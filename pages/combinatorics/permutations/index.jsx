@@ -1421,6 +1421,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 
@@ -2492,7 +2493,17 @@ The [factorial calculator](!/calculators/factorial-calculator) also computes the
     after: ``,
     link: '',
   },
-  
+
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary puts the permutation formulas of the page in one table. Each row names a type of arrangement, gives an everyday case with a link to its section, shows the formula and says when it applies.
+
+The first five rows cover arranging all the items, items with repeats, only some of the items, items around a circle, and items that can be used again. The last three are about derangements, the orders in which no item stays in its place: their number, a recurrence for it, and the share of such orders when there are many items, close to one in e.`,
+    before: ``,
+    after: `Choosing a row comes down to a few questions about the problem: are all the items used or only some, can an item repeat, does the arrangement run in a line or around a circle, and must every item move. The answers point to one row, and its formula gives the count.`,
+    link: '',
+  },
+
   obj9: {
     title: `Common Pitfalls`,
     content: `Five mistakes come up again and again when counting permutations. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -2710,9 +2721,38 @@ const schemas = {
     ],
   };
 
+  // FormulaSheet pilot 2026-11-05: the page's own formula boxes, unchanged, in one table.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Type', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'when', label: 'Applies when' },
+    ],
+    rows: [
+      { name: 'Full permutation', formula: '$P(n)=n!$', when: 'all distinct items are arranged, with no repetitions',
+        sub: 'Every item is used once and only the order changes; [full permutation](!#full) builds the count step by step.' },
+      { name: 'With identical items', formula: '$\\displaystyle \\binom{n}{n_{1},n_{2},\\dots,n_{k}} = \\frac{n!}{n_{1}!n_{2}!\\dots n_{k}!}$', when: 'some identical elements appear more than once',
+        sub: 'Arranging the letters of MISSISSIPPI, where swapping two equal letters gives no new word; see [identical items](!#identical).' },
+      { name: 'Partial, without repetition', formula: '$\\displaystyle P(n,r) = \\frac{n!}{(n-r)!}$', when: 'only some of the distinct items are selected and arranged',
+        sub: 'Choosing and ordering contestants from a group, as in [partial permutation](!#without).' },
+      { name: 'Circular', formula: '$P_{\\text{circ}}(n) = (n-1)!$', when: 'items go around a circle and rotations count as the same',
+        sub: 'Seating people around a round table; [circular permutation](!#circular) fixes one seat first.' },
+      { name: 'With repetition', formula: '$P_{\\text{rep}}(n,r)=n^{r}$', when: 'the same element can be used more than once',
+        sub: 'PIN codes, where a digit can repeat; see [permutation with repetition](!#with).' },
+      { name: 'Derangement', formula: '$\\displaystyle !n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!}$', when: 'no element appears in its original position',
+        sub: 'The hat-check problem, where no guest gets their own hat back, worked through in [derangement](!#8).' },
+      { name: 'Derangement recurrence', formula: '$!n = (n-1) \\bigl( !(n-1) + !(n-2) \\bigr)$, $!0 = 1$, $!1 = 0$', when: 'each value is built from the two before it',
+        sub: 'The same counts without the alternating sum, from the [derangement](!#8) section.' },
+      { name: 'Derangement limit', formula: '$\\displaystyle \\lim_{n \\to \\infty} \\frac{!n}{n!} = \\frac{1}{e} \\approx 0.367879$', when: 'the share of orders that move every item, for large $n$',
+        sub: 'Beyond a handful of items, about $37\\%$ of all orders move every item ([derangement](!#8)).' },
+    ],
+  };
+
    return {
   props:{
     pitfallData,
+    formulaSummaryData,
     seoData: {
       title: "Permutations: Types, Formulas, Examples | Learn Math Class",
       description: "Permutations in combinatorics: full, partial, with repetition, with identical items, circular, and derangements. Formulas, notation, and worked examples.",
@@ -2738,7 +2778,7 @@ const schemas = {
 }
   }
   
-export default function PermutationsPage({ pitfallData,seoData, sectionsContent, introContent, permutationsDiagram, fullPermutationTable,
+export default function PermutationsPage({ pitfallData,formulaSummaryData,seoData, sectionsContent, introContent, permutationsDiagram, fullPermutationTable,
   identicalTable, permutationsTable, permutationsScenariosTableData, partialWithoutTable,
   permutationWithRepetitionTable, circularTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
@@ -2966,6 +3006,25 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
           <div key={'unit-hatCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.hatCheck }} />,
           `Both derangements are rotations: in B C A every hat moves one seat one way, in C A B one seat the other way.`,
           `@academic[punchline:Beyond a handful of items, the share of orders that move every item settles near $1$ in $e$, about $37\\%$.]@`,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="permutation-formula-summary"
+            title="Permutation formulas"
+            source="/combinatorics/permutations"
+            related={{ href: '/combinatorics/formulas', label: 'All combinatorics formulas' }}
+          
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

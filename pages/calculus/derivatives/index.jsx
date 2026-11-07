@@ -19,10 +19,12 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -327,7 +329,7 @@ Both forms define the same quantity. The first emphasizes the increment $h$; the
     parentLabel:`Calculus`,
     content: `@academic[pitfall,aside:true,width:35%:Squaring the first derivative
 Reading $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$ turns $y = x^3$ into $(3x^2)^2 = 9x^4$. Differentiating twice gives $\\frac{d^2y}{dx^2} = 6x$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-the-first-derivative)]@
 
 @academic[fact,aside:true,width:35%:Newton's dots against Leibniz's d
 In 1712 a Royal Society committee ruled that Newton came first; its report was drafted by Newton himself, then the Society's President. British mathematicians kept his dots for a century, until Cambridge students led by Charles Babbage campaigned for "pure D-ism" against "the Dot-age of the University".]@
@@ -344,7 +346,7 @@ The sign of the derivative at a point reveals whether the function is increasing
 
 @academic[pitfall,aside:true,width:35%:Calling every critical point an extremum
 Treating $f'(c) = 0$ as proof of a peak or valley makes $x = 0$ an extremum of $f(x) = x^3$, since $f'(0) = 0$. But $f'(x) = 3x^2$ is positive on both sides, so $x^3$ keeps rising and $x = 0$ is neither.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-calling-every-critical-point-an-extremum)]@
 
 @academic[example:Example
 For $f(x) = x^3 - 3x$, the derivative $f'(x) = 3x^2 - 3$ is zero at $x = -1$ and $x = 1$. It is positive to the left of $-1$, negative between the two points and positive to the right of $1$. The graph rises, falls and rises again, so $x = -1$ is a local maximum and $x = 1$ a local minimum.]@
@@ -392,7 +394,7 @@ Computing derivatives from the limit definition is tedious for all but the simpl
 
 @academic[pitfall,aside:true,width:35%:Multiplying the derivatives
 Writing $(fg)' = f'g'$ turns $\\frac{d}{dx}[x^2 \\cdot x^3]$ into $2x \\cdot 3x^2 = 6x^3$. The product rule $(fg)' = f'g + fg'$ gives $2x \\cdot x^3 + x^2 \\cdot 3x^2 = 5x^4$, the derivative of $x^5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-derivatives)]@
 
 A function built from simpler pieces is differentiated from the outside in: the rule for the outermost operation is applied first, and each piece it produces is then differentiated by another rule or by a formula from the list of common derivatives. For $x^2 \\sin x$ that means the product rule once, followed by the derivatives of $x^2$ and $\\sin x$.
 
@@ -469,61 +471,20 @@ The differential $dy$ approximates the actual change $\\Delta y = f(x + dx) - f(
     after: ``,
     link: '/calculus/derivatives/differentials',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the formulas the page states into four families, and the buttons above the cards show one family at a time. Each formula has a line on what it gives, with a link to the section of this page that introduces it.
+
+The definition comes first: the difference quotient and its limit, in both of the forms the page uses. The common functions follow, with the power rule and the derivatives of sine, cosine, tangent, the exponential and the logarithm. The special functions add the inverse trigonometric and hyperbolic cases, and the last family covers parametric curves and the differential set beside the actual change.`,
+    before: ``,
+    after: `Most formulas here are the limit of the first family worked out once for a whole class of functions. The section behind each link names the page that derives it and adds the rest of its family, so nothing has to be computed from the limit twice.`,
+    link: '',
+  },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `
-Four mistakes come up again and again when derivatives are first computed and read. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Squaring a sum term by term**
-
-Working from the definition, $f(a + h)$ has to be written out before $f(a)$ is subtracted. For $f(x) = x^2$ at $a = 3$, the square $(3 + h)^2$ is written as $3^2 + h^2$.
-
-Wrong working: $\\dfrac{(3 + h)^2 - 9}{h} = \\dfrac{9 + h^2 - 9}{h} = h$, which tends to $0$, so $f'(3) = 0$.
-
-Right working: $(3 + h)^2 = 9 + 6h + h^2$, so $\\dfrac{(3 + h)^2 - 9}{h} = \\dfrac{6h + h^2}{h} = 6 + h$, which tends to $6$. So $f'(3) = 6$.
-
-Why it happens: a power does spread over a product, $(3h)^2 = 9h^2$, and the same move looks just as natural over a sum, where it fails: the cross term $2 \\cdot 3 \\cdot h$ is lost.
-
-How to check: put $h = 1$ into both forms. The original gives $\\dfrac{16 - 9}{1} = 7$, the slope of the secant from $x = 3$ to $x = 4$; the wrong form gives $1$. A derivative of $0$ would also mean a level tangent at $(3, 9)$, where the parabola is clearly rising.
-
-**Squaring the first derivative**
-
-The second derivative $\\dfrac{d^2y}{dx^2}$ is read as the square of the first derivative, because the $2$s look like exponents of a fraction.
-
-Wrong working: for $y = x^3$, $\\dfrac{dy}{dx} = 3x^2$, so $\\dfrac{d^2y}{dx^2} = (3x^2)^2 = 9x^4$.
-
-Right working: differentiate the first derivative. $\\dfrac{d^2y}{dx^2} = \\dfrac{d}{dx}\\left(3x^2\\right) = 6x$.
-
-Why it happens: Leibniz notation is built to behave like a fraction in the chain rule and in differentials, so the superscripts are read as powers of that fraction as well.
-
-How to check: each differentiation lowers the degree of a polynomial by one, so the second derivative of a cubic has degree $1$. The result $9x^4$ has degree $4$; at $x = 1$ it gives $9$, while $6x$ gives $6$.
-
-**Calling every critical point an extremum**
-
-A critical point is found by solving $f'(x) = 0$, and it is declared a local maximum or minimum without looking at the sign of $f'$ on either side.
-
-Wrong working: for $f(x) = x^3$, $f'(x) = 3x^2$ and $f'(0) = 0$, so $x = 0$ is a local extremum.
-
-Right working: $f'(x) = 3x^2 > 0$ for every $x \\neq 0$, so the derivative is positive on both sides of $0$ and does not change sign. The function rises through $x = 0$, which is neither a maximum nor a minimum.
-
-Why it happens: at every peak and valley of a smooth graph the tangent is level, and the statement is read backwards, as if every level tangent were a peak or a valley.
-
-How to check: compare values on either side. $f(-0.1) = -0.001$, $f(0) = 0$ and $f(0.1) = 0.001$, so $f(0)$ is neither the largest nor the smallest of the three.
-
-**Multiplying the derivatives**
-
-The derivative of a product is taken as the product of the derivatives of its factors.
-
-Wrong working: $\\dfrac{d}{dx}[x^2 \\cdot x^3] = 2x \\cdot 3x^2 = 6x^3$.
-
-Right working: the product rule $(fg)' = f'g + fg'$ gives $2x \\cdot x^3 + x^2 \\cdot 3x^2 = 2x^4 + 3x^4 = 5x^4$.
-
-Why it happens: the sum rule $(f + g)' = f' + g'$ works piece by piece, and a product is expected to behave the same way.
-
-How to check: simplify first when possible. $x^2 \\cdot x^3 = x^5$, and the power rule gives $5x^4$, not $6x^3$.
-`,
+    content: `Four mistakes come up again and again when derivatives are first computed and read. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip comes from a shortcut that skips a step. $(3 + h)^2$ has a middle term, the second derivative differentiates $3x^2$ rather than squaring it, a critical point needs a change of sign to be an extremum, and a product needs the product rule. Working the difference quotient through, or checking the sign of $f'$ on each side of the point, catches each slip.`,
     link: '',
   },
   roadmap: {
@@ -793,8 +754,72 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 13, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'squaring-a-sum-term-by-term', name: `Squaring a sum term by term`, errorAt: 0,
+        what: `Working from the definition, $f(a + h)$ has to be written out before $f(a)$ is subtracted. For $f(x) = x^2$ at $a = 3$, the square $(3 + h)^2$ is written as $3^2 + h^2$.`,
+        wrong: [`$\\dfrac{(3 + h)^2 - 9}{h} = \\dfrac{9 + h^2 - 9}{h} = h$, which tends to $0$, so $f'(3) = 0$.`],
+        right: [`$(3 + h)^2 = 9 + 6h + h^2$, so $\\dfrac{(3 + h)^2 - 9}{h} = \\dfrac{6h + h^2}{h} = 6 + h$, which tends to $6$. So $f'(3) = 6$.`],
+        why: `A power does spread over a product, $(3h)^2 = 9h^2$, and the same move looks just as natural over a sum, where it fails: the cross term $2 \\cdot 3 \\cdot h$ is lost.`,
+        check: `Put $h = 1$ into both forms. The original gives $\\dfrac{16 - 9}{1} = 7$, the slope of the secant from $x = 3$ to $x = 4$; the wrong form gives $1$. A derivative of $0$ would also mean a level tangent at $(3, 9)$, where the parabola is clearly rising.` },
+      { id: 'squaring-the-first-derivative', name: `Squaring the first derivative`, errorAt: 1,
+        what: `The second derivative $\\dfrac{d^2y}{dx^2}$ is read as the square of the first derivative, because the $2$s look like exponents of a fraction.`,
+        wrong: [`For $y = x^3$, $\\dfrac{dy}{dx} = 3x^2$,`, `So $\\dfrac{d^2y}{dx^2} = (3x^2)^2 = 9x^4$.`],
+        right: [`For $y = x^3$, $\\dfrac{dy}{dx} = 3x^2$,`, `Differentiate the first derivative. $\\dfrac{d^2y}{dx^2} = \\dfrac{d}{dx}\\left(3x^2\\right) = 6x$.`],
+        why: `Leibniz notation is built to behave like a fraction in the chain rule and in differentials, so the superscripts are read as powers of that fraction as well.`,
+        check: `Each differentiation lowers the degree of a polynomial by one, so the second derivative of a cubic has degree $1$. The result $9x^4$ has degree $4$; at $x = 1$ it gives $9$, while $6x$ gives $6$.` },
+      { id: 'calling-every-critical-point-an-extremum', name: `Calling every critical point an extremum`, errorAt: 1,
+        what: `A critical point is found by solving $f'(x) = 0$, and it is declared a local maximum or minimum without looking at the sign of $f'$ on either side.`,
+        wrong: [`For $f(x) = x^3$, $f'(x) = 3x^2$ and $f'(0) = 0$,`, `So $x = 0$ is a local extremum.`],
+        right: [`For $f(x) = x^3$, $f'(x) = 3x^2$ and $f'(0) = 0$,`, `$f'(x) = 3x^2 > 0$ for every $x \\neq 0$, so the derivative is positive on both sides of $0$ and does not change sign. The function rises through $x = 0$, which is neither a maximum nor a minimum.`],
+        why: `At every peak and valley of a smooth graph the tangent is level, and the statement is read backwards, as if every level tangent were a peak or a valley.`,
+        check: `Compare values on either side. $f(-0.1) = -0.001$, $f(0) = 0$ and $f(0.1) = 0.001$, so $f(0)$ is neither the largest nor the smallest of the three.` },
+      { id: 'multiplying-the-derivatives', name: `Multiplying the derivatives`, errorAt: 0,
+        what: `The derivative of a product is taken as the product of the derivatives of its factors.`,
+        wrong: [`$\\dfrac{d}{dx}[x^2 \\cdot x^3] = 2x \\cdot 3x^2 = 6x^3$.`],
+        right: [`The product rule $(fg)' = f'g + fg'$ gives $2x \\cdot x^3 + x^2 \\cdot 3x^2 = 2x^4 + 3x^4 = 5x^4$.`],
+        why: `The sum rule $(f + g)' = f' + g'$ works piece by piece, and a product is expected to behave the same way.`,
+        check: `Simplify first when possible. $x^2 \\cdot x^3 = x^5$, and the power rule gives $5x^4$, not $6x^3$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'def', name: 'Definition', sub: 'The slope of a curve at one point, as a limit of slopes between two points.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{f(a + h) - f(a)}{h}$', text: 'The difference quotient: the slope of the secant line from $a$ to $a + h$, as [the difference quotient and its limit](!#1) shows.' }, ''],
+        [{ formula: "$\\displaystyle f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$", text: 'The derivative at $a$, the slope of the tangent line, when the limit exists ([the definition](!#1)).' },
+         { formula: "$\\displaystyle f'(a) = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a}$", text: 'The same limit with the second point called $x$; both forms define the same number ([the definition](!#1)).' }],
+      ] },
+      { id: 'common', name: 'Common functions', sub: 'The formulas that cover most computation, with the rules.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[x^n] = nx^{n-1}$', text: 'The power rule, which handles every polynomial term by term; see [derivatives of common functions](!#8).' }, ''],
+        [{ formula: "$(\\sin x)' = \\cos x$", text: 'Sine differentiates to cosine, as [derivatives of common functions](!#8) lists.' },
+         { formula: "$(\\cos x)' = -\\sin x$", text: 'Cosine differentiates to minus sine; the sign is the usual slip ([the same section](!#8)).' }],
+        [{ formula: "$(\\tan x)' = \\sec^2 x$", text: 'Tangent differentiates to secant squared, from [derivatives of common functions](!#8).' }, ''],
+        [{ formula: "$(e^x)' = e^x$", text: 'The exponential is its own derivative, from [derivatives of common functions](!#8).' },
+         { formula: "$(\\ln x)' = 1/x$", text: 'The logarithm differentiates to the reciprocal ([the same section](!#8)).' }],
+      ] },
+      { id: 'special', name: 'Special functions', sub: 'Families beyond the standard set.', pairs: [
+        [{ formula: "$(\\arcsin x)' = 1/\\sqrt{1 - x^2}$", text: 'Inverse trigonometric functions have algebraic derivatives, as [derivatives of special functions](!#9) shows.' },
+         { formula: "$(\\arctan x)' = 1/(1 + x^2)$", text: 'The arctangent derivative is a rational function ([the same section](!#9)).' }],
+        [{ formula: "$(\\sinh x)' = \\cosh x$", text: 'Hyperbolic functions parallel the trigonometric ones; see [derivatives of special functions](!#9).' },
+         { formula: "$(\\tanh x)' = \\text{sech}^2\\,x$", text: 'The hyperbolic version of the tangent rule ([the same section](!#9)).' }],
+      ] },
+      { id: 'beyond', name: 'Parametric curves and differentials', sub: 'Slopes of curves given by a parameter, and changes predicted by the tangent line.', pairs: [
+        [{ formula: '$dy/dx = (dy/dt)/(dx/dt)$', text: 'The slope of a parametric curve $x = x(t)$, $y = y(t)$, from [derivatives of special functions](!#9).' }, ''],
+        [{ formula: "$dy = f'(x) \\cdot dx$", text: 'The differential: the change predicted by the tangent line, as [differentials](!#11) explains.' },
+         { formula: '$\\Delta y = f(x + dx) - f(x)$', text: 'The actual change, which $dy$ approximates for small $dx$ ([differentials](!#11)).' }],
+      ] },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     derivativeShapeProfile,
     derivRoadmapOutline,
     demoUnits,
@@ -817,7 +842,7 @@ const schemas = {
    }
 
 
-   export default function DerivativesPage({derivativeShapeProfile, derivRoadmapOutline, 
+   export default function DerivativesPage({ formulaSummaryData, pitfallData,derivativeShapeProfile, derivRoadmapOutline, 
      seoData,
      sectionsContent,
      introContent,
@@ -912,7 +937,7 @@ $$f'(a) = \\lim_{x \\to a} \\frac{f(x) - f(a)}{x - a}$$]@`,
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
           `@academic[pitfall,aside:true,width:35%:Squaring a sum term by term
 Writing $(3 + h)^2$ as $9 + h^2$ turns the difference quotient of $x^2$ at $3$ into $\\frac{h^2}{h} = h$, and the limit into $0$. The full square $9 + 6h + h^2$ gives $6 + h$, so $f'(3) = 6$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-a-sum-term-by-term)]@
 
 Working from the definition always takes the same three steps: write out $f(a + h)$, subtract $f(a)$, and divide by $h$. The subtraction removes every term that does not contain $h$, which is what makes the division possible. For $f(x) = x^2$ at a general point $a$, the three steps give $\\frac{2ah + h^2}{h} = 2a + h$, and the limit is $2a$.`,
         ]
@@ -1030,11 +1055,38 @@ Working from the definition always takes the same three steps: write out $f(a + 
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="derivative-overview-formula-summary"
+            title="Key derivative formulas"
+            source="/calculus/derivatives"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.pitfalls.title,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="derivative-pitfalls"
+            title="Common pitfalls with derivatives"
+            source="/calculus/derivatives"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

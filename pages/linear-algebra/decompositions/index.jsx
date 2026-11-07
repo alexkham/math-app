@@ -16,6 +16,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -215,7 +216,7 @@ If the algorithm breaks down (a non-positive value under the square root), the m
 
 @academic[pitfall,aside:true,width:35%:Applying Cholesky to any symmetric matrix
 Starting Cholesky on the symmetric $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ gives $l_{11} = 1$, $l_{21} = 2$, then $l_{22}^2 = 1 - 4 = -3$, with no real square root. The eigenvalues of $A$ are $3$ and $-1$, so it is not positive definite and has no Cholesky factor.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-applying-cholesky-to-any-symmetric-matrix)]@
 
 The two conditions are checked in different ways. Symmetry can be read directly from the entries, since each $a_{ij}$ must equal $a_{ji}$. Positive definiteness cannot be seen entry by entry: it is a property of the whole matrix, carried by the signs of its eigenvalues or, equivalently, of its leading principal minors.`,
     before: ``,
@@ -228,7 +229,7 @@ The two conditions are checked in different ways. Symmetry can be read directly 
 
 @academic[pitfall,aside:true,width:35%:Using the spectral form on a non-symmetric matrix
 For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix}$, with eigenvalues $2$ and $1$ and unit eigenvectors as the columns of $Q$, the product is $QDQ^T = \\begin{pmatrix} 5/2 & -1/2 \\\\ -1/2 & 1/2 \\end{pmatrix} \\neq A$. These eigenvectors are not orthogonal, so the factorization is $A = PDP^{-1}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-spectral-form-on-a-non-symmetric-matrix)]@
 
 In outer product form, $A = \\lambda_1 \\mathbf{q}_1\\mathbf{q}_1^T + \\lambda_2 \\mathbf{q}_2\\mathbf{q}_2^T + \\cdots + \\lambda_n \\mathbf{q}_n\\mathbf{q}_n^T$. Each term is the eigenvalue times the [projection](!/linear-algebra/orthogonality/projections) matrix onto the corresponding eigenvector direction. The matrix is decomposed into a sum of independent rank-one projections, weighted by eigenvalues.
 
@@ -245,7 +246,7 @@ The SVD is the most informative factorization in linear algebra. The number of n
 
 @academic[pitfall,aside:true,width:35%:Counting nonzero eigenvalues for the rank
 Both eigenvalues of $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ are $0$, which suggests rank $0$. Its singular values are $1$ and $0$, so the rank is $1$, as the nonzero column shows.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-nonzero-eigenvalues-for-the-rank)]@
 
 Geometrically, every [linear transformation](!/linear-algebra/transformations) is a rotation or reflection ($V^T$), followed by a coordinate-axis scaling ($\\Sigma$), followed by another rotation or reflection ($U$). The SVD makes this decomposition explicit.`,
     before: ``,
@@ -288,50 +289,9 @@ Each decomposition occupies a specific niche — defined by the matrix structure
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come from using a decomposition outside the conditions it needs, or from reading the wrong numbers off it. Each is marked with a box where it happens in the sections above; here each is worked through in full.
-
-**Applying Cholesky to any symmetric matrix**
-
-A symmetric matrix is factored as $A = LL^T$ because it is symmetric, without checking that it is positive definite. The algorithm then reaches a negative number under a square root, or the sign is quietly dropped to keep going.
-
-Wrong working: for $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$, $l_{11} = \\sqrt{1} = 1$ and $l_{21} = 2/1 = 2$, then $l_{22} = \\sqrt{1 - 2^2} = \\sqrt{-3}$. Taking $l_{22} = \\sqrt{3}$ instead gives
-$$LL^T = \\begin{pmatrix} 1 & 0 \\\\ 2 & \\sqrt{3} \\end{pmatrix}\\begin{pmatrix} 1 & 2 \\\\ 0 & \\sqrt{3} \\end{pmatrix} = \\begin{pmatrix} 1 & 2 \\\\ 2 & 7 \\end{pmatrix} \\neq A$$
-
-Right working: test definiteness first. The leading principal minors are $1 > 0$ and $\\det A = 1 - 4 = -3 < 0$, and the eigenvalues are $3$ and $-1$, so $A$ is indefinite and has no Cholesky factor. LU still works:
-$$A = \\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 2 \\\\ 0 & -3 \\end{pmatrix}$$
-and the negative pivot $-3$ is the same sign of trouble.
-
-Why it happens: Cholesky is introduced as the symmetric version of LU, and symmetry is the condition that can be seen at a glance. Positive definiteness is the half of the requirement that has to be computed.
-
-How to check: every leading principal minor must be positive. Multiplying $LL^T$ back must also return $A$ exactly.
-
-**Using the spectral form on a non-symmetric matrix**
-
-A diagonalizable matrix that is not symmetric is written as $A = QDQ^T$, with its unit eigenvectors as the columns of $Q$, as if $Q^T$ were the inverse of $Q$.
-
-Wrong working: $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix}$ has eigenvalue $2$ with unit eigenvector $(1, 0)$ and eigenvalue $1$ with unit eigenvector $\\frac{1}{\\sqrt{2}}(1, -1)$. Then
-$$QDQ^T = 2\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix} + \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix} = \\begin{pmatrix} 5/2 & -1/2 \\\\ -1/2 & 1/2 \\end{pmatrix} \\neq A$$
-
-Right working: the eigenvectors are not orthogonal, so the inverse must be computed. With $P = \\begin{pmatrix} 1 & 1 \\\\ 0 & -1 \\end{pmatrix}$, $P^{-1} = P$ and
-$$PDP^{-1} = \\begin{pmatrix} 1 & 1 \\\\ 0 & -1 \\end{pmatrix}\\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 0 & -1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix} = A$$
-
-Why it happens: the spectral decomposition and ordinary diagonalization have the same shape, and $Q^T = Q^{-1}$ is easy to apply without noticing that it needs orthonormal columns.
-
-How to check: $QDQ^T$ is always symmetric, so it can never equal a non-symmetric $A$. The dot product of the two eigenvectors here is $1/\\sqrt{2}$, not $0$.
-
-**Counting nonzero eigenvalues for the rank**
-
-The rank is read off as the number of nonzero eigenvalues instead of the number of nonzero singular values.
-
-Wrong working: $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has characteristic polynomial $\\lambda^2$, so both eigenvalues are $0$, and the count gives rank $0$.
-
-Right working: $A^TA = \\begin{pmatrix} 0 & 0 \\\\ 0 & 1 \\end{pmatrix}$ has eigenvalues $0$ and $1$, so the singular values are $\\sigma_1 = 1$ and $\\sigma_2 = 0$. One is nonzero, and the rank is $1$.
-
-Why it happens: for symmetric matrices, and for diagonalizable ones in general, the two counts agree, so the shortcut works on most examples met first. A matrix that cannot be diagonalized breaks it.
-
-How to check: rank $0$ belongs only to the zero matrix. A matrix with any nonzero entry has rank at least $1$.`,
+    content: `Three mistakes come from using a decomposition outside the conditions it needs, or from reading the wrong numbers off it. Each is marked with a box where it happens in the sections above; here each is worked through in full.`,
     before: ``,
-    after: ``,
+    after: `Each slip uses a factorization outside the matrices it covers. Cholesky needs a positive definite matrix, not just a symmetric one; the spectral form $QDQ^T$ needs a symmetric matrix, whose eigenvectors are orthogonal; and the rank counts the nonzero singular values, not the nonzero eigenvalues. Checking the leading principal minors, multiplying the factors back, or testing a simple matrix catches each slip.`,
     link: ``,
   },
 }
@@ -523,8 +483,45 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'applying-cholesky-to-any-symmetric-matrix', name: `Applying Cholesky to any symmetric matrix`, errorAt: 1,
+        what: `A symmetric matrix is factored as $A = LL^T$ because it is symmetric, without checking that it is positive definite. The algorithm then reaches a negative number under a square root, or the sign is quietly dropped to keep going.`,
+        wrong: [`For $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$, $l_{11} = \\sqrt{1} = 1$ and $l_{21} = 2/1 = 2$,`, `Then $l_{22} = \\sqrt{1 - 2^2} = \\sqrt{-3}$. Taking $l_{22} = \\sqrt{3}$ instead gives
+$$LL^T$$
+$$= \\begin{pmatrix} 1 & 0 \\\\ 2 & \\sqrt{3} \\end{pmatrix}\\begin{pmatrix} 1 & 2 \\\\ 0 & \\sqrt{3} \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 & 2 \\\\ 2 & 7 \\end{pmatrix} \\neq A$$`],
+        right: [`For $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$, $l_{11} = \\sqrt{1} = 1$ and $l_{21} = 2/1 = 2$,`, `Test definiteness first. The leading principal minors are $1 > 0$ and $\\det A = 1 - 4 = -3 < 0$, and the eigenvalues are $3$ and $-1$, so $A$ is indefinite and has no Cholesky factor. LU still works:
+$$A = \\begin{pmatrix} 1 & 0 \\\\ 2 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 2 \\\\ 0 & -3 \\end{pmatrix}$$`, `And the negative pivot $-3$ is the same sign of trouble.`],
+        why: `Cholesky is introduced as the symmetric version of LU, and symmetry is the condition that can be seen at a glance. Positive definiteness is the half of the requirement that has to be computed.`,
+        check: `Every leading principal minor must be positive. Multiplying $LL^T$ back must also return $A$ exactly.` },
+      { id: 'using-the-spectral-form-on-a-non-symmetric-matrix', name: `Using the spectral form on a non-symmetric matrix`, errorAt: 1,
+        what: `A diagonalizable matrix that is not symmetric is written as $A = QDQ^T$, with its unit eigenvectors as the columns of $Q$, as if $Q^T$ were the inverse of $Q$.`,
+        wrong: [`$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix}$ has eigenvalue $2$ with unit eigenvector $(1, 0)$ and eigenvalue $1$ with unit eigenvector $\\frac{1}{\\sqrt{2}}(1, -1)$.`, `Then
+$$QDQ^T$$
+$$= 2\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$$
+$$+ \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 5/2 & -1/2 \\\\ -1/2 & 1/2 \\end{pmatrix} \\neq A$$`],
+        right: [`$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix}$ has eigenvalue $2$ with unit eigenvector $(1, 0)$ and eigenvalue $1$ with unit eigenvector $\\frac{1}{\\sqrt{2}}(1, -1)$.`, `The eigenvectors are not orthogonal, so the inverse must be computed. With $P = \\begin{pmatrix} 1 & 1 \\\\ 0 & -1 \\end{pmatrix}$, $P^{-1} = P$ and
+$$PDP^{-1}$$
+$$= \\begin{pmatrix} 1 & 1 \\\\ 0 & -1 \\end{pmatrix}\\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 0 & -1 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix} = A$$`],
+        why: `The spectral decomposition and ordinary diagonalization have the same shape, and $Q^T = Q^{-1}$ is easy to apply without noticing that it needs orthonormal columns.`,
+        check: `$QDQ^T$ is always symmetric, so it can never equal a non-symmetric $A$. The dot product of the two eigenvectors here is $1/\\sqrt{2}$, not $0$.` },
+      { id: 'counting-nonzero-eigenvalues-for-the-rank', name: `Counting nonzero eigenvalues for the rank`, errorAt: 0,
+        what: `The rank is read off as the number of nonzero eigenvalues instead of the number of nonzero singular values.`,
+        wrong: [`$A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has characteristic polynomial $\\lambda^2$, so both eigenvalues are $0$, and the count gives rank $0$.`],
+        right: [`$A^TA = \\begin{pmatrix} 0 & 0 \\\\ 0 & 1 \\end{pmatrix}$ has eigenvalues $0$ and $1$, so the singular values are $\\sigma_1 = 1$ and $\\sigma_2 = 0$. One is nonzero, and the rank is $1$.`],
+        why: `For symmetric matrices, and for diagonalizable ones in general, the two counts agree, so the shortcut works on most examples met first. A matrix that cannot be diagonalized breaks it.`,
+        check: `Rank $0$ belongs only to the zero matrix. A matrix with any nonzero entry has rank at least $1$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     faqQuestions,
     decompositionDecision,
     decompositionTree,
@@ -547,7 +544,7 @@ const schemas = {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function DecompositionsPage({faqQuestions, decompositionDecision, decompositionTree,
+export default function DecompositionsPage({ pitfallData,faqQuestions, decompositionDecision, decompositionTree,
   seoData,
   sectionsContent,
   introContent,
@@ -732,6 +729,15 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="decomposition-pitfalls"
+            title="Common pitfalls with matrix decompositions"
+            source="/linear-algebra/decompositions"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

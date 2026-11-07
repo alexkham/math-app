@@ -1019,6 +1019,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
@@ -1622,6 +1623,15 @@ The theorem generalizes — the multinomial theorem expands $(x_1 + x_2 + \\cdot
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the basic counting formulas of the page in three families, and the buttons above the cards show one family at a time. Each family has a line linking to the sections that explain it, and each formula a short note on when it applies.
+
+The counting rules add the counts of separate options, multiply the counts of successive steps, and correct an overlap of two sets by inclusion-exclusion. The second family separates arrangements, where order matters, from selections, where it does not, and links the two counts. The last family gives the symmetry of the binomial coefficient, Pascal's rule, and the binomial theorem that expands a power of a sum.`,
+    before: ``,
+    after: `Most problems start with the two questions behind these families: are the choices alternatives or successive steps, and does the order of the chosen items matter? The ten standard scenarios of the page refine those questions, and each ends in a formula built from these.`,
+    link: '',
+  },
   obj8: {
     title: `Common Pitfalls`,
     content: `Five mistakes come up again and again in basic counting problems. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -1863,8 +1873,32 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'rules', name: 'Counting rules', sub: 'How counts combine, from [counting principles](!#1) and [inclusion-exclusion](!#2).', pairs: [
+        [{ formula: '$m + n$', text: 'Addition rule: $m$ ways for one method and $n$ for another, with no overlap.' },
+         { formula: '$m \\cdot n$', text: 'Multiplication rule: $m$ outcomes for the first step and $n$ for the second.' }],
+        [{ formula: '$|A \\cup B| = |A| + |B| - |A \\cap B|$', text: 'When the options overlap, the shared elements are subtracted once.' }, ''],
+      ] },
+      { id: 'order', name: 'Order or no order', sub: 'Arrangements against selections, from [permutations and combinations](!#3).', pairs: [
+        [{ formula: '$n!$', text: 'Arrange all $n$ distinct items in a row.' },
+         { formula: '$\\displaystyle P(n,r) = \\frac{n!}{(n-r)!}$', text: 'Select and arrange $r$ of $n$ distinct items: the order matters.' }],
+        [{ formula: '$\\displaystyle \\binom{n}{r} = \\frac{n!}{r!(n-r)!}$', text: 'Choose $r$ of $n$ items when the order does not matter.' },
+         { formula: '$\\displaystyle \\binom{n}{r} = \\frac{P(n,r)}{r!}$', text: 'Each selection can be lined up in $r!$ orders.' }],
+      ] },
+      { id: 'binomial', name: 'Binomial coefficient', sub: 'The selection count as an object of its own, from [the binomial coefficient](!#5) and [the binomial theorem](!#6).', pairs: [
+        [{ formula: '$\\displaystyle \\binom{n}{k} = \\binom{n}{n-k}$', text: 'Symmetry, straight from the definition.' },
+         { formula: '$\\displaystyle \\binom{n}{k} = \\binom{n-1}{k-1} + \\binom{n-1}{k}$', text: "Pascal's rule, which builds Pascal's triangle." }],
+        [{ formula: '$\\displaystyle (a+b)^n = \\sum_{k=0}^{n} \\binom{n}{k} \\, a^{n-k} b^k$', text: 'Each coefficient counts the ways to take $b$ from $k$ of the $n$ factors.' }, ''],
+      ] },
+    ],
+  };
+
     return {
   props:{
+    formulaSummaryData,
     pitfallData,
     scenarioOutline,
     permCombCases,
@@ -1892,7 +1926,7 @@ const schemas = {
    
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function CombinatoricsBasicsPage({ pitfallData,scenarioOutline, permCombCases, sectionsContent, introContent,
+export default function CombinatoricsBasicsPage({ formulaSummaryData, pitfallData,scenarioOutline, permCombCases, sectionsContent, introContent,
   combinatoricsScenariosData, countingPrinciplesData, countingPrinciplesDiagram,
   seoData, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
@@ -2039,6 +2073,24 @@ Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 +
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="combinatorics-basics-formula-summary"
+            title="Basic counting formulas"
+            source="/combinatorics/basics"
+            related={{ href: '/combinatorics/formulas', label: 'All combinatorics formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
         ]
     },
     {

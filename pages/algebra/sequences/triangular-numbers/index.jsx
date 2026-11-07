@@ -17,6 +17,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -334,6 +335,15 @@ A different question asks which whole numbers are sums of a few triangular numbe
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page on one set of cards. Each card gives the formula's name, the formula and a note on what it means, with a link to the section that explains it.
+
+The first card is the closed form, the sum of the first natural numbers. The second builds each triangular number from the previous one by adding a row, and the third writes the closed form as a binomial coefficient. The last two are properties: two neighbouring triangular numbers make a square, and adding up the first triangular numbers gives a tetrahedral number.`,
+    before: ``,
+    after: `The closed form is the card to reach for when a single triangular number is needed, since it skips the addition entirely. The other cards explain where that formula comes from and how triangular numbers tie in with squares, choices of two items and stacked triangles.`,
+    link: '',
+  },
   obj5: {
     title: `Common Pitfalls`,
     content: `Two mistakes come up again and again with triangular numbers, and both put the wrong number in place of the index $n$. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -515,8 +525,26 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Triangular number', formula: '$\\displaystyle T_n = 1 + 2 + 3 + \\cdots + n = \\frac{n(n+1)}{2}$',
+        text: 'The sum of the first $n$ natural numbers, the dots in a triangle with $n$ rows, from [the definition](!#1).' },
+      { name: 'Recursive form', formula: '$T_1 = 1, \\quad T_n = T_{n-1} + n$',
+        text: 'Each triangle adds a new row of $n$ dots to the one before, as [recursive form](!#2) shows.' },
+      { name: 'As a binomial coefficient', formula: '$\\displaystyle T_n = \\binom{n+1}{2}$',
+        text: 'The number of ways to choose $2$ items from $n + 1$, from [derivation of the closed form](!#3).' },
+      { name: 'Two triangles make a square', formula: '$\\displaystyle T_n + T_{n-1} = \\frac{n(n+1)}{2} + \\frac{(n-1)n}{2} = n^2$',
+        text: 'Two consecutive triangular numbers add up to a perfect square, one of the [properties](!#4).' },
+      { name: 'Sum of triangular numbers', formula: '$\\displaystyle \\sum_{k=1}^{n} T_k = \\frac{n(n+1)(n+2)}{6}$',
+        text: 'Stacking the first $n$ triangles gives a tetrahedral number, also in [properties](!#4).' },
+    ],
+  };
+
    return {
   props:{
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -535,7 +563,7 @@ const schemas = {
 }
    }
 
-export default function TriangularNumbersPage({ pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function TriangularNumbersPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
@@ -672,6 +700,24 @@ $$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="triangular-number-formula-summary"
+            title="Triangular number formulas"
+            source="/algebra/sequences/triangular-numbers"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

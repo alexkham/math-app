@@ -19,6 +19,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -675,7 +676,7 @@ Each face has an equal and independent chance of appearing.
        link:'/probability/distributions/discrete/binomial',
       pitfall:`@academic[pitfall,aside:true,width:35%:Forgetting the binomial coefficient
 Using $p^k (1-p)^{n-k}$ alone gives the probability of one particular order of successes and failures. For $n = 5$, $p = 0.5$, $k = 3$ that is $0.5^5 = 0.03125$; counting all $\\binom{5}{3} = 10$ orders, $P(X = 3) = 0.3125$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-binomial-coefficient)]@
 
 A binomial probability is read straight from the PMF in the table: fix $n$ and $p$, choose the number of successes $k$, and evaluate. With $n = 5$ flips of a fair coin, for instance, the event of exactly $3$ heads covers every sequence of five flips that contains three heads, wherever in the sequence they fall.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=2) →@
@@ -774,7 +775,7 @@ The possible outcomes range from $k = 0$ (no heads) to $k = 5$ (all heads), with
        link:'/probability/distributions/discrete/geometric',
       pitfall:`@academic[pitfall,aside:true,width:35%:Counting failures instead of trials
 Using $(1-p)^k p$ for $P(X = k)$ puts $k$ failures before the success, which is $k + 1$ trials. Rolling until the first $6$, it gives $P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} \\approx 0.080$; with $X$ counting trials, $P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} \\approx 0.096$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-failures-instead-of-trials)]@
 
 The geometric variable measures how long one waits for the first success. Rolling a die until the first $6$ appears is the standard picture: the success probability is $p = \\frac{1}{6}$ on every roll, and there is no upper limit on the number of rolls. In the table, $X$ is the number of the roll on which that first $6$ appears.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=3) →@`,
@@ -861,7 +862,7 @@ This means there's about a 9.6% chance that you'll need exactly 4 rolls to get y
        link:'/probability/distributions/discrete/negative-binomial',
       pitfall:`@academic[pitfall,aside:true,width:35%:Leaving the last trial free
 Using $\\binom{k}{r}$ instead of $\\binom{k-1}{r-1}$ also counts sequences whose $r$-th success comes before trial $k$. For $r = 3$, $p = 0.5$, $k = 6$ it gives $20 \\cdot 0.5^6 = 0.3125$; with trial $6$ fixed as the third success, $P(X = 6) = \\binom{5}{2} \\cdot 0.5^6 = 0.15625$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-last-trial-free)]@
 
 To use the PMF from the table, fix the target number of successes $r$, the success probability $p$, and the trial $k$ on which the target is reached. Flipping a fair coin until the third head is a typical case: $r = 3$, $p = 0.5$, and $X = 6$ means that the third head comes on the sixth flip.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=4) →@`,
@@ -958,7 +959,7 @@ Note: The geometric distribution is a special case of the negative binomial dist
        link:'/probability/distributions/discrete/hypergeometric',
       pitfall:`@academic[pitfall,aside:true,width:35%:Treating the draws as independent
 Using the binomial with $p = \\frac{K}{N}$ ignores that each draw changes what is left. For $2$ cards from a deck, it puts $P(\\text{both aces}) = \\left(\\frac{4}{52}\\right)^2 = \\frac{1}{169} \\approx 0.0059$; without replacement, $\\frac{\\binom{4}{2}}{\\binom{52}{2}} = \\frac{6}{1326} = \\frac{1}{221} \\approx 0.0045$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-the-draws-as-independent)]@
 
 The PMF in the table counts possible samples: the ways to pick $k$ successes from the $K$ in the population, times the ways to pick the other $n - k$ items from the $N - K$ failures, divided by all ways to pick $n$ items. A typical case is a hand of cards dealt from a standard deck of $N = 52$ cards, with the $K = 4$ aces counted as successes.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=5) →@`,
@@ -1055,7 +1056,7 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
        link:'/probability/distributions/discrete/poisson',
       pitfall:`@academic[pitfall,aside:true,width:35%:Keeping the rate of another interval
 Using $\\lambda = 4$ for a 30-minute window when calls arrive at $4$ per hour gives $P(X = 0) = e^{-4} \\approx 0.018$. Scaled to the window, $\\lambda = 4 \\cdot \\frac{1}{2} = 2$ and $P(X = 0) = e^{-2} \\approx 0.135$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-rate-of-another-interval)]@
 
 The parameter $\\lambda$ is the average number of events in the interval being counted, so it belongs to that interval. A call center that averages $4$ calls per hour is a typical case, and questions about it may concern one hour, a few minutes, or a whole shift.`,
       after:`@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Use distributions calculator](!/probability/calculators/discrete-distributions?tab=6) →@`,
@@ -1286,7 +1287,7 @@ The [cumulative distribution function (CDF)](!/probability/cdf) behaves differen
 
 @academic[pitfall,aside:true,width:35%:Treating strict and non-strict inequalities alike
 Reading $P(X < 4)$ for a fair die as $F(4)$ gives $\\frac{4}{6}$, which counts the face $4$ that the strict inequality leaves out. The correct value is $P(X < 4) = F(3) = \\frac{3}{6} = \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-strict-and-non-strict-inequalities-alike)]@
 
 These differences manifest in how we **calculate probabilities**. Discrete distributions require summation: $P(X \\in A) = \\sum_{k \\in A} P(X = k)$, adding up the probabilities of individual points in the set $A$. Continuous distributions require integration: $P(X \\in A) = \\int_A f(x) \\, dx$, measuring the area under the density curve over the region $A$.
 
@@ -1559,95 +1560,9 @@ For symmetric distributions, median and mean coincide. For skewed distributions,
     },
     obj6:{
       title:`Common Pitfalls`,
-      content:`Each of the six mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating strict and non-strict inequalities alike**
-
-For a discrete variable, a probability with a strict inequality such as $P(X < k)$ is read off the CDF as $F(k)$, or $P(X \\ge k)$ is computed as $1 - F(k)$. Both treat the value $k$ as if it carried no probability.
-
-Wrong working: for a fair die,
-$$P(X < 4) = F(4) = \\frac{4}{6} = \\frac{2}{3}$$
-
-Right working: the strict inequality leaves out the face $4$, so the CDF is read at the last value below it.
-$$P(X < 4) = P(X \\le 3) = F(3) = \\frac{3}{6} = \\frac{1}{2}$$
-
-Why it happens: for a continuous variable single points have probability $0$, so $<$ and $\\le$ give the same answer, and the habit carries over to discrete variables.
-
-How to check: list the values the inequality allows. $X < 4$ allows $1$, $2$ and $3$, three of six equally likely faces.
-
-**Forgetting the binomial coefficient**
-
-The probability of exactly $k$ successes in $n$ trials is computed as $p^k (1-p)^{n-k}$. That is the probability of one particular sequence, such as all successes first and all failures after.
-
-Wrong working: for $n = 5$, $p = 0.5$, $k = 3$,
-$$P(X = 3) = 0.5^3 \\cdot 0.5^2 = 0.03125$$
-
-Right working: every arrangement of $3$ successes among $5$ trials has this same probability, and there are $\\binom{5}{3} = 10$ arrangements.
-$$P(X = 3) = \\binom{5}{3} \\cdot 0.5^3 \\cdot 0.5^2 = 10 \\cdot 0.03125 = 0.3125$$
-
-Why it happens: the product rule for independent trials gives the probability of a sequence, and the event of exactly $k$ successes is easily pictured as a single sequence.
-
-How to check: the probabilities $P(X = 0), \\dots, P(X = n)$ must add up to $1$. Without the coefficients, for $n = 5$ and $p = 0.5$ the six values add up to only $6 \\cdot 0.03125 = 0.1875$.
-
-**Counting failures instead of trials**
-
-On this page the geometric $X$ counts the trials up to and including the first success. Some books define it as the number of failures before the first success instead, and the PMF $(1-p)^k p$ from that version is combined with the trial-counting $X$.
-
-Wrong working: rolling a die until the first $6$, with $p = \\frac{1}{6}$,
-$$P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} = \\frac{625}{7776} \\approx 0.080$$
-
-Right working: $X = 4$ means three rolls without a $6$, then a $6$.
-$$P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} = \\frac{125}{1296} \\approx 0.096$$
-
-Why it happens: both definitions are in common use, and a formula from one source is easily combined with the definition of $X$ from another.
-
-How to check: put $k = 1$ into the PMF. The first roll is a $6$ with probability $\\frac{1}{6}$, so $P(X = 1)$ must equal $p$; the failures version gives $\\frac{5}{6} \\cdot \\frac{1}{6} = \\frac{5}{36}$ instead.
-
-**Leaving the last trial free**
-
-The number of ways to place $r$ successes among $k$ trials is counted as $\\binom{k}{r}$. That count includes sequences in which the $r$-th success comes earlier and trial $k$ is a failure, but $X = k$ requires the $r$-th success to come exactly on trial $k$.
-
-Wrong working: for $r = 3$, $p = 0.5$, $k = 6$,
-$$P(X = 6) = \\binom{6}{3} \\cdot 0.5^3 \\cdot 0.5^3 = 20 \\cdot \\frac{1}{64} = 0.3125$$
-
-Right working: trial $6$ is the third success, so only the other $2$ successes are placed among the first $5$ trials.
-$$P(X = 6) = \\binom{5}{2} \\cdot 0.5^3 \\cdot 0.5^3 = 10 \\cdot \\frac{1}{64} = 0.15625$$
-
-Why it happens: three successes in six trials sounds like a binomial question, and the binomial coefficient is the familiar one.
-
-How to check: write out one sequence the count includes. HHHTTT has three heads in six flips, but its third head comes on flip $3$, so it belongs to $X = 3$, not to $X = 6$.
-
-**Treating the draws as independent**
-
-Successes in a sample drawn without replacement are counted with the binomial PMF, using $p = \\frac{K}{N}$ on every draw. Without replacement the population changes after each draw, so the draws are not independent.
-
-Wrong working: two cards are drawn from a standard deck, with the aces as successes.
-$$P(X = 2) = \\left(\\frac{4}{52}\\right)^2 = \\frac{1}{169} \\approx 0.0059$$
-
-Right working: with $N = 52$, $K = 4$, $n = 2$,
-$$P(X = 2) = \\frac{\\binom{4}{2}\\binom{48}{0}}{\\binom{52}{2}} = \\frac{6}{1326} = \\frac{1}{221} \\approx 0.0045$$
-the same as $\\frac{4}{52} \\cdot \\frac{3}{51}$ worked out draw by draw.
-
-Why it happens: both models count successes in a fixed number of draws, and the binomial is usually learned first.
-
-How to check: ask whether a drawn item goes back. If not, the second draw sees $51$ cards with only $3$ aces, and its probability must change. The binomial is close only when $n$ is a small fraction of $N$.
-
-**Keeping the rate of another interval**
-
-The rate is given for one interval, such as calls per hour, and the question is about a different interval, but $\\lambda$ is used unchanged.
-
-Wrong working: calls arrive at an average of $4$ per hour. For no call in the next $30$ minutes,
-$$P(X = 0) = e^{-4} \\approx 0.018$$
-
-Right working: in half an hour the average number of calls is $\\lambda = 4 \\cdot \\frac{1}{2} = 2$.
-$$P(X = 0) = e^{-2} \\approx 0.135$$
-
-Why it happens: $\\lambda$ is stated once together with its unit, and the unit is lost when the number is put into the formula.
-
-How to check: compare the mean with the window. $E[X] = \\lambda$, and an average of $4$ calls in half an hour would mean $8$ calls per hour, twice the stated rate.
-`,
+      content:`Each of the six mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip miscounts which values or sequences belong to the event. Strict and non-strict inequalities differ for a discrete variable; the binomial counts every arrangement with $\\binom{n}{k}$; the geometric variable here counts trials, not failures; the negative binomial fixes the last trial as the $r$-th success; draws without replacement are hypergeometric; and a rate is rescaled to the interval asked about. Listing the values allowed, putting $k = 1$ into the PMF, or checking that the probabilities add up to $1$ catches each slip.`,
     },
   
   }
@@ -1921,8 +1836,67 @@ This page systematically presents six fundamental discrete distributions, detail
     }
   }
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj6 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-strict-and-non-strict-inequalities-alike', name: `Treating strict and non-strict inequalities alike`, errorAt: 0,
+        what: `For a discrete variable, a probability with a strict inequality such as $P(X < k)$ is read off the CDF as $F(k)$, or $P(X \\ge k)$ is computed as $1 - F(k)$. Both treat the value $k$ as if it carried no probability.`,
+        wrong: [`For a fair die,
+$$P(X < 4) = F(4) = \\frac{4}{6} = \\frac{2}{3}$$`],
+        right: [`The strict inequality leaves out the face $4$, so the CDF is read at the last value below it.`, `$$P(X < 4) = P(X \\le 3)$$
+$$= F(3)$$
+$$= \\frac{3}{6} = \\frac{1}{2}$$`],
+        why: `For a continuous variable single points have probability $0$, so $<$ and $\\le$ give the same answer, and the habit carries over to discrete variables.`,
+        check: `List the values the inequality allows. $X < 4$ allows $1$, $2$ and $3$, three of six equally likely faces.` },
+      { id: 'forgetting-the-binomial-coefficient', name: `Forgetting the binomial coefficient`, errorAt: 1,
+        what: `The probability of exactly $k$ successes in $n$ trials is computed as $p^k (1-p)^{n-k}$. That is the probability of one particular sequence, such as all successes first and all failures after.`,
+        wrong: [`For $n = 5$, $p = 0.5$, $k = 3$,`, `$$P(X = 3) = 0.5^3 \\cdot 0.5^2$$
+$$= 0.03125$$`],
+        right: [`For $n = 5$, $p = 0.5$, $k = 3$,`, `Every arrangement of $3$ successes among $5$ trials has this same probability, and there are $\\binom{5}{3} = 10$ arrangements.`, `$$P(X = 3) = \\binom{5}{3} \\cdot 0.5^3 \\cdot 0.5^2$$
+$$= 10 \\cdot 0.03125 = 0.3125$$`],
+        why: `The product rule for independent trials gives the probability of a sequence, and the event of exactly $k$ successes is easily pictured as a single sequence.`,
+        check: `The probabilities $P(X = 0), \\dots, P(X = n)$ must add up to $1$. Without the coefficients, for $n = 5$ and $p = 0.5$ the six values add up to only $6 \\cdot 0.03125 = 0.1875$.` },
+      { id: 'counting-failures-instead-of-trials', name: `Counting failures instead of trials`, errorAt: 0,
+        what: `On this page the geometric $X$ counts the trials up to and including the first success. Some books define it as the number of failures before the first success instead, and the PMF $(1-p)^k p$ from that version is combined with the trial-counting $X$.`,
+        wrong: [`Rolling a die until the first $6$, with $p = \\frac{1}{6}$,
+$$P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} = \\frac{625}{7776}$$
+$$\\approx 0.080$$`],
+        right: [`$X = 4$ means three rolls without a $6$, then a $6$.`, `$$P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6}$$
+$$= \\frac{125}{1296}$$
+$$\\approx 0.096$$`],
+        why: `Both definitions are in common use, and a formula from one source is easily combined with the definition of $X$ from another.`,
+        check: `Put $k = 1$ into the PMF. The first roll is a $6$ with probability $\\frac{1}{6}$, so $P(X = 1)$ must equal $p$; the failures version gives $\\frac{5}{6} \\cdot \\frac{1}{6} = \\frac{5}{36}$ instead.` },
+      { id: 'leaving-the-last-trial-free', name: `Leaving the last trial free`, errorAt: 1,
+        what: `The number of ways to place $r$ successes among $k$ trials is counted as $\\binom{k}{r}$. That count includes sequences in which the $r$-th success comes earlier and trial $k$ is a failure, but $X = k$ requires the $r$-th success to come exactly on trial $k$.`,
+        wrong: [`For $r = 3$, $p = 0.5$, $k = 6$,`, `$$P(X = 6) = \\binom{6}{3} \\cdot 0.5^3 \\cdot 0.5^3$$
+$$= 20 \\cdot \\frac{1}{64} = 0.3125$$`],
+        right: [`For $r = 3$, $p = 0.5$, $k = 6$,`, `Trial $6$ is the third success, so only the other $2$ successes are placed among the first $5$ trials.`, `$$P(X = 6) = \\binom{5}{2} \\cdot 0.5^3 \\cdot 0.5^3$$
+$$= 10 \\cdot \\frac{1}{64} = 0.15625$$`],
+        why: `Three successes in six trials sounds like a binomial question, and the binomial coefficient is the familiar one.`,
+        check: `Write out one sequence the count includes. HHHTTT has three heads in six flips, but its third head comes on flip $3$, so it belongs to $X = 3$, not to $X = 6$.` },
+      { id: 'treating-the-draws-as-independent', name: `Treating the draws as independent`, errorAt: 0,
+        what: `Successes in a sample drawn without replacement are counted with the binomial PMF, using $p = \\frac{K}{N}$ on every draw. Without replacement the population changes after each draw, so the draws are not independent.`,
+        wrong: [`Two cards are drawn from a standard deck, with the aces as successes.`, `$$P(X = 2) = \\left(\\frac{4}{52}\\right)^2 = \\frac{1}{169}$$
+$$\\approx 0.0059$$`],
+        right: [`With $N = 52$, $K = 4$, $n = 2$,
+$$P(X = 2) = \\frac{\\binom{4}{2}\\binom{48}{0}}{\\binom{52}{2}}$$
+$$= \\frac{6}{1326} = \\frac{1}{221} \\approx 0.0045$$`, `The same as $\\frac{4}{52} \\cdot \\frac{3}{51}$ worked out draw by draw.`],
+        why: `Both models count successes in a fixed number of draws, and the binomial is usually learned first.`,
+        check: `Ask whether a drawn item goes back. If not, the second draw sees $51$ cards with only $3$ aces, and its probability must change. The binomial is close only when $n$ is a small fraction of $N$.` },
+      { id: 'keeping-the-rate-of-another-interval', name: `Keeping the rate of another interval`, errorAt: 1,
+        what: `The rate is given for one interval, such as calls per hour, and the question is about a different interval, but $\\lambda$ is used unchanged.`,
+        wrong: [`Calls arrive at an average of $4$ per hour.`, `For no call in the next $30$ minutes,
+$$P(X = 0) = e^{-4} \\approx 0.018$$`],
+        right: [`Calls arrive at an average of $4$ per hour.`, `In half an hour the average number of calls is $\\lambda = 4 \\cdot \\frac{1}{2} = 2$.`, `$$P(X = 0) = e^{-2} \\approx 0.135$$`],
+        why: `$\\lambda$ is stated once together with its unit, and the unit is lost when the number is put into the formula.`,
+        check: `Compare the mean with the window. $E[X] = \\lambda$, and an average of $4$ calls in half an hour would mean $8$ calls per hour, twice the stated rate.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     faqQuestions,
     discreteFamilyTree,
     demoUnits,
@@ -1950,7 +1924,7 @@ This page systematically presents six fundamental discrete distributions, detail
     }
    }
 
-export default function DiscreteDistributionsPage({discreteFamilyTree, seoData,sectionsContent , introContent,
+export default function DiscreteDistributionsPage({ pitfallData,discreteFamilyTree, seoData,sectionsContent , introContent,
       uniformTable,
       binomialTable,
       geometricTable,
@@ -2340,6 +2314,15 @@ List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n
         link:'',
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-mistakes'}
+            id="discrete-distribution-pitfalls"
+            title="Common pitfalls with discrete distributions"
+            source="/probability/distributions/discrete"
+            after={sectionsContent.obj6.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

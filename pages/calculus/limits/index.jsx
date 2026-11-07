@@ -21,6 +21,9 @@ import functionLimitDiagrams from '@/app/components/functions/limit/functionLimi
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -327,7 +330,7 @@ This requirement unifies behavior from both directions into a single value.
 
 @academic[pitfall,aside:true,width:35%:Checking only one side
 Testing $\\frac{|x|}{x}$ at $x = 0.1$, $0.01$ and $0.001$ gives $1$ each time, so the limit at $0$ looks like $1$. From the left the values are $-1$: the one-sided limits differ, and the two-sided limit does not exist.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-only-one-side)]@
 
 Each one-sided limit is found separately, using only inputs from its own side of $a$: values below $a$ for the left-hand limit and values above $a$ for the right-hand limit. Only when both are known can they be compared, and only their agreement gives the two-sided limit a value.
 
@@ -390,7 +393,7 @@ The function is trapped between two bounds converging to the same value.
 
 @academic[pitfall,aside:true,width:35%:Bounds that fail for negative x
 Multiplying $-1 \\leq \\sin(1/x) \\leq 1$ by $x$ gives $-x \\leq x \\sin(1/x) \\leq x$, false for $x < 0$: at $x = -0.1$ it says $0.1 \\leq x \\sin(1/x) \\leq -0.1$. The bounds $-|x| \\leq x \\sin(1/x) \\leq |x|$ hold on both sides and give the limit $0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-bounds-that-fail-for-negative-x)]@
 
 The theorem is the standard tool for a product in which one factor oscillates and the other tends to $0$, such as $x \\sin(1/x)$ as $x \\to 0$. The factor $\\sin(1/x)$ has no limit, so the product rule above does not apply, but it always lies between $-1$ and $1$, and bounds for the whole product are built from that.
 `,
@@ -414,7 +417,7 @@ $$\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} \\frac{(x-2)(x+2)}{
 
 @academic[pitfall,aside:true,width:35%:Stopping at 0/0
 Substituting $x = 2$ into $\\frac{x^2 - 4}{x - 2}$ gives $\\frac{0}{0}$, and reading that as a limit of $0$, or as no limit, stops too early. After cancelling $x - 2$, the limit is $2 + 2 = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-at-0-0)]@
 
 The cancellation is legitimate because the limit never uses the value at $x = 2$ itself. For every $x \\neq 2$ the expressions $\\frac{x^2 - 4}{x - 2}$ and $x + 2$ are equal, and the limit looks only at those inputs, so the two have the same limit. The simplified form is a polynomial, and substitution now gives a number.
 
@@ -446,7 +449,7 @@ This holds when $x$ is measured in radians. It underlies the derivatives of sine
 
 @academic[pitfall,aside:true,width:35%:Reading every sine limit as 1
 Giving $\\lim_{x \\to 0} \\frac{\\sin 3x}{x}$ the value $1$ ignores that the angle is $3x$ but the denominator is $x$. Rewriting it as $3 \\cdot \\frac{\\sin 3x}{3x}$ gives $3 \\cdot 1 = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-every-sine-limit-as-1)]@
 
 The limit applies to one exact shape: the sine of a quantity divided by the same quantity, with that quantity tending to $0$. Since $5x \\to 0$ and $x^2 \\to 0$ as $x \\to 0$, the expressions $\\frac{\\sin 5x}{5x}$ and $\\frac{\\sin(x^2)}{x^2}$ have this shape and also tend to $1$.
 
@@ -511,7 +514,7 @@ This single equation encodes three requirements. First, $f(a)$ must be definedâ€
 
 @academic[pitfall,aside:true,width:35%:Taking f(a) as the limit
 For $f(x) = \\frac{x^2 - 1}{x - 1}$ when $x \\neq 1$ and $f(1) = 5$, substituting $x = 1$ gives a limit of $5$. Values near $1$ approach $2$, so the limit is $2$, and $f$ is not continuous at $1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-f-a-as-the-limit)]@
 
 Failure of any condition creates a discontinuity. A hole in the graph (removable discontinuity) occurs when the limit exists but differs from the function value or the function is undefined. A jump discontinuity occurs when left and right limits differ. An infinite discontinuity occurs when the function blows up.
 
@@ -533,71 +536,20 @@ The sections above introduce the foundational ideas; each topic gets a dedicated
     after: ``,
     link: ``
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the main formulas of the limits overview in nine rows, in the order the page introduces them. Each row names the formula with a short note and a link to its section, states it, and says what it gives.
+
+The first two rows give the limit itself and the condition for a two-sided limit through the left and right limits. Three limit rules follow, for sums, products and quotients, then three special limits for the sine, the exponential and the number e, and last the equation that defines continuity at a point. Each topic has its own page that develops it in full.`,
+    before: ``,
+    after: `Most limits come down to the rules in the middle rows: when the component limits exist, the limit of a combination is the combination of the limits. When they do not, as with the special limits, the expression has to be rewritten before a value can be found.`,
+    link: '',
+  },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for many wrong answers with limits. Each one is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Checking only one side**
-
-A two-sided limit is estimated from inputs on one side of the point only, usually the right, where values like $0.1$, $0.01$ and $0.001$ are easy to write down. Whatever those values approach is reported as the limit.
-
-Wrong working: for $\\lim_{x \\to 0} \\frac{|x|}{x}$, the inputs $0.1$, $0.01$ and $0.001$ all give $\\frac{|x|}{x} = 1$, so the limit is reported as $1$.
-
-Right working: for $x > 0$, $|x| = x$ and $\\frac{|x|}{x} = 1$, so $\\lim_{x \\to 0^+} \\frac{|x|}{x} = 1$. For $x < 0$, $|x| = -x$ and $\\frac{|x|}{x} = -1$, so $\\lim_{x \\to 0^-} \\frac{|x|}{x} = -1$. The one-sided limits differ, so $\\lim_{x \\to 0} \\frac{|x|}{x}$ does not exist.
-
-Why it happens: for most functions met early on, such as polynomials, both sides give the same answer, so checking one side seems enough.
-
-How to check: always evaluate at least one input on each side of the point. Here $x = 0.01$ gives $1$ and $x = -0.01$ gives $-1$.
-
-**Bounds that fail for negative x**
-
-To apply the Squeeze Theorem to $x \\sin(1/x)$ as $x \\to 0$, the inequality $-1 \\leq \\sin(1/x) \\leq 1$ is multiplied by $x$, without noticing that multiplying by a negative number reverses the inequality signs.
-
-Wrong working: from $-1 \\leq \\sin(1/x) \\leq 1$ it follows that $-x \\leq x \\sin(1/x) \\leq x$. At $x = -0.1$ this claims $0.1 \\leq x \\sin(1/x) \\leq -0.1$, which no number satisfies.
-
-Right working: take absolute values. $|x \\sin(1/x)| = |x| \\cdot |\\sin(1/x)| \\leq |x|$, so $-|x| \\leq x \\sin(1/x) \\leq |x|$ for every $x \\neq 0$. Both bounds tend to $0$ as $x \\to 0$, so $\\lim_{x \\to 0} x \\sin(1/x) = 0$.
-
-Why it happens: the squeeze is set up with positive $x$ in mind, but a two-sided limit at $0$ uses negative inputs as well.
-
-How to check: test the bounds at a negative input. At $x = -0.1$, $x \\sin(1/x) = -0.1 \\sin(-10) \\approx -0.054$. The correct bounds give $-0.1 \\leq -0.054 \\leq 0.1$, which holds; the wrong ones put the lower bound $0.1$ above the upper bound $-0.1$.
-
-**Stopping at 0/0**
-
-Direct substitution gives $\\frac{0}{0}$, and this is taken as the answer: read either as a limit of $0$ or as a sign that the limit does not exist.
-
-Wrong working: $\\frac{2^2 - 4}{2 - 2} = \\frac{0}{0}$, so $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$ is reported as $0$, or as not existing.
-
-Right working: the numerator factors as $(x - 2)(x + 2)$. Cancel $x - 2$, which is allowed because $x \\neq 2$ throughout the approach, then substitute: $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} (x + 2) = 4$.
-
-Why it happens: $\\frac{0}{0}$ looks like a result. A zero on top seems to make the fraction zero, and a zero below seems to make it impossible. It is neither; it only says that substitution has not decided the limit.
-
-How to check: evaluate near the point. At $x = 1.99$ the expression is $3.99$, and at $x = 2.01$ it is $4.01$, both close to $4$.
-
-**Reading every sine limit as 1**
-
-Any limit of the sine of something divided by something, as $x \\to 0$, is given the value $1$, even when the angle and the denominator are different.
-
-Wrong working: $\\lim_{x \\to 0} \\frac{\\sin 3x}{x} = 1$.
-
-Right working: make the denominator match the angle. $\\frac{\\sin 3x}{x} = 3 \\cdot \\frac{\\sin 3x}{3x}$, and $3x \\to 0$ as $x \\to 0$, so $\\lim_{x \\to 0} \\frac{\\sin 3x}{x} = 3 \\cdot 1 = 3$.
-
-Why it happens: the special limit is remembered as "sine over $x$ goes to $1$", and the condition that the angle and the denominator be the same quantity is lost.
-
-How to check: evaluate at a small input. At $x = 0.01$, $\\frac{\\sin 0.03}{0.01} \\approx 2.9996$, close to $3$ and far from $1$.
-
-**Taking f(a) as the limit**
-
-The limit at $a$ is found by evaluating the function at $a$, even when the function is given its value at $a$ by a separate rule. Substitution gives the limit only for a function that is continuous at $a$, which is exactly what is in question.
-
-Wrong working: let $f(x) = \\frac{x^2 - 1}{x - 1}$ for $x \\neq 1$ and $f(1) = 5$. Then $\\lim_{x \\to 1} f(x) = f(1) = 5$, and since the limit equals $f(1)$, $f$ is called continuous at $1$.
-
-Right working: the limit uses only inputs $x \\neq 1$, where $f(x) = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1$. So $\\lim_{x \\to 1} f(x) = 2$. Since $f(1) = 5 \\neq 2$, the third condition fails, and $f$ has a removable discontinuity at $1$.
-
-Why it happens: direct substitution works for polynomials and for most functions met in practice, so it becomes the default way to find any limit.
-
-How to check: evaluate near the point rather than at it. At $x = 0.99$ and $x = 1.01$ the values are $1.99$ and $2.01$, near $2$ and far from $5$.`,
+    content: `Five mistakes account for many wrong answers with limits. Each one is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip judges a limit from too little evidence. Both sides of the point must be checked, squeeze bounds must hold for negative $x$ too, $\\frac{0}{0}$ calls for more work, $\\frac{\\sin 3x}{x}$ tends to $3$, and the limit does not depend on the value $f(a)$. Evaluating at inputs on both sides, near the point but not at it, catches each slip.`,
     link: ``
   }
 };
@@ -804,8 +756,77 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 15, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'checking-only-one-side', name: `Checking only one side`, errorAt: 1,
+        what: `A two-sided limit is estimated from inputs on one side of the point only, usually the right, where values like $0.1$, $0.01$ and $0.001$ are easy to write down. Whatever those values approach is reported as the limit.`,
+        wrong: [`For $\\lim_{x \\to 0} \\frac{|x|}{x}$,`, `The inputs $0.1$, $0.01$ and $0.001$ all give $\\frac{|x|}{x} = 1$, so the limit is reported as $1$.`],
+        right: [`For $\\lim_{x \\to 0} \\frac{|x|}{x}$,`, `For $x > 0$, $|x| = x$ and $\\frac{|x|}{x} = 1$, so $\\lim_{x \\to 0^+} \\frac{|x|}{x} = 1$. For $x < 0$, $|x| = -x$ and $\\frac{|x|}{x} = -1$, so $\\lim_{x \\to 0^-} \\frac{|x|}{x} = -1$. The one-sided limits differ, so $\\lim_{x \\to 0} \\frac{|x|}{x}$ does not exist.`],
+        why: `For most functions met early on, such as polynomials, both sides give the same answer, so checking one side seems enough.`,
+        check: `Always evaluate at least one input on each side of the point. Here $x = 0.01$ gives $1$ and $x = -0.01$ gives $-1$.` },
+      { id: 'bounds-that-fail-for-negative-x', name: `Bounds that fail for negative x`, errorAt: 0,
+        what: `To apply the Squeeze Theorem to $x \\sin(1/x)$ as $x \\to 0$, the inequality $-1 \\leq \\sin(1/x) \\leq 1$ is multiplied by $x$, without noticing that multiplying by a negative number reverses the inequality signs.`,
+        wrong: [`From $-1 \\leq \\sin(1/x) \\leq 1$ it follows that $-x \\leq x \\sin(1/x) \\leq x$. At $x = -0.1$ this claims $0.1 \\leq x \\sin(1/x) \\leq -0.1$, which no number satisfies.`],
+        right: [`Take absolute values. $|x \\sin(1/x)| = |x| \\cdot |\\sin(1/x)| \\leq |x|$, so $-|x| \\leq x \\sin(1/x) \\leq |x|$ for every $x \\neq 0$. Both bounds tend to $0$ as $x \\to 0$, so $\\lim_{x \\to 0} x \\sin(1/x) = 0$.`],
+        why: `The squeeze is set up with positive $x$ in mind, but a two-sided limit at $0$ uses negative inputs as well.`,
+        check: `Test the bounds at a negative input. At $x = -0.1$, $x \\sin(1/x) = -0.1 \\sin(-10) \\approx -0.054$. The correct bounds give $-0.1 \\leq -0.054 \\leq 0.1$, which holds; the wrong ones put the lower bound $0.1$ above the upper bound $-0.1$.` },
+      { id: 'stopping-at-0-0', name: `Stopping at 0/0`, errorAt: 0,
+        what: `Direct substitution gives $\\frac{0}{0}$, and this is taken as the answer: read either as a limit of $0$ or as a sign that the limit does not exist.`,
+        wrong: [`$\\frac{2^2 - 4}{2 - 2} = \\frac{0}{0}$, so $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$ is reported as $0$, or as not existing.`],
+        right: [`The numerator factors as $(x - 2)(x + 2)$. Cancel $x - 2$, which is allowed because $x \\neq 2$ throughout the approach, then substitute: $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2} = \\lim_{x \\to 2} (x + 2) = 4$.`],
+        why: `$\\frac{0}{0}$ looks like a result. A zero on top seems to make the fraction zero, and a zero below seems to make it impossible. It is neither; it only says that substitution has not decided the limit.`,
+        check: `Evaluate near the point. At $x = 1.99$ the expression is $3.99$, and at $x = 2.01$ it is $4.01$, both close to $4$.` },
+      { id: 'reading-every-sine-limit-as-1', name: `Reading every sine limit as 1`, errorAt: 0,
+        what: `Any limit of the sine of something divided by something, as $x \\to 0$, is given the value $1$, even when the angle and the denominator are different.`,
+        wrong: [`$\\lim_{x \\to 0} \\frac{\\sin 3x}{x} = 1$.`],
+        right: [`Make the denominator match the angle. $\\frac{\\sin 3x}{x} = 3 \\cdot \\frac{\\sin 3x}{3x}$, and $3x \\to 0$ as $x \\to 0$, so $\\lim_{x \\to 0} \\frac{\\sin 3x}{x} = 3 \\cdot 1 = 3$.`],
+        why: `The special limit is remembered as "sine over $x$ goes to $1$", and the condition that the angle and the denominator be the same quantity is lost.`,
+        check: `Evaluate at a small input. At $x = 0.01$, $\\frac{\\sin 0.03}{0.01} \\approx 2.9996$, close to $3$ and far from $1$.` },
+      { id: 'taking-f-a-as-the-limit', name: `Taking f(a) as the limit`, errorAt: 1,
+        what: `The limit at $a$ is found by evaluating the function at $a$, even when the function is given its value at $a$ by a separate rule. Substitution gives the limit only for a function that is continuous at $a$, which is exactly what is in question.`,
+        wrong: [`Let $f(x) = \\frac{x^2 - 1}{x - 1}$ for $x \\neq 1$ and $f(1) = 5$.`, `Then $\\lim_{x \\to 1} f(x) = f(1) = 5$, and since the limit equals $f(1)$, $f$ is called continuous at $1$.`],
+        right: [`Let $f(x) = \\frac{x^2 - 1}{x - 1}$ for $x \\neq 1$ and $f(1) = 5$.`, `The limit uses only inputs $x \\neq 1$, where $f(x) = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1$. So $\\lim_{x \\to 1} f(x) = 2$. Since $f(1) = 5 \\neq 2$, the third condition fails, and $f$ has a removable discontinuity at $1$.`],
+        why: `Direct substitution works for polynomials and for most functions met in practice, so it becomes the default way to find any limit.`,
+        check: `Evaluate near the point rather than at it. At $x = 0.99$ and $x = 1.01$ the values are $1.99$ and $2.01$, near $2$ and far from $5$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it gives' },
+    ],
+    rows: [
+      { name: 'Limit', formula: '$\\displaystyle \\lim_{x \\to a} f(x) = L$', says: 'the value $f(x)$ approaches as $x$ approaches $a$',
+        sub: 'The value $f(a)$ itself plays no part, as [the central idea of a limit](!#1) explains.' },
+      { name: 'Two-sided limit', formula: '$\\displaystyle \\lim_{x \\to a^-} f(x) = L \\quad \\text{and} \\quad \\lim_{x \\to a^+} f(x) = L$', says: 'the two-sided limit equals $L$',
+        sub: 'Both one-sided limits must exist and agree; if they differ, [two-sided limits](!#3) shows the limit does not exist.' },
+      { name: 'Sum rule', formula: '$\\displaystyle \\lim_{x \\to a} [f(x) + g(x)] = \\lim_{x \\to a} f(x) + \\lim_{x \\to a} g(x)$', says: 'the limit of a sum is the sum of the limits',
+        sub: 'Holds when both limits exist; [limit rules](!#5) notes the same for differences, multiples and powers.' },
+      { name: 'Product rule', formula: '$\\displaystyle \\lim_{x \\to a} [f(x) \\cdot g(x)] = \\lim_{x \\to a} f(x) \\cdot \\lim_{x \\to a} g(x)$', says: 'the limit of a product is the product of the limits',
+        sub: 'The component limits must exist, as [limit rules](!#5) stresses.' },
+      { name: 'Quotient rule', formula: '$\\displaystyle \\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a} f(x)}{\\lim_{x \\to a} g(x)}$', says: 'the quotient of the limits, provided $\\lim_{x \\to a} g(x) \\neq 0$',
+        sub: 'When the denominator tends to $0$ the rule cannot be used directly, as [limit rules](!#5) warns.' },
+      { name: 'Sine limit at zero', formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$', says: '$1$, with $x$ measured in radians',
+        sub: 'Substitution gives $0/0$, yet the value is known; it underlies the derivatives of sine and cosine ([special limits](!#7)).' },
+      { name: 'Exponential limit at zero', formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$', says: '$1$',
+        sub: 'Another $0/0$ form with a well-known value, among [special limits](!#7).' },
+      { name: 'Definition of e', formula: '$\\displaystyle \\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$', says: 'the number $e$',
+        sub: 'A limit as $x \\to \\infty$ that defines a constant, from [special limits](!#7).' },
+      { name: 'Continuity', formula: '$\\displaystyle \\lim_{x \\to a} f(x) = f(a)$', says: '$f$ is continuous at $a$',
+        sub: 'One equation with three requirements: $f(a)$ is defined, the limit exists, and the two match; see [continuity](!#9).' },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -826,7 +847,7 @@ const schemas = {
   }
 }
    }
-export default function LimitsPage({seoData, sectionsContent, introContent, obj2Table, obj4Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function LimitsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj2Table, obj4Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -991,11 +1012,38 @@ $$\\lim_{x \\to a} f(x) = L$$]@`,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="limits-overview-formula-summary"
+            title="Limit formulas"
+            source="/calculus/limits"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="limit-pitfalls"
+            title="Common pitfalls with limits"
+            source="/calculus/limits"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component â€” must be built here, not in getStaticProps

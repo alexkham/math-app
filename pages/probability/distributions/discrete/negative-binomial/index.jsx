@@ -862,6 +862,9 @@ import distributionExplorerDiagrams from '@/app/components/probability/explorers
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
 
@@ -1170,7 +1173,7 @@ $$E[X] = \\frac{3}{1/6} = 18$$]@
 
 @academic[pitfall,aside:true,width:35%:Mixing up trials and failures
 Reading $E[X] = 18$ as the number of rolls that miss counts the three 6's among the failures. The misses before the third 6 average $18 - 3 = 15$, the mean $\\frac{r(1-p)}{p}$ of the failure count.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-mixing-up-trials-and-failures)]@
 
 On average, you expect to roll the die 18 times before accumulating three 6's. This is exactly three times the expected wait for a single 6.
 
@@ -1238,7 +1241,7 @@ $$\\sigma = \\sqrt{90} \\approx 9.487$$]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying the standard deviation by r
 Taking $3$ times the geometric standard deviation, $3\\sqrt{30} \\approx 16.4$ rolls, overstates the spread. Variances add, standard deviations do not: $\\sigma = \\sqrt{3 \\times 30} = \\sqrt{90} \\approx 9.5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-standard-deviation-by-r)]@
 
 The variance of 90 and standard deviation of about 9.5 indicate high variability around the expected 18 rolls. The actual number of rolls needed could vary substantially from this average.
   `,
@@ -1334,7 +1337,7 @@ $P(X = 6) = \\binom{6-1}{3-1} (0.5)^3 (0.5)^{6-3} = \\binom{5}{2} (0.5)^3 (0.5)^
 
 @academic[pitfall,aside:true,width:35%:Counting the successes anywhere
 Using the binomial $\\binom{6}{3}(0.5)^6 = 0.3125$ counts every way to get 3 heads in 6 flips, including those where the third head came earlier. With the sixth flip fixed as the third head, $P(X = 6) = \\binom{5}{2}(0.5)^6 = 0.15625$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-the-successes-anywhere)]@
 
 This means there's a 15.625% chance that you'll need exactly 6 flips to get your third head.
 
@@ -1427,7 +1430,10 @@ The same stopping rule drives a classic puzzle told about the mathematician Stef
     obj16:{
   
       title:`Negative Binomial at a Glance`,
-      content:`The table below collects the full anatomy of the negative binomial distribution into a single reference card — its parameters and support, the PMF and CDF, the mean and variance formulas, mode and median behavior, the geometric special case, and a canonical example.`,
+      content:`This summary gathers the negative binomial distribution on one card of nine rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the number of successes to wait for, the chance of success on each trial, and the trial counts that can occur. Then come the probability that the last success lands on a given trial, the running total, the mean, the variance with the standard deviation, and the mode and median. The last rows give the geometric special case and the example of rolling a die until three sixes appear.`,
+      formulaSheetAfter: `Reading the distribution as several geometric waits placed end to end explains most of the card: the mean and the variance are those of a single wait multiplied by the number of successes, and with a single success the whole card turns into the geometric one.`,
       before:``,
       after:``,
       link:'',
@@ -1435,51 +1441,9 @@ The same stopping rule drives a classic puzzle told about the mathematician Stef
     },
     obj17:{
       title:`Common Pitfalls`,
-      content:`Three mistakes come up again and again in negative binomial problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Mixing up trials and failures**
-
-The mean $\\frac{r}{p}$ counts all trials, the $r$ successes included. It is read as the expected number of failures, or it is compared with a result that counts failures only.
-
-Wrong working: for a die rolled until three 6's appear, $E[X] = \\frac{3}{1/6} = 18$ is read as the number of rolls that are not a 6.
-
-Right working: $X$ counts all the rolls, and three of them are the 6's. The number of failures is $Y = X - r$, so
-$$E[Y] = \\frac{r}{p} - r = \\frac{r(1-p)}{p} = \\frac{3 \\cdot \\frac{5}{6}}{\\frac{1}{6}} = 15$$
-
-Why it happens: the negative binomial has two conventions, one counting trials and one counting the failures before the $r$-th success, and sources and software do not agree on which to use. The formulas in the sections above count trials, while the calculator on this page counts failures.
-
-How to check: look at where the support starts. Under the trials convention $X \\geq r$, so here the PMF starts at $k = 3$; under the failures convention it starts at $0$. The two means always differ by exactly $r$: $18 - 15 = 3$.
-
-**Multiplying the standard deviation by r**
-
-The negative binomial is the sum of $r$ independent geometric waits, and its standard deviation is taken as $r$ times the geometric one.
-
-Wrong working: for three 6's on a die, the geometric standard deviation is $\\sqrt{30} \\approx 5.477$, so
-$$\\sigma = 3 \\times \\sqrt{30} \\approx 16.43$$
-
-Right working: the variances of independent variables add.
-$$\\mathrm{Var}(X) = 30 + 30 + 30 = 90, \\quad \\sigma = \\sqrt{90} \\approx 9.487$$
-
-Why it happens: the mean does scale by $r$, from $\\frac{1}{p}$ to $\\frac{r}{p}$, so it seems natural for the spread to scale the same way. The standard deviation is the square root of a sum of variances, so it grows only like $\\sqrt{r}$.
-
-How to check: square the result and compare it with the variance formula. $(3\\sqrt{30})^2 = 270$, three times the $90$ that $\\frac{r(1-p)}{p^2}$ gives.
-
-**Counting the successes anywhere**
-
-The probability that the $r$-th success comes on trial $k$ is computed with the binomial formula for $r$ successes in $k$ trials, $\\binom{k}{r} p^r (1-p)^{k-r}$.
-
-Wrong working: for the third head on flip six, with $p = 0.5$,
-$$P(X = 6) = \\binom{6}{3} (0.5)^3 (0.5)^3 = 20 \\cdot 0.015625 = 0.3125$$
-This counts every sequence with three heads in six flips, including HHHTTT, where the third head came on flip three and the experiment would already have stopped.
-
-Right working: the sixth flip must be the third head, so the other two heads go among the first five flips.
-$$P(X = 6) = \\binom{5}{2} (0.5)^3 (0.5)^3 = 10 \\cdot 0.015625 = 0.15625$$
-
-Why it happens: both formulas contain the same powers $p^r (1-p)^{k-r}$, and the coefficient $\\binom{k}{r}$ is the familiar one from the binomial, so the stopping rule gets lost.
-
-How to check: the PMF values must add up to $1$. With $\\binom{k}{r}$ in place of $\\binom{k-1}{r-1}$, the values for $p = 0.5$ and $r = 3$ add up to $2$.`,
+      content:`Three mistakes come up again and again in negative binomial problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip miscounts the trials. The mean $\\frac{r}{p}$ counts all trials, the successes included; the variance of a sum of $r$ independent geometric waits is $r$ times the geometric variance, so the standard deviation grows by $\\sqrt{r}$; and the $r$-th success must come on trial $k$, which gives $\\binom{k - 1}{r - 1}$. Checking where the support starts, squaring the standard deviation, or adding up the PMF values catches each slip.`,
       link:'',
     },
      links:{
@@ -1704,8 +1668,71 @@ const negativeBinomialExplanations = {
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj17 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'mixing-up-trials-and-failures', name: `Mixing up trials and failures`, errorAt: 0,
+        what: `The mean $\\frac{r}{p}$ counts all trials, the $r$ successes included. It is read as the expected number of failures, or it is compared with a result that counts failures only.`,
+        wrong: [`For a die rolled until three 6's appear, $E[X] = \\frac{3}{1/6} = 18$ is read as the number of rolls that are not a 6.`],
+        right: [`$X$ counts all the rolls, and three of them are the 6's. The number of failures is $Y = X - r$, so
+$$E[Y] = \\frac{r}{p} - r = \\frac{r(1-p)}{p} = \\frac{3 \\cdot \\frac{5}{6}}{\\frac{1}{6}} = 15$$`],
+        why: `The negative binomial has two conventions, one counting trials and one counting the failures before the $r$-th success, and sources and software do not agree on which to use. The formulas in the sections above count trials, while the calculator on this page counts failures.`,
+        check: `Look at where the support starts. Under the trials convention $X \\geq r$, so here the PMF starts at $k = 3$; under the failures convention it starts at $0$. The two means always differ by exactly $r$: $18 - 15 = 3$.` },
+      { id: 'multiplying-the-standard-deviation-by-r', name: `Multiplying the standard deviation by r`, errorAt: 0,
+        what: `The negative binomial is the sum of $r$ independent geometric waits, and its standard deviation is taken as $r$ times the geometric one.`,
+        wrong: [`For three 6's on a die, the geometric standard deviation is $\\sqrt{30} \\approx 5.477$, so
+$$\\sigma = 3 \\times \\sqrt{30} \\approx 16.43$$`],
+        right: [`The variances of independent variables add.`, `$$\\mathrm{Var}(X) = 30 + 30 + 30 = 90,$$
+$$\\sigma = \\sqrt{90} \\approx 9.487$$`],
+        why: `The mean does scale by $r$, from $\\frac{1}{p}$ to $\\frac{r}{p}$, so it seems natural for the spread to scale the same way. The standard deviation is the square root of a sum of variances, so it grows only like $\\sqrt{r}$.`,
+        check: `Square the result and compare it with the variance formula. $(3\\sqrt{30})^2 = 270$, three times the $90$ that $\\frac{r(1-p)}{p^2}$ gives.` },
+      { id: 'counting-the-successes-anywhere', name: `Counting the successes anywhere`, errorAt: 0,
+        what: `The probability that the $r$-th success comes on trial $k$ is computed with the binomial formula for $r$ successes in $k$ trials, $\\binom{k}{r} p^r (1-p)^{k-r}$.`,
+        wrong: [`For the third head on flip six, with $p = 0.5$,
+$$P(X = 6) = \\binom{6}{3} (0.5)^3 (0.5)^3$$
+$$= 20 \\cdot 0.015625 = 0.3125$$`, `This counts every sequence with three heads in six flips, including HHHTTT, where the third head came on flip three and the experiment would already have stopped.`],
+        right: [`The sixth flip must be the third head, so the other two heads go among the first five flips.`, `$$P(X = 6) = \\binom{5}{2} (0.5)^3 (0.5)^3$$
+$$= 10 \\cdot 0.015625 = 0.15625$$`],
+        why: `Both formulas contain the same powers $p^r (1-p)^{k-r}$, and the coefficient $\\binom{k}{r}$ is the familiar one from the binomial, so the stopping rule gets lost.`,
+        check: `The PMF values must add up to $1$. With $\\binom{k}{r}$ in place of $\\binom{k-1}{r-1}$, the values for $p = 0.5$ and $r = 3$ add up to $2$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameters', formula: '$r$, the target number of successes (a positive integer); $p$, the success probability, $0 < p \\leq 1$', note: 'trials are independent with constant success probability $p$',
+        sub: 'The two numbers that fix the distribution, as [the parameters section](!#2) explains.' },
+      { name: 'Support', formula: '$k \\in \\{r, r + 1, r + 2, \\ldots\\}$', note: 'at least $r$ trials are needed to collect $r$ successes',
+        sub: 'The trial numbers on which the $r$-th success can land, set out with [the PMF and its support](!#4).' },
+      { name: 'PMF', formula: '$\\displaystyle P(X = k) = \\binom{k-1}{r-1} p^r (1-p)^{k-r}, \\quad k = r, r+1, r+2, \\ldots$', note: 'the $k$-th trial must be the $r$-th success; arrange $r - 1$ successes among the first $k - 1$ trials',
+        sub: 'The probability that the $r$-th success comes on trial $k$, from [the PMF section](!#4).' },
+      { name: 'CDF', formula: '$\\displaystyle F_X(k) = P(X \\leq k) = \\sum_{i=r}^{k} \\binom{i-1}{r-1} p^r (1-p)^{i-r} = I_p(r, k-r+1)$', note: 'no closed form; expressible through the regularized incomplete beta function',
+        sub: 'The probability of reaching $r$ successes within $k$ trials, from [the CDF section](!#5).' },
+      { name: 'Expected value', formula: '$\\displaystyle E[X] = \\frac{r}{p}$', note: '$r$ times the geometric wait, by linearity over $r$ independent geometric waits',
+        sub: 'The average number of trials needed for $r$ successes, derived in [the expected value section](!#6).' },
+      { name: 'Variance', formula: '$\\displaystyle \\mathrm{Var}(X) = \\frac{r(1-p)}{p^2}$; $\\displaystyle \\sigma = \\frac{\\sqrt{r(1-p)}}{p}$', note: 'grows linearly with $r$; explodes as $p \\to 0$',
+        sub: 'How widely the number of trials spreads, worked out in [variance and standard deviation](!#7).' },
+      { name: 'Mode and median', formula: '$\\displaystyle \\text{Mode} = r + \\left\\lfloor \\frac{(r-1)(1-p)}{p} \\right\\rfloor$ trials; the median lies between the mode and the mean and is computed numerically', note: 'right-skewed; the median is typically slightly below the mean',
+        sub: 'The most likely trial count and the middle of the distribution, found in [mode and median](!#8).' },
+      { name: 'Special case', formula: '$\\operatorname{NegBin}(1, p) = \\operatorname{Geom}(p)$', note: 'setting $r = 1$ collapses to the geometric distribution',
+        sub: 'Waiting for a single success is the geometric wait, as [the key terms](!#0) note.' },
+      { name: 'Canonical example', formula: 'rolling a die until three 6s: $r = 3$, $p = 1/6$', note: '$E[X] = 18$ rolls, $\\mathrm{Var}(X) = 90$, $\\sigma \\approx 9.49$',
+        sub: 'The die-rolling wait the page works through; [variance and standard deviation](!#7) finishes its numbers.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -1726,7 +1753,7 @@ const negativeBinomialExplanations = {
     }
    }
 
-export default function NegativeBinomialDistributionPage({
+export default function NegativeBinomialDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1940,8 +1967,16 @@ export default function NegativeBinomialDistributionPage({
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="negative-binomial-distribution-formula-summary"
+            title="Negative binomial distribution at a glance"
+            source="/probability/distributions/discrete/negative-binomial"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.obj16.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1950,6 +1985,15 @@ export default function NegativeBinomialDistributionPage({
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <DiagramFrame
+            key={'obj17-mistakes'}
+            id="negative-binomial-pitfalls"
+            title="Common pitfalls with the negative binomial distribution"
+            source="/probability/distributions/discrete/negative-binomial"
+            after={sectionsContent.obj17.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

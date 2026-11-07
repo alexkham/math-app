@@ -1638,9 +1638,11 @@ import functionTypesDiagrams from '@/app/components/functions/types/functionType
 import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2451,7 +2453,7 @@ Every linear function with $m \\neq 0$ is one-to-one, passing the horizontal lin
 
 @academic[pitfall,aside:true,width:35%:Reading the inverse as a reciprocal
 Taking $f^{-1}(x) = \\dfrac{1}{2x + 6}$ for $f(x) = 2x + 6$ reads the $-1$ as a power. Since $f(1) = 8$, the inverse must send $8$ back to $1$, but the reciprocal gives $\\dfrac{1}{22}$; the inverse is $f^{-1}(x) = \\dfrac{x - 6}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-inverse-as-a-reciprocal)]@
 
 The inverse undoes the function: it takes an output of $f$ and returns the input that produced it. For a line, this means solving $y = mx + b$ for $x$: first $b$ is subtracted, then the result is divided by $m$, the two steps of $f$ undone in reverse order.
 
@@ -2501,7 +2503,7 @@ $$f(x) = a(x - h)^2 + k$$
 
 @academic[pitfall,aside:true,width:35%:Taking the sign inside the bracket
 Reading the vertex of $f(x) = 2(x + 3)^2 - 1$ as $(3, -1)$ copies the sign shown in the bracket. Since $x + 3 = x - (-3)$, $h = -3$ and the vertex is $(-3, -1)$, where $f(-3) = -1$ is the minimum.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-sign-inside-the-bracket)]@
 
 Vertex form trades the coefficients $a$, $b$, $c$ for $a$, $h$ and $k$. The parameter $a$ is the same in both forms, so the opening direction and the width carry over unchanged, while $h$ and $k$ place the turning point without any further calculation.
 
@@ -2628,7 +2630,7 @@ $$y = 0 \\quad \\text{when } \\deg P < \\deg Q$$
 
 @academic[pitfall,aside:true,width:35%:Assuming the asymptote is never crossed
 Assuming $f(x) = \\dfrac{x}{x^2 + 1}$ never meets its horizontal asymptote $y = 0$ fails at once: $f(0) = 0$, so the graph crosses it at the origin. The asymptote fixes only the ends, as $x \\to \\pm\\infty$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-assuming-the-asymptote-is-never-crossed)]@
 
 The simplest rational function is $f(x) = \\dfrac{1}{x}$, with vertical asymptote at $x = 0$, horizontal asymptote at $y = 0$, and hyperbolic shape with branches in quadrants I and III.
 
@@ -2754,7 +2756,7 @@ $$\\lceil 2.7 \\rceil = 3, \\quad \\lceil -0.3 \\rceil = 0, \\quad \\lceil 4 \\r
 
 @academic[pitfall,aside:true,width:35%:Truncating negative inputs
 Reading $\\lfloor -2.7 \\rfloor$ as $-2$ drops the decimal part, but $-2$ lies above $-2.7$. The greatest integer at or below $-2.7$ is $-3$, so $\\lfloor -2.7 \\rfloor = -3$, just as $\\lfloor -0.3 \\rfloor = -1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-truncating-negative-inputs)]@
 
 Floor, ceiling and the fractional part $\\{x\\} = x - \\lfloor x \\rfloor$ are treated as operations on numbers, including rounding, on the [integer and fractional part](!/arithmetic/integer-part) page.
 
@@ -2821,7 +2823,7 @@ Common bases: $\\log_{10}(x) = \\log(x)$ (common logarithm), $\\log_e(x) = \\ln(
 
 @academic[pitfall,aside:true,width:35%:Splitting the log of a sum
 Writing $\\log(10 + 10)$ as $\\log(10) + \\log(10) = 2$ applies the product rule to a sum. In fact $\\log(20) \\approx 1.301$; the value $2$ belongs to $\\log(10 \\cdot 10) = \\log(100)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-log-of-a-sum)]@
 
 The rule turns one multiplication into one addition. For example, $\\log(1000) = \\log(10 \\cdot 100) = \\log(10) + \\log(100) = 1 + 2 = 3$, which agrees with $10^3 = 1000$. The same idea gives $\\log(a/b) = \\log(a) - \\log(b)$ for quotients.
 
@@ -2900,71 +2902,20 @@ The table below puts the growth ranking in compact form with representative exam
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the function families in three groups, each with a line describing it. Every formula carries a short note on what it gives, with a link to the section that explains it, and the buttons above the cards show one group at a time.
+
+The polynomials come first: the line in slope and intercept form, the quadratic in standard and vertex form with its axis of symmetry and vertex, and the general polynomial of any degree. Rational functions follow, with the rules for their vertical and horizontal asymptotes. The last group holds the absolute value, the exponential and the logarithm.`,
+    before: ``,
+    after: `These formulas are what make a family recognizable from its equation. Once the family is known, its notes say where to look next: the vertex of a parabola, the zeros of a denominator, the degrees of a ratio, or the base of an exponential or a logarithm.`,
+    link: '',
+  },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when working with these families. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the inverse as a reciprocal**
-
-The notation $f^{-1}$ is read as a power, and the inverse is computed as $\\dfrac{1}{f(x)}$. The reciprocal and the inverse are different functions.
-
-Wrong working: for $f(x) = 2x + 6$, $f^{-1}(x) = \\dfrac{1}{2x + 6}$.
-
-Right working: solve $y = 2x + 6$ for $x$. Subtracting $6$ and dividing by $2$ gives $x = \\dfrac{y - 6}{2}$, so $f^{-1}(x) = \\dfrac{x - 6}{2}$. This matches $\\dfrac{x - b}{m}$ with $m = 2$ and $b = 6$.
-
-Why it happens: in $x^{-1} = \\dfrac{1}{x}$ the $-1$ is an exponent, and the same mark written on a function name looks identical.
-
-How to check: an inverse sends each output back to its input. $f(1) = 8$, and $f^{-1}(8) = \\dfrac{8 - 6}{2} = 1$, while the reciprocal gives $\\dfrac{1}{2 \\cdot 8 + 6} = \\dfrac{1}{22}$.
-
-**Taking the sign inside the bracket**
-
-The vertex is read from vertex form by copying the numbers as they appear. The value of $k$ comes out right, but $h$ gets the wrong sign.
-
-Wrong working: $f(x) = 2(x + 3)^2 - 1$ has vertex $(3, -1)$.
-
-Right working: vertex form is $a(x - h)^2 + k$. Writing $x + 3 = x - (-3)$ gives $h = -3$ and $k = -1$, so the vertex is $(-3, -1)$. Standard form agrees: $2(x + 3)^2 - 1 = 2x^2 + 12x + 17$, and $-\\dfrac{b}{2a} = -\\dfrac{12}{4} = -3$.
-
-Why it happens: $k$ is read with the sign it shows, so the same is expected of $h$; the minus sign built into $(x - h)$ is easy to forget.
-
-How to check: substitute the claimed $h$. $f(-3) = 2 \\cdot 0 - 1 = -1$, the smallest value, since $2(x + 3)^2 \\geq 0$; $f(3) = 2 \\cdot 36 - 1 = 71$, nowhere near a minimum.
-
-**Assuming the asymptote is never crossed**
-
-A horizontal asymptote is treated like a vertical one, as a line the graph can never touch. A vertical asymptote marks an excluded input; a horizontal one only describes the ends of the graph.
-
-Wrong working: $f(x) = \\dfrac{x}{x^2 + 1}$ has numerator degree lower than denominator degree, so its horizontal asymptote is $y = 0$. The graph is then said never to meet the $x$-axis, so $f$ has no zeros.
-
-Right working: $f(x) = 0$ where the numerator is zero, at $x = 0$. The graph passes through the origin, rises to $f(1) = \\dfrac{1}{2}$, and then falls back toward $0$ as $x \\to \\infty$. It crosses its horizontal asymptote and then approaches it from above.
-
-Why it happens: vertical asymptotes really are never crossed, because the function is undefined there, and the asymptote of $\\dfrac{1}{x}$, the first example met, is never reached either.
-
-How to check: solve $f(x) = L$, where $y = L$ is the horizontal asymptote. Here $\\dfrac{x}{x^2 + 1} = 0$ has the solution $x = 0$; every solution is a point where the graph meets the asymptote.
-
-**Truncating negative inputs**
-
-The floor is found by deleting the decimal part of the input. That works for positive inputs but not for negative non-integers.
-
-Wrong working: $\\lfloor -2.7 \\rfloor = -2$.
-
-Right working: the floor is the greatest integer less than or equal to the input. The integers at or below $-2.7$ are $-3, -4, -5, \\ldots$, and the greatest of them is $-3$, so $\\lfloor -2.7 \\rfloor = -3$. In the same way, $\\lceil -2.7 \\rceil = -2$.
-
-Why it happens: for positive inputs, as in $\\lfloor 2.7 \\rfloor = 2$, cutting off the decimal gives the right answer, so the shortcut is learned as the rule.
-
-How to check: the floor can never be larger than the input. Since $-2 > -2.7$, $-2$ cannot be the floor of $-2.7$.
-
-**Splitting the log of a sum**
-
-The product rule is applied to a sum, as if the logarithm distributed over addition.
-
-Wrong working: $\\log(10 + 10) = \\log(10) + \\log(10) = 1 + 1 = 2$.
-
-Right working: $\\log(10 + 10) = \\log(20) \\approx 1.301$. The product rule needs a product: $\\log(10 \\cdot 10) = \\log(10) + \\log(10) = 2$, and indeed $\\log(100) = 2$. The logarithm of a sum has no general simplification.
-
-Why it happens: $\\log(ab) = \\log(a) + \\log(b)$ looks like a distributive law, and distributing over a sum is a familiar move.
-
-How to check: undo the logarithm. If $\\log(20)$ were $2$, then $10^2$ would equal $20$, but $10^2 = 100$.`,
+    content: `Five mistakes come up again and again when working with these families. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip borrows the wrong rule from a neighbouring family. An inverse undoes the function and is not its reciprocal, the vertex form $a(x - h)^2 + k$ puts $-h$ inside the bracket, a horizontal asymptote describes the ends of the graph and can be crossed in the middle, the floor rounds down even for negative inputs, and the logarithm splits a product, never a sum. Substituting a value, or undoing the step, catches each slip.`,
     link: '',
   },
 
@@ -3265,8 +3216,73 @@ const faqQuestions = {
     ],
   };
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-inverse-as-a-reciprocal', name: `Reading the inverse as a reciprocal`, errorAt: 1,
+        what: `The notation $f^{-1}$ is read as a power, and the inverse is computed as $\\dfrac{1}{f(x)}$. The reciprocal and the inverse are different functions.`,
+        wrong: [`For $f(x) = 2x + 6$,`, `$f^{-1}(x) = \\dfrac{1}{2x + 6}$.`],
+        right: [`For $f(x) = 2x + 6$,`, `Solve $y = 2x + 6$ for $x$. Subtracting $6$ and dividing by $2$ gives $x = \\dfrac{y - 6}{2}$, so $f^{-1}(x) = \\dfrac{x - 6}{2}$. This matches $\\dfrac{x - b}{m}$ with $m = 2$ and $b = 6$.`],
+        why: `In $x^{-1} = \\dfrac{1}{x}$ the $-1$ is an exponent, and the same mark written on a function name looks identical.`,
+        check: `An inverse sends each output back to its input. $f(1) = 8$, and $f^{-1}(8) = \\dfrac{8 - 6}{2} = 1$, while the reciprocal gives $\\dfrac{1}{2 \\cdot 8 + 6} = \\dfrac{1}{22}$.` },
+      { id: 'taking-the-sign-inside-the-bracket', name: `Taking the sign inside the bracket`, errorAt: 0,
+        what: `The vertex is read from vertex form by copying the numbers as they appear. The value of $k$ comes out right, but $h$ gets the wrong sign.`,
+        wrong: [`$f(x) = 2(x + 3)^2 - 1$ has vertex $(3, -1)$.`],
+        right: [`Vertex form is $a(x - h)^2 + k$. Writing $x + 3 = x - (-3)$ gives $h = -3$ and $k = -1$, so the vertex is $(-3, -1)$. Standard form agrees: $2(x + 3)^2 - 1 = 2x^2 + 12x + 17$, and $-\\dfrac{b}{2a} = -\\dfrac{12}{4} = -3$.`],
+        why: `$k$ is read with the sign it shows, so the same is expected of $h$; the minus sign built into $(x - h)$ is easy to forget.`,
+        check: `Substitute the claimed $h$. $f(-3) = 2 \\cdot 0 - 1 = -1$, the smallest value, since $2(x + 3)^2 \\geq 0$; $f(3) = 2 \\cdot 36 - 1 = 71$, nowhere near a minimum.` },
+      { id: 'assuming-the-asymptote-is-never-crossed', name: `Assuming the asymptote is never crossed`, errorAt: 1,
+        what: `A horizontal asymptote is treated like a vertical one, as a line the graph can never touch. A vertical asymptote marks an excluded input; a horizontal one only describes the ends of the graph.`,
+        wrong: [`$f(x) = \\dfrac{x}{x^2 + 1}$ has numerator degree lower than denominator degree, so its horizontal asymptote is $y = 0$.`, `The graph is then said never to meet the $x$-axis, so $f$ has no zeros.`],
+        right: [`$f(x) = \\dfrac{x}{x^2 + 1}$ has numerator degree lower than denominator degree, so its horizontal asymptote is $y = 0$.`, `$f(x) = 0$ where the numerator is zero, at $x = 0$. The graph passes through the origin, rises to $f(1) = \\dfrac{1}{2}$, and then falls back toward $0$ as $x \\to \\infty$. It crosses its horizontal asymptote and then approaches it from above.`],
+        why: `Vertical asymptotes really are never crossed, because the function is undefined there, and the asymptote of $\\dfrac{1}{x}$, the first example met, is never reached either.`,
+        check: `Solve $f(x) = L$, where $y = L$ is the horizontal asymptote. Here $\\dfrac{x}{x^2 + 1} = 0$ has the solution $x = 0$; every solution is a point where the graph meets the asymptote.` },
+      { id: 'truncating-negative-inputs', name: `Truncating negative inputs`, errorAt: 0,
+        what: `The floor is found by deleting the decimal part of the input. That works for positive inputs but not for negative non-integers.`,
+        wrong: [`$\\lfloor -2.7 \\rfloor = -2$.`],
+        right: [`The floor is the greatest integer less than or equal to the input. The integers at or below $-2.7$ are $-3, -4, -5, \\ldots$, and the greatest of them is $-3$, so $\\lfloor -2.7 \\rfloor = -3$. In the same way, $\\lceil -2.7 \\rceil = -2$.`],
+        why: `For positive inputs, as in $\\lfloor 2.7 \\rfloor = 2$, cutting off the decimal gives the right answer, so the shortcut is learned as the rule.`,
+        check: `The floor can never be larger than the input. Since $-2 > -2.7$, $-2$ cannot be the floor of $-2.7$.` },
+      { id: 'splitting-the-log-of-a-sum', name: `Splitting the log of a sum`, errorAt: 0,
+        what: `The product rule is applied to a sum, as if the logarithm distributed over addition.`,
+        wrong: [`$\\log(10 + 10) = \\log(10) + \\log(10) = 1 + 1 = 2$.`],
+        right: [`$\\log(10 + 10) = \\log(20) \\approx 1.301$. The product rule needs a product: $\\log(10 \\cdot 10) = \\log(10) + \\log(10) = 2$, and indeed $\\log(100) = 2$. The logarithm of a sum has no general simplification.`],
+        why: `$\\log(ab) = \\log(a) + \\log(b)$ looks like a distributive law, and distributing over a sum is a familiar move.`,
+        check: `Undo the logarithm. If $\\log(20)$ were $2$, then $10^2$ would equal $20$, but $10^2 = 100$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'poly', name: 'Polynomials', sub: 'Lines, parabolas and higher degrees.', pairs: [
+        [{ formula: '$f(x) = mx + b$', text: 'A straight line with slope $m$ and $y$-intercept $b$, from [linear functions](!#4).' }, ''],
+        [{ formula: '$f(x) = ax^2 + bx + c$', text: 'The standard form of a quadratic, with $a \\neq 0$; its graph is a parabola that opens up when $a > 0$ ([quadratic functions](!#5)).' },
+         { formula: '$f(x) = a(x - h)^2 + k$', text: 'The vertex form, which shows the vertex $(h, k)$ directly, as in [quadratic functions](!#5).' }],
+        [{ formula: '$\\displaystyle x = -\\frac{b}{2a}$', text: 'The axis of symmetry, the vertical line through the vertex ([quadratic functions](!#5)).' },
+         { formula: '$\\displaystyle h = -\\frac{b}{2a}, \\quad k = f(h)$', text: 'The vertex from the coefficients: $h$ from the axis, then $k$ by evaluating, from [quadratic functions](!#5).' }],
+        [{ formula: '$f(x) = a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0, \\quad a_n \\neq 0$', text: 'A polynomial of degree $n$, with at most $n$ real zeros and $n - 1$ turning points ([higher-degree polynomial functions](!#7)).' }, ''],
+      ] },
+      { id: 'rational', name: 'Rational functions', sub: 'A ratio of two polynomials and its asymptotes.', pairs: [
+        [{ formula: '$\\displaystyle f(x) = \\frac{P(x)}{Q(x)}$', text: 'Its domain leaves out every zero of $Q$, as [rational functions](!#8) explains.' },
+         { formula: '$x = a$', text: 'A vertical asymptote at each $a$ with $Q(a) = 0$ and $P(a) \\neq 0$ ([rational functions](!#8)).' }],
+        [{ formula: '$\\displaystyle y = \\frac{a_n}{b_m}$', text: 'When $\\deg P = \\deg Q$, the horizontal asymptote is the ratio of the leading coefficients ([rational functions](!#8)).' },
+         { formula: '$y = 0$', text: 'When $\\deg P < \\deg Q$, the graph levels off at the $x$-axis, from [rational functions](!#8).' }],
+      ] },
+      { id: 'other', name: 'Absolute value, exponential and logarithm', sub: 'Three more parent functions.', pairs: [
+        [{ formula: '$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$', text: 'The distance of $x$ from zero, written in two pieces; its graph is a V with the vertex at the origin ([absolute value function](!#12)).' }, ''],
+        [{ formula: '$f(x) = a \\cdot b^x$', text: 'Growth when $b > 1$ and decay when $0 < b < 1$, with $b > 0$, $b \\neq 1$ and $a \\neq 0$ ([exponential functions](!#14)).' },
+         { formula: '$\\log_b(x) = y \\iff b^y = x$', text: 'The power that $b$ must be raised to, which makes the logarithm the inverse of the exponential ([logarithmic functions](!#15)).' }],
+      ] },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     familyOutline,
     familyGrowthLevels,
     rationalAsymptoteCases,
@@ -3295,7 +3311,7 @@ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', 
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function FamiliesPage({familyOutline, familyGrowthLevels, rationalAsymptoteCases, 
+export default function FamiliesPage({ formulaSummaryData, pitfallData,familyOutline, familyGrowthLevels, rationalAsymptoteCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -3568,11 +3584,38 @@ export default function FamiliesPage({familyOutline, familyGrowthLevels, rationa
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="function-family-formula-summary"
+            title="Function family formulas"
+            source="/functions/families"
+            related={{ href: '/functions/formulas', label: 'All function formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.pitfalls.title,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="function-family-pitfalls"
+            title="Common pitfalls with the function families"
+            source="/functions/families"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

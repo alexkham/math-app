@@ -907,6 +907,8 @@ import ComparisonTable2 from '@/app/components/infographics/comparison-table/Com
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1275,7 +1277,7 @@ For $h(x) = \\dfrac{x}{x^2 + 1}$, the denominator $x^2 + 1$ is always positive â
 
 @academic[pitfall,aside:true,width:35%:Cancelling before finding the domain
 Simplifying $f(x) = \\dfrac{x^2 - 4}{x - 2}$ to $x + 2$ first and reading the domain from that gives all real numbers. The original denominator is zero at $x = 2$, so $f(2)$ is undefined and the domain is $(-\\infty, 2) \\cup (2, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-cancelling-before-finding-the-domain)]@
 
 The numerator does not affect domain. A zero in the numerator makes the function equal zero, which is a valid output. Only zeros in the denominator create exclusions.
 
@@ -1311,7 +1313,7 @@ The domain is $(-\\infty, 3]$.
 
 @academic[pitfall,aside:true,width:35%:Not flipping the inequality
 Solving $6 - 2x \\geq 0$ as $-2x \\geq -6$ and then $x \\geq 3$ keeps the sign when dividing by $-2$. At $x = 4$ the radicand is $-2$; the sign must flip, giving $x \\leq 3$ and the domain $(-\\infty, 3]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-not-flipping-the-inequality)]@
 
 The direction of the inequality carries the whole answer here: it decides whether the domain runs to the left or to the right of the boundary point $x = 3$. The boundary point itself is included, because a radicand of $0$ gives $\\sqrt{0} = 0$, a valid output.
 
@@ -1353,7 +1355,7 @@ $$(-\\infty, -2) \\cup (2, \\infty)$$]@
 
 @academic[pitfall,aside:true,width:35%:Losing the negative interval
 Treating $x^2 - 4 > 0$ like an equation, $x^2 > 4$ so $x > 2$, drops half the domain. At $x = -3$ the argument is $5$ and $\\ln(5)$ is defined; the domain is $(-\\infty, -2) \\cup (2, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-losing-the-negative-interval)]@
 
 Sign analysis works with the roots of the argument, here $x = -2$ and $x = 2$. They split the number line into three intervals, and on each one $x^2 - 4$ keeps a single sign: positive on the two outer intervals, negative between the roots. Only the intervals where the argument is positive enter the domain.
 
@@ -1400,7 +1402,7 @@ For $h(x) = \\dfrac{1}{\\sqrt{x - 2}}$, the square root requires $x - 2 \\geq 0$
 
 @academic[pitfall,aside:true,width:35%:Joining restrictions with or
 Combining $x > 1$ and $x \\leq 5$ for $g(x) = \\ln(x - 1) + \\sqrt{5 - x}$ with "or" gives all real numbers. At $x = 6$, $\\sqrt{5 - 6} = \\sqrt{-1}$ is not real; both conditions must hold, so the domain is $(1, 5]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-joining-restrictions-with-or)]@
 
 A systematic approach prevents errors: list each operation that imposes a restriction, solve each restriction separately, then intersect all the resulting conditions. Overlapping constraints narrow the domain; contradictory constraints can eliminate it entirely.`,
     before: ``,
@@ -1414,7 +1416,7 @@ A systematic approach prevents errors: list each operation that imposes a restri
 
 @academic[pitfall,aside:true,width:35%:Reading the vertical extent
 For a curve rising from a solid dot at $(-2, 1)$ to one at $(4, 7)$, reading the heights gives $[1, 7]$, which is the range. The domain is read along the $x$-axis: $[-2, 4]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-vertical-extent)]@
 
 Trace the graph from left to right. Where does it start? Where does it end? Does it continue indefinitely in either direction? The answers define the domain.
 
@@ -1462,69 +1464,9 @@ Contextual domain is a modeling decision, not a calculation. It requires underst
 
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when finding a domain. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Cancelling before finding the domain**
-
-A rational function is simplified first, by cancelling a factor shared by the numerator and the denominator, and the domain is then read from the simplified formula. The cancelled factor takes its zero with it, so a value the original function excludes slips back in.
-
-Wrong working: $f(x) = \\dfrac{x^2 - 4}{x - 2} = \\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$, a line, so the domain is $(-\\infty, \\infty)$.
-
-Right working: the domain comes from the original denominator. $x - 2 = 0$ gives $x = 2$, so the domain is $(-\\infty, 2) \\cup (2, \\infty)$. On that domain $f(x) = x + 2$, and the graph is the line $y = x + 2$ with a hole at $(2, 4)$.
-
-Why it happens: the simplified formula looks like the same function and is easier to work with, and the cancellation hides the step where $x = 2$ was lost.
-
-How to check: substitute each candidate exclusion into the formula as given. $f(2) = \\dfrac{4 - 4}{2 - 2} = \\dfrac{0}{0}$, which is undefined, so $2$ cannot be in the domain.
-
-**Not flipping the inequality**
-
-The radicand condition is solved by dividing by a negative number, and the inequality sign is kept as it was. The domain then lands on the wrong side of the boundary point.
-
-Wrong working: $6 - 2x \\geq 0$, so $-2x \\geq -6$, so $x \\geq 3$, and the domain is given as $[3, \\infty)$.
-
-Right working: dividing by $-2$ reverses the sign, so $-2x \\geq -6$ gives $x \\leq 3$ and the domain is $(-\\infty, 3]$. Moving $2x$ to the other side, as in the section above, avoids the division altogether: $6 \\geq 2x$, so $3 \\geq x$.
-
-Why it happens: in equations, dividing both sides by a negative number needs no extra care, and the habit is carried over to inequalities.
-
-How to check: test a value from the claimed domain. $x = 4$ gives $\\sqrt{6 - 8} = \\sqrt{-2}$, which is not real, so $[3, \\infty)$ cannot be right; $x = 0$ gives $\\sqrt{6}$, which is real.
-
-**Losing the negative interval**
-
-A quadratic condition on a logarithm's argument is solved like an equation: the square root of both sides is taken and only the positive root is kept. The interval to the left of the negative root disappears.
-
-Wrong working: $x^2 - 4 > 0$, so $x^2 > 4$, so $x > 2$, and the domain is given as $(2, \\infty)$.
-
-Right working: $x^2 > 4$ means $|x| > 2$, that is $x < -2$ or $x > 2$. Sign analysis of $(x - 2)(x + 2)$ agrees: positive for $x < -2$, negative for $-2 < x < 2$, positive for $x > 2$. The domain is $(-\\infty, -2) \\cup (2, \\infty)$.
-
-Why it happens: square roots are usually taken as positive, and for an inequality the square root step really produces an absolute value, which splits into two pieces.
-
-How to check: test a negative value. $x = -3$ gives $x^2 - 4 = 9 - 4 = 5 > 0$, so $\\ln(5)$ exists and $-3$ belongs to the domain.
-
-**Joining restrictions with or**
-
-Each restriction of a combined function is solved correctly, but the results are joined as a union, as if meeting any one condition were enough.
-
-Wrong working: for $g(x) = \\ln(x - 1) + \\sqrt{5 - x}$, the conditions are $x > 1$ or $x \\leq 5$. Every real number satisfies at least one of them, so the domain is given as $(-\\infty, \\infty)$.
-
-Right working: both parts must be defined at the same input, so both conditions must hold at once: $x > 1$ and $x \\leq 5$. The domain is the intersection, $(1, 5]$.
-
-Why it happens: each condition reads like a list of allowed values, and lists are merged by collecting. Domains of a single restriction are also often written with $\\cup$, which makes the union feel like the normal way to join pieces.
-
-How to check: test a value outside the intersection. At $x = 6$, $\\ln(5)$ exists but $\\sqrt{-1}$ does not; at $x = 0$, $\\sqrt{5}$ exists but $\\ln(-1)$ does not. In both cases $g$ is undefined.
-
-**Reading the vertical extent**
-
-On a graph, the domain is read off the vertical axis, from the heights the curve covers. That set is the range, not the domain.
-
-Wrong working: a curve rises from a solid dot at $(-2, 1)$ to a solid dot at $(4, 7)$. It covers heights from $1$ to $7$, so the domain is given as $[1, 7]$.
-
-Right working: the domain is the horizontal extent. The curve starts at $x = -2$ and ends at $x = 4$, both endpoints included, so the domain is $[-2, 4]$. The interval $[1, 7]$ is the range.
-
-Why it happens: domain and range are learned together, and on a graph both are intervals read off an axis, so the axes are easily swapped.
-
-How to check: the domain is a set of inputs, and inputs sit on the horizontal axis. A vertical line at $x = -2$ touches the graph; one at $x = -3$ misses it, so $-3$ is outside the domain.`,
+    content: `Five mistakes come up again and again when finding a domain. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses or adds inputs while the conditions are solved. The domain comes from the original formula before any cancelling, dividing by a negative number reverses the inequality, $x^2 > 4$ has a negative part as well, several restrictions must all hold at once, and a domain is read along the horizontal axis. Testing one value inside and one outside the claimed domain catches each slip.`,
     link: '',
   },
 
@@ -1745,8 +1687,46 @@ const faqQuestions = {
     ],
   };
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'cancelling-before-finding-the-domain', name: `Cancelling before finding the domain`, errorAt: 0,
+        what: `A rational function is simplified first, by cancelling a factor shared by the numerator and the denominator, and the domain is then read from the simplified formula. The cancelled factor takes its zero with it, so a value the original function excludes slips back in.`,
+        wrong: [`$f(x) = \\dfrac{x^2 - 4}{x - 2} = \\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$, a line, so the domain is $(-\\infty, \\infty)$.`],
+        right: [`The domain comes from the original denominator. $x - 2 = 0$ gives $x = 2$, so the domain is $(-\\infty, 2) \\cup (2, \\infty)$. On that domain $f(x) = x + 2$, and the graph is the line $y = x + 2$ with a hole at $(2, 4)$.`],
+        why: `The simplified formula looks like the same function and is easier to work with, and the cancellation hides the step where $x = 2$ was lost.`,
+        check: `Substitute each candidate exclusion into the formula as given. $f(2) = \\dfrac{4 - 4}{2 - 2} = \\dfrac{0}{0}$, which is undefined, so $2$ cannot be in the domain.` },
+      { id: 'not-flipping-the-inequality', name: `Not flipping the inequality`, errorAt: 0,
+        what: `The radicand condition is solved by dividing by a negative number, and the inequality sign is kept as it was. The domain then lands on the wrong side of the boundary point.`,
+        wrong: [`$6 - 2x \\geq 0$, so $-2x \\geq -6$, so $x \\geq 3$, and the domain is given as $[3, \\infty)$.`],
+        right: [`Dividing by $-2$ reverses the sign, so $-2x \\geq -6$ gives $x \\leq 3$ and the domain is $(-\\infty, 3]$. Moving $2x$ to the other side, as in the section above, avoids the division altogether: $6 \\geq 2x$, so $3 \\geq x$.`],
+        why: `In equations, dividing both sides by a negative number needs no extra care, and the habit is carried over to inequalities.`,
+        check: `Test a value from the claimed domain. $x = 4$ gives $\\sqrt{6 - 8} = \\sqrt{-2}$, which is not real, so $[3, \\infty)$ cannot be right; $x = 0$ gives $\\sqrt{6}$, which is real.` },
+      { id: 'losing-the-negative-interval', name: `Losing the negative interval`, errorAt: 0,
+        what: `A quadratic condition on a logarithm's argument is solved like an equation: the square root of both sides is taken and only the positive root is kept. The interval to the left of the negative root disappears.`,
+        wrong: [`$x^2 - 4 > 0$, so $x^2 > 4$, so $x > 2$, and the domain is given as $(2, \\infty)$.`],
+        right: [`$x^2 > 4$ means $|x| > 2$, that is $x < -2$ or $x > 2$. Sign analysis of $(x - 2)(x + 2)$ agrees: positive for $x < -2$, negative for $-2 < x < 2$, positive for $x > 2$. The domain is $(-\\infty, -2) \\cup (2, \\infty)$.`],
+        why: `Square roots are usually taken as positive, and for an inequality the square root step really produces an absolute value, which splits into two pieces.`,
+        check: `Test a negative value. $x = -3$ gives $x^2 - 4 = 9 - 4 = 5 > 0$, so $\\ln(5)$ exists and $-3$ belongs to the domain.` },
+      { id: 'joining-restrictions-with-or', name: `Joining restrictions with or`, errorAt: 1,
+        what: `Each restriction of a combined function is solved correctly, but the results are joined as a union, as if meeting any one condition were enough.`,
+        wrong: [`For $g(x) = \\ln(x - 1) + \\sqrt{5 - x}$,`, `The conditions are $x > 1$ or $x \\leq 5$. Every real number satisfies at least one of them, so the domain is given as $(-\\infty, \\infty)$.`],
+        right: [`For $g(x) = \\ln(x - 1) + \\sqrt{5 - x}$,`, `Both parts must be defined at the same input, so both conditions must hold at once: $x > 1$ and $x \\leq 5$. The domain is the intersection, $(1, 5]$.`],
+        why: `Each condition reads like a list of allowed values, and lists are merged by collecting. Domains of a single restriction are also often written with $\\cup$, which makes the union feel like the normal way to join pieces.`,
+        check: `Test a value outside the intersection. At $x = 6$, $\\ln(5)$ exists but $\\sqrt{-1}$ does not; at $x = 0$, $\\sqrt{5}$ exists but $\\ln(-1)$ does not. In both cases $g$ is undefined.` },
+      { id: 'reading-the-vertical-extent', name: `Reading the vertical extent`, errorAt: 1,
+        what: `On a graph, the domain is read off the vertical axis, from the heights the curve covers. That set is the range, not the domain.`,
+        wrong: [`A curve rises from a solid dot at $(-2, 1)$ to a solid dot at $(4, 7)$.`, `It covers heights from $1$ to $7$, so the domain is given as $[1, 7]$.`],
+        right: [`A curve rises from a solid dot at $(-2, 1)$ to a solid dot at $(4, 7)$.`, `The domain is the horizontal extent. The curve starts at $x = -2$ and ends at $x = 4$, both endpoints included, so the domain is $[-2, 4]$. The interval $[1, 7]$ is the range.`],
+        why: `Domain and range are learned together, and on a graph both are intervals read off an axis, so the axes are easily swapped.`,
+        check: `The domain is a set of inputs, and inputs sit on the horizontal axis. A vertical line at $x = -2$ touches the graph; one at $x = -3$ misses it, so $-3$ is outside the domain.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     domainKindsComparison,
     demoUnits,
     conceptIntroFigures,
@@ -1769,7 +1749,7 @@ const faqQuestions = {
     }
    }
 
-export default function DomainPage({domainKindsComparison, 
+export default function DomainPage({ pitfallData,domainKindsComparison, 
   seoData,
   sectionsContent,
   introContent,
@@ -1993,6 +1973,15 @@ export default function DomainPage({domainKindsComparison,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="domain-pitfalls"
+            title="Common pitfalls in finding a domain"
+            source="/functions/domain"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

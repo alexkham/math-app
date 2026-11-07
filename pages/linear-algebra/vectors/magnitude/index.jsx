@@ -810,6 +810,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magnitudeDiagrams'
@@ -818,6 +819,7 @@ import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1149,7 +1151,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + v_3^2}$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking the root term by term
 Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4 = 7$, gives the wrong length for $(3, -4)$. The root applies to the whole sum: $\\|(3, -4)\\| = \\sqrt{9 + 16} = \\sqrt{25} = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-root-term-by-term)]@
 
 For a concrete case in three dimensions, the vector $\\mathbf{v} = (2, -1, 2)$ has magnitude $\\sqrt{2^2 + (-1)^2 + 2^2} = \\sqrt{4 + 1 + 4} = \\sqrt{9} = 3$. Every component enters the sum as a square, so the sign of the middle entry plays no part in the length.
 
@@ -1256,7 +1258,7 @@ $$\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$$
 
 @academic[pitfall,aside:true,width:35%:Adding the lengths
 Taking $\\|\\mathbf{a} + \\mathbf{b}\\| = \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$ for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (-3, 4)$ gives $5 + 5 = 10$. The sum is $(0, 8)$, so $\\|\\mathbf{a} + \\mathbf{b}\\| = 8$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-lengths)]@
 
 The length of a sum never exceeds the sum of the individual lengths. Geometrically, in the tip-to-tail picture of vector addition, the direct path from start to finish (the sum) is never longer than the path that follows both vectors end to end. Equality holds only when one of $\\mathbf{a}$, $\\mathbf{b}$ is $\\mathbf{0}$ or they point in the same direction — when the path is already straight. The triangle inequality is proved using the Cauchy–Schwarz inequality, which is developed on the [dot product](!/linear-algebra/vectors/dot-product) page.`,
     before: ``,
@@ -1278,7 +1280,7 @@ When $\\mathbf{a}$ and $\\mathbf{b}$ are interpreted as position vectors — arr
 
 @academic[pitfall,aside:true,width:35%:Subtracting the lengths
 Computing $\\|\\mathbf{a}\\| - \\|\\mathbf{b}\\|$ for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$ gives $5 - 5 = 0$, as if the two points coincided. The distance is the length of the difference: $\\|(-1, 1)\\| = \\sqrt{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-lengths)]@
 
 Distance inherits its behavior from the norm. It is always non-negative, equals zero only when the two vectors are identical, is symmetric ($d(\\mathbf{a}, \\mathbf{b}) = d(\\mathbf{b}, \\mathbf{a})$, since $\\|\\mathbf{a} - \\mathbf{b}\\| = \\|\\mathbf{b} - \\mathbf{a}\\|$), and satisfies its own triangle inequality: $d(\\mathbf{a}, \\mathbf{c}) \\leq d(\\mathbf{a}, \\mathbf{b}) + d(\\mathbf{b}, \\mathbf{c})$. These properties make the Euclidean distance a metric — a formal measure of separation on $\\mathbb{R}^n$.`,
     before: ``,
@@ -1327,7 +1329,7 @@ $$\\left\\|\\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}\\right\\| = \\frac{\\|\\mathbf
 
 @academic[pitfall,aside:true,width:35%:Dividing by the squared length
 Dividing $\\mathbf{v} = (1, 2, 2)$ by $1 + 4 + 4 = 9$ gives $\\left(\\frac{1}{9}, \\frac{2}{9}, \\frac{2}{9}\\right)$, whose length is $\\frac{1}{3}$, not $1$. Dividing by $\\|\\mathbf{v}\\| = \\sqrt{9} = 3$ gives $\\hat{\\mathbf{v}} = \\left(\\frac{1}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-squared-length)]@
 
 In a computation, normalization comes down to two steps. The length is found first, from the components of $\\mathbf{v}$, and then every component is divided by that one number. The identity above doubles as a check on the result: the squares of the new components must add up to exactly $1$.
 
@@ -1344,73 +1346,19 @@ Normalization appears throughout the rest of this section. The angle formula on 
   },
   obj7: {
     title: `Summary: Norm and the Concepts Built from It`,
-    content: `The norm is the foundation of three related concepts this page has developed: distance (the norm of a difference), unit vector (a vector with norm exactly 1), and normalization (rescaling any nonzero vector to unit length). The table below collects each alongside its definition, formula, and direct relationship to the norm ‖<b>v</b>‖ &mdash; showing the family tree of ideas that grow out of a single length measurement.`,
+    content: `This summary gathers the norm and everything the page builds from it on one set of cards. Each card gives a name and a formula, with a sentence on what it measures, how it comes from the norm, and a link to the section that explains it. A badge marks the two cards that come with a condition.
+
+The first card is the norm itself, the length of a vector. Three cards follow with its properties: a length is never negative, scaling a vector scales its length, and the triangle inequality bounds the length of a sum. The last three hold the ideas built on the norm: the distance between two vectors, the unit vector, and normalization.`,
+    formulaSheetAfter: `Distance, unit vectors and normalization all come down to one length computation, the square root of a sum of squares. Working out that length first and reusing it keeps the work short, and checking that a normalized vector has length 1 catches most slips.`,
     before: ``,
     after: ``,
     link: '',
   },
   obj8: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for most wrong answers in computations with the norm. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the root term by term**
-
-The magnitude is computed by taking the square root of each squared component on its own and adding the results, as if the root could be split across the sum.
-
-Wrong working:
-$$\\|(3, -4)\\| = \\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4 = 7$$
-
-Right working: add the squares first, then take one square root of the total.
-$$\\|(3, -4)\\| = \\sqrt{3^2 + (-4)^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$$
-
-Why it happens: for non-negative numbers the root does split over a product, $\\sqrt{ab} = \\sqrt{a}\\,\\sqrt{b}$, and the same move is carried over to a sum, where it fails.
-
-How to check: square the answer; it must equal the sum of the squared components. The wrong answer gives $7^2 = 49$, but $3^2 + (-4)^2 = 25$. The right answer gives $5^2 = 25$.
-
-**Adding the lengths**
-
-The norm is treated as if it passed through addition: the length of a sum is taken to be the sum of the two lengths.
-
-Wrong working: for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (-3, 4)$,
-$$\\|\\mathbf{a} + \\mathbf{b}\\| = \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\| = 5 + 5 = 10$$
-
-Right working: add the vectors first, then measure the sum.
-$$\\mathbf{a} + \\mathbf{b} = (0, 8), \\qquad \\|\\mathbf{a} + \\mathbf{b}\\| = \\sqrt{0^2 + 8^2} = 8$$
-As the triangle inequality requires, $8 \\leq 10$.
-
-Why it happens: a scalar does come out of the norm, $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$, and addition is expected to behave the same way. It does only in the equality case of the triangle inequality.
-
-How to check: the sum of lengths is exact only when one vector is a non-negative multiple of the other. Here $(-3, 4)$ is not a multiple of $(3, 4)$, so $10$ can only be an upper bound, and the length of the sum must be computed directly.
-
-**Subtracting the lengths**
-
-The distance between two vectors is computed as the difference of their lengths, $\\|\\mathbf{a}\\| - \\|\\mathbf{b}\\|$, instead of the length of their difference, $\\|\\mathbf{a} - \\mathbf{b}\\|$.
-
-Wrong working: for $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$,
-$$d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a}\\| - \\|\\mathbf{b}\\| = 5 - 5 = 0$$
-
-Right working: subtract the vectors first, then take the norm.
-$$\\mathbf{a} - \\mathbf{b} = (-1, 1), \\qquad d(\\mathbf{a}, \\mathbf{b}) = \\sqrt{(-1)^2 + 1^2} = \\sqrt{2}$$
-
-Why it happens: the two expressions differ only in where the bars close, and the word "difference" suggests subtracting the two lengths that are already known.
-
-How to check: a distance of $0$ means the two vectors are identical, and $(3, 4) \\neq (4, 3)$, so $0$ cannot be right. In general the difference of the lengths is only a lower bound for the distance, by the reverse triangle inequality.
-
-**Dividing by the squared length**
-
-When a vector is normalized, its components are divided by the sum of their squares, $\\|\\mathbf{v}\\|^2$, because the square root was never taken.
-
-Wrong working: for $\\mathbf{v} = (1, 2, 2)$, the sum of squares is $1 + 4 + 4 = 9$, and
-$$\\frac{\\mathbf{v}}{9} = \\left(\\frac{1}{9}, \\frac{2}{9}, \\frac{2}{9}\\right)$$
-
-Right working: the length is $\\|\\mathbf{v}\\| = \\sqrt{9} = 3$, so
-$$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{3} = \\left(\\frac{1}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$$
-
-Why it happens: the sum of squares is the first number the computation produces, and it is easy to stop there. The squared norm also appears on its own in formulas such as $\\|\\mathbf{v}\\|^2 = \\mathbf{v} \\cdot \\mathbf{v}$, so it looks like a finished quantity.
-
-How to check: square and add the components of the result. The wrong answer gives $\\frac{1}{81} + \\frac{4}{81} + \\frac{4}{81} = \\frac{1}{9}$, a length of $\\frac{1}{3}$. The right answer gives $\\frac{1}{9} + \\frac{4}{9} + \\frac{4}{9} = 1$.`,
+    content: `Four mistakes account for most wrong answers in computations with the norm. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip treats the length as if it split over a sum. The square root is taken of the whole sum of squares, lengths do not add, the distance between two vectors is the length of their difference, and a unit vector divides by $\\|\\mathbf{v}\\|$, not by $\\|\\mathbf{v}\\|^2$. Squaring the answer, or squaring and adding the components of a unit vector, catches each slip.`,
     link: '',
   },
 };
@@ -1599,8 +1547,69 @@ const schemas = {
   };
 
 
+  // MistakeFix batch 24, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-root-term-by-term', name: `Taking the root term by term`, errorAt: 0,
+        what: `The magnitude is computed by taking the square root of each squared component on its own and adding the results, as if the root could be split across the sum.`,
+        wrong: [`$$\\|(3, -4)\\| = \\sqrt{3^2} + \\sqrt{(-4)^2}$$
+$$= 3 + 4 = 7$$`],
+        right: [`Add the squares first, then take one square root of the total.`, `$$\\|(3, -4)\\| = \\sqrt{3^2 + (-4)^2}$$
+$$= \\sqrt{9 + 16} = \\sqrt{25} = 5$$`],
+        why: `For non-negative numbers the root does split over a product, $\\sqrt{ab} = \\sqrt{a}\\,\\sqrt{b}$, and the same move is carried over to a sum, where it fails.`,
+        check: `Square the answer; it must equal the sum of the squared components. The wrong answer gives $7^2 = 49$, but $3^2 + (-4)^2 = 25$. The right answer gives $5^2 = 25$.` },
+      { id: 'adding-the-lengths', name: `Adding the lengths`, errorAt: 1,
+        what: `The norm is treated as if it passed through addition: the length of a sum is taken to be the sum of the two lengths.`,
+        wrong: [`For $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (-3, 4)$,`, `$$\\|\\mathbf{a} + \\mathbf{b}\\| = \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$$
+$$= 5 + 5 = 10$$`],
+        right: [`For $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (-3, 4)$,`, `Add the vectors first, then measure the sum.`, `$$\\mathbf{a} + \\mathbf{b} = (0, 8),$$
+$$\\|\\mathbf{a} + \\mathbf{b}\\| = \\sqrt{0^2 + 8^2} = 8$$`, `As the triangle inequality requires, $8 \\leq 10$.`],
+        why: `A scalar does come out of the norm, $\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$, and addition is expected to behave the same way. It does only in the equality case of the triangle inequality.`,
+        check: `The sum of lengths is exact only when one vector is a non-negative multiple of the other. Here $(-3, 4)$ is not a multiple of $(3, 4)$, so $10$ can only be an upper bound, and the length of the sum must be computed directly.` },
+      { id: 'subtracting-the-lengths', name: `Subtracting the lengths`, errorAt: 1,
+        what: `The distance between two vectors is computed as the difference of their lengths, $\\|\\mathbf{a}\\| - \\|\\mathbf{b}\\|$, instead of the length of their difference, $\\|\\mathbf{a} - \\mathbf{b}\\|$.`,
+        wrong: [`For $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$,`, `$$d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a}\\| - \\|\\mathbf{b}\\| = 5 - 5 = 0$$`],
+        right: [`For $\\mathbf{a} = (3, 4)$ and $\\mathbf{b} = (4, 3)$,`, `Subtract the vectors first, then take the norm.`, `$$\\mathbf{a} - \\mathbf{b} = (-1, 1),$$
+$$d(\\mathbf{a}, \\mathbf{b}) = \\sqrt{(-1)^2 + 1^2} = \\sqrt{2}$$`],
+        why: `The two expressions differ only in where the bars close, and the word "difference" suggests subtracting the two lengths that are already known.`,
+        check: `A distance of $0$ means the two vectors are identical, and $(3, 4) \\neq (4, 3)$, so $0$ cannot be right. In general the difference of the lengths is only a lower bound for the distance, by the reverse triangle inequality.` },
+      { id: 'dividing-by-the-squared-length', name: `Dividing by the squared length`, errorAt: 1,
+        what: `When a vector is normalized, its components are divided by the sum of their squares, $\\|\\mathbf{v}\\|^2$, because the square root was never taken.`,
+        wrong: [`For $\\mathbf{v} = (1, 2, 2)$,`, `The sum of squares is $1 + 4 + 4 = 9$, and
+$$\\frac{\\mathbf{v}}{9} = \\left(\\frac{1}{9}, \\frac{2}{9}, \\frac{2}{9}\\right)$$`],
+        right: [`For $\\mathbf{v} = (1, 2, 2)$,`, `The length is $\\|\\mathbf{v}\\| = \\sqrt{9} = 3$, so
+$$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{3} = \\left(\\frac{1}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$$`],
+        why: `The sum of squares is the first number the computation produces, and it is easy to stop there. The squared norm also appears on its own in formulas such as $\\|\\mathbf{v}\\|^2 = \\mathbf{v} \\cdot \\mathbf{v}$, so it looks like a finished quantity.`,
+        check: `Square and add the components of the result. The wrong answer gives $\\frac{1}{81} + \\frac{4}{81} + \\frac{4}{81} = \\frac{1}{9}$, a length of $\\frac{1}{3}$. The right answer gives $\\frac{1}{9} + \\frac{4}{9} + \\frac{4}{9} = 1$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Norm', formula: '$\\displaystyle \\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2} = \\sqrt{\\sum_{i=1}^{n} v_i^2}$',
+        text: 'The length of $\\mathbf{v}$ and the base concept every other card is built from; [the general norm](!#2) extends the formulas for two and three dimensions.' },
+      { name: 'Non-negativity', formula: '$\\|\\mathbf{v}\\| \\geq 0$', restriction: 'zero only for $\\mathbf{v} = \\mathbf{0}$',
+        text: 'A length is never negative, and only the zero vector has length zero, as [properties of the norm](!#3) shows.' },
+      { name: 'Scaling', formula: '$\\|c\\mathbf{v}\\| = |c|\\,\\|\\mathbf{v}\\|$',
+        text: 'Multiplying a vector by $c$ multiplies its length by the absolute value of $c$, from [properties of the norm](!#3).' },
+      { name: 'Triangle inequality', formula: '$\\|\\mathbf{a} + \\mathbf{b}\\| \\leq \\|\\mathbf{a}\\| + \\|\\mathbf{b}\\|$',
+        text: 'The length of a sum never exceeds the sum of the lengths, as [properties of the norm](!#3) explains.' },
+      { name: 'Distance', formula: '$\\displaystyle d(\\mathbf{a}, \\mathbf{b}) = \\|\\mathbf{a} - \\mathbf{b}\\| = \\sqrt{\\sum (a_i - b_i)^2}$',
+        text: 'The straight-line distance between two vectors viewed as points, found by applying the norm to the difference $\\mathbf{a} - \\mathbf{b}$; see [distance between vectors](!#4).' },
+      { name: 'Unit vector', formula: '$\\|\\hat{\\mathbf{u}}\\| = 1$',
+        text: 'A vector that carries pure direction with no scale, defined by requiring the norm to equal exactly 1, as [unit vectors](!#5) shows.' },
+      { name: 'Normalization', formula: '$\\displaystyle \\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}$', restriction: 'undefined for $\\mathbf{v} = \\mathbf{0}$',
+        text: 'Turns any nonzero vector into the unit vector pointing the same way by dividing it by its own norm, from [normalization](!#6).' },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1619,7 +1628,7 @@ const schemas = {
   }
 }
    }
-export default function VectorMagnitudePage({seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function VectorMagnitudePage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1683,7 +1692,7 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2}$$]@`,
         content: [
           `@academic[pitfall,aside:true,width:35%:Taking the root term by term
 Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4 = 7$, gives the wrong length for $(3, -4)$. The root applies to the whole sum: $\\|(3, -4)\\| = \\sqrt{9 + 16} = \\sqrt{25} = 5$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-taking-the-root-term-by-term)]@`,
           `Taking roots term by term just adds up the absolute values of the components, which is a different measure of size. The [general norm](!/linear-algebra/vectors/magnitude#2) carries the correct formula to $\\mathbb{R}^n$.`,
           `To compute the magnitude of a specific vector, use the [vector calculator](!/linear-algebra/calculators/vectors).`,
         ],
@@ -1787,11 +1796,16 @@ Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="vector-norm-formula-summary"
+            title="The norm and what it builds"
+            source="/linear-algebra/vectors/magnitude"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.obj7.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1800,6 +1814,15 @@ Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="magnitude-pitfalls"
+            title="Common pitfalls with magnitude"
+            source="/linear-algebra/vectors/magnitude"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

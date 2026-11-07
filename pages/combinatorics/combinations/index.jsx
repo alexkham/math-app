@@ -1086,6 +1086,7 @@ import simpleCombinationDiagrams from '@/app/components/combinatorics/new-visual
 import { tableHeaders } from '@/app/styles/theme'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 
@@ -1841,6 +1842,15 @@ Understanding these different combination scenarios is essential because each si
     
       },
   
+      formulaSummary: {
+        title: `Formula Summary`,
+        content: `This summary puts the combination formulas of the page side by side, in the order the page treats them. Each row names a type of selection or distribution, gives an everyday case with a link to its section, shows the formula and says when it applies.
+
+The first row chooses some distinct items with no regard to order. The second splits distinct items into labeled groups of known sizes, with a correction for groups that have no names. The next two share identical items among labeled containers, once with empty containers allowed and once with at least one item in each. The last row sends every distinct item to one of several labeled cells.`,
+        before: ``,
+        after: `Three questions pick the row: are the items distinct or identical, is a subset chosen or is everything shared out, and may a container stay empty? The overview of combination types at the top of the page asks the same questions, and the matching row gives the count.`,
+        link: '',
+      },
       pitfalls: {
         title: `Common Pitfalls`,
         content: `Four mistakes come up again and again when a counting formula from this page is put to work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -2021,8 +2031,31 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Type', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'when', label: 'Applies when' },
+    ],
+    rows: [
+      { name: 'Simple combination', formula: '$\\displaystyle \\binom{n}{r} = \\frac{n!}{r! \\, (n-r)!}$', when: 'some distinct items are selected, order does not matter and nothing repeats',
+        sub: 'Choosing committee members or lottery numbers; [simple combinations](!#combinations) builds the count.' },
+      { name: 'Partition into groups', formula: '$\\displaystyle \\frac{n!}{n_1! \\, n_2! \\cdots n_k!}, \\quad n_1 + n_2 + \\cdots + n_k = n$', when: 'distinct items are split into labeled groups of given sizes',
+        sub: 'Dealing bridge hands to four named seats; groups without names need a further division by $k!$, as [partition into groups](!#partition) explains.' },
+      { name: 'Weak composition', formula: '$\\displaystyle \\left(\\!\\!\\binom{r}{n}\\!\\!\\right) = \\binom{n + r - 1}{r - 1}$', when: 'identical items go into labeled containers and a container may stay empty',
+        sub: 'Sharing identical candies among children; $n$ stars split by $r - 1$ bars, as [weak composition](!#weak) shows.' },
+      { name: 'Strong composition', formula: '$\\displaystyle \\binom{n - 1}{r - 1}$', when: 'identical items go into labeled containers and every container gets at least one',
+        sub: 'The same candies with at least one for each child; [strong composition](!#strong) needs $n \\geq r$.' },
+      { name: 'Distribution into cells', formula: '$r^n$', when: 'each distinct item goes to one of $r$ labeled cells, and cells may stay empty',
+        sub: 'Assigning employees to projects; each of the $n$ items picks a cell, as [distribution into cells](!#distribution) explains.' },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
     pitfallData,
     conceptIntroFigures,
     seoData: {
@@ -2046,7 +2079,7 @@ const schemas = {
 }
   }
   
-export default function CombinationsPage({ pitfallData,seoData, sectionsContent, introContent, simpleCombinationTable,
+export default function CombinationsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, simpleCombinationTable,
   partitionTable, weakCompositionTable, strongCompositionTable, distributionTable,
   combinationsScenariosTableData, faqQuestions, schemas, conceptIntroFigures}) {
 
@@ -2262,6 +2295,24 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
        
       ]
   },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="combination-formula-summary"
+            title="Combination formulas"
+            source="/combinatorics/combinations"
+            related={{ href: '/combinatorics/formulas', label: 'All combinatorics formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
+        ]
+    },
     {
         id:'pitfalls',
         title:sectionsContent.pitfalls.title,

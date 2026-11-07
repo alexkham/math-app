@@ -1775,7 +1775,8 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -2216,7 +2217,7 @@ Every real symmetric matrix is orthogonally diagonalizable.]@
 
 @academic[pitfall,aside:true,width:35%:Assuming eigenvectors are always orthogonal
 For $A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$, row reduction gives $(1, -1, 0)^T$ and $(1, 0, -1)^T$ for the repeated eigenvalue $\\lambda = 1$, and their dot product is $1$, not $0$. Orthogonalizing within the eigenspace replaces the second by $\\frac{1}{2}(1, 1, -2)^T$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-assuming-eigenvectors-are-always-orthogonal)]@
 
 There always exist $n$ orthonormal eigenvectors forming a [basis](!/linear-algebra/vector-spaces) for $\\mathbb{R}^n$, even when eigenvalues are repeated. For a repeated eigenvalue with geometric multiplicity $k$, the eigenspace is $k$-dimensional, and Gram-Schmidt within that eigenspace produces $k$ orthonormal eigenvectors.
 
@@ -2257,7 +2258,7 @@ For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$: eigenvalues are $\\l
 
 @academic[pitfall,aside:true,width:35%:Leaving the eigenvectors unnormalized
 Using $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ unscaled gives $Q^TQ = 2I$ and $QDQ^T = \\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = 2A$. With the factor $\\frac{1}{\\sqrt{2}}$ on each column, $QDQ^T = A$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-eigenvectors-unnormalized)]@
 
 Each eigenvector first comes out of row reduction as a direction, here $(1, 1)^T$ for $\\lambda_1 = 4$ and $(1, -1)^T$ for $\\lambda_2 = 2$, and any nonzero multiple of either would be an eigenvector as well. The factor $\\frac{1}{\\sqrt{2}}$ in front of each fixes its length at $1$. The pairing is fixed too: the $i$-th column of $Q$ goes with the $i$-th diagonal entry of $D$.`,
     before: ``,
@@ -2278,7 +2279,7 @@ The [trace](!/linear-algebra/matrix/trace) is $\\text{tr}(A) = \\lambda_1 + \\cd
 
 @academic[pitfall,aside:true,width:35%:Powering the entries of A
 Squaring each entry of $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$ gives $\\begin{pmatrix} 9 & 1 \\\\ 1 & 9 \\end{pmatrix}$, which is not $A^2$. Only $D$ is powered entry by entry: $A^2 = Q\\,\\text{diag}(16, 4)\\,Q^T = \\begin{pmatrix} 10 & 6 \\\\ 6 & 10 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-powering-the-entries-of-a)]@
 
 Every property of $A$ reduces to a property of the diagonal $D$, mediated by the orthogonal matrix $Q$. This is the computational power of diagonalization — and for symmetric matrices, the orthogonality of $Q$ ensures numerical stability as well.`,
     before: ``,
@@ -2352,67 +2353,9 @@ The [SVD](!/linear-algebra/decompositions/svd) generalizes the spectral decompos
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers when a symmetric matrix is decomposed, or used through its decomposition. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Assuming eigenvectors are always orthogonal**
-
-Eigenvectors that belong to different eigenvalues of a symmetric matrix are orthogonal automatically, and this is taken to hold for all eigenvectors. When an eigenvalue repeats, the basis that row reduction gives for its eigenspace is put into $Q$ unchanged.
-
-Wrong working: $A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$ has eigenvalues $4, 1, 1$. For $\\lambda = 4$ the unit eigenvector is $\\frac{1}{\\sqrt{3}}(1, 1, 1)^T$. Row reducing $A - I$ leaves the single equation $x_1 + x_2 + x_3 = 0$, with basis $(1, -1, 0)^T$ and $(1, 0, -1)^T$. Normalizing these two and using them as columns,
-$$Q = \\begin{pmatrix} 1/\\sqrt{3} & 1/\\sqrt{2} & 1/\\sqrt{2} \\\\ 1/\\sqrt{3} & -1/\\sqrt{2} & 0 \\\\ 1/\\sqrt{3} & 0 & -1/\\sqrt{2} \\end{pmatrix}$$
-has columns $2$ and $3$ with dot product $\\frac{1}{2}$, so $Q^TQ \\neq I$, and
-$$QDQ^T = \\begin{pmatrix} 7/3 & 5/6 & 5/6 \\\\ 5/6 & 11/6 & 4/3 \\\\ 5/6 & 4/3 & 11/6 \\end{pmatrix} \\neq A$$
-
-Right working: apply Gram-Schmidt inside the eigenspace.
-$$(1, 0, -1)^T - \\frac{1}{2}(1, -1, 0)^T = \\frac{1}{2}(1, 1, -2)^T$$
-This is still an eigenvector for $\\lambda = 1$, since $A(1, 1, -2)^T = (1, 1, -2)^T$. With $\\mathbf{q}_1 = \\frac{1}{\\sqrt{3}}(1, 1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$, $\\mathbf{q}_3 = \\frac{1}{\\sqrt{6}}(1, 1, -2)^T$ and $D = \\text{diag}(4, 1, 1)$, the columns are orthonormal and $QDQ^T = A$.
-
-Why it happens: the automatic orthogonality is stated for distinct eigenvalues. Inside one eigenspace every nonzero vector is an eigenvector, so any basis looks equally valid and nothing in the row reduction signals the problem.
-
-How to check: before assembling $Q$, compute the dot product of every pair of columns. Each must be $0$.
-
-**Leaving the eigenvectors unnormalized**
-
-Row reduction returns each eigenvector at a convenient scale, and the vectors go into $Q$ at that scale. The transpose is then used as the inverse, which is valid only for unit columns.
-
-Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$ with $D = \\text{diag}(4, 2)$, take $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Then
-$$QDQ^T = \\begin{pmatrix} 4 & 2 \\\\ 4 & -2 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix} = \\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = 2A$$
-
-Right working: divide each column by its length $\\sqrt{2}$, so $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Then $Q^TQ = I$ and
-$$QDQ^T = \\frac{1}{2}\\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix} = A$$
-
-Why it happens: in the general form $A = PDP^{-1}$ any scaling of the eigenvectors works, because $P^{-1}$ undoes it. Replacing $P^{-1}$ by $Q^T$ is what makes unit length necessary.
-
-How to check: $Q^TQ$ must be $I$. Here the unscaled $Q$ gives $Q^TQ = 2I$, and the result comes out multiplied by exactly that factor $2$.
-
-**Powering the entries of A**
-
-A power or another function of $A$ is computed by applying it to each entry of $A$, the way it is applied to each entry of $D$.
-
-Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$,
-$$A^2 \\to \\begin{pmatrix} 9 & 1 \\\\ 1 & 9 \\end{pmatrix}, \\qquad A^{-1} \\to \\begin{pmatrix} 1/3 & 1 \\\\ 1 & 1/3 \\end{pmatrix}$$
-
-Right working: power the eigenvalues $4$ and $2$ and rebuild with the projections $\\mathbf{q}_1\\mathbf{q}_1^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$ and $\\mathbf{q}_2\\mathbf{q}_2^T = \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix}$.
-$$A^2 = 16\\,\\mathbf{q}_1\\mathbf{q}_1^T + 4\\,\\mathbf{q}_2\\mathbf{q}_2^T = \\begin{pmatrix} 8 & 8 \\\\ 8 & 8 \\end{pmatrix} + \\begin{pmatrix} 2 & -2 \\\\ -2 & 2 \\end{pmatrix} = \\begin{pmatrix} 10 & 6 \\\\ 6 & 10 \\end{pmatrix}$$
-$$A^{-1} = \\frac{1}{4}\\,\\mathbf{q}_1\\mathbf{q}_1^T + \\frac{1}{2}\\,\\mathbf{q}_2\\mathbf{q}_2^T = \\begin{pmatrix} 1/8 & 1/8 \\\\ 1/8 & 1/8 \\end{pmatrix} + \\begin{pmatrix} 1/4 & -1/4 \\\\ -1/4 & 1/4 \\end{pmatrix} = \\begin{pmatrix} 3/8 & -1/8 \\\\ -1/8 & 3/8 \\end{pmatrix}$$
-
-Why it happens: for the diagonal matrix $D$, powers and other functions really do act entry by entry, and the rule is carried over to $A$, whose off-diagonal entries mix the eigenvector directions.
-
-How to check: the trace of $A^k$ must equal $\\lambda_1^k + \\cdots + \\lambda_n^k$. For $A^2$ that is $16 + 4 = 20$; the correct matrix has trace $10 + 10 = 20$, the entry-by-entry one only $18$. For $A^{-1}$, multiply back: $AA^{-1}$ must be $I$.
-
-**Judging definiteness by the entries**
-
-A symmetric matrix whose entries are all positive is called positive definite, as if positive numbers in the matrix made the form $\\mathbf{x}^TA\\mathbf{x}$ positive.
-
-Wrong working: every entry of $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ is positive, so $A$ is declared positive definite.
-
-Right working: $\\det(A - \\lambda I) = (1 - \\lambda)^2 - 4 = 0$ gives $\\lambda = 3$ and $\\lambda = -1$. The signs are mixed, so the form is indefinite. Directly, $\\mathbf{x}^TA\\mathbf{x} = x_1^2 + 4x_1x_2 + x_2^2$ is $6$ at $\\mathbf{x} = (1, 1)^T$ and $-2$ at $\\mathbf{x} = (1, -1)^T$.
-
-Why it happens: for a diagonal matrix the entries are the eigenvalues, so positive entries do mean positive definite. With off-diagonal entries present, the cross term $2a_{12}x_1x_2$ changes sign with $x_1x_2$ and can outweigh the squares.
-
-How to check: test a vector whose components have opposite signs, or, for a $2 \\times 2$ matrix, use the test $a_{11} > 0$ and $\\det A > 0$. Here $\\det A = 1 - 4 = -3 < 0$.`,
+    content: `Four mistakes account for many wrong answers when a symmetric matrix is decomposed, or used through its decomposition. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip skips a property that $A = QDQ^T$ depends on. Eigenvectors for a repeated eigenvalue must be made orthogonal, every column of $Q$ must have length $1$, a power of $A$ powers the eigenvalues in $D$ and not the entries of $A$, and definiteness depends on the eigenvalues, not on the signs of the entries. Checking that $Q^TQ = I$, or testing one vector, catches each slip.`,
     link: ``,
   },
 }
@@ -2600,8 +2543,53 @@ const schemas = {
 
 
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'assuming-eigenvectors-are-always-orthogonal', name: `Assuming eigenvectors are always orthogonal`, errorAt: 1,
+        what: `Eigenvectors that belong to different eigenvalues of a symmetric matrix are orthogonal automatically, and this is taken to hold for all eigenvectors. When an eigenvalue repeats, the basis that row reduction gives for its eigenspace is put into $Q$ unchanged.`,
+        wrong: [`$A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$ has eigenvalues $4, 1, 1$.`, `For $\\lambda = 4$ the unit eigenvector is $\\frac{1}{\\sqrt{3}}(1, 1, 1)^T$. Row reducing $A - I$ leaves the single equation $x_1 + x_2 + x_3 = 0$, with basis $(1, -1, 0)^T$ and $(1, 0, -1)^T$. Normalizing these two and using them as columns,
+$$Q = \\begin{pmatrix} 1/\\sqrt{3} & 1/\\sqrt{2} & 1/\\sqrt{2} \\\\ 1/\\sqrt{3} & -1/\\sqrt{2} & 0 \\\\ 1/\\sqrt{3} & 0 & -1/\\sqrt{2} \\end{pmatrix}$$`, `Has columns $2$ and $3$ with dot product $\\frac{1}{2}$, so $Q^TQ \\neq I$, and
+$$QDQ^T = \\begin{pmatrix} 7/3 & 5/6 & 5/6 \\\\ 5/6 & 11/6 & 4/3 \\\\ 5/6 & 4/3 & 11/6 \\end{pmatrix} \\neq A$$`],
+        right: [`$A = \\begin{pmatrix} 2 & 1 & 1 \\\\ 1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$ has eigenvalues $4, 1, 1$.`, `Apply Gram-Schmidt inside the eigenspace.`, `$$(1, 0, -1)^T - \\frac{1}{2}(1, -1, 0)^T$$
+$$= \\frac{1}{2}(1, 1, -2)^T$$`, `This is still an eigenvector for $\\lambda = 1$, since $A(1, 1, -2)^T = (1, 1, -2)^T$. With $\\mathbf{q}_1 = \\frac{1}{\\sqrt{3}}(1, 1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$, $\\mathbf{q}_3 = \\frac{1}{\\sqrt{6}}(1, 1, -2)^T$ and $D = \\text{diag}(4, 1, 1)$, the columns are orthonormal and $QDQ^T = A$.`],
+        why: `The automatic orthogonality is stated for distinct eigenvalues. Inside one eigenspace every nonzero vector is an eigenvector, so any basis looks equally valid and nothing in the row reduction signals the problem.`,
+        check: `Before assembling $Q$, compute the dot product of every pair of columns. Each must be $0$.` },
+      { id: 'leaving-the-eigenvectors-unnormalized', name: `Leaving the eigenvectors unnormalized`, errorAt: 0,
+        what: `Row reduction returns each eigenvector at a convenient scale, and the vectors go into $Q$ at that scale. The transpose is then used as the inverse, which is valid only for unit columns.`,
+        wrong: [`For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$ with $D = \\text{diag}(4, 2)$, take $Q = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Then
+$$QDQ^T$$
+$$= \\begin{pmatrix} 4 & 2 \\\\ 4 & -2 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = 2A$$`],
+        right: [`Divide each column by its length $\\sqrt{2}$, so $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Then $Q^TQ = I$ and
+$$QDQ^T = \\frac{1}{2}\\begin{pmatrix} 6 & 2 \\\\ 2 & 6 \\end{pmatrix} = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix} = A$$`],
+        why: `In the general form $A = PDP^{-1}$ any scaling of the eigenvectors works, because $P^{-1}$ undoes it. Replacing $P^{-1}$ by $Q^T$ is what makes unit length necessary.`,
+        check: `$Q^TQ$ must be $I$. Here the unscaled $Q$ gives $Q^TQ = 2I$, and the result comes out multiplied by exactly that factor $2$.` },
+      { id: 'powering-the-entries-of-a', name: `Powering the entries of A`, errorAt: 1,
+        what: `A power or another function of $A$ is computed by applying it to each entry of $A$, the way it is applied to each entry of $D$.`,
+        wrong: [`For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$,`, `$$A^2 \\to \\begin{pmatrix} 9 & 1 \\\\ 1 & 9 \\end{pmatrix},$$
+$$A^{-1} \\to \\begin{pmatrix} 1/3 & 1 \\\\ 1 & 1/3 \\end{pmatrix}$$`],
+        right: [`For $A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$,`, `Power the eigenvalues $4$ and $2$ and rebuild with the projections $\\mathbf{q}_1\\mathbf{q}_1^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$ and $\\mathbf{q}_2\\mathbf{q}_2^T = \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\end{pmatrix}$.`, `$$A^2 = 16\\,\\mathbf{q}_1\\mathbf{q}_1^T + 4\\,\\mathbf{q}_2\\mathbf{q}_2^T$$
+$$= \\begin{pmatrix} 8 & 8 \\\\ 8 & 8 \\end{pmatrix} + \\begin{pmatrix} 2 & -2 \\\\ -2 & 2 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 10 & 6 \\\\ 6 & 10 \\end{pmatrix}$$`, `$$A^{-1} = \\frac{1}{4}\\,\\mathbf{q}_1\\mathbf{q}_1^T + \\frac{1}{2}\\,\\mathbf{q}_2\\mathbf{q}_2^T$$
+$$= \\begin{pmatrix} 1/8 & 1/8 \\\\ 1/8 & 1/8 \\end{pmatrix}$$
+$$+ \\begin{pmatrix} 1/4 & -1/4 \\\\ -1/4 & 1/4 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 3/8 & -1/8 \\\\ -1/8 & 3/8 \\end{pmatrix}$$`],
+        why: `For the diagonal matrix $D$, powers and other functions really do act entry by entry, and the rule is carried over to $A$, whose off-diagonal entries mix the eigenvector directions.`,
+        check: `The trace of $A^k$ must equal $\\lambda_1^k + \\cdots + \\lambda_n^k$. For $A^2$ that is $16 + 4 = 20$; the correct matrix has trace $10 + 10 = 20$, the entry-by-entry one only $18$. For $A^{-1}$, multiply back: $AA^{-1}$ must be $I$.` },
+      { id: 'judging-definiteness-by-the-entries', name: `Judging definiteness by the entries`, errorAt: 0,
+        what: `A symmetric matrix whose entries are all positive is called positive definite, as if positive numbers in the matrix made the form $\\mathbf{x}^TA\\mathbf{x}$ positive.`,
+        wrong: [`Every entry of $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ is positive, so $A$ is declared positive definite.`],
+        right: [`$\\det(A - \\lambda I) = (1 - \\lambda)^2 - 4 = 0$ gives $\\lambda = 3$ and $\\lambda = -1$. The signs are mixed, so the form is indefinite. Directly, $\\mathbf{x}^TA\\mathbf{x} = x_1^2 + 4x_1x_2 + x_2^2$ is $6$ at $\\mathbf{x} = (1, 1)^T$ and $-2$ at $\\mathbf{x} = (1, -1)^T$.`],
+        why: `For a diagonal matrix the entries are the eigenvalues, so positive entries do mean positive definite. With off-diagonal entries present, the cross term $2a_{12}x_1x_2$ changes sign with $x_1x_2$ and can outweigh the squares.`,
+        check: `Test a vector whose components have opposite signs, or, for a $2 \\times 2$ matrix, use the test $a_{11} > 0$ and $\\det A > 0$. Here $\\det A = 1 - 4 = -3 < 0$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
       spectralChain,
     spectralNest,
     demoUnits,
@@ -2628,7 +2616,7 @@ const schemas = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function SpectralDecompositionPage({spectralChain, spectralNest, 
+export default function SpectralDecompositionPage({ pitfallData,spectralChain, spectralNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -2799,7 +2787,7 @@ Mathematicians were calling the set of eigenvalues a spectrum by the early 1900s
           </DiagramFrame>,
           `@academic[pitfall,aside:true,width:35%:Judging definiteness by the entries
 Every entry of $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ is positive, yet its eigenvalues are $3$ and $-1$, and $\\mathbf{x} = (1, -1)^T$ gives $\\mathbf{x}^TA\\mathbf{x} = -2$. The form is indefinite, not positive definite.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-judging-definiteness-by-the-entries)]@
 
 The classification is immediate once the decomposition is in hand. Substituting $\\mathbf{x} = Q\\mathbf{y}$ turns the form into $\\sum \\lambda_i y_i^2$ — a weighted sum of squares — and the sign of a sum of squares is decided by the signs of the weights and nothing else. The magnitudes only stretch the surface; they never change which of the five classes it belongs to.`,
         ]
@@ -2862,6 +2850,15 @@ The classification is immediate once the decomposition is in hand. Substituting 
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="spectral-pitfalls"
+            title="Common pitfalls with the spectral decomposition"
+            source="/linear-algebra/decompositions/spectral"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

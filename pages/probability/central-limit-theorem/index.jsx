@@ -737,6 +737,8 @@ import distributionExplorerDiagrams from '@/app/components/probability/explorers
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1206,7 +1208,7 @@ If we looked at the raw sample mean alone, this shrinking variability would even
 
 @academic[pitfall,aside:true,width:35%:Standardizing the mean with σ
 Finding $P(\\bar X_{25} > 106)$ for $\\mu = 100$, $\\sigma = 15$ with $z = \\frac{106 - 100}{15} = 0.4$ uses the spread of one observation and gives about $0.34$. The mean's spread is $\\frac{15}{\\sqrt{25}} = 3$, so $z = 2$ and the probability is about $0.023$.
-[Read more](!#7)]@
+[Read more](!#pitfall-standardizing-the-mean-with)]@
 
 The factor $\\sigma / \\sqrt{n}$ reflects how uncertainty decreases with sample size. It captures the rate at which averaging reduces variability and explains why this term appears in the standardized form of the theorem.
 
@@ -1272,53 +1274,9 @@ The table below sets each misconception alongside the corresponding correct view
     },
     misconceptionsMore:{
       title:``,
-      content:`
-The misconceptions above concern what the theorem says. Three more errors appear when it is used in a calculation, and each one comes from taking the wrong spread. Each is marked where it happens in the sections above.
-
-**Multiplying σ by n for a sum**
-
-A question asks about the total of $n$ observations, and the spread of the total is taken as $n$ times the spread of one observation. The standard deviations are added as if they were lengths laid end to end.
-
-Wrong working: for 36 independent packages, each with mean weight $5$ kg and standard deviation $2$ kg, the total $S_{36}$ has mean $36 \\cdot 5 = 180$ kg and
-$$\\sigma_{S} = 36 \\cdot 2 = 72, \\quad z = \\frac{200 - 180}{72} \\approx 0.28, \\quad P(S_{36} > 200) \\approx 0.39$$
-
-Right working: the variances of independent terms add, so the variance of the sum is $n\\sigma^2$.
-$$\\operatorname{Var}(S_{36}) = 36 \\cdot 2^2 = 144, \\quad \\sigma_{S} = \\sqrt{144} = 12, \\quad z = \\frac{200 - 180}{12} \\approx 1.67, \\quad P(S_{36} > 200) \\approx 0.048$$
-
-Why it happens: the mean of the sum is $n\\mu$, so multiplying the standard deviation by $n$ looks like the same step. But independent deviations partly cancel, and the spread of the total grows like $\\sqrt{n}$, not like $n$.
-
-How to check: compare the spread with the mean. With spread $n\\sigma$, the total would be exactly as uncertain relative to its mean, $\\frac{72}{180} = 0.4$, as a single package is, $\\frac{2}{5} = 0.4$, and adding packages would steady nothing. The correct spread gives $\\frac{12}{180} \\approx 0.067$, which keeps shrinking as $n$ grows.
-
-**Using the standard error for single values**
-
-The spread $\\frac{\\sigma}{\\sqrt{n}}$ of the sample mean is used to describe individual observations, as though the narrow bell of averages showed where single values fall.
-
-Wrong working: for the exponential variable with $\\mu = \\sigma = 1$ from the Visual Intuition figure, with $n = 30$,
-$$\\frac{\\sigma}{\\sqrt{30}} \\approx 0.183, \\quad 1 \\pm 2 \\cdot 0.183 \\approx 0.63 \\text{ to } 1.37$$
-and this interval is read as holding about 95% of single observations.
-
-Right working: about 95% of sample means of 30 fall in that interval, but single observations keep their own skewed distribution. For one observation,
-$$P(0.63 < X < 1.37) = e^{-0.63} - e^{-1.37} \\approx 0.53 - 0.25 = 0.28$$
-
-Why it happens: both spreads come from the same $\\sigma$, and the standard error is the quantity written in the theorem's formula, so it is the one at hand.
-
-How to check: the spread of single values does not depend on $n$. If an interval meant for single observations gets narrower when the sample size grows, it is describing the mean, not the observations.
-
-**Standardizing the mean with σ**
-
-A probability about the sample mean is found by standardizing with $\\sigma$, the spread of one observation, instead of with the standard error $\\frac{\\sigma}{\\sqrt{n}}$.
-
-Wrong working: for $\\mu = 100$, $\\sigma = 15$ and $n = 25$,
-$$z = \\frac{106 - 100}{15} = 0.4, \\quad P(\\bar X_{25} > 106) \\approx 0.34$$
-
-Right working: the spread of the mean is the standard error.
-$$\\frac{\\sigma}{\\sqrt{n}} = \\frac{15}{\\sqrt{25}} = 3, \\quad z = \\frac{106 - 100}{3} = 2, \\quad P(\\bar X_{25} > 106) \\approx 0.023$$
-
-Why it happens: the z-score $\\frac{x - \\mu}{\\sigma}$ is first learned for single values, and the same pattern is reused for the mean with the denominator left unchanged.
-
-How to check: the answer must depend on $n$. With $\\sigma$ in the denominator the probability is $0.34$ for a sample of 25 and for a sample of 2,500 alike, although the mean of a larger sample strays less from $\\mu$.`,
+      content:`The misconceptions above concern what the theorem says. Three more errors appear when it is used in a calculation, and each one comes from taking the wrong spread. Each is marked where it happens in the sections above.`,
       before:``,
-      after:``,
+      after: `Each slip uses the wrong spread. The total of $n$ observations has standard deviation $\\sqrt{n}\\,\\sigma$, not $n\\sigma$; single values keep the spread $\\sigma$; and the sample mean is standardized with $\\frac{\\sigma}{\\sqrt{n}}$. Checking how the answer should depend on $n$ catches each slip.`,
       link:'',
 
     },
@@ -1498,8 +1456,47 @@ It describes how combining many independent random contributions leads to a stab
     }),
   };
 
+  // MistakeFix batch 16, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.misconceptionsMore into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-by-n-for-a-sum', name: `Multiplying σ by n for a sum`, errorAt: 0,
+        what: `A question asks about the total of $n$ observations, and the spread of the total is taken as $n$ times the spread of one observation. The standard deviations are added as if they were lengths laid end to end.`,
+        wrong: [`For 36 independent packages, each with mean weight $5$ kg and standard deviation $2$ kg, the total $S_{36}$ has mean $36 \\cdot 5 = 180$ kg and
+$$\\sigma_{S} = 36 \\cdot 2 = 72,$$
+$$z = \\frac{200 - 180}{72} \\approx 0.28,$$
+$$P(S_{36} > 200) \\approx 0.39$$`],
+        right: [`The variances of independent terms add, so the variance of the sum is $n\\sigma^2$.`, `$$\\operatorname{Var}(S_{36}) = 36 \\cdot 2^2 = 144,$$
+$$\\sigma_{S} = \\sqrt{144} = 12,$$
+$$z = \\frac{200 - 180}{12} \\approx 1.67,$$
+$$P(S_{36} > 200) \\approx 0.048$$`],
+        why: `The mean of the sum is $n\\mu$, so multiplying the standard deviation by $n$ looks like the same step. But independent deviations partly cancel, and the spread of the total grows like $\\sqrt{n}$, not like $n$.`,
+        check: `Compare the spread with the mean. With spread $n\\sigma$, the total would be exactly as uncertain relative to its mean, $\\frac{72}{180} = 0.4$, as a single package is, $\\frac{2}{5} = 0.4$, and adding packages would steady nothing. The correct spread gives $\\frac{12}{180} \\approx 0.067$, which keeps shrinking as $n$ grows.` },
+      { id: 'using-the-standard-error-for-single-values', name: `Using the standard error for single values`, errorAt: 0,
+        what: `The spread $\\frac{\\sigma}{\\sqrt{n}}$ of the sample mean is used to describe individual observations, as though the narrow bell of averages showed where single values fall.`,
+        wrong: [`For the exponential variable with $\\mu = \\sigma = 1$ from the Visual Intuition figure, with $n = 30$,
+$$\\frac{\\sigma}{\\sqrt{30}} \\approx 0.183,$$
+$$1 \\pm 2 \\cdot 0.183 \\approx 0.63 \\text{ to } 1.37$$`, `And this interval is read as holding about 95% of single observations.`],
+        right: [`About 95% of sample means of 30 fall in that interval, but single observations keep their own skewed distribution. For one observation,
+$$P(0.63 < X < 1.37) = e^{-0.63} - e^{-1.37}$$
+$$\\approx 0.53 - 0.25 = 0.28$$`],
+        why: `Both spreads come from the same $\\sigma$, and the standard error is the quantity written in the theorem's formula, so it is the one at hand.`,
+        check: `The spread of single values does not depend on $n$. If an interval meant for single observations gets narrower when the sample size grows, it is describing the mean, not the observations.` },
+      { id: 'standardizing-the-mean-with', name: `Standardizing the mean with σ`, errorAt: 1,
+        what: `A probability about the sample mean is found by standardizing with $\\sigma$, the spread of one observation, instead of with the standard error $\\frac{\\sigma}{\\sqrt{n}}$.`,
+        wrong: [`For $\\mu = 100$, $\\sigma = 15$ and $n = 25$,`, `$$z = \\frac{106 - 100}{15} = 0.4,$$
+$$P(\\bar X_{25} > 106) \\approx 0.34$$`],
+        right: [`For $\\mu = 100$, $\\sigma = 15$ and $n = 25$,`, `The spread of the mean is the standard error.`, `$$\\frac{\\sigma}{\\sqrt{n}} = \\frac{15}{\\sqrt{25}} = 3,$$
+$$z = \\frac{106 - 100}{3} = 2,$$
+$$P(\\bar X_{25} > 106) \\approx 0.023$$`],
+        why: `The z-score $\\frac{x - \\mu}{\\sigma}$ is first learned for single values, and the same pattern is reused for the mean with the denominator left unchanged.`,
+        check: `The answer must depend on $n$. With $\\sigma$ in the denominator the probability is $0.34$ for a sample of 25 and for a sample of 2,500 alike, although the mean of a larger sample strays less from $\\mu$.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1521,7 +1518,7 @@ It describes how combining many independent random contributions leads to a stab
   }
 }
 
-export default function PageTemplate({
+export default function PageTemplate({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1655,7 +1652,7 @@ Let $\\bar X_n$ denote their sample mean.`,
           />,
           `@academic[pitfall,aside:true,width:35%:Multiplying σ by n for a sum
 Giving the total of 36 packages, each with $\\mu = 5$ kg and $\\sigma = 2$ kg, the spread $36 \\cdot 2 = 72$ kg adds standard deviations and gives $P(S_{36} > 200) \\approx 0.39$. Variances add: $36 \\cdot 2^2 = 144$, so the spread is $\\sqrt{144} = 12$ kg and the probability is about $0.048$.
-[Read more](!#7)]@
+[Read more](!#pitfall-multiplying-by-n-for-a-sum)]@
 
 Many applied questions ask about a total rather than an average: the combined weight of a shipment, the total waiting time of a day's customers, the total claims an insurer pays in a year. The sum $S_n = X_1 + \\dots + X_n$ is the sample mean multiplied by $n$, so the theorem covers it under the same conditions, and its distribution is approximately normal as well, centered at $n\\mu$.
 
@@ -1674,7 +1671,7 @@ The two forms move in opposite directions as $n$ grows. The mean concentrates ar
           `For a skewed start like this one, n = 30 is a reasonable size; a symmetric start needs far fewer.`,
           `@academic[pitfall,aside:true,width:35%:Using the standard error for single values
 Reading the narrow bell of means as the spread of single values: for the exponential above, with $\\mu = \\sigma = 1$, about 95% of means of 30 lie within $1 \\pm \\frac{2}{\\sqrt{30}}$, from $0.63$ to $1.37$. Only about 28% of single observations do: $e^{-0.63} - e^{-1.37} \\approx 0.28$.
-[Read more](!#7)]@
+[Read more](!#pitfall-using-the-standard-error-for-single-values)]@
 
 The figure holds two different spreads. The amber curve is the distribution of a single observation, and it keeps the same shape and width whatever the sample size. The navy curve is the distribution of the average of 30 observations, and it narrows as the sample grows.
 
@@ -1706,6 +1703,15 @@ Every probability question built on the theorem refers to one of these curves. A
           sectionsContent.obj7.content,
           <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
           sectionsContent.misconceptionsMore.content,
+          <DiagramFrame
+            key={'misconceptionsMore-mistakes'}
+            id="clt-pitfalls"
+            title="Common pitfalls with the central limit theorem"
+            source="/probability/central-limit-theorem"
+            after={sectionsContent.misconceptionsMore.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

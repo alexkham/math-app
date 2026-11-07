@@ -1891,6 +1891,7 @@ import renderVectorArrowsV7 from '@/app/utils/illustrations/linear-algebra/vecto
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2339,7 +2340,7 @@ The sign of $\\det(A)$ indicates orientation: positive means the transformation 
 
 @academic[pitfall,aside:true,width:35%:Mistaking area-preserving for rigid
 Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A rigid motion needs $A^T A = I$; here $A^T A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-mistaking-area-preserving-for-rigid)]@
 
 Both readings are needed. The determinant is a single number, and it records only what happens to area and to orientation. The columns carry the rest of the picture: their lengths and the angle between them show whether each square of the grid keeps its shape or comes out stretched and tilted.`,
     before: ``,
@@ -2396,7 +2397,7 @@ The [determinant](!/linear-algebra/determinants/geometry) is $c^n$ for uniform s
 
 @academic[pitfall,aside:true,width:35%:Forgetting the power of c
 Writing $\\det(cI) = c$ gives $\\det(3I) = 3$ in $\\mathbb{R}^3$, although the unit cube becomes a cube of side $3$. Each of the three axes contributes a factor $3$, so $\\det(3I) = 3^3 = 27$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-power-of-c)]@
 
 In $\\mathbb{R}^3$, $\\text{diag}(c_1, c_2, c_3)$ scales each coordinate axis independently. The unit cube maps to a rectangular box with side lengths $|c_1|$, $|c_2|$, $|c_3|$ and volume $|c_1 c_2 c_3|$.`,
     before: ``,
@@ -2452,7 +2453,7 @@ $$R_x(\\theta) = \\begin{pmatrix} 1 & 0 & 0 \\\\ 0 & \\cos\\theta & -\\sin\\thet
 
 @academic[pitfall,aside:true,width:35%:Misplacing the sign for the y-axis
 Copying the top-right $-\\sin\\theta$ of $R_x$ and $R_z$ into $R_y$ gives $R_y(-\\theta)$: at $\\theta = 90°$ it sends $(0, 0, 1)$ to $(-1, 0, 0)$. In the correct $R_y(\\theta)$ the $-\\sin\\theta$ sits bottom left, and $R_y(90°)$ sends $(0, 0, 1)$ to $(1, 0, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-misplacing-the-sign-for-the-y-axis)]@
 
 Each of these matrices can be checked one column at a time, exactly as in the plane: column $j$ is the image of $\\mathbf{e}_j$. The direction of turn comes from the right-hand rule. With the thumb along the positive $y$-axis, the fingers curl from the positive $z$-axis toward the positive $x$-axis, so in the $xz$-plane the turn runs from $z$ to $x$ rather than from $x$ to $z$.
 
@@ -2534,7 +2535,7 @@ $$P = I - \\frac{\\mathbf{n}\\mathbf{n}^T}{\\mathbf{n}^T\\mathbf{n}}$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the denominator of P
 Using $\\mathbf{u}\\mathbf{u}^T$ alone for $\\mathbf{u} = (1, 2)$ gives $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, which sends $(1, 2)$ to $(5, 10)$ instead of leaving it in place. Dividing by $\\mathbf{u}^T\\mathbf{u} = 5$ gives $P = \\frac{1}{5}\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, and $P(1, 2) = (1, 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-denominator-of-p)]@
 
 All orthogonal projection matrices share the same algebraic signature: $P^2 = P$ ([idempotent](!/linear-algebra/matrix/types) — projecting twice is the same as projecting once), $P^T = P$ (symmetric), [eigenvalues](!/linear-algebra/eigen) are $0$ or $1$, and $\\text{rank}(P) = \\text{tr}(P)$. The determinant is $0$ unless the projection is onto the full space — any projection onto a proper subspace collapses at least one dimension.`,
     before: ``,
@@ -2586,7 +2587,7 @@ Order matters. Rotating then shearing produces a different result from shearing 
 
 @academic[pitfall,aside:true,width:35%:Reading a product left to right
 Writing rotate by $90°$, then reflect across the $x$-axis, as $R_{90°} H$ with $H = \\text{diag}(1, -1)$ gives $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, which sends $(1, 0)$ to $(0, 1)$. The rotation acts first in $H R_{90°} = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$, which sends $(1, 0)$ to $(0, -1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-product-left-to-right)]@
 
 Turning a description into a matrix is therefore a matter of placement. The step named first in the description stands at the far right, next to the vector it acts on, and each later step is written to the left of the steps before it. A three-step description such as scale, then rotate, then shear becomes $\\text{Shear} \\cdot R_\\theta \\cdot S_k$.
 
@@ -2623,84 +2624,9 @@ $|\\det(A)| = 1$: the transformation preserves area or volume. Rotations ($\\det
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when a transformation is read from its matrix or a matrix is written down from a description. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Mistaking area-preserving for rigid**
-
-A matrix with determinant $1$ or $-1$ is taken to be a rotation or a reflection, because it preserves area. The determinant measures only area and orientation; lengths and angles are never tested.
-
-Wrong working: $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ has $\\det A = 1 \\cdot 1 - 1 \\cdot 0 = 1$, so it is declared a rotation, and every length is assumed to stay the same.
-
-Right working: test orthogonality directly.
-$$A^T A = \\begin{pmatrix} 1 & 0 \\\\ 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix} \\neq I$$
-The matrix is a horizontal shear. It sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$, and the right angle between the two axes becomes $45°$.
-
-Why it happens: every rotation and every reflection has $\\det = \\pm 1$, so the reverse statement feels natural. It is false: area can be kept while shape is lost.
-
-How to check: look at the columns. A rigid motion has columns of length $1$ that are perpendicular to each other. Here the second column $(1, 1)$ has length $\\sqrt{2}$, and the dot product of the two columns is $1$, not $0$.
-
-**Forgetting the power of c**
-
-The determinant of the uniform scaling $cI$ is taken to be $c$, as if one factor of $c$ were enough. Each of the $n$ axes is stretched by $c$, so the factor appears $n$ times.
-
-Wrong working: in $\\mathbb{R}^3$, $\\det(3I) = 3$, so the unit cube would map to a solid of volume $3$.
-
-Right working: $3I = \\text{diag}(3, 3, 3)$, so
-$$\\det(3I) = 3 \\cdot 3 \\cdot 3 = 27$$
-The unit cube becomes a cube of side $3$ and volume $27$. In $\\mathbb{R}^2$ the same matrix has $\\det(3I) = 9$.
-
-Why it happens: $cI$ reads as $c$ times $I$, and $\\det I = 1$, so taking the $c$ outside once seems natural. The general rule for an $n \\times n$ matrix is $\\det(cA) = c^n \\det(A)$.
-
-How to check: compute the area or volume of the image of the unit square or cube directly. Its sides have lengths $|c|$, one per axis, and their product is $|c|^n$.
-
-**Misplacing the sign for the y-axis**
-
-$R_x$ and $R_z$ both have $-\\sin\\theta$ above the diagonal, and that pattern is carried over to $R_y$. In $R_y$ the $-\\sin\\theta$ sits below the diagonal, in the bottom-left corner.
-
-Wrong working: the copied pattern at $\\theta = 90°$ is
-$$\\begin{pmatrix} \\cos\\theta & 0 & -\\sin\\theta \\\\ 0 & 1 & 0 \\\\ \\sin\\theta & 0 & \\cos\\theta \\end{pmatrix} = \\begin{pmatrix} 0 & 0 & -1 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & 0 \\end{pmatrix}$$
-It sends $(0, 0, 1)$ to $(-1, 0, 0)$ and $(1, 0, 0)$ to $(0, 0, 1)$. This is $R_y(-\\theta)$, a turn the wrong way.
-
-Right working:
-$$R_y(90°) = \\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 1 & 0 \\\\ -1 & 0 & 0 \\end{pmatrix}$$
-It sends $(0, 0, 1)$ to $(1, 0, 0)$ and $(1, 0, 0)$ to $(0, 0, -1)$, as the right-hand rule about the positive $y$-axis requires.
-
-Why it happens: the plane that turns is the $xz$-plane, and the matrix lists its coordinates in the order $x$, $z$. The cyclic order $x \\to y \\to z \\to x$ puts $z$ before $x$, so reading the $2 \\times 2$ block in the matrix's own order reverses the turn.
-
-How to check: look at column $3$, the image of $(0, 0, 1)$. For a small positive angle about the $y$-axis, the $z$-axis tips toward the positive $x$-axis, so the top entry of column $3$ must be $+\\sin\\theta$.
-
-**Dropping the denominator of P**
-
-The projection onto the line through $\\mathbf{u}$ is written as $\\mathbf{u}\\mathbf{u}^T$, without the division by $\\mathbf{u}^T\\mathbf{u}$. This is correct only when $\\mathbf{u}$ is a unit vector.
-
-Wrong working: with $\\mathbf{u} = (1, 2)$,
-$$\\mathbf{u}\\mathbf{u}^T = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}, \\qquad \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$$
-A vector already on the line is moved and made five times as long.
-
-Right working: $\\mathbf{u}^T\\mathbf{u} = 1 + 4 = 5$, so
-$$P = \\frac{1}{5}\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}, \\qquad P\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}, \\qquad P\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 1/5 \\\\ 2/5 \\end{pmatrix}$$
-
-Why it happens: many formulas are stated for unit vectors, such as the Householder matrix $I - 2\\,\\mathbf{n}\\mathbf{n}^T$ on this page. There the denominator equals $1$ and is left out, and the shorter form is then used for vectors that are not unit vectors.
-
-How to check: a projection satisfies $P^2 = P$, and its trace equals its rank. Here $(\\mathbf{u}\\mathbf{u}^T)^2 = \\begin{pmatrix} 5 & 10 \\\\ 10 & 20 \\end{pmatrix} = 5\\,\\mathbf{u}\\mathbf{u}^T$, and the trace of $\\mathbf{u}\\mathbf{u}^T$ is $5$, while a projection onto a line has rank $1$.
-
-**Reading a product left to right**
-
-A sequence of transformations is written down in the order the steps happen, from left to right. The product then performs them in the reverse order, because the rightmost factor acts first.
-
-Wrong working: rotate by $90°$, then reflect across the $x$-axis, with $H = \\text{diag}(1, -1)$, written as
-$$R_{90°} H = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix} = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$$
-This is the reflection across the line $y = x$, and it sends $(1, 0)$ to $(0, 1)$.
-
-Right working: the first step goes on the right.
-$$H R_{90°} = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$$
-The rotation takes $(1, 0)$ to $(0, 1)$ and the reflection takes that to $(0, -1)$. The result is the reflection across the line $y = -x$.
-
-Why it happens: text is read from left to right, and the description lists the steps in that order. But each matrix acts on the vector to its right: $(H R_{90°})\\mathbf{x} = H(R_{90°}\\mathbf{x})$.
-
-How to check: follow one basis vector through the steps by hand, then compare the result with the matching column of the product. Here $(1, 0)$ must end at $(0, -1)$, the first column of $H R_{90°}$.`,
+    content: `Five mistakes come up again and again when a transformation is read from its matrix or a matrix is written down from a description. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip misreads what a transformation matrix does to space. A determinant of $\\pm 1$ preserves area without making the map rigid, $\\det(cI) = c^n$, the $-\\sin\\theta$ of $R_y$ sits below the diagonal, a projection onto a line divides by $\\mathbf{u}^T\\mathbf{u}$, and a product of transformations acts from right to left. Checking the columns, following one basis vector by hand, or testing $P^2 = P$ catches each slip.`,
     link: ``,
   },
 }
@@ -2901,8 +2827,59 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'mistaking-area-preserving-for-rigid', name: `Mistaking area-preserving for rigid`, errorAt: 0,
+        what: `A matrix with determinant $1$ or $-1$ is taken to be a rotation or a reflection, because it preserves area. The determinant measures only area and orientation; lengths and angles are never tested.`,
+        wrong: [`$A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ has $\\det A = 1 \\cdot 1 - 1 \\cdot 0 = 1$, so it is declared a rotation, and every length is assumed to stay the same.`],
+        right: [`Test orthogonality directly.`, `$$A^T A$$
+$$= \\begin{pmatrix} 1 & 0 \\\\ 1 & 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix} \\neq I$$`, `The matrix is a horizontal shear. It sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$, and the right angle between the two axes becomes $45°$.`],
+        why: `Every rotation and every reflection has $\\det = \\pm 1$, so the reverse statement feels natural. It is false: area can be kept while shape is lost.`,
+        check: `Look at the columns. A rigid motion has columns of length $1$ that are perpendicular to each other. Here the second column $(1, 1)$ has length $\\sqrt{2}$, and the dot product of the two columns is $1$, not $0$.` },
+      { id: 'forgetting-the-power-of-c', name: `Forgetting the power of c`, errorAt: 0,
+        what: `The determinant of the uniform scaling $cI$ is taken to be $c$, as if one factor of $c$ were enough. Each of the $n$ axes is stretched by $c$, so the factor appears $n$ times.`,
+        wrong: [`In $\\mathbb{R}^3$, $\\det(3I) = 3$, so the unit cube would map to a solid of volume $3$.`],
+        right: [`$3I = \\text{diag}(3, 3, 3)$, so
+$$\\det(3I) = 3 \\cdot 3 \\cdot 3 = 27$$`, `The unit cube becomes a cube of side $3$ and volume $27$. In $\\mathbb{R}^2$ the same matrix has $\\det(3I) = 9$.`],
+        why: `$cI$ reads as $c$ times $I$, and $\\det I = 1$, so taking the $c$ outside once seems natural. The general rule for an $n \\times n$ matrix is $\\det(cA) = c^n \\det(A)$.`,
+        check: `Compute the area or volume of the image of the unit square or cube directly. Its sides have lengths $|c|$, one per axis, and their product is $|c|^n$.` },
+      { id: 'misplacing-the-sign-for-the-y-axis', name: `Misplacing the sign for the y-axis`, errorAt: 0,
+        what: `$R_x$ and $R_z$ both have $-\\sin\\theta$ above the diagonal, and that pattern is carried over to $R_y$. In $R_y$ the $-\\sin\\theta$ sits below the diagonal, in the bottom-left corner.`,
+        wrong: [`The copied pattern at $\\theta = 90°$ is
+$$\\begin{pmatrix} \\cos\\theta & 0 & -\\sin\\theta \\\\ 0 & 1 & 0 \\\\ \\sin\\theta & 0 & \\cos\\theta \\end{pmatrix} = \\begin{pmatrix} 0 & 0 & -1 \\\\ 0 & 1 & 0 \\\\ 1 & 0 & 0 \\end{pmatrix}$$`, `It sends $(0, 0, 1)$ to $(-1, 0, 0)$ and $(1, 0, 0)$ to $(0, 0, 1)$. This is $R_y(-\\theta)$, a turn the wrong way.`],
+        right: [`$$R_y(90°) = \\begin{pmatrix} 0 & 0 & 1 \\\\ 0 & 1 & 0 \\\\ -1 & 0 & 0 \\end{pmatrix}$$`, `It sends $(0, 0, 1)$ to $(1, 0, 0)$ and $(1, 0, 0)$ to $(0, 0, -1)$, as the right-hand rule about the positive $y$-axis requires.`],
+        why: `The plane that turns is the $xz$-plane, and the matrix lists its coordinates in the order $x$, $z$. The cyclic order $x \\to y \\to z \\to x$ puts $z$ before $x$, so reading the $2 \\times 2$ block in the matrix's own order reverses the turn.`,
+        check: `Look at column $3$, the image of $(0, 0, 1)$. For a small positive angle about the $y$-axis, the $z$-axis tips toward the positive $x$-axis, so the top entry of column $3$ must be $+\\sin\\theta$.` },
+      { id: 'dropping-the-denominator-of-p', name: `Dropping the denominator of P`, errorAt: 1,
+        what: `The projection onto the line through $\\mathbf{u}$ is written as $\\mathbf{u}\\mathbf{u}^T$, without the division by $\\mathbf{u}^T\\mathbf{u}$. This is correct only when $\\mathbf{u}$ is a unit vector.`,
+        wrong: [`With $\\mathbf{u} = (1, 2)$,`, `$$\\mathbf{u}\\mathbf{u}^T = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix},$$
+$$\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix}$$`, `A vector already on the line is moved and made five times as long.`],
+        right: [`With $\\mathbf{u} = (1, 2)$,`, `$\\mathbf{u}^T\\mathbf{u} = 1 + 4 = 5$, so
+$$P = \\frac{1}{5}\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix},$$
+$$P\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix},$$
+$$P\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 1/5 \\\\ 2/5 \\end{pmatrix}$$`],
+        why: `Many formulas are stated for unit vectors, such as the Householder matrix $I - 2\\,\\mathbf{n}\\mathbf{n}^T$ on this page. There the denominator equals $1$ and is left out, and the shorter form is then used for vectors that are not unit vectors.`,
+        check: `A projection satisfies $P^2 = P$, and its trace equals its rank. Here $(\\mathbf{u}\\mathbf{u}^T)^2 = \\begin{pmatrix} 5 & 10 \\\\ 10 & 20 \\end{pmatrix} = 5\\,\\mathbf{u}\\mathbf{u}^T$, and the trace of $\\mathbf{u}\\mathbf{u}^T$ is $5$, while a projection onto a line has rank $1$.` },
+      { id: 'reading-a-product-left-to-right', name: `Reading a product left to right`, errorAt: 0,
+        what: `A sequence of transformations is written down in the order the steps happen, from left to right. The product then performs them in the reverse order, because the rightmost factor acts first.`,
+        wrong: [`Rotate by $90°$, then reflect across the $x$-axis, with $H = \\text{diag}(1, -1)$, written as
+$$R_{90°} H$$
+$$= \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$$`, `This is the reflection across the line $y = x$, and it sends $(1, 0)$ to $(0, 1)$.`],
+        right: [`The first step goes on the right.`, `$$H R_{90°}$$
+$$= \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$$`, `The rotation takes $(1, 0)$ to $(0, 1)$ and the reflection takes that to $(0, -1)$. The result is the reflection across the line $y = -x$.`],
+        why: `Text is read from left to right, and the description lists the steps in that order. But each matrix acts on the vector to its right: $(H R_{90°})\\mathbf{x} = H(R_{90°}\\mathbf{x})$.`,
+        check: `Follow one basis vector through the steps by hand, then compare the result with the matching column of the product. Here $(1, 0)$ must end at $(0, -1)$, the first column of $H R_{90°}$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2926,7 +2903,7 @@ return {
 }
 
 
-export default function GeometricTransformationsPage({seoData, sectionsContent, introContent, obj4Table, reflectionCases, obj10Table, transformationSignatures, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function GeometricTransformationsPage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, reflectionCases, obj10Table, transformationSignatures, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2982,7 +2959,7 @@ export default function GeometricTransformationsPage({seoData, sectionsContent, 
         content: [
           `@academic[pitfall,aside:true,width:35%:Mistaking area-preserving for rigid
 Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A rigid motion needs $A^T A = I$; here $A^T A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-mistaking-area-preserving-for-rigid)]@`,
         ],
       },
       {
@@ -3150,6 +3127,15 @@ Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix}
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="geometric-transformation-pitfalls"
+            title="Common pitfalls with geometric transformations"
+            source="/linear-algebra/transformations/geometric"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

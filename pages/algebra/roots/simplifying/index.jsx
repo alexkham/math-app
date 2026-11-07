@@ -15,6 +15,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import Procedure from '@/app/components/infographics/Procedure'
 
 
 export async function getStaticProps(){
@@ -517,9 +518,8 @@ Third, check for index reduction by examining whether the radicand's exponents s
 
 Fourth, rationalize any denominators — monomial or binomial — to eliminate radicals from the bottom.
 
-Fifth, verify the result meets all three criteria: no perfect power factors, no fractions under radicals, no radicals in denominators.
-
-This process prepares expressions for [operations](!/algebra/roots/operations) and for solving [radical equations](!/algebra/roots/equations). Two expressions that appear different may simplify to the same form, revealing them as equal.`,
+Fifth, verify the result meets all three criteria: no perfect power factors, no fractions under radicals, no radicals in denominators.`,
+    afterProcedure: `This process prepares expressions for [operations](!/algebra/roots/operations) and for solving [radical equations](!/algebra/roots/equations). Two expressions that appear different may simplify to the same form, revealing them as equal.`,
     before: ``,
     after: ``,
     link: '',
@@ -794,9 +794,28 @@ $$= \\sqrt{25x^4} \\cdot \\sqrt{2x} = 5x^2\\sqrt{2x}$$`],
     ],
   };
 
+  // Procedure pilot 2026-11-05: the five steps of obj9 (Simplification Strategy) as stages.
+  const simplifyProcedure = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { label: 'Inside the radical', sub: 'steps 1 to 3', kind: 'must', stages: [
+        { n: 1, name: 'Factor the radicand', what: 'completely, both numbers and variables', cond: 'identify all perfect power factors relative to the index' },
+        { n: 2, name: 'Extract perfect powers', what: 'using the product rule', cond: 'from [radical rules](!/algebra/roots/radical-rules)' },
+        { n: 3, name: 'Reduce the index', what: "when the radicand's exponents share a common factor with the index" },
+      ] },
+      { label: 'The denominator', sub: 'step 4', kind: 'must', stages: [
+        { n: 4, name: 'Rationalize', what: 'monomial or binomial denominators', cond: 'to eliminate radicals from the bottom' },
+      ] },
+      { label: 'The result', sub: 'step 5', kind: 'out', stages: [
+        { n: 5, name: 'Verify all three criteria', what: 'no perfect power factors, no fractions under radicals, no radicals in denominators' },
+      ] },
+    ],
+  };
+
 return {
   props: {
     pitfallData,
+    simplifyProcedure,
     rationalizeMonomial,
     rationalizeBinomialSteps,
     reduceIndexSteps,
@@ -822,7 +841,7 @@ return {
    }
 
 // export default function SimplifyingPage({seoData,sectionsContent , introContent}) {
-export default function SimplifyingPage({ pitfallData,
+export default function SimplifyingPage({ pitfallData, simplifyProcedure,
   seoData,
   sectionsContent,
   introContent,
@@ -1036,6 +1055,16 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-procedure'}
+            id="simplification-strategy-stages"
+            title="Simplifying a radical, stage by stage"
+            source="/algebra/roots/simplifying"
+            before={"The five steps as a pipeline: three work inside the radical, one clears the denominator, and the last checks the result."}
+          >
+            <Procedure data={simplifyProcedure} variant="stages" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProcedure,
         ]
     },
     {

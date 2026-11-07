@@ -14,8 +14,10 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -595,7 +597,7 @@ $$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 1 \\cdot 0 = 0$$]@
 
 @academic[pitfall,aside:true,width:35%:Copying the value of the sine limit
 Reading $\\frac{1 - \\cos x}{x}$ as a variant of $\\frac{\\sin x}{x}$ gives the limit $1$. At $x = 0.1$ the quotient is only about $0.05$; the product above gives $1 \\cdot 0 = 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-copying-the-value-of-the-sine-limit)]@
 
 The conjugate turns a quotient that no rule handles directly into a product of two factors whose limits are already known. The first factor is the fundamental trigonometric limit and tends to $1$. The second can be found by substitution, because its denominator tends to $2$ and not to $0$, and it is this factor that decides the value of the whole limit.
 `,
@@ -645,7 +647,7 @@ When $a = e$, this reduces to the natural exponential limit since $\\ln e = 1$.
 
 @academic[pitfall,aside:true,width:35%:Using the base-e value for every base
 Applying $\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$ to $\\frac{2^x - 1}{x}$ gives the limit $1$. At $x = 0.001$ the quotient is about $0.6934$; the limit is $\\ln 2 \\approx 0.693$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-base-e-value-for-every-base)]@
 
 The base enters the answer only through its natural logarithm. A base larger than $e$ gives a limit larger than $1$, a base between $1$ and $e$ gives a limit between $0$ and $1$, and a base between $0$ and $1$ gives a negative limit, because then $a^x - 1$ and $x$ have opposite signs.
 
@@ -696,7 +698,7 @@ $$\\lim_{x \\to 0} (1 + x)^{1/x} = e$$]@
 
 @academic[pitfall,aside:true,width:35%:Letting the base reach 1 first
 Sending $1 + \\frac{1}{x}$ to $1$ and then raising it to the power $x$ gives $1^x = 1$. The base and the exponent change together: at $x = 100$ the value is already about $2.705$, and the limit is $e$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-letting-the-base-reach-1-first)]@
 
 The value is $e \\approx 2.71828$. This limit arises naturally in compound interest: if interest is compounded $n$ times per year at annual rate $100\\%$, the growth factor over one year is $(1 + 1/n)^n$, which approaches $e$ as $n \\to \\infty$.
 `,
@@ -781,7 +783,7 @@ $$= \\frac{5}{3} \\cdot \\lim_{x \\to 0} \\frac{\\sin 5x}{5x} = \\frac{5}{3} \\c
 
 @academic[pitfall,aside:true,width:35%:Using the special limit without matching the argument
 Treating $\\frac{\\sin 5x}{3x}$ as $\\frac{\\sin u}{u}$ gives $1$, but the denominator is $3x$, not $5x$. At $x = 0.01$ the quotient is about $1.666$; matching the argument gives $\\frac{5}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-special-limit-without-matching-the-argument)]@
 
 The $5$ inside the sine has to appear in the denominator as well, which is why the expression is multiplied and divided by $5$. The $3$ that was already in the denominator is not part of the standard form; it stays outside the limit as a divisor, next to the factor $5$ that the rewriting brought out.
 
@@ -808,80 +810,19 @@ Recognizing patterns and factoring to match special limits streamlines computati
   },
   obj11: {
     title: `Summary: Master Reference of Special Limits`,
-    content: `
-Every limit on this page appears repeatedly throughout calculus, and pattern-matching against them is the first move for any indeterminate-form limit. The table below collects them in one master reference, grouped by family — trigonometric, exponential, the definition of e, boundary-behavior logarithmic limits, and growth-rate comparisons as x → ∞. The first useful question to ask about an unfamiliar limit is whether it can be massaged into one of these forms; very often, the answer is yes.
-`,
+    content: `This summary collects the fourteen special limits of the page in five families. Each family has a line on where its variable is heading, and each limit a short note on where it comes from, with a link to its section. The buttons above the cards show one family at a time.
+
+The trigonometric family holds the sine limit, its reciprocal, two cosine limits and the tangent limit; the exponential family, the natural exponential limit, its version for any base and the logarithm limit. Then come the two forms of the definition of e, two logarithmic limits at zero and three growth-rate limits at infinity. Matching an indeterminate limit to one of these forms is the first move, and it very often works.`,
+    formulaSheetAfter: `A special limit applies only to its exact shape: the same quantity inside the function and in the denominator, with that quantity tending to the point the limit names. Multiplying and dividing by a constant usually brings an expression into that shape before the known value is used.`,
     before: ``,
     after: ``,
     link: ``
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes cause most wrong answers when special limits are used. Four of them are marked where they happen in the sections above; the first is the one the section on the fundamental trigonometric limit warns about. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Measuring the angle in degrees**
-
-The limit $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$ is used with $x$ measured in degrees, often because the calculator is set to degree mode.
-
-Wrong working: with $x$ in degrees, $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$, by the fundamental trigonometric limit.
-
-Right working: an angle of $x$ degrees is $\\dfrac{\\pi x}{180}$ radians, so the quotient is $\\dfrac{\\sin(\\pi x / 180)}{x} = \\dfrac{\\pi}{180} \\cdot \\dfrac{\\sin(\\pi x / 180)}{\\pi x / 180}$. With $u = \\dfrac{\\pi x}{180}$ the limit is $\\dfrac{\\pi}{180} \\cdot 1 = \\dfrac{\\pi}{180} \\approx 0.01745$.
-
-Why it happens: the formula is written without units, and degrees are the unit used for angles everywhere outside calculus. The proof compares $x$ with lengths on the unit circle, and $x$ is a length there only when it is measured in radians.
-
-How to check: in degree mode a calculator gives $\\dfrac{\\sin 1}{1} \\approx 0.017452$, close to $\\dfrac{\\pi}{180}$ and nowhere near $1$. In radian mode $\\dfrac{\\sin 0.01}{0.01} \\approx 0.99998$.
-
-**Copying the value of the sine limit**
-
-The quotient $\\dfrac{1 - \\cos x}{x}$ gives $\\dfrac{0}{0}$ at $x = 0$ and has a trigonometric numerator, just like $\\dfrac{\\sin x}{x}$, and it is given the same value. A related slip gives it the value $\\dfrac{1}{2}$, which belongs to the version with $x^2$ in the denominator.
-
-Wrong working: $\\lim_{x \\to 0} \\dfrac{1 - \\cos x}{x} = 1$, as for $\\dfrac{\\sin x}{x}$.
-
-Right working: multiply by the conjugate $1 + \\cos x$ in the numerator and the denominator. Then $\\dfrac{1 - \\cos x}{x} = \\dfrac{\\sin x}{x} \\cdot \\dfrac{\\sin x}{1 + \\cos x}$, and the limit is $1 \\cdot \\dfrac{0}{2} = 0$.
-
-Why it happens: the two quotients look alike and stand side by side in the same table. But near $0$ the numerator $1 - \\cos x$ is much smaller than $\\sin x$: it behaves like $\\dfrac{x^2}{2}$, not like $x$.
-
-How to check: evaluate at small $x$. At $x = 0.1$ the quotient is about $0.04996$, and at $x = 0.01$ about $0.0050$, closing in on $0$. Dividing by $x^2$ instead gives about $0.4996$ at $x = 0.1$, which is the limit $\\dfrac{1}{2}$ of the other version.
-
-**Using the base-e value for every base**
-
-The natural exponential limit $\\lim_{x \\to 0} \\dfrac{e^x - 1}{x} = 1$ is applied to $\\dfrac{a^x - 1}{x}$ with a base other than $e$.
-
-Wrong working: $\\lim_{x \\to 0} \\dfrac{2^x - 1}{x} = 1$.
-
-Right working: write $2^x = e^{x \\ln 2}$. Then $\\dfrac{2^x - 1}{x} = \\ln 2 \\cdot \\dfrac{e^{x \\ln 2} - 1}{x \\ln 2}$, and with $u = x \\ln 2$ the limit is $\\ln 2 \\cdot 1 = \\ln 2 \\approx 0.693$.
-
-Why it happens: the base-$e$ limit is learned first, and its value $1$ is taken to belong to the shape "power minus one over $x$" rather than to the base $e$.
-
-How to check: evaluate at a small $x$. At $x = 0.001$ the quotient is about $0.6934$. The base $a = 1$ also shows that the value cannot be $1$ for every base: $\\dfrac{1^x - 1}{x} = 0$ for every $x \\neq 0$.
-
-**Letting the base reach 1 first**
-
-In $\\left(1 + \\dfrac{1}{x}\\right)^x$ the base is sent to its limit $1$ while the exponent is treated as fixed, and the result is $1$ raised to a power.
-
-Wrong working: $1 + \\dfrac{1}{x} \\to 1$, so $\\lim_{x \\to \\infty} \\left(1 + \\dfrac{1}{x}\\right)^x = 1^{\\infty} = 1$.
-
-Right working: $1^{\\infty}$ is an indeterminate form. Take the logarithm: $\\ln\\left(1 + \\dfrac{1}{x}\\right)^x = x \\ln\\left(1 + \\dfrac{1}{x}\\right)$. With $t = \\dfrac{1}{x}$ this is $\\dfrac{\\ln(1 + t)}{t}$, which tends to $1$ as $t \\to 0^+$, by the logarithm limit in Related Exponential Limits. So the limit is $e^1 = e$.
-
-Why it happens: $1$ to any power is $1$, and the two limits are taken one after the other, as if the base could settle before the exponent grows. They change together, and the small excess of the base over $1$ is compounded $x$ times.
-
-How to check: evaluate at a few large $x$. At $x = 10$ the value is about $2.594$ and at $x = 100$ about $2.705$, rising toward $2.718$ and far from $1$.
-
-**Using the special limit without matching the argument**
-
-The special limit $\\lim_{u \\to 0} \\dfrac{\\sin u}{u} = 1$ is applied to an expression that has the sine of one quantity over a different quantity.
-
-Wrong working: $\\lim_{x \\to 0} \\dfrac{\\sin 5x}{3x} = 1$, by the special limit.
-
-Right working: the denominator has to match the argument of the sine. $\\dfrac{\\sin 5x}{3x} = \\dfrac{5}{3} \\cdot \\dfrac{\\sin 5x}{5x}$, and with $u = 5x$ the limit is $\\dfrac{5}{3} \\cdot 1 = \\dfrac{5}{3}$.
-
-Why it happens: the expression has the shape "sine of something over something", and the pattern is recognized by its shape before the two somethings are compared.
-
-How to check: evaluate at a small $x$. At $x = 0.01$, $\\dfrac{\\sin 0.05}{0.03} \\approx 1.666$. For small angles $\\sin 5x \\approx 5x$, so the quotient is close to $\\dfrac{5x}{3x} = \\dfrac{5}{3}$.
-`,
+    content: `Five mistakes cause most wrong answers when special limits are used. Four of them are marked where they happen in the sections above; the first is the one the section on the fundamental trigonometric limit warns about. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip copies a special limit without its conditions. $\\frac{\\sin x}{x} \\to 1$ needs radians, $\\frac{1 - \\cos x}{x} \\to 0$, $\\frac{a^x - 1}{x} \\to \\ln a$, $\\left(1 + \\frac{1}{x}\\right)^x \\to e$ because the base and the exponent move together, and $\\frac{\\sin 5x}{3x} \\to \\frac{5}{3}$. Evaluating at a small or a large $x$ catches each slip.`,
     link: ``
   }
 };
@@ -1115,8 +1056,79 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 15, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'measuring-the-angle-in-degrees', name: `Measuring the angle in degrees`, errorAt: 0,
+        what: `The limit $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$ is used with $x$ measured in degrees, often because the calculator is set to degree mode.`,
+        wrong: [`With $x$ in degrees, $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$, by the fundamental trigonometric limit.`],
+        right: [`An angle of $x$ degrees is $\\dfrac{\\pi x}{180}$ radians, so the quotient is $\\dfrac{\\sin(\\pi x / 180)}{x} = \\dfrac{\\pi}{180} \\cdot \\dfrac{\\sin(\\pi x / 180)}{\\pi x / 180}$. With $u = \\dfrac{\\pi x}{180}$ the limit is $\\dfrac{\\pi}{180} \\cdot 1 = \\dfrac{\\pi}{180} \\approx 0.01745$.`],
+        why: `The formula is written without units, and degrees are the unit used for angles everywhere outside calculus. The proof compares $x$ with lengths on the unit circle, and $x$ is a length there only when it is measured in radians.`,
+        check: `In degree mode a calculator gives $\\dfrac{\\sin 1}{1} \\approx 0.017452$, close to $\\dfrac{\\pi}{180}$ and nowhere near $1$. In radian mode $\\dfrac{\\sin 0.01}{0.01} \\approx 0.99998$.` },
+      { id: 'copying-the-value-of-the-sine-limit', name: `Copying the value of the sine limit`, errorAt: 0,
+        what: `The quotient $\\dfrac{1 - \\cos x}{x}$ gives $\\dfrac{0}{0}$ at $x = 0$ and has a trigonometric numerator, just like $\\dfrac{\\sin x}{x}$, and it is given the same value. A related slip gives it the value $\\dfrac{1}{2}$, which belongs to the version with $x^2$ in the denominator.`,
+        wrong: [`$\\lim_{x \\to 0} \\dfrac{1 - \\cos x}{x} = 1$, as for $\\dfrac{\\sin x}{x}$.`],
+        right: [`Multiply by the conjugate $1 + \\cos x$ in the numerator and the denominator. Then $\\dfrac{1 - \\cos x}{x} = \\dfrac{\\sin x}{x} \\cdot \\dfrac{\\sin x}{1 + \\cos x}$, and the limit is $1 \\cdot \\dfrac{0}{2} = 0$.`],
+        why: `The two quotients look alike and stand side by side in the same table. But near $0$ the numerator $1 - \\cos x$ is much smaller than $\\sin x$: it behaves like $\\dfrac{x^2}{2}$, not like $x$.`,
+        check: `Evaluate at small $x$. At $x = 0.1$ the quotient is about $0.04996$, and at $x = 0.01$ about $0.0050$, closing in on $0$. Dividing by $x^2$ instead gives about $0.4996$ at $x = 0.1$, which is the limit $\\dfrac{1}{2}$ of the other version.` },
+      { id: 'using-the-base-e-value-for-every-base', name: `Using the base-e value for every base`, errorAt: 0,
+        what: `The natural exponential limit $\\lim_{x \\to 0} \\dfrac{e^x - 1}{x} = 1$ is applied to $\\dfrac{a^x - 1}{x}$ with a base other than $e$.`,
+        wrong: [`$\\lim_{x \\to 0} \\dfrac{2^x - 1}{x} = 1$.`],
+        right: [`Write $2^x = e^{x \\ln 2}$. Then $\\dfrac{2^x - 1}{x} = \\ln 2 \\cdot \\dfrac{e^{x \\ln 2} - 1}{x \\ln 2}$, and with $u = x \\ln 2$ the limit is $\\ln 2 \\cdot 1 = \\ln 2 \\approx 0.693$.`],
+        why: `The base-$e$ limit is learned first, and its value $1$ is taken to belong to the shape "power minus one over $x$" rather than to the base $e$.`,
+        check: `Evaluate at a small $x$. At $x = 0.001$ the quotient is about $0.6934$. The base $a = 1$ also shows that the value cannot be $1$ for every base: $\\dfrac{1^x - 1}{x} = 0$ for every $x \\neq 0$.` },
+      { id: 'letting-the-base-reach-1-first', name: `Letting the base reach 1 first`, errorAt: 0,
+        what: `In $\\left(1 + \\dfrac{1}{x}\\right)^x$ the base is sent to its limit $1$ while the exponent is treated as fixed, and the result is $1$ raised to a power.`,
+        wrong: [`$1 + \\dfrac{1}{x} \\to 1$, so $\\lim_{x \\to \\infty} \\left(1 + \\dfrac{1}{x}\\right)^x = 1^{\\infty} = 1$.`],
+        right: [`$1^{\\infty}$ is an indeterminate form. Take the logarithm: $\\ln\\left(1 + \\dfrac{1}{x}\\right)^x = x \\ln\\left(1 + \\dfrac{1}{x}\\right)$. With $t = \\dfrac{1}{x}$ this is $\\dfrac{\\ln(1 + t)}{t}$, which tends to $1$ as $t \\to 0^+$, by the logarithm limit in Related Exponential Limits. So the limit is $e^1 = e$.`],
+        why: `$1$ to any power is $1$, and the two limits are taken one after the other, as if the base could settle before the exponent grows. They change together, and the small excess of the base over $1$ is compounded $x$ times.`,
+        check: `Evaluate at a few large $x$. At $x = 10$ the value is about $2.594$ and at $x = 100$ about $2.705$, rising toward $2.718$ and far from $1$.` },
+      { id: 'using-the-special-limit-without-matching-the-argument', name: `Using the special limit without matching the argument`, errorAt: 0,
+        what: `The special limit $\\lim_{u \\to 0} \\dfrac{\\sin u}{u} = 1$ is applied to an expression that has the sine of one quantity over a different quantity.`,
+        wrong: [`$\\lim_{x \\to 0} \\dfrac{\\sin 5x}{3x} = 1$, by the special limit.`],
+        right: [`The denominator has to match the argument of the sine. $\\dfrac{\\sin 5x}{3x} = \\dfrac{5}{3} \\cdot \\dfrac{\\sin 5x}{5x}$, and with $u = 5x$ the limit is $\\dfrac{5}{3} \\cdot 1 = \\dfrac{5}{3}$.`],
+        why: `The expression has the shape "sine of something over something", and the pattern is recognized by its shape before the two somethings are compared.`,
+        check: `Evaluate at a small $x$. At $x = 0.01$, $\\dfrac{\\sin 0.05}{0.03} \\approx 1.666$. For small angles $\\sin 5x \\approx 5x$, so the quotient is close to $\\dfrac{5x}{3x} = \\dfrac{5}{3}$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'trig', name: 'Trigonometric', sub: 'Five limits as $x \\to 0$, all with $x$ measured in radians.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$', text: 'The fundamental limit, squeezed between $\\cos x$ and $1$ in [the fundamental trigonometric limit](!#2).' },
+         { formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{x}{\\sin x} = 1$', text: 'Its reciprocal, which tends to $1$ as well, among [the related trigonometric limits](!#3).' }],
+        [{ formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{1 - \\cos x}{x} = 0$', text: 'Multiplying by the conjugate turns it into a product of two known limits, as [the derivation](!#4) shows.' },
+         { formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2} = \\frac{1}{2}$', text: 'The same numerator over $x^2$ gives a nonzero limit, listed with [the related trigonometric limits](!#3).' }],
+        [{ formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{\\tan x}{x} = 1$', text: 'Since $\\tan x = \\sin x / \\cos x$ and $\\cos x \\to 1$, it equals the fundamental limit; see [the related trigonometric limits](!#3).' }, ''],
+      ] },
+      { id: 'exp', name: 'Exponential', sub: 'Three limits as $x \\to 0$ built on the number $e$.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$', text: 'It is the derivative of $e^x$ at $x = 0$, as [the natural exponential limit](!#5) shows.' },
+         { formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{a^x - 1}{x} = \\ln a$', text: 'For any base $a > 0$ the base enters only through $\\ln a$, and $a = e$ gives back the limit beside it ([related exponential limits](!#6)).' }],
+        [{ formula: '$\\displaystyle \\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1$', text: 'The substitution $u = \\ln(1 + x)$ turns it into the exponential limit, as [related exponential limits](!#6) shows.' }, ''],
+      ] },
+      { id: 'e', name: 'Definition of e', sub: 'One number, $e \\approx 2.71828$, in two equivalent forms.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$', text: 'Compounding $n$ times a year at a rate of $100\\%$ gives the growth factor $(1 + 1/n)^n$, which tends to $e$; see [the definition of e](!#7).' },
+         { formula: '$\\displaystyle \\lim_{x \\to 0} (1 + x)^{1/x} = e$', text: 'The same limit written with $x \\to 0$, the second form in [the definition of e](!#7).' }],
+      ] },
+      { id: 'log', name: 'Logarithmic at zero', sub: 'Boundary limits as $x \\to 0^+$, the only side where $\\ln x$ is defined.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to 0^+} x \\ln x = 0$', text: 'A $0 \\cdot (-\\infty)$ form in which the factor $x$ wins, from [limits involving logarithms](!#8).' },
+         { formula: '$\\displaystyle \\lim_{x \\to 0^+} x^n \\ln x = 0$', text: 'For any $n > 0$, a positive power of $x$ still beats the logarithm, as [limits involving logarithms](!#8) states.' }],
+      ] },
+      { id: 'growth', name: 'Growth rates', sub: 'Limits as $x \\to \\infty$ that rank logarithms below powers and powers below exponentials.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0$', text: 'For any $n > 0$, a positive power of $x$ outgrows $\\ln x$, from [growth rate comparisons](!#9).' }, ''],
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} \\frac{x^n}{e^x} = 0$', text: 'For any $n$, the exponential outgrows every power of $x$; see [growth rate comparisons](!#9).' },
+         { formula: '$\\displaystyle \\lim_{x \\to \\infty} \\frac{x^n}{a^x} = 0$', text: 'The same holds for any base $a > 1$ and any $n$, as [growth rate comparisons](!#9) states.' }],
+      ] },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     specialLimitsOutline,
     oneMinusCosSteps,
     sectionsContent,
@@ -1140,7 +1152,7 @@ return {
 
 }
 
-export default function SpecialPage({specialLimitsOutline, oneMinusCosSteps, seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SpecialPage({ formulaSummaryData, pitfallData,specialLimitsOutline, oneMinusCosSteps, seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1315,8 +1327,16 @@ export default function SpecialPage({specialLimitsOutline, oneMinusCosSteps, seo
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="special-limit-formula-summary"
+            title="Special limits"
+            source="/calculus/limits/special"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.obj11.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj11-diagram'}
             id="special-limits-outline"
@@ -1333,6 +1353,15 @@ export default function SpecialPage({specialLimitsOutline, oneMinusCosSteps, seo
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="special-limit-pitfalls"
+            title="Common pitfalls with special limits"
+            source="/calculus/limits/special"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

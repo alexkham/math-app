@@ -6,7 +6,7 @@
 // ===========================================================
 
 import { Point, Segment, Line, Polygon, Circle, Angle } from './primitives';
-import { Ticks, RightAngle, ParallelArrows } from './annotations';
+import { Ticks, RightAngle, ParallelArrows, SideLabel } from './annotations';
 import { isPointType } from '../engine/resolver';
 
 export const REGISTRY = {
@@ -14,6 +14,10 @@ export const REGISTRY = {
   midpoint: Point,
   pointAlong: Point,
   pointAlongDist: Point,
+  perpAlongDist: Point,
+  tangentPoint: Point,
+  bisectorFoot: Point,
+  incentre: Point,
   onLine: Point,
   onCircle: Point,
   apex: Point,
@@ -28,7 +32,8 @@ export const REGISTRY = {
 
   ticks: Ticks,
   rightAngle: RightAngle,
-  parallel: ParallelArrows
+  parallel: ParallelArrows,
+  sideLabel: SideLabel
 };
 
 const LAYERS = {
@@ -39,7 +44,8 @@ const LAYERS = {
   segment: 4,
   ticks: 5,
   rightAngle: 5,
-  parallel: 5
+  parallel: 5,
+  sideLabel: 7
 };
 
 export const layerOf = (o) => (isPointType(o.type) ? 9 : LAYERS[o.type] ?? 6);

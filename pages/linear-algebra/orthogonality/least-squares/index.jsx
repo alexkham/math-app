@@ -944,6 +944,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1401,7 +1402,7 @@ When $A$ has full column rank (the columns are [linearly independent](!/linear-a
 
 @academic[pitfall,aside:true,width:35%:Splitting the inverse into two factors
 Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ collapses the formula to $\\hat{\\mathbf{x}} = A^{-1}\\mathbf{b}$, but the $4 \\times 2$ matrix $A$ of the line fit below has no inverse. Only the square matrix $A^TA$, there $\\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}$, is inverted, as one matrix.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-inverse-into-two-factors)]@
 
 The formula is read from right to left. The vector $A^T\\mathbf{b}$ collects the dot products of $\\mathbf{b}$ with the columns of $A$, the matrix $A^TA$ collects the dot products of the columns with each other, and the inverse of $A^TA$ turns the first into the coefficients. For the line fit below, $A$ is $4 \\times 2$, so both pieces are small: a $2 \\times 2$ matrix and a vector of length $2$.
 
@@ -1464,7 +1465,7 @@ When the columns of $A$ are [orthonormal](!/linear-algebra/orthogonality/orthogo
 
 @academic[pitfall,aside:true,width:35%:Swapping the order of the two factors
 Writing $P = Q^TQ$ gives $I_n$, which is $n \\times n$ and for $m > n$ cannot even multiply $\\mathbf{b} \\in \\mathbb{R}^m$. For $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, $Q^TQ = 1$, while the projection is $P = QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-order-of-the-two-factors)]@
 
 With orthonormal columns the middle factor $A^TA = Q^TQ$ drops out of the formula, and no inverse is left to compute. The projection becomes $P\\mathbf{b} = Q(Q^T\\mathbf{b})$: the entries of $Q^T\\mathbf{b}$ are the dot products of $\\mathbf{b}$ with the columns of $Q$, and $Q$ uses them as weights on those same columns.
 
@@ -1519,7 +1520,7 @@ Simple linear regression fits $y = \\beta_0 + \\beta_1 x + \\epsilon$ to data $(
 
 @academic[pitfall,aside:true,width:35%:Leaving out the column of ones
 Without the column of ones the model is $y = c_1x$, a line forced through the origin. For $(0, 1)$, $(1, 3)$, $(2, 5)$ the single column $(0, 1, 2)$ gives $5c_1 = 13$ and $y = 2.6x$, although the line $y = 1 + 2x$ passes through all three points.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-out-the-column-of-ones)]@
 
 Multiple linear regression fits $\\mathbf{y} = X\\boldsymbol{\\beta} + \\boldsymbol{\\epsilon}$ where $X$ is the design matrix with rows for observations and columns for predictors. The normal equations $X^TX\\hat{\\boldsymbol{\\beta}} = X^T\\mathbf{y}$ give the coefficient estimates.
 
@@ -1555,57 +1556,9 @@ The error is zero if and only if $\\mathbf{b} \\in \\text{Col}(A)$ — if and on
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again when the least-squares formulas are applied by hand. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Splitting the inverse into two factors**
-
-The formula $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$ is simplified with the rule for the inverse of a product, $(XY)^{-1} = Y^{-1}X^{-1}$, taking $X = A^T$ and $Y = A$. The factors cancel, and the least-squares problem seems to disappear.
-
-Wrong working:
-$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b} = A^{-1}(A^T)^{-1}A^T\\mathbf{b} = A^{-1}\\mathbf{b}$$
-For the line fit, $A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\\\ 1 & 3 \\\\ 1 & 4 \\end{pmatrix}$ is $4 \\times 2$, so $A^{-1}$ does not exist and the last expression means nothing.
-
-Right working: form the $2 \\times 2$ matrix first and invert it as a whole,
-$$A^TA = \\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix}, \\quad (A^TA)^{-1} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}$$
-and then multiply by the vector $A^T\\mathbf{y}$.
-
-Why it happens: the rule $(XY)^{-1} = Y^{-1}X^{-1}$ is learned for square invertible matrices and looks as if it applies to any product. Here neither $A$ nor $A^T$ is square; only their product is.
-
-How to check: check the sizes before writing an inverse, since only square matrices have one. If a simplification ends in $A^{-1}\\mathbf{b}$, then $A$ would have to be square and invertible, and in that case $A\\mathbf{x} = \\mathbf{b}$ has an exact solution and there was nothing to approximate.
-
-**Swapping the order of the two factors**
-
-With orthonormal columns, $A = Q$ and the projection matrix becomes $QQ^T$. The two factors are written in the other order, $Q^TQ$, which is the product that appears in the condition $Q^TQ = I$.
-
-Wrong working: for $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix}$,
-$$Q^TQ = \\tfrac{1}{2}(1 \\cdot 1 + 1 \\cdot 1) = 1$$
-a $1 \\times 1$ matrix. Read as the identity, it says $\\mathbf{b}$ is its own projection, $(2, 0)$, although $(2, 0)$ does not lie on the line spanned by $(1, 1)$.
-
-Right working:
-$$P = QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}, \\quad P\\mathbf{b} = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$$
-The projection $(1, 1)$ lies on the line, and the residual $(2, 0) - (1, 1) = (1, -1)$ is perpendicular to it.
-
-Why it happens: $Q^TQ = I$ is the identity that defines orthonormal columns, so $Q^TQ$ is the product written most often. For a square $Q$ both orders give $I$; for the tall matrices of least squares only $Q^TQ$ does.
-
-How to check: compare sizes. $P$ must be $m \\times m$ to multiply $\\mathbf{b} \\in \\mathbb{R}^m$; $Q^TQ$ is $n \\times n$ and $QQ^T$ is $m \\times m$. The result $P\\mathbf{b}$ must also lie in the column space of $Q$.
-
-**Leaving out the column of ones**
-
-The model $y = c_0 + c_1x$ is turned into a design matrix, but only the column of $x_i$ values is written down. The intercept $c_0$ gets no column, so the model actually fitted is $y = c_1x$, a line through the origin.
-
-Wrong working: for the points $(0, 1)$, $(1, 3)$, $(2, 5)$, with $A = \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix}$ and $\\mathbf{y} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 5 \\end{pmatrix}$,
-$$A^TA = 0 + 1 + 4 = 5, \\quad A^T\\mathbf{y} = 0 + 3 + 10 = 13, \\quad c_1 = \\frac{13}{5} = 2.6$$
-The fitted line $y = 2.6x$ leaves the residuals $1$, $0.4$ and $-0.2$.
-
-Right working: one column per coefficient, the first one all ones.
-$$A = \\begin{pmatrix} 1 & 0 \\\\ 1 & 1 \\\\ 1 & 2 \\end{pmatrix}, \\quad A^TA = \\begin{pmatrix} 3 & 3 \\\\ 3 & 5 \\end{pmatrix}, \\quad A^T\\mathbf{y} = \\begin{pmatrix} 9 \\\\ 13 \\end{pmatrix}$$
-Solving gives $c_0 = 1$ and $c_1 = 2$. The line $y = 1 + 2x$ passes through all three points, and every residual is $0$.
-
-Why it happens: the intercept multiplies the constant $1$, which does not appear anywhere in the data. Every coefficient of the model needs its own column, including the one that multiplies no variable.
-
-How to check: count the columns, one per unknown coefficient. With a column of ones the residuals always add up to $0$, because that column is orthogonal to the residual; here $1 + 0.4 - 0.2 = 1.2$, so the column is missing.`,
+    content: `Three mistakes come up again and again when the least-squares formulas are applied by hand. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip changes the size of something in the least-squares formula. $(A^TA)^{-1}$ cannot be split, since $A$ is not square; the projection with orthonormal columns is $QQ^T$, an $m \\times m$ matrix; and a model with an intercept needs a column of ones. Checking the sizes of the matrices catches each slip.`,
     link: ``,
   },
 }
@@ -1820,8 +1773,43 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'splitting-the-inverse-into-two-factors', name: `Splitting the inverse into two factors`, errorAt: 0,
+        what: `The formula $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$ is simplified with the rule for the inverse of a product, $(XY)^{-1} = Y^{-1}X^{-1}$, taking $X = A^T$ and $Y = A$. The factors cancel, and the least-squares problem seems to disappear.`,
+        wrong: [`$$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$$
+$$= A^{-1}(A^T)^{-1}A^T\\mathbf{b} = A^{-1}\\mathbf{b}$$`, `For the line fit, $A = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\\\ 1 & 3 \\\\ 1 & 4 \\end{pmatrix}$ is $4 \\times 2$, so $A^{-1}$ does not exist and the last expression means nothing.`],
+        right: [`Form the $2 \\times 2$ matrix first and invert it as a whole,
+$$A^TA = \\begin{pmatrix} 4 & 10 \\\\ 10 & 30 \\end{pmatrix},$$
+$$(A^TA)^{-1} = \\frac{1}{20}\\begin{pmatrix} 30 & -10 \\\\ -10 & 4 \\end{pmatrix}$$`, `And then multiply by the vector $A^T\\mathbf{y}$.`],
+        why: `The rule $(XY)^{-1} = Y^{-1}X^{-1}$ is learned for square invertible matrices and looks as if it applies to any product. Here neither $A$ nor $A^T$ is square; only their product is.`,
+        check: `Check the sizes before writing an inverse, since only square matrices have one. If a simplification ends in $A^{-1}\\mathbf{b}$, then $A$ would have to be square and invertible, and in that case $A\\mathbf{x} = \\mathbf{b}$ has an exact solution and there was nothing to approximate.` },
+      { id: 'swapping-the-order-of-the-two-factors', name: `Swapping the order of the two factors`, errorAt: 1,
+        what: `With orthonormal columns, $A = Q$ and the projection matrix becomes $QQ^T$. The two factors are written in the other order, $Q^TQ$, which is the product that appears in the condition $Q^TQ = I$.`,
+        wrong: [`For $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix}$,`, `$$Q^TQ = \\tfrac{1}{2}(1 \\cdot 1 + 1 \\cdot 1) = 1$$`, `A $1 \\times 1$ matrix. Read as the identity, it says $\\mathbf{b}$ is its own projection, $(2, 0)$, although $(2, 0)$ does not lie on the line spanned by $(1, 1)$.`],
+        right: [`For $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$ and $\\mathbf{b} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix}$,`, `$$P = QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix},$$
+$$P\\mathbf{b} = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$$`, `The projection $(1, 1)$ lies on the line, and the residual $(2, 0) - (1, 1) = (1, -1)$ is perpendicular to it.`],
+        why: `$Q^TQ = I$ is the identity that defines orthonormal columns, so $Q^TQ$ is the product written most often. For a square $Q$ both orders give $I$; for the tall matrices of least squares only $Q^TQ$ does.`,
+        check: `Compare sizes. $P$ must be $m \\times m$ to multiply $\\mathbf{b} \\in \\mathbb{R}^m$; $Q^TQ$ is $n \\times n$ and $QQ^T$ is $m \\times m$. The result $P\\mathbf{b}$ must also lie in the column space of $Q$.` },
+      { id: 'leaving-out-the-column-of-ones', name: `Leaving out the column of ones`, errorAt: 0,
+        what: `The model $y = c_0 + c_1x$ is turned into a design matrix, but only the column of $x_i$ values is written down. The intercept $c_0$ gets no column, so the model actually fitted is $y = c_1x$, a line through the origin.`,
+        wrong: [`For the points $(0, 1)$, $(1, 3)$, $(2, 5)$, with $A = \\begin{pmatrix} 0 \\\\ 1 \\\\ 2 \\end{pmatrix}$ and $\\mathbf{y} = \\begin{pmatrix} 1 \\\\ 3 \\\\ 5 \\end{pmatrix}$,
+$$A^TA = 0 + 1 + 4 = 5,$$
+$$A^T\\mathbf{y} = 0 + 3 + 10 = 13,$$
+$$c_1 = \\frac{13}{5} = 2.6$$`, `The fitted line $y = 2.6x$ leaves the residuals $1$, $0.4$ and $-0.2$.`],
+        right: [`One column per coefficient, the first one all ones.`, `$$A = \\begin{pmatrix} 1 & 0 \\\\ 1 & 1 \\\\ 1 & 2 \\end{pmatrix},$$
+$$A^TA = \\begin{pmatrix} 3 & 3 \\\\ 3 & 5 \\end{pmatrix},$$
+$$A^T\\mathbf{y} = \\begin{pmatrix} 9 \\\\ 13 \\end{pmatrix}$$`, `Solving gives $c_0 = 1$ and $c_1 = 2$. The line $y = 1 + 2x$ passes through all three points, and every residual is $0$.`],
+        why: `The intercept multiplies the constant $1$, which does not appear anywhere in the data. Every coefficient of the model needs its own column, including the one that multiplies no variable.`,
+        check: `Count the columns, one per unknown coefficient. With a column of ones the residuals always add up to $0$, because that column is orthogonal to the residual; here $1 + 0.4 - 0.2 = 1.2$, so the column is missing.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     normalEqCases,
     demoUnits,
     conceptIntroFigures,
@@ -1846,7 +1834,7 @@ const schemas = {
 // export default function LeastSquaresPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LeastSquaresPage({normalEqCases, 
+export default function LeastSquaresPage({ pitfallData,normalEqCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2080,6 +2068,15 @@ Ceres, discovered on 1 January 1801, was followed for about six weeks before it 
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="least-squares-pitfalls"
+            title="Common pitfalls with least squares"
+            source="/linear-algebra/orthogonality/least-squares"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

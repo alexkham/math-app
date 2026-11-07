@@ -921,6 +921,7 @@ import powerIterationDiagrams from '@/app/components/linear-algebra copy/matrix/
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1319,7 +1320,7 @@ This follows from the [characteristic polynomial](!/linear-algebra/eigen/charact
 
 @academic[pitfall,aside:true,width:35%:Reading eigenvalues off the diagonal
 Taking the diagonal entries $1, 3$ of $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ as its eigenvalues passes the trace test, $1 + 3 = 4$, but their product $3$ is not $\\det(A) = -5$. The eigenvalues are $5$ and $-1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-eigenvalues-off-the-diagonal)]@
 
 The trace provides a quick consistency check. A $3 \\times 3$ matrix with diagonal entries $7, -2, 4$ has trace $9$. If the eigenvalues are computed as $5, 3, 1$, the sum is $9$ — consistent. If the sum does not match the trace, a computation error has occurred.`,
     before: ``,
@@ -1342,7 +1343,7 @@ The most immediate consequence is that $A$ is [invertible](!/linear-algebra/matr
 
 @academic[pitfall,aside:true,width:35%:Counting a repeated eigenvalue once
 Listing the eigenvalues of $A = \\begin{pmatrix} 3 & 5 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & -2 \\end{pmatrix}$ as $3, -2$ gives the product $-6$. The characteristic polynomial is $(3 - \\lambda)^2(-2 - \\lambda)$, so $3$ counts twice and $\\det(A) = 3 \\cdot 3 \\cdot (-2) = -18$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-a-repeated-eigenvalue-once)]@
 
 The list $\\lambda_1, \\dots, \\lambda_n$ in the formula comes from the characteristic polynomial, which has degree $n$ for an $n \\times n$ matrix and splits into $n$ linear factors over the complex numbers. A root of multiplicity $m$ fills $m$ places in the list, exactly as in the trace formula of section $1$, so the trace check and the determinant check are run on the same $n$ numbers.`,
     before: ``,
@@ -1468,7 +1469,7 @@ The eigenvalues of $A + cI$ are $\\lambda_1 + c, \\lambda_2 + c, \\dots, \\lambd
 
 @academic[pitfall,aside:true,width:35%:Adding the eigenvalues of a sum
 Adding eigenvalues the way the shift rule does predicts $0, 0$ for $A + B$ when $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$, each with eigenvalues $0, 0$. But $A + B = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has eigenvalues $1$ and $-1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-eigenvalues-of-a-sum)]@
 
 These operations are useful in practice. Adding $cI$ can shift all eigenvalues to be positive (making a matrix positive definite for numerical purposes), or shift a known eigenvalue to zero (making $A - \\lambda_0 I$ singular, which is exactly how the eigenvalue equation is set up).`,
     before: ``,
@@ -1547,7 +1548,7 @@ If $B = P^{-1}AP$ and $\\mathbf{v}$ is an eigenvector of $A$ with eigenvalue $\\
 
 @academic[pitfall,aside:true,width:35%:Reading the theorem backwards
 Concluding similarity from equal eigenvalues fails for $\\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ and $2I$. Both have characteristic polynomial $(\\lambda - 2)^2$, but $P^{-1}(2I)P = 2I$ for every invertible $P$, so they are not similar; their geometric multiplicities are $1$ and $2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-theorem-backwards)]@
 
 The eigenvalues stay the same; the eigenvectors transform by $P^{-1}$. This is consistent with the interpretation that eigenvalues are properties of the [transformation](!/linear-algebra/transformations), not of the matrix. Changing the basis changes the matrix and the eigenvector coordinates, but the eigenvalues — the intrinsic scaling factors — are invariant.
 
@@ -1593,65 +1594,9 @@ The [power iteration tool](!/linear-algebra/visual-tools/power-iteration) runs t
   },
   obj13: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers when the properties on this page are put to use. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading eigenvalues off the diagonal**
-
-The trace is the sum of the diagonal entries and also the sum of the eigenvalues, so the diagonal entries themselves are taken to be the eigenvalues. That is true for diagonal and triangular matrices, and for no others in general.
-
-Wrong working: for $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$, the eigenvalues are read as $1$ and $3$.
-
-Right working: solve the characteristic equation.
-$$\\det(A - \\lambda I) = (1 - \\lambda)(3 - \\lambda) - 8 = \\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1)$$
-so the eigenvalues are $5$ and $-1$.
-
-Why it happens: the trace formula makes the two lists look interchangeable, and the first examples of eigenvalues are usually diagonal or triangular matrices, where they really are the same.
-
-How to check: run the trace check and the determinant check together. The wrong pair passes the first, $1 + 3 = 4$, and fails the second, $1 \\cdot 3 = 3$ while $\\det(A) = 3 - 8 = -5$. The right pair passes both: $5 + (-1) = 4$ and $5 \\cdot (-1) = -5$.
-
-**Counting a repeated eigenvalue once**
-
-The eigenvalues are listed as a set of distinct values, and that shorter list is used in the trace or determinant formula. Both formulas need every eigenvalue as often as it appears as a root of the characteristic polynomial.
-
-Wrong working: $A = \\begin{pmatrix} 3 & 5 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & -2 \\end{pmatrix}$ is triangular, with eigenvalues $3$ and $-2$. Taking each once gives
-$$\\det(A) = 3 \\cdot (-2) = -6, \\qquad \\text{tr}(A) = 3 + (-2) = 1$$
-
-Right working: the characteristic polynomial is $(3 - \\lambda)^2(-2 - \\lambda)$, so the list is $3, 3, -2$:
-$$\\det(A) = 3 \\cdot 3 \\cdot (-2) = -18, \\qquad \\text{tr}(A) = 3 + 3 + (-2) = 4$$
-
-Why it happens: the eigenvalue $3$ has only a one-dimensional eigenspace here, since $A - 3I$ has rank $2$, so only one eigenvector turns up for it. The formulas count the algebraic multiplicity, not the number of eigenvectors.
-
-How to check: an $n \\times n$ matrix has a list of exactly $n$ eigenvalues. The trace check also catches the slip: the diagonal entries add up to $4$, not $1$.
-
-**Adding the eigenvalues of a sum**
-
-The shift rule, $\\lambda \\mapsto \\lambda + c$ for $A + cI$, is carried over to the sum $A + B$ of two arbitrary matrices, and the eigenvalues of $A$ and $B$ are added in pairs.
-
-Wrong working: $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$ are triangular, each with eigenvalues $0, 0$. Adding gives $0, 0$ as the eigenvalues of $A + B$.
-
-Right working:
-$$\\det(A + B - \\lambda I) = \\det\\begin{pmatrix} -\\lambda & 1 \\\\ 1 & -\\lambda \\end{pmatrix} = \\lambda^2 - 1$$
-so the eigenvalues of $A + B$ are $1$ and $-1$, with eigenvectors $(1, 1)^T$ and $(1, -1)^T$. Products fail in the same way: $AB = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ has eigenvalues $1$ and $0$.
-
-Why it happens: the shift rule works because every vector is an eigenvector of $cI$, so $A$ and $cI$ share all eigenvectors of $A$. A general $B$ shares none: the only eigenvector direction of $A$ is $(1, 0)^T$, and that of $B$ is $(0, 1)^T$.
-
-How to check: the trace cannot catch this, because $\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$ always holds. The determinant can: $\\det(A + B) = -1$, while the predicted eigenvalues $0, 0$ would give $0$.
-
-**Reading the theorem backwards**
-
-Similar matrices have the same eigenvalues, and this is turned around: two matrices with the same eigenvalues, or even the same characteristic polynomial, are taken to be similar.
-
-Wrong working: $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ and $2I$ both have characteristic polynomial $(\\lambda - 2)^2$, trace $4$ and determinant $4$, so they are declared similar.
-
-Right working: for every invertible $P$,
-$$P^{-1}(2I)P = 2P^{-1}P = 2I$$
-so the only matrix similar to $2I$ is $2I$ itself, and $A \\neq 2I$. The geometric multiplicities show the same thing: $A - 2I$ has rank $1$, so $m_g(2) = 1$ for $A$, while $m_g(2) = 2$ for $2I$. Similar matrices must agree on both.
-
-Why it happens: the theorem lists many quantities that similar matrices share, and it is natural to expect such a long list to pin the matrix down. The characteristic polynomial does not record the geometric multiplicities.
-
-How to check: compare the geometric multiplicities as well as the eigenvalues. For two diagonalizable matrices, the same eigenvalues with the same multiplicities do imply similarity, since both are similar to the same diagonal matrix.`,
+    content: `Four mistakes account for many wrong answers when the properties on this page are put to use. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip stretches an eigenvalue property too far. The trace equals the sum of the eigenvalues, not the eigenvalues themselves; trace and determinant count a repeated eigenvalue every time it occurs; the eigenvalues of $A + B$ are not the sums of those of $A$ and $B$; and matrices with the same eigenvalues need not be similar. Checking the trace and the determinant together, or comparing geometric multiplicities, catches each slip.`,
     link: ``,
   },
 }
@@ -1821,8 +1766,49 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj13 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-eigenvalues-off-the-diagonal', name: `Reading eigenvalues off the diagonal`, errorAt: 1,
+        what: `The trace is the sum of the diagonal entries and also the sum of the eigenvalues, so the diagonal entries themselves are taken to be the eigenvalues. That is true for diagonal and triangular matrices, and for no others in general.`,
+        wrong: [`For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$,`, `The eigenvalues are read as $1$ and $3$.`],
+        right: [`For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$,`, `Solve the characteristic equation.`, `$$\\det(A - \\lambda I)$$
+$$= (1 - \\lambda)(3 - \\lambda) - 8$$
+$$= \\lambda^2 - 4\\lambda - 5$$
+$$= (\\lambda - 5)(\\lambda + 1)$$`, `So the eigenvalues are $5$ and $-1$.`],
+        why: `The trace formula makes the two lists look interchangeable, and the first examples of eigenvalues are usually diagonal or triangular matrices, where they really are the same.`,
+        check: `Run the trace check and the determinant check together. The wrong pair passes the first, $1 + 3 = 4$, and fails the second, $1 \\cdot 3 = 3$ while $\\det(A) = 3 - 8 = -5$. The right pair passes both: $5 + (-1) = 4$ and $5 \\cdot (-1) = -5$.` },
+      { id: 'counting-a-repeated-eigenvalue-once', name: `Counting a repeated eigenvalue once`, errorAt: 0,
+        what: `The eigenvalues are listed as a set of distinct values, and that shorter list is used in the trace or determinant formula. Both formulas need every eigenvalue as often as it appears as a root of the characteristic polynomial.`,
+        wrong: [`$A = \\begin{pmatrix} 3 & 5 & 0 \\\\ 0 & 3 & 1 \\\\ 0 & 0 & -2 \\end{pmatrix}$ is triangular, with eigenvalues $3$ and $-2$. Taking each once gives
+$$\\det(A) = 3 \\cdot (-2) = -6,$$
+$$\\text{tr}(A) = 3 + (-2) = 1$$`],
+        right: [`The characteristic polynomial is $(3 - \\lambda)^2(-2 - \\lambda)$, so the list is $3, 3, -2$:
+$$\\det(A) = 3 \\cdot 3 \\cdot (-2) = -18,$$
+$$\\text{tr}(A) = 3 + 3 + (-2) = 4$$`],
+        why: `The eigenvalue $3$ has only a one-dimensional eigenspace here, since $A - 3I$ has rank $2$, so only one eigenvector turns up for it. The formulas count the algebraic multiplicity, not the number of eigenvectors.`,
+        check: `An $n \\times n$ matrix has a list of exactly $n$ eigenvalues. The trace check also catches the slip: the diagonal entries add up to $4$, not $1$.` },
+      { id: 'adding-the-eigenvalues-of-a-sum', name: `Adding the eigenvalues of a sum`, errorAt: 1,
+        what: `The shift rule, $\\lambda \\mapsto \\lambda + c$ for $A + cI$, is carried over to the sum $A + B$ of two arbitrary matrices, and the eigenvalues of $A$ and $B$ are added in pairs.`,
+        wrong: [`$A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$ are triangular, each with eigenvalues $0, 0$.`, `Adding gives $0, 0$ as the eigenvalues of $A + B$.`],
+        right: [`$A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$ are triangular, each with eigenvalues $0, 0$.`, `$$\\det(A + B - \\lambda I)$$
+$$= \\det\\begin{pmatrix} -\\lambda & 1 \\\\ 1 & -\\lambda \\end{pmatrix} = \\lambda^2 - 1$$`, `So the eigenvalues of $A + B$ are $1$ and $-1$, with eigenvectors $(1, 1)^T$ and $(1, -1)^T$. Products fail in the same way: $AB = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ has eigenvalues $1$ and $0$.`],
+        why: `The shift rule works because every vector is an eigenvector of $cI$, so $A$ and $cI$ share all eigenvectors of $A$. A general $B$ shares none: the only eigenvector direction of $A$ is $(1, 0)^T$, and that of $B$ is $(0, 1)^T$.`,
+        check: `The trace cannot catch this, because $\\text{tr}(A + B) = \\text{tr}(A) + \\text{tr}(B)$ always holds. The determinant can: $\\det(A + B) = -1$, while the predicted eigenvalues $0, 0$ would give $0$.` },
+      { id: 'reading-the-theorem-backwards', name: `Reading the theorem backwards`, errorAt: 0,
+        what: `Similar matrices have the same eigenvalues, and this is turned around: two matrices with the same eigenvalues, or even the same characteristic polynomial, are taken to be similar.`,
+        wrong: [`$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ and $2I$ both have characteristic polynomial $(\\lambda - 2)^2$, trace $4$ and determinant $4$, so they are declared similar.`],
+        right: [`For every invertible $P$,
+$$P^{-1}(2I)P = 2P^{-1}P = 2I$$`, `So the only matrix similar to $2I$ is $2I$ itself, and $A \\neq 2I$. The geometric multiplicities show the same thing: $A - 2I$ has rank $1$, so $m_g(2) = 1$ for $A$, while $m_g(2) = 2$ for $2I$. Similar matrices must agree on both.`],
+        why: `The theorem lists many quantities that similar matrices share, and it is natural to expect such a long list to pin the matrix down. The characteristic polynomial does not record the geometric multiplicities.`,
+        check: `Compare the geometric multiplicities as well as the eigenvalues. For two diagonalizable matrices, the same eigenvalues with the same multiplicities do imply similarity, since both are similar to the same diagonal matrix.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1844,7 +1830,7 @@ const schemas = {
    }
 
 
-export default function EigenvaluePropertiesPage({
+export default function EigenvaluePropertiesPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2072,6 +2058,15 @@ export default function EigenvaluePropertiesPage({
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'obj13-mistakes'}
+            id="eigen-property-pitfalls"
+            title="Common pitfalls with the properties of eigenvalues"
+            source="/linear-algebra/eigen/properties"
+            after={sectionsContent.obj13.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

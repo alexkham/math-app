@@ -1182,7 +1182,9 @@ import negativeAngleDiagrams from '@/app/components/trigonometry/identities/nega
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1866,7 +1868,7 @@ The geometric explanation is clean. On the [unit circle](!/trigonometry/unit-cir
 
 @academic[pitfall,aside:true,width:35%:Pulling the minus sign out of cosine
 Treating cosine like sine gives $\\cos\\left(-\\frac{\\pi}{3}\\right) = -\\frac{1}{2}$. Cosine is even, so $\\cos\\left(-\\frac{\\pi}{3}\\right) = \\cos\\frac{\\pi}{3} = \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-pulling-the-minus-sign-out-of-cosine)]@
 
 These symmetries are classified as the even/odd [identities](!/trigonometry/identities) and are used constantly in simplification. When a negative angle appears in an expression — say, $\\sin(-3x)$ — the odd identity converts it immediately to $-\\sin(3x)$, eliminating the negative argument. Similarly, $\\cos(-\\alpha) = \\cos(\\alpha)$ allows the sign to be dropped outright.
 
@@ -1905,7 +1907,7 @@ Boundedness has immediate consequences for [equations](!/trigonometry/equations)
 
 @academic[pitfall,aside:true,width:35%:Dropping the reciprocal in cosecant
 Reading $\\csc x = 2$ as $\\sin x = 2$ declares it impossible, since $2 > 1$. Cosecant is a reciprocal, so $\\sin x = \\frac{1}{2}$, with solutions $x = \\frac{\\pi}{6} + 2n\\pi$ and $x = \\frac{5\\pi}{6} + 2n\\pi$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-reciprocal-in-cosecant)]@
 
 For cosecant and secant, the range check passes through the reciprocal. The equation $\\csc x = c$ asks for $\\sin x = \\frac{1}{c}$, so it has solutions exactly when $\\frac{1}{c}$ lies in $[-1, 1]$, that is, when $|c| \\geq 1$. The same holds for $\\sec x = c$ with cosine in place of sine.
 
@@ -2018,7 +2020,7 @@ $$\\text{maximum} = D + |A|, \\quad \\text{minimum} = D - |A|$$]@
 
 @academic[pitfall,aside:true,width:35%:Using A instead of its absolute value
 For $y = -2\\sin x + 1$, taking $D + A = 1 + (-2) = -1$ as the maximum gives the minimum instead. With $|A| = 2$, the maximum is $1 + 2 = 3$, reached where $\\sin x = -1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-a-instead-of-its-absolute-value)]@
 
 To apply the formula, read $A$ and $D$ off the equation.
 
@@ -2103,59 +2105,20 @@ These occur at the same relative positions within each period as for the standar
 
     },
 
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary gathers the formulas of the page in five families: periodicity, even and odd symmetry, boundedness, zeros and extrema. Each formula carries a short note on what it says, with a link to the section that explains it, and the buttons above the cards show one family at a time.
+
+The periodicity cards give the full turn for sine and cosine and the half turn for tangent. The symmetry cards set even cosine beside odd sine and tangent. Boundedness keeps sine and cosine between minus one and one and keeps cosecant and secant at least one in size. The zeros of four functions follow, and the last card gives the highest and lowest values of a transformed sine curve.`,
+      before: ``,
+      after: `Most of these facts come from one picture, the point moving around the unit circle. Its position after a full or half turn gives the periods, its reflection gives the symmetry, and its coordinates staying between minus one and one give the bounds and the zeros.`,
+      link: '',
+    },
     obj16: {
       title: `Common Pitfalls`,
-      content: `Four mistakes come up again and again when the properties of the trigonometric functions are put to use. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Adding 2π to tangent solutions**
-
-A general solution of a tangent equation is written by adding multiples of $2\\pi$, the period of sine and cosine. Tangent repeats every $\\pi$, so half of the solutions are lost.
-
-Wrong working: $\\tan x = 1$ gives $x = \\frac{\\pi}{4}$, so the general solution is written as $x = \\frac{\\pi}{4} + 2n\\pi$. On $[0, 2\\pi)$ this gives only $\\frac{\\pi}{4}$.
-
-Right working: tangent has period $\\pi$, so $x = \\frac{\\pi}{4} + n\\pi$. On $[0, 2\\pi)$ this gives $\\frac{\\pi}{4}$ and $\\frac{5\\pi}{4}$. Indeed $\\tan\\frac{5\\pi}{4} = \\frac{-\\sqrt{2}/2}{-\\sqrt{2}/2} = 1$.
-
-Why it happens: $2\\pi$ is the first period met, for sine and cosine, and it gets attached to every trigonometric equation by habit.
-
-How to check: test the angle half a turn away. If $\\theta_0$ solves a tangent or cotangent equation, so does $\\theta_0 + \\pi$; since $\\tan\\left(\\frac{\\pi}{4} + \\pi\\right) = 1$, the solution $\\frac{5\\pi}{4}$ must appear in the answer.
-
-**Pulling the minus sign out of cosine**
-
-The odd rule $\\sin(-\\theta) = -\\sin\\theta$ is applied to cosine as well, so a negative angle flips the sign of the cosine value.
-
-Wrong working: $\\cos\\left(-\\frac{\\pi}{3}\\right) = -\\cos\\frac{\\pi}{3} = -\\frac{1}{2}$.
-
-Right working: cosine is even, so $\\cos\\left(-\\frac{\\pi}{3}\\right) = \\cos\\frac{\\pi}{3} = \\frac{1}{2}$. On the unit circle, $-\\frac{\\pi}{3}$ is the reflection of $\\frac{\\pi}{3}$ across the $x$-axis, and the $x$-coordinate $\\frac{1}{2}$ does not change. Secant behaves the same way: $\\sec\\left(-\\frac{\\pi}{3}\\right) = \\sec\\frac{\\pi}{3} = 2$.
-
-Why it happens: four of the six functions are odd, so "the minus comes out" feels like the general rule, and the two even functions are the exceptions to remember.
-
-How to check: place the angle on the unit circle. The angle $-\\frac{\\pi}{3}$ ends in Quadrant IV, where cosine is positive, so a negative value cannot be right.
-
-**Dropping the reciprocal in cosecant**
-
-An equation in cosecant or secant is solved as if it were the matching sine or cosine equation, so the range test is applied to the wrong number.
-
-Wrong working: $\\csc x = 2$ is read as $\\sin x = 2$, and since $2 > 1$ the equation is declared to have no solution.
-
-Right working: $\\csc x = 2$ means $\\frac{1}{\\sin x} = 2$, so $\\sin x = \\frac{1}{2}$, giving $x = \\frac{\\pi}{6} + 2n\\pi$ and $x = \\frac{5\\pi}{6} + 2n\\pi$. Indeed $\\csc\\frac{\\pi}{6} = \\frac{1}{1/2} = 2$.
-
-Why it happens: the range $[-1, 1]$ is learned for sine first, and the step to the reciprocal is skipped when the equation looks familiar.
-
-How to check: the range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$, and $2$ lies inside it, so the equation must have solutions. Cosecant can never take the values strictly between $-1$ and $1$, such as $0.3$.
-
-**Using A instead of its absolute value**
-
-The extrema of $y = A\\sin(Bx - C) + D$ are computed as $D + A$ and $D - A$. When $A$ is negative, this swaps the two, and the maximum comes out smaller than the minimum.
-
-Wrong working: for $y = -2\\sin x + 1$, the maximum is given as $1 + (-2) = -1$ and the minimum as $1 - (-2) = 3$.
-
-Right working: $|A| = 2$, so the maximum is $1 + 2 = 3$ and the minimum is $1 - 2 = -1$. The maximum is reached where $\\sin x = -1$, at $x = \\frac{3\\pi}{2} + 2n\\pi$: $y = -2(-1) + 1 = 3$.
-
-Why it happens: in most examples $A$ is positive and the absolute value changes nothing, so it is dropped from memory.
-
-How to check: the maximum can never be smaller than the minimum. Substituting a single point also exposes the error: at $x = \\frac{3\\pi}{2}$, $y = 3$, which already exceeds the claimed maximum $-1$.`,
+      content: `Four mistakes come up again and again when the properties of the trigonometric functions are put to use. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before: ``,
-      after: ``,
+      after: `Each slip misreads one property: tangent has period $\\pi$, cosine is even, cosecant is the reciprocal of sine, and the amplitude is $|A|$. Testing the angle half a turn away, placing the angle on the unit circle, checking the range of cosecant, or substituting one point catches each of them.`,
       link: '',
     },
 
@@ -2271,8 +2234,71 @@ These properties govern every computation downstream. Periodicity is the reason 
     ],
   };
 
+  // MistakeFix batch 9, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'adding-2-to-tangent-solutions', name: `Adding 2π to tangent solutions`, errorAt: 0,
+        what: `A general solution of a tangent equation is written by adding multiples of $2\\pi$, the period of sine and cosine. Tangent repeats every $\\pi$, so half of the solutions are lost.`,
+        wrong: [`$\\tan x = 1$ gives $x = \\frac{\\pi}{4}$, so the general solution is written as $x = \\frac{\\pi}{4} + 2n\\pi$. On $[0, 2\\pi)$ this gives only $\\frac{\\pi}{4}$.`],
+        right: [`Tangent has period $\\pi$, so $x = \\frac{\\pi}{4} + n\\pi$. On $[0, 2\\pi)$ this gives $\\frac{\\pi}{4}$ and $\\frac{5\\pi}{4}$. Indeed $\\tan\\frac{5\\pi}{4} = \\frac{-\\sqrt{2}/2}{-\\sqrt{2}/2} = 1$.`],
+        why: `$2\\pi$ is the first period met, for sine and cosine, and it gets attached to every trigonometric equation by habit.`,
+        check: `Test the angle half a turn away. If $\\theta_0$ solves a tangent or cotangent equation, so does $\\theta_0 + \\pi$; since $\\tan\\left(\\frac{\\pi}{4} + \\pi\\right) = 1$, the solution $\\frac{5\\pi}{4}$ must appear in the answer.` },
+      { id: 'pulling-the-minus-sign-out-of-cosine', name: `Pulling the minus sign out of cosine`, errorAt: 0,
+        what: `The odd rule $\\sin(-\\theta) = -\\sin\\theta$ is applied to cosine as well, so a negative angle flips the sign of the cosine value.`,
+        wrong: [`$\\cos\\left(-\\frac{\\pi}{3}\\right) = -\\cos\\frac{\\pi}{3} = -\\frac{1}{2}$.`],
+        right: [`Cosine is even, so $\\cos\\left(-\\frac{\\pi}{3}\\right) = \\cos\\frac{\\pi}{3} = \\frac{1}{2}$. On the unit circle, $-\\frac{\\pi}{3}$ is the reflection of $\\frac{\\pi}{3}$ across the $x$-axis, and the $x$-coordinate $\\frac{1}{2}$ does not change. Secant behaves the same way: $\\sec\\left(-\\frac{\\pi}{3}\\right) = \\sec\\frac{\\pi}{3} = 2$.`],
+        why: `Four of the six functions are odd, so "the minus comes out" feels like the general rule, and the two even functions are the exceptions to remember.`,
+        check: `Place the angle on the unit circle. The angle $-\\frac{\\pi}{3}$ ends in Quadrant IV, where cosine is positive, so a negative value cannot be right.` },
+      { id: 'dropping-the-reciprocal-in-cosecant', name: `Dropping the reciprocal in cosecant`, errorAt: 0,
+        what: `An equation in cosecant or secant is solved as if it were the matching sine or cosine equation, so the range test is applied to the wrong number.`,
+        wrong: [`$\\csc x = 2$ is read as $\\sin x = 2$, and since $2 > 1$ the equation is declared to have no solution.`],
+        right: [`$\\csc x = 2$ means $\\frac{1}{\\sin x} = 2$, so $\\sin x = \\frac{1}{2}$, giving $x = \\frac{\\pi}{6} + 2n\\pi$ and $x = \\frac{5\\pi}{6} + 2n\\pi$. Indeed $\\csc\\frac{\\pi}{6} = \\frac{1}{1/2} = 2$.`],
+        why: `The range $[-1, 1]$ is learned for sine first, and the step to the reciprocal is skipped when the equation looks familiar.`,
+        check: `The range of cosecant is $(-\\infty, -1] \\cup [1, \\infty)$, and $2$ lies inside it, so the equation must have solutions. Cosecant can never take the values strictly between $-1$ and $1$, such as $0.3$.` },
+      { id: 'using-a-instead-of-its-absolute-value', name: `Using A instead of its absolute value`, errorAt: 1,
+        what: `The extrema of $y = A\\sin(Bx - C) + D$ are computed as $D + A$ and $D - A$. When $A$ is negative, this swaps the two, and the maximum comes out smaller than the minimum.`,
+        wrong: [`For $y = -2\\sin x + 1$,`, `The maximum is given as $1 + (-2) = -1$ and the minimum as $1 - (-2) = 3$.`],
+        right: [`For $y = -2\\sin x + 1$,`, `$|A| = 2$, so the maximum is $1 + 2 = 3$ and the minimum is $1 - 2 = -1$. The maximum is reached where $\\sin x = -1$, at $x = \\frac{3\\pi}{2} + 2n\\pi$: $y = -2(-1) + 1 = 3$.`],
+        why: `In most examples $A$ is positive and the absolute value changes nothing, so it is dropped from memory.`,
+        check: `The maximum can never be smaller than the minimum. Substituting a single point also exposes the error: at $x = \\frac{3\\pi}{2}$, $y = 3$, which already exceeds the claimed maximum $-1$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'period', name: 'Periodicity', sub: 'Adding one period to the angle leaves the value unchanged.', pairs: [
+        [{ formula: '$\\sin(\\theta + 2\\pi) = \\sin\\theta$', text: 'A full turn brings the point on the unit circle back to its start; cosecant shares the period, as [periodicity](!#1) explains.' },
+         { formula: '$\\cos(\\theta + 2\\pi) = \\cos\\theta$', text: 'The same full turn for cosine, and so also for secant; see [periodicity](!#1).' }],
+        [{ formula: '$\\tan(\\theta + \\pi) = \\tan\\theta$', text: 'A half turn negates both coordinates but not their ratio, so tangent and cotangent repeat every $\\pi$, from [periodicity](!#1).' }, ''],
+      ] },
+      { id: 'symmetry', name: 'Even and odd symmetry', sub: 'What a negative angle does to the value.', pairs: [
+        [{ formula: '$\\cos(-\\theta) = \\cos\\theta$', text: 'Cosine is even, and so is secant: reflecting the angle across the $x$-axis keeps the $x$-coordinate, as [even and odd symmetry](!#2) shows.' },
+         { formula: '$\\sin(-\\theta) = -\\sin\\theta$', text: 'Sine is odd, and so is cosecant: the same reflection negates the $y$-coordinate; see [even and odd symmetry](!#2).' }],
+        [{ formula: '$\\tan(-\\theta) = -\\tan\\theta$', text: 'Tangent, the ratio of an odd and an even quantity, is odd, and cotangent with it, from [even and odd symmetry](!#2).' }, ''],
+      ] },
+      { id: 'bounds', name: 'Boundedness', sub: 'The values each function can and cannot reach.', pairs: [
+        [{ formula: '$-1 \\leq \\sin(\\theta) \\leq 1, \\quad -1 \\leq \\cos(\\theta) \\leq 1$', text: 'Sine and cosine are coordinates on a circle of radius $1$, so an equation like $\\sin x = 1.5$ has no solution; see [boundedness](!#3).' },
+         { formula: '$|\\csc(\\theta)| \\geq 1, \\quad |\\sec(\\theta)| \\geq 1$', text: 'Their reciprocals can never lie strictly between $-1$ and $1$, as [boundedness](!#3) shows.' }],
+      ] },
+      { id: 'zeros', name: 'Zeros', sub: 'The angles where the function equals zero, for every integer $n$.', pairs: [
+        [{ formula: '$\\sin(\\theta) = 0 \\quad \\text{at} \\quad \\theta = n\\pi \\quad (n \\in \\mathbb{Z})$', text: 'Where the terminal side lies on the $x$-axis, as [zeros](!#4) explains.' },
+         { formula: '$\\displaystyle \\cos(\\theta) = 0 \\quad \\text{at} \\quad \\theta = \\frac{\\pi}{2} + n\\pi \\quad (n \\in \\mathbb{Z})$', text: 'Where the terminal side lies on the $y$-axis; see [zeros](!#4).' }],
+        [{ formula: '$\\tan(\\theta) = 0 \\quad \\text{at} \\quad \\theta = n\\pi$', text: 'The same points as sine, from [zeros](!#4); cosecant and secant have no zeros at all.' },
+         { formula: '$\\displaystyle \\cot(\\theta) = 0 \\quad \\text{at} \\quad \\theta = \\frac{\\pi}{2} + n\\pi$', text: 'The same points as cosine, as [zeros](!#4) notes.' }],
+      ] },
+      { id: 'extrema', name: 'Extrema', sub: 'Highest and lowest values of a transformed curve $y = A\\sin(Bx - C) + D$.', pairs: [
+        [{ formula: '$\\text{maximum} = D + |A|, \\quad \\text{minimum} = D - |A|$', text: 'The midline $D$ plus or minus the amplitude $|A|$, never $A$ itself; [extrema](!#7) works an example.' }, ''],
+      ] },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     parityTree,
     demoUnits,
     conceptIntroFigures,
@@ -2294,7 +2320,7 @@ These properties govern every computation downstream. Periodicity is the reason 
     }
    }
 
-export default function PropertiesPage({parityTree, 
+export default function PropertiesPage({ formulaSummaryData, pitfallData,parityTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -2377,7 +2403,7 @@ $$\\tan(\\theta + \\pi) = \\tan\\theta$$
           ciTable('periodsTable'),
           `@academic[pitfall,aside:true,width:35%:Adding 2π to tangent solutions
 Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses $x = \\frac{5\\pi}{4}$, where $\\tan\\frac{5\\pi}{4} = 1$ too. Tangent repeats every $\\pi$, so $x = \\frac{\\pi}{4} + n\\pi$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-adding-2-to-tangent-solutions)]@`,
           `The practical consequence for [equations](!/trigonometry/equations): if $\\theta_0$ is a solution to a trigonometric equation, then $\\theta_0 + 2n\\pi$ (for sine, cosine, cosecant, secant) or $\\theta_0 + n\\pi$ (for tangent, cotangent) are also solutions. This generates the infinite families that characterize general solutions of trigonometric equations.`,
           `The practical consequence for [graphs](!/trigonometry/graphs): every trigonometric graph is fully determined by one period. The rest is repetition.`,
         ],
@@ -2475,11 +2501,38 @@ Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses 
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="trig-property-formula-summary"
+            title="Trigonometric function properties"
+            source="/trigonometry/properties"
+            related={{ href: '/trigonometry/formulas', label: 'All trigonometry formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="trig-property-pitfalls"
+            title="Common pitfalls with the properties of the functions"
+            source="/trigonometry/properties"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // NEW aggregation section: obj8

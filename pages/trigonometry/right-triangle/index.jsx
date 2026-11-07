@@ -2594,6 +2594,9 @@ import renderTriangleLabel from '@/app/utils/illustrations/trigonometry/triangle
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -3306,7 +3309,7 @@ A fundamental observation: these ratios do not depend on the size of the triangl
 
 @academic[pitfall,aside:true,width:35%:Taking the hypotenuse as the adjacent side
 Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (opposite 3) gives $\\tan(\\theta) = \\frac{3}{5}$ and even $\\cos(\\theta) = \\frac{5}{5} = 1$. The adjacent side is the leg 4: $\\cos(\\theta) = \\frac{4}{5}$, $\\tan(\\theta) = \\frac{3}{4}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-hypotenuse-as-the-adjacent-side)]@
 
 A right triangle with legs 3 and 4 and hypotenuse 5 gives $\\sin(\\theta) = \\frac{3}{5}$ for the angle opposite the side of length 3 — and any similar triangle, no matter how large or small, produces the same value. The trigonometric functions are properties of the angle alone.
 
@@ -3401,7 +3404,7 @@ $$\\tan(35°) = \\frac{x}{15} \\quad \\Rightarrow \\quad x = 15\\tan(35°)$$]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying when the unknown is in the denominator
 With $\\theta = 35°$ and opposite side 10, the hypotenuse $x$ satisfies $\\sin(35°) = \\frac{10}{x}$. Writing $x = 10\\sin(35°) \\approx 5.74$ makes the hypotenuse shorter than a leg; the correct value is $x = \\frac{10}{\\sin(35°)} \\approx 17.43$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-when-the-unknown-is-in-the-denominator)]@
 
 The choice of ratio is not arbitrary — it is dictated by which pair of sides (one known, one unknown) relates to the given angle. Using the wrong ratio is one of the most common errors in triangle problems. A reliable method: label the sides as opposite, adjacent, or hypotenuse relative to the given angle, identify which two are involved (one known, one unknown), and select the ratio that pairs exactly those two.
 
@@ -3428,7 +3431,7 @@ $$\\tan(\\theta) = \\frac{10}{7} \\quad \\Rightarrow \\quad \\theta = \\arctan\\
 
 @academic[pitfall,aside:true,width:35%:Using sine instead of inverse sine
 Entering $\\sin\\left(\\frac{5}{13}\\right)$ on a calculator in degree mode gives about $0.0067$, which is a ratio, not an angle. The angle comes from the inverse: $\\theta = \\arcsin\\left(\\frac{5}{13}\\right) \\approx 22.6°$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-sine-instead-of-inverse-sine)]@
 
 Once one acute angle is found, the other follows immediately: the two acute angles in a right triangle always sum to $90°$. If $\\theta \\approx 22.6°$, the other acute angle is approximately $90° - 22.6° = 67.4°$.
 
@@ -3454,7 +3457,7 @@ $$\\sin(45°) = \\frac{1}{\\sqrt{2}} = \\frac{\\sqrt{2}}{2}, \\quad \\cos(45°) 
 
 @academic[pitfall,aside:true,width:35%:Multiplying the hypotenuse by √2
 Getting the legs from hypotenuse 8 as $8\\sqrt{2} \\approx 11.31$ makes each leg longer than the hypotenuse. The legs are $\\frac{8}{\\sqrt{2}} = 4\\sqrt{2} \\approx 5.66$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-hypotenuse-by-2)]@
 
 In problems this triangle usually arrives with only one side given, and the ratio $1 : 1 : \\sqrt{2}$ supplies the other two. Starting from a leg of length $a$, the hypotenuse is $a\\sqrt{2}$ in one step. Starting from the hypotenuse, the same ratio is read in the other direction, from the longest side back to the two equal legs.
 
@@ -3483,7 +3486,7 @@ $$\\sin(60°) = \\frac{\\sqrt{3}}{2}, \\quad \\cos(60°) = \\frac{1}{2}, \\quad 
 
 @academic[pitfall,aside:true,width:35%:Putting √3 opposite the 30° angle
 In a 30-60-90 triangle with hypotenuse 10, giving the side opposite $30°$ as $5\\sqrt{3} \\approx 8.66$ would make $\\sin(30°) \\approx 0.87$. The side opposite $30°$ is the shortest one, $5$, and $5\\sqrt{3}$ faces the $60°$ angle.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-putting-3-opposite-the-30-angle)]@
 
 Notice the swap: $\\sin(30°) = \\cos(60°)$ and $\\cos(30°) = \\sin(60°)$. This is the cofunction relationship at work — $30°$ and $60°$ are complements, so the sine of one equals the cosine of the other.
 
@@ -3559,7 +3562,7 @@ $$\\tan(\\theta) = \\frac{\\text{height}}{\\text{distance}} \\quad \\Rightarrow 
 
 @academic[pitfall,aside:true,width:35%:Leaving out the eye height
 A tower seen at $40°$ from $30$ m, with eyes $1.6$ m above the ground, gives $30\\tan(40°) \\approx 25.2$ m. Reporting that as the height of the tower leaves out the part below eye level; the tower is about $25.2 + 1.6 = 26.8$ m tall.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-out-the-eye-height)]@
 
 Variations include: finding the distance given the height and angle, finding the angle given the height and distance, problems involving two observation points at different distances, and problems where the observer&apos;s own height adds to the triangle.
 
@@ -3581,95 +3584,20 @@ Despite these limitations, the exact values and geometric intuitions established
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page in three families. Each formula carries a short note on what it gives or when it applies, with a link to the section that explains it, and the buttons above the cards show one family at a time.
+
+The first family defines sine, cosine and tangent as ratios of the sides seen from an acute angle, then cosecant, secant and cotangent as the same ratios turned upside down. The second family pairs each function with its cofunction at the complementary angle, in degrees on one side and in radians on the other. The last card turns the tangent ratio into a formula for a height from a distance and an angle of elevation.`,
+    before: ``,
+    after: `Every formula here starts from naming the sides correctly: opposite and adjacent depend on which acute angle is used, and the hypotenuse is always the longest side. The exact values at the standard angles are collected in the section after the pitfalls.`,
+    link: '',
+  },
   obj16: {
     title: `Common Pitfalls`,
-    content: `Seven mistakes come up again and again in right-triangle problems. Six are marked where they happen in the sections above; the seventh, a calculator left in radian mode, is described in **Finding Missing Sides**. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the hypotenuse as the adjacent side**
-
-The adjacent side is read as "the side that touches the angle", and the hypotenuse touches it too. The adjacent side is always a leg; the hypotenuse is never adjacent or opposite.
-
-Wrong working: in the triangle with legs 3 and 4 and hypotenuse 5, the angle $\\theta$ opposite 3 is formed by the sides 4 and 5. Choosing 5 as the adjacent side gives $\\cos(\\theta) = \\frac{5}{5} = 1$ and $\\tan(\\theta) = \\frac{3}{5}$.
-
-Right working: the hypotenuse faces the right angle, so it is 5 for both acute angles. The adjacent side is the remaining leg, 4: $\\cos(\\theta) = \\frac{4}{5}$ and $\\tan(\\theta) = \\frac{3}{4}$, so $\\theta \\approx 36.9°$.
-
-Why it happens: both sides that form the angle touch it, and the rule that the adjacent side must be a leg is dropped.
-
-How to check: label the hypotenuse first, across from the right angle, before naming anything else. A cosine of $1$ for an acute angle, or a sine or cosine above $1$, means the labels are wrong.
-
-**Multiplying when the unknown is in the denominator**
-
-The ratio is set up correctly, but the unknown side sits in the denominator, and it is solved for as if it were in the numerator.
-
-Wrong working: with $\\theta = 35°$ and opposite side 10, $\\sin(35°) = \\frac{10}{x}$ is turned into $x = 10\\sin(35°) \\approx 5.74$.
-
-Right working: multiply both sides by $x$ to get $x\\sin(35°) = 10$, then divide by $\\sin(35°)$: $x = \\frac{10}{\\sin(35°)} \\approx 17.43$.
-
-Why it happens: the worked examples in **Finding Missing Sides** all have the unknown on top, where multiplying is correct, and the same move is repeated when the unknown is on the bottom.
-
-How to check: compare with the known side. The hypotenuse must be longer than either leg; $5.74 < 10$ breaks this, while $17.43 > 10$ does not.
-
-**Leaving the calculator in radian mode**
-
-An angle given in degrees is entered into a calculator set to radians. No error appears; the calculator works out the function of 35 radians instead of 35 degrees.
-
-Wrong working: for the side opposite $35°$ in a triangle with hypotenuse 20, radian mode gives $20\\sin(35) = 20 \\times (-0.4282) \\approx -8.56$.
-
-Right working: in degree mode, $20\\sin(35°) = 20 \\times 0.5736 \\approx 11.47$.
-
-Why it happens: many calculators start in radian mode, and the display shows the mode only in small print, if at all.
-
-How to check: test a known value first. $\\sin(30)$ should show $0.5$; any other result means the calculator is not in degree mode. A negative side length is also a sure sign.
-
-**Using sine instead of inverse sine**
-
-When an angle is sought, the sine key is pressed on the side ratio instead of the inverse sine key, so the calculator returns another ratio.
-
-Wrong working: with opposite side 5 and hypotenuse 13, $\\sin\\left(\\frac{5}{13}\\right)$ in degree mode gives about $0.0067$, which is then reported as the angle.
-
-Right working: $\\sin(\\theta) = \\frac{5}{13}$, so $\\theta = \\arcsin\\left(\\frac{5}{13}\\right) \\approx 22.6°$, and the other acute angle is about $67.4°$.
-
-Why it happens: finding sides uses the sine key, and the reverse problem looks as if it should use the same key. The ratio $\\frac{5}{13}$ is the output of sine, so getting back to the angle needs the inverse function.
-
-How to check: the two acute angles of a right triangle add up to $90°$, and neither is close to $0°$ unless one leg is tiny. With legs 5 and 12, an angle of $0.0067°$ is impossible.
-
-**Multiplying the hypotenuse by √2**
-
-In the 45-45-90 triangle a leg and the hypotenuse differ by a factor of $\\sqrt{2}$. When the hypotenuse is the given side, the factor is applied in the wrong direction.
-
-Wrong working: the hypotenuse is 8, so each leg is taken as $8\\sqrt{2} \\approx 11.31$.
-
-Right working: leg $\\times \\sqrt{2}$ = hypotenuse, so each leg is $\\frac{8}{\\sqrt{2}} = \\frac{8\\sqrt{2}}{2} = 4\\sqrt{2} \\approx 5.66$.
-
-Why it happens: the ratio is remembered as "the hypotenuse is a leg times $\\sqrt{2}$", and the multiplication is kept even when the known side is the hypotenuse.
-
-How to check: the hypotenuse is the longest side, so the legs must come out shorter than 8. Also $(4\\sqrt{2})^2 + (4\\sqrt{2})^2 = 32 + 32 = 64 = 8^2$.
-
-**Putting √3 opposite the 30° angle**
-
-In the 30-60-90 triangle the sides $1$, $\\sqrt{3}$, $2$ are matched to the wrong angles, so the $\\sqrt{3}$ side is placed across from $30°$.
-
-Wrong working: with hypotenuse 10, the side opposite $30°$ is taken as $5\\sqrt{3} \\approx 8.66$ and the side opposite $60°$ as 5. Then $\\sin(30°) = \\frac{8.66}{10} \\approx 0.87$.
-
-Right working: the smaller angle faces the shorter side. Opposite $30°$ is $5$, so $\\sin(30°) = \\frac{5}{10} = \\frac{1}{2}$; opposite $60°$ is $5\\sqrt{3} \\approx 8.66$, so $\\sin(60°) = \\frac{\\sqrt{3}}{2}$.
-
-Why it happens: the $\\sqrt{3}$ side touches the $30°$ angle in the drawing, and the side next to an angle is taken for the side across from it.
-
-How to check: larger angles face longer sides. $30°$ is the smallest angle, so its opposite side must be the shortest, and $\\sin(30°)$ must come out as $\\frac{1}{2}$.
-
-**Leaving out the eye height**
-
-The angle of elevation is measured at the eyes of the observer, but the height found from the triangle is reported as the full height of the object.
-
-Wrong working: an observer whose eyes are 1.6 m above the ground stands 30 m from a tower and measures an angle of elevation of $40°$. Then $30\\tan(40°) \\approx 25.2$ m is given as the height of the tower.
-
-Right working: $30\\tan(40°) \\approx 25.17$ m is the height of the top above eye level. Adding the eye height gives $25.17 + 1.6 \\approx 26.8$ m.
-
-Why it happens: the triangle is often sketched with its base on the ground, so its vertical side looks like the whole tower.
-
-How to check: draw the horizontal line from the eyes to the tower. The triangle lies above it, and the strip below it, as tall as the eye height, still has to be added.`,
+    content: `Seven mistakes come up again and again in right-triangle problems. Six are marked where they happen in the sections above; the seventh, a calculator left in radian mode, is described in **Finding Missing Sides**. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Four of the slips set up the triangle wrongly: the hypotenuse faces the right angle, an unknown in the denominator is found by dividing, the $30°$ angle faces the shortest side, and a leg of a $45°$ triangle is the hypotenuse divided by $\\sqrt{2}$. The other three go wrong around the calculation: the calculator must be in degree mode, an angle comes from the inverse sine, and a height measured from eye level needs the eye height added. Comparing each side with the hypotenuse, and checking that the acute angles add up to $90°$, catches most of them.`,
     link: ``,
   },
     // NEW capstone section: obj11
@@ -3835,8 +3763,84 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
     }),
   };
 
+  // MistakeFix batch 9, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-hypotenuse-as-the-adjacent-side', name: `Taking the hypotenuse as the adjacent side`, errorAt: 1,
+        what: `The adjacent side is read as "the side that touches the angle", and the hypotenuse touches it too. The adjacent side is always a leg; the hypotenuse is never adjacent or opposite.`,
+        wrong: [`In the triangle with legs 3 and 4 and hypotenuse 5, the angle $\\theta$ opposite 3 is formed by the sides 4 and 5.`, `Choosing 5 as the adjacent side gives $\\cos(\\theta) = \\frac{5}{5} = 1$ and $\\tan(\\theta) = \\frac{3}{5}$.`],
+        right: [`In the triangle with legs 3 and 4 and hypotenuse 5, the angle $\\theta$ opposite 3 is formed by the sides 4 and 5.`, `The hypotenuse faces the right angle, so it is 5 for both acute angles. The adjacent side is the remaining leg, 4: $\\cos(\\theta) = \\frac{4}{5}$ and $\\tan(\\theta) = \\frac{3}{4}$, so $\\theta \\approx 36.9°$.`],
+        why: `Both sides that form the angle touch it, and the rule that the adjacent side must be a leg is dropped.`,
+        check: `Label the hypotenuse first, across from the right angle, before naming anything else. A cosine of $1$ for an acute angle, or a sine or cosine above $1$, means the labels are wrong.` },
+      { id: 'multiplying-when-the-unknown-is-in-the-denominator', name: `Multiplying when the unknown is in the denominator`, errorAt: 0,
+        what: `The ratio is set up correctly, but the unknown side sits in the denominator, and it is solved for as if it were in the numerator.`,
+        wrong: [`With $\\theta = 35°$ and opposite side 10, $\\sin(35°) = \\frac{10}{x}$ is turned into $x = 10\\sin(35°) \\approx 5.74$.`],
+        right: [`Multiply both sides by $x$ to get $x\\sin(35°) = 10$, then divide by $\\sin(35°)$: $x = \\frac{10}{\\sin(35°)} \\approx 17.43$.`],
+        why: `The worked examples in **Finding Missing Sides** all have the unknown on top, where multiplying is correct, and the same move is repeated when the unknown is on the bottom.`,
+        check: `Compare with the known side. The hypotenuse must be longer than either leg; $5.74 < 10$ breaks this, while $17.43 > 10$ does not.` },
+      { id: 'leaving-the-calculator-in-radian-mode', name: `Leaving the calculator in radian mode`, errorAt: 0,
+        what: `An angle given in degrees is entered into a calculator set to radians. No error appears; the calculator works out the function of 35 radians instead of 35 degrees.`,
+        wrong: [`For the side opposite $35°$ in a triangle with hypotenuse 20, radian mode gives $20\\sin(35) = 20 \\times (-0.4282) \\approx -8.56$.`],
+        right: [`In degree mode, $20\\sin(35°) = 20 \\times 0.5736 \\approx 11.47$.`],
+        why: `Many calculators start in radian mode, and the display shows the mode only in small print, if at all.`,
+        check: `Test a known value first. $\\sin(30)$ should show $0.5$; any other result means the calculator is not in degree mode. A negative side length is also a sure sign.` },
+      { id: 'using-sine-instead-of-inverse-sine', name: `Using sine instead of inverse sine`, errorAt: 0,
+        what: `When an angle is sought, the sine key is pressed on the side ratio instead of the inverse sine key, so the calculator returns another ratio.`,
+        wrong: [`With opposite side 5 and hypotenuse 13, $\\sin\\left(\\frac{5}{13}\\right)$ in degree mode gives about $0.0067$, which is then reported as the angle.`],
+        right: [`$\\sin(\\theta) = \\frac{5}{13}$, so $\\theta = \\arcsin\\left(\\frac{5}{13}\\right) \\approx 22.6°$, and the other acute angle is about $67.4°$.`],
+        why: `Finding sides uses the sine key, and the reverse problem looks as if it should use the same key. The ratio $\\frac{5}{13}$ is the output of sine, so getting back to the angle needs the inverse function.`,
+        check: `The two acute angles of a right triangle add up to $90°$, and neither is close to $0°$ unless one leg is tiny. With legs 5 and 12, an angle of $0.0067°$ is impossible.` },
+      { id: 'multiplying-the-hypotenuse-by-2', name: `Multiplying the hypotenuse by √2`, errorAt: 0,
+        what: `In the 45-45-90 triangle a leg and the hypotenuse differ by a factor of $\\sqrt{2}$. When the hypotenuse is the given side, the factor is applied in the wrong direction.`,
+        wrong: [`The hypotenuse is 8, so each leg is taken as $8\\sqrt{2} \\approx 11.31$.`],
+        right: [`Leg $\\times \\sqrt{2}$ = hypotenuse, so each leg is $\\frac{8}{\\sqrt{2}} = \\frac{8\\sqrt{2}}{2} = 4\\sqrt{2} \\approx 5.66$.`],
+        why: `The ratio is remembered as "the hypotenuse is a leg times $\\sqrt{2}$", and the multiplication is kept even when the known side is the hypotenuse.`,
+        check: `The hypotenuse is the longest side, so the legs must come out shorter than 8. Also $(4\\sqrt{2})^2 + (4\\sqrt{2})^2 = 32 + 32 = 64 = 8^2$.` },
+      { id: 'putting-3-opposite-the-30-angle', name: `Putting √3 opposite the 30° angle`, errorAt: 0,
+        what: `In the 30-60-90 triangle the sides $1$, $\\sqrt{3}$, $2$ are matched to the wrong angles, so the $\\sqrt{3}$ side is placed across from $30°$.`,
+        wrong: [`With hypotenuse 10, the side opposite $30°$ is taken as $5\\sqrt{3} \\approx 8.66$ and the side opposite $60°$ as 5. Then $\\sin(30°) = \\frac{8.66}{10} \\approx 0.87$.`],
+        right: [`The smaller angle faces the shorter side. Opposite $30°$ is $5$, so $\\sin(30°) = \\frac{5}{10} = \\frac{1}{2}$; opposite $60°$ is $5\\sqrt{3} \\approx 8.66$, so $\\sin(60°) = \\frac{\\sqrt{3}}{2}$.`],
+        why: `The $\\sqrt{3}$ side touches the $30°$ angle in the drawing, and the side next to an angle is taken for the side across from it.`,
+        check: `Larger angles face longer sides. $30°$ is the smallest angle, so its opposite side must be the shortest, and $\\sin(30°)$ must come out as $\\frac{1}{2}$.` },
+      { id: 'leaving-out-the-eye-height', name: `Leaving out the eye height`, errorAt: 1,
+        what: `The angle of elevation is measured at the eyes of the observer, but the height found from the triangle is reported as the full height of the object.`,
+        wrong: [`An observer whose eyes are 1.6 m above the ground stands 30 m from a tower and measures an angle of elevation of $40°$.`, `Then $30\\tan(40°) \\approx 25.2$ m is given as the height of the tower.`],
+        right: [`An observer whose eyes are 1.6 m above the ground stands 30 m from a tower and measures an angle of elevation of $40°$.`, `$30\\tan(40°) \\approx 25.17$ m is the height of the top above eye level. Adding the eye height gives $25.17 + 1.6 \\approx 26.8$ m.`],
+        why: `The triangle is often sketched with its base on the ground, so its vertical side looks like the whole tower.`,
+        check: `Draw the horizontal line from the eyes to the tower. The triangle lies above it, and the strip below it, as tall as the eye height, still has to be added.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'ratios', name: 'Ratio definitions', sub: 'The six functions as ratios of the sides seen from an acute angle; they depend on the angle alone, not on the size of the triangle.', pairs: [
+        [{ formula: '$\\displaystyle \\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}}, \\quad \\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}}, \\quad \\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}}$', text: 'The three primary ratios, remembered as SOH-CAH-TOA, from [defining sine, cosine and tangent](!#2).' }, ''],
+        [{ formula: '$\\displaystyle \\csc(\\theta) = \\frac{\\text{hypotenuse}}{\\text{opposite}} = \\frac{1}{\\sin(\\theta)}$', text: 'The sine ratio turned upside down, always greater than $1$ for an acute angle; see [the reciprocal functions](!#3).' },
+         { formula: '$\\displaystyle \\sec(\\theta) = \\frac{\\text{hypotenuse}}{\\text{adjacent}} = \\frac{1}{\\cos(\\theta)}$', text: 'The cosine ratio turned upside down, also greater than $1$, as [the reciprocal functions](!#3) shows.' }],
+        [{ formula: '$\\displaystyle \\cot(\\theta) = \\frac{\\text{adjacent}}{\\text{opposite}} = \\frac{1}{\\tan(\\theta)}$', text: 'The tangent ratio turned upside down; like tangent it can take any positive value, from [the reciprocal functions](!#3).' }, ''],
+      ] },
+      { id: 'cofunctions', name: 'Cofunctions', sub: 'The two acute angles of a right triangle add to a right angle, so the side opposite one is adjacent to the other.', pairs: [
+        [{ formula: '$\\displaystyle \\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}} = \\cos(90° - \\theta)$', text: 'Sine of an angle is cosine of its complement, as [cofunction relationships](!#8) shows in degrees.' },
+         { formula: '$\\displaystyle \\sin\\!\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cos\\theta$', text: 'The same relationship in radians, which [the same section](!#8) extends to all angles.' }],
+        [{ formula: '$\\displaystyle \\cos(\\theta) = \\frac{\\text{adjacent}}{\\text{hypotenuse}} = \\sin(90° - \\theta)$', text: 'Cosine is literally the sine of the complement; see [cofunction relationships](!#8).' },
+         { formula: '$\\displaystyle \\cos\\!\\left(\\frac{\\pi}{2} - \\theta\\right) = \\sin\\theta$', text: 'The radian form of the same pairing, from [cofunction relationships](!#8).' }],
+        [{ formula: '$\\displaystyle \\tan(\\theta) = \\frac{\\text{opposite}}{\\text{adjacent}} = \\cot(90° - \\theta)$', text: 'Tangent of an angle is cotangent of its complement, as [cofunction relationships](!#8) notes.' },
+         { formula: '$\\displaystyle \\tan\\!\\left(\\frac{\\pi}{2} - \\theta\\right) = \\cot\\theta$', text: 'The radian form; at $45°$ both sides are $1$, since that angle is its own complement ([cofunction relationships](!#8)).' }],
+        [{ formula: '$\\displaystyle \\sec(\\theta) = \\frac{\\text{hypotenuse}}{\\text{adjacent}} = \\csc(90° - \\theta)$', text: 'Secant and cosecant follow the same pattern, from [cofunction relationships](!#8).' }, ''],
+      ] },
+      { id: 'elevation', name: 'Elevation and depression', sub: 'Both angles are measured from the horizontal line of sight.', pairs: [
+        [{ formula: '$\\displaystyle \\tan(\\theta) = \\frac{\\text{height}}{\\text{distance}} \\quad \\Rightarrow \\quad \\text{height} = \\text{distance} \\times \\tan(\\theta)$', text: 'The height of an object from the distance to its base and the angle of elevation; add the eye height when the angle is measured at eye level, as [angles of elevation and depression](!#9) explains.' }, ''],
+      ] },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -3859,7 +3863,7 @@ Right triangle trigonometry is limited to acute angles: $\\theta$ must satisfy $
     }
    }
 
-export default function RightTrianglePage({
+export default function RightTrianglePage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -3932,7 +3936,7 @@ $$\\sin(\\theta) = \\frac{\\text{opposite}}{\\text{hypotenuse}}, \\quad \\cos(\\
         content: [
           `@academic[pitfall,aside:true,width:35%:Taking the hypotenuse as the adjacent side
 Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (opposite 3) gives $\\tan(\\theta) = \\frac{3}{5}$ and even $\\cos(\\theta) = \\frac{5}{5} = 1$. The adjacent side is the leg 4: $\\cos(\\theta) = \\frac{4}{5}$, $\\tan(\\theta) = \\frac{3}{4}$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-taking-the-hypotenuse-as-the-adjacent-side)]@`,
         ],
       },
       {
@@ -4081,11 +4085,38 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="right-triangle-formula-summary"
+            title="Right triangle formulas"
+            source="/trigonometry/right-triangle"
+            related={{ href: '/trigonometry/formulas', label: 'All trigonometry formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="right-triangle-pitfalls"
+            title="Common pitfalls in right-triangle problems"
+            source="/trigonometry/right-triangle"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // NEW capstone section: obj11

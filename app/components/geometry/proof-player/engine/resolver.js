@@ -53,6 +53,19 @@ export const POINT_TYPES = {
     }
   },
 
+  // from + |lenOf[0] lenOf[1]| · scale, perpendicular to direction dir[0] → dir[1]
+  // (side +1 = the left-hand normal on screen, −1 = the other side): the
+  // far corners of a square drawn on a segment
+  perpAlongDist: {
+    resolve: (o, P) => {
+      const f = P[o.from];
+      const u = unit(P[o.dir[0]], P[o.dir[1]]);
+      const len = dist(P[o.lenOf[0]], P[o.lenOf[1]]) * (o.scale || 1);
+      const side = o.side || 1;
+      return { x: f.x + u.y * len * side, y: f.y - u.x * len * side };
+    }
+  },
+
   // on the line through of[0], of[1] at parameter params[param]
   // (0 = of[0], 1 = of[1]); draggable along the line when drag: true
   onLine: {
@@ -89,6 +102,51 @@ export const POINT_TYPES = {
       const c = P[o.center];
       const th = Math.atan2(pos.y - c.y, pos.x - c.x);
       return { ...model, params: { ...model.params, [o.param]: th } };
+    }
+  },
+
+  // point of contact of the tangent from `from` to the circle with centre
+  // `center` and radius params[radius]; side +1 / −1 picks the two tangents.
+  // When `from` is inside the circle the point degenerates to the radius
+  // towards `from` (isValid should refuse that state).
+  tangentPoint: {
+    resolve: (o, P, params) => {
+      const c = P[o.center];
+      const r = params[o.radius];
+      const u = unit(c, P[o.from]);
+      const d = dist(c, P[o.from]);
+      const th = d > r ? Math.acos(r / d) : 0;
+      const side = o.side || 1;
+      const ux = Math.cos(th) * u.x + Math.sin(th) * u.y * side;
+      const uy = Math.cos(th) * u.y - Math.sin(th) * u.x * side;
+      return { x: c.x + r * ux, y: c.y + r * uy };
+    }
+  },
+
+  // where the bisector of the angle at `at` meets the opposite side of[0]–of[1]:
+  // the point dividing that side in the ratio |at of[0]| : |at of[1]|
+  bisectorFoot: {
+    resolve: (o, P) => {
+      const a = P[o.at];
+      const b = P[o.of[0]];
+      const c = P[o.of[1]];
+      const ab = dist(a, b);
+      const ac = dist(a, c);
+      const t = ab / (ab + ac || 1);
+      return { x: b.x + (c.x - b.x) * t, y: b.y + (c.y - b.y) * t };
+    }
+  },
+
+  // the incentre of the triangle of[0] of[1] of[2]: the weighted average of
+  // the vertices with the opposite side lengths as weights
+  incentre: {
+    resolve: (o, P) => {
+      const [a, b, c] = o.of.map((k) => P[k]);
+      const wa = dist(b, c);
+      const wb = dist(c, a);
+      const wc = dist(a, b);
+      const w = wa + wb + wc || 1;
+      return { x: (wa * a.x + wb * b.x + wc * c.x) / w, y: (wa * a.y + wb * b.y + wc * c.y) / w };
     }
   },
 

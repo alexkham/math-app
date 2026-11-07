@@ -15,6 +15,7 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
@@ -671,6 +672,15 @@ These relationships provide a quick sanity check. If multiplying two quadratics 
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page by family, with the plus form of each pair on the left and the minus form on the right. Every family carries a line on where its formulas come from, linked to the section, and every formula a short note on what to watch for. The buttons above the cards show one family at a time.
+
+The squares and cubes of a binomial expand into fixed patterns of terms. The third family runs the other way, multiplying out to a plain sum or difference of two cubes. The last card is the relation that long division of polynomials produces: divisor times quotient, plus the remainder, gives back the dividend.`,
+    before: ``,
+    after: `Knowing these patterns by sight saves a full expansion every time they appear, and read backwards they become factoring formulas. The division relation doubles as a check: multiplying the quotient by the divisor and adding the remainder must give back the original polynomial.`,
+    link: '',
+  },
   obj16: {
     title: `Common Pitfalls`,
     content: `Four mistakes account for most wrong answers in polynomial arithmetic. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -921,8 +931,31 @@ $$= x^2 + 6x + 9$$`],
     ],
   };
 
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'squares', name: 'Squares', sub: 'A binomial times itself, from [special products](!#4).', pairs: [
+        [{ formula: '$(a + b)^2 = a^2 + 2ab + b^2$', text: 'The middle term is twice the product of the two terms.' },
+         { formula: '$(a - b)^2 = a^2 - 2ab + b^2$', text: 'The same, with a minus sign on the middle term only.' }],
+      ] },
+      { id: 'cubes', name: 'Cubes', sub: 'A binomial raised to the third power, also in [special products](!#4).', pairs: [
+        [{ formula: '$(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$', text: 'Four terms with coefficients $1, 3, 3, 1$.' },
+         { formula: '$(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$', text: 'The signs alternate, starting with plus.' }],
+      ] },
+      { id: 'sumcubes', name: 'Sum and difference of cubes', sub: 'Products that collapse to two cubes, the reverse of the cube factorings in [special products](!#4).', pairs: [
+        [{ formula: '$(a + b)(a^2 - ab + b^2) = a^3 + b^3$', text: 'Every middle term cancels, leaving a sum of cubes.' },
+         { formula: '$(a - b)(a^2 + ab + b^2) = a^3 - b^3$', text: 'The same cancellation, leaving a difference of cubes.' }],
+      ] },
+      { id: 'division', name: 'Division', sub: 'The relation [polynomial long division](!#6) is built to satisfy.', pairs: [
+        [{ formula: '$\\text{dividend} = (\\text{divisor} \\times \\text{quotient}) + \\text{remainder}$', text: 'The division stops when the remainder has a lower degree than the divisor.' }, ''],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
     pitfallData,
     polyOpTree,
     demoUnits,
@@ -946,7 +979,7 @@ $$= x^2 + 6x + 9$$`],
    }
 
 
-export default function OperationsPage({ pitfallData,polyOpTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function OperationsPage({ formulaSummaryData, pitfallData,polyOpTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1132,6 +1165,24 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
             source="/algebra/polynomials/operations"
           >
             <TopDownTree data={polyOpTree} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="polynomial-operation-formula-summary"
+            title="Special products and division"
+            source="/algebra/polynomials/operations"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
           </DiagramFrame>,
         ]
     },

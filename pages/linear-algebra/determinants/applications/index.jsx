@@ -1014,6 +1014,7 @@ import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/cr
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1488,7 +1489,7 @@ So $x_1 = 26/13 = 2$ and $x_2 = 13/13 = 1$.
 
 @academic[pitfall,aside:true,width:35%:Replacing a row instead of a column
 Putting $\\mathbf{b}$ into row $1$ instead of column $1$ gives $\\det\\begin{pmatrix} 8 & 7 \\\\ 1 & 5 \\end{pmatrix} = 33$ and $x_1 = 33/13$. With column $1$ replaced, $\\det(A_1) = 26$ and $x_1 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-replacing-a-row-instead-of-a-column)]@
 
 Both values can be checked in the original equations: $3 \\cdot 2 + 2 \\cdot 1 = 8$ and $1 \\cdot 2 + 5 \\cdot 1 = 7$. The denominator $\\det(A) = 13$ is shared by both components, while each numerator comes from its own modified matrix, in which $\\mathbf{b}$ stands where the coefficients of that unknown stood.
 
@@ -1626,7 +1627,7 @@ So $A^{-1} = \\frac{1}{13} \\begin{pmatrix} 1 & -2 & 6 \\\\ 6 & 1 & -3 \\\\ -2 &
 
 @academic[pitfall,aside:true,width:35%:Forgetting to transpose the cofactor matrix
 Dividing the cofactor matrix by $13$ without transposing it gives a candidate whose product with $A$ has $(1,2)$ entry $\\frac{1}{13}(1 \\cdot 6 + 2 \\cdot 1 + 0 \\cdot (-3)) = \\frac{8}{13}$ instead of $0$. Transposed first, the cofactors give $\\operatorname{adj}(A)$ above.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-transpose-the-cofactor-matrix)]@
 
 Verification: $A \\cdot A^{-1}$ should produce the identity. The $(1,1)$ entry is $\\frac{1}{13}(1 \\cdot 1 + 2 \\cdot 6 + 0 \\cdot (-2)) = \\frac{13}{13} = 1$. The $(1,2)$ entry is $\\frac{1}{13}(1 \\cdot (-2) + 2 \\cdot 1 + 0 \\cdot 4) = \\frac{0}{13} = 0$. The remaining entries check out similarly.
 
@@ -1668,7 +1669,7 @@ $$= \\hat{\\mathbf{i}}(2) - \\hat{\\mathbf{j}}(-16) + \\hat{\\mathbf{k}}(4) = (2
 
 @academic[pitfall,aside:true,width:35%:Dropping the minus sign on the middle component
 Leaving out the minus in front of $\\hat{\\mathbf{j}}$ turns the result into $(2, -16, 4)$, whose dot product with $\\mathbf{a}$ is $4 + 16 + 12 = 32$, not $0$. With the sign, $\\mathbf{a} \\times \\mathbf{b} = (2, 16, 4)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-minus-sign-on-the-middle-component)]@
 
 The magnitude is $|\\mathbf{a} \\times \\mathbf{b}| = \\sqrt{4 + 256 + 16} = \\sqrt{276} = 2\\sqrt{69}$. This equals the area of the parallelogram spanned by $\\mathbf{a}$ and $\\mathbf{b}$, connecting the cross product back to the [geometric interpretation](!/linear-algebra/determinants/geometry) of the determinant as an area measure.`,
     before: ``,
@@ -1701,7 +1702,7 @@ The eigenvalues are $\\lambda = 2$ and $\\lambda = 5$.
 
 @academic[pitfall,aside:true,width:35%:Subtracting lambda from every entry
 Taking $\\lambda$ off every entry gives $\\det\\begin{pmatrix} 4 - \\lambda & 1 - \\lambda \\\\ 2 - \\lambda & 3 - \\lambda \\end{pmatrix} = 10 - 4\\lambda$, a polynomial of degree $1$. Since $\\lambda I$ is diagonal, only the diagonal changes, and $p(\\lambda) = \\lambda^2 - 7\\lambda + 10$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-lambda-from-every-entry)]@
 
 Two quick checks come from the matrix itself. The eigenvalues add up to $2 + 5 = 7$, which is the sum $4 + 3$ of the diagonal entries of $A$, and they multiply to $2 \\cdot 5 = 10$, which is $\\det(A) = 4 \\cdot 3 - 1 \\cdot 2$. Both facts hold for every square matrix, as the two identities at the end of this section show.
 
@@ -1834,71 +1835,9 @@ Each of these families illustrates the same principle: when a matrix has special
   },
   obj8: {
     title: `Common Pitfalls`,
-    content: `Four slips account for many wrong answers when determinants are put to work. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Replacing a row instead of a column**
-
-In Cramer's rule, $A_i$ is $A$ with column $i$ replaced by $\\mathbf{b}$. The vector $\\mathbf{b}$ is written into row $i$ instead, the way the equations are read off one line at a time.
-
-Wrong working: for the $2 \\times 2$ example, with $\\mathbf{b} = (8, 7)$ in row $1$ and then in row $2$,
-$$\\det\\begin{pmatrix} 8 & 7 \\\\ 1 & 5 \\end{pmatrix} = 40 - 7 = 33, \\quad \\det\\begin{pmatrix} 3 & 2 \\\\ 8 & 7 \\end{pmatrix} = 21 - 16 = 5$$
-so $x_1 = 33/13$ and $x_2 = 5/13$.
-
-Right working: with $\\mathbf{b}$ in column $1$ and then in column $2$,
-$$\\det\\begin{pmatrix} 8 & 2 \\\\ 7 & 5 \\end{pmatrix} = 26, \\quad \\det\\begin{pmatrix} 3 & 8 \\\\ 1 & 7 \\end{pmatrix} = 13$$
-so $x_1 = 2$ and $x_2 = 1$.
-
-Why it happens: each equation is a row of $A$, and since $\\det(A^T) = \\det(A)$, rows and columns feel interchangeable. They are not here: replacing rows of $A$ is replacing columns of $A^T$, so the wrong working solves the different system $A^T \\mathbf{x} = \\mathbf{b}$.
-
-How to check: substitute into the first equation. $3 \\cdot \\frac{33}{13} + 2 \\cdot \\frac{5}{13} = \\frac{109}{13}$, not $8$, while $3 \\cdot 2 + 2 \\cdot 1 = 8$.
-
-**Forgetting to transpose the cofactor matrix**
-
-The cofactors are arranged with $C_{ij}$ in row $i$ and column $j$, and this cofactor matrix is divided by $\\det(A)$ directly. The adjugate is its transpose: $C_{ij}$ belongs in row $j$ and column $i$.
-
-Wrong working: for the $3 \\times 3$ example, the candidate
-$$\\frac{1}{13}\\begin{pmatrix} 1 & 6 & -2 \\\\ -2 & 1 & 4 \\\\ 6 & -3 & 1 \\end{pmatrix}$$
-multiplied by $A$ gives
-$$\\frac{1}{13}\\begin{pmatrix} -3 & 8 & 6 \\\\ 16 & -8 & 7 \\\\ 8 & 9 & -3 \\end{pmatrix}$$
-which is not $I$.
-
-Right working: transpose first.
-$$\\operatorname{adj}(A) = \\begin{pmatrix} 1 & -2 & 6 \\\\ 6 & 1 & -3 \\\\ -2 & 4 & 1 \\end{pmatrix}, \\quad A \\operatorname{adj}(A) = 13I$$
-so $A^{-1} = \\frac{1}{13}\\operatorname{adj}(A)$.
-
-Why it happens: each cofactor is computed in its natural position, and the transpose is a separate step that is easy to skip. For a symmetric matrix the cofactor matrix is symmetric too, so the slip goes unnoticed in many small examples.
-
-How to check: compute one off-diagonal entry of $A$ times the candidate. Row $1$ of $A$ times column $2$ of the untransposed candidate is $\\frac{1}{13}(1 \\cdot 6 + 2 \\cdot 1 + 0 \\cdot (-3)) = \\frac{8}{13}$, where $0$ is needed.
-
-**Dropping the minus sign on the middle component**
-
-The first-row expansion of the cross product determinant carries the signs $+, -, +$. The middle $2 \\times 2$ minor is written down as the $\\hat{\\mathbf{j}}$ component without its minus sign.
-
-Wrong working: for $\\mathbf{a} = (2, -1, 3)$ and $\\mathbf{b} = (4, 0, -2)$, the three minors are $2$, $-16$ and $4$, and they are copied straight into $(2, -16, 4)$.
-
-Right working: the middle minor is subtracted, $-(-16) = 16$, so $\\mathbf{a} \\times \\mathbf{b} = (2, 16, 4)$.
-
-Why it happens: the other two components keep their minors unchanged, and nothing in the middle minor itself shows the sign. The minus belongs to the position in the expansion, not to the entries.
-
-How to check: $\\mathbf{a} \\times \\mathbf{b}$ is perpendicular to both vectors. For $(2, 16, 4)$, the dot products are $4 - 16 + 12 = 0$ with $\\mathbf{a}$ and $8 + 0 - 8 = 0$ with $\\mathbf{b}$. For $(2, -16, 4)$, the dot product with $\\mathbf{a}$ is $4 + 16 + 12 = 32$.
-
-**Subtracting lambda from every entry**
-
-$A - \\lambda I$ is formed by subtracting $\\lambda$ from every entry of $A$. But $\\lambda I$ has $\\lambda$ only on the diagonal and zeros elsewhere, so only the diagonal entries change.
-
-Wrong working: for $A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$,
-$$\\det\\begin{pmatrix} 4 - \\lambda & 1 - \\lambda \\\\ 2 - \\lambda & 3 - \\lambda \\end{pmatrix} = (\\lambda^2 - 7\\lambda + 12) - (\\lambda^2 - 3\\lambda + 2) = 10 - 4\\lambda$$
-a polynomial of degree $1$ with the single root $\\lambda = \\frac{5}{2}$.
-
-Right working:
-$$\\det\\begin{pmatrix} 4 - \\lambda & 1 \\\\ 2 & 3 - \\lambda \\end{pmatrix} = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$$
-with the eigenvalues $2$ and $5$.
-
-Why it happens: $A - \\lambda$ looks like a number subtracted from a matrix, which is not defined, and it is read as subtraction from every entry. The $I$ is what places $\\lambda$ on the diagonal only.
-
-How to check: the characteristic polynomial of an $n \\times n$ matrix has degree $n$, here $2$. The eigenvalues must also add up to the trace, $4 + 3 = 7$, and multiply to $\\det(A) = 10$; the single value $\\frac{5}{2}$ fails both.`,
+    content: `Four slips account for many wrong answers when determinants are put to work. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip puts a piece of a determinant formula in the wrong place. Cramer's rule replaces a column, the adjugate is the transposed cofactor matrix, the middle component of a cross product carries a minus sign, and $A - \\lambda I$ subtracts $\\lambda$ only on the diagonal. Substituting the answer back, or checking that a cross product is perpendicular to both vectors, catches each slip.`,
     link: ``,
   },
 }
@@ -2075,8 +2014,51 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'replacing-a-row-instead-of-a-column', name: `Replacing a row instead of a column`, errorAt: 0,
+        what: `In Cramer's rule, $A_i$ is $A$ with column $i$ replaced by $\\mathbf{b}$. The vector $\\mathbf{b}$ is written into row $i$ instead, the way the equations are read off one line at a time.`,
+        wrong: [`For the $2 \\times 2$ example, with $\\mathbf{b} = (8, 7)$ in row $1$ and then in row $2$,
+$$\\det\\begin{pmatrix} 8 & 7 \\\\ 1 & 5 \\end{pmatrix} = 40 - 7 = 33,$$
+$$\\det\\begin{pmatrix} 3 & 2 \\\\ 8 & 7 \\end{pmatrix} = 21 - 16 = 5$$`, `So $x_1 = 33/13$ and $x_2 = 5/13$.`],
+        right: [`With $\\mathbf{b}$ in column $1$ and then in column $2$,
+$$\\det\\begin{pmatrix} 8 & 2 \\\\ 7 & 5 \\end{pmatrix} = 26, \\quad \\det\\begin{pmatrix} 3 & 8 \\\\ 1 & 7 \\end{pmatrix} = 13$$`, `So $x_1 = 2$ and $x_2 = 1$.`],
+        why: `Each equation is a row of $A$, and since $\\det(A^T) = \\det(A)$, rows and columns feel interchangeable. They are not here: replacing rows of $A$ is replacing columns of $A^T$, so the wrong working solves the different system $A^T \\mathbf{x} = \\mathbf{b}$.`,
+        check: `Substitute into the first equation. $3 \\cdot \\frac{33}{13} + 2 \\cdot \\frac{5}{13} = \\frac{109}{13}$, not $8$, while $3 \\cdot 2 + 2 \\cdot 1 = 8$.` },
+      { id: 'forgetting-to-transpose-the-cofactor-matrix', name: `Forgetting to transpose the cofactor matrix`, errorAt: 0,
+        what: `The cofactors are arranged with $C_{ij}$ in row $i$ and column $j$, and this cofactor matrix is divided by $\\det(A)$ directly. The adjugate is its transpose: $C_{ij}$ belongs in row $j$ and column $i$.`,
+        wrong: [`For the $3 \\times 3$ example, the candidate
+$$\\frac{1}{13}\\begin{pmatrix} 1 & 6 & -2 \\\\ -2 & 1 & 4 \\\\ 6 & -3 & 1 \\end{pmatrix}$$`, `Multiplied by $A$ gives
+$$\\frac{1}{13}\\begin{pmatrix} -3 & 8 & 6 \\\\ 16 & -8 & 7 \\\\ 8 & 9 & -3 \\end{pmatrix}$$`, `Which is not $I$.`],
+        right: [`Transpose first.`, `$$\\operatorname{adj}(A) = \\begin{pmatrix} 1 & -2 & 6 \\\\ 6 & 1 & -3 \\\\ -2 & 4 & 1 \\end{pmatrix},$$
+$$A \\operatorname{adj}(A) = 13I$$`, `So $A^{-1} = \\frac{1}{13}\\operatorname{adj}(A)$.`],
+        why: `Each cofactor is computed in its natural position, and the transpose is a separate step that is easy to skip. For a symmetric matrix the cofactor matrix is symmetric too, so the slip goes unnoticed in many small examples.`,
+        check: `Compute one off-diagonal entry of $A$ times the candidate. Row $1$ of $A$ times column $2$ of the untransposed candidate is $\\frac{1}{13}(1 \\cdot 6 + 2 \\cdot 1 + 0 \\cdot (-3)) = \\frac{8}{13}$, where $0$ is needed.` },
+      { id: 'dropping-the-minus-sign-on-the-middle-component', name: `Dropping the minus sign on the middle component`, errorAt: 1,
+        what: `The first-row expansion of the cross product determinant carries the signs $+, -, +$. The middle $2 \\times 2$ minor is written down as the $\\hat{\\mathbf{j}}$ component without its minus sign.`,
+        wrong: [`For $\\mathbf{a} = (2, -1, 3)$ and $\\mathbf{b} = (4, 0, -2)$,`, `The three minors are $2$, $-16$ and $4$, and they are copied straight into $(2, -16, 4)$.`],
+        right: [`For $\\mathbf{a} = (2, -1, 3)$ and $\\mathbf{b} = (4, 0, -2)$,`, `The middle minor is subtracted, $-(-16) = 16$, so $\\mathbf{a} \\times \\mathbf{b} = (2, 16, 4)$.`],
+        why: `The other two components keep their minors unchanged, and nothing in the middle minor itself shows the sign. The minus belongs to the position in the expansion, not to the entries.`,
+        check: `$\\mathbf{a} \\times \\mathbf{b}$ is perpendicular to both vectors. For $(2, 16, 4)$, the dot products are $4 - 16 + 12 = 0$ with $\\mathbf{a}$ and $8 + 0 - 8 = 0$ with $\\mathbf{b}$. For $(2, -16, 4)$, the dot product with $\\mathbf{a}$ is $4 + 16 + 12 = 32$.` },
+      { id: 'subtracting-lambda-from-every-entry', name: `Subtracting lambda from every entry`, errorAt: 1,
+        what: `$A - \\lambda I$ is formed by subtracting $\\lambda$ from every entry of $A$. But $\\lambda I$ has $\\lambda$ only on the diagonal and zeros elsewhere, so only the diagonal entries change.`,
+        wrong: [`For $A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$,`, `$$\\det\\begin{pmatrix} 4 - \\lambda & 1 - \\lambda \\\\ 2 - \\lambda & 3 - \\lambda \\end{pmatrix}$$
+$$= (\\lambda^2 - 7\\lambda + 12)$$
+$$- (\\lambda^2 - 3\\lambda + 2)$$
+$$= 10 - 4\\lambda$$`, `A polynomial of degree $1$ with the single root $\\lambda = \\frac{5}{2}$.`],
+        right: [`For $A = \\begin{pmatrix} 4 & 1 \\\\ 2 & 3 \\end{pmatrix}$,`, `$$\\det\\begin{pmatrix} 4 - \\lambda & 1 \\\\ 2 & 3 - \\lambda \\end{pmatrix}$$
+$$= \\lambda^2 - 7\\lambda + 10$$
+$$= (\\lambda - 2)(\\lambda - 5)$$`, `With the eigenvalues $2$ and $5$.`],
+        why: `$A - \\lambda$ looks like a number subtracted from a matrix, which is not defined, and it is read as subtraction from every entry. The $I$ is what places $\\lambda$ on the diagonal only.`,
+        check: `The characteristic polynomial of an $n \\times n$ matrix has degree $n$, here $2$. The eigenvalues must also add up to the trace, $4 + 3 = 7$, and multiply to $\\det(A) = 10$; the single value $\\frac{5}{2}$ fails both.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     wronskianSteps,
     demoUnits,
     conceptIntroFigures,
@@ -2099,7 +2081,7 @@ const schemas = {
    }
 
 
-   export default function DeterminantApplicationsPage({
+   export default function DeterminantApplicationsPage({ pitfallData,
      seoData,
      sectionsContent,
      introContent,
@@ -2158,7 +2140,7 @@ So $x_1 = 26/13 = 2$ and $x_2 = 13/13 = 1$.
 
 @academic[pitfall,aside:true,width:35%:Replacing a row instead of a column
 Putting $\\mathbf{b}$ into row $1$ instead of column $1$ gives $\\det\\begin{pmatrix} 8 & 7 \\\\ 1 & 5 \\end{pmatrix} = 33$ and $x_1 = 33/13$. With column $1$ replaced, $\\det(A_1) = 26$ and $x_1 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-replacing-a-row-instead-of-a-column)]@
 
 Both values can be checked in the original equations: $3 \\cdot 2 + 2 \\cdot 1 = 8$ and $1 \\cdot 2 + 5 \\cdot 1 = 7$. The denominator $\\det(A) = 13$ is shared by both components, while each numerator comes from its own modified matrix, in which $\\mathbf{b}$ stands where the coefficients of that unknown stood.`,
         ],
@@ -2353,6 +2335,15 @@ The ratios in the rule were written down before determinants had a name or a not
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="determinant-application-pitfalls"
+            title="Common pitfalls in applying determinants"
+            source="/linear-algebra/determinants/applications"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

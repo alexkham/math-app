@@ -1105,6 +1105,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1587,7 +1588,7 @@ The negative sign transforms into the imaginary unit, while the magnitude passes
 
 @academic[pitfall,aside:true,width:35%:Taking the minus sign out of the root
 Simplifying $\\sqrt{-9}$ to $-3$ moves the minus sign outside the root, but $(-3)^2 = 9$, not $-9$. The root is $\\sqrt{-9} = i\\sqrt{9} = 3i$, since $(3i)^2 = 9i^2 = -9$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-minus-sign-out-of-the-root)]@
 
 @academic[example:Example
 Consider $\\sqrt{-4}$. Applying the rule: $\\sqrt{-4} = i\\sqrt{4} = i \\cdot 2 = 2i$. The answer $2i$ satisfies verification, since $(2i)^2 = 4i^2 = 4(-1) = -4$.]@
@@ -1614,7 +1615,7 @@ Formally, when we write a complex number in standard form $z = a + bi$, the numb
 
 @academic[pitfall,aside:true,width:35%:Judging by the letter i
 Calling $4i^2$ pure imaginary because it contains $i$ skips the simplification: $4i^2 = 4(-1) = -4$, a real number. Write the number as $a + bi$ first; it is pure imaginary only when $a = 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-judging-by-the-letter-i)]@
 
 Examples span a wide range of appearances. Simple cases include $3i$, $-7i$, and $\\frac{1}{2}i$. More elaborate forms arise in calculations: $\\sqrt{5}i$ carries an irrational coefficient, while $\\frac{6\\sqrt{3}}{13}i$ combines fractions and radicals. Despite their varied appearances, all share the defining characteristic — no real part exists alongside the imaginary term.
 
@@ -1703,7 +1704,7 @@ The sequence $i, -1, -i, 1$ repeats indefinitely. Every fourth power brings the 
 
 @academic[pitfall,aside:true,width:35%:Treating every even power as −1
 Taking $i^{100} = -1$ because $100$ is even treats the powers like $(-1)^n$, which alternate in twos. The powers of $i$ cycle in fours: $i^{100} = (i^4)^{25} = 1$; only even exponents with remainder $2$, like $i^{102}$, give $-1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-every-even-power-as-1)]@
 
 The computational shortcut exploits this four-cycle through division with remainder. To evaluate $i^k$ for any positive integer $k$, divide $k$ by $4$ and examine the remainder $r$. The answer matches $i^r$: remainder $0$ yields $1$, remainder $1$ yields $i$, remainder $2$ yields $-1$, and remainder $3$ yields $-i$.
 
@@ -1714,7 +1715,7 @@ The enormous exponent collapses to a single-digit calculation. Similarly, $i^{50
 
 @academic[pitfall,aside:true,width:35%:Ignoring the sign of the exponent
 Evaluating $i^{-3}$ as $i^3 = -i$ drops the minus sign of the exponent. In fact $i^{-3} = \\frac{1}{i^3} = \\frac{1}{-i} = i$; adding $4$ to the exponent gives the same, $i^{-3} = i^{1} = i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-ignoring-the-sign-of-the-exponent)]@
 
 Negative exponents follow the same logic after one preliminary step. Recall that $i^{-1} = \\frac{1}{i}$, which simplifies by multiplying numerator and denominator by $i$: $\\frac{1}{i} \\cdot \\frac{i}{i} = \\frac{i}{i^2} = \\frac{i}{-1} = -i$. Thus $i^{-1} = -i$, corresponding to remainder $3$ in the cycle. The pattern for negative powers runs backward through the same four values, and the remainder method adapts naturally once the exponent's sign is handled.`,
   after: ``,
@@ -1835,81 +1836,9 @@ The [absolute value](!/complex-numbers/absolute-value) of a pure imaginary numbe
   
     obj16:{
       title:`Common Pitfalls`,
-      content:`Six mistakes come up again and again in first work with imaginary numbers. Four are marked where they happen in the sections above; the other two, multiplying negative radicands under one root and keeping the $i$ in the imaginary part, are the ones the page already warns about in its own text. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the minus sign out of the root**
-
-The square root of a negative number is simplified by moving the minus sign in front of the root, as if $\\sqrt{-a}$ were $-\\sqrt{a}$.
-
-Wrong working: $\\sqrt{-9} = -\\sqrt{9} = -3$.
-
-Right working: the minus sign becomes the factor $i$, so $\\sqrt{-9} = i\\sqrt{9} = 3i$.
-
-Why it happens: the $-1$ inside the root looks like an ordinary factor that can be pulled out, the way a factor $4$ comes out as $2$. But $\\sqrt{-1}$ is $i$, not $-1$.
-
-How to check: square the answer. $(-3)^2 = 9$, which is not $-9$, while $(3i)^2 = 9i^2 = -9$.
-
-**Multiplying negative radicands under one root**
-
-Two square roots of negative numbers are combined into a single root with the product rule $\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$, which holds only for non-negative radicands.
-
-Wrong working: $\\sqrt{-4} \\cdot \\sqrt{-9} = \\sqrt{(-4)(-9)} = \\sqrt{36} = 6$.
-
-Right working: convert each root to $i$-form first, then multiply: $\\sqrt{-4} \\cdot \\sqrt{-9} = 2i \\cdot 3i = 6i^2 = -6$.
-
-Why it happens: the product rule is used so often with positive numbers that its condition is forgotten.
-
-How to check: the product of two pure imaginary numbers $bi$ and $ci$ is $bc \\cdot i^2 = -bc$. Since $\\sqrt{-4} = 2i$ and $\\sqrt{-9} = 3i$ both have positive coefficients, their product must be negative, so $6$ cannot be right.
-
-**Judging by the letter i**
-
-A number is called pure imaginary because $i$ appears in it, without first writing it in the form $a + bi$.
-
-Wrong working: $4i^2$ contains $i$, so it is pure imaginary.
-
-Right working: $4i^2 = 4(-1) = -4 = -4 + 0i$. Its real part is $-4$, not $0$, so it is a real number, not a pure imaginary one. The reverse also happens: $(1 + i)^2 = 1 + 2i + i^2 = 2i$ is pure imaginary, although it was built from a number with real part $1$.
-
-Why it happens: the letter $i$ is the visible mark of imaginary numbers, and $i^2$ still shows it even though its value is $-1$.
-
-How to check: simplify fully, using $i^2 = -1$, until the number reads $a + bi$ with real $a$ and $b$. Then look only at $a$.
-
-**Keeping the i in the imaginary part**
-
-Asked for $Im(z)$, the whole imaginary term is given, $i$ included, or its sign is dropped.
-
-Wrong working: for $z = 4 - 6i$, $Im(z) = -6i$, or $Im(z) = 6$.
-
-Right working: write $z = 4 + (-6)i$. The real number standing before $i$ is $-6$, so $Im(z) = -6$.
-
-Why it happens: the name "imaginary part" suggests an imaginary number, and in $4 - 6i$ the minus sign looks like part of the subtraction rather than part of the coefficient.
-
-How to check: $Im(z)$ is always a real number, so an answer containing $i$ is wrong. Rebuilding $z$ as $Re(z) + Im(z) \\cdot i = 4 + (-6)i$ must give back the original number.
-
-**Treating every even power as −1**
-
-Every even power of $i$ is taken to be $-1$ and every odd power to be $i$, as if the powers alternated in twos like the powers of $-1$.
-
-Wrong working: $100$ is even, so $i^{100} = -1$.
-
-Right working: the powers of $i$ repeat every four steps. Since $100 = 4 \\cdot 25$, the remainder is $0$ and $i^{100} = (i^4)^{25} = 1^{25} = 1$. An even exponent gives $-1$ only when its remainder on division by $4$ is $2$, as in $i^{102} = -1$.
-
-Why it happens: the first fact learned is $i^2 = -1$, and it is extended to all even exponents without checking $i^4 = 1$.
-
-How to check: divide the exponent by $4$ and use the remainder, never just the parity. For $100$ the remainder is $0$, so the answer is $1$.
-
-**Ignoring the sign of the exponent**
-
-For a negative exponent, the minus sign is dropped and the remainder method is applied to the positive number.
-
-Wrong working: $i^{-3} = i^3 = -i$.
-
-Right working: $i^{-3} = \\frac{1}{i^3} = \\frac{1}{-i} = -\\frac{1}{i} = -(-i) = i$. Adding $4$ to the exponent does not change the value, so $i^{-3} = i^{-3 + 4} = i^1 = i$ as well.
-
-Why it happens: the remainder method is learned for positive exponents, and $-3$ is read as $3$.
-
-How to check: multiply the answer by $i^3$. A correct $i^{-3}$ gives $i^{-3} \\cdot i^3 = i^0 = 1$: here $i \\cdot (-i) = -i^2 = 1$. The wrong answer gives $(-i)(-i) = i^2 = -1$.`,
+      content:`Six mistakes come up again and again in first work with imaginary numbers. Four are marked where they happen in the sections above; the other two, multiplying negative radicands under one root and keeping the $i$ in the imaginary part, are the ones the page already warns about in its own text. Here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip handles $i$ as if it were an ordinary letter or sign. $\\sqrt{-9} = 3i$; square roots of negative numbers become multiples of $i$ before they are multiplied; $4i^2$ is the real number $-4$; $Im(z)$ is a real number; the powers of $i$ repeat every four steps; and $i^{-3}$ is a reciprocal. Squaring the answer, or simplifying fully to $a + bi$, catches each slip.`,
       link:'',
     },
     faq: {
@@ -2132,8 +2061,52 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-minus-sign-out-of-the-root', name: `Taking the minus sign out of the root`, errorAt: 0,
+        what: `The square root of a negative number is simplified by moving the minus sign in front of the root, as if $\\sqrt{-a}$ were $-\\sqrt{a}$.`,
+        wrong: [`$\\sqrt{-9} = -\\sqrt{9} = -3$.`],
+        right: [`The minus sign becomes the factor $i$, so $\\sqrt{-9} = i\\sqrt{9} = 3i$.`],
+        why: `The $-1$ inside the root looks like an ordinary factor that can be pulled out, the way a factor $4$ comes out as $2$. But $\\sqrt{-1}$ is $i$, not $-1$.`,
+        check: `Square the answer. $(-3)^2 = 9$, which is not $-9$, while $(3i)^2 = 9i^2 = -9$.` },
+      { id: 'multiplying-negative-radicands-under-one-root', name: `Multiplying negative radicands under one root`, errorAt: 0,
+        what: `Two square roots of negative numbers are combined into a single root with the product rule $\\sqrt{a} \\cdot \\sqrt{b} = \\sqrt{ab}$, which holds only for non-negative radicands.`,
+        wrong: [`$\\sqrt{-4} \\cdot \\sqrt{-9} = \\sqrt{(-4)(-9)} = \\sqrt{36} = 6$.`],
+        right: [`Convert each root to $i$-form first, then multiply: $\\sqrt{-4} \\cdot \\sqrt{-9} = 2i \\cdot 3i = 6i^2 = -6$.`],
+        why: `The product rule is used so often with positive numbers that its condition is forgotten.`,
+        check: `The product of two pure imaginary numbers $bi$ and $ci$ is $bc \\cdot i^2 = -bc$. Since $\\sqrt{-4} = 2i$ and $\\sqrt{-9} = 3i$ both have positive coefficients, their product must be negative, so $6$ cannot be right.` },
+      { id: 'judging-by-the-letter-i', name: `Judging by the letter i`, errorAt: 0,
+        what: `A number is called pure imaginary because $i$ appears in it, without first writing it in the form $a + bi$.`,
+        wrong: [`$4i^2$ contains $i$, so it is pure imaginary.`],
+        right: [`$4i^2 = 4(-1) = -4 = -4 + 0i$. Its real part is $-4$, not $0$, so it is a real number, not a pure imaginary one. The reverse also happens: $(1 + i)^2 = 1 + 2i + i^2 = 2i$ is pure imaginary, although it was built from a number with real part $1$.`],
+        why: `The letter $i$ is the visible mark of imaginary numbers, and $i^2$ still shows it even though its value is $-1$.`,
+        check: `Simplify fully, using $i^2 = -1$, until the number reads $a + bi$ with real $a$ and $b$. Then look only at $a$.` },
+      { id: 'keeping-the-i-in-the-imaginary-part', name: `Keeping the i in the imaginary part`, errorAt: 0,
+        what: `Asked for $Im(z)$, the whole imaginary term is given, $i$ included, or its sign is dropped.`,
+        wrong: [`For $z = 4 - 6i$, $Im(z) = -6i$, or $Im(z) = 6$.`],
+        right: [`Write $z = 4 + (-6)i$. The real number standing before $i$ is $-6$, so $Im(z) = -6$.`],
+        why: `The name "imaginary part" suggests an imaginary number, and in $4 - 6i$ the minus sign looks like part of the subtraction rather than part of the coefficient.`,
+        check: `$Im(z)$ is always a real number, so an answer containing $i$ is wrong. Rebuilding $z$ as $Re(z) + Im(z) \\cdot i = 4 + (-6)i$ must give back the original number.` },
+      { id: 'treating-every-even-power-as-1', name: `Treating every even power as −1`, errorAt: 0,
+        what: `Every even power of $i$ is taken to be $-1$ and every odd power to be $i$, as if the powers alternated in twos like the powers of $-1$.`,
+        wrong: [`$100$ is even, so $i^{100} = -1$.`],
+        right: [`The powers of $i$ repeat every four steps. Since $100 = 4 \\cdot 25$, the remainder is $0$ and $i^{100} = (i^4)^{25} = 1^{25} = 1$. An even exponent gives $-1$ only when its remainder on division by $4$ is $2$, as in $i^{102} = -1$.`],
+        why: `The first fact learned is $i^2 = -1$, and it is extended to all even exponents without checking $i^4 = 1$.`,
+        check: `Divide the exponent by $4$ and use the remainder, never just the parity. For $100$ the remainder is $0$, so the answer is $1$.` },
+      { id: 'ignoring-the-sign-of-the-exponent', name: `Ignoring the sign of the exponent`, errorAt: 0,
+        what: `For a negative exponent, the minus sign is dropped and the remainder method is applied to the positive number.`,
+        wrong: [`$i^{-3} = i^3 = -i$.`],
+        right: [`$i^{-3} = \\frac{1}{i^3} = \\frac{1}{-i} = -\\frac{1}{i} = -(-i) = i$. Adding $4$ to the exponent does not change the value, so $i^{-3} = i^{-3 + 4} = i^1 = i$ as well.`],
+        why: `The remainder method is learned for positive exponents, and $-3$ is read as $3$.`,
+        check: `Multiply the answer by $i^3$. A correct $i^{-3}$ gives $i^{-3} \\cdot i^3 = i^0 = 1$: here $i \\cdot (-i) = -i^2 = 1$. The wrong answer gives $(-i)(-i) = i^2 = -1$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     numberSystemLadder,
@@ -2165,7 +2138,7 @@ const siteTheme = {
   warm: '#B45309', warmSoft: '#fef3c7', warmLine: '#fcd34d', warmInk: '#92400e',
 }
 
-export default function ImaginaryNumbersPage({
+export default function ImaginaryNumbersPage({ pitfallData,
   seoData,
   numberSystemLadder,
   sectionsContent,
@@ -2386,6 +2359,15 @@ export default function ImaginaryNumbersPage({
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="imaginary-number-pitfalls"
+            title="Common pitfalls with imaginary numbers"
+            source="/complex-numbers/imaginary-numbers"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

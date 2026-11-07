@@ -1371,9 +1371,12 @@ import renderCompositionSteps from '@/app/utils/illustrations/functions/composit
 import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTest.v2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2019,7 +2022,7 @@ Consider $f(x) = 2x$, which doubles its input. The inverse $f^{-1}(x) = x/2$ hal
 
 @academic[pitfall,aside:true,width:35%:Reading the inverse as a reciprocal
 Taking $f^{-1}(x)$ for $f(x) = 2x$ to be $\\frac{1}{2x}$ gives $f^{-1}(6) = \\frac{1}{12}$, but $f\\left(\\frac{1}{12}\\right) = \\frac{1}{6}$, not $6$. The inverse undoes the doubling: $f^{-1}(x) = \\frac{x}{2}$, so $f^{-1}(6) = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-inverse-as-a-reciprocal)]@
 
 The question behind every inverse is the same: which input did $f$ start from to reach a given output? For $f(x) = 2x$, the output $6$ came from $3$, the output $10$ from $5$, and in general each output came from half of itself. The inverse is the function that answers this question for every output at once.
 
@@ -2079,7 +2082,7 @@ The line $y = x$ is the mirror. Points on this line satisfy $y = x$, so swapping
 
 @academic[pitfall,aside:true,width:35%:Reflecting across an axis instead of y = x
 Mirroring the point $(2, 5)$ of $f$ in the $y$-axis gives $(-2, 5)$, a point of $f(-x)$, not of $f^{-1}$. The mirror is the line $y = x$, which swaps the coordinates: $f^{-1}$ passes through $(5, 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reflecting-across-an-axis-instead-of-y-x)]@
 
 This geometric relationship provides a visual test. Graph a function, draw the line $y = x$, and reflect the curve across that line. The result is the graph of the inverse function (if it exists).
 
@@ -2125,7 +2128,7 @@ Step 4: $f^{-1}(x) = \\dfrac{3x + 1}{x - 2}$]@
 
 @academic[pitfall,aside:true,width:35%:Undoing the steps in the original order
 Undoing "multiply by $3$, then subtract $7$" in that order gives $\\frac{x}{3} + 7$, which sends $f(1) = -4$ to $\\frac{17}{3}$ instead of back to $1$. The last step comes off first: add $7$, then divide by $3$, so $f^{-1}(x) = \\frac{x + 7}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-undoing-the-steps-in-the-original-order)]@
 
 Step 3 carries the real work of finding an inverse. The equation from Step 2 shows every operation that $f$ applies to its input: in $x = 3y - 7$, the input $y$ is multiplied by $3$, and then $7$ is subtracted. Solving for $y$ removes these operations one at a time until $y$ stands alone. In the second example the same idea needs one extra move, collecting both $y$-terms on one side before factoring $y$ out.
 
@@ -2208,7 +2211,7 @@ If any horizontal line intersects the graph more than once, the function is not 
 
 @academic[pitfall,aside:true,width:35%:Using vertical lines to test for an inverse
 Checking $f(x) = (x - 1)^2$ with vertical lines finds one crossing each and declares it invertible. Vertical lines only show that it is a function; the horizontal line $y = 4$ meets it at $x = -1$ and $x = 3$, so it has no inverse on all real numbers.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-vertical-lines-to-test-for-an-inverse)]@
 
 The test works because horizontal lines represent constant outputs. If a horizontal line crosses the graph twice, two different inputs produce the same output. The inverse would need to send that output back to two different inputs simultaneously — impossible for a function.
 
@@ -2256,7 +2259,7 @@ Alternatively, restricting to $(-\\infty, 0]$ also makes $f(x) = x^2$ one-to-one
 
 @academic[pitfall,aside:true,width:35%:Taking the positive root on the left branch
 Writing $f^{-1}(x) = \\sqrt{x}$ for $f(x) = x^2$ on $(-\\infty, 0]$ gives $f^{-1}(4) = 2$, an input outside that domain. The input that $f$ sends to $4$ is $-2$, so $f^{-1}(x) = -\\sqrt{x}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-positive-root-on-the-left-branch)]@
 
 Different restrictions yield different inverses. The choice depends on context or convention. For $x^2$, the standard restriction is $[0, \\infty)$ because positive square roots are more commonly needed.
 
@@ -2365,83 +2368,20 @@ In each case, the inverse answers the reverse question. If the original function
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary groups the formulas of inverse functions into two families, and the buttons above the cards show one at a time. The first holds the rules: the definition, which sends each output back to its input, the one-to-one condition an inverse needs, the swap of domain and range, and the two compositions that return the input.
+
+The second family lists common pairs of a function and its inverse: a line, the square and the square root, the cube and the cube root, the exponential and the logarithm, and the reciprocal, which is its own inverse. Every formula carries a short note with a link to the section that explains it.`,
+    before: ``,
+    after: `The two compositions are the surest test of a candidate inverse, since both must give back the input. Before searching for an inverse at all, the one-to-one condition says whether one exists, and a restricted domain, as with the square, can make one exist.`,
+    link: '',
+  },
   obj15: {
     title: `Common Pitfalls`,
-    content: `Six mistakes come up again and again when finding and using inverse functions. Five are marked where they happen in the sections above; forgetting to restrict the inverse's domain is the one that **Domain and Range Swap** already points out. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the inverse as a reciprocal**
-
-The $-1$ in $f^{-1}$ is read as an exponent, so the inverse is computed as one divided by $f(x)$. On a function name the $-1$ means "the function that undoes $f$", not a power.
-
-Wrong working: for $f(x) = 2x$, $f^{-1}(x) = \\frac{1}{2x}$, so $f^{-1}(6) = \\frac{1}{12}$.
-
-Right working: $f$ doubles its input, so $f^{-1}$ halves it: $f^{-1}(x) = \\frac{x}{2}$, and $f^{-1}(6) = 3$, because $f(3) = 6$.
-
-Why it happens: for numbers, $5^{-1} = \\frac{1}{5}$, and the same superscript is placed on $f$. The reciprocal of a function's value is written $\\frac{1}{f(x)}$ or $(f(x))^{-1}$, never $f^{-1}(x)$.
-
-How to check: apply $f$ to the answer. $f\\left(\\frac{1}{12}\\right) = \\frac{1}{6}$, not $6$, so $\\frac{1}{12}$ cannot be $f^{-1}(6)$; $f(3) = 6$ confirms $3$.
-
-**Reflecting across an axis instead of y = x**
-
-To sketch the inverse, the graph of $f$ is mirrored in the $y$-axis or the $x$-axis, the mirrors used for reflections in [transformations](!/functions/transformations), instead of in the line $y = x$.
-
-Wrong working: the point $(2, 5)$ of $f$ is mirrored in the $y$-axis to $(-2, 5)$, and the mirrored curve, which is the graph of $f(-x)$, is taken as the graph of $f^{-1}$.
-
-Right working: reflecting in $y = x$ swaps the coordinates, so $(2, 5)$ goes to $(5, 2)$. For $f(x) = 2x$, the point $(1, 2)$ goes to $(2, 1)$, which lies on $f^{-1}(x) = \\frac{x}{2}$; the $y$-axis image $(-1, 2)$ lies on $y = -2x$ instead.
-
-Why it happens: reflections in the axes are met first, as graph transformations, and the word "reflection" calls them up.
-
-How to check: take one point $(a, b)$ of $f$ and confirm that the sketch of $f^{-1}$ passes through $(b, a)$. Points on the line $y = x$ should not move.
-
-**Undoing the steps in the original order**
-
-When the inverse is found by undoing the operations of $f$, each operation is reversed correctly, but they are undone in the same order in which $f$ applied them.
-
-Wrong working: $f(x) = 3x - 7$ multiplies by $3$, then subtracts $7$. Undoing in that order, divide by $3$, then add $7$: $f^{-1}(x) = \\frac{x}{3} + 7$.
-
-Right working: the last operation comes off first. Add $7$, then divide by $3$: $f^{-1}(x) = \\frac{x + 7}{3}$. The four-step method does this on its own: $x = 3y - 7$ gives $x + 7 = 3y$, then $y = \\frac{x + 7}{3}$.
-
-Why it happens: the operations are read from left to right, and the undoing follows the same list. As with putting on socks and then shoes, the step done last has to be undone first.
-
-How to check: compose. $f(1) = -4$, and the wrong formula gives $\\frac{-4}{3} + 7 = \\frac{17}{3}$, not $1$. The right one gives $\\frac{-4 + 7}{3} = 1$.
-
-**Forgetting to restrict the inverse's domain**
-
-The inverse formula is found correctly but used on its own natural domain instead of on the range of $f$.
-
-Wrong working: $f(x) = \\sqrt{x}$ has the inverse $x^2$, taken on all real numbers, so $f^{-1}(-3) = 9$.
-
-Right working: $\\text{Dom}(f^{-1}) = \\text{Ran}(f) = [0, \\infty)$, so $f^{-1}(x) = x^2$ only for $x \\geq 0$. The value $f^{-1}(-3)$ is not defined, because $\\sqrt{x}$ never outputs $-3$.
-
-Why it happens: the formula $x^2$ looks complete on its own, and on its own it accepts every real number.
-
-How to check: compose in the order $f(f^{-1}(x))$. At $x = -3$ the wrong version gives $f(9) = \\sqrt{9} = 3$, not $-3$, so $-3$ cannot be in the domain of $f^{-1}$.
-
-**Using vertical lines to test for an inverse**
-
-To decide whether a function has an inverse, the vertical line test is run instead of the horizontal one. Every graph of a function passes it, so every function seems invertible.
-
-Wrong working: every vertical line meets the graph of $f(x) = (x - 1)^2$ once, so the function is declared invertible on all real numbers.
-
-Right working: the horizontal line $y = 4$ meets the graph twice, at $x = -1$ and $x = 3$, since $(-1 - 1)^2 = 4$ and $(3 - 1)^2 = 4$. The output $4$ comes from two inputs, so there is no inverse on all real numbers. Restricted to $[1, \\infty)$ there is one: $f^{-1}(x) = 1 + \\sqrt{x}$.
-
-Why it happens: the vertical line test comes first and is the one that gets practised. It answers a different question: whether the graph is a function at all.
-
-How to check: ask what the line holds fixed. A horizontal line fixes the output, and an inverse needs every output to come from one input.
-
-**Taking the positive root on the left branch**
-
-After $x^2$ is restricted to $(-\\infty, 0]$, its inverse is written as $\\sqrt{x}$ out of habit, although the inputs of $f$, and so the outputs of $f^{-1}$, are now zero or negative.
-
-Wrong working: $f(x) = x^2$ on $(-\\infty, 0]$, so $f^{-1}(x) = \\sqrt{x}$ and $f^{-1}(4) = 2$.
-
-Right working: the input in $(-\\infty, 0]$ that $f$ sends to $4$ is $-2$, so $f^{-1}(4) = -2$ and $f^{-1}(x) = -\\sqrt{x}$ for $x \\geq 0$.
-
-Why it happens: $\\sqrt{x}$ is the standard inverse of $x^2$, and the restriction that produced that standard is forgotten.
-
-How to check: the range of $f^{-1}$ must be the restricted domain of $f$. Every output of $-\\sqrt{x}$ is zero or negative, as required; $\\sqrt{x}$ gives positive outputs for every $x > 0$, and those lie outside $(-\\infty, 0]$.`,
+    content: `Six mistakes come up again and again when finding and using inverse functions. Five are marked where they happen in the sections above; forgetting to restrict the inverse's domain is the one that **Domain and Range Swap** already points out. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip breaks the link between $f$ and $f^{-1}$: the inverse sends each output back to its input. It is not the reciprocal, its graph is the mirror image of $f$ in the line $y = x$, it undoes the steps of $f$ in reverse order, its domain is the range of $f$, it exists only when every horizontal line meets the graph at most once, and on the branch $(-\\infty, 0]$ it takes the negative root. Applying $f$ to the answer, or composing the two functions, catches each slip.`,
     link: '',
   },
 
@@ -2688,9 +2628,97 @@ const faqQuestions = {
       ] },
     ],
   };
+  // ScopeCard data (one-to-one-requirement-scope); every fact is from the section text
+  const oneToOneScope = {
+    header: { kicker: 'Inverse functions', title: 'One-to-one, or no inverse', lede: 'Different inputs must always produce different outputs.' },
+    rule: { name: 'Inverse exists', expr: '$f$ has an inverse $\\iff$ $f$ is one-to-one', condition: 'if $f(a) = f(b)$, then $a = b$', sub: 'Algebraic test: assume $f(a) = f(b)$ and try to prove $a = b$.' },
+    inside: { title: 'One-to-one', items: [
+      { id: 'lin', pairId: 'test', expr: '$f(x) = 3x + 7$', why: 'If $3a + 7 = 3b + 7$, then $3a = 3b$, so $a = b$.' },
+      { id: 'mono', pairId: 'shape', expr: 'Strictly monotonic functions', why: 'Only increasing or only decreasing, no flat stretches: they never produce the same output twice.' },
+    ] },
+    outside: { title: 'Not one-to-one', items: [
+      { id: 'sq', pairId: 'test', expr: '$f(x) = x^2$', why: 'If $a^2 = b^2$, then $a = \\pm b$, which does not imply $a = b$.' },
+      { id: 'turn', pairId: 'shape', expr: 'A function that turns around', why: 'Multiple inputs share an output; the reversal is ambiguous.' },
+    ] },
+    boundary: { badge: 'The boundary', body: 'Reversal needs each output to point to a unique input. The horizontal line test reads the same condition off the graph.' },
+  };
+
+
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj15 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-inverse-as-a-reciprocal', name: `Reading the inverse as a reciprocal`, errorAt: 1,
+        what: `The $-1$ in $f^{-1}$ is read as an exponent, so the inverse is computed as one divided by $f(x)$. On a function name the $-1$ means "the function that undoes $f$", not a power.`,
+        wrong: [`For $f(x) = 2x$, $f^{-1}(x) = \\frac{1}{2x}$,`, `So $f^{-1}(6) = \\frac{1}{12}$.`],
+        right: [`For $f(x) = 2x$, $f^{-1}(x) = \\frac{1}{2x}$,`, `$f$ doubles its input, so $f^{-1}$ halves it: $f^{-1}(x) = \\frac{x}{2}$, and $f^{-1}(6) = 3$, because $f(3) = 6$.`],
+        why: `For numbers, $5^{-1} = \\frac{1}{5}$, and the same superscript is placed on $f$. The reciprocal of a function's value is written $\\frac{1}{f(x)}$ or $(f(x))^{-1}$, never $f^{-1}(x)$.`,
+        check: `Apply $f$ to the answer. $f\\left(\\frac{1}{12}\\right) = \\frac{1}{6}$, not $6$, so $\\frac{1}{12}$ cannot be $f^{-1}(6)$; $f(3) = 6$ confirms $3$.` },
+      { id: 'reflecting-across-an-axis-instead-of-y-x', name: `Reflecting across an axis instead of y = x`, errorAt: 0,
+        what: `To sketch the inverse, the graph of $f$ is mirrored in the $y$-axis or the $x$-axis, the mirrors used for reflections in [transformations](!/functions/transformations), instead of in the line $y = x$.`,
+        wrong: [`The point $(2, 5)$ of $f$ is mirrored in the $y$-axis to $(-2, 5)$, and the mirrored curve, which is the graph of $f(-x)$, is taken as the graph of $f^{-1}$.`],
+        right: [`Reflecting in $y = x$ swaps the coordinates, so $(2, 5)$ goes to $(5, 2)$. For $f(x) = 2x$, the point $(1, 2)$ goes to $(2, 1)$, which lies on $f^{-1}(x) = \\frac{x}{2}$; the $y$-axis image $(-1, 2)$ lies on $y = -2x$ instead.`],
+        why: `Reflections in the axes are met first, as graph transformations, and the word "reflection" calls them up.`,
+        check: `Take one point $(a, b)$ of $f$ and confirm that the sketch of $f^{-1}$ passes through $(b, a)$. Points on the line $y = x$ should not move.` },
+      { id: 'undoing-the-steps-in-the-original-order', name: `Undoing the steps in the original order`, errorAt: 1,
+        what: `When the inverse is found by undoing the operations of $f$, each operation is reversed correctly, but they are undone in the same order in which $f$ applied them.`,
+        wrong: [`$f(x) = 3x - 7$ multiplies by $3$, then subtracts $7$.`, `Undoing in that order, divide by $3$, then add $7$: $f^{-1}(x) = \\frac{x}{3} + 7$.`],
+        right: [`$f(x) = 3x - 7$ multiplies by $3$, then subtracts $7$.`, `The last operation comes off first. Add $7$, then divide by $3$: $f^{-1}(x) = \\frac{x + 7}{3}$. The four-step method does this on its own: $x = 3y - 7$ gives $x + 7 = 3y$, then $y = \\frac{x + 7}{3}$.`],
+        why: `The operations are read from left to right, and the undoing follows the same list. As with putting on socks and then shoes, the step done last has to be undone first.`,
+        check: `Compose. $f(1) = -4$, and the wrong formula gives $\\frac{-4}{3} + 7 = \\frac{17}{3}$, not $1$. The right one gives $\\frac{-4 + 7}{3} = 1$.` },
+      { id: 'forgetting-to-restrict-the-inverse-s-domain', name: `Forgetting to restrict the inverse's domain`, errorAt: 0,
+        what: `The inverse formula is found correctly but used on its own natural domain instead of on the range of $f$.`,
+        wrong: [`$f(x) = \\sqrt{x}$ has the inverse $x^2$, taken on all real numbers, so $f^{-1}(-3) = 9$.`],
+        right: [`$\\text{Dom}(f^{-1}) = \\text{Ran}(f) = [0, \\infty)$, so $f^{-1}(x) = x^2$ only for $x \\geq 0$. The value $f^{-1}(-3)$ is not defined, because $\\sqrt{x}$ never outputs $-3$.`],
+        why: `The formula $x^2$ looks complete on its own, and on its own it accepts every real number.`,
+        check: `Compose in the order $f(f^{-1}(x))$. At $x = -3$ the wrong version gives $f(9) = \\sqrt{9} = 3$, not $-3$, so $-3$ cannot be in the domain of $f^{-1}$.` },
+      { id: 'using-vertical-lines-to-test-for-an-inverse', name: `Using vertical lines to test for an inverse`, errorAt: 0,
+        what: `To decide whether a function has an inverse, the vertical line test is run instead of the horizontal one. Every graph of a function passes it, so every function seems invertible.`,
+        wrong: [`Every vertical line meets the graph of $f(x) = (x - 1)^2$ once, so the function is declared invertible on all real numbers.`],
+        right: [`The horizontal line $y = 4$ meets the graph twice, at $x = -1$ and $x = 3$, since $(-1 - 1)^2 = 4$ and $(3 - 1)^2 = 4$. The output $4$ comes from two inputs, so there is no inverse on all real numbers. Restricted to $[1, \\infty)$ there is one: $f^{-1}(x) = 1 + \\sqrt{x}$.`],
+        why: `The vertical line test comes first and is the one that gets practised. It answers a different question: whether the graph is a function at all.`,
+        check: `Ask what the line holds fixed. A horizontal line fixes the output, and an inverse needs every output to come from one input.` },
+      { id: 'taking-the-positive-root-on-the-left-branch', name: `Taking the positive root on the left branch`, errorAt: 0,
+        what: `After $x^2$ is restricted to $(-\\infty, 0]$, its inverse is written as $\\sqrt{x}$ out of habit, although the inputs of $f$, and so the outputs of $f^{-1}$, are now zero or negative.`,
+        wrong: [`$f(x) = x^2$ on $(-\\infty, 0]$, so $f^{-1}(x) = \\sqrt{x}$ and $f^{-1}(4) = 2$.`],
+        right: [`The input in $(-\\infty, 0]$ that $f$ sends to $4$ is $-2$, so $f^{-1}(4) = -2$ and $f^{-1}(x) = -\\sqrt{x}$ for $x \\geq 0$.`],
+        why: `$\\sqrt{x}$ is the standard inverse of $x^2$, and the restriction that produced that standard is forgotten.`,
+        check: `The range of $f^{-1}$ must be the restricted domain of $f$. Every output of $-\\sqrt{x}$ is zero or negative, as required; $\\sqrt{x}$ gives positive outputs for every $x > 0$, and those lie outside $(-\\infty, 0]$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'rules', name: 'Rules of the inverse', sub: 'What an inverse does and how to check it.', pairs: [
+        [{ formula: '$f(a) = b \\iff f^{-1}(b) = a$', text: 'The inverse sends each output back to the input it came from, as [what is an inverse function](!#1) defines.' },
+         { formula: '$f(a) = f(b) \\implies a = b$', text: 'Only a one-to-one function has an inverse, from [the one-to-one requirement](!#8).' }],
+        [{ formula: '$\\text{Dom}(f^{-1}) = \\text{Ran}(f)$', text: 'The outputs of $f$ are the inputs of its inverse ([domain and range swap](!#5)).' },
+         { formula: '$\\text{Ran}(f^{-1}) = \\text{Dom}(f)$', text: 'The inputs of $f$ are the outputs of its inverse, from [domain and range swap](!#5).' }],
+        [{ formula: '$f(f^{-1}(x)) = x$', text: 'Applying the inverse and then $f$ returns the input, for $x$ in the domain of $f^{-1}$ ([verifying inverses via composition](!#6)).' },
+         { formula: '$f^{-1}(f(x)) = x$', text: 'The other order returns the input too, for $x$ in the domain of $f$, as [verifying inverses via composition](!#6) shows.' }],
+      ] },
+      { id: 'pairs', name: 'Common inverse pairs', sub: 'A function on the left, its inverse on the right.', pairs: [
+        [{ formula: '$f(x) = mx + b$', text: 'A line with $m \\neq 0$, from [common inverse pairs](!#12).' },
+         { formula: '$\\displaystyle f^{-1}(x) = \\frac{x - b}{m}$', text: 'Undoes the line by subtracting $b$ and dividing by $m$ ([common inverse pairs](!#12)).' }],
+        [{ formula: '$f(x) = x^2$', text: 'Restricted to $[0, \\infty)$ so that it is one-to-one ([common inverse pairs](!#12)).' },
+         { formula: '$f^{-1}(x) = \\sqrt{x}$', text: 'The square root undoes the square on that half, from [common inverse pairs](!#12).' }],
+        [{ formula: '$f(x) = x^3$', text: 'One-to-one on all real numbers, so no restriction is needed ([common inverse pairs](!#12)).' },
+         { formula: '$f^{-1}(x) = \\sqrt[3]{x}$', text: 'The cube root undoes the cube, as [common inverse pairs](!#12) lists.' }],
+        [{ formula: '$f(x) = a^x$', text: 'The exponential with base $a$; the special case $e^x$ pairs with $\\ln(x)$ ([common inverse pairs](!#12)).' },
+         { formula: '$f^{-1}(x) = \\log_a(x)$', text: 'The logarithm with the same base undoes it, from [common inverse pairs](!#12).' }],
+        [{ formula: '$\\displaystyle f(x) = \\frac{1}{x}$', text: 'The reciprocal function, from [common inverse pairs](!#12).' },
+         { formula: '$\\displaystyle f^{-1}(x) = \\frac{1}{x}$', text: 'The reciprocal is its own inverse ([common inverse pairs](!#12)).' }],
+      ] },
+    ],
+  };
 
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
+      oneToOneScope,
     inversePairOutline,
     demoUnits,
     conceptIntroFigures,
@@ -2715,7 +2743,9 @@ const faqQuestions = {
     }
    }
 
-export default function InversePage({inversePairOutline, 
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function InversePage({ formulaSummaryData, pitfallData,oneToOneScope, inversePairOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -2752,7 +2782,7 @@ export default function InversePage({inversePairOutline,
           `Consider $f(x) = 2x$, which doubles its input. The inverse $f^{-1}(x) = x/2$ halves its input. If $f(3) = 6$, then $f^{-1}(6) = 3$. Doubling then halving — or halving then doubling — restores the original value.`,
           `@academic[pitfall,aside:true,width:35%:Reading the inverse as a reciprocal
 Taking $f^{-1}(x)$ for $f(x) = 2x$ to be $\\frac{1}{2x}$ gives $f^{-1}(6) = \\frac{1}{12}$, but $f\\left(\\frac{1}{12}\\right) = \\frac{1}{6}$, not $6$. The inverse undoes the doubling: $f^{-1}(x) = \\frac{x}{2}$, so $f^{-1}(6) = 3$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-reading-the-inverse-as-a-reciprocal)]@`,
           ciTable('forwardBackTable'),
           `The question behind every inverse is the same: which input did $f$ start from to reach a given output? For $f(x) = 2x$, the output $6$ came from $3$, the output $10$ from $5$, and in general each output came from half of itself. The inverse is the function that answers this question for every output at once.`,
           `Consider $f(x) = x + 5$, which adds five. The inverse $f^{-1}(x) = x - 5$ subtracts five. Adding then subtracting five is a round trip to nowhere.`,
@@ -2899,6 +2929,16 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-scope'}
+            id="one-to-one-requirement-scope"
+            title="The one-to-one requirement"
+            source="/functions/inverse"
+            before={`The card lines up a function that passes the one-to-one test beside one that fails it, and names where the boundary comes from.`}
+            after={`An inverse exists exactly when every output points back to one input.`}
+          >
+            <ScopeCard data={oneToOneScope} variant="ledger" theme={scopeTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2981,11 +3021,38 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="function-inverse-formula-summary"
+            title="Inverse function formulas"
+            source="/functions/inverse"
+            related={{ href: '/functions/formulas', label: 'All function formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj15.title,
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
+          <DiagramFrame
+            key={'obj15-mistakes'}
+            id="inverse-function-pitfalls"
+            title="Common pitfalls with inverse functions"
+            source="/functions/inverse"
+            after={sectionsContent.obj15.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -883,7 +883,9 @@ import complexMultiplicationDiagrams from '@/app/components/calculators/complex-
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1191,7 +1193,7 @@ $$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
 
 @academic[pitfall,aside:true,width:35%:Multiplying part by part
 Multiplying real parts and imaginary parts separately, as in addition, gives $(1 + 2i)(3 + 4i) = 3 + 8i$. Expanding all four products gives $3 + 4i + 6i + 8i^2 = -5 + 10i$.
-[Read more](!#7)]@
+[Read more](!#pitfall-multiplying-part-by-part)]@
 
 The real part of the product is $ac - bd$. The imaginary part is $ad + bc$. Both involve contributions from all four original values.
 
@@ -1235,7 +1237,7 @@ $$\\frac{a + bi}{c + di} = \\frac{(ac + bd) + (bc - ad)i}{c^2 + d^2}$$
 
 @academic[pitfall,aside:true,width:35%:Dividing part by part
 Dividing real part by real part and imaginary part by imaginary part turns $\\frac{4 + 6i}{2 + 3i}$ into $\\frac{4}{2} + \\frac{6}{3}i = 2 + 2i$. But $4 + 6i = 2(2 + 3i)$, so the quotient is $2$.
-[Read more](!#7)]@
+[Read more](!#pitfall-dividing-part-by-part)]@
 
 The denominator becomes $c^2 + d^2$, a real number, because $z \\cdot \\bar{z} = |z|^2$ for any complex $z$. The numerator requires standard complex multiplication. Once the denominator is real, divide each component of the numerator by it.
 
@@ -1320,7 +1322,7 @@ Verification: $(3 + 4i) \\cdot \\left(\\frac{3}{25} - \\frac{4}{25}i\\right) = \
 
 @academic[pitfall,aside:true,width:35%:Stopping at the conjugate
 Taking $z^{-1} = \\bar{z}$ for $z = 2 - i$ gives $2 + i$, but $(2 - i)(2 + i) = 5$, not $1$. Dividing by $|z|^2 = 5$ gives $z^{-1} = \\frac{2}{5} + \\frac{1}{5}i$.
-[Read more](!#7)]@
+[Read more](!#pitfall-stopping-at-the-conjugate)]@
 
 The inverse exists precisely when $|z|^2 \\neq 0$, which occurs exactly when $z \\neq 0$. Division by zero remains undefined in $\\mathbb{C}$ as in $\\mathbb{R}$ — the number $0$ has no multiplicative inverse.
 
@@ -1352,49 +1354,16 @@ Inversion moves whole sets of points, not only single numbers. Take the vertical
 
 **Confusing conjugate and negative:** The conjugate of $3 + 2i$ is $3 - 2i$, not $-3 - 2i$. Conjugation flips only the imaginary sign; negation flips both. These operations differ and serve different purposes.
 
-**Tips for accuracy:** Work step by step, writing each intermediate result. Check products by verifying that the [modulus](!/complex-numbers/absolute-value) of the product equals the product of moduli: $|z_1 z_2| = |z_1||z_2|$. For division, verify that multiplying the quotient by the divisor recovers the dividend.
-
-**Multiplying part by part**
-
-The product is formed the way a sum is: real part times real part, imaginary part times imaginary part. The two cross terms are lost, and the product of the imaginary parts lands in the wrong place.
-
-Wrong working: $(1 + 2i)(3 + 4i) = 1 \\cdot 3 + (2 \\cdot 4)i = 3 + 8i$.
-
-Right working: $(1 + 2i)(3 + 4i) = 3 + 4i + 6i + 8i^2 = 3 + 10i - 8 = -5 + 10i$.
-
-Why it happens: addition and subtraction really do work part by part, and the same pattern is carried over to multiplication. Multiplication distributes instead, so each part of one factor meets each part of the other.
-
-How to check: moduli multiply. $|1 + 2i| \\cdot |3 + 4i| = \\sqrt{5} \\cdot 5 = \\sqrt{125}$, and $|-5 + 10i| = \\sqrt{25 + 100} = \\sqrt{125}$, while $|3 + 8i| = \\sqrt{73}$.
-
-**Dividing part by part**
-
-The quotient is formed the way a difference is: real part over real part, imaginary part over imaginary part. Division by a complex number does not split over the parts of the denominator.
-
-Wrong working: $\\frac{4 + 6i}{2 + 3i} = \\frac{4}{2} + \\frac{6}{3}i = 2 + 2i$.
-
-Right working: multiply by the conjugate $2 - 3i$. $\\frac{(4 + 6i)(2 - 3i)}{(2 + 3i)(2 - 3i)} = \\frac{8 - 12i + 12i - 18i^2}{4 + 9} = \\frac{26}{13} = 2$.
-
-Why it happens: addition and subtraction work part by part, and so does division by a real number: $\\frac{4 + 6i}{2} = 2 + 3i$. A complex denominator mixes the parts, just as a complex factor does in multiplication.
-
-How to check: multiply the answer by the denominator; it must give the numerator back. $(2 + 2i)(2 + 3i) = 4 + 6i + 4i + 6i^2 = -2 + 10i$, not $4 + 6i$, while $2(2 + 3i) = 4 + 6i$.
-
-**Stopping at the conjugate**
-
-The conjugate is found and given as the inverse, without the division by $|z|^2$. The answer points in the right direction but has the wrong length, unless $|z| = 1$.
-
-Wrong working: $(2 - i)^{-1} = \\overline{2 - i} = 2 + i$.
-
-Right working: $|2 - i|^2 = 4 + 1 = 5$, so $(2 - i)^{-1} = \\frac{2 + i}{5} = \\frac{2}{5} + \\frac{1}{5}i$. Indeed $(2 - i)\\left(\\frac{2}{5} + \\frac{1}{5}i\\right) = \\frac{4}{5} + \\frac{2}{5}i - \\frac{2}{5}i - \\frac{1}{5}i^2 = \\frac{4}{5} + \\frac{1}{5} = 1$.
-
-Why it happens: the conjugate does the visible work of the formula, flipping the sign of the imaginary part, and the real divisor $|z|^2$ looks like a final tidy-up that can be dropped. On the unit circle the two coincide, which makes the shortcut look right.
-
-How to check: multiply $z$ by the answer; the product must be $1$. Here $(2 - i)(2 + i) = 5$, so the conjugate is $5$ times too large.`,
-  after: ``,
+**Tips for accuracy:** Work step by step, writing each intermediate result. Check products by verifying that the [modulus](!/complex-numbers/absolute-value) of the product equals the product of moduli: $|z_1 z_2| = |z_1||z_2|$. For division, verify that multiplying the quotient by the divisor recovers the dividend.`,
+  after: `All three slips handle a complex number as two separate numbers. A product needs every term times every term, with $i^2 = -1$; a quotient is found by multiplying by the conjugate; and the inverse is the conjugate divided by $|z|^2$. Multiplying back, or comparing the moduli, catches each slip.`,
   link: '',
 },
     obj8:{
       title:`Summary: The Four Operations Side by Side`,
-      content:`The four operations on complex numbers share a common pattern — combine like terms for addition and subtraction, expand and apply $i^2 = -1$ for multiplication, and convert to real-denominator form via the [conjugate](!/complex-numbers/complex-conjugate) for division. The table below collects each operation's general formula, the key technique that makes it work, and a worked example side by side for quick reference.`,
+      content:`This summary sets the four operations on complex numbers side by side. Each row gives the operation, its general formula and a worked example, with a line on the key technique that makes it work and a link to the section that explains it.
+
+Addition and subtraction combine like terms, the real parts together and the imaginary parts together, once the minus sign has been distributed. Multiplication expands the product and uses the fact that i squared is minus one. Division multiplies the top and the bottom by the [conjugate](!/complex-numbers/complex-conjugate) of the denominator, which leaves a real number underneath.`,
+      formulaSheetAfter: `Only division needs a new idea; the other three operations are ordinary algebra with one extra fact about i. Any answer can be checked by comparing moduli, since the modulus of a product equals the product of the moduli, or by multiplying a quotient back by the denominator.`,
       before:``,
       after:``,
       link:'',
@@ -1644,8 +1613,55 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj7 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-part-by-part', name: `Multiplying part by part`, errorAt: 0,
+        what: `The product is formed the way a sum is: real part times real part, imaginary part times imaginary part. The two cross terms are lost, and the product of the imaginary parts lands in the wrong place.`,
+        wrong: [`$(1 + 2i)(3 + 4i) = 1 \\cdot 3 + (2 \\cdot 4)i = 3 + 8i$.`],
+        right: [`$(1 + 2i)(3 + 4i) = 3 + 4i + 6i + 8i^2 = 3 + 10i - 8 = -5 + 10i$.`],
+        why: `Addition and subtraction really do work part by part, and the same pattern is carried over to multiplication. Multiplication distributes instead, so each part of one factor meets each part of the other.`,
+        check: `Moduli multiply. $|1 + 2i| \\cdot |3 + 4i| = \\sqrt{5} \\cdot 5 = \\sqrt{125}$, and $|-5 + 10i| = \\sqrt{25 + 100} = \\sqrt{125}$, while $|3 + 8i| = \\sqrt{73}$.` },
+      { id: 'dividing-part-by-part', name: `Dividing part by part`, errorAt: 0,
+        what: `The quotient is formed the way a difference is: real part over real part, imaginary part over imaginary part. Division by a complex number does not split over the parts of the denominator.`,
+        wrong: [`$\\frac{4 + 6i}{2 + 3i} = \\frac{4}{2} + \\frac{6}{3}i = 2 + 2i$.`],
+        right: [`Multiply by the conjugate $2 - 3i$. $\\frac{(4 + 6i)(2 - 3i)}{(2 + 3i)(2 - 3i)} = \\frac{8 - 12i + 12i - 18i^2}{4 + 9} = \\frac{26}{13} = 2$.`],
+        why: `Addition and subtraction work part by part, and so does division by a real number: $\\frac{4 + 6i}{2} = 2 + 3i$. A complex denominator mixes the parts, just as a complex factor does in multiplication.`,
+        check: `Multiply the answer by the denominator; it must give the numerator back. $(2 + 2i)(2 + 3i) = 4 + 6i + 4i + 6i^2 = -2 + 10i$, not $4 + 6i$, while $2(2 + 3i) = 4 + 6i$.` },
+      { id: 'stopping-at-the-conjugate', name: `Stopping at the conjugate`, errorAt: 0,
+        what: `The conjugate is found and given as the inverse, without the division by $|z|^2$. The answer points in the right direction but has the wrong length, unless $|z| = 1$.`,
+        wrong: [`$(2 - i)^{-1} = \\overline{2 - i} = 2 + i$.`],
+        right: [`$|2 - i|^2 = 4 + 1 = 5$, so $(2 - i)^{-1} = \\frac{2 + i}{5} = \\frac{2}{5} + \\frac{1}{5}i$. Indeed $(2 - i)\\left(\\frac{2}{5} + \\frac{1}{5}i\\right) = \\frac{4}{5} + \\frac{2}{5}i - \\frac{2}{5}i - \\frac{1}{5}i^2 = \\frac{4}{5} + \\frac{1}{5} = 1$.`],
+        why: `The conjugate does the visible work of the formula, flipping the sign of the imaginary part, and the real divisor $|z|^2$ looks like a final tidy-up that can be dropped. On the unit circle the two coincide, which makes the shortcut look right.`,
+        check: `Multiply $z$ by the answer; the product must be $1$. Here $(2 - i)(2 + i) = 5$, so the conjugate is $5$ times too large.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Operation', kind: 'name' },
+      { key: 'formula', label: 'General formula', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Addition', formula: '$(a + bi) + (c + di) = (a + c) + (b + d)i$', example: '$(3 + 2i) + (1 - 5i) = 4 - 3i$',
+        sub: 'Combine like terms part by part, the real parts together and the imaginary parts together, as [addition](!#1) shows.' },
+      { name: 'Subtraction', formula: '$(a + bi) - (c + di) = (a - c) + (b - d)i$', example: '$(7 + 4i) - (2 + 6i) = 5 - 2i$',
+        sub: 'Distribute the minus sign over both parts, then combine like terms, from [subtraction](!#2).' },
+      { name: 'Multiplication', formula: '$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$', example: '$(2 + 3i)(4 - i) = 11 + 10i$',
+        sub: 'Multiply out with FOIL, then apply $i^2 = -1$, as [multiplication](!#3) shows.' },
+      { name: 'Division', formula: '$\\displaystyle \\frac{a + bi}{c + di} = \\frac{(a + bi)(c - di)}{c^2 + d^2}$', example: '$\\displaystyle \\frac{3 + 2i}{1 - 4i} = -\\frac{5}{17} + \\frac{14}{17}i$',
+        sub: 'Multiply the top and the bottom by the conjugate of the denominator, which leaves the real number $c^2 + d^2$ below, from [division](!#4).' },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     complexOpTree,
     demoUnits,
     conceptIntroFigures,
@@ -1670,7 +1686,7 @@ const schemas = {
 
 
 
-export default function OperationsPage({complexOpTree, 
+export default function OperationsPage({ formulaSummaryData, pitfallData,complexOpTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1762,7 +1778,7 @@ For whole numbers $a > b > 0$, the parts of $(a + bi)^2$ are the legs of a right
         content: [
           `@academic[pitfall,aside:true,width:35%:Multiplying part by part
 Multiplying real parts and imaginary parts separately, as in addition, gives $(1 + 2i)(3 + 4i) = 3 + 8i$. Expanding all four products gives $3 + 4i + 6i + 8i^2 = -5 + 10i$.
-[Read more](!#7)]@`,
+[Read more](!#pitfall-multiplying-part-by-part)]@`,
           `@academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
 Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12i - 3 = 5 + 10i$. Since $i^2 = -1$, the term is $+3$ and the product is $11 + 10i$.
 [Read more](!#7)]@`,
@@ -1855,6 +1871,15 @@ Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj7Table }}
           />,
+          <DiagramFrame
+            key={'obj7-mistakes'}
+            id="complex-operation-pitfalls"
+            title="Common pitfalls with complex operations"
+            source="/complex-numbers/operations"
+            after={sectionsContent.obj7.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1863,11 +1888,16 @@ Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="complex-operations-formula-summary"
+            title="The four operations"
+            source="/complex-numbers/operations"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="complex-operations-tree"

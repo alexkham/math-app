@@ -1571,6 +1571,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -3020,6 +3021,15 @@ The table below collects the patterns above into a single reference, pairing eac
   link: '',
 },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary sorts the formulas of the page into four families: finding the median, comparing it with the mean and the mode, its properties, and percentiles. Each family has a line on what it covers, and each formula a note on when it applies with a link to the section that explains it. The buttons above the cards show one family at a time.
+
+The first family gives the two conditions for a discrete median, the equation for a continuous one in two forms, and the exponential median. The second orders the three centres under right and left skew. The third covers the minimizing property, symmetry, transformations and the failure of additivity. The last places the median among percentiles.`,
+    before: ``,
+    after: `For a continuous variable, finding the median means solving one equation; for a discrete one, check both conditions, since a flat stretch of the CDF can make a whole interval qualify. The properties then carry the median through transformations, but never through sums.`,
+    link: '',
+  },
   obj13: {
   title: `Common Mistakes`,
   content: `
@@ -3524,8 +3534,39 @@ const schemas = {
     },
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'define', name: 'Finding the median', sub: 'The conditions a median must meet, for discrete and for continuous variables.', pairs: [
+        [{ formula: '$P(X \\leq m) \\geq 0.5 \\quad \\text{and} \\quad P(X \\geq m) \\geq 0.5$', text: 'The discrete median needs both conditions, since the CDF may jump past one half; see [discrete distributions](!#2).' },
+         { formula: '$F(m) = P(X \\leq m) = 0.5$', text: 'For a continuous variable the CDF crosses one half at the median, as [continuous distributions](!#3) shows.' }],
+        [{ formula: '$\\displaystyle \\int_{-\\infty}^{m} f(x)dx = 0.5$', text: 'The same condition written with the density: half of the area lies to the left of $m$ ([continuous distributions](!#3)).' },
+         { formula: '$\\displaystyle m = \\frac{\\ln(2)}{\\lambda}$', text: 'The exponential median, solved step by step in [how to find the median](!#7).' }],
+      ] },
+      { id: 'compare', name: 'Against the mean and the mode', sub: 'Where the three centres sit when a distribution is skewed; under symmetry they coincide.', pairs: [
+        [{ formula: '$\\text{mode} < \\text{median} < \\text{mean}$', text: 'Right skew: the long tail of large values drags the mean furthest ([median, mean and mode compared](!#5)).' },
+         { formula: '$\\text{mean} < \\text{median} < \\text{mode}$', text: 'Left skew reverses the order, from [the same comparison](!#5).' }],
+      ] },
+      { id: 'props', name: 'Properties', sub: 'How the median behaves under transformations and sums.', pairs: [
+        [{ formula: '$\\text{median}(X) = \\arg\\min_m E[|X - m|]$', text: 'The median minimizes the average absolute distance, as [properties of the median](!#6) explains.' },
+         { formula: '$\\text{median}(X) = c = \\text{mean}(X)$', text: 'For a distribution symmetric about $c$, median and mean coincide at the centre ([properties](!#6)).' }],
+        [{ formula: '$\\text{median}(Y) = a \\cdot \\text{median}(X) + b$', text: 'For $Y = aX + b$ with $a \\neq 0$, the median shifts and scales with the data ([properties](!#6)).' },
+         { formula: '$\\text{median}(g(X)) = g(\\text{median}(X))$', text: 'Holds for strictly monotonic $g$, which keeps the order of values, as [properties of the median](!#6) shows.' }],
+        [{ formula: '$\\text{median}(X + Y) \\neq \\text{median}(X) + \\text{median}(Y)$', text: 'Medians do not add, even for independent variables ([properties](!#6)).' }, ''],
+      ] },
+      { id: 'percentiles', name: 'Percentiles', sub: 'The median as the 50th percentile, and the same idea at other levels.', pairs: [
+        [{ formula: '$\\displaystyle P(X \\leq x_p) = \\frac{p}{100}$', text: 'The $p$-th percentile; the median is the case $p = 50$ ([median as the 50th percentile](!#8)).' },
+         { formula: '$\\text{IQR} = Q_3 - Q_1$', text: 'The spread of the middle half of the distribution, centred at the median ([the 50th percentile](!#8)).' }],
+        [{ formula: '$F(x_p) = p, \\quad x_p = F^{-1}(p)$', text: 'A continuous percentile solves the CDF equation or reads the inverse CDF, from [the 50th percentile](!#8).' },
+         { formula: '$P(X \\leq x) \\geq p$', text: 'A discrete percentile is the smallest $x$ meeting this condition ([the 50th percentile](!#8)).' }],
+      ] },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
     medianMethodDecision,
     demoUnits,
     conceptIntroFigures,
@@ -3552,7 +3593,7 @@ const schemas = {
     }
    }
 
-export default function MedianPage({medianMethodDecision, 
+export default function MedianPage({ formulaSummaryData,medianMethodDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -3791,6 +3832,24 @@ export default function MedianPage({medianMethodDecision,
             sheet={probSpreadNotationSheet}
             current={'/probability/median'}
           />,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrameV2
+            key={'formula-summary'}
+            id="probability-median-formula-summary"
+            title="Median formulas"
+            source="/probability/median"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrameV2>,
         ]
     },
     {

@@ -776,6 +776,7 @@ import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-v
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1190,7 +1191,7 @@ Verification: $A\\begin{pmatrix} x \\\\ y \\\\ z \\end{pmatrix} = \\begin{pmatri
 
 @academic[pitfall,aside:true,width:35%:Placing the images in rows
 Writing $T(\\mathbf{e}_1), T(\\mathbf{e}_2), T(\\mathbf{e}_3)$ as rows gives the $3 \\times 2$ array $\\begin{pmatrix} 2 & 4 \\\\ -1 & 0 \\\\ 3 & 5 \\end{pmatrix}$, which cannot multiply a vector of $\\mathbb{R}^3$. As columns they give $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-placing-the-images-in-rows)]@
 
 Each image $T(\\mathbf{e}_j)$ lies in $\\mathbb{R}^2$, so it supplies a column of length $2$, and there is one such column for each of the three input coordinates. The shape $2 \\times 3$ is therefore fixed before a single entry is computed. Reading down a column shows where one basis vector lands; reading across a row gives the coefficients of one output formula, such as $2x - y + 3z$ in the first row.`,
     before: ``,
@@ -1207,7 +1208,7 @@ The size $m \\times n$ records the dimensions of codomain ($m$ rows) and domain 
 
 @academic[pitfall,aside:true,width:35%:Reading the size backwards
 Taking the $2 \\times 3$ matrix of the worked example as a map $\\mathbb{R}^2 \\to \\mathbb{R}^3$ swaps the two spaces: $A\\mathbf{x}$ needs $\\mathbf{x}$ with $3$ entries, one per column, and returns $2$. The map is $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-size-backwards)]@
 
 A square matrix ($m = n$) represents a transformation from a space to itself — a linear operator. Only operators can have [eigenvalues](!/linear-algebra/eigen), [determinants](!/linear-algebra/determinants), and [traces](!/linear-algebra/matrix/trace).`,
     before: ``,
@@ -1270,7 +1271,7 @@ The order matches the composition: $S$ acts after $T$, and $B$ multiplies from t
 
 @academic[pitfall,aside:true,width:35%:Multiplying in the order of application
 Writing $AB$ for $S \\circ T$ applies $S$ first. With $T$ the quarter-turn $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and $S$ the projection $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$, $AB\\mathbf{e}_1 = (0, 1)$, but $S(T(\\mathbf{e}_1)) = S(0, 1) = (0, 0)$, which is $BA\\mathbf{e}_1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-in-the-order-of-application)]@
 
 Associativity of matrix multiplication $(BC)A = B(CA)$ mirrors associativity of composition $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. Non-commutativity of multiplication $AB \\neq BA$ mirrors non-commutativity of composition $S \\circ T \\neq T \\circ S$.
 
@@ -1310,53 +1311,9 @@ This is why matrices dominate computational linear algebra. Abstract transformat
   },
   obj10: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for most wrong matrices of linear maps. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Placing the images in rows**
-
-The images $T(\\mathbf{e}_1), \\dots, T(\\mathbf{e}_n)$ are computed correctly, but each one is written as a row of the matrix instead of a column. The result is the transpose of the standard matrix.
-
-Wrong working: for $T(x, y, z) = (2x - y + 3z, \\; 4x + 5z)$, the images are $(2, 4)$, $(-1, 0)$ and $(3, 5)$. Stacked as rows they give
-$$\\begin{pmatrix} 2 & 4 \\\\ -1 & 0 \\\\ 3 & 5 \\end{pmatrix}$$
-a $3 \\times 2$ array. It can only multiply vectors with $2$ entries, so it cannot be applied to $(x, y, z)$ at all.
-
-Right working: the images are the columns.
-$$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}, \\qquad A\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix} = T(1, 1, 1)$$
-
-Why it happens: the images are found and written as horizontal tuples such as $(2, 4)$, and they are copied into the matrix in the same horizontal form.
-
-How to check: multiply the matrix by $\\mathbf{e}_1$. The result is the first column, and it must equal $T(\\mathbf{e}_1) = (2, 4)$. For a map between spaces of different dimensions, the size check is even quicker: the matrix of $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ must have $3$ columns.
-
-**Reading the size backwards**
-
-The size $m \\times n$ is read in the order it is written, as if the first number were the domain and the second the codomain. The map then appears to run between the wrong two spaces.
-
-Wrong working: the matrix $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$ is $2 \\times 3$, so it is taken to be a map $\\mathbb{R}^2 \\to \\mathbb{R}^3$, and one tries to compute $A\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$. That product is undefined: each row of $A$ has $3$ entries and the vector has $2$.
-
-Right working: the number of columns is the number of inputs, and the number of rows is the number of outputs. $A$ has $3$ columns and $2$ rows, so it maps $\\mathbb{R}^3 \\to \\mathbb{R}^2$:
-$$A\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix}$$
-
-Why it happens: the arrow $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ names the domain first, while the size $m \\times n$ names the rows, that is the codomain, first. The two orders are opposite.
-
-How to check: write a test vector next to the matrix. The vector must have as many entries as the matrix has columns, and the product has as many entries as the matrix has rows.
-
-**Multiplying in the order of application**
-
-In $S \\circ T$ the map $T$ acts first, so its matrix is written first, and the matrix of the composition is taken to be $AB$ instead of $BA$.
-
-Wrong working: let $T$ be the quarter-turn with $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and $S$ the projection onto the first axis with $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$. Then
-$$AB = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$$
-which sends $\\mathbf{e}_1$ to $(0, 1)$.
-
-Right working: the matrix that acts first stands on the right.
-$$BA = \\begin{pmatrix} 0 & -1 \\\\ 0 & 0 \\end{pmatrix}$$
-Directly, $S(T(\\mathbf{e}_1)) = S(0, 1) = (0, 0)$ and $S(T(\\mathbf{e}_2)) = S(-1, 0) = (-1, 0)$, which are exactly the columns of $BA$.
-
-Why it happens: the maps are described in the order they act, first $T$ and then $S$, and the matrices are written down in that same reading order. But a matrix product acts on a vector from the right, so the factor next to $\\mathbf{x}$ acts first.
-
-How to check: apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\mathbf{e}_1))$ computed one map at a time. Here $AB\\mathbf{e}_1 = (0, 1)$ does not match $(0, 0)$.`,
+    content: `Three mistakes account for most wrong matrices of linear maps. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip puts part of the matrix in the wrong place. The images of the basis vectors are its columns, an $m \\times n$ matrix maps $\\mathbb{R}^n$ to $\\mathbb{R}^m$, and the matrix of $S \\circ T$ is $[S][T]$, with the map applied last on the left. Multiplying the matrix by $\\mathbf{e}_1$, or comparing with $S(T(\\mathbf{e}_1))$ worked out one map at a time, catches each slip.`,
     link: ``,
   },
 }
@@ -1549,8 +1506,39 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'placing-the-images-in-rows', name: `Placing the images in rows`, errorAt: 1,
+        what: `The images $T(\\mathbf{e}_1), \\dots, T(\\mathbf{e}_n)$ are computed correctly, but each one is written as a row of the matrix instead of a column. The result is the transpose of the standard matrix.`,
+        wrong: [`For $T(x, y, z) = (2x - y + 3z, \\; 4x + 5z)$, the images are $(2, 4)$, $(-1, 0)$ and $(3, 5)$.`, `Stacked as rows they give
+$$\\begin{pmatrix} 2 & 4 \\\\ -1 & 0 \\\\ 3 & 5 \\end{pmatrix}$$`, `A $3 \\times 2$ array. It can only multiply vectors with $2$ entries, so it cannot be applied to $(x, y, z)$ at all.`],
+        right: [`For $T(x, y, z) = (2x - y + 3z, \\; 4x + 5z)$, the images are $(2, 4)$, $(-1, 0)$ and $(3, 5)$.`, `The images are the columns.`, `$$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix},$$
+$$A\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix}$$
+$$= T(1, 1, 1)$$`],
+        why: `The images are found and written as horizontal tuples such as $(2, 4)$, and they are copied into the matrix in the same horizontal form.`,
+        check: `Multiply the matrix by $\\mathbf{e}_1$. The result is the first column, and it must equal $T(\\mathbf{e}_1) = (2, 4)$. For a map between spaces of different dimensions, the size check is even quicker: the matrix of $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ must have $3$ columns.` },
+      { id: 'reading-the-size-backwards', name: `Reading the size backwards`, errorAt: 0,
+        what: `The size $m \\times n$ is read in the order it is written, as if the first number were the domain and the second the codomain. The map then appears to run between the wrong two spaces.`,
+        wrong: [`The matrix $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$ is $2 \\times 3$, so it is taken to be a map $\\mathbb{R}^2 \\to \\mathbb{R}^3$, and one tries to compute $A\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$. That product is undefined: each row of $A$ has $3$ entries and the vector has $2$.`],
+        right: [`The number of columns is the number of inputs, and the number of rows is the number of outputs. $A$ has $3$ columns and $2$ rows, so it maps $\\mathbb{R}^3 \\to \\mathbb{R}^2$:
+$$A\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix}$$`],
+        why: `The arrow $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ names the domain first, while the size $m \\times n$ names the rows, that is the codomain, first. The two orders are opposite.`,
+        check: `Write a test vector next to the matrix. The vector must have as many entries as the matrix has columns, and the product has as many entries as the matrix has rows.` },
+      { id: 'multiplying-in-the-order-of-application', name: `Multiplying in the order of application`, errorAt: 1,
+        what: `In $S \\circ T$ the map $T$ acts first, so its matrix is written first, and the matrix of the composition is taken to be $AB$ instead of $BA$.`,
+        wrong: [`Let $T$ be the quarter-turn with $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and $S$ the projection onto the first axis with $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$.`, `Then
+$$AB = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$$`, `Which sends $\\mathbf{e}_1$ to $(0, 1)$.`],
+        right: [`Let $T$ be the quarter-turn with $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$ and $S$ the projection onto the first axis with $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$.`, `The matrix that acts first stands on the right.`, `$$BA = \\begin{pmatrix} 0 & -1 \\\\ 0 & 0 \\end{pmatrix}$$`, `Directly, $S(T(\\mathbf{e}_1)) = S(0, 1) = (0, 0)$ and $S(T(\\mathbf{e}_2)) = S(-1, 0) = (-1, 0)$, which are exactly the columns of $BA$.`],
+        why: `The maps are described in the order they act, first $T$ and then $S$, and the matrices are written down in that same reading order. But a matrix product acts on a vector from the right, so the factor next to $\\mathbf{x}$ acts first.`,
+        check: `Apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\mathbf{e}_1))$ computed one map at a time. Here $AB\\mathbf{e}_1 = (0, 1)$ does not match $(0, 0)$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     derivativeMatrixBeforeAfter,
     demoUnits,
     conceptIntroFigures,
@@ -1572,7 +1560,7 @@ return {
 }
    }
 
-export default function MatrixRepresentationPage({seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas, demoUnits, conceptIntroFigures, derivativeMatrixBeforeAfter}) {
+export default function MatrixRepresentationPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas, demoUnits, conceptIntroFigures, derivativeMatrixBeforeAfter}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1780,6 +1768,15 @@ $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mat
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="matrix-representation-pitfalls"
+            title="Common pitfalls with the matrix of a transformation"
+            source="/linear-algebra/transformations/matrix-representation"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

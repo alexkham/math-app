@@ -1551,6 +1551,9 @@ import complexMultiplicationDiagrams from '@/app/components/calculators/complex-
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 
@@ -2261,7 +2264,7 @@ $$r = \\sqrt{0^2 + (-5)^2} = \\sqrt{25} = 5$$]@
 
 @academic[pitfall,aside:true,width:35%:Squaring bi instead of b
 For $z = 3 + 4i$, putting $4i$ into the formula gives $\\sqrt{3^2 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$, not a real number. The formula takes $b = 4$, the coefficient of $i$: $r = \\sqrt{9 + 16} = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-bi-instead-of-b)]@
 
 The modulus represents the "size" of a complex number without regard to its direction. Two numbers with the same modulus lie on a circle of radius $r$ centered at the origin.`,
   before: ``,
@@ -2429,7 +2432,7 @@ $$z = r(\\cos\\theta + i\\sin\\theta)$$
 
 @academic[pitfall,aside:true,width:35%:Reading the argument through a minus sign
 Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argument $\\frac{\\pi}{3}$ ignores the minus sign; the form needs a plus. Since cosine is even and sine is odd, the number is $2\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right)$, with argument $-\\frac{\\pi}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-argument-through-a-minus-sign)]@
 
 This formula encodes the relationship between polar and Cartesian coordinates. The real part is $a = r\\cos\\theta$ and the imaginary part is $b = r\\sin\\theta$.
 
@@ -2538,7 +2541,7 @@ Step 3: $z = 3\\sqrt{2}\\,\\text{cis}\\left(-\\frac{3\\pi}{4}\\right)$]@
 
 @academic[pitfall,aside:true,width:35%:Skipping the quadrant check
 For $z = -1 + \\sqrt{3}i$, taking $\\theta = \\arctan(-\\sqrt{3}) = -\\frac{\\pi}{3}$ gives $2\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right) = 1 - \\sqrt{3}i$, a different point. Here $a < 0$ and $b > 0$, so $\\theta = -\\frac{\\pi}{3} + \\pi = \\frac{2\\pi}{3}$ and $z = 2\\,\\text{cis}\\,\\frac{2\\pi}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-quadrant-check)]@
 
 In both examples the modulus comes straight from the formula, and the real work is in Step 2. The ratio $\\frac{b}{a}$ fixes the tangent of the angle, while the signs of $a$ and $b$ fix the quadrant the angle lies in. Example 1 sits in the first quadrant, Example 2 in the third.`,
   before: ``,
@@ -2586,7 +2589,7 @@ Step 3: $z = -\\sqrt{3} + i$]@
 
 @academic[pitfall,aside:true,width:35%:Calculator in the wrong angle mode
 Evaluating $4\\cos 60°$ with the calculator set to radians computes $4\\cos(60 \\text{ rad}) \\approx -3.81$ and $4\\sin(60 \\text{ rad}) \\approx -1.22$. In degree mode the parts are $a = 2$ and $b = 2\\sqrt{3}$, as in Example 1.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-calculator-in-the-wrong-angle-mode)]@
 
 The three examples use both angle units: the first angle is given in degrees, the other two in radians. The cosine and sine are evaluated at the angle exactly as written, and the modulus then scales both results. Exact values such as $\\cos 60° = \\frac{1}{2}$ or $\\sin\\frac{3\\pi}{2} = -1$ keep the answer exact.
 
@@ -2652,7 +2655,10 @@ These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoi
 },
     obj11:{
       title:`Trigonometric Form at a Glance`,
-      content:`The quantities and operations covered in the sections above collect into a single reference card. Each row gives a quantity or operation and its formula in trigonometric form — useful as a study summary and as a quick lookup when computing modulus, argument, conversions, products, or quotients.`,
+      content:`This summary gathers the formulas of the trigonometric form on eight cards. Each card gives a quantity or operation and its formula, with a line on what it gives and a link to the section that explains it; two cards carry a badge on how to settle the angle.
+
+The first two cards give the modulus and the argument, and the third writes the number with them. Two more convert between algebraic and trigonometric form in each direction. Multiplication and division follow, multiplying or dividing the moduli and adding or subtracting the arguments, and the last card links the form to the exponential one through Euler's formula.`,
+      formulaSheetAfter: `Most work in trigonometric form comes down to the modulus and the argument. Get the argument right first by checking the quadrant of the point, since the tangent alone cannot tell opposite quadrants apart; after that, products and quotients take a single line.`,
       before:``,
       after:``,
       link:'',
@@ -2698,57 +2704,9 @@ These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoi
   
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for many of the wrong answers in work with the trigonometric form. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Squaring bi instead of b**
-
-The modulus formula $r = \\sqrt{a^2 + b^2}$ uses the real number $b$, the coefficient of $i$. Squaring the whole imaginary term $bi$ brings $i^2 = -1$ into the formula and turns the sum under the root into a difference.
-
-Wrong working: for $z = 3 + 4i$, $r = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.
-
-Right working: $b = 4$, so $r = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.
-
-Why it happens: $b$ is read as the imaginary term $4i$ rather than its coefficient $4$.
-
-How to check: a modulus is a distance, so it is a non-negative real number. A negative number under the root shows the slip at once.
-
-**Reading the argument through a minus sign**
-
-The trigonometric form is $r(\\cos\\theta + i\\sin\\theta)$, with a plus sign and the same angle in both places. An expression with a minus sign between the terms looks like trigonometric form but is not, and reading $\\theta$ off it gives the wrong argument.
-
-Wrong working: $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ has modulus $2$ and argument $\\frac{\\pi}{3}$.
-
-Right working: since $\\cos(-\\theta) = \\cos\\theta$ and $\\sin(-\\theta) = -\\sin\\theta$, the number equals $2\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right) = 1 - \\sqrt{3}i$. Its argument is $-\\frac{\\pi}{3}$.
-
-Why it happens: the expression has all the right ingredients, a modulus and the cosine and sine of one angle, so the sign between them is overlooked.
-
-How to check: convert to algebraic form. Here $b = -2\\sin\\frac{\\pi}{3} = -\\sqrt{3}$ is negative, so the point lies below the real axis and its argument cannot be $\\frac{\\pi}{3}$.
-
-**Skipping the quadrant check**
-
-The angle is taken straight from the arctangent, which only returns values in $(-\\frac{\\pi}{2}, \\frac{\\pi}{2})$. For a number in the left half-plane this gives the direction of the opposite point.
-
-Wrong working: for $z = -1 + \\sqrt{3}i$, $r = \\sqrt{1 + 3} = 2$ and $\\theta = \\arctan\\left(\\frac{\\sqrt{3}}{-1}\\right) = -\\frac{\\pi}{3}$, so $z = 2\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right)$. But $2\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right) = 1 - \\sqrt{3}i$.
-
-Right working: $a = -1 < 0$ and $b = \\sqrt{3} > 0$ put $z$ in the second quadrant, so add $\\pi$: $\\theta = -\\frac{\\pi}{3} + \\pi = \\frac{2\\pi}{3}$, and $z = 2\\,\\text{cis}\\,\\frac{2\\pi}{3}$.
-
-Why it happens: $\\tan\\theta = \\frac{b}{a}$ has solutions in two opposite quadrants, and the arctangent always returns the one in the right half-plane.
-
-How to check: convert back. $2\\cos\\frac{2\\pi}{3} = -1$ and $2\\sin\\frac{2\\pi}{3} = \\sqrt{3}$ give the original number; the wrong angle gives $1 - \\sqrt{3}i$.
-
-**Calculator in the wrong angle mode**
-
-An angle given in degrees is entered while the calculator is set to radians, or the other way round. The calculator then evaluates the cosine and sine of a completely different angle.
-
-Wrong working: for $z = 4\\,\\text{cis}\\,60°$ in radian mode, $a = 4\\cos 60 \\approx 4 \\cdot (-0.952) \\approx -3.81$ and $b = 4\\sin 60 \\approx 4 \\cdot (-0.305) \\approx -1.22$.
-
-Right working: in degree mode $a = 4\\cos 60° = 4 \\cdot \\frac{1}{2} = 2$ and $b = 4\\sin 60° = 4 \\cdot \\frac{\\sqrt{3}}{2} = 2\\sqrt{3} \\approx 3.46$.
-
-Why it happens: the degree sign is easy to overlook, and a calculator keeps whatever mode was last used.
-
-How to check: the signs of $a$ and $b$ must match the quadrant of the angle. An angle of $60°$ lies in the first quadrant, so both parts must be positive; two negative parts point to the wrong mode.`,
+      content:`Four mistakes account for many of the wrong answers in work with the trigonometric form. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip produces a wrong modulus or a wrong angle. The modulus squares $b$, not $bi$; $\\cos\\theta - i\\sin\\theta$ has argument $-\\theta$; an arctangent needs a quadrant check; and the calculator must be in the mode of the angle given. Converting back to algebraic form, and checking that the signs of $a$ and $b$ match the quadrant, catches each slip.`,
       link:'',
     },
 
@@ -2927,8 +2885,64 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'squaring-bi-instead-of-b', name: `Squaring bi instead of b`, errorAt: 1,
+        what: `The modulus formula $r = \\sqrt{a^2 + b^2}$ uses the real number $b$, the coefficient of $i$. Squaring the whole imaginary term $bi$ brings $i^2 = -1$ into the formula and turns the sum under the root into a difference.`,
+        wrong: [`For $z = 3 + 4i$,`, `$r = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.`],
+        right: [`For $z = 3 + 4i$,`, `$b = 4$, so $r = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.`],
+        why: `$b$ is read as the imaginary term $4i$ rather than its coefficient $4$.`,
+        check: `A modulus is a distance, so it is a non-negative real number. A negative number under the root shows the slip at once.` },
+      { id: 'reading-the-argument-through-a-minus-sign', name: `Reading the argument through a minus sign`, errorAt: 0,
+        what: `The trigonometric form is $r(\\cos\\theta + i\\sin\\theta)$, with a plus sign and the same angle in both places. An expression with a minus sign between the terms looks like trigonometric form but is not, and reading $\\theta$ off it gives the wrong argument.`,
+        wrong: [`$2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ has modulus $2$ and argument $\\frac{\\pi}{3}$.`],
+        right: [`Since $\\cos(-\\theta) = \\cos\\theta$ and $\\sin(-\\theta) = -\\sin\\theta$, the number equals $2\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right) = 1 - \\sqrt{3}i$. Its argument is $-\\frac{\\pi}{3}$.`],
+        why: `The expression has all the right ingredients, a modulus and the cosine and sine of one angle, so the sign between them is overlooked.`,
+        check: `Convert to algebraic form. Here $b = -2\\sin\\frac{\\pi}{3} = -\\sqrt{3}$ is negative, so the point lies below the real axis and its argument cannot be $\\frac{\\pi}{3}$.` },
+      { id: 'skipping-the-quadrant-check', name: `Skipping the quadrant check`, errorAt: 0,
+        what: `The angle is taken straight from the arctangent, which only returns values in $(-\\frac{\\pi}{2}, \\frac{\\pi}{2})$. For a number in the left half-plane this gives the direction of the opposite point.`,
+        wrong: [`For $z = -1 + \\sqrt{3}i$, $r = \\sqrt{1 + 3} = 2$ and $\\theta = \\arctan\\left(\\frac{\\sqrt{3}}{-1}\\right) = -\\frac{\\pi}{3}$, so $z = 2\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right)$. But $2\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right) = 1 - \\sqrt{3}i$.`],
+        right: [`$a = -1 < 0$ and $b = \\sqrt{3} > 0$ put $z$ in the second quadrant, so add $\\pi$: $\\theta = -\\frac{\\pi}{3} + \\pi = \\frac{2\\pi}{3}$, and $z = 2\\,\\text{cis}\\,\\frac{2\\pi}{3}$.`],
+        why: `$\\tan\\theta = \\frac{b}{a}$ has solutions in two opposite quadrants, and the arctangent always returns the one in the right half-plane.`,
+        check: `Convert back. $2\\cos\\frac{2\\pi}{3} = -1$ and $2\\sin\\frac{2\\pi}{3} = \\sqrt{3}$ give the original number; the wrong angle gives $1 - \\sqrt{3}i$.` },
+      { id: 'calculator-in-the-wrong-angle-mode', name: `Calculator in the wrong angle mode`, errorAt: 0,
+        what: `An angle given in degrees is entered while the calculator is set to radians, or the other way round. The calculator then evaluates the cosine and sine of a completely different angle.`,
+        wrong: [`For $z = 4\\,\\text{cis}\\,60°$ in radian mode, $a = 4\\cos 60 \\approx 4 \\cdot (-0.952) \\approx -3.81$ and $b = 4\\sin 60 \\approx 4 \\cdot (-0.305) \\approx -1.22$.`],
+        right: [`In degree mode $a = 4\\cos 60° = 4 \\cdot \\frac{1}{2} = 2$ and $b = 4\\sin 60° = 4 \\cdot \\frac{\\sqrt{3}}{2} = 2\\sqrt{3} \\approx 3.46$.`],
+        why: `The degree sign is easy to overlook, and a calculator keeps whatever mode was last used.`,
+        check: `The signs of $a$ and $b$ must match the quadrant of the angle. An angle of $60°$ lies in the first quadrant, so both parts must be positive; two negative parts point to the wrong mode.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Modulus', formula: '$r = |z| = \\sqrt{a^2 + b^2}$',
+        text: 'The distance from the origin to the point $(a, b)$, as [modulus](!#2) shows.' },
+      { name: 'Argument', formula: '$\\displaystyle \\tan\\theta = \\frac{b}{a}$', restriction: 'with quadrant adjustment, or $\\text{atan2}(b, a)$',
+        text: 'The angle from the positive real axis; the tangent alone cannot tell opposite quadrants apart, so [quadrant considerations](!#5) adjusts it.' },
+      { name: 'Trigonometric form', formula: '$z = r(\\cos\\theta + i\\sin\\theta) = r\\,\\text{cis}\\,\\theta$',
+        text: 'The number written by its length and its angle, as [the trigonometric form](!#7) defines it.' },
+      { name: 'Algebraic to trigonometric', formula: '$r = \\sqrt{a^2 + b^2}$', restriction: '$\\theta$ from the quadrant of $(a, b)$',
+        text: 'Find the modulus first, then the angle, as [converting algebraic to trigonometric](!#8) does.' },
+      { name: 'Trigonometric to algebraic', formula: '$a = r\\cos\\theta, \\quad b = r\\sin\\theta$',
+        text: 'The real and the imaginary part come straight from the length and the angle, from [converting trigonometric to algebraic](!#9).' },
+      { name: 'Multiplication', formula: '$z_1 \\cdot z_2 = r_1 r_2\\,\\text{cis}(\\theta_1 + \\theta_2)$',
+        text: 'Multiply the moduli and add the arguments, as [multiplication and division](!#10) shows.' },
+      { name: 'Division', formula: '$\\displaystyle \\frac{z_1}{z_2} = \\frac{r_1}{r_2}\\,\\text{cis}(\\theta_1 - \\theta_2)$',
+        text: 'Divide the moduli and subtract the arguments, from [multiplication and division](!#10).' },
+      { name: 'Exponential equivalent', formula: '$r\\,\\text{cis}\\,\\theta = re^{i\\theta}$',
+        text: "Euler's formula writes the same number as $re^{i\\theta}$, the link to exponential form noted in [the trigonometric form](!#7)." },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2949,7 +2963,7 @@ const schemas = {
 }
    }
 
-export default function TrigoFormPage({seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function TrigoFormPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3031,7 +3045,7 @@ $$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$$]@`,
           `The form only reads correctly as written: $r$ positive, the same angle in both places, and a plus sign between them.`,
           `@academic[pitfall,aside:true,width:35%:Reading the argument through a minus sign
 Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argument $\\frac{\\pi}{3}$ ignores the minus sign; the form needs a plus. Since cosine is even and sine is odd, the number is $2\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right)$, with argument $-\\frac{\\pi}{3}$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-reading-the-argument-through-a-minus-sign)]@`,
         ],
       },
       {
@@ -3181,11 +3195,16 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="trigonometric-form-formula-summary"
+            title="Trigonometric form formulas"
+            source="/complex-numbers/trigonometric-form"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.obj11.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3194,6 +3213,15 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="trigonometric-form-pitfalls"
+            title="Common pitfalls with the trigonometric form"
+            source="/complex-numbers/trigonometric-form"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // {

@@ -821,6 +821,8 @@ import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-v
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1311,7 +1313,7 @@ For $T(x) = x + 1$: $T(0) = 1 \\neq 0$. Done — no need to check anything else.
 
 @academic[pitfall,aside:true,width:35%:Calling every straight line linear
 Treating $T(x) = 2x + 3$ as linear because its graph is a line fails additivity: $T(1) + T(1) = 10$, while $T(1 + 1) = T(2) = 7$. Only lines through the origin, $T(x) = mx$, are linear maps.
-[Read more](!#9)]@
+[Read more](!#pitfall-calling-every-straight-line-linear)]@
 
 Products of unknowns, powers higher than $1$, absolute values, square roots, and constant terms all break linearity. If the formula for $T$ involves any of these, the function is almost certainly not linear (and a counterexample is usually easy to construct).`,
     before: ``,
@@ -1364,7 +1366,7 @@ Composition is associative: $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. It 
 
 @academic[pitfall,aside:true,width:35%:Multiplying in the order of application
 Writing $[T][S]$ because $T$ acts first fails for $T$ the projection $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $S$ the quarter-turn $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$: $[T][S]\\mathbf{e}_1 = (0, 0)$, but $S(T(\\mathbf{e}_1)) = S(1, 0) = (0, 1)$. The matrix is $[S][T] = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$.
-[Read more](!#9)]@
+[Read more](!#pitfall-multiplying-in-the-order-of-application)]@
 
 When both transformations are represented by [matrices](!/linear-algebra/transformations/matrix-representation), composition corresponds to matrix multiplication: the matrix of $S \\circ T$ is the product of the matrix of $S$ with the matrix of $T$. This is the fundamental reason matrix multiplication is defined as it is — it encodes the composition of the maps the matrices represent.`,
     before: ``,
@@ -1381,7 +1383,7 @@ The inverse, when it exists, is itself linear. If $T^{-1}(\\mathbf{w}_1) = \\mat
 
 @academic[pitfall,aside:true,width:35%:Stopping at a trivial kernel
 Calling $T(x, y) = (x, y, 0)$ from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ invertible because its kernel is $\\{\\mathbf{0}\\}$ skips surjectivity: no $\\mathbf{v}$ has $T(\\mathbf{v}) = (0, 0, 1)$. Since $2 \\neq 3$, no linear map $\\mathbb{R}^2 \\to \\mathbb{R}^3$ is invertible.
-[Read more](!#9)]@
+[Read more](!#pitfall-stopping-at-a-trivial-kernel)]@
 
 When $\\dim(V) = \\dim(W)$ is finite, these two conditions are equivalent — checking either one establishes both. For [matrix](!/linear-algebra/matrix) transformations, invertibility of $T$ corresponds to [invertibility](!/linear-algebra/matrix/inverse) of the matrix $A$.
 
@@ -1416,49 +1418,9 @@ These operations give the set of all linear transformations from $V$ to $W$ the 
 
 The condition $T(\\mathbf{0}) = \\mathbf{0}$ is necessary but not sufficient. Passing it eliminates many non-examples quickly, but a function with $T(\\mathbf{0}) = \\mathbf{0}$ can still fail additivity or homogeneity. The function $T(x) = x|x|$ satisfies $T(0) = 0$ but is not linear.
 
-A component-by-component check works for maps defined by explicit formulas. If $T(x_1, \\dots, x_n) = (f_1(\\mathbf{x}), \\dots, f_m(\\mathbf{x}))$, then $T$ is linear if and only if each component function $f_i$ is a linear expression in $x_1, \\dots, x_n$ — meaning $f_i = a_{i1}x_1 + a_{i2}x_2 + \\cdots + a_{in}x_n$ with no constant term. Any constant, product, power, or nonlinear function appearing in any component disqualifies the entire map.
-
-**Calling every straight line linear**
-
-A function whose graph is a straight line, such as $T(x) = 2x + 3$, is called linear, because in school algebra a "linear function" means exactly that. For a linear map the word is narrower: the line must pass through the origin.
-
-Wrong working: $T(x) = 2x + 3$ has a constant rate of change, so it is taken to be linear, and $T(1 + 1)$ is computed as $T(1) + T(1) = 5 + 5 = 10$.
-
-Right working: directly, $T(1 + 1) = T(2) = 2 \\cdot 2 + 3 = 7 \\neq 10$, so additivity fails and $T$ is not linear. The map $x \\mapsto 2x$ without the constant passes: $2(1 + 1) = 4 = 2 + 2$.
-
-Why it happens: the same word has two meanings. In algebra and calculus, "linear" means first degree, and any constant term is allowed. In linear algebra a constant term is a translation, and translations are not linear.
-
-How to check: evaluate at zero. A linear map must give $T(0) = 0$, while here $T(0) = 3$.
-
-**Multiplying in the order of application**
-
-In $S \\circ T$ the map $T$ acts first, so its matrix is written first, and the matrix of the composition is taken to be $[T][S]$ instead of $[S][T]$.
-
-Wrong working: let $T$ be the projection onto the first axis and $S$ the quarter-turn,
-$$[T] = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}, \\qquad [S] = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}, \\qquad [T][S] = \\begin{pmatrix} 0 & -1 \\\\ 0 & 0 \\end{pmatrix}$$
-which sends $\\mathbf{e}_1$ to $(0, 0)$.
-
-Right working: the matrix that acts first stands on the right.
-$$[S][T] = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$$
-Directly, $S(T(\\mathbf{e}_1)) = S(1, 0) = (0, 1)$ and $S(T(\\mathbf{e}_2)) = S(0, 0) = (0, 0)$, which are exactly the columns of $[S][T]$.
-
-Why it happens: the maps are described in the order they act, first $T$ and then $S$, and the matrices are written down in that same reading order. But a matrix product acts on a vector from the right, so the factor next to $\\mathbf{x}$ acts first.
-
-How to check: apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\mathbf{e}_1))$ computed one map at a time. Here $[T][S]\\mathbf{e}_1 = (0, 0)$ does not match $(0, 1)$.
-
-**Stopping at a trivial kernel**
-
-Injectivity is checked, the kernel turns out to be $\\{\\mathbf{0}\\}$, and $T$ is declared invertible. The shortcut is used even though $V$ and $W$ have different dimensions, so surjectivity is never checked.
-
-Wrong working: for $T: \\mathbb{R}^2 \\to \\mathbb{R}^3$, $T(x, y) = (x, y, 0)$, the equation $T(x, y) = \\mathbf{0}$ forces $x = y = 0$. The kernel is trivial, so $T$ is called invertible.
-
-Right working: the image of $T$ is the plane of vectors with third entry $0$, so $(0, 0, 1)$ is not $T(\\mathbf{v})$ for any $\\mathbf{v}$. $T$ is injective but not surjective, hence not invertible. By rank–nullity, $\\dim \\operatorname{im}(T) = 2 - 0 = 2 < 3$, and no linear map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ can reach all of $\\mathbb{R}^3$.
-
-Why it happens: "either condition is enough" is true only when $\\dim(V) = \\dim(W)$, and the condition on the dimensions is easy to forget once the shortcut is familiar.
-
-How to check: compare the dimensions first. If $\\dim(V) \\neq \\dim(W)$, $T$ is not invertible; if they are equal, either the kernel test or the image test settles it.`,
+A component-by-component check works for maps defined by explicit formulas. If $T(x_1, \\dots, x_n) = (f_1(\\mathbf{x}), \\dots, f_m(\\mathbf{x}))$, then $T$ is linear if and only if each component function $f_i$ is a linear expression in $x_1, \\dots, x_n$ — meaning $f_i = a_{i1}x_1 + a_{i2}x_2 + \\cdots + a_{in}x_n$ with no constant term. Any constant, product, power, or nonlinear function appearing in any component disqualifies the entire map.`,
     before: ``,
-    after: ``,
+    after: `Each slip stops a test too early. A straight-line graph that misses the origin is not linear, the matrix of $S \\circ T$ is $[S][T]$, and a trivial kernel makes a map invertible only when $\\dim(V) = \\dim(W)$. Evaluating at zero, applying the product to $\\mathbf{e}_1$, or comparing the dimensions first catches each slip.`,
     link: ``,
   },
   obj10: {
@@ -1614,10 +1576,56 @@ const schemas = {
       href: '/linear-algebra/visual-tools/matrix-composition-2d',
       linkText: '2D composition explorer',
     }),
+  };  // ScopeCard data (linearity-conditions-scope); every fact is from the section text
+  const linearityScope = {
+    header: { kicker: 'Linear transformations', title: 'Linear or not', lede: 'Both conditions must hold for every choice of vectors and scalars.' },
+    rule: { name: 'Linearity', expr: '$T(\\mathbf{u} + \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})$ and $T(c\\mathbf{v}) = cT(\\mathbf{v})$', condition: 'for all $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c$' },
+    inside: { title: 'Linear', items: [
+      { id: 'refl', expr: '$(a, b) \\mapsto (a, -b)$ with real scalars', why: 'Additive, and keeps every real multiple: the reflection of the plane is linear.' },
+    ] },
+    outside: { title: 'Not linear', items: [
+      { id: 'conj', expr: '$T(z) = \\bar{z}$ on $\\mathbb{C}$ with complex scalars', why: 'Additive, but $T(i \\cdot 1) = -i$ while $i\\,T(1) = i$: homogeneity fails for $c = i$.' },
+      { id: 'few', expr: 'A map checked on a few particular vectors only', why: 'Verifying linearity on specific examples does not suffice; disproving it needs only one counterexample.' },
+    ] },
+    edgeCases: { badge: 'What moves the line', items: [
+      { id: 'scalars', marker: 'scalars', body: 'Which numbers count as scalars is part of the definition. Additivity reads the same in both settings; homogeneity must be checked for the larger set.' },
+    ] },
+  };
+
+
+
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'calling-every-straight-line-linear', name: `Calling every straight line linear`, errorAt: 0,
+        what: `A function whose graph is a straight line, such as $T(x) = 2x + 3$, is called linear, because in school algebra a "linear function" means exactly that. For a linear map the word is narrower: the line must pass through the origin.`,
+        wrong: [`$T(x) = 2x + 3$ has a constant rate of change, so it is taken to be linear, and $T(1 + 1)$ is computed as $T(1) + T(1) = 5 + 5 = 10$.`],
+        right: [`Directly, $T(1 + 1) = T(2) = 2 \\cdot 2 + 3 = 7 \\neq 10$, so additivity fails and $T$ is not linear. The map $x \\mapsto 2x$ without the constant passes: $2(1 + 1) = 4 = 2 + 2$.`],
+        why: `The same word has two meanings. In algebra and calculus, "linear" means first degree, and any constant term is allowed. In linear algebra a constant term is a translation, and translations are not linear.`,
+        check: `Evaluate at zero. A linear map must give $T(0) = 0$, while here $T(0) = 3$.` },
+      { id: 'multiplying-in-the-order-of-application', name: `Multiplying in the order of application`, errorAt: 0,
+        what: `In $S \\circ T$ the map $T$ acts first, so its matrix is written first, and the matrix of the composition is taken to be $[T][S]$ instead of $[S][T]$.`,
+        wrong: [`Let $T$ be the projection onto the first axis and $S$ the quarter-turn,
+$$[T] = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix},$$
+$$[S] = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix},$$
+$$[T][S] = \\begin{pmatrix} 0 & -1 \\\\ 0 & 0 \\end{pmatrix}$$`, `Which sends $\\mathbf{e}_1$ to $(0, 0)$.`],
+        right: [`The matrix that acts first stands on the right.`, `$$[S][T] = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$$`, `Directly, $S(T(\\mathbf{e}_1)) = S(1, 0) = (0, 1)$ and $S(T(\\mathbf{e}_2)) = S(0, 0) = (0, 0)$, which are exactly the columns of $[S][T]$.`],
+        why: `The maps are described in the order they act, first $T$ and then $S$, and the matrices are written down in that same reading order. But a matrix product acts on a vector from the right, so the factor next to $\\mathbf{x}$ acts first.`,
+        check: `Apply the product to $\\mathbf{e}_1$ and compare it with $S(T(\\mathbf{e}_1))$ computed one map at a time. Here $[T][S]\\mathbf{e}_1 = (0, 0)$ does not match $(0, 1)$.` },
+      { id: 'stopping-at-a-trivial-kernel', name: `Stopping at a trivial kernel`, errorAt: 1,
+        what: `Injectivity is checked, the kernel turns out to be $\\{\\mathbf{0}\\}$, and $T$ is declared invertible. The shortcut is used even though $V$ and $W$ have different dimensions, so surjectivity is never checked.`,
+        wrong: [`For $T: \\mathbb{R}^2 \\to \\mathbb{R}^3$, $T(x, y) = (x, y, 0)$, the equation $T(x, y) = \\mathbf{0}$ forces $x = y = 0$.`, `The kernel is trivial, so $T$ is called invertible.`],
+        right: [`For $T: \\mathbb{R}^2 \\to \\mathbb{R}^3$, $T(x, y) = (x, y, 0)$, the equation $T(x, y) = \\mathbf{0}$ forces $x = y = 0$.`, `The image of $T$ is the plane of vectors with third entry $0$, so $(0, 0, 1)$ is not $T(\\mathbf{v})$ for any $\\mathbf{v}$. $T$ is injective but not surjective, hence not invertible. By rank–nullity, $\\dim \\operatorname{im}(T) = 2 - 0 = 2 < 3$, and no linear map from $\\mathbb{R}^2$ to $\\mathbb{R}^3$ can reach all of $\\mathbb{R}^3$.`],
+        why: `"either condition is enough" is true only when $\\dim(V) = \\dim(W)$, and the condition on the dimensions is easy to forget once the shortcut is familiar.`,
+        check: `Compare the dimensions first. If $\\dim(V) \\neq \\dim(W)$, $T$ is not invertible; if they are equal, either the kernel test or the image test settles it.` },
+    ],
   };
 
 return {
   props:{
+    pitfallData,
+      linearityScope,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1638,7 +1646,9 @@ return {
 }
    }
 
-export default function TransformationPropertiesPage({seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function TransformationPropertiesPage({ pitfallData,linearityScope, seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1713,6 +1723,16 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          <DiagramFrame
+            key={'obj1-scope'}
+            id="linearity-conditions-scope"
+            title="The two linearity conditions"
+            source="/linear-algebra/transformations/properties"
+            before={`The card marks what the two conditions cover, what breaks them, and the one choice that moves the boundary: which numbers count as scalars.`}
+            after={`A few vectors cannot prove linearity; one counterexample disproves it.`}
+          >
+            <ScopeCard data={linearityScope} variant="boundary" theme={scopeTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1809,6 +1829,15 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="transformation-property-pitfalls"
+            title="Common pitfalls with the properties of transformations"
+            source="/linear-algebra/transformations/properties"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

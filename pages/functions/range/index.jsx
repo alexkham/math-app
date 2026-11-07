@@ -882,6 +882,7 @@ import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1251,7 +1252,7 @@ This requires $y \\neq 0$. The range is $(-\\infty, 0) \\cup (0, \\infty)$.
 
 @academic[pitfall,aside:true,width:35%:Forgetting that a square root is never negative
 Solving $y = \\sqrt{x}$ to $x = y^2$ and stopping gives range $(-\\infty, \\infty)$, since every $y$ yields an $x$. Yet $y = -2$ gives $x = 4$, and $\\sqrt{4} = 2$, not $-2$. The range is $[0, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-that-a-square-root-is-never-negative)]@
 
 Radical functions need one extra step in this method. Solving $y = \\sqrt{x - 1}$ for $x$ means squaring both sides, which gives $x = y^2 + 1$, a formula that produces a real $x$ for every real $y$. The squared equation and the original are not the same statement: the original also carries the sign of the square root, which the solved form no longer shows.
 
@@ -1271,7 +1272,7 @@ Monotonic functions — those that only increase or only decrease — are easier
 
 @academic[pitfall,aside:true,width:35%:Using only the endpoint outputs
 Taking $f(x) = x^2$ on $[-1, 3]$ to have range $[f(-1), f(3)] = [1, 9]$ misses the vertex inside the interval, where $f(0) = 0$. The range is $[0, 9]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-only-the-endpoint-outputs)]@
 
 On a restricted domain $[a, b]$, the two endpoint outputs $f(a)$ and $f(b)$ always belong to the range, since both endpoints are inputs. What lies between them depends on how the function moves across the interval: it may rise steadily, fall steadily, or turn one or more times before it reaches the far end.
 
@@ -1321,7 +1322,7 @@ Quadratic functions $f(x) = ax^2 + bx + c$ have range $[k, \\infty)$ when $a > 0
 
 @academic[pitfall,aside:true,width:35%:Taking the constant term as the vertex height
 For $f(x) = x^2 - 4x + 1$, reading the range as $[1, \\infty)$ uses $f(0) = 1$, the $y$-intercept. The vertex is at $x = 2$, with $f(2) = 4 - 8 + 1 = -3$, so the range is $[-3, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-constant-term-as-the-vertex-height)]@
 
 For a quadratic in standard form, the vertex height $k$ does not appear in the formula; it has to be computed. The vertex sits at $x = -\\dfrac{b}{2a}$, and substituting that input back into $f$ gives its height. Completing the square reaches the same number by rewriting the function as $a(x - h)^2 + k$.
 
@@ -1355,7 +1356,7 @@ Horizontal transformations — shifts, stretches, reflections in the $y$-axis �
 
 @academic[pitfall,aside:true,width:35%:Shifting before scaling
 For $g(x) = 2\\sin(x) + 5$, adding $5$ to $[-1, 1]$ first and then doubling gives $[8, 12]$. Each output is $2y + 5$ with $y$ in $[-1, 1]$, running from $2(-1) + 5 = 3$ to $2(1) + 5 = 7$: the range is $[3, 7]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-shifting-before-scaling)]@
 
 Combining transformations requires tracking each effect. For $g(x) = 2f(x - 3) + 5$, the range of $f$ is first scaled by $2$, then shifted up by $5$. The horizontal shift by $3$ does not affect the range.
 
@@ -1415,57 +1416,9 @@ Understanding this relationship is essential for correctly defining and working 
 
   obj12: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when finding the range of a function. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Forgetting that a square root is never negative**
-
-The algebraic method is applied to a radical function: the equation $y = f(x)$ is squared to solve for $x$, and the range is read from the solved form alone. Squaring hides the fact that a square root only produces non-negative outputs.
-
-Wrong working: $y = \\sqrt{x}$ gives $x = y^2$. This produces a real $x$ for every real $y$, so the range is given as $(-\\infty, \\infty)$.
-
-Right working: the original equation also requires $y \\geq 0$, because $\\sqrt{x}$ is never negative. Every $y \\geq 0$ is reached, at $x = y^2$, so the range is $[0, \\infty)$.
-
-Why it happens: the solved form looks like the end of the method, and squaring both sides feels like a harmless step. It is not reversible: $y = 2$ and $y = -2$ both square to $4$.
-
-How to check: substitute the solved $x$ back into the original function. For $y = -2$, $x = 4$, and $\\sqrt{4} = 2$, not $-2$, so $-2$ is not in the range.
-
-**Using only the endpoint outputs**
-
-On a restricted domain $[a, b]$, the range is taken to be the interval between $f(a)$ and $f(b)$. That rule holds for monotonic functions only; a function that turns inside the interval can go higher or lower than both endpoints.
-
-Wrong working: $f(x) = x^2$ on $[-1, 3]$ has $f(-1) = 1$ and $f(3) = 9$, so the range is given as $[1, 9]$.
-
-Right working: the parabola falls from $x = -1$ to its vertex at $x = 0$ and then rises to $x = 3$. The lowest output is $f(0) = 0$ and the highest is $f(3) = 9$, so the range is $[0, 9]$.
-
-Why it happens: the endpoint rule is quick and correct for the increasing and decreasing functions it is usually taught with, and a sketch is often skipped.
-
-How to check: look for turning points inside the interval. Compare the outputs there with the endpoint outputs, and take the smallest and largest of all of them.
-
-**Taking the constant term as the vertex height**
-
-For a quadratic $ax^2 + bx + c$, the number $c$ is used as the boundary of the range. But $c = f(0)$ is the $y$-intercept, and the boundary of the range is the height of the vertex.
-
-Wrong working: $f(x) = x^2 - 4x + 1$ opens upward, and its range is given as $[1, \\infty)$.
-
-Right working: the vertex is at $x = -\\dfrac{-4}{2 \\cdot 1} = 2$, and $f(2) = 4 - 8 + 1 = -3$. The range is $[-3, \\infty)$. Completing the square agrees: $x^2 - 4x + 1 = (x - 2)^2 - 3$.
-
-Why it happens: in vertex form $a(x - h)^2 + k$ the constant at the end is the vertex height, and that reading is carried over to standard form, where the constant means something else.
-
-How to check: evaluate the function at one more input, such as the vertex. Here $f(2) = -3$ is an output below $1$, so $[1, \\infty)$ cannot be the range.
-
-**Shifting before scaling**
-
-When a function is both stretched and shifted vertically, the shift is applied to the range first and the stretch second. The stretch then scales the shift as well.
-
-Wrong working: for $g(x) = 2\\sin(x) + 5$, the range $[-1, 1]$ of $\\sin$ is shifted to $[4, 6]$ and then doubled to $[8, 12]$.
-
-Right working: the formula doubles each output and then adds $5$. Doubling gives $[-2, 2]$, and adding $5$ gives $[3, 7]$.
-
-Why it happens: the $+5$ is the easiest part of the formula to spot, so it is handled first, without checking the order in which the formula actually acts on an output.
-
-How to check: compute the outputs at the extremes of the parent. $\\sin(x) = 1$ gives $2(1) + 5 = 7$, and $\\sin(x) = -1$ gives $2(-1) + 5 = 3$; $12$ never appears.`,
+    content: `Four mistakes come up again and again when finding the range of a function. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip claims outputs the function never reaches, or misses some it does. A square root is never negative, a minimum can lie inside the interval rather than at its ends, the vertex height comes from $f$ at the vertex and not from the constant term, and $2\\sin(x) + 5$ doubles before it adds. Substituting back, or evaluating at the turning points and at the extremes of the parent function, catches each slip.`,
     link: '',
   },
 
@@ -1756,8 +1709,40 @@ const faqQuestions = {
     footnote: 'The range is always a subset of the codomain; the two are equal exactly when the function is onto.',
   };
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'forgetting-that-a-square-root-is-never-negative', name: `Forgetting that a square root is never negative`, errorAt: 1,
+        what: `The algebraic method is applied to a radical function: the equation $y = f(x)$ is squared to solve for $x$, and the range is read from the solved form alone. Squaring hides the fact that a square root only produces non-negative outputs.`,
+        wrong: [`$y = \\sqrt{x}$ gives $x = y^2$.`, `This produces a real $x$ for every real $y$, so the range is given as $(-\\infty, \\infty)$.`],
+        right: [`$y = \\sqrt{x}$ gives $x = y^2$.`, `The original equation also requires $y \\geq 0$, because $\\sqrt{x}$ is never negative. Every $y \\geq 0$ is reached, at $x = y^2$, so the range is $[0, \\infty)$.`],
+        why: `The solved form looks like the end of the method, and squaring both sides feels like a harmless step. It is not reversible: $y = 2$ and $y = -2$ both square to $4$.`,
+        check: `Substitute the solved $x$ back into the original function. For $y = -2$, $x = 4$, and $\\sqrt{4} = 2$, not $-2$, so $-2$ is not in the range.` },
+      { id: 'using-only-the-endpoint-outputs', name: `Using only the endpoint outputs`, errorAt: 0,
+        what: `On a restricted domain $[a, b]$, the range is taken to be the interval between $f(a)$ and $f(b)$. That rule holds for monotonic functions only; a function that turns inside the interval can go higher or lower than both endpoints.`,
+        wrong: [`$f(x) = x^2$ on $[-1, 3]$ has $f(-1) = 1$ and $f(3) = 9$, so the range is given as $[1, 9]$.`],
+        right: [`The parabola falls from $x = -1$ to its vertex at $x = 0$ and then rises to $x = 3$. The lowest output is $f(0) = 0$ and the highest is $f(3) = 9$, so the range is $[0, 9]$.`],
+        why: `The endpoint rule is quick and correct for the increasing and decreasing functions it is usually taught with, and a sketch is often skipped.`,
+        check: `Look for turning points inside the interval. Compare the outputs there with the endpoint outputs, and take the smallest and largest of all of them.` },
+      { id: 'taking-the-constant-term-as-the-vertex-height', name: `Taking the constant term as the vertex height`, errorAt: 0,
+        what: `For a quadratic $ax^2 + bx + c$, the number $c$ is used as the boundary of the range. But $c = f(0)$ is the $y$-intercept, and the boundary of the range is the height of the vertex.`,
+        wrong: [`$f(x) = x^2 - 4x + 1$ opens upward, and its range is given as $[1, \\infty)$.`],
+        right: [`The vertex is at $x = -\\dfrac{-4}{2 \\cdot 1} = 2$, and $f(2) = 4 - 8 + 1 = -3$. The range is $[-3, \\infty)$. Completing the square agrees: $x^2 - 4x + 1 = (x - 2)^2 - 3$.`],
+        why: `In vertex form $a(x - h)^2 + k$ the constant at the end is the vertex height, and that reading is carried over to standard form, where the constant means something else.`,
+        check: `Evaluate the function at one more input, such as the vertex. Here $f(2) = -3$ is an output below $1$, so $[1, \\infty)$ cannot be the range.` },
+      { id: 'shifting-before-scaling', name: `Shifting before scaling`, errorAt: 1,
+        what: `When a function is both stretched and shifted vertically, the shift is applied to the range first and the stretch second. The stretch then scales the shift as well.`,
+        wrong: [`For $g(x) = 2\\sin(x) + 5$,`, `The range $[-1, 1]$ of $\\sin$ is shifted to $[4, 6]$ and then doubled to $[8, 12]$.`],
+        right: [`For $g(x) = 2\\sin(x) + 5$,`, `The formula doubles each output and then adds $5$. Doubling gives $[-2, 2]$, and adding $5$ gives $[3, 7]$.`],
+        why: `The $+5$ is the easiest part of the formula to spot, so it is handled first, without checking the order in which the formula actually acts on an output.`,
+        check: `Compute the outputs at the extremes of the parent. $\\sin(x) = 1$ gives $2(1) + 5 = 7$, and $\\sin(x) = -1$ gives $2(-1) + 5 = 3$; $12$ never appears.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     rangeCodomainComparison,
     rangeMethodDecision,
     rangeByTypeOutline,
@@ -1782,7 +1767,7 @@ const faqQuestions = {
     }
    }
 
-export default function RangePage({rangeCodomainComparison, rangeMethodDecision, rangeByTypeOutline, 
+export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMethodDecision, rangeByTypeOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -2017,6 +2002,15 @@ export default function RangePage({rangeCodomainComparison, rangeMethodDecision,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="range-pitfalls"
+            title="Common pitfalls in finding a range"
+            source="/functions/range"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

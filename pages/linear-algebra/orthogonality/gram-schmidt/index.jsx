@@ -1849,6 +1849,7 @@ import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2247,7 +2248,7 @@ Check: $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0
 
 @academic[pitfall,aside:true,width:35%:Dropping the denominator
 Subtracting $(\\mathbf{u}_1 \\cdot \\mathbf{v}_2)\\,\\mathbf{u}_1 = 1 \\cdot (1, 1, 0)$ gives $(0, -1, 1)$, whose dot product with $\\mathbf{u}_1$ is $-1$, not $0$. Dividing by $\\mathbf{u}_1 \\cdot \\mathbf{u}_1 = 2$ gives $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-denominator)]@
 
 The coefficient in front of $\\mathbf{u}_1$ is a ratio of two dot products. The numerator $\\mathbf{u}_1 \\cdot \\mathbf{v}_2$ measures how far $\\mathbf{v}_2$ reaches along $\\mathbf{u}_1$, and the denominator $\\mathbf{u}_1 \\cdot \\mathbf{u}_1 = \\|\\mathbf{u}_1\\|^2$ accounts for the length of $\\mathbf{u}_1$ itself, so rescaling $\\mathbf{u}_1$ leaves the subtracted vector unchanged. When $\\mathbf{u}_1$ is a unit vector the denominator equals $1$, which is why the formula becomes shorter once the vectors are normalized.`,
     before: ``,
@@ -2266,7 +2267,7 @@ $$\\mathbf{u}_1 = \\mathbf{v}_1$$]@
 
 @academic[pitfall,aside:true,width:35%:Projecting onto the original vectors
 Projecting $\\mathbf{v}_3 = (0, 1, 1)$ onto $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$ instead of onto $\\mathbf{u}_1, \\mathbf{u}_2$ gives $(-1, \\frac{1}{2}, \\frac{1}{2})$, whose dot product with $\\mathbf{u}_1$ is $-\\frac{1}{2}$. Projecting onto the $\\mathbf{u}_i$ gives $\\mathbf{u}_3 = (-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3})$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-projecting-onto-the-original-vectors)]@
 
 At each step, $\\mathbf{v}_j$ has its projections onto all previously computed orthogonal vectors subtracted. What remains is the component of $\\mathbf{v}_j$ perpendicular to $\\text{Span}\\{\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}\\}$.
 
@@ -2328,7 +2329,7 @@ Each vector is divided by its length, making $\\|\\mathbf{q}_i\\| = 1$ while pre
 
 @academic[pitfall,aside:true,width:35%:Normalizing the inputs first
 Scaling $\\mathbf{v}_1, \\mathbf{v}_2$ to $\\frac{1}{\\sqrt{2}}(1, 1, 0)$ and $\\frac{1}{\\sqrt{2}}(1, 0, 1)$ before orthogonalizing gives $\\frac{1}{\\sqrt{2}}(\\frac{1}{2}, -\\frac{1}{2}, 1)$, of length $\\frac{\\sqrt{3}}{2}$, not $1$. Normalizing after the subtraction gives $\\mathbf{q}_2 = \\frac{1}{\\sqrt{6}}(1, -1, 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-normalizing-the-inputs-first)]@
 
 Normalization can be done at each step (normalize $\\mathbf{u}_j$ immediately before moving to $\\mathbf{v}_{j+1}$) or all at the end. The result is the same in exact arithmetic. In practice, normalizing at each step is slightly preferable for numerical stability, as it keeps the vectors well-scaled throughout the computation.`,
     before: ``,
@@ -2429,7 +2430,7 @@ $$\\mathbf{u}_j = \\mathbf{v}_j - \\sum_{i=1}^{j-1} \\frac{\\langle \\mathbf{u}_
 
 @academic[pitfall,aside:true,width:35%:Using the dot product of coefficients
 Treating $1$ and $x^2$ as coefficient lists $(1, 0, 0)$ and $(0, 0, 1)$ gives dot product $0$, so $x^2$ is kept unchanged, although $\\int_{-1}^{1} 1 \\cdot x^2\\,dx = \\frac{2}{3} \\neq 0$. With the integral inner product the third vector is $x^2 - \\frac{1}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-dot-product-of-coefficients)]@
 
 Orthogonalizing $\\{1, x, x^2\\}$ in the polynomial space $\\mathcal{P}_2$ with the inner product $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$ produces the Legendre polynomials (up to normalization): $P_0(x) = 1$, $P_1(x) = x$, $P_2(x) = \\frac{1}{2}(3x^2 - 1)$. The polynomial $x$ is already orthogonal to $1$ under this inner product (the integral of an odd function over a symmetric interval is zero), so the first subtraction has no effect.
 
@@ -2447,73 +2448,9 @@ On the function space $C[0, 2\\pi]$ with $\\langle f, g \\rangle = \\int_0^{2\\p
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Four slips account for many wrong Gram-Schmidt computations. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the denominator**
-
-The coefficient of $\\mathbf{u}_1$ is taken as the dot product $\\mathbf{u}_1 \\cdot \\mathbf{v}_2$ alone, as if $\\mathbf{u}_1$ had length $1$. The subtracted vector then has the wrong length, and what remains is not perpendicular to $\\mathbf{u}_1$.
-
-Wrong working: with $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$,
-$$\\mathbf{u}_2 = \\mathbf{v}_2 - (\\mathbf{u}_1 \\cdot \\mathbf{v}_2)\\,\\mathbf{u}_1 = (1, 0, 1) - 1 \\cdot (1, 1, 0) = (0, -1, 1)$$
-and $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0 - 1 + 0 = -1$.
-
-Right working: $\\mathbf{u}_1 \\cdot \\mathbf{u}_1 = 2$, so
-$$\\mathbf{u}_2 = (1, 0, 1) - \\frac{1}{2}(1, 1, 0) = \\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right)$$
-and $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.
-
-Why it happens: the orthonormal version of the formula, $(\\mathbf{q}_i \\cdot \\mathbf{v}_j)\\,\\mathbf{q}_i$, has no denominator, and it is used for vectors that have not been normalized.
-
-How to check: take the dot product of the new vector with every earlier one. Each product must be $0$.
-
-**Projecting onto the original vectors**
-
-At step $j$, the projections are taken onto the inputs $\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}$ instead of onto the orthogonal vectors $\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}$ already built. At $j = 2$ nothing changes, because $\\mathbf{u}_1 = \\mathbf{v}_1$, so the error first shows at $j = 3$.
-
-Wrong working: with $\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$ and $\\mathbf{v}_3 = (0, 1, 1)$,
-$$\\mathbf{v}_3 - \\frac{\\mathbf{v}_1 \\cdot \\mathbf{v}_3}{\\mathbf{v}_1 \\cdot \\mathbf{v}_1}\\,\\mathbf{v}_1 - \\frac{\\mathbf{v}_2 \\cdot \\mathbf{v}_3}{\\mathbf{v}_2 \\cdot \\mathbf{v}_2}\\,\\mathbf{v}_2 = (0, 1, 1) - \\frac{1}{2}(1, 1, 0) - \\frac{1}{2}(1, 0, 1) = \\left(-1, \\frac{1}{2}, \\frac{1}{2}\\right)$$
-Its dot product with $\\mathbf{u}_1 = (1, 1, 0)$ is $-1 + \\frac{1}{2} = -\\frac{1}{2}$, so it is not perpendicular to $\\mathbf{u}_1$.
-
-Right working: with $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$, the dot products are $\\mathbf{u}_2 \\cdot \\mathbf{v}_3 = \\frac{1}{2}$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_2 = \\frac{3}{2}$, so
-$$\\mathbf{u}_3 = (0, 1, 1) - \\frac{1}{2}(1, 1, 0) - \\frac{1}{3}\\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right) = \\left(-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$$
-Then $\\mathbf{u}_1 \\cdot \\mathbf{u}_3 = -\\frac{2}{3} + \\frac{2}{3} + 0 = 0$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_3 = -\\frac{1}{3} - \\frac{1}{3} + \\frac{2}{3} = 0$.
-
-Why it happens: the inputs are the vectors the problem states, so they are the ones at hand. But a sum of projections onto single vectors gives the projection onto their span only when those vectors are orthogonal, and $\\mathbf{v}_1 \\cdot \\mathbf{v}_2 = 1 \\neq 0$.
-
-How to check: test the new vector against all earlier $\\mathbf{u}_i$, not only the last one. The wrong vector above fails against $\\mathbf{u}_1$.
-
-**Normalizing the inputs first**
-
-The inputs are scaled to unit length before the process runs, in the hope that the output will then be orthonormal. The subtractions change the lengths again: each $\\mathbf{u}_j$ with $j \\geq 2$ is shorter than the vector it came from, unless that vector was already perpendicular to the earlier ones.
-
-Wrong working: scale to $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 0)$ and $\\frac{1}{\\sqrt{2}}(1, 0, 1)$. The dot product of the two is $\\frac{1}{2}$, so the second output is
-$$\\frac{1}{\\sqrt{2}}(1, 0, 1) - \\frac{1}{2} \\cdot \\frac{1}{\\sqrt{2}}(1, 1, 0) = \\frac{1}{\\sqrt{2}}\\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right)$$
-of length $\\frac{1}{\\sqrt{2}} \\cdot \\sqrt{\\frac{3}{2}} = \\frac{\\sqrt{3}}{2}$, not $1$.
-
-Right working: orthogonalize first, $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$ with $\\|\\mathbf{u}_2\\| = \\sqrt{\\frac{3}{2}}$, then divide:
-$$\\mathbf{q}_2 = \\frac{\\mathbf{u}_2}{\\|\\mathbf{u}_2\\|} = \\frac{1}{\\sqrt{6}}(1, -1, 2)$$
-which has length $\\frac{\\sqrt{1 + 1 + 4}}{\\sqrt{6}} = 1$.
-
-Why it happens: normalization looks like a preparation step that can be done at any point, but subtracting a projection shortens a vector.
-
-How to check: compute the length of every output vector. In an orthonormal set each length is exactly $1$, and here the second one is about $0.87$.
-
-**Using the dot product of coefficients**
-
-In a polynomial space with an integral inner product, the polynomials are written as lists of coefficients and the ordinary dot product is used. Under that dot product $1, x, x^2$ are already orthonormal, so the process changes nothing.
-
-Wrong working: $1 \\to (1, 0, 0)$, $x \\to (0, 1, 0)$ and $x^2 \\to (0, 0, 1)$. All dot products are $0$, so the output is $1, x, x^2$ unchanged. But
-$$\\langle 1, x^2 \\rangle = \\int_{-1}^{1} x^2\\,dx = \\frac{2}{3} \\neq 0$$
-so $1$ and $x^2$ are not orthogonal under the inner product of the problem.
-
-Right working: $\\langle 1, 1 \\rangle = 2$, $\\langle 1, x^2 \\rangle = \\frac{2}{3}$ and $\\langle x, x^2 \\rangle = \\int_{-1}^{1} x^3\\,dx = 0$, so the third vector is
-$$x^2 - \\frac{2/3}{2} \\cdot 1 - 0 \\cdot x = x^2 - \\frac{1}{3}$$
-which is $\\frac{2}{3}P_2(x)$.
-
-Why it happens: in $\\mathbb{R}^n$ the dot product is the only inner product in use, and a coefficient list looks exactly like a vector in $\\mathbb{R}^3$.
-
-How to check: compute one inner product of the result with an earlier vector, using the integral. Here $\\int_{-1}^{1} \\left(x^2 - \\frac{1}{3}\\right) dx = \\frac{2}{3} - \\frac{2}{3} = 0$.`,
+    content: `Four slips account for many wrong Gram-Schmidt computations. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip breaks the orthogonality that Gram-Schmidt builds. Each projection divides by $\\mathbf{u}_i \\cdot \\mathbf{u}_i$, projections are taken onto the new orthogonal vectors rather than the inputs, normalizing comes after the subtractions, and the inner product of the space is used throughout, such as an integral for polynomials. Taking the inner product of each new vector with every earlier one catches each slip.`,
     link: ``,
   },
 }
@@ -2685,8 +2622,55 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-denominator', name: `Dropping the denominator`, errorAt: 1,
+        what: `The coefficient of $\\mathbf{u}_1$ is taken as the dot product $\\mathbf{u}_1 \\cdot \\mathbf{v}_2$ alone, as if $\\mathbf{u}_1$ had length $1$. The subtracted vector then has the wrong length, and what remains is not perpendicular to $\\mathbf{u}_1$.`,
+        wrong: [`With $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$,`, `$$\\mathbf{u}_2 = \\mathbf{v}_2 - (\\mathbf{u}_1 \\cdot \\mathbf{v}_2)\\,\\mathbf{u}_1$$
+$$= (1, 0, 1) - 1 \\cdot (1, 1, 0)$$
+$$= (0, -1, 1)$$`, `And $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0 - 1 + 0 = -1$.`],
+        right: [`With $\\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{v}_2 = (1, 0, 1)$,`, `$\\mathbf{u}_1 \\cdot \\mathbf{u}_1 = 2$, so
+$$\\mathbf{u}_2 = (1, 0, 1) - \\frac{1}{2}(1, 1, 0) = \\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right)$$`, `And $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = \\frac{1}{2} - \\frac{1}{2} + 0 = 0$.`],
+        why: `The orthonormal version of the formula, $(\\mathbf{q}_i \\cdot \\mathbf{v}_j)\\,\\mathbf{q}_i$, has no denominator, and it is used for vectors that have not been normalized.`,
+        check: `Take the dot product of the new vector with every earlier one. Each product must be $0$.` },
+      { id: 'projecting-onto-the-original-vectors', name: `Projecting onto the original vectors`, errorAt: 1,
+        what: `At step $j$, the projections are taken onto the inputs $\\mathbf{v}_1, \\dots, \\mathbf{v}_{j-1}$ instead of onto the orthogonal vectors $\\mathbf{u}_1, \\dots, \\mathbf{u}_{j-1}$ already built. At $j = 2$ nothing changes, because $\\mathbf{u}_1 = \\mathbf{v}_1$, so the error first shows at $j = 3$.`,
+        wrong: [`With $\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$ and $\\mathbf{v}_3 = (0, 1, 1)$,`, `$$\\mathbf{v}_3 - \\frac{\\mathbf{v}_1 \\cdot \\mathbf{v}_3}{\\mathbf{v}_1 \\cdot \\mathbf{v}_1}\\,\\mathbf{v}_1$$
+$$- \\frac{\\mathbf{v}_2 \\cdot \\mathbf{v}_3}{\\mathbf{v}_2 \\cdot \\mathbf{v}_2}\\,\\mathbf{v}_2 = (0, 1, 1)$$
+$$- \\frac{1}{2}(1, 1, 0) - \\frac{1}{2}(1, 0, 1)$$
+$$= \\left(-1, \\frac{1}{2}, \\frac{1}{2}\\right)$$`, `Its dot product with $\\mathbf{u}_1 = (1, 1, 0)$ is $-1 + \\frac{1}{2} = -\\frac{1}{2}$, so it is not perpendicular to $\\mathbf{u}_1$.`],
+        right: [`With $\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$ and $\\mathbf{v}_3 = (0, 1, 1)$,`, `With $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$, the dot products are $\\mathbf{u}_2 \\cdot \\mathbf{v}_3 = \\frac{1}{2}$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_2 = \\frac{3}{2}$, so
+$$\\mathbf{u}_3$$
+$$= (0, 1, 1) - \\frac{1}{2}(1, 1, 0)$$
+$$- \\frac{1}{3}\\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right)$$
+$$= \\left(-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$$`, `Then $\\mathbf{u}_1 \\cdot \\mathbf{u}_3 = -\\frac{2}{3} + \\frac{2}{3} + 0 = 0$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_3 = -\\frac{1}{3} - \\frac{1}{3} + \\frac{2}{3} = 0$.`],
+        why: `The inputs are the vectors the problem states, so they are the ones at hand. But a sum of projections onto single vectors gives the projection onto their span only when those vectors are orthogonal, and $\\mathbf{v}_1 \\cdot \\mathbf{v}_2 = 1 \\neq 0$.`,
+        check: `Test the new vector against all earlier $\\mathbf{u}_i$, not only the last one. The wrong vector above fails against $\\mathbf{u}_1$.` },
+      { id: 'normalizing-the-inputs-first', name: `Normalizing the inputs first`, errorAt: 0,
+        what: `The inputs are scaled to unit length before the process runs, in the hope that the output will then be orthonormal. The subtractions change the lengths again: each $\\mathbf{u}_j$ with $j \\geq 2$ is shorter than the vector it came from, unless that vector was already perpendicular to the earlier ones.`,
+        wrong: [`Scale to $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 0)$ and $\\frac{1}{\\sqrt{2}}(1, 0, 1)$. The dot product of the two is $\\frac{1}{2}$, so the second output is
+$$\\frac{1}{\\sqrt{2}}(1, 0, 1)$$
+$$- \\frac{1}{2} \\cdot \\frac{1}{\\sqrt{2}}(1, 1, 0) = \\frac{1}{\\sqrt{2}}\\left(\\frac{1}{2}, -\\frac{1}{2}, 1\\right)$$`, `Of length $\\frac{1}{\\sqrt{2}} \\cdot \\sqrt{\\frac{3}{2}} = \\frac{\\sqrt{3}}{2}$, not $1$.`],
+        right: [`Orthogonalize first, $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$ with $\\|\\mathbf{u}_2\\| = \\sqrt{\\frac{3}{2}}$, then divide:
+$$\\mathbf{q}_2 = \\frac{\\mathbf{u}_2}{\\|\\mathbf{u}_2\\|} = \\frac{1}{\\sqrt{6}}(1, -1, 2)$$`, `Which has length $\\frac{\\sqrt{1 + 1 + 4}}{\\sqrt{6}} = 1$.`],
+        why: `Normalization looks like a preparation step that can be done at any point, but subtracting a projection shortens a vector.`,
+        check: `Compute the length of every output vector. In an orthonormal set each length is exactly $1$, and here the second one is about $0.87$.` },
+      { id: 'using-the-dot-product-of-coefficients', name: `Using the dot product of coefficients`, errorAt: 0,
+        what: `In a polynomial space with an integral inner product, the polynomials are written as lists of coefficients and the ordinary dot product is used. Under that dot product $1, x, x^2$ are already orthonormal, so the process changes nothing.`,
+        wrong: [`$1 \\to (1, 0, 0)$, $x \\to (0, 1, 0)$ and $x^2 \\to (0, 0, 1)$. All dot products are $0$, so the output is $1, x, x^2$ unchanged. But
+$$\\langle 1, x^2 \\rangle = \\int_{-1}^{1} x^2\\,dx = \\frac{2}{3} \\neq 0$$`, `So $1$ and $x^2$ are not orthogonal under the inner product of the problem.`],
+        right: [`$\\langle 1, 1 \\rangle = 2$, $\\langle 1, x^2 \\rangle = \\frac{2}{3}$ and $\\langle x, x^2 \\rangle = \\int_{-1}^{1} x^3\\,dx = 0$, so the third vector is
+$$x^2 - \\frac{2/3}{2} \\cdot 1 - 0 \\cdot x = x^2 - \\frac{1}{3}$$`, `Which is $\\frac{2}{3}P_2(x)$.`],
+        why: `In $\\mathbb{R}^n$ the dot product is the only inner product in use, and a coefficient list looks exactly like a vector in $\\mathbb{R}^3$.`,
+        check: `Compute one inner product of the result with an earlier vector, using the integral. Here $\\int_{-1}^{1} \\left(x^2 - \\frac{1}{3}\\right) dx = \\frac{2}{3} - \\frac{2}{3} = 0$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2708,7 +2692,7 @@ const schemas = {
    }
 
 // export default function GramSchmidtPage({seoData,sectionsContent , introContent}) {
-export default function GramSchmidtsPage({
+export default function GramSchmidtsPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2933,6 +2917,15 @@ Under $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$, the cosine of the
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="gram-schmidt-pitfalls"
+            title="Common pitfalls with the Gram-Schmidt process"
+            source="/linear-algebra/orthogonality/gram-schmidt"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

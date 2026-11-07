@@ -15,6 +15,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -222,7 +224,7 @@ This page explores contradictions in detail, examining their properties, relatio
 
 @academic[pitfall,aside:true,width:35%:Judging from a single row
 Calling $P \\land Q$ a contradiction because it is F at $P = T$, $Q = F$ ignores the row $P = T$, $Q = T$, where it is T. A contradiction is F in every row; $P \\land Q$ is a contingency.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-judging-from-a-single-row)]@
 To decide whether a formula is a contradiction, build its full truth table: a formula with $n$ variables has $2^n$ rows, one for each assignment of truth values. The verdict is read from the column under the main connective. $P \\land \\neg P$ has a single variable and two rows, and its column reads F, F.
 `
     },
@@ -295,7 +297,7 @@ To decide whether a formula is a contradiction, build its full truth table: a fo
           
 @academic[pitfall,aside:true,width:35%:Pushing the negation in without flipping the connective
 Rewriting $\\neg(P \\lor \\neg P)$ as $\\neg P \\lor \\neg\\neg P$ gives $\\neg P \\lor P$, which is T in both rows, a tautology. De Morgan's law turns the $\\lor$ into $\\land$: $\\neg P \\land P$, which is F in both rows.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-pushing-the-negation-in-without-flipping-the-connective)]@
 In each of these formulas the negation sign stands in front of a parenthesis, so its scope is the whole law inside it. There are two ways to confirm that the result is a contradiction. One is to evaluate the law first and then negate its entire column. The other is to move the negation inward step by step, with De Morgan's laws and double negation, until it reaches the single letters. Both routes must end with F in every row.
 
           These contradictions are the logical foundation of proof by contradiction methods, where assuming the negation of the statement to be proved leads to a contradiction, thereby validating the original statement.
@@ -367,7 +369,7 @@ style="display: block; margin: 0 auto; fill:none; stroke:none; fill-rule:evenodd
      description2:       
      `@academic[pitfall,aside:true,width:35%:Negating a formula that is not a tautology
 Taking $\\neg(P \\to Q)$ for a contradiction because $P \\to Q$ is not a tautology fails at $P = T$, $Q = F$, where $\\neg(P \\to Q)$ is T. A contingency negates to a contingency: $\\neg(P \\to Q)$ is T in one row and F in the other three.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-negating-a-formula-that-is-not-a-tautology)]@
 These two related and opposite concepts exist in perfect duality through negation as shown in the diagram – the negation of any [tautology](!/logic/propositional-logic/semantics/tautology) produces a contradiction, and negating any contradiction creates a [tautology](!/logic/propositional-logic/semantics/tautology). This relationship reveals a fundamental symmetry in logical reasoning.
      
      This duality plays a crucial role in logical analysis. Tautologies provide the foundation for valid arguments and proofs, as they represent statements that must necessarily be true. Contradictions enable powerful proof techniques like reductio ad absurdum, where we disprove statements by showing they lead to contradictions. Together, they establish the boundary conditions of logical reasoning – what must be true and what cannot be true – providing the fixed points around which all logical deduction revolves in propositional logic.`
@@ -377,55 +379,8 @@ These two related and opposite concepts exist in perfect duality through negatio
 
     pitfalls:{
       title:'Common Pitfalls',
-      description:`Four slips account for many wrong answers about contradictions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Judging from a single row**
-
-A formula is evaluated in one assignment, comes out false there, and is declared a contradiction. A contradiction must be false in every assignment; a formula that is false in some rows and true in others is a contingency.
-
-Wrong working: at $P = T$, $Q = F$ the formula $P \\land Q$ is $T \\land F$, which is F. So $P \\land Q$ is called a contradiction.
-
-Right working: for $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\land Q$ takes the values T, F, F, F. The first row is T, so $P \\land Q$ is satisfiable: it is a contingency, not a contradiction.
-
-Why it happens: an ordinary false statement and a contradiction both come out F, and the checking stops at the first F. The word "every" in the definition is easy to skip.
-
-How to check: look for one row where the formula is T. If such a row exists, the formula is not a contradiction.
-
-**Pushing the negation in without flipping the connective**
-
-To simplify a negated law, the negation is moved inside the parentheses and applied to each part, but the connective between the parts is kept. De Morgan's laws require the connective to change as well: $\\lor$ becomes $\\land$, and $\\land$ becomes $\\lor$.
-
-Wrong working: $\\neg(P \\lor \\neg P)$ becomes $\\neg P \\lor \\neg\\neg P$, which is $\\neg P \\lor P$. At $P = T$ this is $F \\lor T$, which is T, and at $P = F$ it is $T \\lor F$, which is T. The negated law of excluded middle comes out as a tautology.
-
-Right working: $\\neg(P \\lor \\neg P) \\equiv \\neg P \\land \\neg\\neg P \\equiv \\neg P \\land P$. At $P = T$ this is $F \\land T$, which is F, and at $P = F$ it is $T \\land F$, which is F. The formula is a contradiction, as the section states.
-
-Why it happens: negating each part looks like the whole job, much as a minus sign is multiplied into a bracket in algebra. The change of connective has no counterpart there, so it is forgotten.
-
-How to check: a negation must have the opposite value of the original in every row. At $P = T$, $P \\lor \\neg P$ is T, so its negation must be F there; $\\neg P \\lor P$ is T at $P = T$, so it cannot be the negation.
-
-**Joining a contradiction with or**
-
-The rule that a contradiction stays a contradiction when more letters are attached is applied to every connective. It holds for $\\land$ only. A disjunction is true as soon as one part is true, so the attached part can make the whole formula true.
-
-Wrong working: $P \\land \\neg P$ is a contradiction, and the Triple Contradiction $P \\land \\neg P \\land Q$ shows that attaching $Q$ keeps it one. So $(P \\land \\neg P) \\lor Q$ is called a contradiction too.
-
-Right working: $P \\land \\neg P$ is F in every row, so $(P \\land \\neg P) \\lor Q$ has the same value as $F \\lor Q$, which is the value of $Q$. At $Q = T$ the formula is T, so it is a contingency, equivalent to $Q$.
-
-Why it happens: the table shows the case with $\\land$, and the pattern is carried over without checking which connective does the attaching. The identity law $P \\lor \\bot \\equiv P$ and the domination law $P \\land \\bot \\equiv \\bot$ are easy to mix up.
-
-How to check: replace the contradictory part by F and simplify. $F \\land Q$ is F in every row; $F \\lor Q$ is just $Q$.
-
-**Negating a formula that is not a tautology**
-
-The fact that negating a tautology gives a contradiction is stretched to every formula that is not a tautology. It applies to tautologies only: a formula that is neither a tautology nor a contradiction is a contingency, and so is its negation.
-
-Wrong working: $P \\to Q$ is F at $P = T$, $Q = F$, so it is not a tautology. Therefore $\\neg(P \\to Q)$ is called a contradiction.
-
-Right working: for $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\to Q$ takes the values T, F, T, T, and $\\neg(P \\to Q)$ takes the values F, T, F, F. The row $P = T$, $Q = F$ makes the negation T, so it is a contingency, equivalent to $P \\land \\neg Q$.
-
-Why it happens: tautologies and contradictions are learned as a pair, and every formula gets sorted into one of the two. The third group, the contingencies, drops out of view.
-
-How to check: negation flips every entry of the column. A contradiction needs a column of F only, so the original column must be T only; if it holds even one F, the negation holds a T.`
+      description:`Four slips account for many wrong answers about contradictions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
+      after: `Each slip calls a formula always false on too little evidence, or keeps it false after a change that frees it. A contradiction is F in every row, so one F row proves nothing; moving a negation inside turns $\\lor$ into $\\land$; joining a contradiction to $Q$ with $\\lor$ leaves just $Q$; and the negation of a formula that is not a tautology still has a T somewhere. Looking for a single T row, or replacing the contradictory part by F, catches each slip.`,
     },
 
     faq:{
@@ -487,8 +442,40 @@ const faqQuestions = {
     }),
   };
 
+  // MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of contradictionContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'judging-from-a-single-row', name: `Judging from a single row`, errorAt: 1,
+        what: `A formula is evaluated in one assignment, comes out false there, and is declared a contradiction. A contradiction must be false in every assignment; a formula that is false in some rows and true in others is a contingency.`,
+        wrong: [`At $P = T$, $Q = F$ the formula $P \\land Q$ is $T \\land F$, which is F.`, `So $P \\land Q$ is called a contradiction.`],
+        right: [`At $P = T$, $Q = F$ the formula $P \\land Q$ is $T \\land F$, which is F.`, `For $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\land Q$ takes the values T, F, F, F. The first row is T, so $P \\land Q$ is satisfiable: it is a contingency, not a contradiction.`],
+        why: `An ordinary false statement and a contradiction both come out F, and the checking stops at the first F. The word "every" in the definition is easy to skip.`,
+        check: `Look for one row where the formula is T. If such a row exists, the formula is not a contradiction.` },
+      { id: 'pushing-the-negation-in-without-flipping-the-connective', name: `Pushing the negation in without flipping the connective`, errorAt: 0,
+        what: `To simplify a negated law, the negation is moved inside the parentheses and applied to each part, but the connective between the parts is kept. De Morgan's laws require the connective to change as well: $\\lor$ becomes $\\land$, and $\\land$ becomes $\\lor$.`,
+        wrong: [`$\\neg(P \\lor \\neg P)$ becomes $\\neg P \\lor \\neg\\neg P$, which is $\\neg P \\lor P$. At $P = T$ this is $F \\lor T$, which is T, and at $P = F$ it is $T \\lor F$, which is T. The negated law of excluded middle comes out as a tautology.`],
+        right: [`$\\neg(P \\lor \\neg P) \\equiv \\neg P \\land \\neg\\neg P \\equiv \\neg P \\land P$. At $P = T$ this is $F \\land T$, which is F, and at $P = F$ it is $T \\land F$, which is F. The formula is a contradiction, as the section states.`],
+        why: `Negating each part looks like the whole job, much as a minus sign is multiplied into a bracket in algebra. The change of connective has no counterpart there, so it is forgotten.`,
+        check: `A negation must have the opposite value of the original in every row. At $P = T$, $P \\lor \\neg P$ is T, so its negation must be F there; $\\neg P \\lor P$ is T at $P = T$, so it cannot be the negation.` },
+      { id: 'joining-a-contradiction-with-or', name: `Joining a contradiction with or`, errorAt: 0,
+        what: `The rule that a contradiction stays a contradiction when more letters are attached is applied to every connective. It holds for $\\land$ only. A disjunction is true as soon as one part is true, so the attached part can make the whole formula true.`,
+        wrong: [`$P \\land \\neg P$ is a contradiction, and the Triple Contradiction $P \\land \\neg P \\land Q$ shows that attaching $Q$ keeps it one. So $(P \\land \\neg P) \\lor Q$ is called a contradiction too.`],
+        right: [`$P \\land \\neg P$ is F in every row, so $(P \\land \\neg P) \\lor Q$ has the same value as $F \\lor Q$, which is the value of $Q$. At $Q = T$ the formula is T, so it is a contingency, equivalent to $Q$.`],
+        why: `The table shows the case with $\\land$, and the pattern is carried over without checking which connective does the attaching. The identity law $P \\lor \\bot \\equiv P$ and the domination law $P \\land \\bot \\equiv \\bot$ are easy to mix up.`,
+        check: `Replace the contradictory part by F and simplify. $F \\land Q$ is F in every row; $F \\lor Q$ is just $Q$.` },
+      { id: 'negating-a-formula-that-is-not-a-tautology', name: `Negating a formula that is not a tautology`, errorAt: 1,
+        what: `The fact that negating a tautology gives a contradiction is stretched to every formula that is not a tautology. It applies to tautologies only: a formula that is neither a tautology nor a contradiction is a contingency, and so is its negation.`,
+        wrong: [`$P \\to Q$ is F at $P = T$, $Q = F$, so it is not a tautology.`, `Therefore $\\neg(P \\to Q)$ is called a contradiction.`],
+        right: [`$P \\to Q$ is F at $P = T$, $Q = F$, so it is not a tautology.`, `For $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\to Q$ takes the values T, F, T, T, and $\\neg(P \\to Q)$ takes the values F, T, F, F. The row $P = T$, $Q = F$ makes the negation T, so it is a contingency, equivalent to $P \\land \\neg Q$.`],
+        why: `Tautologies and contradictions are learned as a pair, and every formula gets sorted into one of the two. The third group, the contingencies, drops out of view.`,
+        check: `Negation flips every entry of the column. A contradiction needs a column of F only, so the original column must be T only; if it holds even one F, the negation holds a T.` },
+    ],
+  };
+
   return{
     props:{
+    pitfallData,
 
       demoUnits,
       conceptIntroFigures,
@@ -509,7 +496,7 @@ const faqQuestions = {
   }
 }
 
-export default function ContradictionPage({demoUnits, conceptIntroFigures,
+export default function ContradictionPage({ pitfallData,demoUnits, conceptIntroFigures,
   seoData,
   contradictions,
   introContent,
@@ -574,7 +561,7 @@ export default function ContradictionPage({demoUnits, conceptIntroFigures,
           `Both tables kept the promise: the last column is F all the way down. A formula that is F in some rows and T in others is not a contradiction, however many F's it shows.`,
           `@academic[pitfall,aside:true,width:35%:Judging from a single row
 Calling $P \\land Q$ a contradiction because it is F at $P = T$, $Q = F$ ignores the row $P = T$, $Q = T$, where it is T. A contradiction is F in every row; $P \\land Q$ is a contingency.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-judging-from-a-single-row)]@`,
         ],
       },
       {
@@ -636,7 +623,7 @@ Calling $P \\land Q$ a contradiction because it is F at $P = T$, $Q = F$ ignores
                 copyableFields={'expression'}/>,
                 `@academic[pitfall,aside:true,width:35%:Joining a contradiction with or
 Treating $(P \\land \\neg P) \\lor Q$ as a contradiction, like the Triple Contradiction, fails at $Q = T$, where the formula is T. Only $\\land$ keeps a contradiction false; $(P \\land \\neg P) \\lor Q$ is equivalent to $Q$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-joining-a-contradiction-with-or)]@
 Several entries of the table build a larger contradiction from a smaller one, as the Triple Contradiction attaches $Q$ to $P \\land \\neg P$. The connective that does the attaching decides the outcome. A conjunction is true only in the rows where every part is true, so a part that is false in every row keeps the whole conjunction false in every row, whatever the other parts are.`,
                 contradictionContent.other.description2 ,
                
@@ -656,7 +643,18 @@ Several entries of the table build a larger contradiction from a smaller one, as
           {
             id:'pitfalls',
             title:contradictionContent.pitfalls.title,
-            content:contradictionContent.pitfalls.description
+            content: [
+              contradictionContent.pitfalls.description,
+              <DiagramFrame
+                key={'pitfalls-mistakes'}
+                id="logic-contradiction-pitfalls"
+                title="Common pitfalls with contradictions"
+                source="/logic/propositional-logic/semantics/contradiction"
+                after={contradictionContent.pitfalls.after}
+              >
+                <MistakeFix data={pitfallData} variant="trace" />
+              </DiagramFrame>,
+            ]
           },
           // faq: rendered component — must be built here, not in getStaticProps
           {

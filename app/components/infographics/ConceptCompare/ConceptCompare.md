@@ -3,7 +3,7 @@
 A comparison infographic for two or more related concepts: the same aspects for each, what they share, and when to use which. There are five variants. Wording, colours and behaviour can all be set from data, with defaults.
 
 ```jsx
-import ConceptCompare from '@/app/components/infographics/ConceptCompare';
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare';
 
 <ConceptCompare data={dotVsCross} variant="versus" />
 ```

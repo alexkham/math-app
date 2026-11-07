@@ -1309,9 +1309,11 @@ import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExpl
 import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1992,7 +1994,7 @@ For precision beyond whole degrees, two conventions exist. The older system uses
 
 @academic[pitfall,aside:true,width:35%:Reading minutes as decimal digits
 Writing $41°24'36''$ as $41.2436°$ treats the minutes and seconds as decimal places. The correct value is $41 + \\frac{24}{60} + \\frac{36}{3600} = 41.41°$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-minutes-as-decimal-digits)]@
 
 A DMS reading counts the way a clock does: sixty seconds make a minute and sixty minutes make a degree. A decimal reading counts in tens, so the two forms of the same angle usually share only their whole-degree part. Before a DMS value enters a calculation, each of its three parts is turned into degrees on its own, and only then are the parts combined.
 
@@ -2074,7 +2076,7 @@ $$\\theta_{\\text{deg}} = \\theta_{\\text{rad}} \\times \\frac{180}{\\pi}$$]@
 
 @academic[pitfall,aside:true,width:35%:Using the factor upside down
 Converting $60°$ with $\\frac{180}{\\pi}$ gives $\\frac{10800}{\\pi} \\approx 3437.7$, far more than a full turn of $2\\pi \\approx 6.28$. The right factor is $\\frac{\\pi}{180}$: $60° = \\frac{\\pi}{3} \\approx 1.047$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-factor-upside-down)]@
 
 The two factors are reciprocals of each other, and each is the identity $180° = \\pi$ rearranged into a fraction worth exactly $1$. Multiplying by such a fraction changes the unit without changing the angle. The unit being removed sits in the denominator, so it cancels, and the unit being introduced sits in the numerator.
 
@@ -2123,7 +2125,7 @@ The additional factors are the price of using a unit not inherently tied to the 
 
 @academic[pitfall,aside:true,width:35%:Putting degrees into the arc formula
 With $r = 5$ and $\\theta = 60°$, writing $s = 5 \\times 60 = 300$ gives an arc longer than the whole circumference $10\\pi \\approx 31.4$. In radians $\\theta = \\frac{\\pi}{3}$, so $s = \\frac{5\\pi}{3} \\approx 5.24$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-putting-degrees-into-the-arc-formula)]@
 
 Arc length problems typically involve three quantities — $s$, $r$, and $\\theta$ — and any one of them can be found given the other two. A common variation asks for the angle subtended by a known arc on a known circle: $\\theta = \\frac{s}{r}$. Another asks for the radius of a circle given an arc length and central angle: $r = \\frac{s}{\\theta}$. In each case, the formula remains $s = r\\theta$ with $\\theta$ in radians.`,
     before: ``,
@@ -2153,7 +2155,7 @@ $$A = \\frac{\\theta}{360} \\times \\pi r^2$$]@
 
 @academic[pitfall,aside:true,width:35%:Using the circumference for the area
 For a $60°$ sector of radius $6$, writing $\\frac{60}{360} \\times 2\\pi \\cdot 6 = 2\\pi$ gives the arc length, not the area. The area uses $\\pi r^2$: $\\frac{60}{360} \\times 36\\pi = 6\\pi$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-circumference-for-the-area)]@
 
 As with arc length, the radian version is simpler and is the standard in mathematical work. Problems involving sector area follow the same pattern as arc length: three quantities ($A$, $r$, $\\theta$), any one computable from the other two. A typical application is finding the area swept by a rotating object — a windshield wiper, a radar beam, a door opening through a measured angle.
 
@@ -2229,7 +2231,7 @@ These facts play a direct role in solving [trigonometric equations](!/trigonomet
 
 @academic[pitfall,aside:true,width:35%:Swapping complement and supplement
 Taking the complement of $35°$ as $180° - 35° = 145°$ subtracts from a straight angle. The complement is $90° - 35° = 55°$; $145°$ is the supplement.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-complement-and-supplement)]@
 
 For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°$), while $40°$ and $140°$ are supplementary ($40° + 140° = 180°$). The complement of $\\frac{\\pi}{6}$ is $\\frac{\\pi}{2} - \\frac{\\pi}{6} = \\frac{\\pi}{3}$. The supplement of $\\frac{\\pi}{6}$ is $\\pi - \\frac{\\pi}{6} = \\frac{5\\pi}{6}$. Recognizing these pairs accelerates computation across the subject.`,
     before: ``,
@@ -2238,74 +2240,17 @@ For example, the angles $40°$ and $50°$ are complementary ($40° + 50° = 90°
   },
   obj16: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when angles are measured, converted and used in circle formulas. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading minutes as decimal digits**
-
-A degrees-minutes-seconds angle is turned into decimal degrees by writing the minutes and seconds after the decimal point, as if a degree were split into tenths and hundredths instead of sixtieths.
-
-Wrong working: $41°24'36''$ is written as $41.2436°$.
-
-Right working: $24' = \\frac{24}{60}° = 0.4°$ and $36'' = \\frac{36}{3600}° = 0.01°$, so $41°24'36'' = 41 + 0.4 + 0.01 = 41.41°$.
-
-Why it happens: the marks between the numbers look like separators in an ordinary decimal number, and base 60 is met almost only in clock time, where the same slip ($1$ hour $30$ minutes is not $1.30$ hours) is just as common.
-
-How to check: convert the decimal part back. $0.41° \\times 60 = 24.6'$, and $0.6' \\times 60 = 36''$, which returns $41°24'36''$. Starting from $41.2436°$ instead gives $0.2436 \\times 60 \\approx 14.6'$, not $24'$.
-
-**Using the factor upside down**
-
-Degrees are converted to radians by multiplying by $\\frac{180}{\\pi}$, the factor meant for the opposite direction.
-
-Wrong working: $60° \\times \\frac{180}{\\pi} = \\frac{10800}{\\pi} \\approx 3437.7$.
-
-Right working: $60° \\times \\frac{\\pi}{180} = \\frac{60\\pi}{180} = \\frac{\\pi}{3} \\approx 1.047$.
-
-Why it happens: both factors are built from the same two numbers, $180$ and $\\pi$, and which one goes on top is remembered rather than worked out.
-
-How to check: one radian is about $57.3°$, so the radian measure of an angle is always a much smaller number than its degree measure. Treating the factor as a unit ratio also settles it: in $60° \\times \\frac{\\pi \\text{ rad}}{180°}$ the degrees cancel and radians remain.
-
-**Putting degrees into the arc formula**
-
-The formula $s = r\\theta$ is used with the angle still in degrees. The formula holds only for $\\theta$ in radians.
-
-Wrong working: for $r = 5$ and $\\theta = 60°$, $s = 5 \\times 60 = 300$.
-
-Right working: first $\\theta = 60 \\times \\frac{\\pi}{180} = \\frac{\\pi}{3}$, then $s = 5 \\times \\frac{\\pi}{3} = \\frac{5\\pi}{3} \\approx 5.24$. The degree form gives the same: $s = \\frac{\\pi \\cdot 5 \\cdot 60}{180} = \\frac{5\\pi}{3}$.
-
-Why it happens: $s = r\\theta$ shows no unit, and problems usually state the angle in degrees, so the given number is substituted as it stands.
-
-How to check: compare with the whole circumference, $2\\pi r = 10\\pi \\approx 31.4$. A $60°$ arc is one sixth of the circle, about $5.24$; an arc longer than the circumference is impossible for an angle under one full turn.
-
-**Using the circumference for the area**
-
-In the degree formula for a sector, the fraction $\\frac{\\theta}{360}$ is multiplied by the circumference $2\\pi r$ instead of the area $\\pi r^2$.
-
-Wrong working: for a $60°$ sector of radius $6$, $A = \\frac{60}{360} \\times 2\\pi \\cdot 6 = 2\\pi \\approx 6.28$.
-
-Right working: $A = \\frac{60}{360} \\times \\pi \\cdot 6^2 = \\frac{36\\pi}{6} = 6\\pi \\approx 18.85$. The radian formula agrees: $\\frac{1}{2} \\cdot 6^2 \\cdot \\frac{\\pi}{3} = 6\\pi$.
-
-Why it happens: the arc and sector formulas in degrees share the same fraction $\\frac{\\theta}{360}$ and differ only in what follows it, and both $2\\pi r$ and $\\pi r^2$ are remembered as "the circle formula".
-
-How to check: an area must come out in square units, so $r$ has to appear squared. Here $2\\pi$ is exactly the arc length of the same sector, a sign that the length formula was used.
-
-**Swapping complement and supplement**
-
-The two words are mixed up, so a complement is found by subtracting from $180°$, or a supplement by subtracting from $90°$.
-
-Wrong working: the complement of $35°$ is given as $180° - 35° = 145°$.
-
-Right working: the complement of $35°$ is $90° - 35° = 55°$. The supplement is $180° - 35° = 145°$.
-
-Why it happens: both words name the angle that completes a given one, and neither word says which total it completes.
-
-How to check: the complement of an angle between $0°$ and $90°$ is again between $0°$ and $90°$. An obtuse answer to a complement question means the straight-angle total was used.`,
+    content: `Five mistakes come up again and again when angles are measured, converted and used in circle formulas. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip uses an angle in the wrong unit or the wrong formula. Minutes and seconds are sixtieths, not decimal digits; degrees become radians through $\\frac{\\pi}{180}$; the arc formula $s = r\\theta$ needs $\\theta$ in radians; the area of a sector uses $\\pi r^2$, not the circumference; and a complement makes $90°$ while a supplement makes $180°$. Converting back, or checking the size of the answer against the whole circle, catches each slip.`,
     link: ``,
   },
     obj9:{
       title:`Summary: The Page's Key Formulas`,
-      content:`Five formulas carry most of the practical weight on this page — two conversions, two area/length formulas keyed by radian measure, and one alternative form linking arc length to sector area. The capstone table below collects all five with the required unit for the angle and the derivation each rests on.`,
+      content:`This summary gathers the five key formulas of the page in five rows. Each row names the quantity, gives its formula and the unit the angle must be in, and adds a line on what the formula gives and where it comes from, with a link to the section that explains it.
+
+The first two rows convert between degrees and radians in both directions, both resting on the fact that half a turn measures 180 degrees, or pi radians. The next two give the arc length and the area of a sector, and both need the angle in radians. The last row writes the sector area with the arc length in place of the angle, so it needs no angle at all.`,
+      formulaSheetAfter: `Check the unit column first. The conversions work in either direction, but the arc length and sector area formulas give wrong answers when the angle is left in degrees, so convert it to radians before using them, or use the version with the arc length.`,
       before:``,
       after:``,
       link:'',
@@ -2480,8 +2425,69 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
     ],
   };
 
+  // MistakeFix batch 9, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-minutes-as-decimal-digits', name: `Reading minutes as decimal digits`, errorAt: 0,
+        what: `A degrees-minutes-seconds angle is turned into decimal degrees by writing the minutes and seconds after the decimal point, as if a degree were split into tenths and hundredths instead of sixtieths.`,
+        wrong: [`$41°24'36''$ is written as $41.2436°$.`],
+        right: [`$24' = \\frac{24}{60}° = 0.4°$ and $36'' = \\frac{36}{3600}° = 0.01°$, so $41°24'36'' = 41 + 0.4 + 0.01 = 41.41°$.`],
+        why: `The marks between the numbers look like separators in an ordinary decimal number, and base 60 is met almost only in clock time, where the same slip ($1$ hour $30$ minutes is not $1.30$ hours) is just as common.`,
+        check: `Convert the decimal part back. $0.41° \\times 60 = 24.6'$, and $0.6' \\times 60 = 36''$, which returns $41°24'36''$. Starting from $41.2436°$ instead gives $0.2436 \\times 60 \\approx 14.6'$, not $24'$.` },
+      { id: 'using-the-factor-upside-down', name: `Using the factor upside down`, errorAt: 0,
+        what: `Degrees are converted to radians by multiplying by $\\frac{180}{\\pi}$, the factor meant for the opposite direction.`,
+        wrong: [`$60° \\times \\frac{180}{\\pi} = \\frac{10800}{\\pi} \\approx 3437.7$.`],
+        right: [`$60° \\times \\frac{\\pi}{180} = \\frac{60\\pi}{180} = \\frac{\\pi}{3} \\approx 1.047$.`],
+        why: `Both factors are built from the same two numbers, $180$ and $\\pi$, and which one goes on top is remembered rather than worked out.`,
+        check: `One radian is about $57.3°$, so the radian measure of an angle is always a much smaller number than its degree measure. Treating the factor as a unit ratio also settles it: in $60° \\times \\frac{\\pi \\text{ rad}}{180°}$ the degrees cancel and radians remain.` },
+      { id: 'putting-degrees-into-the-arc-formula', name: `Putting degrees into the arc formula`, errorAt: 1,
+        what: `The formula $s = r\\theta$ is used with the angle still in degrees. The formula holds only for $\\theta$ in radians.`,
+        wrong: [`For $r = 5$ and $\\theta = 60°$,`, `$s = 5 \\times 60 = 300$.`],
+        right: [`For $r = 5$ and $\\theta = 60°$,`, `First $\\theta = 60 \\times \\frac{\\pi}{180} = \\frac{\\pi}{3}$, then $s = 5 \\times \\frac{\\pi}{3} = \\frac{5\\pi}{3} \\approx 5.24$. The degree form gives the same: $s = \\frac{\\pi \\cdot 5 \\cdot 60}{180} = \\frac{5\\pi}{3}$.`],
+        why: `$s = r\\theta$ shows no unit, and problems usually state the angle in degrees, so the given number is substituted as it stands.`,
+        check: `Compare with the whole circumference, $2\\pi r = 10\\pi \\approx 31.4$. A $60°$ arc is one sixth of the circle, about $5.24$; an arc longer than the circumference is impossible for an angle under one full turn.` },
+      { id: 'using-the-circumference-for-the-area', name: `Using the circumference for the area`, errorAt: 0,
+        what: `In the degree formula for a sector, the fraction $\\frac{\\theta}{360}$ is multiplied by the circumference $2\\pi r$ instead of the area $\\pi r^2$.`,
+        wrong: [`For a $60°$ sector of radius $6$, $A = \\frac{60}{360} \\times 2\\pi \\cdot 6 = 2\\pi \\approx 6.28$.`],
+        right: [`$A = \\frac{60}{360} \\times \\pi \\cdot 6^2 = \\frac{36\\pi}{6} = 6\\pi \\approx 18.85$. The radian formula agrees: $\\frac{1}{2} \\cdot 6^2 \\cdot \\frac{\\pi}{3} = 6\\pi$.`],
+        why: `The arc and sector formulas in degrees share the same fraction $\\frac{\\theta}{360}$ and differ only in what follows it, and both $2\\pi r$ and $\\pi r^2$ are remembered as "the circle formula".`,
+        check: `An area must come out in square units, so $r$ has to appear squared. Here $2\\pi$ is exactly the arc length of the same sector, a sign that the length formula was used.` },
+      { id: 'swapping-complement-and-supplement', name: `Swapping complement and supplement`, errorAt: 0,
+        what: `The two words are mixed up, so a complement is found by subtracting from $180°$, or a supplement by subtracting from $90°$.`,
+        wrong: [`The complement of $35°$ is given as $180° - 35° = 145°$.`],
+        right: [`The complement of $35°$ is $90° - 35° = 55°$. The supplement is $180° - 35° = 145°$.`],
+        why: `Both words name the angle that completes a given one, and neither word says which total it completes.`,
+        check: `The complement of an angle between $0°$ and $90°$ is again between $0°$ and $90°$. An obtuse answer to a complement question means the straight-angle total was used.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Quantity', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'unit', label: 'Angle unit needed' },
+    ],
+    rows: [
+      { name: 'Degrees to radians', formula: '$\\displaystyle \\theta_{\\text{rad}} = \\theta_{\\text{deg}} \\times \\frac{\\pi}{180}$', unit: 'no requirement: this is the conversion itself',
+        sub: 'Turns an angle in degrees into radians; it comes from $180° = \\pi$, as [converting between degrees and radians](!#3) shows.' },
+      { name: 'Radians to degrees', formula: '$\\displaystyle \\theta_{\\text{deg}} = \\theta_{\\text{rad}} \\times \\frac{180}{\\pi}$', unit: 'no requirement: this is the conversion itself',
+        sub: 'The inverse of the first conversion, which brings a radian measure back to degrees; see [the conversion section](!#3).' },
+      { name: 'Arc length', formula: '$s = r\\theta$', unit: 'radians',
+        sub: 'The length of the arc cut off by a central angle, straight from the radian definition $\\theta = \\frac{s}{r}$; see [arc length](!#4).' },
+      { name: 'Sector area', formula: '$\\displaystyle A = \\frac{1}{2}r^2\\theta$', unit: 'radians',
+        sub: 'The sector is the fraction $\\frac{\\theta}{2\\pi}$ of the full disc area $\\pi r^2$, as [sector area](!#5) works out.' },
+      { name: 'Sector area from the arc', formula: '$\\displaystyle A = \\frac{1}{2}rs$', unit: 'none: it uses $s$, not $\\theta$',
+        sub: 'Substituting $s = r\\theta$ into the sector area formula gives this form, which [sector area](!#5) compares with the area of a triangle.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     anglePairTree,
          sectionsContent,
          introContent,
@@ -2504,7 +2510,7 @@ The distinction matters far beyond notation. [Arc length](!/trigonometry/degrees
     }
    }
 
-export default function DegreesRadiansPage({anglePairTree, seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DegreesRadiansPage({ formulaSummaryData, pitfallData,anglePairTree, seoData,sectionsContent , introContent, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2708,6 +2714,15 @@ $$\\theta = \\frac{s}{r}$$]@`,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="degrees-radians-pitfalls"
+            title="Common pitfalls with degrees and radians"
+            source="/trigonometry/degrees-radians"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 
@@ -2718,11 +2733,16 @@ $$\\theta = \\frac{s}{r}$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="degree-radian-formula-summary"
+            title="Degree and radian formulas"
+            source="/trigonometry/degrees-radians"
+            related={{ href: '/trigonometry/formulas', label: 'All trigonometry formulas' }}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // {

@@ -17,10 +17,12 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -262,7 +264,7 @@ $$\\int_{-\\infty}^{\\infty} f(x)\\, dx = \\int_{-\\infty}^c f(x)\\, dx + \\int_
 
 @academic[pitfall,aside:true,width:35%:Running both ends out together
 Using one variable for both ends gives $\\lim_{R \\to \\infty} \\int_{-R}^{R} \\frac{2x}{1 + x^2}\\, dx = 0$. Split at $c = 0$ instead: $\\int_0^b \\frac{2x}{1 + x^2}\\, dx = \\ln(1 + b^2) \\to \\infty$, so the integral diverges.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-running-both-ends-out-together)]@
 
 Both integrals must converge independently. The choice of $c$ is arbitrary—any finite value works.
 
@@ -339,7 +341,7 @@ $$\\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx \\quad \\text{w
 
 @academic[pitfall,aside:true,width:35%:Missing an asymptote inside the interval
 Evaluating $\\int_{-1}^{1} \\frac{1}{x^2}\\, dx$ straight through gives $\\left[-\\frac{1}{x}\\right]_{-1}^{1} = -2$, a negative value for a positive integrand. Split at $0$: $\\int_s^1 \\frac{1}{x^2}\\, dx = \\frac{1}{s} - 1 \\to \\infty$ as $s \\to 0^+$, so the integral diverges.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-missing-an-asymptote-inside-the-interval)]@
 
 Both limits must exist independently.
 
@@ -366,7 +368,7 @@ $$\\int_1^{\\infty} \\frac{1}{x}\\, dx = \\lim_{b \\to \\infty} [\\ln x]_1^b = \
 
 @academic[pitfall,aside:true,width:35%:Taking a vanishing integrand as enough
 Concluding convergence from $f(x) \\to 0$ fails for $\\frac{1}{\\sqrt{x}}$: it tends to $0$, but $\\int_1^b \\frac{1}{\\sqrt{x}}\\, dx = 2\\sqrt{b} - 2 \\to \\infty$. So $\\int_1^{\\infty} \\frac{1}{\\sqrt{x}}\\, dx$ diverges.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-a-vanishing-integrand-as-enough)]@
 
 Convergence depends on how fast the integrand decays. The $1/x^2$ decays fast enough; $1/x$ does not.
 
@@ -397,7 +399,7 @@ $$\\int_0^1 \\frac{1}{x^p}\\, dx \\quad \\begin{cases} \\text{converges} & p < 1
 
 @academic[pitfall,aside:true,width:35%:Using the rule for infinity near zero
 Calling $\\int_0^1 \\frac{1}{x^{3/2}}\\, dx$ convergent because $p = \\frac{3}{2} > 1$ uses the wrong half of the test. $\\int_t^1 x^{-3/2}\\, dx = \\frac{2}{\\sqrt{t}} - 2 \\to \\infty$ as $t \\to 0^+$, so it diverges.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-rule-for-infinity-near-zero)]@
 
 The boundary case $p = 1$ always diverges—$\\int 1/x\\, dx = \\ln|x|$, which is unbounded both as $x \\to \\infty$ and as $x \\to 0^+$.
 
@@ -476,73 +478,20 @@ Determining whether an improper integral converges or diverges typically uses on
     after: ``,
     link: ``
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the formulas of the page into three families, and the buttons above the cards show one family at a time. Each formula has a line on when it applies, with a link to the section that explains it.
+
+The first family defines integrals over an infinite interval, with the upper limit, the lower limit or both infinite. The second defines integrals of a function with a vertical asymptote at the left end, at the right end or inside the interval. The last family holds the two benchmark p-tests, at infinity and near zero, and the limit comparison test that measures an integrand against a benchmark.`,
+    before: ``,
+    after: `Every improper integral is a limit of ordinary integrals, so the work is an ordinary integral followed by a limit. When the antiderivative is out of reach, comparing the integrand with a power of the variable usually settles convergence on its own.`,
+    link: '',
+  },
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes cause most wrong verdicts on improper integrals. Four of them are marked where they happen in the sections above; the fifth is the one-way rule that the section on the comparison test warns about. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Running both ends out together**
-
-An integral over the whole real line is evaluated with one variable at both ends, $\\int_{-R}^{R}$, and $R$ is sent to $\\infty$. For an odd integrand the two halves cancel at every $R$, and the result looks like a convergent value.
-
-Wrong working: $\\int_{-R}^{R} \\dfrac{2x}{1 + x^2}\\, dx = \\left[\\ln(1 + x^2)\\right]_{-R}^{R} = \\ln(1 + R^2) - \\ln(1 + R^2) = 0$, so $\\int_{-\\infty}^{\\infty} \\dfrac{2x}{1 + x^2}\\, dx = 0$.
-
-Right working: split at $c = 0$. $\\int_0^{\\infty} \\dfrac{2x}{1 + x^2}\\, dx = \\lim_{b \\to \\infty} \\ln(1 + b^2) = \\infty$. One piece diverges, so the whole integral diverges, whatever the other piece does.
-
-Why it happens: the symmetric limit is shorter and gives a tidy answer, and the rule that an odd function integrates to $0$ over $[-a, a]$ makes $0$ look right. That rule is for finite intervals; on the whole line, the definition asks for two separate limits.
-
-How to check: let the two ends move at different speeds. $\\int_{-R}^{2R} \\dfrac{2x}{1 + x^2}\\, dx = \\ln\\dfrac{1 + 4R^2}{1 + R^2} \\to \\ln 4 \\approx 1.39$, not $0$. A value that depends on how the ends move is not a limit of the integral.
-
-**Missing an asymptote inside the interval**
-
-Both endpoints are ordinary numbers, but the integrand blows up between them. The antiderivative is evaluated at the endpoints as if the integral were proper.
-
-Wrong working: $\\int_{-1}^{1} \\dfrac{1}{x^2}\\, dx = \\left[-\\dfrac{1}{x}\\right]_{-1}^{1} = -1 - 1 = -2$.
-
-Right working: split at $0$. $\\int_{-1}^{1} \\dfrac{1}{x^2}\\, dx = \\lim_{t \\to 0^-} \\int_{-1}^{t} \\dfrac{1}{x^2}\\, dx + \\lim_{s \\to 0^+} \\int_{s}^{1} \\dfrac{1}{x^2}\\, dx$. The second piece is $\\lim_{s \\to 0^+} \\left(\\dfrac{1}{s} - 1\\right) = \\infty$, so the integral diverges.
-
-Why it happens: the Fundamental Theorem of Calculus needs a continuous integrand on $[a, b]$, and that condition is easy to skip because the formula still produces a number.
-
-How to check: look at the sign. $\\dfrac{1}{x^2}$ is positive at every $x \\neq 0$, so a negative result is impossible. Then check the integrand at every point of the interval: its denominator is $0$ at $x = 0$, inside $[-1, 1]$.
-
-**Taking a vanishing integrand as enough**
-
-The integrand tends to $0$ as $x \\to \\infty$, and the area under it is taken to be finite for that reason alone.
-
-Wrong working: $\\dfrac{1}{\\sqrt{x}} \\to 0$ as $x \\to \\infty$, so $\\int_1^{\\infty} \\dfrac{1}{\\sqrt{x}}\\, dx$ converges.
-
-Right working: $\\int_1^b x^{-1/2}\\, dx = \\left[2\\sqrt{x}\\right]_1^b = 2\\sqrt{b} - 2 \\to \\infty$, so the integral diverges. The p-test gives the same verdict, since $p = \\frac{1}{2} \\leq 1$.
-
-Why it happens: every convergent example on $[1, \\infty)$ has an integrand that shrinks to $0$, so shrinking looks like the reason for convergence. It is only part of it; the integrand must shrink fast enough.
-
-How to check: compute the area up to a large $b$. At $b = 10000$ it is already $2 \\cdot 100 - 2 = 198$ and still growing.
-
-**Using the rule for infinity near zero**
-
-The p-test condition for $[1, \\infty)$, $p > 1$, is applied to an integral on $[0, 1]$, where the condition is reversed.
-
-Wrong working: $\\int_0^1 \\dfrac{1}{x^{3/2}}\\, dx$ converges because $p = \\frac{3}{2} > 1$.
-
-Right working: $\\int_t^1 x^{-3/2}\\, dx = \\left[-2x^{-1/2}\\right]_t^1 = -2 + \\dfrac{2}{\\sqrt{t}} \\to \\infty$ as $t \\to 0^+$, so the integral diverges. Near zero, $\\int_0^1 \\dfrac{1}{x^p}\\, dx$ converges only for $p < 1$.
-
-Why it happens: "converges for $p > 1$" is the version met first and remembered, often without the interval it belongs to.
-
-How to check: ask where the trouble is. At infinity the integrand must be small, and a larger $p$ makes it smaller. Near $0$ the integrand is large, and a larger $p$ makes it larger: at $x = 0.01$, $x^{-3/2} = 1000$ while $x^{-1/2} = 10$.
-
-**Comparing in the wrong direction**
-
-The integrand lies below a divergent integrand, and the integral is declared divergent. Direct comparison gives no verdict in that case.
-
-Wrong working: on $[1, \\infty)$, $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x}$, and $\\int_1^{\\infty} \\dfrac{1}{x}\\, dx$ diverges, so $\\int_1^{\\infty} \\dfrac{1}{x^2 + 1}\\, dx$ diverges.
-
-Right working: compare with $\\dfrac{1}{x^2}$ instead. $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{x^2}\\, dx$ converges, so the integral converges. Its value is $\\lim_{b \\to \\infty} (\\arctan b - \\arctan 1) = \\dfrac{\\pi}{2} - \\dfrac{\\pi}{4} = \\dfrac{\\pi}{4}$.
-
-Why it happens: the test has two halves, and being smaller than something infinite sounds as if it should say something.
-
-How to check: before concluding, read the inequality. To prove convergence, $f$ must lie below a convergent integrand; to prove divergence, above a divergent one. Below a divergent integrand, or above a convergent one, decides nothing.
-`,
+    content: `Five mistakes cause most wrong verdicts on improper integrals. Four of them are marked where they happen in the sections above; the fifth is the one-way rule that the section on the comparison test warns about. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip treats an improper integral as an ordinary one. Two infinite ends are two separate limits, an asymptote inside the interval splits the integral, an integrand that shrinks to $0$ need not have a finite integral, the $p$-test reverses near $0$, and a comparison with a divergent integral proves divergence only when the function lies above it. Checking the sign of the answer, or computing the integral up to a large bound, catches each slip.`,
     link: ``
   }
 };
@@ -781,8 +730,69 @@ const schemas = {
     footnote: 'The p-test turns this comparison into a rule for every power of $x$.',
   };
 
+  // MistakeFix batch 14, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'running-both-ends-out-together', name: `Running both ends out together`, errorAt: 0,
+        what: `An integral over the whole real line is evaluated with one variable at both ends, $\\int_{-R}^{R}$, and $R$ is sent to $\\infty$. For an odd integrand the two halves cancel at every $R$, and the result looks like a convergent value.`,
+        wrong: [`$\\int_{-R}^{R} \\dfrac{2x}{1 + x^2}\\, dx = \\left[\\ln(1 + x^2)\\right]_{-R}^{R} = \\ln(1 + R^2) - \\ln(1 + R^2) = 0$, so $\\int_{-\\infty}^{\\infty} \\dfrac{2x}{1 + x^2}\\, dx = 0$.`],
+        right: [`Split at $c = 0$. $\\int_0^{\\infty} \\dfrac{2x}{1 + x^2}\\, dx = \\lim_{b \\to \\infty} \\ln(1 + b^2) = \\infty$. One piece diverges, so the whole integral diverges, whatever the other piece does.`],
+        why: `The symmetric limit is shorter and gives a tidy answer, and the rule that an odd function integrates to $0$ over $[-a, a]$ makes $0$ look right. That rule is for finite intervals; on the whole line, the definition asks for two separate limits.`,
+        check: `Let the two ends move at different speeds. $\\int_{-R}^{2R} \\dfrac{2x}{1 + x^2}\\, dx = \\ln\\dfrac{1 + 4R^2}{1 + R^2} \\to \\ln 4 \\approx 1.39$, not $0$. A value that depends on how the ends move is not a limit of the integral.` },
+      { id: 'missing-an-asymptote-inside-the-interval', name: `Missing an asymptote inside the interval`, errorAt: 0,
+        what: `Both endpoints are ordinary numbers, but the integrand blows up between them. The antiderivative is evaluated at the endpoints as if the integral were proper.`,
+        wrong: [`$\\int_{-1}^{1} \\dfrac{1}{x^2}\\, dx = \\left[-\\dfrac{1}{x}\\right]_{-1}^{1} = -1 - 1 = -2$.`],
+        right: [`Split at $0$. $\\int_{-1}^{1} \\dfrac{1}{x^2}\\, dx = \\lim_{t \\to 0^-} \\int_{-1}^{t} \\dfrac{1}{x^2}\\, dx + \\lim_{s \\to 0^+} \\int_{s}^{1} \\dfrac{1}{x^2}\\, dx$. The second piece is $\\lim_{s \\to 0^+} \\left(\\dfrac{1}{s} - 1\\right) = \\infty$, so the integral diverges.`],
+        why: `The Fundamental Theorem of Calculus needs a continuous integrand on $[a, b]$, and that condition is easy to skip because the formula still produces a number.`,
+        check: `Look at the sign. $\\dfrac{1}{x^2}$ is positive at every $x \\neq 0$, so a negative result is impossible. Then check the integrand at every point of the interval: its denominator is $0$ at $x = 0$, inside $[-1, 1]$.` },
+      { id: 'taking-a-vanishing-integrand-as-enough', name: `Taking a vanishing integrand as enough`, errorAt: 0,
+        what: `The integrand tends to $0$ as $x \\to \\infty$, and the area under it is taken to be finite for that reason alone.`,
+        wrong: [`$\\dfrac{1}{\\sqrt{x}} \\to 0$ as $x \\to \\infty$, so $\\int_1^{\\infty} \\dfrac{1}{\\sqrt{x}}\\, dx$ converges.`],
+        right: [`$\\int_1^b x^{-1/2}\\, dx = \\left[2\\sqrt{x}\\right]_1^b = 2\\sqrt{b} - 2 \\to \\infty$, so the integral diverges. The p-test gives the same verdict, since $p = \\frac{1}{2} \\leq 1$.`],
+        why: `Every convergent example on $[1, \\infty)$ has an integrand that shrinks to $0$, so shrinking looks like the reason for convergence. It is only part of it; the integrand must shrink fast enough.`,
+        check: `Compute the area up to a large $b$. At $b = 10000$ it is already $2 \\cdot 100 - 2 = 198$ and still growing.` },
+      { id: 'using-the-rule-for-infinity-near-zero', name: `Using the rule for infinity near zero`, errorAt: 0,
+        what: `The p-test condition for $[1, \\infty)$, $p > 1$, is applied to an integral on $[0, 1]$, where the condition is reversed.`,
+        wrong: [`$\\int_0^1 \\dfrac{1}{x^{3/2}}\\, dx$ converges because $p = \\frac{3}{2} > 1$.`],
+        right: [`$\\int_t^1 x^{-3/2}\\, dx = \\left[-2x^{-1/2}\\right]_t^1 = -2 + \\dfrac{2}{\\sqrt{t}} \\to \\infty$ as $t \\to 0^+$, so the integral diverges. Near zero, $\\int_0^1 \\dfrac{1}{x^p}\\, dx$ converges only for $p < 1$.`],
+        why: `"converges for $p > 1$" is the version met first and remembered, often without the interval it belongs to.`,
+        check: `Ask where the trouble is. At infinity the integrand must be small, and a larger $p$ makes it smaller. Near $0$ the integrand is large, and a larger $p$ makes it larger: at $x = 0.01$, $x^{-3/2} = 1000$ while $x^{-1/2} = 10$.` },
+      { id: 'comparing-in-the-wrong-direction', name: `Comparing in the wrong direction`, errorAt: 0,
+        what: `The integrand lies below a divergent integrand, and the integral is declared divergent. Direct comparison gives no verdict in that case.`,
+        wrong: [`On $[1, \\infty)$, $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x}$, and $\\int_1^{\\infty} \\dfrac{1}{x}\\, dx$ diverges, so $\\int_1^{\\infty} \\dfrac{1}{x^2 + 1}\\, dx$ diverges.`],
+        right: [`Compare with $\\dfrac{1}{x^2}$ instead. $\\dfrac{1}{x^2 + 1} < \\dfrac{1}{x^2}$ and $\\int_1^{\\infty} \\dfrac{1}{x^2}\\, dx$ converges, so the integral converges. Its value is $\\lim_{b \\to \\infty} (\\arctan b - \\arctan 1) = \\dfrac{\\pi}{2} - \\dfrac{\\pi}{4} = \\dfrac{\\pi}{4}$.`],
+        why: `The test has two halves, and being smaller than something infinite sounds as if it should say something.`,
+        check: `Before concluding, read the inequality. To prove convergence, $f$ must lie below a convergent integrand; to prove divergence, above a divergent one. Below a divergent integrand, or above a convergent one, decides nothing.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'infinite', name: 'Infinite limits', sub: 'The infinite end is replaced by a finite variable, and a limit is taken.', pairs: [
+        [{ formula: '$\\displaystyle \\int_a^{\\infty} f(x)\\, dx = \\lim_{b \\to \\infty} \\int_a^b f(x)\\, dx$', text: 'Upper limit infinite, as [infinite limits of integration](!#2) defines.' },
+         { formula: '$\\displaystyle \\int_{-\\infty}^b f(x)\\, dx = \\lim_{a \\to -\\infty} \\int_a^b f(x)\\, dx$', text: 'Lower limit infinite, the mirror case ([infinite limits of integration](!#2)).' }],
+        [{ formula: '$\\displaystyle \\int_{-\\infty}^{\\infty} f(x)\\, dx = \\int_{-\\infty}^c f(x)\\, dx + \\int_c^{\\infty} f(x)\\, dx$', text: 'Both limits infinite: split at any $c$, and both pieces must converge on their own ([infinite limits of integration](!#2)).' }, ''],
+      ] },
+      { id: 'unbounded', name: 'Unbounded integrand', sub: 'The limit approaches the vertical asymptote from inside the interval.', pairs: [
+        [{ formula: '$\\displaystyle \\int_a^b f(x)\\, dx = \\lim_{t \\to a^+} \\int_t^b f(x)\\, dx$', text: 'Asymptote at the left endpoint, from [discontinuous integrands](!#3).' },
+         { formula: '$\\displaystyle \\int_a^b f(x)\\, dx = \\lim_{t \\to b^-} \\int_a^t f(x)\\, dx$', text: 'Asymptote at the right endpoint ([discontinuous integrands](!#3)).' }],
+        [{ formula: '$\\displaystyle \\int_a^b f(x)\\, dx = \\lim_{t \\to c^-} \\int_a^t f(x)\\, dx + \\lim_{s \\to c^+} \\int_s^b f(x)\\, dx$', text: 'Asymptote at an interior point $c$: both limits must exist, and nothing in the notation warns of it ([discontinuous integrands](!#3)).' }, ''],
+      ] },
+      { id: 'tests', name: 'Convergence tests', sub: 'Deciding convergence without an antiderivative, for positive integrands.', pairs: [
+        [{ formula: '$\\displaystyle \\int_1^{\\infty} \\frac{1}{x^p}\\, dx$ $\\begin{cases} \\text{converges} & p > 1 \\\\ \\text{diverges} & p \\leq 1 \\end{cases}$', text: 'The p-test at infinity: a larger $p$ makes the tail thinner, as [the p-test](!#5) shows.' },
+         { formula: '$\\displaystyle \\int_0^1 \\frac{1}{x^p}\\, dx$ $\\begin{cases} \\text{converges} & p < 1 \\\\ \\text{diverges} & p \\geq 1 \\end{cases}$', text: 'The p-test near zero points the other way: a larger $p$ makes the spike taller; $p = 1$ always diverges ([the p-test](!#5)).' }],
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} \\frac{f(x)}{g(x)} = L \\quad \\text{where } 0 < L < \\infty$', text: 'For $f, g > 0$, the two integrals then converge or diverge together; see [the limit comparison test](!#7).' }, ''],
+      ] },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     improperConvergenceComparison,
     improperTestTree,
     demoUnits,
@@ -805,7 +815,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({improperConvergenceComparison, improperTestTree, seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ formulaSummaryData, pitfallData,improperConvergenceComparison, improperTestTree, seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -999,11 +1009,38 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="improper-integral-formula-summary"
+            title="Improper integral formulas"
+            source="/calculus/integrals/improper"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="improper-integral-pitfalls"
+            title="Common pitfalls with improper integrals"
+            source="/calculus/integrals/improper"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

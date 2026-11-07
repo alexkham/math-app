@@ -18,6 +18,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 
@@ -533,7 +534,10 @@ To check results like these with your own numbers, use the [exponent calculator]
 },
     obj9:{
       title:`Summary of the Five Laws`,
-      content:`The five laws derived in the sections above all follow from a single principle: counting and regrouping factors. The table below collects them as a single reference card, paired with the counting argument that produces each one. Every later extension — to [zero](!/algebra/powers/zero-powers), [negative](!/algebra/powers/negative-exponents), [rational](!/algebra/powers/rational-exponents), and [irrational](!/algebra/powers/irrational-exponents) exponents — is defined to preserve exactly these identities.`,
+      content:`This summary collects the five laws of exponents derived on the page, in the order the page builds them. Each row gives the name of the law with a worked example and a link to its section, the law itself, and what it counts, since every one of them comes from counting and regrouping factors.
+
+The first two laws join or cancel strings of the same base, and the quotient law here assumes the top exponent is the larger one. The third takes groups of groups, and the last two send the exponent to each part of a product or a quotient. Every later extension, to [zero](!/algebra/powers/zero-powers), [negative](!/algebra/powers/negative-exponents), [rational](!/algebra/powers/rational-exponents) and [irrational](!/algebra/powers/irrational-exponents) exponents, is defined to keep exactly these laws.`,
+      formulaSheetAfter: `Each law is a shortcut for writing the factors out and counting them again. When a law is in doubt, expanding a small case with actual numbers settles it, and the same counting shows why the quotient law, as stated here, needs the larger exponent on top.`,
       before:``,
       after:``,
       link:'',
@@ -795,8 +799,31 @@ $$= 2^4 \\cdot (x^3)^4 = 16x^{12}$$`],
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Law', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'counts', label: 'What it counts' },
+    ],
+    rows: [
+      { name: 'Product', formula: '$a^m \\cdot a^n = a^{m+n}$', counts: 'the total factors when two strings of the same base are joined',
+        sub: 'For example $2^3 \\cdot 2^4 = 2^7$; [the product rule](!#3) derives it by counting factors.' },
+      { name: 'Quotient', formula: '$\\displaystyle \\frac{a^m}{a^n} = a^{m-n} \\qquad (m > n,\\; a \\neq 0)$', counts: 'the factors left after the common ones cancel',
+        sub: 'For example $\\frac{2^5}{2^3} = 2^2$; [the quotient rule](!#4) cancels the shared factors.' },
+      { name: 'Power of a power', formula: '$(a^m)^n = a^{m \\cdot n}$', counts: 'groups of groups: $m$ factors taken $n$ times',
+        sub: 'For example $(2^3)^2 = 2^6$, as [power of a power](!#5) shows.' },
+      { name: 'Power of a product', formula: '$(ab)^n = a^n \\cdot b^n$', counts: 'each factor of the product collects the exponent on its own',
+        sub: 'For example $(2 \\cdot 3)^4 = 2^4 \\cdot 3^4$, from [power of a product](!#6).' },
+      { name: 'Power of a quotient', formula: '$\\displaystyle \\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n} \\qquad (b \\neq 0)$', counts: 'the numerator and the denominator each collect the exponent on their own',
+        sub: 'For example $\\left(\\frac{2}{3}\\right)^4 = \\frac{2^4}{3^4}$, from [power of a quotient](!#7).' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -819,7 +846,7 @@ return {
    }
 
 // export default function NaturalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function NaturalExponentsPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function NaturalExponentsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1012,11 +1039,16 @@ For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="natural-exponent-formula-summary"
+            title="The five laws of exponents"
+            source="/algebra/powers/natural-exponents"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

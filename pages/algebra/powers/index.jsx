@@ -677,6 +677,7 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
@@ -1157,7 +1158,10 @@ The [exponential functions](!/algebra/powers/exponential-functions) page covers 
 
   obj12: {
     title: `Summary of Exponent Types`,
-    content: `The exponent types covered above — natural, zero, negative, rational, and irrational — form a hierarchy of progressively broader definitions, each chosen to preserve the laws of exponents while tightening the conditions on the base. The table below collects each type with its definition, the base restriction it imposes, and a representative example.`,
+    content: `This summary collects the five kinds of exponent from the page on one set of cards, from the narrowest definition to the broadest. Each card gives the kind of exponent, its definition, an example, with a line on what the definition means and a link to the section that explains it. A badge on each card states which bases the definition allows.
+
+Natural exponents count repeated factors and work for any base. Zero and negative exponents are defined so the laws of exponents keep working, and both rule out a zero base. Rational exponents bring in roots, so an even root needs a base that is not negative, and irrational exponents are reached as limits of rational ones, which needs a positive base.`,
+    formulaSheetAfter: `Each new kind of exponent keeps the same laws and asks a little more of the base. Before using a law with a given exponent, check its card: a base that suits natural exponents can still fail for a zero, negative, rational or irrational exponent.`,
     before: ``,
     after: ``,
     link: '',
@@ -1376,8 +1380,26 @@ $$= x^{3+4} = x^7$$`, `Multiplying the exponents belongs to a power raised to a 
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Natural exponent', formula: '$a^n = \\underbrace{a \\cdot a \\cdot a \\cdots a}_{n \\text{ times}}$', example: '$3^4 = 81$', restriction: 'any real $a$',
+        text: 'For a positive whole number $n$, the exponent counts the copies of the base being multiplied, as [natural exponents](!#3) shows.' },
+      { name: 'Zero exponent', formula: '$a^0 = 1$', example: '$5^0 = 1$', restriction: '$a \\neq 0$',
+        text: 'Forced by the quotient rule, since a nonzero number divided by itself is 1, as [zero as an exponent](!#4) explains.' },
+      { name: 'Negative exponent', formula: '$\\displaystyle a^{-n} = \\frac{1}{a^n}$', example: '$\\displaystyle 2^{-3} = \\frac{1}{8}$', restriction: '$a \\neq 0$',
+        text: 'For a positive whole number $n$, the exponent $-n$ gives the reciprocal of the positive power, from [negative exponents](!#5).' },
+      { name: 'Rational exponent', formula: '$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$', example: '$8^{2/3} = 4$', restriction: '$a \\geq 0$ if $n$ is even; any real $a$ if $n$ is odd',
+        text: 'For a fraction $m/n$, the denominator is a root and the numerator a power, as [rational exponents](!#6) explains.' },
+      { name: 'Irrational exponent', formula: '$\\displaystyle a^x = \\lim_{r \\to x} a^r$', example: '$2^{\\pi} \\approx 8.825$', restriction: '$a > 0$',
+        text: 'The limit runs over rational exponents $r$ that approach $x$, as [irrational exponents](!#7) shows for $2^{\\pi}$.' },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
     pitfallData,
     faqQuestions,
     exponentTypeCases,
@@ -1403,7 +1425,7 @@ $$= x^{3+4} = x^7$$`, `Multiplying the exponents belongs to a power raised to a 
 
  const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PowersAndExponentsPage({ pitfallData,faqQuestions, exponentTypeCases,seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
+export default function PowersAndExponentsPage({ formulaSummaryData, pitfallData,faqQuestions, exponentTypeCases,seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1615,11 +1637,16 @@ Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="exponent-type-formula-summary"
+            title="Types of exponents"
+            source="/algebra/powers"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj12.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

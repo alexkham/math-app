@@ -16,6 +16,28 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word into the MistakeFix data (trace layout).
+const pitfallData = {
+  mistakes: [
+    { id: 'taking-the-inverse-for-the-contrapositive', name: `Taking the inverse for the contrapositive`, errorAt: 0,
+      what: `Asked for the contrapositive of $p \\to q$, the learner negates both parts but keeps their order, writing $\\neg p \\to \\neg q$. That formula is the inverse, and it is not equivalent to $p \\to q$.`,
+      wrong: [`"If it rains, then the ground is wet" is $p \\to q$. Its contrapositive is taken to be "If it does not rain, then the ground is not wet", that is $\\neg p \\to \\neg q$.`],
+      right: [`Negate both parts and swap them, giving $\\neg q \\to \\neg p$, "If the ground is not wet, then it did not rain". In the row $p = F$, $q = T$, the formula $p \\to q$ is T and $\\neg q \\to \\neg p$ is $F \\to T$, which is T, while $\\neg p \\to \\neg q$ is $T \\to F$, which is F.`],
+      why: `Negating each part looks like the whole change, and the swap is easy to forget. The inverse $\\neg p \\to \\neg q$ is the contrapositive of the converse $q \\to p$, so it is equivalent to the converse, which the asymmetry property already separates from $p \\to q$.`,
+      check: `Compare the two formulas in the row where the original antecedent is F and the original consequent is T. $p \\to q$ is T there, and a correct contrapositive must be T there too.` },
+    { id: 'negating-the-implication-as-another-implication', name: `Negating the implication as another implication`, errorAt: 0,
+      what: `When an implication has to be denied, as in a proof by contradiction, its negation is written as another conditional, such as $p \\to \\neg q$. The negation of an implication is not a conditional at all: it is the single case that breaks it, $p$ true and $q$ false.`,
+      wrong: [`To deny "If it rains, then the ground is wet", the learner states "If it rains, then the ground is not wet", that is $p \\to \\neg q$.`],
+      right: [`By material implication $p \\to q \\equiv \\neg p \\lor q$, so $\\neg(p \\to q) \\equiv \\neg(\\neg p \\lor q) \\equiv p \\land \\neg q$, "It rains and the ground is not wet". For $(p, q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $p \\to q$ takes the values T, F, T, T and $p \\land \\neg q$ takes F, T, F, F, while $p \\to \\neg q$ takes F, T, T, T.`],
+      why: `The "not" is attached to the conclusion, as if denying a conditional meant changing what it promises. In everyday speech "it is not true that if it rains the ground is wet" sounds like a claim about what happens when it rains.`,
+      check: `A negation must take the opposite value of the original in every row. At $p = F$, $p \\to q$ is T, so its negation must be F there; $p \\to \\neg q$ is also T at $p = F$, so it is not the negation.` },
+  ],
+};
+const pitfallClosing = `Both slips change a conditional into a different one. The contrapositive of $p \\to q$ negates both parts and swaps them, giving $\\neg q \\to \\neg p$, and the negation of $p \\to q$ is $p \\land \\neg q$, not another conditional. Testing the rows where $p$ is F, where $p \\to q$ is always T, catches both slips.`;
+
 
 
 
@@ -410,7 +432,7 @@ This single false row also decides how a conditional is tested. To check a claim
             boxed={true} color={'blue'} compact={true} type={'dot'} />,
             `@academic[pitfall,aside:true,width:35%:Taking the inverse for the contrapositive
 Writing $\\neg p \\to \\neg q$ as the contrapositive of $p \\to q$ fails at the row $p = F$, $q = T$: there $p \\to q$ is T but $\\neg p \\to \\neg q$ is F. The inverse $\\neg p \\to \\neg q$ is equivalent to the converse $q \\to p$, not to $p \\to q$.
-[Read more](!#misconceptions)]@
+[Read more](!#pitfall-taking-the-inverse-for-the-contrapositive)]@
 Contraposition and asymmetry both concern what happens when the two parts of an implication are rearranged. Swapping $p$ and $q$ alone gives the converse $q \\to p$, which can differ from $p \\to q$, as the mother example shows. Forming the contrapositive takes two moves together: both parts are negated, and they change places, giving $\\neg q \\to \\neg p$.`
         ]
           },
@@ -427,29 +449,15 @@ Contraposition and asymmetry both concern what happens when the two parts of an 
               
               `Another common misunderstanding is to assume that $p \\rightarrow q$ is equivalent to $q \\rightarrow p$. This is incorrect: implication is not symmetric, and such an inference does not hold logically.`,
 
-              `**Taking the inverse for the contrapositive**
-
-Asked for the contrapositive of $p \\to q$, the learner negates both parts but keeps their order, writing $\\neg p \\to \\neg q$. That formula is the inverse, and it is not equivalent to $p \\to q$.
-
-Wrong working: "If it rains, then the ground is wet" is $p \\to q$. Its contrapositive is taken to be "If it does not rain, then the ground is not wet", that is $\\neg p \\to \\neg q$.
-
-Right working: negate both parts and swap them, giving $\\neg q \\to \\neg p$, "If the ground is not wet, then it did not rain". In the row $p = F$, $q = T$, the formula $p \\to q$ is T and $\\neg q \\to \\neg p$ is $F \\to T$, which is T, while $\\neg p \\to \\neg q$ is $T \\to F$, which is F.
-
-Why it happens: negating each part looks like the whole change, and the swap is easy to forget. The inverse $\\neg p \\to \\neg q$ is the contrapositive of the converse $q \\to p$, so it is equivalent to the converse, which the asymmetry property already separates from $p \\to q$.
-
-How to check: compare the two formulas in the row where the original antecedent is F and the original consequent is T. $p \\to q$ is T there, and a correct contrapositive must be T there too.`,
-
-              `**Negating the implication as another implication**
-
-When an implication has to be denied, as in a proof by contradiction, its negation is written as another conditional, such as $p \\to \\neg q$. The negation of an implication is not a conditional at all: it is the single case that breaks it, $p$ true and $q$ false.
-
-Wrong working: to deny "If it rains, then the ground is wet", the learner states "If it rains, then the ground is not wet", that is $p \\to \\neg q$.
-
-Right working: by material implication $p \\to q \\equiv \\neg p \\lor q$, so $\\neg(p \\to q) \\equiv \\neg(\\neg p \\lor q) \\equiv p \\land \\neg q$, "It rains and the ground is not wet". For $(p, q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $p \\to q$ takes the values T, F, T, T and $p \\land \\neg q$ takes F, T, F, F, while $p \\to \\neg q$ takes F, T, T, T.
-
-Why it happens: the "not" is attached to the conclusion, as if denying a conditional meant changing what it promises. In everyday speech "it is not true that if it rains the ground is wet" sounds like a claim about what happens when it rains.
-
-How to check: a negation must take the opposite value of the original in every row. At $p = F$, $p \\to q$ is T, so its negation must be F there; $p \\to \\neg q$ is also T at $p = F$, so it is not the negation.`
+              <DiagramFrame
+                key={'misconceptions-mistakes'}
+                id="implication-misconceptions"
+                title="Common misconceptions about implication"
+                source="/logic/propositional-logic/semantics/implication"
+                after={pitfallClosing}
+              >
+                <MistakeFix data={pitfallData} variant="trace" />
+              </DiagramFrame>
             ]
           },
           {
@@ -465,7 +473,7 @@ To prove "If $n^2$ is even, then $n$ is even," one may instead prove the contrap
               
               `@academic[pitfall,aside:true,width:35%:Negating the implication as another implication
 Taking $p \\to \\neg q$ as the negation of $p \\to q$ fails at $p = F$: in both rows with $p = F$, $p \\to q$ and $p \\to \\neg q$ are T together. The negation is $p \\land \\neg q$, which is T only at $p = T$, $q = F$.
-[Read more](!#misconceptions)]@
+[Read more](!#pitfall-negating-the-implication-as-another-implication)]@
 Logical implication also underpins **proof by contradiction**, where the assumption of $p$ being true and $q$ being false leads to a contradiction. This contradiction implies that the original implication $p \\rightarrow q$ must be true.`,
               `@academic[punchline:Every proof of an implication rules out the same single case: the antecedent true and the consequent false.]@`
             ]

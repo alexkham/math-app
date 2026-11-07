@@ -20,10 +20,12 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import Procedure from '@/app/components/infographics/Procedure'
 
 
 export async function getStaticProps(){
@@ -652,6 +654,15 @@ Simplify $\\frac{84}{126}$. $\\gcd(84, 126)$: $126 = 84 \\cdot 1 + 42$, $84 = 42
       link:'',
   
     },
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary collects the rules for the greatest common divisor that the page states, one card each. Every card gives the name of the rule and its formula, a line on why it holds with a link to its section and, where the page works one through, an example; a badge marks the cards that need coprime numbers.
+
+The first five cards are the basic properties for positive integers: a number with itself, with one and with zero, the order of the two inputs, and the bound by the smaller number. Then come the step behind the Euclidean algorithm, the rule for consecutive integers, three consequences of being coprime, and the rule that extends the GCD to three or more numbers.`,
+      before: ``,
+      after: `The Euclidean step does the computing and the other rules do the checking: a GCD larger than the smaller input, or a common divisor above one for consecutive integers, points to a slip. The coprime cards say when a factor may be cancelled safely.`,
+      link: '',
+    },
     obj16:{
       title:`Common Pitfalls`,
       content:`Five mistakes account for many of the wrong answers in GCD work. Four are marked where they happen in the sections above; the confusion of coprime with prime is the one the notation and coprime sections already point out. Here each is worked through in full, with the wrong and the right working side by side.`,
@@ -902,9 +913,67 @@ const schemas = {
     ],
   };
 
+  // Procedure pilot 2026-11-05: the Euclidean algorithm of obj6 as a loop, traced on the page's own gcd(1071, 462).
+  const euclidProcedure = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    loop: {
+      label: 'Algorithm',
+      repeat: 'until $b = 0$',
+      steps: [
+        { text: 'Start with two positive integers $a$ and $b$, with $a \\geq b$' },
+        { text: 'Compute $r = a \\bmod b$', repeat: true },
+        { text: 'Replace $a$ with $b$ and $b$ with $r$', repeat: true },
+        { text: 'Repeat until $b = 0$', repeat: true, test: true },
+        { text: 'The value of $a$ at that point is the GCD', output: true },
+      ],
+    },
+    trace: {
+      label: '$\\gcd(1071, 462)$',
+      columns: ['$a = b \\cdot q + r$', 'new $a$', 'new $b$'],
+      eqCol: 0, zeroCol: 2,
+      rows: [
+        ['$1071 = 462 \\cdot 2 + 147$', '$462$', '$147$'],
+        ['$462 = 147 \\cdot 3 + 21$', '$147$', '$21$'],
+        ['$147 = 21 \\cdot 7 + 0$', '$21$', '$0$'],
+      ],
+      result: '$\\gcd(1071, 462) = 21$',
+    },
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Same number', formula: '$\\gcd(a, a) = a$',
+        text: 'The largest number that divides $a$ and $a$ is $a$ itself, from [the basic properties](!#2).' },
+      { name: 'With one', formula: '$\\gcd(a, 1) = 1$',
+        text: 'The only positive divisor of $1$ is $1$, so it is the only common divisor, as [the basic properties](!#2) note.' },
+      { name: 'With zero', formula: '$\\gcd(a, 0) = a$',
+        text: 'Every positive integer divides $0$, so the common divisors are just the divisors of $a$ ([basic properties](!#2)).' },
+      { name: 'Order', formula: '$\\gcd(a, b) = \\gcd(b, a)$',
+        text: 'The common factors are the same in either order, one of [the basic properties](!#2).' },
+      { name: 'Upper bound', formula: '$\\gcd(a, b) \\leq \\min(a, b)$',
+        text: 'No common divisor can be larger than the smaller number, the last of [the basic properties](!#2).' },
+      { name: 'Euclidean step', formula: '$\\gcd(a, b) = \\gcd(b, \\; a \\bmod b)$', example: '$\\gcd(252, 105) = \\gcd(105, 42)$',
+        text: 'Replacing the larger number by the remainder keeps the GCD and shrinks the numbers; [the Euclidean algorithm](!#5) repeats it until the remainder is $0$.' },
+      { name: 'Consecutive integers', formula: '$\\gcd(n, n + 1) = 1$',
+        text: 'Any common divisor of $n$ and $n + 1$ divides their difference, which is $1$, as [coprime numbers](!#7) shows.' },
+      { name: 'Coprime factor', formula: 'if $a \\mid (b \\cdot c)$, then $a \\mid c$', restriction: '$\\gcd(a, b) = 1$',
+        text: 'The factor $a$ inside the product must come from $c$; without coprimality it fails, since $6 \\mid (4 \\cdot 3)$ but $6 \\nmid 3$ ([properties of coprime numbers](!#8)).' },
+      { name: 'Coprime product', formula: '$\\gcd(a, b \\cdot c) = 1$', restriction: '$\\gcd(a, b) = 1$ and $\\gcd(a, c) = 1$',
+        text: 'Being coprime with each factor carries over to the product, from [properties of coprime numbers](!#8).' },
+      { name: 'Coprime squares', formula: '$\\gcd(a^2, b^2) = 1$', restriction: '$\\gcd(a, b) = 1$',
+        text: 'Squaring both numbers brings in no new shared primes, as [properties of coprime numbers](!#8) notes.' },
+      { name: 'More than two numbers', formula: '$\\gcd(a, b, c) = \\gcd(\\gcd(a, b), \\; c)$', example: '$\\gcd(24, 36, 60) = \\gcd(12, 60) = 12$',
+        text: 'Take the GCD of the first two, then of that result with the next number, in any order; see [GCD of more than two numbers](!#9).' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
+    euclidProcedure,
     gcdMethodTree,
     demoUnits,
     conceptIntroFigures,
@@ -935,7 +1004,7 @@ rtGcdObj10Tiles,
    }
 
 
-export default function GCDPage({ pitfallData,gcdMethodTree, seoData, sectionsContent, introContent, 
+export default function GCDPage({ formulaSummaryData, pitfallData,euclidProcedure,gcdMethodTree, seoData, sectionsContent, introContent, 
   obj2Table, obj8Table, summaryTable,
    faqQuestions, schemas,
   fsGcdObj1,
@@ -1161,6 +1230,15 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
       <div key={'obj6-svg-b'} style={{ maxWidth: '800px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: ecGcdObj6b }} />,
       sectionsContent.obj6.afterFigure2,
+      <DiagramFrame
+        key={'obj6-procedure'}
+        id="euclidean-algorithm-loop"
+        title="The Euclidean algorithm as a loop"
+        source="/arithmetic/divisibility/gcd"
+        before={"The same procedure with its loop marked. Use the arrows to run the trace one pass at a time and watch $b$ fall to $0$."}
+      >
+        <Procedure data={euclidProcedure} variant="loop" />
+      </DiagramFrame>,
       sectionsContent.obj6.after,
     ]
 },
@@ -1240,6 +1318,24 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
             source="/arithmetic/divisibility/gcd"
           >
             <TopDownTree data={gcdMethodTree} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="gcd-formula-summary"
+            title="GCD rules"
+            source="/arithmetic/divisibility/gcd"
+            related={false}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
           </DiagramFrame>,
         ]
     },

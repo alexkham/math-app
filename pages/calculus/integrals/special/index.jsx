@@ -14,8 +14,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -487,7 +489,7 @@ The absolute value ensures validity for negative $x$. For $x > 0$, the antideriv
 
 @academic[pitfall,aside:true,width:35%:Using ln for every reciprocal
 Writing $\\int \\frac{1}{x^2}\\, dx = \\ln(x^2) + C$ gives a function whose derivative is $\\frac{2}{x}$, not $\\frac{1}{x^2}$. As $x^{-2}$, the power rule gives $\\frac{x^{-1}}{-1} + C = -\\frac{1}{x} + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-ln-for-every-reciprocal)]@
 
 The logarithm belongs to the exponent $-1$ alone. Other reciprocals of powers, such as $\\frac{1}{x^2} = x^{-2}$ or $\\frac{1}{\\sqrt{x}} = x^{-1/2}$, are first rewritten with a negative exponent and then fall under the power rule, so their antiderivatives are again powers of $x$.
 `,
@@ -522,7 +524,7 @@ $$\\int e^{kx}\\, dx = \\frac{e^{kx}}{k} + C, \\quad k \\neq 0$$]@
 
 @academic[pitfall,aside:true,width:35%:Forgetting the 1/k
 Writing $\\int e^{3x}\\, dx = e^{3x} + C$ gives a function whose derivative is $3e^{3x}$, three times the integrand. Dividing by the inner constant gives $\\frac{e^{3x}}{3} + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-1-k)]@
 
 The factor $\\frac{1}{k}$ does the same job as $\\frac{1}{\\ln a}$ above. Differentiating $e^{kx}$ by the chain rule brings down the constant $k$, the derivative of the inner $kx$, and the antiderivative divides that constant back out. Any linear argument $kx + b$ behaves the same way, since its derivative is the constant $k$.
 `,
@@ -564,7 +566,7 @@ $$\\int \\csc x \\cot x\\, dx = -\\csc x + C$$
 
 @academic[pitfall,aside:true,width:35%:Integrating sin x to cos x
 Writing $\\int \\sin x\\, dx = \\cos x + C$ gives a function whose derivative is $-\\sin x$, the integrand with the wrong sign. The antiderivative is $-\\cos x + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-integrating-sin-x-to-cos-x)]@
 
 Each reverses a standard derivative. The negative signs in $\\sin x$ and $\\csc^2 x$ integrals reflect the negatives in $(\\cos x)' = -\\sin x$ and $(\\cot x)' = -\\csc^2 x$.
 `,
@@ -607,7 +609,7 @@ $$\\int \\frac{1}{\\sqrt{a^2 - x^2}}\\, dx = \\arcsin\\frac{x}{a} + C$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the 1/a in the arctangent form
 Writing $\\int \\frac{1}{4 + x^2}\\, dx = \\arctan\\frac{x}{2} + C$ gives a function whose derivative is $\\frac{2}{4 + x^2}$, twice the integrand. With $a = 2$ the answer is $\\frac{1}{2}\\arctan\\frac{x}{2} + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-1-a-in-the-arctangent-form)]@
 
 Both general forms reduce to the base forms through the substitution $x = au$, $dx = a\\, du$. In the arctangent form the denominator becomes $a^2(1 + u^2)$, and one factor $a$ is left over after $dx$ is replaced. In the arcsine form the radical becomes $a\\sqrt{1 - u^2}$, and the $a$ cancels completely, which is why that form has no factor in front.
 `,
@@ -648,7 +650,7 @@ Here $f(x) = \\cos x$ and $f'(x) = -\\sin x$, so the integrand is $-f'(x)/f(x)$.
 
 @academic[pitfall,aside:true,width:35%:Using ln without the derivative on top
 Writing $\\int \\frac{1}{x^2 + 1}\\, dx = \\ln(x^2 + 1) + C$ gives a function whose derivative is $\\frac{2x}{x^2 + 1}$. The numerator $1$ is not the derivative of $x^2 + 1$; the integral is $\\arctan x + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-ln-without-the-derivative-on-top)]@
 
 Before the pattern is used, the numerator is compared with the derivative of the denominator. A constant factor between them does no harm, since it can be moved outside the integral: in $\\int \\frac{x}{x^2 + 1}\\, dx$ the derivative of the denominator is $2x$, so the integral is $\\frac{1}{2}\\ln(x^2 + 1) + C$. In the example above the factor is $-1$, which gives the minus sign in $-\\ln|\\cos x|$.
 `,
@@ -693,80 +695,19 @@ For $\\sec x$ the form of $1$ is $\\frac{\\sec x + \\tan x}{\\sec x + \\tan x}$.
   },
   obj8: {
     title: `Master Reference: All Special Integrals at a Glance`,
-    content: `
-The formulas covered in the sections above all share the same role: standard endpoints that techniques aim to reach. The master reference below collects every formula on this page in one place, grouped by family so that scanning by integrand form returns the matching antiderivative directly. Use it as a lookup card while working integrals — the section above each row supplies the derivation and the context.
-`,
+    content: `Every formula on this page plays the same role: a standard endpoint that the integration techniques aim to reach. This summary collects all twenty in six families, grouped by the form of the integrand so that scanning for an integrand returns its antiderivative. The buttons above the cards show one family at a time, and each formula has a line on how to spot it or where it comes from, linked to its section.
+
+The power and exponential families come first, then the six basic trigonometric integrals and three inverse trigonometric forms. The logarithmic family holds the logarithm and the pattern of a derivative over its function, and the last family integrates tangent, cotangent, secant and cosecant to logarithms.`,
+    formulaSheetAfter: `When an integral resists, the aim is to rewrite it until one of these forms appears, by substitution, by splitting or by an identity. Every answer can then be checked by differentiating it, and the constant of integration belongs on every line.`,
     before: ``,
     after: ``,
     link: ``
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes cause many of the wrong answers when these formulas are used. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Using ln for every reciprocal**
-
-The antiderivative $\\ln|x|$ of $\\frac{1}{x}$ is carried over to other reciprocals, so $\\frac{1}{x^2}$ or $\\frac{1}{x^3}$ is integrated to a logarithm as well.
-
-Wrong working: $\\int \\frac{1}{x^2}\\, dx = \\ln(x^2) + C$.
-
-Right working: $\\frac{1}{x^2} = x^{-2}$, so $\\int x^{-2}\\, dx = \\frac{x^{-1}}{-1} + C = -\\frac{1}{x} + C$.
-
-Why it happens: $\\frac{1}{x}$ is the reciprocal met most often, and its integral is the one that gets memorised. Written as a fraction, $\\frac{1}{x^2}$ hides its exponent, so it is not obvious that only the exponent $-1$ is the exception.
-
-How to check: on $[1, 2]$ the integrand $\\frac{1}{x^2}$ lies between $\\frac{1}{4}$ and $1$, so $\\int_1^2 \\frac{1}{x^2}\\, dx$ lies between $\\frac{1}{4}$ and $1$. The power rule gives $\\left[-\\frac{1}{x}\\right]_1^2 = -\\frac{1}{2} + 1 = \\frac{1}{2}$; the logarithm gives $\\ln 4 - \\ln 1 \\approx 1.386$, which is too large.
-
-**Forgetting the 1/k**
-
-The exponential $e^{kx}$ is treated like $e^x$, and its antiderivative is written down as the function itself, without dividing by $k$.
-
-Wrong working: $\\int e^{3x}\\, dx = e^{3x} + C$.
-
-Right working: $\\int e^{3x}\\, dx = \\frac{e^{3x}}{3} + C$, because $\\frac{d}{dx}\\left[\\frac{e^{3x}}{3}\\right] = \\frac{3e^{3x}}{3} = e^{3x}$.
-
-Why it happens: $e^x$ is its own antiderivative, and the rule "the exponential stays the same" is applied to every exponential. The factor $3$ from the chain rule only shows up when the answer is differentiated.
-
-How to check: differentiate the answer. $\\frac{d}{dx}[e^{3x}] = 3e^{3x}$, three times the integrand, so the answer must be divided by $3$.
-
-**Integrating sin x to cos x**
-
-Because the derivative of $\\sin x$ is $\\cos x$ with no sign, the integral of $\\sin x$ is taken to be $\\cos x$ with no sign as well.
-
-Wrong working: $\\int \\sin x\\, dx = \\cos x + C$.
-
-Right working: $(\\cos x)' = -\\sin x$, so $(-\\cos x)' = \\sin x$, and $\\int \\sin x\\, dx = -\\cos x + C$.
-
-Why it happens: between $\\sin x$ and $\\cos x$, the minus sign appears in only one direction of differentiation, and it is easy to attach it to the wrong one.
-
-How to check: on $[0, \\pi]$ the integrand $\\sin x$ is never negative, so $\\int_0^\\pi \\sin x\\, dx$ must be positive. The right answer gives $-\\cos \\pi + \\cos 0 = 1 + 1 = 2$; the wrong one gives $\\cos \\pi - \\cos 0 = -2$.
-
-**Dropping the 1/a in the arctangent form**
-
-In $\\int \\frac{1}{a^2 + x^2}\\, dx$, the argument of the arctangent is correctly changed to $\\frac{x}{a}$, but the factor $\\frac{1}{a}$ in front is left off.
-
-Wrong working: $\\int \\frac{1}{4 + x^2}\\, dx = \\arctan\\frac{x}{2} + C$.
-
-Right working: with $x = 2u$ and $dx = 2\\, du$, $\\int \\frac{2\\, du}{4(1 + u^2)} = \\frac{1}{2}\\arctan u + C = \\frac{1}{2}\\arctan\\frac{x}{2} + C$.
-
-Why it happens: the two general forms are learned together, and the arcsine form $\\arcsin\\frac{x}{a}$ has no factor in front. The arctangent form is then remembered in the same shape.
-
-How to check: on $[0, 2]$ the integrand $\\frac{1}{4 + x^2}$ lies between $\\frac{1}{8}$ and $\\frac{1}{4}$, so $\\int_0^2 \\frac{1}{4 + x^2}\\, dx$ lies between $\\frac{1}{4}$ and $\\frac{1}{2}$. The right answer gives $\\frac{1}{2}\\arctan 1 = \\frac{\\pi}{8} \\approx 0.393$; the wrong one gives $\\arctan 1 = \\frac{\\pi}{4} \\approx 0.785$, outside that range.
-
-**Using ln without the derivative on top**
-
-Any fraction with a function in the denominator is integrated to the logarithm of that denominator, whether or not the numerator is its derivative.
-
-Wrong working: $\\int \\frac{1}{x^2 + 1}\\, dx = \\ln(x^2 + 1) + C$.
-
-Right working: $\\frac{1}{1 + x^2}$ is the arctangent form, so $\\int \\frac{1}{x^2 + 1}\\, dx = \\arctan x + C$. The logarithm belongs to $\\int \\frac{x}{x^2 + 1}\\, dx = \\frac{1}{2}\\ln(x^2 + 1) + C$, where the numerator is half the derivative of the denominator.
-
-Why it happens: the pattern $\\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$ is remembered as "a fraction gives a logarithm", and the check on the numerator is skipped.
-
-How to check: differentiate the answer. $\\frac{d}{dx}[\\ln(x^2 + 1)] = \\frac{2x}{x^2 + 1}$, which is $0$ at $x = 0$, while the integrand $\\frac{1}{x^2 + 1}$ is $1$ there.
-`,
+    content: `Five mistakes cause many of the wrong answers when these formulas are used. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip borrows a formula from the wrong integral. Only $\\frac{1}{x}$ integrates to a logarithm of $x$; $\\int e^{kx}\\,dx = \\frac{1}{k}e^{kx} + C$; $\\int \\sin x\\,dx = -\\cos x + C$; $\\int \\frac{dx}{a^2 + x^2} = \\frac{1}{a}\\arctan\\frac{x}{a} + C$; and $\\ln|g(x)|$ needs $g'(x)$ on top. Differentiating the answer, or bounding the integral between two simple values, catches each slip.`,
     link: ``
   }
 };
@@ -1006,8 +947,86 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 14, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-ln-for-every-reciprocal', name: `Using ln for every reciprocal`, errorAt: 0,
+        what: `The antiderivative $\\ln|x|$ of $\\frac{1}{x}$ is carried over to other reciprocals, so $\\frac{1}{x^2}$ or $\\frac{1}{x^3}$ is integrated to a logarithm as well.`,
+        wrong: [`$\\int \\frac{1}{x^2}\\, dx = \\ln(x^2) + C$.`],
+        right: [`$\\frac{1}{x^2} = x^{-2}$, so $\\int x^{-2}\\, dx = \\frac{x^{-1}}{-1} + C = -\\frac{1}{x} + C$.`],
+        why: `$\\frac{1}{x}$ is the reciprocal met most often, and its integral is the one that gets memorised. Written as a fraction, $\\frac{1}{x^2}$ hides its exponent, so it is not obvious that only the exponent $-1$ is the exception.`,
+        check: `On $[1, 2]$ the integrand $\\frac{1}{x^2}$ lies between $\\frac{1}{4}$ and $1$, so $\\int_1^2 \\frac{1}{x^2}\\, dx$ lies between $\\frac{1}{4}$ and $1$. The power rule gives $\\left[-\\frac{1}{x}\\right]_1^2 = -\\frac{1}{2} + 1 = \\frac{1}{2}$; the logarithm gives $\\ln 4 - \\ln 1 \\approx 1.386$, which is too large.` },
+      { id: 'forgetting-the-1-k', name: `Forgetting the 1/k`, errorAt: 0,
+        what: `The exponential $e^{kx}$ is treated like $e^x$, and its antiderivative is written down as the function itself, without dividing by $k$.`,
+        wrong: [`$\\int e^{3x}\\, dx = e^{3x} + C$.`],
+        right: [`$\\int e^{3x}\\, dx = \\frac{e^{3x}}{3} + C$, because $\\frac{d}{dx}\\left[\\frac{e^{3x}}{3}\\right] = \\frac{3e^{3x}}{3} = e^{3x}$.`],
+        why: `$e^x$ is its own antiderivative, and the rule "the exponential stays the same" is applied to every exponential. The factor $3$ from the chain rule only shows up when the answer is differentiated.`,
+        check: `Differentiate the answer. $\\frac{d}{dx}[e^{3x}] = 3e^{3x}$, three times the integrand, so the answer must be divided by $3$.` },
+      { id: 'integrating-sin-x-to-cos-x', name: `Integrating sin x to cos x`, errorAt: 0,
+        what: `Because the derivative of $\\sin x$ is $\\cos x$ with no sign, the integral of $\\sin x$ is taken to be $\\cos x$ with no sign as well.`,
+        wrong: [`$\\int \\sin x\\, dx = \\cos x + C$.`],
+        right: [`$(\\cos x)' = -\\sin x$, so $(-\\cos x)' = \\sin x$, and $\\int \\sin x\\, dx = -\\cos x + C$.`],
+        why: `Between $\\sin x$ and $\\cos x$, the minus sign appears in only one direction of differentiation, and it is easy to attach it to the wrong one.`,
+        check: `On $[0, \\pi]$ the integrand $\\sin x$ is never negative, so $\\int_0^\\pi \\sin x\\, dx$ must be positive. The right answer gives $-\\cos \\pi + \\cos 0 = 1 + 1 = 2$; the wrong one gives $\\cos \\pi - \\cos 0 = -2$.` },
+      { id: 'dropping-the-1-a-in-the-arctangent-form', name: `Dropping the 1/a in the arctangent form`, errorAt: 0,
+        what: `In $\\int \\frac{1}{a^2 + x^2}\\, dx$, the argument of the arctangent is correctly changed to $\\frac{x}{a}$, but the factor $\\frac{1}{a}$ in front is left off.`,
+        wrong: [`$\\int \\frac{1}{4 + x^2}\\, dx = \\arctan\\frac{x}{2} + C$.`],
+        right: [`With $x = 2u$ and $dx = 2\\, du$, $\\int \\frac{2\\, du}{4(1 + u^2)} = \\frac{1}{2}\\arctan u + C = \\frac{1}{2}\\arctan\\frac{x}{2} + C$.`],
+        why: `The two general forms are learned together, and the arcsine form $\\arcsin\\frac{x}{a}$ has no factor in front. The arctangent form is then remembered in the same shape.`,
+        check: `On $[0, 2]$ the integrand $\\frac{1}{4 + x^2}$ lies between $\\frac{1}{8}$ and $\\frac{1}{4}$, so $\\int_0^2 \\frac{1}{4 + x^2}\\, dx$ lies between $\\frac{1}{4}$ and $\\frac{1}{2}$. The right answer gives $\\frac{1}{2}\\arctan 1 = \\frac{\\pi}{8} \\approx 0.393$; the wrong one gives $\\arctan 1 = \\frac{\\pi}{4} \\approx 0.785$, outside that range.` },
+      { id: 'using-ln-without-the-derivative-on-top', name: `Using ln without the derivative on top`, errorAt: 0,
+        what: `Any fraction with a function in the denominator is integrated to the logarithm of that denominator, whether or not the numerator is its derivative.`,
+        wrong: [`$\\int \\frac{1}{x^2 + 1}\\, dx = \\ln(x^2 + 1) + C$.`],
+        right: [`$\\frac{1}{1 + x^2}$ is the arctangent form, so $\\int \\frac{1}{x^2 + 1}\\, dx = \\arctan x + C$. The logarithm belongs to $\\int \\frac{x}{x^2 + 1}\\, dx = \\frac{1}{2}\\ln(x^2 + 1) + C$, where the numerator is half the derivative of the denominator.`],
+        why: `The pattern $\\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$ is remembered as "a fraction gives a logarithm", and the check on the numerator is skipped.`,
+        check: `Differentiate the answer. $\\frac{d}{dx}[\\ln(x^2 + 1)] = \\frac{2x}{x^2 + 1}$, which is $0$ at $x = 0$, while the integrand $\\frac{1}{x^2 + 1}$ is $1$ there.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'power', name: 'Power', sub: 'The power rule and the one exponent it leaves out.', pairs: [
+        [{ formula: '$\\displaystyle \\int x^n\\, dx = \\frac{x^{n+1}}{n+1} + C \\quad n \\neq -1$', text: 'Raise the exponent by one and divide by the new exponent, as [power functions](!#2) shows.' },
+         { formula: '$\\displaystyle \\int \\frac{1}{x}\\, dx = \\ln|x| + C$', text: 'The case $n = -1$ gives a logarithm; the absolute value covers both sides of $0$ ([power functions](!#2)).' }],
+      ] },
+      { id: 'exp', name: 'Exponential', sub: 'Exponentials integrate to themselves, divided by a constant.', pairs: [
+        [{ formula: '$\\displaystyle \\int e^x\\, dx = e^x + C$', text: 'The natural exponential is its own antiderivative, from [exponential functions](!#3).' },
+         { formula: '$\\displaystyle \\int a^x\\, dx = \\frac{a^x}{\\ln a} + C \\quad a > 0, \\, a \\neq 1$', text: 'A general base divides by $\\ln a$, as [exponential functions](!#3) explains.' }],
+        [{ formula: '$\\displaystyle \\int e^{kx}\\, dx = \\frac{e^{kx}}{k} + C, \\quad k \\neq 0$', text: 'A constant in the exponent divides out, which reverses the chain rule ([exponential functions](!#3)).' }, ''],
+      ] },
+      { id: 'trig', name: 'Trigonometric', sub: 'Each formula reverses a derivative from the trigonometric list.', pairs: [
+        [{ formula: '$\\displaystyle \\int \\sin x\\, dx = -\\cos x + C$', text: 'The minus sign comes from $(\\cos x)\' = -\\sin x$; see [trigonometric functions](!#4).' },
+         { formula: '$\\displaystyle \\int \\cos x\\, dx = \\sin x + C$', text: 'Cosine integrates to sine with no sign change ([trigonometric functions](!#4)).' }],
+        [{ formula: '$\\displaystyle \\int \\sec^2 x\\, dx = \\tan x + C$', text: 'Reverses the derivative of the tangent, from [trigonometric functions](!#4).' },
+         { formula: '$\\displaystyle \\int \\csc^2 x\\, dx = -\\cot x + C$', text: 'Reverses the derivative of the cotangent, with its minus sign ([trigonometric functions](!#4)).' }],
+        [{ formula: '$\\displaystyle \\int \\sec x \\tan x\\, dx = \\sec x + C$', text: 'Reverses the derivative of the secant, as [trigonometric functions](!#4) lists.' },
+         { formula: '$\\displaystyle \\int \\csc x \\cot x\\, dx = -\\csc x + C$', text: 'Reverses the derivative of the cosecant ([trigonometric functions](!#4)).' }],
+      ] },
+      { id: 'invtrig', name: 'Inverse trigonometric', sub: 'Algebraic integrands whose antiderivatives are inverse trigonometric functions.', pairs: [
+        [{ formula: '$\\displaystyle \\int \\frac{1}{1 + x^2}\\, dx = \\arctan x + C$', text: 'The sum $1 + x^2$ in the denominator points to the arctangent, as [inverse trigonometric forms](!#5) shows.' },
+         { formula: '$\\displaystyle \\int \\frac{1}{\\sqrt{1 - x^2}}\\, dx = \\arcsin x + C$', text: 'The root of $1 - x^2$ points to the arcsine ([inverse trigonometric forms](!#5)).' }],
+        [{ formula: '$\\displaystyle \\int \\frac{1}{x\\sqrt{x^2 - 1}}\\, dx = \\operatorname{arcsec}|x| + C$', text: 'The root of $x^2 - 1$ with a factor $x$ outside points to the arcsecant ([inverse trigonometric forms](!#5)).' }, ''],
+      ] },
+      { id: 'log', name: 'Logarithmic', sub: 'The logarithm itself, and the pattern that produces logarithms.', pairs: [
+        [{ formula: '$\\displaystyle \\int \\ln x\\, dx = x\\ln x - x + C$', text: 'Found by integration by parts, as [logarithmic integrals](!#6) shows.' },
+         { formula: "$\\displaystyle \\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$", text: 'Whenever the numerator is the derivative of the denominator, the answer is a logarithm ([logarithmic integrals](!#6)).' }],
+      ] },
+      { id: 'triglog', name: 'Trigonometric to logarithm', sub: 'The remaining four trigonometric functions, which integrate to logarithms.', pairs: [
+        [{ formula: '$\\displaystyle \\int \\tan x\\, dx = -\\ln|\\cos x| + C = \\ln|\\sec x| + C$', text: 'Writing $\\tan x$ as $\\sin x / \\cos x$ gives the logarithm pattern, as [integrals leading to logarithms](!#7) shows.' },
+         { formula: '$\\displaystyle \\int \\cot x\\, dx = \\ln|\\sin x| + C$', text: 'The same pattern with $\\cos x / \\sin x$ ([integrals leading to logarithms](!#7)).' }],
+        [{ formula: '$\\displaystyle \\int \\sec x\\, dx = \\ln|\\sec x + \\tan x| + C$', text: 'The secant needs a multiplying trick before the pattern appears; see [integrals leading to logarithms](!#7).' },
+         { formula: '$\\displaystyle \\int \\csc x\\, dx = -\\ln|\\csc x + \\cot x| + C = \\ln|\\csc x - \\cot x| + C$', text: 'The cosecant version, with two equal forms ([integrals leading to logarithms](!#7)).' }],
+      ] },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     specialIntegralsOutline,
     secantIntegralSteps,
     sectionsContent,
@@ -1030,7 +1049,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({specialIntegralsOutline, secantIntegralSteps, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ formulaSummaryData, pitfallData,specialIntegralsOutline, secantIntegralSteps, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1178,8 +1197,16 @@ export default function PageTemplate({specialIntegralsOutline, secantIntegralSte
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="special-integral-formula-summary"
+            title="Special integrals"
+            source="/calculus/integrals/special"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="special-integrals-outline"
@@ -1196,6 +1223,15 @@ export default function PageTemplate({specialIntegralsOutline, secantIntegralSte
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="special-integral-pitfalls"
+            title="Common pitfalls with special integrals"
+            source="/calculus/integrals/special"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -17,6 +17,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -679,7 +680,10 @@ Equality holds only when all values are identical. This inequality extends to in
   },
   obj8: {
     title: `Geometric Sequences at a Glance`,
-    content: `The page defined the common ratio, derived the explicit and recursive formulas, the finite-series telescoping sum, the infinite-series convergence rule, and the geometric-mean property. The table below collects each formula with a representative example for quick reference.`,
+    content: `This summary gathers the formulas of the page in nine rows. Each row names a formula or property with a short note on where it comes from and a link to its section, states it, and gives an example or a note on how it is used.
+
+The first three rows describe the sequence: the common ratio, the explicit formula for any term, and the recursive rule that multiplies each term into the next. Two sums follow, one for finitely many terms and one for an infinite series, with the condition for it to exist. The last rows give the geometric-mean property, the rule for inserting means, the inequality between the means, and how geometric growth differs from arithmetic growth.`,
+    formulaSheetAfter: `Every row rests on multiplying by the same ratio again and again. That one fact gives the explicit formula, folds a long sum into a short fraction, keeps an infinite sum finite when the ratio is small, and makes geometric growth outrun any arithmetic one.`,
     before: ``,
     after: ``,
     link: '',
@@ -890,8 +894,39 @@ $$S = \\frac{1 - 2^9}{1 - 2} = \\frac{1 - 512}{-1} = 511$$`],
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table capstoneTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Concept', kind: 'name' },
+      { key: 'formula', label: 'Formula / property', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Common ratio', formula: '$\\displaystyle \\frac{a_{n+1}}{a_n} = r$, constant, with $r \\neq 0$', example: '$5, 15, 45, 135 \\;\\Rightarrow\\; r = 3$',
+        sub: 'Each term divided by the one before; a ratio of $0$ is ruled out, as [the definition](!#1) explains.' },
+      { name: 'Explicit (n-th term)', formula: '$a_n = a_1 \\cdot r^{n-1}$', example: '$a_1 = 3,\\; r = 2 \\;\\Rightarrow\\; a_n = 3 \\cdot 2^{n-1}$',
+        sub: 'Place $n$ lies $n - 1$ multiplications from the first term; [finding terms](!#3) solves it for any of its four quantities.' },
+      { name: 'Recursive', formula: '$a_1 = c, \\quad a_n = r \\cdot a_{n-1}$', example: 'multiply each term by $r$ to step forward',
+        sub: 'Applying the rule $n - 1$ times gives back the explicit formula, as [the recursive formula](!#4) shows.' },
+      { name: 'Finite series sum', formula: '$\\displaystyle S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$; if $r = 1$, then $S_n = n \\cdot a_1$', example: '$1 + 2 + 4 + \\cdots + 2^9 = 1023$',
+        sub: 'Multiplying the sum by $r$ and subtracting cancels all but two terms, as [finite geometric series](!#5) derives.' },
+      { name: 'Infinite series sum', formula: '$\\displaystyle S = \\frac{a_1}{1 - r}$, valid only when $|r| < 1$', example: '$\\displaystyle \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots = 1$',
+        sub: 'The limit of the finite sum as $r^n$ shrinks to $0$; for $|r| \\geq 1$, [infinite geometric series](!#6) shows there is no sum.' },
+      { name: 'Geometric-mean property', formula: 'for positive terms, $a_n = \\sqrt{a_{n-1} \\cdot a_{n+1}}$', example: 'each interior term is the square root of the product of its two neighbors',
+        sub: 'The neighbors are $a_n$ divided by $r$ and $a_n$ times $r$, so their product is $a_n^2$; see [geometric mean](!#7).' },
+      { name: 'Inserting k means between a and b', formula: '$\\displaystyle r = \\left(\\frac{b}{a}\\right)^{1/(k+1)}$; inserts $ar, ar^2, \\ldots, ar^k$', example: '$3$ means between $2$ and $162$: $r = 3$ gives $6, 18, 54$',
+        sub: 'Placing $k$ terms between the endpoints makes $k + 1$ equal ratio steps, as [inserting geometric means](!#7) works out.' },
+      { name: 'AM–GM inequality', formula: '$G \\leq A$, with equality exactly when all values are equal; extends to $H \\leq G \\leq A$', example: '$\\displaystyle \\sqrt{ab} \\leq \\frac{a + b}{2}$',
+        sub: 'For positive numbers the geometric mean never exceeds the arithmetic mean, as [the AM–GM inequality](!#7) states.' },
+      { name: 'Compared with arithmetic', formula: 'arithmetic is linear, $a_n \\propto n$; geometric is exponential, $a_n \\propto r^n$', example: '$3, 6, 9, 12$ (arithmetic) vs $3, 6, 12, 24$ (geometric)',
+        sub: 'An [arithmetic sequence](!/algebra/sequences/arithmetic) adds a fixed step while a geometric one multiplies by a fixed ratio, as [the definition](!#1) explains.' },
+    ],
+  };
+
    return {
   props:{
+    formulaSummaryData,
     pitfallData,
      sectionsContent,
      introContent,
@@ -913,7 +948,7 @@ $$S = \\frac{1 - 2^9}{1 - 2} = \\frac{1 - 512}{-1} = 511$$`],
 }
    }
 
-export default function GeometricSequencesPage({ pitfallData,seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function GeometricSequencesPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1089,8 +1124,16 @@ $$a_n = a_1 \\cdot r^{n-1}$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="geometric-sequence-formula-summary"
+            title="Geometric sequence formulas"
+            source="/algebra/sequences/geometric"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

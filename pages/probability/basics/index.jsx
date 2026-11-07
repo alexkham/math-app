@@ -13,6 +13,8 @@ import { setsProbabilityData } from '@/app/api/db/diagrams/probability/setsProba
 import { probabilityFunctionData } from '@/app/api/db/diagrams/probability/probabilityFunction'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 // Surfaced on the /probability hub via buildSectionData extraction.
 const hubMeta = {
@@ -367,7 +369,7 @@ By definition, an [event](!/probability/events) is any subset of the [sample spa
 
 @academic[pitfall,aside:true,width:35%:Treating unequal outcomes as equally likely
 Taking the eleven possible sums $2, 3, \\ldots, 12$ of two dice as the sample space gives $P(\\text{sum} = 7) = \\frac{1}{11}$. The sums are not equally likely; counting the $36$ ordered pairs of faces gives $\\frac{6}{36} = \\frac{1}{6}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-unequal-outcomes-as-equally-likely)]@
 
 The ratio counts outcomes, so its result depends on which list of outcomes is taken as the sample space. For a single die the six faces are the natural list. For two dice there is a choice between the $36$ ordered pairs of faces and the $11$ possible sums, and the two lists give different answers to the same question.
  `
@@ -564,7 +566,7 @@ svg:
 
 @academic[pitfall,aside:true,width:35%:Multiplying dependent events
 For one die roll, with $A$ = even and $B$ = greater than $3$, the product gives $P(A \\cap B) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$. But $A \\cap B = \\{4, 6\\}$, so $P(A \\cap B) = \\frac{2}{6} = \\frac{1}{3}$: the events are dependent.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-dependent-events)]@
 
 The product formula rests on the condition that knowing $B$ leaves the chance of $A$ unchanged. That condition is a property of the particular experiment and the particular pair of events, and it can be tested directly by comparing $P(A \\mid B)$ with $P(A)$. When the two differ, $P(A \\cap B)$ is found from the conditional probability instead, as $P(B)\\,P(A \\mid B)$.
 
@@ -593,36 +595,8 @@ link:'/probability/probability-function'
       },
       pitfalls:{
         title:`Common Pitfalls`,
-        content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating unequal outcomes as equally likely**
-
-The ratio of favorable outcomes to all outcomes is applied to a list of outcomes that are not equally likely. The ratio counts outcomes, so it gives the right probability only when every outcome on the list carries the same weight.
-
-Wrong working: two dice are rolled, and the sample space is taken as the possible sums $2, 3, \\ldots, 12$. That is $11$ outcomes, one of them favorable:
-$$P(\\text{sum} = 7) = \\frac{1}{11}$$
-
-Right working: the equally likely outcomes are the $36$ ordered pairs (first die, second die). Six of them give a sum of $7$: $(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)$.
-$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$
-
-Why it happens: the question is about the sum, so the sums look like the natural outcomes. The list of sums does not show that different sums arise from different numbers of pairs.
-
-How to check: compare two outcomes on the list. A sum of $2$ arises only from $(1,1)$, with probability $\\frac{1}{36}$, while a sum of $7$ arises in six ways; the two cannot have the same probability.
-
-**Multiplying dependent events**
-
-The probability that two events both happen is found as $P(A)\\,P(B)$ without checking that the events are independent. The product formula holds only when knowing one event leaves the chance of the other unchanged.
-
-Wrong working: one roll of a fair die; $A$ = even $= \\{2, 4, 6\\}$, $B$ = greater than $3$ $= \\{4, 5, 6\\}$.
-$$P(A \\cap B) = P(A)\\,P(B) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$$
-
-Right working: $A \\cap B = \\{4, 6\\}$, two of the six faces.
-$$P(A \\cap B) = \\frac{2}{6} = \\frac{1}{3}$$
-The same result comes from the conditional probability: $P(B)\\,P(A \\mid B) = \\frac{1}{2} \\cdot \\frac{2}{3} = \\frac{1}{3}$.
-
-Why it happens: the product rule is short and is often the first rule met for "and", so it is applied by habit, and independence is assumed instead of checked.
-
-How to check: with six equally likely faces, every probability for one roll is a whole number of sixths, and $\\frac{1}{4}$ is not. Comparing $P(A \\mid B) = \\frac{2/6}{3/6} = \\frac{2}{3}$ with $P(A) = \\frac{1}{2}$ shows the events are dependent.`,
+        content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
+        after: `Both slips use a formula outside its conditions. The ratio of favourable to all outcomes needs equally likely outcomes, and $P(A)\\,P(B)$ needs independent events. Comparing two outcomes on the list, or checking that the answer is a possible probability for the experiment, catches both.`,
       },
 
 
@@ -703,8 +677,30 @@ Probability is widely applied in science, engineering, finance, and everyday dec
     }
   }
 
+  // MistakeFix batch 16, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-unequal-outcomes-as-equally-likely', name: `Treating unequal outcomes as equally likely`, errorAt: 0,
+        what: `The ratio of favorable outcomes to all outcomes is applied to a list of outcomes that are not equally likely. The ratio counts outcomes, so it gives the right probability only when every outcome on the list carries the same weight.`,
+        wrong: [`Two dice are rolled, and the sample space is taken as the possible sums $2, 3, \\ldots, 12$. That is $11$ outcomes, one of them favorable:
+$$P(\\text{sum} = 7) = \\frac{1}{11}$$`],
+        right: [`The equally likely outcomes are the $36$ ordered pairs (first die, second die). Six of them give a sum of $7$: $(1,6)$, $(2,5)$, $(3,4)$, $(4,3)$, $(5,2)$, $(6,1)$.`, `$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$`],
+        why: `The question is about the sum, so the sums look like the natural outcomes. The list of sums does not show that different sums arise from different numbers of pairs.`,
+        check: `Compare two outcomes on the list. A sum of $2$ arises only from $(1,1)$, with probability $\\frac{1}{36}$, while a sum of $7$ arises in six ways; the two cannot have the same probability.` },
+      { id: 'multiplying-dependent-events', name: `Multiplying dependent events`, errorAt: 0,
+        what: `The probability that two events both happen is found as $P(A)\\,P(B)$ without checking that the events are independent. The product formula holds only when knowing one event leaves the chance of the other unchanged.`,
+        wrong: [`One roll of a fair die; $A$ = even $= \\{2, 4, 6\\}$, $B$ = greater than $3$ $= \\{4, 5, 6\\}$.`, `$$P(A \\cap B) = P(A)\\,P(B) = \\frac{1}{2} \\cdot \\frac{1}{2}$$
+$$= \\frac{1}{4}$$`],
+        right: [`$A \\cap B = \\{4, 6\\}$, two of the six faces.`, `$$P(A \\cap B) = \\frac{2}{6} = \\frac{1}{3}$$`, `The same result comes from the conditional probability: $P(B)\\,P(A \\mid B) = \\frac{1}{2} \\cdot \\frac{2}{3} = \\frac{1}{3}$.`],
+        why: `The product rule is short and is often the first rule met for "and", so it is applied by habit, and independence is assumed instead of checked.`,
+        check: `With six equally likely faces, every probability for one roll is a whole number of sixths, and $\\frac{1}{4}$ is not. Comparing $P(A \\mid B) = \\frac{2/6}{3/6} = \\frac{2}{3}$ with $P(A) = \\frac{1}{2}$ shows the events are dependent.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
       faqQuestions,
       sectionContent,
       introContent,
@@ -718,7 +714,7 @@ Probability is widely applied in science, engineering, finance, and everyday dec
   }
 }
 
-export default function ProbabilityBasicsPage({ 
+export default function ProbabilityBasicsPage({ pitfallData, 
   sectionContent, 
   introContent, 
   keyWords,
@@ -872,6 +868,15 @@ export default function ProbabilityBasicsPage({
       link:'',
       content:[
         sectionContent.pitfalls.content,
+        <DiagramFrame
+          key={'pitfalls-mistakes'}
+          id="probability-basics-pitfalls"
+          title="Common pitfalls with basic probability"
+          source="/probability/basics"
+          after={sectionContent.pitfalls.after}
+        >
+          <MistakeFix data={pitfallData} variant="trace" />
+        </DiagramFrame>,
       ]
     },
     {

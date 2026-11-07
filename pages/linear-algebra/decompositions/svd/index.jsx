@@ -8341,7 +8341,8 @@ import NestedContainment from '@/app/components/infographics/NestedContainment/N
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -8781,7 +8782,7 @@ This is the most numerically stable method for determining rank: compute the SVD
 
 @academic[pitfall,aside:true,width:35%:Forgetting the square root
 Taking the eigenvalues of $A^TA$ as the singular values gives $3$ and $1$ for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$, so $\\sigma_1^2 + \\sigma_2^2 = 10$, while the squared entries of $A$ add up to $4$. The singular values are $\\sqrt{3}$ and $1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-square-root)]@
 
 The largest singular value $\\sigma_1$ is the operator norm $\\|A\\|_2 = \\max_{\\|\\mathbf{x}\\|=1}\\|A\\mathbf{x}\\|$. The [Frobenius norm](!/linear-algebra/matrix/trace) is $\\|A\\|_F = \\sqrt{\\sigma_1^2 + \\sigma_2^2 + \\cdots + \\sigma_r^2}$. For full-rank $A$, the condition number is $\\kappa(A) = \\sigma_1/\\sigma_r$ — a large condition number means the matrix is nearly singular and small perturbations in the input cause large changes in the output.`,
     before: ``,
@@ -8802,7 +8803,7 @@ For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$: $A^TA = \
 
 @academic[pitfall,aside:true,width:35%:Choosing the left vectors separately
 Taking each $\\mathbf{u}_i$ as an eigenvector of $AA^T$ on its own can flip a sign: $\\mathbf{u}_1 = -\\frac{1}{\\sqrt{6}}(1, 1, 2)^T$ is also a unit eigenvector, but with it $U\\Sigma V^T = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\\\ -1 & -1 \\end{pmatrix} \\neq A$. With $\\mathbf{u}_1 = \\frac{1}{\\sigma_1}A\\mathbf{v}_1$ the product is $A$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-choosing-the-left-vectors-separately)]@
 
 In the example, the columns of $V$ came from the eigenvectors of $A^TA$, and the first two columns of $U$ were then produced from them one at a time by $\\mathbf{u}_i = \\frac{1}{\\sigma_i}A\\mathbf{v}_i$. Each such pair satisfies $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$, which is the column-by-column form of $AV = U\\Sigma$. Only $\\mathbf{u}_3$, which meets the zero row of $\\Sigma$, is fixed by orthogonality to $\\mathbf{u}_1$ and $\\mathbf{u}_2$ alone.`,
     before: ``,
@@ -8857,7 +8858,7 @@ The pseudoinverse satisfies four defining properties: $AA^+A = A$, $A^+AA^+ = A^
 
 @academic[pitfall,aside:true,width:35%:Keeping U and V in place
 Writing $U\\Sigma^+V^T$ instead of $V\\Sigma^+U^T$: for $A = \\begin{pmatrix} 0 & 2 \\\\ 0 & 0 \\end{pmatrix}$, with $\\mathbf{u}_1 = \\mathbf{e}_1$, $\\mathbf{v}_1 = \\mathbf{e}_2$ and $\\sigma_1 = 2$, it gives $\\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix}$, and then $AA^+A = O$. The pseudoinverse is $\\begin{pmatrix} 0 & 0 \\\\ 1/2 & 0 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-u-and-v-in-place)]@
 
 Assembling $A^+$ takes three steps: reciprocate the nonzero singular values, transpose the shape of $\\Sigma$ to get $\\Sigma^+$, and multiply by the two orthogonal factors. When $A$ is square and invertible, the result is the ordinary inverse $A^{-1} = V\\Sigma^{-1}U^T$. In every case the result can be tested against the four defining properties above.`,
     before: ``,
@@ -8926,7 +8927,7 @@ For a general symmetric matrix with some negative eigenvalues, the singular valu
 
 @academic[pitfall,aside:true,width:35%:Using the eigenvalues of A
 Reading the singular values of $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ off its eigenvalues $1, 1$ gives $\\|A\\|_2 = 1$ and $\\kappa(A) = 1$. From $A^TA = \\begin{pmatrix} 1 & 2 \\\\ 2 & 5 \\end{pmatrix}$, $\\sigma_{1,2} = \\sqrt{2} \\pm 1$, so $\\|A\\|_2 = 1 + \\sqrt{2}$ and $\\kappa(A) = 3 + 2\\sqrt{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-eigenvalues-of-a)]@
 
 For non-symmetric or rectangular matrices, the eigendecomposition does not apply (it requires square matrices and may not exist even then), but the SVD always does. The SVD is the correct generalization of the spectral decomposition to the broadest possible class of matrices.`,
     before: ``,
@@ -9009,68 +9010,9 @@ The [SVD tool](!/linear-algebra/visual-tools/singular-value-decomposition) repor
   },
   obj14: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when an SVD is worked out by hand. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Forgetting the square root**
-
-The eigenvalues of $A^TA$ are found correctly and then used directly as the singular values. The square root that turns them into stretch factors is left out.
-
-Wrong working: for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$ from the worked example,
-$$A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}, \\quad \\lambda_1 = 3, \\; \\lambda_2 = 1 \\quad \\Longrightarrow \\quad \\sigma_1 = 3, \\; \\sigma_2 = 1$$
-
-Right working: each singular value is the square root of an eigenvalue.
-$$\\sigma_1 = \\sqrt{3}, \\quad \\sigma_2 = \\sqrt{1} = 1$$
-
-Why it happens: the whole computation runs through the eigenvalue problem for $A^TA$, and its eigenvalues look like the final answer. When an eigenvalue is $0$ or $1$ the square root changes nothing, which hides the step.
-
-How to check: the squares of the singular values must add up to the sum of the squared entries of $A$, which is $\\|A\\|_F^2$. Here the entries give $1 + 1 + 1 + 1 = 4$, and $(\\sqrt{3})^2 + 1^2 = 4$, while $3^2 + 1^2 = 10$. A second test: $\\|A\\mathbf{v}_1\\|$ must equal $\\sigma_1$, and $A\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 2)^T$ has length $\\sqrt{3}$.
-
-**Choosing the left vectors separately**
-
-The right singular vectors come from $A^TA$, and the left ones are taken as unit eigenvectors of $AA^T$, found independently. Each eigenvector is fixed only up to sign, so the two choices need not match, and $U\\Sigma V^T$ no longer equals $A$.
-
-Wrong working: with $\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$ from the worked example, the unit eigenvector of $AA^T$ for $\\lambda = 3$ is taken as $\\mathbf{u}_1 = -\\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, with $\\mathbf{u}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Since $\\mathbf{u}_3$ meets a zero row of $\\Sigma$,
-$$U\\Sigma V^T = \\sigma_1\\mathbf{u}_1\\mathbf{v}_1^T + \\sigma_2\\mathbf{u}_2\\mathbf{v}_2^T = -\\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\\\ 2 & 2 \\end{pmatrix} + \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\\\ -1 & -1 \\end{pmatrix}$$
-
-Right working: compute $\\mathbf{u}_1$ from $\\mathbf{v}_1$.
-$$\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1 = \\frac{1}{\\sqrt{3}} \\cdot \\frac{1}{\\sqrt{2}}(1, 1, 2)^T = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$$
-$$U\\Sigma V^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\\\ 2 & 2 \\end{pmatrix} + \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = A$$
-
-Why it happens: the columns of $U$ and $V$ are eigenvectors of $AA^T$ and $A^TA$, so it looks natural to compute both the same way. That description fixes each column only up to sign, and it says nothing about the pairing $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$ that holds the factorization together.
-
-How to check: for each nonzero $\\sigma_i$, compare $A\\mathbf{v}_i$ with $\\sigma_i\\mathbf{u}_i$. Here $A\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 2)^T$, while the wrong choice gives $\\sigma_1\\mathbf{u}_1 = -\\frac{1}{\\sqrt{2}}(1, 1, 2)^T$.
-
-**Keeping U and V in place**
-
-To build the pseudoinverse, $\\Sigma$ is replaced by $\\Sigma^+$ but the outer factors are left where they were, giving $U\\Sigma^+V^T$. The order has to reverse, as it does for the inverse of any product.
-
-Wrong working: $A = \\begin{pmatrix} 0 & 2 \\\\ 0 & 0 \\end{pmatrix}$ sends $\\mathbf{e}_2$ to $2\\mathbf{e}_1$ and $\\mathbf{e}_1$ to $\\mathbf{0}$, so $\\sigma_1 = 2$, $\\mathbf{v}_1 = \\mathbf{e}_2$, $\\mathbf{u}_1 = \\mathbf{e}_1$, and $\\sigma_2 = 0$, $\\mathbf{v}_2 = \\mathbf{e}_1$, $\\mathbf{u}_2 = \\mathbf{e}_2$. Then $U = I$, $V = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, $\\Sigma^+ = \\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix}$, and
-$$U\\Sigma^+V^T = \\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix}\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix}$$
-
-Right working: $V$ goes on the left and $U^T$ on the right.
-$$A^+ = V\\Sigma^+U^T = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & 0 \\\\ 1/2 & 0 \\end{pmatrix}$$
-
-Why it happens: $\\Sigma^+$ takes the place of $\\Sigma$ in the middle, and it is tempting to change nothing else. For a symmetric positive semi-definite matrix $U = V$, so the slip gives the right answer there and goes unnoticed.
-
-How to check: test the first defining property, $AA^+A = A$. With the correct $A^+$, $AA^+ = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $AA^+A = A$. With the wrong one, $A \\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix} = O$, so $AA^+A = O$. For a rectangular $A$ the sizes alone catch it: $A^+$ must be $n \\times m$, and $U\\Sigma^+V^T$ is not even defined when $m \\neq n$.
-
-**Using the eigenvalues of A**
-
-For a square matrix, the singular values are read off the eigenvalues of $A$ itself, and the norm and the condition number are computed from them. This works for symmetric matrices, after taking absolute values, but not in general.
-
-Wrong working: $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ is triangular, with eigenvalues $1$ and $1$. Taking these as the singular values gives
-$$\\|A\\|_2 = 1, \\qquad \\kappa(A) = \\frac{1}{1} = 1$$
-
-Right working: the singular values come from $A^TA$.
-$$A^TA = \\begin{pmatrix} 1 & 2 \\\\ 2 & 5 \\end{pmatrix}, \\quad \\lambda^2 - 6\\lambda + 1 = 0, \\quad \\lambda = 3 \\pm 2\\sqrt{2}$$
-$$\\sigma_1 = \\sqrt{3 + 2\\sqrt{2}} = 1 + \\sqrt{2}, \\qquad \\sigma_2 = \\sqrt{3 - 2\\sqrt{2}} = \\sqrt{2} - 1$$
-$$\\|A\\|_2 = 1 + \\sqrt{2} \\approx 2.414, \\qquad \\kappa(A) = \\frac{\\sqrt{2} + 1}{\\sqrt{2} - 1} = 3 + 2\\sqrt{2} \\approx 5.83$$
-
-Why it happens: for symmetric matrices the singular values are the absolute values of the eigenvalues, as the section on the spectral decomposition shows, and the shortcut is carried over to matrices that are not symmetric.
-
-How to check: one vector is enough. $A\\mathbf{e}_2 = (2, 1)^T$ has length $\\sqrt{5} \\approx 2.24$, more than $1$, so $\\|A\\|_2$ cannot be $1$. The squares of the singular values must also add up to the squared entries, $1 + 4 + 0 + 1 = 6$; the eigenvalues give $1 + 1 = 2$, while $(1 + \\sqrt{2})^2 + (\\sqrt{2} - 1)^2 = 6$.`,
+    content: `Four mistakes come up again and again when an SVD is worked out by hand. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip breaks the link between the parts of $A = U\\Sigma V^T$. The singular values are the square roots of the eigenvalues of $A^TA$, each $\\mathbf{u}_i$ is $\\frac{A\\mathbf{v}_i}{\\sigma_i}$ rather than an eigenvector chosen on its own, the pseudoinverse is $V\\Sigma^+U^T$, and the singular values of a square matrix are not its eigenvalues. Checking $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$, or the sum of the squared singular values, catches each slip.`,
     link: ``,
   },
 }
@@ -9257,8 +9199,65 @@ const schemas = {
 
 
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj14 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'forgetting-the-square-root', name: `Forgetting the square root`, errorAt: 0,
+        what: `The eigenvalues of $A^TA$ are found correctly and then used directly as the singular values. The square root that turns them into stretch factors is left out.`,
+        wrong: [`For $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix}$ from the worked example,
+$$A^TA = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix},$$
+$$\\lambda_1 = 3, \\; \\lambda_2 = 1$$
+$$\\Longrightarrow$$
+$$\\sigma_1 = 3, \\; \\sigma_2 = 1$$`],
+        right: [`Each singular value is the square root of an eigenvalue.`, `$$\\sigma_1 = \\sqrt{3}, \\quad \\sigma_2 = \\sqrt{1} = 1$$`],
+        why: `The whole computation runs through the eigenvalue problem for $A^TA$, and its eigenvalues look like the final answer. When an eigenvalue is $0$ or $1$ the square root changes nothing, which hides the step.`,
+        check: `The squares of the singular values must add up to the sum of the squared entries of $A$, which is $\\|A\\|_F^2$. Here the entries give $1 + 1 + 1 + 1 = 4$, and $(\\sqrt{3})^2 + 1^2 = 4$, while $3^2 + 1^2 = 10$. A second test: $\\|A\\mathbf{v}_1\\|$ must equal $\\sigma_1$, and $A\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 2)^T$ has length $\\sqrt{3}$.` },
+      { id: 'choosing-the-left-vectors-separately', name: `Choosing the left vectors separately`, errorAt: 0,
+        what: `The right singular vectors come from $A^TA$, and the left ones are taken as unit eigenvectors of $AA^T$, found independently. Each eigenvector is fixed only up to sign, so the two choices need not match, and $U\\Sigma V^T$ no longer equals $A$.`,
+        wrong: [`With $\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\mathbf{v}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$ from the worked example, the unit eigenvector of $AA^T$ for $\\lambda = 3$ is taken as $\\mathbf{u}_1 = -\\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, with $\\mathbf{u}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$. Since $\\mathbf{u}_3$ meets a zero row of $\\Sigma$,
+$$U\\Sigma V^T$$
+$$= \\sigma_1\\mathbf{u}_1\\mathbf{v}_1^T + \\sigma_2\\mathbf{u}_2\\mathbf{v}_2^T$$
+$$= -\\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\\\ 2 & 2 \\end{pmatrix}$$
+$$+ \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\\\ 0 & 0 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\\\ -1 & -1 \\end{pmatrix}$$`],
+        right: [`Compute $\\mathbf{u}_1$ from $\\mathbf{v}_1$.`, `$$\\mathbf{u}_1 = \\frac{1}{\\sqrt{3}}A\\mathbf{v}_1$$
+$$= \\frac{1}{\\sqrt{3}} \\cdot \\frac{1}{\\sqrt{2}}(1, 1, 2)^T$$
+$$= \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$$`, `$$U\\Sigma V^T$$
+$$= \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\\\ 2 & 2 \\end{pmatrix}$$
+$$+ \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ -1 & 1 \\\\ 0 & 0 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 1 \\end{pmatrix} = A$$`],
+        why: `The columns of $U$ and $V$ are eigenvectors of $AA^T$ and $A^TA$, so it looks natural to compute both the same way. That description fixes each column only up to sign, and it says nothing about the pairing $A\\mathbf{v}_i = \\sigma_i\\mathbf{u}_i$ that holds the factorization together.`,
+        check: `For each nonzero $\\sigma_i$, compare $A\\mathbf{v}_i$ with $\\sigma_i\\mathbf{u}_i$. Here $A\\mathbf{v}_1 = \\frac{1}{\\sqrt{2}}(1, 1, 2)^T$, while the wrong choice gives $\\sigma_1\\mathbf{u}_1 = -\\frac{1}{\\sqrt{2}}(1, 1, 2)^T$.` },
+      { id: 'keeping-u-and-v-in-place', name: `Keeping U and V in place`, errorAt: 1,
+        what: `To build the pseudoinverse, $\\Sigma$ is replaced by $\\Sigma^+$ but the outer factors are left where they were, giving $U\\Sigma^+V^T$. The order has to reverse, as it does for the inverse of any product.`,
+        wrong: [`$A = \\begin{pmatrix} 0 & 2 \\\\ 0 & 0 \\end{pmatrix}$ sends $\\mathbf{e}_2$ to $2\\mathbf{e}_1$ and $\\mathbf{e}_1$ to $\\mathbf{0}$, so $\\sigma_1 = 2$, $\\mathbf{v}_1 = \\mathbf{e}_2$, $\\mathbf{u}_1 = \\mathbf{e}_1$, and $\\sigma_2 = 0$, $\\mathbf{v}_2 = \\mathbf{e}_1$, $\\mathbf{u}_2 = \\mathbf{e}_2$.`, `Then $U = I$, $V = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, $\\Sigma^+ = \\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix}$, and
+$$U\\Sigma^+V^T$$
+$$= \\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix}\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix}$$`],
+        right: [`$A = \\begin{pmatrix} 0 & 2 \\\\ 0 & 0 \\end{pmatrix}$ sends $\\mathbf{e}_2$ to $2\\mathbf{e}_1$ and $\\mathbf{e}_1$ to $\\mathbf{0}$, so $\\sigma_1 = 2$, $\\mathbf{v}_1 = \\mathbf{e}_2$, $\\mathbf{u}_1 = \\mathbf{e}_1$, and $\\sigma_2 = 0$, $\\mathbf{v}_2 = \\mathbf{e}_1$, $\\mathbf{u}_2 = \\mathbf{e}_2$.`, `$V$ goes on the left and $U^T$ on the right.`, `$$A^+ = V\\Sigma^+U^T$$
+$$= \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1/2 & 0 \\\\ 0 & 0 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0 & 0 \\\\ 1/2 & 0 \\end{pmatrix}$$`],
+        why: `$\\Sigma^+$ takes the place of $\\Sigma$ in the middle, and it is tempting to change nothing else. For a symmetric positive semi-definite matrix $U = V$, so the slip gives the right answer there and goes unnoticed.`,
+        check: `Test the first defining property, $AA^+A = A$. With the correct $A^+$, $AA^+ = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $AA^+A = A$. With the wrong one, $A \\begin{pmatrix} 0 & 1/2 \\\\ 0 & 0 \\end{pmatrix} = O$, so $AA^+A = O$. For a rectangular $A$ the sizes alone catch it: $A^+$ must be $n \\times m$, and $U\\Sigma^+V^T$ is not even defined when $m \\neq n$.` },
+      { id: 'using-the-eigenvalues-of-a', name: `Using the eigenvalues of A`, errorAt: 1,
+        what: `For a square matrix, the singular values are read off the eigenvalues of $A$ itself, and the norm and the condition number are computed from them. This works for symmetric matrices, after taking absolute values, but not in general.`,
+        wrong: [`$A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ is triangular, with eigenvalues $1$ and $1$.`, `Taking these as the singular values gives
+$$\\|A\\|_2 = 1, \\qquad \\kappa(A) = \\frac{1}{1} = 1$$`],
+        right: [`$A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ is triangular, with eigenvalues $1$ and $1$.`, `The singular values come from $A^TA$.`, `$$A^TA = \\begin{pmatrix} 1 & 2 \\\\ 2 & 5 \\end{pmatrix},$$
+$$\\lambda^2 - 6\\lambda + 1 = 0,$$
+$$\\lambda = 3 \\pm 2\\sqrt{2}$$`, `$$\\sigma_1 = \\sqrt{3 + 2\\sqrt{2}} = 1 + \\sqrt{2},$$
+$$\\sigma_2 = \\sqrt{3 - 2\\sqrt{2}} = \\sqrt{2} - 1$$`, `$$\\|A\\|_2 = 1 + \\sqrt{2} \\approx 2.414,$$
+$$\\kappa(A) = \\frac{\\sqrt{2} + 1}{\\sqrt{2} - 1} = 3 + 2\\sqrt{2}$$
+$$\\approx 5.83$$`],
+        why: `For symmetric matrices the singular values are the absolute values of the eigenvalues, as the section on the spectral decomposition shows, and the shortcut is carried over to matrices that are not symmetric.`,
+        check: `One vector is enough. $A\\mathbf{e}_2 = (2, 1)^T$ has length $\\sqrt{5} \\approx 2.24$, more than $1$, so $\\|A\\|_2$ cannot be $1$. The squares of the singular values must also add up to the squared entries, $1 + 4 + 0 + 1 = 6$; the eigenvalues give $1 + 1 = 2$, while $(1 + \\sqrt{2})^2 + (\\sqrt{2} - 1)^2 = 6$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
       eckartYoungApply,
     svdNest,
     demoUnits,
@@ -9284,7 +9283,7 @@ const schemas = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function SVDPage({eckartYoungApply, svdNest, 
+export default function SVDPage({ pitfallData,eckartYoungApply, svdNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -9572,6 +9571,15 @@ export default function SVDPage({eckartYoungApply, svdNest,
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'obj14-mistakes'}
+            id="svd-pitfalls"
+            title="Common pitfalls with the singular value decomposition"
+            source="/linear-algebra/decompositions/svd"
+            after={sectionsContent.obj14.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

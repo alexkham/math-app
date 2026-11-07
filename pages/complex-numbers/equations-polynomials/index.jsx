@@ -966,6 +966,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 // Surfaced on the /complex-numbers hub via buildSectionData extraction.
@@ -1288,7 +1291,7 @@ $$z_1z_2z_3 = -d$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the alternating sign
 Taking the sum of the roots of $z^3 - z^2 + z - 1$ as $b = -1$ and their product as $d = -1$ leaves out the signs. Its roots are $1$, $i$, $-i$: the sum is $1 = -b$ and the product is $1 \\cdot i \\cdot (-i) = 1 = -d$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-alternating-sign)]@
 
 The pattern continues for higher degrees. The $k$-th symmetric sum of roots (all products of $k$ roots) equals $(-1)^k$ times the coefficient of $z^{n-k}$ in a monic polynomial of degree $n$. Formally:
 
@@ -1323,7 +1326,7 @@ $$\\overline{p(z)} = \\overline{a_nz^n + \\cdots + a_0} = a_n\\overline{z^n} + \
 
 @academic[pitfall,aside:true,width:35%:Pairing roots without real coefficients
 Taking $i$ as a root of $z^2 + 2iz - 1$ because $-i$ is one ignores the coefficient $2i$, which is not real. Substituting gives $i^2 + 2i \\cdot i - 1 = -1 - 2 - 1 = -4$; the polynomial is $(z + i)^2$, and $-i$ is its only root.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-pairing-roots-without-real-coefficients)]@
 
 The key step uses $\\overline{a_k} = a_k$ since each coefficient is real, and the property $\\overline{z^k} = (\\bar{z})^k$.
 
@@ -1370,7 +1373,7 @@ $$\\Delta = 1 - 4(1 - i) = 1 - 4 + 4i = -3 + 4i$$]@
 
 @academic[pitfall,aside:true,width:35%:Splitting the square root over a sum
 Writing $\\sqrt{-3 + 4i}$ as $\\sqrt{-3} + \\sqrt{4i} = \\sqrt{2} + (\\sqrt{2} + \\sqrt{3})i$ gives a number whose square is not $-3 + 4i$. The square roots are $\\pm(1 + 2i)$, since $(1 + 2i)^2 = 1 + 4i - 4 = -3 + 4i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-square-root-over-a-sum)]@
 
 Finding $\\sqrt{-3 + 4i}$ requires the technique from [De Moivre's theorem](!/complex-numbers/demoivre-theorem). Convert $-3 + 4i$ to [trigonometric form](!/complex-numbers/trigonometric-form): modulus $\\sqrt{9 + 16} = 5$, argument $\\theta = \\arctan(4/(-3))$ adjusted to the second quadrant. The square roots have modulus $\\sqrt{5}$ and arguments $\\theta/2$ and $\\theta/2 + 180°$.
 
@@ -1408,7 +1411,7 @@ $z_3 = 2\\text{cis}(315°) = 2 \\cdot \\frac{\\sqrt{2}}{2}(1 - i) = \\sqrt{2}(1 
 
 @academic[pitfall,aside:true,width:35%:Stopping at one root
 Using only $k = 0$ for $z^4 = -16$ gives $z = \\sqrt{2}(1 + i)$, one solution out of four. The values $k = 1, 2, 3$ supply the other three: $\\sqrt{2}(-1 + i)$, $\\sqrt{2}(-1 - i)$ and $\\sqrt{2}(1 - i)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-at-one-root)]@
 
 Four roots forming a square on a circle of radius $2$, rotated $45°$ from the axes. Each satisfies $(z_k)^4 = -16$. Consecutive roots sit a quarter turn apart, because the angles $\\frac{\\pi + 2\\pi k}{4}$ grow by $\\frac{\\pi}{2}$ with each step in $k$, and the modulus $\\sqrt{2} \\cdot \\sqrt{2} = 2$ is the same for all of them.`,
   after: ``,
@@ -1433,7 +1436,7 @@ Arguments: $n\\theta = -\\theta + 360°k$ for integer $k$, so $(n+1)\\theta = 36
 
 @academic[pitfall,aside:true,width:35%:Dividing out the modulus
 Dividing $r^2 = r$ by $r$ in $z^2 = \\bar{z}$ leaves only $r = 1$ and three solutions on the unit circle. Factoring instead, $r(r - 1) = 0$ keeps $r = 0$ as well, so $z = 0$ is a fourth solution.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-out-the-modulus)]@
 
 The solution $r = 0$ yields $z = 0$.
 
@@ -1548,71 +1551,20 @@ The Fundamental Theorem of Algebra ensures that these applications never encount
   
     },
   
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary collects the formulas for polynomial equations over the complex numbers in four families, shown one at a time with the buttons above the cards. Each card gives a formula with a line on what it says and a link to the section that explains it.
+
+The first family is the complete factorization promised by the fundamental theorem of algebra. The second gives Vieta's formulas, which link the roots to the coefficients for quadratics, cubics and any degree. The third shows how real coefficients pair each root with its conjugate, and the last gives the quadratic formula and the roots of a pure power equation.`,
+      before: ``,
+      after: `Vieta's formulas give a quick check on any set of roots: add them and multiply them, then compare with the coefficients. For a polynomial with real coefficients, also check that every non-real root appears together with its conjugate.`,
+      link: '',
+    },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Five mistakes account for many of the wrong answers when polynomial equations are solved over $\\mathbb{C}$. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the alternating sign**
-
-Vieta's formulas are read off the coefficients without the sign $(-1)^k$. In a monic polynomial the sum of the roots is the negative of the second coefficient, and for odd degree the product of the roots is the negative of the constant term.
-
-Wrong working: for $z^3 - z^2 + z - 1$, with $b = -1$, $c = 1$, $d = -1$, the sum of the roots is taken as $b = -1$ and the product as $d = -1$.
-
-Right working: $z_1 + z_2 + z_3 = -b = 1$, $z_1z_2 + z_1z_3 + z_2z_3 = c = 1$, $z_1z_2z_3 = -d = 1$. The polynomial factors as $(z - 1)(z^2 + 1)$, with roots $1$, $i$, $-i$: their sum is $1$, their pairwise products add to $i - i + 1 = 1$, and their product is $1 \\cdot i \\cdot (-i) = 1$.
-
-Why it happens: the signs alternate, so some of the formulas carry a minus sign and some do not, and the pattern is easy to lose.
-
-How to check: build the polynomial back from its roots. $(z - z_1)(z - z_2)(z - z_3)$ expands to $z^3 - (z_1 + z_2 + z_3)z^2 + \\cdots$, so a root sum of $1$ must appear as $-1$ in front of $z^2$.
-
-**Pairing roots without real coefficients**
-
-The conjugate root theorem is applied to a polynomial whose coefficients are not all real. The theorem rests on $\\overline{a_k} = a_k$ for every coefficient, and that step fails as soon as one coefficient is non-real.
-
-Wrong working: $z^2 + 2iz - 1 = 0$ has the root $-i$, so its conjugate $i$ is taken as the second root.
-
-Right working: substituting $z = i$ gives $i^2 + 2i \\cdot i - 1 = -1 - 2 - 1 = -4 \\neq 0$. The discriminant is $(2i)^2 - 4(1)(-1) = 0$, and the polynomial is $(z + i)^2$: its only root is $-i$, with multiplicity $2$.
-
-Why it happens: conjugate pairs are so familiar from real quadratics that they are expected everywhere.
-
-How to check: look at the coefficients before pairing. If any coefficient is non-real, substitute the conjugate and see whether it really gives $0$.
-
-**Splitting the square root over a sum**
-
-The square root of a complex discriminant $a + bi$ is taken term by term, as $\\sqrt{a} + \\sqrt{bi}$. Square roots do not split over sums, for real or for complex numbers.
-
-Wrong working: $\\sqrt{-3 + 4i} = \\sqrt{-3} + \\sqrt{4i} = \\sqrt{3}i + \\sqrt{2}(1 + i) = \\sqrt{2} + (\\sqrt{2} + \\sqrt{3})i$. Its square is about $-7.90 + 8.90i$, not $-3 + 4i$.
-
-Right working: look for $x + yi$ with $(x + yi)^2 = -3 + 4i$, or use the trigonometric form with modulus $5$. Both lead to $\\pm(1 + 2i)$, since $(1 + 2i)^2 = 1 + 4i + 4i^2 = -3 + 4i$. Then $z = \\frac{-1 \\pm (1 + 2i)}{2}$ gives $z = i$ and $z = -1 - i$.
-
-Why it happens: the same slip, $\\sqrt{x + y} = \\sqrt{x} + \\sqrt{y}$, is common with real numbers, and splitting the real and imaginary parts feels natural in algebraic form.
-
-How to check: square the result. A square root of $\\Delta$ must give $\\Delta$ back exactly. The modulus is a quick test too: the root must have modulus $\\sqrt{|\\Delta|} = \\sqrt{5}$, and $|1 + 2i| = \\sqrt{5}$.
-
-**Stopping at one root**
-
-An equation $z^n = w$ is solved with $k = 0$ only, giving the principal root and nothing else, as if the equation had one solution.
-
-Wrong working: $z^4 = -16$, $-16 = 16\\text{cis}(180°)$, so $z = 2\\text{cis}(45°) = \\sqrt{2}(1 + i)$, and the work stops there.
-
-Right working: $z_k = 2\\text{cis}(45° + 90°k)$ for $k = 0, 1, 2, 3$ gives $\\sqrt{2}(1 + i)$, $\\sqrt{2}(-1 + i)$, $\\sqrt{2}(-1 - i)$ and $\\sqrt{2}(1 - i)$.
-
-Why it happens: with real numbers a root sign such as $\\sqrt[3]{8} = 2$ names one number, and the habit of writing a single answer carries over.
-
-How to check: count the solutions. A nonzero $w$ always gives exactly $n$ solutions of $z^n = w$, spaced $360°/n$ apart on one circle; four solutions here, $90°$ apart.
-
-**Dividing out the modulus**
-
-In $z^n = \\bar{z}$ the modulus equation $r^n = r$ is divided by $r$, which silently assumes $r \\neq 0$ and throws away the solution $z = 0$.
-
-Wrong working: for $z^2 = \\bar{z}$, $r^2 = r$ becomes $r = 1$, and $3\\theta = 360°k$ gives $\\theta = 0°, 120°, 240°$. The answer is three solutions.
-
-Right working: $r^2 - r = r(r - 1) = 0$, so $r = 0$ or $r = 1$. The case $r = 0$ gives $z = 0$, and $0^2 = 0 = \\bar{0}$. With the three points on the unit circle, there are $4 = n + 2$ solutions.
-
-Why it happens: cancelling a common factor is a reflex from solving equations, and $r$ looks like a quantity that cannot be zero.
-
-How to check: test $z = 0$ directly in the original equation whenever a factor of $r$ or $z$ is cancelled.`,
+      content:`Five mistakes account for many of the wrong answers when polynomial equations are solved over $\\mathbb{C}$. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip skips a condition that the result needs. Vieta's formulas alternate in sign, roots come in conjugate pairs only for real coefficients, a square root does not split over a sum, $z^n = w$ has $n$ solutions, and cancelling $r$ can lose the solution $z = 0$. Expanding back from the roots, squaring the result, or substituting the doubtful value catches each slip.`,
       link:'',
     },
     faq: {
@@ -1833,8 +1785,72 @@ const schemas = {
     },
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-alternating-sign', name: `Dropping the alternating sign`, errorAt: 1,
+        what: `Vieta's formulas are read off the coefficients without the sign $(-1)^k$. In a monic polynomial the sum of the roots is the negative of the second coefficient, and for odd degree the product of the roots is the negative of the constant term.`,
+        wrong: [`For $z^3 - z^2 + z - 1$,`, `With $b = -1$, $c = 1$, $d = -1$, the sum of the roots is taken as $b = -1$ and the product as $d = -1$.`],
+        right: [`For $z^3 - z^2 + z - 1$,`, `$z_1 + z_2 + z_3 = -b = 1$, $z_1z_2 + z_1z_3 + z_2z_3 = c = 1$, $z_1z_2z_3 = -d = 1$. The polynomial factors as $(z - 1)(z^2 + 1)$, with roots $1$, $i$, $-i$: their sum is $1$, their pairwise products add to $i - i + 1 = 1$, and their product is $1 \\cdot i \\cdot (-i) = 1$.`],
+        why: `The signs alternate, so some of the formulas carry a minus sign and some do not, and the pattern is easy to lose.`,
+        check: `Build the polynomial back from its roots. $(z - z_1)(z - z_2)(z - z_3)$ expands to $z^3 - (z_1 + z_2 + z_3)z^2 + \\cdots$, so a root sum of $1$ must appear as $-1$ in front of $z^2$.` },
+      { id: 'pairing-roots-without-real-coefficients', name: `Pairing roots without real coefficients`, errorAt: 0,
+        what: `The conjugate root theorem is applied to a polynomial whose coefficients are not all real. The theorem rests on $\\overline{a_k} = a_k$ for every coefficient, and that step fails as soon as one coefficient is non-real.`,
+        wrong: [`$z^2 + 2iz - 1 = 0$ has the root $-i$, so its conjugate $i$ is taken as the second root.`],
+        right: [`Substituting $z = i$ gives $i^2 + 2i \\cdot i - 1 = -1 - 2 - 1 = -4 \\neq 0$. The discriminant is $(2i)^2 - 4(1)(-1) = 0$, and the polynomial is $(z + i)^2$: its only root is $-i$, with multiplicity $2$.`],
+        why: `Conjugate pairs are so familiar from real quadratics that they are expected everywhere.`,
+        check: `Look at the coefficients before pairing. If any coefficient is non-real, substitute the conjugate and see whether it really gives $0$.` },
+      { id: 'splitting-the-square-root-over-a-sum', name: `Splitting the square root over a sum`, errorAt: 0,
+        what: `The square root of a complex discriminant $a + bi$ is taken term by term, as $\\sqrt{a} + \\sqrt{bi}$. Square roots do not split over sums, for real or for complex numbers.`,
+        wrong: [`$\\sqrt{-3 + 4i} = \\sqrt{-3} + \\sqrt{4i} = \\sqrt{3}i + \\sqrt{2}(1 + i) = \\sqrt{2} + (\\sqrt{2} + \\sqrt{3})i$. Its square is about $-7.90 + 8.90i$, not $-3 + 4i$.`],
+        right: [`Look for $x + yi$ with $(x + yi)^2 = -3 + 4i$, or use the trigonometric form with modulus $5$. Both lead to $\\pm(1 + 2i)$, since $(1 + 2i)^2 = 1 + 4i + 4i^2 = -3 + 4i$. Then $z = \\frac{-1 \\pm (1 + 2i)}{2}$ gives $z = i$ and $z = -1 - i$.`],
+        why: `The same slip, $\\sqrt{x + y} = \\sqrt{x} + \\sqrt{y}$, is common with real numbers, and splitting the real and imaginary parts feels natural in algebraic form.`,
+        check: `Square the result. A square root of $\\Delta$ must give $\\Delta$ back exactly. The modulus is a quick test too: the root must have modulus $\\sqrt{|\\Delta|} = \\sqrt{5}$, and $|1 + 2i| = \\sqrt{5}$.` },
+      { id: 'stopping-at-one-root', name: `Stopping at one root`, errorAt: 0,
+        what: `An equation $z^n = w$ is solved with $k = 0$ only, giving the principal root and nothing else, as if the equation had one solution.`,
+        wrong: [`$z^4 = -16$, $-16 = 16\\text{cis}(180°)$, so $z = 2\\text{cis}(45°) = \\sqrt{2}(1 + i)$, and the work stops there.`],
+        right: [`$z_k = 2\\text{cis}(45° + 90°k)$ for $k = 0, 1, 2, 3$ gives $\\sqrt{2}(1 + i)$, $\\sqrt{2}(-1 + i)$, $\\sqrt{2}(-1 - i)$ and $\\sqrt{2}(1 - i)$.`],
+        why: `With real numbers a root sign such as $\\sqrt[3]{8} = 2$ names one number, and the habit of writing a single answer carries over.`,
+        check: `Count the solutions. A nonzero $w$ always gives exactly $n$ solutions of $z^n = w$, spaced $360°/n$ apart on one circle; four solutions here, $90°$ apart.` },
+      { id: 'dividing-out-the-modulus', name: `Dividing out the modulus`, errorAt: 1,
+        what: `In $z^n = \\bar{z}$ the modulus equation $r^n = r$ is divided by $r$, which silently assumes $r \\neq 0$ and throws away the solution $z = 0$.`,
+        wrong: [`For $z^2 = \\bar{z}$,`, `$r^2 = r$ becomes $r = 1$, and $3\\theta = 360°k$ gives $\\theta = 0°, 120°, 240°$. The answer is three solutions.`],
+        right: [`For $z^2 = \\bar{z}$,`, `$r^2 - r = r(r - 1) = 0$, so $r = 0$ or $r = 1$. The case $r = 0$ gives $z = 0$, and $0^2 = 0 = \\bar{0}$. With the three points on the unit circle, there are $4 = n + 2$ solutions.`],
+        why: `Cancelling a common factor is a reflex from solving equations, and $r$ looks like a quantity that cannot be zero.`,
+        check: `Test $z = 0$ directly in the original equation whenever a factor of $r$ or $z$ is cancelled.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'factoring', name: 'Factoring', sub: 'What the fundamental theorem of algebra guarantees.', pairs: [
+        [{ formula: '$p(z) = a_n(z - z_1)(z - z_2) \\cdots (z - z_n)$', text: 'Every polynomial of degree $n$ splits into $n$ linear factors over $\\mathbb{C}$, so it has exactly $n$ roots counted with multiplicity ([the fundamental theorem of algebra](!#2)).' }, ''],
+      ] },
+      { id: 'vieta', name: "Vieta's formulas", sub: 'Sums and products of the roots read from the coefficients.', pairs: [
+        [{ formula: '$\\displaystyle z_1 + z_2 = -\\frac{b}{a}, \\qquad z_1 \\cdot z_2 = \\frac{c}{a}$', text: "The sum and the product of the two roots of $az^2 + bz + c = 0$, as [Vieta's formulas](!#4) shows." },
+         { formula: '$\\displaystyle \\sum_{i} r_i = -\\frac{a_{n-1}}{a_n}, \\qquad \\prod_{i} r_i = (-1)^n \\frac{a_0}{a_n}$', text: "The same idea for any degree $n$: the sum and the product of all the roots, from [Vieta's formulas](!#4)." }],
+        [{ formula: '$z_1 + z_2 + z_3 = -b$', text: "For a monic cubic $z^3 + bz^2 + cz + d = 0$, the sum of the three roots ([Vieta's formulas](!#4))." },
+         { formula: '$z_1z_2 + z_1z_3 + z_2z_3 = c$', text: "The sum of the products of the roots two at a time, for the same cubic ([Vieta's formulas](!#4))." }],
+        [{ formula: '$z_1z_2z_3 = -d$', text: "The product of all three roots; the signs alternate from $-b$ to $c$ to $-d$, as [Vieta's formulas](!#4) warns." }, ''],
+      ] },
+      { id: 'real', name: 'Real coefficients', sub: 'Non-real roots come in conjugate pairs.', pairs: [
+        [{ formula: '$p(z_0) = 0 \\;\\Rightarrow\\; p(\\overline{z_0}) = 0$', text: 'When every coefficient is real, the conjugate of a root is a root too, as [polynomials with real coefficients](!#5) proves.' },
+         { formula: '$(z - z_0)(z - \\bar{z_0}) = z^2 - 2\\text{Re}(z_0)z + |z_0|^2$', text: 'A conjugate pair of roots multiplies out to a real quadratic, from [polynomials with real coefficients](!#5).' }],
+      ] },
+      { id: 'solving', name: 'Solving', sub: 'Formulas for two common types of equation.', pairs: [
+        [{ formula: '$\\displaystyle z = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$', text: 'The quadratic formula works unchanged with complex coefficients, though the discriminant may itself be complex ([quadratic equations with complex coefficients](!#6)).' },
+         { formula: '$\\displaystyle z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right)$', text: 'The $n$ solutions of $z^n = w$ with $w = R\\,\\text{cis}\\,\\phi$, one for each $k = 0, 1, \\ldots, n-1$, as [the root procedure](!#7) shows.' }],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     complexEquationDecision,
     sectionsContent,
     introContent,
@@ -1858,7 +1874,7 @@ const schemas = {
    }
 
 
-export default function EquationsPolynomialsPage({complexEquationDecision, 
+export default function EquationsPolynomialsPage({ formulaSummaryData, pitfallData,complexEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -2070,11 +2086,38 @@ export default function EquationsPolynomialsPage({complexEquationDecision,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrameV2
+            key={'formula-summary'}
+            id="complex-polynomial-formula-summary"
+            title="Polynomial equation formulas"
+            source="/complex-numbers/equations-polynomials"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrameV2>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="complex-equation-pitfalls"
+            title="Common pitfalls with equations and polynomials"
+            source="/complex-numbers/equations-polynomials"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

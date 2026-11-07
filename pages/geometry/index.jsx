@@ -44,7 +44,7 @@ export async function getStaticProps(){
           title: 'Lines and Angles',
           description: 'The objects everything else is built from: points, lines and the angles they make. Crossing lines, straight angles, parallel lines and their transversals.',
           href: '/geometry/visual-tools#sub-proofs-lines-and-angles',
-          views: ['Vertical angles'],
+          views: ['Vertical angles', 'Parallel lines and a transversal'],
           more: 'Open lines and angles'
         },
         {
@@ -52,7 +52,7 @@ export async function getStaticProps(){
           title: 'Triangle',
           description: 'The simplest polygon and the base of most proofs in the plane: angle relationships, isosceles and equilateral triangles, congruence and the Pythagorean theorem, each on a triangle you can reshape.',
           href: '/geometry/visual-tools#sub-proofs-triangle',
-          views: ['Triangle angle sum', 'Exterior angle theorem', 'Sum of exterior angles', 'Isosceles base angles', 'Triangle inequality', 'Larger side, larger angle', 'Perpendicular is shortest'],
+          views: ['Triangle angle sum', 'Exterior angle theorem', 'Sum of exterior angles', 'Isosceles base angles', 'Triangle inequality', 'Larger side, larger angle', 'Perpendicular is shortest', 'Pythagorean theorem', 'Midsegment theorem', 'Medians and the centroid', 'Angle bisector theorem', 'Circumcentre', 'Incentre', 'Orthocentre', 'Euler line', 'Nine-point circle', 'SSS congruence', 'ASA congruence', 'AAS congruence', 'HL congruence', "Ceva's theorem", "Menelaus' theorem"],
           more: 'Open triangle'
         },
         {
@@ -60,18 +60,24 @@ export async function getStaticProps(){
           title: 'Circle',
           description: "All points at one distance from a center. Inscribed and central angles, Thales' theorem, tangents meeting radii at right angles, chords and arcs.",
           href: '/geometry/visual-tools#sub-proofs-circle',
-          views: ["Thales' theorem"],
+          views: ["Thales' theorem", 'Inscribed angle theorem', 'Cyclic quadrilateral', 'Tangent and radius', 'Two tangents from a point', 'Perpendicular bisects a chord', 'Intersecting chords', 'Secant and tangent', 'Two secants'],
           more: 'Open circle'
         },
         {
           key: 'quadrilateral',
           title: 'Quadrilateral',
-          description: 'Four-sided figures and their families: parallelograms, rectangles, rhombi, trapezoids. Properties of sides and diagonals, and the 360° angle sum.'
+          description: 'Four-sided figures and their families: parallelograms, rectangles, rhombi, trapezoids. Properties of sides and diagonals, and the 360° angle sum.',
+          href: '/geometry/visual-tools#sub-proofs-quadrilateral',
+          views: ['Parallelogram: opposite sides equal', 'Parallelogram: diagonals bisect each other', 'Rhombus: diagonals are perpendicular', 'Rectangle: diagonals are equal', 'Varignon: the midpoint parallelogram', 'Trapezoid midsegment', 'Kite: diagonals are perpendicular'],
+          more: 'Open quadrilateral'
         },
         {
           key: 'polygon',
           title: 'Polygon',
-          description: 'Figures with any number of sides. Interior angle sums of (n − 2) · 180°, exterior angles that always total 360°, and regular polygons.'
+          description: 'Figures with any number of sides. Interior angle sums of (n − 2) · 180°, exterior angles that always total 360°, and regular polygons.',
+          href: '/geometry/visual-tools#sub-proofs-polygon',
+          views: ['Polygon angle sum'],
+          more: 'Open polygon'
         }
       ]
     }
@@ -121,7 +127,7 @@ const FIGURE_ICONS = {
   triangle: <polygon points="6,40 42,40 24,8" fill="#3498db" fillOpacity=".12" stroke="#0f172a" strokeWidth="2" strokeLinejoin="round"/>,
   circle: <circle cx="24" cy="24" r="17" fill="#3498db" fillOpacity=".12" stroke="#0f172a" strokeWidth="2"/>,
   quadrilateral: <polygon points="6,38 16,10 42,10 32,38" fill="none" stroke="#aab7c4" strokeWidth="2" strokeLinejoin="round"/>,
-  polygon: <polygon points="24,5 42,18 35,40 13,40 6,18" fill="none" stroke="#aab7c4" strokeWidth="2" strokeLinejoin="round"/>
+  polygon: <polygon points="24,5 42,18 35,40 13,40 6,18" fill="#3498db" fillOpacity=".12" stroke="#0f172a" strokeWidth="2" strokeLinejoin="round"/>
 }
 
 function FigureCard({ figure }) {

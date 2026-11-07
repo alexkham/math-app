@@ -627,6 +627,8 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -982,7 +984,7 @@ of successes in repeated trials or the outcome of a dice roll.
 
 @academic[pitfall,aside:true,width:35%:Calling an unbounded count continuous
 Calling the number of tosses until the first head continuous, because its values never stop, would make $P(X = 1) = 0$. The values are isolated and can be listed, so $X$ is discrete: $P(X = k) = \\left(\\frac{1}{2}\\right)^k$, and $P(X = 1) = \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-calling-an-unbounded-count-continuous)]@
 
 Some counting processes have no largest value. Tossing a coin until the first head appears can take $1$ toss, $2$ tosses, $3$ tosses, or any larger whole number of tosses.
 
@@ -996,7 +998,7 @@ weight, or temperature.
 
 @academic[pitfall,aside:true,width:35%:Reading the density as a probability
 Taking $f_X(x)$ as $P(X = x)$ fails for $X$ uniform on $[0, 0.5]$: there $f_X(x) = 2$, more than any probability can be. Each single value has $P(X = x) = 0$; intervals get areas, such as $P(0 \\le X \\le 0.25) = 0.5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-density-as-a-probability)]@
 
 Because the values form a continuum, a continuous variable is not described by listing a probability for each value. Its distribution is given by a density $f_X(x)$, and probabilities are areas under that curve: $P(a \\le X \\le b) = \\int_a^b f_X(x)\\,dx$.
 `,
@@ -1021,7 +1023,7 @@ prepares the ground for probability functions and distributions introduced later
 
 @academic[pitfall,aside:true,width:35%:Confusing less than with at most
 For a fair die, reading $P(X < 3)$ as $P(X \\le 3) = \\frac{3}{6} = \\frac{1}{2}$ wrongly includes the face $3$. The condition $X < 3$ collects only the faces $1$ and $2$, so $P(X < 3) = \\frac{2}{6} = \\frac{1}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-confusing-less-than-with-at-most)]@
 
 For a fair die roll $X$, the statement $X \\le 3$ collects the faces $1$, $2$ and $3$, and the statement $2 \\le X \\le 5$ collects the faces $2$, $3$, $4$ and $5$. Each condition picks out a set of outcomes, and the probability of the statement is the probability of that set.`,
       before:``,
@@ -1062,7 +1064,7 @@ weight, or temperature.
 
 @academic[pitfall,aside:true,width:35%:Treating the values as equally likely
 Giving each of the $11$ sums of two dice the probability $\\frac{1}{11}$ makes $P(X = 7) = \\frac{1}{11}$. Six of the $36$ pairs give a sum of $7$, so $P(X = 7) = \\frac{6}{36} = \\frac{1}{6}$, while $P(X = 2) = \\frac{1}{36}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-the-values-as-equally-likely)]@
 
 The sum of two dice is a case where several outcomes share one value. The experiment has $36$ equally likely ordered pairs of faces, and the random variable sends them to only $11$ possible sums, from $2$ to $12$.
 
@@ -1141,69 +1143,9 @@ The page has shown that random variables turn outcomes into numbers, that they c
     },
     pitfalls:{
       title:`Common Pitfalls`,
-      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Calling an unbounded count continuous**
-
-A variable whose values have no upper limit is classed as continuous, because its list of values never ends. Having infinitely many values is taken to mean having a continuum of values.
-
-Wrong working: $X$ is the number of tosses of a fair coin until the first head. Its values $1, 2, 3, \\ldots$ never end, so $X$ is treated as continuous, and every single value gets probability $0$:
-$$P(X = 1) = 0$$
-
-Right working: the values are isolated whole numbers that can be listed one by one, so $X$ is discrete. The first head comes on toss $k$ when the first $k - 1$ tosses are tails and toss $k$ is a head:
-$$P(X = k) = \\left(\\frac{1}{2}\\right)^{k-1} \\cdot \\frac{1}{2} = \\left(\\frac{1}{2}\\right)^k$$
-So $P(X = 1) = \\frac{1}{2}$, $P(X = 2) = \\frac{1}{4}$, and the probabilities over all $k$ add up to $1$.
-
-Why it happens: in everyday speech "infinite" and "continuous" both suggest something endless. The difference is between a list that goes on, which is countable, and an interval that has no gaps.
-
-How to check: ask whether the variable can take values between two neighbouring ones. Between $2$ and $3$ tosses there is nothing the count can take, while a waiting time in seconds can take every value between $2$ and $3$.
-
-**Reading the density as a probability**
-
-For a continuous variable, the value of the density $f_X(x)$ at a point is read as the probability $P(X = x)$, in the same way as a value of a probability mass function.
-
-Wrong working: $X$ is uniform on $[0, 0.5]$, so $f_X(x) = 2$ on that interval, and
-$$P(X = 0.25) = f_X(0.25) = 2$$
-a "probability" larger than $1$.
-
-Right working: probabilities of a continuous variable are areas under the density. A single value has probability $0$, and an interval gets the area above it:
-$$P(X = 0.25) = 0, \\qquad P(0 \\le X \\le 0.25) = \\int_0^{0.25} 2 \\, dx = 0.5$$
-
-Why it happens: for a discrete variable the value $p_X(x)$ is a probability, and the density $f_X(x)$ is written in the same way, so it is read in the same way.
-
-How to check: a probability is never above $1$, but a density can be. The whole area under this density is $2 \\cdot 0.5 = 1$, as it must be, even though the curve itself stands at height $2$.
-
-**Confusing less than with at most**
-
-For a discrete variable, the strict condition $X < a$ is treated as if it were $X \\le a$, or the other way round, so the boundary value is counted when it should not be, or left out when it belongs.
-
-Wrong working: $X$ is the result of a fair die roll.
-$$P(X < 3) = P(X \\le 3) = \\frac{3}{6} = \\frac{1}{2}$$
-
-Right working: $X < 3$ collects only the faces $1$ and $2$.
-$$P(X < 3) = \\frac{2}{6} = \\frac{1}{3}$$
-The two probabilities differ by the probability of the boundary value: $P(X \\le 3) - P(X < 3) = P(X = 3) = \\frac{1}{6}$.
-
-Why it happens: for a continuous variable the two conditions have the same probability, because a single value has probability $0$. The habit is then carried over to discrete variables, where a single value can carry real probability.
-
-How to check: list the values the condition collects and ask whether the boundary value is among them. For $X < 3$ on a die the list is $1, 2$; for $X \\le 3$ it is $1, 2, 3$.
-
-**Treating the values as equally likely**
-
-The outcomes of the experiment are equally likely, and the values of the random variable are assumed to be equally likely as well. But several outcomes can share one value, and then the values carry different probabilities.
-
-Wrong working: $X$ is the sum of two fair dice. It takes the $11$ values $2, 3, \\ldots, 12$, each given the same probability:
-$$P(X = 7) = \\frac{1}{11}$$
-
-Right working: the equally likely outcomes are the $36$ ordered pairs of faces. Six of them give a sum of $7$: $(1, 6)$, $(2, 5)$, $(3, 4)$, $(4, 3)$, $(5, 2)$ and $(6, 1)$.
-$$P(X = 7) = \\frac{6}{36} = \\frac{1}{6}$$
-Only $(1, 1)$ gives a sum of $2$, so $P(X = 2) = \\frac{1}{36}$.
-
-Why it happens: for a single die the value and the outcome are the same thing, so equally likely outcomes do give equally likely values. A sum merges several outcomes into one value, and that link breaks.
-
-How to check: count the outcomes behind each value. For the sum of two dice the counts are $1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1$, which add up to $36$; equal probabilities would need equal counts.`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip misreads what kind of variable it is or what its values carry. A variable is discrete when its values can be listed, even endlessly; a density value is not a probability; for a discrete variable $X < a$ and $X \\le a$ differ by the value $a$; and the values of a variable are not equally likely just because the outcomes are. Listing the values a condition collects, or counting the outcomes behind each value, catches each slip.`,
     },
     obj3:{
   
@@ -1302,8 +1244,47 @@ distributions, averages, variability, and comparison of outcomes.
     }),
   };
 
+  // MistakeFix batch 19, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'calling-an-unbounded-count-continuous', name: `Calling an unbounded count continuous`, errorAt: 1,
+        what: `A variable whose values have no upper limit is classed as continuous, because its list of values never ends. Having infinitely many values is taken to mean having a continuum of values.`,
+        wrong: [`$X$ is the number of tosses of a fair coin until the first head.`, `Its values $1, 2, 3, \\ldots$ never end, so $X$ is treated as continuous, and every single value gets probability $0$:
+$$P(X = 1) = 0$$`],
+        right: [`$X$ is the number of tosses of a fair coin until the first head.`, `The values are isolated whole numbers that can be listed one by one, so $X$ is discrete. The first head comes on toss $k$ when the first $k - 1$ tosses are tails and toss $k$ is a head:
+$$P(X = k) = \\left(\\frac{1}{2}\\right)^{k-1} \\cdot \\frac{1}{2} = \\left(\\frac{1}{2}\\right)^k$$`, `So $P(X = 1) = \\frac{1}{2}$, $P(X = 2) = \\frac{1}{4}$, and the probabilities over all $k$ add up to $1$.`],
+        why: `In everyday speech "infinite" and "continuous" both suggest something endless. The difference is between a list that goes on, which is countable, and an interval that has no gaps.`,
+        check: `Ask whether the variable can take values between two neighbouring ones. Between $2$ and $3$ tosses there is nothing the count can take, while a waiting time in seconds can take every value between $2$ and $3$.` },
+      { id: 'reading-the-density-as-a-probability', name: `Reading the density as a probability`, errorAt: 0,
+        what: `For a continuous variable, the value of the density $f_X(x)$ at a point is read as the probability $P(X = x)$, in the same way as a value of a probability mass function.`,
+        wrong: [`$X$ is uniform on $[0, 0.5]$, so $f_X(x) = 2$ on that interval, and
+$$P(X = 0.25) = f_X(0.25) = 2$$`, `A "probability" larger than $1$.`],
+        right: [`Probabilities of a continuous variable are areas under the density. A single value has probability $0$, and an interval gets the area above it:
+$$P(X = 0.25) = 0,$$
+$$P(0 \\le X \\le 0.25) = \\int_0^{0.25} 2 \\, dx$$
+$$= 0.5$$`],
+        why: `For a discrete variable the value $p_X(x)$ is a probability, and the density $f_X(x)$ is written in the same way, so it is read in the same way.`,
+        check: `A probability is never above $1$, but a density can be. The whole area under this density is $2 \\cdot 0.5 = 1$, as it must be, even though the curve itself stands at height $2$.` },
+      { id: 'confusing-less-than-with-at-most', name: `Confusing less than with at most`, errorAt: 0,
+        what: `For a discrete variable, the strict condition $X < a$ is treated as if it were $X \\le a$, or the other way round, so the boundary value is counted when it should not be, or left out when it belongs.`,
+        wrong: [`$X$ is the result of a fair die roll.`, `$$P(X < 3) = P(X \\le 3) = \\frac{3}{6} = \\frac{1}{2}$$`],
+        right: [`$X < 3$ collects only the faces $1$ and $2$.`, `$$P(X < 3) = \\frac{2}{6} = \\frac{1}{3}$$`, `The two probabilities differ by the probability of the boundary value: $P(X \\le 3) - P(X < 3) = P(X = 3) = \\frac{1}{6}$.`],
+        why: `For a continuous variable the two conditions have the same probability, because a single value has probability $0$. The habit is then carried over to discrete variables, where a single value can carry real probability.`,
+        check: `List the values the condition collects and ask whether the boundary value is among them. For $X < 3$ on a die the list is $1, 2$; for $X \\le 3$ it is $1, 2, 3$.` },
+      { id: 'treating-the-values-as-equally-likely', name: `Treating the values as equally likely`, errorAt: 1,
+        what: `The outcomes of the experiment are equally likely, and the values of the random variable are assumed to be equally likely as well. But several outcomes can share one value, and then the values carry different probabilities.`,
+        wrong: [`$X$ is the sum of two fair dice.`, `It takes the $11$ values $2, 3, \\ldots, 12$, each given the same probability:
+$$P(X = 7) = \\frac{1}{11}$$`],
+        right: [`$X$ is the sum of two fair dice.`, `The equally likely outcomes are the $36$ ordered pairs of faces. Six of them give a sum of $7$: $(1, 6)$, $(2, 5)$, $(3, 4)$, $(4, 3)$, $(5, 2)$ and $(6, 1)$.`, `$$P(X = 7) = \\frac{6}{36} = \\frac{1}{6}$$`, `Only $(1, 1)$ gives a sum of $2$, so $P(X = 2) = \\frac{1}{36}$.`],
+        why: `For a single die the value and the outcome are the same thing, so equally likely outcomes do give equally likely values. A sum merges several outcomes into one value, and that link breaks.`,
+        check: `Count the outcomes behind each value. For the sum of two dice the counts are $1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1$, which add up to $36$; equal probabilities would need equal counts.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1323,7 +1304,7 @@ distributions, averages, variability, and comparison of outcomes.
   }
 }
 
-export default function RandomVariablesPage({
+export default function RandomVariablesPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1526,6 +1507,15 @@ possible.`,
         link:'',
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="random-variable-pitfalls"
+            title="Common pitfalls with random variables"
+            source="/probability/random-variables"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

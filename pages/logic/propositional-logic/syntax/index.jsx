@@ -360,6 +360,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 export async function getStaticProps() {
 
@@ -473,7 +474,7 @@ The process of formation proceeds as follows:
    
 @academic[pitfall,aside:true,width:35%:Reading the negation as covering the whole formula
 Reading $(\\neg P \\wedge Q)$ as $\\neg(P \\wedge Q)$ changes the formula: at $P = T$, $Q = F$ the first is F and the second is T. By rule 2 the negation applies to $P$ alone, and rule 3 then joins $\\neg P$ with $Q$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-negation-as-covering-the-whole-formula)]@
 At this basic level, every formula must be fully parenthesized to make its structure explicit. Parentheses are not optional: they are integral to the definition of the formula under the formation rules. No precedence between connectives is assumed at this stage; every operation's scope must be determined explicitly through parentheses.
 
 Precedence and associativity conventions are introduced only later, as practical tools to simplify the writing and reading of formulas when parentheses are omitted. They are not part of the formation rules themselves but are auxiliary syntactic conventions used in the presentation of formulas.
@@ -493,7 +494,7 @@ We don't rebuild the formula but rather analyze its structure. This means verify
     description2:`
 @academic[pitfall,aside:true,width:35%:Confusing well-formed with true
 Rejecting $(P \\wedge \\neg P)$ as ill-formed because it is F at $P = T$ and at $P = F$ mixes syntax with truth. The formation rules build it from $P$ and $\\neg P$, so it is a WFF, and a contradiction.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-confusing-well-formed-with-true)]@
     Each rule in the table identifies a specific structural constraint. If any one of these constraints is violated, the formula cannot be considered well-formed, regardless of whether it uses the correct symbols.
 
     This validation process can also be performed using a syntax tree, which visually represents the hierarchical structure of the formula. If the formula can be fully parsed into a well-formed tree—with each operator applied to the correct number and type of subformulas—it is syntactically valid. You can experiment with this using our [Syntax Tree Builder](!/logic/propositional-logic/syntax/tree-builder) , which helps visualize whether a formula conforms to the WFF rules.
@@ -525,55 +526,8 @@ Learn more about normal forms and practice your skills and understanding of this
   },
   pitfalls:{
     title:`Common Pitfalls`,
-    content:`Four slips cause many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the negation as covering the whole formula**
-
-In a formula such as $(\\neg P \\wedge Q)$ the negation sign stands at the front, and it is taken to negate everything after it. The formula is then read as $\\neg(P \\wedge Q)$, which is a different formula.
-
-Wrong working: $(\\neg P \\wedge Q)$ is read as "not ($P$ and $Q$)". At $P = T$, $Q = F$, the conjunction $P \\wedge Q$ is F, so its negation is T.
-
-Right working: by rule 2 the negation is applied to $P$ alone, giving $\\neg P$; rule 3 then joins $\\neg P$ and $Q$. At $P = T$, $Q = F$, both $\\neg P$ and $Q$ are F, so $(\\neg P \\wedge Q)$ is F. The two readings differ in this row, so they are not the same formula.
-
-Why it happens: in everyday speech "not P and Q" often means "not both", and a sign at the front of a line looks as if it governs the whole line. The formation rules attach $\\neg$ to a single formula, and only parentheses can make that formula larger.
-
-How to check: draw the parse tree. The node for $\\neg$ has exactly one child; if that child is the leaf $P$, the negation covers $P$ only. To negate the conjunction, the formula must be written $\\neg(P \\wedge Q)$.
-
-**Reading the connectives left to right**
-
-A formula written without all its brackets is grouped in the order the symbols appear, and the precedence of the connectives is ignored. When $\\wedge$ and $\\vee$ are mixed, this produces a different formula.
-
-Wrong working: $P \\vee Q \\wedge R$ is grouped as $(P \\vee Q) \\wedge R$. At $P = T$, $Q = F$, $R = F$, the disjunction $P \\vee Q$ is T and $R$ is F, so the result is F.
-
-Right working: $\\wedge$ binds tighter than $\\vee$, so the formula is $P \\vee (Q \\wedge R)$. In the same row $Q \\wedge R$ is F and $P$ is T, so the formula is T. The left-to-right grouping gives F where the formula is T.
-
-Why it happens: the eye reads the symbols in order, and $\\wedge$ and $\\vee$ look like equal partners. Their ranking is a convention that has to be learned, much like multiplication before addition in arithmetic.
-
-How to check: before evaluating, write the formula out with all its brackets, going down the precedence pyramid: $\\neg$ first, then $\\wedge$, $\\vee$, $\\to$ and $\\leftrightarrow$. The connective placed last is the main connective, and it must match the reading you evaluate.
-
-**Confusing well-formed with true**
-
-A formula that is always false is rejected as not well-formed. Well-formedness is a question of syntax only: it asks how the string is built, not in which rows it is true.
-
-Wrong working: $(P \\wedge \\neg P)$ is F at $P = T$ and F at $P = F$. It can never be true, so it is called an invalid formula and not a WFF.
-
-Right working: rule 1 makes $P$ a formula, rule 2 makes $\\neg P$ a formula, and rule 3 joins them into $(P \\wedge \\neg P)$. Every step follows a formation rule, so the string is a WFF. That it is F in every row is a fact of semantics: it is a [contradiction](!/logic/propositional-logic/semantics/contradiction).
-
-Why it happens: the word "valid" is used in two senses. A formula that is valid in the sense of syntax is simply well-formed, while in semantics a valid formula is a [tautology](!/logic/propositional-logic/semantics/tautology), and the two meanings get mixed.
-
-How to check: answer the two questions separately. First test the string against the formation rules or the table of checks, without giving any letter a truth value. Only after it passes, build its truth table to see where it is true.
-
-**Swapping AND and OR to change the form**
-
-Because CNF and DNF look like mirror images, a CNF is turned into a DNF by exchanging every $\\wedge$ with $\\vee$ and every $\\vee$ with $\\wedge$. The result is the dual of the formula, and in general it is not equivalent to it.
-
-Wrong working: from the CNF $(P \\vee Q) \\wedge R$, swapping the connectives gives $(P \\wedge Q) \\vee R$. At $P = F$, $Q = F$, $R = T$, the new formula is T because $R$ is T, while the original is F because $P \\vee Q$ is F.
-
-Right working: distribute $\\wedge$ over $\\vee$: $(P \\vee Q) \\wedge R \\equiv (P \\wedge R) \\vee (Q \\wedge R)$. This DNF agrees with the original in all eight rows; at $P = F$, $Q = F$, $R = T$ both are F.
-
-Why it happens: the two shapes are mirror images in their outline, with the main connective and the inner connective trading places, and that outline is taken as a rule for rewriting. A rewrite has to keep the truth value of every row, and swapping connectives does not.
-
-How to check: pick a row and evaluate both the original and the result. One row where they differ shows the conversion is wrong; a correct CNF and DNF of the same formula agree in every row.`
+    content:`Four slips cause many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
+    after: `Each slip reads the shape of a formula wrongly. A negation covers only the formula right after it, $\\wedge$ binds tighter than $\\vee$, being well-formed depends on the formation rules and not on truth, and turning a CNF into a DNF needs distribution, not a swap of the connectives. Drawing the parse tree, or evaluating both formulas in one row, catches each slip.`,
   },
   faq:{
     title:`Logic Syntax FAQ`,
@@ -723,8 +677,40 @@ This section introduces the basic elements of propositional logic syntax, beginn
     ],
   };
 
+  // MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-negation-as-covering-the-whole-formula', name: `Reading the negation as covering the whole formula`, errorAt: 0,
+        what: `In a formula such as $(\\neg P \\wedge Q)$ the negation sign stands at the front, and it is taken to negate everything after it. The formula is then read as $\\neg(P \\wedge Q)$, which is a different formula.`,
+        wrong: [`$(\\neg P \\wedge Q)$ is read as "not ($P$ and $Q$)". At $P = T$, $Q = F$, the conjunction $P \\wedge Q$ is F, so its negation is T.`],
+        right: [`By rule 2 the negation is applied to $P$ alone, giving $\\neg P$; rule 3 then joins $\\neg P$ and $Q$. At $P = T$, $Q = F$, both $\\neg P$ and $Q$ are F, so $(\\neg P \\wedge Q)$ is F. The two readings differ in this row, so they are not the same formula.`],
+        why: `In everyday speech "not P and Q" often means "not both", and a sign at the front of a line looks as if it governs the whole line. The formation rules attach $\\neg$ to a single formula, and only parentheses can make that formula larger.`,
+        check: `Draw the parse tree. The node for $\\neg$ has exactly one child; if that child is the leaf $P$, the negation covers $P$ only. To negate the conjunction, the formula must be written $\\neg(P \\wedge Q)$.` },
+      { id: 'reading-the-connectives-left-to-right', name: `Reading the connectives left to right`, errorAt: 0,
+        what: `A formula written without all its brackets is grouped in the order the symbols appear, and the precedence of the connectives is ignored. When $\\wedge$ and $\\vee$ are mixed, this produces a different formula.`,
+        wrong: [`$P \\vee Q \\wedge R$ is grouped as $(P \\vee Q) \\wedge R$. At $P = T$, $Q = F$, $R = F$, the disjunction $P \\vee Q$ is T and $R$ is F, so the result is F.`],
+        right: [`$\\wedge$ binds tighter than $\\vee$, so the formula is $P \\vee (Q \\wedge R)$. In the same row $Q \\wedge R$ is F and $P$ is T, so the formula is T. The left-to-right grouping gives F where the formula is T.`],
+        why: `The eye reads the symbols in order, and $\\wedge$ and $\\vee$ look like equal partners. Their ranking is a convention that has to be learned, much like multiplication before addition in arithmetic.`,
+        check: `Before evaluating, write the formula out with all its brackets, going down the precedence pyramid: $\\neg$ first, then $\\wedge$, $\\vee$, $\\to$ and $\\leftrightarrow$. The connective placed last is the main connective, and it must match the reading you evaluate.` },
+      { id: 'confusing-well-formed-with-true', name: `Confusing well-formed with true`, errorAt: 1,
+        what: `A formula that is always false is rejected as not well-formed. Well-formedness is a question of syntax only: it asks how the string is built, not in which rows it is true.`,
+        wrong: [`$(P \\wedge \\neg P)$ is F at $P = T$ and F at $P = F$.`, `It can never be true, so it is called an invalid formula and not a WFF.`],
+        right: [`$(P \\wedge \\neg P)$ is F at $P = T$ and F at $P = F$.`, `Rule 1 makes $P$ a formula, rule 2 makes $\\neg P$ a formula, and rule 3 joins them into $(P \\wedge \\neg P)$. Every step follows a formation rule, so the string is a WFF. That it is F in every row is a fact of semantics: it is a [contradiction](!/logic/propositional-logic/semantics/contradiction).`],
+        why: `The word "valid" is used in two senses. A formula that is valid in the sense of syntax is simply well-formed, while in semantics a valid formula is a [tautology](!/logic/propositional-logic/semantics/tautology), and the two meanings get mixed.`,
+        check: `Answer the two questions separately. First test the string against the formation rules or the table of checks, without giving any letter a truth value. Only after it passes, build its truth table to see where it is true.` },
+      { id: 'swapping-and-and-or-to-change-the-form', name: `Swapping AND and OR to change the form`, errorAt: 0,
+        what: `Because CNF and DNF look like mirror images, a CNF is turned into a DNF by exchanging every $\\wedge$ with $\\vee$ and every $\\vee$ with $\\wedge$. The result is the dual of the formula, and in general it is not equivalent to it.`,
+        wrong: [`From the CNF $(P \\vee Q) \\wedge R$, swapping the connectives gives $(P \\wedge Q) \\vee R$. At $P = F$, $Q = F$, $R = T$, the new formula is T because $R$ is T, while the original is F because $P \\vee Q$ is F.`],
+        right: [`Distribute $\\wedge$ over $\\vee$: $(P \\vee Q) \\wedge R \\equiv (P \\wedge R) \\vee (Q \\wedge R)$. This DNF agrees with the original in all eight rows; at $P = F$, $Q = F$, $R = T$ both are F.`],
+        why: `The two shapes are mirror images in their outline, with the main connective and the inner connective trading places, and that outline is taken as a rule for rewriting. A rewrite has to keep the truth value of every row, and swapping connectives does not.`,
+        check: `Pick a row and evaluate both the original and the result. One row where they differ shows the conversion is wrong; a correct CNF and DNF of the same formula agree in every row.` },
+    ],
+  };
+
  return {
    props: {
+    pitfallData,
     normalFormTree,
     precedenceLevels,
      demoUnits,
@@ -743,7 +729,7 @@ This section introduces the basic elements of propositional logic syntax, beginn
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LogicPage({normalFormTree, precedenceLevels, demoUnits, 
+export default function LogicPage({ pitfallData,normalFormTree, precedenceLevels, demoUnits, 
  sectionContent,
  pageTitle,
  pageDescription,
@@ -828,7 +814,7 @@ boxed={true} color={'blue'} compact={true} type={'dot'} width={'650px'} />
         </DiagramFrame>,
         `@academic[pitfall,aside:true,width:35%:Reading the connectives left to right
 Grouping $P \\vee Q \\wedge R$ as $(P \\vee Q) \\wedge R$ ignores that $\\wedge$ binds tighter: at $P = T$, $Q = F$, $R = F$ that grouping is F, while the formula is T. The correct reading is $P \\vee (Q \\wedge R)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-connectives-left-to-right)]@
 To restore the brackets of a formula written without them, go down the pyramid from the top. The connective that binds tightest takes its operands first, and the one that binds loosest is applied last and becomes the main connective of the formula. In $P \\wedge Q \\to R$ the conjunction is formed first and the implication then joins it with $R$, so the full form is $((P \\wedge Q) \\to R)$.`,
     ]
    },
@@ -859,7 +845,7 @@ To restore the brackets of a formula written without them, go down the pyramid f
      </DiagramFrame>,
      `@academic[pitfall,aside:true,width:35%:Swapping AND and OR to change the form
 Swapping the connectives of the CNF $(P \\vee Q) \\wedge R$ gives $(P \\wedge Q) \\vee R$, which is T at $P = Q = F$, $R = T$, where the original is F. Distributing gives the DNF $(P \\wedge R) \\vee (Q \\wedge R)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-and-and-or-to-change-the-form)]@
 In a CNF the conjunction is the main connective and the disjunctions sit inside the clauses; in a DNF the roles are reversed. A CNF and a DNF of the same formula are both equivalent to it, so all three agree in every row of the truth table. Moving from one form to the other goes through the laws of equivalence or through the truth table, as the [normal form converter](!/logic/propositional-logic/syntax/normal-forms) does.`,
      `@academic[punchline:Normal forms change a formula's shape, never its truth table: every formula has both a CNF and a DNF.]@`,
     ]
@@ -869,6 +855,15 @@ In a CNF the conjunction is the main connective and the disjunctions sit inside 
     title:sectionContent.pitfalls.title,
     content:[
       sectionContent.pitfalls.content,
+      <DiagramFrame
+        key={'pitfalls-mistakes'}
+        id="logic-syntax-pitfalls"
+        title="Common pitfalls with the syntax of formulas"
+        source="/logic/propositional-logic/syntax"
+        after={sectionContent.pitfalls.after}
+      >
+        <MistakeFix data={pitfallData} variant="trace" />
+      </DiagramFrame>,
     ]
    },
    // faq: rendered component — must be built here, not in getStaticProps

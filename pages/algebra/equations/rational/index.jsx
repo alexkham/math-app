@@ -14,6 +14,7 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 
 
 export async function getStaticProps(){
@@ -668,9 +669,26 @@ $$\\frac{1}{x} + \\frac{1}{x^2} = 6$$`, `$$\\implies x + 1 = 6x^2$$`, `$$\\impli
         check: `Substitute the results. $x = \\frac{1}{2}$ gives $2 + 4 = 6$, and $x = -\\frac{1}{3}$ gives $-3 + 9 = 6$.` },
     ],
   };
+  // ScopeCard data (rational-domain-scope); every fact is from the section text
+  const rationalDomainScope = {
+    header: { kicker: 'Rational equations', title: 'Domain restrictions', lede: 'Values that make any denominator zero are excluded before the equation is touched.' },
+    rule: { name: 'Domain', expr: 'all real numbers minus the excluded values', condition: 'no denominator in the original equation equals zero' },
+    inside: { title: 'Candidates for solutions', items: [
+      { id: 'keep', expr: 'Any value that keeps every denominator nonzero', why: 'Only candidates that survive within the domain qualify as solutions.' },
+    ] },
+    outside: { title: 'Never solutions', items: [
+      { id: 'one', expr: '$x = 3$ in $\\dfrac{x}{x - 3} = \\dfrac{9}{x - 3} + 2$', why: 'The denominator $x - 3$ is zero there, whatever the later algebra suggests.' },
+      { id: 'two', expr: '$x = 0$ and $x = 2$ in $\\dfrac{1}{x} + \\dfrac{1}{x - 2} = \\dfrac{5}{x(x - 2)}$', why: 'Each denominator contributes its own restriction.' },
+    ] },
+    edgeCases: { badge: 'Factor first', items: [
+      { id: 'factor', marker: '$x^2 - 4$', body: 'A denominator may hide restrictions: $x^2 - 4 = (x - 2)(x + 2)$ excludes both $x = 2$ and $x = -2$.' },
+    ] },
+  };
+
 
    return {
   props: {
+      rationalDomainScope,
     pitfallData,
     rationalSubtypeTree,
     sectionsContent,
@@ -693,7 +711,9 @@ $$\\frac{1}{x} + \\frac{1}{x^2} = 6$$`, `$$\\implies x + 1 = 6x^2$$`, `$$\\impli
 }
    }
 
-export default function RationalEquationsPage({ pitfallData,rationalSubtypeTree, 
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function RationalEquationsPage({rationalDomainScope,  pitfallData,rationalSubtypeTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -794,6 +814,16 @@ $$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@`,
           sectionsContent.obj2.content,
           <div key={'unit-domain'} dangerouslySetInnerHTML={{ __html: demoUnits.domain }} />,
           `Stating the excluded values first is what later catches an extraneous candidate.`,
+          <DiagramFrame
+            key={'obj2-scope'}
+            id="rational-domain-scope"
+            title="Domain restrictions for rational equations"
+            source="/algebra/equations/rational"
+            before={`The card draws the line that is declared before any algebra starts: which values can never be solutions.`}
+            after={`Stating the domain at the outset is the safeguard against accepting extraneous results.`}
+          >
+            <ScopeCard data={rationalDomainScope} variant="boundary" theme={scopeTheme} />
+          </DiagramFrame>,
         ]
     },
     {

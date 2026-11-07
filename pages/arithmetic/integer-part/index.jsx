@@ -16,6 +16,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -372,7 +373,10 @@ obj11: {
 
     obj12:{
       title:`Summary: Integer and Fractional Part at a Glance`,
-      content:`The definitions, the behaviour on negative numbers, the rules and the uses on this page reduce to the table below.`,
+      content:`This summary gathers the ideas of the page in nine rows. Each row gives the idea with a line on where it comes from and a link to its section, the statement, and an example, with a negative number wherever the sign changes the answer.
+
+The first three rows define the floor, the ceiling and the fractional part. Then come the behaviour on negative numbers, where the floor and dropping the decimals part ways, rounding to the nearest integer with its tie rules, and the rule that lets an integer pass through the floor. The last rows use the floor for division with remainder and for counting, and describe the staircase and sawtooth graphs.`,
+      formulaSheetAfter: `Most slips with these functions happen below zero, so test any rule on a negative number before trusting it. The floor rounds down, the ceiling rounds up, and the fractional part is whatever the floor leaves behind, always between zero and one.`,
       before:``,
       after:``,
       link:'',
@@ -596,8 +600,39 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Idea', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Floor (integer part)', formula: '$\\lfloor x \\rfloor$ is the greatest integer $\\leq x$', example: '$\\lfloor 3.7 \\rfloor = 3, \\; \\lfloor -3.7 \\rfloor = -4$',
+        sub: 'The integer $n$ with $n \\leq x < n + 1$, as [the integer part](!#1) defines it.' },
+      { name: 'Ceiling', formula: '$\\lceil x \\rceil$ is the least integer $\\geq x$', example: '$\\lceil 3.2 \\rceil = 4, \\; \\lceil -3.2 \\rceil = -3$',
+        sub: 'The integer $n$ with $n - 1 < x \\leq n$, the other neighbour of $x$; see [the ceiling](!#2).' },
+      { name: 'Fractional part', formula: '$\\{x\\} = x - \\lfloor x \\rfloor$, always in $[0, 1)$', example: '$\\{3.7\\} = 0.7, \\; \\{-3.7\\} = 0.3$',
+        sub: 'What is left after the floor is taken away, never negative, as [the fractional part](!#3) shows.' },
+      { name: 'Negative numbers', formula: 'floor moves down, away from zero; dropping the decimals moves toward zero', example: '$\\lfloor -3.7 \\rfloor = -4, \\; \\text{trunc}(-3.7) = -3$',
+        sub: 'For positive numbers the two agree; for negative numbers they differ by one, as [negative numbers](!#4) explains.' },
+      { name: 'Rounding', formula: 'nearest integer; ties need a rule', example: '$2.5 \\to 3$ (half up) or $2$ (half to even)',
+        sub: 'Floor and ceiling give the two candidates and rounding picks the closer one; the half-up rule is $\\text{round}(x) = \\left\\lfloor x + \\tfrac{1}{2} \\right\\rfloor$, and [rounding](!#5) lists the other tie rules.' },
+      { name: 'Integers pass through', formula: '$\\lfloor x + n \\rfloor = \\lfloor x \\rfloor + n$', example: '$\\lfloor 7.2 \\rfloor = 7$',
+        sub: 'Holds for every integer $n$, but in general $\\lfloor x + y \\rfloor \\neq \\lfloor x \\rfloor + \\lfloor y \\rfloor$, as [the properties](!#6) warn.' },
+      { name: 'Division', formula: '$q = \\lfloor a / n \\rfloor, \\; r = a - n\\lfloor a / n \\rfloor$', example: '$-23 \\div 5$: $q = -5$, $r = 2$',
+        sub: 'The remainder is $a \\bmod n$ and stays in $\\{0, 1, \\ldots, n - 1\\}$ even for a negative $a$, as [floor and division](!#8) shows.' },
+      { name: 'Counting', formula: '$\\lfloor N / k \\rfloor$ multiples of $k$ up to $N$; $\\lceil N / k \\rceil$ groups of $k$ to hold $N$', example: '$\\lceil 50 / 12 \\rceil = 5$ buses',
+        sub: 'Use the floor when a part that does not fill a whole group is dropped, and the ceiling when it still needs a group, as [counting with floor and ceiling](!#9) explains.' },
+      { name: 'Graphs', formula: '$\\lfloor x \\rfloor$ is a staircase; $\\{x\\}$ is a sawtooth; both jump at every integer', example: 'jump of $1$ at $x = 2$',
+        sub: 'Each step and each tooth covers one interval from $n$ to $n + 1$, as [the graphs](!#7) show.' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     figures,
     sectionsContent,
@@ -620,7 +655,7 @@ return {
    }
 
 
-export default function IntegerPartPage({ pitfallData,seoData, sectionsContent, introContent, negativeTable, roundingTable, propertiesTable, summaryTable, faqQuestions, schemas, figures}) {
+export default function IntegerPartPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, negativeTable, roundingTable, propertiesTable, summaryTable, faqQuestions, schemas, figures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -772,8 +807,16 @@ export default function IntegerPartPage({ pitfallData,seoData, sectionsContent, 
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="integer-part-formula-summary"
+            title="Integer and fractional part"
+            source="/arithmetic/integer-part"
+            related={false}
+            after={sectionsContent.obj12.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

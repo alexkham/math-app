@@ -1107,6 +1107,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1821,9 +1822,10 @@ The multinomial coefficient is also the natural coefficient in the [multinomial 
 
   obj6: {
     title: `Binomial Coefficient at a Glance`,
-    content: `
-The page covered the formal definition and notation, the network of identities the coefficient satisfies, the Pascal&apos;s-triangle organization, and the multinomial generalization. The table below collects the formula, boundary values, and generalizations in one reference card.
-`,
+    content: `This summary gathers the binomial coefficient facts of the page in ten rows. Each row names a fact with a line on where it comes from and a link to its section, states it, and works one small example.
+
+It opens with the factorial formula, its meaning as a count of subsets and the way it is read aloud. Three rows of special values follow: the ends of each row of Pascal's triangle, the values next to them, and the zero outside the allowed range. The last rows extend the coefficient to a real upper index, place it in Pascal's triangle, generalize it to more than two groups, and list where it appears.`,
+    formulaSheetAfter: `The factorial formula is the definition, but it is rarely the fastest route. Special values and the triangle settle small cases at a glance, and the same numbers return as subset counts, as the coefficients of a power of a sum and as binomial probabilities.`,
     before: ``,
     between: ``,
     after: ``,
@@ -2023,8 +2025,41 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table capstoneTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Concept', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Standard formula', formula: '$\\displaystyle \\binom{n}{k} = \\frac{n!}{k!\\,(n-k)!}, \\quad 0 \\le k \\le n$', example: '$\\displaystyle \\binom{5}{2} = \\frac{120}{2 \\cdot 6} = 10$',
+        sub: 'The count of selections written with factorials, from [the definition](!#1).' },
+      { name: 'Combinatorial meaning', formula: 'the number of $k$-element subsets of an $n$-element set', example: '$10$ two-element subsets of $\\{a, b, c, d, e\\}$',
+        sub: 'Choosing $k$ items from $n$ when order does not matter, the reading [the definition](!#1) starts from.' },
+      { name: 'Read aloud', formula: '"$n$ choose $k$"', example: '$\\displaystyle \\binom{5}{2}$ reads "5 choose 2"',
+        sub: 'Spoken as a choice, never as a fraction, as [the notation section](!#notation) explains.' },
+      { name: 'Edge values', formula: '$\\displaystyle \\binom{n}{0} = \\binom{n}{n} = 1, \\quad n \\ge 0$', example: '$\\displaystyle \\binom{7}{0} = \\binom{7}{7} = 1$',
+        sub: 'Choosing nothing, or everything, can be done in one way only ([the definition](!#1)).' },
+      { name: 'Linear values', formula: '$\\displaystyle \\binom{n}{1} = \\binom{n}{n-1} = n$', example: '$\\displaystyle \\binom{7}{1} = 7$',
+        sub: "One item, or all but one, can be picked in $n$ ways; these values fill the second diagonal of [Pascal's triangle](!#3)." },
+      { name: 'Out of range', formula: '$\\displaystyle \\binom{n}{k} = 0, \\quad k > n \\text{ or } k < 0$', example: '$\\displaystyle \\binom{3}{5} = 0$',
+        sub: 'No selection exists when more items are asked for than there are ([the definition](!#1)).' },
+      { name: 'Real upper index', formula: '$\\displaystyle \\binom{x}{k} = \\frac{x(x-1) \\cdots (x-k+1)}{k!}$, a polynomial of degree $k$ in $x$', example: '$\\displaystyle \\binom{1/2}{2} = \\frac{\\frac{1}{2} \\cdot \\left(-\\frac{1}{2}\\right)}{2} = -\\frac{1}{8}$',
+        sub: 'For any real or complex $x$ and a whole number $k \\ge 0$, as [the generalization to a real upper index](!#1) shows.' },
+      { name: "Pascal's-triangle row", formula: 'row $n$ holds $\\displaystyle \\binom{n}{0}, \\binom{n}{1}, \\ldots, \\binom{n}{n}$', example: 'row $4$: $1, 4, 6, 4, 1$',
+        sub: "Rows and positions are both counted from $0$ in [Pascal's triangle](!#3)." },
+      { name: 'Multinomial generalization', formula: '$\\displaystyle \\binom{n}{k_1, k_2, \\ldots, k_r} = \\frac{n!}{k_1! \\, k_2! \\cdots k_r!}, \\quad k_1 + k_2 + \\cdots + k_r = n$', example: '$\\displaystyle \\binom{6}{2, 2, 2} = \\frac{720}{8} = 90$',
+        sub: 'Splits $n$ items into named groups of the given sizes, as [the multinomial coefficient](!#4) shows.' },
+      { name: 'Where it appears', formula: 'subset counts, polynomial expansions through the [binomial theorem](!/combinatorics/binomial-theorem), discrete probability through the binomial distribution, and finite-difference calculus', example: 'the coefficients of $(x + y)^n$ are $\\displaystyle \\binom{n}{k}$',
+        sub: 'The coefficient reaches well beyond counting, as [related concepts](!#5) lists.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -2047,7 +2082,7 @@ const schemas = {
     }
    }
 
-export default function BinomialCoefficientPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function BinomialCoefficientPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj2Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2236,8 +2271,16 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="binomial-coefficient-formula-summary"
+            title="Binomial coefficient formulas"
+            source="/combinatorics/binomial-coefficient"
+            related={{ href: '/combinatorics/formulas', label: 'All combinatorics formulas' }}
+            after={sectionsContent.obj6.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // {

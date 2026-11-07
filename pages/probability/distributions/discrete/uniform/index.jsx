@@ -872,6 +872,9 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
 
@@ -1091,7 +1094,7 @@ Since all probabilities are equal:
 
 @academic[pitfall,aside:true,width:35%:Forgetting to count both ends
 Counting the integers from $10$ to $20$ as $20 - 10 = 10$ gives each value $\\frac{1}{10}$, and the $11$ probabilities add up to $1.1$. Both bounds are values: $n = 20 - 10 + 1 = 11$, so $P(X = x) = \\frac{1}{11}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-count-both-ends)]@
 
 In practice the formula is used by counting. The bounds $a$ and $b$ are read off the problem, the values from $a$ to $b$ are counted, and that count becomes the denominator shared by every outcome. On a standard die the count is plain to see; on a range such as the integers from $10$ to $20$, it has to be worked out from the bounds.
 
@@ -1139,7 +1142,7 @@ $\\lfloor x \\rfloor$ = floor function (largest integer less than or equal to $x
 
 @academic[pitfall,aside:true,width:35%:Treating at least as more than
 For a fair die, writing $P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{3}{6} = \\frac{1}{2}$ drops the face $3$ itself. At least $3$ means $3, 4, 5, 6$, so $P(X \\geq 3) = 1 - F_X(2) = 1 - \\frac{2}{6} = \\frac{2}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-at-least-as-more-than)]@
 
 Questions about a range of outcomes are answered from this staircase. A roll below $4$, a draw of at least $15$, a number of at most $8$: each picks out a block of consecutive values, and its probability is read from the CDF, directly or through the complement. Because every jump has the same height, each value that lands inside or outside the block changes the answer by exactly $\\frac{1}{b - a + 1}$.
   `,
@@ -1280,7 +1283,7 @@ $$\\sigma = \\sqrt{\\frac{35}{12}} \\approx 1.708$$]@
 
 @academic[pitfall,aside:true,width:35%:Using the continuous variance formula
 Borrowing $\\frac{(b - a)^2}{12}$ from the continuous uniform gives the die $\\frac{(6 - 1)^2}{12} = \\frac{25}{12} \\approx 2.083$. The discrete formula counts the values: $\\frac{6^2 - 1}{12} = \\frac{35}{12} \\approx 2.917$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-continuous-variance-formula)]@
 
 The variance of approximately 2.917 indicates moderate spread around the mean of 3.5, with outcomes ranging from 1 to 6.
   `,
@@ -1454,7 +1457,10 @@ Each face has an equal and independent chance of appearing.
     obj16:{
   
       title:`Discrete Uniform at a Glance`,
-      content:`The table below collects the full anatomy of the discrete uniform distribution into a single reference card — its parameters and support, the PMF and CDF, the mean and variance formulas, mode and median behavior, and the canonical fair-die example.`,
+      content:`This summary gathers the discrete uniform distribution on one card of eight rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the smallest and the largest value, how many values lie between them, and the whole numbers that make up the support. Then come the equal probability of every value, the running total that climbs in equal steps, the mean at the midpoint, the variance, and the mode and median. The last row works through a fair six-sided die.`,
+      formulaSheetAfter: `Nearly every formula on the card starts from one count, the number of values from the smallest to the largest, which is one more than their difference. Getting that count right first keeps the probability, the running total and the variance right with it.`,
       before:``,
       after:``,
       link:'',
@@ -1462,51 +1468,9 @@ Each face has an equal and independent chance of appearing.
     },
     obj17:{
       title:`Common Pitfalls`,
-      content:`Three mistakes account for most wrong answers in discrete uniform problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Forgetting to count both ends**
-
-The number of values is taken as the distance $b - a$ between the bounds, so one of the two endpoints is left out of the count.
-
-Wrong working: for the integers from $10$ to $20$,
-$$n = 20 - 10 = 10, \\qquad P(X = x) = \\frac{1}{10}$$
-
-Right working: both $10$ and $20$ are possible values, so the count is one more than the distance.
-$$n = 20 - 10 + 1 = 11, \\qquad P(X = x) = \\frac{1}{11}$$
-
-Why it happens: subtracting the bounds measures the length of the range, and on the standard die starting at $1$ the slip is hidden, because the count $6$ is also the upper bound. Once the lower bound is not $1$, length and count differ by one.
-
-How to check: the probabilities must add up to $1$. With the wrong count, the $11$ values each get $\\frac{1}{10}$, and $11 \\times \\frac{1}{10} = 1.1$. With the right count, $11 \\times \\frac{1}{11} = 1$.
-
-**Treating at least as more than**
-
-The question asks for at least $k$, and the complement is taken at $k$ instead of at $k - 1$, so the value $k$ itself is left out.
-
-Wrong working: for a fair die,
-$$P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{3}{6} = \\frac{1}{2}$$
-
-Right working: at least $3$ means $3$, $4$, $5$ or $6$, so the complement is at most $2$.
-$$P(X \\geq 3) = 1 - F_X(2) = 1 - \\frac{2}{6} = \\frac{2}{3}$$
-
-Why it happens: the rules for "more than" and "at least" differ by a single value, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
-
-How to check: count the values in the event and divide by $n$. The faces $3, 4, 5, 6$ are four of six, so the answer is $\\frac{4}{6} = \\frac{2}{3}$.
-
-**Using the continuous variance formula**
-
-The variance of the continuous uniform on $[a, b]$, $\\frac{(b - a)^2}{12}$, is used for the discrete uniform on $\\{a, a + 1, \\ldots, b\\}$.
-
-Wrong working: for a fair die,
-$$\\mathrm{Var}(X) = \\frac{(6 - 1)^2}{12} = \\frac{25}{12} \\approx 2.083$$
-
-Right working: the discrete formula uses the number of values $n = b - a + 1 = 6$.
-$$\\mathrm{Var}(X) = \\frac{n^2 - 1}{12} = \\frac{36 - 1}{12} = \\frac{35}{12} \\approx 2.917$$
-
-Why it happens: both distributions are called uniform, both formulas have $12$ in the denominator, and the continuous one is shorter and easier to remember.
-
-How to check: compute the variance directly from the definition. The mean is $3.5$, and the squared distances of the six faces from it are $6.25, 2.25, 0.25, 0.25, 2.25, 6.25$. Their average is $\\frac{17.5}{6} = \\frac{35}{12} \\approx 2.917$.`,
+      content:`Three mistakes account for most wrong answers in discrete uniform problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip miscounts the values from $a$ to $b$. There are $b - a + 1$ of them, at least $k$ includes $k$ itself, and the variance is $\\frac{n^2 - 1}{12}$, not the continuous $\\frac{(b - a)^2}{12}$. Counting the values directly, or computing the variance from the definition, catches each slip.`,
       link:'',
     },
      links:{
@@ -1725,8 +1689,69 @@ const discreteUniformExplanations = {
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj17 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'forgetting-to-count-both-ends', name: `Forgetting to count both ends`, errorAt: 0,
+        what: `The number of values is taken as the distance $b - a$ between the bounds, so one of the two endpoints is left out of the count.`,
+        wrong: [`For the integers from $10$ to $20$,
+$$n = 20 - 10 = 10, \\qquad P(X = x) = \\frac{1}{10}$$`],
+        right: [`Both $10$ and $20$ are possible values, so the count is one more than the distance.`, `$$n = 20 - 10 + 1 = 11,$$
+$$P(X = x) = \\frac{1}{11}$$`],
+        why: `Subtracting the bounds measures the length of the range, and on the standard die starting at $1$ the slip is hidden, because the count $6$ is also the upper bound. Once the lower bound is not $1$, length and count differ by one.`,
+        check: `The probabilities must add up to $1$. With the wrong count, the $11$ values each get $\\frac{1}{10}$, and $11 \\times \\frac{1}{10} = 1.1$. With the right count, $11 \\times \\frac{1}{11} = 1$.` },
+      { id: 'treating-at-least-as-more-than', name: `Treating at least as more than`, errorAt: 0,
+        what: `The question asks for at least $k$, and the complement is taken at $k$ instead of at $k - 1$, so the value $k$ itself is left out.`,
+        wrong: [`For a fair die,
+$$P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{3}{6} = \\frac{1}{2}$$`],
+        right: [`At least $3$ means $3$, $4$, $5$ or $6$, so the complement is at most $2$.`, `$$P(X \\geq 3) = 1 - F_X(2) = 1 - \\frac{2}{6}$$
+$$= \\frac{2}{3}$$`],
+        why: `The rules for "more than" and "at least" differ by a single value, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.`,
+        check: `Count the values in the event and divide by $n$. The faces $3, 4, 5, 6$ are four of six, so the answer is $\\frac{4}{6} = \\frac{2}{3}$.` },
+      { id: 'using-the-continuous-variance-formula', name: `Using the continuous variance formula`, errorAt: 0,
+        what: `The variance of the continuous uniform on $[a, b]$, $\\frac{(b - a)^2}{12}$, is used for the discrete uniform on $\\{a, a + 1, \\ldots, b\\}$.`,
+        wrong: [`For a fair die,
+$$\\mathrm{Var}(X) = \\frac{(6 - 1)^2}{12} = \\frac{25}{12} \\approx 2.083$$`],
+        right: [`The discrete formula uses the number of values $n = b - a + 1 = 6$.`, `$$\\mathrm{Var}(X) = \\frac{n^2 - 1}{12} = \\frac{36 - 1}{12}$$
+$$= \\frac{35}{12} \\approx 2.917$$`],
+        why: `Both distributions are called uniform, both formulas have $12$ in the denominator, and the continuous one is shorter and easier to remember.`,
+        check: `Compute the variance directly from the definition. The mean is $3.5$, and the squared distances of the six faces from it are $6.25, 2.25, 0.25, 0.25, 2.25, 6.25$. Their average is $\\frac{17.5}{6} = \\frac{35}{12} \\approx 2.917$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameters', formula: '$a$, the minimum, and $b$, the maximum; $n = b - a + 1$ values', note: '$a$ and $b$ are integers with $a \\leq b$',
+        sub: 'The two endpoints that fix the distribution, as [the parameters section](!#2) explains.' },
+      { name: 'Support', formula: '$\\{a, a + 1, \\ldots, b\\}$', note: 'finite, equally spaced integers',
+        sub: 'Every whole number from $a$ to $b$, set out with [the PMF and its support](!#4).' },
+      { name: 'PMF', formula: '$\\displaystyle P(X = x) = \\frac{1}{b - a + 1} = \\frac{1}{n}, \\quad x \\in \\{x_1, x_2, \\dots, x_n\\}$', note: 'every value carries the same probability mass',
+        sub: 'The probability of each single value, from [the PMF section](!#4).' },
+      { name: 'CDF', formula: '$\\displaystyle F_X(x) = P(X \\leq x) = \\begin{cases} 0, & x < a \\\\ \\frac{\\lfloor x \\rfloor - a + 1}{b - a + 1}, & a \\leq x \\leq b \\\\ 1, & x > b \\end{cases}$', note: 'a step function jumping by $1/n$ at each integer',
+        sub: 'The probability of a value up to $x$, from [the CDF section](!#5).' },
+      { name: 'Expected value', formula: '$\\displaystyle E[X] = \\frac{a + b}{2}$', note: 'the midpoint of the range; not always a value the variable can take',
+        sub: 'The balance point of the values, derived in [the expected value section](!#6).' },
+      { name: 'Variance', formula: '$\\displaystyle \\mathrm{Var}(X) = \\frac{(b - a + 1)^2 - 1}{12} = \\frac{n^2 - 1}{12}$', note: 'grows quadratically with the width of the range',
+        sub: 'How widely the values spread around the midpoint, worked out in [variance and standard deviation](!#7).' },
+      { name: 'Mode and median', formula: 'every value is a mode; $\\displaystyle \\text{Median} = \\frac{a + b}{2}$, an interval when $n$ is even', note: 'the distribution is fully symmetric and flat',
+        sub: 'No value is more likely than another, and the middle sits at the midpoint, as [mode and median](!#8) shows.' },
+      { name: 'Canonical example', formula: 'a fair six-sided die: $a = 1$, $b = 6$, $n = 6$', note: '$E[X] = 3.5$, $\\displaystyle \\mathrm{Var}(X) = \\frac{35}{12} \\approx 2.92$, $\\sigma \\approx 1.71$',
+        sub: 'The fair die the page keeps returning to; [variance and standard deviation](!#7) finishes its numbers.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -1747,7 +1772,7 @@ const discreteUniformExplanations = {
     }
    }
 
-export default function DiscreteUniformDistributionPage({
+export default function DiscreteUniformDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1970,8 +1995,16 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="discrete-uniform-distribution-formula-summary"
+            title="Discrete uniform distribution at a glance"
+            source="/probability/distributions/discrete/uniform"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.obj16.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1980,6 +2013,15 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <DiagramFrame
+            key={'obj17-mistakes'}
+            id="discrete-uniform-pitfalls"
+            title="Common pitfalls with the discrete uniform distribution"
+            source="/probability/distributions/discrete/uniform"
+            after={sectionsContent.obj17.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

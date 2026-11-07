@@ -624,6 +624,21 @@ import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/Formula
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// MistakeFix batch 19, 2026-11-04: the "Common Pitfalls" entries, moved word for word into the MistakeFix data (trace layout).
+const pitfallData = {
+  mistakes: [
+    { id: 'using-the-complement-of-the-condition', name: `Using the complement of the condition`, errorAt: 0,
+      what: `The complement rule is applied on the wrong side of the bar. Instead of the event, the condition is replaced by its complement, and the two conditional probabilities are expected to add to $1$.`,
+      wrong: [`With two dice, $P(\\text{first even} \\mid \\text{sum } 8) = \\frac{3}{5}$, so $P(\\text{first even} \\mid \\text{sum not } 8)$ is taken as $1 - \\frac{3}{5} = \\frac{2}{5}$.`],
+      right: [`The 31 outcomes with a sum other than 8 include 15 with an even first die, so $P(\\text{first even} \\mid \\text{sum not } 8) = \\frac{15}{31}$. The number $\\frac{2}{5}$ belongs to the complement of the event inside the same condition: 2 of the 5 outcomes with sum 8, (3,5) and (5,3), have an odd first die, so $P(\\text{first odd} \\mid \\text{sum } 8) = \\frac{2}{5}$.`],
+      why: `The rule $P(A^c) = 1 - P(A)$ is first learned without a bar, and once a bar appears it is not obvious which side the complement belongs on. Only the left side can be complemented this way; the right side fixes the restricted situation.`,
+      check: `Two conditional probabilities add to $1$ only when they are measured inside the same condition. Probabilities under different conditions must instead average back to the unconditional value: $\\frac{5}{36} \\cdot \\frac{3}{5} + \\frac{31}{36} \\cdot \\frac{15}{31} = \\frac{3}{36} + \\frac{15}{36} = \\frac{1}{2} = P(\\text{first even})$.` },
+  ],
+};
+const pitfallClosing = `The complement rule works on the left of the bar only: $P(A^c \\mid B) = 1 - P(A \\mid B)$, while changing the condition changes the whole restricted situation. Probabilities under complementary conditions average back to the unconditional probability instead, which catches the slip.`;
+
 
 
 export async function getStaticProps(){
@@ -1356,7 +1371,7 @@ The event is described exactly as before, in words and in outcomes. What has cha
                   <div key={'unit-u_meaning_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_meaning_0 }} />,
           `@academic[pitfall,aside:true,width:35%:Using the complement of the condition
 Expecting $P(A \\mid B) + P(A \\mid B^c) = 1$ mixes two different conditions. For the dice, $P(\\text{first even} \\mid \\text{sum } 8) + P(\\text{first even} \\mid \\text{sum not } 8) = \\frac{3}{5} + \\frac{15}{31} = \\frac{168}{155}$. The pair that sums to 1 is $P(A \\mid B) + P(A^c \\mid B) = \\frac{3}{5} + \\frac{2}{5}$.
-[Read more](!#mistakes)]@
+[Read more](!#pitfall-using-the-complement-of-the-condition)]@
 
 Inside a restricted situation, an event and its complement split the condition between them: every outcome that remains either belongs to the event or does not. That is why the two branches below $A$ in the tree carry weights that add to $1$.
 
@@ -1463,18 +1478,16 @@ For the two dice, both directions can be read off the grid. Among the 5 outcomes
         content:[
           sectionsContent.mistakes.content,
           <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
-          `
-**Using the complement of the condition**
-
-The complement rule is applied on the wrong side of the bar. Instead of the event, the condition is replaced by its complement, and the two conditional probabilities are expected to add to $1$.
-
-Wrong working: with two dice, $P(\\text{first even} \\mid \\text{sum } 8) = \\frac{3}{5}$, so $P(\\text{first even} \\mid \\text{sum not } 8)$ is taken as $1 - \\frac{3}{5} = \\frac{2}{5}$.
-
-Right working: the 31 outcomes with a sum other than 8 include 15 with an even first die, so $P(\\text{first even} \\mid \\text{sum not } 8) = \\frac{15}{31}$. The number $\\frac{2}{5}$ belongs to the complement of the event inside the same condition: 2 of the 5 outcomes with sum 8, (3,5) and (5,3), have an odd first die, so $P(\\text{first odd} \\mid \\text{sum } 8) = \\frac{2}{5}$.
-
-Why it happens: the rule $P(A^c) = 1 - P(A)$ is first learned without a bar, and once a bar appears it is not obvious which side the complement belongs on. Only the left side can be complemented this way; the right side fixes the restricted situation.
-
-How to check: two conditional probabilities add to $1$ only when they are measured inside the same condition. Probabilities under different conditions must instead average back to the unconditional value: $\\frac{5}{36} \\cdot \\frac{3}{5} + \\frac{31}{36} \\cdot \\frac{15}{31} = \\frac{3}{36} + \\frac{15}{36} = \\frac{1}{2} = P(\\text{first even})$.`,
+          `One more mistake is worked through here in full, with the wrong and the right working side by side.`,
+          <DiagramFrame
+            key={'mistakes-mistakes'}
+            id="conditional-probability-pitfalls"
+            title="Common pitfalls with conditional probability"
+            source="/probability/conditional-probability"
+            after={pitfallClosing}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

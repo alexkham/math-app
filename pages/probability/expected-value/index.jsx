@@ -798,11 +798,13 @@ import weightedExpectedValueDiagrams from '@/app/components/probability/expected
 import discreteExpectedValueDiagrams from '@/app/components/probability/expected-value/discreteExpectedValueDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1169,7 +1171,7 @@ The density determines how much each transformed value contributes to the final 
 
 @academic[pitfall,aside:true,width:35%:Applying the function to the mean
 Computing $E[X^2]$ as $(E[X])^2$ squares the average instead of averaging the squares: for a fair die it gives $3.5^2 = 12.25$. Weighting $x^2$ by $\\frac{1}{6}$ gives $E[X^2] = \\frac{91}{6} \\approx 15.17$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-applying-the-function-to-the-mean)]@
 
 Expected value of a function is a fundamental idea because it appears everywhere: in variance, in risk analysis, in moments of distributions, and in many applied calculations where the quantity of interest is built from $X$ rather than $X$ itself.
 
@@ -1363,7 +1365,7 @@ $$E[X] = 0\\cdot0.1 + 1\\cdot0.3 + 2\\cdot0.4 + 3\\cdot0.2 = 1.7$$]@
 
 @academic[pitfall,aside:true,width:35%:Averaging the values without weights
 Adding the values and dividing by their count gives $\\frac{0 + 1 + 2 + 3}{4} = 1.5$, as if every value were equally likely. Weighted by the probabilities, $E[X] = 1.7$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-averaging-the-values-without-weights)]@
 
 This calculation can be read as a **balance**: values that occur more often pull the average toward themselves, while rare values have little influence. If this morning were repeated many times under similar conditions, the average number of items sold would stabilize near (1.7).
 
@@ -1472,7 +1474,7 @@ $$E[X] = \\frac{1}{2} \\cdot \\frac{x^3}{3} \\bigg|_{0}^{2} = \\frac{1}{2} \\cdo
 
 @academic[pitfall,aside:true,width:35%:Integrating the density alone
 Leaving out the factor $x$ gives $\\int_{0}^{2} \\frac{x}{2} \\, dx = 1$, the total probability, which is the same for every density. With the factor, $E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{4}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-integrating-the-density-alone)]@
 
 The example uses two integrals over the same interval $[0, 2]$ with the same density. The first, in the validity check, confirms that the area under $f(x)$ is $1$. The second, which produces the expected value, carries one more factor in its integrand.
 
@@ -1500,7 +1502,7 @@ The normal distribution is typically presented with its mean $μ$ already given 
 
 @academic[pitfall,aside:true,width:35%:Using 1/p for the number of failures
 Applying $E[X] = \\frac{1}{p}$ when $X$ counts the failures before the first success gives $4$ for $p = 0.25$. That formula counts the trials, the success included; the failures have mean $\\frac{1-p}{p} = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-1-p-for-the-number-of-failures)]@
 
 Using these established formulas makes calculations immediate. Instead of setting up integrals or sums from scratch, you simply identify the distribution type and its parameters, then apply the corresponding formula. This approach is both faster and less error-prone, especially when working with well-known distributions in applied problems.
 `,
@@ -1515,71 +1517,18 @@ Using these established formulas makes calculations immediate. Instead of settin
     },
     capstone:{
       title:`**Expected Value at a Glance**`,
-      content:`The table below condenses expected value into a single reference card — what it is, the discrete and continuous formulas that define it, how to compute the expectation of a function of X, the structural properties that govern it (linearity, scaling, the product rule under independence), and the situations in which it fails to exist.`,
+      content:`This summary condenses expected value into eight rows. Each row names an aspect with a short note and a link to the section that explains it, gives its statement, and adds a note or an example.
+
+It starts with what expected value is, a long-run average that need not be a possible outcome, and the two defining formulas, a sum against the PMF and an integral against the PDF. The expectation of a function of the variable follows, then the structural properties: linearity with no independence required, scaling and shifting, and the product rule, which holds only for independent variables. The last row names when the expected value fails to exist.`,
+      formulaSheetAfter: `Linearity is the property to reach for first: it splits a hard expectation into easy pieces with no conditions at all. The product rule is the opposite case and needs independence, so check that before multiplying two expectations.`,
       before:``,
       after:``,
     },
     obj6:{
       title:`Common Pitfalls`,
-      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Averaging the values without weights**
-
-The values of $X$ and their probabilities are given in a table, and the expected value is taken as the ordinary average of the values. The probabilities are never used.
-
-Wrong working: for $X$ taking $0, 1, 2, 3$ with probabilities $0.1, 0.3, 0.4, 0.2$,
-$$E[X] = \\frac{0 + 1 + 2 + 3}{4} = 1.5$$
-
-Right working: each value is multiplied by its probability, and the products are added.
-$$E[X] = 0 \\cdot 0.1 + 1 \\cdot 0.3 + 2 \\cdot 0.4 + 3 \\cdot 0.2 = 0 + 0.3 + 0.8 + 0.6 = 1.7$$
-
-Why it happens: "average" first means adding numbers and dividing by how many there are. That ordinary average is the expected value only when every value is equally likely, as on a fair die.
-
-How to check: compare the answer with where the probability sits. Here $2$ and $3$ carry $0.6$ of the probability, so the balance point must lie above the midpoint $1.5$ of the values.
-
-**Integrating the density alone**
-
-For a continuous variable, the integral is set up over the right interval with the right density, but the factor $x$ is left out of the integrand.
-
-Wrong working: for $f(x) = \\frac{x}{2}$ on $[0, 2]$,
-$$E[X] = \\int_{0}^{2} \\frac{x}{2} \\, dx = \\frac{x^2}{4} \\bigg|_{0}^{2} = 1$$
-
-Right working: each value $x$ is weighted by its density.
-$$E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{x^3}{6} \\bigg|_{0}^{2} = \\frac{8}{6} = \\frac{4}{3}$$
-
-Why it happens: the validity check $\\int f(x) \\, dx = 1$ and the expected value use the same density and the same limits, and the two integrals are easily swapped.
-
-How to check: every density integrates to $1$, so an answer of exactly $1$ that did not use $x$ says nothing about this distribution. Here the density rises towards $2$, so the mean must lie to the right of the midpoint $1$.
-
-**Using 1/p for the number of failures**
-
-The geometric formula $E[X] = \\frac{1}{p}$ is applied to a variable that counts the failures before the first success. The formula in the table belongs to the version that counts trials up to and including the first success.
-
-Wrong working: with $p = 0.25$ and $X$ the number of failures before the first success,
-$$E[X] = \\frac{1}{p} = \\frac{1}{0.25} = 4$$
-
-Right working: the number of failures is the number of trials minus the one success, so its mean is one less.
-$$E[X] = \\frac{1}{p} - 1 = \\frac{1-p}{p} = \\frac{0.75}{0.25} = 3$$
-
-Why it happens: both versions are called geometric and share the parameter $p$; the table lists only one formula, and the wording of a problem decides which variable is meant.
-
-How to check: try $p = 1$, where the first trial always succeeds. There are no failures, so the mean must be $0$; the formula $\\frac{1-p}{p}$ gives $0$, while $\\frac{1}{p}$ gives $1$, the number of trials.
-
-**Applying the function to the mean**
-
-The expected value of $g(X)$ is needed, and $g$ is applied to $E[X]$ instead of to each value of $X$ before averaging.
-
-Wrong working: for a fair die,
-$$E[X^2] = (E[X])^2 = 3.5^2 = 12.25$$
-
-Right working: each value is squared first, and the squares are weighted by $\\frac{1}{6}$.
-$$E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6} \\approx 15.17$$
-
-Why it happens: for a linear function the shortcut works, since $E[aX + b] = aE[X] + b$, and it is easy to carry it over to functions that are not linear.
-
-How to check: $E[X^2] - (E[X])^2$ is the variance, which is never negative and is zero only for a constant. So $E[X^2]$ must come out larger than $(E[X])^2$ for a die; here the gap is $\\frac{91}{6} - 12.25 = \\frac{35}{12} \\approx 2.92$, the variance of a fair die.`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip leaves a weight or a factor out of the average. The values are weighted by their probabilities, the integral for $E[X]$ includes the factor $x$, the number of failures before the first success has mean $\\frac{1 - p}{p}$, not $\\frac{1}{p}$, and $E[g(X)]$ applies $g$ to each value before averaging. Trying a simple case such as $p = 1$, or checking that the variance comes out non-negative, catches each slip.`,
     },
   
   }
@@ -1802,8 +1751,79 @@ const continuousExpectedValueFormulasData = {
     }
   }
 
+  // MistakeFix batch 16, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj6 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'averaging-the-values-without-weights', name: `Averaging the values without weights`, errorAt: 0,
+        what: `The values of $X$ and their probabilities are given in a table, and the expected value is taken as the ordinary average of the values. The probabilities are never used.`,
+        wrong: [`For $X$ taking $0, 1, 2, 3$ with probabilities $0.1, 0.3, 0.4, 0.2$,
+$$E[X] = \\frac{0 + 1 + 2 + 3}{4} = 1.5$$`],
+        right: [`Each value is multiplied by its probability, and the products are added.`, `$$E[X] = 0 \\cdot 0.1 + 1 \\cdot 0.3$$
+$$+ 2 \\cdot 0.4 + 3 \\cdot 0.2$$
+$$= 0 + 0.3 + 0.8 + 0.6 = 1.7$$`],
+        why: `"average" first means adding numbers and dividing by how many there are. That ordinary average is the expected value only when every value is equally likely, as on a fair die.`,
+        check: `Compare the answer with where the probability sits. Here $2$ and $3$ carry $0.6$ of the probability, so the balance point must lie above the midpoint $1.5$ of the values.` },
+      { id: 'integrating-the-density-alone', name: `Integrating the density alone`, errorAt: 0,
+        what: `For a continuous variable, the integral is set up over the right interval with the right density, but the factor $x$ is left out of the integrand.`,
+        wrong: [`For $f(x) = \\frac{x}{2}$ on $[0, 2]$,
+$$E[X] = \\int_{0}^{2} \\frac{x}{2} \\, dx = \\frac{x^2}{4} \\bigg|_{0}^{2} = 1$$`],
+        right: [`Each value $x$ is weighted by its density.`, `$$E[X] = \\int_{0}^{2} x \\cdot \\frac{x}{2} \\, dx = \\frac{x^3}{6} \\bigg|_{0}^{2}$$
+$$= \\frac{8}{6} = \\frac{4}{3}$$`],
+        why: `The validity check $\\int f(x) \\, dx = 1$ and the expected value use the same density and the same limits, and the two integrals are easily swapped.`,
+        check: `Every density integrates to $1$, so an answer of exactly $1$ that did not use $x$ says nothing about this distribution. Here the density rises towards $2$, so the mean must lie to the right of the midpoint $1$.` },
+      { id: 'using-1-p-for-the-number-of-failures', name: `Using 1/p for the number of failures`, errorAt: 0,
+        what: `The geometric formula $E[X] = \\frac{1}{p}$ is applied to a variable that counts the failures before the first success. The formula in the table belongs to the version that counts trials up to and including the first success.`,
+        wrong: [`With $p = 0.25$ and $X$ the number of failures before the first success,
+$$E[X] = \\frac{1}{p} = \\frac{1}{0.25} = 4$$`],
+        right: [`The number of failures is the number of trials minus the one success, so its mean is one less.`, `$$E[X] = \\frac{1}{p} - 1 = \\frac{1-p}{p} = \\frac{0.75}{0.25}$$
+$$= 3$$`],
+        why: `Both versions are called geometric and share the parameter $p$; the table lists only one formula, and the wording of a problem decides which variable is meant.`,
+        check: `Try $p = 1$, where the first trial always succeeds. There are no failures, so the mean must be $0$; the formula $\\frac{1-p}{p}$ gives $0$, while $\\frac{1}{p}$ gives $1$, the number of trials.` },
+      { id: 'applying-the-function-to-the-mean', name: `Applying the function to the mean`, errorAt: 0,
+        what: `The expected value of $g(X)$ is needed, and $g$ is applied to $E[X]$ instead of to each value of $X$ before averaging.`,
+        wrong: [`For a fair die,
+$$E[X^2] = (E[X])^2 = 3.5^2 = 12.25$$`],
+        right: [`Each value is squared first, and the squares are weighted by $\\frac{1}{6}$.`, `$$E[X^2]$$
+$$= \\frac{1 + 4 + 9 + 16 + 25 + 36}{6}$$
+$$= \\frac{91}{6} \\approx 15.17$$`],
+        why: `For a linear function the shortcut works, since $E[aX + b] = aE[X] + b$, and it is easy to carry it over to functions that are not linear.`,
+        check: `$E[X^2] - (E[X])^2$ is the variance, which is never negative and is zero only for a constant. So $E[X^2]$ must come out larger than $(E[X])^2$ for a die; here the gap is $\\frac{91}{6} - 12.25 = \\frac{35}{12} \\approx 2.92$, the variance of a fair die.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'What it is', formula: 'the long-run average, the center of gravity of a random variable', note: 'need not equal any actual outcome (fair die: $3.5$)',
+        sub: 'The idea of a probability-weighted average, built up in [the intuition behind expected value](!#intuition).' },
+      { name: 'Discrete formula', formula: '$\\displaystyle E[X] = \\sum_{x} x \\cdot p(x)$', note: 'sum over the support of the PMF',
+        sub: 'Each value weighted by its probability, as [discrete random variables](!#discrete) works through.' },
+      { name: 'Continuous formula', formula: '$\\displaystyle E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f(x) \\, dx$', note: 'integral against the PDF over the support',
+        sub: 'The sum becomes an integral against the density, from [continuous random variables](!#continuous).' },
+      { name: 'Function of X', formula: '$\\displaystyle E[g(X)] = \\sum_{x} g(x)\\,p_X(x)$ or $\\displaystyle \\int_{-\\infty}^{\\infty} g(x)\\,f_X(x)\\,dx$', note: 'foundation of variance and higher moments',
+        sub: 'Weight $g(x)$ instead of $x$, as [expected value of a function](!#function) shows.' },
+      { name: 'Linearity', formula: '$E(X + Y) = E(X) + E(Y)$', note: 'the single most-used property of expectation',
+        sub: 'Holds with no independence required, as [expected value of a sum](!#sum) explains.' },
+      { name: 'Scaling and shifting', formula: '$E(aX + b) = a \\cdot E(X) + b$', note: 'predictable behavior under unit changes',
+        sub: 'Constants pass straight through the average, one of the [properties of expected value](!#properties).' },
+      { name: 'Product under independence', formula: '$E(XY) = E(X) \\cdot E(Y)$ when $X$, $Y$ are independent', note: 'does not hold under dependence',
+        sub: 'The one property that needs independence, from [properties of expected value](!#properties).' },
+      { name: 'When it fails to exist', formula: 'the sum or integral diverges', note: 'the Cauchy distribution has no finite mean',
+        sub: 'The mean exists only when the sum or integral converges ([properties of expected value](!#properties)).' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     faqQuestions,
     expectationProperties,
     expectedValueCases,
@@ -1831,7 +1851,7 @@ const continuousExpectedValueFormulasData = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function ExpectedValuePage({expectationProperties, expectedValueCases, 
+export default function ExpectedValuePage({ formulaSummaryData, pitfallData,expectationProperties, expectedValueCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2085,8 +2105,16 @@ value reflects the balance point of that curve.`,
         link:'',
         content:[
             sectionsContent.capstone.content,
-            <div key={'summary-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+            <DiagramFrame
+              key={'formula-summary'}
+              id="expected-value-formula-summary"
+              title="Expected value formulas"
+              source="/probability/expected-value"
+              related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+              after={sectionsContent.capstone.formulaSheetAfter}
+            >
+              <FormulaSheet data={formulaSummaryData} variant="card" />
+            </DiagramFrame>,
         ]
     },
     {
@@ -2095,6 +2123,15 @@ value reflects the balance point of that curve.`,
         link:'',
         content:[
             sectionsContent.obj6.content,
+            <DiagramFrame
+              key={'obj6-mistakes'}
+              id="expected-value-pitfalls"
+              title="Common pitfalls with the expected value"
+              source="/probability/expected-value"
+              after={sectionsContent.obj6.after}
+            >
+              <MistakeFix data={pitfallData} variant="trace" />
+            </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

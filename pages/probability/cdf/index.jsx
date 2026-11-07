@@ -670,6 +670,9 @@ import continuousCdfDiagrams from '@/app/components/visualizations/probability/c
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1179,7 +1182,7 @@ $$f_X(x) = \\frac{d}{dx} F_X(x)$$
 
 @academic[pitfall,aside:true,width:35%:Reading the density as a probability
 For $X$ uniform on $[0, \\frac{1}{2}]$ the density is $f_X(x) = 2$, and taking $f_X(\\frac{1}{4}) = 2$ as $P(X \\le \\frac{1}{4})$ gives a probability above $1$. The CDF gives it: $F_X(\\frac{1}{4}) = 2 \\cdot \\frac{1}{4} = \\frac{1}{2}$.
-[Read more](!#mistakes)]@
+[Read more](!#pitfall-reading-the-density-as-a-probability)]@
 
 Probabilities are obtained only by looking at intervals, and the CDF provides a direct way to compute them.
 
@@ -1223,7 +1226,7 @@ This works uniformly for discrete, continuous, and mixed random variables. One-s
 
 @academic[pitfall,aside:true,width:35%:Dropping the mass at the left endpoint
 For a fair die, writing $P(2 \\le X \\le 4) = F_X(4) - F_X(2) = \\frac{4}{6} - \\frac{2}{6} = \\frac{1}{3}$ leaves out the face $2$. Subtracting $F_X(1)$ keeps it: $\\frac{4}{6} - \\frac{1}{6} = \\frac{1}{2}$.
-[Read more](!#mistakes)]@
+[Read more](!#pitfall-dropping-the-mass-at-the-left-endpoint)]@
 
 For a discrete variable, the interval in the formula has to match the interval in the question exactly. The left side is open at $a$ and closed at $b$, and the difference on the right reproduces precisely that: the mass sitting at $b$ is counted, the mass sitting at $a$ is not. Questions are phrased with every combination of $<$ and $\\le$, so each one is matched to this shape before any value of $F_X$ is read.
 
@@ -1272,6 +1275,15 @@ Reading the CDF from left to right shows how probability builds up. At any point
       after:``,
   
     },
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary gathers the formulas of the page in ten rows. Each row names a formula with a short note on where it applies and a link to its section, states it, and says what it gives.
+
+It opens with the definition of the CDF and the four properties every CDF has: values between zero and one, limits of zero and one at the two ends, growth that never reverses, and continuity from the right. Next come the links to the companion functions, a sum of the PMF for discrete variables and an integral of the PDF for continuous ones, with the density as the slope. The last two rows compute the probability of an interval.`,
+      before: ``,
+      after: `Most CDF questions come down to the last two rows: read the function at two points and subtract. Before subtracting, check whether each endpoint of the interval is open or closed, since for a discrete variable that decides which jumps are counted.`,
+      link: '',
+    },
     mistakes:{
       title:`Common Mistakes`,
       content:`
@@ -1285,39 +1297,9 @@ In [discrete distributions](!/probability/distributions/discrete), jumps in the 
 
 Finally, it is easy to forget that every valid CDF must satisfy basic properties such as monotonicity and proper limits. Violating these properties means the function cannot represent a [probability distribution](!/probability/distributions). The table below pairs each common mistake with the correction that prevents it.
 `,
-      more:`
-Two further mistakes come up once the CDF is used for calculations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the density as a probability**
-
-For a continuous variable, the density $f_X(x)$ is evaluated at a point and its value is reported as a probability, either as $P(X \\le x)$ or as the chance of landing at $x$.
-
-Wrong working: for $X$ uniform on $[0, \\frac{1}{2}]$, the density is $f_X(x) = 2$ on that interval, so
-$$P\\left(X \\le \\frac{1}{4}\\right) = f_X\\left(\\frac{1}{4}\\right) = 2$$
-
-Right working: the probability is the area under the density up to $\\frac{1}{4}$, which is the value of the CDF there.
-$$F_X\\left(\\frac{1}{4}\\right) = \\int_0^{1/4} 2\\,dt = \\frac{1}{2}$$
-
-Why it happens: for a discrete variable the PMF value at a point is a probability, and the habit carries over to the density, which looks like the same kind of function and is written with almost the same letter as $F_X$.
-
-How to check: a probability can never exceed $1$, while a density can. Here $f_X(x) = 2$ at every point of $[0, \\frac{1}{2}]$, although the whole interval holds probability $F_X(\\frac{1}{2}) = 1$.
-
-**Dropping the mass at the left endpoint**
-
-For a discrete variable, the probability of a closed interval $a \\le X \\le b$ is computed as $F_X(b) - F_X(a)$, the formula for the half-open interval $a < X \\le b$.
-
-Wrong working: for a fair die,
-$$P(2 \\le X \\le 4) = F_X(4) - F_X(2) = \\frac{4}{6} - \\frac{2}{6} = \\frac{1}{3}$$
-
-Right working: $F_X(2)$ already contains the face $2$, so subtracting it removes that face from the answer. Subtract the CDF one value lower instead.
-$$P(2 \\le X \\le 4) = F_X(4) - F_X(1) = \\frac{4}{6} - \\frac{1}{6} = \\frac{1}{2}$$
-
-Why it happens: the formula $P(a < X \\le b) = F_X(b) - F_X(a)$ is remembered without its strict inequality on the left. For continuous variables the slip costs nothing, since $P(X = a) = 0$, so it goes unnoticed until a discrete problem.
-
-How to check: count the values directly. The faces $2$, $3$ and $4$ give $\\frac{3}{6} = \\frac{1}{2}$.
-`,
+      more:`Two further mistakes come up once the CDF is used for calculations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Both slips misread what the CDF and the density give. A density value is not a probability and can exceed $1$, and for a discrete variable $F_X(b) - F_X(a)$ leaves out the value $a$ itself. Remembering that a probability never exceeds $1$, and counting the values directly, catches both.`,
   
     },
     matters:{
@@ -1447,8 +1429,63 @@ The sections that follow explain how this accumulation works, how it is defined 
     }),
   };
 
+  // MistakeFix batch 16, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.mistakes into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-density-as-a-probability', name: `Reading the density as a probability`, errorAt: 1,
+        what: `For a continuous variable, the density $f_X(x)$ is evaluated at a point and its value is reported as a probability, either as $P(X \\le x)$ or as the chance of landing at $x$.`,
+        wrong: [`For $X$ uniform on $[0, \\frac{1}{2}]$, the density is $f_X(x) = 2$ on that interval, so`, `$$P\\left(X \\le \\frac{1}{4}\\right) = f_X\\left(\\frac{1}{4}\\right) = 2$$`],
+        right: [`For $X$ uniform on $[0, \\frac{1}{2}]$, the density is $f_X(x) = 2$ on that interval, so`, `The probability is the area under the density up to $\\frac{1}{4}$, which is the value of the CDF there.`, `$$F_X\\left(\\frac{1}{4}\\right) = \\int_0^{1/4} 2\\,dt = \\frac{1}{2}$$`],
+        why: `For a discrete variable the PMF value at a point is a probability, and the habit carries over to the density, which looks like the same kind of function and is written with almost the same letter as $F_X$.`,
+        check: `A probability can never exceed $1$, while a density can. Here $f_X(x) = 2$ at every point of $[0, \\frac{1}{2}]$, although the whole interval holds probability $F_X(\\frac{1}{2}) = 1$.` },
+      { id: 'dropping-the-mass-at-the-left-endpoint', name: `Dropping the mass at the left endpoint`, errorAt: 1,
+        what: `For a discrete variable, the probability of a closed interval $a \\le X \\le b$ is computed as $F_X(b) - F_X(a)$, the formula for the half-open interval $a < X \\le b$.`,
+        wrong: [`For a fair die,`, `$$P(2 \\le X \\le 4) = F_X(4) - F_X(2)$$
+$$= \\frac{4}{6} - \\frac{2}{6} = \\frac{1}{3}$$`],
+        right: [`For a fair die,`, `$F_X(2)$ already contains the face $2$, so subtracting it removes that face from the answer. Subtract the CDF one value lower instead.`, `$$P(2 \\le X \\le 4) = F_X(4) - F_X(1)$$
+$$= \\frac{4}{6} - \\frac{1}{6} = \\frac{1}{2}$$`],
+        why: `The formula $P(a < X \\le b) = F_X(b) - F_X(a)$ is remembered without its strict inequality on the left. For continuous variables the slip costs nothing, since $P(X = a) = 0$, so it goes unnoticed until a discrete problem.`,
+        check: `Count the values directly. The faces $2$, $3$ and $4$ give $\\frac{3}{6} = \\frac{1}{2}$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it gives' },
+    ],
+    rows: [
+      { name: 'Definition', formula: '$F_X(x) = P(X \\le x)$', says: 'the probability that $X$ takes a value less than or equal to $x$',
+        sub: 'One definition for discrete, continuous and mixed variables, from [the mathematical definition](!#mathematical).' },
+      { name: 'Bounded', formula: '$0 \\le F_X(x) \\le 1$', says: 'every value of the CDF is a valid probability',
+        sub: 'The first of the [key properties](!#properties) every CDF has.' },
+      { name: 'Limits at infinity', formula: '$\\displaystyle \\lim_{x \\to -\\infty} F_X(x) = 0, \\qquad \\lim_{x \\to +\\infty} F_X(x) = 1$', says: 'the function spans the full probability scale',
+        sub: 'Far to the left nothing has accumulated yet, far to the right everything has ([key properties](!#properties)).' },
+      { name: 'Monotonicity', formula: '$x_1 \\leq x_2 \\implies F_X(x_1) \\leq F_X(x_2)$', says: 'accumulated probability never decreases',
+        sub: 'The CDF stays the same or increases as $x$ grows, as [key properties](!#properties) states.' },
+      { name: 'Right-continuity', formula: '$\\displaystyle \\lim_{y \\to x^+} F_X(y) = F_X(x)$', says: 'the value at $x$ includes the probability at $x$',
+        sub: 'This keeps the jumps of discrete and mixed variables consistent, from [key properties](!#properties).' },
+      { name: 'CDF from a PMF', formula: '$\\displaystyle F_X(x) = \\sum_{k \\leq x} p_X(k)$', says: 'a step function whose jump at each value equals its probability',
+        sub: 'The PMF sets the jump sizes and the CDF adds them up, as [discrete random variables](!#discrete) shows.' },
+      { name: 'CDF from a PDF', formula: '$\\displaystyle F_X(x) = \\int_{-\\infty}^{x} f_X(t)\\,dt$', says: 'a smooth curve that accumulates the density from the left',
+        sub: 'For [continuous random variables](!#continuous) the CDF increases without jumps.' },
+      { name: 'PDF as the derivative', formula: '$\\displaystyle f_X(x) = \\frac{d}{dx} F_X(x)$', says: 'the density is the slope of the CDF',
+        sub: 'The same link read the other way, from [continuous random variables](!#continuous).' },
+      { name: 'Interval from the CDF', formula: '$P(a < X \\le b) = F_X(b) - F_X(a)$', says: 'the probability between two numbers $a < b$',
+        sub: 'Works for discrete, continuous and mixed variables; for a discrete variable the interval must match the question exactly ([using the CDF](!#using)).' },
+      { name: 'Interval from the PDF', formula: '$\\displaystyle P(a \\leq X \\leq b) = \\int_{a}^{b} f_X(x)\\,dx$', says: 'the same probability as the area under the density',
+        sub: 'The continuous form of the interval rule, from [using the CDF](!#using).' },
+    ],
+  };
+
   return {
     props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1470,7 +1507,7 @@ The sections that follow explain how this accumulation works, how it is defined 
   }
 }
 
-export default function PageTemplate({
+export default function PageTemplate({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1672,6 +1709,24 @@ export default function PageTemplate({
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="cdf-formula-summary"
+            title="CDF formulas"
+            source="/probability/cdf"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'mistakes',
         title:sectionsContent.mistakes.title,
         link:'',
@@ -1679,6 +1734,15 @@ export default function PageTemplate({
             sectionsContent.mistakes.content,
             <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
             sectionsContent.mistakes.more,
+            <DiagramFrame
+              key={'mistakes-mistakes'}
+              id="cdf-pitfalls"
+              title="Common pitfalls with the CDF"
+              source="/probability/cdf"
+              after={sectionsContent.mistakes.after}
+            >
+              <MistakeFix data={pitfallData} variant="trace" />
+            </DiagramFrame>,
         ]
     },
     {

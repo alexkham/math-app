@@ -771,8 +771,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -977,7 +979,7 @@ $$W^\\perp = \\{\\mathbf{v} \\in \\mathbb{R}^n : \\mathbf{v} \\cdot \\mathbf{w} 
 
 @academic[pitfall,aside:true,width:35%:Calling any perpendicular subspace the complement
 Taking a subspace perpendicular to $W$ as $W^\\perp$: in $\\mathbb{R}^3$ the $y$-axis is perpendicular to the $x$-axis $W$, but the dimensions give $1 + 1 = 2 \\neq 3$. The complement $W^\\perp$ is the whole $yz$-plane, all vectors $(0, b, c)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-calling-any-perpendicular-subspace-the-complement)]@
 
 Its [dimension](!/linear-algebra/vector-spaces/dimension) satisfies $\\dim(W) + \\dim(W^\\perp) = n$, and taking the complement twice returns to the original: $(W^\\perp)^\\perp = W$.
 
@@ -1059,7 +1061,7 @@ The computational advantage of an orthonormal basis $\\{\\mathbf{q}_1, \\dots, \
 
 @academic[pitfall,aside:true,width:35%:Treating an orthogonal basis as orthonormal
 Using $c_i = \\mathbf{v}_i \\cdot \\mathbf{v}$ with a basis that is orthogonal but not unit length: for $(1, 1)$, $(1, -1)$ and $\\mathbf{v} = (3, 1)$ it gives $c_1 = 4$, $c_2 = 2$, and $4(1, 1) + 2(1, -1) = (6, 2) \\neq \\mathbf{v}$. Dividing by $\\mathbf{v}_i \\cdot \\mathbf{v}_i = 2$ gives $c_1 = 2$, $c_2 = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-an-orthogonal-basis-as-orthonormal)]@
 
 The formula relies on both halves of orthonormality. When $\\mathbf{v} = \\sum c_j \\mathbf{q}_j$ is dotted with $\\mathbf{q}_i$, pairwise perpendicularity removes every term except $c_i\\,\\mathbf{q}_i \\cdot \\mathbf{q}_i$, and unit length makes that term $c_i$ itself. Bases met in practice are often orthogonal without being normalized, such as $(1, 1)$ and $(1, -1)$ in $\\mathbb{R}^2$.`,
     before: ``,
@@ -1078,7 +1080,7 @@ The residual $\\mathbf{b} - P\\mathbf{b}$ is orthogonal to $W$ — this is the d
 
 @academic[pitfall,aside:true,width:35%:Splitting the inverse in P
 Splitting $(A^TA)^{-1}$ into $A^{-1}(A^T)^{-1}$ collapses $P$ to $AA^{-1}(A^T)^{-1}A^T = I$. For $A = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, $A^{-1}$ does not exist, and $P = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$ sends $(1, 0)$ to $(\\frac{1}{2}, \\frac{1}{2})$, not to itself.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-inverse-in-p)]@
 
 The formula is built for a basis matrix $A$ of size $m \\times n$ with independent columns, usually with $m > n$, so $A$ is tall rather than square. The only matrix inverted is the $n \\times n$ product $A^TA$. For a single column $\\mathbf{a}$ that product is the number $\\mathbf{a} \\cdot \\mathbf{a}$, and $P = \\frac{\\mathbf{a}\\mathbf{a}^T}{\\mathbf{a} \\cdot \\mathbf{a}}$ reproduces the single-vector formula above.`,
     before: ``,
@@ -1091,7 +1093,7 @@ The formula is built for a basis matrix $A$ of size $m \\times n$ with independe
 
 @academic[pitfall,aside:true,width:35%:Projecting onto the original vectors
 Subtracting projections onto the original $\\mathbf{v}_1, \\mathbf{v}_2$: for $(1, 1, 0)$, $(1, 0, 1)$, $(0, 1, 1)$ it gives $\\mathbf{u}_3 = (-1, \\frac{1}{2}, \\frac{1}{2})$, and $\\mathbf{u}_3 \\cdot \\mathbf{u}_1 = -\\frac{1}{2}$. Projecting onto $\\mathbf{u}_1 = (1, 1, 0)$ and $\\mathbf{u}_2 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$ gives $\\mathbf{u}_3 = (-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3})$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-projecting-onto-the-original-vectors)]@
 
 Gram-Schmidt applied to the columns of a matrix $A$ produces the [QR decomposition](!/linear-algebra/decompositions/qr) $A = QR$, where $Q$ has orthonormal columns and $R$ is upper triangular. This decomposition is numerically superior to forming $A^TA$ directly and is the standard method for [least-squares](!/linear-algebra/orthogonality/least-squares) computation.
 
@@ -1102,72 +1104,19 @@ Gram-Schmidt applied to the columns of a matrix $A$ produces the [QR decompositi
   },
   obj10: {
     title: `Summary: Orthogonality at a Glance`,
-    content: `The orthogonality subtree branches into several specialized topics — inner products, orthogonal and orthonormal sets, projections, Gram&ndash;Schmidt, and least squares — each developed in its own page. The table below collects each topic alongside its key statement and the main formula or result, providing a roadmap from this hub into the deeper material and a single reference for the central facts.`,
+    content: `This summary walks through the orthogonality topics of the page, one per row, in the order the page meets them. Each row names the topic, gives its main formula or result and states the key fact, with a line under the name linking to the section that explains it.
+
+It starts from the test for perpendicular vectors and the orthogonal complement of a subspace, then the way the four fundamental subspaces pair up as complements. Inner products carry the same geometry to other spaces, orthonormal sets make coordinates free, and projection finds the closest point. Gram-Schmidt and least squares close the list.`,
+    formulaSheetAfter: `Nearly every result here is one dot product equal to zero, used in a new setting. When a problem about closest points, coordinates or approximate solutions gets stuck, asking which vectors should be perpendicular usually shows the next step.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Four mistakes are common when the ideas of this page are first put to work. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Calling any perpendicular subspace the complement**
-
-A subspace that is perpendicular to $W$ is taken to be $W^\\perp$. But $W^\\perp$ contains every vector perpendicular to $W$, and a perpendicular subspace may hold only some of them.
-
-Wrong working: in $\\mathbb{R}^3$ let $W$ be the $x$-axis, spanned by $(1, 0, 0)$. The $y$-axis, spanned by $(0, 1, 0)$, is perpendicular to it, since $(1, 0, 0) \\cdot (0, 1, 0) = 0$, so it is declared to be $W^\\perp = \\text{Span}\\{(0, 1, 0)\\}$.
-
-Right working: a vector $\\mathbf{v} = (a, b, c)$ lies in $W^\\perp$ exactly when $\\mathbf{v} \\cdot (1, 0, 0) = a = 0$. So
-$$W^\\perp = \\{(0, b, c) : b, c \\in \\mathbb{R}\\}$$
-the whole $yz$-plane, which contains the $y$-axis, the $z$-axis and every line between them.
-
-Why it happens: in $\\mathbb{R}^2$ a line perpendicular to a line really is its complement, and that picture is carried over to higher dimensions. The phrases "orthogonal subspaces" and "orthogonal complement" also sound alike.
-
-How to check: count dimensions. $\\dim W + \\dim W^\\perp$ must equal $n$. The $x$-axis and the $y$-axis give $1 + 1 = 2$, not $3$; the $x$-axis and the $yz$-plane give $1 + 2 = 3$.
-
-**Treating an orthogonal basis as orthonormal**
-
-The shortcut $c_i = \\mathbf{q}_i \\cdot \\mathbf{v}$ is applied to a basis that is orthogonal but not unit length. Each coordinate then comes out multiplied by the squared length of its basis vector.
-
-Wrong working: basis $\\mathbf{v}_1 = (1, 1)$, $\\mathbf{v}_2 = (1, -1)$, vector $\\mathbf{v} = (3, 1)$.
-$$c_1 = \\mathbf{v}_1 \\cdot \\mathbf{v} = 4, \\quad c_2 = \\mathbf{v}_2 \\cdot \\mathbf{v} = 2, \\quad 4(1, 1) + 2(1, -1) = (6, 2)$$
-
-Right working: divide each dot product by $\\mathbf{v}_i \\cdot \\mathbf{v}_i$.
-$$c_1 = \\frac{\\mathbf{v}_1 \\cdot \\mathbf{v}}{\\mathbf{v}_1 \\cdot \\mathbf{v}_1} = \\frac{4}{2} = 2, \\quad c_2 = \\frac{\\mathbf{v}_2 \\cdot \\mathbf{v}}{\\mathbf{v}_2 \\cdot \\mathbf{v}_2} = \\frac{2}{2} = 1, \\quad 2(1, 1) + 1(1, -1) = (3, 1)$$
-
-Why it happens: "orthogonal" and "orthonormal" differ by a few letters, and the dot-product formula is usually quoted for the orthonormal case only. Dotting with $\\mathbf{v}_i$ removes the other terms in both cases, but only unit length removes the factor $\\|\\mathbf{v}_i\\|^2$.
-
-How to check: rebuild the vector from its coordinates. The wrong coordinates give $(6, 2) = 2\\mathbf{v}$, too long by exactly $\\|\\mathbf{v}_i\\|^2 = 2$.
-
-**Splitting the inverse in P**
-
-The rule for inverting a product is applied to $(A^TA)^{-1}$, giving $A^{-1}(A^T)^{-1}$. Everything then cancels, and every projection matrix comes out as the identity.
-
-Wrong working:
-$$P = A(A^TA)^{-1}A^T = AA^{-1}(A^T)^{-1}A^T = I$$
-
-Right working: for $A = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, whose column spans the line through $(1, 1)$,
-$$A^TA = 2, \\quad P = \\frac{1}{2}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\end{pmatrix} = \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}, \\quad P\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 1/2 \\\\ 1/2 \\end{pmatrix}$$
-
-Why it happens: the rule $(BC)^{-1} = C^{-1}B^{-1}$ is correct, but only when each factor is square and invertible. Here $A$ is $2 \\times 1$ and has no inverse; only the product $A^TA$ does.
-
-How to check: a projection onto a subspace smaller than the whole space cannot be the identity, since vectors outside $W$ must move. Its rank must equal $\\dim W$: here $P$ has rank $1$, while $I$ has rank $2$. The split is valid only when $A$ is square and invertible, and then $W$ is the whole space and $P = I$ is correct.
-
-**Projecting onto the original vectors**
-
-In Gram-Schmidt, the third vector has its projections onto the original $\\mathbf{v}_1$ and $\\mathbf{v}_2$ removed, instead of its projections onto the new $\\mathbf{u}_1$ and $\\mathbf{u}_2$. Since $\\mathbf{v}_1$ and $\\mathbf{v}_2$ are not perpendicular to each other, the two subtractions interfere and the result is not orthogonal to them.
-
-Wrong working: $\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$, $\\mathbf{v}_3 = (0, 1, 1)$.
-$$\\mathbf{u}_3 = \\mathbf{v}_3 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{v}_1}{\\mathbf{v}_1 \\cdot \\mathbf{v}_1}\\mathbf{v}_1 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{v}_2}{\\mathbf{v}_2 \\cdot \\mathbf{v}_2}\\mathbf{v}_2 = (0, 1, 1) - \\tfrac{1}{2}(1, 1, 0) - \\tfrac{1}{2}(1, 0, 1) = (-1, \\tfrac{1}{2}, \\tfrac{1}{2})$$
-
-Right working: first $\\mathbf{u}_1 = \\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{u}_2 = \\mathbf{v}_2 - \\frac{1}{2}\\mathbf{u}_1 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$, with $\\mathbf{v}_3 \\cdot \\mathbf{u}_2 = \\frac{1}{2}$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_2 = \\frac{3}{2}$. Then
-$$\\mathbf{u}_3 = \\mathbf{v}_3 - \\tfrac{1}{2}\\mathbf{u}_1 - \\tfrac{1}{3}\\mathbf{u}_2 = (0, 1, 1) - (\\tfrac{1}{2}, \\tfrac{1}{2}, 0) - (\\tfrac{1}{6}, -\\tfrac{1}{6}, \\tfrac{1}{3}) = (-\\tfrac{2}{3}, \\tfrac{2}{3}, \\tfrac{2}{3})$$
-
-Why it happens: the original vectors are the ones written down in the problem, and "subtract the projections" does not say onto which vectors. For the second vector there is no difference, because $\\mathbf{u}_1 = \\mathbf{v}_1$, so the slip only shows from the third vector on.
-
-How to check: dot the result with every earlier $\\mathbf{u}_j$. The wrong vector gives $(-1, \\frac{1}{2}, \\frac{1}{2}) \\cdot (1, 1, 0) = -\\frac{1}{2}$. The right one gives $(-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3}) \\cdot (1, 1, 0) = 0$ and $(-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3}) \\cdot (\\frac{1}{2}, -\\frac{1}{2}, 1) = 0$.`,
+    content: `Four mistakes are common when the ideas of this page are first put to work. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses a condition of orthogonality. $W^\\perp$ contains every vector perpendicular to $W$, so its dimension is $n - \\dim W$; coordinates in an orthogonal basis divide by $\\mathbf{q}_i \\cdot \\mathbf{q}_i$; $(A^TA)^{-1}$ cannot be split into inverses of non-square factors; and Gram-Schmidt projects onto the new orthogonal vectors. Counting dimensions, rebuilding the vector, or dotting the result with each earlier vector catches each slip.`,
     link: ``,
   },
 }
@@ -1331,8 +1280,90 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'calling-any-perpendicular-subspace-the-complement', name: `Calling any perpendicular subspace the complement`, errorAt: 1,
+        what: `A subspace that is perpendicular to $W$ is taken to be $W^\\perp$. But $W^\\perp$ contains every vector perpendicular to $W$, and a perpendicular subspace may hold only some of them.`,
+        wrong: [`In $\\mathbb{R}^3$ let $W$ be the $x$-axis, spanned by $(1, 0, 0)$.`, `The $y$-axis, spanned by $(0, 1, 0)$, is perpendicular to it, since $(1, 0, 0) \\cdot (0, 1, 0) = 0$, so it is declared to be $W^\\perp = \\text{Span}\\{(0, 1, 0)\\}$.`],
+        right: [`In $\\mathbb{R}^3$ let $W$ be the $x$-axis, spanned by $(1, 0, 0)$.`, `A vector $\\mathbf{v} = (a, b, c)$ lies in $W^\\perp$ exactly when $\\mathbf{v} \\cdot (1, 0, 0) = a = 0$. So
+$$W^\\perp = \\{(0, b, c) : b, c \\in \\mathbb{R}\\}$$`, `The whole $yz$-plane, which contains the $y$-axis, the $z$-axis and every line between them.`],
+        why: `In $\\mathbb{R}^2$ a line perpendicular to a line really is its complement, and that picture is carried over to higher dimensions. The phrases "orthogonal subspaces" and "orthogonal complement" also sound alike.`,
+        check: `Count dimensions. $\\dim W + \\dim W^\\perp$ must equal $n$. The $x$-axis and the $y$-axis give $1 + 1 = 2$, not $3$; the $x$-axis and the $yz$-plane give $1 + 2 = 3$.` },
+      { id: 'treating-an-orthogonal-basis-as-orthonormal', name: `Treating an orthogonal basis as orthonormal`, errorAt: 0,
+        what: `The shortcut $c_i = \\mathbf{q}_i \\cdot \\mathbf{v}$ is applied to a basis that is orthogonal but not unit length. Each coordinate then comes out multiplied by the squared length of its basis vector.`,
+        wrong: [`Basis $\\mathbf{v}_1 = (1, 1)$, $\\mathbf{v}_2 = (1, -1)$, vector $\\mathbf{v} = (3, 1)$.`, `$$c_1 = \\mathbf{v}_1 \\cdot \\mathbf{v} = 4,$$
+$$c_2 = \\mathbf{v}_2 \\cdot \\mathbf{v} = 2,$$
+$$4(1, 1) + 2(1, -1) = (6, 2)$$`],
+        right: [`Divide each dot product by $\\mathbf{v}_i \\cdot \\mathbf{v}_i$.`, `$$c_1 = \\frac{\\mathbf{v}_1 \\cdot \\mathbf{v}}{\\mathbf{v}_1 \\cdot \\mathbf{v}_1} = \\frac{4}{2}$$
+$$= 2,$$
+$$c_2 = \\frac{\\mathbf{v}_2 \\cdot \\mathbf{v}}{\\mathbf{v}_2 \\cdot \\mathbf{v}_2} = \\frac{2}{2}$$
+$$= 1,$$
+$$2(1, 1) + 1(1, -1) = (3, 1)$$`],
+        why: `"orthogonal" and "orthonormal" differ by a few letters, and the dot-product formula is usually quoted for the orthonormal case only. Dotting with $\\mathbf{v}_i$ removes the other terms in both cases, but only unit length removes the factor $\\|\\mathbf{v}_i\\|^2$.`,
+        check: `Rebuild the vector from its coordinates. The wrong coordinates give $(6, 2) = 2\\mathbf{v}$, too long by exactly $\\|\\mathbf{v}_i\\|^2 = 2$.` },
+      { id: 'splitting-the-inverse-in-p', name: `Splitting the inverse in P`, errorAt: 0,
+        what: `The rule for inverting a product is applied to $(A^TA)^{-1}$, giving $A^{-1}(A^T)^{-1}$. Everything then cancels, and every projection matrix comes out as the identity.`,
+        wrong: [`$$P = A(A^TA)^{-1}A^T$$
+$$= AA^{-1}(A^T)^{-1}A^T = I$$`],
+        right: [`For $A = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$, whose column spans the line through $(1, 1)$,
+$$A^TA = 2,$$
+$$P = \\frac{1}{2}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}\\begin{pmatrix} 1 & 1 \\end{pmatrix}$$
+$$= \\frac{1}{2}\\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix},$$
+$$P\\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} 1/2 \\\\ 1/2 \\end{pmatrix}$$`],
+        why: `The rule $(BC)^{-1} = C^{-1}B^{-1}$ is correct, but only when each factor is square and invertible. Here $A$ is $2 \\times 1$ and has no inverse; only the product $A^TA$ does.`,
+        check: `A projection onto a subspace smaller than the whole space cannot be the identity, since vectors outside $W$ must move. Its rank must equal $\\dim W$: here $P$ has rank $1$, while $I$ has rank $2$. The split is valid only when $A$ is square and invertible, and then $W$ is the whole space and $P = I$ is correct.` },
+      { id: 'projecting-onto-the-original-vectors', name: `Projecting onto the original vectors`, errorAt: 0,
+        what: `In Gram-Schmidt, the third vector has its projections onto the original $\\mathbf{v}_1$ and $\\mathbf{v}_2$ removed, instead of its projections onto the new $\\mathbf{u}_1$ and $\\mathbf{u}_2$. Since $\\mathbf{v}_1$ and $\\mathbf{v}_2$ are not perpendicular to each other, the two subtractions interfere and the result is not orthogonal to them.`,
+        wrong: [`$\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$, $\\mathbf{v}_3 = (0, 1, 1)$.`, `$$\\mathbf{u}_3$$
+$$= \\mathbf{v}_3 - \\frac{\\mathbf{v}_3 \\cdot \\mathbf{v}_1}{\\mathbf{v}_1 \\cdot \\mathbf{v}_1}\\mathbf{v}_1$$
+$$- \\frac{\\mathbf{v}_3 \\cdot \\mathbf{v}_2}{\\mathbf{v}_2 \\cdot \\mathbf{v}_2}\\mathbf{v}_2$$
+$$= (0, 1, 1) - \\tfrac{1}{2}(1, 1, 0)$$
+$$- \\tfrac{1}{2}(1, 0, 1)$$
+$$= (-1, \\tfrac{1}{2}, \\tfrac{1}{2})$$`],
+        right: [`First $\\mathbf{u}_1 = \\mathbf{v}_1 = (1, 1, 0)$ and $\\mathbf{u}_2 = \\mathbf{v}_2 - \\frac{1}{2}\\mathbf{u}_1 = (\\frac{1}{2}, -\\frac{1}{2}, 1)$, with $\\mathbf{v}_3 \\cdot \\mathbf{u}_2 = \\frac{1}{2}$ and $\\mathbf{u}_2 \\cdot \\mathbf{u}_2 = \\frac{3}{2}$. Then
+$$\\mathbf{u}_3 = \\mathbf{v}_3 - \\tfrac{1}{2}\\mathbf{u}_1 - \\tfrac{1}{3}\\mathbf{u}_2$$
+$$= (0, 1, 1) - (\\tfrac{1}{2}, \\tfrac{1}{2}, 0)$$
+$$- (\\tfrac{1}{6}, -\\tfrac{1}{6}, \\tfrac{1}{3})$$
+$$= (-\\tfrac{2}{3}, \\tfrac{2}{3}, \\tfrac{2}{3})$$`],
+        why: `The original vectors are the ones written down in the problem, and "subtract the projections" does not say onto which vectors. For the second vector there is no difference, because $\\mathbf{u}_1 = \\mathbf{v}_1$, so the slip only shows from the third vector on.`,
+        check: `Dot the result with every earlier $\\mathbf{u}_j$. The wrong vector gives $(-1, \\frac{1}{2}, \\frac{1}{2}) \\cdot (1, 1, 0) = -\\frac{1}{2}$. The right one gives $(-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3}) \\cdot (1, 1, 0) = 0$ and $(-\\frac{2}{3}, \\frac{2}{3}, \\frac{2}{3}) \\cdot (\\frac{1}{2}, -\\frac{1}{2}, 1) = 0$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Topic', kind: 'name' },
+      { key: 'formula', label: 'Main formula or result', kind: 'formula' },
+      { key: 'says', label: 'Key statement' },
+    ],
+    rows: [
+      { name: 'Orthogonal vectors', formula: '$\\mathbf{u} \\cdot \\mathbf{v} = 0$', says: '$\\mathbf{u}$ and $\\mathbf{v}$ are perpendicular exactly when their dot product is zero',
+        sub: 'The dot-product-zero test, from [what orthogonality means](!#1).' },
+      { name: 'Orthogonal complement', formula: '$\\dim W + \\dim W^\\perp = n$, and every $\\mathbf{v} = \\mathbf{w} + \\mathbf{w}^\\perp$ uniquely', says: 'the vectors perpendicular to every vector in $W$ form a subspace $W^\\perp$',
+        sub: 'Its dimension count and the unique split of every vector come from [orthogonal complements](!#3).' },
+      { name: 'Four fundamental subspaces', formula: '$\\text{Row}(A)^\\perp = \\text{Null}(A), \\quad \\text{Col}(A)^\\perp = \\text{Null}(A^T)$', says: 'the row space and null space are complements in $\\mathbb{R}^n$, the column space and left null space in $\\mathbb{R}^m$',
+        sub: 'The two pairs of complements behind projection, from [the four fundamental subspaces revisited](!#4).' },
+      { name: 'Inner product', formula: '$\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$, $d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$, $|\\langle \\mathbf{u}, \\mathbf{v} \\rangle| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$', says: 'generalizes the dot product to any vector space and induces a norm, a distance and the Cauchy-Schwarz inequality',
+        sub: 'Any product with symmetry, linearity and positive definiteness, as [inner products](!#6) explains.' },
+      { name: 'Orthogonal and orthonormal sets', formula: '$c_i = \\mathbf{q}_i \\cdot \\mathbf{v}$ in an orthonormal basis', says: 'pairwise-perpendicular nonzero vectors are automatically independent',
+        sub: 'In an orthonormal basis the coordinates come free, as [orthogonal and orthonormal sets](!#7) shows.' },
+      { name: 'Projection onto a subspace', formula: '$P = A(A^TA)^{-1}A^T$, with $P^2 = P$ and $P^T = P$', says: 'gives the closest point in $W$ to a given $\\mathbf{b}$',
+        sub: 'The projection matrix is idempotent and symmetric, from [projections](!#8).' },
+      { name: 'Gram-Schmidt process', formula: '$A = QR$', says: 'converts any basis into an orthonormal one by subtracting projections one after another',
+        sub: 'Applied to the columns of $A$ it produces the QR decomposition, as [Gram-Schmidt and least squares](!#9) explains.' },
+      { name: 'Least squares', formula: '$A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$', says: 'the best approximate solution when $A\\mathbf{x} = \\mathbf{b}$ has none',
+        sub: 'The normal equations, where $A\\hat{\\mathbf{x}}$ is the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$, from [Gram-Schmidt and least squares](!#9).' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     faqQuestions,
     orthoNest,
     demoUnits,
@@ -1355,7 +1386,7 @@ return {
    }
 
 // export default function OrthogonalityPage({seoData,sectionsContent , introContent}) {
-export default function OrthogonalityPage({faqQuestions, orthoNest,
+export default function OrthogonalityPage({ formulaSummaryData, pitfallData,faqQuestions, orthoNest,
   seoData,
   sectionsContent,
   introContent,
@@ -1527,6 +1558,15 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="orthogonality-pitfalls"
+            title="Common pitfalls with orthogonality"
+            source="/linear-algebra/orthogonality"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1535,11 +1575,16 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="orthogonality-overview-formula-summary"
+            title="Orthogonality at a glance"
+            source="/linear-algebra/orthogonality"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.obj10.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

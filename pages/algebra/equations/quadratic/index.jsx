@@ -16,6 +16,7 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -713,6 +714,15 @@ The sign of $a$ determines the parabola's orientation — opening upward when $a
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page in one table, in the order the page builds them. Each row gives the name with a line on where the formula comes from and a link to its section, the formula itself, and what it gives.
+
+It starts from the standard form and the square root property, then follows completing the square from the identity to the completed form of the general equation. The quadratic formula comes out of that last line, the discriminant is the part under its square root, and Vieta's formulas close the table with the sum and the product of the roots.`,
+    before: ``,
+    after: `Read from top to bottom, the table is one derivation: completing the square on the standard form produces the quadratic formula. The discriminant then says how many real solutions to expect before computing them, and Vieta's formulas check the answer once it is found.`,
+    link: '',
+  },
   obj10: {
     title: `Common Pitfalls`,
     content: `Five mistakes account for most wrong answers to quadratic equations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -1012,8 +1022,35 @@ $$\\Delta = 2^2 - 4(1)(-3) = 4 + 12 = 16 > 0$$`, `So there are two real roots, $
     ],
   };
 
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it gives' },
+    ],
+    rows: [
+      { name: 'Standard form', formula: '$ax^2 + bx + c = 0$', says: 'the shape every quadratic equation is brought to, with $a \\neq 0$',
+        sub: 'The coefficients $a$, $b$ and $c$ used by every formula below, from [definition and standard form](!#1).' },
+      { name: 'Square root property', formula: '$x^2 = p \\implies x = \\pm\\sqrt{p}$', says: 'both solutions of a squared expression equal to a number',
+        sub: 'The last step of [completing the square](!#3); the $\\pm$ keeps both roots.' },
+      { name: 'Completing the square', formula: '$\\displaystyle x^2 + bx = \\left(x + \\frac{b}{2}\\right)^2 - \\frac{b^2}{4}$', says: 'turns the two $x$ terms into one perfect square',
+        sub: 'The identity behind [completing the square](!#3), which works whether or not the quadratic factors.' },
+      { name: 'Completed form', formula: '$\\displaystyle \\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$', says: 'the general equation after the square is completed',
+        sub: 'Dividing by $a$ and adding $\\left(\\frac{b}{2a}\\right)^2$ to both sides in [completing the square](!#3) gives this line.' },
+      { name: 'Quadratic formula', formula: '$\\displaystyle x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$', says: 'both solutions of any quadratic equation',
+        sub: 'Taking the square root of the completed form, as [the quadratic formula](!#4) does.' },
+      { name: 'Discriminant', formula: '$\\Delta = b^2 - 4ac$', says: 'two real roots, one repeated root or none, by its sign',
+        sub: 'The part under the root; [the discriminant](!#5) reads the number of solutions from it.' },
+      { name: "Vieta's formulas", formula: '$\\displaystyle x_1 + x_2 = -\\frac{b}{a} \\qquad x_1 \\cdot x_2 = \\frac{c}{a}$', says: 'the sum and the product of the roots',
+        sub: "From expanding $a(x - x_1)(x - x_2)$; [Vieta's formulas](!#6) uses them to check solutions." },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
     pitfallData,
     quadraticFormulaAnatomy,
     quadMethodTree,
@@ -1040,7 +1077,7 @@ $$\\Delta = 2^2 - 4(1)(-3) = 4 + 12 = 16 > 0$$`, `So there are two real roots, $
    }
 
 
-export default function QuadraticEquationsPage({ pitfallData,quadraticFormulaAnatomy, quadMethodTree, 
+export default function QuadraticEquationsPage({ formulaSummaryData, pitfallData,quadraticFormulaAnatomy, quadMethodTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1277,6 +1314,24 @@ $$ax^2 + bx + c = 0$$]@`,
             source="/algebra/equations/quadratic"
           >
             <TopDownTree data={quadMethodTree} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="quadratic-equation-formula-summary"
+            title="Quadratic equation formulas"
+            source="/algebra/equations/quadratic"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
         ]
     },

@@ -817,6 +817,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1244,7 +1245,7 @@ This scaling factor applies uniformly to every region, not just the unit hypercu
 
 @academic[pitfall,aside:true,width:35%:Pulling the scaling factor out once
 Taking the map $\\mathbf{x} \\mapsto 2\\mathbf{x}$ on $\\mathbb{R}^3$ to scale volumes by $2$ treats $\\det(2I)$ as $2\\det(I) = 2$. All three directions double, so $\\det(2I) = 2^3 = 8$; in general $\\det(kA) = k^n \\det(A)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-pulling-the-scaling-factor-out-once)]@
 
 Three regimes emerge from this interpretation. When $|\\det(A)| > 1$, the map expands volumes. When $0 < |\\det(A)| < 1$, it compresses volumes. When $|\\det(A)| = 1$, volumes are preserved — the map is volume-preserving. Rotations and reflections both fall in this last category.
 
@@ -1270,7 +1271,7 @@ Standard examples make the distinction concrete. A rotation matrix in $\\mathbb{
 
 @academic[pitfall,aside:true,width:35%:Reading a determinant of 1 as a rotation
 Concluding that $A$ is a rotation because $\\det(A) = 1$ fails for the shear $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$: its determinant is $1$, yet it sends $(0, 1)$ to $(1, 1)$, of length $\\sqrt{2}$. A determinant of $1$ only says that area and orientation are kept.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-determinant-of-1-as-a-rotation)]@
 
 The examples above start from a known map and then compute its determinant. Classifying an unknown map runs the other way: the matrix is given, its determinant is computed, and the number is then read for what it says about the map. The size of that number and its sign are the two readings that this section and the previous one provide.
 
@@ -1307,7 +1308,7 @@ where $J_T(\\mathbf{x})$ is the Jacobian matrix of $T$ at the point $\\mathbf{x}
 
 @academic[pitfall,aside:true,width:35%:Dropping the Jacobian factor
 Writing $dA = dr\\,d\\theta$ in polar coordinates gives the unit disk an area of $\\int_0^{2\\pi}\\!\\int_0^1 dr\\,d\\theta = 2\\pi$. With the factor $|\\det(J_T)| = r$, the area is $\\int_0^{2\\pi}\\!\\int_0^1 r\\,dr\\,d\\theta = \\pi$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-jacobian-factor)]@
 
 The Jacobian matrix is the best linear approximation to $T$ near $\\mathbf{x}$. At each point, it acts like a linear transformation on a small neighborhood, and its determinant measures the local volume distortion. The absolute value appears because the integral accumulates unsigned volume — areas and volumes are always non-negative regardless of orientation.
 
@@ -1336,7 +1337,7 @@ For the vertices $(1, 2)$, $(4, 6)$, $(3, 1)$: the edge vectors are $(3, 4)$ and
 
 @academic[pitfall,aside:true,width:35%:Using the vertices instead of edge vectors
 Putting the vertices $(4, 6)$ and $(3, 1)$ in as columns gives $\\frac{1}{2}|4 \\cdot 1 - 3 \\cdot 6| = 7$, the area of the triangle with corners $(0, 0)$, $(4, 6)$, $(3, 1)$. The edge vectors $(3, 4)$ and $(2, -1)$ give the true area $\\frac{11}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-vertices-instead-of-edge-vectors)]@
 
 Each edge vector is a difference of two vertices, so the formula depends only on the shape of the triangle and not on where it sits in the plane: moving all three vertices by the same amount leaves both edge vectors unchanged. Any vertex can serve as vertex $1$. Another choice gives different edge vectors and may flip the sign of the determinant, but its absolute value, and so the area, stays the same.
 
@@ -1377,66 +1378,9 @@ The parallelepiped spanned by three vectors in $\\mathbb{R}^3$ has volume equal 
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when the determinant is used to measure areas and volumes. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Pulling the scaling factor out once**
-
-A map that multiplies every coordinate by the same number $k$ has the matrix $kI$, and scaling a map $A$ in the same way gives $kA$. The factor $k$ is taken out of the determinant once, so the volume factor is taken to be $k\\det(A)$.
-
-Wrong working: for the map $\\mathbf{x} \\mapsto 2\\mathbf{x}$ on $\\mathbb{R}^3$, $\\det(2I) = 2\\det(I) = 2$, so the unit cube is expected to go to a solid of volume $2$.
-
-Right working: every one of the three rows of $2I$ carries the factor $2$.
-$$\\det(2I) = \\det\\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix} = 2 \\cdot 2 \\cdot 2 = 8$$
-The unit cube goes to the cube with side $2$, whose volume is $8$. For an $n \\times n$ matrix, $\\det(kA) = k^n \\det(A)$.
-
-Why it happens: the determinant is linear in each row separately, so a factor in one row comes out once. Multiplying the whole matrix by $k$ puts the factor in all $n$ rows. For a single number, the case $n = 1$, scaling by $k$ really does scale by $k$, and that habit is carried over.
-
-How to check: picture the unit square or cube. Doubling every side of a square gives area $4$, and doubling every side of a cube gives volume $8$, never $2$.
-
-**Reading a determinant of 1 as a rotation**
-
-Rotations have determinant $+1$ and reflections $-1$, and the statement is read backwards: a matrix with determinant $1$ is taken to be a rotation, one with $-1$ a reflection. The determinant records only how volumes scale and whether orientation is kept. Lengths and angles can still change.
-
-Wrong working: for $S = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, $\\det(S) = 1 \\cdot 1 - 1 \\cdot 0 = 1$, so $S$ is called a rotation.
-
-Right working: $S$ sends $(1, 0)$ to $(1, 0)$ and $(0, 1)$ to $(1, 1)$. The second image has length $\\sqrt{2}$, and the two images meet at $45^\\circ$ instead of $90^\\circ$. $S$ is a shear: it keeps area and orientation but changes the shape of the square. A rotation also needs $S^T S = I$, and here
-$$S^T S = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix} \\neq I$$
-
-Why it happens: the standard examples are always given in one direction, from the map to its determinant, and "rotations have determinant $1$" is remembered as "determinant $1$ means rotation".
-
-How to check: look at the columns. For a rotation or a reflection both columns have length $1$ and are perpendicular. The second column of $S$ is $(1, 1)$, of length $\\sqrt{2}$.
-
-**Dropping the Jacobian factor**
-
-When an integral is moved to new coordinates, the differentials are replaced, for example $dx\\,dy$ by $dr\\,d\\theta$, but the factor $|\\det(J_T)|$ that measures how the map stretches area is left out.
-
-Wrong working: the area of the unit disk in polar coordinates,
-$$\\int_0^{2\\pi}\\!\\int_0^1 dr\\,d\\theta = 2\\pi$$
-
-Right working: for $T(r, \\theta) = (r\\cos\\theta, r\\sin\\theta)$,
-$$\\det(J_T) = \\det\\begin{pmatrix} \\cos\\theta & -r\\sin\\theta \\\\ \\sin\\theta & r\\cos\\theta \\end{pmatrix} = r\\cos^2\\theta + r\\sin^2\\theta = r$$
-so the area is
-$$\\int_0^{2\\pi}\\!\\int_0^1 r\\,dr\\,d\\theta = \\int_0^{2\\pi} \\frac{1}{2}\\,d\\theta = \\pi$$
-
-Why it happens: in the new variables the region is a plain rectangle, $0 \\le r \\le 1$ and $0 \\le \\theta \\le 2\\pi$, and the integral looks complete without the factor. The stretching done by the map cannot be seen in the new coordinates.
-
-How to check: integrate $1$ over a region whose area is known. The unit disk must give $\\pi$; the wrong answer $2\\pi$ is the area of the rectangle in the $(r, \\theta)$ plane, not of the disk.
-
-**Using the vertices instead of edge vectors**
-
-The two columns of the $2 \\times 2$ matrix are filled with two of the vertices themselves instead of the edge vectors from vertex $1$. This measures a different triangle, the one with a corner at the origin.
-
-Wrong working: for the vertices $(1, 2)$, $(4, 6)$, $(3, 1)$, taking $(4, 6)$ and $(3, 1)$ as columns,
-$$\\frac{1}{2}\\left|\\det\\begin{pmatrix} 4 & 3 \\\\ 6 & 1 \\end{pmatrix}\\right| = \\frac{1}{2}|4 - 18| = 7$$
-
-Right working: the edge vectors are $(4 - 1, 6 - 2) = (3, 4)$ and $(3 - 1, 1 - 2) = (2, -1)$, and
-$$\\frac{1}{2}\\left|\\det\\begin{pmatrix} 3 & 2 \\\\ 4 & -1 \\end{pmatrix}\\right| = \\frac{1}{2}|-3 - 8| = \\frac{11}{2}$$
-
-Why it happens: the parallelogram formula takes vectors that start at the origin, and vertex coordinates look like such vectors. The shortcut is right only when one of the vertices is the origin.
-
-How to check: shift all three vertices by the same amount; the area must not change. Moving $(1, 2)$ to the origin gives the vertices $(0, 0)$, $(3, 4)$, $(2, -1)$, and the shortcut now gives $\\frac{11}{2}$ instead of $7$, so it cannot have been measuring the original triangle.`,
+    content: `Four mistakes come up again and again when the determinant is used to measure areas and volumes. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip misreads what a determinant measures. Scaling every coordinate by $k$ in $n$ dimensions multiplies volume by $k^n$, a determinant of $1$ preserves area but does not make a rotation, a change of variables needs the factor $|\\det(J)|$, and an area uses edge vectors, not vertices. Picturing the unit square, checking the lengths of the columns, or integrating $1$ over a known region catches each slip.`,
     link: ``,
   },
 }
@@ -1706,8 +1650,50 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'pulling-the-scaling-factor-out-once', name: `Pulling the scaling factor out once`, errorAt: 0,
+        what: `A map that multiplies every coordinate by the same number $k$ has the matrix $kI$, and scaling a map $A$ in the same way gives $kA$. The factor $k$ is taken out of the determinant once, so the volume factor is taken to be $k\\det(A)$.`,
+        wrong: [`For the map $\\mathbf{x} \\mapsto 2\\mathbf{x}$ on $\\mathbb{R}^3$, $\\det(2I) = 2\\det(I) = 2$, so the unit cube is expected to go to a solid of volume $2$.`],
+        right: [`Every one of the three rows of $2I$ carries the factor $2$.`, `$$\\det(2I) = \\det\\begin{pmatrix} 2 & 0 & 0 \\\\ 0 & 2 & 0 \\\\ 0 & 0 & 2 \\end{pmatrix}$$
+$$= 2 \\cdot 2 \\cdot 2$$
+$$= 8$$`, `The unit cube goes to the cube with side $2$, whose volume is $8$. For an $n \\times n$ matrix, $\\det(kA) = k^n \\det(A)$.`],
+        why: `The determinant is linear in each row separately, so a factor in one row comes out once. Multiplying the whole matrix by $k$ puts the factor in all $n$ rows. For a single number, the case $n = 1$, scaling by $k$ really does scale by $k$, and that habit is carried over.`,
+        check: `Picture the unit square or cube. Doubling every side of a square gives area $4$, and doubling every side of a cube gives volume $8$, never $2$.` },
+      { id: 'reading-a-determinant-of-1-as-a-rotation', name: `Reading a determinant of 1 as a rotation`, errorAt: 1,
+        what: `Rotations have determinant $+1$ and reflections $-1$, and the statement is read backwards: a matrix with determinant $1$ is taken to be a rotation, one with $-1$ a reflection. The determinant records only how volumes scale and whether orientation is kept. Lengths and angles can still change.`,
+        wrong: [`For $S = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, $\\det(S) = 1 \\cdot 1 - 1 \\cdot 0 = 1$,`, `So $S$ is called a rotation.`],
+        right: [`For $S = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$, $\\det(S) = 1 \\cdot 1 - 1 \\cdot 0 = 1$,`, `$S$ sends $(1, 0)$ to $(1, 0)$ and $(0, 1)$ to $(1, 1)$. The second image has length $\\sqrt{2}$, and the two images meet at $45^\\circ$ instead of $90^\\circ$. $S$ is a shear: it keeps area and orientation but changes the shape of the square. A rotation also needs $S^T S = I$, and here
+$$S^T S = \\begin{pmatrix} 1 & 1 \\\\ 1 & 2 \\end{pmatrix} \\neq I$$`],
+        why: `The standard examples are always given in one direction, from the map to its determinant, and "rotations have determinant $1$" is remembered as "determinant $1$ means rotation".`,
+        check: `Look at the columns. For a rotation or a reflection both columns have length $1$ and are perpendicular. The second column of $S$ is $(1, 1)$, of length $\\sqrt{2}$.` },
+      { id: 'dropping-the-jacobian-factor', name: `Dropping the Jacobian factor`, errorAt: 0,
+        what: `When an integral is moved to new coordinates, the differentials are replaced, for example $dx\\,dy$ by $dr\\,d\\theta$, but the factor $|\\det(J_T)|$ that measures how the map stretches area is left out.`,
+        wrong: [`The area of the unit disk in polar coordinates,
+$$\\int_0^{2\\pi}\\!\\int_0^1 dr\\,d\\theta = 2\\pi$$`],
+        right: [`For $T(r, \\theta) = (r\\cos\\theta, r\\sin\\theta)$,
+$$\\det(J_T) = \\det\\begin{pmatrix} \\cos\\theta & -r\\sin\\theta \\\\ \\sin\\theta & r\\cos\\theta \\end{pmatrix}$$
+$$= r\\cos^2\\theta + r\\sin^2\\theta$$
+$$= r$$`, `So the area is
+$$\\int_0^{2\\pi}\\!\\int_0^1 r\\,dr\\,d\\theta = \\int_0^{2\\pi} \\frac{1}{2}\\,d\\theta = \\pi$$`],
+        why: `In the new variables the region is a plain rectangle, $0 \\le r \\le 1$ and $0 \\le \\theta \\le 2\\pi$, and the integral looks complete without the factor. The stretching done by the map cannot be seen in the new coordinates.`,
+        check: `Integrate $1$ over a region whose area is known. The unit disk must give $\\pi$; the wrong answer $2\\pi$ is the area of the rectangle in the $(r, \\theta)$ plane, not of the disk.` },
+      { id: 'using-the-vertices-instead-of-edge-vectors', name: `Using the vertices instead of edge vectors`, errorAt: 0,
+        what: `The two columns of the $2 \\times 2$ matrix are filled with two of the vertices themselves instead of the edge vectors from vertex $1$. This measures a different triangle, the one with a corner at the origin.`,
+        wrong: [`For the vertices $(1, 2)$, $(4, 6)$, $(3, 1)$, taking $(4, 6)$ and $(3, 1)$ as columns,
+$$\\frac{1}{2}\\left|\\det\\begin{pmatrix} 4 & 3 \\\\ 6 & 1 \\end{pmatrix}\\right| = \\frac{1}{2}|4 - 18| = 7$$`],
+        right: [`The edge vectors are $(4 - 1, 6 - 2) = (3, 4)$ and $(3 - 1, 1 - 2) = (2, -1)$, and
+$$\\frac{1}{2}\\left|\\det\\begin{pmatrix} 3 & 2 \\\\ 4 & -1 \\end{pmatrix}\\right| = \\frac{1}{2}|-3 - 8| = \\frac{11}{2}$$`],
+        why: `The parallelogram formula takes vectors that start at the origin, and vertex coordinates look like such vectors. The shortcut is right only when one of the vertices is the origin.`,
+        check: `Shift all three vertices by the same amount; the area must not change. Moving $(1, 2)$ to the origin gives the vertices $(0, 0)$, $(3, 4)$, $(2, -1)$, and the shortcut now gives $\\frac{11}{2}$ instead of $7$, so it cannot have been measuring the original triangle.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     signedAreaCases,
     detSignCases,
     detScaleCases,
@@ -1733,7 +1719,7 @@ const schemas = {
 
  const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeterminantGeometryPage({signedAreaCases, detSignCases, detScaleCases, 
+export default function DeterminantGeometryPage({ pitfallData,signedAreaCases, detSignCases, detScaleCases, 
    seoData,
    sectionsContent,
    introContent,
@@ -1960,6 +1946,15 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="determinant-geometry-pitfalls"
+            title="Common pitfalls with the geometry of determinants"
+            source="/linear-algebra/determinants/geometry"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

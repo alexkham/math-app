@@ -1960,6 +1960,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import crossProductDiagrams from '@/app/components/linear-algebra copy/matrix/crossProductDiagrams'
@@ -1967,6 +1968,7 @@ import renderVectorArrowsV5 from '@/app/utils/illustrations/linear-algebra/vecto
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2416,7 +2418,7 @@ $$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} &
 
 @academic[pitfall,aside:true,width:35%:Dropping the minus on the middle component
 Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) = (-3, -6, -3)$. The cofactor signs are $+, -, +$, so the $\\mathbf{j}$ term is $-(1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} = 6\\mathbf{j}$, and the result is $(-3, 6, -3)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-minus-on-the-middle-component)]@
 
 Placing vectors rather than numbers in the top row makes this a notational device rather than a genuine determinant. Still, applying cofactor expansion along that top row reproduces the component formula term by term. The determinant layout keeps the six constituent products and their signs organized in a form that is easy to remember and hard to scramble.
 
@@ -2557,7 +2559,7 @@ $$\\mathbf{a} \\times (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\times \\mathbf
 
 @academic[pitfall,aside:true,width:35%:Expanding as if the order did not matter
 Multiplying out $(\\mathbf{i} + \\mathbf{j}) \\times (\\mathbf{i} - \\mathbf{j})$ like $(x + y)(x - y) = x^2 - y^2$ cancels the middle terms and gives $\\mathbf{0}$. But $-\\mathbf{i} \\times \\mathbf{j} = -\\mathbf{k}$ and $\\mathbf{j} \\times \\mathbf{i} = -\\mathbf{k}$ add up, so the result is $-2\\mathbf{k}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expanding-as-if-the-order-did-not-matter)]@
 
 The cross product spreads across sums on either side. Because of anti-commutativity, distributing from the right introduces a sign change relative to distributing from the left.
 
@@ -2618,7 +2620,7 @@ $$\\mathbf{a} \\times \\mathbf{b} = \\mathbf{0} \\iff \\mathbf{a} \\parallel \\m
 
 @academic[pitfall,aside:true,width:35%:Reading a zero cross product as perpendicular
 Taking $\\mathbf{a} \\times \\mathbf{b} = \\mathbf{0}$ to mean a right angle mixes up the two tests. $(1, 2, 3) \\times (2, 4, 6) = \\mathbf{0}$ because $(2, 4, 6) = 2(1, 2, 3)$: the vectors are parallel, and their dot product is $28$, not $0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-zero-cross-product-as-perpendicular)]@
 
 Parallel vectors sit along the same line, so the angle between them is $0$ or $\\pi$. In either case $\\sin\\theta$ vanishes, collapsing the magnitude $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ to zero. A zero magnitude forces the cross product itself to be $\\mathbf{0}$. The zero vector is parallel to every vector by convention, so the test absorbs the edge cases naturally.
 
@@ -2699,55 +2701,20 @@ Taken together, the two products partition the angular information between a pai
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the cross product formulas that the uses in the section before do not list, in four families. Each family opens with a line linking to its section, and each formula carries a sentence on what it says. The buttons above the cards show one family at a time.
+
+The first family computes the product in components and as a determinant, and the second gives the products of the standard basis vectors. The third holds the algebra rules: swapping flips the sign, a vector crossed with itself vanishes, sums and scalars split out, regrouping fails, and the Lagrange identity. The last covers the scalar triple product and a pyramid volume.`,
+    before: ``,
+    after: `The cross product breaks two habits from ordinary multiplication: the order of the factors matters and so does the grouping. Checking that the result is perpendicular to both inputs, with two dot products, catches most slips in the components.`,
+    link: '',
+  },
   obj10: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for many wrong cross products. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the minus on the middle component**
-
-The symbolic determinant is expanded along its top row, but all three cofactors are taken with a plus sign. The $\\mathbf{j}$ component comes out with the wrong sign.
-
-Wrong working, for $\\mathbf{a} = (1, 2, 3)$ and $\\mathbf{b} = (4, 5, 6)$:
-$$\\mathbf{a} \\times \\mathbf{b} = (2 \\cdot 6 - 3 \\cdot 5)\\,\\mathbf{i} + (1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} + (1 \\cdot 5 - 2 \\cdot 4)\\,\\mathbf{k} = (-3, -6, -3)$$
-
-Right working: the cofactor signs along the top row are $+, -, +$.
-$$\\mathbf{a} \\times \\mathbf{b} = (2 \\cdot 6 - 3 \\cdot 5)\\,\\mathbf{i} - (1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} + (1 \\cdot 5 - 2 \\cdot 4)\\,\\mathbf{k} = (-3, 6, -3)$$
-This matches the component formula, whose middle entry is $a_3b_1 - a_1b_3 = 3 \\cdot 4 - 1 \\cdot 6 = 6$.
-
-Why it happens: the minus sign on the middle term is not visible in the determinant itself; it comes from the checkerboard of cofactor signs, which is easy to forget when the expansion is done quickly.
-
-How to check: the result must be perpendicular to both inputs. $(-3, -6, -3) \\cdot (1, 2, 3) = -24$, so the wrong answer fails. $(-3, 6, -3) \\cdot (1, 2, 3) = 0$ and $(-3, 6, -3) \\cdot (4, 5, 6) = 0$.
-
-**Expanding as if the order did not matter**
-
-A product of two sums is multiplied out with distributivity, and the terms are then collected as in ordinary algebra, where $xy$ and $yx$ are the same.
-
-Wrong working:
-$$(\\mathbf{a} + \\mathbf{b}) \\times (\\mathbf{a} - \\mathbf{b}) = \\mathbf{a} \\times \\mathbf{a} - \\mathbf{b} \\times \\mathbf{b} = \\mathbf{0}$$
-The middle terms $-\\mathbf{a} \\times \\mathbf{b}$ and $\\mathbf{b} \\times \\mathbf{a}$ are taken to cancel.
-
-Right working: keep all four terms in order and use $\\mathbf{b} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{b})$.
-$$(\\mathbf{a} + \\mathbf{b}) \\times (\\mathbf{a} - \\mathbf{b}) = \\mathbf{a} \\times \\mathbf{a} - \\mathbf{a} \\times \\mathbf{b} + \\mathbf{b} \\times \\mathbf{a} - \\mathbf{b} \\times \\mathbf{b} = -2(\\mathbf{a} \\times \\mathbf{b})$$
-With $\\mathbf{a} = \\mathbf{i}$ and $\\mathbf{b} = \\mathbf{j}$, the result is $-2\\mathbf{k}$, not $\\mathbf{0}$.
-
-Why it happens: the pattern $(x + y)(x - y) = x^2 - y^2$ is so familiar that the middle terms are cancelled without being written down. That cancellation needs $xy = yx$, which the cross product does not have.
-
-How to check: compute one case in components. $(1, 1, 0) \\times (1, -1, 0) = (0, 0, -2)$, which is $-2\\mathbf{k}$.
-
-**Reading a zero cross product as perpendicular**
-
-The two zero tests are swapped: a zero cross product is read as a right angle, the meaning that belongs to a zero dot product.
-
-Wrong working:
-$$(1, 2, 3) \\times (2, 4, 6) = \\mathbf{0} \\implies (1, 2, 3) \\perp (2, 4, 6)$$
-
-Right working: a zero cross product means the vectors are parallel. Here $(2, 4, 6) = 2(1, 2, 3)$, so the angle between them is $0$. The test for a right angle is the dot product, and $(1, 2, 3) \\cdot (2, 4, 6) = 2 + 8 + 18 = 28 \\neq 0$.
-
-Why it happens: both tests end in "equals zero", and the dot product test for perpendicular vectors is usually learned first, so a zero result gets the familiar reading.
-
-How to check: go back to the magnitude formula. $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ is zero only when $\\sin\\theta = 0$, at $\\theta = 0$ or $\\theta = \\pi$. Perpendicular vectors give the longest cross product their lengths allow, as in $\\mathbf{i} \\times \\mathbf{j} = \\mathbf{k}$.`,
+    content: `Three mistakes account for many wrong cross products. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip forgets a property of the cross product. The middle component carries a minus sign, the order of the factors matters, since $\\mathbf{b} \\times \\mathbf{a} = -\\mathbf{a} \\times \\mathbf{b}$, and a zero cross product means parallel vectors, not perpendicular ones. Checking that the result is perpendicular to both inputs, or going back to $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$, catches each slip.`,
     link: '',
   },
 };
@@ -2918,8 +2885,74 @@ const schemas = {
 
 
 
+  // MistakeFix batch 24, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-minus-on-the-middle-component', name: `Dropping the minus on the middle component`, errorAt: 1,
+        what: `The symbolic determinant is expanded along its top row, but all three cofactors are taken with a plus sign. The $\\mathbf{j}$ component comes out with the wrong sign.`,
+        wrong: [`For $\\mathbf{a} = (1, 2, 3)$ and $\\mathbf{b} = (4, 5, 6)$:`, `$$\\mathbf{a} \\times \\mathbf{b}$$
+$$= (2 \\cdot 6 - 3 \\cdot 5)\\,\\mathbf{i}$$
+$$+ (1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j}$$
+$$+ (1 \\cdot 5 - 2 \\cdot 4)\\,\\mathbf{k}$$
+$$= (-3, -6, -3)$$`],
+        right: [`For $\\mathbf{a} = (1, 2, 3)$ and $\\mathbf{b} = (4, 5, 6)$:`, `The cofactor signs along the top row are $+, -, +$.`, `$$\\mathbf{a} \\times \\mathbf{b}$$
+$$= (2 \\cdot 6 - 3 \\cdot 5)\\,\\mathbf{i}$$
+$$- (1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j}$$
+$$+ (1 \\cdot 5 - 2 \\cdot 4)\\,\\mathbf{k}$$
+$$= (-3, 6, -3)$$`, `This matches the component formula, whose middle entry is $a_3b_1 - a_1b_3 = 3 \\cdot 4 - 1 \\cdot 6 = 6$.`],
+        why: `The minus sign on the middle term is not visible in the determinant itself; it comes from the checkerboard of cofactor signs, which is easy to forget when the expansion is done quickly.`,
+        check: `The result must be perpendicular to both inputs. $(-3, -6, -3) \\cdot (1, 2, 3) = -24$, so the wrong answer fails. $(-3, 6, -3) \\cdot (1, 2, 3) = 0$ and $(-3, 6, -3) \\cdot (4, 5, 6) = 0$.` },
+      { id: 'expanding-as-if-the-order-did-not-matter', name: `Expanding as if the order did not matter`, errorAt: 0,
+        what: `A product of two sums is multiplied out with distributivity, and the terms are then collected as in ordinary algebra, where $xy$ and $yx$ are the same.`,
+        wrong: [`$$(\\mathbf{a} + \\mathbf{b}) \\times (\\mathbf{a} - \\mathbf{b})$$
+$$= \\mathbf{a} \\times \\mathbf{a} - \\mathbf{b} \\times \\mathbf{b} = \\mathbf{0}$$`, `The middle terms $-\\mathbf{a} \\times \\mathbf{b}$ and $\\mathbf{b} \\times \\mathbf{a}$ are taken to cancel.`],
+        right: [`Keep all four terms in order and use $\\mathbf{b} \\times \\mathbf{a} = -(\\mathbf{a} \\times \\mathbf{b})$.`, `$$(\\mathbf{a} + \\mathbf{b}) \\times (\\mathbf{a} - \\mathbf{b})$$
+$$= \\mathbf{a} \\times \\mathbf{a} - \\mathbf{a} \\times \\mathbf{b} + \\mathbf{b} \\times \\mathbf{a}$$
+$$- \\mathbf{b} \\times \\mathbf{b}$$
+$$= -2(\\mathbf{a} \\times \\mathbf{b})$$`, `With $\\mathbf{a} = \\mathbf{i}$ and $\\mathbf{b} = \\mathbf{j}$, the result is $-2\\mathbf{k}$, not $\\mathbf{0}$.`],
+        why: `The pattern $(x + y)(x - y) = x^2 - y^2$ is so familiar that the middle terms are cancelled without being written down. That cancellation needs $xy = yx$, which the cross product does not have.`,
+        check: `Compute one case in components. $(1, 1, 0) \\times (1, -1, 0) = (0, 0, -2)$, which is $-2\\mathbf{k}$.` },
+      { id: 'reading-a-zero-cross-product-as-perpendicular', name: `Reading a zero cross product as perpendicular`, errorAt: 1,
+        what: `The two zero tests are swapped: a zero cross product is read as a right angle, the meaning that belongs to a zero dot product.`,
+        wrong: [`$$(1, 2, 3) \\times (2, 4, 6) = \\mathbf{0}$$`, `$$\\implies (1, 2, 3) \\perp (2, 4, 6)$$`],
+        right: [`$$(1, 2, 3) \\times (2, 4, 6) = \\mathbf{0}$$`, `A zero cross product means the vectors are parallel. Here $(2, 4, 6) = 2(1, 2, 3)$, so the angle between them is $0$. The test for a right angle is the dot product, and $(1, 2, 3) \\cdot (2, 4, 6) = 2 + 8 + 18 = 28 \\neq 0$.`],
+        why: `Both tests end in "equals zero", and the dot product test for perpendicular vectors is usually learned first, so a zero result gets the familiar reading.`,
+        check: `Go back to the magnitude formula. $\\|\\mathbf{a} \\times \\mathbf{b}\\| = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\sin\\theta$ is zero only when $\\sin\\theta = 0$, at $\\theta = 0$ or $\\theta = \\pi$. Perpendicular vectors give the longest cross product their lengths allow, as in $\\mathbf{i} \\times \\mathbf{j} = \\mathbf{k}$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'compute', name: 'Computing it', sub: 'Two ways to write the product of $\\mathbf{a}$ and $\\mathbf{b}$ in $\\mathbb{R}^3$, from [the algebraic definition](!#1).', pairs: [
+        [{ formula: '$\\mathbf{a} \\times \\mathbf{b} = (a_2 b_3 - a_3 b_2,\\ a_3 b_1 - a_1 b_3,\\ a_1 b_2 - a_2 b_1)$', text: 'The indices rotate cyclically, and the middle entry is $a_3b_1 - a_1b_3$, as [the algebraic definition](!#1) shows.' },
+         { formula: '$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\end{vmatrix}$', text: 'Expanding this symbolic determinant along its top row gives the component formula, as [the algebraic definition](!#1) explains.' }],
+      ] },
+      { id: 'basis', name: 'Standard basis vectors', sub: 'The nine basis pairings behind every cross product, from [standard basis cross products](!#2).', pairs: [
+        [{ formula: '$\\mathbf{i} \\times \\mathbf{j} = \\mathbf{k}, \\quad \\mathbf{j} \\times \\mathbf{k} = \\mathbf{i}, \\quad \\mathbf{k} \\times \\mathbf{i} = \\mathbf{j}$', text: 'Following the loop from i to j to k and back to i gives a positive basis vector, as [standard basis cross products](!#2) shows.' },
+         { formula: '$\\mathbf{j} \\times \\mathbf{i} = -\\mathbf{k}, \\quad \\mathbf{k} \\times \\mathbf{j} = -\\mathbf{i}, \\quad \\mathbf{i} \\times \\mathbf{k} = -\\mathbf{j}$', text: 'Going against the loop flips the sign, from [standard basis cross products](!#2).' }],
+      ] },
+      { id: 'rules', name: 'Algebra rules', sub: 'Some rules match the basic operations and some break from them, from [properties of the cross product](!#5).', pairs: [
+        [{ formula: '$\\mathbf{a} \\times \\mathbf{b} = -(\\mathbf{b} \\times \\mathbf{a})$', text: 'Swapping the two inputs reverses the output vector, as [properties of the cross product](!#5) shows.' },
+         { formula: '$\\mathbf{a} \\times \\mathbf{a} = \\mathbf{0}$', text: 'A vector crossed with itself gives the zero vector, which anti-commutativity forces; see [properties of the cross product](!#5).' }],
+        [{ formula: '$\\mathbf{a} \\times (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\times \\mathbf{b} + \\mathbf{a} \\times \\mathbf{c}$', text: 'The product spreads across sums on either side, as the rules in [properties of the cross product](!#5) state.' },
+         { formula: '$(c\\mathbf{a}) \\times \\mathbf{b} = c(\\mathbf{a} \\times \\mathbf{b}) = \\mathbf{a} \\times (c\\mathbf{b})$', text: 'A scalar moves freely between the inputs and the output, from [properties of the cross product](!#5).' }],
+        [{ formula: '$\\mathbf{a} \\times (\\mathbf{b} \\times \\mathbf{c}) \\neq (\\mathbf{a} \\times \\mathbf{b}) \\times \\mathbf{c}$', text: 'In general regrouping gives a different vector, unlike with addition, as [properties of the cross product](!#5) warns.' },
+         { formula: '$(\\mathbf{a} \\times \\mathbf{b}) \\cdot (\\mathbf{c} \\times \\mathbf{d}) = (\\mathbf{a} \\cdot \\mathbf{c})(\\mathbf{b} \\cdot \\mathbf{d}) - (\\mathbf{a} \\cdot \\mathbf{d})(\\mathbf{b} \\cdot \\mathbf{c})$', text: 'The Lagrange identity writes the dot product of two cross products through dot products, from [properties of the cross product](!#5).' }],
+      ] },
+      { id: 'triple', name: 'Scalar triple product', sub: 'Three vectors combined into one number, from [the scalar triple product](!#7).', pairs: [
+        [{ formula: '$\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c}) = \\begin{vmatrix} a_1 & a_2 & a_3 \\\\ b_1 & b_2 & b_3 \\\\ c_1 & c_2 & c_3 \\end{vmatrix}$', text: 'The nine components arranged in a determinant; a zero value means the three vectors lie in one plane, as [the scalar triple product](!#7) shows.' },
+         { formula: '$\\displaystyle V = \\tfrac{1}{6}|\\mathbf{a} \\cdot (\\mathbf{b} \\times \\mathbf{c})|$', text: 'The tetrahedron with edges $\\mathbf{a}, \\mathbf{b}, \\mathbf{c}$ fills one sixth of the parallelepiped, from [the scalar triple product](!#7).' }],
+      ] },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2940,7 +2973,7 @@ const schemas = {
   }
 }
    }
-export default function CrossProductPage({
+export default function CrossProductPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -3004,7 +3037,7 @@ $$\\mathbf{a} \\times \\mathbf{b} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} &
           ciTable('compTable'),
           `@academic[pitfall,aside:true,width:35%:Dropping the minus on the middle component
 Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) = (-3, -6, -3)$. The cofactor signs are $+, -, +$, so the $\\mathbf{j}$ term is $-(1 \\cdot 6 - 3 \\cdot 4)\\,\\mathbf{j} = 6\\mathbf{j}$, and the result is $(-3, 6, -3)$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-dropping-the-minus-on-the-middle-component)]@`,
         ],
       },
       {
@@ -3153,11 +3186,38 @@ Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) 
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="cross-product-formula-summary"
+            title="Cross product formulas"
+            source="/linear-algebra/vectors/cross-product"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="cross-product-pitfalls"
+            title="Common pitfalls with the cross product"
+            source="/linear-algebra/vectors/cross-product"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

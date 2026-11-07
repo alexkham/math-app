@@ -939,6 +939,7 @@ import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/Taxon
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1303,7 +1304,7 @@ obj3: {
 For $f(x) = x^2 - 4x + 3$, build a table of values:`,
   contentAfter: `@academic[pitfall,aside:true,width:35%:Joining points with straight segments
 Joining $(1, 0)$, $(2, -1)$ and $(3, 0)$ with a ruler draws a sharp corner at the vertex and puts the graph above $x = 1.5$ at height $-0.5$. The curve is smooth and lower there: $f(1.5) = 2.25 - 6 + 3 = -0.75$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-joining-points-with-straight-segments)]@
 
 Plot these five points and connect them with a smooth parabola. The curve passes through $(1, 0)$ and $(3, 0)$, reaches a minimum at $(2, -1)$, and opens upward.
 
@@ -1372,7 +1373,7 @@ To find all $x$ such that $f(x) = b$ for a specific output $b$: locate $b$ on th
 
 @academic[pitfall,aside:true,width:35%:Stopping at the first intersection
 Solving $f(x) = 5$ for $f(x) = x^2 - 4$ by reading only the crossing on the right gives $x = 3$ alone. The line $y = 5$ meets the parabola twice: $x = -3$ and $x = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-at-the-first-intersection)]@
 
 The first question has at most one answer — a function produces exactly one output per input. The second question may have zero, one, or many answers — multiple inputs can share the same output.
 
@@ -1400,7 +1401,7 @@ A function can have zero, one, or many $x$-intercepts. The parabola $f(x) = x^2 
 
 @academic[pitfall,aside:true,width:35%:Setting the wrong variable to zero
 Finding the $x$-intercept of $f(x) = 2x - 6$ by putting $x = 0$ gives $-6$, which belongs to the $y$-intercept $(0, -6)$. For the $x$-intercept the output is set to zero: $2x - 6 = 0$, so the point is $(3, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-setting-the-wrong-variable-to-zero)]@
 
 The $x$-intercepts are the zeros of the function, and finding them is equivalent to solving the equation $f(x) = 0$. This connection makes intercepts central to both graphing and equation-solving. The table below sets the two intercept types side by side with their algebraic methods, graphical meaning, and count.`,
     before: ``,
@@ -1418,7 +1419,7 @@ The absolute maximum is the highest point on the entire graph; the absolute mini
 
 @academic[pitfall,aside:true,width:35%:Giving the location as the maximum
 For $f(x) = -x^2 + 2x + 3$, whose peak is at $(1, 4)$, answering "the maximum is $1$" reports where the peak is, not how high it is. The maximum value is $f(1) = 4$, reached at $x = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-giving-the-location-as-the-maximum)]@
 
 Every turning point is a pair $(x, y)$, and its two coordinates carry different information: the input where the function turns, and the output it reaches there. Questions about extrema can ask for either one — where a maximum occurs, or what the maximum value is. On a graph, the first is read along the horizontal axis and the second along the vertical axis.
 
@@ -1489,7 +1490,7 @@ The [range](!/functions/range) appears as vertical extent. How high does the gra
 
 @academic[pitfall,aside:true,width:35%:Reading the range off the horizontal axis
 The parabola $f(x) = x^2 - 4$ spreads over every $x$, so its range is given as all real numbers. That is the domain; read vertically, the lowest point is $(0, -4)$ and the range is $[-4, \\infty)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-range-off-the-horizontal-axis)]@
 
 Domain and range are read from the same picture, each against its own axis. A graph can run without end in one direction while staying bounded in the other, so the two answers often look nothing alike. Each one needs its own look at the curve: the horizontal spread for the domain, the vertical spread for the range.
 
@@ -1513,69 +1514,9 @@ Graphs translate between the algebraic and the visual. The equation $f(x) = x^2 
 
   obj12: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when drawing and reading graphs of functions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Joining points with straight segments**
-
-After a table of values is plotted, the points are joined with straight segments, as if the function were linear between them. For a curved graph this draws corners that are not there and gives wrong values between the plotted inputs.
-
-Wrong working: for $f(x) = x^2 - 4x + 3$, the points $(1, 0)$ and $(2, -1)$ are joined by a segment, so the graph above $x = 1.5$ is read at the midpoint height $-0.5$, and the bottom of the sketch is a sharp V at $(2, -1)$.
-
-Right working: the graph is a parabola, so it bends between the points. At $x = 1.5$, $f(1.5) = 1.5^2 - 4(1.5) + 3 = 2.25 - 6 + 3 = -0.75$, below the segment, and the curve is rounded at the vertex $(2, -1)$.
-
-Why it happens: a ruler gives a neat sketch, and five points look like enough to fix the shape. The points fix only positions; the shape between them comes from knowing the function family.
-
-How to check: evaluate the function halfway between two plotted inputs. If the value differs from the height of the segment there, the graph curves.
-
-**Stopping at the first intersection**
-
-To solve $f(x) = b$ from a graph, the horizontal line $y = b$ is drawn, the first crossing is read, and the search stops. Every other crossing is a solution too, and it is lost.
-
-Wrong working: for $f(x) = x^2 - 4$ and $b = 5$, the line $y = 5$ is followed to the right branch of the parabola, giving $x = 3$ as the only answer.
-
-Right working: the line $y = 5$ meets both branches, at $x = -3$ and $x = 3$. Both check: $(-3)^2 - 4 = 5$ and $3^2 - 4 = 5$.
-
-Why it happens: reading $f(a)$ from an input always gives one answer, and the same habit is carried over to the reverse question, which can have zero, one or many answers.
-
-How to check: follow the horizontal line across the whole graph, from the left edge to the right edge, and count the crossings before writing the answer.
-
-**Setting the wrong variable to zero**
-
-The two intercept rules are swapped: to find the $x$-intercept, the input $x$ is set to zero, and to find the $y$-intercept, the output is set to zero.
-
-Wrong working: for $f(x) = 2x - 6$, the $x$-intercept is found as $f(0) = -6$ and written as the point $(-6, 0)$.
-
-Right working: on the $x$-axis the output is zero, so solve $2x - 6 = 0$, giving $x = 3$ and the point $(3, 0)$. The $y$-intercept is $f(0) = -6$, the point $(0, -6)$.
-
-Why it happens: the name "$x$-intercept" mentions $x$, so $x$ feels like the variable to change. The name actually says which axis the point lies on, and on that axis the other coordinate is zero.
-
-How to check: substitute the point into the function. For $(3, 0)$, $f(3) = 0$, so it lies on the graph. For $(-6, 0)$, $f(-6) = -18$, not $0$, so it does not.
-
-**Giving the location as the maximum**
-
-Asked for the maximum value of a function, the $x$-coordinate of the peak is given instead of its height.
-
-Wrong working: $f(x) = -x^2 + 2x + 3$ peaks at $(1, 4)$, and the maximum is reported as $1$.
-
-Right working: the maximum value is the output at the peak, $f(1) = -1 + 2 + 3 = 4$, and it is reached at $x = 1$. A full answer names both: the maximum value $4$ occurs at $x = 1$.
-
-Why it happens: finding the peak usually starts by locating its $x$-coordinate, and the first number found is written down as the answer.
-
-How to check: a maximum value is an output, so it is read on the vertical axis. If the answer is a position on the horizontal axis, it answers "where", not "how high".
-
-**Reading the range off the horizontal axis**
-
-The range is read from how far the graph spreads left and right, which is the domain, instead of how far it reaches up and down.
-
-Wrong working: $f(x) = x^2 - 4$ is defined for every $x$, and its graph spreads across the whole horizontal axis, so the range is given as all real numbers.
-
-Right working: the range collects the $y$-values the graph reaches. The lowest point is $(0, -4)$ and the parabola rises without end from there, so the range is $[-4, \\infty)$. All real numbers is the domain.
-
-Why it happens: both answers come from the same picture, and in many first examples, such as lines with nonzero slope, domain and range are both all real numbers, so the difference never shows.
-
-How to check: pick a $y$-value outside the claimed range and draw the horizontal line there. For $y = -5$ the line misses the parabola, since $x^2 - 4 = -5$ has no real solution, so $-5$ is not in the range.`,
+    content: `Five mistakes come up again and again when drawing and reading graphs of functions. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip reads a graph from too little of it. Plotted points are joined by the curve of the function, not by straight segments; a horizontal line can meet a graph more than once; an $x$-intercept has output $0$; a maximum is an output read on the vertical axis; and the range is read along the vertical axis too. Evaluating at one more point, or substituting the claimed point into the function, catches each slip.`,
     link: '',
   },
 
@@ -1815,8 +1756,46 @@ const faqQuestions = {
     ],
   };
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'joining-points-with-straight-segments', name: `Joining points with straight segments`, errorAt: 1,
+        what: `After a table of values is plotted, the points are joined with straight segments, as if the function were linear between them. For a curved graph this draws corners that are not there and gives wrong values between the plotted inputs.`,
+        wrong: [`For $f(x) = x^2 - 4x + 3$,`, `The points $(1, 0)$ and $(2, -1)$ are joined by a segment, so the graph above $x = 1.5$ is read at the midpoint height $-0.5$, and the bottom of the sketch is a sharp V at $(2, -1)$.`],
+        right: [`For $f(x) = x^2 - 4x + 3$,`, `The graph is a parabola, so it bends between the points. At $x = 1.5$, $f(1.5) = 1.5^2 - 4(1.5) + 3 = 2.25 - 6 + 3 = -0.75$, below the segment, and the curve is rounded at the vertex $(2, -1)$.`],
+        why: `A ruler gives a neat sketch, and five points look like enough to fix the shape. The points fix only positions; the shape between them comes from knowing the function family.`,
+        check: `Evaluate the function halfway between two plotted inputs. If the value differs from the height of the segment there, the graph curves.` },
+      { id: 'stopping-at-the-first-intersection', name: `Stopping at the first intersection`, errorAt: 1,
+        what: `To solve $f(x) = b$ from a graph, the horizontal line $y = b$ is drawn, the first crossing is read, and the search stops. Every other crossing is a solution too, and it is lost.`,
+        wrong: [`For $f(x) = x^2 - 4$ and $b = 5$,`, `The line $y = 5$ is followed to the right branch of the parabola, giving $x = 3$ as the only answer.`],
+        right: [`For $f(x) = x^2 - 4$ and $b = 5$,`, `The line $y = 5$ meets both branches, at $x = -3$ and $x = 3$. Both check: $(-3)^2 - 4 = 5$ and $3^2 - 4 = 5$.`],
+        why: `Reading $f(a)$ from an input always gives one answer, and the same habit is carried over to the reverse question, which can have zero, one or many answers.`,
+        check: `Follow the horizontal line across the whole graph, from the left edge to the right edge, and count the crossings before writing the answer.` },
+      { id: 'setting-the-wrong-variable-to-zero', name: `Setting the wrong variable to zero`, errorAt: 1,
+        what: `The two intercept rules are swapped: to find the $x$-intercept, the input $x$ is set to zero, and to find the $y$-intercept, the output is set to zero.`,
+        wrong: [`For $f(x) = 2x - 6$,`, `The $x$-intercept is found as $f(0) = -6$ and written as the point $(-6, 0)$.`],
+        right: [`For $f(x) = 2x - 6$,`, `On the $x$-axis the output is zero, so solve $2x - 6 = 0$, giving $x = 3$ and the point $(3, 0)$. The $y$-intercept is $f(0) = -6$, the point $(0, -6)$.`],
+        why: `The name "$x$-intercept" mentions $x$, so $x$ feels like the variable to change. The name actually says which axis the point lies on, and on that axis the other coordinate is zero.`,
+        check: `Substitute the point into the function. For $(3, 0)$, $f(3) = 0$, so it lies on the graph. For $(-6, 0)$, $f(-6) = -18$, not $0$, so it does not.` },
+      { id: 'giving-the-location-as-the-maximum', name: `Giving the location as the maximum`, errorAt: 0,
+        what: `Asked for the maximum value of a function, the $x$-coordinate of the peak is given instead of its height.`,
+        wrong: [`$f(x) = -x^2 + 2x + 3$ peaks at $(1, 4)$, and the maximum is reported as $1$.`],
+        right: [`The maximum value is the output at the peak, $f(1) = -1 + 2 + 3 = 4$, and it is reached at $x = 1$. A full answer names both: the maximum value $4$ occurs at $x = 1$.`],
+        why: `Finding the peak usually starts by locating its $x$-coordinate, and the first number found is written down as the answer.`,
+        check: `A maximum value is an output, so it is read on the vertical axis. If the answer is a position on the horizontal axis, it answers "where", not "how high".` },
+      { id: 'reading-the-range-off-the-horizontal-axis', name: `Reading the range off the horizontal axis`, errorAt: 0,
+        what: `The range is read from how far the graph spreads left and right, which is the domain, instead of how far it reaches up and down.`,
+        wrong: [`$f(x) = x^2 - 4$ is defined for every $x$, and its graph spreads across the whole horizontal axis, so the range is given as all real numbers.`],
+        right: [`The range collects the $y$-values the graph reaches. The lowest point is $(0, -4)$ and the parabola rises without end from there, so the range is $[-4, \\infty)$. All real numbers is the domain.`],
+        why: `Both answers come from the same picture, and in many first examples, such as lines with nonzero slope, domain and range are both all real numbers, so the difference never shows.`,
+        check: `Pick a $y$-value outside the claimed range and draw the horizontal line there. For $y = -5$ the line misses the parabola, since $x^2 - 4 = -5$ has no real solution, so $-5$ is not in the range.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     quadraticSketchProfile,
     curveOutline,
     demoUnits,
@@ -1842,7 +1821,7 @@ const faqQuestions = {
     }
    }
 
-export default function GraphsPage({quadraticSketchProfile, curveOutline, 
+export default function GraphsPage({ pitfallData,quadraticSketchProfile, curveOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -2080,6 +2059,15 @@ Because a function assigns exactly one output to each input, the graph has a def
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="function-graph-pitfalls"
+            title="Common pitfalls with graphs of functions"
+            source="/functions/graphs"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

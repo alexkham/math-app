@@ -968,6 +968,7 @@ import varianceDiagrams from '@/app/components/probability/variance/varianceDiag
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
@@ -1968,8 +1969,10 @@ Together, these connections show that variance is not merely a standalone measur
 
     summary:{
       title:`Variance at a Glance`,
-      content:`
-The preceding sections covered variance through several lenses — its definition, its calculation across discrete and continuous settings, the algebraic rules that govern its behavior under scaling, shifting, and summation, and its relationship to standard deviation. The table below collects the most-used facts into a single reference card, with each row pairing a foundational property or formula with a brief note on its scope or use. Together with the distribution tables in the section above, this card is meant to serve as a quick lookup whenever the page&apos;s content is needed in practice.`,
+      content:`The preceding sections covered variance through several lenses: its definition, its calculation in discrete and continuous settings, the rules for scaling, shifting and summing, and its relation to the standard deviation. This summary collects the most-used facts in ten rows, each with a short note on where it comes from and a link to its section.
+
+The first rows give the definition, the shortcut form, the sign, the standard deviation and the squared units. The rules follow: scaling brings the constant out squared, shifting changes nothing, and sums add the variances for independent variables or carry a covariance term in general. The last row points to the distribution formulas above.`,
+      formulaSheetAfter: `Two rules cause most slips: a constant factor comes out squared, and variances add only for independent variables. Check both before simplifying, and take the square root at the end when the answer should be in the units of the variable.`,
       before:``,
       after:``,
     },
@@ -2181,8 +2184,41 @@ const continuousVarianceFormulasData = {
     footnote: 'Shifting moves the mean but not the spread; scaling by $a$ multiplies the spread by $a^2$.',
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'note', label: 'Note' },
+    ],
+    rows: [
+      { name: 'Definition', formula: '$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$', note: 'expected squared deviation from the mean',
+        sub: 'The average squared distance from $\\mu$, from [what is variance](!#definition).' },
+      { name: 'Shortcut form', formula: '$\\operatorname{Var}(X) = E[X^2] - \\mu^2$', note: 'algebraically equivalent; often easier to compute',
+        sub: 'The mean of the squares minus the square of the mean, as [how to calculate variance](!#calculate) shows.' },
+      { name: 'Sign', formula: '$\\operatorname{Var}(X) \\geq 0$', note: 'equals $0$ if and only if $X$ is constant',
+        sub: 'An average of squares is never negative, one of the [properties of variance](!#properties).' },
+      { name: 'Standard deviation', formula: '$\\sigma = \\sqrt{\\operatorname{Var}(X)}$', note: 'returns to the original units of $X$',
+        sub: 'The square root of the variance, compared with it in [variance vs standard deviation](!#sd).' },
+      { name: 'Units', formula: 'squared units of $X$', note: 'square meters if $X$ is in meters, square dollars if $X$ is in dollars',
+        sub: 'Squaring the deviations squares their units too, as [variance vs standard deviation](!#sd) explains.' },
+      { name: 'Scaling', formula: '$\\operatorname{Var}(aX) = a^2 \\operatorname{Var}(X)$', note: 'the constant factor comes out squared',
+        sub: 'Multiplying the variable stretches every deviation, from [properties of variance](!#properties).' },
+      { name: 'Shifting', formula: '$\\operatorname{Var}(X + b) = \\operatorname{Var}(X)$', note: 'adding a constant does not change spread',
+        sub: 'The values and the mean move together, so the deviations stay as they were ([properties of variance](!#properties)).' },
+      { name: 'Sum, independent', formula: '$\\operatorname{Var}(X + Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y)$', note: 'requires $X$, $Y$ independent',
+        sub: 'Variances add only for independent variables, as [variance of a sum](!#sum) shows.' },
+      { name: 'Sum, general', formula: '$\\operatorname{Var}(X + Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y) + 2\\operatorname{Cov}(X, Y)$', note: 'always valid; reduces to the independent case when $\\operatorname{Cov} = 0$',
+        sub: 'The covariance term carries the dependence, from [variance of a sum](!#sum).' },
+      { name: 'Standard distributions', formula: 'closed-form formulas', note: 'see the discrete and continuous distribution tables above',
+        sub: 'Each named distribution has its own variance formula, collected in [variance formulas for specific distributions](!#individualdist).' },
+    ],
+  };
+
   return {
     props: {
+    formulaSummaryData,
     varianceExpectationMoves,
     demoUnits,
     conceptIntroFigures,
@@ -2208,7 +2244,7 @@ const continuousVarianceFormulasData = {
   }
 }
 
-export default function VariancePage({varianceExpectationMoves, 
+export default function VariancePage({ formulaSummaryData,varianceExpectationMoves, 
   seoData,
   sectionsContent,
   introContent,
@@ -2499,8 +2535,16 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
         link:'',
         content:[
             sectionsContent.summary.content,
-            <div key={'summary-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+            <DiagramFrameV2
+              key={'formula-summary'}
+              id="variance-formula-summary"
+              title="Variance formulas"
+              source="/probability/variance"
+              related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+              after={sectionsContent.summary.formulaSheetAfter}
+            >
+              <FormulaSheet data={formulaSummaryData} variant="card" />
+            </DiagramFrameV2>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

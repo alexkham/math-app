@@ -1132,6 +1132,9 @@ import continuousCdfDiagrams from '@/app/components/visualizations/probability/c
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1417,7 +1420,7 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{
 
 @academic[pitfall,aside:true,width:35%:Using the CDF for a longer wait
 Using $F(x) = 1 - e^{-\\lambda x}$ for $P(X > x)$: with calls at $\\lambda = 5$ per hour it gives $P(X > 0.1) \\approx 0.393$, the chance of waiting at most 6 minutes. A wait longer than 6 minutes has probability $e^{-0.5} \\approx 0.607$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-cdf-for-a-longer-wait)]@
 
 **Practical Use:** The exponential CDF is one of the simplest to work with.
 @academic[example:Example
@@ -1483,7 +1486,7 @@ $$E[X] = \\frac{1}{3} \\text{ hours} = 20 \\text{ minutes}$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking the rate as the mean wait
 Using $E[X] = \\lambda$, as for a Poisson count, gives a mean wait of $3$ hours for $\\lambda = 3$ customers per hour. The wait is the reciprocal of the rate: $E[X] = \\frac{1}{3}$ hour $= 20$ minutes.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-rate-as-the-mean-wait)]@
 
 The expected time until the next customer arrives is 20 minutes. If the rate increases to $\\lambda = 6$ customers per hour, the expected wait drops to $\\frac{1}{6}$ hours, or 10 minutes.
 
@@ -1737,7 +1740,7 @@ The middle 50% of waiting times span about 22 minutes.]@
 
 @academic[pitfall,aside:true,width:35%:Using ln p instead of ln(1 − p)
 Computing $x_{0.25} = \\frac{-\\ln(0.25)}{3}$ for $\\lambda = 3$ gives $0.462$ hours $\\approx 27.7$ minutes, which is the 75th percentile. With $1 - p$: $x_{0.25} = \\frac{-\\ln(0.75)}{3} \\approx 0.096$ hours $\\approx 5.8$ minutes.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-ln-p-instead-of-ln-1-p)]@
 
 **90th percentile:** $x_{0.90} = \\frac{-\\ln(0.10)}{\\lambda} = \\frac{2.303}{\\lambda}$ (only 10% of waits exceed this)
 
@@ -1964,7 +1967,7 @@ $$P(X > s + t \\mid X > s) = P(X > t) \\text{ for all } s, t \\geq 0$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the condition
 With $\\lambda = 3$ per hour, or $0.05$ per minute, computing $P(X > 30 \\mid X > 20)$ as $P(X > 30) = e^{-1.5} \\approx 0.223$ ignores the 20 minutes already waited. Only the remaining 10 minutes count: $P(X > 10) = e^{-0.5} \\approx 0.607$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-condition)]@
 
 The exponential is the **only continuous distribution** with this property. Past waiting time provides no information about future waiting time. This makes it ideal for modeling random arrivals and failures without aging effects.
 
@@ -2086,73 +2089,19 @@ Of these, the Poisson and geometric links matter most in practice: the first say
     },
     capstone:{
       title:`Exponential Distribution at a Glance`,
-      content:`The table below collects the full anatomy of the exponential distribution into a single reference card — its rate parameter, support, PDF and CDF (both closed-form), the mean and variance, mode and median, the closed-form quantile function, the defining memoryless property with constant hazard rate, the connection to the Poisson process, and a canonical customer-arrivals example.`,
+      content:`This summary gathers the exponential distribution on one card of eleven rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the rate of events and the waiting times that can occur. Then come the density, the running total with its tail, the mean, the variance with the standard deviation, the mode and median, and the closed-form quantile. The last rows give the memoryless property with its constant hazard rate, the link to the Poisson process and the example of customers arriving at a steady rate.`,
+      formulaSheetAfter: `Most exponential questions are about the tail, the chance of waiting longer than some time, which is a single power of e. The mean is one over the rate, so check which of the two a problem gives before using either; mixing them up is the commonest slip.`,
       before:``,
       after:``,
       link:'',
     },
     obj18:{
       title:`Common Pitfalls`,
-      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Using the CDF for a longer wait**
-
-The question asks for the chance that the wait is longer than some time $x$, and the CDF $F(x) = 1 - e^{-\\lambda x}$ is used. The CDF gives the chance of waiting at most $x$, the opposite event.
-
-Wrong working: calls arrive at $\\lambda = 5$ per hour, and the chance of waiting more than 6 minutes ($0.1$ hours) is taken as
-$$P(X > 0.1) = 1 - e^{-5(0.1)} = 1 - e^{-0.5} \\approx 0.393$$
-
-Right working: the probability of a longer wait is the survival function.
-$$P(X > 0.1) = 1 - F(0.1) = e^{-0.5} \\approx 0.607$$
-
-Why it happens: both expressions contain $e^{-\\lambda x}$, and the CDF is the formula learned first, so the "$1 -$" is put in by habit.
-
-How to check: compare with the median. The median wait is $\\frac{\\ln 2}{5} \\approx 0.139$ hours, about 8.3 minutes, so a wait of more than 6 minutes must have probability above one half; $0.607$ fits, $0.393$ does not.
-
-**Taking the rate as the mean wait**
-
-The rate $\\lambda$ is used as the expected waiting time, as if the exponential had the Poisson mean $\\lambda$.
-
-Wrong working: customers arrive at $\\lambda = 3$ per hour,
-$$E[X] = \\lambda = 3 \\text{ hours}$$
-
-Right working: the mean wait is the reciprocal of the rate.
-$$E[X] = \\frac{1}{\\lambda} = \\frac{1}{3} \\text{ hour} = 20 \\text{ minutes}$$
-
-Why it happens: the same $\\lambda$ is the mean of the Poisson count of arrivals in one hour, here $3$ customers. The count and the wait come from the same process, and the count's mean is carried over to the wait.
-
-How to check: look at units and direction. $\\lambda$ is measured in customers per hour, while a wait is measured in hours. A higher rate must also give a shorter wait: $\\frac{1}{\\lambda}$ falls as $\\lambda$ grows, $\\lambda$ itself does not.
-
-**Using ln p instead of ln(1 − p)**
-
-The quantile formula $x_p = \\frac{-\\ln(1 - p)}{\\lambda}$ is written with $\\ln p$ in place of $\\ln(1 - p)$.
-
-Wrong working: for $\\lambda = 3$ per hour, the 25th percentile is taken as
-$$x_{0.25} = \\frac{-\\ln(0.25)}{3} = \\frac{1.386}{3} \\approx 0.462 \\text{ hours} \\approx 27.7 \\text{ minutes}$$
-
-Right working: the CDF equation leaves $1 - p$ on the right.
-$$x_{0.25} = \\frac{-\\ln(1 - 0.25)}{3} = \\frac{-\\ln(0.75)}{3} = \\frac{0.288}{3} \\approx 0.096 \\text{ hours} \\approx 5.8 \\text{ minutes}$$
-
-Why it happens: solving $1 - e^{-\\lambda x_p} = p$ gives $e^{-\\lambda x_p} = 1 - p$, and it is easy to set $e^{-\\lambda x_p}$ equal to $p$ instead. That solves $P(X > x_p) = p$, so every quantile is swapped with its mirror: the wrong 25th percentile is the true 75th.
-
-How to check: a 25th percentile must lie below the median, here 13.9 minutes, and 27.7 minutes lies above it. Substituting back confirms the right answer: $F(0.096) = 1 - e^{-0.288} \\approx 0.25$.
-
-**Dropping the condition**
-
-The chance of waiting more than $t$ longer, given that $s$ has already passed, is $P(X > s + t \\mid X > s)$. It is computed as the unconditional $P(X > s + t)$.
-
-Wrong working: customers arrive at $\\lambda = 3$ per hour, which is $0.05$ per minute. After 20 minutes without a customer, the chance of waiting more than 10 further minutes is taken as
-$$P(X > 30 \\mid X > 20) = P(X > 30) = e^{-0.05 \\cdot 30} = e^{-1.5} \\approx 0.223$$
-
-Right working: divide by the probability of the condition.
-$$P(X > 30 \\mid X > 20) = \\frac{P(X > 30)}{P(X > 20)} = \\frac{e^{-1.5}}{e^{-1}} = e^{-0.5} \\approx 0.607$$
-This equals $P(X > 10)$, as the memoryless property says.
-
-Why it happens: the event $X > 30$ already includes $X > 20$, so "both happen" shrinks to $X > 30$, and the division by $P(X > 20)$, the step that makes the probability conditional, is left out.
-
-How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so the conditional probability must exceed $P(X > 30) \\approx 0.223$. By the memoryless property it must also equal the chance that a fresh wait exceeds 10 minutes.`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip turns one quantity of the exponential distribution into another. A longer wait is the tail $e^{-\\lambda x}$, not the CDF; the mean wait is $\\frac{1}{\\lambda}$, not $\\lambda$; the quantile uses $\\ln(1 - p)$; and a conditional wait divides by $P(X > s)$, which by the memoryless property leaves $P(X > t)$. Comparing with the median, or checking the units, catches each slip.`,
       link:'',
     },
      links:{
@@ -2371,8 +2320,87 @@ How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so th
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj18 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-the-cdf-for-a-longer-wait', name: `Using the CDF for a longer wait`, errorAt: 0,
+        what: `The question asks for the chance that the wait is longer than some time $x$, and the CDF $F(x) = 1 - e^{-\\lambda x}$ is used. The CDF gives the chance of waiting at most $x$, the opposite event.`,
+        wrong: [`Calls arrive at $\\lambda = 5$ per hour, and the chance of waiting more than 6 minutes ($0.1$ hours) is taken as
+$$P(X > 0.1) = 1 - e^{-5(0.1)}$$
+$$= 1 - e^{-0.5} \\approx 0.393$$`],
+        right: [`The probability of a longer wait is the survival function.`, `$$P(X > 0.1) = 1 - F(0.1) = e^{-0.5}$$
+$$\\approx 0.607$$`],
+        why: `Both expressions contain $e^{-\\lambda x}$, and the CDF is the formula learned first, so the "$1 -$" is put in by habit.`,
+        check: `Compare with the median. The median wait is $\\frac{\\ln 2}{5} \\approx 0.139$ hours, about 8.3 minutes, so a wait of more than 6 minutes must have probability above one half; $0.607$ fits, $0.393$ does not.` },
+      { id: 'taking-the-rate-as-the-mean-wait', name: `Taking the rate as the mean wait`, errorAt: 0,
+        what: `The rate $\\lambda$ is used as the expected waiting time, as if the exponential had the Poisson mean $\\lambda$.`,
+        wrong: [`Customers arrive at $\\lambda = 3$ per hour,
+$$E[X] = \\lambda = 3 \\text{ hours}$$`],
+        right: [`The mean wait is the reciprocal of the rate.`, `$$E[X] = \\frac{1}{\\lambda} = \\frac{1}{3} \\text{ hour} = 20 \\text{ minutes}$$`],
+        why: `The same $\\lambda$ is the mean of the Poisson count of arrivals in one hour, here $3$ customers. The count and the wait come from the same process, and the count's mean is carried over to the wait.`,
+        check: `Look at units and direction. $\\lambda$ is measured in customers per hour, while a wait is measured in hours. A higher rate must also give a shorter wait: $\\frac{1}{\\lambda}$ falls as $\\lambda$ grows, $\\lambda$ itself does not.` },
+      { id: 'using-ln-p-instead-of-ln-1-p', name: `Using ln p instead of ln(1 − p)`, errorAt: 0,
+        what: `The quantile formula $x_p = \\frac{-\\ln(1 - p)}{\\lambda}$ is written with $\\ln p$ in place of $\\ln(1 - p)$.`,
+        wrong: [`For $\\lambda = 3$ per hour, the 25th percentile is taken as
+$$x_{0.25} = \\frac{-\\ln(0.25)}{3} = \\frac{1.386}{3}$$
+$$\\approx 0.462 \\text{ hours} \\approx 27.7 \\text{ minutes}$$`],
+        right: [`The CDF equation leaves $1 - p$ on the right.`, `$$x_{0.25} = \\frac{-\\ln(1 - 0.25)}{3}$$
+$$= \\frac{-\\ln(0.75)}{3} = \\frac{0.288}{3}$$
+$$\\approx 0.096 \\text{ hours} \\approx 5.8 \\text{ minutes}$$`],
+        why: `Solving $1 - e^{-\\lambda x_p} = p$ gives $e^{-\\lambda x_p} = 1 - p$, and it is easy to set $e^{-\\lambda x_p}$ equal to $p$ instead. That solves $P(X > x_p) = p$, so every quantile is swapped with its mirror: the wrong 25th percentile is the true 75th.`,
+        check: `A 25th percentile must lie below the median, here 13.9 minutes, and 27.7 minutes lies above it. Substituting back confirms the right answer: $F(0.096) = 1 - e^{-0.288} \\approx 0.25$.` },
+      { id: 'dropping-the-condition', name: `Dropping the condition`, errorAt: 1,
+        what: `The chance of waiting more than $t$ longer, given that $s$ has already passed, is $P(X > s + t \\mid X > s)$. It is computed as the unconditional $P(X > s + t)$.`,
+        wrong: [`Customers arrive at $\\lambda = 3$ per hour, which is $0.05$ per minute.`, `After 20 minutes without a customer, the chance of waiting more than 10 further minutes is taken as
+$$P(X > 30 \\mid X > 20) = P(X > 30)$$
+$$= e^{-0.05 \\cdot 30} = e^{-1.5} \\approx 0.223$$`],
+        right: [`Customers arrive at $\\lambda = 3$ per hour, which is $0.05$ per minute.`, `Divide by the probability of the condition.`, `$$P(X > 30 \\mid X > 20)$$
+$$= \\frac{P(X > 30)}{P(X > 20)}$$
+$$= \\frac{e^{-1.5}}{e^{-1}} = e^{-0.5} \\approx 0.607$$`, `This equals $P(X > 10)$, as the memoryless property says.`],
+        why: `The event $X > 30$ already includes $X > 20$, so "both happen" shrinks to $X > 30$, and the division by $P(X > 20)$, the step that makes the probability conditional, is left out.`,
+        check: `Dividing by $P(X > 20) < 1$ can only make the answer larger, so the conditional probability must exceed $P(X > 30) \\approx 0.223$. By the memoryless property it must also equal the chance that a fresh wait exceeds 10 minutes.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameter', formula: '$\\lambda > 0$, the rate (events per unit time)', note: 'scale form: $\\beta = 1/\\lambda$, the mean waiting time',
+        sub: 'The single number that fixes the distribution, as [the parameters section](!#3) explains.' },
+      { name: 'Support', formula: '$x \\in [0, \\infty)$', note: 'waiting times are non-negative',
+        sub: 'Any waiting time from zero upward, set out with [the PDF and its support](!#5).' },
+      { name: 'PDF', formula: '$f(x) = \\begin{cases} \\lambda e^{-\\lambda x} & \\text{if } x \\geq 0 \\\\ 0 & \\text{if } x < 0 \\end{cases}$', note: 'always decreasing; the density is largest at $x = 0$',
+        sub: 'The density of the waiting time, from [the PDF section](!#5).' },
+      { name: 'CDF', formula: '$F(x) = \\begin{cases} 0 & \\text{if } x < 0 \\\\ 1 - e^{-\\lambda x} & \\text{if } x \\geq 0 \\end{cases}$; survival $S(x) = P(X > x) = e^{-\\lambda x}$', note: 'closed form, so no tables are needed, unlike the normal',
+        sub: 'The probability of waiting at most $x$, and its tail, from [the CDF section](!#6).' },
+      { name: 'Expected value', formula: '$\\displaystyle E[X] = \\frac{1}{\\lambda}$', note: 'the reciprocal of the rate',
+        sub: 'The average waiting time, derived in [the expected value section](!#7).' },
+      { name: 'Variance', formula: '$\\displaystyle \\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$; $\\displaystyle \\sigma = \\frac{1}{\\lambda} = E[X]$', note: 'for every $\\lambda$, the standard deviation equals the mean',
+        sub: 'How widely waiting times spread, worked out in [variance and standard deviation](!#8).' },
+      { name: 'Mode and median', formula: '$\\text{Mode} = 0$; $\\displaystyle \\text{Median} = \\frac{\\ln(2)}{\\lambda} \\approx \\frac{0.693}{\\lambda}$', note: 'right-skewed: mode $<$ median $<$ mean',
+        sub: 'The most likely waiting time and the time by which half the waits are over, found in [mode and median](!#9).' },
+      { name: 'Quantile function', formula: '$\\displaystyle x_p = \\frac{-\\ln(1 - p)}{\\lambda}$', note: 'a closed-form inverse CDF, so sampling is straightforward',
+        sub: 'The waiting time below which a share $p$ of all waits fall, solved in [quantiles and percentiles](!#10).' },
+      { name: 'Memoryless property', formula: '$P(X > s + t \\mid X > s) = P(X > t)$; hazard rate $h(x) = \\lambda$, constant', note: 'the only continuous distribution with this property; no aging',
+        sub: 'Time already spent waiting does not shorten the wait ahead, as [the properties section](!#15) proves.' },
+      { name: 'Poisson connection', formula: 'events at rate $\\lambda$ have inter-arrival times $\\sim \\operatorname{Exp}(\\lambda)$', note: 'the continuous-time analog of the geometric distribution',
+        sub: 'The gaps between Poisson events are exponential, as [related distributions](!#16) shows.' },
+      { name: 'Canonical example', formula: 'customer arrivals at $\\lambda = 3$ per hour', note: '$E[X] = 20$ min, median $\\approx 13.9$ min, $\\sigma = 20$ min',
+        sub: 'The arrivals setting the page works through, starting in [the expected value section](!#7).' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -2392,7 +2420,7 @@ How to check: dividing by $P(X > 20) < 1$ can only make the answer larger, so th
     }
    }
 
-export default function ExponentialDistributionPage({
+export default function ExponentialDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2634,8 +2662,16 @@ export default function ExponentialDistributionPage({
         link:sectionsContent.capstone.link,
         content:[
           sectionsContent.capstone.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="exponential-distribution-formula-summary"
+            title="Exponential distribution at a glance"
+            source="/probability/distributions/continuous/exponential"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.capstone.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2644,6 +2680,15 @@ export default function ExponentialDistributionPage({
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
+          <DiagramFrame
+            key={'obj18-mistakes'}
+            id="exponential-distribution-pitfalls"
+            title="Common pitfalls with the exponential distribution"
+            source="/probability/distributions/continuous/exponential"
+            after={sectionsContent.obj18.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

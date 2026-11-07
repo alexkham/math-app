@@ -988,6 +988,7 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1387,7 +1388,7 @@ Combined range: $\\{2\\} \\cup [1, \\infty) = [1, \\infty)$ (since $2$ is alread
 
 @academic[pitfall,aside:true,width:35%:Taking the range of the whole formula
 Taking all outputs of $x + 1$ gives the second piece, and the whole function, the range $(-\\infty, \\infty)$. On its interval $x \\geq 0$ the piece only reaches $[1, \\infty)$, so the range is $[1, \\infty)$.
-[Read more](!#12)]@
+[Read more](!#pitfall-taking-the-range-of-the-whole-formula)]@
 
 Finding the range may require analyzing each piece separately — finding minima, maxima, and behavior on each interval — then combining results.
 
@@ -1457,7 +1458,7 @@ Equations involving absolute values often require piecewise analysis. Solving $|
 
 @academic[pitfall,aside:true,width:35%:Solving only the positive case
 Removing the bars from $|x + 4| = 6$ to get $x + 4 = 6$ gives only $x = 2$. The negative piece, $-(x + 4) = 6$, gives $x = -10$ as well, and $|-10 + 4| = 6$.
-[Read more](!#12)]@
+[Read more](!#pitfall-solving-only-the-positive-case)]@
 
 Each piece turns the absolute value equation into an ordinary linear equation, valid on its own side of the vertex. The solution from the piece with $x - 2 \\geq 0$ must satisfy $x \\geq 2$, and the one from the piece with $x - 2 < 0$ must satisfy $x < 2$; here $7 \\geq 2$ and $-3 < 2$, so both solutions stand. On the number line they are the two points at distance $5$ from $2$.`,
     before: ``,
@@ -1476,7 +1477,7 @@ $$\\lfloor 2.7 \\rfloor = 2, \\quad \\lfloor -1.3 \\rfloor = -2, \\quad \\lfloor
 
 @academic[pitfall,aside:true,width:35%:Rounding negative inputs toward zero
 Dropping the decimal part of $-2.5$ gives $\\lfloor -2.5 \\rfloor = -2$, but $-2$ is greater than $-2.5$. The greatest integer less than or equal to $-2.5$ is $-3$.
-[Read more](!#12)]@
+[Read more](!#pitfall-rounding-negative-inputs-toward-zero)]@
 
 Negative inputs follow the same definition as positive ones. The integers less than or equal to $-1.3$ are $-2, -3, -4, \\ldots$, and the greatest of them is $-2$. On the number line, the floor always moves left to the nearest integer, or stays put when the input is already an integer.
 
@@ -1513,7 +1514,7 @@ $$T(x) = \\begin{cases} 0.10x & \\text{if } x \\leq 10000 \\\\ 1000 + 0.20(x - 1
 
 @academic[pitfall,aside:true,width:35%:Taxing all income at the top rate
 Applying $30\\%$ to the whole income gives $T(50000) = 0.30 \\cdot 50000 = 15000$. Only the $10000$ above $40000$ is taxed at $30\\%$, so $T(50000) = 7000 + 0.30 \\cdot 10000 = 10000$.
-[Read more](!#12)]@
+[Read more](!#pitfall-taxing-all-income-at-the-top-rate)]@
 
 The constants in the second and third pieces are the tax already owed on the lower brackets. The $1000$ is $10\\%$ of the first $10{,}000$ dollars, and $7000 = 1000 + 0.20 \\cdot 30{,}000$ is the tax on the first $40{,}000$ dollars. Because of them, adjacent pieces agree at each threshold: both give $1000$ at $x = 10000$ and $7000$ at $x = 40000$.
 
@@ -1565,7 +1566,7 @@ $$C(t) = \\begin{cases} 50 & \\text{if } 0 < t \\leq 1 \\\\ 30t + 20 & \\text{if
 
 @academic[pitfall,aside:true,width:35%:Charging the first hour twice
 Writing the second piece as $50 + 30t$ counts the first hour in both terms: it gives $C(2) = 50 + 60 = 110$. Only the hours after the first cost $30$ each, so $C(2) = 50 + 30(2 - 1) = 80$.
-[Read more](!#12)]@
+[Read more](!#pitfall-charging-the-first-hour-twice)]@
 
 The threshold $t = 1$ is where the rule changes, and both pieces give $50$ there, so the charge does not jump. Past it, each extra hour adds $30$: at $t = 3$ the second piece gives $30(3) + 20 = 110$, the $50$ for the first hour plus $2 \\cdot 30 = 60$ for the other two.`,
     before: ``,
@@ -1596,67 +1597,8 @@ The table below collects each mistake with the specific problem it causes and th
   },
 
   obj12b: {
-    content: `Five more mistakes are marked where they happen in the sections above. Each is worked through here in full, with the wrong and the right working side by side.
-
-**Taking the range of the whole formula**
-
-To find the range of a piecewise function, the range of each formula is found as if the formula ran over all real numbers. The condition beside it is ignored, so a piece seems to produce outputs it never reaches.
-
-Wrong working: for $f(x) = \\begin{cases} 2 & \\text{if } x < 0 \\\\ x + 1 & \\text{if } x \\geq 0 \\end{cases}$, the line $x + 1$ takes every real value, so the range is given as $(-\\infty, \\infty)$.
-
-Right working: on $x \\geq 0$ the line starts at $0 + 1 = 1$ and rises, so the second piece gives $[1, \\infty)$. The first piece gives $\\{2\\}$. The range is $\\{2\\} \\cup [1, \\infty) = [1, \\infty)$.
-
-Why it happens: the range of a single formula is a familiar task, and the condition next to it reads like a note on when to use the formula rather than a limit on its outputs.
-
-How to check: test a value from the claimed range. Is there an input with $f(x) = 0$? The first piece gives only $2$, and $x + 1 = 0$ needs $x = -1$, which is not in $x \\geq 0$. So $0$ is not in the range.
-
-**Solving only the positive case**
-
-An absolute value equation is solved by simply removing the bars, which uses only the piece for a non-negative inside. The solutions that come from the other piece are lost.
-
-Wrong working: $|x + 4| = 6$ becomes $x + 4 = 6$, so $x = 2$ is given as the only solution.
-
-Right working: split into the two pieces. If $x + 4 \\geq 0$: $x + 4 = 6$, so $x = 2$, and $2 \\geq -4$ holds. If $x + 4 < 0$: $-(x + 4) = 6$, so $x + 4 = -6$ and $x = -10$, and $-10 < -4$ holds. Both $x = 2$ and $x = -10$ are solutions.
-
-Why it happens: the bars look like brackets that can be dropped, and the positive case is the one that comes to mind first.
-
-How to check: on the number line, the inputs at distance $6$ from $-4$ are $-4 + 6 = 2$ and $-4 - 6 = -10$; there are two of them whenever the right side is positive. Substituting confirms both: $|2 + 4| = 6$ and $|-10 + 4| = |-6| = 6$.
-
-**Rounding negative inputs toward zero**
-
-The floor of a negative number is found by dropping its decimal part. That moves the number toward zero, which for a negative number is upward, while the floor always moves downward.
-
-Wrong working: $\\lfloor -2.5 \\rfloor = -2$, by cutting off the $.5$.
-
-Right working: the integers less than or equal to $-2.5$ are $-3, -4, -5, \\ldots$, and the greatest of them is $-3$. So $\\lfloor -2.5 \\rfloor = -3$. In the same way $\\lfloor -1.3 \\rfloor = -2$.
-
-Why it happens: for positive numbers, dropping the decimal part does give the floor, $\\lfloor 2.7 \\rfloor = 2$, so the shortcut seems to work everywhere. Calculators and programming languages that truncate also return $-2$.
-
-How to check: the floor is never greater than the input, and $\\lfloor x \\rfloor \\leq x < \\lfloor x \\rfloor + 1$. Here $-2 > -2.5$, so $-2$ fails; $-3 \\leq -2.5 < -2$ holds.
-
-**Taxing all income at the top rate**
-
-An income is placed in its bracket, and that bracket's rate is applied to the whole income. In the piecewise formula, each rate applies only to the part of the income that lies inside its own bracket.
-
-Wrong working: an income of $50{,}000$ dollars lies in the bracket $x > 40000$, so $T(50000) = 0.30 \\cdot 50000 = 15000$.
-
-Right working: use the third piece. $T(50000) = 7000 + 0.30(50000 - 40000) = 7000 + 3000 = 10000$. The $7000$ is the tax on the first $40{,}000$ dollars: $0.10 \\cdot 10000 + 0.20 \\cdot 30000 = 1000 + 6000$.
-
-Why it happens: the phrase "the $30\\%$ bracket" sounds like a rate for the whole income, and a single multiplication is simpler than the piecewise formula.
-
-How to check: compare two neighboring incomes. With the wrong method, an income of $40{,}000$ dollars pays $0.20 \\cdot 40000 = 8000$, but one dollar more pays $0.30 \\cdot 40001 \\approx 12000$, a jump of about $4000$ dollars. The piecewise $T$ has no jumps: both pieces give $7000$ at $x = 40000$.
-
-**Charging the first hour twice**
-
-A description has a fixed charge for a first block and a rate for what comes after it. The rate is applied to the whole quantity instead of only to the part beyond the first block.
-
-Wrong working: "50 dollars for the first hour and 30 dollars for each additional hour" is written as $C(t) = 50 + 30t$ for $t > 1$. Then $C(2) = 50 + 60 = 110$.
-
-Right working: after the first hour, $t - 1$ hours remain, so $C(t) = 50 + 30(t - 1) = 30t + 20$ for $t > 1$. Then $C(2) = 50 + 30 = 80$: the first hour plus one additional hour.
-
-Why it happens: "30 per hour" is turned straight into $30t$, and the word "additional" is lost on the way.
-
-How to check: compare the pieces at the threshold. The correct pieces both give $50$ at $t = 1$. As $t$ approaches $1$ from above, the wrong second piece approaches $50 + 30 = 80$, a jump of $30$ dollars that the description never mentions.`,
+    content: `Five more mistakes are marked where they happen in the sections above. Each is worked through here in full, with the wrong and the right working side by side.`,
+    after: `Each slip ignores the condition attached to a piece. A piece contributes only the outputs it takes on its own interval, an absolute value equation splits into two cases, the floor rounds $-2.5$ down to $-3$, a tax bracket taxes only the income inside it, and the hours after the first are $t - 1$, not $t$. Comparing the pieces at the boundary where they meet, or testing a value from the claimed answer, catches each slip.`,
   },
 
   obj13: {
@@ -1898,8 +1840,46 @@ const faqQuestions = {
     ],
   };
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12b into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-range-of-the-whole-formula', name: `Taking the range of the whole formula`, errorAt: 1,
+        what: `To find the range of a piecewise function, the range of each formula is found as if the formula ran over all real numbers. The condition beside it is ignored, so a piece seems to produce outputs it never reaches.`,
+        wrong: [`For $f(x) = \\begin{cases} 2 & \\text{if } x < 0 \\\\ x + 1 & \\text{if } x \\geq 0 \\end{cases}$,`, `The line $x + 1$ takes every real value, so the range is given as $(-\\infty, \\infty)$.`],
+        right: [`For $f(x) = \\begin{cases} 2 & \\text{if } x < 0 \\\\ x + 1 & \\text{if } x \\geq 0 \\end{cases}$,`, `On $x \\geq 0$ the line starts at $0 + 1 = 1$ and rises, so the second piece gives $[1, \\infty)$. The first piece gives $\\{2\\}$. The range is $\\{2\\} \\cup [1, \\infty) = [1, \\infty)$.`],
+        why: `The range of a single formula is a familiar task, and the condition next to it reads like a note on when to use the formula rather than a limit on its outputs.`,
+        check: `Test a value from the claimed range. Is there an input with $f(x) = 0$? The first piece gives only $2$, and $x + 1 = 0$ needs $x = -1$, which is not in $x \\geq 0$. So $0$ is not in the range.` },
+      { id: 'solving-only-the-positive-case', name: `Solving only the positive case`, errorAt: 0,
+        what: `An absolute value equation is solved by simply removing the bars, which uses only the piece for a non-negative inside. The solutions that come from the other piece are lost.`,
+        wrong: [`$|x + 4| = 6$ becomes $x + 4 = 6$, so $x = 2$ is given as the only solution.`],
+        right: [`Split into the two pieces. If $x + 4 \\geq 0$: $x + 4 = 6$, so $x = 2$, and $2 \\geq -4$ holds. If $x + 4 < 0$: $-(x + 4) = 6$, so $x + 4 = -6$ and $x = -10$, and $-10 < -4$ holds. Both $x = 2$ and $x = -10$ are solutions.`],
+        why: `The bars look like brackets that can be dropped, and the positive case is the one that comes to mind first.`,
+        check: `On the number line, the inputs at distance $6$ from $-4$ are $-4 + 6 = 2$ and $-4 - 6 = -10$; there are two of them whenever the right side is positive. Substituting confirms both: $|2 + 4| = 6$ and $|-10 + 4| = |-6| = 6$.` },
+      { id: 'rounding-negative-inputs-toward-zero', name: `Rounding negative inputs toward zero`, errorAt: 0,
+        what: `The floor of a negative number is found by dropping its decimal part. That moves the number toward zero, which for a negative number is upward, while the floor always moves downward.`,
+        wrong: [`$\\lfloor -2.5 \\rfloor = -2$, by cutting off the $.5$.`],
+        right: [`The integers less than or equal to $-2.5$ are $-3, -4, -5, \\ldots$, and the greatest of them is $-3$. So $\\lfloor -2.5 \\rfloor = -3$. In the same way $\\lfloor -1.3 \\rfloor = -2$.`],
+        why: `For positive numbers, dropping the decimal part does give the floor, $\\lfloor 2.7 \\rfloor = 2$, so the shortcut seems to work everywhere. Calculators and programming languages that truncate also return $-2$.`,
+        check: `The floor is never greater than the input, and $\\lfloor x \\rfloor \\leq x < \\lfloor x \\rfloor + 1$. Here $-2 > -2.5$, so $-2$ fails; $-3 \\leq -2.5 < -2$ holds.` },
+      { id: 'taxing-all-income-at-the-top-rate', name: `Taxing all income at the top rate`, errorAt: 0,
+        what: `An income is placed in its bracket, and that bracket's rate is applied to the whole income. In the piecewise formula, each rate applies only to the part of the income that lies inside its own bracket.`,
+        wrong: [`An income of $50{,}000$ dollars lies in the bracket $x > 40000$, so $T(50000) = 0.30 \\cdot 50000 = 15000$.`],
+        right: [`Use the third piece. $T(50000) = 7000 + 0.30(50000 - 40000) = 7000 + 3000 = 10000$. The $7000$ is the tax on the first $40{,}000$ dollars: $0.10 \\cdot 10000 + 0.20 \\cdot 30000 = 1000 + 6000$.`],
+        why: `The phrase "the $30\\%$ bracket" sounds like a rate for the whole income, and a single multiplication is simpler than the piecewise formula.`,
+        check: `Compare two neighboring incomes. With the wrong method, an income of $40{,}000$ dollars pays $0.20 \\cdot 40000 = 8000$, but one dollar more pays $0.30 \\cdot 40001 \\approx 12000$, a jump of about $4000$ dollars. The piecewise $T$ has no jumps: both pieces give $7000$ at $x = 40000$.` },
+      { id: 'charging-the-first-hour-twice', name: `Charging the first hour twice`, errorAt: 0,
+        what: `A description has a fixed charge for a first block and a rate for what comes after it. The rate is applied to the whole quantity instead of only to the part beyond the first block.`,
+        wrong: [`"50 dollars for the first hour and 30 dollars for each additional hour" is written as $C(t) = 50 + 30t$ for $t > 1$. Then $C(2) = 50 + 60 = 110$.`],
+        right: [`After the first hour, $t - 1$ hours remain, so $C(t) = 50 + 30(t - 1) = 30t + 20$ for $t > 1$. Then $C(2) = 50 + 30 = 80$: the first hour plus one additional hour.`],
+        why: `"30 per hour" is turned straight into $30t$, and the word "additional" is lost on the way.`,
+        check: `Compare the pieces at the threshold. The correct pieces both give $50$ at $t = 1$. As $t$ approaches $1$ from above, the wrong second piece approaches $50 + 30 = 80$, a jump of $30$ dollars that the description never mentions.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     absPiecewiseSteps,
@@ -1923,7 +1903,7 @@ const faqQuestions = {
     }
    }
 
-export default function PiecewisePage({
+export default function PiecewisePage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2171,6 +2151,15 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
           sectionsContent.obj12b.content,
+          <DiagramFrame
+            key={'obj12b-mistakes'}
+            id="piecewise-pitfalls"
+            title="Common pitfalls with piecewise functions"
+            source="/functions/piecewise"
+            after={sectionsContent.obj12b.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

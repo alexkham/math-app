@@ -916,6 +916,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
@@ -923,7 +924,8 @@ import magnitudeDiagrams from '@/app/components/linear-algebra copy/matrix/magni
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1332,7 +1334,7 @@ A unit vector has $\\|\\mathbf{v}\\| = 1$. Any nonzero vector can be normalized 
 
 @academic[pitfall,aside:true,width:35%:Dividing by the squared length
 Dividing by $\\mathbf{v} \\cdot \\mathbf{v}$ instead of $\\|\\mathbf{v}\\|$ turns $(3, 4)$ into $(\\frac{3}{25}, \\frac{4}{25})$, a vector of length $\\frac{1}{5}$. Dividing by $\\|(3, 4)\\| = 5$ gives the unit vector $(\\frac{3}{5}, \\frac{4}{5})$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-squared-length)]@
 
 Normalizing is a two-stage computation. The sum of squares $\\mathbf{v} \\cdot \\mathbf{v}$ comes first, the length is taken from it, and only then is each component divided. The result can be checked at once, because the squares of the new components must add up to exactly $1$.`,
     before: ``,
@@ -1408,7 +1410,7 @@ The length of one side of a triangle never exceeds the sum of the other two. Equ
 
 @academic[pitfall,aside:true,width:35%:Adding the lengths of a sum
 Writing $\\|\\mathbf{u} + \\mathbf{v}\\| = \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$ for $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$ gives $3 + 4 = 7$. The sum is $(3, 4)$, so $\\|\\mathbf{u} + \\mathbf{v}\\| = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-lengths-of-a-sum)]@
 
 The proof follows from Cauchy-Schwarz. Square both sides: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 \\leq \\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{u}\\|\\|\\mathbf{v}\\| + \\|\\mathbf{v}\\|^2 = (\\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|)^2$. The key step uses $\\mathbf{u} \\cdot \\mathbf{v} \\leq |\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$.
 
@@ -1482,7 +1484,7 @@ Each of these geometries brings its own length, $\\|\\mathbf{v}\\| = \\sqrt{\\la
 
 @academic[pitfall,aside:true,width:35%:Measuring with the plain dot product
 Testing $\\mathbf{u} = (1, 1)$ and $\\mathbf{v} = (1, -2)$ with $\\mathbf{u} \\cdot \\mathbf{v} = -1$ when the space uses $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$ suggests they are not orthogonal. In this space $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = 2(1)(1) + (1)(-2) = 0$, so they are.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-measuring-with-the-plain-dot-product)]@
 
 In a weighted space every measurement goes through $W$. Lengths are $\\sqrt{\\mathbf{v}^T W \\mathbf{v}}$, and two vectors are orthogonal when $\\mathbf{u}^T W \\mathbf{v} = 0$. With $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$, the first coordinate counts twice in every product, so a pair of vectors can meet at a different angle here than under the standard dot product.
 
@@ -1506,7 +1508,7 @@ Each inner product defines its own geometry, but the linear algebra — [project
 
 @academic[pitfall,aside:true,width:35%:Dropping the cross term
 Using $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ for $\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$, which are not orthogonal, gives $1 + 2 = 3$. The sum is $(2, 1)$, so $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = 5$, which includes $2\\mathbf{u} \\cdot \\mathbf{v} = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-cross-term)]@
 
 The proof is a one-line expansion: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\mathbf{u} \\cdot \\mathbf{u} + 2\\mathbf{u} \\cdot \\mathbf{v} + \\mathbf{v} \\cdot \\mathbf{v} = \\|\\mathbf{u}\\|^2 + 0 + \\|\\mathbf{v}\\|^2$.
 
@@ -1527,75 +1529,19 @@ The sum may even run over infinitely many perpendicular pieces. On $[-\\pi, \\pi
   },
   obj11: {
     title: `Summary: What an Inner Product Induces`,
-    content: `Every quantity built in this page — norm, distance, angle, the orthogonality criterion, and the projection formula on the projections page — is constructed from a single inner product through a small family of formulas. The table below collects each induced quantity alongside its general definition in any inner product space, the concrete dot-product form in ℝⁿ, and a pointer back to the section that introduced it.`,
+    content: `This summary sets each quantity an inner product induces beside its form for the dot product. Every row names one quantity and gives two cards: its general definition, with a link to the section that introduces it, and the standard version in ordinary space. A short condition appears where one is needed.
+
+The rows cover the length of a vector, the unit vector, the distance and the angle between two vectors, orthogonality as the right-angle case, and the projection of one vector onto another, which the projections page develops. A note at the end adds the Cauchy-Schwarz and triangle inequalities and the Pythagorean theorem, which hold for every inner product.`,
+    formulaSheetAfter: `The general formulas use nothing but the inner product, so replacing the dot product by another inner product changes every length, distance and angle at once while each formula keeps its shape.`,
     before: ``,
     after: ``,
     link: ``,
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Four slips account for many wrong answers when lengths, sums and inner products are computed. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dividing by the squared length**
-
-To normalize a vector, each component is divided by $\\mathbf{v} \\cdot \\mathbf{v}$, the sum of squares, and the square root is never taken. The result points the right way but does not have length $1$.
-
-Wrong working: for $\\mathbf{v} = (3, 4)$, $\\mathbf{v} \\cdot \\mathbf{v} = 9 + 16 = 25$, and
-$$\\frac{\\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}} = \\left(\\frac{3}{25}, \\frac{4}{25}\\right), \\quad \\left\\|\\left(\\frac{3}{25}, \\frac{4}{25}\\right)\\right\\| = \\frac{5}{25} = \\frac{1}{5}$$
-
-Right working: the length is $\\|\\mathbf{v}\\| = \\sqrt{25} = 5$, so
-$$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|} = \\left(\\frac{3}{5}, \\frac{4}{5}\\right)$$
-
-Why it happens: $\\mathbf{v} \\cdot \\mathbf{v}$ is the first number the computation produces, and the projection formula $\\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v}$ really does divide by it, so the two denominators get mixed up.
-
-How to check: square and add the new components. $\\left(\\frac{3}{5}\\right)^2 + \\left(\\frac{4}{5}\\right)^2 = \\frac{9}{25} + \\frac{16}{25} = 1$, while $\\left(\\frac{3}{25}\\right)^2 + \\left(\\frac{4}{25}\\right)^2 = \\frac{25}{625} = \\frac{1}{25}$.
-
-**Adding the lengths of a sum**
-
-The length of $\\mathbf{u} + \\mathbf{v}$ is found by adding the two lengths, as if the norm were linear. The triangle inequality says only that this sum is an upper bound.
-
-Wrong working: for $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$,
-$$\\|\\mathbf{u} + \\mathbf{v}\\| = \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\| = 3 + 4 = 7$$
-
-Right working: add the vectors first, then take the length.
-$$\\mathbf{u} + \\mathbf{v} = (3, 4), \\quad \\|\\mathbf{u} + \\mathbf{v}\\| = \\sqrt{9 + 16} = 5$$
-
-Why it happens: the norm does pull out non-negative scalars, $\\|c\\mathbf{v}\\| = c\\|\\mathbf{v}\\|$ for $c \\geq 0$, and splitting a sum looks like the same kind of rule.
-
-How to check: the two sides are equal only when one vector is a non-negative multiple of the other. Here $(3, 0)$ and $(0, 4)$ are perpendicular, so the length of the sum must come out strictly less than $7$.
-
-**Measuring with the plain dot product**
-
-The space carries a weighted inner product $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$, but lengths and orthogonality are still tested with the ordinary dot product. The answers then belong to the standard geometry, not to the one the problem uses.
-
-Wrong working: with $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$, $\\mathbf{u} = (1, 1)$ and $\\mathbf{v} = (1, -2)$,
-$$\\mathbf{u} \\cdot \\mathbf{v} = 1 - 2 = -1 \\neq 0$$
-so the vectors are declared not orthogonal.
-
-Right working:
-$$\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v} = 2(1)(1) + 1(1)(-2) = 0$$
-so $\\mathbf{u}$ and $\\mathbf{v}$ are orthogonal in this space. Lengths change as well: here $\\|\\mathbf{u}\\| = \\sqrt{\\mathbf{u}^T W \\mathbf{u}} = \\sqrt{2 + 1} = \\sqrt{3}$, not $\\sqrt{2}$.
-
-Why it happens: the dot product is so familiar that orthogonality and length are read in their $\\mathbb{R}^n$ sense by default, even after the problem has declared another inner product.
-
-How to check: before any length, angle or orthogonality test, write down which inner product the space carries and compute every bracket with it. When $W$ is not the identity, the two answers usually differ.
-
-**Dropping the cross term**
-
-The Pythagorean identity $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ is used for vectors that are not orthogonal, so the term $2\\mathbf{u} \\cdot \\mathbf{v}$ of the expansion is lost.
-
-Wrong working: for $\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$,
-$$\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2 = 1 + 2 = 3$$
-
-Right working: expand in full.
-$$\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 = 1 + 2(1) + 2 = 5$$
-which matches $\\|(2, 1)\\|^2 = 4 + 1 = 5$.
-
-Why it happens: the identity is remembered as the formula for the length of a sum, and the condition $\\mathbf{u} \\perp \\mathbf{v}$ that makes the middle term vanish is left behind. It is the same slip as writing $(a + b)^2 = a^2 + b^2$ for numbers.
-
-How to check: compute $\\mathbf{u} \\cdot \\mathbf{v}$ first. Only when it is $0$ may the squared lengths simply be added.`,
+    content: `Four slips account for many wrong answers when lengths, sums and inner products are computed. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip treats length or angle too simply. A unit vector divides by $\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}$; lengths do not add; a weighted space measures with its own inner product; and the Pythagorean identity needs $\\mathbf{u} \\cdot \\mathbf{v} = 0$. Squaring and adding the components, or computing $\\mathbf{u} \\cdot \\mathbf{v}$ first, catches each slip.`,
     link: ``,
   },
 }
@@ -1782,8 +1728,86 @@ const schemas = {
 
 
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dividing-by-the-squared-length', name: `Dividing by the squared length`, errorAt: 1,
+        what: `To normalize a vector, each component is divided by $\\mathbf{v} \\cdot \\mathbf{v}$, the sum of squares, and the square root is never taken. The result points the right way but does not have length $1$.`,
+        wrong: [`For $\\mathbf{v} = (3, 4)$, $\\mathbf{v} \\cdot \\mathbf{v} = 9 + 16 = 25$,`, `And
+$$\\frac{\\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}} = \\left(\\frac{3}{25}, \\frac{4}{25}\\right),$$
+$$\\left\\|\\left(\\frac{3}{25}, \\frac{4}{25}\\right)\\right\\| = \\frac{5}{25} = \\frac{1}{5}$$`],
+        right: [`For $\\mathbf{v} = (3, 4)$, $\\mathbf{v} \\cdot \\mathbf{v} = 9 + 16 = 25$,`, `The length is $\\|\\mathbf{v}\\| = \\sqrt{25} = 5$, so
+$$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|} = \\left(\\frac{3}{5}, \\frac{4}{5}\\right)$$`],
+        why: `$\\mathbf{v} \\cdot \\mathbf{v}$ is the first number the computation produces, and the projection formula $\\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v}$ really does divide by it, so the two denominators get mixed up.`,
+        check: `Square and add the new components. $\\left(\\frac{3}{5}\\right)^2 + \\left(\\frac{4}{5}\\right)^2 = \\frac{9}{25} + \\frac{16}{25} = 1$, while $\\left(\\frac{3}{25}\\right)^2 + \\left(\\frac{4}{25}\\right)^2 = \\frac{25}{625} = \\frac{1}{25}$.` },
+      { id: 'adding-the-lengths-of-a-sum', name: `Adding the lengths of a sum`, errorAt: 1,
+        what: `The length of $\\mathbf{u} + \\mathbf{v}$ is found by adding the two lengths, as if the norm were linear. The triangle inequality says only that this sum is an upper bound.`,
+        wrong: [`For $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$,`, `$$\\|\\mathbf{u} + \\mathbf{v}\\| = \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\| = 3 + 4 = 7$$`],
+        right: [`For $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$,`, `Add the vectors first, then take the length.`, `$$\\mathbf{u} + \\mathbf{v} = (3, 4),$$
+$$\\|\\mathbf{u} + \\mathbf{v}\\| = \\sqrt{9 + 16} = 5$$`],
+        why: `The norm does pull out non-negative scalars, $\\|c\\mathbf{v}\\| = c\\|\\mathbf{v}\\|$ for $c \\geq 0$, and splitting a sum looks like the same kind of rule.`,
+        check: `The two sides are equal only when one vector is a non-negative multiple of the other. Here $(3, 0)$ and $(0, 4)$ are perpendicular, so the length of the sum must come out strictly less than $7$.` },
+      { id: 'measuring-with-the-plain-dot-product', name: `Measuring with the plain dot product`, errorAt: 1,
+        what: `The space carries a weighted inner product $\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$, but lengths and orthogonality are still tested with the ordinary dot product. The answers then belong to the standard geometry, not to the one the problem uses.`,
+        wrong: [`With $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$, $\\mathbf{u} = (1, 1)$ and $\\mathbf{v} = (1, -2)$,`, `$$\\mathbf{u} \\cdot \\mathbf{v} = 1 - 2 = -1 \\neq 0$$`, `So the vectors are declared not orthogonal.`],
+        right: [`With $W = \\begin{pmatrix} 2 & 0 \\\\ 0 & 1 \\end{pmatrix}$, $\\mathbf{u} = (1, 1)$ and $\\mathbf{v} = (1, -2)$,`, `$$\\langle \\mathbf{u}, \\mathbf{v} \\rangle = \\mathbf{u}^T W \\mathbf{v}$$
+$$= 2(1)(1) + 1(1)(-2) = 0$$`, `So $\\mathbf{u}$ and $\\mathbf{v}$ are orthogonal in this space. Lengths change as well: here $\\|\\mathbf{u}\\| = \\sqrt{\\mathbf{u}^T W \\mathbf{u}} = \\sqrt{2 + 1} = \\sqrt{3}$, not $\\sqrt{2}$.`],
+        why: `The dot product is so familiar that orthogonality and length are read in their $\\mathbb{R}^n$ sense by default, even after the problem has declared another inner product.`,
+        check: `Before any length, angle or orthogonality test, write down which inner product the space carries and compute every bracket with it. When $W$ is not the identity, the two answers usually differ.` },
+      { id: 'dropping-the-cross-term', name: `Dropping the cross term`, errorAt: 1,
+        what: `The Pythagorean identity $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ is used for vectors that are not orthogonal, so the term $2\\mathbf{u} \\cdot \\mathbf{v}$ of the expansion is lost.`,
+        wrong: [`For $\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$,`, `$$\\|\\mathbf{u} + \\mathbf{v}\\|^2$$
+$$= \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2 = 1 + 2$$
+$$= 3$$`],
+        right: [`For $\\mathbf{u} = (1, 0)$ and $\\mathbf{v} = (1, 1)$,`, `Expand in full.`, `$$\\|\\mathbf{u} + \\mathbf{v}\\|^2$$
+$$= \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2$$
+$$= 1 + 2(1) + 2 = 5$$`, `Which matches $\\|(2, 1)\\|^2 = 4 + 1 = 5$.`],
+        why: `The identity is remembered as the formula for the length of a sum, and the condition $\\mathbf{u} \\perp \\mathbf{v}$ that makes the middle term vanish is left behind. It is the same slip as writing $(a + b)^2 = a^2 + b^2$ for numbers.`,
+        check: `Compute $\\mathbf{u} \\cdot \\mathbf{v}$ first. Only when it is $0$ may the squared lengths simply be added.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    sides: [
+      { name: 'Any inner product', sub: 'the general definition in an inner product space', tone: 'direct' },
+      { name: 'Dot product', sub: 'the standard instance in $\\mathbb{R}^n$', tone: 'reversed' },
+    ],
+    rows: [
+      { op: 'Norm (length)', cells: [
+        { formula: '$\\|\\mathbf{v}\\| = \\sqrt{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}$', effect: 'The length of a vector, introduced in [length](!#3).' },
+        { formula: '$\\sqrt{\\mathbf{v} \\cdot \\mathbf{v}} = \\sqrt{v_1^2 + \\cdots + v_n^2}$', effect: 'The square root of the sum of squared components.' },
+      ] },
+      { op: 'Unit vector', cells: [
+        { formula: '$\\displaystyle \\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}$', effect: 'Normalization keeps the direction and gives length 1, as [length](!#3) shows.', condition: '$\\mathbf{v} \\neq \\mathbf{0}$' },
+        { formula: '$\\displaystyle \\frac{\\mathbf{v}}{\\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}}$', effect: 'Each component divided by the length.' },
+      ] },
+      { op: 'Distance', cells: [
+        { formula: '$d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$', effect: 'The length of the difference, introduced in [distance](!#4).' },
+        { formula: '$\\displaystyle \\sqrt{\\sum_i (u_i - v_i)^2}$', effect: 'The straight-line Euclidean distance between two points.' },
+      ] },
+      { op: 'Angle', cells: [
+        { formula: '$\\displaystyle \\cos\\theta = \\frac{\\langle \\mathbf{u}, \\mathbf{v} \\rangle}{\\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|}$', effect: 'The angle between two nonzero vectors, from [angle between vectors](!#5).' },
+        { formula: '$\\displaystyle \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|}$', effect: 'The same ratio with the dot product on top.' },
+      ] },
+      { op: 'Orthogonality', cells: [
+        { formula: '$\\mathbf{u} \\perp \\mathbf{v} \\iff \\langle \\mathbf{u}, \\mathbf{v} \\rangle = 0$', effect: 'The special case of the angle formula in [angle between vectors](!#5).', condition: 'the case $\\theta = \\pi/2$' },
+        { formula: '$\\mathbf{u} \\cdot \\mathbf{v} = 0$', effect: 'Perpendicular vectors have dot product zero.' },
+      ] },
+      { op: 'Projection of u onto a nonzero v', cells: [
+        { formula: '$\\displaystyle \\text{proj}_{\\mathbf{v}}(\\mathbf{u}) = \\frac{\\langle \\mathbf{u}, \\mathbf{v} \\rangle}{\\langle \\mathbf{v}, \\mathbf{v} \\rangle}\\,\\mathbf{v}$', effect: 'The part of $\\mathbf{u}$ along $\\mathbf{v}$, covered on the [projections page](!/linear-algebra/orthogonality/projections).', condition: '$\\mathbf{v} \\neq \\mathbf{0}$' },
+        { formula: '$\\displaystyle \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\mathbf{v} \\cdot \\mathbf{v}}\\,\\mathbf{v}$', effect: 'The same coefficient with dot products.' },
+      ] },
+    ],
+    note: { label: 'In every inner product space', text: 'The Cauchy-Schwarz inequality $|\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|$, the triangle inequality $\\|\\mathbf{u} + \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$ and, for perpendicular vectors, the Pythagorean theorem $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ hold for any inner product, as [general inner products](!#8) states.' },
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
       pythagoreanCard,
     demoUnits,
     conceptIntroFigures,
@@ -1808,7 +1832,7 @@ const schemas = {
 // export default function InnerProductPage({seoData,sectionsContent , introContent}) {
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function InnerProductPage({pythagoreanCard, 
+export default function InnerProductPage({ formulaSummaryData, pitfallData,pythagoreanCard, 
   seoData,
   sectionsContent,
   introContent,
@@ -2020,11 +2044,16 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="inner-product-formula-summary"
+            title="What an inner product induces"
+            source="/linear-algebra/orthogonality/inner-product"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.obj11.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="paired" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2033,6 +2062,15 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="inner-product-pitfalls"
+            title="Common pitfalls with inner products"
+            source="/linear-algebra/orthogonality/inner-product"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

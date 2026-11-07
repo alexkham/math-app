@@ -16,6 +16,7 @@ import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 
 
 export async function getStaticProps(){
@@ -740,9 +741,26 @@ $$\\approx \\frac{0.845}{0.477} \\approx 1.771$$`],
         check: `Substitute the answer into the original equation. $3^{0.368} \\approx 1.50$, far from $7$, while $3^{1.771} \\approx 7.00$.` },
     ],
   };
+  // ScopeCard data (log-domain-scope); every fact is from the section text
+  const logDomainScope = {
+    header: { kicker: 'Logarithmic equations', title: 'Domain restrictions', lede: 'Every argument of every logarithm in the original equation must be positive.' },
+    rule: { name: 'Defined when', expr: '$\\log_a(f(x))$ is defined', condition: '$f(x) > 0$, for every logarithm in the equation' },
+    inside: { title: 'Admissible', items: [
+      { id: 'dom', expr: '$x > 5$ for $\\log_3(x - 5) + \\log_3(x + 1) = 2$', why: '$x - 5 > 0$ gives $x > 5$ and $x + 1 > 0$ gives $x > -1$; the intersection is $x > 5$.' },
+      { id: 'root', expr: '$x = 2 + 3\\sqrt{2} \\approx 6.24$', why: 'Satisfies $x > 5$: the solution.' },
+    ] },
+    outside: { title: 'Rejected', items: [
+      { id: 'bad', expr: '$x = 2 - 3\\sqrt{2} \\approx -2.24$', why: 'A root of $x^2 - 4x - 14 = 0$, but it fails $x > 5$: an argument would be negative.' },
+    ] },
+    edgeCases: { badge: 'Order of work', items: [
+      { id: 'first', marker: 'before', body: 'Identify the restrictions before solving: condense to $\\log_3((x - 5)(x + 1)) = 2$, solve $(x - 5)(x + 1) = 9$, then test each root against $x > 5$.' },
+    ] },
+  };
+
 
 return {
   props: {
+      logDomainScope,
     pitfallData,
     logEquationDecision,
     sectionsContent,
@@ -766,7 +784,9 @@ return {
    }
 
 // export default function EquationsPage({seoData,sectionsContent , introContent}) {
-export default function EquationsPage({ pitfallData,logEquationDecision, 
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function EquationsPage({logDomainScope,  pitfallData,logEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -902,6 +922,16 @@ $$x = 13$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrameV2
+            key={'obj4-scope'}
+            id="log-domain-scope"
+            title="Domain restrictions for logarithmic equations"
+            source="/algebra/logarithms/equations"
+            before={`The restriction is set before solving and applied after. The card shows the page’s example on both sides of the line.`}
+            after={`Of the two roots the algebra produces, only the one inside the domain is a solution.`}
+          >
+            <ScopeCard data={logDomainScope} variant="boundary" theme={scopeTheme} />
+          </DiagramFrameV2>,
         ]
     },
     {

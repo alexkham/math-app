@@ -946,6 +946,7 @@ import renderMatrixGridV3 from '@/app/utils/illustrations/linear-algebra/matrix/
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1448,7 +1449,7 @@ A [nilpotent](!/linear-algebra/matrix/types) matrix has all eigenvalues equal to
 
 @academic[pitfall,aside:true,width:35%:Reading zero trace as singular
 Taking $\\text{tr}(A) = 0$ to mean that $A$ is singular or nilpotent fails for $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}$. Its trace is $1 + (-1) = 0$, yet $\\det(A) = -1$ and $A^2 = I$. A zero trace says only that the eigenvalues add up to $0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-zero-trace-as-singular)]@
 
 Two of these classes land on the same number. Skew-symmetric and nilpotent matrices both have trace $0$, the first because its diagonal is forced to vanish entry by entry, the second because its eigenvalues are. In each case the zero is read off from a structural condition that the matrix already satisfies.`,
     before: ``,
@@ -1494,7 +1495,7 @@ A companion identity links the determinant to the product of eigenvalues: $\\det
 
 @academic[pitfall,aside:true,width:35%:Taking diagonal entries as eigenvalues
 Reading the eigenvalues of $\\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ off its diagonal gives $1$ and $1$. Only the sums agree: the eigenvalues are $3$ and $-1$, and $3 + (-1) = 2 = 1 + 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-diagonal-entries-as-eigenvalues)]@
 
 For a $3 \\times 3$ matrix with eigenvalues $2, -1, 4$, the trace is $5$ and the determinant is $-8$. Neither the trace nor the determinant individually determines the eigenvalues, but together they constrain them heavily. For a $2 \\times 2$ matrix, the trace and determinant determine the eigenvalues completely via the quadratic formula.
 
@@ -1516,7 +1517,7 @@ This follows in one step from the cyclic property: $\\text{tr}(P^{-1}AP) = \\tex
 
 @academic[pitfall,aside:true,width:35%:Treating equal traces as similarity
 Concluding that matrices with equal traces are similar fails for $\\text{diag}(1, 3)$ and $\\text{diag}(2, 2)$. Both have trace $4$, but their eigenvalues $1, 3$ and $2, 2$ differ, so they are not similar. Equal trace is necessary, not sufficient.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-equal-traces-as-similarity)]@
 
 Invariance under similarity means the trace is a property of the transformation itself, not of any particular matrix representation. No matter which basis is chosen, the trace comes out the same. The eigenvalues share this invariance (similar matrices have the same eigenvalues), and indeed $\\text{tr}(A) = \\sum \\lambda_i$ is an eigenvalue identity, so trace invariance and eigenvalue invariance are two sides of the same coin.
 
@@ -1613,7 +1614,7 @@ When $A$ is symmetric, this simplifies to $2AX$.
 
 @academic[pitfall,aside:true,width:35%:Forgetting the transpose in the gradient
 Writing $\\frac{\\partial}{\\partial X} \\text{tr}(AX) = A$ puts entries in the wrong place. With $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$, $\\text{tr}(AX) = x_{11} + 2x_{21} + 3x_{12} + 4x_{22}$, so the derivative in $x_{12}$ is $3$, the $(1,2)$ entry of $A^T$, not of $A$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-transpose-in-the-gradient)]@
 
 These formulas are the matrix analogues of the scalar rules $\\frac{d}{dx}(ax) = a$ and $\\frac{d}{dx}(ax^2) = 2ax$. They appear in deriving the normal equations for [least squares](!/linear-algebra/orthogonality/least-squares), in the gradient descent updates for matrix factorization problems, and in the analysis of covariance estimators. The trace's linearity and cyclic property make these derivatives clean and systematic — full matrix calculus extends these patterns to products of arbitrary length and composition.`,
     before: ``,
@@ -1629,88 +1630,9 @@ These formulas are the matrix analogues of the scalar rules $\\frac{d}{dx}(ax) =
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Six mistakes account for many wrong answers about the trace. Four are marked with a box where they happen in the sections above. The other two, multiplying traces and swapping factors inside a trace, are flagged in the text of the linearity and cyclic property sections. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying traces**
-
-The trace of a product is computed as the product of the traces, the way the determinant of a product is.
-
-Wrong working: with $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 0 \\\\ 3 & 1 \\end{pmatrix}$,
-$$\\text{tr}(AB) = \\text{tr}(A) \\cdot \\text{tr}(B) = 2 \\cdot 2 = 4$$
-
-Right working: multiply first, then add the diagonal.
-$$AB = \\begin{pmatrix} 7 & 2 \\\\ 3 & 1 \\end{pmatrix}, \\quad \\text{tr}(AB) = 7 + 1 = 8$$
-
-Why it happens: $\\det(AB) = \\det(A)\\det(B)$ holds, and the trace and the determinant are learned side by side as the two numbers attached to a square matrix.
-
-How to check: the diagonal entries of $AB$ use the off-diagonal entries of $A$ and $B$, which $\\text{tr}(A)$ and $\\text{tr}(B)$ never see. With $A = B = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, both traces are $0$, yet $AB = I$ has trace $2$.
-
-**Reading zero trace as singular**
-
-A matrix with trace $0$ is taken to be singular or nilpotent. The statements of the special-matrices section are read backwards, or the trace is confused with the determinant.
-
-Wrong working: $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}$ has $\\text{tr}(A) = 1 + (-1) = 0$, so $A$ is singular, and some power of $A$ is the zero matrix.
-
-Right working: $\\det(A) = (1)(-1) - 0 = -1 \\neq 0$, so $A$ is invertible; in fact $A^{-1} = A$. Its square is $A^2 = I$, so no power of $A$ is zero. The eigenvalues are $1$ and $-1$, and the only thing the zero trace records is that they add up to $0$.
-
-Why it happens: a nilpotent matrix does have trace $0$, and a single zero number is how singularity is usually detected, through the determinant.
-
-How to check: compute the determinant to test singularity. For nilpotence of a $2 \\times 2$ matrix, compute $A^2$, which must be the zero matrix.
-
-**Swapping factors inside a trace**
-
-The cyclic property is applied as if the trace let the factors of a product be reordered in any way.
-
-Wrong working: with $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$, $B = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $C = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$, $\\text{tr}(ACB) = \\text{tr}(ABC)$.
-
-Right working: compute both.
-$$ABC = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}, \\quad ACB = \\begin{pmatrix} 0 & 0 \\\\ 0 & 0 \\end{pmatrix}$$
-so $\\text{tr}(ABC) = 1$ and $\\text{tr}(ACB) = 0$. The rotations do agree: $BCA = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $CAB = \\begin{pmatrix} 0 & 0 \\\\ 0 & 1 \\end{pmatrix}$ both have trace $1$.
-
-Why it happens: with two factors, $\\text{tr}(AB) = \\text{tr}(BA)$, and every reordering of two factors is a rotation. The rule looks like commutativity and is carried over to three factors.
-
-How to check: write the factors around a circle. A permitted reordering reads the same circle from a different starting point; $ACB$ reads $ABC$ in the opposite direction.
-
-**Taking diagonal entries as eigenvalues**
-
-Because the trace is both the sum of the diagonal entries and the sum of the eigenvalues, the diagonal entries are taken to be the eigenvalues.
-
-Wrong working: $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ has diagonal entries $1$ and $1$, so its eigenvalues are $1$ and $1$.
-
-Right working: solve the characteristic equation.
-$$\\det(A - \\lambda I) = (1 - \\lambda)^2 - 4 = 0 \\implies \\lambda = 3 \\text{ or } \\lambda = -1$$
-The sums agree, $3 + (-1) = 2 = 1 + 1$, but the individual values do not.
-
-Why it happens: for diagonal and triangular matrices the diagonal entries really are the eigenvalues, and the trace identity looks like the same statement for every matrix.
-
-How to check: the product of the eigenvalues must equal the determinant. Here $\\det(A) = 1 - 4 = -3$, which matches $3 \\cdot (-1)$ but not $1 \\cdot 1$.
-
-**Treating equal traces as similarity**
-
-Two matrices with the same trace are declared similar, by reading the similarity invariance of the trace in reverse.
-
-Wrong working: $\\text{diag}(1, 3)$ and $\\text{diag}(2, 2)$ both have trace $4$, so they are similar.
-
-Right working: $\\text{diag}(2, 2) = 2I$, and $P^{-1}(2I)P = 2I$ for every invertible $P$, so $2I$ is similar only to itself. It is not similar to $\\text{diag}(1, 3)$; their eigenvalues $2, 2$ and $1, 3$ differ.
-
-Why it happens: the invariance statement says that similar matrices have equal traces. The reverse direction sounds equally natural but does not follow.
-
-How to check: compare other similarity invariants. Here the determinants are $3$ and $4$, so the matrices cannot be similar. Even equal trace and equal determinant are not enough: $I$ and $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ share trace $2$ and determinant $1$, and are not similar.
-
-**Forgetting the transpose in the gradient**
-
-The derivative of $\\text{tr}(AX)$ with respect to $X$ is taken to be $A$, by direct analogy with $\\frac{d}{dx}(ax) = a$.
-
-Wrong working: $\\frac{\\partial}{\\partial X} \\text{tr}(AX) = A$.
-
-Right working: $\\text{tr}(AX) = \\sum_{i} \\sum_{j} a_{ij} x_{ji}$, so the derivative with respect to $x_{ji}$ is $a_{ij}$. The entry in position $(j, i)$ of the gradient is $a_{ij}$, which makes the gradient $A^T$. With $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$,
-$$\\text{tr}(AX) = x_{11} + 2x_{21} + 3x_{12} + 4x_{22}, \\quad \\frac{\\partial}{\\partial X} \\text{tr}(AX) = \\begin{pmatrix} 1 & 3 \\\\ 2 & 4 \\end{pmatrix} = A^T$$
-
-Why it happens: the scalar rule has no transpose to forget, and for a symmetric $A$ the two answers coincide, so the slip often goes unnoticed.
-
-How to check: expand $\\text{tr}(AX)$ for a $2 \\times 2$ case and place the coefficient of each $x_{ij}$ in position $(i, j)$ of the gradient.`,
+    content: `Six mistakes account for many wrong answers about the trace. Four are marked with a box where they happen in the sections above. The other two, multiplying traces and swapping factors inside a trace, are flagged in the text of the linearity and cyclic property sections. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip carries over a property that the trace does not have. $\\text{tr}(AB) \\neq \\text{tr}(A)\\,\\text{tr}(B)$ in general; a zero trace says nothing about singularity; the trace allows only cyclic reorderings; the diagonal entries add up to the same sum as the eigenvalues without being the eigenvalues; equal traces do not make matrices similar; and the derivative of $\\text{tr}(AX)$ with respect to $X$ is $A^T$. Comparing determinants, writing the factors around a circle, or expanding a $2 \\times 2$ case catches each slip.`,
     link: ``,
   },
 }
@@ -1871,8 +1793,58 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-traces', name: `Multiplying traces`, errorAt: 1,
+        what: `The trace of a product is computed as the product of the traces, the way the determinant of a product is.`,
+        wrong: [`With $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 0 \\\\ 3 & 1 \\end{pmatrix}$,`, `$$\\text{tr}(AB) = \\text{tr}(A) \\cdot \\text{tr}(B) = 2 \\cdot 2 = 4$$`],
+        right: [`With $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$ and $B = \\begin{pmatrix} 1 & 0 \\\\ 3 & 1 \\end{pmatrix}$,`, `Multiply first, then add the diagonal.`, `$$AB = \\begin{pmatrix} 7 & 2 \\\\ 3 & 1 \\end{pmatrix},$$
+$$\\text{tr}(AB) = 7 + 1 = 8$$`],
+        why: `$\\det(AB) = \\det(A)\\det(B)$ holds, and the trace and the determinant are learned side by side as the two numbers attached to a square matrix.`,
+        check: `The diagonal entries of $AB$ use the off-diagonal entries of $A$ and $B$, which $\\text{tr}(A)$ and $\\text{tr}(B)$ never see. With $A = B = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, both traces are $0$, yet $AB = I$ has trace $2$.` },
+      { id: 'reading-zero-trace-as-singular', name: `Reading zero trace as singular`, errorAt: 0,
+        what: `A matrix with trace $0$ is taken to be singular or nilpotent. The statements of the special-matrices section are read backwards, or the trace is confused with the determinant.`,
+        wrong: [`$A = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}$ has $\\text{tr}(A) = 1 + (-1) = 0$, so $A$ is singular, and some power of $A$ is the zero matrix.`],
+        right: [`$\\det(A) = (1)(-1) - 0 = -1 \\neq 0$, so $A$ is invertible; in fact $A^{-1} = A$. Its square is $A^2 = I$, so no power of $A$ is zero. The eigenvalues are $1$ and $-1$, and the only thing the zero trace records is that they add up to $0$.`],
+        why: `A nilpotent matrix does have trace $0$, and a single zero number is how singularity is usually detected, through the determinant.`,
+        check: `Compute the determinant to test singularity. For nilpotence of a $2 \\times 2$ matrix, compute $A^2$, which must be the zero matrix.` },
+      { id: 'swapping-factors-inside-a-trace', name: `Swapping factors inside a trace`, errorAt: 1,
+        what: `The cyclic property is applied as if the trace let the factors of a product be reordered in any way.`,
+        wrong: [`With $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$, $B = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $C = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$,`, `$\\text{tr}(ACB) = \\text{tr}(ABC)$.`],
+        right: [`With $A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$, $B = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $C = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$,`, `Compute both.`, `$$ABC = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix},$$
+$$ACB = \\begin{pmatrix} 0 & 0 \\\\ 0 & 0 \\end{pmatrix}$$`, `So $\\text{tr}(ABC) = 1$ and $\\text{tr}(ACB) = 0$. The rotations do agree: $BCA = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $CAB = \\begin{pmatrix} 0 & 0 \\\\ 0 & 1 \\end{pmatrix}$ both have trace $1$.`],
+        why: `With two factors, $\\text{tr}(AB) = \\text{tr}(BA)$, and every reordering of two factors is a rotation. The rule looks like commutativity and is carried over to three factors.`,
+        check: `Write the factors around a circle. A permitted reordering reads the same circle from a different starting point; $ACB$ reads $ABC$ in the opposite direction.` },
+      { id: 'taking-diagonal-entries-as-eigenvalues', name: `Taking diagonal entries as eigenvalues`, errorAt: 0,
+        what: `Because the trace is both the sum of the diagonal entries and the sum of the eigenvalues, the diagonal entries are taken to be the eigenvalues.`,
+        wrong: [`$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ has diagonal entries $1$ and $1$, so its eigenvalues are $1$ and $1$.`],
+        right: [`Solve the characteristic equation.`, `$$\\det(A - \\lambda I) = (1 - \\lambda)^2 - 4 = 0$$`, `$$\\implies \\lambda = 3 \\text{ or } \\lambda = -1$$`, `The sums agree, $3 + (-1) = 2 = 1 + 1$, but the individual values do not.`],
+        why: `For diagonal and triangular matrices the diagonal entries really are the eigenvalues, and the trace identity looks like the same statement for every matrix.`,
+        check: `The product of the eigenvalues must equal the determinant. Here $\\det(A) = 1 - 4 = -3$, which matches $3 \\cdot (-1)$ but not $1 \\cdot 1$.` },
+      { id: 'treating-equal-traces-as-similarity', name: `Treating equal traces as similarity`, errorAt: 0,
+        what: `Two matrices with the same trace are declared similar, by reading the similarity invariance of the trace in reverse.`,
+        wrong: [`$\\text{diag}(1, 3)$ and $\\text{diag}(2, 2)$ both have trace $4$, so they are similar.`],
+        right: [`$\\text{diag}(2, 2) = 2I$, and $P^{-1}(2I)P = 2I$ for every invertible $P$, so $2I$ is similar only to itself. It is not similar to $\\text{diag}(1, 3)$; their eigenvalues $2, 2$ and $1, 3$ differ.`],
+        why: `The invariance statement says that similar matrices have equal traces. The reverse direction sounds equally natural but does not follow.`,
+        check: `Compare other similarity invariants. Here the determinants are $3$ and $4$, so the matrices cannot be similar. Even equal trace and equal determinant are not enough: $I$ and $\\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ share trace $2$ and determinant $1$, and are not similar.` },
+      { id: 'forgetting-the-transpose-in-the-gradient', name: `Forgetting the transpose in the gradient`, errorAt: 0,
+        what: `The derivative of $\\text{tr}(AX)$ with respect to $X$ is taken to be $A$, by direct analogy with $\\frac{d}{dx}(ax) = a$.`,
+        wrong: [`$\\frac{\\partial}{\\partial X} \\text{tr}(AX) = A$.`],
+        right: [`$\\text{tr}(AX) = \\sum_{i} \\sum_{j} a_{ij} x_{ji}$, so the derivative with respect to $x_{ji}$ is $a_{ij}$. The entry in position $(j, i)$ of the gradient is $a_{ij}$, which makes the gradient $A^T$. With $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$,
+$$\\text{tr}(AX)$$
+$$= x_{11} + 2x_{21} + 3x_{12} + 4x_{22},$$
+$$\\frac{\\partial}{\\partial X} \\text{tr}(AX) = \\begin{pmatrix} 1 & 3 \\\\ 2 & 4 \\end{pmatrix}$$
+$$= A^T$$`],
+        why: `The scalar rule has no transpose to forget, and for a symmetric $A$ the two answers coincide, so the slip often goes unnoticed.`,
+        check: `Expand $\\text{tr}(AX)$ for a $2 \\times 2$ case and place the coefficient of each $x_{ij}$ in position $(i, j)$ of the gradient.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1894,7 +1866,7 @@ const schemas = {
    }
 
 
-export default function MatrixTracePage({seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MatrixTracePage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2094,6 +2066,15 @@ export default function MatrixTracePage({seoData, sectionsContent, introContent,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="trace-pitfalls"
+            title="Common pitfalls with the trace"
+            source="/linear-algebra/matrix/trace"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

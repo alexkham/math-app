@@ -866,6 +866,9 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
 
@@ -1117,7 +1120,7 @@ $$P(X > k) = 1 - F_X(k)$$]@
 
 @academic[pitfall,aside:true,width:35%:Treating at least as more than
 For $\\lambda = 3$, writing $P(X \\geq 2) = 1 - F_X(2) \\approx 1 - 0.423 = 0.577$ leaves out $P(X = 2) \\approx 0.224$. At least $2$ means more than $1$: $P(X \\geq 2) = 1 - F_X(1) \\approx 1 - 0.199 = 0.801$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-at-least-as-more-than)]@
 
 The complement rule above is written for the event "more than $k$". A Poisson count takes only whole-number values, so the wording of a question decides exactly which counts are kept: "more than", "at least", "fewer than" and "at most" each draw the line at a different count. Every count on either side of that line carries its own share of the probability, and the CDF is read at the last count that falls outside the event.
 
@@ -1261,7 +1264,7 @@ $$\\sigma = \\sqrt{16} = 4$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking lambda as the standard deviation
 Reading $\\lambda = 16$ as the typical deviation gives hours anywhere from $16 - 16 = 0$ to $16 + 16 = 32$ calls. Only the variance equals $\\lambda$; the standard deviation is $\\sqrt{\\lambda} = \\sqrt{16} = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-lambda-as-the-standard-deviation)]@
 
 The variance equals the expected value (16), and the standard deviation of 4 indicates that in most hours, the number of calls will fall within roughly 12 to 20 calls (within one standard deviation of the mean).
 
@@ -1362,7 +1365,7 @@ This means there's about a 10.4% chance of receiving exactly 6 calls in an hour.
 
 @academic[pitfall,aside:true,width:35%:Not rescaling lambda to the interval
 Using the hourly rate $\\lambda = 4$ for a half-hour window gives $P(X = 0) = e^{-4} \\approx 0.018$. Half an hour carries half the rate, $\\lambda = 2$, so $P(X = 0) = e^{-2} \\approx 0.135$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-not-rescaling-lambda-to-the-interval)]@
 
 The rate in this example is stated per hour, and the probability $0.104$ belongs to exactly one hour of calls. Questions about the same call center often ask about other stretches of time, such as a quarter of an hour, a morning or a full shift, and each of those is a separate count with its own Poisson distribution.
 
@@ -1458,7 +1461,10 @@ $$X \\sim \\text{Poisson}(\\lambda_X),\\; Y \\sim \\text{Poisson}(\\lambda_Y) \\
     obj16:{
   
       title:`Poisson at a Glance`,
-      content:`The table below collects the full anatomy of the Poisson distribution into a single reference card — its rate parameter, support, PMF and CDF, the mean and variance (both equal to λ), mode and median behavior, the binomial approximation, and a canonical example.`,
+      content:`This summary gathers the Poisson distribution on one card of nine rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the average rate of events and the counts that can occur, with no upper limit. Then come the probability of an exact count, the running total up to a count, the mean and the variance, which are both equal to the rate, and the mode and median. The last rows give the link to the binomial for rare events and the example of a call center taking calls at a steady rate.`,
+      formulaSheetAfter: `Everything on the card is driven by the one rate, so the first step in any problem is to rescale that rate to the length of the interval asked about. A sample whose mean and variance come out close together is a good sign that the Poisson model fits.`,
       before:``,
       after:``,
       link:'',
@@ -1466,51 +1472,9 @@ $$X \\sim \\text{Poisson}(\\lambda_X),\\; Y \\sim \\text{Poisson}(\\lambda_Y) \\
     },
     obj17:{
       title:`Common Pitfalls`,
-      content:`Three mistakes account for most wrong answers in Poisson problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating at least as more than**
-
-The question asks for at least $k$ events, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.
-
-Wrong working: for $\\lambda = 3$,
-$$P(X \\geq 2) = 1 - F_X(2) = 1 - \\left(P(X = 0) + P(X = 1) + P(X = 2)\\right) \\approx 1 - 0.423 = 0.577$$
-
-Right working: at least $2$ means $2$ or more events, so the complement is at most $1$.
-$$P(X \\geq 2) = 1 - F_X(1) = 1 - \\left(e^{-3} + 3e^{-3}\\right) = 1 - 4e^{-3} \\approx 1 - 0.199 = 0.801$$
-
-Why it happens: the page's complement rule is written for "more than $k$", and the two wordings differ by a single count. For continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
-
-How to check: the gap between the two answers must be exactly the probability of the count that was dropped. Here $0.801 - 0.577 = 0.224$, and $P(X = 2) = \\frac{3^2 e^{-3}}{2!} = 4.5e^{-3} \\approx 0.224$.
-
-**Taking lambda as the standard deviation**
-
-Because the variance of a Poisson count equals $\\lambda$, the number $\\lambda$ itself is taken as the typical distance of a count from its mean.
-
-Wrong working: calls arrive at $\\lambda = 16$ per hour, so $\\sigma = 16$, and a typical hour has anywhere from $16 - 16 = 0$ to $16 + 16 = 32$ calls.
-
-Right working: the variance is $\\lambda = 16$, and the standard deviation is its square root.
-$$\\sigma = \\sqrt{\\lambda} = \\sqrt{16} = 4$$
-A typical hour has between $16 - 4 = 12$ and $16 + 4 = 20$ calls.
-
-Why it happens: the Poisson distribution is the one familiar case where a single number is both the mean and the variance, and "$\\lambda$ is the spread" is remembered without the square root.
-
-How to check: look at the units. The variance is measured in calls squared, while the standard deviation is measured in calls, like the mean. The PMF agrees: for $\\lambda = 16$, the counts from $12$ to $20$ hold about 74% of hours, while the counts from $0$ to $32$ hold about 99.99%, far more than a band of one standard deviation on each side of the mean usually holds.
-
-**Not rescaling lambda to the interval**
-
-The rate is given for one interval, and the question is about another, but the same $\\lambda$ is used.
-
-Wrong working: a call center receives $4$ calls per hour on average. The probability of no calls in half an hour is taken as
-$$P(X = 0) = e^{-4} \\approx 0.018$$
-
-Right working: $\\lambda$ is the expected number of calls in the window being watched. Half an hour carries half the hourly rate, $\\lambda = 4 \\times \\frac{1}{2} = 2$.
-$$P(X = 0) = e^{-2} \\approx 0.135$$
-
-Why it happens: $\\lambda$ is quoted as "the rate", and it feels like a fixed property of the call center rather than the average count over one particular length of time.
-
-How to check: a whole hour with no calls is two half hours with no calls. With the right rate, $e^{-2} \\times e^{-2} = e^{-4}$, which matches the one-hour probability; with the wrong rate, the two half hours would give $e^{-4} \\times e^{-4} = e^{-8}$ for the hour.`,
+      content:`Three mistakes account for most wrong answers in Poisson problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip misreads $\\lambda$ or the event. At least $k$ includes $k$ itself; $\\lambda$ is the variance, so the standard deviation is $\\sqrt{\\lambda}$; and $\\lambda$ is rescaled to the length of the interval asked about. Checking the units, or splitting an interval into parts, catches each slip.`,
       link:'',
     },
      links:{
@@ -1743,8 +1707,71 @@ const poissonExplanations = {
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj17 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-at-least-as-more-than', name: `Treating at least as more than`, errorAt: 1,
+        what: `The question asks for at least $k$ events, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.`,
+        wrong: [`For $\\lambda = 3$,`, `$$P(X \\geq 2) = 1 - F_X(2)$$
+$$= 1 - \\big(P(X = 0) + P(X = 1)$$
+$$+ P(X = 2)\\big)$$
+$$\\approx 1 - 0.423 = 0.577$$`],
+        right: [`For $\\lambda = 3$,`, `At least $2$ means $2$ or more events, so the complement is at most $1$.`, `$$P(X \\geq 2) = 1 - F_X(1)$$
+$$= 1 - \\left(e^{-3} + 3e^{-3}\\right) = 1 - 4e^{-3}$$
+$$\\approx 1 - 0.199 = 0.801$$`],
+        why: `The page's complement rule is written for "more than $k$", and the two wordings differ by a single count. For continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.`,
+        check: `The gap between the two answers must be exactly the probability of the count that was dropped. Here $0.801 - 0.577 = 0.224$, and $P(X = 2) = \\frac{3^2 e^{-3}}{2!} = 4.5e^{-3} \\approx 0.224$.` },
+      { id: 'taking-lambda-as-the-standard-deviation', name: `Taking lambda as the standard deviation`, errorAt: 0,
+        what: `Because the variance of a Poisson count equals $\\lambda$, the number $\\lambda$ itself is taken as the typical distance of a count from its mean.`,
+        wrong: [`Calls arrive at $\\lambda = 16$ per hour, so $\\sigma = 16$, and a typical hour has anywhere from $16 - 16 = 0$ to $16 + 16 = 32$ calls.`],
+        right: [`The variance is $\\lambda = 16$, and the standard deviation is its square root.`, `$$\\sigma = \\sqrt{\\lambda} = \\sqrt{16} = 4$$`, `A typical hour has between $16 - 4 = 12$ and $16 + 4 = 20$ calls.`],
+        why: `The Poisson distribution is the one familiar case where a single number is both the mean and the variance, and "$\\lambda$ is the spread" is remembered without the square root.`,
+        check: `Look at the units. The variance is measured in calls squared, while the standard deviation is measured in calls, like the mean. The PMF agrees: for $\\lambda = 16$, the counts from $12$ to $20$ hold about 74% of hours, while the counts from $0$ to $32$ hold about 99.99%, far more than a band of one standard deviation on each side of the mean usually holds.` },
+      { id: 'not-rescaling-lambda-to-the-interval', name: `Not rescaling lambda to the interval`, errorAt: 1,
+        what: `The rate is given for one interval, and the question is about another, but the same $\\lambda$ is used.`,
+        wrong: [`A call center receives $4$ calls per hour on average.`, `The probability of no calls in half an hour is taken as
+$$P(X = 0) = e^{-4} \\approx 0.018$$`],
+        right: [`A call center receives $4$ calls per hour on average.`, `$\\lambda$ is the expected number of calls in the window being watched. Half an hour carries half the hourly rate, $\\lambda = 4 \\times \\frac{1}{2} = 2$.`, `$$P(X = 0) = e^{-2} \\approx 0.135$$`],
+        why: `$\\lambda$ is quoted as "the rate", and it feels like a fixed property of the call center rather than the average count over one particular length of time.`,
+        check: `A whole hour with no calls is two half hours with no calls. With the right rate, $e^{-2} \\times e^{-2} = e^{-4}$, which matches the one-hour probability; with the wrong rate, the two half hours would give $e^{-4} \\times e^{-4} = e^{-8}$ for the hour.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameter', formula: '$\\lambda > 0$, the average rate (events per interval)', note: 'events occur independently at a constant rate',
+        sub: 'The single number that fixes the distribution, as [the parameters section](!#2) explains.' },
+      { name: 'Support', formula: '$k \\in \\{0, 1, 2, \\ldots\\}$', note: 'countably infinite: no upper limit on the count',
+        sub: 'Every whole-number count can occur, as [the PMF and its support](!#4) shows.' },
+      { name: 'PMF', formula: '$\\displaystyle P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}, \\quad k = 0, 1, 2, \\ldots$', note: 'normalized through the Taylor series $\\displaystyle e^{\\lambda} = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!}$',
+        sub: 'The probability of exactly $k$ events in the interval, from [the PMF section](!#4).' },
+      { name: 'CDF', formula: '$\\displaystyle F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\lambda^i e^{-\\lambda}}{i!}$', note: 'no simple closed form; computed through the regularized incomplete gamma function',
+        sub: 'The probability of at most $k$ events, from [the CDF section](!#5).' },
+      { name: 'Expected value', formula: '$E[X] = \\lambda$', note: 'the rate parameter is the mean',
+        sub: 'The average count per interval, derived in [the expected value section](!#6).' },
+      { name: 'Variance', formula: '$\\mathrm{Var}(X) = \\lambda$, equal to the mean', note: 'a hallmark of the Poisson; a sample mean close to the sample variance is a check of fit',
+        sub: 'How widely the count spreads around $\\lambda$, worked out in [variance and standard deviation](!#7).' },
+      { name: 'Mode and median', formula: '$\\text{Mode} = \\lfloor \\lambda \\rfloor$, or $\\lambda - 1$ and $\\lambda$ when $\\lambda$ is an integer; $\\displaystyle \\text{Median} \\approx \\lambda + \\frac{1}{3} - \\frac{0.02}{\\lambda}$', note: 'the distribution approaches symmetry as $\\lambda$ grows',
+        sub: 'The most likely count and the middle of the distribution, found in [mode and median](!#8).' },
+      { name: 'Binomial approximation', formula: '$\\operatorname{Poisson}(\\lambda) \\approx \\operatorname{Binomial}(n, p)$ with $\\lambda = np$, large $n$ and small $p$', note: 'the law of rare events; rule of thumb $n > 20$, $p < 0.05$',
+        sub: 'Many trials with a small chance each give Poisson counts, as [applications and examples](!#11) notes.' },
+      { name: 'Canonical example', formula: 'a call center receiving 12 calls per hour: $\\lambda = 12$', note: '$E[X] = 12$, $\\mathrm{Var}(X) = 12$, $\\sigma \\approx 3.46$',
+        sub: 'The call-center setting used in [the expected value section](!#6).' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -1765,7 +1792,7 @@ const poissonExplanations = {
     }
    }
 
-export default function PoissonDistributionPage({
+export default function PoissonDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1982,8 +2009,16 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="poisson-distribution-formula-summary"
+            title="Poisson distribution at a glance"
+            source="/probability/distributions/discrete/poisson"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.obj16.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1992,6 +2027,15 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <DiagramFrame
+            key={'obj17-mistakes'}
+            id="poisson-pitfalls"
+            title="Common pitfalls with the Poisson distribution"
+            source="/probability/distributions/discrete/poisson"
+            after={sectionsContent.obj17.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -16,9 +16,11 @@ import functionRiemannDiagrams from '@/app/components/functions/riemann/function
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -393,7 +395,7 @@ Positive where $f(x) > 0$, negative where $f(x) < 0$. The integral sums these si
 
 @academic[pitfall,aside:true,width:35%:Reading signed area as area
 Taking $\\int_0^{2\\pi} \\sin x\\, dx = 0$ as the area between $\\sin x$ and the axis says the region has no area. Each of the two arches has area $2$, so the area is $2 + |-2| = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-signed-area-as-area)]@
 
 When $f$ changes sign on $[a, b]$, the positive and negative contributions are added together and partly cancel. The integral then measures a net amount: for a velocity that can turn negative, the net change in position rather than the total distance covered.
 
@@ -419,7 +421,7 @@ The "$+ C$" represents this entire family.
 
 @academic[pitfall,aside:true,width:35%:Forgetting the constant of integration
 Writing $\\int 2x\\, dx = x^2$ keeps one antiderivative only, and a condition such as $F(0) = 5$ then cannot be met, since $x^2$ is $0$ at $x = 0$. With $x^2 + C$ the condition gives $C = 5$ and $F(x) = x^2 + 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-constant-of-integration)]@
 
 For example, $x^3$, $x^3 + 7$ and $x^3 - 2$ all have derivative $3x^2$, so each of them is an antiderivative of $3x^2$, and $\\int 3x^2\\, dx = x^3 + C$ names all of them at once. Each choice of $C$ shifts the graph of $x^3$ up or down, and all the shifted graphs have the same slope at every $x$.
 
@@ -448,7 +450,7 @@ $$\\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$$
 
 @academic[pitfall,aside:true,width:35%:Integrating a product factor by factor
 Splitting $\\int x \\cdot x\\, dx$ into $\\int x\\, dx \\cdot \\int x\\, dx$ gives $\\frac{x^4}{4} + C$, whose derivative is $x^3$, not $x^2$. Linearity covers sums and constant factors only; here $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-integrating-a-product-factor-by-factor)]@
 
 Together the two rules break an integrand built from sums and constant multiples into single pieces. A polynomial, for instance, is integrated one power at a time: $\\int (3x^2 + 4x)\\, dx = 3\\int x^2\\, dx + 4\\int x\\, dx = x^3 + 2x^2 + C$.
 
@@ -533,7 +535,7 @@ $$\\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx = \\lim_{a \\to 0^+} \\int_a^1 \\frac{1}{
 
 @academic[pitfall,aside:true,width:35%:Missing a blow-up inside the interval
 Applying $F(b) - F(a)$ to $\\int_{-1}^{1} \\frac{1}{x^2}\\, dx$ gives $\\left[-\\frac{1}{x}\\right]_{-1}^{1} = -2$, a negative value for a positive integrand. The integrand is unbounded at $x = 0$, where $\\int_0^1 \\frac{1}{x^2}\\, dx$ already diverges, so the integral diverges.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-missing-a-blow-up-inside-the-interval)]@
 
 An improper integral converges if the limit exists and is finite; otherwise it diverges. The distinction matters—some infinite regions have finite area, others do not.
 `,
@@ -565,61 +567,20 @@ The seven subtopics covered in the sections above are different facets of the sa
     after: ``,
     link: ``
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the formulas this page shows from each branch of integration into four families, and the buttons above the cards show one family at a time. Each formula has a line on what it gives, with a link to the section of this page that introduces it.
+
+The first family sets the two kinds of integral side by side, the definite integral that gives a number and the indefinite one that gives a family of functions. The rules follow: splitting sums, moving constants out, the Fundamental Theorem and integration by parts. Six standard antiderivatives come next, and the last family shows two improper integrals evaluated as limits.`,
+    before: ``,
+    after: `A definite integral is usually computed in two moves: find an antiderivative with the rules and the standard forms, then evaluate it at the two limits. Improper integrals add a third move, a limit taken at the end that decides whether the area is finite.`,
+    link: '',
+  },
   obj12: {
     title: `Common Pitfalls`,
-    content: `
-Four mistakes cause many wrong answers in a first course on integration. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading signed area as area**
-
-A definite integral is computed and its value is reported as the area of the region between the curve and the $x$-axis, even though part of the region lies below the axis.
-
-Wrong working: $\\int_0^{2\\pi} \\sin x\\, dx = \\left[-\\cos x\\right]_0^{2\\pi} = -1 - (-1) = 0$, so the region between $\\sin x$ and the axis on $[0, 2\\pi]$ has area $0$.
-
-Right working: $\\sin x$ is negative on $(\\pi, 2\\pi)$, so split there. $\\int_0^{\\pi} \\sin x\\, dx = 1 - (-1) = 2$ and $\\int_{\\pi}^{2\\pi} \\sin x\\, dx = -1 - 1 = -2$. The area is $2 + |-2| = 4$, while the integral, the net amount, is $0$.
-
-Why it happens: the definite integral is introduced as "the area under a curve", and for a function that stays above the axis the two are the same number.
-
-How to check: an area is never negative, and it is $0$ only when there is no region. A sketch of the graph shows whether the curve crosses the axis inside $[a, b]$; if it does, the integral and the area differ.
-
-**Forgetting the constant of integration**
-
-An indefinite integral is written as a single function, without $+ C$. The answer then names one antiderivative instead of the whole family, and a later condition on the function cannot be used.
-
-Wrong working: $\\int 2x\\, dx = x^2$. Asked for the antiderivative with $F(0) = 5$, the only candidate is $F(x) = x^2$, and $F(0) = 0$, not $5$.
-
-Right working: $\\int 2x\\, dx = x^2 + C$. The condition gives $F(0) = 0 + C = 5$, so $C = 5$ and $F(x) = x^2 + 5$.
-
-Why it happens: a derivative is one function, and the answer to the reverse question is expected to be one function as well. The constant is invisible when the answer is checked by differentiating, because its derivative is $0$.
-
-How to check: two different methods can give answers that look different but differ by a constant. $\\int 2\\sin x \\cos x\\, dx$ comes out as $\\sin^2 x + C$ by one substitution and $-\\cos^2 x + C$ by another; the two differ by $\\sin^2 x + \\cos^2 x = 1$, which the $+ C$ absorbs.
-
-**Integrating a product factor by factor**
-
-Linearity splits an integral of a sum into a sum of integrals. The same splitting is then applied to a product, as if the integral of a product were the product of the integrals.
-
-Wrong working: $\\int x \\cdot x\\, dx = \\int x\\, dx \\cdot \\int x\\, dx = \\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$.
-
-Right working: simplify the integrand first. $x \\cdot x = x^2$, and the power rule gives $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
-
-Why it happens: the sum rule and the constant multiple rule both let the integral pass through, and a product looks like the next case of the same pattern. There is no such rule for products; integration by parts is the technique that handles many of them.
-
-How to check: differentiate the answer. $\\left(\\frac{x^4}{4}\\right)' = x^3$, which is not the integrand $x^2$; $\\left(\\frac{x^3}{3}\\right)' = x^2$, which is.
-
-**Missing a blow-up inside the interval**
-
-The Fundamental Theorem of Calculus is applied to an integrand that is unbounded at a point inside $[a, b]$. The antiderivative is defined at both ends, so nothing seems wrong, but the integral is improper.
-
-Wrong working: $\\int_{-1}^{1} \\frac{1}{x^2}\\, dx = \\left[-\\frac{1}{x}\\right]_{-1}^{1} = -1 - 1 = -2$.
-
-Right working: $\\frac{1}{x^2}$ is unbounded at $x = 0$, so the integral splits there into two improper integrals. $\\int_0^1 \\frac{1}{x^2}\\, dx = \\lim_{a \\to 0^+} \\left(-1 + \\frac{1}{a}\\right) = \\infty$, so that part diverges, and the whole integral diverges.
-
-Why it happens: the evaluation $F(b) - F(a)$ looks only at the endpoints, so a problem in the middle of the interval goes unseen. The theorem needs $f$ to be continuous on all of $[a, b]$.
-
-How to check: $\\frac{1}{x^2}$ is positive everywhere it is defined, so its integral over an interval cannot be negative; the $-2$ is a warning. Before evaluating, look for points in $[a, b]$ where a denominator is $0$.
-`,
+    content: `Four mistakes cause many wrong answers in a first course on integration. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip treats the integral as simpler than it is. A signed area of $0$ can hide two regions of equal area, an antiderivative needs its $+ C$ to meet a condition such as $F(0) = 5$, a product is not integrated factor by factor, and a blow-up inside the interval makes the integral improper. Differentiating the answer, or sketching the graph, catches each slip.`,
     link: ``
   }
 };
@@ -811,8 +772,70 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 14, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-signed-area-as-area', name: `Reading signed area as area`, errorAt: 0,
+        what: `A definite integral is computed and its value is reported as the area of the region between the curve and the $x$-axis, even though part of the region lies below the axis.`,
+        wrong: [`$\\int_0^{2\\pi} \\sin x\\, dx = \\left[-\\cos x\\right]_0^{2\\pi} = -1 - (-1) = 0$, so the region between $\\sin x$ and the axis on $[0, 2\\pi]$ has area $0$.`],
+        right: [`$\\sin x$ is negative on $(\\pi, 2\\pi)$, so split there. $\\int_0^{\\pi} \\sin x\\, dx = 1 - (-1) = 2$ and $\\int_{\\pi}^{2\\pi} \\sin x\\, dx = -1 - 1 = -2$. The area is $2 + |-2| = 4$, while the integral, the net amount, is $0$.`],
+        why: `The definite integral is introduced as "the area under a curve", and for a function that stays above the axis the two are the same number.`,
+        check: `An area is never negative, and it is $0$ only when there is no region. A sketch of the graph shows whether the curve crosses the axis inside $[a, b]$; if it does, the integral and the area differ.` },
+      { id: 'forgetting-the-constant-of-integration', name: `Forgetting the constant of integration`, errorAt: 0,
+        what: `An indefinite integral is written as a single function, without $+ C$. The answer then names one antiderivative instead of the whole family, and a later condition on the function cannot be used.`,
+        wrong: [`$\\int 2x\\, dx = x^2$. Asked for the antiderivative with $F(0) = 5$, the only candidate is $F(x) = x^2$, and $F(0) = 0$, not $5$.`],
+        right: [`$\\int 2x\\, dx = x^2 + C$. The condition gives $F(0) = 0 + C = 5$, so $C = 5$ and $F(x) = x^2 + 5$.`],
+        why: `A derivative is one function, and the answer to the reverse question is expected to be one function as well. The constant is invisible when the answer is checked by differentiating, because its derivative is $0$.`,
+        check: `Two different methods can give answers that look different but differ by a constant. $\\int 2\\sin x \\cos x\\, dx$ comes out as $\\sin^2 x + C$ by one substitution and $-\\cos^2 x + C$ by another; the two differ by $\\sin^2 x + \\cos^2 x = 1$, which the $+ C$ absorbs.` },
+      { id: 'integrating-a-product-factor-by-factor', name: `Integrating a product factor by factor`, errorAt: 0,
+        what: `Linearity splits an integral of a sum into a sum of integrals. The same splitting is then applied to a product, as if the integral of a product were the product of the integrals.`,
+        wrong: [`$\\int x \\cdot x\\, dx = \\int x\\, dx \\cdot \\int x\\, dx = \\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$.`],
+        right: [`Simplify the integrand first. $x \\cdot x = x^2$, and the power rule gives $\\int x^2\\, dx = \\frac{x^3}{3} + C$.`],
+        why: `The sum rule and the constant multiple rule both let the integral pass through, and a product looks like the next case of the same pattern. There is no such rule for products; integration by parts is the technique that handles many of them.`,
+        check: `Differentiate the answer. $\\left(\\frac{x^4}{4}\\right)' = x^3$, which is not the integrand $x^2$; $\\left(\\frac{x^3}{3}\\right)' = x^2$, which is.` },
+      { id: 'missing-a-blow-up-inside-the-interval', name: `Missing a blow-up inside the interval`, errorAt: 0,
+        what: `The Fundamental Theorem of Calculus is applied to an integrand that is unbounded at a point inside $[a, b]$. The antiderivative is defined at both ends, so nothing seems wrong, but the integral is improper.`,
+        wrong: [`$\\int_{-1}^{1} \\frac{1}{x^2}\\, dx = \\left[-\\frac{1}{x}\\right]_{-1}^{1} = -1 - 1 = -2$.`],
+        right: [`$\\frac{1}{x^2}$ is unbounded at $x = 0$, so the integral splits there into two improper integrals. $\\int_0^1 \\frac{1}{x^2}\\, dx = \\lim_{a \\to 0^+} \\left(-1 + \\frac{1}{a}\\right) = \\infty$, so that part diverges, and the whole integral diverges.`],
+        why: `The evaluation $F(b) - F(a)$ looks only at the endpoints, so a problem in the middle of the interval goes unseen. The theorem needs $f$ to be continuous on all of $[a, b]$.`,
+        check: `$\\frac{1}{x^2}$ is positive everywhere it is defined, so its integral over an interval cannot be negative; the $-2$ is a warning. Before evaluating, look for points in $[a, b]$ where a denominator is $0$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'kinds', name: 'Two kinds of integral', sub: 'The same symbol, with limits or without.', pairs: [
+        [{ formula: '$\\displaystyle \\int_a^b f(x)\\, dx$', text: 'The definite integral: a number, the signed area between the curve and the axis over $[a, b]$, as [definite integrals](!#4) explains.' },
+         { formula: '$\\displaystyle \\int f(x)\\, dx = F(x) + C$', text: 'The indefinite integral: the whole family of antiderivatives of $f$, as [indefinite integrals](!#5) explains.' }],
+      ] },
+      { id: 'rules', name: 'Rules and techniques', sub: 'Splitting integrals, evaluating them, and reversing the product rule.', pairs: [
+        [{ formula: '$\\displaystyle \\int [f(x) + g(x)]\\, dx = \\int f(x)\\, dx + \\int g(x)\\, dx$', text: 'A sum is integrated one term at a time, from [integration rules](!#6).' },
+         { formula: '$\\displaystyle \\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$', text: 'A constant factor moves outside the integral ([integration rules](!#6)).' }],
+        [{ formula: '$\\displaystyle \\int_a^b f(x)\\, dx = F(b) - F(a)$', text: 'The Fundamental Theorem of Calculus: any antiderivative $F$ evaluates the definite integral, as [integration rules](!#6) shows.' },
+         { formula: '$\\displaystyle \\int u\\, dv = uv - \\int v\\, du$', text: 'Integration by parts, which reverses the product rule; see [integration techniques](!#7).' }],
+      ] },
+      { id: 'special', name: 'Standard antiderivatives', sub: 'The building blocks that most integrals are reduced to.', pairs: [
+        [{ formula: '$\\displaystyle \\int x^n\\, dx = \\frac{x^{n+1}}{n+1} + C \\quad (n \\neq -1)$', text: 'The power rule for integrals, from [special integrals](!#8).' },
+         { formula: '$\\displaystyle \\int \\frac{1}{x}\\, dx = \\ln|x| + C$', text: 'The exponent the power rule leaves out gives a logarithm ([special integrals](!#8)).' }],
+        [{ formula: '$\\displaystyle \\int \\sin x\\, dx = -\\cos x + C$', text: 'Sine integrates to minus cosine, as [special integrals](!#8) lists.' },
+         { formula: '$\\displaystyle \\int \\cos x\\, dx = \\sin x + C$', text: 'Cosine integrates to sine ([special integrals](!#8)).' }],
+        [{ formula: '$\\displaystyle \\int e^x\\, dx = e^x + C$', text: 'The exponential is its own antiderivative ([special integrals](!#8)).' },
+         { formula: '$\\displaystyle \\int \\frac{1}{1 + x^2}\\, dx = \\arctan x + C$', text: 'A rational integrand with an inverse trigonometric answer, from [special integrals](!#8).' }],
+      ] },
+      { id: 'improper', name: 'Improper integrals', sub: 'Integrals over an infinite interval or of an unbounded function, defined as limits.', pairs: [
+        [{ formula: '$\\displaystyle \\int_1^{\\infty} \\frac{1}{x^2}\\, dx = \\lim_{b \\to \\infty} \\int_1^b \\frac{1}{x^2}\\, dx = 1$', text: 'An infinite interval with a finite area: the limit exists, so the integral converges ([improper integrals](!#9)).' },
+         { formula: '$\\displaystyle \\int_0^1 \\frac{1}{\\sqrt{x}}\\, dx = \\lim_{a \\to 0^+} \\int_a^1 \\frac{1}{\\sqrt{x}}\\, dx = 2$', text: 'An integrand that blows up at $0$, yet the limit is finite, as [improper integrals](!#9) shows.' }],
+      ] },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     integralTypeTree,
     demoUnits,
     conceptIntroFigures,
@@ -835,7 +858,7 @@ const schemas = {
 }
    }
 
-export default function IntegralsPage({integralTypeTree, seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function IntegralsPage({ formulaSummaryData, pitfallData,integralTypeTree, seoData, sectionsContent, introContent, obj2Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1037,11 +1060,38 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="integral-overview-formula-summary"
+            title="Key integral formulas"
+            source="/calculus/integrals"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj12.title,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="integral-pitfalls"
+            title="Common pitfalls with integrals"
+            source="/calculus/integrals"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

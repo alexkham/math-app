@@ -700,6 +700,8 @@ import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/ou
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1077,7 +1079,7 @@ These probabilities are part of the model definition and must be specified expli
 
 @academic[pitfall,aside:true,width:35%:Weights that do not sum to 1
 For a die whose six is twice as likely as each other face, taking $P(6) = \\frac{2}{6}$ and $\\frac{1}{6}$ for the rest gives a total of $\\frac{5}{6} + \\frac{2}{6} = \\frac{7}{6}$. With weights $q$ and $2q$, $5q + 2q = 1$, so $q = \\frac{1}{7}$ and $P(6) = \\frac{2}{7}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-weights-that-do-not-sum-to-1)]@
 
 In many introductory settings, all outcomes are assigned the same probability, producing a symmetric or "fair" model. This symmetry, however, is an assumption rather than a requirement. Unequal probabilities lead to a different, but equally valid, dice roll model.
 
@@ -1262,69 +1264,9 @@ Because it captures finite multi-outcome randomness in its simplest form, the di
 
     obj16:{
       title:`Common Pitfalls`,
-      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Ignoring the order of the dice**
-
-Two dice are rolled, and the outcomes are listed as unordered pairs of faces, so that a 1 with a 2 is one outcome however the dice fall. Each of these pairs is then given the same probability.
-
-Wrong working: there are $6$ doubles and $15$ pairs of different faces, $21$ in all, so
-$$P(\\text{a 1 and a 2}) = \\frac{1}{21}, \\quad P(\\text{double six}) = \\frac{1}{21}$$
-
-Right working: the equally likely outcomes are the $36$ ordered cells. "A 1 and a 2" is the two cells (1, 2) and (2, 1); double six is the single cell (6, 6).
-$$P(\\text{a 1 and a 2}) = \\frac{2}{36} = \\frac{1}{18}, \\quad P(\\text{double six}) = \\frac{1}{36}$$
-
-Why it happens: the two dice look alike, so (1, 2) and (2, 1) seem to be the same result. Physically they are still two dice, and each way of landing is a separate outcome.
-
-How to check: colour the dice, one red and one blue. Every unordered pair of different faces then splits into two distinguishable results, giving $6 + 2 \\cdot 15 = 36$ outcomes, and only these $36$ are equally likely.
-
-**Weights that do not sum to 1**
-
-A biased die is described in words, for example "a six is twice as likely as each other face", and the probabilities are written down by adjusting the fair values $\\frac{1}{6}$ without checking the total.
-
-Wrong working:
-$$P(6) = 2 \\cdot \\frac{1}{6} = \\frac{2}{6}, \\quad P(1) = \\dots = P(5) = \\frac{1}{6}$$
-$$\\text{total} = 5 \\cdot \\frac{1}{6} + \\frac{2}{6} = \\frac{7}{6}$$
-
-Right working: give each of the faces 1 to 5 the weight $q$ and the six the weight $2q$, and require the total to be $1$.
-$$5q + 2q = 1 \\implies q = \\frac{1}{7}$$
-$$P(1) = \\dots = P(5) = \\frac{1}{7}, \\quad P(6) = \\frac{2}{7}$$
-
-Why it happens: the fair value $\\frac{1}{6}$ is so familiar that it is kept for the unchanged faces. Making one face more likely must make the others less likely, because the total is fixed at $1$.
-
-How to check: add all six probabilities before using them. Here $5 \\cdot \\frac{1}{7} + \\frac{2}{7} = 1$, and the ratio $P(6) : P(1) = 2 : 1$ is the one described.
-
-**Expecting a missing face to be due**
-
-A face has not appeared for many rolls, and its probability on the next roll is believed to have risen.
-
-Wrong working: after ten rolls without a six,
-$$P(6 \\text{ on roll 11}) > \\frac{1}{6}$$
-
-Right working: rolls are independent, so roll 11 has the same assignment as every other roll.
-$$P(6 \\text{ on roll 11}) = \\frac{1}{6}$$
-A stretch of ten rolls without a six is not rare: its probability is $\\left(\\frac{5}{6}\\right)^{10} \\approx 0.16$.
-
-Why it happens: over many rolls each face appears about one time in six, and this is read as the die making up for a shortage. The proportions settle because later rolls far outnumber the stretch, not because the die compensates for it.
-
-How to check: compare two sequences of eleven rolls that agree in the first ten and differ only in the last roll. Each has probability $\\left(\\frac{1}{6}\\right)^{11}$ for a fair die, so the earlier rolls give no reason to prefer any face next.
-
-**Adding the chances for at least one six**
-
-The probability that at least one of two dice shows a six is found by adding the probability of a six on each die.
-
-Wrong working:
-$$P(\\text{at least one six}) = \\frac{1}{6} + \\frac{1}{6} = \\frac{12}{36} = \\frac{1}{3}$$
-
-Right working: the only way to have no six is that neither die shows one, with probability $\\left(\\frac{5}{6}\\right)^2 = \\frac{25}{36}$.
-$$P(\\text{at least one six}) = 1 - \\frac{25}{36} = \\frac{11}{36}$$
-On the grid this is the row of the first die's 6 and the column of the second die's 6: $6 + 6 - 1 = 11$ cells.
-
-Why it happens: probabilities of events that cannot happen together do add, and "six on the first die" and "six on the second die" look like separate events. They can happen together, in the cell (6, 6), which the sum counts twice.
-
-How to check: try more dice. With seven dice the same addition gives $\\frac{7}{6}$, more than $1$, which no probability can be; the complement gives $1 - \\left(\\frac{5}{6}\\right)^7 \\approx 0.72$.`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip builds the model of the dice wrongly. Two dice give ordered pairs, $36$ of them; the weights of a biased die must add up to $1$; a face that has not appeared is not due; and at least one six has probability $1 - \\left(\\frac{5}{6}\\right)^2$, not $\\frac{1}{6} + \\frac{1}{6}$. Colouring the dice, adding the weights, or trying more dice catches each slip.`,
       link:'',
     },
     obj15:{
@@ -1400,8 +1342,47 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
     }),
   };
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'ignoring-the-order-of-the-dice', name: `Ignoring the order of the dice`, errorAt: 0,
+        what: `Two dice are rolled, and the outcomes are listed as unordered pairs of faces, so that a 1 with a 2 is one outcome however the dice fall. Each of these pairs is then given the same probability.`,
+        wrong: [`There are $6$ doubles and $15$ pairs of different faces, $21$ in all, so
+$$P(\\text{a 1 and a 2}) = \\frac{1}{21},$$
+$$P(\\text{double six}) = \\frac{1}{21}$$`],
+        right: [`The equally likely outcomes are the $36$ ordered cells. "A 1 and a 2" is the two cells (1, 2) and (2, 1); double six is the single cell (6, 6).`, `$$P(\\text{a 1 and a 2}) = \\frac{2}{36} = \\frac{1}{18},$$
+$$P(\\text{double six}) = \\frac{1}{36}$$`],
+        why: `The two dice look alike, so (1, 2) and (2, 1) seem to be the same result. Physically they are still two dice, and each way of landing is a separate outcome.`,
+        check: `Colour the dice, one red and one blue. Every unordered pair of different faces then splits into two distinguishable results, giving $6 + 2 \\cdot 15 = 36$ outcomes, and only these $36$ are equally likely.` },
+      { id: 'weights-that-do-not-sum-to-1', name: `Weights that do not sum to 1`, errorAt: 0,
+        what: `A biased die is described in words, for example "a six is twice as likely as each other face", and the probabilities are written down by adjusting the fair values $\\frac{1}{6}$ without checking the total.`,
+        wrong: [`$$P(6) = 2 \\cdot \\frac{1}{6} = \\frac{2}{6},$$
+$$P(1) = \\dots = P(5) = \\frac{1}{6}$$`, `$$\\text{total} = 5 \\cdot \\frac{1}{6} + \\frac{2}{6} = \\frac{7}{6}$$`],
+        right: [`Give each of the faces 1 to 5 the weight $q$ and the six the weight $2q$, and require the total to be $1$.`, `$$5q + 2q = 1$$`, `$$\\implies q = \\frac{1}{7}$$`, `$$P(1) = \\dots = P(5) = \\frac{1}{7},$$
+$$P(6) = \\frac{2}{7}$$`],
+        why: `The fair value $\\frac{1}{6}$ is so familiar that it is kept for the unchanged faces. Making one face more likely must make the others less likely, because the total is fixed at $1$.`,
+        check: `Add all six probabilities before using them. Here $5 \\cdot \\frac{1}{7} + \\frac{2}{7} = 1$, and the ratio $P(6) : P(1) = 2 : 1$ is the one described.` },
+      { id: 'expecting-a-missing-face-to-be-due', name: `Expecting a missing face to be due`, errorAt: 0,
+        what: `A face has not appeared for many rolls, and its probability on the next roll is believed to have risen.`,
+        wrong: [`After ten rolls without a six,
+$$P(6 \\text{ on roll 11}) > \\frac{1}{6}$$`],
+        right: [`Rolls are independent, so roll 11 has the same assignment as every other roll.`, `$$P(6 \\text{ on roll 11}) = \\frac{1}{6}$$`, `A stretch of ten rolls without a six is not rare: its probability is $\\left(\\frac{5}{6}\\right)^{10} \\approx 0.16$.`],
+        why: `Over many rolls each face appears about one time in six, and this is read as the die making up for a shortage. The proportions settle because later rolls far outnumber the stretch, not because the die compensates for it.`,
+        check: `Compare two sequences of eleven rolls that agree in the first ten and differ only in the last roll. Each has probability $\\left(\\frac{1}{6}\\right)^{11}$ for a fair die, so the earlier rolls give no reason to prefer any face next.` },
+      { id: 'adding-the-chances-for-at-least-one-six', name: `Adding the chances for at least one six`, errorAt: 0,
+        what: `The probability that at least one of two dice shows a six is found by adding the probability of a six on each die.`,
+        wrong: [`$$P(\\text{at least one six}) = \\frac{1}{6} + \\frac{1}{6}$$
+$$= \\frac{12}{36} = \\frac{1}{3}$$`],
+        right: [`The only way to have no six is that neither die shows one, with probability $\\left(\\frac{5}{6}\\right)^2 = \\frac{25}{36}$.`, `$$P(\\text{at least one six}) = 1 - \\frac{25}{36} = \\frac{11}{36}$$`, `On the grid this is the row of the first die's 6 and the column of the second die's 6: $6 + 6 - 1 = 11$ cells.`],
+        why: `Probabilities of events that cannot happen together do add, and "six on the first die" and "six on the second die" look like separate events. They can happen together, in the cell (6, 6), which the sum counts twice.`,
+        check: `Try more dice. With seven dice the same addition gives $\\frac{7}{6}$, more than $1$, which no probability can be; the complement gives $1 - \\left(\\frac{5}{6}\\right)^7 \\approx 0.72$.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1422,7 +1403,7 @@ By allowing more than two outcomes, the dice roll model provides a basic framewo
   }
 }
 
-export default function DiceRollPage({
+export default function DiceRollPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1519,7 +1500,7 @@ export default function DiceRollPage({
                   <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
           `@academic[pitfall,aside:true,width:35%:Ignoring the order of the dice
 Listing two dice as 21 unordered pairs, each with probability $\\frac{1}{21}$, makes "a 1 and a 2" as likely as double six. In the grid "a 1 and a 2" fills two cells and double six one, so the probabilities are $\\frac{2}{36} = \\frac{1}{18}$ and $\\frac{1}{36}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-ignoring-the-order-of-the-dice)]@
 
 With two dice, an outcome records the face of the first die and the face of the second die, in that order. A 3 on the first die with a 5 on the second sits in a different cell from a 5 on the first die with a 3 on the second. For fair dice, each of the 36 cells carries the same probability, $\\frac{1}{36}$.`,
           `Events in this model are groups of these cells.`,
@@ -1553,7 +1534,7 @@ With two dice, an outcome records the face of the first die and the face of the 
                dangerouslySetInnerHTML={{ __html: assumptionsTable }} />,
           `@academic[pitfall,aside:true,width:35%:Expecting a missing face to be due
 After ten rolls without a six, a six seems due, so the next roll is given $P(6) > \\frac{1}{6}$. Rolls are independent: the next roll still has $P(6) = \\frac{1}{6}$, whatever the earlier rolls showed.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expecting-a-missing-face-to-be-due)]@
 
 Long stretches without a given face are an ordinary part of repeated rolling. In ten rolls of a fair die, no six appears at all with probability $\\left(\\frac{5}{6}\\right)^{10} \\approx 0.16$, about one time in six. Under the independence assumption, each roll in such a stretch is a new trial with the same probability assignment as the first roll.`,
         ]
@@ -1592,7 +1573,7 @@ The faces of a die need not carry the numbers 1 to 6: any six numbers can be wri
             `Larger faces are more likely as the maximum: P(max = 6) = 11/36, P(max = 1) = 1/36.`,
           `@academic[pitfall,aside:true,width:35%:Adding the chances for at least one six
 Adding $\\frac{1}{6}$ for each die gives $P(\\text{at least one six}) = \\frac{1}{6} + \\frac{1}{6} = \\frac{12}{36}$, counting the cell (6, 6) twice. The event has 11 cells, so its probability is $\\frac{11}{36}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-chances-for-at-least-one-six)]@
 
 The maximum also answers questions about a single face. The larger of the two faces is 6 exactly when at least one die shows a 6, so this event is the row of the grid where the first die shows 6 together with the column where the second die shows 6. Its probability is the number of cells in that row and column, divided by 36.`,
         ]
@@ -1645,6 +1626,15 @@ The maximum also answers questions about a single face. The larger of the two fa
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="dice-roll-pitfalls"
+            title="Common pitfalls with dice rolls"
+            source="/probability/models/dice-roll"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -16,6 +16,7 @@ import identityDiagrams from '@/app/components/algebra/identities/identityDiagra
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -890,6 +891,15 @@ Over the integers, identifying irreducibility is harder and no single test cover
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the factoring patterns of the page, sorted by the number of terms, which is how the page chooses a technique. Each family carries a line linking to the sections that explain it, and each pattern a short note on how to recognize it or what to watch for. The buttons above the cards show one family at a time.
+
+Three-term polynomials factor through the simple trinomial pattern or, when the ends are squares, as a perfect square. Two-term polynomials factor as a difference of squares or as a sum or difference of cubes. The last family generalizes both to higher powers: an even power reduces to a difference of squares, and odd powers split off one linear factor.`,
+    before: ``,
+    after: `Each pattern is checked the same way, by multiplying the factors back together. After any pattern is used, every factor deserves a second look, since a difference of squares or of cubes often hides inside the result.`,
+    link: '',
+  },
   obj12: {
     title: `Common Mistakes`,
     content: `Certain errors appear repeatedly in factoring work, and awareness of them is the simplest way to avoid them.
@@ -1215,8 +1225,31 @@ $$= (3x + 4)(2x + 1)$$`],
     ],
   };
 
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'three', name: 'Three terms', sub: 'Trinomials, from [the simple case](!#4) and [perfect square trinomials](!#7).', pairs: [
+        [{ formula: '$x^2 + (a + b)x + ab = (x + a)(x + b)$', text: 'Find two numbers whose product is the constant and whose sum is the middle coefficient.' }, ''],
+        [{ formula: '$a^2 + 2ab + b^2 = (a + b)^2$', text: 'The first and last terms are squares and the middle is twice their product.' },
+         { formula: '$a^2 - 2ab + b^2 = (a - b)^2$', text: 'The same pattern with a minus middle term.' }],
+      ] },
+      { id: 'two', name: 'Two terms', sub: 'Binomials, from [difference of squares](!#6) and [sum and difference of cubes](!#8).', pairs: [
+        [{ formula: '$a^2 - b^2 = (a + b)(a - b)$', text: 'A difference of two squares always factors; a sum of two squares does not over the reals.' }, ''],
+        [{ formula: '$a^3 + b^3 = (a + b)(a^2 - ab + b^2)$', text: 'The binomial factor keeps the sign of the sum.' },
+         { formula: '$a^3 - b^3 = (a - b)(a^2 + ab + b^2)$', text: 'The binomial factor keeps the minus; the trinomial has all plus signs.' }],
+      ] },
+      { id: 'higher', name: 'Higher powers', sub: 'The general patterns in [factoring higher-degree polynomials](!#9).', pairs: [
+        [{ formula: '$x^{2n} - a^{2n} = (x^n - a^n)(x^n + a^n)$', text: 'An even power is a difference of squares, and the first factor may split again.' }, ''],
+        [{ formula: '$x^n - a^n = (x - a)(x^{n-1} + ax^{n-2} + \\cdots + a^{n-1})$', text: 'For odd $n$, the second factor has all plus signs.' },
+         { formula: '$x^n + a^n = (x + a)(x^{n-1} - ax^{n-2} + \\cdots + a^{n-1})$', text: 'For odd $n$, the signs in the second factor alternate.' }],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
     pitfallData,
     factoringDecision,
     factorOutline,
@@ -1242,7 +1275,7 @@ $$= (3x + 4)(2x + 1)$$`],
 }
    }
 
-export default function FactoringPage({ pitfallData,factoringDecision, factorOutline,gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FactoringPage({ formulaSummaryData, pitfallData,factoringDecision, factorOutline,gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1457,6 +1490,24 @@ export default function FactoringPage({ pitfallData,factoringDecision, factorOut
     },
 
     // obj12: prose + common-mistakes aggregation table
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="factoring-formula-summary"
+            title="Factoring patterns"
+            source="/algebra/polynomials/factoring"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
     {
         id:'12',
         title:sectionsContent.obj12.title,

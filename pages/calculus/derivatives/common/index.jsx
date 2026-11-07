@@ -16,7 +16,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -425,7 +427,7 @@ $$\\frac{d}{dx}[c] = 0$$
 
 @academic[pitfall,aside:true,width:35%:Applying the power rule to a constant
 Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number as a function of $x$. $e^3 \\approx 20.09$ is a constant, so its derivative is $0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-applying-the-power-rule-to-a-constant)]@
 
 The graph of a constant function is a horizontal line. Every secant line through two points on it has slope zero, so the tangent line at every point also has slope zero. From the limit definition, the difference quotient $\\frac{c - c}{h} = 0$ for all $h \\neq 0$, and the limit is $0$.
 
@@ -453,7 +455,7 @@ For positive integer $n$, the proof expands $(x+h)^n$ using the binomial theorem
 
 @academic[pitfall,aside:true,width:35%:Lowering a negative exponent toward zero
 Computing $-3 + 1$ instead of $-3 - 1$ turns $\\frac{d}{dx}[x^{-3}]$ into $-3x^{-2}$, which is $-0.75$ at $x = 2$. The rule always subtracts $1$: the derivative is $-3x^{-4}$, which is $-0.1875$ at $x = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-lowering-a-negative-exponent-toward-zero)]@
 
 Extension to negative and fractional exponents uses the quotient rule and the chain rule respectively, or alternatively [logarithmic differentiation](!/calculus/derivatives/techniques): writing $x^n = e^{n \\ln x}$ and applying the chain rule gives $\\frac{d}{dx}[x^n] = e^{n \\ln x} \\cdot \\frac{n}{x} = x^n \\cdot \\frac{n}{x} = nx^{n-1}$.
 `,
@@ -573,7 +575,7 @@ $$\\frac{d}{dx}[a^x] = a^x \\ln a$$
 
 @academic[pitfall,aside:true,width:35%:Using the power rule on an exponential
 Bringing the exponent down turns $\\frac{d}{dx}[2^x]$ into $x \\cdot 2^{x-1}$, which is $0$ at $x = 0$. The variable is in the exponent, so the derivative is $2^x \\ln 2$, which is $\\ln 2 \\approx 0.693$ at $x = 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-power-rule-on-an-exponential)]@
 
 This follows from rewriting $a^x = e^{x \\ln a}$ and applying the chain rule. The factor $\\ln a$ is constant—it scales the derivative. When $a = e$, $\\ln a = 1$ and the factor disappears, confirming the special role of base $e$.
 `,
@@ -605,7 +607,7 @@ $$\\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the factor ln a
 Using $\\frac{1}{x}$ as the derivative of $\\log_{10} x$ gives slope $1$ at $x = 1$. The factor $\\frac{1}{\\ln 10}$ is missing: the derivative is $\\frac{1}{x \\ln 10}$, about $0.434$ at $x = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-factor-ln-a)]@
 
 This follows from the change of base formula $\\log_a x = \\frac{\\ln x}{\\ln a}$ and the constant multiple rule. The natural logarithm gives the simplest derivative—another reason $e$ is the preferred base.
 
@@ -619,8 +621,7 @@ This extended form appears frequently in [integration](!/calculus/integrals).
   },
   obj8: {
     title: `Summary of Common Derivatives`,
-    content: `
-The complete set of common derivative formulas:
+    content: `The complete set of common derivative formulas:
 
 @academic[formula_callout:Summary of Common Derivatives
 $$\\frac{d}{dx}[c] = 0 \\qquad \\frac{d}{dx}[x^n] = nx^{n-1}$$]@
@@ -640,79 +641,21 @@ $$\\frac{d}{dx}[e^x] = e^x \\qquad \\frac{d}{dx}[a^x] = a^x \\ln a$$]@
 @academic[formula_callout:Summary of Common Derivatives
 $$\\frac{d}{dx}[\\ln x] = \\frac{1}{x} \\qquad \\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$$]@
 
-These twelve formulas, combined with the [differentiation rules](!/calculus/derivatives/rules), handle every explicit function built from powers, trigonometric functions, exponentials, and logarithms. Functions involving inverse trigonometric, hyperbolic, or piecewise definitions require the additional formulas collected in [derivatives of special functions](!/calculus/derivatives/special). The master reference card below collects everything in one place, grouped by function family for quick lookup.
-`,
+These twelve formulas, combined with the [differentiation rules](!/calculus/derivatives/rules), handle every explicit function built from powers, trigonometric functions, exponentials, and logarithms. Functions involving inverse trigonometric, hyperbolic, or piecewise definitions require the additional formulas collected in [derivatives of special functions](!/calculus/derivatives/special).
+
+The summary sorts the twelve formulas into four families, two formulas to a line, and the buttons above the cards show one family at a time. Each formula has a line on where it comes from or what to watch for, with a link to the section that derives it, and the conditions on the base or the variable are stated beside the formula they belong to.
+
+The first family holds the constant and the power rule. The trigonometric family pairs each function with its co-function: sine with cosine, tangent with cotangent, secant with cosecant. The exponential family sets the natural exponential beside a general base, and the logarithmic family does the same for the natural and the general logarithm.`,
+    formulaSheetAfter: `Each line pairs a formula with a close relative. A co-function follows its partner's rule with the co-functions swapped in and a minus sign added, and a general base follows the natural one with an extra factor, the logarithm of the base, so six formulas and two habits cover all twelve.`,
     before: ``,
     after: ``,
     link: '',
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes account for most wrong answers when these formulas are applied. Four of them are marked where they happen in the sections above; the sign of the cosine derivative is the one the sine and cosine section warns against. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Applying the power rule to a constant**
-
-A constant written as a power, such as $e^3$, $\\pi^2$ or $5^4$, is differentiated as if its base were the variable.
-
-Wrong working: $\\frac{d}{dx}[e^3] = 3e^2$, by the power rule.
-
-Right working: $e^3 \\approx 20.09$ is a fixed number; nothing in it depends on $x$. By the constant rule, $\\frac{d}{dx}[e^3] = 0$.
-
-Why it happens: the expression has the shape "something to a power", and the power rule is matched by shape. The rule is about $x^n$, where the base is the variable and the exponent is fixed.
-
-How to check: look for $x$. If the expression contains no $x$, its graph is a horizontal line and the derivative is $0$.
-
-**Lowering a negative exponent toward zero**
-
-With a negative exponent, $1$ is added to it instead of subtracted, so the new exponent moves toward zero.
-
-Wrong working: $\\frac{d}{dx}[x^{-3}] = -3x^{-3 + 1} = -3x^{-2}$. At $x = 2$ this gives $-\\frac{3}{4} = -0.75$.
-
-Right working: the rule gives $n - 1$, and $-3 - 1 = -4$. So $\\frac{d}{dx}[x^{-3}] = -3x^{-4}$, and at $x = 2$ this is $-\\frac{3}{16} = -0.1875$.
-
-Why it happens: for positive exponents, subtracting $1$ makes the exponent smaller in size, and that habit is carried over. For negative exponents, subtracting $1$ makes the exponent larger in size.
-
-How to check: compute a difference quotient. For $f(x) = x^{-3}$, $\\frac{f(2.001) - f(2)}{0.001} \\approx -0.1873$, close to $-0.1875$ and far from $-0.75$.
-
-**Dropping the minus sign on the cosine derivative**
-
-The derivative of $\\cos x$ is written as $\\sin x$, without the minus sign, by analogy with $\\frac{d}{dx}[\\sin x] = \\cos x$.
-
-Wrong working: $\\frac{d}{dx}[\\cos x] = \\sin x$, so the slope of $\\cos x$ at $x = \\frac{\\pi}{2}$ is $\\sin \\frac{\\pi}{2} = 1$.
-
-Right working: $\\frac{d}{dx}[\\cos x] = -\\sin x$, so the slope at $x = \\frac{\\pi}{2}$ is $-1$.
-
-Why it happens: the two formulas are learned as a pair, and the pair looks symmetric. It is not: going from sine to cosine keeps the sign, going from cosine to sine changes it.
-
-How to check: think of the graph. Between $0$ and $\\pi$ the cosine falls from $1$ to $-1$, so its slope there must be negative, and $-\\sin x$ is negative on that interval.
-
-**Using the power rule on an exponential**
-
-In $2^x$ the variable is the exponent, but the power rule is applied as if it were $x^n$: the exponent is brought down and lowered by one.
-
-Wrong working: $\\frac{d}{dx}[2^x] = x \\cdot 2^{x - 1}$. At $x = 0$ this gives $0$.
-
-Right working: the exponential rule applies. $\\frac{d}{dx}[2^x] = 2^x \\ln 2$, and at $x = 0$ this is $\\ln 2 \\approx 0.693$.
-
-Why it happens: $x^2$ and $2^x$ use the same symbols, and the power rule is the first rule learned, so it is applied by habit.
-
-How to check: compute a difference quotient at $x = 0$. $\\frac{2^{0.001} - 2^0}{0.001} \\approx 0.6934$, which is not $0$. An exponential with a base above $1$ is always increasing, so its slope cannot be $0$ anywhere.
-
-**Dropping the factor ln a**
-
-The derivative of $\\log_a x$ is written as $\\frac{1}{x}$, the formula for the natural logarithm, for every base.
-
-Wrong working: $\\frac{d}{dx}[\\log_{10} x] = \\frac{1}{x}$, so the slope at $x = 1$ is $1$.
-
-Right working: $\\log_{10} x = \\frac{\\ln x}{\\ln 10}$, so $\\frac{d}{dx}[\\log_{10} x] = \\frac{1}{x \\ln 10}$. At $x = 1$ this is $\\frac{1}{\\ln 10} \\approx 0.434$.
-
-Why it happens: $\\frac{1}{x}$ is the logarithm derivative used most often, and the base is easy to overlook.
-
-How to check: compute a difference quotient at $x = 1$. $\\frac{\\log_{10} 1.001 - \\log_{10} 1}{0.001} \\approx 0.4341$, close to $0.434$ and not $1$. Only for base $e$, where $\\ln e = 1$, is the derivative exactly $\\frac{1}{x}$.
-`,
+    content: `Five mistakes account for most wrong answers when these formulas are applied. Four of them are marked where they happen in the sections above; the sign of the cosine derivative is the one the sine and cosine section warns against. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip uses a rule outside the functions it covers. A constant such as $e^3$ has derivative $0$, the power rule lowers $-3$ to $-4$, the derivative of $\\cos x$ is $-\\sin x$, an exponential $a^x$ has derivative $a^x \\ln a$, and $\\log_a x$ has derivative $\\frac{1}{x \\ln a}$. A difference quotient with a small step, or a look at whether the graph rises or falls, catches each slip.`,
     link: '',
   },
 };
@@ -923,8 +866,74 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 13, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'applying-the-power-rule-to-a-constant', name: `Applying the power rule to a constant`, errorAt: 0,
+        what: `A constant written as a power, such as $e^3$, $\\pi^2$ or $5^4$, is differentiated as if its base were the variable.`,
+        wrong: [`$\\frac{d}{dx}[e^3] = 3e^2$, by the power rule.`],
+        right: [`$e^3 \\approx 20.09$ is a fixed number; nothing in it depends on $x$. By the constant rule, $\\frac{d}{dx}[e^3] = 0$.`],
+        why: `The expression has the shape "something to a power", and the power rule is matched by shape. The rule is about $x^n$, where the base is the variable and the exponent is fixed.`,
+        check: `Look for $x$. If the expression contains no $x$, its graph is a horizontal line and the derivative is $0$.` },
+      { id: 'lowering-a-negative-exponent-toward-zero', name: `Lowering a negative exponent toward zero`, errorAt: 0,
+        what: `With a negative exponent, $1$ is added to it instead of subtracted, so the new exponent moves toward zero.`,
+        wrong: [`$\\frac{d}{dx}[x^{-3}] = -3x^{-3 + 1} = -3x^{-2}$. At $x = 2$ this gives $-\\frac{3}{4} = -0.75$.`],
+        right: [`The rule gives $n - 1$, and $-3 - 1 = -4$. So $\\frac{d}{dx}[x^{-3}] = -3x^{-4}$, and at $x = 2$ this is $-\\frac{3}{16} = -0.1875$.`],
+        why: `For positive exponents, subtracting $1$ makes the exponent smaller in size, and that habit is carried over. For negative exponents, subtracting $1$ makes the exponent larger in size.`,
+        check: `Compute a difference quotient. For $f(x) = x^{-3}$, $\\frac{f(2.001) - f(2)}{0.001} \\approx -0.1873$, close to $-0.1875$ and far from $-0.75$.` },
+      { id: 'dropping-the-minus-sign-on-the-cosine-derivative', name: `Dropping the minus sign on the cosine derivative`, errorAt: 0,
+        what: `The derivative of $\\cos x$ is written as $\\sin x$, without the minus sign, by analogy with $\\frac{d}{dx}[\\sin x] = \\cos x$.`,
+        wrong: [`$\\frac{d}{dx}[\\cos x] = \\sin x$, so the slope of $\\cos x$ at $x = \\frac{\\pi}{2}$ is $\\sin \\frac{\\pi}{2} = 1$.`],
+        right: [`$\\frac{d}{dx}[\\cos x] = -\\sin x$, so the slope at $x = \\frac{\\pi}{2}$ is $-1$.`],
+        why: `The two formulas are learned as a pair, and the pair looks symmetric. It is not: going from sine to cosine keeps the sign, going from cosine to sine changes it.`,
+        check: `Think of the graph. Between $0$ and $\\pi$ the cosine falls from $1$ to $-1$, so its slope there must be negative, and $-\\sin x$ is negative on that interval.` },
+      { id: 'using-the-power-rule-on-an-exponential', name: `Using the power rule on an exponential`, errorAt: 0,
+        what: `In $2^x$ the variable is the exponent, but the power rule is applied as if it were $x^n$: the exponent is brought down and lowered by one.`,
+        wrong: [`$\\frac{d}{dx}[2^x] = x \\cdot 2^{x - 1}$. At $x = 0$ this gives $0$.`],
+        right: [`The exponential rule applies. $\\frac{d}{dx}[2^x] = 2^x \\ln 2$, and at $x = 0$ this is $\\ln 2 \\approx 0.693$.`],
+        why: `$x^2$ and $2^x$ use the same symbols, and the power rule is the first rule learned, so it is applied by habit.`,
+        check: `Compute a difference quotient at $x = 0$. $\\frac{2^{0.001} - 2^0}{0.001} \\approx 0.6934$, which is not $0$. An exponential with a base above $1$ is always increasing, so its slope cannot be $0$ anywhere.` },
+      { id: 'dropping-the-factor-ln-a', name: `Dropping the factor ln a`, errorAt: 0,
+        what: `The derivative of $\\log_a x$ is written as $\\frac{1}{x}$, the formula for the natural logarithm, for every base.`,
+        wrong: [`$\\frac{d}{dx}[\\log_{10} x] = \\frac{1}{x}$, so the slope at $x = 1$ is $1$.`],
+        right: [`$\\log_{10} x = \\frac{\\ln x}{\\ln 10}$, so $\\frac{d}{dx}[\\log_{10} x] = \\frac{1}{x \\ln 10}$. At $x = 1$ this is $\\frac{1}{\\ln 10} \\approx 0.434$.`],
+        why: `$\\frac{1}{x}$ is the logarithm derivative used most often, and the base is easy to overlook.`,
+        check: `Compute a difference quotient at $x = 1$. $\\frac{\\log_{10} 1.001 - \\log_{10} 1}{0.001} \\approx 0.4341$, close to $0.434$ and not $1$. Only for base $e$, where $\\ln e = 1$, is the derivative exactly $\\frac{1}{x}$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'power', name: 'Constant and power', sub: 'The two rules that handle every polynomial term by term.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[c] = 0$', text: 'A constant has a horizontal graph, so its slope is zero everywhere, as [constant functions](!#1) shows.' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[x^n] = nx^{n-1}$', text: 'Valid for every real exponent $n$; the exponent comes down and drops by one, from [power functions](!#2).' }],
+      ] },
+      { id: 'trig', name: 'Trigonometric', sub: 'Six functions in pairs; every co-function derivative carries a minus sign.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\sin x] = \\cos x$', text: 'The slope of the sine curve is the cosine, as [sine and cosine](!#4) proves from the limit definition.' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\cos x] = -\\sin x$', text: 'The minus sign is where most slips happen; see [sine and cosine](!#4).' }],
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\tan x] = \\sec^2 x$', text: 'Found with the quotient rule on $\\sin x / \\cos x$ in [tangent, cotangent, secant, cosecant](!#5).' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\cot x] = -\\csc^2 x$', text: 'The co-function version of the tangent rule, with a minus sign ([the same section](!#5)).' }],
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\sec x] = \\sec x \\tan x$', text: 'Secant is $1/\\cos x$, and differentiating it gives this product, as [the tangent family](!#5) shows.' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$', text: 'The co-function version of the secant rule, again with a minus sign ([the same section](!#5)).' }],
+      ] },
+      { id: 'exp', name: 'Exponential', sub: 'Bases other than $e$ pick up the constant factor $\\ln a$.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[e^x] = e^x$', text: 'The natural exponential is its own derivative, as [exponential functions](!#6) explains.' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[a^x] = a^x \\ln a$', text: 'For a base $a > 0$, $a \\neq 1$; rewriting $a^x = e^{x \\ln a}$ in [exponential functions](!#6) gives the factor.' }],
+      ] },
+      { id: 'log', name: 'Logarithmic', sub: 'Logarithms differentiate to reciprocals, not to other logarithms.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\ln x] = \\frac{1}{x}$', text: 'For $x > 0$; the natural logarithm has the simplest slope, as [logarithmic functions](!#7) shows.' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\log_a x] = \\frac{1}{x \\ln a}$', text: 'For a base $a > 0$, $a \\neq 1$; changing the base to $e$ in [logarithmic functions](!#7) brings in $\\ln a$.' }],
+      ] },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     commonDerivativesOutline,
     demoUnits,
     conceptIntroFigures,
@@ -946,7 +955,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({commonDerivativesOutline, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ formulaSummaryData, pitfallData,commonDerivativesOutline, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1006,7 +1015,7 @@ $$\\frac{d}{dx}[c] = 0$$
         content: [
           `@academic[pitfall,aside:true,width:35%:Applying the power rule to a constant
 Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number as a function of $x$. $e^3 \\approx 20.09$ is a constant, so its derivative is $0$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-applying-the-power-rule-to-a-constant)]@`,
         ],
       },
       {
@@ -1092,8 +1101,16 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="common-derivative-formula-summary"
+            title="Common derivatives"
+            source="/calculus/derivatives/common"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="common-derivatives-outline"
@@ -1110,6 +1127,15 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="common-derivative-pitfalls"
+            title="Common pitfalls with common derivatives"
+            source="/calculus/derivatives/common"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

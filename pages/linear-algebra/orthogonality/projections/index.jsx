@@ -1854,6 +1854,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import projectionDiagrams from '@/app/components/linear-algebra copy/matrix/projectionDiagrams'
@@ -1861,6 +1862,7 @@ import projection2dDiagrams from '@/app/components/linear-algebra copy/r2-visual
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2191,7 +2193,7 @@ Residual: $\\mathbf{b} - \\text{proj}_{\\mathbf{a}}\\mathbf{b} = (\\frac{2}{3}, 
 
 @academic[pitfall,aside:true,width:35%:Dividing by the length instead of its square
 Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$ instead of $\\mathbf{a} \\cdot \\mathbf{a} = 3$ gives $\\frac{7}{\\sqrt{3}}(1, 1, 1)$, of length $7$, more than $\\|\\mathbf{b}\\| = 5$. The projection is $\\frac{7}{3}(1, 1, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-length-instead-of-its-square)]@
 
 The residual check is the quickest test of a computed projection. Only one multiple of $\\mathbf{a}$ leaves a remainder perpendicular to $\\mathbf{a}$, so a slip in the coefficient shows up as a nonzero dot product. A second test is size: the projection and the residual are the two legs of a right triangle whose hypotenuse is $\\mathbf{b}$, so the projection is never longer than $\\mathbf{b}$.`,
     before: ``,
@@ -2292,7 +2294,7 @@ This formula requires $A^TA$ to be [invertible](!/linear-algebra/matrix/inverse)
 
 @academic[pitfall,aside:true,width:35%:Splitting the inverse of a product
 Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ cancels the formula to $P = I$, but an $m \\times k$ matrix $A$ with $k < m$ has no inverse. For the columns $(1, 0, 1)$ and $(0, 1, 1)$, $P = \\frac{1}{3}\\begin{pmatrix} 2 & -1 & 1 \\\\ -1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$, not $I$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-inverse-of-a-product)]@
 
 The derivation comes from the orthogonality condition. The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$: $A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$. Solving for $\\hat{\\mathbf{x}}$ gives $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$, so $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$, and $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
 
@@ -2312,7 +2314,7 @@ When the basis is orthonormal ($A = Q$ with $Q^TQ = I$), the formula simplifies:
 
 @academic[pitfall,aside:true,width:35%:Taking QQ transpose to be the identity
 Concluding $QQ^T = I$ from $Q^TQ = I$ fails for a non-square $Q$: with the single column $\\frac{1}{\\sqrt{2}}(1, 1, 0)$, $Q^TQ = (1)$, but $QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 & 0 \\\\ 1 & 1 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}$ sends $(1, 0, 0)$ to $(\\frac{1}{2}, \\frac{1}{2}, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-qq-transpose-to-be-the-identity)]@
 
 The projection matrix satisfies two algebraic conditions. It is [symmetric](!/linear-algebra/matrix/types): $P^T = P$. And it is [idempotent](!/linear-algebra/matrix/types): $P^2 = P$ — projecting twice gives the same result as projecting once, because vectors already in $W$ are fixed by $P$.
 
@@ -2392,7 +2394,7 @@ $$\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = 1\\begin{pmatrix} 1 \\\\ 0 \\\\ 1 \
 
 @academic[pitfall,aside:true,width:35%:Adding projections onto a non-orthogonal basis
 Summing the single-vector projections onto $(1, 0, 1)$ and $(0, 1, 1)$ gives $2(1, 0, 1) + \\frac{5}{2}(0, 1, 1) = (2, \\frac{5}{2}, \\frac{9}{2})$, which is not even $\\mathbf{b}$. The general formula gives $\\hat{\\mathbf{b}} = (1, 2, 3)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-projections-onto-a-non-orthogonal-basis)]@
 
 The projection equals $\\mathbf{b}$ itself — meaning $\\mathbf{b}$ was already in $W$. The residual is $\\mathbf{0}$, confirming $\\mathbf{b} \\in \\text{Span}\\{(1, 0, 1), (0, 1, 1)\\}$. Indeed: $(1, 2, 3) = 1 \\cdot (1, 0, 1) + 2 \\cdot (0, 1, 1)$.`,
     before: ``,
@@ -2406,69 +2408,20 @@ The projection equals $\\mathbf{b}$ itself — meaning $\\mathbf{b}$ was already
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the projection formulas of the page on one set of cards, from a single vector up to the projection matrix. Each card gives a name and a formula, with a sentence on what it computes and a link to the section that explains it. A badge states what the vector or the basis must satisfy.
+
+The first card projects onto one vector. Three cards project onto a subspace: with an orthogonal basis, with an orthonormal basis, and with any basis held in the columns of a matrix. The last three describe the projection matrix: its short form for orthonormal columns, the complementary projection, and the two properties of every orthogonal projection.`,
+    before: ``,
+    after: `Pick the formula that fits the basis at hand. An orthonormal basis needs only dot products, an orthogonal one adds one division per vector, and any other basis calls for the matrix formula or for Gram-Schmidt first; every route gives the same projection.`,
+    link: '',
+  },
   obj10: {
     title: `Common Pitfalls`,
-    content: `Four slips account for many wrong projection computations. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Dividing by the length instead of its square**
-
-The coefficient is computed as $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|}$, the signed length of the projection, and then multiplied by $\\mathbf{a}$ itself rather than by the unit vector in its direction. The result points the right way but has the wrong length, unless $\\mathbf{a}$ is a unit vector.
-
-Wrong working: with $\\mathbf{b} = (3, 4, 0)$ and $\\mathbf{a} = (1, 1, 1)$,
-$$\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|}\\,\\mathbf{a} = \\frac{7}{\\sqrt{3}}(1, 1, 1)$$
-a vector of length $\\frac{7}{\\sqrt{3}} \\cdot \\sqrt{3} = 7$.
-
-Right working: divide by $\\mathbf{a} \\cdot \\mathbf{a} = \\|\\mathbf{a}\\|^2 = 3$.
-$$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a} = \\frac{7}{3}(1, 1, 1)$$
-of length $\\frac{7}{\\sqrt{3}} \\approx 4.04$. Written with the unit vector, the same result is $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|} \\cdot \\frac{\\mathbf{a}}{\\|\\mathbf{a}\\|}$, with two divisions by $\\|\\mathbf{a}\\|$.
-
-Why it happens: the scalar projection $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|}$ has a single division, and it is mixed up with the vector projection, which needs two.
-
-How to check: the projection is never longer than $\\mathbf{b}$, and here $\\|\\mathbf{b}\\| = 5 < 7$. The residual test fails too: $\\left((3, 4, 0) - \\frac{7}{\\sqrt{3}}(1, 1, 1)\\right) \\cdot (1, 1, 1) = 7 - 7\\sqrt{3} \\neq 0$.
-
-**Splitting the inverse of a product**
-
-The rule $(XY)^{-1} = Y^{-1}X^{-1}$ is applied to $(A^TA)^{-1}$, although it holds only when both factors are square and invertible. Everything then cancels, and the projection matrix comes out as $I$, as if every vector were its own projection.
-
-Wrong working:
-$$A(A^TA)^{-1}A^T = A\\,A^{-1}(A^T)^{-1}A^T = I$$
-
-Right working: $A$ is $m \\times k$ with $k < m$, so $A^{-1}$ does not exist, and only the $k \\times k$ matrix $A^TA$ is inverted. With the columns $(1, 0, 1)$ and $(0, 1, 1)$ of the worked example, $(A^TA)^{-1} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$ and
-$$P = A(A^TA)^{-1}A^T = \\frac{1}{3}\\begin{pmatrix} 2 & -1 & 1 \\\\ -1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$$
-This $P$ sends $(1, 1, -1)$, which is perpendicular to both columns, to $\\mathbf{0}$, while $I$ would leave it unchanged.
-
-Why it happens: the inverse rule for products is remembered without its condition, and $A^TA$ looks like a product of two matrices that can be inverted one at a time.
-
-How to check: the trace of $P$ equals $\\dim W$. Here $\\operatorname{tr}(P) = \\frac{2 + 2 + 2}{3} = 2$, the dimension of the plane, while $\\operatorname{tr}(I) = 3$.
-
-**Taking QQ transpose to be the identity**
-
-For a matrix $Q$ with orthonormal columns, $Q^TQ = I$ is turned around into $QQ^T = I$. The reversed product is the identity only when $Q$ is square. With $k < m$ columns, $QQ^T$ is the $m \\times m$ projection onto $\\text{Col}(Q)$, of rank $k$.
-
-Wrong working: for $Q$ with the single column $\\frac{1}{\\sqrt{2}}(1, 1, 0)$, $Q^TQ = (1)$, so $QQ^T$ is taken to be $I$ and every $\\mathbf{b}$ is its own projection.
-
-Right working:
-$$QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 & 0 \\\\ 1 & 1 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix}, \\quad QQ^T\\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} \\frac{1}{2} \\\\ \\frac{1}{2} \\\\ 0 \\end{pmatrix}$$
-which matches the single-vector formula: $\\frac{(1, 1, 0) \\cdot (1, 0, 0)}{(1, 1, 0) \\cdot (1, 1, 0)}(1, 1, 0) = \\frac{1}{2}(1, 1, 0)$.
-
-Why it happens: for a square orthogonal matrix both products are the identity, and the two products differ only in the order of the factors.
-
-How to check: compare sizes and rank. $Q^TQ$ is $k \\times k$, while $QQ^T$ is $m \\times m$ with rank $k$. Here the rank is $1$, so $QQ^T$ cannot be the $3 \\times 3$ identity.
-
-**Adding projections onto a non-orthogonal basis**
-
-The sum formula from the orthogonal basis section is used with a basis that is not orthogonal. Each term is a correct projection onto one line, but the lines are not perpendicular, so the terms overlap and their sum is not the projection onto $W$.
-
-Wrong working: with $\\mathbf{b} = (1, 2, 3)$ and the basis $(1, 0, 1)$, $(0, 1, 1)$ of the worked example,
-$$\\frac{4}{2}(1, 0, 1) + \\frac{5}{2}(0, 1, 1) = \\left(2, \\frac{5}{2}, \\frac{9}{2}\\right)$$
-
-Right working: the general formula gives $\\hat{\\mathbf{x}} = (1, 2)$ and $\\hat{\\mathbf{b}} = 1 \\cdot (1, 0, 1) + 2 \\cdot (0, 1, 1) = (1, 2, 3)$, which is $\\mathbf{b}$ itself, because $\\mathbf{b}$ lies in $W$.
-
-Why it happens: the sum formula is shorter, and the condition that the basis be orthogonal is easy to skip when the basis vectors look simple.
-
-How to check: test the basis first, $(1, 0, 1) \\cdot (0, 1, 1) = 1 \\neq 0$. Or test the residual: $(1, 2, 3) - (2, \\frac{5}{2}, \\frac{9}{2}) = (-1, -\\frac{1}{2}, -\\frac{3}{2})$, whose dot product with $(1, 0, 1)$ is $-\\frac{5}{2}$, not $0$.`,
+    content: `Four slips account for many wrong projection computations. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip gets a projection formula slightly wrong. The coefficient divides by $\\|\\mathbf{a}\\|^2$, $(A^TA)^{-1}$ cannot be split into inverses, $QQ^T$ is the identity only for a square $Q$, and the sum of one-line projections works only for an orthogonal basis. Checking that the projection is no longer than the vector, that the residual is orthogonal to the subspace, or that $\\text{tr}(P) = \\dim W$, catches each slip.`,
     link: ``,
   },
 }
@@ -2627,8 +2580,67 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dividing-by-the-length-instead-of-its-square', name: `Dividing by the length instead of its square`, errorAt: 1,
+        what: `The coefficient is computed as $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|}$, the signed length of the projection, and then multiplied by $\\mathbf{a}$ itself rather than by the unit vector in its direction. The result points the right way but has the wrong length, unless $\\mathbf{a}$ is a unit vector.`,
+        wrong: [`With $\\mathbf{b} = (3, 4, 0)$ and $\\mathbf{a} = (1, 1, 1)$,`, `$$\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|}\\,\\mathbf{a} = \\frac{7}{\\sqrt{3}}(1, 1, 1)$$`, `A vector of length $\\frac{7}{\\sqrt{3}} \\cdot \\sqrt{3} = 7$.`],
+        right: [`With $\\mathbf{b} = (3, 4, 0)$ and $\\mathbf{a} = (1, 1, 1)$,`, `Divide by $\\mathbf{a} \\cdot \\mathbf{a} = \\|\\mathbf{a}\\|^2 = 3$.`, `$$\\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a} = \\frac{7}{3}(1, 1, 1)$$`, `Of length $\\frac{7}{\\sqrt{3}} \\approx 4.04$. Written with the unit vector, the same result is $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|} \\cdot \\frac{\\mathbf{a}}{\\|\\mathbf{a}\\|}$, with two divisions by $\\|\\mathbf{a}\\|$.`],
+        why: `The scalar projection $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|}$ has a single division, and it is mixed up with the vector projection, which needs two.`,
+        check: `The projection is never longer than $\\mathbf{b}$, and here $\\|\\mathbf{b}\\| = 5 < 7$. The residual test fails too: $\\left((3, 4, 0) - \\frac{7}{\\sqrt{3}}(1, 1, 1)\\right) \\cdot (1, 1, 1) = 7 - 7\\sqrt{3} \\neq 0$.` },
+      { id: 'splitting-the-inverse-of-a-product', name: `Splitting the inverse of a product`, errorAt: 0,
+        what: `The rule $(XY)^{-1} = Y^{-1}X^{-1}$ is applied to $(A^TA)^{-1}$, although it holds only when both factors are square and invertible. Everything then cancels, and the projection matrix comes out as $I$, as if every vector were its own projection.`,
+        wrong: [`$$A(A^TA)^{-1}A^T = A\\,A^{-1}(A^T)^{-1}A^T$$
+$$= I$$`],
+        right: [`$A$ is $m \\times k$ with $k < m$, so $A^{-1}$ does not exist, and only the $k \\times k$ matrix $A^TA$ is inverted. With the columns $(1, 0, 1)$ and $(0, 1, 1)$ of the worked example, $(A^TA)^{-1} = \\frac{1}{3}\\begin{pmatrix} 2 & -1 \\\\ -1 & 2 \\end{pmatrix}$ and
+$$P = A(A^TA)^{-1}A^T$$
+$$= \\frac{1}{3}\\begin{pmatrix} 2 & -1 & 1 \\\\ -1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$$`, `This $P$ sends $(1, 1, -1)$, which is perpendicular to both columns, to $\\mathbf{0}$, while $I$ would leave it unchanged.`],
+        why: `The inverse rule for products is remembered without its condition, and $A^TA$ looks like a product of two matrices that can be inverted one at a time.`,
+        check: `The trace of $P$ equals $\\dim W$. Here $\\operatorname{tr}(P) = \\frac{2 + 2 + 2}{3} = 2$, the dimension of the plane, while $\\operatorname{tr}(I) = 3$.` },
+      { id: 'taking-qq-transpose-to-be-the-identity', name: `Taking QQ transpose to be the identity`, errorAt: 0,
+        what: `For a matrix $Q$ with orthonormal columns, $Q^TQ = I$ is turned around into $QQ^T = I$. The reversed product is the identity only when $Q$ is square. With $k < m$ columns, $QQ^T$ is the $m \\times m$ projection onto $\\text{Col}(Q)$, of rank $k$.`,
+        wrong: [`For $Q$ with the single column $\\frac{1}{\\sqrt{2}}(1, 1, 0)$, $Q^TQ = (1)$, so $QQ^T$ is taken to be $I$ and every $\\mathbf{b}$ is its own projection.`],
+        right: [`$$QQ^T = \\frac{1}{2}\\begin{pmatrix} 1 & 1 & 0 \\\\ 1 & 1 & 0 \\\\ 0 & 0 & 0 \\end{pmatrix},$$
+$$QQ^T\\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix} = \\begin{pmatrix} \\frac{1}{2} \\\\ \\frac{1}{2} \\\\ 0 \\end{pmatrix}$$`, `Which matches the single-vector formula: $\\frac{(1, 1, 0) \\cdot (1, 0, 0)}{(1, 1, 0) \\cdot (1, 1, 0)}(1, 1, 0) = \\frac{1}{2}(1, 1, 0)$.`],
+        why: `For a square orthogonal matrix both products are the identity, and the two products differ only in the order of the factors.`,
+        check: `Compare sizes and rank. $Q^TQ$ is $k \\times k$, while $QQ^T$ is $m \\times m$ with rank $k$. Here the rank is $1$, so $QQ^T$ cannot be the $3 \\times 3$ identity.` },
+      { id: 'adding-projections-onto-a-non-orthogonal-basis', name: `Adding projections onto a non-orthogonal basis`, errorAt: 0,
+        what: `The sum formula from the orthogonal basis section is used with a basis that is not orthogonal. Each term is a correct projection onto one line, but the lines are not perpendicular, so the terms overlap and their sum is not the projection onto $W$.`,
+        wrong: [`With $\\mathbf{b} = (1, 2, 3)$ and the basis $(1, 0, 1)$, $(0, 1, 1)$ of the worked example,
+$$\\frac{4}{2}(1, 0, 1) + \\frac{5}{2}(0, 1, 1) = \\left(2, \\frac{5}{2}, \\frac{9}{2}\\right)$$`],
+        right: [`The general formula gives $\\hat{\\mathbf{x}} = (1, 2)$ and $\\hat{\\mathbf{b}} = 1 \\cdot (1, 0, 1) + 2 \\cdot (0, 1, 1) = (1, 2, 3)$, which is $\\mathbf{b}$ itself, because $\\mathbf{b}$ lies in $W$.`],
+        why: `The sum formula is shorter, and the condition that the basis be orthogonal is easy to skip when the basis vectors look simple.`,
+        check: `Test the basis first, $(1, 0, 1) \\cdot (0, 1, 1) = 1 \\neq 0$. Or test the residual: $(1, 2, 3) - (2, \\frac{5}{2}, \\frac{9}{2}) = (-1, -\\frac{1}{2}, -\\frac{3}{2})$, whose dot product with $(1, 0, 1)$ is $-\\frac{5}{2}$, not $0$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Onto a vector', formula: '$\\displaystyle \\text{proj}_{\\mathbf{a}}\\mathbf{b} = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{a} \\cdot \\mathbf{a}}\\,\\mathbf{a}$', restriction: '$\\mathbf{a} \\neq \\mathbf{0}$',
+        text: 'The point on the line through $\\mathbf{a}$ nearest to $\\mathbf{b}$, with a residual orthogonal to $\\mathbf{a}$, as [projection onto a vector](!#1) shows.' },
+      { name: 'Orthogonal basis', formula: '$\\displaystyle \\text{proj}_W \\mathbf{b} = \\frac{\\mathbf{u}_1 \\cdot \\mathbf{b}}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}\\,\\mathbf{u}_1 + \\cdots + \\frac{\\mathbf{u}_k \\cdot \\mathbf{b}}{\\mathbf{u}_k \\cdot \\mathbf{u}_k}\\,\\mathbf{u}_k$', restriction: 'the basis vectors must be orthogonal',
+        text: 'One vector projection for each basis vector, with no interference between them, from [projection with an orthogonal basis](!#3).' },
+      { name: 'Orthonormal basis', formula: '$\\displaystyle \\text{proj}_W \\mathbf{b} = \\sum_{i=1}^{k} (\\mathbf{q}_i \\cdot \\mathbf{b})\\,\\mathbf{q}_i$', restriction: 'unit-length, orthogonal basis vectors',
+        text: 'With unit-length basis vectors every denominator is 1, leaving $k$ dot products, as [projection with an orthogonal basis](!#3) shows.' },
+      { name: 'Any basis', formula: '$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$', restriction: 'the columns of $A$ must be independent',
+        text: 'For a basis written as the columns of $A$, from the condition that the residual is perpendicular to every column; see [projection with an arbitrary basis](!#4).' },
+      { name: 'Orthonormal columns', formula: '$P = QQ^T$', restriction: '$Q^TQ = I$',
+        text: 'The projection matrix $P = A(A^TA)^{-1}A^T$ simplifies to this when the columns are orthonormal, as [the projection matrix](!#5) shows.' },
+      { name: 'Complementary projection', formula: '$I - P$ projects onto $W^\\perp$',
+        text: 'It takes the part of each vector that $P$ leaves out, the part perpendicular to $W$, from [the projection matrix](!#5).' },
+      { name: 'Projection matrix properties', formula: '$P^2 = P, \\quad P^T = P$',
+        text: 'Projecting twice changes nothing, and the symmetry makes the projection orthogonal rather than oblique, as [properties of orthogonal projections](!#6) explains.' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2651,7 +2663,7 @@ return {
    }
 
 // export default function ProjectionsPage({seoData,sectionsContent , introContent}) {
-export default function ProjectionsPage({
+export default function ProjectionsPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2726,7 +2738,7 @@ $$\\hat{c} = \\frac{3 + 4 + 0}{1 + 1 + 1} = \\frac{7}{3}, \\quad \\text{proj}_{\
         content: [
           `@academic[pitfall,aside:true,width:35%:Dividing by the length instead of its square
 Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$ instead of $\\mathbf{a} \\cdot \\mathbf{a} = 3$ gives $\\frac{7}{\\sqrt{3}}(1, 1, 1)$, of length $7$, more than $\\|\\mathbf{b}\\| = 5$. The projection is $\\frac{7}{3}(1, 1, 1)$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-dividing-by-the-length-instead-of-its-square)]@`,
           `The residual check is the quickest test of a computed projection. Only one multiple of $\\mathbf{a}$ leaves a remainder perpendicular to $\\mathbf{a}$, so a slip in the coefficient shows up as a nonzero dot product. A second test is size: the projection and the residual are the two legs of a right triangle whose hypotenuse is $\\mathbf{b}$, so the projection is never longer than $\\mathbf{b}$.`,
           `Splitting a vector against a whole plane or subspace is the subject of [the orthogonal decomposition](!/linear-algebra/orthogonality/projections#2).`,
         ],
@@ -2868,11 +2880,38 @@ Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="orthogonal-projection-formula-summary"
+            title="Projection formulas"
+            source="/linear-algebra/orthogonality/projections"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="projection-pitfalls"
+            title="Common pitfalls with projections"
+            source="/linear-algebra/orthogonality/projections"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

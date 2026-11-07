@@ -8,6 +8,46 @@ import IntroSection from '@/app/components/page-components/section/IntroContentS
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import '../../pages.css'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word into the MistakeFix data (trace layout).
+const pitfallData = {
+  mistakes: [
+    { id: 'checking-the-members-one-at-a-time', name: `Checking the members one at a time`, errorAt: 1,
+      what: `A set is tested for consistency by looking at each proposition separately: every member can be made true by some row, so the set is called consistent. Consistency asks for one row that makes all members true together.`,
+      wrong: [`For $\\{P \\lor Q, \\neg P, \\neg Q\\}$, $P \\lor Q$ is T at $P = T$, $\\neg P$ is T at $P = F$, and $\\neg Q$ is T at $Q = F$.`, `Each member is satisfiable, so the set is called consistent.`],
+      right: [`For $\\{P \\lor Q, \\neg P, \\neg Q\\}$, $P \\lor Q$ is T at $P = T$, $\\neg P$ is T at $P = F$, and $\\neg Q$ is T at $Q = F$.`, `$\\neg P$ and $\\neg Q$ are both T only in the row $P = F$, $Q = F$. In that row $P \\lor Q$ is F. No row makes all three members T, so the set is inconsistent.`],
+      why: `Each member is checked against its own best row, and the rows are never compared. The definition speaks of all members being true at the same time, and that phrase is easy to skip.`,
+      check: `Write one truth table with a column for every member and look for a single row with T in all of them. If the conjunction of the members is a contradiction, as $(P \\lor Q) \\land \\neg P \\land \\neg Q$ is, the set is inconsistent.` },
+    { id: 'reversing-the-entailment', name: `Reversing the entailment`, errorAt: 1,
+      what: `Having shown $P \\models Q$, the learner treats it as also giving $Q \\models P$. Entailment, like the conditional, has a direction; it holds both ways only when $P$ and $Q$ are equivalent.`,
+      wrong: [`In every row where $P$ is T, $P \\lor Q$ is T, so $P \\models P \\lor Q$.`, `Therefore $P \\lor Q \\models P$ as well.`],
+      right: [`In every row where $P$ is T, $P \\lor Q$ is T, so $P \\models P \\lor Q$.`, `Test $P \\lor Q \\models P$ on the rows where $P \\lor Q$ is T, which are $(T, T)$, $(T, F)$ and $(F, T)$ for $(P, Q)$. In the row $P = F$, $Q = T$, $P \\lor Q$ is T and $P$ is F, so $P \\lor Q \\nvDash P$.`],
+      why: `"follows from" is heard as "goes together with", and entailment is mixed up with equivalence, $P \\equiv Q$, which does work in both directions.`,
+      check: `Reverse the claim and run the same row test; one row where the new premise is T and the new conclusion is F settles it. $P \\models Q$ and $Q \\models P$ hold together exactly when $P \\equiv Q$.` },
+    { id: 'reading-invalid-as-always-false', name: `Reading invalid as always false`, errorAt: 1,
+      what: `"Invalid" is read as "false", so an invalid formula is treated as a contradiction. Invalid only means not true in every interpretation; most invalid formulas are contingencies, true in some rows and false in others.`,
+      wrong: [`$P \\to Q$ is not a tautology, since it is F at $P = T$, $Q = F$.`, `So it is invalid, therefore always false and unsatisfiable.`],
+      right: [`$P \\to Q$ is not a tautology, since it is F at $P = T$, $Q = F$.`, `For $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\to Q$ takes the values T, F, T, T. One F makes it invalid; three T values make it satisfiable. It is a contingency.`],
+      why: `In everyday speech "invalid" sounds like "wrong", and the pairs valid/invalid and satisfiable/unsatisfiable are mixed up. They split the formulas at different places: invalid covers contingencies and contradictions, unsatisfiable covers contradictions only.`,
+      check: `Find one row where the formula is T. If such a row exists, the formula is satisfiable and cannot be a contradiction, whether or not it is valid.` },
+    { id: 'taking-the-inverse-for-the-contrapositive', name: `Taking the inverse for the contrapositive`, errorAt: 0,
+      what: `Asked for the contrapositive of $A \\to B$, the learner negates both parts but keeps their order, writing $\\neg A \\to \\neg B$. That formula is the inverse, and it is not equivalent to $A \\to B$.`,
+      wrong: [`$A \\to B$ is "if it rains, the ground is wet". Its contrapositive is taken to be "if it does not rain, the ground is not wet", that is $\\neg A \\to \\neg B$.`],
+      right: [`Negate both parts and swap them, giving $\\neg B \\to \\neg A$, "if the ground is not wet, it does not rain". Axiom A3, $(\\neg B \\to \\neg A) \\to (A \\to B)$, has this form. In the row $A = F$, $B = T$, the formula $A \\to B$ is T while $\\neg A \\to \\neg B$ is $T \\to F$, which is F.`],
+      why: `Negating each part looks like the whole change, and the swap is easy to forget. The inverse $\\neg A \\to \\neg B$ is the contrapositive of the converse $B \\to A$, so it is equivalent to the converse, not to the original.`,
+      check: `Compare the two formulas in the row where the original antecedent is F and the original consequent is T. $A \\to B$ is T there, and a correct contrapositive must be T there too.` },
+    { id: 'affirming-the-consequent', name: `Affirming the consequent`, errorAt: 0,
+      what: `Modus ponens is applied backwards: from the implication $A \\to B$ and its consequent $B$, the antecedent $A$ is derived. The rule only allows the step from $A$ and $A \\to B$ to $B$.`,
+      wrong: [`Line 1 is $A \\to B$ (premise), line 2 is $B$ (premise), and line 3 is $A$, by modus ponens from lines 1 and 2.`],
+      right: [`Modus ponens needs the antecedent as a line of the proof. With $A \\to B$ and $A$ on earlier lines, it gives $B$. From $A \\to B$ and $B$ nothing about $A$ follows: in the row $A = F$, $B = T$ both premises are T and $A$ is F.`],
+      why: `The extra line $B$ is matched with the implication as if either of its two parts would do. Everyday arguments such as "the ground is wet, so it rained" make the backward step feel natural.`,
+      check: `Before citing modus ponens, confirm that one of the cited lines is exactly the part before the arrow of the other. If the cited line is the part after the arrow, the step is not modus ponens.` },
+  ],
+};
+const pitfallClosing = `Each slip stretches a definition past what it says. A set is consistent only if one row makes every member true at once, $P \\models P \\lor Q$ does not reverse, an invalid formula can still be true in most rows, the contrapositive of $A \\to B$ negates and swaps its parts, and modus ponens needs the part before the arrow, not the part after it. Building one truth table for the whole claim, or checking which line a rule cites, catches each slip.`;
+
 
 export default function PropositionalLogicPage({ keyWords, introContent, propositionalLogicSections, faqQuestions }) {
 
@@ -15,7 +55,19 @@ export default function PropositionalLogicPage({ keyWords, introContent, proposi
   // (this page's sections array is created in getStaticProps, so the JSX
   // entry is appended on the client side of the props boundary)
   const allSections = [
-    ...propositionalLogicSections,
+    // the pitfall section gets its MistakeFix diagram here, since getStaticProps cannot hold JSX
+    ...propositionalLogicSections.map((s) => s.id === 'pitfalls' ? { ...s, content: [
+      s.content,
+      <DiagramFrame
+        key={'pitfalls-mistakes'}
+        id="propositional-logic-pitfalls"
+        title="Common pitfalls in propositional logic"
+        source="/logic/propositional-logic"
+        after={pitfallClosing}
+      >
+        <MistakeFix data={pitfallData} variant="trace" />
+      </DiagramFrame>,
+    ] } : s),
     {
       id: 'faq',
       title: `Propositional Logic FAQ`,
@@ -210,7 +262,7 @@ The set {"It is raining", "It is not raining"} is inconsistent.
 The set {"It is raining", "The ground is wet"} is consistent.]@
 @academic[pitfall,aside:true,width:35%:Checking the members one at a time
 Each of $P \\lor Q$, $\\neg P$, $\\neg Q$ is satisfiable on its own, yet the set is not consistent: $\\neg P$ and $\\neg Q$ force $P = Q = F$, where $P \\lor Q$ is F. No row makes all three true, so the set is inconsistent.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-the-members-one-at-a-time)]@
 To test a set for consistency, list every interpretation of its variables and evaluate all members of the set in each one. The set is consistent exactly when at least one row shows T for every member at once. A single such row is enough, and if there is none, the set is inconsistent.
 ## 3.Implication (Entailment / Logical Consequence):
 
@@ -221,7 +273,7 @@ A proposition $Q$ is a logical consequence of $P$ (denoted $P⊨Q$ — the [doub
 Whenever $P$ is true, $Q$ is true as well, so $Q$ logically follows from $P$. By contrast, "The ground is wet" does not follow from $P$ by logic alone: it is a fact about the world, not about the form of the sentences.]@
 @academic[pitfall,aside:true,width:35%:Reversing the entailment
 From $P \\models P \\lor Q$, concluding $P \\lor Q \\models P$ fails at the row $P = F$, $Q = T$, where $P \\lor Q$ is T and $P$ is F. The entailment holds in one direction only.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reversing-the-entailment)]@
 To check a claim $P \\models Q$, go through the interpretations in which $P$ is true and confirm that $Q$ is true in each of them. Rows in which $P$ is false place no demand on $Q$, so they can be skipped. The two propositions play different roles: $P$ selects the rows, and $Q$ is tested in them.
 Read more about logical [implications](!/logic/propositional-logic/semantics/implication).
 ## 4. Independence:
@@ -236,7 +288,7 @@ A proposition is invalid if it is not true in all interpretations (i.e., it is e
 
 @academic[pitfall,aside:true,width:35%:Reading invalid as always false
 Calling $P \\to Q$ always false because it is invalid ignores the row $P = F$, $Q = F$, where it is T. Invalid only means false in at least one row (here $P = T$, $Q = F$); $P \\to Q$ is a contingency and is satisfiable.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-invalid-as-always-false)]@
 Validity is an important concept in logic because valid statements are universally true, meaning they hold regardless of the truth values of their components.
 
 ## 6.Satisfiability & Unsatisfiability:
@@ -264,7 +316,7 @@ A proposition is unsatisfiable if it is false in all possible interpretations (i
 
 @academic[pitfall,aside:true,width:35%:Taking the inverse for the contrapositive
 Writing $\\neg A \\to \\neg B$ as the contrapositive of $A \\to B$ fails at the row $A = F$, $B = T$: there $A \\to B$ is T but $\\neg A \\to \\neg B$ is F. The contrapositive is $\\neg B \\to \\neg A$, which matches $A \\to B$ in every row.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-inverse-for-the-contrapositive)]@
 In A3 the two letters change places as they gain their negations: $B$, the consequent of the conclusion $A \\to B$, stands negated before the arrow in the hypothesis, and $A$ stands negated after it. With $A$ = "it rains" and $B$ = "the ground is wet", the hypothesis reads "if the ground is not wet, then it does not rain", and the conclusion reads "if it rains, the ground is wet".
 
 ## B. Premises
@@ -293,7 +345,7 @@ Premises establish the initial truth conditions. All subsequent steps must follo
 ### Proof Construction
 @academic[pitfall,aside:true,width:35%:Affirming the consequent
 Deriving $A$ from $A \\to B$ and $B$ is not modus ponens: at the row $A = F$, $B = T$ both premises are T while $A$ is F. Modus ponens needs the antecedent $A$, and then gives $B$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-affirming-the-consequent)]@
 A proof is a finite sequence of formulas where each formula is either:
 - A premise (axiom or assumption)
 - Derived from previous formulas by Modus Ponens
@@ -312,67 +364,7 @@ A proof in this system may be long, but checking it is mechanical. Each line is 
           ,{
             id:'pitfalls',
             title:'Common Pitfalls',
-            content:`Five slips account for many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Checking the members one at a time**
-
-A set is tested for consistency by looking at each proposition separately: every member can be made true by some row, so the set is called consistent. Consistency asks for one row that makes all members true together.
-
-Wrong working: for $\\{P \\lor Q, \\neg P, \\neg Q\\}$, $P \\lor Q$ is T at $P = T$, $\\neg P$ is T at $P = F$, and $\\neg Q$ is T at $Q = F$. Each member is satisfiable, so the set is called consistent.
-
-Right working: $\\neg P$ and $\\neg Q$ are both T only in the row $P = F$, $Q = F$. In that row $P \\lor Q$ is F. No row makes all three members T, so the set is inconsistent.
-
-Why it happens: each member is checked against its own best row, and the rows are never compared. The definition speaks of all members being true at the same time, and that phrase is easy to skip.
-
-How to check: write one truth table with a column for every member and look for a single row with T in all of them. If the conjunction of the members is a contradiction, as $(P \\lor Q) \\land \\neg P \\land \\neg Q$ is, the set is inconsistent.
-
-**Reversing the entailment**
-
-Having shown $P \\models Q$, the learner treats it as also giving $Q \\models P$. Entailment, like the conditional, has a direction; it holds both ways only when $P$ and $Q$ are equivalent.
-
-Wrong working: in every row where $P$ is T, $P \\lor Q$ is T, so $P \\models P \\lor Q$. Therefore $P \\lor Q \\models P$ as well.
-
-Right working: test $P \\lor Q \\models P$ on the rows where $P \\lor Q$ is T, which are $(T, T)$, $(T, F)$ and $(F, T)$ for $(P, Q)$. In the row $P = F$, $Q = T$, $P \\lor Q$ is T and $P$ is F, so $P \\lor Q \\nvDash P$.
-
-Why it happens: "follows from" is heard as "goes together with", and entailment is mixed up with equivalence, $P \\equiv Q$, which does work in both directions.
-
-How to check: reverse the claim and run the same row test; one row where the new premise is T and the new conclusion is F settles it. $P \\models Q$ and $Q \\models P$ hold together exactly when $P \\equiv Q$.
-
-**Reading invalid as always false**
-
-"Invalid" is read as "false", so an invalid formula is treated as a contradiction. Invalid only means not true in every interpretation; most invalid formulas are contingencies, true in some rows and false in others.
-
-Wrong working: $P \\to Q$ is not a tautology, since it is F at $P = T$, $Q = F$. So it is invalid, therefore always false and unsatisfiable.
-
-Right working: for $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\to Q$ takes the values T, F, T, T. One F makes it invalid; three T values make it satisfiable. It is a contingency.
-
-Why it happens: in everyday speech "invalid" sounds like "wrong", and the pairs valid/invalid and satisfiable/unsatisfiable are mixed up. They split the formulas at different places: invalid covers contingencies and contradictions, unsatisfiable covers contradictions only.
-
-How to check: find one row where the formula is T. If such a row exists, the formula is satisfiable and cannot be a contradiction, whether or not it is valid.
-
-**Taking the inverse for the contrapositive**
-
-Asked for the contrapositive of $A \\to B$, the learner negates both parts but keeps their order, writing $\\neg A \\to \\neg B$. That formula is the inverse, and it is not equivalent to $A \\to B$.
-
-Wrong working: $A \\to B$ is "if it rains, the ground is wet". Its contrapositive is taken to be "if it does not rain, the ground is not wet", that is $\\neg A \\to \\neg B$.
-
-Right working: negate both parts and swap them, giving $\\neg B \\to \\neg A$, "if the ground is not wet, it does not rain". Axiom A3, $(\\neg B \\to \\neg A) \\to (A \\to B)$, has this form. In the row $A = F$, $B = T$, the formula $A \\to B$ is T while $\\neg A \\to \\neg B$ is $T \\to F$, which is F.
-
-Why it happens: negating each part looks like the whole change, and the swap is easy to forget. The inverse $\\neg A \\to \\neg B$ is the contrapositive of the converse $B \\to A$, so it is equivalent to the converse, not to the original.
-
-How to check: compare the two formulas in the row where the original antecedent is F and the original consequent is T. $A \\to B$ is T there, and a correct contrapositive must be T there too.
-
-**Affirming the consequent**
-
-Modus ponens is applied backwards: from the implication $A \\to B$ and its consequent $B$, the antecedent $A$ is derived. The rule only allows the step from $A$ and $A \\to B$ to $B$.
-
-Wrong working: line 1 is $A \\to B$ (premise), line 2 is $B$ (premise), and line 3 is $A$, by modus ponens from lines 1 and 2.
-
-Right working: modus ponens needs the antecedent as a line of the proof. With $A \\to B$ and $A$ on earlier lines, it gives $B$. From $A \\to B$ and $B$ nothing about $A$ follows: in the row $A = F$, $B = T$ both premises are T and $A$ is F.
-
-Why it happens: the extra line $B$ is matched with the implication as if either of its two parts would do. Everyday arguments such as "the ground is wet, so it rained" make the backward step feel natural.
-
-How to check: before citing modus ponens, confirm that one of the cited lines is exactly the part before the arrow of the other. If the cited line is the part after the arrow, the step is not modus ponens.`
+            content:`Five slips account for many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`
           }
    
         

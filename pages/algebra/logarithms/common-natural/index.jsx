@@ -17,6 +17,7 @@ import powersRootsLogsNotationSheet from '@/app/components/infographics/Notation
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
 
 
 export async function getStaticProps(){
@@ -571,9 +572,38 @@ $$= \\frac{\\ln(10)}{\\ln(2)} \\approx \\frac{2.303}{0.693} \\approx 3.322$$`],
         check: `For $x > 1$, the natural logarithm is always larger than the common logarithm, because its base is smaller. The wrong value $0.868$ is smaller than $\\log(100) = 2$, so it cannot be right. The right value passes a second test as well: $e^{4.605} \\approx 100$.` },
     ],
   };
+  // ConceptCompare data (common-vs-natural-when); every fact is from the section text
+  const commonVsNaturalWhen = {
+    header: { kicker: 'Logarithms', title: 'Common or natural?', lede: 'The choice depends on context.' },
+    concepts: [
+      { id: 'common', name: 'common logarithms', uses: [
+        { area: 'Scales', text: 'Orders of magnitude and human-readable scales: the Richter scale, the decibel scale, the pH scale all use base $10$.' },
+        { area: 'Decimal data', text: 'Decimal-based measurements; a change of $1$ on the Richter and pH scales is a factor of $10$.' },
+      ] },
+      { id: 'natural', name: 'natural logarithms', uses: [
+        { area: 'Growth and decay', text: 'Continuous growth or decay: models of the form $Ae^{kt}$ pair naturally with $\\ln$.' },
+        { area: 'Calculus', text: 'Calculus and theoretical derivations.' },
+        { area: 'Base $e$ equations', text: 'Solving $e^{2x} = 5$: $2x = \\ln(5)$, so $x = \\ln(5)/2$.' },
+      ] },
+    ],
+    together: { label: 'Either works', text: '$3^x = 7$ gives $x = \\log(7)/\\log(3)$ or $x = \\ln(7)/\\ln(3)$, the same number; divide the two logarithms as numbers, not as $\\log(7/3)$.' },
+  };
+
+  // ConceptCompare data (log-vs-ln-bridge); every fact is from the section text
+  const logVsLnBridge = {
+    header: { kicker: 'Logarithms', title: 'Common and natural logarithm graphs', lede: 'Vertical stretches of each other.' },
+    concepts: [
+      { id: 'log', name: 'Common logarithm', formula: '$y = \\log(x)$', say: 'Through $(1, 0)$ and $(10, 1)$', forText: 'decimal scales and measurements' },
+      { id: 'ln', name: 'Natural logarithm', formula: '$y = \\ln(x)$', say: 'Through $(1, 0)$ and $(e, 1) \\approx (2.718, 1)$; steeper for small $x$', forText: 'continuous growth, calculus' },
+    ],
+    bridge: { label: 'Constant ratio, about 2.303', formula: '$\\ln(x) = \\ln(10) \\cdot \\log(x)$' },
+    together: { label: 'Shared shape', text: 'Both have a vertical asymptote at $x = 0$ and extend to $+\\infty$; for $x > 1$, $\\ln(x) > \\log(x)$ because the natural logarithm uses the smaller base. Converting $\\log(100) = 2$ multiplies by $2.303$: $\\ln(100) \\approx 4.605$.' },
+  };
+
 
 return {
   props: {
+      commonVsNaturalWhen, logVsLnBridge,
     pitfallData,
     sectionsContent,
     introContent,
@@ -596,7 +626,9 @@ return {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function PageTemplate({ pitfallData,
+const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function PageTemplate({commonVsNaturalWhen, logVsLnBridge,  pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -753,6 +785,16 @@ A whole number has one more digit than the integer part of its common logarithm.
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-compare'}
+            id="common-vs-natural-when"
+            title="When to use common or natural logarithms"
+            source="/algebra/logarithms/common-natural"
+            before={`The section’s two lists, laid out by area.`}
+            after={`For a general exponential equation either logarithm works: the answer is one logarithm over another, and the base cancels as long as it is the same on top and below.`}
+          >
+            <ConceptCompare data={commonVsNaturalWhen} variant="when" theme={compareTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -771,6 +813,16 @@ A whole number has one more digit than the integer part of its common logarithm.
           sectionsContent.obj7.content,
           <div key={'unit-lnVsLog'} dangerouslySetInnerHTML={{ __html: demoUnits.lnVsLog }} />,
           `Every logarithm is a vertical stretch of every other, by the change-of-base constant.`,
+          <DiagramFrame
+            key={'obj7-compare'}
+            id="log-vs-ln-bridge"
+            title="log(x) and ln(x): the same curve, stretched"
+            source="/algebra/logarithms/common-natural"
+            before={`The two graphs share their shape and differ by one constant factor. The card shows the two curves and the formula that joins them.`}
+            after={`Multiplying every output of the common logarithm by $\\ln(10)$ produces the natural logarithm.`}
+          >
+            <ConceptCompare data={logVsLnBridge} variant="bridge" theme={compareTheme} />
+          </DiagramFrame>,
         ]
     },
     {

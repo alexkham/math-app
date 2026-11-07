@@ -997,6 +997,7 @@ import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1263,7 +1264,7 @@ In $\\mathbb{R}^3$ the subspaces are exactly four kinds of sets: the origin alon
 
 @academic[pitfall,aside:true,width:35%:Testing scaling only with positive scalars
 The quarter-plane of vectors $(x, y)$ with $x \\geq 0$ and $y \\geq 0$ contains $\\mathbf{0}$, is closed under addition, and keeps every positive multiple. But $(-1)(1, 2) = (-1, -2)$ leaves it, so it is not a subspace.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-testing-scaling-only-with-positive-scalars)]@
 
 Running the test on a candidate set means taking arbitrary members $\\mathbf{u}$ and $\\mathbf{v}$ of the set and an arbitrary real scalar $c$, then asking whether $\\mathbf{u} + \\mathbf{v}$ and $c\\mathbf{u}$ are still in the set. A single pair of vectors or a single scalar that leads outside is enough to rule the set out. Showing that a set is a subspace takes the general argument, for every choice at once.`,
     before: ``,
@@ -1287,7 +1288,7 @@ Span answers a reachability question: which vectors can be built from the ones y
 
 @academic[pitfall,aside:true,width:35%:Checking the vectors two at a time
 No two of $(1, 0, 1)$, $(0, 1, 1)$, $(1, 1, 2)$ are multiples of each other, so the set looks independent. But $(1, 1, 2) = (1, 0, 1) + (0, 1, 1)$, so the set is dependent.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-the-vectors-two-at-a-time)]@
 
 Independence measures redundancy. The vectors $(1, 0)$, $(0, 1)$ and $(1, 1)$ span $\\mathbb{R}^2$, but they are dependent, since $(1, 1) = (1, 0) + (0, 1)$; dropping any one of them leaves the span unchanged. To test vectors in $\\mathbb{R}^n$, place them as the columns of a matrix and row reduce: they are independent exactly when every column has a pivot.
 
@@ -1319,7 +1320,7 @@ Dimension turns many questions into counting.
 
 @academic[pitfall,aside:true,width:35%:Counting entries instead of basis vectors
 The plane $x + y + z = 0$ in $\\mathbb{R}^3$ is given dimension $3$ because its vectors have three entries. A basis is $(-1, 1, 0)$, $(-1, 0, 1)$, so the dimension is $2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-entries-instead-of-basis-vectors)]@
 
 A subspace never has a larger dimension than the space that contains it, and it is the whole space when the dimensions match. Some spaces, such as the space of all polynomials, have no finite basis and are called infinite-dimensional.`,
     before: ``,
@@ -1332,7 +1333,7 @@ A subspace never has a larger dimension than the space that contains it, and it 
 
 @academic[pitfall,aside:true,width:35%:Subtracting the rank from the row count
 For $A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & 3 \\end{pmatrix}$, of rank $2$, taking $m - r = 2 - 2 = 0$ says only $\\mathbf{0}$ solves $A\\mathbf{x} = \\mathbf{0}$. Yet $(-2, -3, 1)$ does: the null space has dimension $n - r = 3 - 2 = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-rank-from-the-row-count)]@
 
 Their dimensions are fixed by the [rank](!/linear-algebra/matrix/rank) $r$. The column space and the row space both have dimension $r$, the null space has dimension $n - r$, and the left null space has dimension $m - r$. This is the rank–nullity theorem in its full form. The pairs also meet at right angles: the row space is orthogonal to the null space, and the column space is orthogonal to the left null space.`,
     before: ``,
@@ -1391,63 +1392,9 @@ Each page in this section treats one step of this chain in full, with definition
   },
   obj14: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers about subspaces, independence and dimension. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Testing scaling only with positive scalars**
-
-The closure test for scalar multiplication is run with positive scalars only, such as $c = 2$ or $c = \\frac{1}{2}$. A set that is closed under addition and under positive scaling then passes, even though it fails for negative scalars.
-
-Wrong working: let $Q$ be the set of vectors $(x, y)$ with $x \\geq 0$ and $y \\geq 0$. It contains $(0, 0)$. If $\\mathbf{u}$ and $\\mathbf{v}$ have nonnegative entries, so does $\\mathbf{u} + \\mathbf{v}$. For $c = 2$, $2(1, 2) = (2, 4)$ is in $Q$. Conclusion: $Q$ is a subspace.
-
-Right working: closure under scalar multiplication must hold for every real $c$. With $c = -1$,
-$$(-1)(1, 2) = (-1, -2)$$
-which has negative entries and is not in $Q$. So $Q$ is not a subspace.
-
-Why it happens: the scalings that come to mind first are stretching and shrinking, both with positive numbers. Negative scalars, which point a vector the other way, are the ones that break sets like $Q$.
-
-How to check: always try $c = -1$. A subspace contains $-\\mathbf{u}$ for every $\\mathbf{u}$ in it, so if the negative of some member is missing, the set is not a subspace.
-
-**Checking the vectors two at a time**
-
-Independence of three or more vectors is tested by comparing them in pairs. Since no vector is a multiple of another, the set is called independent.
-
-Wrong working: none of $(1, 0, 1)$, $(0, 1, 1)$, $(1, 1, 2)$ is a multiple of another, so the three vectors are declared independent.
-
-Right working: place them as the columns of a matrix and row reduce.
-$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix} \\to \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
-The third column has no pivot, so the vectors are dependent. Indeed $(1, 1, 2) = (1, 0, 1) + (0, 1, 1)$.
-
-Why it happens: for two vectors, being multiples of each other is exactly what dependence means, and the pair test is carried over to larger sets. With three or more vectors, one of them can be a combination of several others without being a multiple of any single one.
-
-How to check: row reduce and count pivots; the vectors are independent only if every column has one. For $n$ vectors in $\\mathbb{R}^n$, the determinant of the matrix they form must be nonzero; here it is $0$.
-
-**Counting entries instead of basis vectors**
-
-The dimension of a subspace of $\\mathbb{R}^n$ is read off from the number of entries in its vectors, which always gives $n$.
-
-Wrong working: every vector in the plane $W$ given by $x + y + z = 0$ has three entries, so $\\dim W = 3$.
-
-Right working: solve for one variable, $x = -y - z$. Every vector in $W$ is then
-$$(-y - z, y, z) = y(-1, 1, 0) + z(-1, 0, 1)$$
-The vectors $(-1, 1, 0)$ and $(-1, 0, 1)$ span $W$ and are not multiples of each other, so they form a basis and $\\dim W = 2$.
-
-Why it happens: the vectors of $W$ have three entries because $W$ sits inside $\\mathbb{R}^3$. The number of entries describes the surrounding space, not the subspace.
-
-How to check: a subspace with the same dimension as the space around it is the whole space. If $\\dim W$ were $3$, $W$ would be all of $\\mathbb{R}^3$, but $(1, 0, 0)$ is not in $W$, since $1 + 0 + 0 \\neq 0$.
-
-**Subtracting the rank from the row count**
-
-The dimension of the null space of an $m \\times n$ matrix is computed as $m - r$, from the number of rows, instead of $n - r$, from the number of columns.
-
-Wrong working: $A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & 3 \\end{pmatrix}$ is $2 \\times 3$ with rank $2$, so the null space would have dimension $2 - 2 = 0$, and only $\\mathbf{x} = \\mathbf{0}$ would solve $A\\mathbf{x} = \\mathbf{0}$.
-
-Right working: the null space lives in $\\mathbb{R}^n$, the space of inputs, so its dimension is $n - r = 3 - 2 = 1$. Setting the free variable $x_3 = t$ gives $x_1 = -2t$ and $x_2 = -3t$, so the null space is the line spanned by $(-2, -3, 1)$. The count $m - r = 0$ belongs to the left null space.
-
-Why it happens: row reduction works on rows, so their number is the first one at hand. But each column stands for a variable, and the null space has one dimension for each free variable, that is, for each column without a pivot.
-
-How to check: count the columns without a pivot in the echelon form. Here column $3$ has none, so the null space has dimension $1$. The rank and the null-space dimension must add up to $n$, the number of columns.`,
+    content: `Four mistakes account for many wrong answers about subspaces, independence and dimension. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip checks a vector space too loosely. Closure must hold for negative scalars, independence of three or more vectors is a property of the whole set, dimension counts basis vectors rather than entries, and the nullity is $n - r$. Trying $c = -1$, row reducing and counting pivots, or counting the columns without a pivot catches each slip.`,
     link: ``,
   },
 }
@@ -1633,8 +1580,43 @@ const faqQuestions = {
     }
   }
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj14 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'testing-scaling-only-with-positive-scalars', name: `Testing scaling only with positive scalars`, errorAt: 1,
+        what: `The closure test for scalar multiplication is run with positive scalars only, such as $c = 2$ or $c = \\frac{1}{2}$. A set that is closed under addition and under positive scaling then passes, even though it fails for negative scalars.`,
+        wrong: [`Let $Q$ be the set of vectors $(x, y)$ with $x \\geq 0$ and $y \\geq 0$.`, `It contains $(0, 0)$. If $\\mathbf{u}$ and $\\mathbf{v}$ have nonnegative entries, so does $\\mathbf{u} + \\mathbf{v}$. For $c = 2$, $2(1, 2) = (2, 4)$ is in $Q$. Conclusion: $Q$ is a subspace.`],
+        right: [`Let $Q$ be the set of vectors $(x, y)$ with $x \\geq 0$ and $y \\geq 0$.`, `Closure under scalar multiplication must hold for every real $c$. With $c = -1$,
+$$(-1)(1, 2) = (-1, -2)$$`, `Which has negative entries and is not in $Q$. So $Q$ is not a subspace.`],
+        why: `The scalings that come to mind first are stretching and shrinking, both with positive numbers. Negative scalars, which point a vector the other way, are the ones that break sets like $Q$.`,
+        check: `Always try $c = -1$. A subspace contains $-\\mathbf{u}$ for every $\\mathbf{u}$ in it, so if the negative of some member is missing, the set is not a subspace.` },
+      { id: 'checking-the-vectors-two-at-a-time', name: `Checking the vectors two at a time`, errorAt: 0,
+        what: `Independence of three or more vectors is tested by comparing them in pairs. Since no vector is a multiple of another, the set is called independent.`,
+        wrong: [`None of $(1, 0, 1)$, $(0, 1, 1)$, $(1, 1, 2)$ is a multiple of another, so the three vectors are declared independent.`],
+        right: [`Place them as the columns of a matrix and row reduce.`, `$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix} \\to \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$`, `The third column has no pivot, so the vectors are dependent. Indeed $(1, 1, 2) = (1, 0, 1) + (0, 1, 1)$.`],
+        why: `For two vectors, being multiples of each other is exactly what dependence means, and the pair test is carried over to larger sets. With three or more vectors, one of them can be a combination of several others without being a multiple of any single one.`,
+        check: `Row reduce and count pivots; the vectors are independent only if every column has one. For $n$ vectors in $\\mathbb{R}^n$, the determinant of the matrix they form must be nonzero; here it is $0$.` },
+      { id: 'counting-entries-instead-of-basis-vectors', name: `Counting entries instead of basis vectors`, errorAt: 0,
+        what: `The dimension of a subspace of $\\mathbb{R}^n$ is read off from the number of entries in its vectors, which always gives $n$.`,
+        wrong: [`Every vector in the plane $W$ given by $x + y + z = 0$ has three entries, so $\\dim W = 3$.`],
+        right: [`Solve for one variable, $x = -y - z$. Every vector in $W$ is then
+$$(-y - z, y, z)$$
+$$= y(-1, 1, 0) + z(-1, 0, 1)$$`, `The vectors $(-1, 1, 0)$ and $(-1, 0, 1)$ span $W$ and are not multiples of each other, so they form a basis and $\\dim W = 2$.`],
+        why: `The vectors of $W$ have three entries because $W$ sits inside $\\mathbb{R}^3$. The number of entries describes the surrounding space, not the subspace.`,
+        check: `A subspace with the same dimension as the space around it is the whole space. If $\\dim W$ were $3$, $W$ would be all of $\\mathbb{R}^3$, but $(1, 0, 0)$ is not in $W$, since $1 + 0 + 0 \\neq 0$.` },
+      { id: 'subtracting-the-rank-from-the-row-count', name: `Subtracting the rank from the row count`, errorAt: 0,
+        what: `The dimension of the null space of an $m \\times n$ matrix is computed as $m - r$, from the number of rows, instead of $n - r$, from the number of columns.`,
+        wrong: [`$A = \\begin{pmatrix} 1 & 0 & 2 \\\\ 0 & 1 & 3 \\end{pmatrix}$ is $2 \\times 3$ with rank $2$, so the null space would have dimension $2 - 2 = 0$, and only $\\mathbf{x} = \\mathbf{0}$ would solve $A\\mathbf{x} = \\mathbf{0}$.`],
+        right: [`The null space lives in $\\mathbb{R}^n$, the space of inputs, so its dimension is $n - r = 3 - 2 = 1$. Setting the free variable $x_3 = t$ gives $x_1 = -2t$ and $x_2 = -3t$, so the null space is the line spanned by $(-2, -3, 1)$. The count $m - r = 0$ belongs to the left null space.`],
+        why: `Row reduction works on rows, so their number is the first one at hand. But each column stands for a variable, and the null space has one dimension for each free variable, that is, for each column without a pivot.`,
+        check: `Count the columns without a pivot in the echelon form. Here column $3$ has none, so the null space has dimension $1$. The rank and the null-space dimension must add up to $n$, the number of columns.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     faqQuestions,
     vectorSpaceExamplesOutline,
     vectorSpaceChainLevels,
@@ -1660,7 +1642,7 @@ return {
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function VectorSpacesPage({vectorSpaceExamplesOutline, vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
+export default function VectorSpacesPage({ pitfallData,vectorSpaceExamplesOutline, vectorSpaceChainLevels, seoData, sectionsContent, introContent, obj7Table, obj11Table, obj12Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1851,6 +1833,15 @@ Peano gave the first axiomatic definition of a vector space in 1888 and already 
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'obj14-mistakes'}
+            id="vector-space-pitfalls"
+            title="Common pitfalls with vector spaces"
+            source="/linear-algebra/vector-spaces"
+            after={sectionsContent.obj14.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

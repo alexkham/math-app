@@ -16,11 +16,13 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
-import ConceptCompare from '@/app/components/infographics/ConceptCompare'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -357,7 +359,7 @@ $$= \\lim_{x \\to \\infty} \\frac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{
 
 @academic[pitfall,aside:true,width:35%:Setting infinity over infinity to 1
 Putting $x = \\infty$ into $\\frac{3x^2 + 5x - 1}{2x^2 - 7}$ gives $\\frac{\\infty}{\\infty}$, and cancelling that to $1$ treats $\\infty$ as a number. At $x = 1000$ the quotient is already about $1.50$; dividing by $x^2$ gives the limit $\\frac{3}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-setting-infinity-over-infinity-to-1)]@
 
 Terms with $x$ in the denominator vanish as $x \\to \\infty$. Only the leading coefficients survive.
 
@@ -391,7 +393,7 @@ $$\\lim_{x \\to \\infty} \\frac{x^3}{x + 1} = \\infty$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking the first coefficients instead of the leading ones
 Reading $\\frac{7 + 4x^2}{x + 2x^2}$ from the left takes $7$ and $1$ as the coefficients and gives the limit $7$. The leading terms are $4x^2$ and $2x^2$, so the limit is $\\frac{4}{2} = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-first-coefficients-instead-of-the-leading-ones)]@
 
 In all three cases the comparison is between the leading terms: the term with the highest power of $x$ in the numerator and the one in the denominator. The degrees $m$ and $n$ are the exponents of those two terms, and when $m = n$ their coefficients give the limit. All the other terms only affect how quickly the quotient settles down or grows, not where it goes.
 `,
@@ -477,7 +479,7 @@ Vertical asymptotes typically occur where the denominator of a rational function
 
 @academic[pitfall,aside:true,width:35%:Calling every zero of the denominator an asymptote
 Placing an asymptote at $x = 2$ for $\\frac{x^2 - 4}{x - 2}$ because the denominator vanishes there ignores that the numerator vanishes too. The function equals $x + 2$ for $x \\neq 2$, so the limit is $4$: a hole, not an asymptote.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-calling-every-zero-of-the-denominator-an-asymptote)]@
 
 For $f(x) = \\dfrac{1}{x - 2}$, the denominator vanishes at $x = 2$. The line $x = 2$ is a vertical asymptote.
 
@@ -507,7 +509,7 @@ $$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$]@
 
 @academic[pitfall,aside:true,width:35%:Ignoring the sign of the numerator
 Reading only the small positive denominator in $\\lim_{x \\to 2^+} \\frac{x - 5}{x - 2}$ gives $+\\infty$. The numerator tends to $-3$, so the quotient is negative near $2$ and the limit is $-\\infty$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-ignoring-the-sign-of-the-numerator)]@
 
 The same reading works for any quotient whose numerator tends to a nonzero number while the denominator tends to $0$. Near the point the numerator stays close to its limit, so its sign does not change, while the denominator is a small number whose sign depends on the side of approach. The size of the quotient grows without bound, and the signs of the two parts decide its direction, as in ordinary division.
 `,
@@ -642,61 +644,20 @@ Every type of infinity behavior on this page maps cleanly to a graph feature: fi
     after: ``,
     link: ``
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page in four families: asymptotes, exponentials, logarithms and growth rates. Each family has a line on what it describes, and each formula a short note on what it says, with a link to its section. The buttons above the cards show one family at a time.
+
+The asymptote family gives the conditions for a horizontal and a vertical asymptote. The exponential family pairs the natural exponential with its reciprocal in both directions, and the logarithm family gives the natural logarithm at infinity and toward zero from the right. The growth rates close with an exponential beating any power and any positive power beating the logarithm.`,
+    before: ``,
+    after: `Before evaluating a limit at infinity, ask which piece of the expression grows fastest: exponentials beat powers and powers beat logarithms, so that piece decides the limit. A finite limit at infinity marks a horizontal asymptote, and a blow-up near a point marks a vertical one.`,
+    link: '',
+  },
   obj14: {
     title: `Common Pitfalls`,
-    content: `
-Four mistakes cause most wrong answers with limits at infinity and infinite limits. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Setting infinity over infinity to 1**
-
-As $x \\to \\infty$ the numerator and the denominator both grow without bound, and $\\dfrac{\\infty}{\\infty}$ is cancelled to $1$ as if $\\infty$ were a number.
-
-Wrong working: in $\\lim_{x \\to \\infty} \\dfrac{3x^2 + 5x - 1}{2x^2 - 7}$ both parts tend to $\\infty$, so the limit is $\\dfrac{\\infty}{\\infty} = 1$.
-
-Right working: divide every term by $x^2$. The expression becomes $\\dfrac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$, which tends to $\\dfrac{3 + 0 - 0}{2 - 0} = \\dfrac{3}{2}$.
-
-Why it happens: a number divided by itself is $1$, and $\\infty$ is handled like a number. But the two parts can grow at different rates: $\\dfrac{x^2}{x}$ also has the form $\\dfrac{\\infty}{\\infty}$ and tends to $\\infty$, while $\\dfrac{x}{x^2}$ tends to $0$.
-
-How to check: evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{3004999}{1999993} \\approx 1.5025$, close to $1.5$ and not to $1$.
-
-**Taking the first coefficients instead of the leading ones**
-
-When a polynomial is not written in descending powers, its first coefficient is not its leading coefficient. The ratio of the first coefficients is then read off as the limit, and it has nothing to do with the limit.
-
-Wrong working: in $\\lim_{x \\to \\infty} \\dfrac{7 + 4x^2}{x + 2x^2}$ the first coefficients are $7$ and $1$, so the limit is $\\dfrac{7}{1} = 7$.
-
-Right working: the leading terms are $4x^2$ and $2x^2$, so $m = n = 2$. Dividing every term by $x^2$ gives $\\dfrac{\\frac{7}{x^2} + 4}{\\frac{1}{x} + 2}$, which tends to $\\dfrac{0 + 4}{0 + 2} = 2$.
-
-Why it happens: polynomials are usually written with the highest power first, so "leading" and "first" are taken to mean the same thing.
-
-How to check: rewrite both polynomials in descending powers before reading anything off, or evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{4000007}{2001000} \\approx 1.999$, close to $2$ and far from $7$.
-
-**Calling every zero of the denominator an asymptote**
-
-A vertical asymptote is placed at every point where the denominator is $0$, without a check of the numerator there. If the numerator is also $0$, the form is $\\dfrac{0}{0}$, and the graph may have only a hole.
-
-Wrong working: the denominator of $\\dfrac{x^2 - 4}{x - 2}$ vanishes at $x = 2$, so $x = 2$ is a vertical asymptote.
-
-Right working: the numerator is also $0$ at $x = 2$. Factoring gives $\\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$ for $x \\neq 2$, so $\\lim_{x \\to 2} \\dfrac{x^2 - 4}{x - 2} = 4$. The limit is finite: the graph is the line $y = x + 2$ with a hole at $(2, 4)$, and there is no vertical asymptote.
-
-Why it happens: in the simplest examples, such as $\\dfrac{1}{x - 2}$, the numerator is a constant, and the zero of the denominator is all there is to check.
-
-How to check: substitute the zero of the denominator into the numerator. A nonzero value means an asymptote; a zero means the limit has to be computed first. Here, at $x = 2.01$ the quotient is $\\dfrac{2.01^2 - 4}{0.01} = 4.01$, which stays bounded.
-
-**Ignoring the sign of the numerator**
-
-In a one-sided infinite limit the sign is read from the denominator alone: a small positive denominator is taken to mean $+\\infty$, whatever the numerator does.
-
-Wrong working: as $x \\to 2^+$, $x - 2$ is a small positive number, so $\\lim_{x \\to 2^+} \\dfrac{x - 5}{x - 2} = +\\infty$.
-
-Right working: the numerator tends to $2 - 5 = -3$, which is negative. A negative number divided by a small positive number is a large negative number, so $\\lim_{x \\to 2^+} \\dfrac{x - 5}{x - 2} = -\\infty$.
-
-Why it happens: in the standard example $\\dfrac{1}{x - 2}$ the numerator is $1$, so the sign of the quotient is the sign of the denominator, and that shortcut is carried over to quotients where it no longer holds.
-
-How to check: evaluate just to the right of the point. At $x = 2.01$ the quotient is $\\dfrac{-2.99}{0.01} = -299$.
-`,
+    content: `Four mistakes cause most wrong answers with limits at infinity and infinite limits. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip reads the wrong part of the expression. $\\frac{\\infty}{\\infty}$ is settled by the leading terms, found after both polynomials are written in descending powers; a zero of the denominator is an asymptote only when the numerator is not $0$ there; and the sign of an infinite limit comes from the numerator as well as the denominator. Evaluating at a large $x$, or just to one side of the point, catches each slip.`,
     link: ``
   }
 };
@@ -964,8 +925,66 @@ const schemas = {
   };
 
 
+  // MistakeFix batch 15, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj14 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'setting-infinity-over-infinity-to-1', name: `Setting infinity over infinity to 1`, errorAt: 0,
+        what: `As $x \\to \\infty$ the numerator and the denominator both grow without bound, and $\\dfrac{\\infty}{\\infty}$ is cancelled to $1$ as if $\\infty$ were a number.`,
+        wrong: [`In $\\lim_{x \\to \\infty} \\dfrac{3x^2 + 5x - 1}{2x^2 - 7}$ both parts tend to $\\infty$, so the limit is $\\dfrac{\\infty}{\\infty} = 1$.`],
+        right: [`Divide every term by $x^2$. The expression becomes $\\dfrac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$, which tends to $\\dfrac{3 + 0 - 0}{2 - 0} = \\dfrac{3}{2}$.`],
+        why: `A number divided by itself is $1$, and $\\infty$ is handled like a number. But the two parts can grow at different rates: $\\dfrac{x^2}{x}$ also has the form $\\dfrac{\\infty}{\\infty}$ and tends to $\\infty$, while $\\dfrac{x}{x^2}$ tends to $0$.`,
+        check: `Evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{3004999}{1999993} \\approx 1.5025$, close to $1.5$ and not to $1$.` },
+      { id: 'taking-the-first-coefficients-instead-of-the-leading-ones', name: `Taking the first coefficients instead of the leading ones`, errorAt: 0,
+        what: `When a polynomial is not written in descending powers, its first coefficient is not its leading coefficient. The ratio of the first coefficients is then read off as the limit, and it has nothing to do with the limit.`,
+        wrong: [`In $\\lim_{x \\to \\infty} \\dfrac{7 + 4x^2}{x + 2x^2}$ the first coefficients are $7$ and $1$, so the limit is $\\dfrac{7}{1} = 7$.`],
+        right: [`The leading terms are $4x^2$ and $2x^2$, so $m = n = 2$. Dividing every term by $x^2$ gives $\\dfrac{\\frac{7}{x^2} + 4}{\\frac{1}{x} + 2}$, which tends to $\\dfrac{0 + 4}{0 + 2} = 2$.`],
+        why: `Polynomials are usually written with the highest power first, so "leading" and "first" are taken to mean the same thing.`,
+        check: `Rewrite both polynomials in descending powers before reading anything off, or evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{4000007}{2001000} \\approx 1.999$, close to $2$ and far from $7$.` },
+      { id: 'calling-every-zero-of-the-denominator-an-asymptote', name: `Calling every zero of the denominator an asymptote`, errorAt: 0,
+        what: `A vertical asymptote is placed at every point where the denominator is $0$, without a check of the numerator there. If the numerator is also $0$, the form is $\\dfrac{0}{0}$, and the graph may have only a hole.`,
+        wrong: [`The denominator of $\\dfrac{x^2 - 4}{x - 2}$ vanishes at $x = 2$, so $x = 2$ is a vertical asymptote.`],
+        right: [`The numerator is also $0$ at $x = 2$. Factoring gives $\\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$ for $x \\neq 2$, so $\\lim_{x \\to 2} \\dfrac{x^2 - 4}{x - 2} = 4$. The limit is finite: the graph is the line $y = x + 2$ with a hole at $(2, 4)$, and there is no vertical asymptote.`],
+        why: `In the simplest examples, such as $\\dfrac{1}{x - 2}$, the numerator is a constant, and the zero of the denominator is all there is to check.`,
+        check: `Substitute the zero of the denominator into the numerator. A nonzero value means an asymptote; a zero means the limit has to be computed first. Here, at $x = 2.01$ the quotient is $\\dfrac{2.01^2 - 4}{0.01} = 4.01$, which stays bounded.` },
+      { id: 'ignoring-the-sign-of-the-numerator', name: `Ignoring the sign of the numerator`, errorAt: 0,
+        what: `In a one-sided infinite limit the sign is read from the denominator alone: a small positive denominator is taken to mean $+\\infty$, whatever the numerator does.`,
+        wrong: [`As $x \\to 2^+$, $x - 2$ is a small positive number, so $\\lim_{x \\to 2^+} \\dfrac{x - 5}{x - 2} = +\\infty$.`],
+        right: [`The numerator tends to $2 - 5 = -3$, which is negative. A negative number divided by a small positive number is a large negative number, so $\\lim_{x \\to 2^+} \\dfrac{x - 5}{x - 2} = -\\infty$.`],
+        why: `In the standard example $\\dfrac{1}{x - 2}$ the numerator is $1$, so the sign of the quotient is the sign of the denominator, and that shortcut is carried over to quotients where it no longer holds.`,
+        check: `Evaluate just to the right of the point. At $x = 2.01$ the quotient is $\\dfrac{-2.99}{0.01} = -299$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'asym', name: 'Asymptotes', sub: 'Limits that locate the lines a graph approaches.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} f(x) = L \\;\\text{ or }\\; \\lim_{x \\to -\\infty} f(x) = L$', text: 'A finite limit in either direction makes the line $y = L$ a horizontal asymptote, as [horizontal asymptotes](!#3) explains.' },
+         { formula: '$\\displaystyle \\lim_{x \\to a^-} f(x) = \\pm\\infty \\;\\text{ or }\\; \\lim_{x \\to a^+} f(x) = \\pm\\infty$', text: 'An infinite limit from either side makes the line $x = a$ a vertical asymptote, from [vertical asymptotes](!#8).' }],
+      ] },
+      { id: 'exp', name: 'Exponentials', sub: 'Opposite behavior in the two directions.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} e^x = \\infty$', text: 'Exponential growth is unbounded to the right, as [limits of exponentials](!#11) shows.' },
+         { formula: '$\\displaystyle \\lim_{x \\to -\\infty} e^x = 0$', text: 'To the left $e^x$ decays toward zero, so $y = 0$ is a horizontal asymptote ([limits of exponentials](!#11)).' }],
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} e^{-x} = 0$', text: 'For $e^{-x}$ the behavior reverses: it decays to the right, from [limits of exponentials](!#11).' },
+         { formula: '$\\displaystyle \\lim_{x \\to -\\infty} e^{-x} = \\infty$', text: 'It grows without bound to the left; the asymptote $y = 0$ sits where the exponent goes to $-\\infty$ ([limits of exponentials](!#11)).' }],
+      ] },
+      { id: 'log', name: 'Logarithms', sub: 'The natural logarithm is defined only for $x > 0$.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} \\ln x = \\infty$', text: 'The logarithm grows without bound, but slower than any positive power of $x$, as [limits of logarithms](!#12) notes.' },
+         { formula: '$\\displaystyle \\lim_{x \\to 0^+} \\ln x = -\\infty$', text: 'Toward zero from the right it plunges, so $x = 0$ is a vertical asymptote; no left-hand limit exists ([limits of logarithms](!#12)).' }],
+      ] },
+      { id: 'growth', name: 'Growth rates', sub: 'Which function wins as $x \\to \\infty$: logarithms lose to polynomials, and polynomials to exponentials.', pairs: [
+        [{ formula: '$\\displaystyle \\lim_{x \\to \\infty} \\frac{x^n}{e^x} = 0$', text: 'For any $n$, the exponential eventually overtakes the polynomial, as [the growth hierarchy](!#6) states.' },
+         { formula: '$\\displaystyle \\lim_{x \\to \\infty} \\frac{\\ln x}{x^n} = 0$', text: 'For any $n > 0$, the power eventually overtakes the logarithm, from [the growth hierarchy](!#6).' }],
+      ] },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
+    pitfallData,
       twoInfinityLimits,
     horizontalAsymptoteProfile,
     growthRateLevels,
@@ -994,7 +1013,7 @@ const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
 const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function InfinityPage({twoInfinityLimits, horizontalAsymptoteProfile, growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function InfinityPage({ formulaSummaryData, pitfallData,twoInfinityLimits, horizontalAsymptoteProfile, growthRateLevels, seoData, sectionsContent, introContent, obj5Table, obj10Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1238,11 +1257,38 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="limits-at-infinity-formula-summary"
+            title="Limits and infinity"
+            source="/calculus/limits/infinity"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj14.title,
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'obj14-mistakes'}
+            id="limits-at-infinity-pitfalls"
+            title="Common pitfalls with limits and infinity"
+            source="/calculus/limits/infinity"
+            after={sectionsContent.obj14.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

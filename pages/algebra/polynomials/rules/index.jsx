@@ -17,6 +17,7 @@ import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheat
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 
 
 
@@ -1099,9 +1100,110 @@ $$x^3 - x^2 + x - 1 = (x - 1)(x^2 + 1)$$`, `The factor $x^2 + 1$ has roots $\\pm
         check: `Look for real roots in each factor. $x^2 + 1 = 0$ needs $x^2 = -1$, which no real number satisfies, and since $x^2 + 1 > 0$ for every $x$, the graph of $x^3 - x^2 + x - 1$ crosses the x-axis only at $x = 1$.` },
     ],
   };
+  // TheoremCard data (remainder-theorem-chain); every fact is from the section text
+  const remainderChain = {
+    header: { kicker: 'Polynomial theorems', title: 'Why the Remainder Theorem works', lede: 'Evaluation and division are not separate operations.' },
+    chain: [
+      { name: 'Division algorithm', text: '$P(x) = (x - c) \\cdot Q(x) + R$', edge: 'degree of $(x - c)$ is $1$' },
+      { name: 'The remainder is a constant', text: '$R$ has degree less than $1$', items: ['Independent of $x$'], edge: 'substitute $x = c$' },
+      { name: 'Remainder Theorem', text: '$P(c) = 0 \\cdot Q(c) + R = R$', items: ['The factor $(c - c)$ annihilates the quotient term'] },
+    ],
+  };
+
+  // TheoremCard data (factor-theorem-iff); every fact is from the section text
+  const factorIff = {
+    header: { kicker: 'Polynomial theorems', title: 'The Factor Theorem', lede: 'A bridge between roots and factors.' },
+    theorem: {
+      left: '$P(c) = 0$', leftSay: '$c$ is a root',
+      right: '$(x - c)$ is a factor of $P(x)$', rightSay: '$P(x) = (x - c) \\cdot Q(x)$ with no leftover term',
+      forward: 'remainder is zero', backward: '$P(c) = (c - c) \\cdot Q(c) = 0$',
+      general: { label: 'Remainder Theorem (general case)', text: '$P(x) = (x - c) \\cdot Q(x) + P(c)$',
+        say: 'Dividing by $(x - c)$ leaves remainder $P(c)$; the Factor Theorem is the case $P(c) = 0$.' },
+      misuse: { label: 'Using the wrong sign of $c$',
+        text: 'For $x^3 - 4x + 2$ divided by $(x + 3)$, $P(3) = 17$ is the remainder for $(x - 3)$. Here $c = -3$, so the remainder is $P(-3) = -13$.' },
+    },
+  };
+
+  // TheoremCard data (rational-root-theorem-apply); every fact is from the section text
+  const rationalRootApply = {
+    header: { kicker: 'Polynomial theorems', title: 'The Rational Root Theorem', lede: 'An infinite search becomes a finite one.' },
+    theorem: {
+      statement: 'If $P(x)$ has integer coefficients and $\\frac{p}{q}$ is a rational root in lowest terms, then $p \\mid a_0$ and $q \\mid a_n$.',
+      steps: [
+        { label: 'Read the ends', text: '$2x^3 + x^2 - 13x + 6$: constant term $6$, leading coefficient $2$.' },
+        { label: 'Divisors', text: '$p$: $\\pm 1, \\pm 2, \\pm 3, \\pm 6$ · $q$: $\\pm 1, \\pm 2$' },
+        { label: 'Candidates', text: '$\\pm 1, \\pm 2, \\pm 3, \\pm 6, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$: twelve in all.' },
+        { label: 'Test', hit: true, text: '$P(1) = -4$, not a root. $P(2) = 16 + 4 - 26 + 6 = 0$, so $2$ is a root and $(x - 2)$ is a factor.' },
+        { label: 'Reduce', text: 'Synthetic division leaves $2x^2 + 5x - 3 = (2x - 1)(x + 3)$: roots $2$, $\\frac{1}{2}$, $-3$, all on the list.' },
+      ],
+      misuse: { label: 'Leaving out the fractions',
+        text: 'Listing only the divisors of $6$ gives $\\pm 1, \\pm 2, \\pm 3, \\pm 6$ and misses the root $\\frac{1}{2}$. Dividing by $q = \\pm 2$ adds $\\pm\\frac{1}{2}$ and $\\pm\\frac{3}{2}$.' },
+    },
+  };
+
+  // TheoremCard data (rational-root-limits-converse); every fact is from the section text
+  const rationalRootConverse = {
+    header: { kicker: 'Polynomial theorems', title: 'Limits of the Rational Root Theorem', lede: 'It identifies only rational roots.' },
+    theorem: {
+      says: 'If $\\frac{p}{q}$ is a rational root of a polynomial with integer coefficients, then $p$ divides $a_0$ and $q$ divides $a_n$.',
+      not: 'Every polynomial has a rational root, or every candidate on the list is a root.',
+      counter: {
+        label: 'Reading an empty list as "no roots"',
+        wrong: '$x^2 - 2$ has candidates $\\pm 1, \\pm 2$; none is a root, so the polynomial has no roots.',
+        right: 'The roots are $\\pm\\sqrt{2}$, irrational and invisible to the theorem. $x^4 + x^3 + x^2 + x + 1$ has candidates $\\pm 1$ and four complex roots.',
+      },
+      scope: '**A first filter, not a complete solution:** when it finds roots, synthetic division lowers the degree; when it finds none, the roots are irrational or complex.',
+    },
+  };
+
+  // TheoremCard data (integer-root-theorem-chain); every fact is from the section text
+  const integerRootChain = {
+    header: { kicker: 'Polynomial theorems', title: 'The Integer Root Theorem', lede: 'A monic polynomial has only integer rational roots.' },
+    chain: [
+      { name: 'Rational Root Theorem', text: '$\\tfrac{p}{q}$ a root $\\implies q \\mid a_n$', edge: 'monic: $a_n = 1$' },
+      { name: 'Denominator forced', text: '$q = \\pm 1$, so $\\tfrac{p}{q}$ is an integer', edge: 'hence' },
+      { name: 'Integer Root Theorem', text: 'Rational roots are integers dividing $a_0$', items: [
+        '$x^3 - 6x^2 + 11x - 6$: candidates $\\pm 1, \\pm 2, \\pm 3, \\pm 6$; roots $1, 2, 3$',
+        '$x^2 - n$ is monic, so $\\sqrt{n}$ is a whole number or irrational',
+      ] },
+    ],
+  };
+
+  // TheoremCard data (fundamental-theorem-algebra-converse); every fact is from the section text
+  const ftaConverse = {
+    header: { kicker: 'Polynomial theorems', title: 'The Fundamental Theorem of Algebra', lede: 'Every polynomial of degree $n \\geq 1$ has exactly $n$ complex roots, counted with multiplicity.' },
+    theorem: {
+      says: 'A polynomial of degree $n \\geq 1$ with complex coefficients has exactly $n$ roots in the complex numbers, counted with multiplicity.',
+      not: 'A polynomial of degree $n$ has $n$ real roots and crosses the $x$-axis $n$ times.',
+      counter: {
+        label: 'Expecting all roots to be real',
+        wrong: '$x^3 - x^2 + x - 1$ has three roots, so its graph crosses the $x$-axis three times.',
+        right: 'It factors as $(x - 1)(x^2 + 1)$: one crossing at $x = 1$, the other two roots are $\\pm i$. Repeats count too: $(x - 1)^3$ has one distinct root with multiplicity $3$.',
+      },
+      scope: '**Existence, not a method:** for degree $5$ and above no general formula in radicals exists (Abel–Ruffini). With real coefficients, complex roots come in conjugate pairs, so odd degree forces at least one real root.',
+    },
+  };
+
+  // TheoremCard data (vieta-formulas-apply); every fact is from the section text
+  const vietaApply = {
+    header: { kicker: 'Polynomial theorems', title: 'Vieta’s Formulas', lede: 'Symmetric relationships between roots and coefficients.' },
+    theorem: {
+      statement: 'For a monic polynomial of degree $n$, the $k$-th elementary symmetric polynomial of the roots equals $(-1)^k$ times the coefficient of $x^{n-k}$.',
+      steps: [
+        { label: 'Quadratic', text: '$x^2 + bx + c$ with roots $r_1, r_2$: $r_1 + r_2 = -b$ and $r_1 r_2 = c$.' },
+        { label: 'Cubic', text: '$x^3 + bx^2 + cx + d$: $r_1 + r_2 + r_3 = -b$, $r_1 r_2 + r_1 r_3 + r_2 r_3 = c$, $r_1 r_2 r_3 = -d$.' },
+        { label: 'Check a factorization', hit: true, text: '$x^3 - 6x^2 + 11x - 6$ with roots $1, 2, 3$: $1 + 2 + 3 = 6 = -(-6)$, $1 \\cdot 2 + 1 \\cdot 3 + 2 \\cdot 3 = 11$, $1 \\cdot 2 \\cdot 3 = 6 = -(-6)$.' },
+        { label: 'Without the roots', text: 'Sum of the squares of the roots: $(r_1 + r_2 + r_3)^2 - 2(r_1 r_2 + r_1 r_3 + r_2 r_3) = 36 - 22 = 14$.' },
+      ],
+      misuse: { label: 'Taking the sum of the roots as $b$',
+        text: 'Reading the sum of the roots of $x^2 - 5x + 6$ as $b = -5$ clashes with its roots $2$ and $3$. The sum is $-b = 5$ and the product is $c = 6$.' },
+    },
+  };
+
 
   return {
   props:{
+      remainderChain, factorIff, rationalRootApply, rationalRootConverse, integerRootChain, ftaConverse, vietaApply,
     pitfallData,
     sectionsContent,
     introContent,
@@ -1124,7 +1226,9 @@ $$x^3 - x^2 + x - 1 = (x - 1)(x^2 + 1)$$`, `The factor $x^2 + 1$ has roots $\\pm
 }
    }
 
-export default function RulesPage({ pitfallData,seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function RulesPage({remainderChain, factorIff, rationalRootApply, rationalRootConverse, integerRootChain, ftaConverse, vietaApply,  pitfallData,seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1249,6 +1353,16 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-theorem'}
+            id="remainder-theorem-chain"
+            title="Why the Remainder Theorem works"
+            source="/algebra/polynomials/rules"
+            before={`The proof is three steps from the division algorithm. The chain runs them in order.`}
+            after={`Evaluating $P$ at $c$ and extracting the remainder of division by $(x - c)$ are the same operation.`}
+          >
+            <TheoremCard data={remainderChain} variant="chain" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1257,6 +1371,16 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-theorem'}
+            id="factor-theorem-iff"
+            title="The Factor Theorem"
+            source="/algebra/polynomials/rules"
+            before={`The theorem runs both ways: a root gives a factor, a factor gives a root. The card shows each direction with its reason.`}
+            after={`Finding one gives the other automatically.`}
+          >
+            <TheoremCard data={factorIff} variant="iff" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1281,6 +1405,16 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-theorem'}
+            id="rational-root-theorem-apply"
+            title="The Rational Root Theorem, applied"
+            source="/algebra/polynomials/rules"
+            before={`The theorem as a procedure, on the page’s cubic: a finite list of candidates, then a test that pays twice.`}
+            after={`Twelve candidates replace infinitely many possibilities, and each root found lowers the degree by one.`}
+          >
+            <TheoremCard data={rationalRootApply} variant="apply" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1291,6 +1425,16 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
           sectionsContent.obj7.content,
           <div key={'unit-candidates'} dangerouslySetInnerHTML={{ __html: demoUnits.candidates }} />,
           `An empty candidate list rules out rational roots only, never roots in general.`,
+          <DiagramFrame
+            key={'obj7-theorem'}
+            id="rational-root-limits-converse"
+            title="The Rational Root Theorem: what it does not say"
+            source="/algebra/polynomials/rules"
+            before={`The theorem filters candidates; it does not promise roots. The card separates the two.`}
+            after={`An empty candidate list is information too: the roots are irrational or complex, and other tools take over.`}
+          >
+            <TheoremCard data={rationalRootConverse} variant="converse" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1299,6 +1443,16 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-theorem'}
+            id="integer-root-theorem-chain"
+            title="From the Rational Root Theorem to the Integer Root Theorem"
+            source="/algebra/polynomials/rules"
+            before={`For a monic polynomial the candidate list loses its fractions. The chain shows why.`}
+            after={`Recognising a monic polynomial before the search saves the work with fractions.`}
+          >
+            <TheoremCard data={integerRootChain} variant="chain" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1333,6 +1487,16 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-theorem'}
+            id="fundamental-theorem-algebra-converse"
+            title="The Fundamental Theorem of Algebra: what it does not say"
+            source="/algebra/polynomials/rules"
+            before={`Exactly $n$ roots, but where they live and how to find them are separate questions. The card keeps them apart.`}
+            after={`Existence is guaranteed; the finding is left to the other tools on this page.`}
+          >
+            <TheoremCard data={ftaConverse} variant="converse" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1349,6 +1513,16 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
             dangerouslySetInnerHTML={{ __html: obj12Table }}
           />,
           `@academic[punchline:Any symmetric expression in the roots can be computed from the coefficients, without solving for a single root.]@`,
+          <DiagramFrame
+            key={'obj12-theorem'}
+            id="vieta-formulas-apply"
+            title="Vieta’s formulas, applied"
+            source="/algebra/polynomials/rules"
+            before={`The formulas as a check on a factorization, on the page’s cubic.`}
+            after={`The coefficients know the roots’ sum and product before the roots themselves are found.`}
+          >
+            <TheoremCard data={vietaApply} variant="apply" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
 

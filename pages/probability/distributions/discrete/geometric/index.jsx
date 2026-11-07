@@ -867,6 +867,9 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1016,7 +1019,7 @@ $$P(X > m + n \\mid X > m) = P(X > n)$$
 
 @academic[pitfall,aside:true,width:35%:Expecting a success to be due
 For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chance that flip six is a tail too makes heads look $\\frac{63}{64}$ likely. Given the five tails, $P(X = 6 \\mid X > 5) = \\frac{1}{2}$, as on the first flip.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expecting-a-success-to-be-due)]@
 
 Read the identity with $m$ as the number of trials that have already failed and $n$ as a number of trials still to come. The left side is the chance of waiting more than $n$ further trials after those failures; the right side is the chance of waiting more than $n$ trials from the very start. The two are equal for every $m$: the trials already played are spent, and each new trial succeeds with the same probability $p$.
 
@@ -1124,7 +1127,7 @@ $$P(X \\leq k) = 1 - P(\\text{all first } k \\text{ trials fail}) = 1 - (1-p)^k$
 
 @academic[pitfall,aside:true,width:35%:Adding p for each trial
 Writing $P(X \\leq 6) = 6 \\times \\frac{1}{6} = 1$ for a die adds the chance of a 6 on each roll and makes a 6 within six rolls certain. The complement gives $P(X \\leq 6) = 1 - \\left(\\frac{5}{6}\\right)^6 \\approx 0.665$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-p-for-each-trial)]@
 
 The event that the first success comes within $k$ trials can happen in $k$ different ways, one for each trial on which it can arrive, and each way has its own probability. The complement happens in only one way: all of the first $k$ trials fail. Because the trials are independent, those $k$ failure probabilities multiply, which is why the complement is the shorter road to the CDF.
 
@@ -1374,7 +1377,7 @@ $P(X = 4) = \\left(\\frac{5}{6}\\right)^{4-1} \\cdot \\frac{1}{6} = \\left(\\fra
 
 @academic[pitfall,aside:true,width:35%:Using k failures in the exponent
 Writing $\\left(\\frac{5}{6}\\right)^{4} \\cdot \\frac{1}{6} \\approx 0.080$ puts four failed rolls before the 6, which is the chance of needing five rolls. Exactly $4$ rolls means $3$ failures: $P(X = 4) \\approx 0.096$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-k-failures-in-the-exponent)]@
 
 This means there's about a 9.6% chance that you'll need exactly 4 rolls to get your first 6.
 
@@ -1460,7 +1463,10 @@ The roll that shows the first 6 is itself one of the $k$ rolls being counted. Ev
     obj16:{
   
       title:`Geometric at a Glance`,
-      content:`The table below collects the full anatomy of the geometric distribution into a single reference card — its single parameter, support, PMF and CDF, the mean and variance formulas, mode and median behavior, the defining memoryless property, the relationship to the negative binomial, and a canonical die-rolling example.`,
+      content:`This summary gathers the geometric distribution on one card of ten rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the chance of success on each trial and the trial numbers on which the first success can come. Then come the probability of a first success on a given trial, the chance of one within a number of trials, the mean, the variance with the standard deviation, and the mode and median. The last rows give the memoryless property, the link to the negative binomial and the die-rolling example.`,
+      formulaSheetAfter: `The running total is the row to reach for first: the chance of a first success within some number of trials is one minus the chance that every one of them fails. The memoryless property then says that trials already lost change nothing about the wait still ahead.`,
       before:``,
       after:``,
       link:'',
@@ -1468,54 +1474,9 @@ The roll that shows the first 6 is itself one of the $k$ rolls being counted. Ev
     },
     obj17:{
       title:`Common Pitfalls`,
-      content:`Three mistakes come up again and again in geometric problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Expecting a success to be due**
-
-After a run of failures, the next trial is treated as more likely to succeed than the first one was. The probability of the whole run, computed from the start, is used as if it were the probability of the next trial.
-
-Wrong working: a fair coin has shown five tails. Six tails in a row has probability
-$$P(X > 6) = \\left(\\frac{1}{2}\\right)^6 = \\frac{1}{64}$$
-so flip six is taken to be heads with probability $1 - \\frac{1}{64} = \\frac{63}{64}$.
-
-Right working: the five tails have already happened, so the question is conditional on $X > 5$.
-$$P(X = 6 \\mid X > 5) = \\frac{P(X = 6)}{P(X > 5)} = \\frac{1/64}{1/32} = \\frac{1}{2}$$
-
-Why it happens: a long streak of failures is rare when viewed from the start, and that rarity is carried over to the next trial, even though each flip is independent of the ones before it.
-
-How to check: apply the memoryless identity with $m = 5$ and $n = 1$. $P(X > 6 \\mid X > 5) = P(X > 1) = \\frac{1}{2}$, so heads on flip six has probability $1 - \\frac{1}{2} = \\frac{1}{2}$, exactly as on the first flip.
-
-**Adding p for each trial**
-
-The probability that the first success comes within $k$ trials is computed as $k$ times $p$, adding up the chance of a success on each trial.
-
-Wrong working: for a die rolled until the first 6,
-$$P(X \\leq 6) = 6 \\times \\frac{1}{6} = 1$$
-which says a 6 is certain to appear within six rolls.
-
-Right working: the complement of a 6 within six rolls is six rolls with no 6.
-$$P(X \\leq 6) = 1 - \\left(\\frac{5}{6}\\right)^6 = 1 - \\frac{15625}{46656} \\approx 0.665$$
-
-Why it happens: for one trial $P(X \\leq 1) = p$ is correct, and for small $k$ and small $p$ the product $kp$ is close to the right value, so the shortcut looks reliable. It counts the outcomes with a 6 on several of the rolls more than once.
-
-How to check: the result must stay below $1$. With seven rolls the same shortcut gives $7 \\times \\frac{1}{6} = \\frac{7}{6}$, which is not a probability. Summing the PMF gives the right value as well: $\\frac{1}{6} + \\frac{5}{36} + \\cdots + \\left(\\frac{5}{6}\\right)^5 \\cdot \\frac{1}{6} \\approx 0.665$.
-
-**Using k failures in the exponent**
-
-The probability that the first success comes on trial $k$ is computed as $(1-p)^k p$, as if $k$ failures came before the success.
-
-Wrong working: for a die and $k = 4$,
-$$P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} = \\frac{625}{7776} \\approx 0.080$$
-This is the probability of four failed rolls followed by a 6, that is, of needing five rolls.
-
-Right working: the fourth roll is the success, so only three rolls fail.
-$$P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} = \\frac{125}{1296} \\approx 0.096$$
-
-Why it happens: the trial number $k$ appears in the question, so it goes straight into the exponent. The form $(1-p)^k p$ is also correct under the other convention, where $X$ counts failures instead of trials, and formulas copied from such a source carry it over.
-
-How to check: put $k = 1$. The first roll is a 6 with probability $\\frac{1}{6}$, and $(1-p)^{k-1} p$ gives exactly that, while $(1-p)^k p$ gives $\\frac{5}{36}$. The wrong PMF also adds up to $1 - p = \\frac{5}{6}$ instead of $1$.`,
+      content:`Three mistakes come up again and again in geometric problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip forgets how the geometric distribution counts. Past failures do not make a success due, by the memoryless property; the chance of a first success within $k$ trials is $1 - (1 - p)^k$, not $kp$; and a first success on trial $k$ follows $k - 1$ failures. Putting $k = 1$ into the formula, or checking that a probability stays below $1$, catches each slip.`,
       link:'',
     },
      links:{
@@ -1734,8 +1695,73 @@ const geometricExplanations = {
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj17 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'expecting-a-success-to-be-due', name: `Expecting a success to be due`, errorAt: 1,
+        what: `After a run of failures, the next trial is treated as more likely to succeed than the first one was. The probability of the whole run, computed from the start, is used as if it were the probability of the next trial.`,
+        wrong: [`A fair coin has shown five tails.`, `Six tails in a row has probability
+$$P(X > 6) = \\left(\\frac{1}{2}\\right)^6 = \\frac{1}{64}$$`, `So flip six is taken to be heads with probability $1 - \\frac{1}{64} = \\frac{63}{64}$.`],
+        right: [`A fair coin has shown five tails.`, `The five tails have already happened, so the question is conditional on $X > 5$.`, `$$P(X = 6 \\mid X > 5) = \\frac{P(X = 6)}{P(X > 5)}$$
+$$= \\frac{1/64}{1/32} = \\frac{1}{2}$$`],
+        why: `A long streak of failures is rare when viewed from the start, and that rarity is carried over to the next trial, even though each flip is independent of the ones before it.`,
+        check: `Apply the memoryless identity with $m = 5$ and $n = 1$. $P(X > 6 \\mid X > 5) = P(X > 1) = \\frac{1}{2}$, so heads on flip six has probability $1 - \\frac{1}{2} = \\frac{1}{2}$, exactly as on the first flip.` },
+      { id: 'adding-p-for-each-trial', name: `Adding p for each trial`, errorAt: 0,
+        what: `The probability that the first success comes within $k$ trials is computed as $k$ times $p$, adding up the chance of a success on each trial.`,
+        wrong: [`For a die rolled until the first 6,
+$$P(X \\leq 6) = 6 \\times \\frac{1}{6} = 1$$`, `Which says a 6 is certain to appear within six rolls.`],
+        right: [`The complement of a 6 within six rolls is six rolls with no 6.`, `$$P(X \\leq 6) = 1 - \\left(\\frac{5}{6}\\right)^6$$
+$$= 1 - \\frac{15625}{46656} \\approx 0.665$$`],
+        why: `For one trial $P(X \\leq 1) = p$ is correct, and for small $k$ and small $p$ the product $kp$ is close to the right value, so the shortcut looks reliable. It counts the outcomes with a 6 on several of the rolls more than once.`,
+        check: `The result must stay below $1$. With seven rolls the same shortcut gives $7 \\times \\frac{1}{6} = \\frac{7}{6}$, which is not a probability. Summing the PMF gives the right value as well: $\\frac{1}{6} + \\frac{5}{36} + \\cdots + \\left(\\frac{5}{6}\\right)^5 \\cdot \\frac{1}{6} \\approx 0.665$.` },
+      { id: 'using-k-failures-in-the-exponent', name: `Using k failures in the exponent`, errorAt: 0,
+        what: `The probability that the first success comes on trial $k$ is computed as $(1-p)^k p$, as if $k$ failures came before the success.`,
+        wrong: [`For a die and $k = 4$,
+$$P(X = 4) = \\left(\\frac{5}{6}\\right)^4 \\cdot \\frac{1}{6} = \\frac{625}{7776} \\approx 0.080$$`, `This is the probability of four failed rolls followed by a 6, that is, of needing five rolls.`],
+        right: [`The fourth roll is the success, so only three rolls fail.`, `$$P(X = 4) = \\left(\\frac{5}{6}\\right)^3 \\cdot \\frac{1}{6} = \\frac{125}{1296}$$
+$$\\approx 0.096$$`],
+        why: `The trial number $k$ appears in the question, so it goes straight into the exponent. The form $(1-p)^k p$ is also correct under the other convention, where $X$ counts failures instead of trials, and formulas copied from such a source carry it over.`,
+        check: `Put $k = 1$. The first roll is a 6 with probability $\\frac{1}{6}$, and $(1-p)^{k-1} p$ gives exactly that, while $(1-p)^k p$ gives $\\frac{5}{36}$. The wrong PMF also adds up to $1 - p = \\frac{5}{6}$ instead of $1$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameter', formula: '$p \\in (0, 1]$, the success probability per trial', note: 'independent Bernoulli trials with constant $p$',
+        sub: 'The single number that fixes the distribution, as [the parameters section](!#2) explains.' },
+      { name: 'Support', formula: '$k \\in \\{1, 2, 3, \\ldots\\}$', note: '$k$ is the trial on which the first success occurs',
+        sub: 'The trial numbers on which the first success can land, set out with [the PMF and its support](!#4).' },
+      { name: 'PMF', formula: '$P(X = k) = (1-p)^{k-1} p, \\quad k = 1, 2, 3, \\ldots$', note: '$k - 1$ failures, then a success; strictly decreasing in $k$',
+        sub: 'The probability that the first success comes on trial $k$, from [the PMF section](!#4).' },
+      { name: 'CDF', formula: '$F_X(k) = P(X \\leq k) = 1 - (1-p)^k$', note: 'complement of "all first $k$ trials fail"',
+        sub: 'The probability of a first success within $k$ trials, derived in [the CDF section](!#5).' },
+      { name: 'Expected value', formula: '$\\displaystyle E[X] = \\frac{1}{p}$', note: 'rolling for a 6: $p = 1/6$, so $E[X] = 6$ trials on average',
+        sub: 'The average number of trials up to and including the first success, from [the expected value section](!#6).' },
+      { name: 'Variance', formula: '$\\displaystyle \\mathrm{Var}(X) = \\frac{1-p}{p^2}$; $\\displaystyle \\sigma = \\frac{\\sqrt{1-p}}{p}$', note: 'grows rapidly as $p \\to 0$: rare successes are highly variable',
+        sub: 'How widely the waiting time spreads, worked out in [variance and standard deviation](!#7).' },
+      { name: 'Mode and median', formula: '$\\text{Mode} = 1$ always; $\\displaystyle \\text{Median} = \\left\\lceil \\frac{-\\ln(2)}{\\ln(1-p)} \\right\\rceil$', note: 'the PMF is strictly decreasing, so trial $1$ is always the most likely',
+        sub: 'The most likely trial and the trial by which half the probability is used up, found in [mode and median](!#8).' },
+      { name: 'Memoryless property', formula: '$P(X > m + n \\mid X > m) = P(X > n)$', note: 'the only discrete distribution with this property',
+        sub: 'Failures so far do not change the wait still ahead, as [the experiment behind the distribution](!#1) shows.' },
+      { name: 'Relation', formula: '$\\operatorname{Geom}(p) = \\operatorname{NegBin}(1, p)$', note: 'the geometric is the $r = 1$ special case of the negative binomial',
+        sub: 'Waiting for one success is waiting for the first of $r$ successes with $r = 1$, as [the key terms](!#0) note.' },
+      { name: 'Canonical example', formula: 'rolling a die until the first 6: $p = 1/6$', note: '$E[X] = 6$, $\\mathrm{Var}(X) = 30$, $\\sigma \\approx 5.48$',
+        sub: 'The die-rolling wait the page works through; [variance and standard deviation](!#7) finishes its numbers.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -1756,7 +1782,7 @@ const geometricExplanations = {
     }
    }
 
-export default function GeometricDistributionPage({
+export default function GeometricDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1826,7 +1852,7 @@ $$P(X > m + n \\mid X > m) = P(X > n)$$
 /probability/formulas]@`,
           `@academic[pitfall,aside:true,width:35%:Expecting a success to be due
 For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chance that flip six is a tail too makes heads look $\\frac{63}{64}$ likely. Given the five tails, $P(X = 6 \\mid X > 5) = \\frac{1}{2}$, as on the first flip.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-expecting-a-success-to-be-due)]@`,
           `Read the identity with $m$ as the number of trials that have already failed and $n$ as a number of trials still to come. The left side is the chance of waiting more than $n$ further trials after those failures; the right side is the chance of waiting more than $n$ trials from the very start. The two are equal for every $m$: the trials already played are spent, and each new trial succeeds with the same probability $p$.`,
           <div key={'unit-geoMemory'} dangerouslySetInnerHTML={{ __html: demoUnits.geoMemory }} />,
           `This is the discrete counterpart of the exponential distribution's memoryless property.`,
@@ -1983,8 +2009,16 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="geometric-distribution-formula-summary"
+            title="Geometric distribution at a glance"
+            source="/probability/distributions/discrete/geometric"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.obj16.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1993,6 +2027,15 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <DiagramFrame
+            key={'obj17-mistakes'}
+            id="geometric-pitfalls"
+            title="Common pitfalls with the geometric distribution"
+            source="/probability/distributions/discrete/geometric"
+            after={sectionsContent.obj17.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

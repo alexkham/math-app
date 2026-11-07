@@ -15,6 +15,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 
 export async function getStaticProps(){
 const keyWords = [
@@ -859,9 +860,25 @@ $$x - 2 = -5 \\implies x = -3$$`],
         check: `Use the distance reading. $|x - 2| = 5$ asks for the points at distance $5$ from $2$ on the number line, and there are two of them, $7$ and $-3$.` },
     ],
   };
+  // TheoremCard data (abel-ruffini-converse); every fact is from the section text
+  const abelRuffiniConverse = {
+    header: { kicker: 'Polynomial equations', title: 'The Abel–Ruffini Theorem', lede: 'A hard boundary at degree five.' },
+    theorem: {
+      says: 'No general formula built from radicals and arithmetic can solve every polynomial equation of degree five or higher.',
+      not: 'Equations of degree five or higher cannot be solved.',
+      counter: {
+        label: 'Reading "no general formula" as "no solution"',
+        wrong: 'The equation is a quintic, so its roots cannot be found.',
+        right: 'Specific equations may still yield to factoring, the rational root theorem or substitution tricks; each confirmed root lowers the degree by one, and numerical methods approximate the rest to any accuracy.',
+      },
+      scope: '**Below degree five:** closed forms exist, Cardano’s formula for cubics and Ferrari’s method for quartics, cumbersome and rarely used. The Fundamental Theorem of Algebra still guarantees exactly $n$ complex roots.',
+    },
+  };
+
 
    return {
   props: {
+      abelRuffiniConverse,
     pitfallData,
     faqQuestions,
     beyondAlgebraTree,
@@ -890,7 +907,9 @@ $$x - 2 = -5 \\implies x = -3$$`],
    }
 
 
-export default function EquationsPage({ pitfallData,faqQuestions, beyondAlgebraTree, equationFamilyTree,
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQuestions, beyondAlgebraTree, equationFamilyTree,
   seoData,
   sectionsContent,
   introContent,
@@ -1071,6 +1090,16 @@ export default function EquationsPage({ pitfallData,faqQuestions, beyondAlgebraT
           sectionsContent.obj8.content,
                   <div key={'unit-polynomial'} dangerouslySetInnerHTML={{ __html: demoUnits.polynomial }} />,
           `The Fundamental Theorem counts complex roots; the picture shows how many of them are real.`,
+          <DiagramFrame
+            key={'obj8-theorem'}
+            id="abel-ruffini-converse"
+            title="Abel–Ruffini: what it does not say"
+            source="/algebra/equations"
+            before={`The theorem closes one door at degree five. The card shows which door, and which stay open.`}
+            after={`No universal recipe, but still a strategy: rational root candidates, division, and a numerical fallback.`}
+          >
+            <TheoremCard data={abelRuffiniConverse} variant="converse" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

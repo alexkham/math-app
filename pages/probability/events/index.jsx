@@ -568,6 +568,7 @@ import conditionalTreeDiagrams from '@/app/components/probability/conditional-pr
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -993,7 +994,7 @@ Larger events naturally represent more possibilities, and smaller events represe
 
 @academic[pitfall,aside:true,width:35%:Adding probabilities of overlapping events
 On a die, adding $P(\\text{even}) + P(\\text{at least 4}) = \\frac{3}{6} + \\frac{3}{6} = 1$ counts the shared outcomes 4 and 6 twice. The union $\\{2, 4, 5, 6\\}$ has probability $\\frac{4}{6} = \\frac{2}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-probabilities-of-overlapping-events)]@
 
 When events overlap, their probabilities interact through the structure of that overlap.
 
@@ -1012,7 +1013,7 @@ Sometimes two events do not influence each other in any meaningful way. When kno
 
 @academic[pitfall,aside:true,width:35%:Treating disjoint events as independent
 Calling a sum of 7 and doubles on two dice independent because they share no outcome gets it backwards. Once the sum is 7, doubles is impossible, so its chance drops from $\\frac{6}{36} = \\frac{1}{6}$ to $0$, and the events are dependent.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-disjoint-events-as-independent)]@
 
 Independence is not about numbers yet — it is about the absence of connection. When events are independent, their occurrence patterns do not interact. When they are not independent, the presence of one event changes how we think about the other.
 
@@ -1050,7 +1051,7 @@ Certain forms of events appear again and again in probability questions. Recogni
 
 @academic[pitfall,aside:true,width:35%:Taking the wrong complement
 Writing $1 - \\left(\\frac{1}{6}\\right)^2 = \\frac{35}{36}$ for at least one six in two rolls subtracts the chance of two sixes. The opposite of at least one six is no six at all, so $P = 1 - \\left(\\frac{5}{6}\\right)^2 = \\frac{11}{36}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-wrong-complement)]@
 
 The "at least one" and complement patterns often appear in the same problem. An event such as "at least one six in several rolls" gathers many separate cases, one six, two sixes and so on, while the event left over when it fails is a single, simpler case. Its probability is found first and then subtracted from $1$.
 
@@ -1104,53 +1105,9 @@ Seeing these connections early helps unify the subject: no matter how advanced t
     },
     pitfalls:{
       title:`Common Pitfalls`,
-      content:`Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Adding probabilities of overlapping events**
-
-The probability that at least one of two events occurs is found by adding their probabilities, although the two events share outcomes. Every shared outcome is then counted twice.
-
-Wrong working: roll one die, with $A$ = the result is even and $B$ = the result is at least 4.
-$$P(A \\cup B) = P(A) + P(B) = \\frac{3}{6} + \\frac{3}{6} = 1$$
-
-Right working: $A = \\{2, 4, 6\\}$ and $B = \\{4, 5, 6\\}$ share $4$ and $6$, so the union is $\\{2, 4, 5, 6\\}$ and the shared part is subtracted once.
-$$P(A \\cup B) = \\frac{3}{6} + \\frac{3}{6} - \\frac{2}{6} = \\frac{4}{6} = \\frac{2}{3}$$
-
-Why it happens: "or" suggests putting two things together, and adding is the first way of combining that comes to mind. The rule that disjoint events add is then used without checking that the events are disjoint.
-
-How to check: list the outcomes of the union and count them. An answer of $1$ would make the union certain, yet a roll of $1$ or $3$ lies in neither event.
-
-**Treating disjoint events as independent**
-
-Two events that share no outcome are called independent, because they seem to have nothing to do with each other. In fact, disjoint events with positive probabilities are tightly connected: if one occurs, the other cannot.
-
-Wrong working: roll two dice, with $A$ = the sum is 7 and $B$ = doubles. Since they share no outcome, they are taken as independent, so the chance of doubles is left at $\\frac{6}{36} = \\frac{1}{6}$ after the sum is known to be 7, and the product rule gives
-$$P(A \\cap B) = P(A)P(B) = \\frac{1}{6} \\cdot \\frac{1}{6} = \\frac{1}{36}$$
-
-Right working: a double always has an even sum, so no outcome is in both events.
-$$P(A \\cap B) = 0 \\neq \\frac{1}{36} = P(A)P(B)$$
-Once the sum is known to be 7, the chance of doubles is $0$, not $\\frac{1}{6}$. Knowing that $A$ occurred changes the view of $B$, so the events are dependent.
-
-Why it happens: "disjoint" and "independent" both sound like "separate", and in everyday speech the two ideas blur together.
-
-How to check: ask whether learning that one event happened changes anything about the other. For disjoint events with positive probabilities it always does, because it rules the other one out.
-
-**Taking the wrong complement**
-
-A problem that asks for "at least one" is solved through the complement, but the complement of the wrong event is used: the case where every trial succeeds is subtracted instead of the case where none does.
-
-Wrong working: for at least one six in two rolls of a die,
-$$P = 1 - \\left(\\frac{1}{6}\\right)^2 = 1 - \\frac{1}{36} = \\frac{35}{36}$$
-This is the probability of not rolling two sixes.
-
-Right working: the opposite of "at least one six" is "no six at all", which has probability $\\left(\\frac{5}{6}\\right)^2 = \\frac{25}{36}$.
-$$P = 1 - \\frac{25}{36} = \\frac{11}{36}$$
-
-Why it happens: the chance of a six, $\\frac{1}{6}$, is the number the problem gives, and it is raised to the number of rolls without asking which event that power describes.
-
-How to check: "at least one six" in two rolls happens only if the first roll or the second roll is a six, so its probability is at most $\\frac{1}{6} + \\frac{1}{6} = \\frac{1}{3}$. An answer of $\\frac{35}{36}$ is far above that bound; counting the grid of 36 outcomes gives 11 cells.`,
+      content:`Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip mixes up how two events relate. Overlapping events need their overlap subtracted, disjoint events with positive probability are never independent, and the complement of at least one success is no success, not every success. Listing the outcomes, or asking whether one event changes the chances of the other, catches each slip.`,
     }
   
   }
@@ -1254,8 +1211,37 @@ This page presents the idea of events and shows how they form the basic language
     ],
   };
 
+  // MistakeFix batch 16, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'adding-probabilities-of-overlapping-events', name: `Adding probabilities of overlapping events`, errorAt: 0,
+        what: `The probability that at least one of two events occurs is found by adding their probabilities, although the two events share outcomes. Every shared outcome is then counted twice.`,
+        wrong: [`Roll one die, with $A$ = the result is even and $B$ = the result is at least 4.`, `$$P(A \\cup B) = P(A) + P(B)$$
+$$= \\frac{3}{6} + \\frac{3}{6} = 1$$`],
+        right: [`$A = \\{2, 4, 6\\}$ and $B = \\{4, 5, 6\\}$ share $4$ and $6$, so the union is $\\{2, 4, 5, 6\\}$ and the shared part is subtracted once.`, `$$P(A \\cup B) = \\frac{3}{6} + \\frac{3}{6} - \\frac{2}{6} = \\frac{4}{6} = \\frac{2}{3}$$`],
+        why: `"or" suggests putting two things together, and adding is the first way of combining that comes to mind. The rule that disjoint events add is then used without checking that the events are disjoint.`,
+        check: `List the outcomes of the union and count them. An answer of $1$ would make the union certain, yet a roll of $1$ or $3$ lies in neither event.` },
+      { id: 'treating-disjoint-events-as-independent', name: `Treating disjoint events as independent`, errorAt: 1,
+        what: `Two events that share no outcome are called independent, because they seem to have nothing to do with each other. In fact, disjoint events with positive probabilities are tightly connected: if one occurs, the other cannot.`,
+        wrong: [`Roll two dice, with $A$ = the sum is 7 and $B$ = doubles.`, `Since they share no outcome, they are taken as independent, so the chance of doubles is left at $\\frac{6}{36} = \\frac{1}{6}$ after the sum is known to be 7, and the product rule gives
+$$P(A \\cap B) = P(A)P(B) = \\frac{1}{6} \\cdot \\frac{1}{6} = \\frac{1}{36}$$`],
+        right: [`Roll two dice, with $A$ = the sum is 7 and $B$ = doubles.`, `A double always has an even sum, so no outcome is in both events.`, `$$P(A \\cap B) = 0 \\neq \\frac{1}{36} = P(A)P(B)$$`, `Once the sum is known to be 7, the chance of doubles is $0$, not $\\frac{1}{6}$. Knowing that $A$ occurred changes the view of $B$, so the events are dependent.`],
+        why: `"disjoint" and "independent" both sound like "separate", and in everyday speech the two ideas blur together.`,
+        check: `Ask whether learning that one event happened changes anything about the other. For disjoint events with positive probabilities it always does, because it rules the other one out.` },
+      { id: 'taking-the-wrong-complement', name: `Taking the wrong complement`, errorAt: 0,
+        what: `A problem that asks for "at least one" is solved through the complement, but the complement of the wrong event is used: the case where every trial succeeds is subtracted instead of the case where none does.`,
+        wrong: [`For at least one six in two rolls of a die,
+$$P = 1 - \\left(\\frac{1}{6}\\right)^2 = 1 - \\frac{1}{36} = \\frac{35}{36}$$`, `This is the probability of not rolling two sixes.`],
+        right: [`The opposite of "at least one six" is "no six at all", which has probability $\\left(\\frac{5}{6}\\right)^2 = \\frac{25}{36}$.`, `$$P = 1 - \\frac{25}{36} = \\frac{11}{36}$$`],
+        why: `The chance of a six, $\\frac{1}{6}$, is the number the problem gives, and it is raised to the number of rolls without asking which event that power describes.`,
+        check: `"at least one six" in two rolls happens only if the first roll or the second roll is a six, so its probability is at most $\\frac{1}{6} + \\frac{1}{6} = \\frac{1}{3}$. An answer of $\\frac{35}{36}$ is far above that bound; counting the grid of 36 outcomes gives 11 cells.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     eventTypesOutline,
     demoUnits,
     conceptIntroFigures,
@@ -1277,7 +1263,7 @@ This page presents the idea of events and shows how they form the basic language
   }
 }
 
-export default function EventsPage({eventTypesOutline, 
+export default function EventsPage({ pitfallData,eventTypesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1477,6 +1463,15 @@ The formula also tests a common hunch: a six comes up on one roll in six, so six
         link:'',
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="event-pitfalls"
+            title="Common pitfalls with events"
+            source="/probability/events"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

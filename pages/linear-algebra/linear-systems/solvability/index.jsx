@@ -1772,7 +1772,9 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2223,7 +2225,7 @@ When $\\text{rank}(A) < n$, there are $n - \\text{rank}(A)$ free variables. Each
 
 @academic[pitfall,aside:true,width:35%:Skipping the existence check
 Concluding "exactly one solution" from $\\text{rank}(A) = n$ alone fails for $x_1 = 1$, $x_1 = 2$: here $\\text{rank}(A) = 1 = n$, yet $\\text{rank}([A \\mid \\mathbf{b}]) = 2$ and there is no solution. Uniqueness can be claimed only after $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$ has been checked.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-existence-check)]@
 
 The rank test for uniqueness looks only at the coefficient matrix. It compares the number of pivot columns of $A$ with the number of unknowns, and $\\mathbf{b}$ plays no part in it. The same count comes out for every right-hand side the system could be given.`,
     before: ``,
@@ -2276,7 +2278,7 @@ The solution is $\\mathbf{x} = A^{-1}\\mathbf{b}$, or equivalently, the solution
 
 @academic[pitfall,aside:true,width:35%:Reading a zero determinant as no solution
 Concluding "no solution" from $\\det(A) = 0$ fails for $x_1 + 2x_2 = 3$, $2x_1 + 4x_2 = 6$: the determinant is $0$, yet $x_1 = 3 - 2t$, $x_2 = t$ solves it for every $t$. Only a $\\mathbf{b}$ outside $\\text{Col}(A)$, such as $(3, 5)$, leaves no solution.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-zero-determinant-as-no-solution)]@
 
 If $\\det(A) = 0$: the matrix is singular, the rank is less than $n$, and the outcome depends on $\\mathbf{b}$. For some $\\mathbf{b}$ (those in the column space), infinitely many solutions exist. For other $\\mathbf{b}$ (those outside the column space), no solution exists. The determinant test determines whether the coefficient matrix is adequate; the rank comparison with the augmented matrix determines whether the specific $\\mathbf{b}$ is reachable.`,
     before: ``,
@@ -2291,7 +2293,7 @@ The column space of $A$ is at most $n$-dimensional inside $\\mathbb{R}^m$. When 
 
 @academic[pitfall,aside:true,width:35%:Deciding existence from the shape alone
 Concluding "no solution" because $m = 3 > n = 2$ fails for $x_1 + x_2 = 2$, $x_1 - x_2 = 0$, $2x_1 = 2$: both ranks equal $2$, and $\\mathbf{x} = (1, 1)$ is the unique solution. Only the rank comparison decides.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-deciding-existence-from-the-shape-alone)]@
 
 A solution exists only when $\\mathbf{b}$ happens to lie in the column space — when the extra equations are consistent with the first $n$. When a solution does exist and $\\text{rank}(A) = n$, it is unique.
 
@@ -2308,7 +2310,7 @@ When no exact solution exists, the [least-squares](!/linear-algebra/orthogonalit
 
 @academic[pitfall,aside:true,width:35%:Assuming a wide system always has solutions
 Expecting infinitely many solutions because $m = 2 < n = 3$ fails for $x_1 + x_2 + x_3 = 1$, $x_1 + x_2 + x_3 = 2$: $\\text{rank}(A) = 1$ but $\\text{rank}([A \\mid \\mathbf{b}]) = 2$, so there is no solution. A wide shape rules out uniqueness, not inconsistency.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-assuming-a-wide-system-always-has-solutions)]@
 
 The solution set, when nonempty, is an affine subspace of dimension at least $n - m$. Multiple vectors $\\mathbf{x}$ satisfy the equations, and additional criteria beyond the linear system itself are needed to select a preferred one.
 
@@ -2352,7 +2354,7 @@ The dimension of the solution set equals the dimension of the null space: $n - \
 
 @academic[pitfall,aside:true,width:35%:Dropping the particular solution
 Writing the solutions of $x_1 + x_2 = 2$ as $\\mathbf{x} = t(-1, 1)$ gives only the null space: at $t = 0$ it offers $\\mathbf{0}$, and $0 + 0 \\neq 2$. Adding $\\mathbf{x}_p = (2, 0)$ gives the solution set $\\mathbf{x} = (2, 0) + t(-1, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-particular-solution)]@
 
 The particular solution $\\mathbf{x}_p$ captures the effect of the right-hand side $\\mathbf{b}$. The [homogeneous](!/linear-algebra/linear-systems/homogeneous) component $\\mathbf{x}_h$ captures the inherent freedom in the system — the directions along which the solution can shift without violating any equation. This decomposition into &quot;forced&quot; and &quot;free&quot; parts is one of the most fundamental structural results in linear algebra.`,
     before: ``,
@@ -2368,84 +2370,9 @@ The particular solution $\\mathbf{x}_p$ captures the effect of the right-hand si
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Five mistakes cause many wrong verdicts about linear systems. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Skipping the existence check**
-
-A unique solution is announced as soon as $\\text{rank}(A) = n$, without checking that a solution exists at all. Full column rank says there is at most one solution; it does not say there is one.
-
-Wrong working: for the system $x_1 = 1$, $x_1 = 2$,
-$$A = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}, \\quad \\text{rank}(A) = 1 = n \\quad \\Longrightarrow \\quad \\text{exactly one solution}$$
-
-Right working: reduce the augmented matrix first.
-$$\\left(\\begin{array}{c|c} 1 & 1 \\\\ 1 & 2 \\end{array}\\right) \\sim \\left(\\begin{array}{c|c} 1 & 1 \\\\ 0 & 1 \\end{array}\\right)$$
-The second row reads $0 = 1$, so $\\text{rank}([A \\mid \\mathbf{b}]) = 2 > \\text{rank}(A)$ and there is no solution.
-
-Why it happens: for a square matrix with $\\det(A) \\neq 0$, full rank does guarantee a solution, and the habit carries over to tall matrices, where it does not.
-
-How to check: ask the existence question first. Look for a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ in the reduced augmented matrix before counting pivot columns.
-
-**Reading a zero determinant as no solution**
-
-$\\det(A) = 0$ is taken to mean that $A\\mathbf{x} = \\mathbf{b}$ has no solution. A zero determinant says only that a solution, when there is one, is not unique; whether one exists depends on $\\mathbf{b}$.
-
-Wrong working:
-$$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}, \\quad \\det(A) = 4 - 4 = 0 \\quad \\Longrightarrow \\quad x_1 + 2x_2 = 3, \\; 2x_1 + 4x_2 = 6 \\text{ has no solution}$$
-
-Right working: reduce the augmented matrix.
-$$\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\end{array}\\right) \\sim \\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
-Both ranks are $1$, so the system is consistent, with one free variable: $x_2 = t$, $x_1 = 3 - 2t$. With $\\mathbf{b} = (3, 5)$ instead, the second row becomes $[0 \\; 0 \\mid -1]$ and there is no solution.
-
-Why it happens: for a single equation $ax = b$, $a = 0$ usually means no solution, and $\\det(A) = 0$ is read the same way. The case $0x = 0$, true for every $x$, is the one that gets forgotten.
-
-How to check: after finding $\\det(A) = 0$, compare $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$. Equal ranks mean infinitely many solutions, unequal ranks mean none.
-
-**Deciding existence from the shape alone**
-
-A system with more equations than unknowns is declared inconsistent without any reduction. Most right-hand sides do make a tall system inconsistent, but some do not.
-
-Wrong working:
-$$x_1 + x_2 = 2, \\quad x_1 - x_2 = 0, \\quad 2x_1 = 2 \\qquad m = 3 > n = 2 \\quad \\Longrightarrow \\quad \\text{no solution}$$
-
-Right working: reduce the augmented matrix.
-$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\\\ 2 & 0 & 2 \\end{array}\\right) \\sim \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & -2 & -2 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
-Both ranks are $2 = n$, so there is exactly one solution: $x_2 = 1$, $x_1 = 1$.
-
-Why it happens: the third equation looks like one constraint too many, and a randomly chosen right-hand side would indeed break the system. Here the third equation is the sum of the first two, so it adds nothing new.
-
-How to check: substitute the candidate solution into every equation. $\\mathbf{x} = (1, 1)$ gives $2$, $0$ and $2$, matching all three right-hand sides.
-
-**Assuming a wide system always has solutions**
-
-A system with fewer equations than unknowns is expected to have infinitely many solutions. The shape guarantees free variables, so a solution is never unique, but it does not guarantee that a solution exists.
-
-Wrong working:
-$$x_1 + x_2 + x_3 = 1, \\quad x_1 + x_2 + x_3 = 2 \\qquad m = 2 < n = 3 \\quad \\Longrightarrow \\quad \\text{infinitely many solutions}$$
-
-Right working: reduce the augmented matrix.
-$$\\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 1 & 1 & 1 & 2 \\end{array}\\right) \\sim \\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 0 & 0 & 0 & 1 \\end{array}\\right)$$
-The second row reads $0 = 1$, so $\\text{rank}(A) = 1$ but $\\text{rank}([A \\mid \\mathbf{b}]) = 2$, and there is no solution.
-
-Why it happens: "more unknowns than equations" is remembered as "always solvable", and the condition that a solution must exist first is dropped.
-
-How to check: before counting free variables, check that the reduction produced no row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$. Two equations with the same left side and different right sides, as here, always produce one.
-
-**Dropping the particular solution**
-
-The solution set of $A\\mathbf{x} = \\mathbf{b}$ is written using only the free directions, as if $\\mathbf{b}$ were $\\mathbf{0}$. That describes the null space, the solution set of the homogeneous system, not the solutions of $A\\mathbf{x} = \\mathbf{b}$.
-
-Wrong working: for $x_1 + x_2 = 2$, the free variable $x_2 = t$ gives the direction $(-1, 1)$, and the answer is written as
-$$\\mathbf{x} = t\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$
-
-Right working: $x_1 = 2 - t$, so the constant $2$ stays in the answer.
-$$\\mathbf{x} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$
-This is a line through $(2, 0)$, parallel to the null space and not through the origin.
-
-Why it happens: the free directions are the part of the answer that takes work to find, and the constant column is easy to leave behind. For homogeneous systems the particular solution really is $\\mathbf{0}$, which reinforces the habit.
-
-How to check: set every parameter to $0$. The result must solve $A\\mathbf{x} = \\mathbf{b}$; the wrong answer gives $\\mathbf{0}$, and $0 + 0 \\neq 2$.`,
+    content: `Five mistakes cause many wrong verdicts about linear systems. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip decides solvability from too little. Full column rank gives uniqueness only once a solution exists, $\\det(A) = 0$ leaves the question of existence open, the shape of a system never decides existence on its own, and the solution set of $A\\mathbf{x} = \\mathbf{b}$ is a particular solution plus the null space. Comparing $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$, or setting every parameter to $0$, catches each slip.`,
     link: ``,
   },
 }
@@ -2695,12 +2622,87 @@ const schemas = {
       general: { label: 'When consistent', text: 'the solution set has dimension $n - \\text{rank}(A)$',
         say: 'Existence and dimension in a single rank comparison; $A$ may be square, tall or wide. The proof: $\\mathbf{b} \\in \\text{Col}(A)$ exactly when the rank does not grow.' },
     },
+  };  // ScopeCard data (uniqueness-condition-scope); every fact is from the section text
+  const uniquenessScope = {
+    header: { kicker: 'Solvability', title: 'Exactly one solution', lede: 'When a solution exists, it is unique if and only if the rank equals the number of unknowns.' },
+    rule: { name: 'Uniqueness', expr: '$\\text{rank}(A) = n$', condition: 'a solution exists, and $n$ is the number of unknowns' },
+    inside: { title: 'Unique', items: [
+      { id: 'full', expr: 'Full column rank', why: 'Every column has a pivot, no free variables, null space $\\{\\mathbf{0}\\}$: $\\mathbf{x}_p$ stands alone.' },
+    ] },
+    outside: { title: 'Infinitely many', items: [
+      { id: 'free', expr: '$\\text{rank}(A) < n$', why: '$n - \\text{rank}(A)$ free variables, each a direction the solution can move along: a translated copy of the null space.' },
+    ] },
+    edgeCases: { badge: 'Outside the test', items: [
+      { id: 'exist', marker: 'existence', body: '$x_1 = 1$, $x_1 = 2$ has $\\text{rank}(A) = 1 = n$, yet $\\text{rank}([A \\mid \\mathbf{b}]) = 2$ and no solution. Uniqueness can be claimed only after the existence check.' },
+      { id: 'b', marker: '$\\mathbf{b}$', body: 'The rank test compares pivot columns of $A$ with the unknowns; $\\mathbf{b}$ plays no part, so the count is the same for every right-hand side.' },
+    ] },
   };
 
 
 
+
+
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'skipping-the-existence-check', name: `Skipping the existence check`, errorAt: 0,
+        what: `A unique solution is announced as soon as $\\text{rank}(A) = n$, without checking that a solution exists at all. Full column rank says there is at most one solution; it does not say there is one.`,
+        wrong: [`For the system $x_1 = 1$, $x_1 = 2$,
+$$A = \\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix},$$
+$$\\text{rank}(A) = 1 = n$$
+$$\\Longrightarrow$$
+$$\\text{exactly one solution}$$`],
+        right: [`Reduce the augmented matrix first.`, `$$\\left(\\begin{array}{c|c} 1 & 1 \\\\ 1 & 2 \\end{array}\\right) \\sim \\left(\\begin{array}{c|c} 1 & 1 \\\\ 0 & 1 \\end{array}\\right)$$`, `The second row reads $0 = 1$, so $\\text{rank}([A \\mid \\mathbf{b}]) = 2 > \\text{rank}(A)$ and there is no solution.`],
+        why: `For a square matrix with $\\det(A) \\neq 0$, full rank does guarantee a solution, and the habit carries over to tall matrices, where it does not.`,
+        check: `Ask the existence question first. Look for a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ in the reduced augmented matrix before counting pivot columns.` },
+      { id: 'reading-a-zero-determinant-as-no-solution', name: `Reading a zero determinant as no solution`, errorAt: 0,
+        what: `$\\det(A) = 0$ is taken to mean that $A\\mathbf{x} = \\mathbf{b}$ has no solution. A zero determinant says only that a solution, when there is one, is not unique; whether one exists depends on $\\mathbf{b}$.`,
+        wrong: [`$$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix},$$
+$$\\det(A) = 4 - 4 = 0$$
+$$\\Longrightarrow$$
+$$x_1 + 2x_2 = 3, \\; 2x_1 + 4x_2$$
+$$= 6 \\text{ has no solution}$$`],
+        right: [`Reduce the augmented matrix.`, `$$\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 2 & 4 & 6 \\end{array}\\right) \\sim \\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$$`, `Both ranks are $1$, so the system is consistent, with one free variable: $x_2 = t$, $x_1 = 3 - 2t$. With $\\mathbf{b} = (3, 5)$ instead, the second row becomes $[0 \\; 0 \\mid -1]$ and there is no solution.`],
+        why: `For a single equation $ax = b$, $a = 0$ usually means no solution, and $\\det(A) = 0$ is read the same way. The case $0x = 0$, true for every $x$, is the one that gets forgotten.`,
+        check: `After finding $\\det(A) = 0$, compare $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$. Equal ranks mean infinitely many solutions, unequal ranks mean none.` },
+      { id: 'deciding-existence-from-the-shape-alone', name: `Deciding existence from the shape alone`, errorAt: 0,
+        what: `A system with more equations than unknowns is declared inconsistent without any reduction. Most right-hand sides do make a tall system inconsistent, but some do not.`,
+        wrong: [`$$x_1 + x_2 = 2,$$
+$$x_1 - x_2 = 0,$$
+$$2x_1 = 2$$
+$$m = 3 > n = 2$$
+$$\\Longrightarrow$$
+$$\\text{no solution}$$`],
+        right: [`Reduce the augmented matrix.`, `$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\\\ 2 & 0 & 2 \\end{array}\\right)$$
+$$\\sim \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & -2 & -2 \\\\ 0 & 0 & 0 \\end{array}\\right)$$`, `Both ranks are $2 = n$, so there is exactly one solution: $x_2 = 1$, $x_1 = 1$.`],
+        why: `The third equation looks like one constraint too many, and a randomly chosen right-hand side would indeed break the system. Here the third equation is the sum of the first two, so it adds nothing new.`,
+        check: `Substitute the candidate solution into every equation. $\\mathbf{x} = (1, 1)$ gives $2$, $0$ and $2$, matching all three right-hand sides.` },
+      { id: 'assuming-a-wide-system-always-has-solutions', name: `Assuming a wide system always has solutions`, errorAt: 0,
+        what: `A system with fewer equations than unknowns is expected to have infinitely many solutions. The shape guarantees free variables, so a solution is never unique, but it does not guarantee that a solution exists.`,
+        wrong: [`$$x_1 + x_2 + x_3 = 1,$$
+$$x_1 + x_2 + x_3 = 2$$
+$$m = 2 < n = 3$$
+$$\\Longrightarrow$$
+$$\\text{infinitely many solutions}$$`],
+        right: [`Reduce the augmented matrix.`, `$$\\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 1 & 1 & 1 & 2 \\end{array}\\right)$$
+$$\\sim \\left(\\begin{array}{ccc|c} 1 & 1 & 1 & 1 \\\\ 0 & 0 & 0 & 1 \\end{array}\\right)$$`, `The second row reads $0 = 1$, so $\\text{rank}(A) = 1$ but $\\text{rank}([A \\mid \\mathbf{b}]) = 2$, and there is no solution.`],
+        why: `"more unknowns than equations" is remembered as "always solvable", and the condition that a solution must exist first is dropped.`,
+        check: `Before counting free variables, check that the reduction produced no row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$. Two equations with the same left side and different right sides, as here, always produce one.` },
+      { id: 'dropping-the-particular-solution', name: `Dropping the particular solution`, errorAt: 1,
+        what: `The solution set of $A\\mathbf{x} = \\mathbf{b}$ is written using only the free directions, as if $\\mathbf{b}$ were $\\mathbf{0}$. That describes the null space, the solution set of the homogeneous system, not the solutions of $A\\mathbf{x} = \\mathbf{b}$.`,
+        wrong: [`For $x_1 + x_2 = 2$,`, `The free variable $x_2 = t$ gives the direction $(-1, 1)$, and the answer is written as
+$$\\mathbf{x} = t\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$`],
+        right: [`For $x_1 + x_2 = 2$,`, `$x_1 = 2 - t$, so the constant $2$ stays in the answer.`, `$$\\mathbf{x} = \\begin{pmatrix} 2 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$`, `This is a line through $(2, 0)$, parallel to the null space and not through the origin.`],
+        why: `The free directions are the part of the answer that takes work to find, and the constant column is easy to leave behind. For homogeneous systems the particular solution really is $\\mathbf{0}$, which reinforces the habit.`,
+        check: `Set every parameter to $0$. The result must solve $A\\mathbf{x} = \\mathbf{b}$; the wrong answer gives $\\mathbf{0}$, and $0 + 0 \\neq 2$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
+      uniquenessScope,
       roucheCapelliIff,
     existenceCases,
     squareSystemCases,
@@ -2729,7 +2731,9 @@ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', 
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function SolvabilityPage({roucheCapelliIff, existenceCases, squareSystemCases, 
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function SolvabilityPage({ pitfallData,uniquenessScope, roucheCapelliIff, existenceCases, squareSystemCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2861,6 +2865,16 @@ export default function SolvabilityPage({roucheCapelliIff, existenceCases, squar
           sectionsContent.obj3.content,
           <div key={'unit-notUnique'} dangerouslySetInnerHTML={{ __html: demoUnits.notUnique }} />,
           `Uniqueness is a question about A alone: whatever b is, a free column always leaves room to move.`,
+          <DiagramFrame
+            key={'obj3-scope'}
+            id="uniqueness-condition-scope"
+            title="The uniqueness condition"
+            source="/linear-algebra/linear-systems/solvability"
+            before={`The rank test for uniqueness looks only at the coefficient matrix. The card shows what it decides and what it cannot decide.`}
+            after={`Uniqueness is a statement about the null space; existence is a separate check that comes first.`}
+          >
+            <ScopeCard data={uniquenessScope} variant="boundary" theme={scopeTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2980,6 +2994,15 @@ export default function SolvabilityPage({roucheCapelliIff, existenceCases, squar
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="solvability-pitfalls"
+            title="Common pitfalls with solvability"
+            source="/linear-algebra/linear-systems/solvability"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -10,7 +10,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import Head from 'next/head'
 import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
-import ConceptCompare from '@/app/components/infographics/ConceptCompare'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 

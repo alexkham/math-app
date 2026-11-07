@@ -674,6 +674,7 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -911,7 +912,7 @@ The idea of the array is much older than its name. Rectangular tables of coeffic
 
 @academic[pitfall,aside:true,width:35%:Swapping the row and column index
 Reading $a_{12}$ as column $1$, row $2$ in $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}$ gives $a_{12} = 4$. The row index comes first, so $a_{12} = 2$, and $4$ is $a_{21}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-row-and-column-index)]@
 
 Row $i$ of $A$ is the horizontal slice $(a_{i1}, a_{i2}, \\dots, a_{in})$, a $1 \\times n$ vector. Column $j$ is the vertical slice $(a_{1j}, a_{2j}, \\dots, a_{mj})^T$, an $m \\times 1$ vector. The main diagonal consists of the entries where the row index equals the column index: $a_{11}, a_{22}, \\dots, a_{kk}$ with $k = \\min(m, n)$. The diagonal is defined for any matrix, not just square ones, though it is most prominent in the square case.
 
@@ -966,7 +967,7 @@ Matrix multiplication is more involved. For $A$ of size $m \\times n$ and $B$ of
 
 @academic[pitfall,aside:true,width:35%:Multiplying entry by entry
 Multiplying matching positions turns $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$ into $\\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$. Each entry of $AB$ needs a row times a column, which gives $\\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-entry-by-entry)]@
 
 For two $2 \\times 2$ matrices, the product takes four separate dot products, one for each entry. The entry in row $2$, column $1$ of $AB$, for instance, pairs the second row of $A$ with the first column of $B$: the first entries of the two are multiplied, then the second entries, and the two products are added. The other three entries are built the same way from the remaining row and column pairs.
 
@@ -1007,7 +1008,7 @@ which breaks down precisely when $ad - bc = 0$. For larger matrices, the inverse
 
 @academic[pitfall,aside:true,width:35%:Swapping the wrong pair
 Swapping $b$ and $c$ instead of $a$ and $d$ turns $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$, with $ad - bc = 1$, into $\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$, and $A$ times that is $\\begin{pmatrix} 3 & -7 \\\\ 7 & -16 \\end{pmatrix}$, not $I$. The inverse is $\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-wrong-pair)]@
 
 Applying the formula to a particular matrix takes three steps: compute $ad - bc$, rearrange the four entries in the pattern the formula shows, and divide every entry by the determinant. Multiplying the result by $A$ should then give the identity matrix, so every inverse found this way can be verified in a few lines of arithmetic.
 
@@ -1068,49 +1069,9 @@ This perspective transforms matrices from static tables of numbers into active g
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again when matrices are first met. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Swapping the row and column index**
-
-The entry $a_{ij}$ is read as column $i$, row $j$, the way a point $(x, y)$ is read across first and then up. Every entry looked up this way is taken from the mirror position.
-
-Wrong working: in $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}$, the entry $a_{12}$ is looked up in column $1$, row $2$, which gives $a_{12} = 4$.
-
-Right working: the first index is the row and the second is the column, so $a_{12}$ sits in row $1$, column $2$, and $a_{12} = 2$. The entry $4$ is $a_{21}$.
-
-Why it happens: coordinates in the plane put the horizontal position first, and the horizontal position of an entry is its column. Matrix indices follow the opposite order, rows first, the same order as in the size $m \\times n$.
-
-How to check: look for an index that cannot fit the size. $A$ is $2 \\times 3$, so $a_{23} = 6$ exists, but under the swapped reading $a_{23}$ would sit in row $3$, which $A$ does not have.
-
-**Multiplying entry by entry**
-
-The product $AB$ is computed by multiplying the entries that sit in the same position, the way matrices are added. Rows and columns are never combined.
-
-Wrong working:
-$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\cdot 5 & 2 \\cdot 6 \\\\ 3 \\cdot 7 & 4 \\cdot 8 \\end{pmatrix} = \\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$$
-
-Right working: each entry is a row of the left matrix times a column of the right matrix.
-$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\cdot 5 + 2 \\cdot 7 & 1 \\cdot 6 + 2 \\cdot 8 \\\\ 3 \\cdot 5 + 4 \\cdot 7 & 3 \\cdot 6 + 4 \\cdot 8 \\end{pmatrix} = \\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$$
-
-Why it happens: addition and scalar multiplication really do work position by position, so the same pattern is carried over to the product.
-
-How to check: multiply by the identity matrix, which must return the matrix unchanged. With the row-times-column rule, $AI = A$. Entry by entry, $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ and $I$ give $\\begin{pmatrix} 1 & 0 \\\\ 0 & 4 \\end{pmatrix}$, only the diagonal.
-
-**Swapping the wrong pair**
-
-In the formula for the inverse of a $2 \\times 2$ matrix, two entries trade places and the other two change sign. The pairs get mixed up: $b$ and $c$ are swapped, and $a$ and $d$ stay where they are.
-
-Wrong working: for $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$, the determinant is $ad - bc = 6 - 5 = 1$, and swapping the off-diagonal entries gives
-$$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$
-
-Right working: swap the diagonal entries $a$ and $d$, change the sign of $b$ and $c$ where they stand, and divide by $ad - bc = 1$.
-$$A^{-1} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$$
-
-Why it happens: the formula moves two entries and negates the other two, and from memory it is easy to attach the swap to the pair that should only be negated.
-
-How to check: multiply by $A$. The wrong answer gives $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 3 & -7 \\\\ 7 & -16 \\end{pmatrix}$, while the right one gives $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$.`,
+    content: `Three mistakes come up again and again when matrices are first met. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip borrows a habit from somewhere else. $a_{ij}$ is row $i$, column $j$; a product combines the rows of the first matrix with the columns of the second; and the $2 \\times 2$ inverse swaps $a$ and $d$ and negates $b$ and $c$. Checking that an index fits the size, multiplying by the identity, or multiplying the answer by $A$ catches each slip.`,
     link: ``,
   },
 }
@@ -1303,8 +1264,39 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'swapping-the-row-and-column-index', name: `Swapping the row and column index`, errorAt: 0,
+        what: `The entry $a_{ij}$ is read as column $i$, row $j$, the way a point $(x, y)$ is read across first and then up. Every entry looked up this way is taken from the mirror position.`,
+        wrong: [`In $A = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}$, the entry $a_{12}$ is looked up in column $1$, row $2$, which gives $a_{12} = 4$.`],
+        right: [`The first index is the row and the second is the column, so $a_{12}$ sits in row $1$, column $2$, and $a_{12} = 2$. The entry $4$ is $a_{21}$.`],
+        why: `Coordinates in the plane put the horizontal position first, and the horizontal position of an entry is its column. Matrix indices follow the opposite order, rows first, the same order as in the size $m \\times n$.`,
+        check: `Look for an index that cannot fit the size. $A$ is $2 \\times 3$, so $a_{23} = 6$ exists, but under the swapped reading $a_{23}$ would sit in row $3$, which $A$ does not have.` },
+      { id: 'multiplying-entry-by-entry', name: `Multiplying entry by entry`, errorAt: 0,
+        what: `The product $AB$ is computed by multiplying the entries that sit in the same position, the way matrices are added. Rows and columns are never combined.`,
+        wrong: [`$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 \\cdot 5 & 2 \\cdot 6 \\\\ 3 \\cdot 7 & 4 \\cdot 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$$`],
+        right: [`Each entry is a row of the left matrix times a column of the right matrix.`, `$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 \\cdot 5 + 2 \\cdot 7 & 1 \\cdot 6 + 2 \\cdot 8 \\\\ 3 \\cdot 5 + 4 \\cdot 7 & 3 \\cdot 6 + 4 \\cdot 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$$`],
+        why: `Addition and scalar multiplication really do work position by position, so the same pattern is carried over to the product.`,
+        check: `Multiply by the identity matrix, which must return the matrix unchanged. With the row-times-column rule, $AI = A$. Entry by entry, $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ and $I$ give $\\begin{pmatrix} 1 & 0 \\\\ 0 & 4 \\end{pmatrix}$, only the diagonal.` },
+      { id: 'swapping-the-wrong-pair', name: `Swapping the wrong pair`, errorAt: 1,
+        what: `In the formula for the inverse of a $2 \\times 2$ matrix, two entries trade places and the other two change sign. The pairs get mixed up: $b$ and $c$ are swapped, and $a$ and $d$ stay where they are.`,
+        wrong: [`For $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$,`, `The determinant is $ad - bc = 6 - 5 = 1$, and swapping the off-diagonal entries gives
+$$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$`],
+        right: [`For $A = \\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}$,`, `Swap the diagonal entries $a$ and $d$, change the sign of $b$ and $c$ where they stand, and divide by $ad - bc = 1$.`, `$$A^{-1} = \\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix}$$`],
+        why: `The formula moves two entries and negates the other two, and from memory it is easy to attach the swap to the pair that should only be negated.`,
+        check: `Multiply by $A$. The wrong answer gives $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 3 & -7 \\\\ 7 & -16 \\end{pmatrix}$, while the right one gives $\\begin{pmatrix} 2 & 1 \\\\ 5 & 3 \\end{pmatrix}\\begin{pmatrix} 3 & -1 \\\\ -5 & 2 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     faqQuestions,
     matrixShapesOutline,
     demoUnits,
@@ -1329,7 +1321,7 @@ const schemas = {
 
 
 
-   export default function MatricesPage({matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
+   export default function MatricesPage({ pitfallData,matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1514,6 +1506,15 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="matrix-pitfalls"
+            title="Common pitfalls with matrices"
+            source="/linear-algebra/matrix"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

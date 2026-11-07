@@ -15,8 +15,10 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -393,7 +395,7 @@ $$\\int (x^3 + \\sin x)\\, dx = \\int x^3\\, dx + \\int \\sin x\\, dx = \\frac{x
 
 @academic[pitfall,aside:true,width:35%:Splitting a product like a sum
 Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$, whose derivative is $x^3$, not $x^2$. Multiplying first, $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-a-product-like-a-sum)]@
 
 In the example the two terms are integrated independently: $x^3$ by the power rule and $\\sin x$ from the trigonometric formulas, and the two results are simply added, with one constant for the whole answer. The sum rule is what allows this, and it holds because differentiation splits over sums in the same way: $(F + G)' = F' + G'$.
 `,
@@ -427,7 +429,7 @@ $$\\int [af(x) + bg(x)]\\, dx = a\\int f(x)\\, dx + b\\int g(x)\\, dx$$]@
 
 @academic[pitfall,aside:true,width:35%:Pulling a variable out of the integral
 Moving $x$ out of $\\int x \\cos x\\, dx$ gives $x \\sin x + C$, whose derivative is $\\sin x + x \\cos x$. Only constants come out; the correct result, by integration by parts, is $x \\sin x + \\cos x + C$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-pulling-a-variable-out-of-the-integral)]@
 
 The coefficients $a$ and $b$ here are fixed numbers, like the $7$ in the example above. Once they are taken out, what remains inside each integral is a single function, and the work reduces to finding $\\int f(x)\\, dx$ and $\\int g(x)\\, dx$ separately and combining the two results with the same coefficients.
 `,
@@ -449,7 +451,7 @@ $$\\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$$
 
 @academic[pitfall,aside:true,width:35%:Not splitting where the formula changes
 Integrating $|x|$ on $[-1, 2]$ with the single antiderivative $\\frac{x^2}{2}$ gives $2 - \\frac{1}{2} = \\frac{3}{2}$. Splitting at $0$: $\\int_{-1}^0 (-x)\\, dx + \\int_0^2 x\\, dx = \\frac{1}{2} + 2 = \\frac{5}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-not-splitting-where-the-formula-changes)]@
 
 This property allows splitting an integral at any intermediate point. It proves essential for piecewise functions, where different formulas apply on different subintervals.
 
@@ -507,7 +509,7 @@ $$\\frac{d}{dx}\\left[\\int_a^x f(t)\\, dt\\right] = f(x) \\quad \\text{when } f
 
 @academic[pitfall,aside:true,width:35%:Subtracting the lower limit in Part 1
 Mixing Part 1 with Part 2 gives $\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2 - 1$. The integral is $\\frac{x^3}{3} - \\frac{1}{3}$, and the constant $-\\frac{1}{3}$ differentiates to $0$, so the derivative is $x^2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-lower-limit-in-part-1)]@
 
 Differentiation undoes integration. The rate of change of accumulated area equals the integrand's value at the boundary.
 
@@ -540,7 +542,7 @@ $$\\int_1^3 x^2\\, dx = \\frac{x^3}{3}\\Big|_1^3 = \\frac{27}{3} - \\frac{1}{3} 
 
 @academic[pitfall,aside:true,width:35%:Subtracting in the wrong order
 Computing $F(1) - F(3)$ for $\\int_1^3 x^2\\, dx$ gives $\\frac{1}{3} - \\frac{27}{3} = -\\frac{26}{3}$. The upper limit comes first: $F(3) - F(1) = \\frac{26}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-in-the-wrong-order)]@
 
 The antiderivative $\\frac{x^3}{3}$ is evaluated twice, once at each endpoint, and the constant of integration is left out because it would cancel. Since $x^2 > 0$ on $[1, 3]$, the result must be positive, and $\\frac{26}{3} \\approx 8.67$ has a sensible size: the region lies under a curve that rises from height $1$ to height $9$ over a width of $2$, so its area is between $2$ and $18$.
 `,
@@ -611,80 +613,19 @@ Comparison can also settle questions that do not look like questions about area.
   },
   obj9: {
     title: `Summary: All Integration Rules at a Glance`,
-    content: `
-The rules covered in the sections above fall into three groups — algebraic rules of linearity, properties of the interval of integration, and the Fundamental Theorem in its two parts — capped by the comparison properties that govern inequalities. The master reference below collects every rule on this page in one table, with a third column flagging whether each applies to both definite and indefinite integrals or to definite integrals only. Use it as a single-glance reminder while working problems; each row points back to the section above where the rule is derived and discussed.
-`,
+    content: `The rules of this page fall into three groups: the algebraic rules of linearity, the properties of the interval of integration, and the Fundamental Theorem in its two parts, followed by the comparison properties that govern inequalities. This summary lists every rule in that order, one row each, with its statement, a line on what it does linked to its section, and a column saying whether it holds for both kinds of integral or only for definite ones.
+
+The first three rows split sums and move constants out, and the next three join, reverse and empty the interval. The two parts of the Fundamental Theorem follow, and the last three rows compare integrals through their integrands.`,
+    formulaSheetAfter: `Before using a rule, check its last column: only the linearity rules work for indefinite integrals, while every property of the limits needs a definite integral. With an antiderivative in hand, the second part of the Fundamental Theorem turns any definite integral into two evaluations.`,
     before: ``,
     after: ``,
     link: ``
   },
   obj10: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes cause most wrong answers when these rules are applied. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Splitting a product like a sum**
-
-The sum rule splits an integral over $+$ and $-$. The same split is applied to a product: each factor is integrated separately and the results are multiplied.
-
-Wrong working: $\\int x \\cdot x\\, dx = \\left(\\int x\\, dx\\right)\\left(\\int x\\, dx\\right) = \\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$.
-
-Right working: multiply first, $x \\cdot x = x^2$, then $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
-
-Why it happens: integrals split over sums, and the pattern is extended by analogy. Derivatives do not split over products either: $(fg)' = f'g + fg'$, not $f'g'$.
-
-How to check: differentiate. $\\left(\\frac{x^4}{4}\\right)' = x^3$, not $x^2$; $\\left(\\frac{x^3}{3}\\right)' = x^2$.
-
-**Pulling a variable out of the integral**
-
-The constant multiple rule moves a number out of the integral. A factor that depends on $x$ is moved out the same way, and only the rest is integrated.
-
-Wrong working: $\\int x \\cos x\\, dx = x \\int \\cos x\\, dx = x \\sin x + C$.
-
-Right working: the factor $x$ changes with $x$, so it has to stay inside. This integral needs [integration by parts](!/calculus/integrals/techniques), which gives $x \\sin x + \\cos x + C$.
-
-Why it happens: in $\\int c \\cdot f(x)\\, dx$ the constant stands in front of the function, just where a variable factor would stand, and the condition that $c$ does not change with $x$ is easy to overlook.
-
-How to check: differentiate. $(x \\sin x)' = \\sin x + x \\cos x$, which has an extra $\\sin x$. $(x \\sin x + \\cos x)' = \\sin x + x \\cos x - \\sin x = x \\cos x$.
-
-**Not splitting where the formula changes**
-
-An integrand whose formula changes inside the interval, such as $|x|$ on $[-1, 2]$, is integrated with one antiderivative across the whole interval.
-
-Wrong working: treat $|x|$ as $x$, so $\\int_{-1}^2 |x|\\, dx = \\frac{x^2}{2}\\Big|_{-1}^2 = 2 - \\frac{1}{2} = \\frac{3}{2}$.
-
-Right working: $|x| = -x$ on $[-1, 0]$ and $|x| = x$ on $[0, 2]$. By additivity, $\\int_{-1}^0 (-x)\\, dx + \\int_0^2 x\\, dx = \\frac{1}{2} + 2 = \\frac{5}{2}$.
-
-Why it happens: for positive $x$ the absolute value changes nothing, so the formula for positive $x$ is used everywhere.
-
-How to check: the graph of $|x|$ on $[-1, 2]$ encloses two triangles with the axis, of areas $\\frac{1}{2} \\cdot 1 \\cdot 1 = \\frac{1}{2}$ and $\\frac{1}{2} \\cdot 2 \\cdot 2 = 2$, total $\\frac{5}{2}$. The wrong working also treats $\\int_{-1}^0 x\\, dx = -\\frac{1}{2}$ as part of the integral of $|x|$, a negative piece for an integrand that is never negative.
-
-**Subtracting the lower limit in Part 1**
-
-The derivative of an accumulation function $\\int_a^x f(t)\\, dt$ is written as $f(x) - f(a)$, as if Part 1 also produced a difference of endpoint values.
-
-Wrong working: $\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2 - 1^2 = x^2 - 1$.
-
-Right working: $\\int_1^x t^2\\, dt = \\frac{x^3}{3} - \\frac{1}{3}$. The second term is a constant, with derivative $0$, so $\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2$. The lower limit does not appear in the answer.
-
-Why it happens: Part 2 always produces a difference $F(b) - F(a)$, and the habit of subtracting something at the lower limit carries over to Part 1.
-
-How to check: changing the lower limit only shifts the accumulation function by a constant, so it cannot change the derivative. With $a = 0$, $\\int_0^x t^2\\, dt = \\frac{x^3}{3}$, whose derivative is again $x^2$.
-
-**Subtracting in the wrong order**
-
-In Part 2 the antiderivative is evaluated at both endpoints, but the subtraction is done the wrong way round: the value at the upper limit is taken away from the value at the lower limit.
-
-Wrong working: $\\int_1^3 x^2\\, dx = F(1) - F(3) = \\frac{1}{3} - \\frac{27}{3} = -\\frac{26}{3}$. That is the value of $\\int_3^1 x^2\\, dx$, the integral with its limits reversed.
-
-Right working: $\\int_1^3 x^2\\, dx = F(3) - F(1) = \\frac{27}{3} - \\frac{1}{3} = \\frac{26}{3}$.
-
-Why it happens: the lower limit is read first, as in $[1, 3]$, so it is often evaluated first and ends up first in the subtraction.
-
-How to check: the sign. $x^2 \\geq 0$ on $[1, 3]$, so by nonnegativity the integral cannot be negative. The bounding property gives the size: between $1 \\cdot 2 = 2$ and $9 \\cdot 2 = 18$.
-`,
+    content: `Five mistakes cause most wrong answers when these rules are applied. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip applies an integration rule where it does not hold. A product is not integrated factor by factor, a variable factor cannot be taken outside the integral, $|x|$ is split at $0$ where its formula changes, $\\frac{d}{dx}\\int_a^x f(t)\\,dt = f(x)$ with nothing subtracted, and a definite integral is $F(b) - F(a)$, upper limit first. Differentiating the answer, or checking the sign and size of a definite integral, catches each slip.`,
     link: ``
   }
 };
@@ -883,8 +824,81 @@ const schemas = {
   };
 
 
+  // MistakeFix batch 14, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'splitting-a-product-like-a-sum', name: `Splitting a product like a sum`, errorAt: 0,
+        what: `The sum rule splits an integral over $+$ and $-$. The same split is applied to a product: each factor is integrated separately and the results are multiplied.`,
+        wrong: [`$\\int x \\cdot x\\, dx = \\left(\\int x\\, dx\\right)\\left(\\int x\\, dx\\right) = \\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$.`],
+        right: [`Multiply first, $x \\cdot x = x^2$, then $\\int x^2\\, dx = \\frac{x^3}{3} + C$.`],
+        why: `Integrals split over sums, and the pattern is extended by analogy. Derivatives do not split over products either: $(fg)' = f'g + fg'$, not $f'g'$.`,
+        check: `Differentiate. $\\left(\\frac{x^4}{4}\\right)' = x^3$, not $x^2$; $\\left(\\frac{x^3}{3}\\right)' = x^2$.` },
+      { id: 'pulling-a-variable-out-of-the-integral', name: `Pulling a variable out of the integral`, errorAt: 0,
+        what: `The constant multiple rule moves a number out of the integral. A factor that depends on $x$ is moved out the same way, and only the rest is integrated.`,
+        wrong: [`$\\int x \\cos x\\, dx = x \\int \\cos x\\, dx = x \\sin x + C$.`],
+        right: [`The factor $x$ changes with $x$, so it has to stay inside. This integral needs [integration by parts](!/calculus/integrals/techniques), which gives $x \\sin x + \\cos x + C$.`],
+        why: `In $\\int c \\cdot f(x)\\, dx$ the constant stands in front of the function, just where a variable factor would stand, and the condition that $c$ does not change with $x$ is easy to overlook.`,
+        check: `Differentiate. $(x \\sin x)' = \\sin x + x \\cos x$, which has an extra $\\sin x$. $(x \\sin x + \\cos x)' = \\sin x + x \\cos x - \\sin x = x \\cos x$.` },
+      { id: 'not-splitting-where-the-formula-changes', name: `Not splitting where the formula changes`, errorAt: 0,
+        what: `An integrand whose formula changes inside the interval, such as $|x|$ on $[-1, 2]$, is integrated with one antiderivative across the whole interval.`,
+        wrong: [`Treat $|x|$ as $x$, so $\\int_{-1}^2 |x|\\, dx = \\frac{x^2}{2}\\Big|_{-1}^2 = 2 - \\frac{1}{2} = \\frac{3}{2}$.`],
+        right: [`$|x| = -x$ on $[-1, 0]$ and $|x| = x$ on $[0, 2]$. By additivity, $\\int_{-1}^0 (-x)\\, dx + \\int_0^2 x\\, dx = \\frac{1}{2} + 2 = \\frac{5}{2}$.`],
+        why: `For positive $x$ the absolute value changes nothing, so the formula for positive $x$ is used everywhere.`,
+        check: `The graph of $|x|$ on $[-1, 2]$ encloses two triangles with the axis, of areas $\\frac{1}{2} \\cdot 1 \\cdot 1 = \\frac{1}{2}$ and $\\frac{1}{2} \\cdot 2 \\cdot 2 = 2$, total $\\frac{5}{2}$. The wrong working also treats $\\int_{-1}^0 x\\, dx = -\\frac{1}{2}$ as part of the integral of $|x|$, a negative piece for an integrand that is never negative.` },
+      { id: 'subtracting-the-lower-limit-in-part-1', name: `Subtracting the lower limit in Part 1`, errorAt: 0,
+        what: `The derivative of an accumulation function $\\int_a^x f(t)\\, dt$ is written as $f(x) - f(a)$, as if Part 1 also produced a difference of endpoint values.`,
+        wrong: [`$\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2 - 1^2 = x^2 - 1$.`],
+        right: [`$\\int_1^x t^2\\, dt = \\frac{x^3}{3} - \\frac{1}{3}$. The second term is a constant, with derivative $0$, so $\\frac{d}{dx}\\int_1^x t^2\\, dt = x^2$. The lower limit does not appear in the answer.`],
+        why: `Part 2 always produces a difference $F(b) - F(a)$, and the habit of subtracting something at the lower limit carries over to Part 1.`,
+        check: `Changing the lower limit only shifts the accumulation function by a constant, so it cannot change the derivative. With $a = 0$, $\\int_0^x t^2\\, dt = \\frac{x^3}{3}$, whose derivative is again $x^2$.` },
+      { id: 'subtracting-in-the-wrong-order', name: `Subtracting in the wrong order`, errorAt: 0,
+        what: `In Part 2 the antiderivative is evaluated at both endpoints, but the subtraction is done the wrong way round: the value at the upper limit is taken away from the value at the lower limit.`,
+        wrong: [`$\\int_1^3 x^2\\, dx = F(1) - F(3) = \\frac{1}{3} - \\frac{27}{3} = -\\frac{26}{3}$. That is the value of $\\int_3^1 x^2\\, dx$, the integral with its limits reversed.`],
+        right: [`$\\int_1^3 x^2\\, dx = F(3) - F(1) = \\frac{27}{3} - \\frac{1}{3} = \\frac{26}{3}$.`],
+        why: `The lower limit is read first, as in $[1, 3]$, so it is often evaluated first and ends up first in the subtraction.`,
+        check: `The sign. $x^2 \\geq 0$ on $[1, 3]$, so by nonnegativity the integral cannot be negative. The bounding property gives the size: between $1 \\cdot 2 = 2$ and $9 \\cdot 2 = 18$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Rule', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'applies', label: 'Applies to' },
+    ],
+    rows: [
+      { name: 'Sum / difference', formula: '$\\displaystyle \\int [f(x) \\pm g(x)]\\, dx = \\int f(x)\\, dx \\pm \\int g(x)\\, dx$', applies: 'definite and indefinite',
+        sub: 'A sum is integrated one term at a time, as [the sum and difference rules](!#1) show.' },
+      { name: 'Constant multiple', formula: '$\\displaystyle \\int c \\cdot f(x)\\, dx = c \\int f(x)\\, dx$', applies: 'definite and indefinite',
+        sub: 'A constant factor moves outside the integral, from [the constant multiple rule](!#2).' },
+      { name: 'Linearity', formula: '$\\displaystyle \\int [af(x) + bg(x)]\\, dx = a\\int f(x)\\, dx + b\\int g(x)\\, dx$', applies: 'definite and indefinite',
+        sub: 'The two rules above combined into one statement, at the end of [the constant multiple rule](!#2).' },
+      { name: 'Additivity over intervals', formula: '$\\displaystyle \\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$', applies: 'definite only',
+        sub: 'Adjacent intervals join into one, which is how piecewise integrands are handled; see [additivity over intervals](!#3).' },
+      { name: 'Reversing limits', formula: '$\\displaystyle \\int_a^b f(x)\\, dx = -\\int_b^a f(x)\\, dx$', applies: 'definite only',
+        sub: 'Swapping the limits changes the sign, as [reversing limits of integration](!#4) explains.' },
+      { name: 'Empty interval', formula: '$\\displaystyle \\int_a^a f(x)\\, dx = 0$', applies: 'definite only',
+        sub: 'An interval of zero width holds no area, from [reversing limits of integration](!#4).' },
+      { name: 'FTC, Part 1', formula: '$\\displaystyle \\frac{d}{dx}\\left[\\int_a^x f(t)\\, dt\\right] = f(x)$', applies: 'definite with variable upper limit, assuming $f$ continuous',
+        sub: 'Differentiating an accumulation function gives back the integrand, as [the Fundamental Theorem, Part 1](!#5) shows.' },
+      { name: 'FTC, Part 2', formula: "$\\displaystyle \\int_a^b f(x)\\, dx = F(b) - F(a) \\quad \\text{where } F'(x) = f(x)$", applies: 'definite only, for any antiderivative $F$',
+        sub: 'A definite integral is evaluated with any antiderivative at the two endpoints; see [the Fundamental Theorem, Part 2](!#6).' },
+      { name: 'Nonnegativity', formula: '$\\displaystyle f(x) \\geq 0 \\text{ on } [a, b] \\implies \\int_a^b f(x)\\, dx \\geq 0$', applies: 'definite only',
+        sub: 'A function that never dips below the axis has a nonnegative integral, from [comparison properties](!#8).' },
+      { name: 'Monotonicity', formula: '$\\displaystyle f(x) \\leq g(x) \\text{ on } [a, b] \\implies \\int_a^b f(x)\\, dx \\leq \\int_a^b g(x)\\, dx$', applies: 'definite only',
+        sub: 'A smaller integrand gives a smaller integral, as [comparison properties](!#8) shows.' },
+      { name: 'Bounding', formula: '$\\displaystyle m \\leq f(x) \\leq M \\text{ on } [a, b] \\implies m(b - a) \\leq \\int_a^b f(x)\\, dx \\leq M(b - a)$', applies: 'definite only',
+        sub: 'Bounds on the integrand give bounds on the integral without evaluating it; see [comparison properties](!#8).' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
       ftcChain,
     demoUnits,
     conceptIntroFigures,
@@ -908,7 +922,7 @@ const schemas = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function RulesPage({ftcChain, seoData, sectionsContent, introContent, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RulesPage({ formulaSummaryData, pitfallData,ftcChain, seoData, sectionsContent, introContent, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -974,7 +988,7 @@ Neither $\\int e^{x^2}\\, dx$ nor $\\int 2x^2 e^{x^2}\\, dx$ can be written with
         content: [
           `@academic[pitfall,aside:true,width:35%:Splitting a product like a sum
 Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2}{2} \\cdot \\frac{x^2}{2} = \\frac{x^4}{4} + C$, whose derivative is $x^3$, not $x^2$. Multiplying first, $\\int x^2\\, dx = \\frac{x^3}{3} + C$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-splitting-a-product-like-a-sum)]@`,
         ],
       },
       {
@@ -1073,8 +1087,16 @@ Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="integration-rule-formula-summary"
+            title="Integration rules"
+            source="/calculus/integrals/rules"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1083,6 +1105,15 @@ Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="integration-rule-pitfalls"
+            title="Common pitfalls with the integration rules"
+            source="/calculus/integrals/rules"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

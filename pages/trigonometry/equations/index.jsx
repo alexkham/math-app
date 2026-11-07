@@ -1015,10 +1015,13 @@ import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiag
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1412,7 +1415,7 @@ General solution: $x = \\frac{4\\pi}{3} + 2n\\pi$ or $x = \\frac{5\\pi}{3} + 2n\
 
 @academic[pitfall,aside:true,width:35%:Keeping only the calculator value
 For $\\sin(x) = 0.6$, the inverse sine gives $x \\approx 0.644$, and stopping there loses the Quadrant II solution. On $[0, 2\\pi)$ there are two: $x \\approx 0.644$ and $x = \\pi - 0.644 \\approx 2.498$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-only-the-calculator-value)]@
 
 The inverse sine is a function, so it returns exactly one angle for each input, always from the interval $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$. An equation $\\sin(x) = a$ with $|a| < 1$ asks for something different: every angle at that height on the unit circle. That is why Steps 2 and 3 work from the reference angle and the quadrants rather than from the inverse sine value alone.`,
     before: ``,
@@ -1456,7 +1459,7 @@ $$x = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3} \\quad \\text{or} \\quad x = \\p
 
 @academic[pitfall,aside:true,width:35%:Using the sine partner for cosine
 Pairing $\\frac{\\pi}{3}$ with $\\pi - \\frac{\\pi}{3}$ for $\\cos(x) = \\frac{1}{2}$ gives $\\frac{2\\pi}{3}$, but $\\cos\\left(\\frac{2\\pi}{3}\\right) = -\\frac{1}{2}$. The second solution is $2\\pi - \\frac{\\pi}{3} = \\frac{5\\pi}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-sine-partner-for-cosine)]@
 
 Sine and cosine equations go through the same four steps, but the two functions repeat their values across different lines. Sine takes equal values at angles mirrored across the vertical axis, while cosine takes equal values at angles mirrored across the horizontal axis. The quadrant pair in Step 2 is where this difference enters the solution.`,
     before: ``,
@@ -1482,7 +1485,7 @@ $$\\tan\\theta = k \\implies \\theta = \\arctan k + n\\pi$$
 
 @academic[pitfall,aside:true,width:35%:Stepping by 2nπ for tangent
 Writing $\\tan(x) = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ keeps only $\\frac{\\pi}{4}$ on $[0, 2\\pi)$ and drops $\\frac{5\\pi}{4}$, where the tangent is also $1$. With the step $n\\pi$, both appear.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stepping-by-2n-for-tangent)]@
 
 No quadrant analysis is needed — the single principal value $\\alpha$, repeated at intervals of $\\pi$, captures every solution. This is more compact than the sine and cosine cases, where two solutions per period require two separate expressions.
 
@@ -1606,7 +1609,7 @@ The double angle [formulas](!/trigonometry/formulas) are another frequent source
 
 @academic[pitfall,aside:true,width:35%:Reading cos(2x) as 2cos(x)
 Replacing $\\cos(2x)$ by $2\\cos(x)$ turns $\\cos(2x) = \\sin(x)$ into $\\tan(x) = 2$, whose roots fail the original. With $\\cos(2x) = 1 - 2\\sin^2(x)$ it becomes $(2\\sin x - 1)(\\sin x + 1) = 0$, so $x = \\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\frac{3\\pi}{2}$ on $[0, 2\\pi)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-cos-2x-as-2cos-x)]@
 
 Not every identity substitution leads to a cleaner equation. If one substitution creates a more complicated expression, try a different form. The three versions of $\\cos(2\\theta)$ — $\\cos^2\\theta - \\sin^2\\theta$, $2\\cos^2\\theta - 1$, and $1 - 2\\sin^2\\theta$ — each serve different purposes depending on whether the target variable is sine or cosine.
 
@@ -1640,7 +1643,7 @@ $$u = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the negative square root
 Solving $4\\sin^2(x) = 1$ as $\\sin(x) = \\frac{1}{2}$ keeps only $\\frac{\\pi}{6}$ and $\\frac{5\\pi}{6}$. The root is $\\sin(x) = \\pm\\frac{1}{2}$, which adds $\\frac{7\\pi}{6}$ and $\\frac{11\\pi}{6}$ for four solutions on $[0, 2\\pi)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-negative-square-root)]@
 
 After finding the values of $u$, check whether each falls within the range of the relevant function. For sine and cosine, reject any $|u| > 1$ — these correspond to no solution. For tangent, any real value of $u$ is valid. This check is a consequence of [boundedness](!/trigonometry/properties) and prevents reporting nonexistent solutions.
 
@@ -1719,95 +1722,20 @@ The safeguard is straightforward: **always substitute solutions back into the or
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the general solution formulas of the page in four rows. Each row names the kind of equation, gives the formula that produces all of its solutions, and states when solutions exist, with a line on what the formula does and a link to the section that explains it.
+
+The first three rows solve the basic sine, cosine and tangent equations. Sine and cosine need a value between minus one and one and give two solutions in every period, while tangent accepts any value and gives one. The last row is the quadratic formula, used after a substitution turns an equation into a quadratic in one function.`,
+    before: ``,
+    after: `Each formula hands back infinitely many angles, one family for each integer. To answer a question on a given interval, list the members of the family that fall inside it, and check the range condition first so that impossible equations are dropped at once.`,
+    link: '',
+  },
   obj16: {
     title: `Common Pitfalls`,
-    content: `Seven mistakes come up again and again when solving trigonometric equations. Five are marked where they happen in the sections above; the other two, dividing by a trigonometric factor and missing multiple-angle solutions, are described in their own sections. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Keeping only the calculator value**
-
-The inverse sine of $a$ is taken as the whole answer to $\\sin(x) = a$. The inverse function returns one angle, but the equation has two solutions in every period when $|a| < 1$.
-
-Wrong working: $\\sin(x) = 0.6$ gives $x = \\arcsin(0.6) \\approx 0.644$, and that is reported as the solution on $[0, 2\\pi)$.
-
-Right working: the reference angle is $\\alpha \\approx 0.644$. Sine is positive, so the solutions lie in Quadrants I and II: $x \\approx 0.644$ and $x = \\pi - 0.644 \\approx 2.498$.
-
-Why it happens: the calculator shows a single number, and it looks like the end of the computation. The inverse sine only ever answers from $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, so it cannot show the Quadrant II angle.
-
-How to check: count before finishing. For $|a| < 1$ a sine equation has exactly two solutions on $[0, 2\\pi)$; one answer means one is missing. Here $\\sin(2.498) \\approx 0.6$ confirms the second.
-
-**Using the sine partner for cosine**
-
-The second solution of a cosine equation is written as $\\pi - \\alpha$, the partner that belongs to sine.
-
-Wrong working: $\\cos(x) = \\frac{1}{2}$ has $\\alpha = \\frac{\\pi}{3}$, and the solutions are given as $\\frac{\\pi}{3}$ and $\\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$.
-
-Right working: cosine is positive in Quadrants I and IV, so the solutions are $x = \\frac{\\pi}{3}$ and $x = 2\\pi - \\frac{\\pi}{3} = \\frac{5\\pi}{3}$.
-
-Why it happens: sine equations are usually met first, and the pair $\\alpha$, $\\pi - \\alpha$ is carried over without asking which quadrants cosine is positive in.
-
-How to check: substitute each answer. $\\cos\\left(\\frac{2\\pi}{3}\\right) = -\\frac{1}{2}$, not $\\frac{1}{2}$, while $\\cos\\left(\\frac{5\\pi}{3}\\right) = \\frac{1}{2}$.
-
-**Stepping by 2nπ for tangent**
-
-The general solution of a tangent equation is written with the step $2n\\pi$, as for sine and cosine. Tangent has period $\\pi$, so every second solution is lost.
-
-Wrong working: $\\tan(x) = 1$ gives $x = \\frac{\\pi}{4} + 2n\\pi$, so on $[0, 2\\pi)$ the only answer is $\\frac{\\pi}{4}$.
-
-Right working: $x = \\frac{\\pi}{4} + n\\pi$. On $[0, 2\\pi)$, $n = 0$ gives $\\frac{\\pi}{4}$ and $n = 1$ gives $\\frac{5\\pi}{4}$.
-
-Why it happens: $2n\\pi$ is the step in most general solutions a learner writes, and it is added out of habit.
-
-How to check: a tangent equation has exactly one solution in each interval of length $\\pi$, so two on $[0, 2\\pi)$. Also $\\tan\\left(\\frac{5\\pi}{4}\\right) = 1$ confirms the missing one.
-
-**Dividing by a trigonometric factor**
-
-Both sides of an equation are divided by a factor such as $\\sin(x)$ to simplify it. Every solution where that factor is zero disappears.
-
-Wrong working: $\\sin(x)\\tan(x) = \\sin(x)$ is divided by $\\sin(x)$ to get $\\tan(x) = 1$, so on $[0, 2\\pi)$ the answers are $\\frac{\\pi}{4}$ and $\\frac{5\\pi}{4}$.
-
-Right working: $\\sin(x)\\tan(x) - \\sin(x) = 0$ factors as $\\sin(x)[\\tan(x) - 1] = 0$. Then $\\sin(x) = 0$ gives $x = 0, \\pi$ and $\\tan(x) = 1$ gives $x = \\frac{\\pi}{4}, \\frac{5\\pi}{4}$: four solutions in all.
-
-Why it happens: cancelling a common factor is the standard way to simplify in algebra, and a trigonometric factor does not look like something that can be zero.
-
-How to check: before dividing, solve "divisor $= 0$" and test those values in the original equation. At $x = 0$, both sides are $0$, so $0$ is a solution the division would have lost.
-
-**Reading cos(2x) as 2cos(x)**
-
-The $2$ inside $\\cos(2x)$ is moved outside the function, as if cosine were multiplied through like a bracket.
-
-Wrong working: $\\cos(2x) = \\sin(x)$ becomes $2\\cos(x) = \\sin(x)$, so $\\tan(x) = 2$ and $x \\approx 1.107$ or $x \\approx 4.249$.
-
-Right working: with $\\cos(2x) = 1 - 2\\sin^2(x)$ the equation is $2\\sin^2(x) + \\sin(x) - 1 = 0$, which factors as $(2\\sin x - 1)(\\sin x + 1) = 0$. Then $\\sin(x) = \\frac{1}{2}$ gives $\\frac{\\pi}{6}, \\frac{5\\pi}{6}$ and $\\sin(x) = -1$ gives $\\frac{3\\pi}{2}$.
-
-Why it happens: $\\cos(2x)$ is read as cosine times $2x$, and a factor is pulled out as in ordinary algebra. Cosine is a function, not a multiplier, so its argument cannot be split this way.
-
-How to check: test one value. At $x = \\frac{\\pi}{3}$, $\\cos(2x) = -\\frac{1}{2}$ but $2\\cos(x) = 1$. The wrong roots also fail: at $x \\approx 1.107$, $\\cos(2x) \\approx -0.6$ while $\\sin(x) \\approx 0.894$.
-
-**Dropping the negative square root**
-
-An equation with a squared function is solved by taking the square root of both sides, and only the positive root is kept.
-
-Wrong working: $4\\sin^2(x) = 1$ gives $\\sin^2(x) = \\frac{1}{4}$, then $\\sin(x) = \\frac{1}{2}$, so $x = \\frac{\\pi}{6}, \\frac{5\\pi}{6}$.
-
-Right working: $\\sin(x) = \\pm\\frac{1}{2}$. The positive value gives $\\frac{\\pi}{6}, \\frac{5\\pi}{6}$ and the negative value gives $\\frac{7\\pi}{6}, \\frac{11\\pi}{6}$: four solutions on $[0, 2\\pi)$.
-
-Why it happens: the square root symbol means the positive root, and the step from $\\sin^2(x)$ to $\\sin(x)$ is written as if it were that symbol.
-
-How to check: treat the equation as quadratic in $u = \\sin(x)$. $4u^2 - 1 = 0$ factors as $(2u - 1)(2u + 1) = 0$, which shows both roots at once.
-
-**Stopping at one turn for the inner angle**
-
-In an equation like $\\sin(2x) = a$ on $[0, 2\\pi)$, the solutions for $u = 2x$ are taken only from $[0, 2\\pi)$ and then halved, so every $x$ found lies in $[0, \\pi)$.
-
-Wrong working: $\\sin(2x) = \\frac{1}{2}$ gives $u = \\frac{\\pi}{6}, \\frac{5\\pi}{6}$, so $x = \\frac{\\pi}{12}, \\frac{5\\pi}{12}$.
-
-Right working: $x \\in [0, 2\\pi)$ means $u \\in [0, 4\\pi)$, so $u = \\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\frac{13\\pi}{6}, \\frac{17\\pi}{6}$ and $x = \\frac{\\pi}{12}, \\frac{5\\pi}{12}, \\frac{13\\pi}{12}, \\frac{17\\pi}{12}$.
-
-Why it happens: the interval in the problem belongs to $x$, but it is applied to $u$ out of habit, since basic equations are always solved on $[0, 2\\pi)$.
-
-How to check: $\\sin(2x) = a$ with $|a| < 1$ has four solutions on $[0, 2\\pi)$. If all the answers lie in the first half of the interval, the second turn of $u$ was skipped.`,
+    content: `Seven mistakes come up again and again when solving trigonometric equations. Five are marked where they happen in the sections above; the other two, dividing by a trigonometric factor and missing multiple-angle solutions, are described in their own sections. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Five of the seven slips lose solutions: a sine equation has two solutions in each turn, tangent repeats every $\\pi$, dividing by $\\sin(x)$ drops the solutions of $\\sin(x) = 0$, a square root has two signs, and the inner angle $2x$ runs through two turns. The other two give wrong solutions: the second cosine solution lies in Quadrant IV, and $\\cos(2x)$ is not $2\\cos(x)$. Counting the solutions a turn must hold, and substituting each answer into the original equation, catches every slip.`,
     link: ``,
   },
     obj10:{
@@ -1991,8 +1919,79 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     footnote: 'Sine and cosine give two solutions per period $2\\pi$ when $|a| < 1$; tangent gives one per period $\\pi$.',
   };
 
+  // MistakeFix batch 9, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'keeping-only-the-calculator-value', name: `Keeping only the calculator value`, errorAt: 0,
+        what: `The inverse sine of $a$ is taken as the whole answer to $\\sin(x) = a$. The inverse function returns one angle, but the equation has two solutions in every period when $|a| < 1$.`,
+        wrong: [`$\\sin(x) = 0.6$ gives $x = \\arcsin(0.6) \\approx 0.644$, and that is reported as the solution on $[0, 2\\pi)$.`],
+        right: [`The reference angle is $\\alpha \\approx 0.644$. Sine is positive, so the solutions lie in Quadrants I and II: $x \\approx 0.644$ and $x = \\pi - 0.644 \\approx 2.498$.`],
+        why: `The calculator shows a single number, and it looks like the end of the computation. The inverse sine only ever answers from $\\left[-\\frac{\\pi}{2}, \\frac{\\pi}{2}\\right]$, so it cannot show the Quadrant II angle.`,
+        check: `Count before finishing. For $|a| < 1$ a sine equation has exactly two solutions on $[0, 2\\pi)$; one answer means one is missing. Here $\\sin(2.498) \\approx 0.6$ confirms the second.` },
+      { id: 'using-the-sine-partner-for-cosine', name: `Using the sine partner for cosine`, errorAt: 0,
+        what: `The second solution of a cosine equation is written as $\\pi - \\alpha$, the partner that belongs to sine.`,
+        wrong: [`$\\cos(x) = \\frac{1}{2}$ has $\\alpha = \\frac{\\pi}{3}$, and the solutions are given as $\\frac{\\pi}{3}$ and $\\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$.`],
+        right: [`Cosine is positive in Quadrants I and IV, so the solutions are $x = \\frac{\\pi}{3}$ and $x = 2\\pi - \\frac{\\pi}{3} = \\frac{5\\pi}{3}$.`],
+        why: `Sine equations are usually met first, and the pair $\\alpha$, $\\pi - \\alpha$ is carried over without asking which quadrants cosine is positive in.`,
+        check: `Substitute each answer. $\\cos\\left(\\frac{2\\pi}{3}\\right) = -\\frac{1}{2}$, not $\\frac{1}{2}$, while $\\cos\\left(\\frac{5\\pi}{3}\\right) = \\frac{1}{2}$.` },
+      { id: 'stepping-by-2n-for-tangent', name: `Stepping by 2nπ for tangent`, errorAt: 0,
+        what: `The general solution of a tangent equation is written with the step $2n\\pi$, as for sine and cosine. Tangent has period $\\pi$, so every second solution is lost.`,
+        wrong: [`$\\tan(x) = 1$ gives $x = \\frac{\\pi}{4} + 2n\\pi$, so on $[0, 2\\pi)$ the only answer is $\\frac{\\pi}{4}$.`],
+        right: [`$x = \\frac{\\pi}{4} + n\\pi$. On $[0, 2\\pi)$, $n = 0$ gives $\\frac{\\pi}{4}$ and $n = 1$ gives $\\frac{5\\pi}{4}$.`],
+        why: `$2n\\pi$ is the step in most general solutions a learner writes, and it is added out of habit.`,
+        check: `A tangent equation has exactly one solution in each interval of length $\\pi$, so two on $[0, 2\\pi)$. Also $\\tan\\left(\\frac{5\\pi}{4}\\right) = 1$ confirms the missing one.` },
+      { id: 'dividing-by-a-trigonometric-factor', name: `Dividing by a trigonometric factor`, errorAt: 0,
+        what: `Both sides of an equation are divided by a factor such as $\\sin(x)$ to simplify it. Every solution where that factor is zero disappears.`,
+        wrong: [`$\\sin(x)\\tan(x) = \\sin(x)$ is divided by $\\sin(x)$ to get $\\tan(x) = 1$, so on $[0, 2\\pi)$ the answers are $\\frac{\\pi}{4}$ and $\\frac{5\\pi}{4}$.`],
+        right: [`$\\sin(x)\\tan(x) - \\sin(x) = 0$ factors as $\\sin(x)[\\tan(x) - 1] = 0$. Then $\\sin(x) = 0$ gives $x = 0, \\pi$ and $\\tan(x) = 1$ gives $x = \\frac{\\pi}{4}, \\frac{5\\pi}{4}$: four solutions in all.`],
+        why: `Cancelling a common factor is the standard way to simplify in algebra, and a trigonometric factor does not look like something that can be zero.`,
+        check: `Before dividing, solve "divisor $= 0$" and test those values in the original equation. At $x = 0$, both sides are $0$, so $0$ is a solution the division would have lost.` },
+      { id: 'reading-cos-2x-as-2cos-x', name: `Reading cos(2x) as 2cos(x)`, errorAt: 0,
+        what: `The $2$ inside $\\cos(2x)$ is moved outside the function, as if cosine were multiplied through like a bracket.`,
+        wrong: [`$\\cos(2x) = \\sin(x)$ becomes $2\\cos(x) = \\sin(x)$, so $\\tan(x) = 2$ and $x \\approx 1.107$ or $x \\approx 4.249$.`],
+        right: [`With $\\cos(2x) = 1 - 2\\sin^2(x)$ the equation is $2\\sin^2(x) + \\sin(x) - 1 = 0$, which factors as $(2\\sin x - 1)(\\sin x + 1) = 0$. Then $\\sin(x) = \\frac{1}{2}$ gives $\\frac{\\pi}{6}, \\frac{5\\pi}{6}$ and $\\sin(x) = -1$ gives $\\frac{3\\pi}{2}$.`],
+        why: `$\\cos(2x)$ is read as cosine times $2x$, and a factor is pulled out as in ordinary algebra. Cosine is a function, not a multiplier, so its argument cannot be split this way.`,
+        check: `Test one value. At $x = \\frac{\\pi}{3}$, $\\cos(2x) = -\\frac{1}{2}$ but $2\\cos(x) = 1$. The wrong roots also fail: at $x \\approx 1.107$, $\\cos(2x) \\approx -0.6$ while $\\sin(x) \\approx 0.894$.` },
+      { id: 'dropping-the-negative-square-root', name: `Dropping the negative square root`, errorAt: 0,
+        what: `An equation with a squared function is solved by taking the square root of both sides, and only the positive root is kept.`,
+        wrong: [`$4\\sin^2(x) = 1$ gives $\\sin^2(x) = \\frac{1}{4}$, then $\\sin(x) = \\frac{1}{2}$, so $x = \\frac{\\pi}{6}, \\frac{5\\pi}{6}$.`],
+        right: [`$\\sin(x) = \\pm\\frac{1}{2}$. The positive value gives $\\frac{\\pi}{6}, \\frac{5\\pi}{6}$ and the negative value gives $\\frac{7\\pi}{6}, \\frac{11\\pi}{6}$: four solutions on $[0, 2\\pi)$.`],
+        why: `The square root symbol means the positive root, and the step from $\\sin^2(x)$ to $\\sin(x)$ is written as if it were that symbol.`,
+        check: `Treat the equation as quadratic in $u = \\sin(x)$. $4u^2 - 1 = 0$ factors as $(2u - 1)(2u + 1) = 0$, which shows both roots at once.` },
+      { id: 'stopping-at-one-turn-for-the-inner-angle', name: `Stopping at one turn for the inner angle`, errorAt: 0,
+        what: `In an equation like $\\sin(2x) = a$ on $[0, 2\\pi)$, the solutions for $u = 2x$ are taken only from $[0, 2\\pi)$ and then halved, so every $x$ found lies in $[0, \\pi)$.`,
+        wrong: [`$\\sin(2x) = \\frac{1}{2}$ gives $u = \\frac{\\pi}{6}, \\frac{5\\pi}{6}$, so $x = \\frac{\\pi}{12}, \\frac{5\\pi}{12}$.`],
+        right: [`$x \\in [0, 2\\pi)$ means $u \\in [0, 4\\pi)$, so $u = \\frac{\\pi}{6}, \\frac{5\\pi}{6}, \\frac{13\\pi}{6}, \\frac{17\\pi}{6}$ and $x = \\frac{\\pi}{12}, \\frac{5\\pi}{12}, \\frac{13\\pi}{12}, \\frac{17\\pi}{12}$.`],
+        why: `The interval in the problem belongs to $x$, but it is applied to $u$ out of habit, since basic equations are always solved on $[0, 2\\pi)$.`,
+        check: `$\\sin(2x) = a$ with $|a| < 1$ has four solutions on $[0, 2\\pi)$. If all the answers lie in the first half of the interval, the second turn of $u$ was skipped.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Equation', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'when', label: 'Has solutions when' },
+    ],
+    rows: [
+      { name: 'Sine equation', formula: '$\\sin\\theta = k \\implies \\theta = (-1)^n \\arcsin k + n\\pi$', when: '$-1 \\leq k \\leq 1$',
+        sub: 'Every solution, for every integer $n$: the alternating sign folds both branches into one expression, as [basic sine equations](!#2) shows.' },
+      { name: 'Cosine equation', formula: '$\\cos\\theta = k \\implies \\theta = \\pm\\arccos k + 2n\\pi$', when: '$-1 \\leq k \\leq 1$',
+        sub: 'Cosine is even, so the two solutions in each period are plus and minus the same angle; see [basic cosine equations](!#3).' },
+      { name: 'Tangent equation', formula: '$\\tan\\theta = k \\implies \\theta = \\arctan k + n\\pi$', when: 'every real $k$',
+        sub: 'One solution in each period of $\\pi$, so the step is $n\\pi$ and not $2n\\pi$, from [basic tangent equations](!#4).' },
+      { name: 'Quadratic in one function', formula: '$\\displaystyle u = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$', when: 'for sine or cosine, only the values with $|u| \\leq 1$ count',
+        sub: 'After the substitution $u = \\sin(x)$, it gives the values of $u$ when factoring is not obvious, as [quadratic-type equations](!#7) explains.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     generalRestrictedComparison,
     trigEquationDecision,
     demoUnits,
@@ -2016,7 +2015,7 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     }
    }
 
-export default function EquationsPage({generalRestrictedComparison, trigEquationDecision, seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function EquationsPage({ formulaSummaryData, pitfallData,generalRestrictedComparison, trigEquationDecision, seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2226,11 +2225,38 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrameV2
+            key={'formula-summary'}
+            id="trig-equation-formula-summary"
+            title="General solution formulas"
+            source="/trigonometry/equations"
+            related={{ href: '/trigonometry/formulas', label: 'All trigonometry formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrameV2>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="trig-equation-pitfalls"
+            title="Common pitfalls in solving trigonometric equations"
+            source="/trigonometry/equations"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
 

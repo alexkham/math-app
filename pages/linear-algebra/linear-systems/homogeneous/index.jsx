@@ -865,6 +865,7 @@ import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subsp
 import renderVectorArrowsV6 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v6'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1258,7 +1259,7 @@ One case is automatic: if the system has more unknowns than equations ($n > m$),
 
 @academic[pitfall,aside:true,width:35%:Reading the fewer-equations rule backwards
 Concluding from $m \\ge n$ that only $\\mathbf{x} = \\mathbf{0}$ works fails for $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\\\ 3 & 6 \\end{pmatrix}$: three equations, two unknowns, yet $\\text{rank}(A) = 1 < 2$ and $\\mathbf{x} = (-2, 1)$ solves $A\\mathbf{x} = \\mathbf{0}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-fewer-equations-rule-backwards)]@
 
 The rank of an $m \\times n$ matrix cannot exceed $m$, and when $m < n$, the rank is strictly less than $n$. This guarantees at least $n - m$ free variables, producing an infinite family of nontrivial solutions. Fewer equations than unknowns always leaves room.`,
     before: ``,
@@ -1283,7 +1284,7 @@ The [dimension](!/linear-algebra/vector-spaces/dimension) of the null space is t
 
 @academic[pitfall,aside:true,width:35%:Subtracting the rank from the number of equations
 Computing the nullity as $m - \\text{rank}(A)$ gives $3 - 3 = 0$ for a $3 \\times 5$ matrix of rank $3$, wrongly ruling out nontrivial solutions. The nullity counts unknowns: $n - \\text{rank}(A) = 5 - 3 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-rank-from-the-number-of-equations)]@
 
 When the nullity is $0$, the null space is $\\{\\mathbf{0}\\}$ and only the trivial solution exists. When the nullity is $k > 0$, the null space is a $k$-dimensional subspace, and the solution set contains infinitely many vectors forming a $k$-dimensional flat through the origin.`,
     before: ``,
@@ -1310,7 +1311,7 @@ Setting $s = 1, t = 0$: $\\mathbf{v}_1 = (-2, 1, 0, 0, 0)$. Setting $s = 0, t = 
 
 @academic[pitfall,aside:true,width:35%:Reading null-space vectors from the rows
 Taking the rows of the echelon form as null-space vectors fails: $A(1, 2, -1, 0, 3) = (15, 34, -7)$, not $\\mathbf{0}$. Those rows span the row space; the null space comes from solving, here $\\mathbf{v}_1 = (-2, 1, 0, 0, 0)$ and $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-null-space-vectors-from-the-rows)]@
 
 The null space is $\\text{Span}\\{\\mathbf{v}_1, \\mathbf{v}_2\\}$, a two-dimensional subspace of $\\mathbb{R}^5$.
 
@@ -1397,7 +1398,7 @@ $$(A - \\lambda I)\\mathbf{x} = \\mathbf{0}$$]@
 
 @academic[pitfall,aside:true,width:35%:Subtracting λ from every entry
 Subtracting $\\lambda$ from all four entries of $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$ gives $(2 - \\lambda)^2 - (1 - \\lambda)^2 = 3 - 2\\lambda$ and the false eigenvalue $3/2$. With $\\lambda I$ only the diagonal changes: $(2 - \\lambda)^2 - 1 = 0$, so $\\lambda = 1$ and $\\lambda = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-from-every-entry)]@
 
 This is a homogeneous system with coefficient matrix $A - \\lambda I$. Eigenvectors are precisely the nontrivial solutions. They exist when and only when $A - \\lambda I$ is singular — that is, when $\\det(A - \\lambda I) = 0$.
 
@@ -1417,63 +1418,9 @@ This rewriting connects homogeneous systems directly to spectral theory. Every e
   },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers about homogeneous systems. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the fewer-equations rule backwards**
-
-The rule says that fewer equations than unknowns ($m < n$) forces nontrivial solutions. It is read in reverse: with at least as many equations as unknowns, the system is assumed to have only the trivial solution. The rule goes one way only; when $m \\ge n$, the rank decides.
-
-Wrong working: $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\\\ 3 & 6 \\end{pmatrix}$ has $3$ equations and $2$ unknowns, so only $\\mathbf{x} = \\mathbf{0}$ is accepted.
-
-Right working: row reduce.
-$$\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\\\ 3 & 6 \\end{pmatrix} \\xrightarrow{R_2 - 2R_1,\\; R_3 - 3R_1} \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\\\ 0 & 0 \\end{pmatrix}$$
-The rank is $1 < 2$, so $x_2 = t$ is free and $x_1 = -2t$. Setting $t = 1$ gives the nontrivial solution $(-2, 1)$.
-
-Why it happens: "more equations than unknowns" sounds like too many conditions to leave any freedom. But equations can repeat one another; here rows $2$ and $3$ are multiples of row $1$ and add no condition.
-
-How to check: compute the rank instead of comparing the shape, and substitute the candidate: $A(-2, 1) = (0, 0, 0)$.
-
-**Subtracting the rank from the number of equations**
-
-The nullity is computed as $m - \\text{rank}(A)$, the number of rows minus the rank, instead of $n - \\text{rank}(A)$. The free variables are counted among the unknowns, that is, among the columns.
-
-Wrong working: the $3 \\times 5$ matrix of the worked example in Finding the Null Space has rank $3$, so the nullity is taken as $3 - 3 = 0$ and only the trivial solution is expected.
-
-Right working: the nullity is $n - \\text{rank}(A) = 5 - 3 = 2$. The null space is two-dimensional, spanned by $\\mathbf{v}_1 = (-2, 1, 0, 0, 0)$ and $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$.
-
-Why it happens: $m$ and $n$ are both sizes of the same matrix, and for a square matrix the two formulas agree, so the slip shows only on a non-square one.
-
-How to check: the nullity equals the number of columns without a pivot; here columns $2$ and $4$. A matrix with $m < n$ can never have nullity $0$, since its rank is at most $m$.
-
-**Reading null-space vectors from the rows**
-
-After row reduction, the nonzero rows of the echelon form are taken as a basis of the null space. Those rows span the row space, a different subspace; null-space vectors come only from solving the system.
-
-Wrong working: from the echelon form in Finding the Null Space, the rows $(1, 2, -1, 0, 3)$, $(0, 0, 2, 2, 2)$ and $(0, 0, 0, 0, 2)$ are listed as the basis, giving a three-dimensional null space.
-
-Right working: set the free variables $x_2 = s$, $x_4 = t$, solve the pivot variables, and set each free variable to $1$ in turn: $\\mathbf{v}_1 = (-2, 1, 0, 0, 0)$ and $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$. Both give $A\\mathbf{v} = \\mathbf{0}$.
-
-Why it happens: the reduced rows are the visible result of the elimination, and the last step, turning the reduced equations into vectors, is skipped.
-
-How to check: multiply each claimed basis vector by the original matrix. $A(1, 2, -1, 0, 3) = (15, 34, -7)$, not $\\mathbf{0}$. The count also gives it away: there must be one vector per free variable, two here, while the echelon form has three nonzero rows.
-
-**Subtracting λ from every entry**
-
-The matrix $A - \\lambda I$ is formed by subtracting $\\lambda$ from every entry of $A$, instead of only from the diagonal entries. $\\lambda I$ is the matrix with $\\lambda$ on the diagonal and $0$ elsewhere.
-
-Wrong working: for $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$,
-$$\\det\\begin{pmatrix} 2 - \\lambda & 1 - \\lambda \\\\ 1 - \\lambda & 2 - \\lambda \\end{pmatrix} = (2 - \\lambda)^2 - (1 - \\lambda)^2 = 3 - 2\\lambda = 0$$
-gives the single value $\\lambda = 3/2$.
-
-Right working:
-$$\\det\\begin{pmatrix} 2 - \\lambda & 1 \\\\ 1 & 2 - \\lambda \\end{pmatrix} = (2 - \\lambda)^2 - 1 = \\lambda^2 - 4\\lambda + 3 = (\\lambda - 1)(\\lambda - 3) = 0$$
-so $\\lambda = 1$ and $\\lambda = 3$. The eigenvectors are the null spaces of $A - I = \\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$, spanned by $(1, -1)$, and of $A - 3I = \\begin{pmatrix} -1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, spanned by $(1, 1)$.
-
-Why it happens: rewriting $A\\mathbf{x} = \\lambda\\mathbf{x}$ as $(A - \\lambda)\\mathbf{x} = \\mathbf{0}$ skips the step $\\lambda\\mathbf{x} = \\lambda I\\mathbf{x}$, and $A - \\lambda$ is then read as "subtract $\\lambda$ everywhere".
-
-How to check: test the value found. $A - \\frac{3}{2}I = \\begin{pmatrix} 1/2 & 1 \\\\ 1 & 1/2 \\end{pmatrix}$ has determinant $1/4 - 1 = -3/4 \\neq 0$, so $(A - \\frac{3}{2}I)\\mathbf{x} = \\mathbf{0}$ has only the trivial solution and $3/2$ is not an eigenvalue. For a $2 \\times 2$ matrix the two eigenvalues must also add up to the trace: $1 + 3 = 4$.`,
+    content: `Four mistakes account for many wrong answers about homogeneous systems. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip misjudges the null space. Nontrivial solutions depend on the rank, not on the shape alone; the nullity is $n - \\text{rank}(A)$, counting columns; the rows of the echelon form span the row space, not the null space; and $A - \\lambda I$ subtracts $\\lambda$ only on the diagonal. Multiplying each candidate by $A$ catches each slip.`,
     link: ``,
   },
 }
@@ -1658,8 +1605,46 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-fewer-equations-rule-backwards', name: `Reading the fewer-equations rule backwards`, errorAt: 0,
+        what: `The rule says that fewer equations than unknowns ($m < n$) forces nontrivial solutions. It is read in reverse: with at least as many equations as unknowns, the system is assumed to have only the trivial solution. The rule goes one way only; when $m \\ge n$, the rank decides.`,
+        wrong: [`$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\\\ 3 & 6 \\end{pmatrix}$ has $3$ equations and $2$ unknowns, so only $\\mathbf{x} = \\mathbf{0}$ is accepted.`],
+        right: [`Row reduce.`, `$$\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\\\ 3 & 6 \\end{pmatrix}$$
+$$\\xrightarrow{R_2 - 2R_1,\\; R_3 - 3R_1} \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\\\ 0 & 0 \\end{pmatrix}$$`, `The rank is $1 < 2$, so $x_2 = t$ is free and $x_1 = -2t$. Setting $t = 1$ gives the nontrivial solution $(-2, 1)$.`],
+        why: `"more equations than unknowns" sounds like too many conditions to leave any freedom. But equations can repeat one another; here rows $2$ and $3$ are multiples of row $1$ and add no condition.`,
+        check: `Compute the rank instead of comparing the shape, and substitute the candidate: $A(-2, 1) = (0, 0, 0)$.` },
+      { id: 'subtracting-the-rank-from-the-number-of-equations', name: `Subtracting the rank from the number of equations`, errorAt: 0,
+        what: `The nullity is computed as $m - \\text{rank}(A)$, the number of rows minus the rank, instead of $n - \\text{rank}(A)$. The free variables are counted among the unknowns, that is, among the columns.`,
+        wrong: [`The $3 \\times 5$ matrix of the worked example in Finding the Null Space has rank $3$, so the nullity is taken as $3 - 3 = 0$ and only the trivial solution is expected.`],
+        right: [`The nullity is $n - \\text{rank}(A) = 5 - 3 = 2$. The null space is two-dimensional, spanned by $\\mathbf{v}_1 = (-2, 1, 0, 0, 0)$ and $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$.`],
+        why: `$m$ and $n$ are both sizes of the same matrix, and for a square matrix the two formulas agree, so the slip shows only on a non-square one.`,
+        check: `The nullity equals the number of columns without a pivot; here columns $2$ and $4$. A matrix with $m < n$ can never have nullity $0$, since its rank is at most $m$.` },
+      { id: 'reading-null-space-vectors-from-the-rows', name: `Reading null-space vectors from the rows`, errorAt: 0,
+        what: `After row reduction, the nonzero rows of the echelon form are taken as a basis of the null space. Those rows span the row space, a different subspace; null-space vectors come only from solving the system.`,
+        wrong: [`From the echelon form in Finding the Null Space, the rows $(1, 2, -1, 0, 3)$, $(0, 0, 2, 2, 2)$ and $(0, 0, 0, 0, 2)$ are listed as the basis, giving a three-dimensional null space.`],
+        right: [`Set the free variables $x_2 = s$, $x_4 = t$, solve the pivot variables, and set each free variable to $1$ in turn: $\\mathbf{v}_1 = (-2, 1, 0, 0, 0)$ and $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$. Both give $A\\mathbf{v} = \\mathbf{0}$.`],
+        why: `The reduced rows are the visible result of the elimination, and the last step, turning the reduced equations into vectors, is skipped.`,
+        check: `Multiply each claimed basis vector by the original matrix. $A(1, 2, -1, 0, 3) = (15, 34, -7)$, not $\\mathbf{0}$. The count also gives it away: there must be one vector per free variable, two here, while the echelon form has three nonzero rows.` },
+      { id: 'subtracting-from-every-entry', name: `Subtracting λ from every entry`, errorAt: 1,
+        what: `The matrix $A - \\lambda I$ is formed by subtracting $\\lambda$ from every entry of $A$, instead of only from the diagonal entries. $\\lambda I$ is the matrix with $\\lambda$ on the diagonal and $0$ elsewhere.`,
+        wrong: [`For $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$,`, `$$\\det\\begin{pmatrix} 2 - \\lambda & 1 - \\lambda \\\\ 1 - \\lambda & 2 - \\lambda \\end{pmatrix}$$
+$$= (2 - \\lambda)^2 - (1 - \\lambda)^2$$
+$$= 3 - 2\\lambda = 0$$`, `Gives the single value $\\lambda = 3/2$.`],
+        right: [`For $A = \\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$,`, `$$\\det\\begin{pmatrix} 2 - \\lambda & 1 \\\\ 1 & 2 - \\lambda \\end{pmatrix}$$
+$$= (2 - \\lambda)^2 - 1$$
+$$= \\lambda^2 - 4\\lambda + 3$$
+$$= (\\lambda - 1)(\\lambda - 3) = 0$$`, `So $\\lambda = 1$ and $\\lambda = 3$. The eigenvectors are the null spaces of $A - I = \\begin{pmatrix} 1 & 1 \\\\ 1 & 1 \\end{pmatrix}$, spanned by $(1, -1)$, and of $A - 3I = \\begin{pmatrix} -1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, spanned by $(1, 1)$.`],
+        why: `Rewriting $A\\mathbf{x} = \\lambda\\mathbf{x}$ as $(A - \\lambda)\\mathbf{x} = \\mathbf{0}$ skips the step $\\lambda\\mathbf{x} = \\lambda I\\mathbf{x}$, and $A - \\lambda$ is then read as "subtract $\\lambda$ everywhere".`,
+        check: `Test the value found. $A - \\frac{3}{2}I = \\begin{pmatrix} 1/2 & 1 \\\\ 1 & 1/2 \\end{pmatrix}$ has determinant $1/4 - 1 = -3/4 \\neq 0$, so $(A - \\frac{3}{2}I)\\mathbf{x} = \\mathbf{0}$ has only the trivial solution and $3/2$ is not an eigenvalue. For a $2 \\times 2$ matrix the two eigenvalues must also add up to the trace: $1 + 3 = 4$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1682,7 +1667,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function HomogeneousSystemsPage({
+export default function HomogeneousSystemsPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1892,6 +1877,15 @@ $$A\\mathbf{x} = \\mathbf{0}$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="homogeneous-system-pitfalls"
+            title="Common pitfalls with homogeneous systems"
+            source="/linear-algebra/linear-systems/homogeneous"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

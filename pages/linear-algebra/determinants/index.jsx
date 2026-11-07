@@ -683,6 +683,7 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -884,7 +885,7 @@ One way to see where this formula comes from is to solve the system $Ax = \\math
 
 @academic[pitfall,aside:true,width:35%:Subtracting in the wrong order
 Taking $bc - ad$ for $\\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$ gives $1 \\cdot 2 - 3 \\cdot 5 = -13$, the right size with the wrong sign. The main diagonal comes first: $ad - bc = 15 - 2 = 13$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-in-the-wrong-order)]@
 
 The expression $ad - bc$ also carries geometric meaning. The columns of $A$ are the vectors $(a, c)$ and $(b, d)$ in $\\mathbb{R}^2$. The signed area of the parallelogram these two vectors span equals exactly $ad - bc$. A positive value means the columns are arranged counterclockwise; a negative value means clockwise; zero means the columns are parallel and the parallelogram collapses to a line segment.
 
@@ -938,7 +939,7 @@ $$= 2(-3 - 8) - 3(0 - 20) + 1(0 + 5) = 2(-11) - 3(-20) + 5 = -22 + 60 + 5 = 43$$
 
 @academic[pitfall,aside:true,width:35%:Adding all three terms
 Adding the terms instead of alternating the signs gives $2(-11) + 3(-20) + 1(5) = -77$. The middle term is subtracted: $2(-11) - 3(-20) + 1(5) = 43$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-all-three-terms)]@
 
 The same result follows from the Sarrus rule: downward diagonals give $2(-1)(3) + 3(4)(5) + 1(0)(2) = -6 + 60 + 0 = 54$; upward diagonals give $1(-1)(5) + 2(4)(2) + 3(0)(3) = -5 + 16 + 0 = 11$; the determinant is $54 - 11 = 43$.`,
     before: ``,
@@ -1016,7 +1017,7 @@ So $\\det(A) = (-1)^{5} \\cdot 1 \\cdot (-30) = (-1)(-30) = 30$.
 
 @academic[pitfall,aside:true,width:35%:Reusing the first-row signs
 Applying the first-row pattern $+, -, +, -$ down column $2$ gives the entry at $(3,2)$ the sign $+$ and $\\det(A) = -30$. The sign comes from the position, $(-1)^{3+2} = -1$, so $\\det(A) = 30$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reusing-the-first-row-signs)]@
 
 The choice of column $2$ reduced the problem from four $3 \\times 3$ determinants down to one. This illustrates why scanning for zeros before expanding is the first step in any hand computation.
 
@@ -1062,7 +1063,7 @@ Both give the same result regardless of which row or column is chosen. Collectin
 
 @academic[pitfall,aside:true,width:35%:Scaling the whole matrix once
 Writing $\\det(2A) = 2\\det(A)$ for $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$ gives $4$. Doubling $A$ doubles both rows, so $\\det(2A) = 2^2 \\cdot 2 = 8$; in general $\\det(kA) = k^n \\det(A)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-scaling-the-whole-matrix-once)]@
 
 These three rules turn [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) into a determinant-computing algorithm. Reduce $A$ to upper triangular form using row operations, tracking every swap and every scaling. The determinant of the resulting triangular matrix is the product of its diagonal entries. Adjusting for the tracked sign flips and scale factors gives $\\det(A)$.
 
@@ -1072,7 +1073,7 @@ This approach requires on the order of $n^3$ arithmetic operations — a dramati
 
 @academic[pitfall,aside:true,width:35%:Forgetting to undo a scaling
 Dividing row $1$ of $\\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$ by $2$ and then clearing below the pivot gives $\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}$, with diagonal product $1$. That division halved the determinant, so $\\det(A) = 2 \\cdot 1 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-undo-a-scaling)]@
 
 @academic[example:Example
 Starting from $A =\\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, subtract $\\frac{3}{2}$ times row $1$ from row $2$ (this does not change the determinant) to get $\\begin{pmatrix} 2 & 4 \\\\ 0 & 1 \\end{pmatrix}$. The product of the diagonal is $2 \\cdot 1 = 2$, which matches $\\det(A) = 2 \\cdot 7 - 4 \\cdot 3 = 2$.]@
@@ -1123,94 +1124,9 @@ Each of these formulas is developed with full worked examples on the [applicatio
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Six mistakes account for many wrong determinants. Five are marked with a box where they happen in the sections above, and the sixth, a diagonal shortcut used on a $4 \\times 4$ matrix, is flagged in the section on the $3 \\times 3$ formula. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Subtracting in the wrong order**
-
-The $2 \\times 2$ formula is applied with its two products the wrong way round: the product of the other diagonal comes first, and the main-diagonal product is subtracted from it.
-
-Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$,
-$$bc - ad = 1 \\cdot 2 - 3 \\cdot 5 = 2 - 15 = -13$$
-
-Right working: the main diagonal $a, d$ comes first.
-$$ad - bc = 3 \\cdot 5 - 1 \\cdot 2 = 15 - 2 = 13$$
-
-Why it happens: both products are formed correctly and only their order is swapped. The two results differ only in sign, so the wrong one looks just as plausible.
-
-How to check: the identity matrix must give $1$. With $ad - bc$, $\\det(I) = 1 \\cdot 1 - 0 \\cdot 0 = 1$; with the order reversed it gives $-1$.
-
-**Adding all three terms**
-
-In the first-row expansion of a $3 \\times 3$ determinant, the three terms are added as if every sign were $+$. The middle term should be subtracted.
-
-Wrong working: for the matrix of the worked example, $A = \\begin{pmatrix} 2 & 3 & 1 \\\\ 0 & -1 & 4 \\\\ 5 & 2 & 3 \\end{pmatrix}$,
-$$2(-11) + 3(-20) + 1(5) = -22 - 60 + 5 = -77$$
-
-Right working: the signs alternate $+, -, +$.
-$$2(-11) - 3(-20) + 1(5) = -22 + 60 + 5 = 43$$
-
-Why it happens: the three $2 \\times 2$ determinants are computed carefully, and the sign in front of the middle one is lost when the terms are put together. A negative middle value, as here, makes the slip easier, because two minus signs have to combine into a plus.
-
-How to check: compute the same determinant with the rule of Sarrus, which has no position signs to forget. For this matrix it gives $54 - 11 = 43$.
-
-**Using the diagonal rule on a 4×4 matrix**
-
-The rule of Sarrus is stretched to a $4 \\times 4$ matrix: the first three columns are copied to the right, and the four downward diagonal products minus the four upward ones are taken as the determinant.
-
-Wrong working: for the $4 \\times 4$ matrix of the section on small determinants, $A = \\begin{pmatrix} 1 & 0 & 2 & -1 \\\\ 3 & 0 & 0 & 5 \\\\ 2 & 1 & 4 & -3 \\\\ 1 & 0 & 5 & 0 \\end{pmatrix}$, the downward diagonals give $0$, $0$, $0$ and $(-1)(3)(1)(5) = -15$, and all four upward diagonals give $0$. The result would be $-15 - 0 = -15$.
-
-Right working: expand along column $2$, which has a single nonzero entry.
-$$\\det(A) = (-1)^{3+2} \\cdot 1 \\cdot M_{32} = (-1)(-30) = 30$$
-
-Why it happens: the diagonal picture is easy to remember, and nothing in it seems tied to the size $3$. But a $4 \\times 4$ determinant has $4! = 24$ products, and the diagonals reach only $8$ of them.
-
-How to check: count the products. A determinant of size $n$ has $n!$ of them, a diagonal rule of this kind produces $2n$, and the two counts agree only for $n = 3$.
-
-**Reusing the first-row signs**
-
-When a determinant is expanded along a row or column other than the first row, the signs are taken from the first-row pattern $+, -, +, -$ in the order the entries are used, instead of from their positions.
-
-Wrong working: in the $4 \\times 4$ example, the expansion along column $2$ has a single term, from the entry $1$ at position $(3,2)$. Running $+, -, +, -$ down the column gives row $3$ the sign $+$:
-$$\\det(A) = +1 \\cdot M_{32} = 1 \\cdot (-30) = -30$$
-
-Right working: the sign of position $(i,j)$ is $(-1)^{i+j}$. For $(3,2)$ it is $(-1)^{5} = -1$, so
-$$\\det(A) = (-1) \\cdot 1 \\cdot (-30) = 30$$
-
-Why it happens: most worked expansions use the first row, where the pattern does start with $+$. Column $2$ starts with $-$, and so does row $2$.
-
-How to check: read the sign off the checkerboard pattern in the section on minors and cofactors. Position $(3,2)$ sits on a $-$ square.
-
-**Scaling the whole matrix once**
-
-The rule for scaling one row is applied to a multiple of the whole matrix: $\\det(kA)$ is taken to be $k\\det(A)$.
-
-Wrong working: for $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, with $\\det(A) = 2$,
-$$\\det(2A) = 2\\det(A) = 4$$
-
-Right working: $2A$ multiplies each of the $2$ rows by $2$, and each row contributes its own factor.
-$$\\det(2A) = \\det\\begin{pmatrix} 4 & 8 \\\\ 6 & 14 \\end{pmatrix} = 4 \\cdot 14 - 8 \\cdot 6 = 56 - 48 = 8 = 2^2 \\cdot 2$$
-For an $n \\times n$ matrix, $\\det(kA) = k^n \\det(A)$.
-
-Why it happens: multiplying a matrix by $k$ looks like one operation, but it scales all $n$ rows at once, and the row rule counts each of them.
-
-How to check: try $A = I$. The matrix $kI$ is diagonal with $n$ entries equal to $k$, so its determinant is $k^n$, not $k$.
-
-**Forgetting to undo a scaling**
-
-During row reduction a row is divided by its pivot to make the pivot $1$, and the diagonal product of the final triangular matrix is reported as the determinant without accounting for that division.
-
-Wrong working: for $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$, divide row $1$ by $2$ to get $\\begin{pmatrix} 1 & 2 \\\\ 3 & 7 \\end{pmatrix}$, then subtract $3$ times row $1$ from row $2$:
-$$\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}, \\quad 1 \\cdot 1 = 1$$
-
-Right working: dividing row $1$ by $2$ divided the determinant by $2$, so the product is multiplied back by $2$.
-$$\\det(A) = 2 \\cdot (1 \\cdot 1) = 2$$
-This matches $2 \\cdot 7 - 4 \\cdot 3 = 2$.
-
-Why it happens: making every pivot equal to $1$ is a habit from solving linear systems, where scaling a row does not change the solution. For a determinant it does change the value.
-
-How to check: keep a running factor beside the reduction and multiply by it at the end. Or avoid scaling altogether: row additions alone, as in the illustration of the row-operations section, leave the determinant unchanged.`,
+    content: `Six mistakes account for many wrong determinants. Five are marked with a box where they happen in the sections above, and the sixth, a diagonal shortcut used on a $4 \\times 4$ matrix, is flagged in the section on the $3 \\times 3$ formula. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip gets a sign or a factor wrong. The $2 \\times 2$ determinant is $ad - bc$, the cofactor signs alternate, the rule of Sarrus works only for $3 \\times 3$ matrices, the sign of each position comes from the checkerboard, $\\det(kA) = k^n \\det(A)$, and a row divided during reduction must be multiplied back at the end. Trying the identity matrix, or computing the determinant a second way, catches each slip.`,
     link: ``,
   },
 }
@@ -1408,8 +1324,64 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'subtracting-in-the-wrong-order', name: `Subtracting in the wrong order`, errorAt: 1,
+        what: `The $2 \\times 2$ formula is applied with its two products the wrong way round: the product of the other diagonal comes first, and the main-diagonal product is subtracted from it.`,
+        wrong: [`For $A = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$,`, `$$bc - ad = 1 \\cdot 2 - 3 \\cdot 5$$
+$$= 2 - 15 = -13$$`],
+        right: [`For $A = \\begin{pmatrix} 3 & 1 \\\\ 2 & 5 \\end{pmatrix}$,`, `The main diagonal $a, d$ comes first.`, `$$ad - bc = 3 \\cdot 5 - 1 \\cdot 2$$
+$$= 15 - 2 = 13$$`],
+        why: `Both products are formed correctly and only their order is swapped. The two results differ only in sign, so the wrong one looks just as plausible.`,
+        check: `The identity matrix must give $1$. With $ad - bc$, $\\det(I) = 1 \\cdot 1 - 0 \\cdot 0 = 1$; with the order reversed it gives $-1$.` },
+      { id: 'adding-all-three-terms', name: `Adding all three terms`, errorAt: 0,
+        what: `In the first-row expansion of a $3 \\times 3$ determinant, the three terms are added as if every sign were $+$. The middle term should be subtracted.`,
+        wrong: [`For the matrix of the worked example, $A = \\begin{pmatrix} 2 & 3 & 1 \\\\ 0 & -1 & 4 \\\\ 5 & 2 & 3 \\end{pmatrix}$,
+$$2(-11) + 3(-20) + 1(5)$$
+$$= -22 - 60 + 5 = -77$$`],
+        right: [`The signs alternate $+, -, +$.`, `$$2(-11) - 3(-20) + 1(5)$$
+$$= -22 + 60 + 5 = 43$$`],
+        why: `The three $2 \\times 2$ determinants are computed carefully, and the sign in front of the middle one is lost when the terms are put together. A negative middle value, as here, makes the slip easier, because two minus signs have to combine into a plus.`,
+        check: `Compute the same determinant with the rule of Sarrus, which has no position signs to forget. For this matrix it gives $54 - 11 = 43$.` },
+      { id: 'using-the-diagonal-rule-on-a-4-4-matrix', name: `Using the diagonal rule on a 4×4 matrix`, errorAt: 0,
+        what: `The rule of Sarrus is stretched to a $4 \\times 4$ matrix: the first three columns are copied to the right, and the four downward diagonal products minus the four upward ones are taken as the determinant.`,
+        wrong: [`For the $4 \\times 4$ matrix of the section on small determinants, $A = \\begin{pmatrix} 1 & 0 & 2 & -1 \\\\ 3 & 0 & 0 & 5 \\\\ 2 & 1 & 4 & -3 \\\\ 1 & 0 & 5 & 0 \\end{pmatrix}$, the downward diagonals give $0$, $0$, $0$ and $(-1)(3)(1)(5) = -15$, and all four upward diagonals give $0$. The result would be $-15 - 0 = -15$.`],
+        right: [`Expand along column $2$, which has a single nonzero entry.`, `$$\\det(A) = (-1)^{3+2} \\cdot 1 \\cdot M_{32}$$
+$$= (-1)(-30) = 30$$`],
+        why: `The diagonal picture is easy to remember, and nothing in it seems tied to the size $3$. But a $4 \\times 4$ determinant has $4! = 24$ products, and the diagonals reach only $8$ of them.`,
+        check: `Count the products. A determinant of size $n$ has $n!$ of them, a diagonal rule of this kind produces $2n$, and the two counts agree only for $n = 3$.` },
+      { id: 'reusing-the-first-row-signs', name: `Reusing the first-row signs`, errorAt: 1,
+        what: `When a determinant is expanded along a row or column other than the first row, the signs are taken from the first-row pattern $+, -, +, -$ in the order the entries are used, instead of from their positions.`,
+        wrong: [`In the $4 \\times 4$ example, the expansion along column $2$ has a single term, from the entry $1$ at position $(3,2)$.`, `Running $+, -, +, -$ down the column gives row $3$ the sign $+$:
+$$\\det(A) = +1 \\cdot M_{32} = 1 \\cdot (-30) = -30$$`],
+        right: [`In the $4 \\times 4$ example, the expansion along column $2$ has a single term, from the entry $1$ at position $(3,2)$.`, `The sign of position $(i,j)$ is $(-1)^{i+j}$. For $(3,2)$ it is $(-1)^{5} = -1$, so
+$$\\det(A) = (-1) \\cdot 1 \\cdot (-30) = 30$$`],
+        why: `Most worked expansions use the first row, where the pattern does start with $+$. Column $2$ starts with $-$, and so does row $2$.`,
+        check: `Read the sign off the checkerboard pattern in the section on minors and cofactors. Position $(3,2)$ sits on a $-$ square.` },
+      { id: 'scaling-the-whole-matrix-once', name: `Scaling the whole matrix once`, errorAt: 1,
+        what: `The rule for scaling one row is applied to a multiple of the whole matrix: $\\det(kA)$ is taken to be $k\\det(A)$.`,
+        wrong: [`For $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$,`, `With $\\det(A) = 2$,
+$$\\det(2A) = 2\\det(A) = 4$$`],
+        right: [`For $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$,`, `$2A$ multiplies each of the $2$ rows by $2$, and each row contributes its own factor.`, `$$\\det(2A) = \\det\\begin{pmatrix} 4 & 8 \\\\ 6 & 14 \\end{pmatrix}$$
+$$= 4 \\cdot 14 - 8 \\cdot 6$$
+$$= 56 - 48 = 8 = 2^2 \\cdot 2$$`, `For an $n \\times n$ matrix, $\\det(kA) = k^n \\det(A)$.`],
+        why: `Multiplying a matrix by $k$ looks like one operation, but it scales all $n$ rows at once, and the row rule counts each of them.`,
+        check: `Try $A = I$. The matrix $kI$ is diagonal with $n$ entries equal to $k$, so its determinant is $k^n$, not $k$.` },
+      { id: 'forgetting-to-undo-a-scaling', name: `Forgetting to undo a scaling`, errorAt: 1,
+        what: `During row reduction a row is divided by its pivot to make the pivot $1$, and the diagonal product of the final triangular matrix is reported as the determinant without accounting for that division.`,
+        wrong: [`For $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$,`, `Divide row $1$ by $2$ to get $\\begin{pmatrix} 1 & 2 \\\\ 3 & 7 \\end{pmatrix}$, then subtract $3$ times row $1$ from row $2$:
+$$\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}, \\quad 1 \\cdot 1 = 1$$`],
+        right: [`For $A = \\begin{pmatrix} 2 & 4 \\\\ 3 & 7 \\end{pmatrix}$,`, `Dividing row $1$ by $2$ divided the determinant by $2$, so the product is multiplied back by $2$.`, `$$\\det(A) = 2 \\cdot (1 \\cdot 1) = 2$$`, `This matches $2 \\cdot 7 - 4 \\cdot 3 = 2$.`],
+        why: `Making every pivot equal to $1$ is a habit from solving linear systems, where scaling a row does not change the solution. For a determinant it does change the value.`,
+        check: `Keep a running factor beside the reduction and multiply by it at the end. Or avoid scaling altogether: row additions alone, as in the illustration of the row-operations section, leave the determinant unchanged.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     faqQuestions,
     detRowOpTree,
     singularCases,
@@ -1433,7 +1405,7 @@ const schemas = {
    }
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeterminantsPage({faqQuestions, detRowOpTree, singularCases,
+export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTree, singularCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1631,6 +1603,15 @@ export default function DeterminantsPage({faqQuestions, detRowOpTree, singularCa
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="determinant-pitfalls"
+            title="Common pitfalls with determinants"
+            source="/linear-algebra/determinants"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

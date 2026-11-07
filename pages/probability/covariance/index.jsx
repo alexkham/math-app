@@ -920,9 +920,11 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1290,7 +1292,7 @@ behavior.
 
 @academic[pitfall,aside:true,width:35%:Judging strength by the size of the covariance
 Reading a larger covariance as a stronger relationship ignores units: recording height in centimetres instead of metres multiplies $\\operatorname{Cov}$ by $100$, while the relationship stays the same. Strength is compared with the correlation $\\rho_{XY}$, which does not change.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-judging-strength-by-the-size-of-the-covariance)]@
 
 The pairs in this list are recorded in very different units: centimetres and kilograms, hours and points, degrees and kilowatt-hours, percentage returns. Each deviation from a mean carries the unit of its own variable, so the product of two deviations carries the product of the two units.
 
@@ -1365,7 +1367,7 @@ $$-1 \\leq \\rho_{XY} \\leq 1$$
 
 @academic[pitfall,aside:true,width:35%:Dividing by the variances
 Using $\\operatorname{Var}(X)\\operatorname{Var}(Y)$ in the denominator: with $\\operatorname{Cov}(X, Y) = 3$, $\\operatorname{Var}(X) = 4$, $\\operatorname{Var}(Y) = 9$ this gives $\\frac{3}{36} \\approx 0.083$. The denominator takes the square roots: $\\rho_{XY} = \\frac{3}{2 \\cdot 3} = 0.5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-variances)]@
 
 The denominator is built so that the units cancel. The covariance in the numerator carries the unit of $X$ times the unit of $Y$, and the product in the denominator carries exactly the same pair of units, so the ratio is a pure number.
 
@@ -1442,7 +1444,10 @@ That is what makes correlation comparable across pairs and unchanged by a change
 
     capstone:{
       title:`Covariance at a Glance`,
-      content:`The table below collects covariance into a single reference card — its definition, the symmetry and self-covariance identities, the sign interpretation (positive, negative, zero), the one-way relationship with independence, what covariance does and does not capture, common examples of paired quantities, and the concepts it leads into.`,
+      content:`This summary collects covariance into ten rows. Each row names an aspect with a short note and a link to the section that explains it, gives its statement, and adds a note or an example.
+
+The rows run from the definition and the symmetry and self-covariance identities to the meaning of a positive, a negative and a zero covariance. Next comes the one-way relationship with independence: independent variables have zero covariance, but not the other way round. The last rows say what covariance does and does not capture, list common pairs of quantities, and name the concepts it leads into, with the correlation coefficient written out.`,
+      formulaSheetAfter: `Read a covariance for its sign first: it tells the direction of the linear relationship and nothing more. To judge strength, or to compare different pairs, divide by both standard deviations and work with the correlation instead.`,
       before:``,
       after:``,
       link:'',
@@ -1450,63 +1455,9 @@ That is what makes correlation comparable across pairs and unchanged by a change
 
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for most wrong conclusions drawn from covariance. Three are marked where they happen in the sections above; the first is the one the section on independence warns about. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating zero covariance as independence**
-
-A covariance of $0$ is computed, and the two variables are declared independent.
-
-Wrong working: let $X$ take the values $-2, -1, 0, 1, 2$ with probability $\\frac{1}{5}$ each, and let $Y = X^2$. Then $E[X] = 0$ and $E[XY] = E[X^3] = 0$, so
-$$\\operatorname{Cov}(X, Y) = E[XY] - E[X]\\,E[Y] = 0 - 0 \\cdot 2 = 0$$
-and the conclusion is that $X$ and $Y$ are independent.
-
-Right working: $Y$ is fixed by $X$, so they are as dependent as two variables can be. Independence would need $P(X = 0, Y = 0) = P(X = 0)\\,P(Y = 0) = \\frac{1}{5} \\cdot \\frac{1}{5} = \\frac{1}{25}$, but $X = 0$ forces $Y = 0$, so $P(X = 0, Y = 0) = \\frac{1}{5}$. The variables are uncorrelated, not independent.
-
-Why it happens: the implication "independent, so covariance $0$" is true and is used often, and it is easy to run it backwards.
-
-How to check: test one pair of values against the product rule $P(X = x, Y = y) = P(X = x)\\,P(Y = y)$. A single pair that fails proves dependence, whatever the covariance is.
-
-**Judging strength by the size of the covariance**
-
-Two covariances are compared, and the larger one is read as the stronger relationship.
-
-Wrong working: height and weight have $\\operatorname{Cov} = 0.5$ with height in metres, and study time and exam score have $\\operatorname{Cov} = 20$. Since $20 > 0.5$, study time and score seem far more closely related. With height in centimetres the first covariance becomes $50$, and the ranking reverses.
-
-Right working: compare correlations. With $\\sigma_H = 0.1$ m and $\\sigma_W = 10$ kg, $\\rho = \\frac{0.5}{0.1 \\cdot 10} = 0.5$; with $\\sigma_T = 5$ hours and $\\sigma_S = 10$ points, $\\rho = \\frac{20}{5 \\cdot 10} = 0.4$. Height and weight are the more strongly related pair, in any units.
-
-Why it happens: for most quantities a bigger number means more of something, and the units of a covariance, such as metre-kilograms, are rarely written next to it.
-
-How to check: change the units of one variable. If the comparison flips, it was a comparison of scales, not of relationships. In centimetres, $\\rho = \\frac{50}{10 \\cdot 10} = 0.5$ is unchanged.
-
-**Splitting the expectation of a product**
-
-The computational formula $\\operatorname{Cov}(X, Y) = E[XY] - E[X]\\,E[Y]$ is used, and $E[XY]$ is replaced by $E[X]\\,E[Y]$.
-
-Wrong working, for a fair coin $X \\in \\{0, 1\\}$ and $Y = X$:
-$$E[XY] = E[X]\\,E[Y] = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}, \\quad \\operatorname{Cov}(X, Y) = \\frac{1}{4} - \\frac{1}{4} = 0$$
-
-Right working: compute $E[XY]$ from the pairs. Here $XY = X^2 = X$, so $E[XY] = \\frac{1}{2}$ and
-$$\\operatorname{Cov}(X, Y) = \\frac{1}{2} - \\frac{1}{4} = \\frac{1}{4}$$
-
-Why it happens: the rule $E[XY] = E[X]\\,E[Y]$ is true for independent variables and is met early. Applied without independence, it turns every covariance into $0$.
-
-How to check: $\\operatorname{Cov}(X, X)$ must equal $\\operatorname{Var}(X)$, and for this coin $\\operatorname{Var}(X) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$, not $0$.
-
-**Dividing by the variances**
-
-The correlation is computed with the two variances in the denominator instead of the two standard deviations.
-
-Wrong working, with $\\operatorname{Cov}(X, Y) = 3$, $\\operatorname{Var}(X) = 4$ and $\\operatorname{Var}(Y) = 9$:
-$$\\rho_{XY} = \\frac{3}{4 \\cdot 9} = \\frac{1}{12} \\approx 0.083$$
-
-Right working: $\\sigma_X = \\sqrt{4} = 2$ and $\\sigma_Y = \\sqrt{9} = 3$, so
-$$\\rho_{XY} = \\frac{3}{2 \\cdot 3} = 0.5$$
-
-Why it happens: variances are often the numbers given, and $\\sigma_X\\,\\sigma_Y$ looks like it could be $\\sigma_X^2\\,\\sigma_Y^2$ with the squares left off.
-
-How to check: try $Y = X$, whose correlation must be $1$. With $\\operatorname{Var}(X) = 4$, the right formula gives $\\frac{4}{2 \\cdot 2} = 1$, while the wrong one gives $\\frac{4}{4 \\cdot 4} = 0.25$. The wrong version also changes when the units change, which a correlation never does.`,
+      content:`Four mistakes account for most wrong conclusions drawn from covariance. Three are marked where they happen in the sections above; the first is the one the section on independence warns about. Here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip reads more into covariance than it says. A covariance of $0$ does not give independence, its size depends on the units, $E[XY]$ is not $E[X]\\,E[Y]$ in general, and the correlation divides by the standard deviations, not the variances. Testing one pair of values, changing the units, or trying $Y = X$ catches each slip.`,
       link:'',
     }
   
@@ -1598,8 +1549,81 @@ variable.
     ],
   };
 
+  // MistakeFix batch 16, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-zero-covariance-as-independence', name: `Treating zero covariance as independence`, errorAt: 1,
+        what: `A covariance of $0$ is computed, and the two variables are declared independent.`,
+        wrong: [`Let $X$ take the values $-2, -1, 0, 1, 2$ with probability $\\frac{1}{5}$ each, and let $Y = X^2$.`, `Then $E[X] = 0$ and $E[XY] = E[X^3] = 0$, so
+$$\\operatorname{Cov}(X, Y) = E[XY] - E[X]\\,E[Y]$$
+$$= 0 - 0 \\cdot 2 = 0$$`, `And the conclusion is that $X$ and $Y$ are independent.`],
+        right: [`Let $X$ take the values $-2, -1, 0, 1, 2$ with probability $\\frac{1}{5}$ each, and let $Y = X^2$.`, `$Y$ is fixed by $X$, so they are as dependent as two variables can be. Independence would need $P(X = 0, Y = 0) = P(X = 0)\\,P(Y = 0) = \\frac{1}{5} \\cdot \\frac{1}{5} = \\frac{1}{25}$, but $X = 0$ forces $Y = 0$, so $P(X = 0, Y = 0) = \\frac{1}{5}$. The variables are uncorrelated, not independent.`],
+        why: `The implication "independent, so covariance $0$" is true and is used often, and it is easy to run it backwards.`,
+        check: `Test one pair of values against the product rule $P(X = x, Y = y) = P(X = x)\\,P(Y = y)$. A single pair that fails proves dependence, whatever the covariance is.` },
+      { id: 'judging-strength-by-the-size-of-the-covariance', name: `Judging strength by the size of the covariance`, errorAt: 1,
+        what: `Two covariances are compared, and the larger one is read as the stronger relationship.`,
+        wrong: [`Height and weight have $\\operatorname{Cov} = 0.5$ with height in metres, and study time and exam score have $\\operatorname{Cov} = 20$.`, `Since $20 > 0.5$, study time and score seem far more closely related. With height in centimetres the first covariance becomes $50$, and the ranking reverses.`],
+        right: [`Height and weight have $\\operatorname{Cov} = 0.5$ with height in metres, and study time and exam score have $\\operatorname{Cov} = 20$.`, `Compare correlations. With $\\sigma_H = 0.1$ m and $\\sigma_W = 10$ kg, $\\rho = \\frac{0.5}{0.1 \\cdot 10} = 0.5$; with $\\sigma_T = 5$ hours and $\\sigma_S = 10$ points, $\\rho = \\frac{20}{5 \\cdot 10} = 0.4$. Height and weight are the more strongly related pair, in any units.`],
+        why: `For most quantities a bigger number means more of something, and the units of a covariance, such as metre-kilograms, are rarely written next to it.`,
+        check: `Change the units of one variable. If the comparison flips, it was a comparison of scales, not of relationships. In centimetres, $\\rho = \\frac{50}{10 \\cdot 10} = 0.5$ is unchanged.` },
+      { id: 'splitting-the-expectation-of-a-product', name: `Splitting the expectation of a product`, errorAt: 0,
+        what: `The computational formula $\\operatorname{Cov}(X, Y) = E[XY] - E[X]\\,E[Y]$ is used, and $E[XY]$ is replaced by $E[X]\\,E[Y]$.`,
+        wrong: [`For a fair coin $X \\in \\{0, 1\\}$ and $Y = X$:
+$$E[XY] = E[X]\\,E[Y] = \\frac{1}{2} \\cdot \\frac{1}{2}$$
+$$= \\frac{1}{4},$$
+$$\\operatorname{Cov}(X, Y) = \\frac{1}{4} - \\frac{1}{4} = 0$$`],
+        right: [`Compute $E[XY]$ from the pairs. Here $XY = X^2 = X$, so $E[XY] = \\frac{1}{2}$ and
+$$\\operatorname{Cov}(X, Y) = \\frac{1}{2} - \\frac{1}{4} = \\frac{1}{4}$$`],
+        why: `The rule $E[XY] = E[X]\\,E[Y]$ is true for independent variables and is met early. Applied without independence, it turns every covariance into $0$.`,
+        check: `$\\operatorname{Cov}(X, X)$ must equal $\\operatorname{Var}(X)$, and for this coin $\\operatorname{Var}(X) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$, not $0$.` },
+      { id: 'dividing-by-the-variances', name: `Dividing by the variances`, errorAt: 0,
+        what: `The correlation is computed with the two variances in the denominator instead of the two standard deviations.`,
+        wrong: [`With $\\operatorname{Cov}(X, Y) = 3$, $\\operatorname{Var}(X) = 4$ and $\\operatorname{Var}(Y) = 9$:
+$$\\rho_{XY} = \\frac{3}{4 \\cdot 9} = \\frac{1}{12} \\approx 0.083$$`],
+        right: [`$\\sigma_X = \\sqrt{4} = 2$ and $\\sigma_Y = \\sqrt{9} = 3$, so
+$$\\rho_{XY} = \\frac{3}{2 \\cdot 3} = 0.5$$`],
+        why: `Variances are often the numbers given, and $\\sigma_X\\,\\sigma_Y$ looks like it could be $\\sigma_X^2\\,\\sigma_Y^2$ with the squares left off.`,
+        check: `Try $Y = X$, whose correlation must be $1$. With $\\operatorname{Var}(X) = 4$, the right formula gives $\\frac{4}{2 \\cdot 2} = 1$, while the wrong one gives $\\frac{4}{4 \\cdot 4} = 0.25$. The wrong version also changes when the units change, which a correlation never does.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Definition', formula: '$\\operatorname{Cov}(X, Y) = E\\!\\left[(X - \\mu_X)(Y - \\mu_Y)\\right]$', note: 'extends variance from one variable to a pair',
+        sub: 'The average product of the two deviations from the means, from [what covariance describes](!#2).' },
+      { name: 'Symmetry', formula: '$\\operatorname{Cov}(X, Y) = \\operatorname{Cov}(Y, X)$', note: "order of the variables doesn't matter",
+        sub: 'The product in [the definition](!#2) reads the same in either order.' },
+      { name: 'Self-covariance', formula: '$\\operatorname{Cov}(X, X) = \\operatorname{Var}(X)$', note: 'pairing a variable with itself recovers its variance',
+        sub: 'Both deviations become the same, so [the definition](!#2) turns into the variance.' },
+      { name: 'Positive covariance', formula: '$\\operatorname{Cov}(X, Y) > 0$', note: 'both variables tend to be above (or below) their averages together',
+        sub: 'One of the three cases in [interpreting the sign of covariance](!#3).' },
+      { name: 'Negative covariance', formula: '$\\operatorname{Cov}(X, Y) < 0$', note: 'one variable above its average tends to occur with the other below its average',
+        sub: 'The opposite case, from [interpreting the sign](!#3).' },
+      { name: 'Zero covariance', formula: '$\\operatorname{Cov}(X, Y) = 0$', note: 'no consistent linear relationship; non-linear dependence may still exist',
+        sub: 'The third case of [interpreting the sign](!#3).' },
+      { name: 'Independence', formula: '$X, Y$ independent $\\implies \\operatorname{Cov}(X, Y) = 0$', note: 'the converse does **not** hold: zero covariance is not independence',
+        sub: 'Only one direction holds, as [covariance and independence](!#4) shows.' },
+      { name: 'What it captures', formula: 'direction (not strength) of the linear relationship', note: 'magnitude depends on the units; normalize via correlation $\\rho$ for scale-free strength',
+        sub: 'The sign is the message and the size is not, as [interpreting the sign](!#3) stresses.' },
+      { name: 'Typical examples', formula: 'height and weight; study time and exam score; temperature and energy use; returns of two assets', note: 'paired numerical quantities recorded from the same observations',
+        sub: 'Each pair is discussed, with its units, in [common examples of covariance](!#6).' },
+      { name: 'Leads to', formula: 'correlation coefficient $\\rho$; covariance matrices; joint distributions', note: 'basis for multivariate models, linear regression, and portfolio theory',
+        sub: '[What comes next](!#8) defines $\\displaystyle \\rho_{XY} = \\frac{\\operatorname{Cov}(X, Y)}{\\sigma_X\\,\\sigma_Y}$, which always lies between $-1$ and $1$.' },
+    ],
+  };
+
   return {
     props: {
+    formulaSummaryData,
+    pitfallData,
       sectionsContent,
       covarianceSignCases,
       introContent,
@@ -1624,7 +1648,7 @@ const siteTheme = {
   panelSoft: '#eff6ff', panelSofter: '#f8fafc',
 }
 
-export default function CovariancePage({seoData, sectionsContent, introContent, covarianceSignCases, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function CovariancePage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, covarianceSignCases, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1812,7 +1836,7 @@ $$\\operatorname{Cov}(aX + b,\\; cY + d) = ac\\,\\operatorname{Cov}(X, Y)$$
 
 @academic[pitfall,aside:true,width:35%:Splitting the expectation of a product
 Replacing $E[XY]$ by $E[X]\\,E[Y]$ without independence makes every covariance $0$. For a fair coin $X \\in \\{0, 1\\}$ and $Y = X$: $E[XY] = \\frac{1}{2}$ and $E[X]\\,E[Y] = \\frac{1}{4}$, so $\\operatorname{Cov}(X, Y) = \\frac{1}{4}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-expectation-of-a-product)]@
 
 The computational formula is the version used with tables of paired data. The first term, $E[XY]$, is the average of the products of the paired values, taken observation by observation. The second, $E[X]\\,E[Y]$, is the product of two separate averages, each computed from one variable on its own.
 
@@ -1834,8 +1858,16 @@ The two terms are built from different information: one keeps track of which val
         link:sectionsContent.capstone.link,
         content:[
           sectionsContent.capstone.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="covariance-formula-summary"
+            title="Covariance formulas"
+            source="/probability/covariance"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.capstone.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1844,6 +1876,15 @@ The two terms are built from different information: one keeps track of which val
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="covariance-pitfalls"
+            title="Common pitfalls with covariance"
+            source="/probability/covariance"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -17,6 +17,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -578,9 +579,23 @@ $$\\text{so } \\log_{1/2}(2) > \\log_{1/2}(4)$$`],
         check: `Substitute the answer into the original equation. $x = 8$ gives $\\log_3(8) + \\log_3(2) = \\log_3(16)$, not $\\log_3(10)$. $x = 5$ gives $\\log_3(5) + \\log_3(2) = \\log_3(10)$.` },
     ],
   };
+  // TheoremCard data (log-one-to-one-card); every fact is from the section text
+  const oneToOneLogCard = {
+    header: { kicker: 'Logarithm properties', title: 'The one-to-one property', lede: 'Click the hypothesis to see what it does and what breaks without it.' },
+    theorem: {
+      hypotheses: [
+        { text: '$\\log_a(M) = \\log_a(N)$: a single logarithm on each side, same base', job: 'Exactly the form the property needs; the arguments can then be set equal.',
+          counter: 'Dropping the logarithms from $\\log_3(x) + \\log_3(2) = \\log_3(10)$ term by term gives $x + 2 = 10$, so $x = 8$, but $\\log_3(8) + \\log_3(2) = \\log_3(16)$. Condensed first, $\\log_3(2x) = \\log_3(10)$, so $x = 5$.' },
+      ],
+      conclusion: '$M = N$',
+      meaning: 'Logarithmic functions are strictly monotonic, so they cannot assign the same output to two different inputs. $\\log_3(2x + 1) = \\log_3(x + 5)$ gives $2x + 1 = x + 5$, so $x = 4$.',
+    },
+  };
+
 
 return {
   props: {
+      oneToOneLogCard,
     pitfallData,
     logPropertyCards,
     logMonotonicityCases,
@@ -606,7 +621,9 @@ return {
 // export default function PropertiesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PropertiesPage({ pitfallData,logPropertyCards, logMonotonicityCases, 
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function PropertiesPage({oneToOneLogCard,  pitfallData,logPropertyCards, logMonotonicityCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -735,6 +752,16 @@ Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the
           sectionsContent.obj4.content,
           <div key={'unit-oneToOne'} dangerouslySetInnerHTML={{ __html: demoUnits.oneToOne }} />,
           `Equating arguments is always valid for log_a; what needs care is the equation that follows when the argument, as a function of x, is not one-to-one.`,
+          <DiagramFrame
+            key={'obj4-theorem'}
+            id="log-one-to-one-card"
+            title="The one-to-one property of logarithms"
+            source="/algebra/logarithms/properties"
+            before={`One hypothesis carries the technique. Drop it to see what goes wrong when the sides are not single logarithms yet.`}
+            after={`Condense first, then equate the arguments.`}
+          >
+            <TheoremCard data={oneToOneLogCard} variant="card" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

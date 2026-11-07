@@ -969,6 +969,7 @@ import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/li
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1500,7 +1501,7 @@ Row $1$: $x_1 + 3(-9) - 2(2) = 5$, so $x_1 = 5 + 27 + 4 = 36$.
 
 @academic[pitfall,aside:true,width:35%:Reading the answer straight off the REF
 Taking the last column as the solution gives $x_1 = 5$, $x_2 = -1$, $x_3 = 2$, but row $1$ then reads $5 + 3(-1) - 2(2) = -2 \\neq 5$. The entries above the pivots still have to be cleared by back substitution, which gives $x_1 = 36$, $x_2 = -9$, $x_3 = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-answer-straight-off-the-ref)]@
 
 Each step uses values computed in previous steps. The process requires $n$ substitutions for an $n \\times n$ system with a unique solution. When free variables are present, they appear as unresolved symbols carried through the substitution, producing a parametric expression.`,
     before: ``,
@@ -1546,7 +1547,7 @@ $$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\beg
 
 @academic[pitfall,aside:true,width:35%:Copying the free column without changing sign
 Taking the entries of column $2$ as they stand gives the direction $(2, 1, 0, 0)$, and at $s = 1$ the point $(7, 1, -2, 0)$, where row $1$ gives $7 + 2(1) - 0 = 9 \\neq 5$. Moving $2x_2$ to the right side flips the sign, so the direction is $(-2, 1, 0, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-copying-the-free-column-without-changing-sign)]@
 
 The first vector is a particular solution $\\mathbf{x}_p$. The two direction vectors form a [basis](!/linear-algebra/vector-spaces) for the null space of the coefficient matrix. The solution set is the null space translated by $\\mathbf{x}_p$ — an affine subspace of dimension $2$ in $\\mathbb{R}^4$.
 
@@ -1572,7 +1573,7 @@ The extra column $\\mathbf{b}$ introduces a new pivot that the coefficient matri
 
 @academic[pitfall,aside:true,width:35%:Reading a zero row as a contradiction
 Declaring $\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$ inconsistent because of its zero row gives no solution. That row says $0 = 0$, which every $\\mathbf{x}$ satisfies, and the system has infinitely many solutions, $x_1 = 3 - 2t$, $x_2 = t$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-zero-row-as-a-contradiction)]@
 
 If no such contradictory row appears, the system is consistent. The distinction between unique and infinite solutions then depends on whether free variables exist: rank $= n$ gives a unique solution, rank $< n$ gives infinitely many.`,
     before: ``,
@@ -1611,7 +1612,7 @@ The pivot positions also identify [bases](!/linear-algebra/vector-spaces) for th
 
 @academic[pitfall,aside:true,width:35%:Taking basis columns from the reduced matrix
 For $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, with reduced form $\\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$, taking pivot column $1$ of the reduced form gives $(1, 0)$, which is not in $\\text{Col}(A)$ at all. The basis is column $1$ of $A$ itself, $(1, 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-basis-columns-from-the-reduced-matrix)]@
 
 Each basis is read after the same single reduction. The reduction locates the pivots, and that one list of positions then serves the column space, the row space and the null space. What differs from one basis to the next is the matrix the vectors are copied from, and that choice follows from how row operations act on rows and on columns.`,
     before: ``,
@@ -1627,66 +1628,9 @@ Each basis is read after the same single reduction. The reduction locates the pi
   },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Four mistakes cause many wrong answers when solutions and bases are read from an echelon form. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the answer straight off the REF**
-
-The last column of a row echelon form is taken as the solution, as if the matrix were already reduced. In REF a pivot row can still hold entries in the columns of later pivots, so the last column is not yet the answer.
-
-Wrong working: for the system of the worked example,
-$$\\left(\\begin{array}{ccc|c} 1 & 3 & -2 & 5 \\\\ 0 & 1 & 4 & -1 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right) \\quad \\Longrightarrow \\quad x_1 = 5, \\; x_2 = -1, \\; x_3 = 2$$
-
-Right working: solve from the bottom row upward.
-$$x_3 = 2, \\qquad x_2 = -1 - 4(2) = -9, \\qquad x_1 = 5 - 3(-9) + 2(2) = 36$$
-
-Why it happens: in RREF the last column really is the solution, and the two forms look alike at a glance. The difference sits in the entries above the pivots, which REF does not clear.
-
-How to check: substitute into the first row. The wrong values give $5 + 3(-1) - 2(2) = -2$, not $5$; the right ones give $36 + 3(-9) - 2(2) = 5$.
-
-**Copying the free column without changing sign**
-
-When a direction vector is built for a free variable, the entries of its column in the RREF are copied into the vector as they stand. Those entries sit on the left side of the equations, and moving them to the right side changes their sign.
-
-Wrong working: for the RREF
-$$\\left(\\begin{array}{cccc|c} 1 & 2 & 0 & -1 & 5 \\\\ 0 & 0 & 1 & 3 & -2 \\end{array}\\right)$$
-copying columns $2$ and $4$ gives
-$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} -1 \\\\ 0 \\\\ 3 \\\\ 1 \\end{pmatrix}$$
-
-Right working: write each row as an equation and solve for its pivot variable, $x_1 = 5 - 2s + t$ and $x_3 = -2 - 3t$. The coefficients of $s$ and $t$ are the free-column entries with the sign changed:
-$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} -2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 1 \\\\ 0 \\\\ -3 \\\\ 1 \\end{pmatrix}$$
-
-Why it happens: the particular solution is copied from the last column with no change of sign, because those entries already sit on the right side. The same copying is then applied to the free columns, whose entries sit on the left.
-
-How to check: every direction vector must solve the homogeneous system. The wrong vector $(2, 1, 0, 0)$ gives $2 + 2(1) - 0 = 4$ in row $1$, not $0$; the right one gives $-2 + 2(1) - 0 = 0$.
-
-**Reading a zero row as a contradiction**
-
-A row of zeros in the reduced augmented matrix is taken as a sign that the system has no solution. Only a row with zeros on the left of the bar and a nonzero entry on the right is a contradiction.
-
-Wrong working:
-$$\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right) \\quad \\Longrightarrow \\quad \\text{a zero row, so no solution}$$
-
-Right working: the second row is the equation $0x_1 + 0x_2 = 0$, true for every $\\mathbf{x}$. Only the first row constrains the unknowns, $x_1 + 2x_2 = 3$. Column $2$ is free, so $x_2 = t$ and $x_1 = 3 - 2t$, infinitely many solutions. In rank terms, $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = 1 < 2$.
-
-Why it happens: the contradiction row $[0 \\; \\cdots \\; 0 \\mid d]$ and the zero row look almost the same, and both turn up at the bottom of the matrix. The difference is one entry, the one to the right of the bar.
-
-How to check: look only at the last entry of each row whose coefficients are all zero. If it is $0$, the row can be dropped; if it is nonzero, the system is inconsistent.
-
-**Taking basis columns from the reduced matrix**
-
-The pivot columns of the reduced form are used as a basis for the column space of $A$. Row operations preserve which columns depend on which, but they change the columns themselves, so the reduced columns need not lie in $\\text{Col}(A)$.
-
-Wrong working:
-$$A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix} \\sim \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix} \\quad \\Longrightarrow \\quad \\text{basis } \\left\\{ \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} \\right\\}$$
-
-Right working: the only pivot is in column $1$, so the basis is column $1$ of the original $A$:
-$$\\text{Col}(A) = \\text{span}\\left\\{ \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\right\\}$$
-
-Why it happens: for the row space the reduced rows are the right answer, and the two rules look symmetric. They are not, because row operations preserve the row space but not the column space.
-
-How to check: every column of $A$ must be a combination of the basis vectors. Column $1$ of $A$, $(1, 2)$, is not a multiple of $(1, 0)$, while both columns of $A$ are multiples of $(1, 2)$.`,
+    content: `Four mistakes cause many wrong answers when solutions and bases are read from an echelon form. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip reads an echelon form for more than it shows. A row echelon form still needs back substitution, a free column enters the direction vector with its sign changed, a zero row is a contradiction only when its last entry is nonzero, and a basis for the column space comes from the pivot columns of the original matrix. Substituting into the original rows catches each slip.`,
     link: ``,
   },
 }
@@ -1907,8 +1851,54 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-answer-straight-off-the-ref', name: `Reading the answer straight off the REF`, errorAt: 0,
+        what: `The last column of a row echelon form is taken as the solution, as if the matrix were already reduced. In REF a pivot row can still hold entries in the columns of later pivots, so the last column is not yet the answer.`,
+        wrong: [`For the system of the worked example,
+$$\\left(\\begin{array}{ccc|c} 1 & 3 & -2 & 5 \\\\ 0 & 1 & 4 & -1 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$
+$$\\Longrightarrow$$
+$$x_1 = 5, \\; x_2 = -1, \\; x_3 = 2$$`],
+        right: [`Solve from the bottom row upward.`, `$$x_3 = 2,$$
+$$x_2 = -1 - 4(2) = -9,$$
+$$x_1 = 5 - 3(-9) + 2(2) = 36$$`],
+        why: `In RREF the last column really is the solution, and the two forms look alike at a glance. The difference sits in the entries above the pivots, which REF does not clear.`,
+        check: `Substitute into the first row. The wrong values give $5 + 3(-1) - 2(2) = -2$, not $5$; the right ones give $36 + 3(-9) - 2(2) = 5$.` },
+      { id: 'copying-the-free-column-without-changing-sign', name: `Copying the free column without changing sign`, errorAt: 0,
+        what: `When a direction vector is built for a free variable, the entries of its column in the RREF are copied into the vector as they stand. Those entries sit on the left side of the equations, and moving them to the right side changes their sign.`,
+        wrong: [`For the RREF
+$$\\left(\\begin{array}{cccc|c} 1 & 2 & 0 & -1 & 5 \\\\ 0 & 0 & 1 & 3 & -2 \\end{array}\\right)$$`, `Copying columns $2$ and $4$ gives
+$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} -1 \\\\ 0 \\\\ 3 \\\\ 1 \\end{pmatrix}$$`],
+        right: [`Write each row as an equation and solve for its pivot variable, $x_1 = 5 - 2s + t$ and $x_3 = -2 - 3t$. The coefficients of $s$ and $t$ are the free-column entries with the sign changed:
+$$\\mathbf{x} = \\begin{pmatrix} 5 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} -2 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 1 \\\\ 0 \\\\ -3 \\\\ 1 \\end{pmatrix}$$`],
+        why: `The particular solution is copied from the last column with no change of sign, because those entries already sit on the right side. The same copying is then applied to the free columns, whose entries sit on the left.`,
+        check: `Every direction vector must solve the homogeneous system. The wrong vector $(2, 1, 0, 0)$ gives $2 + 2(1) - 0 = 4$ in row $1$, not $0$; the right one gives $-2 + 2(1) - 0 = 0$.` },
+      { id: 'reading-a-zero-row-as-a-contradiction', name: `Reading a zero row as a contradiction`, errorAt: 0,
+        what: `A row of zeros in the reduced augmented matrix is taken as a sign that the system has no solution. Only a row with zeros on the left of the bar and a nonzero entry on the right is a contradiction.`,
+        wrong: [`$$\\left(\\begin{array}{cc|c} 1 & 2 & 3 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
+$$\\Longrightarrow$$
+$$\\text{a zero row, so no solution}$$`],
+        right: [`The second row is the equation $0x_1 + 0x_2 = 0$, true for every $\\mathbf{x}$. Only the first row constrains the unknowns, $x_1 + 2x_2 = 3$. Column $2$ is free, so $x_2 = t$ and $x_1 = 3 - 2t$, infinitely many solutions. In rank terms, $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = 1 < 2$.`],
+        why: `The contradiction row $[0 \\; \\cdots \\; 0 \\mid d]$ and the zero row look almost the same, and both turn up at the bottom of the matrix. The difference is one entry, the one to the right of the bar.`,
+        check: `Look only at the last entry of each row whose coefficients are all zero. If it is $0$, the row can be dropped; if it is nonzero, the system is inconsistent.` },
+      { id: 'taking-basis-columns-from-the-reduced-matrix', name: `Taking basis columns from the reduced matrix`, errorAt: 0,
+        what: `The pivot columns of the reduced form are used as a basis for the column space of $A$. Row operations preserve which columns depend on which, but they change the columns themselves, so the reduced columns need not lie in $\\text{Col}(A)$.`,
+        wrong: [`$$A$$
+$$= \\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix} \\sim \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$$
+$$\\Longrightarrow$$
+$$\\text{basis } \\left\\{ \\begin{pmatrix} 1 \\\\ 0 \\end{pmatrix} \\right\\}$$`],
+        right: [`The only pivot is in column $1$, so the basis is column $1$ of the original $A$:
+$$\\text{Col}(A) = \\text{span}\\left\\{ \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\right\\}$$`],
+        why: `For the row space the reduced rows are the right answer, and the two rules look symmetric. They are not, because row operations preserve the row space but not the column space.`,
+        check: `Every column of $A$ must be a combination of the basis vectors. Column $1$ of $A$, $(1, 2)$, is not a multiple of $(1, 0)$, while both columns of $A$ are multiples of $(1, 2)$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     parametricBeforeAfter,
     demoUnits,
     conceptIntroFigures,
@@ -1929,7 +1919,7 @@ return {
   }
 }
    }
-export default function EchelonFormPage({
+export default function EchelonFormPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2177,6 +2167,15 @@ Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="echelon-form-pitfalls"
+            title="Common pitfalls with echelon forms"
+            source="/linear-algebra/linear-systems/echelon-form"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

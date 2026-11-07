@@ -25,6 +25,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
 
@@ -585,6 +586,15 @@ obj10: {
       link:'',
   
     },
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary gathers the formulas stated across the page in ten rows. Each row names a rule, with a line on what it says and a link to the section that explains it, then states the rule and checks it on small numbers.
+
+It opens with the definition of one integer dividing another and the basic properties: a number with itself, with one and with zero, chains of divisors, sums, differences and multiples. Then come the division with remainder and the remainder test that computes divisibility, the count of factors read from a prime factorization, and the identity linking the greatest common divisor and the least common multiple, with the formula for the multiple that follows from it.`,
+      before: ``,
+      after: `Divisibility is a yes-or-no question, and these rules answer it without long division wherever they can. The remainder test settles any single case, while the properties carry a known divisor over to sums, multiples and longer chains.`,
+      link: '',
+    },
     obj16:{
       title:`Common Pitfalls`,
       content:`Six mistakes account for many of the wrong answers in divisibility work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -802,8 +812,41 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Rule', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Divisibility', formula: '$a \\mid b$ means $b = a \\cdot k$ for some integer $k$', example: '$3 \\mid 12$, since $12 = 3 \\cdot 4$',
+        sub: 'A yes-or-no statement, not a division that produces a number, as [what divisibility is](!#1) explains.' },
+      { name: 'Itself, one and zero', formula: '$a \\mid a, \\quad 1 \\mid a, \\quad a \\mid 0$', example: '$a = a \\cdot 1, \\; a = 1 \\cdot a, \\; 0 = a \\cdot 0$',
+        sub: 'Every nonzero integer divides itself and $0$, and $1$ divides everything; $0$ divides only $0$, as [the basic properties](!#3) note.' },
+      { name: 'Transitive', formula: 'if $a \\mid b$ and $b \\mid c$, then $a \\mid c$', example: '$3 \\mid 12$ and $12 \\mid 60$, so $3 \\mid 60$',
+        sub: 'A divisor of a divisor divides the number too, one of [the basic properties](!#3).' },
+      { name: 'Sums and differences', formula: 'if $a \\mid b$ and $a \\mid c$, then $a \\mid (b + c)$ and $a \\mid (b - c)$', example: '$4 \\mid 20$ and $4 \\mid 12$, so $4 \\mid 32$ and $4 \\mid 8$',
+        sub: 'A common divisor of two numbers also divides their sum and their difference, from [the basic properties](!#3).' },
+      { name: 'Multiples', formula: 'if $a \\mid b$, then $a \\mid (b \\cdot k)$ for any integer $k$', example: '$3 \\mid 12$, so $3 \\mid 36$ and $3 \\mid 60$',
+        sub: 'A divisor of a number divides all of its multiples, the last of [the basic properties](!#3).' },
+      { name: 'Division with remainder', formula: '$a = n \\cdot q + r, \\qquad 0 \\leq r < n$', example: '$30 = 7 \\cdot 4 + 2$',
+        sub: 'The quotient $q$ and the remainder $r$ for any integers $a$ and $n > 0$; [divisibility and remainders](!#4) reads $n \\mid a$ as the case $r = 0$.' },
+      { name: 'Remainder test', formula: '$n \\mid a$ exactly when $a \\bmod n = 0$', example: '$30 \\bmod 7 = 2$, so $7 \\nmid 30$',
+        sub: 'The computational form of the same statement: divisibility poses the question and modulo computes the answer, as [divisibility and remainders](!#4) puts it.' },
+      { name: 'Number of factors', formula: '$n = p_1^{a_1} \\cdot p_2^{a_2} \\cdots$ has $(a_1 + 1)(a_2 + 1) \\cdots$ factors', example: '$84 = 2^2 \\cdot 3 \\cdot 7$: $(2 + 1)(1 + 1)(1 + 1) = 12$',
+        sub: 'Read straight from the exponents of [the prime factorization](!#8), with $1$ added to each exponent.' },
+      { name: 'GCD and LCM', formula: '$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$', example: '$4 \\cdot 6 = 2 \\cdot 12 = 24$',
+        sub: 'The identity that links the two quantities in [GCD and LCM](!#9).' },
+      { name: 'LCM from the GCD', formula: '$\\displaystyle \\text{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$', example: '$\\displaystyle \\text{lcm}(4, 6) = \\frac{24}{2} = 12$',
+        sub: 'The same identity read the other way: the product is a common multiple, and dividing by the GCD brings it down to the least one ([GCD and LCM](!#9)).' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -832,7 +875,7 @@ fsMainObj6,
 
 
 
-export default function DivisibilityPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, 
+export default function DivisibilityPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj2Table, 
   obj3Table, summaryTable, obj1SvgExact, obj1SvgFails, obj3SvgScale, 
   obj4SvgRemainder, faqQuestions, schemas,fsMainObj6, demoUnits, conceptIntroFigures}) {
 
@@ -1088,6 +1131,24 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="divisibility-formula-summary"
+            title="Divisibility formulas"
+            source="/arithmetic/divisibility"
+            related={false}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

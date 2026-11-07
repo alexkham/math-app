@@ -1299,6 +1299,9 @@ import renderComplexPoints from '@/app/utils/illustrations/complex-numbers/plane
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1921,7 +1924,7 @@ The real components cancel and the imaginary components cancel, leaving zero.
 
 @academic[pitfall,aside:true,width:35%:Making both parts negative
 Reading $-z$ as the number whose two parts are negative leaves $z = -2 - 5i$ unchanged, and $z + z = -4 - 10i \\neq 0$. Flipping each sign gives $-z = 2 + 5i$.
-[Read more](!#10)]@
+[Read more](!#pitfall-making-both-parts-negative)]@
 
 Consider $z = 3 + 2i$. The additive inverse is $-z = -3 - 2i$. Adding them: $(3 + 2i) + (-3 - 2i) = 0$. For $z = -4 + 5i$, the inverse is $-z = 4 - 5i$. The signs of both components flip. For $z = -1 - 7i$, the inverse is $-z = 1 + 7i$. A number in the third quadrant has its inverse in the first quadrant, and vice versa.
 
@@ -1982,7 +1985,7 @@ Both $z$ and $-z$ lie at the same distance from the origin. They occupy opposite
 
 @academic[pitfall,aside:true,width:35%:Pulling the minus out of the modulus
 Writing $|-z| = -|z|$ for $z = 3 + 4i$ gives $|-3 - 4i| = -5$, a negative distance. The modulus ignores the signs: $|-3 - 4i| = \\sqrt{9 + 16} = 5$.
-[Read more](!#10)]@
+[Read more](!#pitfall-pulling-the-minus-out-of-the-modulus)]@
 
 The modulus is computed from the squares $a^2$ and $b^2$, and squaring erases the sign of each part. Negating $z$ changes both signs at once, yet the two squares under the root, and with them the distance from the origin, stay exactly as they were.
 
@@ -2157,6 +2160,15 @@ Uniqueness justifies the notation $-z$. If multiple inverses existed, writing $-
 
 
 
+formulaSummary: {
+  title: `Formula Summary`,
+  content: `This summary collects the formulas for the additive inverse of a complex number in three families, shown one at a time with the buttons above the cards. Each card gives a formula with a line on what it says and a link to the section that explains it.
+
+The first family defines the negative, which flips the sign of both parts and adds to the number to give zero. The second places it in the plane, at the same distance from the origin and half a turn round. The last gathers the rules: a double negative, the negative of a sum, the swap with the conjugate, and subtraction as adding the negative.`,
+  before: ``,
+  after: `Every formula here comes from flipping both signs. When a result looks doubtful, check it against the picture: the negative sits exactly opposite the number, through the origin and at the same distance, while the conjugate flips only the imaginary part.`,
+  link: '',
+},
 obj10: {
   title: `Common Mistakes`,
   content: `Several errors appear repeatedly when students work with additive inverses of complex numbers. Recognizing these patterns helps avoid them.
@@ -2174,33 +2186,9 @@ $$(5 + 2i) + (-3 + 4i) = 2 + 6i$$]@
 
 A common error is writing $(5 + 2i) - (3 - 4i) = 5 + 2i - 3 - 4i = 2 - 2i$, forgetting that subtracting $-4i$ means adding $+4i$. Distributing the negative sign completely — to both the real and imaginary parts of the subtracted number — eliminates this mistake.
 
-When in doubt, write out the additive inverse explicitly before combining terms. Converting $z_1 - z_2$ to $z_1 + (-z_2)$ and computing $-z_2$ as a separate step reduces errors.
-
-**Making both parts negative**
-
-The minus in $-z$ is read as an instruction to make both parts negative, rather than to change the sign of each part. A number whose parts are already negative is then left as it is, and a number with one negative part gets only its other part changed.
-
-Wrong working: for $z = -2 - 5i$, both parts are already negative, so $-z = -2 - 5i$.
-
-Right working: $-z = -(-2) - (-5)i = 2 + 5i$, and $(-2 - 5i) + (2 + 5i) = 0$.
-
-Why it happens: the formula $-z = -a - bi$ shows two minus signs, which suggests that the inverse always has negative parts. The minus signs act on $a$ and $b$, and when these are negative, the parts of $-z$ come out positive.
-
-How to check: add the result to $z$. With the wrong answer, $(-2 - 5i) + (-2 - 5i) = -4 - 10i$, not $0$.
-
-**Pulling the minus out of the modulus**
-
-The minus sign of $-z$ is carried outside the modulus bars, so $|-z|$ is written as $-|z|$. The result is a negative number, which cannot be a distance.
-
-Wrong working: for $z = 3 + 4i$, $|-z| = -|z| = -\\sqrt{9 + 16} = -5$.
-
-Right working: $-z = -3 - 4i$, so $|-z| = \\sqrt{(-3)^2 + (-4)^2} = \\sqrt{9 + 16} = 5 = |z|$.
-
-Why it happens: in ordinary algebra a factor of $-1$ is often moved to the front of an expression, and the same move is tried on the modulus. The modulus of a product is the product of the moduli, so $|-z| = |-1| \\cdot |z| = |z|$, because $|-1| = 1$, not $-1$.
-
-How to check: a modulus is never negative, so any negative value for $|-z|$ is wrong at once.`,
+When in doubt, write out the additive inverse explicitly before combining terms. Converting $z_1 - z_2$ to $z_1 + (-z_2)$ and computing $-z_2$ as a separate step reduces errors.`,
   before: ``,
-  after: ``,
+  after: `Both slips forget what $-z$ is: the number that adds to $z$ to give $0$. It flips the sign of both parts, whatever those signs are, and it lies at the same distance from the origin, so $|-z| = |z|$. Adding the answer to $z$, and remembering that a modulus is never negative, catches both.`,
   link: '',
 },
 
@@ -2407,8 +2395,50 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'making-both-parts-negative', name: `Making both parts negative`, errorAt: 1,
+        what: `The minus in $-z$ is read as an instruction to make both parts negative, rather than to change the sign of each part. A number whose parts are already negative is then left as it is, and a number with one negative part gets only its other part changed.`,
+        wrong: [`For $z = -2 - 5i$,`, `Both parts are already negative, so $-z = -2 - 5i$.`],
+        right: [`For $z = -2 - 5i$,`, `$-z = -(-2) - (-5)i = 2 + 5i$, and $(-2 - 5i) + (2 + 5i) = 0$.`],
+        why: `The formula $-z = -a - bi$ shows two minus signs, which suggests that the inverse always has negative parts. The minus signs act on $a$ and $b$, and when these are negative, the parts of $-z$ come out positive.`,
+        check: `Add the result to $z$. With the wrong answer, $(-2 - 5i) + (-2 - 5i) = -4 - 10i$, not $0$.` },
+      { id: 'pulling-the-minus-out-of-the-modulus', name: `Pulling the minus out of the modulus`, errorAt: 1,
+        what: `The minus sign of $-z$ is carried outside the modulus bars, so $|-z|$ is written as $-|z|$. The result is a negative number, which cannot be a distance.`,
+        wrong: [`For $z = 3 + 4i$,`, `$|-z| = -|z| = -\\sqrt{9 + 16} = -5$.`],
+        right: [`For $z = 3 + 4i$,`, `$-z = -3 - 4i$, so $|-z| = \\sqrt{(-3)^2 + (-4)^2} = \\sqrt{9 + 16} = 5 = |z|$.`],
+        why: `In ordinary algebra a factor of $-1$ is often moved to the front of an expression, and the same move is tried on the modulus. The modulus of a product is the product of the moduli, so $|-z| = |-1| \\cdot |z| = |z|$, because $|-1| = 1$, not $-1$.`,
+        check: `A modulus is never negative, so any negative value for $|-z|$ is wrong at once.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'definition', name: 'Definition', sub: 'What the negative of a complex number is.', pairs: [
+        [{ formula: '$-z = -a - bi$', text: 'For $z = a + bi$, both the real and the imaginary part change sign, as [the additive inverse of a complex number](!#2) defines it.' },
+         { formula: '$z + (-z) = 0$', text: 'A number plus its negative gives zero, the property that makes it the inverse, from [the same section](!#2).' }],
+      ] },
+      { id: 'plane', name: 'In the plane', sub: 'Where the negative sits compared with the number.', pairs: [
+        [{ formula: '$|-z| = |z|$', text: 'The negative lies at the same distance from the origin, as [the geometric interpretation](!#4) shows.' },
+         { formula: '$\\arg(-z) = \\arg(z) + \\pi$', text: 'Its angle is half a turn more, so $-z$ is $z$ reflected through the origin ([geometric interpretation](!#4)).' }],
+      ] },
+      { id: 'rules', name: 'Rules', sub: 'How the negative combines with other operations.', pairs: [
+        [{ formula: '$-(-z) = z$', text: 'Taking the negative twice gives the number back, from [properties of additive inverse](!#5).' },
+         { formula: '$-(z_1 + z_2) = -z_1 - z_2$', text: 'The negative of a sum is the sum of the negatives, as [the properties](!#5) show.' }],
+        [{ formula: '$-\\overline{z} = \\overline{-z}$', text: 'Negating and taking the conjugate give the same result in either order, from [properties of additive inverse](!#5).' },
+         { formula: '$z_1 - z_2 = z_1 + (-z_2)$', text: 'Subtracting a number means adding its negative, as [connection to subtraction](!#8) shows.' }],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2432,7 +2462,7 @@ const schemas = {
 
 
 
-export default function AdditiveInversePage({
+export default function AdditiveInversePage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2474,7 +2504,7 @@ export default function AdditiveInversePage({
           `Flipping only the imaginary sign cancels the $-5i$ but doubles the $-2$. Flipping only the real sign does the opposite. "Make both parts negative" sounds like flipping both, but $-2 - 5i$ is already negative in both parts, so it is left unchanged and the sum simply doubles.`,
           `@academic[pitfall,aside:true,width:35%:Making both parts negative
 Reading $-z$ as the number whose two parts are negative leaves $z = -2 - 5i$ unchanged, and $z + z = -4 - 10i \\neq 0$. Flipping each sign gives $-z = 2 + 5i$.
-[Read more](!#10)]@`,
+[Read more](!#pitfall-making-both-parts-negative)]@`,
           `The real components cancel and the imaginary components cancel, leaving zero.`,
         ],
       },
@@ -2640,6 +2670,24 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="additive-inverse-formula-summary"
+            title="Additive inverse formulas"
+            source="/complex-numbers/additive-inverse"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'10',
         title:sectionsContent.obj10.title,
         link:sectionsContent.obj10.link,
@@ -2650,6 +2698,15 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj10Table }}
           />,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="additive-inverse-pitfalls"
+            title="Common pitfalls with the additive inverse"
+            source="/complex-numbers/additive-inverse"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

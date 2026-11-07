@@ -728,6 +728,8 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1220,22 +1222,9 @@ The errors above share a common pattern: confusing what the theorem says about l
 
     misconceptionsMore:{
   title:``,
-  content:`
-**Expecting the count of heads to even out**
-
-The law is read as a statement about the number of heads: as the flips go on, the count is expected to come closer and closer to exactly half the number of flips.
-
-Wrong working: from $\\frac{H_n}{n} \\to \\frac{1}{2}$, where $H_n$ is the number of heads in $n$ flips, conclude that $H_n - \\frac{n}{2}$ shrinks toward $0$, so that after $10{,}000$ flips the count should sit closer to $5{,}000$ than it sat to $50$ after $100$ flips.
-
-Right working: $H_n$ has variance $n \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{n}{4}$, so its distance from $\\frac{n}{2}$ has standard deviation $\\frac{\\sqrt{n}}{2}$:
-$$n = 100: \\ \\frac{\\sqrt{100}}{2} = 5, \\qquad n = 10{,}000: \\ \\frac{\\sqrt{10{,}000}}{2} = 50$$
-The share $\\frac{H_n}{n}$ has standard deviation $\\frac{1}{2\\sqrt{n}}$, which falls from $0.05$ to $0.005$. The typical gap in the count grows tenfold while the gap in the share shrinks tenfold.
-
-Why it happens: "the average settles at 0.5" sounds like "heads and tails balance out". The law divides by $n$, and that division is what makes the deviation small.
-
-How to check: at $n = 10{,}000$, two standard deviations of the count is $2 \\cdot 50 = 100$ heads, so the count usually lands anywhere from $4{,}900$ to $5{,}100$. As a share that same range is only $0.49$ to $0.51$.`,
+  content:`One more mistake is worked through here in full, with the wrong and the right working side by side.`,
   before:``,
-  after:``,
+  after: `The law of large numbers is about the proportion of heads, not their number. The proportion $\\frac{H_n}{n}$ settles at $\\frac{1}{2}$, while the count $H_n$ typically lies further and further from $\\frac{n}{2}$ as $n$ grows, by about $\\frac{\\sqrt{n}}{2}$. Comparing the spread of the count at a large $n$ catches the slip.`,
   link:'',
 },
 
@@ -1579,8 +1568,24 @@ This page presents the formal statement of the theorem, clarifies what kind of c
     footnote: 'The LLN tells **where** the mean goes; the CLT tells **the shape of the path**.',
   };
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.misconceptionsMore into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'expecting-the-count-of-heads-to-even-out', name: `Expecting the count of heads to even out`, errorAt: 0,
+        what: `The law is read as a statement about the number of heads: as the flips go on, the count is expected to come closer and closer to exactly half the number of flips.`,
+        wrong: [`From $\\frac{H_n}{n} \\to \\frac{1}{2}$, where $H_n$ is the number of heads in $n$ flips, conclude that $H_n - \\frac{n}{2}$ shrinks toward $0$, so that after $10{,}000$ flips the count should sit closer to $5{,}000$ than it sat to $50$ after $100$ flips.`],
+        right: [`$H_n$ has variance $n \\cdot \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{n}{4}$, so its distance from $\\frac{n}{2}$ has standard deviation $\\frac{\\sqrt{n}}{2}$:
+$$n = 100: \\ \\frac{\\sqrt{100}}{2} = 5,$$
+$$n = 10{,}000: \\ \\frac{\\sqrt{10{,}000}}{2} = 50$$`, `The share $\\frac{H_n}{n}$ has standard deviation $\\frac{1}{2\\sqrt{n}}$, which falls from $0.05$ to $0.005$. The typical gap in the count grows tenfold while the gap in the share shrinks tenfold.`],
+        why: `"the average settles at 0.5" sounds like "heads and tails balance out". The law divides by $n$, and that division is what makes the deviation small.`,
+        check: `At $n = 10{,}000$, two standard deviations of the count is $2 \\cdot 50 = 100$ heads, so the count usually lands anywhere from $4{,}900$ to $5{,}100$. As a share that same range is only $0.49$ to $0.51$.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     llnCltComparison,
     demoUnits,
     conceptIntroFigures,
@@ -1604,7 +1609,7 @@ This page presents the formal statement of the theorem, clarifies what kind of c
     }
    }
 
-export default function LargeNumbersLawPage({llnCltComparison, 
+export default function LargeNumbersLawPage({ pitfallData,llnCltComparison, 
   seoData,
   sectionsContent,
   introContent,
@@ -1733,7 +1738,7 @@ Unlike the [Central Limit Theorem](!/probability/central-limit-theorem), finite 
           `Run it again and the early paths change completely; the place they settle does not.`,
           `@academic[pitfall,aside:true,width:35%:Expecting the count of heads to even out
 Expecting the number of heads to close in on $\\frac{n}{2}$ confuses the count with the share. The count's distance from $\\frac{n}{2}$ has standard deviation $\\frac{\\sqrt{n}}{2}$: $5$ at $n = 100$, $50$ at $n = 10{,}000$. Only the share's gap shrinks, from $0.05$ to $0.005$.
-[Read more](!#7)]@
+[Read more](!#pitfall-expecting-the-count-of-heads-to-even-out)]@
 
 The curves in the figure follow the share of heads: the number of heads so far divided by the number of flips. The number of heads itself is a different quantity. After $n$ flips its mean is $\\frac{n}{2}$, and every new flip still moves it by a full unit, no matter how long the run has been.
 
@@ -1796,6 +1801,15 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
                   <div key={'unit-llnDilution'} dangerouslySetInnerHTML={{ __html: demoUnits.llnDilution }} />,
             `The surplus of 5 heads is still expected at n = 1000; it is just 0.5% of the flips.`,
             sectionsContent.misconceptionsMore.content,
+            <DiagramFrame
+              key={'misconceptionsMore-mistakes'}
+              id="law-of-large-numbers-pitfalls"
+              title="Common pitfalls with the law of large numbers"
+              source="/probability/large-numbers-law"
+              after={sectionsContent.misconceptionsMore.after}
+            >
+              <MistakeFix data={pitfallData} variant="trace" />
+            </DiagramFrame>,
         ]
     },
     {

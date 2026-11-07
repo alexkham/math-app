@@ -715,6 +715,9 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/diceSampleSpaceDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1246,7 +1249,7 @@ $$P(\\emptyset) = 0$$
 
 @academic[pitfall,aside:true,width:35%:Adding probabilities of overlapping events
 Adding $P(A) + P(B)$ for $A$ = first die shows 6 and $B$ = second die shows 6 gives $\\frac{6}{36} + \\frac{6}{36} = \\frac{12}{36}$, counting the outcome $(6, 6)$ twice. Subtracting $P(A \\cap B) = \\frac{1}{36}$ gives $\\frac{11}{36}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-probabilities-of-overlapping-events)]@
 
 The two-event union rule applies to any pair of events, whether or not they share outcomes. Its last term, $P(A \\cap B)$, is the probability of the outcomes the two events have in common. For disjoint events that term is $0$, and the rule reduces to Axiom 3.
 
@@ -1276,7 +1279,7 @@ The probability axioms are intentionally minimal. They impose consistency, but t
 
 @academic[pitfall,aside:true,width:35%:Assuming outcomes are equally likely
 Treating the 11 possible sums of two dice as equally likely gives $P(\\text{sum} = 7) = \\frac{1}{11}$. The equally likely outcomes are the 36 ordered pairs, and six of them sum to 7, so $P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-assuming-outcomes-are-equally-likely)]@
 
 This section is crucial because it separates what probability **requires** from what is often **assumed**. Many misunderstandings arise from attributing extra meaning to the axioms that they do not contain. The table below collects each non-assumption alongside what it means and where the corresponding assumption must come from if a model needs it.
 `,
@@ -1351,39 +1354,20 @@ The three probability axioms are minimal in form, yet through logical inference 
       before:``,
       after:``,
     },
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary lists the three axioms of probability and the rules that follow from them, one row each. Every row gives the name of the rule with a line on where it comes from and a link to its section, the rule in symbols, and what it says in words.
+
+The first four rows are the axioms themselves: probabilities are never negative, the whole sample space has probability one, and disjoint events add, first for two events and then for a countable family. The remaining rows are consequences proved from those axioms alone: the empty event, the complement, monotonicity, the bounds between zero and one, and the union of two overlapping events.`,
+      before: ``,
+      after: `Every rule after the first four is proved, not assumed, so a forgotten consequence can be rebuilt from the axioms by splitting events into disjoint pieces and adding. Any assignment of numbers that breaks one of the three axioms is not a probability model at all.`,
+      link: '',
+    },
     pitfalls:{
       title:`Common Pitfalls`,
-      content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Adding probabilities of overlapping events**
-
-Two events can both happen, but the probability that at least one of them happens is found by adding their probabilities, as if Axiom 3 applied. The outcomes they share are then counted twice.
-
-Wrong working: roll two dice, with $A$ = the first die shows 6 and $B$ = the second die shows 6.
-$$P(A \\cup B) = P(A) + P(B) = \\frac{6}{36} + \\frac{6}{36} = \\frac{12}{36} = \\frac{1}{3}$$
-
-Right working: the outcome $(6, 6)$ lies in both events, so its probability is subtracted once.
-$$P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = \\frac{6}{36} + \\frac{6}{36} - \\frac{1}{36} = \\frac{11}{36}$$
-
-Why it happens: Axiom 3 is the first rule for combining events, and its condition, that the events share no outcome, is easy to drop when the events look unrelated.
-
-How to check: count outcomes directly. The pairs with at least one 6 fill one row and one column of the $6 \\times 6$ grid, which share one cell, so there are $6 + 6 - 1 = 11$ of them. With more rolls the sum gives itself away: adding $\\frac{1}{6}$ once for each of seven rolls gives $\\frac{7}{6}$, more than $1$, which breaks the bound $P(A) \\leq 1$.
-
-**Assuming outcomes are equally likely**
-
-The possible results of an experiment are listed, and each is given the same probability, one over the number of results. Nothing in the axioms says the results are equally likely, and often they are not.
-
-Wrong working: the sum of two dice takes the 11 values $2, 3, \\ldots, 12$, so
-$$P(\\text{sum} = 7) = \\frac{1}{11}$$
-
-Right working: for fair dice the 36 ordered pairs of faces are equally likely. Six of them sum to 7, namely $(1, 6), (2, 5), (3, 4), (4, 3), (5, 2), (6, 1)$, so
-$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$
-
-Why it happens: for a single fair die or coin, every listed result really does have the same probability, and the habit carries over to results built from several outcomes.
-
-How to check: compare two results whose pairs are easy to count. A sum of 2 comes only from $(1, 1)$, while a sum of 7 comes from six pairs, so the two cannot have the same probability: $\\frac{1}{36}$ against $\\frac{6}{36}$.`,
+      content:`Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Both slips go beyond what the axioms say. Axiom 3 adds probabilities only for disjoint events, so overlapping events need their overlap subtracted, and nothing in the axioms makes the outcomes equally likely. Counting the outcomes directly, on the $6 \\times 6$ grid of pairs, catches both.`,
     },
     obj4:{
       title:``,
@@ -1446,8 +1430,64 @@ Everything that follows in probability — conditional probability, independence
     }),
   };
 
+  // MistakeFix batch 16, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'adding-probabilities-of-overlapping-events', name: `Adding probabilities of overlapping events`, errorAt: 0,
+        what: `Two events can both happen, but the probability that at least one of them happens is found by adding their probabilities, as if Axiom 3 applied. The outcomes they share are then counted twice.`,
+        wrong: [`Roll two dice, with $A$ = the first die shows 6 and $B$ = the second die shows 6.`, `$$P(A \\cup B) = P(A) + P(B)$$
+$$= \\frac{6}{36} + \\frac{6}{36} = \\frac{12}{36} = \\frac{1}{3}$$`],
+        right: [`The outcome $(6, 6)$ lies in both events, so its probability is subtracted once.`, `$$P(A \\cup B)$$
+$$= P(A) + P(B) - P(A \\cap B)$$
+$$= \\frac{6}{36} + \\frac{6}{36} - \\frac{1}{36} = \\frac{11}{36}$$`],
+        why: `Axiom 3 is the first rule for combining events, and its condition, that the events share no outcome, is easy to drop when the events look unrelated.`,
+        check: `Count outcomes directly. The pairs with at least one 6 fill one row and one column of the $6 \\times 6$ grid, which share one cell, so there are $6 + 6 - 1 = 11$ of them. With more rolls the sum gives itself away: adding $\\frac{1}{6}$ once for each of seven rolls gives $\\frac{7}{6}$, more than $1$, which breaks the bound $P(A) \\leq 1$.` },
+      { id: 'assuming-outcomes-are-equally-likely', name: `Assuming outcomes are equally likely`, errorAt: 0,
+        what: `The possible results of an experiment are listed, and each is given the same probability, one over the number of results. Nothing in the axioms says the results are equally likely, and often they are not.`,
+        wrong: [`The sum of two dice takes the 11 values $2, 3, \\ldots, 12$, so
+$$P(\\text{sum} = 7) = \\frac{1}{11}$$`],
+        right: [`For fair dice the 36 ordered pairs of faces are equally likely. Six of them sum to 7, namely $(1, 6)$, $(2, 5)$, $(3, 4)$, $(4, 3)$, $(5, 2)$, $(6, 1)$, so
+$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$`],
+        why: `For a single fair die or coin, every listed result really does have the same probability, and the habit carries over to results built from several outcomes.`,
+        check: `Compare two results whose pairs are easy to count. A sum of 2 comes only from $(1, 1)$, while a sum of 7 comes from six pairs, so the two cannot have the same probability: $\\frac{1}{36}$ against $\\frac{6}{36}$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Rule', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it says' },
+    ],
+    rows: [
+      { name: 'Non-negativity', formula: '$P(A) \\ge 0$', says: 'no event can have a negative chance of occurring',
+        sub: 'The first axiom holds for every event $A$, as [Axiom 1](!#axiom1) states.' },
+      { name: 'Normalization', formula: '$P(\\Omega) = 1$', says: 'the whole sample space carries the full unit of probability',
+        sub: 'The second axiom fixes the scale that every other probability is measured on ([Axiom 2](!#axiom2)).' },
+      { name: 'Additivity for two disjoint events', formula: '$P(A \\cup B) = P(A) + P(B)$', says: 'mutually exclusive cases combine by simple addition',
+        sub: 'The third axiom, for events with $A \\cap B = \\varnothing$, from [Axiom 3](!#axiom3).' },
+      { name: 'Countable additivity', formula: '$\\displaystyle P\\!\\left(\\bigcup_{i=1}^{\\infty} A_i\\right) = \\sum_{i=1}^{\\infty} P(A_i)$', says: 'the same addition for any countable family of pairwise disjoint events',
+        sub: 'The general form of [Axiom 3](!#axiom3), which lets probability handle infinite sample spaces.' },
+      { name: 'Empty event', formula: '$P(\\emptyset) = 0$', says: 'the event that cannot occur has probability zero',
+        sub: 'Follows from normalization plus additivity applied to $\\Omega$ and $\\emptyset$, as in [immediate consequences](!#consequences).' },
+      { name: 'Complement', formula: '$P(A^c) = 1 - P(A)$', says: 'the probability left over once the event is accounted for',
+        sub: 'Additivity applied to the disjoint union $A \\cup A^c = \\Omega$ ([immediate consequences](!#consequences)).' },
+      { name: 'Monotonicity', formula: '$A \\subseteq B \\implies P(A) \\le P(B)$', says: 'an event inside another cannot be more likely',
+        sub: 'The larger event splits into $A$ and $B \\setminus A$, both with non-negative probability, from [immediate consequences](!#consequences).' },
+      { name: 'Bounds', formula: '$0 \\leq P(A) \\leq 1$', says: 'every probability lies between zero and one',
+        sub: 'One of the two results [immediate consequences](!#consequences) writes out in symbols.' },
+      { name: 'Union with overlap', formula: '$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$', says: 'the union of any two events, disjoint or not',
+        sub: 'Additivity on disjoint pieces plus a correction for counting the overlap twice; for disjoint events it reduces to Axiom 3 ([immediate consequences](!#consequences)).' },
+    ],
+  };
+
   return {
     props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1469,7 +1509,7 @@ Everything that follows in probability — conditional probability, independence
   }
 }
 
-export default function AxiomsPage({
+export default function AxiomsPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1671,11 +1711,38 @@ When two events cannot occur together, the probability that one or the other occ
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="probability-axiom-formula-summary"
+            title="Probability axioms and their consequences"
+            source="/probability/axioms"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.pitfalls.title,
         link:'',
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="probability-axiom-pitfalls"
+            title="Common pitfalls with the axioms"
+            source="/probability/axioms"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1056,6 +1056,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1579,6 +1580,15 @@ The power set transforms subset relationships into membership relationships: $B 
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the subset formulas of the page on one set of cards. Each card gives the name, the formula and a line on what it says, with a link to the section that explains it, and most cards add a small example.
+
+The first three cards define the relations: subset, proper subset, and superset, which reads the same relation from the larger set, with the chain of number sets as its example. The next three count subsets: all of them by two choices per element, the proper ones by leaving the set itself out, and all of them again by adding up the subsets of each size. The last two define the power set and give its size.`,
+    before: ``,
+    after: `Two checks settle most questions here. For a containment, take each element of the smaller set and see whether it lands in the larger one. For a count, remember that the empty set and the set itself are both subsets, which is why the total is always a power of two.`,
+    link: '',
+  },
   pitfalls: {
     title: `Common Pitfalls`,
     content: `Five mistakes come up again and again with subsets and power sets. The first four are marked where they happen in the sections above; the fifth, the power set of the empty set, is the case the Power Set section singles out. Here each is worked through in full, with the wrong and the right working side by side.`,
@@ -1838,8 +1848,32 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Subset', formula: '$A \\subseteq B \\iff \\forall x\\,(x \\in A \\Rightarrow x \\in B)$', example: '$\\{2, 4\\} \\subseteq \\{1, 2, 3, 4, 5\\}$',
+        text: 'Every element of $A$ is also in $B$. Every set is a subset of itself, and $\\emptyset \\subseteq A$ for any set, as [subsets](!#1) explains.' },
+      { name: 'Proper subset', formula: '$A \\subset B \\iff (A \\subseteq B) \\land (A \\neq B)$', example: '$\\{a, b\\} \\subset \\{a, b, c\\}$',
+        text: 'A subset that leaves out at least one element of $B$, so no set is a proper subset of itself ([proper subsets](!#2)).' },
+      { name: 'Superset', formula: '$B \\supseteq A$', example: '$\\mathbb{C} \\supset \\mathbb{R} \\supset \\mathbb{Q} \\supset \\mathbb{Z} \\supset \\mathbb{N}$',
+        text: 'The same relation as $A \\subseteq B$, read from the larger set; $B \\supset A$ is the proper version ([superset](!#3)).' },
+      { name: 'Number of subsets', formula: '$2 \\times 2 \\times \\cdots \\times 2 = 2^n$', example: 'a set with $3$ elements has $2^3 = 8$ subsets',
+        text: 'Each of the $n$ elements is either in or out, two choices each, as [number of subsets](!#4) counts; the empty set and the set itself are included.' },
+      { name: 'Number of proper subsets', formula: '$2^{|A|} - 1$', example: 'a set with $3$ elements has $7$ proper subsets',
+        text: 'All the subsets except $A$ itself, from [number of subsets](!#4).' },
+      { name: 'Subsets by size', formula: '$\\displaystyle \\sum_{k=0}^{n} \\binom{n}{k} = 2^n$',
+        text: 'There are $\\binom{n}{k}$ subsets of size $k$, and adding them over every size gives the same total ([number of subsets](!#4)).' },
+      { name: 'Power set', formula: '$\\mathcal{P}(A) = \\{S : S \\subseteq A\\}$', example: '$\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, \\{1\\}, \\{2\\}, \\{1, 2\\}\\}$',
+        text: 'The set of all subsets of $A$, also written $2^A$; $B \\subseteq A$ exactly when $B \\in \\mathcal{P}(A)$, as [power set](!#5) shows.' },
+      { name: 'Size of the power set', formula: '$|\\mathcal{P}(A)| = 2^{|A|}$', example: '$\\mathcal{P}(\\emptyset) = \\{\\emptyset\\}$ has one element',
+        text: 'Subset counting in the language of cardinality, from [power set](!#5).' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
     pitfallData,
     sectionsContent,
     introContent,
@@ -1861,7 +1895,7 @@ const schemas = {
    }
 
 
-export default function SubsetsPage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SubsetsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2017,6 +2051,24 @@ Writing $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, 1, 2, \\{1, 2\\}\\}$ lists th
 [Read more](!#pitfall-leaving-the-braces-off-the-singletons)]@
 
 The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\}$, $\\{a, b\\}$, $\\{a, c\\}$, $\\{b, c\\}$ and $\\{a, b, c\\}$. Written between one outer pair of braces, these eight sets make up $\\mathcal{P}(\\{a, b, c\\})$, so the power set has $8$ elements even though $\\{a, b, c\\}$ itself has only $3$. Each of the letters $a$, $b$ and $c$ appears in four of the eight subsets, one for every choice made about the other two letters.`,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="subset-formula-summary"
+            title="Subset and power set formulas"
+            source="/set-theory/subsets"
+            related={{ href: '/set-theory/formulas', label: 'All set theory formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

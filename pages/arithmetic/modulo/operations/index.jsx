@@ -843,6 +843,7 @@ import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieW
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1335,7 +1336,10 @@ To check modular results with your own numbers, use the [modulo calculator](!/ca
 
     obj14:{
       title:`Summary: The Operations Toolkit`,
-      content:`Every problem on this page — combining residues, finding last digits, predicting clock positions, classifying days, validating divisibility rules — pulls from the same five operations. The table below collects them in one place: the procedure that produces the right answer, the compact formula, and a worked example that fits in a single row. Division gets its own row because it works differently from the rest.`,
+      content:`Every problem on this page, from combining remainders to last digits, clock positions, days of the week and divisibility rules, draws on the same five operations. This summary gives one row to each: the operation with its procedure and a link to its section, the compact formula, and a worked example.
+
+Addition, subtraction and multiplication share one pattern: reduce the inputs, combine them, and reduce the result, with a negative difference moved back into range by adding the modulus. Powers are built one multiplication at a time and shortened by their cycle. Division gets a row of its own because it does not pass through the modulus and needs an inverse instead.`,
+      formulaSheetAfter: `Reduce early and reduce often: for sums, differences, products and powers this keeps every number small without changing the answer. Division is the one exception, so a quotient of remainders calls for an inverse, not for ordinary division.`,
       before:``,
       after:``,
       link:'',
@@ -1557,8 +1561,31 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Operation', kind: 'name' },
+      { key: 'formula', label: 'Compact formula', kind: 'formula' },
+      { key: 'example', label: 'Worked example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Addition', formula: '$(a + b) \\bmod n = ((a \\bmod n) + (b \\bmod n)) \\bmod n$', example: '$(47 + 38) \\bmod 10$: $7 + 8 = 15 \\to 15 \\bmod 10 = 5$',
+        sub: 'Reduce each operand, add, and reduce once more if the sum is $n$ or more, as [addition](!#3) shows.' },
+      { name: 'Subtraction', formula: '$(a - b) \\bmod n = ((a \\bmod n) - (b \\bmod n)) \\bmod n$', example: '$(23 - 47) \\bmod 10$: $3 - 7 = -4 \\to -4 + 10 = 6$',
+        sub: 'Reduce each operand and subtract; if the result is negative, add $n$, as [subtraction](!#4) shows.' },
+      { name: 'Multiplication', formula: '$(a \\cdot b) \\bmod n = ((a \\bmod n) \\cdot (b \\bmod n)) \\bmod n$', example: '$(89 \\cdot 76) \\bmod 9$: $8 \\cdot 4 = 32 \\to 32 \\bmod 9 = 5$',
+        sub: 'Reduce each factor, multiply, and reduce the product, as [multiplication](!#5) shows.' },
+      { name: 'Exponentiation', formula: '$a^k \\bmod n$ via repeated $(\\cdot \\, a) \\bmod n$; for large $k$, use the exponent mod the period', example: '$7^4 \\bmod 10$: $7 \\to 9 \\to 3 \\to 1$ (intermediates stay under $100$)',
+        sub: 'Build the power one multiplication at a time, reducing after each step, and detect the cycle once a remainder repeats, as [powers](!#6) shows.' },
+      { name: 'Division', formula: '$a / b \\equiv a \\cdot b^{-1} \\pmod{n}$, where $b \\cdot b^{-1} \\equiv 1 \\pmod{n}$', example: 'the inverse $b^{-1}$ may not exist; it depends on $\\gcd(b, n)$, and the full treatment lies in number theory',
+        sub: 'Division does not pass through $\\bmod n$ directly, so it multiplies by the modular inverse instead, as [why division is different](!#8) explains.' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1582,7 +1609,7 @@ return {
 
 
 
-export default function OperationsPage({ pitfallData,seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function OperationsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1773,8 +1800,16 @@ export default function OperationsPage({ pitfallData,seoData, sectionsContent, i
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="modular-operations-formula-summary"
+            title="Modular operations"
+            source="/arithmetic/modulo/operations"
+            related={false}
+            after={sectionsContent.obj14.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1219,12 +1219,14 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import ConceptCompare from '@/app/components/infographics/ConceptCompare'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1874,7 +1876,7 @@ The product of two linear functions is a quadratic.
 
 @academic[pitfall,aside:true,width:35%:Composing instead of multiplying
 Reading $(fg)(x)$ as $f(g(x))$ gives $(x - 3) + 2 = x - 1$, which at $x = 0$ is $-1$ instead of $(fg)(0) = 2 \\cdot (-3) = -6$. The product multiplies the outputs: $(fg)(x) = x^2 - x - 6$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-composing-instead-of-multiplying)]@
 
 Multiplication is commutative: $fg = gf$. It is associative: $(fg)h = f(gh)$. It distributes over addition: $f(g + h) = fg + fh$.
 
@@ -1945,7 +1947,7 @@ $$(f - g)(4) = 16 - 8 - 1 = 7$$]@
 
 @academic[pitfall,aside:true,width:35%:Subtracting only the first term
 Writing $(f - g)(x) = x^2 - 2x + 1$ subtracts only the $2x$ of $g(x) = 2x + 1$ and gives $(f - g)(4) = 9$. The whole of $g$ is subtracted: $x^2 - (2x + 1) = x^2 - 2x - 1$, so $(f - g)(4) = 7$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-only-the-first-term)]@
 
 Both methods yield the same result. The first is often faster for a single evaluation; the second is necessary when working with the combined function repeatedly.
 
@@ -1979,7 +1981,7 @@ $$\\text{Domain of } f + g = [0, \\infty) \\cap (-\\infty, 4] = [0, 4]$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking the union of the domains
 Joining $[0, \\infty)$ and $(-\\infty, 4]$ by union admits every real number, including $x = 5$, where $g(5) = \\sqrt{-1}$ is not defined. The sum needs both $f(x)$ and $g(x)$, so the domains are intersected, not joined.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-union-of-the-domains)]@
 
 Only inputs from $0$ to $4$ lie in both domains.
 
@@ -2011,7 +2013,7 @@ $$\\text{Domain of } \\frac{f}{g} = (-\\infty, -2) \\cup (-2, 2) \\cup (2, \\inf
 
 @academic[pitfall,aside:true,width:35%:Excluding the zeros of the numerator
 Removing $x = -3$ as well, because $f(-3) = 0$, throws away a valid input: $\\frac{f(-3)}{g(-3)} = \\frac{0}{5} = 0$. Only the zeros of the denominator leave the domain, here $x = 2$ and $x = -2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-excluding-the-zeros-of-the-numerator)]@
 
 The three intervals cover every real number except the two zeros of the denominator. At those two inputs the numerator is not zero, since $f(2) = 5$ and $f(-2) = 1$, so the graph of $f/g$ has vertical asymptotes at $x = 2$ and $x = -2$ rather than holes. At every other input both outputs exist and the denominator is nonzero, so the quotient has a value there.
 
@@ -2119,75 +2121,18 @@ In each case, the arithmetic of functions translates the arithmetic of the situa
 
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again when functions are combined. Four are marked where they happen in the sections above; losing the excluded point after simplifying is the one that **Quotient of Functions** and **Algebraic Simplification** already point out. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Composing instead of multiplying**
-
-The product $(fg)(x)$ is read as $f(g(x))$: the output of $g$ is fed into $f$ instead of being multiplied by the output of $f$. Both operations use the same two letters, but they build different functions.
-
-Wrong working: for $f(x) = x + 2$ and $g(x) = x - 3$, $(fg)(x) = f(x - 3) = (x - 3) + 2 = x - 1$.
-
-Right working: $(fg)(x) = f(x) \\cdot g(x) = (x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$.
-
-Why it happens: the product $fg$ is written with no symbol between the letters, and some texts also write a [composition](!/functions/composition) without its ring, so the string $fg(x)$ is read as one function inside the other.
-
-How to check: evaluate both functions at one input and multiply. At $x = 0$, $f(0) = 2$ and $g(0) = -3$, so $(fg)(0) = -6$; the right formula gives $-6$, the wrong one gives $-1$.
-
-**Losing the excluded point after simplifying**
-
-A quotient is simplified by cancelling a common factor, and the domain is then read from the simplified formula, which no longer shows the zero of the original denominator.
-
-Wrong working: $\\dfrac{x^2 - 9}{x + 3} = x - 3$, so the domain is taken to be all real numbers and the value at $x = -3$ to be $-3 - 3 = -6$.
-
-Right working: the original denominator $x + 3$ is $0$ at $x = -3$, and substituting gives $\\dfrac{(-3)^2 - 9}{-3 + 3} = \\dfrac{0}{0}$, which has no value. The domain is $x \\neq -3$, and the graph is the line $y = x - 3$ with a hole at $(-3, -6)$.
-
-Why it happens: after cancelling, the factor that caused the restriction is gone from the page, and the shorter formula looks complete.
-
-How to check: before simplifying, list every zero of the original denominator, and keep that list next to the simplified formula.
-
-**Subtracting only the first term**
-
-When $(f - g)(x)$ is formed, the minus sign reaches only the first term of $g(x)$, because the brackets around $g(x)$ are left out.
-
-Wrong working: for $f(x) = x^2$ and $g(x) = 2x + 1$, $(f - g)(x) = x^2 - 2x + 1$, so $(f - g)(4) = 16 - 8 + 1 = 9$.
-
-Right working: $(f - g)(x) = x^2 - (2x + 1) = x^2 - 2x - 1$, so $(f - g)(4) = 16 - 8 - 1 = 7$, the same as $f(4) - g(4) = 16 - 9$.
-
-Why it happens: when $g$ has a single term, as $g(x) = x^2$ in **Difference of Functions**, no brackets are needed, and the habit carries over to a $g$ with several terms.
-
-How to check: evaluate at one point by both methods of **Notation and Evaluation at a Point**; the results must agree. Here $f(4) - g(4) = 16 - 9 = 7$ exposes the $9$.
-
-**Taking the union of the domains**
-
-The domains of $f$ and $g$ are combined by union, as if an input only had to work in one of the two functions.
-
-Wrong working: $f(x) = \\sqrt{x}$ has domain $[0, \\infty)$ and $g(x) = \\sqrt{4 - x}$ has domain $(-\\infty, 4]$; their union is all real numbers, which is given as the domain of $f + g$.
-
-Right working: $(f + g)(x) = \\sqrt{x} + \\sqrt{4 - x}$ needs both square roots, so $x \\geq 0$ and $x \\leq 4$. The domain is $[0, \\infty) \\cap (-\\infty, 4] = [0, 4]$.
-
-Why it happens: "the domain of $f$ and the domain of $g$" sounds like putting the two sets together.
-
-How to check: test an input that lies in one domain but not the other. At $x = 5$ the term $\\sqrt{4 - 5} = \\sqrt{-1}$ is not a real number, and at $x = -1$ the term $\\sqrt{-1}$ appears in $f$, so neither input belongs to the domain.
-
-**Excluding the zeros of the numerator**
-
-In the domain of $f/g$, the inputs where $f(x) = 0$ are removed together with those where $g(x) = 0$, as if a zero anywhere in the fraction made it undefined.
-
-Wrong working: for $f(x) = x + 3$ and $g(x) = x^2 - 4$, the inputs $x = -3$, $x = -2$ and $x = 2$ are all excluded.
-
-Right working: only the denominator matters. Since $g(-3) = 9 - 4 = 5$, the quotient at $x = -3$ is $\\dfrac{0}{5} = 0$, a value. The domain excludes only $x = 2$ and $x = -2$: $(-\\infty, -2) \\cup (-2, 2) \\cup (2, \\infty)$.
-
-Why it happens: the rule against division by zero is remembered as a rule against zero in a fraction, without noting which part of the fraction it is about.
-
-How to check: substitute the doubtful input. If the denominator is not zero, the quotient has a value; here $x = -3$ is a zero of $f/g$, not a gap in its domain.`,
+    content: `Five mistakes come up again and again when functions are combined. Four are marked where they happen in the sections above; losing the excluded point after simplifying is the one that **Quotient of Functions** and **Algebraic Simplification** already point out. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses part of what combining two functions means. $(fg)(x)$ multiplies the outputs and does not compose; a quotient keeps the zeros of its original denominator out of the domain, even after cancelling, and only those; a difference subtracts all of $g$; and a sum is defined only where both functions are, on the intersection of their domains. Evaluating at one input by both methods, or substituting a doubtful input, catches each slip.`,
     link: '',
   },
 
   obj13: {
     title: `The Four Operations at a Glance`,
-    content: `The four arithmetic operations on functions cover the same essential pattern — combine outputs pointwise — but each has its own properties, restrictions, and idiomatic forms. The table below collects all four side by side as a reference card: the pointwise definition, the key algebraic properties, and an example of the combined formula. Use it to check at a glance which operations are commutative, which need an extra domain caution, and what kind of expression to expect from each.`,
+    content: `This summary sets the four arithmetic operations on functions side by side, one card each: sum, difference, product and quotient. Every card gives the pointwise definition, an example that combines two specific functions into one formula, and a line naming the key algebraic properties, with a link to the section that explains the operation.
+
+The sum and the product behave like the same operations on numbers: both are commutative and associative, and the product distributes over addition. The difference and the quotient are neither, and swapping the order of a difference only flips its sign. The quotient alone carries a badge, because the function in the denominator must not be zero.`,
+    formulaSheetAfter: `Every operation works the same way: evaluate both functions at the same input, then combine the two outputs. Order matters for the difference and the quotient, and for the quotient the zeros of the denominator stay excluded even when the simplified formula hides them.`,
     before: ``,
     after: ``,
     link: '',
@@ -2437,8 +2382,62 @@ const faqQuestions = {
   };
 
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'composing-instead-of-multiplying', name: `Composing instead of multiplying`, errorAt: 1,
+        what: `The product $(fg)(x)$ is read as $f(g(x))$: the output of $g$ is fed into $f$ instead of being multiplied by the output of $f$. Both operations use the same two letters, but they build different functions.`,
+        wrong: [`For $f(x) = x + 2$ and $g(x) = x - 3$,`, `$(fg)(x) = f(x - 3) = (x - 3) + 2 = x - 1$.`],
+        right: [`For $f(x) = x + 2$ and $g(x) = x - 3$,`, `$(fg)(x) = f(x) \\cdot g(x) = (x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$.`],
+        why: `The product $fg$ is written with no symbol between the letters, and some texts also write a [composition](!/functions/composition) without its ring, so the string $fg(x)$ is read as one function inside the other.`,
+        check: `Evaluate both functions at one input and multiply. At $x = 0$, $f(0) = 2$ and $g(0) = -3$, so $(fg)(0) = -6$; the right formula gives $-6$, the wrong one gives $-1$.` },
+      { id: 'losing-the-excluded-point-after-simplifying', name: `Losing the excluded point after simplifying`, errorAt: 0,
+        what: `A quotient is simplified by cancelling a common factor, and the domain is then read from the simplified formula, which no longer shows the zero of the original denominator.`,
+        wrong: [`$\\dfrac{x^2 - 9}{x + 3} = x - 3$, so the domain is taken to be all real numbers and the value at $x = -3$ to be $-3 - 3 = -6$.`],
+        right: [`The original denominator $x + 3$ is $0$ at $x = -3$, and substituting gives $\\dfrac{(-3)^2 - 9}{-3 + 3} = \\dfrac{0}{0}$, which has no value. The domain is $x \\neq -3$, and the graph is the line $y = x - 3$ with a hole at $(-3, -6)$.`],
+        why: `After cancelling, the factor that caused the restriction is gone from the page, and the shorter formula looks complete.`,
+        check: `Before simplifying, list every zero of the original denominator, and keep that list next to the simplified formula.` },
+      { id: 'subtracting-only-the-first-term', name: `Subtracting only the first term`, errorAt: 0,
+        what: `When $(f - g)(x)$ is formed, the minus sign reaches only the first term of $g(x)$, because the brackets around $g(x)$ are left out.`,
+        wrong: [`For $f(x) = x^2$ and $g(x) = 2x + 1$, $(f - g)(x) = x^2 - 2x + 1$, so $(f - g)(4) = 16 - 8 + 1 = 9$.`],
+        right: [`$(f - g)(x) = x^2 - (2x + 1) = x^2 - 2x - 1$, so $(f - g)(4) = 16 - 8 - 1 = 7$, the same as $f(4) - g(4) = 16 - 9$.`],
+        why: `When $g$ has a single term, as $g(x) = x^2$ in **Difference of Functions**, no brackets are needed, and the habit carries over to a $g$ with several terms.`,
+        check: `Evaluate at one point by both methods of **Notation and Evaluation at a Point**; the results must agree. Here $f(4) - g(4) = 16 - 9 = 7$ exposes the $9$.` },
+      { id: 'taking-the-union-of-the-domains', name: `Taking the union of the domains`, errorAt: 0,
+        what: `The domains of $f$ and $g$ are combined by union, as if an input only had to work in one of the two functions.`,
+        wrong: [`$f(x) = \\sqrt{x}$ has domain $[0, \\infty)$ and $g(x) = \\sqrt{4 - x}$ has domain $(-\\infty, 4]$; their union is all real numbers, which is given as the domain of $f + g$.`],
+        right: [`$(f + g)(x) = \\sqrt{x} + \\sqrt{4 - x}$ needs both square roots, so $x \\geq 0$ and $x \\leq 4$. The domain is $[0, \\infty) \\cap (-\\infty, 4] = [0, 4]$.`],
+        why: `"the domain of $f$ and the domain of $g$" sounds like putting the two sets together.`,
+        check: `Test an input that lies in one domain but not the other. At $x = 5$ the term $\\sqrt{4 - 5} = \\sqrt{-1}$ is not a real number, and at $x = -1$ the term $\\sqrt{-1}$ appears in $f$, so neither input belongs to the domain.` },
+      { id: 'excluding-the-zeros-of-the-numerator', name: `Excluding the zeros of the numerator`, errorAt: 1,
+        what: `In the domain of $f/g$, the inputs where $f(x) = 0$ are removed together with those where $g(x) = 0$, as if a zero anywhere in the fraction made it undefined.`,
+        wrong: [`For $f(x) = x + 3$ and $g(x) = x^2 - 4$,`, `The inputs $x = -3$, $x = -2$ and $x = 2$ are all excluded.`],
+        right: [`For $f(x) = x + 3$ and $g(x) = x^2 - 4$,`, `Only the denominator matters. Since $g(-3) = 9 - 4 = 5$, the quotient at $x = -3$ is $\\dfrac{0}{5} = 0$, a value. The domain excludes only $x = 2$ and $x = -2$: $(-\\infty, -2) \\cup (-2, 2) \\cup (2, \\infty)$.`],
+        why: `The rule against division by zero is remembered as a rule against zero in a fraction, without noting which part of the fraction it is about.`,
+        check: `Substitute the doubtful input. If the denominator is not zero, the quotient has a value; here $x = -3$ is a zero of $f/g$, not a gap in its domain.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Sum', formula: '$(f + g)(x) = f(x) + g(x)$', example: '$f = x^2,\\; g = 5x - 3 \\;\\Rightarrow\\; x^2 + 5x - 3$',
+        text: 'Add the two outputs at each input. The sum is commutative and associative, as [the sum of functions](!#2) shows.' },
+      { name: 'Difference', formula: '$(f - g)(x) = f(x) - g(x)$', example: '$f = 3x + 7,\\; g = x^2 \\;\\Rightarrow\\; -x^2 + 3x + 7$',
+        text: 'Subtract the second output from the first. It is neither commutative nor associative, and $(g - f)(x) = -(f - g)(x)$, from [the difference of functions](!#3).' },
+      { name: 'Product', formula: '$(fg)(x) = f(x) \\cdot g(x)$', example: '$f = x + 2,\\; g = x - 3 \\;\\Rightarrow\\; x^2 - x - 6$',
+        text: 'Multiply the two outputs. The product is commutative and associative and distributes over addition, as [the product of functions](!#4) shows.' },
+      { name: 'Quotient', formula: '$\\displaystyle \\left(\\frac{f}{g}\\right)(x) = \\frac{f(x)}{g(x)}$', example: '$f = x^2 - 1,\\; g = x + 1 \\;\\Rightarrow\\; x - 1 \\;\\; (x \\neq -1)$', restriction: 'requires $g(x) \\neq 0$',
+        text: 'Divide the first output by the second. It is neither commutative nor associative, as [the quotient of functions](!#5) explains.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
       arithmeticVsComposition,
     functionArithTree,
     quotientReduceSteps,
@@ -2465,7 +2464,7 @@ const faqQuestions = {
 
 const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function ArithmeticPage({arithmeticVsComposition, functionArithTree, quotientReduceSteps,
+export default function ArithmeticPage({ formulaSummaryData, pitfallData,arithmeticVsComposition, functionArithTree, quotientReduceSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -2716,6 +2715,15 @@ export default function ArithmeticPage({arithmeticVsComposition, functionArithTr
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="function-arithmetic-pitfalls"
+            title="Common pitfalls in combining functions"
+            source="/functions/arithmetic"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2724,8 +2732,16 @@ export default function ArithmeticPage({arithmeticVsComposition, functionArithTr
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="function-arithmetic-formula-summary"
+            title="The four operations on functions"
+            source="/functions/arithmetic"
+            related={{ href: '/functions/formulas', label: 'All function formulas' }}
+            after={sectionsContent.obj13.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj13-diagram'}
             id="function-arithmetic-tree"

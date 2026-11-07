@@ -20,6 +20,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
@@ -637,6 +638,15 @@ Find $\\text{lcm}(6, 10, 15)$. $\\text{lcm}(6, 10) = 30$. $\\text{lcm}(30, 15) =
       link:'',
   
     },
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary lists the rules for the least common multiple that the page states, in nine rows. Each row gives the name of the rule with a line on why it holds and a link to its section, the formula, and what the formula gives.
+
+The first rows bound the LCM between the larger number and the product, give the cases of a number with itself or with one and the order of the inputs, and state that the LCM divides every common multiple. The formula through the greatest common divisor and the identity behind it follow, then the two extreme cases, coprime numbers and one number dividing the other, and the rule for three or more numbers.`,
+      before: ``,
+      after: `The bounds give a quick check on any answer: an LCM below the larger number or above the product is wrong. For a computation, the formula through the GCD is usually the shortest path, with the Euclidean algorithm supplying the GCD.`,
+      link: '',
+    },
     obj16:{
       title:`Common Pitfalls`,
       content:`Three mistakes account for many of the wrong LCM answers. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -848,8 +858,39 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Rule', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'says', label: 'What it gives' },
+    ],
+    rows: [
+      { name: 'Bounds', formula: '$\\max(a, b) \\leq \\text{lcm}(a, b) \\leq a \\cdot b$', says: 'the range the LCM always falls in',
+        sub: 'A multiple of both numbers is at least the larger one, and the product is always a common multiple, as [what LCM is](!#1) explains.' },
+      { name: 'Same number and one', formula: '$\\text{lcm}(a, a) = a, \\quad \\text{lcm}(a, 1) = a$', says: 'the LCM when nothing new has to be covered',
+        sub: 'In both cases $a$ already qualifies as the smallest common multiple, from [the basic properties](!#2).' },
+      { name: 'Order', formula: '$\\text{lcm}(a, b) = \\text{lcm}(b, a)$', says: 'the same answer in either order',
+        sub: 'The common multiples of $a$ and $b$ are those of $b$ and $a$, one of [the basic properties](!#2).' },
+      { name: 'Common multiples', formula: '$a \\mid \\text{lcm}(a, b)$ and $b \\mid \\text{lcm}(a, b)$', says: 'every other common multiple is a multiple of the LCM',
+        sub: 'Both numbers divide the LCM by definition, and the LCM divides every other common multiple ([basic properties](!#2)).' },
+      { name: 'Using the GCD', formula: '$\\displaystyle \\text{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$', says: 'the LCM in a single division once the GCD is known',
+        sub: 'Often the fastest route; [using the GCD](!#5) divides before multiplying, $\\frac{a}{\\gcd(a,b)} \\cdot b$, to keep the numbers small.' },
+      { name: 'GCD–LCM relationship', formula: '$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$', says: 'either quantity from the other',
+        sub: 'For each prime the GCD keeps the smaller exponent and the LCM the larger, as [the GCD–LCM relationship](!#6) proves.' },
+      { name: 'Coprime numbers', formula: '$\\text{lcm}(a, b) = a \\cdot b$ when $\\gcd(a, b) = 1$', says: 'the full product, since no prime is shared',
+        sub: 'It also works the other way: an LCM equal to the product means the numbers are coprime, as [the coprime case](!#7) shows.' },
+      { name: 'One divides the other', formula: 'if $a \\mid b$, then $\\text{lcm}(a, b) = b$', says: 'the larger number itself',
+        sub: 'The smallest possible LCM, from [when one divides the other](!#8).' },
+      { name: 'More than two numbers', formula: '$\\text{lcm}(a, b, c) = \\text{lcm}(\\text{lcm}(a, b), \\; c)$', says: 'the LCM of any list, pair by pair',
+        sub: 'The order of pairing does not matter; see [LCM of more than two numbers](!#9).' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     lcmMethodTree,
     demoUnits,
@@ -877,7 +918,7 @@ pfLcmObj4,
    }
 
 
-export default function LCMPage({ pitfallData,lcmMethodTree, seoData, sectionsContent,
+export default function LCMPage({ formulaSummaryData, pitfallData,lcmMethodTree, seoData, sectionsContent,
    introContent, obj2Table, obj8Table, summaryTable,
    faqQuestions, schemas,
   obj1SvgCommon,
@@ -1200,6 +1241,24 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
             source="/arithmetic/divisibility/lcm"
           >
             <TopDownTree data={lcmMethodTree} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="lcm-formula-summary"
+            title="LCM rules"
+            source="/arithmetic/divisibility/lcm"
+            related={false}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
         ]
     },

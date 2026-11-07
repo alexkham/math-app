@@ -12,6 +12,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -609,6 +610,15 @@ Mastery of roots and powers together provides the foundation for exponential fun
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of this overview page in one table. Each row gives the name with a line on where it is introduced and a link to that section, the formula, and what it says in words.
+
+The first row defines a root as the reverse of raising to a power. The next three connect radicals to exponents: a root is a fractional power, a root of a power is a fractional power too, and the root and the power can be taken in either order. The last three are the rules for radicals, which split the root of a product or a quotient and combine a root of a root into one.`,
+    before: ``,
+    after: `The table is a map of the subject rather than its full detail. Each rule has its own page in this section, with the conditions under which it holds, its exceptions and worked examples.`,
+    link: '',
+  },
   obj12: {
     title: `Common Pitfalls`,
     content: `Three mistakes come up again and again when working with roots. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -833,8 +843,35 @@ $$= \\sqrt{25} = 5$$`, `An expression such as $\\sqrt{x^2 + 9}$ stays as it is; 
     ],
   };
 
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it says' },
+    ],
+    rows: [
+      { name: 'Definition of a root', formula: '$a^n = b \\quad \\Longleftrightarrow \\quad \\sqrt[n]{b} = a$', says: 'a root undoes raising to a power',
+        sub: 'The index $n$ says which root; [what is a root](!#1) introduces the notation.' },
+      { name: 'Root as a power', formula: '$\\sqrt[n]{a} = a^{1/n}$', says: 'the $n$th root is the power $\\frac{1}{n}$',
+        sub: 'The bridge between radicals and exponents in [radical and exponent notation](!#4).' },
+      { name: 'Power rule', formula: '$\\sqrt[n]{a^m} = a^{m/n}$', says: 'a root of a power is a fractional power',
+        sub: 'The same section turns any radical into an exponent this way.' },
+      { name: 'Root first, then power', formula: '$\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$', says: 'the root and the power can be taken in either order',
+        sub: 'Taking the root first keeps the numbers small, as in [radical and exponent notation](!#4).' },
+      { name: 'Product rule', formula: '$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$', says: 'the root of a product splits into a product of roots',
+        sub: 'The first of the [rules for radicals](!#5), the tool for simplifying.' },
+      { name: 'Quotient rule', formula: '$\\displaystyle \\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$', says: 'the root of a quotient splits the same way',
+        sub: 'The matching rule for division in [rules for radicals](!#5).' },
+      { name: 'Nested radicals', formula: '$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$', says: 'a root of a root multiplies the indices',
+        sub: 'The third rule in [rules for radicals](!#5).' },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
     pitfallData,
     faqQuestions,
     rootsSubtreeOutline,
@@ -863,7 +900,7 @@ $$= \\sqrt{25} = 5$$`, `An expression such as $\\sqrt{x^2 + 9}$ stays as it is; 
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RootsAndRadicalsPage({ pitfallData,faqQuestions, rootsSubtreeOutline, radicalFunctionCases,
+export default function RootsAndRadicalsPage({ formulaSummaryData, pitfallData,faqQuestions, rootsSubtreeOutline, radicalFunctionCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1062,6 +1099,24 @@ $$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="roots-formula-summary"
+            title="Root and radical formulas"
+            source="/algebra/roots"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -3026,6 +3026,7 @@ import EquivalenceRing from '@/app/components/infographics/linear-algebra/Equiva
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import inverseDiagrams from '@/app/components/linear-algebra copy/matrix/inverseDiagrams'
@@ -3036,6 +3037,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -3617,7 +3619,7 @@ The recipe is: swap the diagonal entries, negate the off-diagonal entries, and d
 
 @academic[pitfall,aside:true,width:35%:Dropping the determinant factor
 Swapping and negating without dividing turns $A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$ into $\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$, and $A$ times that is $10I$, not $I$. With $\\det(A) = 10$, the inverse is $\\frac{1}{10}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$.
-[Read more](!#9)]@
+[Read more](!#pitfall-dropping-the-determinant-factor)]@
 
 For $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$, the determinant is $3 \\cdot 2 - 1 \\cdot 5 = 1$. The inverse is $A^{-1} = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$. Since $\\det(A) = 1$, every entry of $A^{-1}$ is an integer.
 
@@ -3685,7 +3687,7 @@ So $A^{-1} = \\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{
 
 @academic[pitfall,aside:true,width:35%:Stopping at echelon form
 Reading the right half once the left half is triangular, after the second step, gives $\\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 1 \\end{pmatrix}$; $A$ times it has first row $(-2, 1, 1)$, not $(1, 0, 0)$. The left half has to reach $I$; then the right half is $A^{-1}$, with first row $(6, -3, 1)$.
-[Read more](!#9)]@
+[Read more](!#pitfall-stopping-at-echelon-form)]@
 
 The reduction ran in two stages. The first two steps cleared the entries below the diagonal and left an upper triangular left half with ones on the diagonal. The last two steps worked upward from row $3$ and cleared the entries above the diagonal, and every operation was applied to the whole row of six entries. Multiplying $A$ by the final right half returns $I$, which confirms the result.
 
@@ -3707,7 +3709,7 @@ The adjugate is the transpose of the [cofactor](!/linear-algebra/determinants/co
 
 @academic[pitfall,aside:true,width:35%:Forgetting to transpose the cofactors
 Dividing the cofactor matrix itself by $\\det(A)$ for $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$ gives $\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$, and $A$ times it is $\\begin{pmatrix} 5 & -12 \\\\ 8 & -19 \\end{pmatrix}$. Transposed first, it gives the inverse $\\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$.
-[Read more](!#9)]@
+[Read more](!#pitfall-forgetting-to-transpose-the-cofactors)]@
 
 For the $2 \\times 2$ case, the adjugate formula reduces to the swap-and-negate formula from section $2$. The cofactor matrix of $\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$ is $\\begin{pmatrix} d & -c \\\\ -b & a \\end{pmatrix}$, and transposing gives $\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$, which is exactly the numerator matrix in the $2 \\times 2$ inverse formula.
 
@@ -3814,6 +3816,15 @@ A block diagonal matrix $\\text{diag}(A_1, \\dots, A_k)$ is invertible if and on
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the formulas of the page in three families, and the buttons above the cards show one family at a time. Each card holds a formula, a sentence on what it gives or when it applies, and a link to the section that explains it.
+
+The first family defines the inverse, gives the determinant test for when it exists, and lists three ways to compute it: the swap-and-negate formula for two-by-two matrices, the adjugate formula, and row reduction beside the identity. The second holds six rules, for the inverse of an inverse, a product, a transpose, a scalar multiple, a power and a determinant. The last solves a system with the inverse and inverts diagonal and orthogonal matrices.`,
+    before: ``,
+    after: `Every formula here can be checked the same way: multiply the matrix by the answer and look for the identity. Testing the determinant before computing anything, and reversing the order for a product, prevent most of the errors made with inverses.`,
+    link: '',
+  },
   obj9: {
     title: `Common Errors`,
     content: `Several incorrect analogies from scalar arithmetic cause persistent mistakes when working with matrix inverses.
@@ -3824,51 +3835,9 @@ The inverse of a product reverses order. Writing $(AB)^{-1} = A^{-1}B^{-1}$ is w
 
 Not every matrix is invertible. Assuming an inverse exists without checking the determinant or rank leads to division-by-zero errors in the $2 \\times 2$ formula and to contradictions in row reduction.
 
-The inverse is not the entry-by-entry reciprocal. The matrix $A^{-1}$ is not obtained by replacing each $a_{ij}$ with $1/a_{ij}$. The inverse is a global operation that depends on all entries simultaneously.
-
-**Dropping the determinant factor**
-
-In the $2 \\times 2$ formula, the swap and the sign changes are the visible part of the work, and the division by $ad - bc$ is left out. The result is $\\det(A)$ times the inverse, not the inverse.
-
-Wrong working: for $A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$, swap the diagonal entries and negate the off-diagonal ones:
-$$A^{-1} = \\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$$
-
-Right working: $\\det(A) = 4 \\cdot 6 - 7 \\cdot 2 = 10$, so
-$$A^{-1} = \\frac{1}{10}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix} = \\begin{pmatrix} 0.6 & -0.7 \\\\ -0.2 & 0.4 \\end{pmatrix}$$
-
-Why it happens: many practice matrices, including the worked examples in section $2$, have determinant $1$, where the division changes nothing and is easy to forget.
-
-How to check: multiply $A$ by the answer. The wrong form gives $\\begin{pmatrix} 10 & 0 \\\\ 0 & 10 \\end{pmatrix} = 10I$; the right form gives $I$.
-
-**Stopping at echelon form**
-
-Row reduction of $[A \\mid I]$ has two stages: clearing the entries below the diagonal, then clearing the entries above it. After the first stage the left half is triangular and looks finished, and the right half is read off as the inverse.
-
-Wrong working: for the matrix $A$ of section $4$, stop when the left half is $\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 1 \\end{pmatrix}$ and take
-$$A^{-1} = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 1 \\end{pmatrix}$$
-
-Right working: continue upward. Subtract row $3$ from rows $2$ and $1$, then subtract $2$ times row $2$ from row $1$. The left half becomes $I$, and
-$$A^{-1} = \\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{pmatrix}$$
-
-Why it happens: when Gaussian elimination is used to solve a system, it stops at echelon form and finishes with back-substitution, and that habit carries over to the inverse.
-
-How to check: the left half must be exactly $I$ before the right half is read. Multiplying also catches it: $A$ times the wrong form is $\\begin{pmatrix} -2 & 1 & 1 \\\\ -5 & 2 & 3 \\\\ -2 & 0 & 3 \\end{pmatrix}$, while $A$ times the right form is $I$.
-
-**Forgetting to transpose the cofactors**
-
-The adjugate formula needs two steps once the cofactors are known: transpose the cofactor matrix, then divide by the determinant. The transpose is skipped, and the cofactor matrix itself is divided by $\\det(A)$.
-
-Wrong working: for $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$, the cofactors are $C_{11} = 2$, $C_{12} = -5$, $C_{21} = -1$, $C_{22} = 3$, and $\\det(A) = 1$, so
-$$A^{-1} = \\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$
-
-Right working: transpose first, so $\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$, and
-$$A^{-1} = \\frac{1}{1}\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$$
-
-Why it happens: the cofactor $C_{ij}$ is computed for position $(i, j)$, and it feels natural to leave it there. For a symmetric matrix the transpose changes nothing, so the slip goes unnoticed in such examples.
-
-How to check: multiply $A$ by the answer. The wrong form gives $\\begin{pmatrix} 5 & -12 \\\\ 8 & -19 \\end{pmatrix}$, the right form gives $I$. For a $2 \\times 2$ matrix, the result must also agree with the swap-and-negate formula.`,
+The inverse is not the entry-by-entry reciprocal. The matrix $A^{-1}$ is not obtained by replacing each $a_{ij}$ with $1/a_{ij}$. The inverse is a global operation that depends on all entries simultaneously.`,
     before: ``,
-    after: ``,
+    after: `Each slip stops the inverse one step short. The $2 \\times 2$ formula divides by $ad - bc$, row reduction of $[A \\mid I]$ continues until the left half is $I$, and the adjugate is the transposed cofactor matrix. Multiplying $A$ by the answer, which must give $I$, catches each slip.`,
     link: ``,
   },
   obj10: {
@@ -4096,8 +4065,69 @@ const schemas = {
     },
   };
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-determinant-factor', name: `Dropping the determinant factor`, errorAt: 1,
+        what: `In the $2 \\times 2$ formula, the swap and the sign changes are the visible part of the work, and the division by $ad - bc$ is left out. The result is $\\det(A)$ times the inverse, not the inverse.`,
+        wrong: [`For $A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$,`, `Swap the diagonal entries and negate the off-diagonal ones:
+$$A^{-1} = \\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$$`],
+        right: [`For $A = \\begin{pmatrix} 4 & 7 \\\\ 2 & 6 \\end{pmatrix}$,`, `$\\det(A) = 4 \\cdot 6 - 7 \\cdot 2 = 10$, so
+$$A^{-1} = \\frac{1}{10}\\begin{pmatrix} 6 & -7 \\\\ -2 & 4 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0.6 & -0.7 \\\\ -0.2 & 0.4 \\end{pmatrix}$$`],
+        why: `Many practice matrices, including the worked examples in section $2$, have determinant $1$, where the division changes nothing and is easy to forget.`,
+        check: `Multiply $A$ by the answer. The wrong form gives $\\begin{pmatrix} 10 & 0 \\\\ 0 & 10 \\end{pmatrix} = 10I$; the right form gives $I$.` },
+      { id: 'stopping-at-echelon-form', name: `Stopping at echelon form`, errorAt: 0,
+        what: `Row reduction of $[A \\mid I]$ has two stages: clearing the entries below the diagonal, then clearing the entries above it. After the first stage the left half is triangular and looks finished, and the right half is read off as the inverse.`,
+        wrong: [`For the matrix $A$ of section $4$, stop when the left half is $\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 1 \\end{pmatrix}$ and take
+$$A^{-1} = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & -1 & 1 \\end{pmatrix}$$`],
+        right: [`Continue upward. Subtract row $3$ from rows $2$ and $1$, then subtract $2$ times row $2$ from row $1$. The left half becomes $I$, and
+$$A^{-1} = \\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{pmatrix}$$`],
+        why: `When Gaussian elimination is used to solve a system, it stops at echelon form and finishes with back-substitution, and that habit carries over to the inverse.`,
+        check: `The left half must be exactly $I$ before the right half is read. Multiplying also catches it: $A$ times the wrong form is $\\begin{pmatrix} -2 & 1 & 1 \\\\ -5 & 2 & 3 \\\\ -2 & 0 & 3 \\end{pmatrix}$, while $A$ times the right form is $I$.` },
+      { id: 'forgetting-to-transpose-the-cofactors', name: `Forgetting to transpose the cofactors`, errorAt: 1,
+        what: `The adjugate formula needs two steps once the cofactors are known: transpose the cofactor matrix, then divide by the determinant. The transpose is skipped, and the cofactor matrix itself is divided by $\\det(A)$.`,
+        wrong: [`For $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$,`, `The cofactors are $C_{11} = 2$, $C_{12} = -5$, $C_{21} = -1$, $C_{22} = 3$, and $\\det(A) = 1$, so
+$$A^{-1} = \\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$`],
+        right: [`For $A = \\begin{pmatrix} 3 & 1 \\\\ 5 & 2 \\end{pmatrix}$,`, `Transpose first, so $\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$, and
+$$A^{-1} = \\frac{1}{1}\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 & 3 \\end{pmatrix}$$`],
+        why: `The cofactor $C_{ij}$ is computed for position $(i, j)$, and it feels natural to leave it there. For a symmetric matrix the transpose changes nothing, so the slip goes unnoticed in such examples.`,
+        check: `Multiply $A$ by the answer. The wrong form gives $\\begin{pmatrix} 5 & -12 \\\\ 8 & -19 \\end{pmatrix}$, the right form gives $I$. For a $2 \\times 2$ matrix, the result must also agree with the swap-and-negate formula.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'find', name: 'Finding the inverse', sub: 'What the inverse is, when it exists, and three ways to compute it.', pairs: [
+        [{ formula: '$AA^{-1} = A^{-1}A = I$', text: 'Both products must give the identity; only a square matrix can have an inverse, and then exactly one, as [the definition](!#1) shows.' },
+         { formula: '$\\det(A) \\neq 0$', text: 'The quickest of the equivalent tests in [the invertible matrix theorem](!#3); rank $n$, independent columns and a null space of only $\\mathbf{0}$ say the same thing.' }],
+        [{ formula: '$\\displaystyle \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}^{-1} = \\frac{1}{ad - bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$', text: 'Swap the diagonal entries, negate the other two and divide by $ad - bc$, which must not be zero; see [the swap-and-negate formula](!#2).' },
+         { formula: '$\\displaystyle A^{-1} = \\frac{1}{\\det(A)}\\, \\operatorname{adj}(A)$', text: 'The adjugate is the transposed cofactor matrix; the formula is exact for any size but costly, as [the adjugate method](!#5) explains.' }],
+        [{ formula: '$[A \\mid I] \\xrightarrow{\\text{row ops}} [I \\mid A^{-1}]$', text: 'Reduce the left half to $I$ and the right half becomes $A^{-1}$; a row of zeros on the left means there is no inverse ([row reduction](!#4)).' }, ''],
+      ] },
+      { id: 'rules', name: 'Rules for the inverse', sub: 'How the inverse behaves with products, transposes, scalars, powers and determinants.', pairs: [
+        [{ formula: '$(A^{-1})^{-1} = A$', text: 'Inverting twice gives back the original matrix, from [the properties](!#6).' },
+         { formula: '$(AB)^{-1} = B^{-1} A^{-1}$', text: 'The order reverses: the matrix applied last is the first one undone, as [properties of the inverse](!#6) explains.' }],
+        [{ formula: '$(A^T)^{-1} = (A^{-1})^T$', text: 'Transposing and inverting can be done in either order ([properties of the inverse](!#6)).' },
+         { formula: '$\\displaystyle (cA)^{-1} = \\frac{1}{c}\\, A^{-1}$', text: 'A nonzero scalar comes out as its reciprocal, from [the same section](!#6).' }],
+        [{ formula: '$(A^k)^{-1} = A^{-k}$', text: 'The inverse of a power equals the same power of $A^{-1}$, as [the properties](!#6) note.' },
+         { formula: '$\\displaystyle \\det(A^{-1}) = \\frac{1}{\\det(A)}$', text: 'It follows from $\\det(A)\\det(A^{-1}) = \\det(I) = 1$, shown in [properties of the inverse](!#6).' }],
+      ] },
+      { id: 'use', name: 'Systems and special matrices', sub: 'Where the inverse is put to work or comes ready-made.', pairs: [
+        [{ formula: '$A\\mathbf{x} = \\mathbf{b} \\implies \\mathbf{x} = A^{-1}\\mathbf{b}$', text: 'The unique solution of an invertible system; elimination usually reaches it more cheaply, as [solving systems with the inverse](!#7) explains.' }, ''],
+        [{ formula: '$D = \\text{diag}(d_1, \\dots, d_n) \\Rightarrow D^{-1} = \\text{diag}(1/d_1, \\dots, 1/d_n)$', text: 'A diagonal matrix with no zero on its diagonal is inverted entry by entry, from [special matrix types](!#8).' },
+         { formula: '$Q^{-1} = Q^T$', text: 'An orthogonal matrix is inverted by transposing it, at no cost ([inverses of special matrix types](!#8)).' }],
+      ] },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     inverseMethodDecision,
     inverse2x2Strip,
     demoUnits,
@@ -4123,7 +4153,7 @@ const schemas = {
    }
 
 
-export default function MatrixInversePage({inverseMethodDecision, inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MatrixInversePage({ formulaSummaryData, pitfallData,inverseMethodDecision, inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4322,6 +4352,24 @@ export default function MatrixInversePage({inverseMethodDecision, inverse2x2Stri
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="matrix-inverse-formula-summary"
+            title="Inverse matrix formulas"
+            source="/linear-algebra/matrix/inverse"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'9',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
@@ -4329,6 +4377,15 @@ export default function MatrixInversePage({inverseMethodDecision, inverse2x2Stri
           sectionsContent.obj9.content,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="matrix-inverse-pitfalls"
+            title="Common pitfalls with the inverse"
+            source="/linear-algebra/matrix/inverse"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -19,6 +19,8 @@ import discretePmfDiagrams from '@/app/components/visualizations/probability/dis
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
 
@@ -1167,6 +1169,15 @@ The mode works best when probability genuinely concentrates at identifiable peak
   after: ``,
   link: '',
 },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page on ten cards. Each card gives the name of the formula, the formula and a sentence on what it means with a link to its section, and where a condition applies, a badge states it.
+
+The first four cards locate the mode: the most probable value of a discrete variable, the peak of a density, the calculus test for that peak, and the shortcut for the binomial. The mixture card shows how several peaks arise. Two cards order the mode, median and mean under right and left skew, and the last three cover linear and monotonic transformations and the failure of additivity.`,
+    before: ``,
+    after: `The mode is a location, not a height: report the value where the probability or density peaks, never the peak itself. On a restricted support check the end points too, and when two values tie, both are modes.`,
+    link: '',
+  },
   obj12: {
   title: `Common Mistakes`,
   content: `
@@ -1575,8 +1586,36 @@ const schemas = {
     }),
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Discrete mode', formula: '$\\text{mode} = \\arg\\max_k P(X = k)$', restriction: 'ties give several modes',
+        text: 'The value with the highest probability in the support, from [mode for discrete distributions](!#2).' },
+      { name: 'Continuous mode', formula: '$\\text{mode} = \\arg\\max_x f(x)$',
+        text: 'The peak of the density, not a point of highest probability, which is always zero for a continuous variable ([mode for continuous distributions](!#3)).' },
+      { name: 'Finding a continuous mode', formula: "$f'(x) = 0, \\quad f''(x) < 0$", restriction: 'also check the ends of a restricted support',
+        text: 'Critical points of the density with a negative second derivative are peaks, as [how to find the mode](!#7) shows step by step.' },
+      { name: 'Binomial shortcut', formula: '$\\text{mode} = \\lfloor (n+1)p \\rfloor$', restriction: 'when $(n+1)p$ is a whole number, two modes',
+        text: 'One of the closed forms in [how to find the mode](!#7), next to $\\lfloor \\lambda \\rfloor$ for the Poisson and $1$ for the geometric.' },
+      { name: 'Mixture', formula: '$f(x) = w_1 f_1(x) + w_2 f_2(x)$', restriction: 'components far enough apart',
+        text: 'Mixing two distributions gives peaks at the modes of the components, as [multiple modes](!#4) explains.' },
+      { name: 'Right skew', formula: '$\\text{mode} < \\text{median} < \\text{mean}$',
+        text: 'The mode stays at the peak while the tail of large values drags the mean right ([mode, mean and median compared](!#5)).' },
+      { name: 'Left skew', formula: '$\\text{mean} < \\text{median} < \\text{mode}$',
+        text: 'The same three centres in reverse order, from [the comparison](!#5).' },
+      { name: 'Linear transformation', formula: '$\\text{mode}(Y) = a \\cdot \\text{mode}(X) + b$', restriction: '$Y = aX + b$ with $a \\neq 0$',
+        text: 'The peak moves with the data when it is scaled and shifted, one of the [properties of the mode](!#6).' },
+      { name: 'Monotonic transformation', formula: '$\\text{mode}(g(X)) = g(\\text{mode}(X))$', restriction: 'discrete $X$, strictly monotonic $g$',
+        text: 'A one-to-one $g$ only relabels the values, so the most likely value moves to its image ([properties](!#6)).' },
+      { name: 'No additivity', formula: '$\\text{mode}(X + Y) \\neq \\text{mode}(X) + \\text{mode}(Y)$',
+        text: 'The peak of a sum is not the sum of the peaks, even for independent variables ([properties of the mode](!#6)).' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -1601,7 +1640,7 @@ const schemas = {
     }
    }
 
-export default function ModePage({
+export default function ModePage({ formulaSummaryData,
   seoData,
   sectionsContent,
   introContent,
@@ -1829,6 +1868,24 @@ The mode complements mean and median by revealing where probability actually con
             sheet={probSpreadNotationSheet}
             current={'/probability/mode'}
           />,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="probability-mode-formula-summary"
+            title="Mode formulas"
+            source="/probability/mode"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

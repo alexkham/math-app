@@ -2575,10 +2575,11 @@ import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagr
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
@@ -2980,6 +2981,15 @@ This theorem implies there is no largest cardinality — given any set, its powe
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the cardinality formulas of the page in one place, in the order the page meets them. Each row names a formula with a line on where it comes from and a link to its section, states it, and says what it gives.
+
+The first rows count finite sets: the empty set, a set measured by a natural number, and the size of a union of two or three overlapping sets, which simplifies when the sets are disjoint. The middle row names the sizes of the natural numbers and of the real line. The last rows compare sizes through bijections and injections and close with the Cantor-Schröder-Bernstein theorem and Cantor's theorem on power sets.`,
+    before: ``,
+    after: `For finite sets the work is counting, and the usual trap is an overlap counted twice, which inclusion-exclusion corrects. For infinite sets counting stops working, and every comparison comes down to finding an injection or a bijection between the two sets.`,
+    link: '',
+  },
   obj8: {
     title: `Common Pitfalls`,
     content: `Five mistakes come up again and again when sets are measured and compared. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -3272,8 +3282,41 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it gives' },
+    ],
+    rows: [
+      { name: 'Empty set', formula: '$|\\emptyset| = 0$', says: 'the only set with no elements',
+        sub: 'Cardinality counts elements, and the empty set has none, as [the definition](!#1) states.' },
+      { name: 'Finite set', formula: '$|A| = n$', says: 'a size given by a natural number $n$',
+        sub: 'A bijection between $A$ and $\\{1, 2, \\ldots, n\\}$ makes the set finite; see [finite sets](!#2).' },
+      { name: 'Inclusion-exclusion, two sets', formula: '$|A \\cup B| = |A| + |B| - |A \\cap B|$', says: 'the size of a union of two overlapping sets',
+        sub: 'Subtracting the intersection removes the elements counted twice, as [finite sets](!#2) explains.' },
+      { name: 'Inclusion-exclusion, three sets', formula: '$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$', says: 'the size of a union of three sets',
+        sub: 'Singles are added, the pairwise intersections subtracted and the triple intersection added back ([finite sets](!#2)).' },
+      { name: 'Disjoint union', formula: '$|A \\cup B| = |A| + |B| \\quad \\text{when } A \\cap B = \\emptyset$', says: 'sizes that simply add',
+        sub: 'When the sets share no elements the correction term vanishes, from the end of [finite sets](!#2).' },
+      { name: 'Sizes of the naturals and the reals', formula: '$|\\mathbb{N}| = \\aleph_0, \\quad |\\mathbb{R}| = \\mathfrak{c} = 2^{\\aleph_0}$', says: 'the smallest infinite size and the size of the real line',
+        sub: 'The continuum is strictly larger than aleph-null, which [uncountable sets](!#5) proves with the diagonal argument.' },
+      { name: 'Same size', formula: '$|A| = |B|$', says: 'holds when a bijection exists between $A$ and $B$',
+        sub: 'For infinite sets this pairing replaces counting, as [comparing cardinalities](!#6) explains.' },
+      { name: 'At most the size', formula: '$|A| \\leq |B|$', says: 'holds when an injection exists from $A$ to $B$; $|A| < |B|$ adds $|A| \\neq |B|$',
+        sub: 'One injection that misses elements does not prove a smaller size; see [comparing cardinalities](!#6).' },
+      { name: 'Cantor-Schröder-Bernstein theorem', formula: '$|A| \\leq |B|, \\; |B| \\leq |A| \\implies |A| = |B|$', says: 'equal size from two injections, one each way',
+        sub: 'Two injections are often easier to find than one bijection, as [comparing cardinalities](!#6) shows with the integers.' },
+      { name: "Cantor's theorem", formula: '$|A| < |\\mathcal{P}(A)|$', says: 'a power set always larger than its set',
+        sub: 'So there is no largest cardinality, as the end of [comparing cardinalities](!#6) concludes.' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
     pitfallData,
       csbCard,
     cardinalityLevels,
@@ -3302,7 +3345,7 @@ const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function CardinalityPage({ pitfallData,csbCard, cardinalityLevels, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function CardinalityPage({ formulaSummaryData, pitfallData,csbCard, cardinalityLevels, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3490,6 +3533,24 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
             after={`This is how $|\\mathbb{N}| = |\\mathbb{Z}|$ follows from the two injections above without building the bijection by hand.`}
           >
             <TheoremCard data={csbCard} variant="card" theme={theoremTheme} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="set-cardinality-formula-summary"
+            title="Cardinality formulas"
+            source="/set-theory/cardinality"
+            related={{ href: '/set-theory/formulas', label: 'All set theory formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
         ]
     },

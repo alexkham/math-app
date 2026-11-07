@@ -16,6 +16,9 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 
@@ -220,7 +223,7 @@ This page explores tautologies comprehensively, examining their properties, rela
 (The [law](!/logic/propositional-logic/laws) of the excluded middle: "P or not P" is always true.)]@
 @academic[pitfall,aside:true,width:35%:Checking only some rows
 Calling $P \\to (P \\land Q)$ a tautology after the rows $P = T$, $Q = T$ and $P = F$ misses the row $P = T$, $Q = F$, where $P \\land Q$ is F and the formula is F. It is not a tautology.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-only-some-rows)]@
 To test a formula, list every truth assignment of its variables in a truth table and evaluate the formula in each row. With $n$ variables there are $2^n$ rows: two for $P∨¬P$, four for a formula in $P$ and $Q$, eight for one in $P$, $Q$ and $R$. The formula is a tautology exactly when its column holds T in all of these rows.
 `
 
@@ -374,7 +377,7 @@ This states that no proposition can be both true and false simultaneously, which
 
 @academic[pitfall,aside:true,width:35%:Reading a tautological conditional as an equivalence
 Turning the tautology $((P \\to Q) \\land P) \\to Q$ into $(P \\to Q) \\land P \\equiv Q$ fails at $P = F$, $Q = T$: the left side is F and $Q$ is T. The conditional holds in one direction only.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-a-tautological-conditional-as-an-equivalence)]@
 Since all [propositional logic laws](!/logic/propositional-logic/laws) apart from inference rules and non-equivalences either express equivalences whose biconditionals are tautologies or standalone tautologies, we conclude that all these laws yield **tautologies**.
 
 Visit corresponding page to learn more about [propositional logic laws](!/logic/propositional-logic/laws).
@@ -400,7 +403,7 @@ Use this tool to evaluate [truth tables](!/logic/truth-tables).
     after:
     `@academic[pitfall,aside:true,width:35%:Treating not a tautology as a contradiction
 Calling $P \\to Q$ a contradiction because it is not a tautology, and so taking $\\neg(P \\to Q)$ for a tautology, fails at $P = T$, $Q = T$: there $P \\to Q$ is T and $\\neg(P \\to Q)$ is F. Both formulas are contingencies.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-not-a-tautology-as-a-contradiction)]@
 This is not just an abstract symmetry — it's a fundamental mechanism in logical systems.
     This reciprocal relationship plays out in reasoning strategies: to show something is necessarily true (a tautology), one might show that its negation leads to a contradiction — a technique known as reductio ad absurdum. The tension between the two is constructive: from the impossibility of one, we often infer the necessity of the other.
     Take for example the classic tautology 'P ∨ ¬P'. Its truth table confirms that it's always true, regardless of whether 'P' is true or false. Now consider the negation: '¬(P ∨ ¬P)'. No matter what truth value you assign to 'P', this formula is always false — a contradiction. In practice, this duality underpins proof techniques, logic solvers, and model checkers. If a system can show that assuming '¬φ' leads to a contradiction, it immediately concludes that 'φ' must be a tautology — turning logical failure into proof.`,
@@ -443,45 +446,19 @@ This is not just an abstract symmetry — it's a fundamental mechanism in logica
 `  ,
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary sets out the laws of logic that the page reads as tautologies, in two families, the way the section on logic laws as tautologies divides them. Each family has a line linking back to that section, and each law a short note on what it says. The buttons above the cards show one family at a time.
+
+The first family holds laws written as equivalences, the two De Morgan laws and the two commutative laws, whose biconditionals are true in every row. The second holds the laws that are tautologies on their own: the law of the excluded middle and the law of non-contradiction.`,
+    before: ``,
+    after: `Joining the two sides of a valid equivalence with a biconditional always gives a tautology, so every law here can be confirmed by checking that one formula is true in every row. Inference rules such as resolution are left out of both families, since they are not stated as equivalences.`,
+    link: '',
+  },
   pitfalls:{
     title:'Common Pitfalls',
-    content:`Three slips account for many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Checking only some rows**
-
-A formula is evaluated in a few rows, comes out T in each of them, and is called a tautology. A tautology must be T in every row of its truth table, so the rows that were not checked can still hold an F.
-
-Wrong working: for $P \\to (P \\land Q)$, the row $P = T$, $Q = T$ gives $T \\to T$, which is T. When $P = F$ the formula is $F \\to (P \\land Q)$, which is T for either value of $Q$. Every row tried gives T, so the formula is called a tautology.
-
-Right working: the four rows for $(P, Q)$ are $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, and the formula takes the values T, F, T, T. In the row $P = T$, $Q = F$, $P \\land Q$ is F and the formula is $T \\to F$, which is F. It is a contingency, not a tautology.
-
-Why it happens: once a few rows give T, the formula starts to look always true, and the remaining rows seem like a formality. The rows that are skipped are often the ones with mixed values, which are where formulas of this kind fail.
-
-How to check: count the rows first, $2^n$ for $n$ variables, and evaluate every one. A shortcut for conditionals is to look only for a row with the part before the arrow T and the part after it F; if no such row exists, the conditional is a tautology.
-
-**Reading a tautological conditional as an equivalence**
-
-A conditional $A \\to B$ that is a tautology is treated as if $A \\equiv B$ held. Only an equivalence makes the biconditional $A \\leftrightarrow B$ a tautology; a tautological conditional, such as the form of an inference rule, guarantees one direction only.
-
-Wrong working: $((P \\to Q) \\land P) \\to Q$, the form of modus ponens, is T in all four rows. So $(P \\to Q) \\land P \\equiv Q$, and $((P \\to Q) \\land P) \\leftrightarrow Q$ is taken to be a tautology too.
-
-Right working: in the row $P = F$, $Q = T$, $P \\to Q$ is T and $(P \\to Q) \\land P$ is $T \\land F$, which is F, while $Q$ is T. The biconditional is $F \\leftrightarrow T$, which is F, so $(P \\to Q) \\land P \\not\\equiv Q$. The conditional is a tautology; the biconditional is not.
-
-Why it happens: both laws and inference rules are listed as tautologies, so their forms are read in the same way. The arrow $\\to$ and the double arrow $\\leftrightarrow$ also look alike, and the second direction is assumed without being tested.
-
-How to check: test the reverse conditional $B \\to A$ on its own. Here $Q \\to ((P \\to Q) \\land P)$ is F at $P = F$, $Q = T$, so the reverse direction fails and the two sides are not equivalent.
-
-**Treating not a tautology as a contradiction**
-
-The rule that the negation of a tautology is a contradiction is read as if every formula were one or the other. A formula that is not a tautology is then called a contradiction, and its negation is called a tautology.
-
-Wrong working: $P \\to Q$ is F at $P = T$, $Q = F$, so it is not a tautology. It is called a contradiction, and so $\\neg(P \\to Q)$ is taken to be a tautology.
-
-Right working: for $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\to Q$ takes the values T, F, T, T, and $\\neg(P \\to Q)$ takes F, T, F, F. Each column holds both T and F, so both formulas are contingencies. The negation of a contingency is again a contingency.
-
-Why it happens: tautology and contradiction are shown side by side as opposites, and the negation rule links only these two. The third category, contingency, is not part of the picture and is easy to forget.
-
-How to check: before negating, find one row with T and one row with F. If both exist, the formula and its negation are both contingencies, and neither is a tautology.`
+    content:`Three slips account for many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
+    after: `Each slip draws a conclusion the truth table does not support. A tautology must be T in every row, a tautological conditional $A \\to B$ is not an equivalence unless $B \\to A$ holds too, and a formula that is not a tautology may still be true in some rows, so its negation need not be a tautology. Evaluating every row, and testing the reverse conditional, catches each slip.`,
   },
 
   faq:{
@@ -548,8 +525,52 @@ const faqQuestions = {
     }),
   };
 
+  // MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'checking-only-some-rows', name: `Checking only some rows`, errorAt: 0,
+        what: `A formula is evaluated in a few rows, comes out T in each of them, and is called a tautology. A tautology must be T in every row of its truth table, so the rows that were not checked can still hold an F.`,
+        wrong: [`For $P \\to (P \\land Q)$, the row $P = T$, $Q = T$ gives $T \\to T$, which is T. When $P = F$ the formula is $F \\to (P \\land Q)$, which is T for either value of $Q$. Every row tried gives T, so the formula is called a tautology.`],
+        right: [`The four rows for $(P, Q)$ are $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, and the formula takes the values T, F, T, T. In the row $P = T$, $Q = F$, $P \\land Q$ is F and the formula is $T \\to F$, which is F. It is a contingency, not a tautology.`],
+        why: `Once a few rows give T, the formula starts to look always true, and the remaining rows seem like a formality. The rows that are skipped are often the ones with mixed values, which are where formulas of this kind fail.`,
+        check: `Count the rows first, $2^n$ for $n$ variables, and evaluate every one. A shortcut for conditionals is to look only for a row with the part before the arrow T and the part after it F; if no such row exists, the conditional is a tautology.` },
+      { id: 'reading-a-tautological-conditional-as-an-equivalence', name: `Reading a tautological conditional as an equivalence`, errorAt: 1,
+        what: `A conditional $A \\to B$ that is a tautology is treated as if $A \\equiv B$ held. Only an equivalence makes the biconditional $A \\leftrightarrow B$ a tautology; a tautological conditional, such as the form of an inference rule, guarantees one direction only.`,
+        wrong: [`$((P \\to Q) \\land P) \\to Q$, the form of modus ponens, is T in all four rows.`, `So $(P \\to Q) \\land P \\equiv Q$, and $((P \\to Q) \\land P) \\leftrightarrow Q$ is taken to be a tautology too.`],
+        right: [`$((P \\to Q) \\land P) \\to Q$, the form of modus ponens, is T in all four rows.`, `In the row $P = F$, $Q = T$, $P \\to Q$ is T and $(P \\to Q) \\land P$ is $T \\land F$, which is F, while $Q$ is T. The biconditional is $F \\leftrightarrow T$, which is F, so $(P \\to Q) \\land P \\not\\equiv Q$. The conditional is a tautology; the biconditional is not.`],
+        why: `Both laws and inference rules are listed as tautologies, so their forms are read in the same way. The arrow $\\to$ and the double arrow $\\leftrightarrow$ also look alike, and the second direction is assumed without being tested.`,
+        check: `Test the reverse conditional $B \\to A$ on its own. Here $Q \\to ((P \\to Q) \\land P)$ is F at $P = F$, $Q = T$, so the reverse direction fails and the two sides are not equivalent.` },
+      { id: 'treating-not-a-tautology-as-a-contradiction', name: `Treating not a tautology as a contradiction`, errorAt: 1,
+        what: `The rule that the negation of a tautology is a contradiction is read as if every formula were one or the other. A formula that is not a tautology is then called a contradiction, and its negation is called a tautology.`,
+        wrong: [`$P \\to Q$ is F at $P = T$, $Q = F$, so it is not a tautology.`, `It is called a contradiction, and so $\\neg(P \\to Q)$ is taken to be a tautology.`],
+        right: [`$P \\to Q$ is F at $P = T$, $Q = F$, so it is not a tautology.`, `For $(P, Q)$ equal to $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$, the formula $P \\to Q$ takes the values T, F, T, T, and $\\neg(P \\to Q)$ takes F, T, F, F. Each column holds both T and F, so both formulas are contingencies. The negation of a contingency is again a contingency.`],
+        why: `Tautology and contradiction are shown side by side as opposites, and the negation rule links only these two. The third category, contingency, is not part of the picture and is easy to forget.`,
+        check: `Before negating, find one row with T and one row with F. If both exist, the formula and its negation are both contingencies, and neither is a tautology.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'equivalences', name: 'Laws written as equivalences', sub: 'A valid equivalence $A \\equiv B$ means its biconditional $A \\leftrightarrow B$ is a tautology, as [logic laws as tautologies](!#laws_as-tautologies) explains.', pairs: [
+        [{ formula: '$\\neg(P \\lor Q) \\equiv (\\neg P \\land \\neg Q)$', text: "The negation of a disjunction is the conjunction of the negations, by [De Morgan's laws](!#laws_as-tautologies)." },
+         { formula: '$\\neg(P \\land Q) \\equiv (\\neg P \\lor \\neg Q)$', text: "The negation of a conjunction is the disjunction of the negations, the second of [De Morgan's laws](!#laws_as-tautologies)." }],
+        [{ formula: '$P \\lor Q \\equiv Q \\lor P$', text: 'The order of the parts of a disjunction does not matter, by [the commutative laws](!#laws_as-tautologies).' },
+         { formula: '$P \\land Q \\equiv Q \\land P$', text: 'The same holds for a conjunction, the second of [the commutative laws](!#laws_as-tautologies).' }],
+      ] },
+      { id: 'direct', name: 'Laws that are tautologies directly', sub: 'One-sided laws, true in every case without equating two formulas, from [the same section](!#laws_as-tautologies).', pairs: [
+        [{ formula: '$P \\lor \\neg P \\equiv T$', text: 'Every proposition is either true or false, the [law of the excluded middle](!#laws_as-tautologies).' },
+         { formula: '$\\neg(P \\land \\neg P) \\equiv T$', text: 'No proposition is both true and false at once, the [law of non-contradiction](!#laws_as-tautologies).' }],
+      ] },
+    ],
+  };
+
   return {
     props:{
+    formulaSummaryData,
+    pitfallData,
       demoUnits,
       conceptIntroFigures,
       tautologies,
@@ -564,7 +585,7 @@ const faqQuestions = {
 }
 
 
-export default function TautologyPage({demoUnits, tautologies ,introContent ,sectionsContent,keyWords ,faqQuestions, conceptIntroFigures}) {
+export default function TautologyPage({ formulaSummaryData, pitfallData,demoUnits, tautologies ,introContent ,sectionsContent,keyWords ,faqQuestions, conceptIntroFigures}) {
 
   // const theoremHTML = renderAcademicBlockHTML("Theorem 1.2 (Existence and Uniqueness).\nA system of linear equations has either no solutions, exactly one solution, or infinitely many solutions.", 
   //   "definition");
@@ -598,7 +619,7 @@ export default function TautologyPage({demoUnits, tautologies ,introContent ,sec
           ciTable('truthTable'),
           `@academic[pitfall,aside:true,width:35%:Checking only some rows
 Calling $P \\to (P \\land Q)$ a tautology after the rows $P = T$, $Q = T$ and $P = F$ misses the row $P = T$, $Q = F$, where $P \\land Q$ is F and the formula is F. It is not a tautology.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-checking-only-some-rows)]@`,
         ],
       },
       {
@@ -715,9 +736,38 @@ Calling $P \\to (P \\land Q)$ a tautology after the rows $P = T$, $Q = T$ and $P
 ]
           },
           {
+              id:'formula-summary',
+              title:sectionsContent.formulaSummary.title,
+              link:sectionsContent.formulaSummary.link,
+              content:[
+                sectionsContent.formulaSummary.content,
+                <DiagramFrame
+                  key={'formula-summary'}
+                  id="tautology-law-formula-summary"
+                  title="Logic laws as tautologies"
+                  source="/logic/propositional-logic/semantics/tautology"
+                  related={{ href: '/logic/formulas', label: 'All logic formulas' }}
+                  after={sectionsContent.formulaSummary.after}
+                >
+                  <FormulaSheet data={formulaSummaryData} variant="grouped" />
+                </DiagramFrame>,
+              ]
+          },
+          {
             id:'pitfalls',
             title:sectionsContent.pitfalls.title,
-            content:sectionsContent.pitfalls.content,
+            content: [
+              sectionsContent.pitfalls.content,
+              <DiagramFrame
+                key={'pitfalls-mistakes'}
+                id="tautology-pitfalls"
+                title="Common pitfalls with tautologies"
+                source="/logic/propositional-logic/semantics/tautology"
+                after={sectionsContent.pitfalls.after}
+              >
+                <MistakeFix data={pitfallData} variant="trace" />
+              </DiagramFrame>,
+            ],
           },
           // faq: rendered component — must be built here, not in getStaticProps
           {

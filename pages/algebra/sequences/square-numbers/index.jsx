@@ -16,6 +16,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -365,6 +366,15 @@ The triple $(3, 4, 5)$ comes from $m = 2, n = 1$; the triple $(5, 12, 13)$ from 
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page on one set of cards. Each card gives the formula's name, the formula and a note on what it means, with a link to the section that explains it.
+
+The first three cards describe a square number three ways: directly from its position, by adding one L-shaped border at a time, and as a sum of consecutive odd numbers. The fourth adds up the first squares. The last two connect squares to other numbers: two neighbouring triangular numbers make a square, and differences and sums of squares generate Pythagorean triples.`,
+    before: ``,
+    after: `The cards show the same object from several sides. The direct formula is the fastest way to a single square, the recursive form and the odd-number sum explain why squares grow the way they do, and the last two cards are where squares meet triangles and right triangles.`,
+    link: '',
+  },
   obj6: {
     title: `Common Pitfalls`,
     content: `Three mistakes come up again and again with square numbers. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -555,8 +565,28 @@ $$3^2 = 9 < 13 < 16 = 4^2$$`, `So neither $26$ nor $13$ is a perfect square. A n
     ],
   };
 
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Square number', formula: '$S_n = n^2$',
+        text: 'The number of dots in a square grid with $n$ rows and $n$ columns, from [the definition](!#1).' },
+      { name: 'Recursive form', formula: '$S_1 = 1, \\quad S_n = S_{n-1} + (2n - 1)$',
+        text: 'Each square adds an L-shaped border of $2n - 1$ dots to the one before, as [recursive form](!#2) shows.' },
+      { name: 'Sum of odd numbers', formula: '$n^2 = 1 + 3 + 5 + \\cdots + (2n - 1)$',
+        text: 'Stacking those borders: every perfect square is a sum of consecutive odd numbers ([odd number sums](!#2)).' },
+      { name: 'Sum of squares', formula: '$\\displaystyle \\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$',
+        text: 'The total of the first $n$ squares, derived in [sum of squares](!#4).' },
+      { name: 'Two triangles make a square', formula: '$S_n = T_n + T_{n-1}$',
+        text: 'Two consecutive triangular numbers fit together into a square, as [connections to triangular numbers](!#5) shows.' },
+      { name: 'Pythagorean triples', formula: '$a = m^2 - n^2, \\quad b = 2mn, \\quad c = m^2 + n^2$',
+        text: 'Squares of two whole numbers give a right triangle with whole sides, from [the same section](!#5).' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
     pitfallData,
          sectionsContent,
          introContent,
@@ -576,7 +606,7 @@ $$3^2 = 9 < 13 < 16 = 4^2$$`, `So neither $26$ nor $13$ is a perfect square. A n
     }
    }
 
-export default function SquareNumbersPage({ pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SquareNumbersPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
@@ -722,6 +752,24 @@ $$1, 4, 9, 16, 25, 36, 49, 64, 81, 100, \\ldots$$]@`,
           sectionsContent.obj5.content,
           <div key={'unit-twoTriangles'} dangerouslySetInnerHTML={{ __html: demoUnits.twoTriangles }} />,
           `The same cut works for every n: n² = Tₙ + Tₙ₋₁.`,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="square-number-formula-summary"
+            title="Square number formulas"
+            source="/algebra/sequences/square-numbers"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -3179,6 +3179,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixAdditionDiagrams from '@/app/components/linear-algebra copy/matrix/matrixAdditionDiagrams'
@@ -3193,6 +3194,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -3844,7 +3846,7 @@ The same count works for any sizes. Each of the $mp$ entries of the product need
 
 @academic[pitfall,aside:true,width:35%:Multiplying entry by entry
 Multiplying matching positions turns $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$ into $\\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$, the Hadamard product, not $AB$. The row-by-column rule gives $\\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-entry-by-entry)]@
 
 Every entry of the product draws on a whole row of the left factor and a whole column of the right factor. The entry $29$, in row $2$ and column $2$, combines the second row $(2, -1, 4)$ of the left matrix with the second column $(1, -3, 6)$ of the right one: three products, added together. The same pattern produces the other three entries, and it works the same way whatever the sizes of the two factors.`,
     before: ``,
@@ -3958,7 +3960,7 @@ One rule from scalar arithmetic does not carry over. Since matrix multiplication
 
 @academic[pitfall,aside:true,width:35%:Squaring a sum as with numbers
 Writing $(A + B)^2 = A^2 + 2AB + B^2$ merges $AB$ and $BA$. With $A$ and $B$ from the commutativity counterexample, it gives $\\begin{pmatrix} 13 & 18 \\\\ 12 & 16 \\end{pmatrix}$, but $(A + B)^2 = A^2 + AB + BA + B^2 = \\begin{pmatrix} 7 & 10 \\\\ 15 & 22 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-a-sum-as-with-numbers)]@
 
 Squaring a sum is where this matters most often. The square $(A + B)^2$ is the product $(A + B)(A + B)$, and it is expanded with the two distributive laws from the properties section, exactly as a product of two different sums would be. Only after the expansion is it clear which of the resulting terms can be combined.
 
@@ -3977,7 +3979,7 @@ The key property is that left-multiplying a matrix $A$ by an elementary matrix $
 
 @academic[pitfall,aside:true,width:35%:Multiplying on the wrong side
 Writing $AE$ instead of $EA$ for the row swap $E = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ and $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ gives $\\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$, with the columns swapped. The row swap is $EA = \\begin{pmatrix} 3 & 4 \\\\ 1 & 2 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-on-the-wrong-side)]@
 
 This leads to a structural result: every invertible matrix can be written as a product of elementary matrices. Since [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) reduces an invertible matrix to the identity through a sequence of row operations, each operation corresponds to an elementary matrix, and reversing the sequence expresses the original matrix as their product. This factorization is more conceptual than computational, but it underpins the theoretical foundations of the [determinant](!/linear-algebra/determinants) and the inverse.
 
@@ -4035,72 +4037,20 @@ Both products have their own visual tools: the [Hadamard product](!/linear-algeb
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page in four families, and the buttons above the cards show one family at a time. Each card gives a formula, a sentence on what it computes or which sizes it needs, and a link to the section that explains it.
+
+The first family works entry by entry: addition, subtraction, scalar multiplication, linear combinations and the Hadamard product. The second covers matrix multiplication, from the row-by-column definition and the failure of commutativity through associativity and distribution to the column and outer-product views. The third gives the transpose and its rules for sums, scalars and products, and the last defines powers of a square matrix.`,
+    before: ``,
+    after: `Most mistakes with these formulas are about size or order. Checking that the inner sizes match before multiplying, and remembering that a product and its transpose both depend on order, settles which expressions exist and what they equal.`,
+    link: '',
+  },
   obj14: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers in matrix arithmetic. Three are marked with a box where they happen in the sections above, and the fourth, the order of a transposed product, is flagged in the transpose section. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying entry by entry**
-
-The product $AB$ is computed by multiplying the entries that sit in the same position, the way matrices are added. Rows and columns are never combined.
-
-Wrong working:
-$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\cdot 5 & 2 \\cdot 6 \\\\ 3 \\cdot 7 & 4 \\cdot 8 \\end{pmatrix} = \\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$$
-
-Right working: each entry is a row of the left matrix times a column of the right matrix.
-$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix} = \\begin{pmatrix} 1 \\cdot 5 + 2 \\cdot 7 & 1 \\cdot 6 + 2 \\cdot 8 \\\\ 3 \\cdot 5 + 4 \\cdot 7 & 3 \\cdot 6 + 4 \\cdot 8 \\end{pmatrix} = \\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$$
-
-Why it happens: addition, subtraction and scalar multiplication really do work position by position, and the entry-by-entry product exists as an operation of its own, the Hadamard product. The pattern is carried over to $AB$.
-
-How to check: multiply by the identity matrix, which must return the matrix unchanged. With the row-times-column rule, $AI = A$. Entry by entry, $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ and $I$ give $\\begin{pmatrix} 1 & 0 \\\\ 0 & 4 \\end{pmatrix}$, only the diagonal.
-
-**Keeping the order when transposing a product**
-
-The transpose is applied to each factor of a product, but the factors are left in their original order: $(AB)^T$ is written as $A^T B^T$.
-
-Wrong working: take the matrices of the worked example, $A = \\begin{pmatrix} 1 & 0 & 3 \\\\ 2 & -1 & 4 \\end{pmatrix}$ and $B = \\begin{pmatrix} 5 & 1 \\\\ 2 & -3 \\\\ 0 & 6 \\end{pmatrix}$. Then $A^T$ is $3 \\times 2$, $B^T$ is $2 \\times 3$, and
-$$A^T B^T = \\begin{pmatrix} 7 & -4 & 12 \\\\ -1 & 3 & -6 \\\\ 19 & -6 & 24 \\end{pmatrix}$$
-a $3 \\times 3$ matrix, although $AB$ is $2 \\times 2$.
-
-Right working: the order reverses.
-$$(AB)^T = B^T A^T = \\begin{pmatrix} 5 & 8 \\\\ 19 & 29 \\end{pmatrix}$$
-which is exactly $AB = \\begin{pmatrix} 5 & 19 \\\\ 8 & 29 \\end{pmatrix}$ with its rows and columns exchanged.
-
-Why it happens: the transpose distributes over a sum, $(A + B)^T = A^T + B^T$, with no change of order, and the same pattern is carried over to products.
-
-How to check: compare sizes. If $A$ is $m \\times n$ and $B$ is $n \\times p$, then $(AB)^T$ is $p \\times m$. The product $B^T A^T$ has that size, while $A^T B^T$ is defined only when $m = p$, and even then it is $n \\times n$.
-
-**Squaring a sum as with numbers**
-
-$(A + B)^2$ is expanded with the formula from ordinary algebra, and the two middle terms $AB$ and $BA$ are merged into $2AB$.
-
-Wrong working: with $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 3 & 4 \\end{pmatrix}$ from the commutativity counterexample,
-$$A^2 + 2AB + B^2 = \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix} + \\begin{pmatrix} 12 & 16 \\\\ 0 & 0 \\end{pmatrix} + \\begin{pmatrix} 0 & 0 \\\\ 12 & 16 \\end{pmatrix} = \\begin{pmatrix} 13 & 18 \\\\ 12 & 16 \\end{pmatrix}$$
-
-Right working: distribute without reordering, so both $AB$ and $BA$ appear.
-$$(A + B)^2 = A^2 + AB + BA + B^2$$
-$$= \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix} + \\begin{pmatrix} 6 & 8 \\\\ 0 & 0 \\end{pmatrix} + \\begin{pmatrix} 0 & 0 \\\\ 3 & 6 \\end{pmatrix} + \\begin{pmatrix} 0 & 0 \\\\ 12 & 16 \\end{pmatrix} = \\begin{pmatrix} 7 & 10 \\\\ 15 & 22 \\end{pmatrix}$$
-
-Why it happens: the formula $(a + b)^2 = a^2 + 2ab + b^2$ is so familiar that the step $ba = ab$ hidden inside it goes unnoticed.
-
-How to check: add first, then square. $A + B = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$, and its square is $\\begin{pmatrix} 7 & 10 \\\\ 15 & 22 \\end{pmatrix}$, the same as the four-term expansion. The two-term middle $2AB$ is correct only when $AB = BA$.
-
-**Multiplying on the wrong side**
-
-To perform a row operation, the elementary matrix is placed to the right of $A$. Multiplying on the right acts on the columns, so the operation lands on the columns instead of the rows.
-
-Wrong working: with $E = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, the identity with its two rows swapped, and $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$,
-$$AE = \\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$$
-The two columns of $A$ have traded places; the rows have not.
-
-Right working:
-$$EA = \\begin{pmatrix} 3 & 4 \\\\ 1 & 2 \\end{pmatrix}$$
-which is $A$ with rows $1$ and $2$ swapped.
-
-Why it happens: the operation is done to $A$, so $A$ is written first and $E$ is attached after it. For a row swap the slip is hard to see, because the same $E$ is also the identity with two columns swapped.
-
-How to check: every row of a row-swapped matrix must be a row of $A$. The first row of $AE$ is $(2, 1)$, which is not a row of $A$; the rows of $EA$ are $(3, 4)$ and $(1, 2)$.`,
+    content: `Four mistakes account for many wrong answers in matrix arithmetic. Three are marked with a box where they happen in the sections above, and the fourth, the order of a transposed product, is flagged in the transpose section. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip treats matrices like numbers. A product combines rows with columns, $(AB)^T = B^TA^T$, $(A + B)^2 = A^2 + AB + BA + B^2$ because $AB \\neq BA$ in general, and an elementary matrix acts on rows only from the left. Multiplying by the identity, comparing sizes, or adding before squaring catches each slip.`,
     link: ``,
   },
 }
@@ -4344,8 +4294,87 @@ const schemas = {
     intro: 'Rows become columns: the 2×3 matrix turns into a 3×2, and the diagonal entries 1 and 5 stay in place.',
   };
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj14 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-entry-by-entry', name: `Multiplying entry by entry`, errorAt: 0,
+        what: `The product $AB$ is computed by multiplying the entries that sit in the same position, the way matrices are added. Rows and columns are never combined.`,
+        wrong: [`$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 \\cdot 5 & 2 \\cdot 6 \\\\ 3 \\cdot 7 & 4 \\cdot 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$$`],
+        right: [`Each entry is a row of the left matrix times a column of the right matrix.`, `$$\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 \\cdot 5 + 2 \\cdot 7 & 1 \\cdot 6 + 2 \\cdot 8 \\\\ 3 \\cdot 5 + 4 \\cdot 7 & 3 \\cdot 6 + 4 \\cdot 8 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$$`],
+        why: `Addition, subtraction and scalar multiplication really do work position by position, and the entry-by-entry product exists as an operation of its own, the Hadamard product. The pattern is carried over to $AB$.`,
+        check: `Multiply by the identity matrix, which must return the matrix unchanged. With the row-times-column rule, $AI = A$. Entry by entry, $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$ and $I$ give $\\begin{pmatrix} 1 & 0 \\\\ 0 & 4 \\end{pmatrix}$, only the diagonal.` },
+      { id: 'keeping-the-order-when-transposing-a-product', name: `Keeping the order when transposing a product`, errorAt: 1,
+        what: `The transpose is applied to each factor of a product, but the factors are left in their original order: $(AB)^T$ is written as $A^T B^T$.`,
+        wrong: [`Take the matrices of the worked example, $A = \\begin{pmatrix} 1 & 0 & 3 \\\\ 2 & -1 & 4 \\end{pmatrix}$ and $B = \\begin{pmatrix} 5 & 1 \\\\ 2 & -3 \\\\ 0 & 6 \\end{pmatrix}$.`, `Then $A^T$ is $3 \\times 2$, $B^T$ is $2 \\times 3$, and
+$$A^T B^T = \\begin{pmatrix} 7 & -4 & 12 \\\\ -1 & 3 & -6 \\\\ 19 & -6 & 24 \\end{pmatrix}$$`, `A $3 \\times 3$ matrix, although $AB$ is $2 \\times 2$.`],
+        right: [`Take the matrices of the worked example, $A = \\begin{pmatrix} 1 & 0 & 3 \\\\ 2 & -1 & 4 \\end{pmatrix}$ and $B = \\begin{pmatrix} 5 & 1 \\\\ 2 & -3 \\\\ 0 & 6 \\end{pmatrix}$.`, `The order reverses.`, `$$(AB)^T = B^T A^T = \\begin{pmatrix} 5 & 8 \\\\ 19 & 29 \\end{pmatrix}$$`, `Which is exactly $AB = \\begin{pmatrix} 5 & 19 \\\\ 8 & 29 \\end{pmatrix}$ with its rows and columns exchanged.`],
+        why: `The transpose distributes over a sum, $(A + B)^T = A^T + B^T$, with no change of order, and the same pattern is carried over to products.`,
+        check: `Compare sizes. If $A$ is $m \\times n$ and $B$ is $n \\times p$, then $(AB)^T$ is $p \\times m$. The product $B^T A^T$ has that size, while $A^T B^T$ is defined only when $m = p$, and even then it is $n \\times n$.` },
+      { id: 'squaring-a-sum-as-with-numbers', name: `Squaring a sum as with numbers`, errorAt: 0,
+        what: `$(A + B)^2$ is expanded with the formula from ordinary algebra, and the two middle terms $AB$ and $BA$ are merged into $2AB$.`,
+        wrong: [`With $A = \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 3 & 4 \\end{pmatrix}$ from the commutativity counterexample,
+$$A^2 + 2AB + B^2$$
+$$= \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix}$$
+$$+ \\begin{pmatrix} 12 & 16 \\\\ 0 & 0 \\end{pmatrix}$$
+$$+ \\begin{pmatrix} 0 & 0 \\\\ 12 & 16 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 13 & 18 \\\\ 12 & 16 \\end{pmatrix}$$`],
+        right: [`Distribute without reordering, so both $AB$ and $BA$ appear.`, `$$(A + B)^2 = A^2 + AB + BA + B^2$$`, `$$= \\begin{pmatrix} 1 & 2 \\\\ 0 & 0 \\end{pmatrix} + \\begin{pmatrix} 6 & 8 \\\\ 0 & 0 \\end{pmatrix}$$
+$$+ \\begin{pmatrix} 0 & 0 \\\\ 3 & 6 \\end{pmatrix}$$
+$$+ \\begin{pmatrix} 0 & 0 \\\\ 12 & 16 \\end{pmatrix} = \\begin{pmatrix} 7 & 10 \\\\ 15 & 22 \\end{pmatrix}$$`],
+        why: `The formula $(a + b)^2 = a^2 + 2ab + b^2$ is so familiar that the step $ba = ab$ hidden inside it goes unnoticed.`,
+        check: `Add first, then square. $A + B = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$, and its square is $\\begin{pmatrix} 7 & 10 \\\\ 15 & 22 \\end{pmatrix}$, the same as the four-term expansion. The two-term middle $2AB$ is correct only when $AB = BA$.` },
+      { id: 'multiplying-on-the-wrong-side', name: `Multiplying on the wrong side`, errorAt: 1,
+        what: `To perform a row operation, the elementary matrix is placed to the right of $A$. Multiplying on the right acts on the columns, so the operation lands on the columns instead of the rows.`,
+        wrong: [`With $E = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$,`, `The identity with its two rows swapped, and $A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}$,
+$$AE = \\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$$`, `The two columns of $A$ have traded places; the rows have not.`],
+        right: [`With $E = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$,`, `$$EA = \\begin{pmatrix} 3 & 4 \\\\ 1 & 2 \\end{pmatrix}$$`, `Which is $A$ with rows $1$ and $2$ swapped.`],
+        why: `The operation is done to $A$, so $A$ is written first and $E$ is attached after it. For a row swap the slip is hard to see, because the same $E$ is also the identity with two columns swapped.`,
+        check: `Every row of a row-swapped matrix must be a row of $A$. The first row of $AE$ is $(2, 1)$, which is not a row of $A$; the rows of $EA$ are $(3, 4)$ and $(1, 2)$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'entry', name: 'Entry by entry', sub: 'Operations that act on matching positions and keep the size of the matrix.', pairs: [
+        [{ formula: '$(A + B)_{ij} = a_{ij} + b_{ij}$', text: 'Matching entries add, and both matrices must be $m \\times n$, as [matrix addition](!#1) requires.' },
+         { formula: '$A - B = A + (-B)$', text: 'Subtraction adds the negative, with the same size rule, from [matrix subtraction](!#2).' }],
+        [{ formula: '$(cA)_{ij} = c \\cdot a_{ij}$', text: 'A scalar multiplies every entry and the size stays the same ([scalar multiplication](!#3)).' },
+         { formula: '$c_1 A_1 + c_2 A_2 + \\cdots + c_k A_k$', text: 'Scaling and adding matrices of one size; these make the $m \\times n$ matrices a vector space of dimension $mn$, as [linear combinations](!#4) shows.' }],
+        [{ formula: '$(A \\circ B)_{ij} = a_{ij}\\,b_{ij}$', text: 'The Hadamard product multiplies matching entries of two $m \\times n$ matrices and has nothing to do with $AB$ ([two more products](!#13)).' }, ''],
+      ] },
+      { id: 'product', name: 'Matrix multiplication', sub: 'Rows of the left factor meet columns of the right one.', pairs: [
+        [{ formula: '$\\displaystyle (AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$', text: 'Row $i$ of $A$ times column $j$ of $B$; $A$ is $m \\times n$, $B$ is $n \\times p$ and $AB$ is $m \\times p$, from [the definition](!#5).' },
+         { formula: '$AB \\neq BA$', text: 'In general the order matters, even when both products exist; [the properties](!#6) give a counterexample.' }],
+        [{ formula: '$(AB)C = A(BC)$', text: 'Grouping does not change a product whenever all the products are defined ([multiplication properties](!#6)).' },
+         { formula: '$A(B + C) = AB + AC, \\quad (A + B)C = AC + BC$', text: 'Multiplication distributes over addition on both sides, from [the same section](!#6).' }],
+        [{ formula: '$AB = \\begin{pmatrix} A\\mathbf{b}_1 & A\\mathbf{b}_2 & \\cdots & A\\mathbf{b}_p \\end{pmatrix}$', text: 'Column $j$ of the product is $A$ times column $j$ of $B$, the [column view](!#7) of the product.' },
+         { formula: '$\\displaystyle AB = \\sum_{k=1}^{n} \\mathbf{a}_k \\mathbf{b}_k^{\\mathsf{T}}$', text: 'Column $k$ of $A$ times row $k$ of $B$, summed: the product as a sum of rank-one pieces, the third view in [column and row interpretations](!#7).' }],
+      ] },
+      { id: 'transpose', name: 'Transpose', sub: 'Rows become columns, and products come back in reverse order.', pairs: [
+        [{ formula: '$(A^T)_{ij} = a_{ji}$', text: 'An $m \\times n$ matrix turns into an $n \\times m$ one, as [the transpose](!#8) defines.' },
+         { formula: '$(A^T)^T = A$', text: 'Transposing twice gives back the original matrix ([the transpose](!#8)).' }],
+        [{ formula: '$(A + B)^T = A^T + B^T$', text: 'The transpose of a sum is the sum of the transposes, from [the same section](!#8).' },
+         { formula: '$(cA)^T = c\\, A^T$', text: 'A scalar passes straight through the transpose, as [the transpose](!#8) shows.' }],
+        [{ formula: '$(AB)^T = B^T A^T$', text: 'The order reverses, so transposing a product reads it backward; this is why $A^T A$ is always symmetric ([the transpose](!#8)).' }, ''],
+      ] },
+      { id: 'powers', name: 'Powers', sub: 'Repeated multiplication of a square matrix.', pairs: [
+        [{ formula: '$A^0 = I, \\quad A^1 = A, \\quad A^k = \\underbrace{A \\cdot A \\cdots A}_{k \\text{ factors}}$', text: 'Defined only for square matrices, from [matrix powers](!#9).' },
+         { formula: '$A^j A^k = A^{j+k}$', text: 'Exponents add as with numbers, but $(AB)^k = A^k B^k$ fails in general, as [matrix powers](!#9) explains.' }],
+      ] },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     transposeStrip,
     matrixProductOrder,
     matrixProductAnatomy,
@@ -4373,7 +4402,7 @@ const schemas = {
    }
 
 
-   export default function MatrixOperationsPage({transposeStrip, matrixProductOrder, matrixProductAnatomy, scalarMultipleStrip, matrixAdditionStrip, seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+   export default function MatrixOperationsPage({ formulaSummaryData, pitfallData,transposeStrip, matrixProductOrder, matrixProductAnatomy, scalarMultipleStrip, matrixAdditionStrip, seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4645,11 +4674,38 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="matrix-operation-formula-summary"
+            title="Matrix operation formulas"
+            source="/linear-algebra/matrix/operations"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj14.title,
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'obj14-mistakes'}
+            id="matrix-operation-pitfalls"
+            title="Common pitfalls with matrix operations"
+            source="/linear-algebra/matrix/operations"
+            after={sectionsContent.obj14.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -721,6 +721,8 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import discretePmfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/discretePmfDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1295,67 +1297,9 @@ Because of its simplicity and flexibility, the coin toss model appears repeatedl
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Counting heads instead of sequences**
-
-Three fair tosses are summarised by the number of heads, and the four possible counts are treated as the outcomes of the experiment, each with the same probability.
-
-Wrong working: the counts are $0, 1, 2, 3$, so
-$$P(\\text{two heads}) = \\frac{1}{4}$$
-
-Right working: the outcomes are the eight ordered sequences, each with probability $\\frac{1}{8}$. Two heads occur in HHT, HTH and THH, so
-$$P(\\text{two heads}) = \\frac{3}{8}$$
-
-Why it happens: the question asks about a count, so the counts look like the natural list of outcomes. But a count can be reached by several sequences, and the probability is shared out over sequences, not over counts.
-
-How to check: add up the probabilities of all counts. From the sequences they are $\\frac{1}{8}, \\frac{3}{8}, \\frac{3}{8}, \\frac{1}{8}$, which sum to $1$; the middle counts must be more likely than the extreme ones, since HHH and TTT are single sequences.
-
-**Adding the chances of overlapping events**
-
-The probability that at least one of several tosses shows heads is found by adding the probability of heads for each toss.
-
-Wrong working: for three tosses,
-$$P(\\text{at least one head}) = \\frac{1}{2} + \\frac{1}{2} + \\frac{1}{2} = \\frac{3}{2}$$
-
-Right working: the only sequence with no head is TTT, so
-$$P(\\text{at least one head}) = 1 - P(TTT) = 1 - \\frac{1}{8} = \\frac{7}{8}$$
-
-Why it happens: within a single toss, heads and tails are mutually exclusive, and their probabilities add. "Heads on the first toss" and "heads on the second toss" are not exclusive: both hold for HHT, so adding counts that sequence twice.
-
-How to check: a probability can never exceed $1$, and $\\frac{3}{2}$ does. Counting directly also works: seven of the eight sequences contain at least one head.
-
-**Expecting a streak to end**
-
-After a run of the same face, the other face is believed to be due, and the next toss is given a higher probability for it.
-
-Wrong working: after HHHHH, tails "must" come soon, so
-$$P(T \\text{ on toss 6}) > \\frac{1}{2}$$
-
-Right working: the mechanism has no memory, so toss 6 has the same assignment as every other toss.
-$$P(T \\text{ on toss 6}) = \\frac{1}{2}$$
-Both six-toss sequences HHHHHT and HHHHHH have probability $\\left(\\frac{1}{2}\\right)^6 = \\frac{1}{64}$.
-
-Why it happens: over many tosses the proportion of heads settles near $\\frac{1}{2}$, and this is read as the coin correcting earlier imbalances. The proportion settles because later tosses outnumber the early streak, not because the coin compensates for it.
-
-How to check: write out the two sequences that differ only in the last toss and compare their probabilities. If they are equal, the streak gives no reason to prefer either face.
-
-**Expecting exactly half heads**
-
-Because the most likely count of heads in ten fair tosses is $5$, that count is taken as the result that normally happens.
-
-Wrong working: "ten tosses usually give five heads", so
-$$P(5 \\text{ heads}) \\text{ is close to } 1$$
-
-Right working: five heads can occur in $\\binom{10}{5} = 252$ of the $2^{10} = 1024$ sequences, so
-$$P(5 \\text{ heads}) = \\frac{252}{1024} \\approx 0.246$$
-The count is not $5$ with probability about $0.754$.
-
-Why it happens: the expected number of heads, $10 \\cdot \\frac{1}{2} = 5$, is confused with a count that is likely to occur exactly. The expected value describes the centre of the distribution, not a single likely result.
-
-How to check: compare the bar at $5$ with its neighbours. The bars at $4$ and $6$ each carry $\\frac{210}{1024} \\approx 0.205$, almost as much as the bar at $5$, so no single count dominates.`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip misreads what the tosses produce. The outcomes are sequences, not counts of heads; overlapping events are not added; a streak does not make the other face due; and the most likely count of heads is not the result that usually happens. Checking that the probabilities add up to $1$ and stay below $1$, or comparing two sequences that differ only in the last toss, catches each slip.`,
       link:'',
     }
   
@@ -1425,8 +1369,48 @@ From this basic source of randomness, more complex experiments can be constructe
     }),
   };
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'counting-heads-instead-of-sequences', name: `Counting heads instead of sequences`, errorAt: 0,
+        what: `Three fair tosses are summarised by the number of heads, and the four possible counts are treated as the outcomes of the experiment, each with the same probability.`,
+        wrong: [`The counts are $0, 1, 2, 3$, so
+$$P(\\text{two heads}) = \\frac{1}{4}$$`],
+        right: [`The outcomes are the eight ordered sequences, each with probability $\\frac{1}{8}$. Two heads occur in HHT, HTH and THH, so
+$$P(\\text{two heads}) = \\frac{3}{8}$$`],
+        why: `The question asks about a count, so the counts look like the natural list of outcomes. But a count can be reached by several sequences, and the probability is shared out over sequences, not over counts.`,
+        check: `Add up the probabilities of all counts. From the sequences they are $\\frac{1}{8}, \\frac{3}{8}, \\frac{3}{8}, \\frac{1}{8}$, which sum to $1$; the middle counts must be more likely than the extreme ones, since HHH and TTT are single sequences.` },
+      { id: 'adding-the-chances-of-overlapping-events', name: `Adding the chances of overlapping events`, errorAt: 0,
+        what: `The probability that at least one of several tosses shows heads is found by adding the probability of heads for each toss.`,
+        wrong: [`For three tosses,
+$$P(\\text{at least one head}) = \\frac{1}{2} + \\frac{1}{2} + \\frac{1}{2} = \\frac{3}{2}$$`],
+        right: [`The only sequence with no head is TTT, so
+$$P(\\text{at least one head}) = 1 - P(TTT)$$
+$$= 1 - \\frac{1}{8} = \\frac{7}{8}$$`],
+        why: `Within a single toss, heads and tails are mutually exclusive, and their probabilities add. "Heads on the first toss" and "heads on the second toss" are not exclusive: both hold for HHT, so adding counts that sequence twice.`,
+        check: `A probability can never exceed $1$, and $\\frac{3}{2}$ does. Counting directly also works: seven of the eight sequences contain at least one head.` },
+      { id: 'expecting-a-streak-to-end', name: `Expecting a streak to end`, errorAt: 0,
+        what: `After a run of the same face, the other face is believed to be due, and the next toss is given a higher probability for it.`,
+        wrong: [`After HHHHH, tails "must" come soon, so
+$$P(T \\text{ on toss 6}) > \\frac{1}{2}$$`],
+        right: [`The mechanism has no memory, so toss 6 has the same assignment as every other toss.`, `$$P(T \\text{ on toss 6}) = \\frac{1}{2}$$`, `Both six-toss sequences HHHHHT and HHHHHH have probability $\\left(\\frac{1}{2}\\right)^6 = \\frac{1}{64}$.`],
+        why: `Over many tosses the proportion of heads settles near $\\frac{1}{2}$, and this is read as the coin correcting earlier imbalances. The proportion settles because later tosses outnumber the early streak, not because the coin compensates for it.`,
+        check: `Write out the two sequences that differ only in the last toss and compare their probabilities. If they are equal, the streak gives no reason to prefer either face.` },
+      { id: 'expecting-exactly-half-heads', name: `Expecting exactly half heads`, errorAt: 0,
+        what: `Because the most likely count of heads in ten fair tosses is $5$, that count is taken as the result that normally happens.`,
+        wrong: [`"ten tosses usually give five heads", so
+$$P(5 \\text{ heads}) \\text{ is close to } 1$$`],
+        right: [`Five heads can occur in $\\binom{10}{5} = 252$ of the $2^{10} = 1024$ sequences, so
+$$P(5 \\text{ heads}) = \\frac{252}{1024} \\approx 0.246$$`, `The count is not $5$ with probability about $0.754$.`],
+        why: `The expected number of heads, $10 \\cdot \\frac{1}{2} = 5$, is confused with a count that is likely to occur exactly. The expected value describes the centre of the distribution, not a single likely result.`,
+        check: `Compare the bar at $5$ with its neighbours. The bars at $4$ and $6$ each carry $\\frac{210}{1024} \\approx 0.205$, almost as much as the bar at $5$, so no single count dominates.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1447,7 +1431,7 @@ From this basic source of randomness, more complex experiments can be constructe
   }
 }
 
-export default function CoinTossPage({
+export default function CoinTossPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1549,7 +1533,7 @@ A real toss is a mechanical event. The coin leaves the thumb with some upward sp
                   <div key={'unit-u_2_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_2_0 }} />,
           `@academic[pitfall,aside:true,width:35%:Counting heads instead of sequences
 Treating the counts 0, 1, 2 and 3 heads as four equally likely outcomes of three tosses gives $P(\\text{two heads}) = \\frac{1}{4}$. Two heads covers three sequences, HHT, HTH and THH, so $P(\\text{two heads}) = \\frac{3}{8}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-heads-instead-of-sequences)]@
 
 With three tosses, an outcome is a whole sequence such as HTH, recording the face of the first, second and third toss in that order. Sequences that contain the same number of heads, like HTT and TTH, are still different outcomes of the experiment. The fair-coin assignment gives each of the eight sequences the same probability, $\\frac{1}{8}$.`,
           `Events in this model are exactly the groups of such sequences.`,
@@ -1564,7 +1548,7 @@ With three tosses, an outcome is a whole sequence such as HTH, recording the fac
                   <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
           `@academic[pitfall,aside:true,width:35%:Adding the chances of overlapping events
 Adding $\\frac{1}{2}$ for each toss gives $P(\\text{at least one head}) = \\frac{3}{2}$ for three tosses, more than 1, because sequences such as HHT are counted more than once. Only TTT has no head, so the answer is $1 - \\frac{1}{8} = \\frac{7}{8}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-chances-of-overlapping-events)]@
 
 Events can also be described toss by toss. "Heads on the first toss" holds for the four sequences that begin with H, and "heads on the second toss" for the four with H in second place. Both of these events hold for HHT and for HHH, and the event "at least one head" collects every sequence in which any of the three tosses shows heads.`,
           `The probability assignment is what turns these counts into probabilities.`,
@@ -1592,7 +1576,7 @@ A biased coin with $P(H) = p$ still keeps one symmetry. Tossed twice, it gives H
                dangerouslySetInnerHTML={{ __html: assumptionsTable }} />,
           `@academic[pitfall,aside:true,width:35%:Expecting a streak to end
 After five heads in a row, tails seems due, so the next toss is given $P(T) > \\frac{1}{2}$. The coin has no memory: the next toss still has $P(T) = \\frac{1}{2}$, and HHHHHT and HHHHHH each have probability $\\frac{1}{64}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expecting-a-streak-to-end)]@
 
 The last assumption becomes visible when the coin is tossed many times in a row. Long sequences contain streaks: in 100 fair tosses, a run of at least five identical faces appears with probability about $0.97$. The model treats every toss in such a run as a new trial, with the same probability assignment as the first toss of the experiment.`,
         ]
@@ -1624,7 +1608,7 @@ The last assumption becomes visible when the coin is tossed many times in a row.
                   <div key={'unit-u_8_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_8_2 }} />,
           `@academic[pitfall,aside:true,width:35%:Expecting exactly half heads
 Treating 5 heads, the most likely count, as the usual result of ten fair tosses overrates it: $P(5 \\text{ heads}) = \\frac{252}{1024} \\approx 0.246$. About three times in four, the count is not 5.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expecting-exactly-half-heads)]@
 
 The binomial bars for ten tosses are tallest at 5, the count equal to half the number of tosses. The neighbouring counts 4 and 6 are close behind, and the five bars from 3 to 7 together carry $\\frac{912}{1024} \\approx 0.89$ of the probability. The count of heads is spread over several values around the middle, not fixed at one.`,
           `Longer runs approximate continuous behaviour, as the next section shows.`,
@@ -1682,6 +1666,15 @@ The binomial bars for ten tosses are tallest at 5, the count equal to half the n
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="coin-toss-pitfalls"
+            title="Common pitfalls with coin tosses"
+            source="/probability/models/coin-toss"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

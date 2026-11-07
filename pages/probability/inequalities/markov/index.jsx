@@ -675,6 +675,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -942,7 +943,7 @@ $$\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$$]@
 
 @academic[pitfall,aside:true,width:35%:Applying it to a variable that can be negative
 For $X$ equal to $-10$ or $10$ with probability $\\frac{1}{2}$ each, the bound gives $\\mathbb{P}(X \\ge 5) \\le \\frac{0}{5} = 0$, yet the true probability is $\\frac{1}{2}$. Negative values pull the mean down without shrinking the tail; the bound holds only for $X \\ge 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-applying-it-to-a-variable-that-can-be-negative)]@
 
 This inequality provides an upper bound on the probability that $X$ exceeds a given threshold, expressed solely in terms of its expectation.
 
@@ -1069,7 +1070,7 @@ A direct refinement is **Chebyshev's inequality**, which applies Markov's inequa
 
 @academic[pitfall,aside:true,width:35%:Leaving the threshold unsquared
 Applying Markov to $(X - \\mu)^2$ with threshold $\\varepsilon$ gives $\\frac{\\sigma^2}{\\varepsilon}$, which is $\\frac{4}{3}$ for $\\sigma^2 = 4$ and $\\varepsilon = 3$. The event $|X - \\mu| \\ge \\varepsilon$ is $(X - \\mu)^2 \\ge \\varepsilon^2$, so the bound is $\\frac{\\sigma^2}{\\varepsilon^2} = \\frac{4}{9}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-threshold-unsquared)]@
 
 The squared deviation $(X - \\mu)^2$ is never negative, so Markov's inequality applies to it directly, with $\\mathbb{E}[(X - \\mu)^2] = \\sigma^2$ in the place of the mean. The event of interest, a deviation of at least $\\varepsilon$ from the mean, is first rewritten as an event about the squared deviation, and the bound is then read off for that event.
 
@@ -1138,54 +1139,9 @@ For this reason, Markov's inequality is best understood as a baseline result: si
     },
     pitfalls:{
       title:`Common Pitfalls`,
-      content:`Three mistakes account for most wrong uses of Markov's inequality. Two of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Applying it to a variable that can be negative**
-
-The formula is applied to a variable that takes negative values, because the statement looks as if it needed only a mean and a threshold.
-
-Wrong working: let $X$ be $-10$ or $10$, each with probability $\\frac{1}{2}$. Then $\\mathbb{E}[X] = 0$ and
-$$\\mathbb{P}(X \\ge 5) \\le \\frac{0}{5} = 0$$
-
-Right working: the true probability is $\\mathbb{P}(X \\ge 5) = \\mathbb{P}(X = 10) = \\frac{1}{2}$, so the "bound" is false. Markov needs $X \\ge 0$. Shifting to $Y = X + 10$, which is never negative and has $\\mathbb{E}[Y] = 10$, gives a valid bound:
-$$\\mathbb{P}(X \\ge 5) = \\mathbb{P}(Y \\ge 15) \\le \\frac{10}{15} = \\frac{2}{3}$$
-and indeed $\\frac{1}{2} \\le \\frac{2}{3}$.
-
-Why it happens: non-negativity is stated once, among the conditions, and does not appear in the formula itself.
-
-How to check: before using the bound, ask whether $X$ can ever be below $0$. A mean of $0$ or below with a positive tail probability is a sure sign the condition was broken.
-
-**Reading the bound as the probability**
-
-The number $\\frac{\\mathbb{E}[X]}{a}$ is reported as the chance that $X$ reaches $a$, as if Markov computed the probability rather than capped it.
-
-Wrong working: for an exponential variable with mean $10$ and the threshold $15$,
-$$\\mathbb{P}(X \\ge 15) \\approx \\frac{10}{15} \\approx 0.67$$
-
-Right working: Markov only says $\\mathbb{P}(X \\ge 15) \\le \\frac{2}{3}$. For this exponential variable the true value is
-$$\\mathbb{P}(X \\ge 15) = e^{-1.5} \\approx 0.22$$
-about a third of the bound.
-
-Why it happens: the bound is the only number the calculation produces, and with nothing else to compare it with it gets read as the answer.
-
-How to check: write $\\le$ in the answer, never $=$ or $\\approx$. If the distribution is known, compute the true tail and compare; it should come out at or below the bound, often far below.
-
-**Leaving the threshold unsquared**
-
-Markov is applied to the squared deviation $(X - \\mu)^2$ to bound $\\mathbb{P}(|X - \\mu| \\ge \\varepsilon)$, but the threshold is left as $\\varepsilon$ instead of being squared along with the deviation.
-
-Wrong working: for $\\sigma^2 = 4$ and $\\varepsilon = 3$,
-$$\\mathbb{P}(|X - \\mu| \\ge 3) \\le \\frac{\\mathbb{E}[(X - \\mu)^2]}{3} = \\frac{4}{3}$$
-
-Right working: the event $|X - \\mu| \\ge 3$ is the same as $(X - \\mu)^2 \\ge 9$, so Markov is applied with threshold $9$:
-$$\\mathbb{P}(|X - \\mu| \\ge 3) = \\mathbb{P}\\big((X - \\mu)^2 \\ge 9\\big) \\le \\frac{4}{9} \\approx 0.44$$
-This is Chebyshev's bound $\\frac{\\sigma^2}{\\varepsilon^2}$.
-
-Why it happens: the variable is squared, and the threshold, written separately, is not carried along. With $\\varepsilon < 1$ the slip is worse than useless: for $\\sigma^2 = 0.01$ and $\\varepsilon = 0.5$ it claims $0.02$, while the correct bound is $0.04$.
-
-How to check: the bound must not change when the units change. Measuring in other units multiplies $\\sigma^2$ by the square of the conversion factor; only $\\frac{\\sigma^2}{\\varepsilon^2}$ stays the same, while $\\frac{\\sigma^2}{\\varepsilon}$ does not.`,
+      content:`Three mistakes account for most wrong uses of Markov's inequality. Two of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip uses Markov's inequality outside its terms. The variable must never be negative, the result caps the probability rather than giving it, and applied to $(X - \\mu)^2$ the threshold becomes $\\varepsilon^2$. Asking whether $X$ can be below $0$, writing $\\le$ in the answer, or checking that the bound does not change with the units, catches each slip.`,
       link:'',
 
     },
@@ -1302,8 +1258,41 @@ The result is deliberately simple and broadly applicable. It trades precision fo
     ],
   };
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'applying-it-to-a-variable-that-can-be-negative', name: `Applying it to a variable that can be negative`, errorAt: 1,
+        what: `The formula is applied to a variable that takes negative values, because the statement looks as if it needed only a mean and a threshold.`,
+        wrong: [`Let $X$ be $-10$ or $10$, each with probability $\\frac{1}{2}$.`, `Then $\\mathbb{E}[X] = 0$ and
+$$\\mathbb{P}(X \\ge 5) \\le \\frac{0}{5} = 0$$`],
+        right: [`Let $X$ be $-10$ or $10$, each with probability $\\frac{1}{2}$.`, `The true probability is $\\mathbb{P}(X \\ge 5) = \\mathbb{P}(X = 10) = \\frac{1}{2}$, so the "bound" is false. Markov needs $X \\ge 0$. Shifting to $Y = X + 10$, which is never negative and has $\\mathbb{E}[Y] = 10$, gives a valid bound:
+$$\\mathbb{P}(X \\ge 5) = \\mathbb{P}(Y \\ge 15) \\le \\frac{10}{15} = \\frac{2}{3}$$`, `And indeed $\\frac{1}{2} \\le \\frac{2}{3}$.`],
+        why: `Non-negativity is stated once, among the conditions, and does not appear in the formula itself.`,
+        check: `Before using the bound, ask whether $X$ can ever be below $0$. A mean of $0$ or below with a positive tail probability is a sure sign the condition was broken.` },
+      { id: 'reading-the-bound-as-the-probability', name: `Reading the bound as the probability`, errorAt: 0,
+        what: `The number $\\frac{\\mathbb{E}[X]}{a}$ is reported as the chance that $X$ reaches $a$, as if Markov computed the probability rather than capped it.`,
+        wrong: [`For an exponential variable with mean $10$ and the threshold $15$,
+$$\\mathbb{P}(X \\ge 15) \\approx \\frac{10}{15} \\approx 0.67$$`],
+        right: [`Markov only says $\\mathbb{P}(X \\ge 15) \\le \\frac{2}{3}$. For this exponential variable the true value is
+$$\\mathbb{P}(X \\ge 15) = e^{-1.5} \\approx 0.22$$`, `About a third of the bound.`],
+        why: `The bound is the only number the calculation produces, and with nothing else to compare it with it gets read as the answer.`,
+        check: `Write $\\le$ in the answer, never $=$ or $\\approx$. If the distribution is known, compute the true tail and compare; it should come out at or below the bound, often far below.` },
+      { id: 'leaving-the-threshold-unsquared', name: `Leaving the threshold unsquared`, errorAt: 1,
+        what: `Markov is applied to the squared deviation $(X - \\mu)^2$ to bound $\\mathbb{P}(|X - \\mu| \\ge \\varepsilon)$, but the threshold is left as $\\varepsilon$ instead of being squared along with the deviation.`,
+        wrong: [`For $\\sigma^2 = 4$ and $\\varepsilon = 3$,`, `$$\\mathbb{P}(|X - \\mu| \\ge 3) \\le \\frac{\\mathbb{E}[(X - \\mu)^2]}{3}$$
+$$= \\frac{4}{3}$$`],
+        right: [`For $\\sigma^2 = 4$ and $\\varepsilon = 3$,`, `The event $|X - \\mu| \\ge 3$ is the same as $(X - \\mu)^2 \\ge 9$, so Markov is applied with threshold $9$:
+$$\\mathbb{P}(|X - \\mu| \\ge 3) = \\mathbb{P}\\big((X - \\mu)^2 \\ge 9\\big)$$
+$$\\le \\frac{4}{9} \\approx 0.44$$`, `This is Chebyshev's bound $\\frac{\\sigma^2}{\\varepsilon^2}$.`],
+        why: `The variable is squared, and the threshold, written separately, is not carried along. With $\\varepsilon < 1$ the slip is worse than useless: for $\\sigma^2 = 0.01$ and $\\varepsilon = 0.5$ it claims $0.02$, while the correct bound is $0.04$.`,
+        check: `The bound must not change when the units change. Measuring in other units multiplies $\\sigma^2$ by the square of the conversion factor; only $\\frac{\\sigma^2}{\\varepsilon^2}$ stays the same, while $\\frac{\\sigma^2}{\\varepsilon}$ does not.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     markovFamilyLevels,
     demoUnits,
     conceptIntroFigures,
@@ -1325,7 +1314,7 @@ The result is deliberately simple and broadly applicable. It trades precision fo
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function MarkovInequalityPage({markovFamilyLevels, 
+export default function MarkovInequalityPage({ pitfallData,markovFamilyLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -1391,7 +1380,7 @@ $$\\mathbb{P}(X \\ge a) \\le \\frac{\\mathbb{E}[X]}{a}$$]@`,
         content: [
           `@academic[pitfall,aside:true,width:35%:Applying it to a variable that can be negative
 For $X$ equal to $-10$ or $10$ with probability $\\frac{1}{2}$ each, the bound gives $\\mathbb{P}(X \\ge 5) \\le \\frac{0}{5} = 0$, yet the true probability is $\\frac{1}{2}$. Negative values pull the mean down without shrinking the tail; the bound holds only for $X \\ge 0$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-applying-it-to-a-variable-that-can-be-negative)]@`,
           `The conditions are listed in [what Markov's inequality applies to](!/probability/inequalities/markov#1).`,
         ],
       },
@@ -1536,6 +1525,15 @@ For $X$ equal to $-10$ or $10$ with probability $\\frac{1}{2}$ each, the bound g
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="markov-pitfalls"
+            title="Common pitfalls with Markov's inequality"
+            source="/probability/inequalities/markov"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

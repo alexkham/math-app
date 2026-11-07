@@ -26,6 +26,9 @@ import { processContent } from '@/app/utils/contentProcessor';
  *   id           required; `${id}.png` etc. are the files, `#id` the anchor
  *   title        attribution strip
  *   source       page path; also the copy-link target with the anchor
+ *   related      optional; replaces the source link in the attribution strip, which
+ *                otherwise points back at the page itself. { href, label } links to
+ *                another page; false shows no link. Copy link still uses source.
  *   formats      ['png','pdf'] default; add 'svg' for SVG components
  *   layout       'left' (default) | 'right' | 'top' | 'bottom' | 'strip'
  *   variant      'buttons' (default) | 'menu'
@@ -64,8 +67,12 @@ export default function DiagramFrame(props) {
   const {
     id, title, source, formats, layout = 'left', variant = 'buttons', size = 'default',
     controls, segmented, copyLink = true, maxWidth, paper, children,
-    before, after, proseInCapture = false,
+    before, after, proseInCapture = false, related,
   } = props;
+  // the attribution link: the page itself by default, another page or none when `related` is given
+  const attrLink = related === undefined
+    ? (source ? { href: source, label: source } : null)
+    : (related && related.href ? { href: related.href, label: related.label || related.href } : null);
 
   if (!id) return <>{children}</>;
 
@@ -102,8 +109,8 @@ export default function DiagramFrame(props) {
       {proseInCapture ? afterBlock : null}
       <div className="dfv-attr">
         {title ? <span className="dfv-attr-title">{title}</span> : null}
-        {title && source ? <span className="dfv-attr-sep">&middot;</span> : null}
-        {source ? <a className="dfv-attr-src" href={source}>{source}</a> : null}
+        {title && attrLink ? <span className="dfv-attr-sep">&middot;</span> : null}
+        {attrLink ? <a className="dfv-attr-src" href={attrLink.href}>{attrLink.label}</a> : null}
         <span className="dfv-attr-site">{SITE_NAME}</span>
       </div>
     </div>

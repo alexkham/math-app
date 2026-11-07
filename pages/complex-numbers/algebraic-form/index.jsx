@@ -1211,9 +1211,11 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1753,7 +1755,7 @@ The real number $a$ is called the real part of $z$. The real number $b$ — not 
 
 @academic[pitfall,aside:true,width:35%:Combining the two terms
 Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the point $(0, 5)$ instead of $(3, 2)$. The two terms never merge: $3 + 2i$ is already in standard form, with real part $3$ and imaginary part $2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-combining-the-two-terms)]@
 
 The imaginary unit $i$ serves a structural role: it separates and distinguishes the two components. Without $i$, we could not tell where the real part ends and the imaginary part begins. The expression $a + bi$ packages two independent real values into one object, with $i$ acting as the marker that identifies which piece is which. This packaging allows complex numbers to encode two-dimensional information — a feature that becomes central when we explore the [geometric representation](!/complex-numbers/geometric-representation).
 
@@ -1826,7 +1828,7 @@ Consider the equation $z^2 = 3 + 4i$ where we seek $z = x + yi$ with real unknow
 
 @academic[pitfall,aside:true,width:35%:Matching parts before collecting
 Solving $x + yi + 3i = 4 + 7i$ by matching $x = 4$ and $y = 7$ leaves out the $3i$: those values give $4 + 10i$. Collected, the left side is $x + (y + 3)i$, so $x = 4$ and $y + 3 = 7$, giving $y = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-matching-parts-before-collecting)]@
 
 This method extends broadly. Whenever a complex equation appears, equating real and imaginary parts separately converts the problem into real arithmetic. The strategy applies to polynomial equations, functional equations, and identities. What looks like one equation is actually two, and exploiting this duality simplifies countless calculations throughout complex analysis.
 
@@ -1843,7 +1845,7 @@ The equality criterion also explains why complex numbers cannot be ordered. With
 
 @academic[pitfall,aside:true,width:35%:Negating both parts
 Conjugating $-2 + 5i$ to $2 - 5i$ changes the real part too and gives $-z$, the reflection through the origin. Only the imaginary part changes sign: $\\overline{-2 + 5i} = -2 - 5i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-negating-both-parts)]@
 
 The geometric meaning becomes clear on the [complex plane](!/complex-numbers/geometric-representation). If $z$ sits at point $(a, b)$, then $\\bar{z}$ sits at $(a, -b)$. The two points share identical horizontal position but opposite vertical positions. Drawing both reveals mirror images reflected across the real axis. The conjugate of $3 + 2i$ is $3 - 2i$; the conjugate of $-1 - 4i$ is $-1 + 4i$; the conjugate of $5$ (a real number) is simply $5$.
 
@@ -1907,7 +1909,7 @@ The product of a number and its conjugate yields the sum of squares of the compo
 
 @academic[pitfall,aside:true,width:35%:Subtracting the second square
 Writing $z \\cdot \\bar{z} = a^2 - b^2$ forgets that $(bi)^2 = -b^2$: for $z = 3 + 2i$ it gives $9 - 4 = 5$. The product is $a^2 + b^2$, so $(3 + 2i)(3 - 2i) = 9 + 4 = 13 = |z|^2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-second-square)]@
 
 The product identity is the one used most often in practice, because it turns a complex expression into a single real number. In a division by $c + di$, numerator and denominator are both multiplied by $c - di$, and the new denominator is the product of a number with its own conjugate, the case worked out above with $c$ and $d$ in place of $a$ and $b$. Every quotient in standard form passes through this step.
 
@@ -2056,83 +2058,20 @@ A complex number qualifies as [pure imaginary](!/complex-numbers/imaginary-numbe
   link: '',
 },
   
+formulaSummary: {
+  title: `Formula Summary`,
+  content: `This summary collects the formulas of the standard form in four families, shown one at a time with the buttons above the cards. Each card gives a formula with a line on what it says and a link to the section that explains it.
+
+The first family writes a number as a real part plus an imaginary part, reads off the two parts and compares two numbers part by part. The second defines the conjugate and shows how it passes through sums, products, quotients and powers. The third tests whether a number is real or pure imaginary, and the last recovers the two parts and the squared modulus from a number and its conjugate.`,
+  before: ``,
+  after: `Nearly every calculation in standard form comes down to handling the real and the imaginary part separately. When an equation mixes a number and its conjugate, the identities in the last family turn it into statements about those two real parts.`,
+  link: '',
+},
 obj16: {
   title: `Common Pitfalls`,
   before: ``,
-  content: `Six mistakes account for many of the wrong answers in work with the algebraic form. Four are marked where they happen in the sections above; keeping the $i$ in the imaginary part and dropping its minus sign are the two that the notation section and **The Imaginary Part** already point out. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Combining the two terms**
-
-The real term and the imaginary term of $a + bi$ are added together as if they were like terms, so a number such as $3 + 2i$ is turned into a single term.
-
-Wrong working: $3 + 2i = (3 + 2)i = 5i$.
-
-Right working: $3$ is a real number and $2i$ is a real multiple of $i$, so they cannot merge, just as $3 + 2x$ does not become $5x$. The number $3 + 2i$ is already in standard form, with $Re(z) = 3$ and $Im(z) = 2$. The number $5i$ has $Re = 0$ and $Im = 5$.
-
-Why it happens: in ordinary arithmetic every sum of two numbers ends in a single number, so a sum that stays as two terms looks unfinished.
-
-How to check: plot both. $3 + 2i$ is the point $(3, 2)$ and $5i$ is the point $(0, 5)$, two different points and so two different numbers.
-
-**Keeping the i in the imaginary part**
-
-The imaginary part of $z = a + bi$ is reported as the whole term $bi$ instead of the coefficient $b$.
-
-Wrong working: $Im(7 + 4i) = 4i$.
-
-Right working: $Im(z)$ is the real number that multiplies $i$. In $7 + 4i$ that number is $4$, so $Im(7 + 4i) = 4$, and together with $Re(7 + 4i) = 7$ it gives the point $(7, 4)$.
-
-Why it happens: the name "imaginary part" suggests that the answer itself should be imaginary.
-
-How to check: $Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$, so a correct answer never contains $i$. Rebuilding $z = Re(z) + Im(z) \\cdot i$ must also give back $z$: $7 + 4 \\cdot i = 7 + 4i$, while $7 + (4i) \\cdot i = 7 - 4 = 3$ does not.
-
-**Dropping the minus sign**
-
-When the imaginary term is subtracted, as in $5 - 3i$, the sign is left behind and only the number after it is reported as the imaginary part.
-
-Wrong working: $5 - 3i$ has imaginary part $3$.
-
-Right working: in strict standard form $5 - 3i = 5 + (-3)i$, so $Re(z) = 5$ and $Im(z) = -3$.
-
-Why it happens: the minus looks like the operation between the two terms rather than part of the coefficient of $i$.
-
-How to check: plot the point. $Im(z) = -3$ puts $5 - 3i$ three units below the real axis, at $(5, -3)$. An imaginary part of $3$ would put it at $(5, 3)$, which is the conjugate $5 + 3i$.
-
-**Matching parts before collecting**
-
-In an equation with the unknown $z = x + yi$, the parts are compared before each side has been written as one real part plus one imaginary part, so an extra real or imaginary term is left out of the comparison.
-
-Wrong working: $x + yi + 3i = 4 + 7i$, so $x = 4$ and $y = 7$.
-
-Right working: collect the left side first, $x + (y + 3)i = 4 + 7i$. The real parts give $x = 4$ and the imaginary parts give $y + 3 = 7$, so $y = 4$.
-
-Why it happens: $x$ and $y$ look like the real and imaginary parts of the left side, but they are only the parts of $z$, not of the whole expression.
-
-How to check: substitute back. $4 + 4i + 3i = 4 + 7i$ is correct, while $x = 4$ and $y = 7$ give $4 + 7i + 3i = 4 + 10i$.
-
-**Negating both parts**
-
-The conjugate is formed by changing the sign of every term, the real part included.
-
-Wrong working: $\\overline{-2 + 5i} = 2 - 5i$.
-
-Right working: the conjugate keeps the real part and changes only the sign of the imaginary part, so $\\overline{-2 + 5i} = -2 - 5i$. The number $2 - 5i$ is $-z$, the negative of $z$.
-
-Why it happens: the rule "change the sign" is remembered without the words "of the imaginary part", and changing every sign is what negation does.
-
-How to check: the real part must not change, $Re(\\bar{z}) = Re(z)$. On the plane, $\\bar{z}$ is the mirror image across the real axis, from $(-2, 5)$ to $(-2, -5)$, while $2 - 5i$ at $(2, -5)$ is the reflection through the origin.
-
-**Subtracting the second square**
-
-In the product $z \\cdot \\bar{z} = (a + bi)(a - bi)$, the pattern $(x + y)(x - y) = x^2 - y^2$ is applied, but the square of $bi$ is taken to be $b^2$.
-
-Wrong working: $(3 + 2i)(3 - 2i) = 3^2 - 2^2 = 9 - 4 = 5$.
-
-Right working: $(3 + 2i)(3 - 2i) = 3^2 - (2i)^2 = 9 - 4i^2 = 9 + 4 = 13$. In general $z \\cdot \\bar{z} = a^2 - b^2 i^2 = a^2 + b^2$.
-
-Why it happens: the difference of squares is familiar from real algebra, and the $i$ inside the second term is lost when that term is squared.
-
-How to check: $z \\cdot \\bar{z}$ must equal $|z|^2$, which is never negative. Here $|3 + 2i| = \\sqrt{13}$, so the product must be $13$. For $z = 1 + 2i$ the wrong rule even gives $1 - 4 = -3$, while the true product is $1 + 4 = 5$.`,
-  after: ``,
+  content: `Six mistakes account for many of the wrong answers in work with the algebraic form. Four are marked where they happen in the sections above; keeping the $i$ in the imaginary part and dropping its minus sign are the two that the notation section and **The Imaginary Part** already point out. Here each is worked through in full, with the wrong and the right working side by side.`,
+  after: `Each slip mixes up the two parts of $a + bi$. The real and imaginary terms never merge; $Im(z)$ is the real number in front of $i$, sign included; two complex numbers are matched part by part only after each side is collected; the conjugate changes only the sign of the imaginary part; and $(a + bi)(a - bi) = a^2 + b^2$, because $i^2 = -1$. Plotting the point, or substituting back, catches each slip.`,
   link: '',
 },
 
@@ -2331,8 +2270,82 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'combining-the-two-terms', name: `Combining the two terms`, errorAt: 0,
+        what: `The real term and the imaginary term of $a + bi$ are added together as if they were like terms, so a number such as $3 + 2i$ is turned into a single term.`,
+        wrong: [`$3 + 2i = (3 + 2)i = 5i$.`],
+        right: [`$3$ is a real number and $2i$ is a real multiple of $i$, so they cannot merge, just as $3 + 2x$ does not become $5x$. The number $3 + 2i$ is already in standard form, with $Re(z) = 3$ and $Im(z) = 2$. The number $5i$ has $Re = 0$ and $Im = 5$.`],
+        why: `In ordinary arithmetic every sum of two numbers ends in a single number, so a sum that stays as two terms looks unfinished.`,
+        check: `Plot both. $3 + 2i$ is the point $(3, 2)$ and $5i$ is the point $(0, 5)$, two different points and so two different numbers.` },
+      { id: 'keeping-the-i-in-the-imaginary-part', name: `Keeping the i in the imaginary part`, errorAt: 0,
+        what: `The imaginary part of $z = a + bi$ is reported as the whole term $bi$ instead of the coefficient $b$.`,
+        wrong: [`$Im(7 + 4i) = 4i$.`],
+        right: [`$Im(z)$ is the real number that multiplies $i$. In $7 + 4i$ that number is $4$, so $Im(7 + 4i) = 4$, and together with $Re(7 + 4i) = 7$ it gives the point $(7, 4)$.`],
+        why: `The name "imaginary part" suggests that the answer itself should be imaginary.`,
+        check: `$Re$ and $Im$ are functions from $\\mathbb{C}$ to $\\mathbb{R}$, so a correct answer never contains $i$. Rebuilding $z = Re(z) + Im(z) \\cdot i$ must also give back $z$: $7 + 4 \\cdot i = 7 + 4i$, while $7 + (4i) \\cdot i = 7 - 4 = 3$ does not.` },
+      { id: 'dropping-the-minus-sign', name: `Dropping the minus sign`, errorAt: 0,
+        what: `When the imaginary term is subtracted, as in $5 - 3i$, the sign is left behind and only the number after it is reported as the imaginary part.`,
+        wrong: [`$5 - 3i$ has imaginary part $3$.`],
+        right: [`In strict standard form $5 - 3i = 5 + (-3)i$, so $Re(z) = 5$ and $Im(z) = -3$.`],
+        why: `The minus looks like the operation between the two terms rather than part of the coefficient of $i$.`,
+        check: `Plot the point. $Im(z) = -3$ puts $5 - 3i$ three units below the real axis, at $(5, -3)$. An imaginary part of $3$ would put it at $(5, 3)$, which is the conjugate $5 + 3i$.` },
+      { id: 'matching-parts-before-collecting', name: `Matching parts before collecting`, errorAt: 0,
+        what: `In an equation with the unknown $z = x + yi$, the parts are compared before each side has been written as one real part plus one imaginary part, so an extra real or imaginary term is left out of the comparison.`,
+        wrong: [`$x + yi + 3i = 4 + 7i$, so $x = 4$ and $y = 7$.`],
+        right: [`Collect the left side first, $x + (y + 3)i = 4 + 7i$. The real parts give $x = 4$ and the imaginary parts give $y + 3 = 7$, so $y = 4$.`],
+        why: `$x$ and $y$ look like the real and imaginary parts of the left side, but they are only the parts of $z$, not of the whole expression.`,
+        check: `Substitute back. $4 + 4i + 3i = 4 + 7i$ is correct, while $x = 4$ and $y = 7$ give $4 + 7i + 3i = 4 + 10i$.` },
+      { id: 'negating-both-parts', name: `Negating both parts`, errorAt: 0,
+        what: `The conjugate is formed by changing the sign of every term, the real part included.`,
+        wrong: [`$\\overline{-2 + 5i} = 2 - 5i$.`],
+        right: [`The conjugate keeps the real part and changes only the sign of the imaginary part, so $\\overline{-2 + 5i} = -2 - 5i$. The number $2 - 5i$ is $-z$, the negative of $z$.`],
+        why: `The rule "change the sign" is remembered without the words "of the imaginary part", and changing every sign is what negation does.`,
+        check: `The real part must not change, $Re(\\bar{z}) = Re(z)$. On the plane, $\\bar{z}$ is the mirror image across the real axis, from $(-2, 5)$ to $(-2, -5)$, while $2 - 5i$ at $(2, -5)$ is the reflection through the origin.` },
+      { id: 'subtracting-the-second-square', name: `Subtracting the second square`, errorAt: 0,
+        what: `In the product $z \\cdot \\bar{z} = (a + bi)(a - bi)$, the pattern $(x + y)(x - y) = x^2 - y^2$ is applied, but the square of $bi$ is taken to be $b^2$.`,
+        wrong: [`$(3 + 2i)(3 - 2i) = 3^2 - 2^2 = 9 - 4 = 5$.`],
+        right: [`$(3 + 2i)(3 - 2i) = 3^2 - (2i)^2 = 9 - 4i^2 = 9 + 4 = 13$. In general $z \\cdot \\bar{z} = a^2 - b^2 i^2 = a^2 + b^2$.`],
+        why: `The difference of squares is familiar from real algebra, and the $i$ inside the second term is lost when that term is squared.`,
+        check: `$z \\cdot \\bar{z}$ must equal $|z|^2$, which is never negative. Here $|3 + 2i| = \\sqrt{13}$, so the product must be $13$. For $z = 1 + 2i$ the wrong rule even gives $1 - 4 = -3$, while the true product is $1 + 4 = 5$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'form', name: 'Standard form', sub: 'How a complex number is written, read and compared.', pairs: [
+        [{ formula: '$z = a + bi$', text: 'Every complex number has a real part $a$ and an imaginary part $b$, both real numbers, as [the standard form](!#1) sets out.' },
+         { formula: '$\\operatorname{Re}(z) = a, \\qquad \\operatorname{Im}(z) = b$', text: 'The two parts read off the standard form; the imaginary part is the real number $b$, not $bi$, as [the imaginary part](!#22) stresses.' }],
+        [{ formula: '$a + bi = c + di \\iff a = c \\;\\text{ and }\\; b = d$', text: 'Two complex numbers are equal only when both parts match, which turns one complex equation into two real ones ([equality of complex numbers](!#3)).' }, ''],
+      ] },
+      { id: 'conjugate', name: 'The conjugate', sub: 'The mirror image across the real axis and its rules.', pairs: [
+        [{ formula: '$\\bar{z} = a - bi$', text: 'The conjugate keeps the real part and changes the sign of the imaginary part, from [the complex conjugate](!#4).' },
+         { formula: '$\\overline{\\bar{z}} = z$', text: 'Conjugating twice gives the number back, as [properties of the conjugate](!#5) shows.' }],
+        [{ formula: '$\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$', text: 'The conjugate of a sum is the sum of the conjugates, and the same holds for differences ([properties of the conjugate](!#5)).' },
+         { formula: '$\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$', text: 'The conjugate of a product is the product of the conjugates, from [properties of the conjugate](!#5).' }],
+        [{ formula: '$\\overline{z_1 / z_2} = \\bar{z_1} / \\bar{z_2}$', text: 'Quotients follow the same rule when $z_2 \\neq 0$, as [properties of the conjugate](!#5) shows.' },
+         { formula: '$\\overline{z^n} = (\\bar{z})^n$', text: 'So do powers, for any integer $n$, from [properties of the conjugate](!#5).' }],
+      ] },
+      { id: 'tests', name: 'Tests', sub: 'Telling real and pure imaginary numbers apart with the conjugate.', pairs: [
+        [{ formula: '$z = \\bar{z}$', text: 'Holds exactly when $z$ is real, as [classification theorems](!#6) proves.' },
+         { formula: '$\\bar{z} = -z$', text: 'Holds exactly when $z$ is pure imaginary, from [classification theorems](!#6).' }],
+      ] },
+      { id: 'identities', name: 'Identities', sub: 'What a number and its conjugate give together.', pairs: [
+        [{ formula: '$\\displaystyle \\operatorname{Re}(z) = \\frac{z + \\bar{z}}{2}$', text: 'The sum of a number and its conjugate is $2a$, so halving it gives the real part ([the real part](!#21)).' },
+         { formula: '$\\displaystyle \\operatorname{Im}(z) = \\frac{z - \\bar{z}}{2i}$', text: 'The difference is $2bi$, so dividing by $2i$, not by $2$, gives the imaginary part ([the imaginary part](!#22)).' }],
+        [{ formula: '$z \\cdot \\bar{z} = a^2 + b^2 = |z|^2$', text: 'The product is always real and never negative; it is the squared modulus and the step that makes division work ([useful identities with conjugates](!#7)).' }, ''],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     conjugateClassCases,
     demoUnits,
     conceptIntroFigures,
@@ -2358,7 +2371,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function AlgebraicFormPage({conjugateClassCases, 
+export default function AlgebraicFormPage({ formulaSummaryData, pitfallData,conjugateClassCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2422,7 +2435,7 @@ $$z = a + bi$$
           `The real number $a$ is called the real part of $z$. The real number $b$ — not $bi$, just $b$ — is called the imaginary part. This terminology causes confusion at first, since the "imaginary part" is itself a real number. The name indicates which component of $z$ the value describes, not the nature of $b$ as a quantity.`,
           `@academic[pitfall,aside:true,width:35%:Combining the two terms
 Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the point $(0, 5)$ instead of $(3, 2)$. The two terms never merge: $3 + 2i$ is already in standard form, with real part $3$ and imaginary part $2$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-combining-the-two-terms)]@`,
           `The imaginary unit $i$ serves a structural role: it separates and distinguishes the two components. Without $i$, we could not tell where the real part ends and the imaginary part begins. The expression $a + bi$ packages two independent real values into one object, with $i$ acting as the marker that identifies which piece is which. This packaging allows complex numbers to encode two-dimensional information — a feature that becomes central when we explore the [geometric representation](!/complex-numbers/geometric-representation).`,
           `Special cases deserve mention. When $b = 0$, the imaginary term vanishes and $z = a + 0i = a$ reduces to a pure real number. When $a = 0$, the real term vanishes and $z = 0 + bi = bi$ becomes a [pure imaginary number](!/complex-numbers/imaginary-numbers). When both $a = 0$ and $b = 0$, we obtain $z = 0$, the complex number zero. Every real number and every pure imaginary number fits within the algebraic form as a special case — the complex numbers contain all previous number systems as subsets.`,
           <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
@@ -2577,11 +2590,38 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="algebraic-form-formula-summary"
+            title="Standard form formulas"
+            source="/complex-numbers/algebraic-form"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="algebraic-form-pitfalls"
+            title="Common pitfalls with the algebraic form"
+            source="/complex-numbers/algebraic-form"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

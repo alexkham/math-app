@@ -698,6 +698,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1054,7 +1056,7 @@ The probability of a complete path is obtained by following the path from the ro
 
 @academic[pitfall,aside:true,width:35%:Adding along a path
 Adding the branch values on a path, for two draws without replacement from 3 red and 2 blue balls, gives $P(R_1 \\cap R_2) = \\frac{3}{5} + \\frac{2}{4} = \\frac{11}{10}$, more than 1. Along a path the values multiply: $\\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{3}{10}$.
-[Read more](!#8)]@
+[Read more](!#pitfall-adding-along-a-path)]@
 
 Tree diagrams therefore make it explicit how local, step-by-step probabilities combine to produce probabilities of full outcome sequences.
 `,
@@ -1111,7 +1113,7 @@ Each complete path through the diagram represents one possible sequence of outco
 
 @academic[pitfall,aside:true,width:35%:Counting only one order
 Taking only the path red then blue for one ball of each colour, drawn from 3 red and 2 blue, gives $\\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{3}{10}$. Blue then red is a second path, so the probability is $\\frac{3}{10} + \\frac{2}{5} \\cdot \\frac{3}{4} = \\frac{3}{5}$.
-[Read more](!#8)]@
+[Read more](!#pitfall-counting-only-one-order)]@
 
 When a question involves several possible sequences, the corresponding path probabilities are combined to obtain the final result. In this way, tree diagrams turn complex probability questions into structured path-based calculations.
 
@@ -1163,8 +1165,7 @@ Tree diagrams are most effective when the process is sequential and the number o
     },
     obj8:{
       title:`Common Mistakes and Misinterpretations`,
-      content:`
-Tree diagrams are simple in structure, but they are often used incorrectly.
+      content:`Tree diagrams are simple in structure, but they are often used incorrectly.
 
 Typical mistakes include:
 • treating branch probabilities as unconditional rather than conditional
@@ -1175,38 +1176,9 @@ Typical mistakes include:
 
 Another common error is reading the tree in the wrong direction after information is observed. Once an outcome at a later stage is known, only the paths consistent with that outcome should be considered.
 
-Being careful about what each branch represents, and what information is being conditioned on at each stage, prevents most misunderstandings.
-
-**Adding along a path**
-
-The probability of a complete path is found by adding the branch values on it instead of multiplying them. Each later branch is a fraction of what is left after the earlier ones, and adding ignores that.
-
-Wrong working: two balls are drawn without replacement from a bag of 3 red and 2 blue; the path is red, then red.
-$$P(R_1 \\cap R_2) = \\frac{3}{5} + \\frac{2}{4} = \\frac{11}{10}$$
-
-Right working: the branch values along the path multiply.
-$$P(R_1 \\cap R_2) = P(R_1) \\cdot P(R_2 \\mid R_1) = \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{6}{20} = \\frac{3}{10}$$
-
-Why it happens: a tree uses two operations, multiplying along a path and adding across paths, and the two are easily swapped.
-
-How to check: a path probability is never larger than any branch value on it, since each step keeps only a fraction of what came before; $\\frac{11}{10}$ is not even a probability. The four paths of this tree must also add to $1$: $\\frac{3}{10} + \\frac{3}{10} + \\frac{3}{10} + \\frac{1}{10} = 1$.
-
-**Counting only one order**
-
-An event that can happen in more than one order is given the probability of a single path. "One red and one blue" is reached by red then blue and by blue then red, which are two different paths of the tree.
-
-Wrong working: from the same bag of 3 red and 2 blue, two draws without replacement,
-$$P(\\text{one of each}) = P(R_1 \\cap B_2) = \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{3}{10}$$
-
-Right working: both paths are added.
-$$P(\\text{one of each}) = \\frac{3}{5} \\cdot \\frac{2}{4} + \\frac{2}{5} \\cdot \\frac{3}{4} = \\frac{3}{10} + \\frac{3}{10} = \\frac{3}{5}$$
-
-Why it happens: the question names colours, not an order, so only one path comes to mind; the tree records the draws in order and keeps the two orders apart.
-
-How to check: list every leaf that matches the event before computing. The three events "both red", "both blue" and "one of each" must add to $1$: $\\frac{3}{10} + \\frac{1}{10} + \\frac{3}{5} = 1$.
-`,
+Being careful about what each branch represents, and what information is being conditioned on at each stage, prevents most misunderstandings.`,
       before:``,
-      after:``,
+      after: `Both slips misread the tree. Branch values along a path multiply, because each later branch is a fraction of what came before, and an event reached by more than one path adds the probabilities of all of them. Checking that a path is never more likely than any branch on it, and listing every matching leaf, catches both.`,
       link:'',
   
     },
@@ -1339,8 +1311,32 @@ They help track how probabilities change as information accumulates and make com
     }),
   };
 
+  // MistakeFix batch 19, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj8 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'adding-along-a-path', name: `Adding along a path`, errorAt: 0,
+        what: `The probability of a complete path is found by adding the branch values on it instead of multiplying them. Each later branch is a fraction of what is left after the earlier ones, and adding ignores that.`,
+        wrong: [`Two balls are drawn without replacement from a bag of 3 red and 2 blue; the path is red, then red.`, `$$P(R_1 \\cap R_2) = \\frac{3}{5} + \\frac{2}{4} = \\frac{11}{10}$$`],
+        right: [`The branch values along the path multiply.`, `$$P(R_1 \\cap R_2) = P(R_1) \\cdot P(R_2 \\mid R_1)$$
+$$= \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{6}{20} = \\frac{3}{10}$$`],
+        why: `A tree uses two operations, multiplying along a path and adding across paths, and the two are easily swapped.`,
+        check: `A path probability is never larger than any branch value on it, since each step keeps only a fraction of what came before; $\\frac{11}{10}$ is not even a probability. The four paths of this tree must also add to $1$: $\\frac{3}{10} + \\frac{3}{10} + \\frac{3}{10} + \\frac{1}{10} = 1$.` },
+      { id: 'counting-only-one-order', name: `Counting only one order`, errorAt: 0,
+        what: `An event that can happen in more than one order is given the probability of a single path. "One red and one blue" is reached by red then blue and by blue then red, which are two different paths of the tree.`,
+        wrong: [`From the same bag of 3 red and 2 blue, two draws without replacement,
+$$P(\\text{one of each}) = P(R_1 \\cap B_2)$$
+$$= \\frac{3}{5} \\cdot \\frac{2}{4} = \\frac{3}{10}$$`],
+        right: [`Both paths are added.`, `$$P(\\text{one of each}) = \\frac{3}{5} \\cdot \\frac{2}{4} + \\frac{2}{5} \\cdot \\frac{3}{4}$$
+$$= \\frac{3}{10} + \\frac{3}{10} = \\frac{3}{5}$$`],
+        why: `The question names colours, not an order, so only one path comes to mind; the tree records the draws in order and keeps the two orders apart.`,
+        check: `List every leaf that matches the event before computing. The three events "both red", "both blue" and "one of each" must add to $1$: $\\frac{3}{10} + \\frac{1}{10} + \\frac{3}{5} = 1$.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1361,7 +1357,7 @@ They help track how probabilities change as information accumulates and make com
   }
 }
 
-export default function TreeDiagramsPage({
+export default function TreeDiagramsPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1525,6 +1521,15 @@ The tree does not define randomness on its own — it **organizes** an already d
           sectionsContent.obj8.content,
           <div key={'obj8-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'obj8-mistakes'}
+            id="tree-diagram-pitfalls"
+            title="Common pitfalls with tree diagrams"
+            source="/probability/tree-diagrams"
+            after={sectionsContent.obj8.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

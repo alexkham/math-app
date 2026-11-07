@@ -20,6 +20,9 @@ import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagr
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -417,7 +420,7 @@ $$\\text{Total area} = \\int_a^b |f(x)|\\, dx$$
 
 @academic[pitfall,aside:true,width:35%:Moving the absolute value outside
 Taking $\\left|\\int_{-1}^{2} x\\, dx\\right| = \\frac{3}{2}$ as the area still lets the part below the axis cancel against the part above. Splitting at the zero $x = 0$ gives $\\frac{1}{2} + 2 = \\frac{5}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-moving-the-absolute-value-outside)]@
 
 Computing $\\int_a^b |f(x)|\\, dx$ starts with the zeros of $f$ in $[a, b]$. Between consecutive zeros $f$ keeps one sign, so on each piece $|f(x)|$ is either $f(x)$ or $-f(x)$ and an ordinary antiderivative applies. The integrals over the pieces are then added.
 `,
@@ -450,7 +453,7 @@ $$\\int_a^b f(x)\\, dx = -\\int_b^a f(x)\\, dx$$
 
 @academic[pitfall,aside:true,width:35%:Ignoring the order of the limits
 Treating $\\int_3^1 2x\\, dx$ as the integral over $[1, 3]$ gives $9 - 1 = 8$. The upper limit is $1$, so the value is $F(1) - F(3) = 1 - 9 = -8$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-ignoring-the-order-of-the-limits)]@
 
 Integrating from $b$ down to $a$ makes the width $\\Delta x = (a - b)/n$ negative, so every term $f(x_i^*)\\,\\Delta x$ of the Riemann sum changes sign while the heights stay the same. The bounds therefore carry a direction as well as an interval: the lower limit is where accumulation starts and the upper limit is where it stops, even when the upper limit is the smaller number.
 
@@ -489,7 +492,7 @@ $$\\int_a^b c \\cdot f(x)\\, dx = c \\int_a^b f(x)\\, dx$$]@
 
 @academic[pitfall,aside:true,width:35%:Integrating a product factor by factor
 Splitting $\\int_0^1 x \\cdot x\\, dx$ into $\\int_0^1 x\\, dx \\cdot \\int_0^1 x\\, dx$ gives $\\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$. Linearity covers sums and constant factors only; $\\int_0^1 x^2\\, dx = \\frac{1}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-integrating-a-product-factor-by-factor)]@
 
 These [rules](!/calculus/integrals/rules) allow complex integrands to be broken into simpler pieces, each integrated separately and then combined.
 `,
@@ -509,7 +512,7 @@ $$\\int_a^b f(x)\\, dx = F(b) - F(a)$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the lower-limit term
 Assuming $F(0) = 0$ in $\\int_0^{\\pi} \\sin x\\, dx = \\left[-\\cos x\\right]_0^{\\pi}$ gives $-\\cos \\pi = 1$. But $F(0) = -\\cos 0 = -1$, so the integral is $1 - (-1) = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-lower-limit-term)]@
 
 This result, detailed on the [rules](!/calculus/integrals/rules) page, transforms integration from a limiting process into a two-step procedure: find an antiderivative, then evaluate at the endpoints.
 
@@ -533,7 +536,7 @@ $$f_{\\text{avg}} = \\frac{1}{b - a} \\int_a^b f(x)\\, dx$$
 
 @academic[pitfall,aside:true,width:35%:Averaging the endpoint values
 Taking $\\frac{f(0) + f(3)}{2}$ for $f(x) = x^2$ on $[0, 3]$ gives $\\frac{0 + 9}{2} = 4.5$. The average value uses the whole interval: $\\frac{1}{3}\\int_0^3 x^2\\, dx = \\frac{9}{3} = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-averaging-the-endpoint-values)]@
 
 This generalizes the familiar average of discrete values. The integral computes the total, and division by the interval length yields the mean.
 
@@ -560,73 +563,20 @@ The sections above introduce the definite integral from three angles: as the lim
     after: ``,
     link: ``
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the formulas of the page into four families, and the buttons above the cards show one family at a time. Each formula has a line on what it means or when it holds, with a link to the section that explains it.
+
+The construction comes first: the Riemann sum and its limit, which defines the integral. The area family sets the signed area beside the total area. The properties cover joining and reversing intervals, an empty interval, comparing two integrands and the two linearity rules. The last family gives the evaluation by an antiderivative, the average value of a function and the point where that average is reached.`,
+    before: ``,
+    after: `The definition by Riemann sums says what the integral means, but the evaluation by an antiderivative is how it is computed. The properties do the rest of the work, splitting an awkward interval or integrand into pieces that the evaluation formula handles one at a time.`,
+    link: '',
+  },
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes cause many wrong answers with definite integrals. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Moving the absolute value outside**
-
-The total area between a curve and the axis is wanted, and the absolute value is applied to the finished integral instead of to the integrand. The cancellation between the parts above and below the axis has then already happened.
-
-Wrong working: $\\left|\\int_{-1}^{2} x\\, dx\\right| = \\left|\\left[\\frac{x^2}{2}\\right]_{-1}^{2}\\right| = \\left|2 - \\frac{1}{2}\\right| = \\frac{3}{2}$.
-
-Right working: $x$ is negative on $(-1, 0)$ and positive on $(0, 2)$, so split at $0$. $\\int_{-1}^{0} (-x)\\, dx = \\left[-\\frac{x^2}{2}\\right]_{-1}^{0} = 0 - \\left(-\\frac{1}{2}\\right) = \\frac{1}{2}$ and $\\int_0^2 x\\, dx = 2$, so the total area is $\\frac{1}{2} + 2 = \\frac{5}{2}$.
-
-Why it happens: $\\left|\\int_a^b f(x)\\, dx\\right|$ and $\\int_a^b |f(x)|\\, dx$ look almost the same, and for a function that keeps one sign on $[a, b]$ they are equal.
-
-How to check: the region here is two triangles, one with base $1$ and height $1$, area $\\frac{1}{2}$, and one with base $2$ and height $2$, area $2$. In general $\\left|\\int_a^b f(x)\\, dx\\right| \\leq \\int_a^b |f(x)|\\, dx$, with equality only when $f$ does not change sign.
-
-**Ignoring the order of the limits**
-
-An integral whose upper limit is smaller than its lower limit is evaluated as if it ran over the same interval in the usual direction.
-
-Wrong working: $\\int_3^1 2x\\, dx$ is read as an integral over $[1, 3]$, so it equals $\\left[x^2\\right]_1^3 = 9 - 1 = 8$.
-
-Right working: the upper limit is $1$ and the lower limit is $3$, so $\\int_3^1 2x\\, dx = F(1) - F(3) = 1 - 9 = -8$, which is $-\\int_1^3 2x\\, dx$.
-
-Why it happens: both versions cover the same set of points, so the order of the bounds seems to be only a matter of notation.
-
-How to check: when the integrand is positive and the upper limit is the smaller number, the integral must come out negative.
-
-**Integrating a product factor by factor**
-
-The sum rule and the constant multiple rule are extended to products, as if the integral of a product were the product of the integrals.
-
-Wrong working: $\\int_0^1 x \\cdot x\\, dx = \\int_0^1 x\\, dx \\cdot \\int_0^1 x\\, dx = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$.
-
-Right working: simplify the integrand first. $x \\cdot x = x^2$, and $\\int_0^1 x^2\\, dx = \\left[\\frac{x^3}{3}\\right]_0^1 = \\frac{1}{3}$.
-
-Why it happens: both rules of linearity let the integral pass through a combination of functions, and a product looks like the next case of the same pattern.
-
-How to check: try the simplest functions. With $f(x) = g(x) = 1$ on $[0, 2]$, $\\int_0^2 1 \\cdot 1\\, dx = 2$, while $\\int_0^2 1\\, dx \\cdot \\int_0^2 1\\, dx = 2 \\cdot 2 = 4$.
-
-**Dropping the lower-limit term**
-
-After the antiderivative is found, only its value at the upper limit is kept. The habit comes from examples where the lower limit is $0$ and the antiderivative is $0$ there.
-
-Wrong working: $\\int_0^{\\pi} \\sin x\\, dx = \\left[-\\cos x\\right]_0^{\\pi} = -\\cos \\pi = 1$.
-
-Right working: $\\int_0^{\\pi} \\sin x\\, dx = (-\\cos \\pi) - (-\\cos 0) = 1 - (-1) = 2$.
-
-Why it happens: in $\\int_0^2 t^2\\, dt = \\left[\\frac{t^3}{3}\\right]_0^2$ the lower term is $0$, and the step is skipped by habit. A lower limit of $0$ does not make $F(0)$ equal to $0$.
-
-How to check: estimate the area. The arch of $\\sin x$ on $[0, \\pi]$ lies above the triangle with base $\\pi$ and height $1$, whose area is $\\frac{\\pi}{2} \\approx 1.57$, so $1$ is too small.
-
-**Averaging the endpoint values**
-
-The average value of a function on $[a, b]$ is taken as the average of its two endpoint values, as for two numbers, instead of from the integral over the whole interval.
-
-Wrong working: for $f(x) = x^2$ on $[0, 3]$, $f_{\\text{avg}} = \\frac{f(0) + f(3)}{2} = \\frac{0 + 9}{2} = 4.5$.
-
-Right working: $f_{\\text{avg}} = \\frac{1}{3 - 0}\\int_0^3 x^2\\, dx = \\frac{1}{3} \\cdot 9 = 3$.
-
-Why it happens: the average of two numbers is familiar, and for a linear function it gives the right answer. For $f(x) = 2x + 1$ on $[0, 3]$ both methods give $4$, which hides the difference.
-
-How to check: the rectangle of height $f_{\\text{avg}}$ over $[a, b]$ must have the same area as the region under the curve. $4.5 \\cdot 3 = 13.5$, but $\\int_0^3 x^2\\, dx = 9$; $3 \\cdot 3 = 9$ matches.
-`,
+    content: `Five mistakes cause many wrong answers with definite integrals. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip breaks a property of the definite integral. The absolute value of an integral is not the area, which is found piece by piece; swapping the limits changes the sign; the integral of a product is not the product of the integrals; the lower-limit term $F(a)$ is subtracted too; and the average value is $\\frac{1}{b - a}\\int_a^b f(x)\\,dx$, not the mean of the endpoint values. Checking the sign, estimating the area, or trying the simplest functions catches each slip.`,
     link: ``
   }
 };
@@ -841,8 +791,75 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 14, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'moving-the-absolute-value-outside', name: `Moving the absolute value outside`, errorAt: 0,
+        what: `The total area between a curve and the axis is wanted, and the absolute value is applied to the finished integral instead of to the integrand. The cancellation between the parts above and below the axis has then already happened.`,
+        wrong: [`$\\left|\\int_{-1}^{2} x\\, dx\\right| = \\left|\\left[\\frac{x^2}{2}\\right]_{-1}^{2}\\right| = \\left|2 - \\frac{1}{2}\\right| = \\frac{3}{2}$.`],
+        right: [`$x$ is negative on $(-1, 0)$ and positive on $(0, 2)$, so split at $0$. $\\int_{-1}^{0} (-x)\\, dx = \\left[-\\frac{x^2}{2}\\right]_{-1}^{0} = 0 - \\left(-\\frac{1}{2}\\right) = \\frac{1}{2}$ and $\\int_0^2 x\\, dx = 2$, so the total area is $\\frac{1}{2} + 2 = \\frac{5}{2}$.`],
+        why: `$\\left|\\int_a^b f(x)\\, dx\\right|$ and $\\int_a^b |f(x)|\\, dx$ look almost the same, and for a function that keeps one sign on $[a, b]$ they are equal.`,
+        check: `The region here is two triangles, one with base $1$ and height $1$, area $\\frac{1}{2}$, and one with base $2$ and height $2$, area $2$. In general $\\left|\\int_a^b f(x)\\, dx\\right| \\leq \\int_a^b |f(x)|\\, dx$, with equality only when $f$ does not change sign.` },
+      { id: 'ignoring-the-order-of-the-limits', name: `Ignoring the order of the limits`, errorAt: 0,
+        what: `An integral whose upper limit is smaller than its lower limit is evaluated as if it ran over the same interval in the usual direction.`,
+        wrong: [`$\\int_3^1 2x\\, dx$ is read as an integral over $[1, 3]$, so it equals $\\left[x^2\\right]_1^3 = 9 - 1 = 8$.`],
+        right: [`The upper limit is $1$ and the lower limit is $3$, so $\\int_3^1 2x\\, dx = F(1) - F(3) = 1 - 9 = -8$, which is $-\\int_1^3 2x\\, dx$.`],
+        why: `Both versions cover the same set of points, so the order of the bounds seems to be only a matter of notation.`,
+        check: `When the integrand is positive and the upper limit is the smaller number, the integral must come out negative.` },
+      { id: 'integrating-a-product-factor-by-factor', name: `Integrating a product factor by factor`, errorAt: 0,
+        what: `The sum rule and the constant multiple rule are extended to products, as if the integral of a product were the product of the integrals.`,
+        wrong: [`$\\int_0^1 x \\cdot x\\, dx = \\int_0^1 x\\, dx \\cdot \\int_0^1 x\\, dx = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$.`],
+        right: [`Simplify the integrand first. $x \\cdot x = x^2$, and $\\int_0^1 x^2\\, dx = \\left[\\frac{x^3}{3}\\right]_0^1 = \\frac{1}{3}$.`],
+        why: `Both rules of linearity let the integral pass through a combination of functions, and a product looks like the next case of the same pattern.`,
+        check: `Try the simplest functions. With $f(x) = g(x) = 1$ on $[0, 2]$, $\\int_0^2 1 \\cdot 1\\, dx = 2$, while $\\int_0^2 1\\, dx \\cdot \\int_0^2 1\\, dx = 2 \\cdot 2 = 4$.` },
+      { id: 'dropping-the-lower-limit-term', name: `Dropping the lower-limit term`, errorAt: 0,
+        what: `After the antiderivative is found, only its value at the upper limit is kept. The habit comes from examples where the lower limit is $0$ and the antiderivative is $0$ there.`,
+        wrong: [`$\\int_0^{\\pi} \\sin x\\, dx = \\left[-\\cos x\\right]_0^{\\pi} = -\\cos \\pi = 1$.`],
+        right: [`$\\int_0^{\\pi} \\sin x\\, dx = (-\\cos \\pi) - (-\\cos 0) = 1 - (-1) = 2$.`],
+        why: `In $\\int_0^2 t^2\\, dt = \\left[\\frac{t^3}{3}\\right]_0^2$ the lower term is $0$, and the step is skipped by habit. A lower limit of $0$ does not make $F(0)$ equal to $0$.`,
+        check: `Estimate the area. The arch of $\\sin x$ on $[0, \\pi]$ lies above the triangle with base $\\pi$ and height $1$, whose area is $\\frac{\\pi}{2} \\approx 1.57$, so $1$ is too small.` },
+      { id: 'averaging-the-endpoint-values', name: `Averaging the endpoint values`, errorAt: 0,
+        what: `The average value of a function on $[a, b]$ is taken as the average of its two endpoint values, as for two numbers, instead of from the integral over the whole interval.`,
+        wrong: [`For $f(x) = x^2$ on $[0, 3]$, $f_{\\text{avg}} = \\frac{f(0) + f(3)}{2} = \\frac{0 + 9}{2} = 4.5$.`],
+        right: [`$f_{\\text{avg}} = \\frac{1}{3 - 0}\\int_0^3 x^2\\, dx = \\frac{1}{3} \\cdot 9 = 3$.`],
+        why: `The average of two numbers is familiar, and for a linear function it gives the right answer. For $f(x) = 2x + 1$ on $[0, 3]$ both methods give $4$, which hides the difference.`,
+        check: `The rectangle of height $f_{\\text{avg}}$ over $[a, b]$ must have the same area as the region under the curve. $4.5 \\cdot 3 = 13.5$, but $\\int_0^3 x^2\\, dx = 9$; $3 \\cdot 3 = 9$ matches.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'build', name: 'Construction', sub: 'Rectangles under the curve, made infinitely thin.', pairs: [
+        [{ formula: '$\\displaystyle S_n = \\sum_{i=1}^{n} f(x_i^*) \\Delta x$', text: 'The Riemann sum: $n$ rectangles of width $\\Delta x = (b - a)/n$ and height $f(x_i^*)$, as [the Riemann sum construction](!#1) shows.' },
+         { formula: '$\\displaystyle \\int_a^b f(x)\\, dx = \\lim_{n \\to \\infty} \\sum_{i=1}^{n} f(x_i^*) \\Delta x$', text: 'The definite integral is the limit of the Riemann sums ([the Riemann sum construction](!#1)).' }],
+      ] },
+      { id: 'area', name: 'Area', sub: 'Area below the axis counts as negative.', pairs: [
+        [{ formula: '$\\displaystyle \\int_a^b f(x)\\, dx = (\\text{area above}) - (\\text{area below})$', text: 'The integral is a net, signed area and can be zero or negative, as [signed area](!#3) explains.' },
+         { formula: '$\\displaystyle \\text{Total area} = \\int_a^b |f(x)|\\, dx$', text: 'Integrating the absolute value counts every region as positive ([signed area](!#3)).' }],
+      ] },
+      { id: 'props', name: 'Properties', sub: 'Rules for the interval and for comparing integrands.', pairs: [
+        [{ formula: '$\\displaystyle \\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx = \\int_a^c f(x)\\, dx$', text: 'Adjacent intervals join into one, from [properties of definite integrals](!#4).' },
+         { formula: '$\\displaystyle \\int_a^b f(x)\\, dx = -\\int_b^a f(x)\\, dx$', text: 'Swapping the limits changes the sign, since the width of each rectangle turns negative ([properties](!#4)).' }],
+        [{ formula: '$\\displaystyle \\int_a^a f(x)\\, dx = 0$', text: 'An interval of zero width holds no area ([properties of definite integrals](!#4)).' },
+         { formula: '$\\displaystyle \\int_a^b f(x)\\, dx \\leq \\int_a^b g(x)\\, dx$', text: 'Holds when $f(x) \\leq g(x)$ on $[a, b]$: a smaller integrand gives a smaller integral ([properties](!#4)).' }],
+        [{ formula: '$\\displaystyle \\int_a^b [f(x) + g(x)]\\, dx = \\int_a^b f(x)\\, dx + \\int_a^b g(x)\\, dx$', text: 'A sum is integrated one term at a time, as [linearity](!#5) shows.' },
+         { formula: '$\\displaystyle \\int_a^b c \\cdot f(x)\\, dx = c \\int_a^b f(x)\\, dx$', text: 'A constant factor moves outside the integral ([linearity](!#5)).' }],
+      ] },
+      { id: 'eval', name: 'Evaluation and average', sub: 'The shortcut past the Riemann sums, and the mean height of a function.', pairs: [
+        [{ formula: '$\\displaystyle \\int_a^b f(x)\\, dx = F(b) - F(a)$', text: 'For any antiderivative $F$ of $f$: find $F$, then evaluate at the endpoints, as [computing definite integrals](!#6) shows.' }, ''],
+        [{ formula: '$\\displaystyle f_{\\text{avg}} = \\frac{1}{b - a} \\int_a^b f(x)\\, dx$', text: 'The total divided by the length of the interval, the height of a rectangle with the same area ([average value](!#7)).' },
+         { formula: '$f(c) = f_{\\text{avg}}$', text: 'A continuous function takes its average value at some $c$ in $(a, b)$, by the Mean Value Theorem for Integrals ([average value](!#7)).' }],
+      ] },
+    ],
+  };
+
     return {
       props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
         sectionsContent,
@@ -862,7 +879,7 @@ const schemas = {
     }
 
    }
-export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj1Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1031,11 +1048,38 @@ In the third century BC Archimedes proved that a parabolic segment has $\\frac{4
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="definite-integral-formula-summary"
+            title="Definite integral formulas"
+            source="/calculus/integrals/definite"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj9.title,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="definite-integral-pitfalls"
+            title="Common pitfalls with definite integrals"
+            source="/calculus/integrals/definite"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1953,6 +1953,9 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -2442,7 +2445,7 @@ $$\\lim_{x \\to 2^+} (3x - 2) = 4$$]@
 
 @academic[pitfall,aside:true,width:35%:Using the wrong piece
 Taking both sides from the piece that holds at $x = 2$: for $x^2$ when $x < 2$ and $3x$ when $x \\geq 2$, that gives $6$ from both sides. The left side uses $x^2$ and gives $4$, so the limit does not exist.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-wrong-piece)]@
 
 Since both one-sided limits equal $4$, the two-sided limit exists and equals $4$. If the formulas had produced different values, the two-sided limit would not exist.
 `,
@@ -2465,7 +2468,7 @@ $$\\lim_{x \\to n^+} \\lfloor x \\rfloor = n$$]@
 
 @academic[pitfall,aside:true,width:35%:Plugging in the integer
 Substituting $x = 2$ gives $\\lfloor 2 \\rfloor = 2$ as the left-hand limit. Just left of $2$, at $x = 1.9$ or $1.99$, the floor is $1$, so $\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-plugging-in-the-integer)]@
 
 The left-hand limit gives the integer below, while the right-hand limit gives the integer itself. The function jumps by $1$ at each integer. No two-sided limit exists at these points because the one-sided limits disagree.
 
@@ -2490,7 +2493,7 @@ $$\\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$]@
 
 @academic[pitfall,aside:true,width:35%:Ignoring the sign of the denominator
 Treating $\\lim_{x \\to 3^-} \\frac{x}{x - 3}$ as a number over something tiny gives $+\\infty$. For $x < 3$ the denominator is negative while the numerator is near $3$, so the limit is $-\\infty$; at $x = 2.99$ the value is $-299$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-ignoring-the-sign-of-the-denominator)]@
 
 From the left, $x - 2$ is a small negative number, so the reciprocal is a large negative number. From the right, $x - 2$ is a small positive number, so the reciprocal is a large positive number.
 
@@ -2536,7 +2539,7 @@ $$\\lim_{x \\to 0^-} \\frac{|x|}{x} = \\lim_{x \\to 0^-} \\frac{-x}{x} = -1$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the absolute value bars
 Treating $|x - 2|$ as $x - 2$ in $\\lim_{x \\to 2^-} \\frac{x^2 - 4}{|x - 2|}$ cancels to $x + 2$ and gives $4$. For $x < 2$, $|x - 2| = 2 - x$, so the quotient is $-(x + 2)$ and the limit is $-4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-absolute-value-bars)]@
 
 When $x > 0$, the absolute value $|x| = x$. When $x < 0$, the absolute value $|x| = -x$. The direction of approach determines which case applies.
 `,
@@ -2568,7 +2571,7 @@ $$f \\text{ right-continuous at } a \\iff \\lim_{x \\to a^+} f(x) = f(a); \\quad
 
 @academic[pitfall,aside:true,width:35%:Checking continuity from one side
 Calling the step $f(x) = x$ for $x < 0$, $f(x) = x + 1$ for $x \\geq 0$ continuous at $0$ because $\\lim_{x \\to 0^+} f(x) = 1 = f(0)$ checks one side only. The left-hand limit is $0$, so $f$ is right-continuous at $0$ but not continuous.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-continuity-from-one-side)]@
 
 Full continuity at $a$ requires both. On a closed interval $[a, b]$, continuity means: continuous on the open interval $(a, b)$, continuous from the right at $a$, and continuous from the left at $b$.
 
@@ -2617,86 +2620,20 @@ One-sided limits aren&apos;t just a finer-grained version of the two-sided limit
     after: ``,
     link: ``
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary sets the left-hand and the right-hand side of each formula next to each other. At the top stands the link between them: a two-sided limit exists exactly when both one-sided limits exist and share the same value.
+
+The rows then pair the two sides three times: the one-sided limits themselves, continuity from the left and from the right, which a closed interval needs at its endpoints, and the floor function at an integer, where the two sides give different values. Each cell has a note and a link to its section, and a closing note says what happens when the sides disagree.`,
+    before: ``,
+    after: `Whenever a function changes formula, hits the edge of its domain or blows up at a point, compute the two sides separately and compare them. Their agreement decides whether the two-sided limit exists and whether the function is continuous there.`,
+    link: '',
+  },
   obj12: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for most wrong answers with one-sided limits. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Using the wrong piece**
-
-At a boundary between the pieces of a piecewise function, both one-sided limits are computed from the formula that holds at the boundary point itself, so the left side never uses its own formula.
-
-Wrong working: for $f(x) = x^2$ when $x < 2$ and $f(x) = 3x$ when $x \\geq 2$, the point $x = 2$ belongs to the piece $3x$, so
-$$\\lim_{x \\to 2^-} f(x) = 3 \\cdot 2 = 6, \\qquad \\lim_{x \\to 2^+} f(x) = 6, \\qquad \\lim_{x \\to 2} f(x) = 6$$
-
-Right working: each side uses the formula that holds on that side.
-$$\\lim_{x \\to 2^-} x^2 = 4, \\qquad \\lim_{x \\to 2^+} 3x = 6$$
-Since $4 \\neq 6$, the two-sided limit does not exist.
-
-Why it happens: the boundary point is listed in one of the pieces, and that piece feels like the formula at $2$. A left-hand limit never uses $x = 2$ itself, only values below it.
-
-How to check: pick one value on each side and ask which condition it meets. $x = 1.99$ satisfies $x < 2$ and gives $1.99^2 = 3.9601$; $x = 2.01$ satisfies $x \\geq 2$ and gives $6.03$.
-
-**Plugging in the integer**
-
-The left-hand limit of the floor function at an integer is found by substituting the integer, which gives the function value instead of the value approached from below.
-
-Wrong working:
-$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = \\lfloor 2 \\rfloor = 2$$
-
-Right working: for $1 \\leq x < 2$ the floor is $1$, so the function is constant at $1$ just left of $2$.
-$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1, \\qquad \\lim_{x \\to 2^+} \\lfloor x \\rfloor = 2$$
-The value $\\lfloor 2 \\rfloor = 2$ matches the right side only.
-
-Why it happens: direct substitution is the reflex, and it works for continuous functions. At a jump the value at the point belongs to one side only.
-
-How to check: evaluate just inside the side being approached. $\\lfloor 1.99 \\rfloor = 1$ and $\\lfloor 1.999 \\rfloor = 1$; a substituted answer that differs from these is wrong.
-
-**Ignoring the sign of the denominator**
-
-Near a vertical asymptote the size of the quotient is found correctly, but its sign is assumed to be positive.
-
-Wrong working: as $x \\to 3^-$ the numerator tends to $3$ and the denominator to $0$, so the quotient is $3$ divided by something tiny, and
-$$\\lim_{x \\to 3^-} \\frac{x}{x - 3} = +\\infty$$
-
-Right working: for $x$ slightly less than $3$, $x - 3$ is a small negative number while $x$ is close to $3$, which is positive. A positive number over a small negative one is a large negative number.
-$$\\lim_{x \\to 3^-} \\frac{x}{x - 3} = -\\infty, \\qquad \\lim_{x \\to 3^+} \\frac{x}{x - 3} = +\\infty$$
-
-Why it happens: the rule that a tiny denominator gives a huge value is remembered without the sign, and $x - 3$ is handled as if it were $|x - 3|$.
-
-How to check: substitute one value on the side. $x = 2.99$ gives $\\frac{2.99}{-0.01} = -299$.
-
-**Dropping the absolute value bars**
-
-In a quotient with an absolute value, $|x - a|$ is replaced by $x - a$ and cancelled, without checking which side of $a$ is being approached.
-
-Wrong working:
-$$\\lim_{x \\to 2^-} \\frac{x^2 - 4}{|x - 2|} = \\lim_{x \\to 2^-} \\frac{(x - 2)(x + 2)}{x - 2} = \\lim_{x \\to 2^-} (x + 2) = 4$$
-
-Right working: for $x < 2$, $x - 2$ is negative, so $|x - 2| = -(x - 2)$.
-$$\\lim_{x \\to 2^-} \\frac{(x - 2)(x + 2)}{-(x - 2)} = \\lim_{x \\to 2^-} \\big(-(x + 2)\\big) = -4$$
-From the right $|x - 2| = x - 2$ and the limit is $4$, so the two-sided limit does not exist.
-
-Why it happens: once the numerator is factored, the bars look like decoration, and the case $|u| = u$ is the one that comes to mind.
-
-How to check: substitute a value on the side. $x = 1.99$ gives $\\frac{3.9601 - 4}{0.01} = -3.99$, close to $-4$.
-
-**Checking continuity from one side**
-
-Continuity at a point is tested with one one-sided limit only. When that side matches $f(a)$, the function is called continuous.
-
-Wrong working: for $f(x) = x$ when $x < 0$ and $f(x) = x + 1$ when $x \\geq 0$,
-$$\\lim_{x \\to 0^+} (x + 1) = 1 = f(0), \\quad \\text{so } f \\text{ is continuous at } 0$$
-
-Right working: the right side shows only that $f$ is continuous from the right at $0$. The left side gives
-$$\\lim_{x \\to 0^-} x = 0 \\neq 1 = f(0)$$
-so $f$ is not continuous from the left, and therefore not continuous at $0$.
-
-Why it happens: the side whose formula contains the point is checked first, and it agrees with $f(a)$ whenever that piece is continuous.
-
-How to check: write down all three numbers, $f(a^-)$, $f(a^+)$ and $f(a)$, and require them to be equal. Here they are $0$, $1$ and $1$. Only at an endpoint of a closed interval is one side enough.
-`,
+    content: `Five mistakes account for most wrong answers with one-sided limits. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip uses the wrong side or the wrong piece. A left-hand limit uses the piece for $x < a$, $\\lfloor x \\rfloor$ just left of $2$ is $1$, the sign of a tiny denominator decides between $+\\infty$ and $-\\infty$, $|x - 2|$ is $-(x - 2)$ to the left of $2$, and continuity needs both one-sided limits to equal $f(a)$. Substituting one value just inside the side being approached catches each slip.`,
     link: ``
   }
 };
@@ -2903,8 +2840,84 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 15, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-the-wrong-piece', name: `Using the wrong piece`, errorAt: 1,
+        what: `At a boundary between the pieces of a piecewise function, both one-sided limits are computed from the formula that holds at the boundary point itself, so the left side never uses its own formula.`,
+        wrong: [`For $f(x) = x^2$ when $x < 2$ and $f(x) = 3x$ when $x \\geq 2$, the point $x = 2$ belongs to the piece $3x$, so`, `$$\\lim_{x \\to 2^-} f(x) = 3 \\cdot 2 = 6,$$
+$$\\lim_{x \\to 2^+} f(x) = 6,$$
+$$\\lim_{x \\to 2} f(x) = 6$$`],
+        right: [`For $f(x) = x^2$ when $x < 2$ and $f(x) = 3x$ when $x \\geq 2$, the point $x = 2$ belongs to the piece $3x$, so`, `Each side uses the formula that holds on that side.`, `$$\\lim_{x \\to 2^-} x^2 = 4, \\qquad \\lim_{x \\to 2^+} 3x = 6$$`, `Since $4 \\neq 6$, the two-sided limit does not exist.`],
+        why: `The boundary point is listed in one of the pieces, and that piece feels like the formula at $2$. A left-hand limit never uses $x = 2$ itself, only values below it.`,
+        check: `Pick one value on each side and ask which condition it meets. $x = 1.99$ satisfies $x < 2$ and gives $1.99^2 = 3.9601$; $x = 2.01$ satisfies $x \\geq 2$ and gives $6.03$.` },
+      { id: 'plugging-in-the-integer', name: `Plugging in the integer`, errorAt: 0,
+        what: `The left-hand limit of the floor function at an integer is found by substituting the integer, which gives the function value instead of the value approached from below.`,
+        wrong: [`$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = \\lfloor 2 \\rfloor = 2$$`],
+        right: [`For $1 \\leq x < 2$ the floor is $1$, so the function is constant at $1$ just left of $2$.`, `$$\\lim_{x \\to 2^-} \\lfloor x \\rfloor = 1,$$
+$$\\lim_{x \\to 2^+} \\lfloor x \\rfloor = 2$$`, `The value $\\lfloor 2 \\rfloor = 2$ matches the right side only.`],
+        why: `Direct substitution is the reflex, and it works for continuous functions. At a jump the value at the point belongs to one side only.`,
+        check: `Evaluate just inside the side being approached. $\\lfloor 1.99 \\rfloor = 1$ and $\\lfloor 1.999 \\rfloor = 1$; a substituted answer that differs from these is wrong.` },
+      { id: 'ignoring-the-sign-of-the-denominator', name: `Ignoring the sign of the denominator`, errorAt: 1,
+        what: `Near a vertical asymptote the size of the quotient is found correctly, but its sign is assumed to be positive.`,
+        wrong: [`As $x \\to 3^-$ the numerator tends to $3$ and the denominator to $0$, so the quotient is $3$ divided by something tiny, and`, `$$\\lim_{x \\to 3^-} \\frac{x}{x - 3} = +\\infty$$`],
+        right: [`As $x \\to 3^-$ the numerator tends to $3$ and the denominator to $0$, so the quotient is $3$ divided by something tiny, and`, `For $x$ slightly less than $3$, $x - 3$ is a small negative number while $x$ is close to $3$, which is positive. A positive number over a small negative one is a large negative number.`, `$$\\lim_{x \\to 3^-} \\frac{x}{x - 3} = -\\infty,$$
+$$\\lim_{x \\to 3^+} \\frac{x}{x - 3} = +\\infty$$`],
+        why: `The rule that a tiny denominator gives a huge value is remembered without the sign, and $x - 3$ is handled as if it were $|x - 3|$.`,
+        check: `Substitute one value on the side. $x = 2.99$ gives $\\frac{2.99}{-0.01} = -299$.` },
+      { id: 'dropping-the-absolute-value-bars', name: `Dropping the absolute value bars`, errorAt: 0,
+        what: `In a quotient with an absolute value, $|x - a|$ is replaced by $x - a$ and cancelled, without checking which side of $a$ is being approached.`,
+        wrong: [`$$\\lim_{x \\to 2^-} \\frac{x^2 - 4}{|x - 2|}$$
+$$= \\lim_{x \\to 2^-} \\frac{(x - 2)(x + 2)}{x - 2}$$
+$$= \\lim_{x \\to 2^-} (x + 2) = 4$$`],
+        right: [`For $x < 2$, $x - 2$ is negative, so $|x - 2| = -(x - 2)$.`, `$$\\lim_{x \\to 2^-} \\frac{(x - 2)(x + 2)}{-(x - 2)}$$
+$$= \\lim_{x \\to 2^-} \\big(-(x + 2)\\big) = -4$$`, `From the right $|x - 2| = x - 2$ and the limit is $4$, so the two-sided limit does not exist.`],
+        why: `Once the numerator is factored, the bars look like decoration, and the case $|u| = u$ is the one that comes to mind.`,
+        check: `Substitute a value on the side. $x = 1.99$ gives $\\frac{3.9601 - 4}{0.01} = -3.99$, close to $-4$.` },
+      { id: 'checking-continuity-from-one-side', name: `Checking continuity from one side`, errorAt: 1,
+        what: `Continuity at a point is tested with one one-sided limit only. When that side matches $f(a)$, the function is called continuous.`,
+        wrong: [`For $f(x) = x$ when $x < 0$ and $f(x) = x + 1$ when $x \\geq 0$,`, `$$\\lim_{x \\to 0^+} (x + 1) = 1 = f(0),$$
+$$\\text{so } f \\text{ is continuous at } 0$$`],
+        right: [`For $f(x) = x$ when $x < 0$ and $f(x) = x + 1$ when $x \\geq 0$,`, `The right side shows only that $f$ is continuous from the right at $0$. The left side gives
+$$\\lim_{x \\to 0^-} x = 0 \\neq 1 = f(0)$$`, `So $f$ is not continuous from the left, and therefore not continuous at $0$.`],
+        why: `The side whose formula contains the point is checked first, and it agrees with $f(a)$ whenever that piece is continuous.`,
+        check: `Write down all three numbers, $f(a^-)$, $f(a^+)$ and $f(a)$, and require them to be equal. Here they are $0$, $1$ and $1$. Only at an endpoint of a closed interval is one side enough.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: '$\\displaystyle \\lim_{x \\to a} f(x) = L \\quad \\Longleftrightarrow \\quad \\lim_{x \\to a^-} f(x) = L \\;\\text{ and }\\; \\lim_{x \\to a^+} f(x) = L$',
+    generalLabel: 'Both sides together',
+    sides: [
+      { name: 'Left-hand', sub: '$x$ approaches $a$ through values below $a$', tone: 'direct' },
+      { name: 'Right-hand', sub: '$x$ approaches $a$ through values above $a$', tone: 'reversed' },
+    ],
+    rows: [
+      { op: 'Limit', cells: [
+        { formula: '$\\displaystyle \\lim_{x \\to a^-} f(x)$', effect: 'Only inputs strictly below $a$ count, reached by moving in from the left, as [left-hand limits](!#1) explains.' },
+        { formula: '$\\displaystyle \\lim_{x \\to a^+} f(x)$', effect: 'Only inputs strictly above $a$ count, reached by moving in from the right, as [right-hand limits](!#2) explains.' },
+      ] },
+      { op: 'Continuity', cells: [
+        { formula: '$\\displaystyle \\lim_{x \\to a^-} f(x) = f(a)$', effect: '$f$ is continuous from the left at $a$; on $[a, b]$ this is the check at $b$, from [one-sided continuity](!#10).',
+          condition: 'full continuity at $a$ needs both sides' },
+        { formula: '$\\displaystyle \\lim_{x \\to a^+} f(x) = f(a)$', effect: '$f$ is continuous from the right at $a$; on $[a, b]$ this is the check at $a$, from [one-sided continuity](!#10).',
+          condition: 'full continuity at $a$ needs both sides' },
+      ] },
+      { op: 'Floor at an integer', cells: [
+        { formula: '$\\displaystyle \\lim_{x \\to n^-} \\lfloor x \\rfloor = n - 1$', effect: 'From the left the floor function gives the integer below, as [jump discontinuities](!#6) shows.' },
+        { formula: '$\\displaystyle \\lim_{x \\to n^+} \\lfloor x \\rfloor = n$', effect: 'From the right it gives the integer itself, so the graph jumps by $1$ at every integer ([jump discontinuities](!#6)).' },
+      ] },
+    ],
+    note: { label: 'When the two sides disagree', text: 'If the one-sided limits differ, or either fails to exist, the two-sided limit does not exist, as [the connection to two-sided limits](!#3) explains.' },
+  };
+
 return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2925,7 +2938,7 @@ return {
    }
 
 
-export default function OneSidedPage({seoData, sectionsContent, introContent, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function OneSidedPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3117,11 +3130,38 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="one-sided-limit-formula-summary"
+            title="One-sided limit formulas"
+            source="/calculus/limits/one-sided"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="paired" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj12.title,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="one-sided-limit-pitfalls"
+            title="Common pitfalls with one-sided limits"
+            source="/calculus/limits/one-sided"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

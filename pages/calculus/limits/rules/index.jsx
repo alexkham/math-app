@@ -15,8 +15,10 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -560,7 +562,7 @@ The limit of a sum is the sum of the limits. The limit of a difference is the di
 
 @academic[pitfall,aside:true,width:35%:Cancelling infinity minus infinity to 0
 Splitting $\\lim_{x \\to \\infty} (\\sqrt{x^2 + x} - x)$ into $\\infty - \\infty$ and calling it $0$ uses the rule on parts with no finite limit. Rewriting it as $\\frac{x}{\\sqrt{x^2 + x} + x}$ gives the limit $\\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-cancelling-infinity-minus-infinity-to-0)]@
 
 Both component limits must exist. If either fails to exist, these rules do not apply. The indeterminate form $\\infty - \\infty$ illustrates what can go wrong: two quantities both growing without bound may have a difference that converges, diverges, or oscillates.
 `,
@@ -604,7 +606,7 @@ The limit of a product is the product of the limits. This extends to any finite 
 
 @academic[pitfall,aside:true,width:35%:Treating zero times infinity as zero
 Writing $\\lim_{x \\to 0^+} \\sin x \\cdot \\frac{1}{x} = 0$ because $\\sin x \\to 0$ ignores that $\\frac{1}{x} \\to \\infty$. The product is $\\frac{\\sin x}{x}$, and its limit is $1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-zero-times-infinity-as-zero)]@
 
 The indeterminate form $0 \\cdot \\infty$ shows the rule's limitation. When one factor approaches $0$ while the other grows without bound, the product's behavior depends on the relative rates—it might approach $0$, $\\infty$, or any finite value.
 `,
@@ -751,7 +753,7 @@ $$\\lim_{x \\to a} f(g(x)) = f\\left(\\lim_{x \\to a} g(x)\\right) \\quad \\text
 
 @academic[pitfall,aside:true,width:35%:Moving the limit inside a discontinuous function
 Passing the limit into the floor function gives $\\lim_{x \\to 0} \\lfloor 1 - x^2 \\rfloor = \\lfloor 1 \\rfloor = 1$, but $\\lfloor u \\rfloor$ jumps at $u = 1$. Near $0$, $1 - x^2$ is just below $1$, so every value is $0$ and the limit is $0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-moving-the-limit-inside-a-discontinuous-function)]@
 
 The limit passes through continuous functions. You first find the limit of the inner function, then apply the outer function to that limit.
 
@@ -822,56 +824,19 @@ The [evaluating limits](!/calculus/limits/evaluating) page covers techniques for
   },
   obj16: {
     title: `Summary: Master Reference of Limit Rules`,
-    content: `
-The rules above split into three families: the basic facts (constant, identity), the algebraic combination rules (sum/difference, constant multiple, product, quotient, power, root, absolute value), and the advanced rules (composition, Squeeze Theorem). The table below collects all eleven in one place with each rule&apos;s precise conditions, since the conditions — not the formulas — are what distinguish correct application from a misuse that produces a wrong answer.
-`,
+    content: `This summary gathers the thirteen limit rules of the page, one per row, in the order the page states them. Each row gives the name of the rule with a line on what the limit becomes and a link to its section, the rule itself, and the conditions under which it holds.
+
+The rules fall into three families: the basic facts for a constant and for the identity function, the algebraic rules for sums, differences, multiples, products, quotients, powers, roots and absolute values, with their results for polynomials and rational functions, and the advanced rules, composition and the Squeeze Theorem. The conditions, not the formulas, separate a correct use from a misuse that gives a wrong answer.`,
+    formulaSheetAfter: `Read the conditions before the formula. Every component limit must exist, a denominator limit must not be zero, and an even root needs a limit that is not negative. When a condition fails, rewrite the expression first and apply the rules only afterwards.`,
     before: ``,
     after: ``,
     link: ``
   },
   obj17: {
     title: `Common Pitfalls`,
-    content: `
-Three mistakes cause most wrong answers when the limit rules are applied: each one uses a rule whose condition does not hold. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Cancelling infinity minus infinity to 0**
-
-A difference of two parts that both grow without bound is split with the difference rule, and $\\infty - \\infty$ is then cancelled to $0$ as if $\\infty$ were a number.
-
-Wrong working: $\\lim_{x \\to \\infty} (\\sqrt{x^2 + x} - x) = \\lim_{x \\to \\infty} \\sqrt{x^2 + x} - \\lim_{x \\to \\infty} x = \\infty - \\infty = 0$.
-
-Right working: neither part has a finite limit, so the difference rule does not apply. Multiply and divide by $\\sqrt{x^2 + x} + x$: for $x > 0$, $\\sqrt{x^2 + x} - x = \\dfrac{(x^2 + x) - x^2}{\\sqrt{x^2 + x} + x} = \\dfrac{x}{\\sqrt{x^2 + x} + x} = \\dfrac{1}{\\sqrt{1 + \\frac{1}{x}} + 1}$, and the limit is $\\dfrac{1}{1 + 1} = \\dfrac{1}{2}$.
-
-Why it happens: the difference rule is so natural that it is used before its condition is checked, and a number minus itself is $0$. But two quantities can both grow without bound while the gap between them settles, grows, or shrinks.
-
-How to check: evaluate at a large $x$. At $x = 100$, $\\sqrt{10100} - 100 \\approx 0.4988$; at $x = 10000$ the difference is about $0.49999$, closing in on $0.5$ and not on $0$.
-
-**Treating zero times infinity as zero**
-
-One factor of a product tends to $0$, and the product is declared to tend to $0$ without a look at the other factor. When the other factor grows without bound, the product rule does not apply.
-
-Wrong working: $\\lim_{x \\to 0^+} \\sin x = 0$, so $\\lim_{x \\to 0^+} \\sin x \\cdot \\dfrac{1}{x} = 0 \\cdot \\lim_{x \\to 0^+} \\dfrac{1}{x} = 0$.
-
-Right working: $\\dfrac{1}{x} \\to \\infty$ as $x \\to 0^+$, so the form is $0 \\cdot \\infty$ and the product rule says nothing. Combine the factors: $\\sin x \\cdot \\dfrac{1}{x} = \\dfrac{\\sin x}{x}$, and the [special limit](!/calculus/limits/special) $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$ gives the limit $1$.
-
-Why it happens: zero times any number is zero, and $\\infty$ is handled like one more number. The factor that tends to $0$ and the factor that grows without bound pull in opposite directions, and their rates decide the result.
-
-How to check: evaluate at a small positive $x$. At $x = 0.1$, $\\dfrac{\\sin 0.1}{0.1} \\approx 0.9983$, close to $1$ and far from $0$.
-
-**Moving the limit inside a discontinuous function**
-
-The composition rule is used without checking that the outer function is continuous at the limit of the inner one. The limit is moved inside, and the outer function is simply evaluated at that limit.
-
-Wrong working: $\\lim_{x \\to 0} (1 - x^2) = 1$, so $\\lim_{x \\to 0} \\lfloor 1 - x^2 \\rfloor = \\lfloor 1 \\rfloor = 1$.
-
-Right working: the floor function $\\lfloor u \\rfloor$ jumps from $0$ to $1$ at $u = 1$, so it is not continuous there and the composition rule does not apply. For $0 < |x| < 1$, $0 < 1 - x^2 < 1$, so $\\lfloor 1 - x^2 \\rfloor = 0$. The function equals $0$ for every $x$ near $0$ other than $0$ itself, and the limit is $0$.
-
-Why it happens: for the functions met most often, such as polynomials, roots, exponentials, sine and cosine, moving the limit inside always works, so the continuity check is skipped.
-
-How to check: look at how the inner function approaches its limit. Here $1 - x^2$ approaches $1$ from below only, and $\\lfloor u \\rfloor = 0$ for every $u$ just below $1$. At $x = 0.1$, $\\lfloor 0.99 \\rfloor = 0$.
-`,
+    content: `Three mistakes cause most wrong answers when the limit rules are applied: each one uses a rule whose condition does not hold. Each is marked where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip applies a limit law where it does not hold. $\\infty - \\infty$ and $0 \\cdot \\infty$ are indeterminate, so the expression is rewritten first, and a limit moves inside a function only where that function is continuous. Evaluating at a large or a small input, or watching how the inner function approaches its limit, catches each slip.`,
     link: ``
   }
 };
@@ -1071,8 +1036,73 @@ const schemas = {
   };
 
 
+  // MistakeFix batch 15, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj17 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'cancelling-infinity-minus-infinity-to-0', name: `Cancelling infinity minus infinity to 0`, errorAt: 0,
+        what: `A difference of two parts that both grow without bound is split with the difference rule, and $\\infty - \\infty$ is then cancelled to $0$ as if $\\infty$ were a number.`,
+        wrong: [`$\\lim_{x \\to \\infty} (\\sqrt{x^2 + x} - x) = \\lim_{x \\to \\infty} \\sqrt{x^2 + x} - \\lim_{x \\to \\infty} x = \\infty - \\infty = 0$.`],
+        right: [`Neither part has a finite limit, so the difference rule does not apply. Multiply and divide by $\\sqrt{x^2 + x} + x$: for $x > 0$, $\\sqrt{x^2 + x} - x = \\dfrac{(x^2 + x) - x^2}{\\sqrt{x^2 + x} + x} = \\dfrac{x}{\\sqrt{x^2 + x} + x} = \\dfrac{1}{\\sqrt{1 + \\frac{1}{x}} + 1}$, and the limit is $\\dfrac{1}{1 + 1} = \\dfrac{1}{2}$.`],
+        why: `The difference rule is so natural that it is used before its condition is checked, and a number minus itself is $0$. But two quantities can both grow without bound while the gap between them settles, grows, or shrinks.`,
+        check: `Evaluate at a large $x$. At $x = 100$, $\\sqrt{10100} - 100 \\approx 0.4988$; at $x = 10000$ the difference is about $0.49999$, closing in on $0.5$ and not on $0$.` },
+      { id: 'treating-zero-times-infinity-as-zero', name: `Treating zero times infinity as zero`, errorAt: 0,
+        what: `One factor of a product tends to $0$, and the product is declared to tend to $0$ without a look at the other factor. When the other factor grows without bound, the product rule does not apply.`,
+        wrong: [`$\\lim_{x \\to 0^+} \\sin x = 0$, so $\\lim_{x \\to 0^+} \\sin x \\cdot \\dfrac{1}{x} = 0 \\cdot \\lim_{x \\to 0^+} \\dfrac{1}{x} = 0$.`],
+        right: [`$\\dfrac{1}{x} \\to \\infty$ as $x \\to 0^+$, so the form is $0 \\cdot \\infty$ and the product rule says nothing. Combine the factors: $\\sin x \\cdot \\dfrac{1}{x} = \\dfrac{\\sin x}{x}$, and the [special limit](!/calculus/limits/special) $\\lim_{x \\to 0} \\dfrac{\\sin x}{x} = 1$ gives the limit $1$.`],
+        why: `Zero times any number is zero, and $\\infty$ is handled like one more number. The factor that tends to $0$ and the factor that grows without bound pull in opposite directions, and their rates decide the result.`,
+        check: `Evaluate at a small positive $x$. At $x = 0.1$, $\\dfrac{\\sin 0.1}{0.1} \\approx 0.9983$, close to $1$ and far from $0$.` },
+      { id: 'moving-the-limit-inside-a-discontinuous-function', name: `Moving the limit inside a discontinuous function`, errorAt: 0,
+        what: `The composition rule is used without checking that the outer function is continuous at the limit of the inner one. The limit is moved inside, and the outer function is simply evaluated at that limit.`,
+        wrong: [`$\\lim_{x \\to 0} (1 - x^2) = 1$, so $\\lim_{x \\to 0} \\lfloor 1 - x^2 \\rfloor = \\lfloor 1 \\rfloor = 1$.`],
+        right: [`The floor function $\\lfloor u \\rfloor$ jumps from $0$ to $1$ at $u = 1$, so it is not continuous there and the composition rule does not apply. For $0 < |x| < 1$, $0 < 1 - x^2 < 1$, so $\\lfloor 1 - x^2 \\rfloor = 0$. The function equals $0$ for every $x$ near $0$ other than $0$ itself, and the limit is $0$.`],
+        why: `For the functions met most often, such as polynomials, roots, exponentials, sine and cosine, moving the limit inside always works, so the continuity check is skipped.`,
+        check: `Look at how the inner function approaches its limit. Here $1 - x^2$ approaches $1$ from below only, and $\\lfloor u \\rfloor = 0$ for every $u$ just below $1$. At $x = 0.1$, $\\lfloor 0.99 \\rfloor = 0$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Rule', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'cond', label: 'Conditions' },
+    ],
+    rows: [
+      { name: 'Constant', formula: '$\\displaystyle \\lim_{x \\to a} c = c$', cond: 'always, no conditions',
+        sub: 'A constant function has the same value everywhere, so its limit at any point is that value; see [the limit of a constant](!#2).' },
+      { name: 'Identity', formula: '$\\displaystyle \\lim_{x \\to a} x = a$', cond: 'always, no conditions',
+        sub: 'As $x$ approaches $a$, the output $x$ approaches $a$ too, as [the identity function](!#3) shows.' },
+      { name: 'Sum / Difference', formula: '$\\displaystyle \\lim_{x \\to a} [f(x) \\pm g(x)] = \\lim_{x \\to a} f(x) \\pm \\lim_{x \\to a} g(x)$', cond: 'both component limits exist',
+        sub: 'With limits $L$ and $M$, the sum or difference tends to $L \\pm M$; [the sum and difference rules](!#4) show how $\\infty - \\infty$ breaks this.' },
+      { name: 'Constant multiple', formula: '$\\displaystyle \\lim_{x \\to a} [c \\cdot f(x)] = c \\cdot \\lim_{x \\to a} f(x)$', cond: 'the limit of $f$ exists; $c$ any real constant',
+        sub: 'A constant factors out, so the limit is $c \\cdot L$, from [the constant multiple rule](!#5).' },
+      { name: 'Product', formula: '$\\displaystyle \\lim_{x \\to a} [f(x) \\cdot g(x)] = \\lim_{x \\to a} f(x) \\cdot \\lim_{x \\to a} g(x)$', cond: 'both component limits exist',
+        sub: 'The product tends to $L \\cdot M$, for any finite number of factors; [the product rule](!#6) shows how $0 \\cdot \\infty$ escapes it.' },
+      { name: 'Quotient', formula: '$\\displaystyle \\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\frac{\\lim_{x \\to a} f(x)}{\\lim_{x \\to a} g(x)}$', cond: 'both component limits exist and $M \\neq 0$',
+        sub: 'The quotient tends to $L / M$; when $M = 0$ the rule fails, as [the quotient rule](!#7) explains.' },
+      { name: 'Power', formula: '$\\displaystyle \\lim_{x \\to a} [f(x)]^n = \\left[\\lim_{x \\to a} f(x)\\right]^n$', cond: '$n$ a positive integer; for a rational exponent $m/n$ in lowest terms, any real $L$ when $n$ is odd and $L \\geq 0$ when $n$ is even ($L \\neq 0$ if $m/n < 0$)',
+        sub: 'The power tends to $L^n$, and for rational exponents $\\lim_{x \\to a} [f(x)]^{m/n} = L^{m/n}$, from [the power rule](!#8).' },
+      { name: 'Root', formula: '$\\displaystyle \\lim_{x \\to a} \\sqrt[n]{f(x)} = \\sqrt[n]{\\lim_{x \\to a} f(x)}$', cond: 'odd $n$: all $L$; even $n$: $L \\geq 0$ and $f(x) \\geq 0$ near $a$',
+        sub: 'The root tends to $\\sqrt[n]{L}$; it is the power rule with exponent $1/n$, as [the root rule](!#9) notes.' },
+      { name: 'Absolute value', formula: '$\\displaystyle \\lim_{x \\to a} |f(x)| = \\left|\\lim_{x \\to a} f(x)\\right|$', cond: 'the limit of $f$ exists (the converse does not hold)',
+        sub: 'The limit of $|f(x)|$ is $|L|$; [the absolute value rule](!#10) shows $|f(x)|$ can have a limit when $f(x)$ has none.' },
+      { name: 'Polynomial', formula: '$\\displaystyle \\lim_{x \\to a} p(x) = p(a)$', cond: 'any polynomial $p$, at any point $a$',
+        sub: 'Direct substitution always works, because the sum, constant multiple and power rules apply term by term; see [limits of polynomials](!#11).' },
+      { name: 'Rational function', formula: '$\\displaystyle \\lim_{x \\to a} \\frac{p(x)}{q(x)} = \\frac{p(a)}{q(a)}$', cond: '$p$ and $q$ polynomials with $q(a) \\neq 0$',
+        sub: 'Substitute directly when the denominator is nonzero at $a$; [limits of rational functions](!#12) covers what to do when $q(a) = 0$.' },
+      { name: 'Composition', formula: '$\\displaystyle \\lim_{x \\to a} f(g(x)) = f\\left(\\lim_{x \\to a} g(x)\\right)$', cond: '$\\lim_{x \\to a} g(x) = L$ and $f$ is continuous at $L$',
+        sub: 'The limit passes through the outer function and gives $f(L)$, as [the composition rule](!#13) explains.' },
+      { name: 'Squeeze Theorem', formula: '$\\displaystyle \\lim_{x \\to a} f(x) = L$', cond: '$g(x) \\leq f(x) \\leq h(x)$ near $a$, with $\\lim_{x \\to a} g(x) = \\lim_{x \\to a} h(x) = L$',
+        sub: 'A function trapped between two functions with the same limit has nowhere to go but $L$; [the Squeeze Theorem](!#14) uses this for the sine limit at zero.' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
       squeezeCard,
     sectionsContent,
     quotientRuleCases,
@@ -1099,7 +1129,7 @@ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', 
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function RulesPage({squeezeCard, seoData, sectionsContent, introContent, quotientRuleCases, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RulesPage({ formulaSummaryData, pitfallData,squeezeCard, seoData, sectionsContent, introContent, quotientRuleCases, obj12Table, obj15Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1311,8 +1341,16 @@ export default function RulesPage({squeezeCard, seoData, sectionsContent, introC
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="limit-rule-formula-summary"
+            title="Limit rules"
+            source="/calculus/limits/rules"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.obj16.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1321,6 +1359,15 @@ export default function RulesPage({squeezeCard, seoData, sectionsContent, introC
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <DiagramFrame
+            key={'obj17-mistakes'}
+            id="limit-law-pitfalls"
+            title="Common pitfalls with the limit laws"
+            source="/calculus/limits/rules"
+            after={sectionsContent.obj17.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

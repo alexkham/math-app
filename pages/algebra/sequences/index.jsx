@@ -11,6 +11,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import { tableHeaders } from '@/app/styles/theme'
@@ -359,6 +360,15 @@ The [prime numbers calculator](!/algebra/calculators/sequences/prime-numbers) li
 @span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Prime Numbers](!/algebra/sequences/prime-numbers) →@`,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page, one card per family of sequences: the general term on the left, and the sum or a second form on the right. Each card says how its terms are built and links to the section that explains it, and the buttons above the cards show one family at a time.
+
+Arithmetic and geometric sequences each have a term formula and a sum formula; the geometric sum holds for every ratio except one. A harmonic sequence has only a term formula, since its partial sums have no closed form. The Fibonacci card sets the defining recurrence next to Binet's formula, and the last card holds the triangular and square numbers together with the sum of the first squares.`,
+    before: ``,
+    after: `The cards repeat one pattern. Once the first term and the rule that builds the next one are known, the general term gives any term straight from its position, without listing the terms before it, and where a sum formula exists it adds up a whole stretch of terms in one step.`,
+    link: '',
+  },
   obj10: {
     title: `Common Pitfalls`,
     content: `Three mistakes come up often with the sequences on this page. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -567,9 +577,38 @@ $$N = 2 \\cdot 3 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13 + 1 = 30031 \\text{ is pr
     ],
   };
 
+  // FormulaSheet pilot 2026-11-05: the page's own formula boxes, unchanged, grouped by family.
+  // A family with an odd number of formulas leaves its last slot empty ('').
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'arithmetic', name: 'Arithmetic', sub: 'Each term adds the same common difference $d$ to the one before; [arithmetic sequences](!#3) derives both formulas.', pairs: [
+        [{ formula: '$a_n = a_1 + (n - 1)d$', text: 'The $n$-th term: start at $a_1$ and add $d$ once for each of the $n - 1$ steps.' },
+         { formula: '$\\displaystyle S_n = \\frac{n}{2}(a_1 + a_n)$', text: 'The sum of the first $n$ terms: the number of terms times the average of the first and the last.' }],
+      ] },
+      { id: 'geometric', name: 'Geometric', sub: 'Each term multiplies the one before by the same common ratio $r$; the formulas come from [geometric sequences](!#4).', pairs: [
+        [{ formula: '$a_n = a_1 \\cdot r^{n-1}$', text: 'The $n$-th term: start at $a_1$ and multiply by $r$ once for each of the $n - 1$ steps.' },
+         { formula: '$\\displaystyle S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$', text: 'The sum of the first $n$ terms, for every ratio except $r = 1$.' }],
+      ] },
+      { id: 'harmonic', name: 'Harmonic', sub: 'The reciprocals of an arithmetic sequence, as [harmonic sequences](!#5) shows.', pairs: [
+        [{ formula: '$\\displaystyle a_n = \\frac{1}{b_1 + (n-1)d}$', text: 'One over the $n$-th term of the arithmetic sequence with first term $b_1$ and difference $d$. There is no sum formula: the partial sums have no closed form.' }, ''],
+      ] },
+      { id: 'fibonacci', name: 'Fibonacci', sub: 'Each term is the sum of the two before it; [Fibonacci numbers](!#6) gives both forms.', pairs: [
+        [{ formula: '$F_1 = 1, \\quad F_2 = 1, \\quad F_n = F_{n-1} + F_{n-2} \\quad (n \\geq 3)$', text: 'The definition: two starting ones, then each term adds its two predecessors.' },
+         { formula: '$\\displaystyle F_n = \\frac{\\phi^n - \\psi^n}{\\sqrt{5}}$', text: "Binet's formula gives $F_n$ directly from the golden ratio $\\phi$ and $\\psi = \\frac{1 - \\sqrt{5}}{2}$, and always returns a whole number." }],
+      ] },
+      { id: 'figurate', name: 'Triangular and square', sub: 'Numbers that count dots in triangles and squares, from [triangular numbers](!#7) and [square numbers](!#8).', pairs: [
+        [{ formula: '$\\displaystyle T_n = 1 + 2 + 3 + \\cdots + n = \\frac{n(n+1)}{2}$', text: 'The $n$-th triangular number is the sum of the first $n$ natural numbers.' },
+         { formula: '$n^2 = 1 + 3 + 5 + \\cdots + (2n - 1)$', text: 'Every perfect square is a sum of consecutive odd numbers.' }],
+        [{ formula: '$\\displaystyle \\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$', text: 'The sum of the first $n$ square numbers.' }, ''],
+      ] },
+    ],
+  };
+
    return {
   props:{
     pitfallData,
+    formulaSummaryData,
     faqQuestions,
     arithmeticDiffCases,
     demoUnits,
@@ -590,7 +629,7 @@ $$N = 2 \\cdot 3 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13 + 1 = 30031 \\text{ is pr
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function SequencesPage({ pitfallData,faqQuestions, arithmeticDiffCases, seoData, sectionsContent, introContent, schemas, demoUnits, conceptIntroFigures}) {
+export default function SequencesPage({ pitfallData,formulaSummaryData,faqQuestions, arithmeticDiffCases, seoData, sectionsContent, introContent, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -766,6 +805,25 @@ Mark $n$ points on a circle and join every pair by a chord, with no three chords
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="sequence-formula-summary"
+            title="Sequence formulas"
+            source="/algebra/sequences"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+          
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
         ]
     },
     {

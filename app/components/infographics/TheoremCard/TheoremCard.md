@@ -3,7 +3,7 @@
 A theorem infographic with seven variants. Each one lays out the same kind of content (hypotheses, conclusion, consequences, misreadings) in a different shape. Wording, colours and behaviour can all be set from data, with defaults.
 
 ```jsx
-import TheoremCard from '@/app/components/infographics/TheoremCard';
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard';
 
 <TheoremCard data={rolle} variant="card" />
 ```

@@ -15,6 +15,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -672,6 +673,15 @@ These relationships hold whether the roots are real or complex, rational or irra
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page in one table. Each row gives the formula's name with a line on where it comes from and a link to its section, the statement itself, and what it says in words.
+
+The first rows describe the equation itself: its general form, and the complete factorization that the fundamental theorem of algebra guarantees over the complex numbers. The depressed cubic follows, the reduced form that Cardano's method starts from. The remaining rows are Vieta's formulas, which tie the roots to the coefficients, first for any leading coefficient and then for a monic polynomial.`,
+    before: ``,
+    after: `Together the rows let a polynomial be read in both directions. The coefficients give the sum and the product of the roots without solving anything, and known roots rebuild the polynomial through its factorization.`,
+    link: '',
+  },
   obj11: {
     title: `Common Pitfalls`,
     content: `Five mistakes come up again and again when polynomial equations are solved by hand. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -913,8 +923,37 @@ $$r_1 r_2 r_3 = (-1)^3 \\cdot \\frac{12}{2} = -6$$`, `The roots $-2$, $\\frac{3}
     ],
   };
 
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it says' },
+    ],
+    rows: [
+      { name: 'General form', formula: '$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$', says: 'the degree is the highest power with a nonzero coefficient',
+        sub: 'Every polynomial equation can be written this way, as [definition and degree](!#1) shows.' },
+      { name: 'Complete factorization', formula: '$P(x) = a_n(x - r_1)(x - r_2) \\cdots (x - r_n)$', says: 'a degree-$n$ polynomial has exactly $n$ complex roots, counted with multiplicity',
+        sub: 'The consequence of [the fundamental theorem of algebra](!#2).' },
+      { name: 'Depressed cubic', formula: '$t^3 + pt + q = 0$', says: 'the cubic with its squared term removed',
+        sub: 'The substitution $x = t - \\frac{b}{3a}$ in [solving cubic equations](!#5) leads here, the starting point for Cardano.' },
+      { name: 'Sum of the roots', formula: '$\\displaystyle r_1 + r_2 + \\cdots + r_n = -\\frac{a_{n-1}}{a_n}$', says: 'read off the two leading coefficients',
+        sub: "Vieta's formulas for any degree, from [roots and coefficients](!#9)." },
+      { name: 'Product of the roots', formula: '$\\displaystyle r_1 r_2 \\cdots r_n = (-1)^n \\frac{a_0}{a_n}$', says: 'read off the constant and leading coefficients',
+        sub: 'The other end of the same list of formulas in [roots and coefficients](!#9).' },
+      { name: 'Monic: sum of roots', formula: '$r_1 + r_2 + \\cdots + r_n = -a_{n-1}$', says: 'for leading coefficient $1$',
+        sub: 'With $a_n = 1$, each coefficient is a symmetric combination of the roots ([roots and coefficients](!#9)).' },
+      { name: 'Monic: pairs and triples', formula: '$r_1 r_2 + r_1 r_3 + \\cdots + r_{n-1}r_n = a_{n-2}$, $r_1 r_2 r_3 + \\cdots = -a_{n-3}$', says: 'products of two roots, then of three, with alternating signs',
+        sub: 'The pattern continues down the coefficients.' },
+      { name: 'Monic: product of roots', formula: '$r_1 \\cdot r_2 \\cdots r_n = (-1)^n a_0$', says: 'the constant term, with sign $(-1)^n$',
+        sub: 'The last formula of the list.' },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -936,7 +975,7 @@ $$r_1 r_2 r_3 = (-1)^3 \\cdot \\frac{12}{2} = -6$$`, `The roots $-2$, $\\frac{3}
   }
 }
    }
-export default function PolynomialEquationsPage({ pitfallData,
+export default function PolynomialEquationsPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1132,6 +1171,24 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="polynomial-equation-formula-summary"
+            title="Polynomial equation formulas"
+            source="/algebra/equations/polynomial"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

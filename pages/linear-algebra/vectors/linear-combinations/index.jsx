@@ -809,6 +809,7 @@ import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-vi
 import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1176,7 +1177,7 @@ $$\\text{Span}\\{\\mathbf{v}_1, \\mathbf{v}_2, \\ldots, \\mathbf{v}_k\\} = \\{c_
 
 @academic[pitfall,aside:true,width:35%:Confusing the set with its span
 Saying that $(3, -2)$ is not in $\\text{Span}\\{(1, 0), (0, 1)\\}$ because it is neither of the two vectors reads the span as the set itself. Since $(3, -2) = 3(1, 0) - 2(0, 1)$, it is in the span.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-confusing-the-set-with-its-span)]@
 
 The span is a subset of $\\mathbb{R}^n$ that contains all vectors reachable through linear combinations — and no others. It always contains the zero vector, since setting every coefficient to zero produces $\\mathbf{0}$.
 
@@ -1213,7 +1214,7 @@ A non-trivial combination is one in which at least one coefficient is nonzero. T
 
 @academic[pitfall,aside:true,width:35%:Testing one combination only
 Trying $c_1 = c_2 = 1$ on $(1, 2)$ and $(2, 4)$ gives $(3, 6) \\neq \\mathbf{0}$, which does not show independence. Other coefficients reach zero, $2(1, 2) - 1(2, 4) = \\mathbf{0}$, so the pair is dependent.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-testing-one-combination-only)]@
 
 This characterization is developed formally in the [linear independence](!/linear-algebra/vector-spaces/linear-independence) section, but the computational meaning is accessible now: if the equation $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$ has only the solution $c_1 = c_2 = \\cdots = c_k = 0$, the vectors are independent. If it has other solutions, they are dependent.`,
     before: ``,
@@ -1238,7 +1239,7 @@ $$A\\mathbf{x} = \\mathbf{b}$$
 
 @academic[pitfall,aside:true,width:35%:Writing the vectors as rows
 To reach $\\mathbf{b} = (3, 7)$ from $(1, 2)$ and $(0, 1)$, rows give $c_1 + 2c_2 = 3$ and $c_2 = 7$, so $c_1 = -11$, but $-11(1, 2) + 7(0, 1) = (-11, -15) \\neq \\mathbf{b}$. As columns, $c_1 = 3$ and $c_2 = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-writing-the-vectors-as-rows)]@
 
 The linear combination question and the system-of-equations question are identical — they are two descriptions of the same problem. The combination exists if and only if the system has a solution. Solving the system finds the coefficients; the coefficients reconstruct the combination.
 
@@ -1267,54 +1268,9 @@ Both concepts — [linear independence](!/linear-algebra/vector-spaces/linear-in
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for most wrong answers about linear combinations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Confusing the set with its span**
-
-The span of a set is treated as if it were the set itself, a short list of the given vectors, rather than the collection of every combination of them. A vector that is not on the list is then wrongly left out.
-
-Wrong working: $(3, -2)$ is neither $(1, 0)$ nor $(0, 1)$, so $(3, -2) \\notin \\text{Span}\\{(1, 0), (0, 1)\\}$.
-
-Right working: look for coefficients.
-$$c_1(1, 0) + c_2(0, 1) = (c_1, c_2) = (3, -2)$$
-gives $c_1 = 3$ and $c_2 = -2$, so $(3, -2) = 3(1, 0) - 2(0, 1)$ is in the span. In fact every vector of $\\mathbb{R}^2$ is.
-
-Why it happens: the notation $\\text{Span}\\{\\ldots\\}$ puts braces around the same short list that names the set, and the infinite collection it stands for is never written out.
-
-How to check: the span of a set that contains a nonzero vector is never finite; it holds every multiple of that vector, and $\\mathbf{0}$ as well. An answer that treats the span as a few listed vectors has read the braces as the set.
-
-**Testing one combination only**
-
-To decide whether vectors are independent, one choice of nonzero coefficients is tried. When it does not give $\\mathbf{0}$, the vectors are declared independent.
-
-Wrong working: for $(1, 2)$ and $(2, 4)$,
-$$1(1, 2) + 1(2, 4) = (3, 6) \\neq \\mathbf{0}, \\quad \\text{so the vectors are independent}$$
-
-Right working: solve $c_1(1, 2) + c_2(2, 4) = \\mathbf{0}$ for all coefficients at once. The components give $c_1 + 2c_2 = 0$ and $2c_1 + 4c_2 = 0$; the second equation is twice the first, so every $c_1 = -2c_2$ works. With $c_2 = -1$ and $c_1 = 2$:
-$$2(1, 2) - 1(2, 4) = (0, 0)$$
-A non-trivial combination reaches $\\mathbf{0}$, so the pair is dependent.
-
-Why it happens: one failed attempt feels like evidence, but independence is a statement about every possible choice of coefficients, and a single trial cannot cover them all.
-
-How to check: for two vectors, look for a scalar multiple. Here $(2, 4) = 2(1, 2)$, so the vectors are parallel and therefore dependent. For more vectors, solve the system instead of sampling it.
-
-**Writing the vectors as rows**
-
-When the combination question is turned into $A\\mathbf{x} = \\mathbf{b}$, the given vectors are placed as the rows of $A$ instead of its columns. The resulting system may still have a solution, but its numbers are not the coefficients of the combination.
-
-Wrong working: to write $\\mathbf{b} = (3, 7)$ as a combination of $(1, 2)$ and $(0, 1)$, the rows $(1, 2)$ and $(0, 1)$ give the system
-$$c_1 + 2c_2 = 3, \\qquad c_2 = 7$$
-so $c_2 = 7$ and $c_1 = -11$.
-
-Right working: each equation collects one component from every vector. The first components give $c_1 \\cdot 1 + c_2 \\cdot 0 = 3$, and the second components give $c_1 \\cdot 2 + c_2 \\cdot 1 = 7$, so
-$$c_1 = 3, \\qquad c_2 = 7 - 6 = 1$$
-and $3(1, 2) + 1(0, 1) = (3, 7) = \\mathbf{b}$.
-
-Why it happens: vectors are usually written across the page, as $(1, 2)$, so they are copied into the matrix the way they are written, as rows.
-
-How to check: substitute the coefficients back into the combination; the result must be $\\mathbf{b}$. The wrong answer gives $-11(1, 2) + 7(0, 1) = (-11, -15)$, which is not $(3, 7)$.`,
+    content: `Three mistakes account for most wrong answers about linear combinations. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip reads too little into a set of vectors, or puts them in the wrong place. The span holds every combination of the vectors, not only the vectors themselves; independence needs every nonzero combination to miss $\\mathbf{0}$, not just one; and the vectors go into $A$ as columns. Looking for a scalar multiple, or substituting the coefficients back, catches each slip.`,
     link: '',
   },
 };
@@ -1492,8 +1448,40 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 24, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'confusing-the-set-with-its-span', name: `Confusing the set with its span`, errorAt: 0,
+        what: `The span of a set is treated as if it were the set itself, a short list of the given vectors, rather than the collection of every combination of them. A vector that is not on the list is then wrongly left out.`,
+        wrong: [`$(3, -2)$ is neither $(1, 0)$ nor $(0, 1)$, so $(3, -2) \\notin \\text{Span}\\{(1, 0), (0, 1)\\}$.`],
+        right: [`Look for coefficients.`, `$$c_1(1, 0) + c_2(0, 1)$$
+$$= (c_1, c_2) = (3, -2)$$`, `Gives $c_1 = 3$ and $c_2 = -2$, so $(3, -2) = 3(1, 0) - 2(0, 1)$ is in the span. In fact every vector of $\\mathbb{R}^2$ is.`],
+        why: `The notation $\\text{Span}\\{\\ldots\\}$ puts braces around the same short list that names the set, and the infinite collection it stands for is never written out.`,
+        check: `The span of a set that contains a nonzero vector is never finite; it holds every multiple of that vector, and $\\mathbf{0}$ as well. An answer that treats the span as a few listed vectors has read the braces as the set.` },
+      { id: 'testing-one-combination-only', name: `Testing one combination only`, errorAt: 1,
+        what: `To decide whether vectors are independent, one choice of nonzero coefficients is tried. When it does not give $\\mathbf{0}$, the vectors are declared independent.`,
+        wrong: [`For $(1, 2)$ and $(2, 4)$,`, `$$1(1, 2) + 1(2, 4)$$
+$$= (3, 6) \\neq \\mathbf{0},$$
+$$\\text{so the vectors are independent}$$`],
+        right: [`For $(1, 2)$ and $(2, 4)$,`, `Solve $c_1(1, 2) + c_2(2, 4) = \\mathbf{0}$ for all coefficients at once. The components give $c_1 + 2c_2 = 0$ and $2c_1 + 4c_2 = 0$; the second equation is twice the first, so every $c_1 = -2c_2$ works. With $c_2 = -1$ and $c_1 = 2$:
+$$2(1, 2) - 1(2, 4) = (0, 0)$$`, `A non-trivial combination reaches $\\mathbf{0}$, so the pair is dependent.`],
+        why: `One failed attempt feels like evidence, but independence is a statement about every possible choice of coefficients, and a single trial cannot cover them all.`,
+        check: `For two vectors, look for a scalar multiple. Here $(2, 4) = 2(1, 2)$, so the vectors are parallel and therefore dependent. For more vectors, solve the system instead of sampling it.` },
+      { id: 'writing-the-vectors-as-rows', name: `Writing the vectors as rows`, errorAt: 0,
+        what: `When the combination question is turned into $A\\mathbf{x} = \\mathbf{b}$, the given vectors are placed as the rows of $A$ instead of its columns. The resulting system may still have a solution, but its numbers are not the coefficients of the combination.`,
+        wrong: [`To write $\\mathbf{b} = (3, 7)$ as a combination of $(1, 2)$ and $(0, 1)$, the rows $(1, 2)$ and $(0, 1)$ give the system
+$$c_1 + 2c_2 = 3, \\qquad c_2 = 7$$`, `So $c_2 = 7$ and $c_1 = -11$.`],
+        right: [`Each equation collects one component from every vector. The first components give $c_1 \\cdot 1 + c_2 \\cdot 0 = 3$, and the second components give $c_1 \\cdot 2 + c_2 \\cdot 1 = 7$, so
+$$c_1 = 3, \\qquad c_2 = 7 - 6 = 1$$`, `And $3(1, 2) + 1(0, 1) = (3, 7) = \\mathbf{b}$.`],
+        why: `Vectors are usually written across the page, as $(1, 2)$, so they are copied into the matrix the way they are written, as rows.`,
+        check: `Substitute the coefficients back into the combination; the result must be $\\mathbf{b}$. The wrong answer gives $-11(1, 2) + 7(0, 1) = (-11, -15)$, which is not $(3, 7)$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
     conceptIntroFigures,
     sectionsContent,
     introContent,
@@ -1512,7 +1500,7 @@ const schemas = {
   }
 }
    }
-export default function LinearCombinationsPage({seoData, sectionsContent, introContent, obj5Table, combinationForms, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function LinearCombinationsPage({ pitfallData,seoData, sectionsContent, introContent, obj5Table, combinationForms, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1679,6 +1667,15 @@ In the colour-matching experiments of the late 1920s behind the 1931 CIE colour 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="linear-combination-pitfalls"
+            title="Common pitfalls with linear combinations"
+            source="/linear-algebra/vectors/linear-combinations"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

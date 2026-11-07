@@ -298,3 +298,18 @@ Use the same pattern as the other infographics: place it in the method section's
 - **stages:** use `kind: 'opt'` with `fork: true` for alternatives, and `kind: 'out'` for the final result.
 - **worked:** end with a `check` row whenever the page checks its answer.
 - **Escaping:** in JS strings, escape backslashes in LaTeX (`'\\bmod'`, `'\\mathbf'`).
+- **Fork:** a forked group shows two stages per row, so a choice of three wraps as two plus one.
+
+---
+
+## Pages using it
+
+Pilot, 2026-11-05, one page per layout. Each frame is added beside the section's text; nothing on the page was removed. The data is a constant in `getStaticProps`, passed through props like `pitfallData`, with the site palette in `theme` (`#06357A`, `#2563EB`, `#B45309`).
+
+| Page | Section | Layout | Frame id | Notes |
+|---|---|---|---|---|
+| `/arithmetic/divisibility/gcd` | Euclidean Algorithm Step by Step (`obj6`) | loop | `euclidean-algorithm-loop` | Trace of the page's own $\gcd(1071, 462)$. Placed after the "why it stops" paragraph; no note or pitfall box, since the page already says both. |
+| `/algebra/inequalities/quadratic` | Sign Chart Method (`obj6`) | worked | `sign-chart-steps` | Example $(x - 1)(x - 4) > 0$ from the section. The content was split at "When the quadratic does not factor neatly"; the rest is `obj6.afterProcedure`, shown after the frame. |
+| `/algebra/roots/simplifying` | Simplification Strategy (`obj9`) | stages | `simplification-strategy-stages` | The five steps in three groups. The content was split before "This process prepares"; the rest is `obj9.afterProcedure`. |
+
+Spots looked at and skipped: `/algebra/polynomials/factoring` Factoring Strategy (already holds a DecisionBox), `/linear-algebra/linear-systems/gaussian-elimination` Summary (already holds an IdentitySheet), `/linear-algebra/decompositions/cholesky` The Algorithm (a column-by-column loop, not stages).

@@ -18,9 +18,11 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -453,7 +455,7 @@ The graph makes a sharp turn at $x = a$—two distinct tangent directions meetin
 
 @academic[pitfall,aside:true,width:35%:Assuming every absolute value makes a corner
 Seeing $|x|$ in $f(x) = x|x|$ and declaring a corner at $0$ skips the computation. The quotient is $\\frac{h|h|}{h} = |h|$, which tends to $0$ from both sides, so $f'(0) = 0$ and there is no corner.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-assuming-every-absolute-value-makes-a-corner)]@
 
 The standard example is $f(x) = |x|$ at $x = 0$. The left-hand derivative is $-1$ and the right-hand derivative is $+1$. The graph forms a V-shape, and no single straight line can serve as a tangent. More generally, any piecewise linear function with a slope change at a junction has a corner there.
 
@@ -472,7 +474,7 @@ The graph comes to a sharp point where the curve doubles back on itself with ver
 
 @academic[pitfall,aside:true,width:35%:Checking only one side
 For $f(x) = x^{4/5}$ at $0$, checking only $h > 0$ gives the quotient $h^{-1/5} \\to +\\infty$ and suggests a vertical tangent. For $h < 0$ the quotient is negative and tends to $-\\infty$, so the point is a cusp.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-only-one-side)]@
 
 @academic[example:Example
 The standard example is $f(x) = x^{2/3}$ at $x = 0$. The derivative $f'(x) = \\frac{2}{3}x^{-1/3}$ tends to $+\\infty$ from the right and $-\\infty$ from the left. The graph has a pointed tip at the origin, sharper than any corner. The function is continuous at $x = 0$, but the infinite and opposing slopes prevent differentiability.]@
@@ -534,7 +536,7 @@ $$f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\qquad f'_+(a) = \\li
 
 @academic[pitfall,aside:true,width:35%:Differentiating the pieces instead of using f(a)
 For $f(x) = x^2$ on $x \\leq 1$ and $2x + 1$ on $x > 1$, the piece formulas give slopes $2$ and $2$ at $x = 1$. But $f(1) = 1$ while the right piece tends to $3$, so $f'_+(1) = \\lim_{h \\to 0^+} \\frac{2 + 2h}{h} = +\\infty$ and $f$ is not differentiable at $1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-differentiating-the-pieces-instead-of-using-f-a)]@
 
 One-sided derivatives appear naturally at endpoints of closed intervals, where only one direction of approach is available. They also arise at boundaries of piecewise functions, where different formulas govern the left and right sides. Checking whether the one-sided derivatives match at a boundary is the standard test for differentiability of a piecewise-defined function.
 `,
@@ -580,61 +582,20 @@ The failure modes covered above—corners, cusps, vertical tangents, and discont
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page in six rows. Each row names a statement with a line on where it is used and a link to its section, gives the formula, and says what the formula tells about the function at the point.
+
+It starts from the definition of the derivative at a point as a two-sided limit of the difference quotient. The left-hand and right-hand derivatives split that limit into its two halves, and the two-sided test joins them again: a derivative exists only when both halves agree. A corner is the case where they disagree, and the last row records that differentiability implies continuity, but not the other way round.`,
+    before: ``,
+    after: `To decide whether a function is differentiable at a point, check continuity there first, then compute the two one-sided limits of the difference quotient. If they are finite and equal, the derivative exists; any other outcome names the way it fails.`,
+    link: '',
+  },
   obj11: {
     title: `Common Pitfalls`,
-    content: `
-Four mistakes cause most wrong verdicts about differentiability. Three of them are marked where they happen in the sections above; the first is the one the sections on continuity and on intervals warn against. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Assuming continuity guarantees a derivative**
-
-Because differentiability implies continuity, the converse is assumed as well: a function whose graph has no break at a point is taken to have a derivative there.
-
-Wrong working: $f(x) = |x - 2|$ is continuous at $x = 2$, so $f'(2)$ exists, and by symmetry $f'(2) = 0$.
-
-Right working: the difference quotient is $\\frac{f(2 + h) - f(2)}{h} = \\frac{|h|}{h}$, which is $1$ for $h > 0$ and $-1$ for $h < 0$. The one-sided derivatives $-1$ and $1$ disagree, so $f'(2)$ does not exist.
-
-Why it happens: the implication is learned as a link between the two words, and the direction gets lost. An unbroken graph also looks well behaved enough to have a slope.
-
-How to check: compute the quotient for one small positive and one small negative $h$. At $h = 0.01$ it is $1$, at $h = -0.01$ it is $-1$.
-
-**Assuming every absolute value makes a corner**
-
-An absolute value in the formula is taken as proof of a corner, and the function is declared non-differentiable at the point where the inside is $0$, without computing anything.
-
-Wrong working: $f(x) = x|x|$ contains $|x|$, which has a corner at $0$, so $f$ has a corner at $0$ and $f'(0)$ does not exist.
-
-Right working: $f(0) = 0$, and the difference quotient is $\\frac{h|h|}{h} = |h|$, which tends to $0$ from both sides. So $f'(0) = 0$. Piece by piece, $f(x) = x^2$ for $x \\geq 0$ and $f(x) = -x^2$ for $x < 0$, and both have slope $0$ at $0$.
-
-Why it happens: the corner of $|x|$ is remembered as a property of the symbol rather than as the result of a computation. The extra factor $x$ flattens the graph near $0$ and removes the corner.
-
-How to check: evaluate the quotient. At $h = 0.01$ and at $h = -0.01$ it is $0.01$, small on both sides and shrinking with $h$.
-
-**Checking only one side**
-
-To tell a cusp from a vertical tangent, the slope is examined for positive $h$ (or positive $x$) only, and the sign on the other side is never checked.
-
-Wrong working: for $f(x) = x^{4/5}$, $f'(x) = \\frac{4}{5}x^{-1/5}$ grows without bound as $x \\to 0^+$, so $f'(x) \\to +\\infty$ and the graph has a vertical tangent at $0$.
-
-Right working: the quotient is $\\frac{f(h) - f(0)}{h} = \\frac{h^{4/5}}{h} = h^{-1/5}$. For $h > 0$ it tends to $+\\infty$. For $h < 0$, $h^{1/5}$ is negative, so $h^{-1/5}$ is negative and tends to $-\\infty$. The signs are opposite, so $0$ is a cusp, as for $x^{2/3}$.
-
-Why it happens: small positive numbers are the default test values, and the formula $x^{-1/5}$ does not show its sign for negative $x$ at a glance.
-
-How to check: try one value on each side. At $h = 10^{-5}$ the quotient is $10$; at $h = -10^{-5}$ it is $-10$. The values of $f$ give a second check: $x^{4/5} \\geq 0$ on both sides of $0$, so the graph comes down to the origin and goes back up, which is the shape of a cusp; a vertical tangent such as $x^{1/3}$ passes from negative to positive values.
-
-**Differentiating the pieces instead of using f(a)**
-
-At the boundary of a piecewise function, each piece's formula is differentiated and the two slopes are compared, without checking that the pieces meet.
-
-Wrong working: for $f(x) = x^2$ on $x \\leq 1$ and $f(x) = 2x + 1$ on $x > 1$, the left formula has derivative $2x$, which is $2$ at $x = 1$, and the right formula has derivative $2$. The slopes match, so $f'(1) = 2$.
-
-Right working: first check continuity. $f(1) = 1$ from the left piece, but the right piece tends to $2 \\cdot 1 + 1 = 3$, so $f$ jumps at $1$. The right-hand derivative uses $f(1)$: $\\lim_{h \\to 0^+} \\frac{2(1 + h) + 1 - 1}{h} = \\lim_{h \\to 0^+} \\frac{2 + 2h}{h} = +\\infty$. So $f$ is not differentiable at $1$; it is not even continuous there.
-
-Why it happens: the derivative of a piece's formula is the slope of that piece's own graph. It knows nothing about the value $f(1)$ or about whether the two graphs touch.
-
-How to check: before comparing slopes, put the boundary value into both formulas. Here they give $1$ and $3$, which settles the question. The quotient confirms it: at $h = 0.01$ the right-hand quotient is $202$.
-`,
+    content: `Four mistakes cause most wrong verdicts about differentiability. Three of them are marked where they happen in the sections above; the first is the one the sections on continuity and on intervals warn against. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip decides differentiability from the look of the formula instead of from the difference quotient. Continuity does not guarantee a derivative, an absolute value does not always make a corner, both one-sided limits must be checked, and a piecewise function must be continuous at the boundary before its slopes are compared. Computing the quotient for one small positive and one small negative $h$ catches each slip.`,
     link: '',
   },
 };
@@ -891,8 +852,65 @@ const schemas = {
     legend: [{ label: 'continuous but not differentiable' }, { label: 'not even continuous', tone: 'warn' }],
   };
 
+  // MistakeFix batch 13, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'assuming-continuity-guarantees-a-derivative', name: `Assuming continuity guarantees a derivative`, errorAt: 0,
+        what: `Because differentiability implies continuity, the converse is assumed as well: a function whose graph has no break at a point is taken to have a derivative there.`,
+        wrong: [`$f(x) = |x - 2|$ is continuous at $x = 2$, so $f'(2)$ exists, and by symmetry $f'(2) = 0$.`],
+        right: [`The difference quotient is $\\frac{f(2 + h) - f(2)}{h} = \\frac{|h|}{h}$, which is $1$ for $h > 0$ and $-1$ for $h < 0$. The one-sided derivatives $-1$ and $1$ disagree, so $f'(2)$ does not exist.`],
+        why: `The implication is learned as a link between the two words, and the direction gets lost. An unbroken graph also looks well behaved enough to have a slope.`,
+        check: `Compute the quotient for one small positive and one small negative $h$. At $h = 0.01$ it is $1$, at $h = -0.01$ it is $-1$.` },
+      { id: 'assuming-every-absolute-value-makes-a-corner', name: `Assuming every absolute value makes a corner`, errorAt: 0,
+        what: `An absolute value in the formula is taken as proof of a corner, and the function is declared non-differentiable at the point where the inside is $0$, without computing anything.`,
+        wrong: [`$f(x) = x|x|$ contains $|x|$, which has a corner at $0$, so $f$ has a corner at $0$ and $f'(0)$ does not exist.`],
+        right: [`$f(0) = 0$, and the difference quotient is $\\frac{h|h|}{h} = |h|$, which tends to $0$ from both sides. So $f'(0) = 0$. Piece by piece, $f(x) = x^2$ for $x \\geq 0$ and $f(x) = -x^2$ for $x < 0$, and both have slope $0$ at $0$.`],
+        why: `The corner of $|x|$ is remembered as a property of the symbol rather than as the result of a computation. The extra factor $x$ flattens the graph near $0$ and removes the corner.`,
+        check: `Evaluate the quotient. At $h = 0.01$ and at $h = -0.01$ it is $0.01$, small on both sides and shrinking with $h$.` },
+      { id: 'checking-only-one-side', name: `Checking only one side`, errorAt: 1,
+        what: `To tell a cusp from a vertical tangent, the slope is examined for positive $h$ (or positive $x$) only, and the sign on the other side is never checked.`,
+        wrong: [`For $f(x) = x^{4/5}$,`, `$f'(x) = \\frac{4}{5}x^{-1/5}$ grows without bound as $x \\to 0^+$, so $f'(x) \\to +\\infty$ and the graph has a vertical tangent at $0$.`],
+        right: [`For $f(x) = x^{4/5}$,`, `The quotient is $\\frac{f(h) - f(0)}{h} = \\frac{h^{4/5}}{h} = h^{-1/5}$. For $h > 0$ it tends to $+\\infty$. For $h < 0$, $h^{1/5}$ is negative, so $h^{-1/5}$ is negative and tends to $-\\infty$. The signs are opposite, so $0$ is a cusp, as for $x^{2/3}$.`],
+        why: `Small positive numbers are the default test values, and the formula $x^{-1/5}$ does not show its sign for negative $x$ at a glance.`,
+        check: `Try one value on each side. At $h = 10^{-5}$ the quotient is $10$; at $h = -10^{-5}$ it is $-10$. The values of $f$ give a second check: $x^{4/5} \\geq 0$ on both sides of $0$, so the graph comes down to the origin and goes back up, which is the shape of a cusp; a vertical tangent such as $x^{1/3}$ passes from negative to positive values.` },
+      { id: 'differentiating-the-pieces-instead-of-using-f-a', name: `Differentiating the pieces instead of using f(a)`, errorAt: 0,
+        what: `At the boundary of a piecewise function, each piece's formula is differentiated and the two slopes are compared, without checking that the pieces meet.`,
+        wrong: [`For $f(x) = x^2$ on $x \\leq 1$ and $f(x) = 2x + 1$ on $x > 1$, the left formula has derivative $2x$, which is $2$ at $x = 1$, and the right formula has derivative $2$. The slopes match, so $f'(1) = 2$.`],
+        right: [`First check continuity. $f(1) = 1$ from the left piece, but the right piece tends to $2 \\cdot 1 + 1 = 3$, so $f$ jumps at $1$. The right-hand derivative uses $f(1)$: $\\lim_{h \\to 0^+} \\frac{2(1 + h) + 1 - 1}{h} = \\lim_{h \\to 0^+} \\frac{2 + 2h}{h} = +\\infty$. So $f$ is not differentiable at $1$; it is not even continuous there.`],
+        why: `The derivative of a piece's formula is the slope of that piece's own graph. It knows nothing about the value $f(1)$ or about whether the two graphs touch.`,
+        check: `Before comparing slopes, put the boundary value into both formulas. Here they give $1$ and $3$, which settles the question. The quotient confirms it: at $h = 0.01$ the right-hand quotient is $202$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Statement', kind: 'name' },
+      { key: 'formula', label: 'Formula', kind: 'formula' },
+      { key: 'says', label: 'What it tells' },
+    ],
+    rows: [
+      { name: 'Derivative at a point', formula: "$\\displaystyle f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$", says: '$f$ is differentiable at $a$ when this limit exists and is finite',
+        sub: 'A two-sided limit: the quotient must settle on one value from both sides, as [the definition](!#1) explains.' },
+      { name: 'Left-hand derivative', formula: "$\\displaystyle f'_-(a) = \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h}$", says: 'the slope approached from the left only',
+        sub: 'Used at the right end of a closed interval and at the boundary of a piecewise function; see [one-sided derivatives](!#7).' },
+      { name: 'Right-hand derivative', formula: "$\\displaystyle f'_+(a) = \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$", says: 'the slope approached from the right only',
+        sub: 'Used at the left end of a closed interval and at the boundary of a piecewise function, from [one-sided derivatives](!#7).' },
+      { name: 'Two-sided test', formula: "$f'_-(a) = f'_+(a)$", says: "$f'(a)$ exists exactly when both one-sided derivatives exist, are finite and are equal",
+        sub: 'The standard check at the boundary of a piecewise function, stated as a theorem in [one-sided derivatives](!#7).' },
+      { name: 'Corner', formula: '$\\displaystyle \\lim_{h \\to 0^-} \\frac{f(a + h) - f(a)}{h} \\neq \\lim_{h \\to 0^+} \\frac{f(a + h) - f(a)}{h}$', says: 'both one-sided slopes are finite but different, so there is no derivative',
+        sub: 'The graph turns sharply, as $|x|$ does at $0$ with slopes $-1$ and $+1$; see [corners](!#3).' },
+      { name: 'Differentiability implies continuity', formula: '$f \\text{ differentiable at } a \\implies f \\text{ continuous at } a$', says: 'a discontinuity rules out a derivative; the converse fails',
+        sub: '$|x|$ is continuous at $0$ but not differentiable there, as [differentiability implies continuity](!#2) shows.' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     differentiabilityFailureTree,
     demoUnits,
     conceptIntroFigures,
@@ -914,7 +932,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({differentiabilityFailureTree, seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ formulaSummaryData, pitfallData,differentiabilityFailureTree, seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1114,11 +1132,38 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="differentiability-formula-summary"
+            title="Differentiability formulas"
+            source="/calculus/derivatives/differentiability"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="differentiability-pitfalls"
+            title="Common pitfalls with differentiability"
+            source="/calculus/derivatives/differentiability"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

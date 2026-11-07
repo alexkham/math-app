@@ -1052,11 +1052,13 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1349,7 +1351,7 @@ $$z^n = (r\\text{cis}\\theta)^n = r^n\\text{cis}(n\\theta)$$]@
 
 @academic[pitfall,aside:true,width:35%:Forgetting to raise the modulus
 Writing $(2\\text{cis}(45°))^4$ as $2\\text{cis}(180°) = -2$ multiplies the angle but leaves the modulus at $2$. The modulus is raised to the fourth power too: $2^4\\text{cis}(180°) = 16\\text{cis}(180°) = -16$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-raise-the-modulus)]@
 
 The modulus raises to the $n$-th power while the argument multiplies by $n$. Both operations are elementary. The number $2\\text{cis}(30°)$ raised to the sixth power becomes $2^6\\text{cis}(180°) = 64\\text{cis}(180°) = -64$. What would require extensive algebra in rectangular form reduces to mental arithmetic in trigonometric form.
 
@@ -1428,7 +1430,7 @@ Verification through direct calculation would require multiplying $1 + i$ by its
 
 @academic[pitfall,aside:true,width:35%:Taking the argument from the tangent alone
 Taking $\\theta = \\arctan\\frac{1}{-1} = -45°$ for $-1 + i$ gives $(-1 + i)^3 = (\\sqrt{2})^3\\text{cis}(-135°) = -2 - 2i$. The point lies in the second quadrant, so $\\theta = 135°$ and $(-1 + i)^3 = 2\\sqrt{2}\\text{cis}(405°) = 2 + 2i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-argument-from-the-tangent-alone)]@
 
 Another example: find $(\\sqrt{3} - i)^6$. The modulus is $\\sqrt{3 + 1} = 2$. The argument, with $a = \\sqrt{3} > 0$ and $b = -1 < 0$, lies in the fourth quadrant: $\\theta = -30°$. So $\\sqrt{3} - i = 2\\text{cis}(-30°)$, and:
 
@@ -1478,7 +1480,7 @@ Each root has the same modulus: $|z_k| = R^{1/n}$, the positive real $n$-th root
 
 @academic[pitfall,aside:true,width:35%:Adding the full turn after dividing
 For $z^3 = 8i$, taking the angles $\\frac{90°}{3} + 360°k = 30° + 360°k$ gives the single root $2\\text{cis}(30°)$ three times. Adding $360°k$ before dividing gives $\\frac{90° + 360°k}{3} = 30°, 150°, 270°$: the roots $\\sqrt{3} + i$, $-\\sqrt{3} + i$ and $-2i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-full-turn-after-dividing)]@
 
 The first root ($k = 0$) has argument $\\phi/n$, the original angle divided by $n$. Each subsequent root adds $360°/n$ to the argument. The $n$ roots space themselves evenly around the circle of radius $R^{1/n}$.
 
@@ -1705,59 +1707,20 @@ A regular pentagon with radius $2$, one vertex on the positive real axis.`,
   
     },
   
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary collects the formulas of De Moivre's theorem and the roots it leads to, in three families shown one at a time with the buttons above the cards. Each card gives a formula with a line on what it says and a link to the section that explains it.
+
+The first family raises a number to a power: the modulus is raised to the power and the angle multiplied, for negative powers as well. The second runs the other way and finds all the roots of a number, which share one modulus and sit evenly spaced on a circle. The last covers the roots of unity, the root that generates them, their sum and their product.`,
+      before: ``,
+      after: `Powers and roots are the same rule read in two directions. A power gives one answer, but a root gives as many answers as its degree, so let the counter run through every value and check that the results form a regular polygon around the origin.`,
+      link: '',
+    },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for many of the wrong answers in work with De Moivre's theorem. Three are marked where they happen in the sections above; keeping only one root is the one the introduction to $n$-th roots already points out. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Forgetting to raise the modulus**
-
-The angle is multiplied by $n$, but the modulus is left as it is, as if every number had modulus $1$.
-
-Wrong working: $(2\\text{cis}(45°))^4 = 2\\text{cis}(4 \\times 45°) = 2\\text{cis}(180°) = -2$.
-
-Right working: $(2\\text{cis}(45°))^4 = 2^4\\text{cis}(180°) = 16\\text{cis}(180°) = -16$. In algebraic form $2\\text{cis}(45°) = \\sqrt{2} + \\sqrt{2}i$, its square is $2 + 4i + 2i^2 = 4i$, and $(4i)^2 = 16i^2 = -16$.
-
-Why it happens: the theorem is first stated for $\\cos\\theta + i\\sin\\theta$, whose modulus is $1$, and it is remembered as "multiply the angle".
-
-How to check: the modulus of $z^n$ is $|z|^n$. Here $|z^4| = 2^4 = 16$, so $-2$ cannot be right.
-
-**Taking the argument from the tangent alone**
-
-The argument is found as $\\arctan\\frac{b}{a}$ without looking at the quadrant of the point, and De Moivre's theorem then multiplies the wrong angle.
-
-Wrong working: for $z = -1 + i$, $\\theta = \\arctan\\frac{1}{-1} = -45°$, so $(-1 + i)^3 = (\\sqrt{2})^3\\text{cis}(-135°) = 2\\sqrt{2}\\left(-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i\\right) = -2 - 2i$.
-
-Right working: the point $(-1, 1)$ lies in the second quadrant, so $\\theta = 180° - 45° = 135°$. Then $(-1 + i)^3 = 2\\sqrt{2}\\text{cis}(405°) = 2\\sqrt{2}\\text{cis}(45°) = 2 + 2i$. Directly, $(-1 + i)^2 = 1 - 2i + i^2 = -2i$ and $-2i(-1 + i) = 2i - 2i^2 = 2 + 2i$.
-
-Why it happens: $\\arctan$ only returns angles between $-90°$ and $90°$, so it never gives the direction of a point with $a < 0$.
-
-How to check: the signs of $\\cos\\theta$ and $\\sin\\theta$ must match the signs of $a$ and $b$. Here $\\cos(-45°) > 0$ while $a = -1 < 0$.
-
-**Keeping only one root**
-
-An equation $z^n = w$ is solved with the single root that real-number experience suggests, and the other $n - 1$ roots are never looked for.
-
-Wrong working: $z^4 = 16$, so $z = 2$, or at most $z = \\pm 2$.
-
-Right working: $16 = 16\\text{cis}(0°)$, so $z_k = 16^{1/4}\\text{cis}\\left(\\frac{360°k}{4}\\right) = 2\\text{cis}(90°k)$ for $k = 0, 1, 2, 3$. The four roots are $2$, $2i$, $-2$ and $-2i$; for example $(2i)^4 = 16i^4 = 16$.
-
-Why it happens: the radical sign and the exponent $\\frac{1}{n}$ name a single value on the positive reals, and that habit is carried over to $\\mathbb{C}$.
-
-How to check: count the roots. A nonzero number has exactly $n$ distinct $n$-th roots, evenly spaced $\\frac{360°}{n}$ apart on one circle.
-
-**Adding the full turn after dividing**
-
-In the roots formula, the angle $\\phi$ is divided by $n$ first and the multiples of $360°$ are added afterwards. Every value of $k$ then gives the same direction.
-
-Wrong working: for $z^3 = 8i = 8\\text{cis}(90°)$, the angles $\\frac{90°}{3} + 360°k = 30°, 390°, 750°$ all point the same way, so the only root found is $2\\text{cis}(30°) = \\sqrt{3} + i$.
-
-Right working: the full turn is added before dividing, $\\alpha = \\frac{90° + 360°k}{3} = 30°, 150°, 270°$. The roots are $2\\text{cis}(30°) = \\sqrt{3} + i$, $2\\text{cis}(150°) = -\\sqrt{3} + i$ and $2\\text{cis}(270°) = -2i$. For example $(-2i)^3 = -8i^3 = 8i$.
-
-Why it happens: the identity $\\text{cis}\\theta = \\text{cis}(\\theta + 360°)$ is applied to the root's angle instead of to the angle of $w$, which is the one that can be written in many ways.
-
-How to check: consecutive roots must differ by $\\frac{360°}{n}$, here $120°$. If two of the listed roots coincide, the turns were added in the wrong place.`,
+      content:`Four mistakes account for many of the wrong answers in work with De Moivre's theorem. Three are marked where they happen in the sections above; keeping only one root is the one the introduction to $n$-th roots already points out. Here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip loses part of De Moivre's rule. The modulus is raised to the power as well as the angle multiplied, the argument must match the quadrant of the number, $z^n = w$ has $n$ roots, and the full turns are added before dividing by $n$. Checking the modulus of the answer, and counting the roots and their spacing of $\\frac{360°}{n}$, catches each slip.`,
       link:'',
     },
     faq: {
@@ -2027,8 +1990,63 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'forgetting-to-raise-the-modulus', name: `Forgetting to raise the modulus`, errorAt: 0,
+        what: `The angle is multiplied by $n$, but the modulus is left as it is, as if every number had modulus $1$.`,
+        wrong: [`$(2\\text{cis}(45°))^4 = 2\\text{cis}(4 \\times 45°) = 2\\text{cis}(180°) = -2$.`],
+        right: [`$(2\\text{cis}(45°))^4 = 2^4\\text{cis}(180°) = 16\\text{cis}(180°) = -16$. In algebraic form $2\\text{cis}(45°) = \\sqrt{2} + \\sqrt{2}i$, its square is $2 + 4i + 2i^2 = 4i$, and $(4i)^2 = 16i^2 = -16$.`],
+        why: `The theorem is first stated for $\\cos\\theta + i\\sin\\theta$, whose modulus is $1$, and it is remembered as "multiply the angle".`,
+        check: `The modulus of $z^n$ is $|z|^n$. Here $|z^4| = 2^4 = 16$, so $-2$ cannot be right.` },
+      { id: 'taking-the-argument-from-the-tangent-alone', name: `Taking the argument from the tangent alone`, errorAt: 0,
+        what: `The argument is found as $\\arctan\\frac{b}{a}$ without looking at the quadrant of the point, and De Moivre's theorem then multiplies the wrong angle.`,
+        wrong: [`For $z = -1 + i$, $\\theta = \\arctan\\frac{1}{-1} = -45°$, so $(-1 + i)^3 = (\\sqrt{2})^3\\text{cis}(-135°) = 2\\sqrt{2}\\left(-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i\\right) = -2 - 2i$.`],
+        right: [`The point $(-1, 1)$ lies in the second quadrant, so $\\theta = 180° - 45° = 135°$. Then $(-1 + i)^3 = 2\\sqrt{2}\\text{cis}(405°) = 2\\sqrt{2}\\text{cis}(45°) = 2 + 2i$. Directly, $(-1 + i)^2 = 1 - 2i + i^2 = -2i$ and $-2i(-1 + i) = 2i - 2i^2 = 2 + 2i$.`],
+        why: `$\\arctan$ only returns angles between $-90°$ and $90°$, so it never gives the direction of a point with $a < 0$.`,
+        check: `The signs of $\\cos\\theta$ and $\\sin\\theta$ must match the signs of $a$ and $b$. Here $\\cos(-45°) > 0$ while $a = -1 < 0$.` },
+      { id: 'keeping-only-one-root', name: `Keeping only one root`, errorAt: 0,
+        what: `An equation $z^n = w$ is solved with the single root that real-number experience suggests, and the other $n - 1$ roots are never looked for.`,
+        wrong: [`$z^4 = 16$, so $z = 2$, or at most $z = \\pm 2$.`],
+        right: [`$16 = 16\\text{cis}(0°)$, so $z_k = 16^{1/4}\\text{cis}\\left(\\frac{360°k}{4}\\right) = 2\\text{cis}(90°k)$ for $k = 0, 1, 2, 3$. The four roots are $2$, $2i$, $-2$ and $-2i$; for example $(2i)^4 = 16i^4 = 16$.`],
+        why: `The radical sign and the exponent $\\frac{1}{n}$ name a single value on the positive reals, and that habit is carried over to $\\mathbb{C}$.`,
+        check: `Count the roots. A nonzero number has exactly $n$ distinct $n$-th roots, evenly spaced $\\frac{360°}{n}$ apart on one circle.` },
+      { id: 'adding-the-full-turn-after-dividing', name: `Adding the full turn after dividing`, errorAt: 1,
+        what: `In the roots formula, the angle $\\phi$ is divided by $n$ first and the multiples of $360°$ are added afterwards. Every value of $k$ then gives the same direction.`,
+        wrong: [`For $z^3 = 8i = 8\\text{cis}(90°)$,`, `The angles $\\frac{90°}{3} + 360°k = 30°, 390°, 750°$ all point the same way, so the only root found is $2\\text{cis}(30°) = \\sqrt{3} + i$.`],
+        right: [`For $z^3 = 8i = 8\\text{cis}(90°)$,`, `The full turn is added before dividing, $\\alpha = \\frac{90° + 360°k}{3} = 30°, 150°, 270°$. The roots are $2\\text{cis}(30°) = \\sqrt{3} + i$, $2\\text{cis}(150°) = -\\sqrt{3} + i$ and $2\\text{cis}(270°) = -2i$. For example $(-2i)^3 = -8i^3 = 8i$.`],
+        why: `The identity $\\text{cis}\\theta = \\text{cis}(\\theta + 360°)$ is applied to the root's angle instead of to the angle of $w$, which is the one that can be written in many ways.`,
+        check: `Consecutive roots must differ by $\\frac{360°}{n}$, here $120°$. If two of the listed roots coincide, the turns were added in the wrong place.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'powers', name: 'Powers', sub: 'Raising a number in trigonometric form to an integer power.', pairs: [
+        [{ formula: '$(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$', text: "The theorem itself: for a number on the unit circle, the power multiplies the angle by $n$, as [the formula section](!#2) states." }, ''],
+        [{ formula: '$z^n = (r\\text{cis}\\theta)^n = r^n\\text{cis}(n\\theta)$', text: 'For any modulus, the modulus is raised to the $n$-th power and the angle multiplied by $n$, from [the formula section](!#2).' },
+         { formula: '$z^{-n} = r^{-n}\\text{cis}(-n\\theta)$', text: 'Negative powers invert the modulus and negate the angle, since $z^{-n} = 1/z^n$, as [the proof](!#3) shows.' }],
+      ] },
+      { id: 'roots', name: 'Roots', sub: 'All solutions of $z^n = w$ for $w = R\\,\\text{cis}\\,\\phi$.', pairs: [
+        [{ formula: '$\\displaystyle z_k = R^{1/n}\\text{cis}\\left(\\frac{\\phi + 360°k}{n}\\right)$', text: 'The $n$ roots, one for each $k = 0, 1, \\ldots, n-1$; in radians $360°$ becomes $2\\pi$, as [the formula for roots](!#6) shows.' },
+         { formula: '$|z_k| = R^{1/n}$', text: 'Every root has the same modulus, so all $n$ roots lie on one circle, $360°/n$ apart ([geometric interpretation of roots](!#7)).' }],
+      ] },
+      { id: 'unity', name: 'Roots of unity', sub: 'The solutions of $z^n = 1$.', pairs: [
+        [{ formula: '$z_k = e^{i \\, 2\\pi k / n}$', text: 'The $n$-th roots of unity, for $k = 0, 1, \\ldots, n-1$, all on the unit circle, from [roots of unity](!#8).' },
+         { formula: '$\\displaystyle \\omega = \\text{cis}\\left(\\frac{2\\pi}{n}\\right)$', text: 'The primitive root: its powers $\\omega^k$ give every root of unity, as [roots of unity](!#8) shows.' }],
+        [{ formula: '$\\displaystyle \\sum_{k=0}^{n-1} e^{i \\, 2\\pi k / n} = 0$', text: 'For $n \\geq 2$ the roots of unity add up to zero, like arrows around a regular polygon ([properties of roots of unity](!#9)).' },
+         { formula: '$\\displaystyle \\prod_{k=0}^{n-1} z_k = (-1)^{n+1}$', text: 'Their product is $1$ for odd $n$ and $-1$ for even $n$, from [properties of roots of unity](!#9).' }],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     nthRootsAnatomy,
     unityParityCases,
     demoivrePowerSteps,
@@ -2057,7 +2075,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeMoivreTheoremPage({nthRootsAnatomy, unityParityCases, demoivrePowerSteps,
+export default function DeMoivreTheoremPage({ formulaSummaryData, pitfallData,nthRootsAnatomy, unityParityCases, demoivrePowerSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -2315,11 +2333,38 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="de-moivre-formula-summary"
+            title="Powers and roots"
+            source="/complex-numbers/demoivre-theorem"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="demoivre-pitfalls"
+            title="Common pitfalls with De Moivre's theorem"
+            source="/complex-numbers/demoivre-theorem"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

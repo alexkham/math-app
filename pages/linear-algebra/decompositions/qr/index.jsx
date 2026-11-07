@@ -1736,6 +1736,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2141,7 +2142,7 @@ For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$: Gram-Schm
 
 @academic[pitfall,aside:true,width:35%:Leaving the columns unnormalized
 Putting $\\mathbf{u}_1 = (1, 0, 1)^T$ into $Q$ without dividing by its length gives $Q^TQ \\neq I$, and with $R_{11} = \\sqrt{2}$ the first column of $QR$ becomes $(\\sqrt{2}, 0, \\sqrt{2})^T$ instead of $\\mathbf{a}_1$. With $\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T$ it is $(1, 0, 1)^T$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-columns-unnormalized)]@
 
 Two quantities come out of every step of the computation: the leftover vector $\\mathbf{u}_j$, whose length becomes the diagonal entry $R_{jj}$, and the unit vector $\\mathbf{q}_j = \\mathbf{u}_j / \\|\\mathbf{u}_j\\|$ that becomes a column of $Q$. In the example, $\\mathbf{u}_1 = (1, 0, 1)^T$ has length $\\sqrt{2}$, and $\\mathbf{u}_2 = (1/2, 1, -1/2)^T$ has length $\\sqrt{3/2} = 3/\\sqrt{6}$, the entry in the bottom-right corner of $R$. The entry above it, $1/\\sqrt{2}$, is the dot product of $\\mathbf{q}_1$ with the second column $(1, 1, 0)^T$.`,
     before: ``,
@@ -2156,7 +2157,7 @@ Applying Householder reflections sequentially — one per column — produces $H
 
 @academic[pitfall,aside:true,width:35%:Reversing the order of the reflections
 Taking $Q = H_2H_1$ from $H_2H_1A = R$ puts $Q^T$ in place of $Q$, and $QR$ no longer returns $A$. Inverting the product reverses it, $(H_2H_1)^{-1} = H_1H_2$, so $A = H_1H_2R$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reversing-the-order-of-the-reflections)]@
 
 In the equation $H_n \\cdots H_2 H_1 A = R$ the reflections stand to the left of $A$ in the order they were applied: $H_1$ acts first and sits next to $A$, and $H_n$ acts last and sits on the far left. Each $H_i$ is symmetric as well as orthogonal, so it is its own transpose and its own inverse. Recovering $Q$ means moving the whole product of reflections to the right-hand side of that equation.
 
@@ -2236,7 +2237,7 @@ The matrix $QQ^T$ is the [projection](!/linear-algebra/orthogonality/projections
 
 @academic[pitfall,aside:true,width:35%:Treating QQᵀ as the identity
 Replacing $QQ^T$ by $I$ for a thin $Q$ claims $QQ^T\\mathbf{b} = \\mathbf{b}$ for every $\\mathbf{b}$. For the worked example and $\\mathbf{b} = (1, 1, 1)^T$, the product is $(4/3, 2/3, 2/3)^T$; only $Q^TQ = I_2$ holds.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-qq-as-the-identity)]@
 
 For the matrix of the worked example, $m = 3$ and $n = 2$, so $QQ^T$ is a $3 \\times 3$ matrix of rank $2$. It leaves every vector in the plane $\\text{Col}(A)$ unchanged and sends every vector perpendicular to that plane to $\\mathbf{0}$. A general vector of $\\mathbb{R}^3$ keeps only its component in the plane spanned by $\\mathbf{q}_1$ and $\\mathbf{q}_2$.
 
@@ -2287,55 +2288,9 @@ This duality means every theorem about QR has an interpretation in terms of Gram
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again when a QR factorization is computed by hand or used afterwards. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Leaving the columns unnormalized**
-
-Gram-Schmidt first produces the orthogonal vectors $\\mathbf{u}_j$, and these are put into $Q$ as they are. The division by $\\|\\mathbf{u}_j\\|$ that turns them into unit vectors is skipped, while $R$ is filled in with the lengths as usual.
-
-Wrong working: for $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, take $\\mathbf{u}_1 = (1, 0, 1)^T$ and $\\mathbf{u}_2 = (1/2, 1, -1/2)^T$ as the columns of $Q$, with $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$. Then
-$$Q^TQ = \\begin{pmatrix} 2 & 0 \\\\ 0 & 3/2 \\end{pmatrix} \\neq I, \\qquad \\text{first column of } QR = \\sqrt{2}\\,\\mathbf{u}_1 = (\\sqrt{2}, 0, \\sqrt{2})^T \\neq \\mathbf{a}_1$$
-
-Right working: divide each $\\mathbf{u}_j$ by its length.
-$$\\mathbf{q}_1 = \\frac{\\mathbf{u}_1}{\\sqrt{2}} = \\frac{1}{\\sqrt{2}}(1, 0, 1)^T, \\qquad \\mathbf{q}_2 = \\frac{\\mathbf{u}_2}{\\sqrt{3/2}} = \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$$
-Now $Q^TQ = I_2$ and $QR = A$. The first column of $QR$ is $\\sqrt{2}\\,\\mathbf{q}_1 = (1, 0, 1)^T$, and the second is $\\frac{1}{\\sqrt{2}}\\mathbf{q}_1 + \\frac{3}{\\sqrt{6}}\\mathbf{q}_2 = (\\frac{1}{2}, 0, \\frac{1}{2})^T + (\\frac{1}{2}, 1, -\\frac{1}{2})^T = (1, 1, 0)^T$.
-
-Why it happens: the length $\\|\\mathbf{u}_j\\|$ is already recorded in $R$ as the diagonal entry, so it feels as if it has been used. It is needed twice: once as $R_{jj}$, and once as the divisor that makes $\\mathbf{q}_j$ a unit vector.
-
-How to check: compute $Q^TQ$. Its diagonal entries are the squared lengths of the columns of $Q$, and every one of them must be $1$.
-
-**Reversing the order of the reflections**
-
-Householder reflections are applied to $A$ one after another, giving $H_n \\cdots H_2 H_1 A = R$. The product on the left is then taken as $Q$ in the same order, although $Q$ has to undo it.
-
-Wrong working: take $A = \\begin{pmatrix} 2 & 5 \\\\ 1 & 0 \\\\ 2 & -2 \\end{pmatrix}$. The reflections
-$$H_1 = \\frac{1}{3}\\begin{pmatrix} 2 & 1 & 2 \\\\ 1 & 2 & -2 \\\\ 2 & -2 & -1 \\end{pmatrix}, \\qquad H_2 = \\frac{1}{5}\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 3 & 4 \\\\ 0 & 4 & -3 \\end{pmatrix}$$
-give $H_1A = \\begin{pmatrix} 3 & 2 \\\\ 0 & 3 \\\\ 0 & 4 \\end{pmatrix}$ and $H_2H_1A = R = \\begin{pmatrix} 3 & 2 \\\\ 0 & 5 \\\\ 0 & 0 \\end{pmatrix}$. Taking $Q = H_2H_1$:
-$$H_2H_1 = \\frac{1}{15}\\begin{pmatrix} 10 & 5 & 10 \\\\ 11 & -2 & -10 \\\\ -2 & 14 & -5 \\end{pmatrix}, \\qquad H_2H_1R = \\begin{pmatrix} 2 & 3 \\\\ 11/5 & 4/5 \\\\ -2/5 & 22/5 \\end{pmatrix} \\neq A$$
-
-Right working: move the product to the other side. Each $H_i$ is its own inverse, so $A = (H_2H_1)^{-1}R = H_1^{-1}H_2^{-1}R = H_1H_2R$, and
-$$Q = H_1H_2 = \\frac{1}{15}\\begin{pmatrix} 10 & 11 & -2 \\\\ 5 & -2 & 14 \\\\ 10 & -10 & -5 \\end{pmatrix}, \\qquad QR = \\begin{pmatrix} 2 & 5 \\\\ 1 & 0 \\\\ 2 & -2 \\end{pmatrix} = A$$
-The wrong product $H_2H_1$ is exactly $Q^T$.
-
-Why it happens: $H_2H_1$ is the matrix that appears on the page, and it is orthogonal, so it looks like a valid $Q$. The inversion that reverses the order is a single step that is easy to skip.
-
-How to check: the first column of $Q$ must be the first column of $A$ divided by $R_{11}$. Here that is $\\frac{1}{3}(2, 1, 2)^T$, which is the first column of $H_1H_2$ and not of $H_2H_1$.
-
-**Treating QQᵀ as the identity**
-
-For a thin $Q$ with $m > n$, the identity $Q^TQ = I_n$ is turned around and $QQ^T$ is replaced by $I_m$, as if $Q$ were square.
-
-Wrong working: with $Q$ from the worked example and $\\mathbf{b} = (1, 1, 1)^T$, the least-squares solution $\\hat{\\mathbf{x}} = R^{-1}Q^T\\mathbf{b}$ gives $A\\hat{\\mathbf{x}} = QRR^{-1}Q^T\\mathbf{b} = QQ^T\\mathbf{b}$, and replacing $QQ^T$ by $I$ makes this $\\mathbf{b}$. The fit looks exact, with zero residual.
-
-Right working: $QQ^T\\mathbf{b}$ is the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$.
-$$QQ^T\\mathbf{b} = (\\mathbf{q}_1 \\cdot \\mathbf{b})\\,\\mathbf{q}_1 + (\\mathbf{q}_2 \\cdot \\mathbf{b})\\,\\mathbf{q}_2 = (1, 0, 1)^T + (\\tfrac{1}{3}, \\tfrac{2}{3}, -\\tfrac{1}{3})^T = (\\tfrac{4}{3}, \\tfrac{2}{3}, \\tfrac{2}{3})^T$$
-Solving $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b} = (\\sqrt{2}, 2/\\sqrt{6})^T$ gives $\\hat{\\mathbf{x}} = (2/3, 2/3)^T$, and $A\\hat{\\mathbf{x}} = (4/3, 2/3, 2/3)^T$. The residual is $\\mathbf{b} - A\\hat{\\mathbf{x}} = (-1/3, 1/3, 1/3)^T$, not zero.
-
-Why it happens: for a square orthogonal matrix both products equal $I$, and the two identities are learned together. For a thin $Q$ only the product of size $n \\times n$ is the identity.
-
-How to check: compare sizes and rank. $QQ^T$ is $m \\times m$ but has rank only $n$, so for $m > n$ it cannot be $I_m$. The residual $\\mathbf{b} - QQ^T\\mathbf{b}$ is zero only when $\\mathbf{b}$ already lies in $\\text{Col}(A)$.`,
+    content: `Three mistakes come up again and again when a QR factorization is computed by hand or used afterwards. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip gets $Q$ wrong. Its columns must have length $1$, the Householder product is reversed to give $Q = H_1 H_2 \\cdots H_n$, and a thin $Q$ has $Q^TQ = I$ but not $QQ^T = I$. Computing $Q^TQ$, or comparing the first column of $Q$ with that of $A$, catches each slip.`,
     link: ``,
   },
 }
@@ -2511,8 +2466,53 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'leaving-the-columns-unnormalized', name: `Leaving the columns unnormalized`, errorAt: 1,
+        what: `Gram-Schmidt first produces the orthogonal vectors $\\mathbf{u}_j$, and these are put into $Q$ as they are. The division by $\\|\\mathbf{u}_j\\|$ that turns them into unit vectors is skipped, while $R$ is filled in with the lengths as usual.`,
+        wrong: [`For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$,`, `Take $\\mathbf{u}_1 = (1, 0, 1)^T$ and $\\mathbf{u}_2 = (1/2, 1, -1/2)^T$ as the columns of $Q$, with $R = \\begin{pmatrix} \\sqrt{2} & 1/\\sqrt{2} \\\\ 0 & 3/\\sqrt{6} \\end{pmatrix}$. Then
+$$Q^TQ = \\begin{pmatrix} 2 & 0 \\\\ 0 & 3/2 \\end{pmatrix} \\neq I,$$
+$$\\text{first column of } QR = \\sqrt{2}\\,\\mathbf{u}_1$$
+$$= (\\sqrt{2}, 0, \\sqrt{2})^T \\neq \\mathbf{a}_1$$`],
+        right: [`For $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$,`, `Divide each $\\mathbf{u}_j$ by its length.`, `$$\\mathbf{q}_1 = \\frac{\\mathbf{u}_1}{\\sqrt{2}}$$
+$$= \\frac{1}{\\sqrt{2}}(1, 0, 1)^T,$$
+$$\\mathbf{q}_2 = \\frac{\\mathbf{u}_2}{\\sqrt{3/2}}$$
+$$= \\frac{1}{\\sqrt{6}}(1, 2, -1)^T$$`, `Now $Q^TQ = I_2$ and $QR = A$. The first column of $QR$ is $\\sqrt{2}\\,\\mathbf{q}_1 = (1, 0, 1)^T$, and the second is $\\frac{1}{\\sqrt{2}}\\mathbf{q}_1 + \\frac{3}{\\sqrt{6}}\\mathbf{q}_2 = (\\frac{1}{2}, 0, \\frac{1}{2})^T + (\\frac{1}{2}, 1, -\\frac{1}{2})^T = (1, 1, 0)^T$.`],
+        why: `The length $\\|\\mathbf{u}_j\\|$ is already recorded in $R$ as the diagonal entry, so it feels as if it has been used. It is needed twice: once as $R_{jj}$, and once as the divisor that makes $\\mathbf{q}_j$ a unit vector.`,
+        check: `Compute $Q^TQ$. Its diagonal entries are the squared lengths of the columns of $Q$, and every one of them must be $1$.` },
+      { id: 'reversing-the-order-of-the-reflections', name: `Reversing the order of the reflections`, errorAt: 1,
+        what: `Householder reflections are applied to $A$ one after another, giving $H_n \\cdots H_2 H_1 A = R$. The product on the left is then taken as $Q$ in the same order, although $Q$ has to undo it.`,
+        wrong: [`Take $A = \\begin{pmatrix} 2 & 5 \\\\ 1 & 0 \\\\ 2 & -2 \\end{pmatrix}$.`, `The reflections
+$$H_1 = \\frac{1}{3}\\begin{pmatrix} 2 & 1 & 2 \\\\ 1 & 2 & -2 \\\\ 2 & -2 & -1 \\end{pmatrix},$$
+$$H_2 = \\frac{1}{5}\\begin{pmatrix} 5 & 0 & 0 \\\\ 0 & 3 & 4 \\\\ 0 & 4 & -3 \\end{pmatrix}$$`, `Give $H_1A = \\begin{pmatrix} 3 & 2 \\\\ 0 & 3 \\\\ 0 & 4 \\end{pmatrix}$ and $H_2H_1A = R = \\begin{pmatrix} 3 & 2 \\\\ 0 & 5 \\\\ 0 & 0 \\end{pmatrix}$. Taking $Q = H_2H_1$:
+$$H_2H_1$$
+$$= \\frac{1}{15}\\begin{pmatrix} 10 & 5 & 10 \\\\ 11 & -2 & -10 \\\\ -2 & 14 & -5 \\end{pmatrix},$$
+$$H_2H_1R$$
+$$= \\begin{pmatrix} 2 & 3 \\\\ 11/5 & 4/5 \\\\ -2/5 & 22/5 \\end{pmatrix} \\neq A$$`],
+        right: [`Take $A = \\begin{pmatrix} 2 & 5 \\\\ 1 & 0 \\\\ 2 & -2 \\end{pmatrix}$.`, `Move the product to the other side. Each $H_i$ is its own inverse, so $A = (H_2H_1)^{-1}R = H_1^{-1}H_2^{-1}R = H_1H_2R$, and
+$$Q = H_1H_2$$
+$$= \\frac{1}{15}\\begin{pmatrix} 10 & 11 & -2 \\\\ 5 & -2 & 14 \\\\ 10 & -10 & -5 \\end{pmatrix},$$
+$$QR = \\begin{pmatrix} 2 & 5 \\\\ 1 & 0 \\\\ 2 & -2 \\end{pmatrix} = A$$`, `The wrong product $H_2H_1$ is exactly $Q^T$.`],
+        why: `$H_2H_1$ is the matrix that appears on the page, and it is orthogonal, so it looks like a valid $Q$. The inversion that reverses the order is a single step that is easy to skip.`,
+        check: `The first column of $Q$ must be the first column of $A$ divided by $R_{11}$. Here that is $\\frac{1}{3}(2, 1, 2)^T$, which is the first column of $H_1H_2$ and not of $H_2H_1$.` },
+      { id: 'treating-qq-as-the-identity', name: `Treating QQᵀ as the identity`, errorAt: 0,
+        what: `For a thin $Q$ with $m > n$, the identity $Q^TQ = I_n$ is turned around and $QQ^T$ is replaced by $I_m$, as if $Q$ were square.`,
+        wrong: [`With $Q$ from the worked example and $\\mathbf{b} = (1, 1, 1)^T$, the least-squares solution $\\hat{\\mathbf{x}} = R^{-1}Q^T\\mathbf{b}$ gives $A\\hat{\\mathbf{x}} = QRR^{-1}Q^T\\mathbf{b} = QQ^T\\mathbf{b}$, and replacing $QQ^T$ by $I$ makes this $\\mathbf{b}$. The fit looks exact, with zero residual.`],
+        right: [`$QQ^T\\mathbf{b}$ is the projection of $\\mathbf{b}$ onto $\\text{Col}(A)$.`, `$$QQ^T\\mathbf{b}$$
+$$= (\\mathbf{q}_1 \\cdot \\mathbf{b})\\,\\mathbf{q}_1 + (\\mathbf{q}_2 \\cdot \\mathbf{b})\\,\\mathbf{q}_2$$
+$$= (1, 0, 1)^T$$
+$$+ (\\tfrac{1}{3}, \\tfrac{2}{3}, -\\tfrac{1}{3})^T$$
+$$= (\\tfrac{4}{3}, \\tfrac{2}{3}, \\tfrac{2}{3})^T$$`, `Solving $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b} = (\\sqrt{2}, 2/\\sqrt{6})^T$ gives $\\hat{\\mathbf{x}} = (2/3, 2/3)^T$, and $A\\hat{\\mathbf{x}} = (4/3, 2/3, 2/3)^T$. The residual is $\\mathbf{b} - A\\hat{\\mathbf{x}} = (-1/3, 1/3, 1/3)^T$, not zero.`],
+        why: `For a square orthogonal matrix both products equal $I$, and the two identities are learned together. For a thin $Q$ only the product of size $n \\times n$ is the identity.`,
+        check: `Compare sizes and rank. $QQ^T$ is $m \\times m$ but has rank only $n$, so for $m > n$ it cannot be $I_m$. The residual $\\mathbf{b} - QQ^T\\mathbf{b}$ is zero only when $\\mathbf{b}$ already lies in $\\text{Col}(A)$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     qrStabilityLevels,
     demoUnits,
     conceptIntroFigures,
@@ -2536,7 +2536,7 @@ const schemas = {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function QRDecompositionPage({qrStabilityLevels, 
+export default function QRDecompositionPage({ pitfallData,qrStabilityLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2762,6 +2762,15 @@ export default function QRDecompositionPage({qrStabilityLevels,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="qr-pitfalls"
+            title="Common pitfalls with the QR decomposition"
+            source="/linear-algebra/decompositions/qr"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

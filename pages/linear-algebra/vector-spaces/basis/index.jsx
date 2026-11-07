@@ -825,6 +825,7 @@ import '../../../pages.css'
 import Head from 'next/head'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -835,6 +836,7 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1196,7 +1198,7 @@ Coordinates depend entirely on the choice of basis. The same vector $\\mathbf{v}
 
 @academic[pitfall,aside:true,width:35%:Reading components as coordinates
 Taking $[\\mathbf{v}]_\\mathcal{B} = (3, 5)$ for $\\mathbf{v} = (3, 5)$ and $\\mathcal{B} = \\{(1, 2), (0, 1)\\}$ rebuilds $3(1, 2) + 5(0, 1) = (3, 11)$, not $\\mathbf{v}$. Solving the system gives $[\\mathbf{v}]_\\mathcal{B} = (3, -1)$, since $3(1, 2) - 1(0, 1) = (3, 5)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-components-as-coordinates)]@
 
 To find the coordinates of $\\mathbf{v}$ relative to $\\mathcal{B}$, solve the [linear system](!/linear-algebra/linear-systems) $c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n = \\mathbf{v}$. If the basis vectors are columns of a [matrix](!/linear-algebra/matrix) $B$, this is the system $B\\mathbf{c} = \\mathbf{v}$, and the coordinate vector is $\\mathbf{c} = B^{-1}\\mathbf{v}$ when $B$ is invertible. For the standard basis, $B = I$, so the coordinates are simply the components of $\\mathbf{v}$ itself.`,
     before: ``,
@@ -1302,7 +1304,7 @@ Change of basis connects to [similarity](!/linear-algebra/transformations/basis-
 
 @academic[pitfall,aside:true,width:35%:Applying the matrix in the wrong direction
 Multiplying $\\mathbf{v} = (3, 1)$ by $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ instead of solving gives $(4, 2)$, but $4(1, 1) + 2(1, -1) = (6, 2)$, not $\\mathbf{v}$. The input of $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is $\\mathcal{B}$-coordinates, so $[\\mathbf{v}]_\\mathcal{B} = P^{-1}\\mathbf{v} = (2, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-applying-the-matrix-in-the-wrong-direction)]@
 
 In the example, the known coordinates were the standard ones, $(3, 1)$, and the unknown ones were the $\\mathcal{B}$-coordinates. The matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is built directly from the $\\mathcal{B}$-vectors, so it is the easy matrix to write down, while the conversion that was needed ran from $\\mathcal{C}$ back to $\\mathcal{B}$. Which coordinates are given and which are wanted decides whether $P$ or its inverse is applied.`,
     before: ``,
@@ -1343,7 +1345,7 @@ Span is tested by checking whether $A\\mathbf{c} = \\mathbf{b}$ is consistent fo
 
 @academic[pitfall,aside:true,width:35%:Checking one condition with the wrong count
 Calling $\\{(1, 0, 0), (0, 1, 0)\\}$ a basis of $\\mathbb{R}^3$ because it is independent misses that every combination $(a, b, 0)$ has third entry $0$, so $(0, 0, 1)$ is out of reach. The shortcut needs exactly $3$ vectors; this set is a basis only of the $xy$-plane.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-one-condition-with-the-wrong-count)]@
 
 At the magic count $n = \\dim(V)$, the two conditions become equivalent.
 
@@ -1363,62 +1365,20 @@ These four subspaces split into two pairs of [orthogonal](!/linear-algebra/ortho
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the basis formulas of the page in seven rows, in the order the page develops them. Each row names the formula, states it and says what it gives, with a line under the name on where it comes from and a link to its section.
+
+It begins with the two conditions that make a set a basis and the single way every vector is written in it. The coordinate vector collects those scalars, and the standard basis is the case where they are just the components. The change-of-basis matrix converts coordinates between two bases, its inverse converts them back, and the last row shows that taking coordinates keeps addition and scaling.`,
+    before: ``,
+    after: `Coordinates always belong to a basis, so name the basis before writing any coordinate vector. With two bases in play, the subscripts of the change-of-basis matrix show the direction: it takes coordinates in the right-hand basis to the left-hand one.`,
+    link: '',
+  },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers when working with bases and coordinates. Three are marked with a box where they happen in the sections above, and the fourth, taking the echelon columns as a basis for the column space, is flagged in the section on finding a basis. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading components as coordinates**
-
-The coordinates of $\\mathbf{v}$ relative to a basis $\\mathcal{B}$ are written down as the components of $\\mathbf{v}$, as they would be in the standard basis. For any other basis, the components and the coordinates are usually different numbers.
-
-Wrong working: for $\\mathcal{B} = \\{(1, 2), (0, 1)\\}$ and $\\mathbf{v} = (3, 5)$, take $[\\mathbf{v}]_\\mathcal{B} = (3, 5)$.
-
-Right working: solve $c_1(1, 2) + c_2(0, 1) = (3, 5)$. The first entries give $c_1 = 3$, and the second entries give $2 \\cdot 3 + c_2 = 5$, so $c_2 = -1$ and $[\\mathbf{v}]_\\mathcal{B} = (3, -1)$.
-
-Why it happens: in $\\mathbb{R}^n$ almost all work is done in the standard basis, where coordinates and components coincide, so the difference never shows.
-
-How to check: rebuild the vector from its coordinates. With $(3, 5)$, $3(1, 2) + 5(0, 1) = (3, 11) \\neq \\mathbf{v}$; with $(3, -1)$, $3(1, 2) - 1(0, 1) = (3, 5) = \\mathbf{v}$.
-
-**Using echelon columns for the column space**
-
-After row reduction, the pivot columns of the echelon form are taken as the basis of $\\text{Col}(A)$, instead of the matching columns of $A$. Row operations change the columns, so the echelon columns usually span a different subspace.
-
-Wrong working: for the matrix $A$ of the worked example in the section on finding a basis, the pivot columns of the echelon form are $(1, 0, 0)$ and $(0, 1, 0)$, and $\\{(1, 0, 0), (0, 1, 0)\\}$ is given as a basis of $\\text{Col}(A)$.
-
-Right working: the pivots are in columns $1$ and $3$, so the basis is made of columns $1$ and $3$ of the original $A$: $\\{(1, 2, 3), (0, 1, 1)\\}$.
-
-Why it happens: the echelon form is the matrix on the page at the end of the computation, and its pivot columns are the simplest vectors in sight.
-
-How to check: every original column must be a combination of the proposed basis. Column $1$ of $A$, $(1, 2, 3)$, has third entry $3$, while every combination of $(1, 0, 0)$ and $(0, 1, 0)$ has third entry $0$. With the right basis, column $2$ is $2(1, 2, 3)$ and column $4$ is $(1, 3, 4) = (1, 2, 3) + (0, 1, 1)$.
-
-**Applying the matrix in the wrong direction**
-
-The change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ takes $\\mathcal{B}$-coordinates as input and returns $\\mathcal{C}$-coordinates. When the $\\mathcal{C}$-coordinates are known and the $\\mathcal{B}$-coordinates are wanted, $P$ is applied anyway instead of its inverse.
-
-Wrong working: in the change-of-basis example, $\\mathcal{C}$ is the standard basis and $\\mathbf{v} = (3, 1)$. Multiplying,
-$$P\\mathbf{v} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix}$$
-and $(4, 2)$ is given as $[\\mathbf{v}]_\\mathcal{B}$.
-
-Right working: solve $P\\mathbf{c} = \\mathbf{v}$, or apply the inverse:
-$$\\mathbf{c} = P^{-1}\\mathbf{v} = \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$$
-
-Why it happens: $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the matrix that is easy to write, with the $\\mathcal{B}$-vectors as its columns, and its subscript is easily read left to right, as if it started at $\\mathcal{C}$. The wrong product still computes, so nothing signals the error.
-
-How to check: rebuild $\\mathbf{v}$ from the answer. $4(1, 1) + 2(1, -1) = (6, 2) \\neq (3, 1)$, while $2(1, 1) + 1(1, -1) = (3, 1)$.
-
-**Checking one condition with the wrong count**
-
-The theorem that one condition implies the other applies only to sets of exactly $n = \\dim(V)$ vectors. Applied to a smaller set, independence is taken to imply spanning; applied to a larger set, spanning is taken to imply independence.
-
-Wrong working: $\\{(1, 0, 0), (0, 1, 0)\\}$ is independent, since neither vector is a multiple of the other, so it is declared a basis of $\\mathbb{R}^3$.
-
-Right working: the set has $2$ vectors and $\\dim(\\mathbb{R}^3) = 3$, so spanning has to be checked separately. Every combination $a(1, 0, 0) + b(0, 1, 0) = (a, b, 0)$ has third entry $0$, so $(0, 0, 1)$ is not in the span and the set is not a basis. Adding $(0, 0, 1)$ gives the standard basis.
-
-Why it happens: the shortcut saves a whole check and is used so often for $n$ vectors in $\\mathbb{R}^n$ that the condition on the count is forgotten.
-
-How to check: count first. Fewer than $n$ vectors can never span an $n$-dimensional space and more than $n$ can never be independent, so only a set of exactly $n$ vectors can be a basis.`,
+    content: `Four mistakes account for many wrong answers when working with bases and coordinates. Three are marked with a box where they happen in the sections above, and the fourth, taking the echelon columns as a basis for the column space, is flagged in the section on finding a basis. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip mixes a vector with its coordinates, or uses a theorem outside its conditions. Coordinates relative to $\\mathcal{B}$ are the weights that rebuild $\\mathbf{v}$, a basis of the column space comes from the original columns, $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ takes $\\mathcal{B}$-coordinates in, and the one-condition theorem needs exactly $\\dim(V)$ vectors. Rebuilding the vector from its coordinates, or counting the vectors first, catches each slip.`,
     link: ``,
   },
 };
@@ -1568,8 +1528,71 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-components-as-coordinates', name: `Reading components as coordinates`, errorAt: 1,
+        what: `The coordinates of $\\mathbf{v}$ relative to a basis $\\mathcal{B}$ are written down as the components of $\\mathbf{v}$, as they would be in the standard basis. For any other basis, the components and the coordinates are usually different numbers.`,
+        wrong: [`For $\\mathcal{B} = \\{(1, 2), (0, 1)\\}$ and $\\mathbf{v} = (3, 5)$,`, `Take $[\\mathbf{v}]_\\mathcal{B} = (3, 5)$.`],
+        right: [`For $\\mathcal{B} = \\{(1, 2), (0, 1)\\}$ and $\\mathbf{v} = (3, 5)$,`, `Solve $c_1(1, 2) + c_2(0, 1) = (3, 5)$. The first entries give $c_1 = 3$, and the second entries give $2 \\cdot 3 + c_2 = 5$, so $c_2 = -1$ and $[\\mathbf{v}]_\\mathcal{B} = (3, -1)$.`],
+        why: `In $\\mathbb{R}^n$ almost all work is done in the standard basis, where coordinates and components coincide, so the difference never shows.`,
+        check: `Rebuild the vector from its coordinates. With $(3, 5)$, $3(1, 2) + 5(0, 1) = (3, 11) \\neq \\mathbf{v}$; with $(3, -1)$, $3(1, 2) - 1(0, 1) = (3, 5) = \\mathbf{v}$.` },
+      { id: 'using-echelon-columns-for-the-column-space', name: `Using echelon columns for the column space`, errorAt: 0,
+        what: `After row reduction, the pivot columns of the echelon form are taken as the basis of $\\text{Col}(A)$, instead of the matching columns of $A$. Row operations change the columns, so the echelon columns usually span a different subspace.`,
+        wrong: [`For the matrix $A$ of the worked example in the section on finding a basis, the pivot columns of the echelon form are $(1, 0, 0)$ and $(0, 1, 0)$, and $\\{(1, 0, 0), (0, 1, 0)\\}$ is given as a basis of $\\text{Col}(A)$.`],
+        right: [`The pivots are in columns $1$ and $3$, so the basis is made of columns $1$ and $3$ of the original $A$: $\\{(1, 2, 3), (0, 1, 1)\\}$.`],
+        why: `The echelon form is the matrix on the page at the end of the computation, and its pivot columns are the simplest vectors in sight.`,
+        check: `Every original column must be a combination of the proposed basis. Column $1$ of $A$, $(1, 2, 3)$, has third entry $3$, while every combination of $(1, 0, 0)$ and $(0, 1, 0)$ has third entry $0$. With the right basis, column $2$ is $2(1, 2, 3)$ and column $4$ is $(1, 3, 4) = (1, 2, 3) + (0, 1, 1)$.` },
+      { id: 'applying-the-matrix-in-the-wrong-direction', name: `Applying the matrix in the wrong direction`, errorAt: 1,
+        what: `The change-of-basis matrix $P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ takes $\\mathcal{B}$-coordinates as input and returns $\\mathcal{C}$-coordinates. When the $\\mathcal{C}$-coordinates are known and the $\\mathcal{B}$-coordinates are wanted, $P$ is applied anyway instead of its inverse.`,
+        wrong: [`In the change-of-basis example, $\\mathcal{C}$ is the standard basis and $\\mathbf{v} = (3, 1)$.`, `Multiplying,
+$$P\\mathbf{v} = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix}$$`, `And $(4, 2)$ is given as $[\\mathbf{v}]_\\mathcal{B}$.`],
+        right: [`In the change-of-basis example, $\\mathcal{C}$ is the standard basis and $\\mathbf{v} = (3, 1)$.`, `Solve $P\\mathbf{c} = \\mathbf{v}$, or apply the inverse:
+$$\\mathbf{c} = P^{-1}\\mathbf{v}$$
+$$= \\frac{1}{-2}\\begin{pmatrix} -1 & -1 \\\\ -1 & 1 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$$`],
+        why: `$P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$ is the matrix that is easy to write, with the $\\mathcal{B}$-vectors as its columns, and its subscript is easily read left to right, as if it started at $\\mathcal{C}$. The wrong product still computes, so nothing signals the error.`,
+        check: `Rebuild $\\mathbf{v}$ from the answer. $4(1, 1) + 2(1, -1) = (6, 2) \\neq (3, 1)$, while $2(1, 1) + 1(1, -1) = (3, 1)$.` },
+      { id: 'checking-one-condition-with-the-wrong-count', name: `Checking one condition with the wrong count`, errorAt: 0,
+        what: `The theorem that one condition implies the other applies only to sets of exactly $n = \\dim(V)$ vectors. Applied to a smaller set, independence is taken to imply spanning; applied to a larger set, spanning is taken to imply independence.`,
+        wrong: [`$\\{(1, 0, 0), (0, 1, 0)\\}$ is independent, since neither vector is a multiple of the other, so it is declared a basis of $\\mathbb{R}^3$.`],
+        right: [`The set has $2$ vectors and $\\dim(\\mathbb{R}^3) = 3$, so spanning has to be checked separately. Every combination $a(1, 0, 0) + b(0, 1, 0) = (a, b, 0)$ has third entry $0$, so $(0, 0, 1)$ is not in the span and the set is not a basis. Adding $(0, 0, 1)$ gives the standard basis.`],
+        why: `The shortcut saves a whole check and is used so often for $n$ vectors in $\\mathbb{R}^n$ that the condition on the count is forgotten.`,
+        check: `Count first. Fewer than $n$ vectors can never span an $n$-dimensional space and more than $n$ can never be independent, so only a set of exactly $n$ vectors can be a basis.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it gives' },
+    ],
+    rows: [
+      { name: 'Basis', formula: '$\\mathcal{B}$ linearly independent and $\\text{Span}(\\mathcal{B}) = V$', says: 'no redundant vector, and every vector of $V$ within reach',
+        sub: 'The two conditions a basis must meet at once, from [the definition of a basis](!#2).' },
+      { name: 'Unique representation', formula: '$\\forall\\, \\mathbf{v} \\in V,\\ \\exists!\\, (c_1, \\ldots, c_n): \\mathbf{v} = c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_n\\mathbf{v}_n$', says: 'exactly one list of scalars for every vector',
+        sub: 'Spanning gives existence and independence gives uniqueness, as [unique representation](!#3) shows.' },
+      { name: 'Coordinate vector', formula: '$[\\mathbf{v}]_\\mathcal{B} = \\begin{pmatrix} c_1 \\\\ c_2 \\\\ \\vdots \\\\ c_n \\end{pmatrix}$', says: 'the coordinates of $\\mathbf{v}$ relative to $\\mathcal{B}$',
+        sub: 'The scalars of $\\mathbf{v} = c_1\\mathbf{v}_1 + \\cdots + c_n\\mathbf{v}_n$ stacked in a column, as [coordinates](!#4) explains.' },
+      { name: 'Standard basis', formula: '$\\mathbf{e}_i = (0, \\ldots, 0, \\underset{i\\text{-th}}{1}, 0, \\ldots, 0)$', says: 'the default basis of $\\mathbb{R}^n$, where coordinates are just the components',
+        sub: 'One vector for each $i = 1, \\ldots, n$, from [the standard basis](!#5).' },
+      { name: 'Change of basis', formula: '$[\\mathbf{v}]_\\mathcal{C} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\, [\\mathbf{v}]_\\mathcal{B}$', says: 'coordinates in $\\mathcal{C}$ from coordinates in $\\mathcal{B}$',
+        sub: 'The columns of the matrix are the $\\mathcal{C}$-coordinates of the $\\mathcal{B}$ vectors, as [change of basis](!#9) explains.' },
+      { name: 'Reverse change of basis', formula: '$P_{\\mathcal{B} \\leftarrow \\mathcal{C}} = \\bigl(P_{\\mathcal{C} \\leftarrow \\mathcal{B}}\\bigr)^{-1}$', says: 'the conversion back to $\\mathcal{B}$',
+        sub: 'Going back uses the inverse of the change-of-basis matrix, from [change of basis](!#9).' },
+      { name: 'Coordinate map', formula: '$[\\mathbf{u} + \\mathbf{v}]_\\mathcal{B} = [\\mathbf{u}]_\\mathcal{B} + [\\mathbf{v}]_\\mathcal{B}, \\qquad [c\\mathbf{v}]_\\mathcal{B} = c\\,[\\mathbf{v}]_\\mathcal{B}$', says: 'taking coordinates keeps addition and scaling',
+        sub: 'This makes every $n$-dimensional space behave like $\\mathbb{R}^n$, as [coordinates and isomorphism](!#10) explains.' },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
      sectionsContent,
@@ -1643,7 +1666,7 @@ const standardBases = {
 }
 
 
-export default function BasisVectorSpacePage({seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function BasisVectorSpacePage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -1853,11 +1876,38 @@ $$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis 
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="basis-coordinate-formula-summary"
+            title="Basis and coordinate formulas"
+            source="/linear-algebra/vector-spaces/basis"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.pitfalls.title,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="basis-pitfalls"
+            title="Common pitfalls with bases"
+            source="/linear-algebra/vector-spaces/basis"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

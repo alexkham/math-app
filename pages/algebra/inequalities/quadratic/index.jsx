@@ -15,6 +15,7 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Procedure from '@/app/components/infographics/Procedure'
 
 
 
@@ -342,9 +343,8 @@ $$\\begin{array}{c|ccc} & x < 1 & 1 < x < 4 & x > 4 \\\\ \\hline (x-1) & - & + &
 Solving $(x + 2)(x - 3) > 0$ as $x + 2 > 0$ or $x - 3 > 0$ gives $x > -2$, which includes $x = 0$, where the product is $-6$. The product is positive when both factors share a sign: $x < -2$ or $x > 3$.
 [Read more](!#pitfall-setting-each-factor-positive)]@
 
-The solution to the $> 0$ inequality consists of the intervals where the product is positive: $(-\\infty, 1) \\cup (4, \\infty)$.
-
-When the quadratic does not factor neatly, the roots from the quadratic formula serve the same purpose. The sign chart does not require integer or rational roots — any pair of real numbers works as boundary points. The method fails only when no real roots exist ($\\Delta < 0$), in which case the sign is constant and no chart is needed.
+The solution to the $> 0$ inequality consists of the intervals where the product is positive: $(-\\infty, 1) \\cup (4, \\infty)$.`,
+    afterProcedure: `When the quadratic does not factor neatly, the roots from the quadratic formula serve the same purpose. The sign chart does not require integer or rational roots — any pair of real numbers works as boundary points. The method fails only when no real roots exist ($\\Delta < 0$), in which case the sign is constant and no chart is needed.
 
 To solve your own quadratic inequality with each step shown, use the [quadratic inequality solver](!/algebra/calculators/inequalities/quadratic).`,
     before: ``,
@@ -646,9 +646,26 @@ const schemas = {
     ],
   };
 
+  // Procedure pilot 2026-11-05: the sign chart method of obj6, step by step on the page's own (x - 1)(x - 4) > 0.
+  const signChartProcedure = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(x - 1)(x - 4) > 0$',
+      rows: [
+        { step: 'Find the roots', stepSub: 'They are the boundary points of the chart', example: '$r_1 = 1$, $r_2 = 4$' },
+        { step: 'List the intervals the roots create', example: '$(-\\infty, 1)$, $(1, 4)$, $(4, \\infty)$' },
+        { step: 'Find the sign of each linear factor in each interval', example: '$x - 1$: $-$, $+$, $+$ and $x - 4$: $-$, $-$, $+$' },
+        { step: 'Multiply the signs to get the sign of the product', example: 'product: $+$, $-$, $+$' },
+        { step: 'Keep the intervals whose sign matches the inequality', stepSub: 'For $> 0$, the intervals where the product is positive', example: '$(-\\infty, 1) \\cup (4, \\infty)$' },
+      ],
+    },
+  };
+
   return {
   props: {
     pitfallData,
+    signChartProcedure,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -669,7 +686,7 @@ const schemas = {
 }
    }
 
-   export default function QuadraticInequalitiesPage({ pitfallData,
+   export default function QuadraticInequalitiesPage({ pitfallData, signChartProcedure,
   seoData,
   sectionsContent,
   introContent,
@@ -815,6 +832,16 @@ $$ax^2 + bx + c > 0$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-procedure'}
+            id="sign-chart-steps"
+            title="The sign chart method, step by step"
+            source="/algebra/inequalities/quadratic"
+            before={"The same method as a list of steps, with the example beside each one."}
+          >
+            <Procedure data={signChartProcedure} variant="worked" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProcedure,
         ]
     },
 

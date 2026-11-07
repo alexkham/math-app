@@ -1372,6 +1372,9 @@ import complexDivisionDiagrams from '@/app/components/calculators/complex-number
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -2074,7 +2077,7 @@ The exponential form excels in computation. Standard rules for exponents — whi
 
 @academic[pitfall,aside:true,width:35%:Putting degrees in the exponent
 Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads radians: $5e^{i \\cdot 53.13} \\approx -4.81 + 1.37i$, a different point. With the angle in radians, $5e^{i \\cdot 0.927} \\approx 3 + 4i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-putting-degrees-in-the-exponent)]@
 
 The number $3 + 4i$ has modulus $5$ and argument $\\arctan(4/3) \\approx 53.13°$, so $3 + 4i = 5e^{i \\cdot 0.927}$ (in radians). The number $-2$ has modulus $2$ and argument $\\pi$, so $-2 = 2e^{i\\pi}$. Even pure imaginaries fit: $i = 1 \\cdot e^{i\\pi/2} = e^{i\\pi/2}$.`,
   after: ``,
@@ -2141,7 +2144,7 @@ Convert $z = 1 + i$. The modulus is $r = \\sqrt{1 + 1} = \\sqrt{2}$. With $a = 1
 
 @academic[pitfall,aside:true,width:35%:Ignoring the quadrant
 For $z = -1 - i$, taking $\\theta = \\arctan(1) = \\pi/4$ gives $\\sqrt{2}e^{i\\pi/4} = 1 + i$, the opposite point. Since $a < 0$ and $b < 0$, $\\theta = \\pi/4 - \\pi = -3\\pi/4$, and $-1 - i = \\sqrt{2}e^{-i \\cdot 3\\pi/4}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-ignoring-the-quadrant)]@
 
 In this example both parts are positive, so the point lies in the first quadrant and the first line of the case formula applies. The remaining lines handle points in the second and third quadrants and on the imaginary axis, adding or subtracting $\\pi$ or replacing the arctangent outright. The modulus formula needs no such cases: it is the same in every quadrant.
 
@@ -2181,7 +2184,7 @@ This rule follows from the standard law of exponents: $e^a \\cdot e^b = e^{a+b}$
 
 @academic[pitfall,aside:true,width:35%:Adding the moduli
 Adding the moduli along with the arguments turns $(2e^{i\\pi/4})(3e^{i\\pi/4})$ into $5e^{i\\pi/2} = 5i$. Only the arguments add; the moduli multiply, so the product is $6e^{i\\pi/2} = 6i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-moduli)]@
 
 Geometrically, multiplication scales and rotates. Multiplying by $z_2 = r_2e^{i\\theta_2}$ stretches lengths by factor $r_2$ and rotates counterclockwise by angle $\\theta_2$. Multiplying by $e^{i\\pi/2} = i$ rotates by $90°$ without changing length. Multiplying by $2$ doubles length without rotation. Multiplying by $2e^{i\\pi/4}$ doubles length and rotates $45°$.
 
@@ -2213,7 +2216,7 @@ The exponent law $e^a / e^b = e^{a-b}$ governs the calculation, just as with rea
 
 @academic[pitfall,aside:true,width:35%:Subtracting in the wrong order
 Computing $\\frac{6e^{i\\pi/2}}{3e^{i\\pi/6}}$ with $\\pi/6 - \\pi/2 = -\\pi/3$ gives $2e^{-i\\pi/3} = 1 - \\sqrt{3}i$. The denominator's argument is the one subtracted: $\\pi/2 - \\pi/6 = \\pi/3$, so the quotient is $2e^{i\\pi/3} = 1 + \\sqrt{3}i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-in-the-wrong-order)]@
 
 Geometrically, dividing by $z_2$ shrinks by factor $1/r_2$ and rotates clockwise by angle $\\theta_2$ (equivalently, counterclockwise by $-\\theta_2$). Division undoes multiplication: if $w = z_1 \\cdot z_2$, then $z_1 = w/z_2$ recovers the original factor.
 
@@ -2260,7 +2263,7 @@ Result: $64 \\cdot (-1) = -64$.]@
 
 @academic[pitfall,aside:true,width:35%:Leaving the modulus unpowered
 Multiplying only the angle by $12$ turns $(\\sqrt{2}e^{i\\pi/4})^{12}$ into $\\sqrt{2}e^{i \\cdot 3\\pi} = -\\sqrt{2}$. The modulus is raised too, $(\\sqrt{2})^{12} = 64$, so the result is $64e^{i \\cdot 3\\pi} = -64$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-modulus-unpowered)]@
 
 The computation required no binomial expansion, no tracking of $i$ powers, no collection of terms. Converting to exponential form, applying the power rule, and simplifying completed the calculation in a few lines.`,
   after: ``,
@@ -2280,7 +2283,7 @@ Each value of $k$ produces a distinct root. Beyond $k = n-1$, the arguments diff
 
 @academic[pitfall,aside:true,width:35%:Adding the full turn after dividing
 Writing the square roots of $-9 = 9e^{i\\pi}$ as $3e^{i(\\pi/2 + 2\\pi k)}$ gives $3i$ for every $k$, so $-3i$ is lost. The full turn is divided too: $3e^{i(\\pi + 2\\pi k)/2}$ gives $3i$ for $k = 0$ and $-3i$ for $k = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-full-turn-after-dividing)]@
 
 All $n$ roots share the same modulus $R^{1/n}$, placing them on a circle of that radius in the [complex plane](!/complex-numbers/geometric-representation). Their arguments differ by $2\\pi/n$, spacing them evenly around the circle. The roots form vertices of a regular $n$-gon.
 
@@ -2320,7 +2323,10 @@ The exponential form appears wherever oscillation, rotation, or periodic phenome
 },
     obj11:{
       title:`Summary: Operations in Algebraic vs Exponential Form`,
-      content:`The advantage of exponential form lies in computational simplicity — every operation that requires careful expansion in [algebraic form](!/complex-numbers/algebraic-form) reduces to elementary exponent arithmetic in exponential form. The table below collects each operation in both representations side by side, making the contrast explicit: where the algebraic column needs distribution, conjugates, or term-collection, the exponential column performs the same work via addition, subtraction, or multiplication of the argument $\\theta$.`,
+      content:`This summary sets each operation on two complex numbers in algebraic form beside the same operation in exponential form. Each row is one operation: multiplication, division, a power, an n-th root, the modulus, the argument and the conjugate. The left column gives the algebraic formula or method, the right column the exponential one, each with a line on how the work is done, and the right one with a link to the section that explains it.
+
+Where the [algebraic form](!/complex-numbers/algebraic-form) needs distribution, conjugates or collecting terms, the exponential column does the same work by multiplying or dividing the moduli and adding, subtracting or multiplying the argument.`,
+      formulaSheetAfter: `For products, quotients, powers and roots, converting to exponential form first saves the most work: the moduli and the arguments are handled separately with simple arithmetic, and the result is converted back to algebraic form at the end if it is needed.`,
       before:``,
       after:``,
       link:'',
@@ -2366,81 +2372,9 @@ The exponential form appears wherever oscillation, rotation, or periodic phenome
   
     obj16:{
       title:`Common Pitfalls`,
-      content:`Six mistakes account for many of the wrong answers in work with the exponential form. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Putting degrees in the exponent**
-
-The argument of a number is found in degrees, and the degree value is written straight into the exponent. Euler's formula comes from Taylor series in which $\\theta$ is measured in radians, so $e^{i\\theta}$ reads any number in the exponent as radians.
-
-Wrong working: the argument of $3 + 4i$ is $\\arctan(4/3) \\approx 53.13°$, so $3 + 4i = 5e^{i \\cdot 53.13}$. Read in radians, $5e^{i \\cdot 53.13} = 5(\\cos 53.13 + i\\sin 53.13) \\approx -4.81 + 1.37i$.
-
-Right working: convert first, $53.13° \\cdot \\frac{\\pi}{180°} \\approx 0.927$, so $3 + 4i = 5e^{i \\cdot 0.927}$. Check: $5(\\cos 0.927 + i\\sin 0.927) \\approx 3 + 4i$.
-
-Why it happens: the trigonometric form is often written in degrees, as in $\\text{cis}(45°)$, and calculators are often left in degree mode. The habit carries over to the exponent.
-
-How to check: convert back with $a = r\\cos\\theta$ and $b = r\\sin\\theta$ in radian mode; the result must be the original number. An exponent larger than $2\\pi \\approx 6.28$ in a plain conversion is a warning sign.
-
-**Ignoring the quadrant**
-
-The argument is taken as $\\arctan(b/a)$ with no adjustment. The ratio $b/a$ is the same for $z$ and $-z$, and the arctangent only returns angles between $-\\pi/2$ and $\\pi/2$, so a point with $a < 0$ is given the angle of the opposite point.
-
-Wrong working: for $z = -1 - i$, $\\theta = \\arctan\\frac{-1}{-1} = \\arctan(1) = \\pi/4$, so $-1 - i = \\sqrt{2}e^{i\\pi/4}$. But $\\sqrt{2}e^{i\\pi/4} = 1 + i$.
-
-Right working: $r = \\sqrt{2}$. Since $a < 0$ and $b < 0$, the third line of the case formula applies: $\\theta = \\arctan(1) - \\pi = -3\\pi/4$. So $-1 - i = \\sqrt{2}e^{-i \\cdot 3\\pi/4}$, and indeed $\\sqrt{2}\\left(\\cos(-3\\pi/4) + i\\sin(-3\\pi/4)\\right) = \\sqrt{2}\\left(-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i\\right) = -1 - i$.
-
-Why it happens: in first-quadrant examples such as $1 + i$ the plain arctangent is correct, and the case formula looks like fine print.
-
-How to check: sketch the point. $-1 - i$ lies in the third quadrant, so its argument must lie between $-\\pi$ and $-\\pi/2$; $\\pi/4$ points into the first quadrant.
-
-**Adding the moduli**
-
-When two numbers are multiplied, the arguments add, and the moduli are added as well instead of multiplied.
-
-Wrong working: $(2e^{i\\pi/4})(3e^{i\\pi/4}) = (2 + 3)e^{i(\\pi/4 + \\pi/4)} = 5e^{i\\pi/2} = 5i$.
-
-Right working: the moduli multiply, $2 \\cdot 3 = 6$, and the arguments add, $\\pi/4 + \\pi/4 = \\pi/2$. The product is $6e^{i\\pi/2} = 6i$.
-
-Why it happens: the arguments sit in the exponent, where multiplication turns into addition; the moduli are ordinary factors in front, where multiplication stays multiplication. The two parts look alike and get the same treatment.
-
-How to check: try a real case. With both arguments $0$, $(2e^{i \\cdot 0})(3e^{i \\cdot 0}) = 2 \\cdot 3 = 6$, not $5$.
-
-**Subtracting in the wrong order**
-
-In a quotient the arguments are subtracted the wrong way round, the numerator's argument from the denominator's.
-
-Wrong working: $\\frac{6e^{i\\pi/2}}{3e^{i\\pi/6}}$: moduli $6/3 = 2$, arguments $\\pi/6 - \\pi/2 = -\\pi/3$, so the quotient is $2e^{-i\\pi/3} = 1 - \\sqrt{3}i$.
-
-Right working: the argument of the quotient is $\\theta_1 - \\theta_2 = \\pi/2 - \\pi/6 = \\pi/3$, so the quotient is $2e^{i\\pi/3} = 1 + \\sqrt{3}i$.
-
-Why it happens: subtraction is the one step where order matters, and the wrong answer differs only in the sign of the angle, so it looks just as plausible.
-
-How to check: multiply the answer by the denominator; it must give the numerator back. $2e^{i\\pi/3} \\cdot 3e^{i\\pi/6} = 6e^{i\\pi/2}$, while $2e^{-i\\pi/3} \\cdot 3e^{i\\pi/6} = 6e^{-i\\pi/6}$.
-
-**Leaving the modulus unpowered**
-
-In a power the angle is multiplied by $n$, but the modulus is left as it was.
-
-Wrong working: $(\\sqrt{2}e^{i\\pi/4})^{12} = \\sqrt{2}e^{i \\cdot 12 \\cdot \\pi/4} = \\sqrt{2}e^{i \\cdot 3\\pi} = -\\sqrt{2}$.
-
-Right working: $(\\sqrt{2}e^{i\\pi/4})^{12} = (\\sqrt{2})^{12} \\cdot e^{i \\cdot 3\\pi} = 64 \\cdot (-1) = -64$.
-
-Why it happens: in De Moivre's theorem for the unit circle, $(\\text{cis}\\theta)^n = \\text{cis}(n\\theta)$, there is no modulus at all, and the angle step is the memorable part.
-
-How to check: $|z^n| = |z|^n$. Here $|1 + i| = \\sqrt{2}$, so $|(1 + i)^{12}|$ must be $(\\sqrt{2})^{12} = 64$. A second route agrees: $(1 + i)^2 = 2i$, so $(1 + i)^{12} = (2i)^6 = 64i^6 = -64$.
-
-**Adding the full turn after dividing**
-
-In the root formula, the argument $\\phi$ is divided by $n$ and the full turn $2\\pi k$ is added afterwards, instead of dividing $\\phi + 2\\pi k$ as a whole. The full turns then survive undivided, and every $k$ gives the same point.
-
-Wrong working: $z^2 = -9$ with $-9 = 9e^{i\\pi}$. Then $z_k = 3e^{i(\\pi/2 + 2\\pi k)}$: $k = 0$ gives $3e^{i\\pi/2} = 3i$, and $k = 1$ gives $3e^{i \\cdot 5\\pi/2} = 3i$ again. One root is found twice.
-
-Right working: $z_k = 3e^{i(\\pi + 2\\pi k)/2}$. For $k = 0$, $3e^{i\\pi/2} = 3i$; for $k = 1$, $3e^{i \\cdot 3\\pi/2} = -3i$. Both satisfy $(\\pm 3i)^2 = -9$.
-
-Why it happens: adding $2\\pi k$ at the end looks like the familiar remark that an argument repeats every full turn, which is true for a number but not for its roots.
-
-How to check: the $n$ roots must be spaced $2\\pi/n$ apart around the circle. If two values of $k$ give the same point, the $2\\pi k$ was not divided by $n$.`,
+      content:`Six mistakes account for many of the wrong answers in work with the exponential form. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip misuses a rule of $re^{i\\theta}$. The exponent takes radians, the argument depends on the quadrant, moduli multiply while arguments add, a quotient subtracts the second argument from the first, a power raises the modulus too, and the full turn $2\\pi k$ is divided by $n$ along with the angle. Converting back, or multiplying the answer by the denominator, catches each slip.`,
       link:'',
     },
     faq: {
@@ -2627,8 +2561,96 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'putting-degrees-in-the-exponent', name: `Putting degrees in the exponent`, errorAt: 0,
+        what: `The argument of a number is found in degrees, and the degree value is written straight into the exponent. Euler's formula comes from Taylor series in which $\\theta$ is measured in radians, so $e^{i\\theta}$ reads any number in the exponent as radians.`,
+        wrong: [`The argument of $3 + 4i$ is $\\arctan(4/3) \\approx 53.13°$, so $3 + 4i = 5e^{i \\cdot 53.13}$. Read in radians, $5e^{i \\cdot 53.13} = 5(\\cos 53.13 + i\\sin 53.13) \\approx -4.81 + 1.37i$.`],
+        right: [`Convert first, $53.13° \\cdot \\frac{\\pi}{180°} \\approx 0.927$, so $3 + 4i = 5e^{i \\cdot 0.927}$. Check: $5(\\cos 0.927 + i\\sin 0.927) \\approx 3 + 4i$.`],
+        why: `The trigonometric form is often written in degrees, as in $\\text{cis}(45°)$, and calculators are often left in degree mode. The habit carries over to the exponent.`,
+        check: `Convert back with $a = r\\cos\\theta$ and $b = r\\sin\\theta$ in radian mode; the result must be the original number. An exponent larger than $2\\pi \\approx 6.28$ in a plain conversion is a warning sign.` },
+      { id: 'ignoring-the-quadrant', name: `Ignoring the quadrant`, errorAt: 0,
+        what: `The argument is taken as $\\arctan(b/a)$ with no adjustment. The ratio $b/a$ is the same for $z$ and $-z$, and the arctangent only returns angles between $-\\pi/2$ and $\\pi/2$, so a point with $a < 0$ is given the angle of the opposite point.`,
+        wrong: [`For $z = -1 - i$, $\\theta = \\arctan\\frac{-1}{-1} = \\arctan(1) = \\pi/4$, so $-1 - i = \\sqrt{2}e^{i\\pi/4}$. But $\\sqrt{2}e^{i\\pi/4} = 1 + i$.`],
+        right: [`$r = \\sqrt{2}$. Since $a < 0$ and $b < 0$, the third line of the case formula applies: $\\theta = \\arctan(1) - \\pi = -3\\pi/4$. So $-1 - i = \\sqrt{2}e^{-i \\cdot 3\\pi/4}$, and indeed
+$$\\sqrt{2}\\left(\\cos(-3\\pi/4) + i\\sin(-3\\pi/4)\\right)$$
+$$= \\sqrt{2}\\left(-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i\\right) = -1 - i$$`],
+        why: `In first-quadrant examples such as $1 + i$ the plain arctangent is correct, and the case formula looks like fine print.`,
+        check: `Sketch the point. $-1 - i$ lies in the third quadrant, so its argument must lie between $-\\pi$ and $-\\pi/2$; $\\pi/4$ points into the first quadrant.` },
+      { id: 'adding-the-moduli', name: `Adding the moduli`, errorAt: 0,
+        what: `When two numbers are multiplied, the arguments add, and the moduli are added as well instead of multiplied.`,
+        wrong: [`$(2e^{i\\pi/4})(3e^{i\\pi/4}) = (2 + 3)e^{i(\\pi/4 + \\pi/4)} = 5e^{i\\pi/2} = 5i$.`],
+        right: [`The moduli multiply, $2 \\cdot 3 = 6$, and the arguments add, $\\pi/4 + \\pi/4 = \\pi/2$. The product is $6e^{i\\pi/2} = 6i$.`],
+        why: `The arguments sit in the exponent, where multiplication turns into addition; the moduli are ordinary factors in front, where multiplication stays multiplication. The two parts look alike and get the same treatment.`,
+        check: `Try a real case. With both arguments $0$, $(2e^{i \\cdot 0})(3e^{i \\cdot 0}) = 2 \\cdot 3 = 6$, not $5$.` },
+      { id: 'subtracting-in-the-wrong-order', name: `Subtracting in the wrong order`, errorAt: 0,
+        what: `In a quotient the arguments are subtracted the wrong way round, the numerator's argument from the denominator's.`,
+        wrong: [`$\\frac{6e^{i\\pi/2}}{3e^{i\\pi/6}}$: moduli $6/3 = 2$, arguments $\\pi/6 - \\pi/2 = -\\pi/3$, so the quotient is $2e^{-i\\pi/3} = 1 - \\sqrt{3}i$.`],
+        right: [`The argument of the quotient is $\\theta_1 - \\theta_2 = \\pi/2 - \\pi/6 = \\pi/3$, so the quotient is $2e^{i\\pi/3} = 1 + \\sqrt{3}i$.`],
+        why: `Subtraction is the one step where order matters, and the wrong answer differs only in the sign of the angle, so it looks just as plausible.`,
+        check: `Multiply the answer by the denominator; it must give the numerator back. $2e^{i\\pi/3} \\cdot 3e^{i\\pi/6} = 6e^{i\\pi/2}$, while $2e^{-i\\pi/3} \\cdot 3e^{i\\pi/6} = 6e^{-i\\pi/6}$.` },
+      { id: 'leaving-the-modulus-unpowered', name: `Leaving the modulus unpowered`, errorAt: 0,
+        what: `In a power the angle is multiplied by $n$, but the modulus is left as it was.`,
+        wrong: [`$(\\sqrt{2}e^{i\\pi/4})^{12} = \\sqrt{2}e^{i \\cdot 12 \\cdot \\pi/4} = \\sqrt{2}e^{i \\cdot 3\\pi} = -\\sqrt{2}$.`],
+        right: [`$(\\sqrt{2}e^{i\\pi/4})^{12} = (\\sqrt{2})^{12} \\cdot e^{i \\cdot 3\\pi} = 64 \\cdot (-1) = -64$.`],
+        why: `In De Moivre's theorem for the unit circle, $(\\text{cis}\\theta)^n = \\text{cis}(n\\theta)$, there is no modulus at all, and the angle step is the memorable part.`,
+        check: `$|z^n| = |z|^n$. Here $|1 + i| = \\sqrt{2}$, so $|(1 + i)^{12}|$ must be $(\\sqrt{2})^{12} = 64$. A second route agrees: $(1 + i)^2 = 2i$, so $(1 + i)^{12} = (2i)^6 = 64i^6 = -64$.` },
+      { id: 'adding-the-full-turn-after-dividing', name: `Adding the full turn after dividing`, errorAt: 1,
+        what: `In the root formula, the argument $\\phi$ is divided by $n$ and the full turn $2\\pi k$ is added afterwards, instead of dividing $\\phi + 2\\pi k$ as a whole. The full turns then survive undivided, and every $k$ gives the same point.`,
+        wrong: [`$z^2 = -9$ with $-9 = 9e^{i\\pi}$.`, `Then $z_k = 3e^{i(\\pi/2 + 2\\pi k)}$: $k = 0$ gives $3e^{i\\pi/2} = 3i$, and $k = 1$ gives $3e^{i \\cdot 5\\pi/2} = 3i$ again. One root is found twice.`],
+        right: [`$z^2 = -9$ with $-9 = 9e^{i\\pi}$.`, `$z_k = 3e^{i(\\pi + 2\\pi k)/2}$. For $k = 0$, $3e^{i\\pi/2} = 3i$; for $k = 1$, $3e^{i \\cdot 3\\pi/2} = -3i$. Both satisfy $(\\pm 3i)^2 = -9$.`],
+        why: `Adding $2\\pi k$ at the end looks like the familiar remark that an argument repeats every full turn, which is true for a number but not for its roots.`,
+        check: `The $n$ roots must be spaced $2\\pi/n$ apart around the circle. If two values of $k$ give the same point, the $2\\pi k$ was not divided by $n$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    sides: [
+      { name: 'Algebraic form', sub: 'with $z = a + bi$ and $w = c + di$', tone: 'direct' },
+      { name: 'Exponential form', sub: 'with $z = r_1e^{i\\theta_1}$ and $w = r_2e^{i\\theta_2}$', tone: 'reversed' },
+    ],
+    rows: [
+      { op: 'Multiplication', cells: [
+        { formula: '$z \\cdot w = (ac - bd) + (ad + bc)i$', effect: 'Multiply out with FOIL, then apply $i^2 = -1$.' },
+        { formula: '$z \\cdot w = r_1r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$', effect: 'The moduli multiply and the arguments add, as [multiplication in exponential form](!#6) shows.' },
+      ] },
+      { op: 'Division', cells: [
+        { formula: '$\\displaystyle \\frac{z}{w} = \\frac{z \\cdot \\bar{w}}{w \\cdot \\bar{w}}$', effect: 'Multiply the top and the bottom by $\\bar{w}$, then expand.' },
+        { formula: '$\\displaystyle \\frac{z}{w} = \\frac{r_1}{r_2} \\cdot e^{i(\\theta_1 - \\theta_2)}$', effect: 'The moduli divide and the arguments subtract, from [division in exponential form](!#7).' },
+      ] },
+      { op: 'Power', cells: [
+        { formula: '$z^n = (a + bi)^n$', effect: 'Binomial expansion, then every $i^2$ collapsed to $-1$, again and again.' },
+        { formula: '$z^n = r_1^n \\cdot e^{in\\theta_1}$', effect: "De Moivre's rule: the modulus goes to the $n$-th power and the argument is multiplied by $n$, as [powers in exponential form](!#8) shows.",
+          condition: 'for an integer $n$' },
+      ] },
+      { op: 'n-th root', cells: [
+        { formula: '$z^n = w$', effect: 'No clean closed-form method in algebraic form.' },
+        { formula: '$z_k = r_2^{1/n} \\cdot e^{i(\\theta_2 + 2\\pi k)/n}$', effect: 'All $n$ solutions of $z^n = w$, from [roots in exponential form](!#9).',
+          condition: '$k = 0, 1, \\ldots, n - 1$' },
+      ] },
+      { op: 'Modulus', cells: [
+        { formula: '$|z| = \\sqrt{a^2 + b^2}$', effect: 'Computed from the two parts.' },
+        { formula: '$|z| = r_1$', effect: 'Read directly from the form; [converting between forms](!#5) finds it from $a$ and $b$.' },
+      ] },
+      { op: 'Argument', cells: [
+        { formula: '$\\arg(z) = \\arctan(b/a)$', effect: 'Computed from the two parts.', condition: 'adjust for the quadrant' },
+        { formula: '$\\arg(z) = \\theta_1$', effect: 'Read directly from the exponent, as [converting between forms](!#5) shows.' },
+      ] },
+      { op: 'Conjugate', cells: [
+        { formula: '$\\bar{z} = a - bi$', effect: 'The imaginary part changes sign.' },
+        { formula: '$\\bar{z} = r_1 \\cdot e^{-i\\theta_1}$', effect: 'The modulus stays the same and the argument changes sign, in the notation of [the exponential form](!#4).' },
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -2651,7 +2673,7 @@ const schemas = {
    }
 
 
-export default function ExponentialFormPage({
+export default function ExponentialFormPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2731,7 +2753,7 @@ $$z = a + bi = r(\\cos\\theta + i\\sin\\theta) = r\\text{cis}\\theta = re^{i\\th
           `The exponent rules only work with the angle in radians, because Euler's formula is stated in radians. And the form helps only with multiplying: adding two numbers in exponential form still means going back to $a + bi$, since there is no rule for $e^{i\\alpha} + e^{i\\beta}$. [Euler's formula](!/complex-numbers/exponential-form#1) itself is at the top of the page.`,
           `@academic[pitfall,aside:true,width:35%:Putting degrees in the exponent
 Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads radians: $5e^{i \\cdot 53.13} \\approx -4.81 + 1.37i$, a different point. With the angle in radians, $5e^{i \\cdot 0.927} \\approx 3 + 4i$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-putting-degrees-in-the-exponent)]@`,
         ],
       },
       {
@@ -2888,11 +2910,16 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="exponential-form-formula-summary"
+            title="Operations in two forms"
+            source="/complex-numbers/exponential-form"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.obj11.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="paired" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2901,6 +2928,15 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="exponential-form-pitfalls"
+            title="Common pitfalls with the exponential form"
+            source="/complex-numbers/exponential-form"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

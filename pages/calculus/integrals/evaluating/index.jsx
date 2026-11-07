@@ -14,8 +14,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -228,7 +230,7 @@ $$\\int \\frac{x^3 + 1}{x}\\, dx = \\int \\left(x^2 + \\frac{1}{x}\\right)\\, dx
 
 @academic[pitfall,aside:true,width:35%:Integrating the top and bottom separately
 Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\frac{x^2}{2} + \\frac{2}{x}$, whose derivative at $x = 1$ is $-1$, while the integrand there is $2$. Splitting the fraction first gives $\\frac{x^3}{3} + \\ln|x| + C$.
-[Read more](!#7)]@
+[Read more](!#pitfall-integrating-the-top-and-bottom-separately)]@
 
 Expand, simplify, and separate before reaching for techniques.
 
@@ -252,7 +254,7 @@ This matches $\\int \\dfrac{1}{u^2 + a^2}\\, du = \\dfrac{1}{a}\\arctan\\dfrac{u
 
 @academic[pitfall,aside:true,width:35%:Forgetting the factor in front of arctan
 Finishing with $\\arctan(x + 2) + C$ uses the formula for $a = 1$: its derivative is $\\frac{1}{(x + 2)^2 + 1}$, not $\\frac{1}{(x + 2)^2 + 4}$. With $a = 2$ the answer is $\\frac{1}{2}\\arctan\\frac{x + 2}{2} + C$.
-[Read more](!#7)]@
+[Read more](!#pitfall-forgetting-the-factor-in-front-of-arctan)]@
 
 Completing the square is the move for a quadratic that does not factor. The discriminant of $x^2 + 4x + 8$ is $16 - 32 = -16 < 0$, so there are no real roots to split the fraction with. Writing $x^2 + 4x + 8 = (x + 2)^2 + 4$ puts the variable part into $u^2$ and leaves the constant $4 = 2^2$ as $a^2$.
 
@@ -328,7 +330,7 @@ $$= \\frac{1}{3} + (4 - 1) = \\frac{1}{3} + 3 = \\frac{10}{3}$$]@
 
 @academic[pitfall,aside:true,width:35%:Using one formula on the whole interval
 Integrating $x^2$ over all of $[0, 2]$ gives $\\frac{8}{3}$, and using $2x$ throughout gives $4$. Neither is the integral of $f$, which is $\\frac{1}{3} + 3 = \\frac{10}{3}$.
-[Read more](!#7)]@
+[Read more](!#pitfall-using-one-formula-on-the-whole-interval)]@
 
 The boundaries between the pieces are the only places where the integral has to be cut, and the number of pieces sets the number of integrals to add. The value of $f$ at the single point $x = 1$ does not affect either integral, so it makes no difference which piece the boundary point belongs to. A function with three or more pieces is handled the same way, with one integral per piece.
 `,
@@ -364,7 +366,7 @@ $$\\int_{-2}^{2} x^4\\, dx = 2\\int_0^2 x^4\\, dx = 2 \\cdot \\frac{32}{5} = \\f
 
 @academic[pitfall,aside:true,width:35%:Missing the even part of the integrand
 Seeing $x^3$ in $\\int_{-2}^{2} (x^3 + 1)\\, dx$ and answering $0$ ignores the even term $1$. Only the $x^3$ part cancels, so the integral is $0 + 2 \\cdot 2 = 4$.
-[Read more](!#7)]@
+[Read more](!#pitfall-missing-the-even-part-of-the-integrand)]@
 
 Both shortcuts rest on comparing $f(-x)$ with $f(x)$. In the first example $(-x)^3 = -x^3$, so the region on $[-3, 0]$ is the region on $[0, 3]$ reflected below the axis. In the second $(-x)^4 = x^4$, and the two halves are equal. Replacing $x$ by $-x$ takes one line and settles which shortcut, if any, applies.
 
@@ -379,10 +381,18 @@ When $f(x) + f(a + b - x)$ is simpler than $f(x)$, for example a constant, the r
     after: ``,
     link: ``
   },
+ formulaSummary: {
+   title: `Formula Summary`,
+   content: `This summary collects the formulas of the page on six cards. Each card gives the name, the formula and a line on when it helps, with a link to the section that explains it; most cards add a worked example from the page, and a badge at the bottom states when the formula applies.
+
+The first two cards split an integral: at the boundary between the pieces of a piecewise function, and where the argument of an absolute value changes sign. Three symmetry cards follow, for even functions, for odd functions and for the reflection about the midpoint of the interval. The last card gives Simpson's rule, a numerical check on a computed answer.`,
+   before: ``,
+   after: `These formulas save work only when their condition holds, so test it first: replace the variable by its negative to look for symmetry, and find the points where the integrand changes form. A quick Simpson estimate then confirms the final number.`,
+   link: '',
+ },
  obj7: {
     title: `Common Pitfalls`,
-    content: `
-**Forgetting the constant of integration:** Indefinite integrals always include $+C$.
+    content: `**Forgetting the constant of integration:** Indefinite integrals always include $+C$.
 
 **Dropping absolute values:** The antiderivative of $1/x$ is $\\ln|x| + C$, not $\\ln x + C$.
 
@@ -390,58 +400,9 @@ When $f(x) + f(a + b - x)$ is simpler than $f(x)$, for example a constant, the r
 
 **Forgetting to convert limits:** In definite integrals with substitution, either convert the limits to $u$-values or substitute back to $x$ before evaluating.
 
-**Missing discontinuities:** An integral like $\\int_{-1}^{1} \\dfrac{1}{x^2}\\, dx$ is improper—the integrand is unbounded at $x = 0$.
-
-**Integrating the top and bottom separately**
-
-A fraction is integrated by finding an antiderivative of the numerator and one of the denominator and dividing the two, as if integration had a quotient rule that works that way.
-
-Wrong working: $\\int \\dfrac{x^3 + 1}{x}\\, dx = \\dfrac{\\int (x^3 + 1)\\, dx}{\\int x\\, dx} = \\dfrac{x^4/4 + x}{x^2/2} = \\dfrac{x^2}{2} + \\dfrac{2}{x}$.
-
-Right working: split the fraction first. $\\dfrac{x^3 + 1}{x} = x^2 + \\dfrac{1}{x}$, so $\\int \\dfrac{x^3 + 1}{x}\\, dx = \\dfrac{x^3}{3} + \\ln|x| + C$.
-
-Why it happens: an integral does split over a sum, term by term, and the same splitting looks just as natural over a quotient. There is no such rule for quotients; even for derivatives, the quotient rule is not the quotient of the derivatives.
-
-How to check: differentiate the answer. $\\left(\\dfrac{x^2}{2} + \\dfrac{2}{x}\\right)' = x - \\dfrac{2}{x^2}$, which is $-1$ at $x = 1$, while the integrand there is $\\dfrac{1 + 1}{1} = 2$. $\\left(\\dfrac{x^3}{3} + \\ln|x|\\right)' = x^2 + \\dfrac{1}{x}$, which is $2$ at $x = 1$.
-
-**Forgetting the factor in front of arctan**
-
-Completing the square brings the integral to the form $\\int \\dfrac{1}{u^2 + a^2}\\, du$, and it is finished as $\\arctan u + C$, which is the formula for $a = 1$ only.
-
-Wrong working: $\\int \\dfrac{1}{x^2 + 4x + 8}\\, dx = \\int \\dfrac{1}{(x + 2)^2 + 4}\\, dx = \\arctan(x + 2) + C$.
-
-Right working: with $u = x + 2$ and $a = 2$, $\\int \\dfrac{1}{(x + 2)^2 + 4}\\, dx = \\dfrac{1}{2}\\arctan\\dfrac{x + 2}{2} + C$.
-
-Why it happens: $\\int \\dfrac{1}{1 + u^2}\\, du = \\arctan u + C$ is the version learned first, and for $a = 1$ both the factor $\\dfrac{1}{a}$ and the division inside the arctan disappear.
-
-How to check: differentiate. $\\left(\\arctan(x + 2)\\right)' = \\dfrac{1}{(x + 2)^2 + 1} = \\dfrac{1}{x^2 + 4x + 5}$, the wrong constant. $\\left(\\dfrac{1}{2}\\arctan\\dfrac{x + 2}{2}\\right)' = \\dfrac{1}{2} \\cdot \\dfrac{1/2}{1 + \\frac{(x + 2)^2}{4}} = \\dfrac{1}{(x + 2)^2 + 4}$, the integrand.
-
-**Using one formula on the whole interval**
-
-A piecewise function is integrated with one of its formulas over the whole interval, usually the first one or the easier one, and the boundary between the pieces is ignored.
-
-Wrong working: for $f(x) = x^2$ when $x < 1$ and $f(x) = 2x$ when $x \\geq 1$, $\\int_0^2 f(x)\\, dx = \\int_0^2 x^2\\, dx = \\dfrac{8}{3}$. Using the other formula throughout gives $\\int_0^2 2x\\, dx = 4$, just as wrong.
-
-Right working: split at $x = 1$. $\\int_0^1 x^2\\, dx + \\int_1^2 2x\\, dx = \\dfrac{1}{3} + 3 = \\dfrac{10}{3}$.
-
-Why it happens: the integral is written with a single symbol $f$, so $\\int_0^2 f(x)\\, dx$ looks like one integral. The cases are read once at the start and then forgotten.
-
-How to check: list the subintervals used and match each one to the case of $f$ that holds there. Integrating $x^2$ on $[1, 2]$ uses the wrong formula: at $x = 1.5$, for instance, $f(1.5) = 3$, not $1.5^2 = 2.25$.
-
-**Missing the even part of the integrand**
-
-An integrand on a symmetric interval contains an odd term such as $x^3$, and the whole integral is set to $0$, although another term is even.
-
-Wrong working: $x^3$ is odd, so $\\int_{-2}^{2} (x^3 + 1)\\, dx = 0$.
-
-Right working: split by linearity. $\\int_{-2}^{2} x^3\\, dx + \\int_{-2}^{2} 1\\, dx = 0 + 2\\int_0^2 1\\, dx = 0 + 4 = 4$. Directly: $\\left[\\dfrac{x^4}{4} + x\\right]_{-2}^{2} = (4 + 2) - (4 - 2) = 4$.
-
-Why it happens: the odd rule gives the answer with no work, so it is tempting to use it as soon as an odd power appears, and the eye stops at the leading term.
-
-How to check: test $f(-x) = -f(x)$ for the whole integrand at one point. For $f(x) = x^3 + 1$, $f(-1) = 0$ while $-f(1) = -2$, so $f$ is not odd.
-`,
+**Missing discontinuities:** An integral like $\\int_{-1}^{1} \\dfrac{1}{x^2}\\, dx$ is improper—the integrand is unbounded at $x = 0$.`,
     before: ``,
-    after: ``,
+    after: `Each slip skips the step that makes the integral computable. A quotient is divided out before integrating, not integrated top and bottom separately; $\\int \\frac{du}{u^2 + a^2} = \\frac{1}{a}\\arctan\\frac{u}{a} + C$; a piecewise integrand is split where its formula changes; and only the odd part of $x^3 + 1$ integrates to $0$ over a symmetric interval. Differentiating the answer, or testing $f(-x) = -f(x)$ for the whole integrand, catches each slip.`,
     link: ``
   },
   obj8: {
@@ -743,8 +704,60 @@ const schemas = {
     last: [{ label: 'Finally', text: 'Verify: differentiate the antiderivative; for a definite integral, check the sign and the size.' }],
   };
 
+  // MistakeFix batch 14, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj7 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'integrating-the-top-and-bottom-separately', name: `Integrating the top and bottom separately`, errorAt: 0,
+        what: `A fraction is integrated by finding an antiderivative of the numerator and one of the denominator and dividing the two, as if integration had a quotient rule that works that way.`,
+        wrong: [`$\\int \\dfrac{x^3 + 1}{x}\\, dx = \\dfrac{\\int (x^3 + 1)\\, dx}{\\int x\\, dx} = \\dfrac{x^4/4 + x}{x^2/2} = \\dfrac{x^2}{2} + \\dfrac{2}{x}$.`],
+        right: [`Split the fraction first. $\\dfrac{x^3 + 1}{x} = x^2 + \\dfrac{1}{x}$, so $\\int \\dfrac{x^3 + 1}{x}\\, dx = \\dfrac{x^3}{3} + \\ln|x| + C$.`],
+        why: `An integral does split over a sum, term by term, and the same splitting looks just as natural over a quotient. There is no such rule for quotients; even for derivatives, the quotient rule is not the quotient of the derivatives.`,
+        check: `Differentiate the answer. $\\left(\\dfrac{x^2}{2} + \\dfrac{2}{x}\\right)' = x - \\dfrac{2}{x^2}$, which is $-1$ at $x = 1$, while the integrand there is $\\dfrac{1 + 1}{1} = 2$. $\\left(\\dfrac{x^3}{3} + \\ln|x|\\right)' = x^2 + \\dfrac{1}{x}$, which is $2$ at $x = 1$.` },
+      { id: 'forgetting-the-factor-in-front-of-arctan', name: `Forgetting the factor in front of arctan`, errorAt: 0,
+        what: `Completing the square brings the integral to the form $\\int \\dfrac{1}{u^2 + a^2}\\, du$, and it is finished as $\\arctan u + C$, which is the formula for $a = 1$ only.`,
+        wrong: [`$\\int \\dfrac{1}{x^2 + 4x + 8}\\, dx = \\int \\dfrac{1}{(x + 2)^2 + 4}\\, dx = \\arctan(x + 2) + C$.`],
+        right: [`With $u = x + 2$ and $a = 2$, $\\int \\dfrac{1}{(x + 2)^2 + 4}\\, dx = \\dfrac{1}{2}\\arctan\\dfrac{x + 2}{2} + C$.`],
+        why: `$\\int \\dfrac{1}{1 + u^2}\\, du = \\arctan u + C$ is the version learned first, and for $a = 1$ both the factor $\\dfrac{1}{a}$ and the division inside the arctan disappear.`,
+        check: `Differentiate. $\\left(\\arctan(x + 2)\\right)' = \\dfrac{1}{(x + 2)^2 + 1} = \\dfrac{1}{x^2 + 4x + 5}$, the wrong constant. $\\left(\\dfrac{1}{2}\\arctan\\dfrac{x + 2}{2}\\right)' = \\dfrac{1}{2} \\cdot \\dfrac{1/2}{1 + \\frac{(x + 2)^2}{4}} = \\dfrac{1}{(x + 2)^2 + 4}$, the integrand.` },
+      { id: 'using-one-formula-on-the-whole-interval', name: `Using one formula on the whole interval`, errorAt: 0,
+        what: `A piecewise function is integrated with one of its formulas over the whole interval, usually the first one or the easier one, and the boundary between the pieces is ignored.`,
+        wrong: [`For $f(x) = x^2$ when $x < 1$ and $f(x) = 2x$ when $x \\geq 1$, $\\int_0^2 f(x)\\, dx = \\int_0^2 x^2\\, dx = \\dfrac{8}{3}$. Using the other formula throughout gives $\\int_0^2 2x\\, dx = 4$, just as wrong.`],
+        right: [`Split at $x = 1$. $\\int_0^1 x^2\\, dx + \\int_1^2 2x\\, dx = \\dfrac{1}{3} + 3 = \\dfrac{10}{3}$.`],
+        why: `The integral is written with a single symbol $f$, so $\\int_0^2 f(x)\\, dx$ looks like one integral. The cases are read once at the start and then forgotten.`,
+        check: `List the subintervals used and match each one to the case of $f$ that holds there. Integrating $x^2$ on $[1, 2]$ uses the wrong formula: at $x = 1.5$, for instance, $f(1.5) = 3$, not $1.5^2 = 2.25$.` },
+      { id: 'missing-the-even-part-of-the-integrand', name: `Missing the even part of the integrand`, errorAt: 0,
+        what: `An integrand on a symmetric interval contains an odd term such as $x^3$, and the whole integral is set to $0$, although another term is even.`,
+        wrong: [`$x^3$ is odd, so $\\int_{-2}^{2} (x^3 + 1)\\, dx = 0$.`],
+        right: [`Split by linearity. $\\int_{-2}^{2} x^3\\, dx + \\int_{-2}^{2} 1\\, dx = 0 + 2\\int_0^2 1\\, dx = 0 + 4 = 4$. Directly: $\\left[\\dfrac{x^4}{4} + x\\right]_{-2}^{2} = (4 + 2) - (4 - 2) = 4$.`],
+        why: `The odd rule gives the answer with no work, so it is tempting to use it as soon as an odd power appears, and the eye stops at the leading term.`,
+        check: `Test $f(-x) = -f(x)$ for the whole integrand at one point. For $f(x) = x^3 + 1$, $f(-1) = 0$ while $-f(1) = -2$, so $f$ is not odd.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Splitting at a boundary', formula: '$\\displaystyle \\int_a^c f(x)\\, dx = \\int_a^b f(x)\\, dx + \\int_b^c f(x)\\, dx$', restriction: 'cut only where the formula of $f$ changes',
+        text: 'A piecewise function is integrated one piece at a time and the results are added, as [piecewise functions](!#5) shows.' },
+      { name: 'Absolute value', formula: '$\\left|\\int f\\right| \\neq \\int |f|$', example: '$\\displaystyle \\int_{-2}^{3} |x|\\, dx = 2 + \\frac{9}{2} = \\frac{13}{2}$', restriction: 'split where the argument changes sign',
+        text: 'The absolute value is removed piece by piece, and in general it cannot be moved outside the integral; see [handling absolute values](!#4).' },
+      { name: 'Even function', formula: '$\\displaystyle \\int_{-a}^{a} f(x)\\, dx = 2 \\int_0^a f(x)\\, dx$', example: '$\\displaystyle \\int_{-2}^{2} x^4\\, dx = \\frac{64}{5}$', restriction: '$f(-x) = f(x)$',
+        text: 'The two halves of the region are equal, so one half is computed and doubled, as [symmetry shortcuts](!#6) explains.' },
+      { name: 'Odd function', formula: '$\\displaystyle \\int_{-a}^{a} f(x)\\, dx = 0$', example: '$\\displaystyle \\int_{-3}^{3} x^3\\, dx = 0$', restriction: '$f(-x) = -f(x)$',
+        text: 'The region on the left is the region on the right reflected below the axis, so the two cancel ([symmetry shortcuts](!#6)).' },
+      { name: 'Reflection', formula: '$\\displaystyle \\int_a^b f(x)\\, dx = \\int_a^b f(a + b - x)\\, dx$', restriction: 'useful when $f(x) + f(a + b - x)$ is simpler than $f$',
+        text: 'Reflecting about the midpoint covers the same points in reverse; adding the two forms can give the integral without an antiderivative ([symmetry shortcuts](!#6)).' },
+      { name: "Simpson's rule", formula: '$\\displaystyle \\int_a^b f(x)\\, dx$ $\\displaystyle \\approx \\frac{b - a}{6}$ $\\left[f(a) + 4f(m) + f(b)\\right]$', example: 'area under $y = x^2$ on $[0, 3]$: exactly $9$', restriction: '$m$ is the midpoint; exact for cubics',
+        text: 'A numerical check by hand from three values of the integrand, as [checking your answer](!#8) shows.' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     integralLadderDecision,
     splitFractionSteps,
     completeSquareIntegral,
@@ -768,7 +781,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({integralLadderDecision, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, splitFractionSteps, completeSquareIntegral, conceptIntroFigures}) {
+export default function PageTemplate({ formulaSummaryData, pitfallData,integralLadderDecision, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, splitFractionSteps, completeSquareIntegral, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -844,7 +857,7 @@ $$\\int \\frac{x^3 + 1}{x}\\, dx = \\int \\left(x^2 + \\frac{1}{x}\\right)\\, dx
         content: [
           `@academic[pitfall,aside:true,width:35%:Integrating the top and bottom separately
 Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\frac{x^2}{2} + \\frac{2}{x}$, whose derivative at $x = 1$ is $-1$, while the integrand there is $2$. Splitting the fraction first gives $\\frac{x^3}{3} + \\ln|x| + C$.
-[Read more](!#7)]@`,
+[Read more](!#pitfall-integrating-the-top-and-bottom-separately)]@`,
         ],
       },
       {
@@ -924,6 +937,24 @@ Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\f
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="integral-evaluation-formula-summary"
+            title="Formulas for evaluating integrals"
+            source="/calculus/integrals/evaluating"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'7',
         title:sectionsContent.obj7.title,
         link:sectionsContent.obj7.link,
@@ -933,6 +964,15 @@ Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\f
           `Before evaluating, check that the integrand is continuous on the whole closed interval.`,
           <div key={'obj7-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'obj7-mistakes'}
+            id="evaluating-integral-pitfalls"
+            title="Common pitfalls in evaluating integrals"
+            source="/calculus/integrals/evaluating"
+            after={sectionsContent.obj7.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

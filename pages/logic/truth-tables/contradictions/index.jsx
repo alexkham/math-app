@@ -11,9 +11,10 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
-export default function ContradictionsTruthTablesPage({ keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent, deniedDisjunctionBeforeAfter, negatedImplicationSteps }) {
+export default function ContradictionsTruthTablesPage({ pitfallData, keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent, deniedDisjunctionBeforeAfter, negatedImplicationSteps }) {
 
     const contradictionOperators = {
         'P ∧ ¬P': { 
@@ -227,7 +228,18 @@ export default function ContradictionsTruthTablesPage({ keyWords, contradictionE
         id: 'pitfalls',
         title: sectionsContent.pitfalls.title,
         link: sectionsContent.pitfalls.link,
-        content: [sectionsContent.pitfalls.content]
+        content: [
+          sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="contradiction-pitfalls"
+            title="Common pitfalls with contradictions"
+            source="/logic/truth-tables/contradictions"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
+        ]
       },
       // faq: rendered component — must be built here, not in getStaticProps
       {
@@ -442,7 +454,7 @@ export async function getStaticProps() {
 
 @academic[pitfall,aside:true,width:35%:Calling a contingent formula a contradiction
 Seeing an F in the column of P → Q and calling it a contradiction stops too early: P → Q is F only at P = T, Q = F and T in the other three rows. A contradiction is F in every row; P → Q is contingent.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-calling-a-contingent-formula-a-contradiction)]@
 
 Contradictions are also called unsatisfiable formulas — there is no interpretation that makes them true. They are the logical opposite of [tautologies](!/logic/propositional-logic/semantics/tautology): the negation of a contradiction is a tautology, and the negation of a tautology is a contradiction.
 
@@ -485,7 +497,7 @@ The law of non-contradiction (that P ∧ ¬P is always false) is one of the foun
 
 @academic[pitfall,aside:true,width:35%:Treating P → Q and P → ¬Q as contradictory
 Taking P → Q and P → ¬Q to contradict each other overlooks the rows with P = F, where both are T. Together they are equivalent to ¬P, not to a contradiction; the formula here is always F only because it also asserts P.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-p-q-and-p-q-as-contradictory)]@
 
 When P is true, the first [implication](!/logic/propositional-logic/semantics/implication) forces Q to be true. But the second implication forces Q to be false. Q cannot be both true and false, so no truth assignment satisfies all three conjuncts.
 
@@ -506,7 +518,7 @@ By De Morgan&apos;s law, ¬P ∧ ¬Q is equivalent to ¬(P ∨ Q). So the formul
 
 @academic[pitfall,aside:true,width:35%:Keeping the connective in De Morgan's law
 Rewriting ¬P ∧ ¬Q as ¬(P ∧ Q) turns the formula into (P ∨ Q) ∧ ¬(P ∧ Q), which is T at P = T, Q = F, so it is not a contradiction. De Morgan's law flips the connective: ¬P ∧ ¬Q ≡ ¬(P ∨ Q).
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-connective-in-de-morgan-s-law)]@
 
 Reducing a formula to the pattern X ∧ ¬X is a quick way to recognise a contradiction without writing out the whole truth table. Each step of the reduction has to be an equivalence, so that the new formula agrees with the old one in every row. Only then does the verdict for X ∧ ¬X carry over to the formula the reduction started from.
 
@@ -592,7 +604,7 @@ The formula can be rewritten as P ∧ (Q ∧ ¬Q) by factoring out P. Since Q �
 
 @academic[pitfall,aside:true,width:35%:Negating an implication into an implication
 Writing ¬(P → Q) as P → ¬Q fails at P = F, Q = T: there ¬(P → Q) is F but P → ¬Q is T. The negation is a conjunction, ¬(P → Q) ≡ P ∧ ¬Q.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-negating-an-implication-into-an-implication)]@
 
 But the second conjunct P ∧ Q asserts that both P and Q are true. The first conjunct requires Q to be false; the second requires Q to be true. These conditions are mutually exclusive.
 
@@ -603,57 +615,9 @@ The formula reduces to (P ∧ ¬Q) ∧ (P ∧ Q) = P ∧ (¬Q ∧ Q) = P ∧ ⊥
     },
     pitfalls: {
       title: `Common Pitfalls`,
-      content: `Four slips account for many wrong answers when formulas are tested for contradiction. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Calling a contingent formula a contradiction**
-
-A formula is found to be false in one or two rows of its truth table, and it is called a contradiction. A contradiction is false in every row; a formula that is false in some rows and true in others is contingent.
-
-Wrong working: P → Q is F at P = T, Q = F, so P → Q is a contradiction.
-
-Right working: for (P, Q) equal to (T, T), (T, F), (F, T), (F, F), P → Q takes T, F, T, T. Three rows are T, so the formula is satisfiable and not a contradiction. Because of its F row it is not a tautology either: it is contingent.
-
-Why it happens: the F row is the memorable one, and the three ways a formula can behave, always T, always F or mixed, get collapsed into two. "Not a tautology" is heard as "a contradiction".
-
-How to check: read the whole final column. A contradiction has no T at all; a single T makes the formula satisfiable.
-
-**Treating P → Q and P → ¬Q as contradictory**
-
-Two implications with the same antecedent and opposite consequents look as if they cannot both hold, so their conjunction is taken to be a contradiction. They clash only when the antecedent is true.
-
-Wrong working: P → Q says P gives Q, P → ¬Q says P gives ¬Q, and Q and ¬Q cannot both be true, so (P → Q) ∧ (P → ¬Q) is always F.
-
-Right working: for (P, Q) equal to (T, T), (T, F), (F, T), (F, F), P → Q takes T, F, T, T and P → ¬Q takes F, T, T, T, so the conjunction takes F, F, T, T. It is true in both rows with P = F and is equivalent to ¬P. The formula in section 4 is a contradiction only because it adds the third conjunct P, which is F in exactly those rows.
-
-Why it happens: in everyday speech, "if it rains, the ground is wet" and "if it rains, the ground is not wet" sound incompatible, because the listener pictures rain. On a dry day both are vacuously true.
-
-How to check: test the rows where the shared antecedent is false. If the conjunction is T there, it is satisfiable; the two implications together only say that the antecedent is false.
-
-**Keeping the connective in De Morgan's law**
-
-In the reduction of (P ∨ Q) ∧ ¬P ∧ ¬Q to the pattern X ∧ ¬X, the part ¬P ∧ ¬Q is rewritten by pulling the negation outside, but the ∧ is kept. The rewritten formula is no longer equivalent to the original.
-
-Wrong working: ¬P ∧ ¬Q ≡ ¬(P ∧ Q), so the formula becomes (P ∨ Q) ∧ ¬(P ∧ Q).
-
-Right working: at P = T, Q = F, ¬P ∧ ¬Q is F ∧ T, which is F, while ¬(P ∧ Q) is ¬F, which is T, so the rewrite is not an equivalence. The wrong formula (P ∨ Q) ∧ ¬(P ∧ Q) is T in that row: it is the exclusive or, not a contradiction. De Morgan's law changes the connective: ¬P ∧ ¬Q ≡ ¬(P ∨ Q), and the formula becomes (P ∨ Q) ∧ ¬(P ∨ Q), which is F in every row.
-
-Why it happens: the negation is moved out like a common factor taken out of a bracket, with the operation between the terms left as it was. In words, "neither P nor Q" gets confused with "not both P and Q".
-
-How to check: test a row where P and Q differ. "Neither P nor Q" is F there, while "not both" is T, so a rewrite that turns one into the other changes the value.
-
-**Negating an implication into an implication**
-
-To negate "if P, then Q", the negation is moved onto the consequent and the arrow is kept, giving P → ¬Q. That is another implication, not the negation.
-
-Wrong working: ¬(P → Q) ≡ P → ¬Q, so the formula in section 12 would become (P → ¬Q) ∧ (P ∧ Q).
-
-Right working: at P = F, Q = T, P → Q is T, so ¬(P → Q) is F, but P → ¬Q is F → F, which is T. With material implication and De Morgan's law, ¬(P → Q) ≡ ¬(¬P ∨ Q) ≡ ¬¬P ∧ ¬Q ≡ P ∧ ¬Q, which is T only at P = T, Q = F.
-
-Why it happens: "it is not the case that if P then Q" sounds like a claim about what happens when P holds, so the "if" is kept. The negation of a conditional describes the single row where the conditional fails.
-
-How to check: the negation must be T exactly where P → Q is F, which is only the row P = T, Q = F. P → ¬Q is T in both rows with P = F, so it fails the test.`,
+      content: `Four slips account for many wrong answers when formulas are tested for contradiction. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before: ``,
-      after: ``,
+      after: `Each slip calls a formula always false too soon, or rewrites it into a different formula. A contradiction has no T in its final column, so one F row only shows that the formula is not a tautology; $(P \\to Q) \\land (P \\to \\neg Q)$ is T whenever $P$ is F; De Morgan's law turns $\\neg P \\land \\neg Q$ into $\\neg(P \\lor Q)$; and the negation of $P \\to Q$ is $P \\land \\neg Q$. Reading the whole final column, or testing the rows where $P$ is F, catches each slip.`,
       link: ``,
     },
     faq: {
@@ -822,8 +786,40 @@ How to check: the negation must be T exactly where P → Q is F, which is only t
     ],
   };
 
+  // MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'calling-a-contingent-formula-a-contradiction', name: `Calling a contingent formula a contradiction`, errorAt: 0,
+        what: `A formula is found to be false in one or two rows of its truth table, and it is called a contradiction. A contradiction is false in every row; a formula that is false in some rows and true in others is contingent.`,
+        wrong: [`P → Q is F at P = T, Q = F, so P → Q is a contradiction.`],
+        right: [`For (P, Q) equal to (T, T), (T, F), (F, T), (F, F), P → Q takes T, F, T, T. Three rows are T, so the formula is satisfiable and not a contradiction. Because of its F row it is not a tautology either: it is contingent.`],
+        why: `The F row is the memorable one, and the three ways a formula can behave, always T, always F or mixed, get collapsed into two. "Not a tautology" is heard as "a contradiction".`,
+        check: `Read the whole final column. A contradiction has no T at all; a single T makes the formula satisfiable.` },
+      { id: 'treating-p-q-and-p-q-as-contradictory', name: `Treating P → Q and P → ¬Q as contradictory`, errorAt: 0,
+        what: `Two implications with the same antecedent and opposite consequents look as if they cannot both hold, so their conjunction is taken to be a contradiction. They clash only when the antecedent is true.`,
+        wrong: [`P → Q says P gives Q, P → ¬Q says P gives ¬Q, and Q and ¬Q cannot both be true, so (P → Q) ∧ (P → ¬Q) is always F.`],
+        right: [`For (P, Q) equal to (T, T), (T, F), (F, T), (F, F), P → Q takes T, F, T, T and P → ¬Q takes F, T, T, T, so the conjunction takes F, F, T, T. It is true in both rows with P = F and is equivalent to ¬P. The formula in section 4 is a contradiction only because it adds the third conjunct P, which is F in exactly those rows.`],
+        why: `In everyday speech, "if it rains, the ground is wet" and "if it rains, the ground is not wet" sound incompatible, because the listener pictures rain. On a dry day both are vacuously true.`,
+        check: `Test the rows where the shared antecedent is false. If the conjunction is T there, it is satisfiable; the two implications together only say that the antecedent is false.` },
+      { id: 'keeping-the-connective-in-de-morgan-s-law', name: `Keeping the connective in De Morgan's law`, errorAt: 0,
+        what: `In the reduction of (P ∨ Q) ∧ ¬P ∧ ¬Q to the pattern X ∧ ¬X, the part ¬P ∧ ¬Q is rewritten by pulling the negation outside, but the ∧ is kept. The rewritten formula is no longer equivalent to the original.`,
+        wrong: [`¬P ∧ ¬Q ≡ ¬(P ∧ Q), so the formula becomes (P ∨ Q) ∧ ¬(P ∧ Q).`],
+        right: [`At P = T, Q = F, ¬P ∧ ¬Q is F ∧ T, which is F, while ¬(P ∧ Q) is ¬F, which is T, so the rewrite is not an equivalence. The wrong formula (P ∨ Q) ∧ ¬(P ∧ Q) is T in that row: it is the exclusive or, not a contradiction. De Morgan's law changes the connective: ¬P ∧ ¬Q ≡ ¬(P ∨ Q), and the formula becomes (P ∨ Q) ∧ ¬(P ∨ Q), which is F in every row.`],
+        why: `The negation is moved out like a common factor taken out of a bracket, with the operation between the terms left as it was. In words, "neither P nor Q" gets confused with "not both P and Q".`,
+        check: `Test a row where P and Q differ. "Neither P nor Q" is F there, while "not both" is T, so a rewrite that turns one into the other changes the value.` },
+      { id: 'negating-an-implication-into-an-implication', name: `Negating an implication into an implication`, errorAt: 0,
+        what: `To negate "if P, then Q", the negation is moved onto the consequent and the arrow is kept, giving P → ¬Q. That is another implication, not the negation.`,
+        wrong: [`¬(P → Q) ≡ P → ¬Q, so the formula in section 12 would become (P → ¬Q) ∧ (P ∧ Q).`],
+        right: [`At P = F, Q = T, P → Q is T, so ¬(P → Q) is F, but P → ¬Q is F → F, which is T. With material implication and De Morgan's law, ¬(P → Q) ≡ ¬(¬P ∨ Q) ≡ ¬¬P ∧ ¬Q ≡ P ∧ ¬Q, which is T only at P = T, Q = F.`],
+        why: `"it is not the case that if P then Q" sounds like a claim about what happens when P holds, so the "if" is kept. The negation of a conditional describes the single row where the conditional fails.`,
+        check: `The negation must be T exactly where P → Q is F, which is only the row P = T, Q = F. P → ¬Q is T in both rows with P = F, so it fails the test.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
       keyWords,
       contradictionExplanations,
       deniedDisjunctionBeforeAfter,

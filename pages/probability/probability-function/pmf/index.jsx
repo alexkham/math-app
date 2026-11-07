@@ -1316,10 +1316,12 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1966,7 +1968,7 @@ $P(X > 3) = 1 - P(X \\leq 3) = 1 - \\frac{1}{2} = \\frac{1}{2}$]@
 
 @academic[pitfall,aside:true,width:35%:Using the wrong complement
 Writing $P(X > 3) = 1 - P(X < 3)$ leaves the face $3$ in neither event and gives $1 - \\frac{2}{6} = \\frac{2}{3}$. The complement of $X > 3$ is $X \\leq 3$, so $P(X > 3) = 1 - \\frac{1}{2} = \\frac{1}{2}$.
-[Read more](!#12)]@
+[Read more](!#pitfall-using-the-wrong-complement)]@
 
 The complement rule needs the two events to split the support exactly: every value of $X$ lies in one of them and none lies in both. For the die, the faces $1, 2, 3$ make up the event $X \\leq 3$ and the faces $4, 5, 6$ make up its complement, three faces of mass $\\frac{1}{6}$ on each side.
 
@@ -2015,7 +2017,7 @@ The average outcome over many rolls is 3.5.
 
 @academic[pitfall,aside:true,width:35%:Averaging the values without weights
 For the loaded die, $\\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3.5$ treats every face as equally likely. Weighting each face by its probability, $E[X] = \\frac{1}{10}(1 + 2 + 3 + 4 + 5) + \\frac{1}{2} \\cdot 6 = 1.5 + 3 = 4.5$.
-[Read more](!#12)]@
+[Read more](!#pitfall-averaging-the-values-without-weights)]@
 
 For the fair die every weight is the same, $\\frac{1}{6}$, so each face pulls on the balance point equally and the mean lands exactly in the middle of the support. When the weights differ, as on the loaded die from the axioms section, the faces that carry more probability pull the center of mass toward themselves.
 
@@ -2078,7 +2080,7 @@ Computational shortcut: $\\text{Var}(X) = E[X^2] - (E[X])^2$
 
 @academic[pitfall,aside:true,width:35%:Subtracting the mean instead of its square
 For the fair die, $E[X^2] - E[X] = \\frac{91}{6} - 3.5 = \\frac{35}{3} \\approx 11.67$. The shortcut subtracts the squared mean: $\\frac{91}{6} - 3.5^2 = \\frac{35}{12} \\approx 2.92$.
-[Read more](!#12)]@
+[Read more](!#pitfall-subtracting-the-mean-instead-of-its-square)]@
 
 For the fair die, the shortcut needs two averages taken with the same weights $\\frac{1}{6}$: $E[X^2]$, the average of the squared faces $1, 4, 9, 16, 25, 36$, which is $\\frac{91}{6}$, and the mean $E[X] = 3.5$ found in the location section. The shortcut saves computing six separate deviations from the mean and squaring each one.
 
@@ -2173,7 +2175,7 @@ Linear transformations follow: $E[aX + b] = aE[X] + b$
 
 @academic[pitfall,aside:true,width:35%:Applying the function to the mean
 For $Y = (X - 3.5)^2$, plugging in the mean gives $(E[X] - 3.5)^2 = 0$, yet $Y$ is never $0$. Averaging $g(x)$ over the PMF gives $E[Y] = \\frac{0.25 + 2.25 + 6.25}{3} = \\frac{35}{12}$.
-[Read more](!#12)]@
+[Read more](!#pitfall-applying-the-function-to-the-mean)]@
 
 The linear rule lets the mean pass straight through the transformation: scale and shift $X$, and its mean is scaled and shifted in the same way. The squared distance $Y = (X - 3.5)^2$ from the example above is not of this form. It bends the number line, folding faces from both sides of $3.5$ onto the same value.
 
@@ -2370,10 +2372,18 @@ Each PMF has characteristic behavior: where mass concentrates, how it spreads, w
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary sorts the formulas of the page into five families: the two axioms, probabilities of events, summary measures, transformations, and the connection to the CDF. Each family has a line on what it covers, and each formula a note on what it gives with a link to the section that explains it. The buttons above the cards show one family at a time.
+
+The axioms ask for values that are never negative and add up to one. The second family reads single values, sets of values and complements from the PMF. The third computes the mean, variance and mode, and the average of a function of the variable. The last two find the PMF of a transformed variable and move between the PMF and the CDF.`,
+    before: ``,
+    after: `Every formula here is a sum over the support, so the first step is always the same: list the values the variable can take and their probabilities. Check the two axioms on that list before computing anything from it.`,
+    link: '',
+  },
   obj12: {
     title: `Common Mistakes`,
-    content: `
-## Confusing PMF with PDF
+    content: `## Confusing PMF with PDF
 
 The PMF applies only to discrete [random variables](!/probability/random-variables). For continuous variables, you need a PDF (Probability Density Function). The PMF gives exact point probabilities: $P(X = k)$. The PDF does not—for continuous variables, $P(X = x) = 0$ for any specific point.
 
@@ -2410,66 +2420,9 @@ Don't waste time summing over values where the PMF is zero.
 
 Discrete [random variables](!/probability/random-variables) take isolated values, not continuous ranges. $P(2 < X < 3)$ might be zero if nothing sits between 2 and 3. Don't treat discrete variables as if they vary smoothly.
 
-Always check whether your variable is discrete or continuous before choosing methods.
-
-**Using the wrong complement**
-
-The probability of an event is found as one minus the probability of the opposite event, but the opposite event is written with the wrong inequality, so a boundary value falls into neither event.
-
-Wrong working: for a fair die,
-$$P(X > 3) = 1 - P(X < 3) = 1 - \\frac{2}{6} = \\frac{2}{3}$$
-
-Right working: the complement of $X > 3$ is $X \\leq 3$, the faces $1, 2, 3$.
-$$P(X > 3) = 1 - P(X \\leq 3) = 1 - \\frac{3}{6} = \\frac{1}{2}$$
-
-Why it happens: the opposite of "greater than" is read as "less than", and for continuous variables that slip costs nothing, since a single point has probability zero. For a discrete variable the boundary value carries its own mass.
-
-How to check: list the values of the event and of its complement. Together they must cover the support exactly once: here $\\{4, 5, 6\\}$ and $\\{1, 2, 3\\}$. With $X < 3$ the face $3$ is in neither list, and the wrong answer exceeds the direct count $p_X(4) + p_X(5) + p_X(6) = \\frac{1}{2}$ by exactly $p_X(3) = \\frac{1}{6}$.
-
-**Averaging the values without weights**
-
-The expected value is taken as the plain average of the values in the support, as if each were equally likely, and the PMF is not used.
-
-Wrong working: for the loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1, 2, 3, 4, 5\\}$,
-$$E[X] = \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3.5$$
-
-Right working: each value is multiplied by its probability.
-$$E[X] = \\frac{1}{10}(1 + 2 + 3 + 4 + 5) + \\frac{1}{2} \\cdot 6 = 1.5 + 3 = 4.5$$
-
-Why it happens: for a fair die the plain average and the weighted average agree, and the fair die is usually the first example met.
-
-How to check: compare the answer with where the mass sits. Half the probability is on the face $6$, so the mean must lie well above the midpoint $3.5$ of the faces.
-
-**Subtracting the mean instead of its square**
-
-In the shortcut $\\text{Var}(X) = E[X^2] - (E[X])^2$, the mean is subtracted as it is, without being squared.
-
-Wrong working: for a fair die, $E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6}$ and $E[X] = 3.5$, so
-$$\\text{Var}(X) = \\frac{91}{6} - 3.5 = \\frac{35}{3} \\approx 11.67$$
-
-Right working: the mean is squared before it is subtracted.
-$$\\text{Var}(X) = \\frac{91}{6} - 3.5^2 = \\frac{182}{12} - \\frac{147}{12} = \\frac{35}{12} \\approx 2.92$$
-
-Why it happens: the formula holds two quantities that look alike, $E[X^2]$ and $(E[X])^2$, and after the work of computing $E[X^2]$ the second square is easy to drop.
-
-How to check: take the square root. The wrong variance gives a standard deviation of about $3.42$, more than the largest distance of any face from the mean, $6 - 3.5 = 2.5$. The right one gives $\\sqrt{35/12} \\approx 1.71$, the value quoted in the standard deviation section.
-
-**Applying the function to the mean**
-
-The expected value of $g(X)$ is needed, and $g$ is applied to $E[X]$ instead of to each value of $X$ before averaging.
-
-Wrong working: for a fair die and $Y = (X - 3.5)^2$,
-$$E[Y] = (E[X] - 3.5)^2 = (3.5 - 3.5)^2 = 0$$
-
-Right working: by LOTUS, each value $g(x)$ is weighted by $p_X(x) = \\frac{1}{6}$.
-$$E[Y] = \\frac{6.25 + 2.25 + 0.25 + 0.25 + 2.25 + 6.25}{6} = \\frac{17.5}{6} = \\frac{35}{12}$$
-
-Why it happens: for a linear function the shortcut is correct, $E[aX + b] = aE[X] + b$, and it is easy to carry it over to functions that are not linear.
-
-How to check: look at the values $Y$ can take. $Y$ is always $0.25$, $2.25$ or $6.25$, and an expected value lies between the smallest and the largest value of the variable, so $E[Y]$ cannot be $0$.
-    `,
+Always check whether your variable is discrete or continuous before choosing methods.`,
     before: ``,
-    after: ``,
+    after: `Each slip uses the PMF too loosely. The complement covers exactly the values the event leaves out; the mean weights each value by its probability; the variance subtracts $(E[X])^2$; and $E[g(X)]$ applies $g$ to each value before averaging. Listing the values, comparing with where the mass sits, or taking the square root of the variance catches each slip.`,
     link: '',
   },
   obj13: {
@@ -2851,8 +2804,83 @@ const generalTable = `
     ],
   };
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-the-wrong-complement', name: `Using the wrong complement`, errorAt: 0,
+        what: `The probability of an event is found as one minus the probability of the opposite event, but the opposite event is written with the wrong inequality, so a boundary value falls into neither event.`,
+        wrong: [`For a fair die,
+$$P(X > 3) = 1 - P(X < 3)$$
+$$= 1 - \\frac{2}{6} = \\frac{2}{3}$$`],
+        right: [`The complement of $X > 3$ is $X \\leq 3$, the faces $1, 2, 3$.`, `$$P(X > 3) = 1 - P(X \\leq 3)$$
+$$= 1 - \\frac{3}{6} = \\frac{1}{2}$$`],
+        why: `The opposite of "greater than" is read as "less than", and for continuous variables that slip costs nothing, since a single point has probability zero. For a discrete variable the boundary value carries its own mass.`,
+        check: `List the values of the event and of its complement. Together they must cover the support exactly once: here $\\{4, 5, 6\\}$ and $\\{1, 2, 3\\}$. With $X < 3$ the face $3$ is in neither list, and the wrong answer exceeds the direct count $p_X(4) + p_X(5) + p_X(6) = \\frac{1}{2}$ by exactly $p_X(3) = \\frac{1}{6}$.` },
+      { id: 'averaging-the-values-without-weights', name: `Averaging the values without weights`, errorAt: 0,
+        what: `The expected value is taken as the plain average of the values in the support, as if each were equally likely, and the PMF is not used.`,
+        wrong: [`For the loaded die with $p_X(6) = \\frac{1}{2}$ and $p_X(k) = \\frac{1}{10}$ for $k \\in \\{1, 2, 3, 4, 5\\}$,
+$$E[X] = \\frac{1 + 2 + 3 + 4 + 5 + 6}{6} = 3.5$$`],
+        right: [`Each value is multiplied by its probability.`, `$$E[X] = \\frac{1}{10}(1 + 2 + 3 + 4 + 5)$$
+$$+ \\frac{1}{2} \\cdot 6$$
+$$= 1.5 + 3 = 4.5$$`],
+        why: `For a fair die the plain average and the weighted average agree, and the fair die is usually the first example met.`,
+        check: `Compare the answer with where the mass sits. Half the probability is on the face $6$, so the mean must lie well above the midpoint $3.5$ of the faces.` },
+      { id: 'subtracting-the-mean-instead-of-its-square', name: `Subtracting the mean instead of its square`, errorAt: 0,
+        what: `In the shortcut $\\text{Var}(X) = E[X^2] - (E[X])^2$, the mean is subtracted as it is, without being squared.`,
+        wrong: [`For a fair die, $E[X^2] = \\frac{1 + 4 + 9 + 16 + 25 + 36}{6} = \\frac{91}{6}$ and $E[X] = 3.5$, so
+$$\\text{Var}(X) = \\frac{91}{6} - 3.5 = \\frac{35}{3} \\approx 11.67$$`],
+        right: [`The mean is squared before it is subtracted.`, `$$\\text{Var}(X) = \\frac{91}{6} - 3.5^2$$
+$$= \\frac{182}{12} - \\frac{147}{12} = \\frac{35}{12} \\approx 2.92$$`],
+        why: `The formula holds two quantities that look alike, $E[X^2]$ and $(E[X])^2$, and after the work of computing $E[X^2]$ the second square is easy to drop.`,
+        check: `Take the square root. The wrong variance gives a standard deviation of about $3.42$, more than the largest distance of any face from the mean, $6 - 3.5 = 2.5$. The right one gives $\\sqrt{35/12} \\approx 1.71$, the value quoted in the standard deviation section.` },
+      { id: 'applying-the-function-to-the-mean', name: `Applying the function to the mean`, errorAt: 0,
+        what: `The expected value of $g(X)$ is needed, and $g$ is applied to $E[X]$ instead of to each value of $X$ before averaging.`,
+        wrong: [`For a fair die and $Y = (X - 3.5)^2$,
+$$E[Y] = (E[X] - 3.5)^2$$
+$$= (3.5 - 3.5)^2 = 0$$`],
+        right: [`By LOTUS, each value $g(x)$ is weighted by $p_X(x) = \\frac{1}{6}$.`, `The six values of $Y$ are $6.25$, $2.25$, $0.25$, $0.25$, $2.25$ and $6.25$, which add up to $17.5$, so
+$$E[Y]$$
+$$= \\frac{17.5}{6} = \\frac{35}{12}$$`],
+        why: `For a linear function the shortcut is correct, $E[aX + b] = aE[X] + b$, and it is easy to carry it over to functions that are not linear.`,
+        check: `Look at the values $Y$ can take. $Y$ is always $0.25$, $2.25$ or $6.25$, and an expected value lies between the smallest and the largest value of the variable, so $E[Y]$ cannot be $0$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'axioms', name: 'The two axioms', sub: 'The conditions every PMF must meet before it can be used.', pairs: [
+        [{ formula: '$p_X(x) \\geq 0$', text: 'No value gets a negative probability, for every $x$, the first of [the two axioms](!#3).' },
+         { formula: '$\\displaystyle \\sum_{x \\in \\text{Support}} p_X(x) = 1$', text: 'The probabilities over the support add up to one, the second of [the two axioms](!#3).' }],
+      ] },
+      { id: 'events', name: 'Probabilities of events', sub: 'Every probability question about $X$ is answered by adding values of the PMF.', pairs: [
+        [{ formula: '$P(X = k) = p_X(k)$', text: 'The PMF gives the probability of a single value directly ([calculations using the PMF](!#6)).' },
+         { formula: '$\\displaystyle P(X \\in A) = \\sum_{k \\in A} p_X(k)$', text: 'For a set of values, add the PMF over that set, as [calculations using the PMF](!#6) shows.' }],
+        [{ formula: '$P(X \\notin A) = 1 - P(X \\in A)$', text: 'The complement rule, when the two events split the support exactly ([calculations](!#6)).' }, ''],
+      ] },
+      { id: 'measures', name: 'Summary measures', sub: 'Location and spread computed from the PMF.', pairs: [
+        [{ formula: '$\\displaystyle E[X] = \\sum_{k \\in \\text{Support}} k \\cdot p_X(k)$', text: 'The probability-weighted average of the values, from [location measures](!#7).' },
+         { formula: '$\\displaystyle \\text{Var}(X) = \\sum_{k \\in \\text{Support}} (k - E[X])^2 \\cdot p_X(k)$', text: 'The weighted average squared distance from the mean, from [spread measures](!#8).' }],
+        [{ formula: '$\\text{mode} = \\arg\\max_k p_X(k)$', text: 'The value with the tallest bar, also in [location measures](!#7).' },
+         { formula: '$\\displaystyle E[g(X)] = \\sum_{x} g(x) \\cdot p_X(x)$', text: 'The average of $g(X)$ for any transformation $g$, weighting each $g(x)$ by the probability of $x$ ([transformations](!#9)).' }],
+      ] },
+      { id: 'transform', name: 'Transformations', sub: 'The PMF of a new variable $Y = g(X)$.', pairs: [
+        [{ formula: '$\\displaystyle p_Y(y) = \\sum_{x: g(x) = y} p_X(x)$', text: 'Collect the mass of every value of $X$ that lands on the same $y$ ([transformations](!#9)).' },
+         { formula: '$\\displaystyle p_Y(y) = p_X\\left(\\frac{y - b}{a}\\right)$', text: 'For $Y = aX + b$ with $a \\neq 0$, the support shifts and scales, as [transformations](!#9) shows.' }],
+      ] },
+      { id: 'cdf', name: 'Connection to the CDF', sub: 'Accumulating the PMF gives the CDF, and its jumps give the PMF back.', pairs: [
+        [{ formula: '$\\displaystyle F_X(x) = P(X \\leq x) = \\sum_{k \\leq x} p_X(k)$', text: 'The running total of the PMF up to $x$, from [connection to CDF](!#10).' },
+         { formula: '$p_X(k) = F_X(k) - F_X(k^-)$', text: 'The size of the jump of the CDF at $k$ ([connection to CDF](!#10)).' }],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     pmfViewTree,
     varianceBeforeAfter,
     demoUnits,
@@ -2880,7 +2908,7 @@ const generalTable = `
 }
    }
 
-export default function PMFPage({pmfViewTree, varianceBeforeAfter,
+export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, varianceBeforeAfter,
   seoData,
   sectionsContent,
   introContent,
@@ -3165,6 +3193,24 @@ export default function PMFPage({pmfViewTree, varianceBeforeAfter,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="pmf-formula-summary"
+            title="PMF formulas"
+            source="/probability/probability-function/pmf"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'12',
         title:sectionsContent.obj12.title,
         link:sectionsContent.obj12.link,
@@ -3172,6 +3218,15 @@ export default function PMFPage({pmfViewTree, varianceBeforeAfter,
           sectionsContent.obj12.content,
           <div key={'mistakes-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="pmf-pitfalls"
+            title="Common pitfalls with the PMF"
+            source="/probability/probability-function/pmf"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

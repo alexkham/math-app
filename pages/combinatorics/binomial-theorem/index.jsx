@@ -1155,10 +1155,11 @@ import partitionIntoGroupsDiagrams from '@/app/components/combinatorics/new-visu
 import renderBinomialExpansion from '@/app/utils/illustrations/combinatorics/binomial/binomialExpansion'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
@@ -1928,9 +1929,10 @@ The number of terms, $\\binom{3+3-1}{3-1} = \\binom{5}{2} = 10$, matches the cou
 
   obj7: {
     title: `Binomial Theorem at a Glance`,
-    content: `
-The page covered the theorem statement, the general-term formula, useful substitutions that yield combinatorial identities, the multinomial generalization, and the standard problem types. The table below collects the structural facts about (a+b)<sup>n</sup> in one reference card.
-`,
+    content: `This summary gathers the structural facts about a power of a sum in ten rows. Each row names a fact with a line on where it comes from and a link to its section, states it, and gives an example.
+
+It opens with the theorem, the number of terms in the expansion and the formula for a single term, counted from the term with no second variable. The coefficients are a row of Pascal's triangle and read the same in both directions, so an even power has one middle term with the largest coefficient and an odd power has two. The multinomial theorem extends all this to more than two summands and counts its terms, and a last row lists where the theorem appears.`,
+    formulaSheetAfter: `Problems about one term need only the general term: fix the power asked for, solve for the index and evaluate a single coefficient. The whole expansion is needed only when every term is wanted, and then the row of Pascal's triangle supplies the coefficients.`,
     before: ``,
     between: ``,
     after: ``,
@@ -2206,8 +2208,41 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table capstoneTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Concept', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'The theorem', formula: '$\\displaystyle (a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^{n-k} b^k$', example: '$(x + y)^3 = x^3 + 3x^2y + 3xy^2 + y^3$',
+        sub: 'Each term counts the ways to take $b$ from $k$ of the $n$ factors, as [the theorem](!#1) proves.' },
+      { name: 'Number of terms', formula: 'exactly $n + 1$, one for each $k$ from $0$ to $n$', example: '$(a + b)^5$ has $6$ terms',
+        sub: 'The index $k$ runs from $0$ through $n$, as [the theorem](!#1) notes.' },
+      { name: 'General term', formula: '$\\displaystyle T_{k+1} = \\binom{n}{k} a^{n-k} b^k$; indexing starts at $T_1 = a^n$', example: '$T_3$ in $(a + b)^4$ is $\\displaystyle \\binom{4}{2} a^2b^2 = 6a^2b^2$',
+        sub: 'The term with $b^k$ is $T_{k+1}$, not $T_k$, as [the general term](!#2) explains.' },
+      { name: 'Coefficients = Pascal row', formula: "the $n + 1$ coefficients are row $n$ of [Pascal's triangle](!/combinatorics/binomial-coefficient)", example: '$(a + b)^4$: $1, 4, 6, 4, 1$',
+        sub: 'A row of the triangle reads as the row of coefficients of the expansion ([the theorem](!#1)).' },
+      { name: 'Coefficient symmetry', formula: '$\\displaystyle \\binom{n}{k} = \\binom{n}{n-k}$; each row reads the same forwards and backwards', example: '$1, 4, 6, 4, 1$ is palindromic',
+        sub: 'Each coefficient equals its partner the same distance from the other end of [the coefficient row](!#1).' },
+      { name: 'Middle term (n even)', formula: '$\\displaystyle T_{n/2 + 1} = \\binom{n}{n/2} a^{n/2} b^{n/2}$, one middle term with the largest coefficient', example: '$(a + b)^6$: $T_4 = 20a^3b^3$',
+        sub: 'The coefficients grow from the edges toward the middle, as [the middle term](!#2) explains.' },
+      { name: 'Middle terms (n odd)', formula: 'two middle terms $T_{(n+1)/2}$ and $T_{(n+3)/2}$ with equal coefficients', example: '$(a + b)^5$: $T_3$ and $T_4$, both with coefficient $10$',
+        sub: 'An odd power gives an even number of terms, so two share the middle; see [the general term](!#2).' },
+      { name: 'Multinomial generalization', formula: '$\\displaystyle (x_1 + x_2 + \\cdots + x_r)^n$ $\\displaystyle = \\sum_{\\substack{k_1 + \\cdots + k_r = n \\\\ k_i \\ge 0}} \\binom{n}{k_1, \\ldots, k_r}$ $x_1^{k_1} x_2^{k_2} \\cdots x_r^{k_r}$', example: '$(a + b + c)^3$: $10$ distinct monomials',
+        sub: 'The sum runs over every way to share the exponent $n$ among the $r$ summands, as [the multinomial theorem](!#4) states.' },
+      { name: 'Multinomial term count', formula: '$\\displaystyle \\binom{n+r-1}{r-1}$ distinct monomials, a weak-composition count', example: '$(a + b + c)^3$: $\\displaystyle \\binom{5}{2} = 10$',
+        sub: 'For $r = 2$ it gives $n + 1$, matching the binomial count ([the multinomial theorem](!#4)).' },
+      { name: 'Where it appears', formula: "polynomial expansions, the binomial distribution with $a = p$ and $b = 1 - p$, and Newton's generalized binomial series for non-integer $n$", example: '$(p + (1 - p))^n = 1$ sums all binomial probabilities',
+        sub: 'Algebra and probability both build on the theorem, as [related concepts](!#6) shows.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
     pitfallData,
       multinomialApply,
       binomialApply,
@@ -2235,7 +2270,7 @@ const schemas = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function BinomialTheoremPage({ pitfallData,multinomialApply, binomialApply, seoData, sectionsContent, introContent, obj3Table, obj5Table, capstoneTable, faqQuestions, schemas, demoUnits, differenceExpansionSteps, conceptIntroFigures}) {
+export default function BinomialTheoremPage({ formulaSummaryData, pitfallData,multinomialApply, binomialApply, seoData, sectionsContent, introContent, obj3Table, obj5Table, capstoneTable, faqQuestions, schemas, demoUnits, differenceExpansionSteps, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2463,8 +2498,16 @@ Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ an
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="binomial-theorem-formula-summary"
+            title="Binomial theorem formulas"
+            source="/combinatorics/binomial-theorem"
+            related={{ href: '/combinatorics/formulas', label: 'All combinatorics formulas' }}
+            after={sectionsContent.obj7.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // {

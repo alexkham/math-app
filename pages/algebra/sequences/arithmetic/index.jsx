@@ -17,6 +17,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -547,7 +548,10 @@ In this kind of problem the two endpoints are fixed and only the spacing between
   },
   obj7: {
     title: `Arithmetic Sequences at a Glance`,
-    content: `The page defined the common difference, derived the explicit and recursive formulas, the two equivalent series-sum formulas, the arithmetic-mean property, and the procedure for inserting means between two values. The table below collects each formula with a representative example for quick reference.`,
+    content: `This summary gathers the formulas of the page in eight rows. Each row names a formula or property with a short note on where it comes from and a link to its section, states it, and gives an example or a note on when to use it.
+
+The first three rows describe the sequence: the common difference between neighboring terms, the explicit formula for any term from its position, and the recursive rule that builds each term from the one before. Two forms of the series sum follow, one using the last term and one using the common difference. The last rows give the arithmetic-mean property, the rule for inserting means between two values, and the reading of the sequence as a straight line.`,
+    formulaSheetAfter: `Everything here grows out of adding the same step again and again. The explicit formula counts the steps, the series sums pair the terms from both ends, and the straight-line picture shows at once whether the sequence rises, falls or stays constant.`,
     before: ``,
     after: ``,
     link: '',
@@ -741,8 +745,37 @@ $$\\implies d = -3$$`],
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table capstoneTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Concept', kind: 'name' },
+      { key: 'formula', label: 'Formula / property', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Common difference', formula: '$a_{n+1} - a_n = d$, constant for every $n$', example: '$5, 12, 19, 26 \\;\\Rightarrow\\; d = 7$',
+        sub: 'Always the later term minus the earlier one; [identifying arithmetic sequences](!#2) checks every consecutive pair.' },
+      { name: 'Explicit (n-th term)', formula: '$a_n = a_1 + (n - 1)d$', example: '$a_1 = 4,\\; d = 6 \\;\\Rightarrow\\; a_n = 4 + 6(n - 1)$',
+        sub: 'Place $n$ is reached from the first term by $n - 1$ steps of $d$, as [the definition](!#1) shows.' },
+      { name: 'Recursive', formula: '$a_1 = c, \\quad a_n = a_{n-1} + d$', example: '$a_1 = 4, \\quad a_n = a_{n-1} + 6$',
+        sub: 'A starting value and a rule for the next term; [the recursive formula](!#4) converts it to the explicit form and back.' },
+      { name: 'Series sum (with the last term)', formula: '$\\displaystyle S_n = \\frac{n}{2}(a_1 + a_n)$', example: '$\\displaystyle 1 + 2 + \\cdots + 100 = \\frac{100}{2} \\cdot 101 = 5050$',
+        sub: 'Writing the sum forwards and backwards pairs the terms into $n$ copies of $a_1 + a_n$, as [arithmetic series](!#5) derives.' },
+      { name: 'Series sum (with d)', formula: '$\\displaystyle S_n = \\frac{n}{2}(2a_1 + (n-1)d)$', example: 'used when $a_n$ is not known directly',
+        sub: 'The same sum with $a_n$ replaced by $a_1 + (n - 1)d$, from the end of [arithmetic series](!#5).' },
+      { name: 'Arithmetic-mean property', formula: '$\\displaystyle a_n = \\frac{a_{n-1} + a_{n+1}}{2}$ for interior terms', example: 'every interior term is the mean of its two neighbors',
+        sub: 'Both neighbors lie $d$ away, one on each side, so together they add to $2a_n$; see [arithmetic mean](!#6).' },
+      { name: 'Inserting k means between a and b', formula: '$\\displaystyle d = \\frac{b - a}{k + 1}$; inserts $a + d, a + 2d, \\ldots, a + kd$', example: '$3$ means between $5$ and $25$: $d = 5$, giving $5, 10, 15, 20, 25$',
+        sub: 'Placing $k$ terms between the endpoints makes $k + 1$ equal steps, as [inserting arithmetic means](!#6) works out.' },
+      { name: 'Linear-function structure', formula: '$a_n = d \\cdot n + (a_1 - d)$: slope $d$, intercept $a_1 - d$; plotted against $n$, the terms lie on a straight line', example: '$d > 0$ increasing, $d < 0$ decreasing, $d = 0$ constant',
+        sub: 'Multiplying out the explicit formula gives a linear function of $n$, as the end of [the definition](!#1) notes.' },
+    ],
+  };
+
    return {
   props:{
+    formulaSummaryData,
     pitfallData,
      sectionsContent,
      introContent,
@@ -763,7 +796,7 @@ $$\\implies d = -3$$`],
 }
    }
 
-export default function ArithmeticSequencesPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ArithmeticSequencesPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -933,8 +966,16 @@ $$a_n = a_1 + (n - 1)d$$
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="arithmetic-sequence-formula-summary"
+            title="Arithmetic sequence formulas"
+            source="/algebra/sequences/arithmetic"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj7.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -579,6 +579,7 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1026,7 +1027,7 @@ These properties ensure that probabilities assigned to events make sense and beh
 
 @academic[pitfall,aside:true,width:35%:Listing overlapping outcomes
 Taking $\\Omega = \\{\\text{heart}, \\text{king}, \\text{other}\\}$ for one card puts the king of hearts in two outcomes, and the probabilities add to $\\frac{13 + 4 + 36}{52} = \\frac{53}{52}$. With $\\{\\text{heart}, \\text{other king}, \\text{other}\\}$ they add to $\\frac{13 + 3 + 36}{52} = 1$.
-[Read more](!#mistakes)]@
+[Read more](!#pitfall-listing-overlapping-outcomes)]@
 
 The two middle requirements are checked together: every result of the experiment must match exactly one listed outcome. For a single card drawn from a deck, the 52 individual cards pass this test at once, and outcomes that describe groups of cards have to be tested group by group.
 
@@ -1041,7 +1042,7 @@ $$P(A) = \\frac{|A|}{|\\Omega|}$$
 
 @academic[pitfall,aside:true,width:35%:Counting outcomes that are not equally likely
 Using $\\Omega = \\{2, 3, \\ldots, 12\\}$ for the sum of two dice gives $P(\\text{sum} = 7) = \\frac{1}{11}$, but these 11 sums are not equally likely. Over the 36 ordered pairs, $P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$.
-[Read more](!#mistakes)]@
+[Read more](!#pitfall-counting-outcomes-that-are-not-equally-likely)]@
 
 Applying the formula takes two counts: the outcomes in $A$ and the outcomes in $\\Omega$. For one die, both come straight from the list $\\{1, 2, 3, 4, 5, 6\\}$. For two dice, the list is the grid of 36 ordered pairs from the definition above, each with probability $\\frac{1}{36}$.
 
@@ -1092,45 +1093,15 @@ Rolling three dice gives a sample space of $6^3 = 216$ ordered triples $(x_1, x_
     },
     mistakes:{
       title:`Common Mistakes`,
-      content:`
-• Leaving out outcomes that actually can occur in the scenario  
+      content:`• Leaving out outcomes that actually can occur in the scenario  
 • Including outcomes that cannot occur  
 • Ignoring the order of outcomes when order matters  
 • Mixing outcomes of different types within the same sample space  
 • Using an incomplete $\\Omega$, which leads to incorrect event definitions or wrong probabilities  
 
-A correct sample space removes ambiguity and prevents errors in later calculations.
-
-**Listing overlapping outcomes**
-
-The outcomes of a sample space are written as groups of results, and some result falls into two of the groups. The outcomes are then not mutually exclusive, and a single draw counts as two outcomes at once.
-
-Wrong working: for one card from a standard deck, with $\\Omega = \\{\\text{heart}, \\text{king}, \\text{other}\\}$, where "other" means neither a heart nor a king,
-$$P(\\text{heart}) + P(\\text{king}) + P(\\text{other}) = \\frac{13}{52} + \\frac{4}{52} + \\frac{36}{52} = \\frac{53}{52}$$
-
-Right working: the king of hearts goes into one group only, so the three remaining kings form their own outcome.
-$$\\Omega = \\{\\text{heart}, \\text{other king}, \\text{other}\\}, \\quad \\frac{13}{52} + \\frac{3}{52} + \\frac{36}{52} = \\frac{52}{52} = 1$$
-
-Why it happens: each group is described by one feature, on its own, and the places where two groups meet are never looked at. A card with both features is easy to miss when the groups are named rather than listed card by card.
-
-How to check: the probabilities of all outcomes in $\\Omega$ must add to exactly $1$. A total above $1$ means some result is counted twice; a total below $1$ means some result is missing.
-
-**Counting outcomes that are not equally likely**
-
-The counting formula $P(A) = \\frac{|A|}{|\\Omega|}$ is applied to a sample space whose outcomes have different probabilities.
-
-Wrong working: for the sum of two dice, with $\\Omega = \\{2, 3, \\ldots, 12\\}$,
-$$|\\Omega| = 11, \\quad P(\\text{sum} = 7) = \\frac{1}{11}$$
-
-Right working: count in the sample space of 36 equally likely ordered pairs. Six of them give a sum of $7$: $(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)$.
-$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$
-
-Why it happens: the list of sums is a correct sample space, so it looks ready for counting. But a correct list says nothing about whether its outcomes are equally likely: the sum $2$ comes from one pair, the sum $7$ from six.
-
-How to check: compare two outcomes directly. A sum of $2$ needs both dice to show $1$, while a sum of $7$ can be made in six ways, so the two cannot share the probability $\\frac{1}{11}$. Over the 36 pairs, the sums $2$ to $12$ have probabilities $\\frac{1}{36}, \\frac{2}{36}, \\ldots, \\frac{6}{36}, \\ldots, \\frac{1}{36}$, which add to $1$.
-`,
+A correct sample space removes ambiguity and prevents errors in later calculations.`,
       before:``,
-      after:``,
+      after: `Both slips build a sample space that the counting formula cannot use. The outcomes must not overlap, and $\\frac{|A|}{|\\Omega|}$ needs outcomes that are equally likely. Checking that the probabilities of all outcomes add up to exactly $1$, or comparing two outcomes directly, catches both.`,
   
     },
     connection:{
@@ -1247,8 +1218,34 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
     ],
   };
 
+  // MistakeFix batch 19, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.mistakes into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'listing-overlapping-outcomes', name: `Listing overlapping outcomes`, errorAt: 0,
+        what: `The outcomes of a sample space are written as groups of results, and some result falls into two of the groups. The outcomes are then not mutually exclusive, and a single draw counts as two outcomes at once.`,
+        wrong: [`For one card from a standard deck, with $\\Omega = \\{\\text{heart}, \\text{king}, \\text{other}\\}$, where "other" means neither a heart nor a king,
+$$P(\\text{heart}) + P(\\text{king})$$
+$$+ P(\\text{other})$$
+$$= \\frac{13}{52} + \\frac{4}{52} + \\frac{36}{52}$$
+$$= \\frac{53}{52}$$`],
+        right: [`The king of hearts goes into one group only, so the three remaining kings form their own outcome.`, `$$\\Omega = \\{\\text{heart}, \\text{other king}, \\text{other}\\},$$
+$$\\frac{13}{52} + \\frac{3}{52} + \\frac{36}{52} = \\frac{52}{52} = 1$$`],
+        why: `Each group is described by one feature, on its own, and the places where two groups meet are never looked at. A card with both features is easy to miss when the groups are named rather than listed card by card.`,
+        check: `The probabilities of all outcomes in $\\Omega$ must add to exactly $1$. A total above $1$ means some result is counted twice; a total below $1$ means some result is missing.` },
+      { id: 'counting-outcomes-that-are-not-equally-likely', name: `Counting outcomes that are not equally likely`, errorAt: 0,
+        what: `The counting formula $P(A) = \\frac{|A|}{|\\Omega|}$ is applied to a sample space whose outcomes have different probabilities.`,
+        wrong: [`For the sum of two dice, with $\\Omega = \\{2, 3, \\ldots, 12\\}$,
+$$|\\Omega| = 11, \\quad P(\\text{sum} = 7) = \\frac{1}{11}$$`],
+        right: [`Count in the sample space of 36 equally likely ordered pairs. Six of them give a sum of $7$: $(1,6)$, $(2,5)$, $(3,4)$, $(4,3)$, $(5,2)$, $(6,1)$.`, `$$P(\\text{sum} = 7) = \\frac{6}{36} = \\frac{1}{6}$$`],
+        why: `The list of sums is a correct sample space, so it looks ready for counting. But a correct list says nothing about whether its outcomes are equally likely: the sum $2$ comes from one pair, the sum $7$ from six.`,
+        check: `Compare two outcomes directly. A sum of $2$ needs both dice to show $1$, while a sum of $7$ can be made in six ways, so the two cannot share the probability $\\frac{1}{11}$. Over the 36 pairs, the sums $2$ to $12$ have probabilities $\\frac{1}{36}, \\frac{2}{36}, \\ldots, \\frac{6}{36}, \\ldots, \\frac{1}{36}$, which add to $1$.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     sampleSpaceSizeLevels,
     demoUnits,
     conceptIntroFigures,
@@ -1272,7 +1269,7 @@ Since "all possible outcomes" appears directly in the formula, it makes sense to
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function SampleSpacePage({sampleSpaceSizeLevels, 
+export default function SampleSpacePage({ pitfallData,sampleSpaceSizeLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -1458,6 +1455,15 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
                dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
                   <div key={'unit-orderMatters'} dangerouslySetInnerHTML={{ __html: demoUnits.orderMatters }} />,
             `Counting with ordered pairs keeps every outcome at 1/36, so probabilities can be found by counting cells.`,
+          <DiagramFrame
+            key={'mistakes-mistakes'}
+            id="sample-space-pitfalls"
+            title="Common pitfalls with sample spaces"
+            source="/probability/sample-space"
+            after={sectionsContent.mistakes.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

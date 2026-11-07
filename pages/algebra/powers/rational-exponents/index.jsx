@@ -14,6 +14,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
@@ -392,7 +393,10 @@ The key advantage of exponent notation over radical notation is uniformity. Ever
 },
     obj8:{
       title:`Summary of Rational-Exponent Forms`,
-      content:`The expressions covered above — from $a^{1/n}$ through negative rational exponents on negative bases — fit into a small number of canonical forms, each with its own radical equivalent, domain rule, and computational strategy. The table below collects them as a single reference card.`,
+      content:`This summary collects the forms a rational exponent can take on one set of cards. Each card gives the form with its radical equivalent, a worked example with the base eight, and a line on the easiest way to compute it, with a link to the section that explains it. A badge on each card states the real bases for which the form is defined.
+
+The first two cards are the positive forms: a single root, and a root combined with a power. The last two put a minus sign in front of the exponent, which adds a reciprocal at the end and rules out a zero base. On every card an even root needs a base that is not negative, while an odd root takes any real base.`,
+      formulaSheetAfter: `With a rational exponent, the denominator tells which root to take and the numerator which power, and taking the root first keeps the numbers small. A minus sign in the exponent only adds one last step, the reciprocal, once the rest is computed.`,
       before:``,
       after:``,
       link:'',
@@ -667,8 +671,24 @@ $$x^{1/2} \\cdot x^{1/3} = x^{5/6}$$`],
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Root', formula: '$a^{1/n} = \\sqrt[n]{a}$', example: '$8^{1/3} = 2$', restriction: '$a \\geq 0$ if $n$ is even; any real $a$ if $n$ is odd',
+        text: 'Take the $n$-th root directly; [roots as powers](!#2) shows why the exponent $1/n$ must mean this root.' },
+      { name: 'Root and power', formula: '$a^{m/n} = \\left(\\sqrt[n]{a}\\right)^m = \\sqrt[n]{a^m}$', example: '$8^{2/3} = 4$', restriction: '$a \\geq 0$ if $n$ is even; any real $a$ if $n$ is odd',
+        text: 'Take the root first, then raise to the $m$-th power, which keeps the numbers small, as [fractional exponents](!#3) shows.' },
+      { name: 'Reciprocal of a root', formula: '$\\displaystyle a^{-1/n} = \\frac{1}{\\sqrt[n]{a}}$', example: '$\\displaystyle 8^{-1/3} = \\frac{1}{2}$', restriction: '$a \\neq 0$; $a \\geq 0$ if $n$ is even',
+        text: 'Take the root, then the reciprocal, as [negative rational exponents](!#4) does.' },
+      { name: 'Reciprocal of a root and power', formula: '$\\displaystyle a^{-m/n} = \\frac{1}{a^{m/n}} = \\frac{1}{\\left(\\sqrt[n]{a}\\right)^m}$', example: '$\\displaystyle 8^{-2/3} = \\frac{1}{4}$', restriction: '$a \\neq 0$; $a \\geq 0$ if $n$ is even',
+        text: 'Compute $a^{m/n}$ first, then take the reciprocal, as in [negative rational exponents](!#4).' },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
     pitfallData,
     radicalProductSteps,
     sectionsContent,
@@ -691,7 +711,7 @@ return {
    }
 
 // export default function RationalExponentsPage({seoData,sectionsContent , introContent}) {
-export default function RationalExponentsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, radicalProductSteps}) {
+export default function RationalExponentsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, radicalProductSteps}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
     
@@ -823,11 +843,16 @@ export default function RationalExponentsPage({ pitfallData,seoData, sectionsCon
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="rational-exponent-formula-summary"
+            title="Rational exponent forms"
+            source="/algebra/powers/rational-exponents"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

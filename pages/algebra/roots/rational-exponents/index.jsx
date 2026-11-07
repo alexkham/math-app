@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -849,7 +850,10 @@ Fluency in both notations and the ability to convert freely between them is the 
 
   obj10: {
     title: `Summary of Rational Exponent Forms`,
-    content: `The forms introduced in the sections above collect into a single reference card. Each row gives a form, its general pattern, the radical equivalent, the restriction on the base for the expression to be real-valued, and a numerical example — useful for quick translation in either direction and for reviewing the territory at a glance.`,
+    content: `This summary collects the four forms of a rational exponent on one set of cards. Each card names the form and gives the power together with its radical equivalent, a worked example with a base of eight, and a badge with the restriction on the base for the result to be a real number. A short note under each formula says what the form does and links to the section that explains it.
+
+The first two cards cover positive exponents: a unit fraction is a single root, and a general fraction is a root combined with a power, in either order. The last two are their negative versions, which take the reciprocal and so also rule out a base of zero.`,
+    formulaSheetAfter: `The denominator of the exponent always picks the root and the numerator the power, while a minus sign only adds a reciprocal. The restrictions follow the same split: an even denominator rules out negative bases, and a negative exponent rules out zero.`,
     before: ``,
     after: ``,
     link: '',
@@ -1097,8 +1101,28 @@ $$= x^{1/2}(1 + x)$$`],
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Unit fraction', formula: '$a^{1/n} = \\sqrt[n]{a}$', example: '$8^{1/3} = \\sqrt[3]{8} = 2$',
+        restriction: '$a \\geq 0$ if $n$ is even; any real $a$ if $n$ is odd',
+        text: 'The denominator becomes the index of the root, as [unit fraction exponents](!#1) shows. An even root of a negative number is not real, which [domain restrictions](!#5) explains.' },
+      { name: 'General m/n', formula: '$a^{m/n} = \\sqrt[n]{a^m} = (\\sqrt[n]{a})^m$', example: '$8^{2/3} = (\\sqrt[3]{8})^2 = 2^2 = 4$',
+        restriction: '$a \\geq 0$ if $n$ is even; any real $a$ if $n$ is odd',
+        text: 'The denominator is the root and the numerator the power, taken in either order; [general rational exponents](!#2) shows that taking the root first keeps the numbers small.' },
+      { name: 'Negative unit fraction', formula: '$\\displaystyle a^{-1/n} = \\frac{1}{\\sqrt[n]{a}}$', example: '$\\displaystyle 8^{-1/3} = \\frac{1}{\\sqrt[3]{8}} = \\frac{1}{2}$',
+        restriction: 'as for $a^{1/n}$, plus $a \\neq 0$',
+        text: 'The minus sign takes the reciprocal of the root, so the base cannot be zero, as [negative rational exponents](!#3) explains.' },
+      { name: 'Negative m/n', formula: '$\\displaystyle a^{-m/n} = \\frac{1}{\\sqrt[n]{a^m}}$', example: '$\\displaystyle 8^{-2/3} = \\frac{1}{8^{2/3}} = \\frac{1}{4}$',
+        restriction: 'as for $a^{m/n}$, plus $a \\neq 0$',
+        text: 'The reciprocal of the general form; the same section, [negative rational exponents](!#3), shows the reciprocal can also be taken first.' },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
     pitfallData,
     ratExpDomainCases,
     combineRadicalsSteps,
@@ -1127,7 +1151,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RationalExponentsPage({ pitfallData,ratExpDomainCases, combineRadicalsSteps, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RationalExponentsPage({ formulaSummaryData, pitfallData,ratExpDomainCases, combineRadicalsSteps, seoData, sectionsContent, introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1334,11 +1358,16 @@ Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent 
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="root-rational-exponent-formula-summary"
+            title="Rational exponent forms"
+            source="/algebra/roots/rational-exponents"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj10.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

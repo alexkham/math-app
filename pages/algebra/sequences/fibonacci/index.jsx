@@ -20,6 +20,8 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -430,7 +432,10 @@ The same holds for any pair of starting values: a sequence that follows the rule
   },
   obj6: {
     title: `Fibonacci at a Glance`,
-    content: `The page built the Fibonacci sequence from its recurrence, derived the golden ratio as the limit of consecutive-term ratios, obtained Binet&apos;s closed-form expression from the characteristic equation, surveyed five core identities, and introduced the Lucas-number companion sequence. The table below collects the structural facts — recurrence, roots, Binet form, growth rate, and the Lucas bridge — in one reference card.`,
+    content: `This summary gathers the main facts of the page in nine rows. Each row names a fact with a short note on where it comes from and a link to its section, states it, and adds an example or a note.
+
+The first two rows define the sequence by its rule and its two starting values. The next three come from the quadratic behind the rule: the equation itself, the golden ratio, and the second root whose powers fade away. Binet's formula and the growth rate follow from those two roots. The last two rows bring in the Lucas numbers, which follow the same rule from other starting values, and the simple link between the two sequences.`,
+    formulaSheetAfter: `The rule of adding the two previous terms fixes everything else here. Its quadratic supplies the two roots, the roots give Binet's formula and the growth rate, and changing only the starting values turns the Fibonacci numbers into the Lucas numbers.`,
     before: ``,
     after: ``,
     link: '',
@@ -638,9 +643,57 @@ $$F_3 = \\frac{(2 + \\sqrt{5}) - (2 - \\sqrt{5})}{\\sqrt{5}} = \\frac{2\\sqrt{5}
         check: `The answer must divide both numbers and must itself be a Fibonacci number. $6$ does not divide $2584$, and $6$ does not appear in $1, 1, 2, 3, 5, 8, \\ldots$.` },
     ],
   };
+  // TheoremCard data (binet-formula-apply); every fact is from the section text
+  const binetApply = {
+    header: { kicker: 'Fibonacci sequence', title: 'Binet’s Formula', lede: 'An explicit formula for a recursively defined sequence.' },
+    theorem: {
+      statement: '$F_n = \\dfrac{\\phi^n - \\psi^n}{\\sqrt{5}}$ with $\\phi = \\dfrac{1 + \\sqrt{5}}{2}$ and $\\psi = \\dfrac{1 - \\sqrt{5}}{2}$.',
+      steps: [
+        { label: 'Guess a power', text: 'Assume $F_n = x^n$ in $F_n = F_{n-1} + F_{n-2}$: $x^n = x^{n-1} + x^{n-2}$.' },
+        { label: 'Characteristic equation', text: '$x^2 = x + 1$, with roots $\\phi$ and $\\psi$.' },
+        { label: 'Combine', hit: true, text: 'The recurrence is linear, so $F_n = A\\phi^n + B\\psi^n$; $F_1 = F_2 = 1$ fix $A$ and $B$.' },
+        { label: 'Read the growth', text: '$|\\psi| < 1$, so $\\psi^n$ vanishes for large $n$ and $F_n \\approx \\phi^n / \\sqrt{5}$: about $61.8\\%$ growth per step.' },
+      ],
+      misuse: { label: 'Dropping the sign of the second root',
+        text: 'Using $\\psi \\approx +0.618$ gives $F_3 \\approx \\dfrac{4.236 - 0.236}{\\sqrt{5}} \\approx 1.789$, not a whole number. With $\\psi \\approx -0.618$, $F_3 = \\dfrac{4.236 + 0.236}{\\sqrt{5}} = 2$.' },
+    },
+  };
+
+
+  // Formula Summary 2026-11-06: replaces the summary table capstoneTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Concept', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'example', label: 'Example / note', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Recurrence', formula: '$F_n = F_{n-1} + F_{n-2} \\quad (n \\geq 3)$', example: '$F_3 = 1 + 1 = 2$; $\\; F_4 = 1 + 2 = 3$',
+        sub: 'Each term after the second is the sum of the two before it, from [the definition](!#1).' },
+      { name: 'Initial values', formula: '$F_1 = 1, \\quad F_2 = 1$ (an alternative convention starts at $F_0 = 0$)', example: '$1, 1, 2, 3, 5, 8, 13, 21, 34, 55, \\ldots$',
+        sub: 'Starting at $F_0 = 0$ puts a $0$ in front of the list but leaves every $F_n$ unchanged; [the definition](!#1) compares the two.' },
+      { name: 'Characteristic equation', formula: '$x^2 = x + 1$; its roots $\\phi$ and $\\psi$ govern every closed form', example: '$\\phi + \\psi = 1$, $\\; \\phi \\cdot \\psi = -1$',
+        sub: "Trying $F_n = x^n$ in the recurrence leads to this quadratic, as the derivation in [Binet's formula](!#3) shows." },
+      { name: 'Golden ratio', formula: '$\\displaystyle \\phi = \\frac{1 + \\sqrt{5}}{2} \\approx 1.6180$, the limit of $\\displaystyle \\frac{F_{n+1}}{F_n}$', example: '$\\displaystyle \\frac{F_6}{F_5} = 1.6, \\quad \\frac{F_{10}}{F_9} \\approx 1.6176$',
+        sub: 'Ratios of consecutive terms settle on this number, as [the golden ratio](!#2) shows.' },
+      { name: 'Conjugate root', formula: '$\\displaystyle \\psi = \\frac{1 - \\sqrt{5}}{2} \\approx -0.6180$; $|\\psi| < 1$, so $\\psi^n \\to 0$', example: 'explains why the ratios converge to $\\phi$, not to $\\psi$',
+        sub: 'The second root of the same quadratic, introduced in [the golden ratio](!#2); its powers shrink toward zero.' },
+      { name: "Binet's formula", formula: '$\\displaystyle F_n = \\frac{\\phi^n - \\psi^n}{\\sqrt{5}}$, always an integer despite irrational inputs', example: '$\\displaystyle F_n \\approx \\frac{\\phi^n}{\\sqrt{5}}$ for large $n$',
+        sub: "The irrational parts of the two powers cancel exactly; [Binet's formula](!#3) builds it from the two roots." },
+      { name: 'Growth rate', formula: 'exponential at rate $\\phi$, roughly $61.8\\%$ growth per step', example: 'faster than every arithmetic sequence, slower than $2^n$',
+        sub: "Once $\\psi^n$ has faded, each term is about $\\phi$ times the one before ([Binet's formula](!#3)), so the terms outgrow every [arithmetic sequence](!/algebra/sequences/arithmetic)." },
+      { name: 'Lucas sequence', formula: 'same recurrence, $L_1 = 1, \\; L_2 = 3$; Binet form $L_n = \\phi^n + \\psi^n$', example: '$1, 3, 4, 7, 11, 18, 29, 47, 76, \\ldots$',
+        sub: 'The same rule from different starting values; [Lucas numbers](!#5) adds the powers of the two roots where Fibonacci subtracts them.' },
+      { name: 'Fibonacci–Lucas bridge', formula: '$L_n = F_{n-1} + F_{n+1}$', example: '$L_5 = F_4 + F_6 = 3 + 8 = 11$',
+        sub: 'Each Lucas number is the sum of the two Fibonacci numbers on either side of its position, from [Lucas numbers](!#5).' },
+    ],
+  };
 
    return {
   props:{
+    formulaSummaryData,
+      binetApply,
     pitfallData,
      sectionsContent,
      introContent,
@@ -661,7 +714,9 @@ $$F_3 = \\frac{(2 + \\sqrt{5}) - (2 - \\sqrt{5})}{\\sqrt{5}} = \\frac{2\\sqrt{5}
 }
    }
 
-export default function FibonacciSequencePage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function FibonacciSequencePage({ formulaSummaryData,binetApply,  pitfallData,seoData, sectionsContent, introContent, obj4Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -796,6 +851,16 @@ Taking the 10th entry of $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \\ldots$ as $F_{10}$ 
           sectionsContent.obj3.content,
           <div key={'unit-binet'} dangerouslySetInnerHTML={{ __html: demoUnits.binet }} />,
           `Growth per step is the factor φ ≈ 1.618, the same φ the ratios converge to.`,
+          <DiagramFrame
+            key={'obj3-theorem'}
+            id="binet-formula-apply"
+            title="Binet’s formula, derived and used"
+            source="/algebra/sequences/fibonacci"
+            before={`The steps from the recurrence to the closed form, and the one sign that must not be dropped.`}
+            after={`Two irrational numbers, subtracted and divided by $\\sqrt{5}$, give a whole number every time.`}
+          >
+            <TheoremCard data={binetApply} variant="apply" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -822,8 +887,16 @@ Taking the 10th entry of $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \\ldots$ as $F_{10}$ 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="fibonacci-formula-summary"
+            title="Fibonacci formulas"
+            source="/algebra/sequences/fibonacci"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj6.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

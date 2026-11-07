@@ -11,12 +11,14 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 
 
 export async function getStaticProps(){
@@ -355,6 +357,15 @@ The AM–GM portion of the inequality ($G \\leq A$) is used extensively througho
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the formulas of the page in three families. Each family has a line linking to the sections it comes from, and each formula a short note on what it means. The buttons above the cards show one family at a time.
+
+The first card holds the general term, the reciprocal of an arithmetic sequence, next to the harmonic series, whose terms shrink to zero while the sum keeps growing. The second gives the harmonic mean, for any number of values and for two. The third places it in the chain of means: harmonic, then geometric, then arithmetic, from smallest to largest.`,
+    before: ``,
+    after: `The three cards hang together through reciprocals. Taking reciprocals turns the harmonic sequence back into an arithmetic one, and the harmonic mean is the reciprocal of the average of the reciprocals of the values.`,
+    link: '',
+  },
   obj6: {
     title: `Common Pitfalls`,
     content: `Four mistakes come up again and again with harmonic sequences, the harmonic series and the harmonic mean. Three of them are marked where they happen in the sections above; the fourth is the misreading that the section on the harmonic series answers. Here each is worked through in full, with the wrong and the right working side by side.`,
@@ -572,9 +583,45 @@ $$\\frac{240}{5} = 48 = \\frac{2 \\cdot 60 \\cdot 40}{60 + 40}$$`, `The average 
         check: `Work out the total time from the claimed average. At $50$ km/h, $240$ km would take $4.8$ hours, but the two legs actually take $5$ hours.` },
     ],
   };
+  // ScopeCard data (terms-to-zero-scope); every fact is from the section text
+  const termsToZeroScope = {
+    header: { kicker: 'Harmonic series', title: 'Terms to zero, sum to what?', lede: 'Terms approaching zero is necessary for convergence but not sufficient.' },
+    rule: { name: 'Convergence', expr: '$\\displaystyle\\sum a_n$ converges', condition: 'the terms must approach $0$, and must shrink fast enough' },
+    inside: { title: 'Converges', items: [
+      { id: 'geo', expr: '$\\displaystyle\\sum \\frac{1}{2^n} = 1$', why: 'Geometric terms shrink by a constant factor: fast enough to keep the total finite.' },
+    ] },
+    outside: { title: 'Diverges', items: [
+      { id: 'harm', expr: '$\\displaystyle\\sum_{n=1}^{\\infty} \\frac{1}{n}$', why: 'The terms shrink to zero, but too slowly: each doubling block of terms adds at least $\\frac{1}{2}$, and there are infinitely many blocks.' },
+    ] },
+    edgeCases: { badge: 'How slowly', items: [
+      { id: 'slow', marker: '$\\ln n + \\gamma$', body: 'The partial sums approximate $\\ln n + \\gamma$ with $\\gamma \\approx 0.5772$; passing $10$ takes over $12{,}000$ terms.' },
+    ] },
+  };
+
+
+  // Formula Summary 2026-11-05: the page's own formula boxes, unchanged.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'sequence', name: 'Sequence and series', sub: 'The terms, from [the definition](!#1), and their sum, from [the harmonic series](!#3).', pairs: [
+        [{ formula: '$\\displaystyle a_n = \\frac{1}{b_n} = \\frac{1}{b_1 + (n-1)d}$', text: 'Each term is the reciprocal of a term of an arithmetic sequence.' },
+         { formula: '$\\displaystyle \\sum_{n=1}^{\\infty} \\frac{1}{n} = 1 + \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$', text: 'The terms shrink to zero, yet the sum grows without bound.' }],
+      ] },
+      { id: 'mean', name: 'Harmonic mean', sub: 'The average that suits rates, from [harmonic mean](!#4).', pairs: [
+        [{ formula: '$\\displaystyle H = \\frac{n}{\\frac{1}{a_1} + \\frac{1}{a_2} + \\cdots + \\frac{1}{a_n}}$', text: 'The number of values over the sum of their reciprocals.' },
+         { formula: '$\\displaystyle H = \\frac{2ab}{a + b}$', text: 'The same mean for two numbers.' }],
+      ] },
+      { id: 'inequality', name: 'Mean inequality', sub: 'How the three means compare, from [the mean inequality](!#5).', pairs: [
+        [{ formula: '$H \\leq G \\leq A$', text: 'The harmonic mean is never larger than the geometric mean, which is never larger than the arithmetic mean.' },
+         { formula: '$\\displaystyle \\frac{2ab}{a+b} \\leq \\sqrt{ab} \\leq \\frac{a+b}{2}$', text: 'The same chain written out for two positive numbers.' }],
+      ] },
+    ],
+  };
 
   return {
   props:{
+    formulaSummaryData,
+      termsToZeroScope,
     pitfallData,
     meanOrderLevels,
      sectionsContent,
@@ -596,7 +643,9 @@ $$\\frac{240}{5} = 48 = \\frac{2 \\cdot 60 \\cdot 40}{60 + 40}$$`, `The average 
 
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function HarmonicSequencesPage({ pitfallData,meanOrderLevels, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function HarmonicSequencesPage({ formulaSummaryData,termsToZeroScope,  pitfallData,meanOrderLevels, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -722,6 +771,16 @@ Treating $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\ldots$ as arithmetic with 
           sectionsContent.obj3.content,
           <div key={'unit-harmonicGrowth'} dangerouslySetInnerHTML={{ __html: demoUnits.harmonicGrowth }} />,
           `The climb is slow: Hₙ grows like ln n, so passing 10 takes over 12,000 terms.`,
+          <DiagramFrame
+            key={'obj3-scope'}
+            id="terms-to-zero-scope"
+            title="Terms approaching zero: necessary, not sufficient"
+            source="/algebra/sequences/harmonic"
+            before={`Two series whose terms shrink to zero sit on opposite sides of one line. The card shows what decides which side.`}
+            after={`Slowly is not the same as bounded: the harmonic sum eventually surpasses any finite threshold.`}
+          >
+            <ScopeCard data={termsToZeroScope} variant="boundary" theme={scopeTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -748,6 +807,24 @@ Treating $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\ldots$ as arithmetic with 
             source="/algebra/sequences/harmonic"
           >
             <Hierarchy data={meanOrderLevels} variant="pyramid" exportable={false} theme={hierarchyTheme} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="harmonic-formula-summary"
+            title="Harmonic sequence formulas"
+            source="/algebra/sequences/harmonic"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
           </DiagramFrame>,
         ]
     },

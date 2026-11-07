@@ -1794,6 +1794,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -2219,7 +2220,7 @@ Symmetry means $A = A^T$. Positive definiteness means $\\mathbf{x}^TA\\mathbf{x}
 
 @academic[pitfall,aside:true,width:35%:Skipping the symmetry check
 Testing only positivity passes $B = \\begin{pmatrix} 4 & 0 \\\\ 2 & 5 \\end{pmatrix}$: its eigenvalues $4, 5$ and leading minors $4, 20$ are all positive. But $B \\neq B^T$, so no $L$ exists; the formulas still return an $L$, with $LL^T = \\begin{pmatrix} 4 & 2 \\\\ 2 & 5 \\end{pmatrix} \\neq B$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-symmetry-check)]@
 
 Several equivalent conditions characterize positive definiteness: all [eigenvalues](!/linear-algebra/eigen) of $A$ are strictly positive; all leading principal minors (the [determinants](!/linear-algebra/determinants) of the upper-left $k \\times k$ submatrices) are positive; all pivots in [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) (without pivoting) are positive.
 
@@ -2263,7 +2264,7 @@ Verification: $LL^T = \\begin{pmatrix} 4 & 2 & -2 \\\\ 2 & 5 & 1 \\\\ -2 & 1 & 6
 
 @academic[pitfall,aside:true,width:35%:Dropping the subtracted sum
 Computing $l_{32} = a_{32}/l_{22} = \\frac{1}{2}$ leaves out $l_{31}l_{21} = -1$. Entry $(3, 2)$ of $LL^T$ then comes out $(-1)(1) + \\frac{1}{2} \\cdot 2 = 0$, not $a_{32} = 1$. With the sum, $l_{32} = (1 - (-1)(1))/2 = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-subtracted-sum)]@
 
 Each entry of $L$ is built from the matching entry of $A$ and from entries of $L$ already found to its left. The first column uses only $A$ and $l_{11}$, while every later entry first subtracts the products collected so far: $l_{32}$ draws on $l_{31}$ and $l_{21}$, and $l_{33}$ on the whole third row before it. This is why the columns have to be computed in order, from left to right.`,
     before: ``,
@@ -2280,7 +2281,7 @@ Back substitution: solve $L^T\\mathbf{x} = \\mathbf{y}$ for $\\mathbf{x}$. Cost:
 
 @academic[pitfall,aside:true,width:35%:Using L in both solves
 Solving $L\\mathbf{x} = \\mathbf{y}$ in the second step solves $L^2\\mathbf{x} = \\mathbf{b}$. For the worked example with $\\mathbf{b} = (0, 6, 7)^T$, so $\\mathbf{y} = (0, 3, 2)^T$, it gives $\\mathbf{x} = (0, \\frac{3}{2}, \\frac{1}{4})^T$. Back substitution on $L^T$ gives $\\mathbf{x} = (0, 1, 1)^T$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-l-in-both-solves)]@
 
 The structure is identical to [LU](!/linear-algebra/decompositions/lower-upper), but only one triangular factor needs to be stored. The other is its transpose, which costs nothing extra — the same array of numbers is read in reverse order.`,
     before: ``,
@@ -2378,59 +2379,9 @@ In practice, numerical near-singularity — eigenvalues very close to zero but n
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for many wrong results with the Cholesky decomposition. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Skipping the symmetry check**
-
-Before factoring, the eigenvalues or the leading principal minors are checked, and when they are positive the matrix is taken to be positive definite. The matrix is never compared with its transpose, although those tests describe positive definiteness only for symmetric matrices.
-
-Wrong working: $B = \\begin{pmatrix} 4 & 0 \\\\ 2 & 5 \\end{pmatrix}$ is triangular, so its eigenvalues are $4$ and $5$, and its leading minors are $4$ and $4 \\cdot 5 - 0 \\cdot 2 = 20$. All are positive, so $B = LL^T$ is expected. The formulas read only $b_{11}$, $b_{21}$ and $b_{22}$:
-$$l_{11} = \\sqrt{4} = 2, \\quad l_{21} = 2/2 = 1, \\quad l_{22} = \\sqrt{5 - 1^2} = 2, \\qquad L = \\begin{pmatrix} 2 & 0 \\\\ 1 & 2 \\end{pmatrix}$$
-
-Right working: compare $B$ with $B^T$ first.
-$$B^T = \\begin{pmatrix} 4 & 2 \\\\ 0 & 5 \\end{pmatrix} \\neq B$$
-Since $LL^T$ is symmetric for every $L$, no Cholesky factor exists. The $L$ found above gives $LL^T = \\begin{pmatrix} 4 & 2 \\\\ 2 & 5 \\end{pmatrix}$, which differs from $B$ in the entry above the diagonal.
-
-Why it happens: the list of equivalent conditions is quoted without its standing assumption that $A$ is symmetric. The formulas use only the entries on and below the diagonal, so they run without any warning.
-
-How to check: compare $a_{ij}$ with $a_{ji}$ before anything else. After factoring, multiply out $LL^T$ and compare every entry with $A$, including those above the diagonal.
-
-**Dropping the subtracted sum**
-
-In the off-diagonal formula, the sum $\\sum_{k=1}^{j-1} l_{ik}l_{jk}$ is left out once $j > 1$, and the entry is computed as $a_{ij}/l_{jj}$, the way the first column is.
-
-Wrong working: in the worked example,
-$$l_{32} = \\frac{a_{32}}{l_{22}} = \\frac{1}{2}$$
-Entry $(3, 2)$ of $LL^T$ is row $3$ of $L$ times row $2$ of $L$:
-$$l_{31}l_{21} + l_{32}l_{22} = (-1)(1) + \\frac{1}{2} \\cdot 2 = 0 \\neq a_{32} = 1$$
-The error spreads: $l_{33} = \\sqrt{6 - (-1)^2 - (\\frac{1}{2})^2} = \\frac{\\sqrt{19}}{2} \\approx 2.18$ instead of $2$.
-
-Right working: subtract the products already available.
-$$l_{32} = \\frac{a_{32} - l_{31}l_{21}}{l_{22}} = \\frac{1 - (-1)(1)}{2} = 1, \\qquad l_{31}l_{21} + l_{32}l_{22} = -1 + 2 = 1 = a_{32}$$
-
-Why it happens: in the first column the sum is empty, so the first entries are plain divisions, and that pattern is carried over to the later columns.
-
-How to check: rebuild one entry at a time. Entry $(i, j)$ of $LL^T$ is row $i$ of $L$ times row $j$ of $L$, and it must equal $a_{ij}$.
-
-**Using L in both solves**
-
-After forward substitution, the second triangular solve is done with $L$ again instead of $L^T$. Only $L$ is stored, and the array is read in the same order twice.
-
-Wrong working: with the worked example and $\\mathbf{b} = (0, 6, 7)^T$, forward substitution gives $\\mathbf{y}$:
-$$y_1 = \\frac{0}{2} = 0, \\quad y_2 = \\frac{6 - 1 \\cdot 0}{2} = 3, \\quad y_3 = \\frac{7 - (-1) \\cdot 0 - 1 \\cdot 3}{2} = 2$$
-Then $L\\mathbf{x} = \\mathbf{y}$ is solved from the top:
-$$x_1 = 0, \\quad x_2 = \\frac{3 - 0}{2} = \\frac{3}{2}, \\quad x_3 = \\frac{2 + 0 - \\frac{3}{2}}{2} = \\frac{1}{4}$$
-and $A(0, \\frac{3}{2}, \\frac{1}{4})^T = (\\frac{5}{2}, \\frac{31}{4}, 3)^T \\neq \\mathbf{b}$. This $\\mathbf{x}$ solves $L^2\\mathbf{x} = \\mathbf{b}$.
-
-Right working: solve $L^T\\mathbf{x} = \\mathbf{y}$ from the bottom, with $L^T = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & 2 & 1 \\\\ 0 & 0 & 2 \\end{pmatrix}$.
-$$x_3 = \\frac{2}{2} = 1, \\quad x_2 = \\frac{3 - 1}{2} = 1, \\quad x_1 = \\frac{0 - 1 + 1}{2} = 0$$
-and $A(0, 1, 1)^T = (0, 6, 7)^T = \\mathbf{b}$.
-
-Why it happens: the second factor is not stored as a separate matrix, so it is easy to run the same routine on the same array twice.
-
-How to check: forward substitution starts at the top with $y_1$, back substitution at the bottom with $x_n$. If both solves start at the top, $L$ was used twice. Multiplying $A\\mathbf{x}$ and comparing with $\\mathbf{b}$ settles it.`,
+    content: `Three mistakes account for many wrong results with the Cholesky decomposition. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip skips a part of the Cholesky recipe. The matrix must be symmetric as well as positive definite, every off-diagonal entry subtracts the sum of earlier products before dividing, and the second solve uses $L^T$, from the bottom up. Multiplying $LL^T$ back out and comparing it with $A$ entry by entry catches each slip.`,
     link: ``,
   },
 }
@@ -2609,8 +2560,54 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'skipping-the-symmetry-check', name: `Skipping the symmetry check`, errorAt: 1,
+        what: `Before factoring, the eigenvalues or the leading principal minors are checked, and when they are positive the matrix is taken to be positive definite. The matrix is never compared with its transpose, although those tests describe positive definiteness only for symmetric matrices.`,
+        wrong: [`$B = \\begin{pmatrix} 4 & 0 \\\\ 2 & 5 \\end{pmatrix}$ is triangular, so its eigenvalues are $4$ and $5$, and its leading minors are $4$ and $4 \\cdot 5 - 0 \\cdot 2 = 20$.`, `All are positive, so $B = LL^T$ is expected. The formulas read only $b_{11}$, $b_{21}$ and $b_{22}$:
+$$l_{11} = \\sqrt{4} = 2,$$
+$$l_{21} = 2/2 = 1,$$
+$$l_{22} = \\sqrt{5 - 1^2} = 2,$$
+$$L = \\begin{pmatrix} 2 & 0 \\\\ 1 & 2 \\end{pmatrix}$$`],
+        right: [`$B = \\begin{pmatrix} 4 & 0 \\\\ 2 & 5 \\end{pmatrix}$ is triangular, so its eigenvalues are $4$ and $5$, and its leading minors are $4$ and $4 \\cdot 5 - 0 \\cdot 2 = 20$.`, `Compare $B$ with $B^T$ first.`, `$$B^T = \\begin{pmatrix} 4 & 2 \\\\ 0 & 5 \\end{pmatrix} \\neq B$$`, `Since $LL^T$ is symmetric for every $L$, no Cholesky factor exists. The $L$ found above gives $LL^T = \\begin{pmatrix} 4 & 2 \\\\ 2 & 5 \\end{pmatrix}$, which differs from $B$ in the entry above the diagonal.`],
+        why: `The list of equivalent conditions is quoted without its standing assumption that $A$ is symmetric. The formulas use only the entries on and below the diagonal, so they run without any warning.`,
+        check: `Compare $a_{ij}$ with $a_{ji}$ before anything else. After factoring, multiply out $LL^T$ and compare every entry with $A$, including those above the diagonal.` },
+      { id: 'dropping-the-subtracted-sum', name: `Dropping the subtracted sum`, errorAt: 0,
+        what: `In the off-diagonal formula, the sum $\\sum_{k=1}^{j-1} l_{ik}l_{jk}$ is left out once $j > 1$, and the entry is computed as $a_{ij}/l_{jj}$, the way the first column is.`,
+        wrong: [`In the worked example,
+$$l_{32} = \\frac{a_{32}}{l_{22}} = \\frac{1}{2}$$`, `Entry $(3, 2)$ of $LL^T$ is row $3$ of $L$ times row $2$ of $L$:
+$$l_{31}l_{21} + l_{32}l_{22}$$
+$$= (-1)(1) + \\frac{1}{2} \\cdot 2 = 0 \\neq a_{32}$$
+$$= 1$$`, `The error spreads: $l_{33} = \\sqrt{6 - (-1)^2 - (\\frac{1}{2})^2} = \\frac{\\sqrt{19}}{2} \\approx 2.18$ instead of $2$.`],
+        right: [`Subtract the products already available.`, `$$l_{32} = \\frac{a_{32} - l_{31}l_{21}}{l_{22}}$$
+$$= \\frac{1 - (-1)(1)}{2} = 1,$$
+$$l_{31}l_{21} + l_{32}l_{22} = -1 + 2 = 1$$
+$$= a_{32}$$`],
+        why: `In the first column the sum is empty, so the first entries are plain divisions, and that pattern is carried over to the later columns.`,
+        check: `Rebuild one entry at a time. Entry $(i, j)$ of $LL^T$ is row $i$ of $L$ times row $j$ of $L$, and it must equal $a_{ij}$.` },
+      { id: 'using-l-in-both-solves', name: `Using L in both solves`, errorAt: 0,
+        what: `After forward substitution, the second triangular solve is done with $L$ again instead of $L^T$. Only $L$ is stored, and the array is read in the same order twice.`,
+        wrong: [`With the worked example and $\\mathbf{b} = (0, 6, 7)^T$, forward substitution gives $\\mathbf{y}$:
+$$y_1 = \\frac{0}{2} = 0,$$
+$$y_2 = \\frac{6 - 1 \\cdot 0}{2} = 3,$$
+$$y_3 = \\frac{7 - (-1) \\cdot 0 - 1 \\cdot 3}{2}$$
+$$= 2$$`, `Then $L\\mathbf{x} = \\mathbf{y}$ is solved from the top:
+$$x_1 = 0,$$
+$$x_2 = \\frac{3 - 0}{2} = \\frac{3}{2},$$
+$$x_3 = \\frac{2 + 0 - \\frac{3}{2}}{2} = \\frac{1}{4}$$`, `And $A(0, \\frac{3}{2}, \\frac{1}{4})^T = (\\frac{5}{2}, \\frac{31}{4}, 3)^T \\neq \\mathbf{b}$. This $\\mathbf{x}$ solves $L^2\\mathbf{x} = \\mathbf{b}$.`],
+        right: [`Solve $L^T\\mathbf{x} = \\mathbf{y}$ from the bottom, with $L^T = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & 2 & 1 \\\\ 0 & 0 & 2 \\end{pmatrix}$.`, `$$x_3 = \\frac{2}{2} = 1,$$
+$$x_2 = \\frac{3 - 1}{2} = 1,$$
+$$x_1 = \\frac{0 - 1 + 1}{2} = 0$$`, `And $A(0, 1, 1)^T = (0, 6, 7)^T = \\mathbf{b}$.`],
+        why: `The second factor is not stored as a separate matrix, so it is easy to run the same routine on the same array twice.`,
+        check: `Forward substitution starts at the top with $y_1$, back substitution at the bottom with $x_n$. If both solves start at the top, $L$ was used twice. Multiplying $A\\mathbf{x}$ and comparing with $\\mathbf{b}$ settles it.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     choleskyLevels,
     demoUnits,
     conceptIntroFigures,
@@ -2632,7 +2629,7 @@ const schemas = {
    }
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PageTemplate({choleskyLevels, 
+export default function PageTemplate({ pitfallData,choleskyLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2862,6 +2859,15 @@ export default function PageTemplate({choleskyLevels,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="cholesky-pitfalls"
+            title="Common pitfalls with the Cholesky decomposition"
+            source="/linear-algebra/decompositions/cholesky"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

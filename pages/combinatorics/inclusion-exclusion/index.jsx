@@ -992,6 +992,7 @@ import renderVennCount from '@/app/utils/illustrations/combinatorics/counting/ve
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1627,9 +1628,10 @@ In how many ways can $n$ items be arranged so that none of $m$ specified items o
 
   obj8: {
     title: `Inclusion–Exclusion at a Glance`,
-    content: `
-The page built the principle from two sets to the general n-set formula, derived its complementary form, and applied that form to derangements and several other standard problems. The table below collects the formula variants alongside the situations each one solves.
-`,
+    content: `This summary sets out the five forms of inclusion-exclusion from the page, one card each. Every card names the form, states its formula, says when to use it and links to the section that explains it, with a worked example underneath.
+
+The two-set and three-set forms correct the double counting of overlapping groups, the second adding back the triple overlap. The general form handles any number of sets with alternating signs and has one term for each non-empty group of the sets. The complementary form counts what lies outside every set, and the last card applies it to derangements, the orders in which no item keeps its place, whose share of all orders comes close to one in e.`,
+    formulaSheetAfter: `Every form rests on one check: an element that lies in several sets must end up counted exactly once. When a problem asks for none, for avoiding every condition or for no item in its place, start from the complementary form; when it asks for at least one, the union form answers directly.`,
     before: ``,
     between: ``,
     after: ``,
@@ -1839,8 +1841,26 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table capstoneTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Two sets', formula: '$|A \\cup B| = |A| + |B| - |A \\cap B|$', example: '18 French plus 15 Spanish minus 7 taking both: $18 + 15 - 7 = 26$',
+        text: 'For two overlapping groups: the double count is corrected once, as [two sets](!#1) shows.' },
+      { name: 'Three sets', formula: '$|A \\cup B \\cup C| = |A| + |B| + |C| - |A \\cap B| - |A \\cap C| - |B \\cap C| + |A \\cap B \\cap C|$', example: 'multiples of $2$, $3$ or $5$ in $1$ to $100$: $74$',
+        text: 'Singles minus pairs plus the triple: with three overlapping conditions, one over-correction is added back ([three sets](!#2)).' },
+      { name: 'n sets, union form', formula: '$\\displaystyle \\left| \\bigcup_{i=1}^{n} A_i \\right|$ $\\displaystyle = \\sum_{k=1}^{n} (-1)^{k+1}$ $\\displaystyle \\sum_{1 \\le i_1 < \\cdots < i_k \\le n} |A_{i_1} \\cap \\cdots \\cap A_{i_k}|$', example: 'any union problem with explicit intersection sizes',
+        text: 'The general count of a union of $n$ overlapping sets, with $2^n - 1$ terms in total, from [the general formula](!#3).' },
+      { name: 'n sets, complementary form', formula: '$\\displaystyle |U| - \\sum_{i} |A_i| + \\sum_{i<j} |A_i \\cap A_j| - \\sum_{i<j<k} |A_i \\cap A_j \\cap A_k| + \\cdots + (-1)^n |A_1 \\cap \\cdots \\cap A_n|$', example: 'integers in $1$ to $100$ coprime to $30$: $26$',
+        text: 'Counts the elements that satisfy none of the conditions, for problems that ask to avoid all forbidden cases ([the complementary form](!#4)).' },
+      { name: 'Derangement specialization', formula: '$\\displaystyle !n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!} \\approx \\frac{n!}{e}$', example: 'shuffled hats: the chance that no one gets their own hat tends to $1/e$',
+        text: 'No item lands in its own original position; [counting derangements](!#5) derives it from the complementary form.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
     pitfallData,
          sectionsContent,
          introContent,
@@ -1862,7 +1882,7 @@ const schemas = {
     }
    }
 
-export default function InclusionExclusionPage({ pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function InclusionExclusionPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2041,8 +2061,16 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="combinatorics-inclusion-exclusion-formula-summary"
+            title="Inclusion-exclusion formulas"
+            source="/combinatorics/inclusion-exclusion"
+            related={{ href: '/combinatorics/formulas', label: 'All combinatorics formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     // {

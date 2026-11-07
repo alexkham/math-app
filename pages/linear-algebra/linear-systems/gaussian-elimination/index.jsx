@@ -947,6 +947,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1385,7 +1386,7 @@ Start with the leftmost column that contains a nonzero entry. Identify a nonzero
 
 @academic[pitfall,aside:true,width:35%:Updating two rows from each other at once
 Doing $R_1 - R_2 \\to R_1$ and $R_2 - R_1 \\to R_2$ in one step on $x_1 + x_2 = 2$, $x_1 - x_2 = 0$ gives the rows $[0 \\; 2 \\mid 2]$ and $[0 \\; {-2} \\mid {-2}]$, which allow infinitely many solutions. $R_2 - R_1 \\to R_2$ alone gives the unique solution $x_1 = x_2 = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-updating-two-rows-from-each-other-at-once)]@
 
 Move one column to the right and one row down, and repeat the process on the submatrix below and to the right of the current pivot. Continue until no rows or columns remain to process.
 
@@ -1433,7 +1434,7 @@ After forward elimination produces REF, continue by working from the bottom pivo
 
 @academic[pitfall,aside:true,width:35%:Reading the answer off echelon form
 Reading the last column of the echelon form in the back substitution example as the solution gives $(9, 6, 10)$, and already the bottom row fails: $5 \\cdot 10 \\neq 10$. That matrix is in REF, not RREF; the solution is $(11/4, 5/2, 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-answer-off-echelon-form)]@
 
 The payoff is that in RREF, the solution is visible by direct inspection — no back substitution is needed. Each pivot row reads "$x_i = \\text{(expression in free variables and constants)}$." The trade-off is that the backward pass requires additional row operations, raising the total work by up to roughly $50\\%$ compared to forward elimination alone.
 
@@ -1459,7 +1460,7 @@ $$\\xrightarrow{R_3 - 2R_2} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 &
 
 @academic[pitfall,aside:true,width:35%:Dropping the right-hand side
 Applying $R_2 - 2R_1$ to the coefficients only keeps the constant $8$ instead of $8 - 2 \\cdot 3 = 2$. Back substitution then gives $(71, -28, 12)$, which fails the second equation: $14 \\neq 8$. The full row operation gives $(-1, 2, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-right-hand-side)]@
 
 Three pivots in three columns — unique solution. Back substitution: row $3$ gives $-x_3 = 0$, so $x_3 = 0$. Row $2$ gives $x_2 + 3(0) = 2$, so $x_2 = 2$. Row $1$ gives $x_1 + 2(2) - 0 = 3$, so $x_1 = -1$.
 
@@ -1491,7 +1492,7 @@ $$\\mathbf{x} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\beg
 
 @academic[pitfall,aside:true,width:35%:Dropping the free variable's own entry
 Writing the $s$-vector as $(1, 0, 0, 0)$, without the $1$ for $x_2 = s$, gives at $s = 1, t = 0$ the point $(0, 0, 2, 0)$, where the first equation reads $4 = 3$. The direction vectors are $(1, 1, 0, 0)$ and $(3, 0, -2, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-free-variable-s-own-entry)]@
 
 The solution set is a two-dimensional plane in $\\mathbb{R}^4$, passing through $(-1, 0, 2, 0)$ and spanned by two direction vectors.
 
@@ -1518,7 +1519,7 @@ The system is inconsistent. Geometrically, the two equations represent parallel 
 
 @academic[pitfall,aside:true,width:35%:Treating a zero row as a contradiction
 For $x_1 + x_2 = 2$, $2x_1 + 2x_2 = 4$, $R_2 - 2R_1$ leaves the row $[0 \\; 0 \\mid 0]$. Reading it as no solution is wrong: it says $0 = 0$, true for every pair, and the system has infinitely many solutions $(2 - s, s)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-a-zero-row-as-a-contradiction)]@
 
 Inconsistency is always detectable in echelon form: a row $[0 \\; 0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ means $\\text{rank}([A \\mid \\mathbf{b}]) > \\text{rank}(A)$, and by the [Rouché-Capelli theorem](!/linear-algebra/linear-systems/solvability), no solution exists.`,
     before: ``,
@@ -1563,82 +1564,9 @@ Every serious numerical implementation of Gaussian elimination uses partial pivo
   },
   obj13: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for many wrong answers in Gaussian elimination. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Updating two rows from each other at once**
-
-Two row additions are carried out in the same step, and each one reads the other row before it has changed: $R_1 - R_2 \\to R_1$ and $R_2 - R_1 \\to R_2$ together. Each move on its own is a legal row operation, but the pair is not, and information is lost.
-
-Wrong working: for $x_1 + x_2 = 2$, $x_1 - x_2 = 0$,
-$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\end{array}\\right) \\to \\left(\\begin{array}{cc|c} 0 & 2 & 2 \\\\ 0 & -2 & -2 \\end{array}\\right)$$
-The second row is $-1$ times the first, so only $x_2 = 1$ remains, $x_1$ looks free, and the system seems to have infinitely many solutions.
-
-Right working: one operation, with the pivot row left as it is.
-$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\end{array}\\right) \\xrightarrow{R_2 - R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & -2 & -2 \\end{array}\\right)$$
-Row $2$ gives $x_2 = 1$ and row $1$ gives $x_1 = 1$: the unique solution $(1, 1)$.
-
-Why it happens: worked examples write several operations over one arrow, such as $R_2 - 2R_1,\\; R_3 - 3R_1$, and that looks as if any two operations can be combined. Those two are safe only because both read row $1$, which neither of them changes.
-
-How to check: row operations never change the rank. The coefficient matrix $\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ has rank $2$, but the wrong result has rank $1$, so a step was not a row operation.
-
-**Reading the answer off echelon form**
-
-The last column of the augmented matrix is read as the solution as soon as the matrix is in row echelon form. That reading is valid only in reduced row echelon form, where every pivot is $1$ and is the only nonzero entry in its column.
-
-Wrong working: from the matrix of the back substitution example,
-$$\\left(\\begin{array}{ccc|c} 2 & -1 & 3 & 9 \\\\ 0 & 4 & -2 & 6 \\\\ 0 & 0 & 5 & 10 \\end{array}\\right)$$
-the values $x_1 = 9$, $x_2 = 6$, $x_3 = 10$ are read off.
-
-Right working: back substitution from the bottom row gives $x_3 = 2$, then $x_2 = 5/2$, then $x_1 = 11/4$. Continuing to RREF gives the same values in the last column:
-$$\\left(\\begin{array}{ccc|c} 1 & 0 & 0 & 11/4 \\\\ 0 & 1 & 0 & 5/2 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$
-
-Why it happens: both forms are staircases with zeros below the pivots, and in RREF the last column really is the answer, so the habit carries over to REF.
-
-How to check: substitute into the bottom row. With $x_3 = 10$ it reads $5 \\cdot 10 = 50$, not $10$. Before reading the last column, check that every pivot is $1$ and has zeros above it.
-
-**Dropping the right-hand side**
-
-A row operation is applied to the coefficients but not to the constant behind the bar. The coefficient part still reduces correctly, so nothing looks wrong until the end.
-
-Wrong working: in the unique-solution example, $R_2 - 2R_1$ turns $(2, 5, 1)$ into $(0, 1, 3)$ but the constant $8$ is kept.
-$$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 8 \\\\ 0 & 2 & 5 & 4 \\end{array}\\right) \\xrightarrow{R_3 - 2R_2} \\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 8 \\\\ 0 & 0 & -1 & -12 \\end{array}\\right)$$
-Back substitution gives $x_3 = 12$, $x_2 = 8 - 36 = -28$ and $x_1 = 3 - 2(-28) + 12 = 71$.
-
-Right working: the constant becomes $8 - 2 \\cdot 3 = 2$, the third row ends in $0$ instead of $-12$, and back substitution gives $x_3 = 0$, $x_2 = 2$, $x_1 = -1$.
-
-Why it happens: the bar sets the constants apart, and attention goes to the entries being eliminated, which all sit to the left of it.
-
-How to check: substitute into the original equations. The wrong answer $(71, -28, 12)$ satisfies the first and third equations, but the second gives $2(71) + 5(-28) + 12 = 14$, not $8$.
-
-**Dropping the free variable's own entry**
-
-When the parametric vector form is assembled, each direction vector is filled in only from the pivot rows. The entry of the free variable itself, which equals its parameter, is left at $0$.
-
-Wrong working: from $x_1 = -1 + s + 3t$ and $x_3 = 2 - 2t$,
-$$\\mathbf{x} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix}$$
-
-Right working: write all four unknowns, including $x_2 = s$ and $x_4 = t$, and then split by parameter.
-$$\\mathbf{x} = \\begin{pmatrix} -1 + s + 3t \\\\ s \\\\ 2 - 2t \\\\ t \\end{pmatrix} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 1 \\end{pmatrix}$$
-
-Why it happens: the free variables never stand alone on the left of an equation from the echelon form, so they are easy to miss when the vector is built from those equations.
-
-How to check: set one parameter to $1$ and the other to $0$, and substitute. The wrong form gives $(0, 0, 2, 0)$ at $s = 1, t = 0$, and the first equation reads $0 - 0 + 4 + 0 = 4$, not $3$. The right form gives $(0, 1, 2, 0)$, which satisfies both equations. In the right form, the free-variable entries of the direction vectors are always $1$ and $0$.
-
-**Treating a zero row as a contradiction**
-
-Any row with zeros in all the coefficient columns is read as a sign that the system has no solution. Only a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ is a contradiction; a row that is zero all the way across says $0 = 0$.
-
-Wrong working: for $x_1 + x_2 = 2$, $2x_1 + 2x_2 = 4$,
-$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 2 & 2 & 4 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & 0 & 0 \\end{array}\\right)$$
-and the second row is taken to mean that the system is inconsistent.
-
-Right working: the second row reads $0 = 0$, which every pair $(x_1, x_2)$ satisfies, so it puts no condition on the solution. Row $1$ has its pivot in column $1$ and column $2$ is free: $x_2 = s$, $x_1 = 2 - s$. There are infinitely many solutions; the two equations describe the same line.
-
-Why it happens: the no-solution example also ends in a row whose coefficients are all zero, and the entry behind the bar is overlooked.
-
-How to check: look behind the bar before deciding. Here $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = 1$, so the system is consistent; the point $(2, 0)$ satisfies both equations.`,
+    content: `Five mistakes account for many wrong answers in Gaussian elimination. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip breaks one of the rules of elimination. Row operations are done one after another, an echelon form still needs back substitution, every operation includes the constant behind the bar, a free variable's own entry is $1$ in its direction vector, and a zero row is a contradiction only with a nonzero constant. Substituting the answer into the original equations catches each slip.`,
     link: ``,
   },
 }
@@ -1837,8 +1765,55 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj13 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'updating-two-rows-from-each-other-at-once', name: `Updating two rows from each other at once`, errorAt: 1,
+        what: `Two row additions are carried out in the same step, and each one reads the other row before it has changed: $R_1 - R_2 \\to R_1$ and $R_2 - R_1 \\to R_2$ together. Each move on its own is a legal row operation, but the pair is not, and information is lost.`,
+        wrong: [`For $x_1 + x_2 = 2$, $x_1 - x_2 = 0$,`, `$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\end{array}\\right)$$
+$$\\to \\left(\\begin{array}{cc|c} 0 & 2 & 2 \\\\ 0 & -2 & -2 \\end{array}\\right)$$`, `The second row is $-1$ times the first, so only $x_2 = 1$ remains, $x_1$ looks free, and the system seems to have infinitely many solutions.`],
+        right: [`For $x_1 + x_2 = 2$, $x_1 - x_2 = 0$,`, `One operation, with the pivot row left as it is.`, `$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 1 & -1 & 0 \\end{array}\\right)$$
+$$\\xrightarrow{R_2 - R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & -2 & -2 \\end{array}\\right)$$`, `Row $2$ gives $x_2 = 1$ and row $1$ gives $x_1 = 1$: the unique solution $(1, 1)$.`],
+        why: `Worked examples write several operations over one arrow, such as $R_2 - 2R_1,\\; R_3 - 3R_1$, and that looks as if any two operations can be combined. Those two are safe only because both read row $1$, which neither of them changes.`,
+        check: `Row operations never change the rank. The coefficient matrix $\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$ has rank $2$, but the wrong result has rank $1$, so a step was not a row operation.` },
+      { id: 'reading-the-answer-off-echelon-form', name: `Reading the answer off echelon form`, errorAt: 0,
+        what: `The last column of the augmented matrix is read as the solution as soon as the matrix is in row echelon form. That reading is valid only in reduced row echelon form, where every pivot is $1$ and is the only nonzero entry in its column.`,
+        wrong: [`From the matrix of the back substitution example,
+$$\\left(\\begin{array}{ccc|c} 2 & -1 & 3 & 9 \\\\ 0 & 4 & -2 & 6 \\\\ 0 & 0 & 5 & 10 \\end{array}\\right)$$`, `The values $x_1 = 9$, $x_2 = 6$, $x_3 = 10$ are read off.`],
+        right: [`Back substitution from the bottom row gives $x_3 = 2$, then $x_2 = 5/2$, then $x_1 = 11/4$. Continuing to RREF gives the same values in the last column:
+$$\\left(\\begin{array}{ccc|c} 1 & 0 & 0 & 11/4 \\\\ 0 & 1 & 0 & 5/2 \\\\ 0 & 0 & 1 & 2 \\end{array}\\right)$$`],
+        why: `Both forms are staircases with zeros below the pivots, and in RREF the last column really is the answer, so the habit carries over to REF.`,
+        check: `Substitute into the bottom row. With $x_3 = 10$ it reads $5 \\cdot 10 = 50$, not $10$. Before reading the last column, check that every pivot is $1$ and has zeros above it.` },
+      { id: 'dropping-the-right-hand-side', name: `Dropping the right-hand side`, errorAt: 0,
+        what: `A row operation is applied to the coefficients but not to the constant behind the bar. The coefficient part still reduces correctly, so nothing looks wrong until the end.`,
+        wrong: [`In the unique-solution example, $R_2 - 2R_1$ turns $(2, 5, 1)$ into $(0, 1, 3)$ but the constant $8$ is kept.`, `$$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 8 \\\\ 0 & 2 & 5 & 4 \\end{array}\\right)$$`, `Then $R_3 - 2R_2$ gives
+$$\\left(\\begin{array}{ccc|c} 1 & 2 & -1 & 3 \\\\ 0 & 1 & 3 & 8 \\\\ 0 & 0 & -1 & -12 \\end{array}\\right)$$`, `Back substitution gives $x_3 = 12$, $x_2 = 8 - 36 = -28$ and $x_1 = 3 - 2(-28) + 12 = 71$.`],
+        right: [`The constant becomes $8 - 2 \\cdot 3 = 2$, the third row ends in $0$ instead of $-12$, and back substitution gives $x_3 = 0$, $x_2 = 2$, $x_1 = -1$.`],
+        why: `The bar sets the constants apart, and attention goes to the entries being eliminated, which all sit to the left of it.`,
+        check: `Substitute into the original equations. The wrong answer $(71, -28, 12)$ satisfies the first and third equations, but the second gives $2(71) + 5(-28) + 12 = 14$, not $8$.` },
+      { id: 'dropping-the-free-variable-s-own-entry', name: `Dropping the free variable's own entry`, errorAt: 0,
+        what: `When the parametric vector form is assembled, each direction vector is filled in only from the pivot rows. The entry of the free variable itself, which equals its parameter, is left at $0$.`,
+        wrong: [`From $x_1 = -1 + s + 3t$ and $x_3 = 2 - 2t$,
+$$\\mathbf{x} = \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\\\ 0 \\end{pmatrix} + t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 0 \\end{pmatrix}$$`],
+        right: [`Write all four unknowns, including $x_2 = s$ and $x_4 = t$, and then split by parameter.`, `$$\\mathbf{x} = \\begin{pmatrix} -1 + s + 3t \\\\ s \\\\ 2 - 2t \\\\ t \\end{pmatrix}$$
+$$= \\begin{pmatrix} -1 \\\\ 0 \\\\ 2 \\\\ 0 \\end{pmatrix} + s\\begin{pmatrix} 1 \\\\ 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$$
+$$+ t\\begin{pmatrix} 3 \\\\ 0 \\\\ -2 \\\\ 1 \\end{pmatrix}$$`],
+        why: `The free variables never stand alone on the left of an equation from the echelon form, so they are easy to miss when the vector is built from those equations.`,
+        check: `Set one parameter to $1$ and the other to $0$, and substitute. The wrong form gives $(0, 0, 2, 0)$ at $s = 1, t = 0$, and the first equation reads $0 - 0 + 4 + 0 = 4$, not $3$. The right form gives $(0, 1, 2, 0)$, which satisfies both equations. In the right form, the free-variable entries of the direction vectors are always $1$ and $0$.` },
+      { id: 'treating-a-zero-row-as-a-contradiction', name: `Treating a zero row as a contradiction`, errorAt: 1,
+        what: `Any row with zeros in all the coefficient columns is read as a sign that the system has no solution. Only a row $[0 \\; \\cdots \\; 0 \\mid d]$ with $d \\neq 0$ is a contradiction; a row that is zero all the way across says $0 = 0$.`,
+        wrong: [`For $x_1 + x_2 = 2$, $2x_1 + 2x_2 = 4$,`, `$$\\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 2 & 2 & 4 \\end{array}\\right)$$
+$$\\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & 0 & 0 \\end{array}\\right)$$`, `And the second row is taken to mean that the system is inconsistent.`],
+        right: [`For $x_1 + x_2 = 2$, $2x_1 + 2x_2 = 4$,`, `The second row reads $0 = 0$, which every pair $(x_1, x_2)$ satisfies, so it puts no condition on the solution. Row $1$ has its pivot in column $1$ and column $2$ is free: $x_2 = s$, $x_1 = 2 - s$. There are infinitely many solutions; the two equations describe the same line.`],
+        why: `The no-solution example also ends in a row whose coefficients are all zero, and the entry behind the bar is overlooked.`,
+        check: `Look behind the bar before deciding. Here $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = 1$, so the system is consistent; the point $(2, 0)$ satisfies both equations.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     rowOperationTree,
     demoUnits,
     conceptIntroFigures,
@@ -1861,7 +1836,7 @@ return {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function GaussianEliminationPage({rowOperationTree, 
+export default function GaussianEliminationPage({ pitfallData,rowOperationTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -2098,6 +2073,15 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'obj13-mistakes'}
+            id="gaussian-elimination-pitfalls"
+            title="Common pitfalls with Gaussian elimination"
+            source="/linear-algebra/linear-systems/gaussian-elimination"
+            after={sectionsContent.obj13.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

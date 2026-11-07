@@ -15,7 +15,9 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -481,7 +483,7 @@ The domain restriction $|x| < 1$ reflects the range of $\\sin y$ on $[-\\pi/2, \
 
 @academic[pitfall,aside:true,width:35%:Forgetting the chain rule
 Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leaves out the derivative of the inner $2x$. The chain rule gives $\\frac{d}{dx}[\\arcsin(2x)] = \\frac{2}{\\sqrt{1 - 4x^2}}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-chain-rule)]@
 
 The formulas are stated for the bare variable $x$, but in practice the argument of $\\arcsin$ or $\\arccos$ is often an expression such as $2x$, $x^2$ or $e^x$. The formula is then evaluated at that inner expression, and the [chain rule](!/calculus/derivatives/rules#7) links the result to the rate at which the inner expression changes. The same holds for every formula on this page.
 `,
@@ -534,7 +536,7 @@ $$\\frac{d}{dx}[\\operatorname{arccsc} x] = -\\frac{1}{|x| \\sqrt{x^2 - 1}}$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the absolute value
 Using $\\frac{1}{x\\sqrt{x^2 - 1}}$ gives the slope $-\\frac{1}{2\\sqrt{3}} \\approx -0.289$ at $x = -2$. But $\\operatorname{arcsec} x$ rises on both parts of its domain, and the formula with $|x|$ gives $\\frac{1}{2\\sqrt{3}} \\approx 0.289$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-absolute-value)]@
 
 The derivation for arcsecant: let $y = \\text{arcsec}\\, x$, so $\\sec y = x$. Differentiating: $\\sec y \\tan y \\cdot \\frac{dy}{dx} = 1$. Since $\\sec y = x$ and $\\tan y = \\pm\\sqrt{\\sec^2 y - 1} = \\pm\\sqrt{x^2 - 1}$, the sign depends on the quadrant. The absolute value $|x|$ in the formula resolves this: $\\sec y \\tan y = |x|\\sqrt{x^2 - 1}$ across the full domain.
 
@@ -606,7 +608,7 @@ The critical difference from trigonometric derivatives: $(\\cosh x)' = \\sinh x$
 
 @academic[pitfall,aside:true,width:35%:Copying the sign of sec x
 Taking over $(\\sec x)' = \\sec x \\tan x$ gives $(\\operatorname{sech} x)' = \\operatorname{sech} x \\tanh x$, positive for $x > 0$. But $\\operatorname{sech} x = \\frac{1}{\\cosh x}$ falls there as $\\cosh x$ grows; the derivative is $-\\operatorname{sech} x \\tanh x$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-copying-the-sign-of-sec-x)]@
 
 Each derivative is verified directly by differentiating the exponential definitions. For $\\sinh x$: $\\frac{d}{dx}\\left[\\frac{e^x - e^{-x}}{2}\\right] = \\frac{e^x + e^{-x}}{2} = \\cosh x$. No special limits or implicit differentiation are needed—the [exponential derivative](!/calculus/derivatives/common) does all the work.
 `,
@@ -661,7 +663,7 @@ Consider $f(x) = x^2$ for $x \\leq 1$ and $f(x) = 2x - 1$ for $x > 1$. Continuit
 
 @academic[pitfall,aside:true,width:35%:Comparing slopes without checking continuity
 For $f(x) = x^2$ when $x \\leq 1$ and $f(x) = 2x$ when $x > 1$, both pieces have slope $2$ at $x = 1$, which suggests $f'(1) = 2$. But the pieces give the values $1$ and $2$ there: the graph jumps, and $f'(1)$ does not exist.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-comparing-slopes-without-checking-continuity)]@
 
 If either continuity fails or the one-sided derivatives disagree, the function is not [differentiable](!/calculus/derivatives/differentiability) at that boundary. The absolute value function $|x|$ is the canonical example: continuous at $x = 0$, but left derivative $-1$ and right derivative $+1$ do not match. The table below names each of the three boundary conditions, what it requires, and the failure mode that appears when it is violated.
 `,
@@ -671,8 +673,7 @@ If either continuity fails or the one-sided derivatives disagree, the function i
   },
   obj8: {
     title: `Summary of Special Derivatives`,
-    content: `
-The complete set of special derivative formulas:
+    content: `The complete set of special derivative formulas:
 
 @academic[formula_callout:Summary of Special Derivatives
 $$\\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1-x^2}} \\qquad \\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1-x^2}}$$]@
@@ -702,67 +703,21 @@ $$\\frac{d}{dx}[\\text{arctanh}\\, x] = \\frac{1}{1-x^2}$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-Together with the [common derivatives](!/calculus/derivatives/common), these formulas cover every standard function encountered in calculus. Recognizing the algebraic forms—$\\sqrt{1-x^2}$, $1+x^2$, $\\sqrt{x^2 \\pm 1}$, $1-x^2$—is equally important for integration, where these expressions signal inverse trigonometric or inverse hyperbolic antiderivatives. The table below assembles all 15 formulas as a single reference card, organized by category and including the domain on which each derivative is valid.
-`,
+Together with the [common derivatives](!/calculus/derivatives/common), these formulas cover every standard function encountered in calculus. Recognizing the algebraic forms—$\\sqrt{1-x^2}$, $1+x^2$, $\\sqrt{x^2 \\pm 1}$, $1-x^2$—is equally important for integration, where these expressions signal inverse trigonometric or inverse hyperbolic antiderivatives.
+
+The summary sorts all fifteen formulas into three families, two formulas to a line, and the buttons above the cards show one family at a time. Each formula carries the domain on which it is valid, a short note comparing it with its partner or its trigonometric relative, and a link to the section that derives it.
+
+The inverse trigonometric family pairs arcsine with arccosine, arctangent with arccotangent and arcsecant with arccosecant, each partner differing only in sign. The hyperbolic family follows the six trigonometric rules with a few sign changes, and the inverse hyperbolic family closes with the three derivatives of inverse hyperbolic sine, cosine and tangent.`,
+    formulaSheetAfter: `When one of these derivatives slips from memory, its partner on the same line and its trigonometric relative usually bring it back. Checking the domain before using a formula matters just as much, since most of them hold only on part of the real line.`,
     before: ``,
     after: ``,
     link: '',
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Four mistakes cause many of the wrong answers when these formulas are used. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Forgetting the chain rule**
-
-The formulas on this page are stated for the bare variable $x$. When the argument is an expression such as $2x$, that expression is put into the formula, but the derivative of the inside is left out.
-
-Wrong working: $\\frac{d}{dx}[\\arcsin(2x)] = \\frac{1}{\\sqrt{1 - (2x)^2}} = \\frac{1}{\\sqrt{1 - 4x^2}}$.
-
-Right working: with $u = 2x$ and $u' = 2$, $\\frac{d}{dx}[\\arcsin u] = \\frac{u'}{\\sqrt{1 - u^2}} = \\frac{2}{\\sqrt{1 - 4x^2}}$.
-
-Why it happens: the inner expression is copied into the formula correctly, so the result looks complete. The missing factor is invisible when the inside is a plain $x$, which is the only case the formulas show.
-
-How to check: compare with the slope measured from the graph. At $x = 0.25$ the slope of $\\arcsin(2x)$ is about $2.309$, which matches $\\frac{2}{\\sqrt{0.75}} \\approx 2.309$; the wrong formula gives $\\frac{1}{\\sqrt{0.75}} \\approx 1.155$, half as much.
-
-**Dropping the absolute value**
-
-The arcsecant derivative is written as $\\frac{1}{x\\sqrt{x^2 - 1}}$, without the absolute value. For $x > 1$ this agrees with the formula, but for $x < -1$ it has the wrong sign.
-
-Wrong working: at $x = -2$, $\\frac{1}{x\\sqrt{x^2 - 1}} = \\frac{1}{-2\\sqrt{3}} \\approx -0.289$.
-
-Right working: at $x = -2$, $\\frac{1}{|x|\\sqrt{x^2 - 1}} = \\frac{1}{2\\sqrt{3}} \\approx 0.289$.
-
-Why it happens: the derivation gives $\\frac{1}{\\sec y \\tan y}$, and replacing $\\sec y$ by $x$ and $\\tan y$ by $\\sqrt{x^2 - 1}$ looks natural. On the branch where $x < -1$, both $\\sec y$ and $\\tan y$ are negative, so their product is positive, and the absolute value records exactly that.
-
-How to check: compare nearby values of the function. $\\operatorname{arcsec}(-2.1) \\approx 2.067$ and $\\operatorname{arcsec}(-1.9) \\approx 2.125$, so the function rises near $x = -2$, at a rate of about $\\frac{2.125 - 2.067}{0.2} \\approx 0.29$. The slope must be positive.
-
-**Copying the sign of sec x**
-
-The hyperbolic derivatives are written by analogy with the trigonometric ones, sign included. Since $(\\sec x)' = \\sec x \\tan x$ has no minus sign, none is expected for $\\operatorname{sech} x$ either.
-
-Wrong working: $\\frac{d}{dx}[\\operatorname{sech} x] = \\operatorname{sech} x \\tanh x$.
-
-Right working: $\\operatorname{sech} x = (\\cosh x)^{-1}$, so $\\frac{d}{dx}[\\operatorname{sech} x] = -(\\cosh x)^{-2}\\sinh x = -\\frac{1}{\\cosh x} \\cdot \\frac{\\sinh x}{\\cosh x} = -\\operatorname{sech} x \\tanh x$.
-
-Why it happens: differentiating a reciprocal always produces a minus sign. For $\\sec x$ it is cancelled by the minus sign in $(\\cos x)' = -\\sin x$, which leaves $\\sec x \\tan x$ positive. For $\\operatorname{sech} x$ there is nothing to cancel it, because $(\\cosh x)' = \\sinh x$ has no minus sign.
-
-How to check: $\\operatorname{sech} 0 = 1$ and $\\operatorname{sech} 1 \\approx 0.648$, so the function falls for $x > 0$, where $\\tanh x > 0$. A derivative of $\\operatorname{sech} x \\tanh x$ would be positive there; the right formula gives about $-0.494$ at $x = 1$.
-
-**Comparing slopes without checking continuity**
-
-At a boundary, the two pieces are differentiated and their slopes at the boundary are compared, but nobody checks that the pieces meet. Matching slopes are then taken as the derivative.
-
-Wrong working: for $f(x) = x^2$ when $x \\leq 1$ and $f(x) = 2x$ when $x > 1$, the slopes are $\\frac{d}{dx}[x^2]\\big|_{x=1} = 2$ and $\\frac{d}{dx}[2x] = 2$, so $f'(1) = 2$.
-
-Right working: check the values first. From the left $f(1) = 1$; from the right $2x \\to 2$ as $x \\to 1^+$. The pieces do not meet, $f$ is not continuous at $1$, and $f'(1)$ does not exist.
-
-Why it happens: differentiating removes a constant term, so two pieces that differ by a constant have the same derivative. Here $2x$ and the section's $2x - 1$ both have slope $2$; only their values at $x = 1$ tell them apart.
-
-How to check: compute the difference quotient from the right. $\\frac{f(1 + h) - f(1)}{h} = \\frac{2(1 + h) - 1}{h} = \\frac{1 + 2h}{h}$, which is $102$ at $h = 0.01$ and grows without bound as $h \\to 0^+$.
-`,
+    content: `Four mistakes cause many of the wrong answers when these formulas are used. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip leaves out a piece of a special derivative. $\\arcsin(2x)$ needs the chain-rule factor $2$, the arcsecant derivative has $|x|$ in its denominator, $\\operatorname{sech} x$ has derivative $-\\operatorname{sech} x \\tanh x$, unlike $\\sec x$, and a piecewise function must be continuous before its slopes are compared. Checking the sign of the answer at a negative input, or putting the boundary value into both pieces, catches each slip.`,
     link: '',
   },
 };
@@ -991,8 +946,69 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 13, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'forgetting-the-chain-rule', name: `Forgetting the chain rule`, errorAt: 0,
+        what: `The formulas on this page are stated for the bare variable $x$. When the argument is an expression such as $2x$, that expression is put into the formula, but the derivative of the inside is left out.`,
+        wrong: [`$\\frac{d}{dx}[\\arcsin(2x)] = \\frac{1}{\\sqrt{1 - (2x)^2}} = \\frac{1}{\\sqrt{1 - 4x^2}}$.`],
+        right: [`With $u = 2x$ and $u' = 2$, $\\frac{d}{dx}[\\arcsin u] = \\frac{u'}{\\sqrt{1 - u^2}} = \\frac{2}{\\sqrt{1 - 4x^2}}$.`],
+        why: `The inner expression is copied into the formula correctly, so the result looks complete. The missing factor is invisible when the inside is a plain $x$, which is the only case the formulas show.`,
+        check: `Compare with the slope measured from the graph. At $x = 0.25$ the slope of $\\arcsin(2x)$ is about $2.309$, which matches $\\frac{2}{\\sqrt{0.75}} \\approx 2.309$; the wrong formula gives $\\frac{1}{\\sqrt{0.75}} \\approx 1.155$, half as much.` },
+      { id: 'dropping-the-absolute-value', name: `Dropping the absolute value`, errorAt: 0,
+        what: `The arcsecant derivative is written as $\\frac{1}{x\\sqrt{x^2 - 1}}$, without the absolute value. For $x > 1$ this agrees with the formula, but for $x < -1$ it has the wrong sign.`,
+        wrong: [`At $x = -2$, $\\frac{1}{x\\sqrt{x^2 - 1}} = \\frac{1}{-2\\sqrt{3}} \\approx -0.289$.`],
+        right: [`At $x = -2$, $\\frac{1}{|x|\\sqrt{x^2 - 1}} = \\frac{1}{2\\sqrt{3}} \\approx 0.289$.`],
+        why: `The derivation gives $\\frac{1}{\\sec y \\tan y}$, and replacing $\\sec y$ by $x$ and $\\tan y$ by $\\sqrt{x^2 - 1}$ looks natural. On the branch where $x < -1$, both $\\sec y$ and $\\tan y$ are negative, so their product is positive, and the absolute value records exactly that.`,
+        check: `Compare nearby values of the function. $\\operatorname{arcsec}(-2.1) \\approx 2.067$ and $\\operatorname{arcsec}(-1.9) \\approx 2.125$, so the function rises near $x = -2$, at a rate of about $\\frac{2.125 - 2.067}{0.2} \\approx 0.29$. The slope must be positive.` },
+      { id: 'copying-the-sign-of-sec-x', name: `Copying the sign of sec x`, errorAt: 0,
+        what: `The hyperbolic derivatives are written by analogy with the trigonometric ones, sign included. Since $(\\sec x)' = \\sec x \\tan x$ has no minus sign, none is expected for $\\operatorname{sech} x$ either.`,
+        wrong: [`$\\frac{d}{dx}[\\operatorname{sech} x] = \\operatorname{sech} x \\tanh x$.`],
+        right: [`$\\operatorname{sech} x = (\\cosh x)^{-1}$, so $\\frac{d}{dx}[\\operatorname{sech} x] = -(\\cosh x)^{-2}\\sinh x = -\\frac{1}{\\cosh x} \\cdot \\frac{\\sinh x}{\\cosh x} = -\\operatorname{sech} x \\tanh x$.`],
+        why: `Differentiating a reciprocal always produces a minus sign. For $\\sec x$ it is cancelled by the minus sign in $(\\cos x)' = -\\sin x$, which leaves $\\sec x \\tan x$ positive. For $\\operatorname{sech} x$ there is nothing to cancel it, because $(\\cosh x)' = \\sinh x$ has no minus sign.`,
+        check: `$\\operatorname{sech} 0 = 1$ and $\\operatorname{sech} 1 \\approx 0.648$, so the function falls for $x > 0$, where $\\tanh x > 0$. A derivative of $\\operatorname{sech} x \\tanh x$ would be positive there; the right formula gives about $-0.494$ at $x = 1$.` },
+      { id: 'comparing-slopes-without-checking-continuity', name: `Comparing slopes without checking continuity`, errorAt: 0,
+        what: `At a boundary, the two pieces are differentiated and their slopes at the boundary are compared, but nobody checks that the pieces meet. Matching slopes are then taken as the derivative.`,
+        wrong: [`For $f(x) = x^2$ when $x \\leq 1$ and $f(x) = 2x$ when $x > 1$, the slopes are $\\frac{d}{dx}[x^2]\\big|_{x=1} = 2$ and $\\frac{d}{dx}[2x] = 2$, so $f'(1) = 2$.`],
+        right: [`Check the values first. From the left $f(1) = 1$; from the right $2x \\to 2$ as $x \\to 1^+$. The pieces do not meet, $f$ is not continuous at $1$, and $f'(1)$ does not exist.`],
+        why: `Differentiating removes a constant term, so two pieces that differ by a constant have the same derivative. Here $2x$ and the section's $2x - 1$ both have slope $2$; only their values at $x = 1$ tell them apart.`,
+        check: `Compute the difference quotient from the right. $\\frac{f(1 + h) - f(1)}{h} = \\frac{2(1 + h) - 1}{h} = \\frac{1 + 2h}{h}$, which is $102$ at $h = 0.01$ and grows without bound as $h \\to 0^+$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table obj8Table.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'invtrig', name: 'Inverse trigonometric', sub: 'Algebraic derivatives; each co-function is the negative of its partner.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\arcsin x] = \\frac{1}{\\sqrt{1 - x^2}}$', text: 'Valid for $|x| < 1$, where the root is real and nonzero; derived in [arcsine and arccosine](!#1).' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1 - x^2}}$', text: 'Also for $|x| < 1$; the negative of the arcsine derivative, as [arcsine and arccosine](!#1) shows.' }],
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\arctan x] = \\frac{1}{1 + x^2}$', text: 'Valid for all real $x$, since $1 + x^2$ is never zero; see [arctangent and arccotangent](!#2).' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{arccot} x] = -\\frac{1}{1 + x^2}$', text: 'Also for all real $x$, with the opposite sign, from [arctangent and arccotangent](!#2).' }],
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{arcsec} x] = \\frac{1}{|x| \\sqrt{x^2 - 1}}$', text: 'Valid for $|x| > 1$; the absolute value settles the sign on both branches of the domain, as [arcsecant and arccosecant](!#3) explains.' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{arccsc} x] = -\\frac{1}{|x| \\sqrt{x^2 - 1}}$', text: 'Also for $|x| > 1$, with the opposite sign, from [arcsecant and arccosecant](!#3).' }],
+      ] },
+      { id: 'hyp', name: 'Hyperbolic', sub: 'The trigonometric rules again, with sign changes.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\sinh x] = \\cosh x$', text: 'Valid for all real $x$; follows from the exponential definitions in [hyperbolic functions](!#5).' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\cosh x] = \\sinh x$', text: 'Valid for all real $x$, and with no minus sign, unlike the cosine; see [hyperbolic functions](!#5).' }],
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\tanh x] = \\operatorname{sech}^2 x$', text: 'Valid for all real $x$; the hyperbolic version of the tangent rule in [hyperbolic functions](!#5).' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\coth x] = -\\operatorname{csch}^2 x$', text: 'Valid for $x \\neq 0$, where $\\coth x$ is defined ([hyperbolic functions](!#5)).' }],
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{sech} x] = -\\operatorname{sech} x \\tanh x$', text: 'Valid for all real $x$; the hyperbolic version of the secant rule, with a minus sign ([hyperbolic functions](!#5)).' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{csch} x] = -\\operatorname{csch} x \\coth x$', text: 'Valid for $x \\neq 0$, where $\\operatorname{csch} x$ is defined ([hyperbolic functions](!#5)).' }],
+      ] },
+      { id: 'invhyp', name: 'Inverse hyperbolic', sub: 'Algebraic derivatives, close to the inverse trigonometric ones.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{arcsinh} x] = \\frac{1}{\\sqrt{x^2 + 1}}$', text: 'Valid for all real $x$; compare the arcsine, which has $1 - x^2$ under the root ([inverse hyperbolic functions](!#6)).' },
+         { formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{arccosh} x] = \\frac{1}{\\sqrt{x^2 - 1}}$', text: 'Valid for $x > 1$, where the root is real and nonzero; see [inverse hyperbolic functions](!#6).' }],
+        [{ formula: '$\\displaystyle \\frac{d}{dx}[\\operatorname{arctanh} x] = \\frac{1}{1 - x^2}$', text: 'Valid for $|x| < 1$; compare the arctangent, which has $1 + x^2$ ([inverse hyperbolic functions](!#6)).' }, ''],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     specialDerivativesOutline,
     sectionsContent,
     introContent,
@@ -1014,7 +1030,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({specialDerivativesOutline, 
+export default function PageTemplate({ formulaSummaryData, pitfallData,specialDerivativesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1090,7 +1106,7 @@ $$\\frac{d}{dx}[\\arccos x] = -\\frac{1}{\\sqrt{1 - x^2}}$$
         content: [
           `@academic[pitfall,aside:true,width:35%:Forgetting the chain rule
 Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leaves out the derivative of the inner $2x$. The chain rule gives $\\frac{d}{dx}[\\arcsin(2x)] = \\frac{2}{\\sqrt{1 - 4x^2}}$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-forgetting-the-chain-rule)]@`,
           `The formulas are stated for the bare variable $x$, but in practice the argument of $\\arcsin$ or $\\arccos$ is often an expression such as $2x$, $x^2$ or $e^x$. The formula is then evaluated at that inner expression, and the [chain rule](!/calculus/derivatives/rules#7) links the result to the rate at which the inner expression changes. The same holds for every formula on this page.`,
         ],
       },
@@ -1171,7 +1187,16 @@ Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leave
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj8Table}}/>,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="special-derivative-formula-summary"
+            title="Special derivatives"
+            source="/calculus/derivatives/special"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="special-derivatives-outline"
@@ -1188,6 +1213,15 @@ Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leave
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="special-derivative-pitfalls"
+            title="Common pitfalls with special derivatives"
+            source="/calculus/derivatives/special"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

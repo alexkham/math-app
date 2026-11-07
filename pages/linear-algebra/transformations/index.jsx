@@ -744,6 +744,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -1045,7 +1047,7 @@ In each case, linearity can be verified directly from the definition. The matrix
 
 @academic[pitfall,aside:true,width:35%:Trusting the zero test alone
 Calling $T(x, y) = (x, xy)$ linear because $T(\\mathbf{0}) = \\mathbf{0}$ skips the real test: $T(2(1, 1)) = (2, 4)$, but $2T(1, 1) = (2, 2)$. Passing the zero test does not prove linearity, and this map is not linear.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-trusting-the-zero-test-alone)]@
 
 The squaring function $T(x) = x^2$ from $\\mathbb{R}$ to $\\mathbb{R}$ fails additivity: $T(1 + 1) = 4$ but $T(1) + T(1) = 2$. The absolute value function $T(x) = |x|$ fails homogeneity: $T(-1 \\cdot 2) = 2$ but $-1 \\cdot T(2) = -2$. Norms $T(\\mathbf{v}) = \\|\\mathbf{v}\\|$ fail additivity by the triangle inequality.
 
@@ -1086,7 +1088,7 @@ $$T(\\mathbf{v}) = c_1T(\\mathbf{v}_1) + \\cdots + c_nT(\\mathbf{v}_n)$$]@
 
 @academic[pitfall,aside:true,width:35%:Using standard coordinates with basis images
 With $T(1, 1) = (2, 0)$ and $T(1, -1) = (0, 4)$, putting the images in as columns and multiplying by the standard coordinates of $(3, 1)$ gives $(6, 4)$. In the basis, $(3, 1) = 2(1, 1) + 1(1, -1)$, so $T(3, 1) = 2(2, 0) + (0, 4) = (4, 4)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-standard-coordinates-with-basis-images)]@
 
 Conversely, any choice of images for the basis vectors — any $n$ vectors in $W$, with no constraints — defines a unique linear transformation. There are no compatibility conditions to satisfy; the basis images can be chosen freely.
 
@@ -1103,7 +1105,7 @@ The composition of two linear transformations is linear. If $T: U \\to V$ and $S
 
 @academic[pitfall,aside:true,width:35%:Reversing the order of a composition
 Writing the matrix of $S \\circ T$ as $AB$, with $A$ for $T$ = rotation by $90^\\circ$ and $B$ for $S$ = reflection across the x-axis, gives $\\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$. $T$ acts first, so the matrix is $BA = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reversing-the-order-of-a-composition)]@
 
 The order of the two maps needs care here. In $S \\circ T$ the map written second acts first: a vector is sent through $T$, and $S$ is then applied to the result. When both maps are given by matrices, the matrix of the composition is found by following a vector through the two steps in that order.
 
@@ -1118,7 +1120,7 @@ A linear transformation is invertible if and only if it is bijective — both in
 
 @academic[pitfall,aside:true,width:35%:Writing the images as rows
 For $T(x, y) = (2x + y, 3y)$, writing $T(\\mathbf{e}_1) = (2, 0)$ and $T(\\mathbf{e}_2) = (1, 3)$ as rows gives $\\begin{pmatrix} 2 & 0 \\\\ 1 & 3 \\end{pmatrix}$, which sends $(0, 1)$ to $(0, 3)$ instead of $(1, 3)$. As columns they give $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-writing-the-images-as-rows)]@
 
 This gives a one-to-one correspondence between linear maps $\\mathbb{R}^n \\to \\mathbb{R}^m$ and $m \\times n$ matrices. Every property of the transformation — its [rank](!/linear-algebra/matrix/rank), [determinant](!/linear-algebra/determinants) (when square), [eigenvalues](!/linear-algebra/eigen), [image and kernel](!/linear-algebra/transformations/image-kernel) — can be read from the matrix. And every matrix operation — multiplication, inversion, decomposition — has a transformation-level interpretation.
 
@@ -1147,79 +1149,9 @@ The singular value decomposition reveals the hidden geometry of any matrix: ever
   },
   obj10: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for many wrong answers on this topic. Four are marked with a box where they happen in the sections above, and the fifth, calling a straight-line function such as $2x + 3$ linear, belongs with the affine maps of the non-examples section. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Trusting the zero test alone**
-
-The check $T(\\mathbf{0}) = \\mathbf{0}$ is carried out, it holds, and the map is declared linear. The zero test can only show that a map is not linear; passing it proves nothing.
-
-Wrong working: $T(x, y) = (x, xy)$ sends $(0, 0)$ to $(0, 0)$, so $T$ is linear.
-
-Right working: test the defining condition. $T(1, 1) = (1, 1)$, while
-$$T(2(1, 1)) = T(2, 2) = (2, 4) \\neq (2, 2) = 2T(1, 1)$$
-Scalar multiplication is not preserved, so $T$ is not linear. The squaring function and the absolute value from the non-examples section pass the zero test as well, since $0^2 = 0$ and $|0| = 0$, and neither is linear.
-
-Why it happens: the zero test is the quickest check and it does catch translations and affine maps, so it gets used as if it were the whole definition.
-
-How to check: after the zero test, try one scaling, with $c = 2$ or $c = -1$, and one sum of two simple vectors. A product or a power of the coordinates in the formula, such as $xy$ or $x^2$, is a sign that one of these will fail.
-
-**Calling a straight-line function linear**
-
-In school algebra, $f(x) = 2x + 3$ is called a linear function because its graph is a straight line. The name is carried over, and $f$ is taken to be a linear transformation of $\\mathbb{R}$.
-
-Wrong working: the graph of $f(x) = 2x + 3$ is a line, so $f$ is linear.
-
-Right working: test additivity.
-$$f(1 + 1) = f(2) = 7, \\qquad f(1) + f(1) = 5 + 5 = 10$$
-The two sides differ, so $f$ is not linear. It is an affine map $x \\mapsto 2x + 3$ with shift $b = 3$; only its matrix part $x \\mapsto 2x$ is linear.
-
-Why it happens: the word "linear" is used for two different things. In algebra it describes the shape of a graph; in linear algebra it describes how a map treats sums and multiples.
-
-How to check: evaluate at zero. Here $f(0) = 3 \\neq 0$. A linear map of $\\mathbb{R}$ has the form $x \\mapsto mx$, and its graph is a line through the origin.
-
-**Using standard coordinates with basis images**
-
-The map is given on a basis that is not the standard one. The images are put into a matrix as columns, and that matrix is multiplied by the standard coordinates of a vector.
-
-Wrong working: with the basis $\\mathbf{v}_1 = (1, 1)$, $\\mathbf{v}_2 = (1, -1)$ and the images $T(\\mathbf{v}_1) = (2, 0)$, $T(\\mathbf{v}_2) = (0, 4)$,
-$$T(3, 1) = \\begin{pmatrix} 2 & 0 \\\\ 0 & 4 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 6 \\\\ 4 \\end{pmatrix}$$
-
-Right working: first write $(3, 1)$ in the basis. From $c_1 + c_2 = 3$ and $c_1 - c_2 = 1$, $c_1 = 2$ and $c_2 = 1$. Then linearity gives
-$$T(3, 1) = 2T(\\mathbf{v}_1) + 1T(\\mathbf{v}_2) = 2(2, 0) + (0, 4) = (4, 4)$$
-
-Why it happens: for the standard basis the shortcut is correct, because the coordinates of $(3, 1)$ in that basis are $3$ and $1$. In any other basis the coordinates are different numbers, and the shortcut silently uses the wrong ones.
-
-How to check: apply the method to a basis vector itself. The matrix above sends $\\mathbf{v}_1 = (1, 1)$ to $(2, 4)$, not to the given image $(2, 0)$.
-
-**Reversing the order of a composition**
-
-The matrix of $S \\circ T$ is written with the matrix of $T$ on the left, because $T$ is the map that acts first.
-
-Wrong working: with $T$ the rotation by $90^\\circ$, $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, and $S$ the reflection across the x-axis, $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}$,
-$$AB = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix} = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$$
-
-Right working: $(S \\circ T)(\\mathbf{x}) = S(A\\mathbf{x}) = B(A\\mathbf{x}) = (BA)\\mathbf{x}$, so
-$$BA = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$$
-
-Why it happens: the maps act in the order $T$, then $S$, and that order is copied into the product. But a matrix acts on the vector to its right, so the matrix of the first map has to stand next to the vector.
-
-How to check: follow $\\mathbf{e}_1$ by hand. The rotation sends $(1, 0)$ to $(0, 1)$, and the reflection sends $(0, 1)$ to $(0, -1)$. So the first column of the matrix must be $(0, -1)$, as in $BA$; the first column of $AB$ is $(0, 1)$.
-
-**Writing the images as rows**
-
-The images $T(\\mathbf{e}_1), \\dots, T(\\mathbf{e}_n)$ are found correctly but are written into the matrix as rows instead of columns.
-
-Wrong working: for $T(x, y) = (2x + y, 3y)$, the images are $T(\\mathbf{e}_1) = (2, 0)$ and $T(\\mathbf{e}_2) = (1, 3)$, and stacking them as rows gives
-$$\\begin{pmatrix} 2 & 0 \\\\ 1 & 3 \\end{pmatrix}$$
-
-Right working: the images are the columns.
-$$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix}, \\qquad A\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 2x + y \\\\ 3y \\end{pmatrix}$$
-
-Why it happens: vectors are often written in a row, as $(2, 0)$, so a list of images is naturally stacked one under another.
-
-How to check: multiply the matrix by $\\mathbf{e}_2 = (0, 1)$. The result must be $T(\\mathbf{e}_2) = (1, 3)$; the matrix with rows gives $(0, 3)$.`,
+    content: `Five mistakes account for many wrong answers on this topic. Four are marked with a box where they happen in the sections above, and the fifth, calling a straight-line function such as $2x + 3$ linear, belongs with the affine maps of the non-examples section. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip takes one property for linearity or misplaces a matrix. $T(\\mathbf{0}) = \\mathbf{0}$ is necessary but not enough; $2x + 3$ is affine, not linear; images given on a non-standard basis need coordinates in that basis; the matrix of $S \\circ T$ has the matrix of $S$ on the left; and the images of the basis vectors are columns. Testing one scaling and one sum, or following $\\mathbf{e}_1$ by hand, catches each slip.`,
     link: ``,
   },
 }
@@ -1354,8 +1286,58 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'trusting-the-zero-test-alone', name: `Trusting the zero test alone`, errorAt: 0,
+        what: `The check $T(\\mathbf{0}) = \\mathbf{0}$ is carried out, it holds, and the map is declared linear. The zero test can only show that a map is not linear; passing it proves nothing.`,
+        wrong: [`$T(x, y) = (x, xy)$ sends $(0, 0)$ to $(0, 0)$, so $T$ is linear.`],
+        right: [`Test the defining condition. $T(1, 1) = (1, 1)$, while
+$$T(2(1, 1)) = T(2, 2)$$
+$$= (2, 4) \\neq (2, 2) = 2T(1, 1)$$`, `Scalar multiplication is not preserved, so $T$ is not linear. The squaring function and the absolute value from the non-examples section pass the zero test as well, since $0^2 = 0$ and $|0| = 0$, and neither is linear.`],
+        why: `The zero test is the quickest check and it does catch translations and affine maps, so it gets used as if it were the whole definition.`,
+        check: `After the zero test, try one scaling, with $c = 2$ or $c = -1$, and one sum of two simple vectors. A product or a power of the coordinates in the formula, such as $xy$ or $x^2$, is a sign that one of these will fail.` },
+      { id: 'calling-a-straight-line-function-linear', name: `Calling a straight-line function linear`, errorAt: 0,
+        what: `In school algebra, $f(x) = 2x + 3$ is called a linear function because its graph is a straight line. The name is carried over, and $f$ is taken to be a linear transformation of $\\mathbb{R}$.`,
+        wrong: [`The graph of $f(x) = 2x + 3$ is a line, so $f$ is linear.`],
+        right: [`Test additivity.`, `$$f(1 + 1) = f(2) = 7,$$
+$$f(1) + f(1) = 5 + 5 = 10$$`, `The two sides differ, so $f$ is not linear. It is an affine map $x \\mapsto 2x + 3$ with shift $b = 3$; only its matrix part $x \\mapsto 2x$ is linear.`],
+        why: `The word "linear" is used for two different things. In algebra it describes the shape of a graph; in linear algebra it describes how a map treats sums and multiples.`,
+        check: `Evaluate at zero. Here $f(0) = 3 \\neq 0$. A linear map of $\\mathbb{R}$ has the form $x \\mapsto mx$, and its graph is a line through the origin.` },
+      { id: 'using-standard-coordinates-with-basis-images', name: `Using standard coordinates with basis images`, errorAt: 0,
+        what: `The map is given on a basis that is not the standard one. The images are put into a matrix as columns, and that matrix is multiplied by the standard coordinates of a vector.`,
+        wrong: [`With the basis $\\mathbf{v}_1 = (1, 1)$, $\\mathbf{v}_2 = (1, -1)$ and the images $T(\\mathbf{v}_1) = (2, 0)$, $T(\\mathbf{v}_2) = (0, 4)$,
+$$T(3, 1) = \\begin{pmatrix} 2 & 0 \\\\ 0 & 4 \\end{pmatrix}\\begin{pmatrix} 3 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 6 \\\\ 4 \\end{pmatrix}$$`],
+        right: [`First write $(3, 1)$ in the basis. From $c_1 + c_2 = 3$ and $c_1 - c_2 = 1$, $c_1 = 2$ and $c_2 = 1$. Then linearity gives
+$$T(3, 1) = 2T(\\mathbf{v}_1) + 1T(\\mathbf{v}_2)$$
+$$= 2(2, 0) + (0, 4) = (4, 4)$$`],
+        why: `For the standard basis the shortcut is correct, because the coordinates of $(3, 1)$ in that basis are $3$ and $1$. In any other basis the coordinates are different numbers, and the shortcut silently uses the wrong ones.`,
+        check: `Apply the method to a basis vector itself. The matrix above sends $\\mathbf{v}_1 = (1, 1)$ to $(2, 4)$, not to the given image $(2, 0)$.` },
+      { id: 'reversing-the-order-of-a-composition', name: `Reversing the order of a composition`, errorAt: 0,
+        what: `The matrix of $S \\circ T$ is written with the matrix of $T$ on the left, because $T$ is the map that acts first.`,
+        wrong: [`With $T$ the rotation by $90^\\circ$, $A = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$, and $S$ the reflection across the x-axis, $B = \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}$,
+$$AB = \\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}\\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix} = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$$`],
+        right: [`$(S \\circ T)(\\mathbf{x}) = S(A\\mathbf{x}) = B(A\\mathbf{x}) = (BA)\\mathbf{x}$, so
+$$BA$$
+$$= \\begin{pmatrix} 1 & 0 \\\\ 0 & -1 \\end{pmatrix}\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0 & -1 \\\\ -1 & 0 \\end{pmatrix}$$`],
+        why: `The maps act in the order $T$, then $S$, and that order is copied into the product. But a matrix acts on the vector to its right, so the matrix of the first map has to stand next to the vector.`,
+        check: `Follow $\\mathbf{e}_1$ by hand. The rotation sends $(1, 0)$ to $(0, 1)$, and the reflection sends $(0, 1)$ to $(0, -1)$. So the first column of the matrix must be $(0, -1)$, as in $BA$; the first column of $AB$ is $(0, 1)$.` },
+      { id: 'writing-the-images-as-rows', name: `Writing the images as rows`, errorAt: 1,
+        what: `The images $T(\\mathbf{e}_1), \\dots, T(\\mathbf{e}_n)$ are found correctly but are written into the matrix as rows instead of columns.`,
+        wrong: [`For $T(x, y) = (2x + y, 3y)$,`, `The images are $T(\\mathbf{e}_1) = (2, 0)$ and $T(\\mathbf{e}_2) = (1, 3)$, and stacking them as rows gives
+$$\\begin{pmatrix} 2 & 0 \\\\ 1 & 3 \\end{pmatrix}$$`],
+        right: [`For $T(x, y) = (2x + y, 3y)$,`, `The images are the columns.`, `$$A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix},$$
+$$A\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 2x + y \\\\ 3y \\end{pmatrix}$$`],
+        why: `Vectors are often written in a row, as $(2, 0)$, so a list of images is naturally stacked one under another.`,
+        check: `Multiply the matrix by $\\mathbf{e}_2 = (0, 1)$. The result must be $T(\\mathbf{e}_2) = (1, 3)$; the matrix with rows gives $(0, 3)$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     faqQuestions,
     demoUnits,
     conceptIntroFigures,
@@ -1377,7 +1359,7 @@ return {
 }
    }
 
-export default function LinearTransformationsPage({seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
+export default function LinearTransformationsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1536,6 +1518,15 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="linear-transformation-pitfalls"
+            title="Common pitfalls with linear transformations"
+            source="/linear-algebra/transformations"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

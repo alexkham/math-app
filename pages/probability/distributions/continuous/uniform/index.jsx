@@ -1125,6 +1125,9 @@ import continuousCdfDiagrams from '@/app/components/visualizations/probability/c
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1404,7 +1407,7 @@ $$F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if 
 
 @academic[pitfall,aside:true,width:35%:Extending the ramp past b
 Using $\\frac{x-a}{b-a}$ beyond $b$ gives $F(15) = 1.5$ for $U(0, 10)$, so $P(8 \\leq X \\leq 15) = 1.5 - 0.8 = 0.7$. Above $b$ the CDF stays at $1$: $P(8 \\leq X \\leq 15) = 1 - 0.8 = 0.2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-extending-the-ramp-past-b)]@
 
 **Practical Use:** The [CDF (Cumulative Distribution Function)](!/probability/cdf) for the uniform distribution is particularly simple.
 
@@ -1470,7 +1473,7 @@ $$E[X] = \\frac{0 + 30}{2} = 15 \\text{ minutes}$$]@
 
 @academic[pitfall,aside:true,width:35%:Halving the width
 Computing $\\frac{b-a}{2}$ for $U(2, 8)$ gives $3$, half the length of the interval rather than its centre. The mean is $\\frac{a+b}{2} = \\frac{2+8}{2} = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-halving-the-width)]@
 
 The expected arrival time is 2:15 PM, exactly halfway through the 30-minute window. If you repeatedly sample random arrival times, the long-run average will converge to 15 minutes after 2:00 PM.
 
@@ -1563,7 +1566,7 @@ $$\\sigma = \\frac{30}{\\sqrt{12}} \\approx 8.66 \\text{ minutes}$$]@
 
 @academic[pitfall,aside:true,width:35%:Dividing the width by 12
 Writing $\\sigma = \\frac{b-a}{12}$ gives $\\frac{30}{12} = 2.5$ minutes for the bus. The variance divides the squared width by $12$, so the root takes in the $12$ too: $\\sigma = \\frac{30}{\\sqrt{12}} \\approx 8.66$ minutes.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-the-width-by-12)]@
 
 The variance of 75 min² and standard deviation of about 8.66 minutes indicate moderate spread. While the expected arrival is 15 minutes after 2:00 PM, typical variations are around ±8.66 minutes, meaning arrivals between roughly 6 and 24 minutes are common.
   `,
@@ -1739,7 +1742,7 @@ The middle 50% of arrivals span a 15-minute window from 2:07:30 PM to 2:22:30 PM
 
 @academic[pitfall,aside:true,width:35%:Forgetting to add a
 Taking $x_p = p \\cdot b$ for $U(10, 30)$ gives the 25th percentile $0.25 \\cdot 30 = 7.5$, below the interval. The quantile starts from $a$: $x_{0.25} = 10 + 0.25(30 - 10) = 15$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-add-a)]@
 
 **10th percentile:** $x_{0.10} = a + 0.10(b - a)$ (10% of values below this)
 
@@ -2051,72 +2054,19 @@ Unlike the normal distribution, sums of independent uniform variables do **not**
     },
     capstone:{
       title:`Continuous Uniform at a Glance`,
-      content:`The table below collects the full anatomy of the continuous uniform distribution into a single reference card — its parameters and support, the PDF and CDF, the mean and variance formulas, mode and median behavior, the quantile function, the standard Uniform(0, 1) case, and a canonical bus-arrival example.`,
+      content:`This summary gathers the continuous uniform distribution on one card of ten rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the two endpoints and the interval between them as the support. Then come the flat density, the running total that rises in a straight line, the mean at the midpoint, the variance with the standard deviation, the mode and median, and the quantile. The last rows give the standard uniform on the unit interval and the example of a bus that arrives at a random moment within half an hour.`,
+      formulaSheetAfter: `On this distribution a probability is simply a length: the share of the interval that an event covers. The mean and median sit at the midpoint, and the spread depends on the width alone, so moving the interval changes neither the variance nor the shape.`,
       before:``,
       after:``,
       link:'',
     },
     obj18:{
       title:`Common Pitfalls`,
-      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Extending the ramp past b**
-
-A probability $P(c \\leq X \\leq d)$ is found from the CDF, but one end of the window lies outside the interval $[a, b]$, and the middle line $\\frac{x-a}{b-a}$ of the CDF is used there anyway.
-
-Wrong working: for $X \\sim U(0, 10)$,
-$$P(8 \\leq X \\leq 15) = \\frac{15 - 0}{10} - \\frac{8 - 0}{10} = 1.5 - 0.8 = 0.7$$
-
-Right working: above $b = 10$ the CDF equals $1$, so $F(15) = 1$.
-$$P(8 \\leq X \\leq 15) = F(15) - F(8) = 1 - 0.8 = 0.2$$
-
-Why it happens: the shortcut $\\frac{d-c}{b-a}$ is quick and is shown for windows inside the interval, so it gets applied to any window. It holds only when $a \\leq c \\leq d \\leq b$.
-
-How to check: a CDF value can never exceed $1$, so $F(15) = 1.5$ is a warning sign. Cutting the window to the part inside the interval first gives the same answer: $[8, 15]$ becomes $[8, 10]$, a length of $2$ out of $10$.
-
-**Halving the width**
-
-The mean of a uniform distribution is the midpoint of the interval, and the midpoint is mixed up with half the length of the interval.
-
-Wrong working: for $X \\sim U(2, 8)$,
-$$E[X] = \\frac{b-a}{2} = \\frac{8-2}{2} = 3$$
-
-Right working: the midpoint is the average of the two endpoints.
-$$E[X] = \\frac{a+b}{2} = \\frac{2+8}{2} = 5$$
-
-Why it happens: the bus example starts at $a = 0$, where $\\frac{b-a}{2}$ and $\\frac{a+b}{2}$ both equal $\\frac{b}{2}$, so the wrong formula gives the right answer there. The difference shows only when $a \\neq 0$.
-
-How to check: shift the interval. Moving $U(2, 8)$ to $U(102, 108)$ must move the mean by $100$, from $5$ to $105$; the half-width $3$ does not move at all, so it cannot be the mean.
-
-**Dividing the width by 12**
-
-The standard deviation is needed, and the divisor $12$ from the variance formula is applied to the width directly, without its square root.
-
-Wrong working: for the bus on $[0, 30]$ minutes,
-$$\\sigma = \\frac{b-a}{12} = \\frac{30}{12} = 2.5 \\text{ minutes}$$
-
-Right working: the variance divides the squared width by $12$, and the standard deviation is the square root of the whole fraction.
-$$\\mathrm{Var}(X) = \\frac{30^2}{12} = 75, \\qquad \\sigma = \\sqrt{75} = \\frac{30}{\\sqrt{12}} \\approx 8.66 \\text{ minutes}$$
-
-Why it happens: the $12$ is the memorable part of the formula, and the square root is taken of the top only: $\\sqrt{(b-a)^2} = b - a$ is used, $\\sqrt{12}$ is forgotten.
-
-How to check: for any uniform distribution the standard deviation is about $0.289$ of the width, so a 30-minute window must give close to $8.7$ minutes. A value of $2.5$ minutes would keep almost every arrival within a few minutes of 2:15, which a flat density over the whole half hour does not do.
-
-**Forgetting to add a**
-
-A quantile is found with $x_p = a + p(b - a)$, and the formula is shortened to $p \\cdot b$, which is correct only when the interval starts at $0$.
-
-Wrong working: for $X \\sim U(10, 30)$,
-$$x_{0.25} = 0.25 \\cdot 30 = 7.5$$
-
-Right working: the quantile lies a fraction $p$ of the width beyond the starting point $a$.
-$$x_{0.25} = a + 0.25(b - a) = 10 + 0.25 \\cdot 20 = 15$$
-
-Why it happens: the worked percentiles on this page use the bus interval $[0, 30]$, where $a = 0$ and the two formulas agree.
-
-How to check: every quantile must lie inside the interval, and $7.5$ is below $a = 10$, a value the variable never takes. Substituting back confirms the right answer: $F(15) = \\frac{15 - 10}{30 - 10} = 0.25$.`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip loses track of the interval $[a, b]$. The CDF stays at $1$ past $b$, the mean is the midpoint $\\frac{a + b}{2}$, the standard deviation is $\\frac{b - a}{\\sqrt{12}}$, and a quantile starts from $a$: $x_p = a + p(b - a)$. Checking that every value lies in the interval, and that no probability exceeds $1$, catches each slip.`,
       link:'',
     },
     links:{
@@ -2307,8 +2257,79 @@ How to check: every quantile must lie inside the interval, and $7.5$ is below $a
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj18 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'extending-the-ramp-past-b', name: `Extending the ramp past b`, errorAt: 1,
+        what: `A probability $P(c \\leq X \\leq d)$ is found from the CDF, but one end of the window lies outside the interval $[a, b]$, and the middle line $\\frac{x-a}{b-a}$ of the CDF is used there anyway.`,
+        wrong: [`For $X \\sim U(0, 10)$,`, `$$P(8 \\leq X \\leq 15) = \\frac{15 - 0}{10} - \\frac{8 - 0}{10}$$
+$$= 1.5 - 0.8 = 0.7$$`],
+        right: [`For $X \\sim U(0, 10)$,`, `Above $b = 10$ the CDF equals $1$, so $F(15) = 1$.`, `$$P(8 \\leq X \\leq 15) = F(15) - F(8)$$
+$$= 1 - 0.8 = 0.2$$`],
+        why: `The shortcut $\\frac{d-c}{b-a}$ is quick and is shown for windows inside the interval, so it gets applied to any window. It holds only when $a \\leq c \\leq d \\leq b$.`,
+        check: `A CDF value can never exceed $1$, so $F(15) = 1.5$ is a warning sign. Cutting the window to the part inside the interval first gives the same answer: $[8, 15]$ becomes $[8, 10]$, a length of $2$ out of $10$.` },
+      { id: 'halving-the-width', name: `Halving the width`, errorAt: 1,
+        what: `The mean of a uniform distribution is the midpoint of the interval, and the midpoint is mixed up with half the length of the interval.`,
+        wrong: [`For $X \\sim U(2, 8)$,`, `$$E[X] = \\frac{b-a}{2} = \\frac{8-2}{2} = 3$$`],
+        right: [`For $X \\sim U(2, 8)$,`, `The midpoint is the average of the two endpoints.`, `$$E[X] = \\frac{a+b}{2} = \\frac{2+8}{2} = 5$$`],
+        why: `The bus example starts at $a = 0$, where $\\frac{b-a}{2}$ and $\\frac{a+b}{2}$ both equal $\\frac{b}{2}$, so the wrong formula gives the right answer there. The difference shows only when $a \\neq 0$.`,
+        check: `Shift the interval. Moving $U(2, 8)$ to $U(102, 108)$ must move the mean by $100$, from $5$ to $105$; the half-width $3$ does not move at all, so it cannot be the mean.` },
+      { id: 'dividing-the-width-by-12', name: `Dividing the width by 12`, errorAt: 0,
+        what: `The standard deviation is needed, and the divisor $12$ from the variance formula is applied to the width directly, without its square root.`,
+        wrong: [`For the bus on $[0, 30]$ minutes,
+$$\\sigma = \\frac{b-a}{12} = \\frac{30}{12} = 2.5 \\text{ minutes}$$`],
+        right: [`The variance divides the squared width by $12$, and the standard deviation is the square root of the whole fraction.`, `$$\\mathrm{Var}(X) = \\frac{30^2}{12} = 75,$$
+$$\\sigma = \\sqrt{75} = \\frac{30}{\\sqrt{12}}$$
+$$\\approx 8.66 \\text{ minutes}$$`],
+        why: `The $12$ is the memorable part of the formula, and the square root is taken of the top only: $\\sqrt{(b-a)^2} = b - a$ is used, $\\sqrt{12}$ is forgotten.`,
+        check: `For any uniform distribution the standard deviation is about $0.289$ of the width, so a 30-minute window must give close to $8.7$ minutes. A value of $2.5$ minutes would keep almost every arrival within a few minutes of 2:15, which a flat density over the whole half hour does not do.` },
+      { id: 'forgetting-to-add-a', name: `Forgetting to add a`, errorAt: 1,
+        what: `A quantile is found with $x_p = a + p(b - a)$, and the formula is shortened to $p \\cdot b$, which is correct only when the interval starts at $0$.`,
+        wrong: [`For $X \\sim U(10, 30)$,`, `$$x_{0.25} = 0.25 \\cdot 30 = 7.5$$`],
+        right: [`For $X \\sim U(10, 30)$,`, `The quantile lies a fraction $p$ of the width beyond the starting point $a$.`, `$$x_{0.25} = a + 0.25(b - a)$$
+$$= 10 + 0.25 \\cdot 20 = 15$$`],
+        why: `The worked percentiles on this page use the bus interval $[0, 30]$, where $a = 0$ and the two formulas agree.`,
+        check: `Every quantile must lie inside the interval, and $7.5$ is below $a = 10$, a value the variable never takes. Substituting back confirms the right answer: $F(15) = \\frac{15 - 10}{30 - 10} = 0.25$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameters', formula: '$a, b \\in \\mathbb{R}$ with $a < b$', note: 'the endpoints of the interval; width $b - a$',
+        sub: 'The two endpoints that fix the distribution, as [the parameters section](!#3) explains.' },
+      { name: 'Support', formula: '$x \\in [a, b]$', note: 'the density is zero outside the interval',
+        sub: 'Every value between the endpoints, set out with [the PDF and its support](!#5).' },
+      { name: 'PDF', formula: '$\\displaystyle f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & \\text{otherwise} \\end{cases}$', note: 'a flat rectangle of height $1/(b - a)$ and width $b - a$; total area $1$',
+        sub: 'The constant density over the interval, from [the PDF section](!#5).' },
+      { name: 'CDF', formula: '$\\displaystyle F(x) = \\begin{cases} 0 & \\text{if } x < a \\\\ \\frac{x-a}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 1 & \\text{if } x > b \\end{cases}$', note: 'a linear ramp: probability scales with the length of the subinterval',
+        sub: 'The probability of a value up to $x$, from [the CDF section](!#6).' },
+      { name: 'Expected value', formula: '$\\displaystyle E[X] = \\frac{a + b}{2}$', note: 'the midpoint of the interval',
+        sub: 'The balance point of the interval, derived in [the expected value section](!#7).' },
+      { name: 'Variance', formula: '$\\displaystyle \\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$; $\\displaystyle \\sigma = \\frac{b-a}{\\sqrt{12}}$', note: 'depends only on the width of the interval, not on its location',
+        sub: 'How widely the values spread around the midpoint, worked out in [variance and standard deviation](!#8).' },
+      { name: 'Mode and median', formula: '$\\displaystyle \\text{Median} = \\frac{a + b}{2}$; the mode is not uniquely defined, since every value in $[a, b]$ qualifies', note: 'perfectly symmetric: mean, median and midpoint coincide',
+        sub: 'The middle sits at the midpoint and no value is more likely than another, as [mode and median](!#9) shows.' },
+      { name: 'Quantile function', formula: '$x_p = a + p(b - a)$ for $0 < p < 1$', note: 'linear; the basis of the inverse-CDF sampling method',
+        sub: 'The value below which a share $p$ of the interval lies, solved in [quantiles and percentiles](!#10).' },
+      { name: 'Standard case', formula: '$\\operatorname{Uniform}(0, 1)$, the standard uniform distribution', note: 'the basis of random-number generation; $(X - a)/(b - a) \\sim U(0, 1)$',
+        sub: 'Any uniform variable rescales to the unit interval, as [special cases](!#14) shows.' },
+      { name: 'Canonical example', formula: 'a bus arriving uniformly between 2:00 and 2:30 PM: $[0, 30]$ minutes', note: '$E[X] = 15$ min, $\\mathrm{Var}(X) = 75 \\text{ min}^2$, $\\sigma \\approx 8.66$ min',
+        sub: 'The bus-arrival setting the page works through; [variance and standard deviation](!#8) finishes its numbers.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -2328,7 +2349,7 @@ How to check: every quantile must lie inside the interval, and $7.5$ is below $a
     }
    }
 
-export default function ContinuousUniformDistributionPage({
+export default function ContinuousUniformDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2558,8 +2579,16 @@ export default function ContinuousUniformDistributionPage({
         link:sectionsContent.capstone.link,
         content:[
           sectionsContent.capstone.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="continuous-uniform-distribution-formula-summary"
+            title="Continuous uniform distribution at a glance"
+            source="/probability/distributions/continuous/uniform"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.capstone.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2568,6 +2597,15 @@ export default function ContinuousUniformDistributionPage({
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
+          <DiagramFrame
+            key={'obj18-mistakes'}
+            id="continuous-uniform-pitfalls"
+            title="Common pitfalls with the continuous uniform distribution"
+            source="/probability/distributions/continuous/uniform"
+            after={sectionsContent.obj18.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

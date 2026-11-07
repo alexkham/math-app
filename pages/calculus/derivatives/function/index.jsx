@@ -19,7 +19,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -407,7 +408,7 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{(x+h)^2 - x^2}{h} = \\lim_{h \\to 0} \\frac{2x
 
 @academic[pitfall,aside:true,width:35%:Squaring a sum term by term
 Writing $(x + h)^2$ as $x^2 + h^2$ leaves $\\frac{h^2}{h} = h$, which tends to $0$, so $f'(x) = 0$ for every $x$. With $(x + h)^2 = x^2 + 2xh + h^2$ the quotient is $2x + h$, and $f'(x) = 2x$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-a-sum-term-by-term)]@
 
 The result $f'(x) = 2x$ is a function: input $x$, output the slope of the parabola at that $x$. At $x = 3$, the slope is $6$. At $x = -1$, the slope is $-2$.
 
@@ -465,7 +466,7 @@ Where $f$ is increasing, $f' \\geq 0$—the graph of $f'$ lies on or above the $
 
 @academic[pitfall,aside:true,width:35%:Reading the slope from the height
 Taking the sign of $f'$ from the height of $f$: $f(x) = x^2$ is positive at $x = -1$, which suggests $f'(-1) > 0$. But $f$ is falling there, and $f'(-1) = 2(-1) = -2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-slope-from-the-height)]@
 
 Steep sections of $f$ correspond to large values of $|f'|$. Flat sections of $f$ correspond to $f'$ near zero. A straight segment of $f$ with constant slope corresponds to $f'$ being constant—a horizontal segment on the graph of $f'$.
 
@@ -486,7 +487,7 @@ Where $f'$ is positive, $f$ is rising. Where $f'$ is negative, $f$ is falling. W
 
 @academic[pitfall,aside:true,width:35%:Taking every zero of the derivative as an extremum
 Reading $f'(a) = 0$ alone as a maximum or minimum fails for $f(x) = x^3$: $f'(0) = 0$, yet $f$ rises on both sides of $0$. Since $f'(x) = 3x^2$ does not change sign at $0$, there is no extremum there.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-every-zero-of-the-derivative-as-an-extremum)]@
 
 The magnitude of $f'$ controls steepness: large positive values of $f'$ mean $f$ is climbing steeply; values of $f'$ near zero mean $f$ is nearly flat. Where $f'$ is increasing, $f$ is concave up. Where $f'$ is decreasing, $f$ is concave down.
 
@@ -569,47 +570,9 @@ The two graphical translations covered above—reading $f'$ from $f$, and recons
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `
-Three mistakes cause most wrong answers when the derivative function is computed from the definition or read from a graph. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Squaring a sum term by term**
-
-In the limit definition for $f(x) = x^2$, the term $f(x + h) = (x + h)^2$ is expanded as if a square could be taken one term at a time, and the cross term $2xh$ is lost.
-
-Wrong working: $\\dfrac{(x + h)^2 - x^2}{h} = \\dfrac{x^2 + h^2 - x^2}{h} = \\dfrac{h^2}{h} = h$, and as $h \\to 0$ this gives $f'(x) = 0$ for every $x$.
-
-Right working: $(x + h)^2 = x^2 + 2xh + h^2$, so $\\dfrac{(x + h)^2 - x^2}{h} = \\dfrac{2xh + h^2}{h} = 2x + h$, which tends to $2x$. So $f'(x) = 2x$.
-
-Why it happens: multiplication spreads over a sum, $3(x + h) = 3x + 3h$, and squaring is treated as if it did the same. It does not: $(x + h)^2 = (x + h)(x + h)$, and multiplying out produces the cross term $2xh$.
-
-How to check: a derivative equal to $0$ everywhere belongs to a flat graph, and the parabola is not flat. Numerically, at $x = 3$ with $h = 0.01$ the quotient is $\\dfrac{3.01^2 - 9}{0.01} = 6.01$, close to $6$ and far from $0$.
-
-**Reading the slope from the height**
-
-When the graph of $f'$ is sketched from the graph of $f$, the sign of $f'$ is taken from where $f$ sits, above or below the $x$-axis, instead of from whether $f$ is rising or falling.
-
-Wrong working: $f(x) = x^2$ lies above the $x$-axis for every $x \\neq 0$, so $f'$ is drawn positive everywhere, and $f'(-1) > 0$.
-
-Right working: for $x < 0$ the parabola falls, so $f'$ is negative there. With $f'(x) = 2x$, $f'(-1) = -2$; the graph of $f'$ is below the axis to the left of $0$ and above it to the right.
-
-Why it happens: both graphs are drawn on the same kind of axes, and copying the shape of $f$ is easier than reading its slope point by point.
-
-How to check: follow the tangent at a sample point. At $x = -1$ the tangent to $x^2$ goes down to the right, so its slope, which is the value of $f'$ there, is negative.
-
-**Taking every zero of the derivative as an extremum**
-
-When $f$ is reconstructed from $f'$, every point where $f'$ equals $0$ is marked as a maximum or a minimum, without checking whether $f'$ changes sign there.
-
-Wrong working: for $f(x) = x^3$, $f'(x) = 3x^2$ is $0$ at $x = 0$, so $f$ is said to have a local extremum at $0$.
-
-Right working: $3x^2 > 0$ on both sides of $0$, so $f$ rises before $0$ and after it. The tangent at $0$ is horizontal, but there is no extremum: $f(-0.1) = -0.001$ is below $f(0) = 0$, and $f(0.1) = 0.001$ is above it.
-
-Why it happens: at a smooth maximum or minimum the tangent is always horizontal, and the statement is read backwards: horizontal tangent, therefore extremum.
-
-How to check: look at the sign of $f'$ just left and just right of the zero. An extremum needs a change of sign, from positive to negative for a maximum and from negative to positive for a minimum.
-`,
+    content: `Three mistakes cause most wrong answers when the derivative function is computed from the definition or read from a graph. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip confuses the function with its derivative. $(x + h)^2$ has the middle term $2xh$, the sign of $f'$ shows whether $f$ rises or falls and not whether it lies above the axis, and a zero of $f'$ is an extremum only when $f'$ changes sign there. A difference quotient with a small $h$, or the sign of $f'$ on both sides of the point, catches each slip.`,
     link: '',
   },
 };
@@ -822,8 +785,34 @@ const schemas = {
   };
 
 
+  // MistakeFix batch 13, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'squaring-a-sum-term-by-term', name: `Squaring a sum term by term`, errorAt: 0,
+        what: `In the limit definition for $f(x) = x^2$, the term $f(x + h) = (x + h)^2$ is expanded as if a square could be taken one term at a time, and the cross term $2xh$ is lost.`,
+        wrong: [`$\\dfrac{(x + h)^2 - x^2}{h} = \\dfrac{x^2 + h^2 - x^2}{h} = \\dfrac{h^2}{h} = h$, and as $h \\to 0$ this gives $f'(x) = 0$ for every $x$.`],
+        right: [`$(x + h)^2 = x^2 + 2xh + h^2$, so $\\dfrac{(x + h)^2 - x^2}{h} = \\dfrac{2xh + h^2}{h} = 2x + h$, which tends to $2x$. So $f'(x) = 2x$.`],
+        why: `Multiplication spreads over a sum, $3(x + h) = 3x + 3h$, and squaring is treated as if it did the same. It does not: $(x + h)^2 = (x + h)(x + h)$, and multiplying out produces the cross term $2xh$.`,
+        check: `A derivative equal to $0$ everywhere belongs to a flat graph, and the parabola is not flat. Numerically, at $x = 3$ with $h = 0.01$ the quotient is $\\dfrac{3.01^2 - 9}{0.01} = 6.01$, close to $6$ and far from $0$.` },
+      { id: 'reading-the-slope-from-the-height', name: `Reading the slope from the height`, errorAt: 0,
+        what: `When the graph of $f'$ is sketched from the graph of $f$, the sign of $f'$ is taken from where $f$ sits, above or below the $x$-axis, instead of from whether $f$ is rising or falling.`,
+        wrong: [`$f(x) = x^2$ lies above the $x$-axis for every $x \\neq 0$, so $f'$ is drawn positive everywhere, and $f'(-1) > 0$.`],
+        right: [`For $x < 0$ the parabola falls, so $f'$ is negative there. With $f'(x) = 2x$, $f'(-1) = -2$; the graph of $f'$ is below the axis to the left of $0$ and above it to the right.`],
+        why: `Both graphs are drawn on the same kind of axes, and copying the shape of $f$ is easier than reading its slope point by point.`,
+        check: `Follow the tangent at a sample point. At $x = -1$ the tangent to $x^2$ goes down to the right, so its slope, which is the value of $f'$ there, is negative.` },
+      { id: 'taking-every-zero-of-the-derivative-as-an-extremum', name: `Taking every zero of the derivative as an extremum`, errorAt: 1,
+        what: `When $f$ is reconstructed from $f'$, every point where $f'$ equals $0$ is marked as a maximum or a minimum, without checking whether $f'$ changes sign there.`,
+        wrong: [`For $f(x) = x^3$,`, `$f'(x) = 3x^2$ is $0$ at $x = 0$, so $f$ is said to have a local extremum at $0$.`],
+        right: [`For $f(x) = x^3$,`, `$3x^2 > 0$ on both sides of $0$, so $f$ rises before $0$ and after it. The tangent at $0$ is horizontal, but there is no extremum: $f(-0.1) = -0.001$ is below $f(0) = 0$, and $f(0.1) = 0.001$ is above it.`],
+        why: `At a smooth maximum or minimum the tangent is always horizontal, and the statement is read backwards: horizontal tangent, therefore extremum.`,
+        check: `Look at the sign of $f'$ just left and just right of the zero. An extremum needs a change of sign, from positive to negative for a maximum and from negative to positive for a minimum.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
       darbouxConverse,
     smoothNest,
     demoUnits,
@@ -848,7 +837,7 @@ const schemas = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PageTemplate({darbouxConverse, smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ pitfallData,darbouxConverse, smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1045,6 +1034,15 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="derivative-function-pitfalls"
+            title="Common pitfalls with the derivative function"
+            source="/calculus/derivatives/function"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

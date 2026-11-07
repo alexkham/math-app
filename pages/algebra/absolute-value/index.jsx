@@ -13,6 +13,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -338,7 +339,10 @@ obj12: {
 
     obj13:{
       title:`Summary: Absolute Value at a Glance`,
-      content:`The definition, the rules, the graph and the calculus facts on this page reduce to the table below.`,
+      content:`This summary gathers the main facts of the page in nine rows. Each row names an idea with a short note on where it comes from and a link to its section, states the fact itself, and gives a worked example.
+
+The first rows say what absolute value is: a distance from zero, the two-case rule that defines it, and the distance between two numbers. The middle rows show how the bars behave with products, sums and square roots, the triangle inequality, and how to rewrite an expression without bars. The last two rows give the shape of the graph and the calculus facts: no break anywhere, a corner at zero, and the bars inside a logarithm.`,
+      formulaSheetAfter: `Nearly every row comes back to one rule: inside the bars, a negative value changes sign and a non-negative one is left alone. Splitting at the point where the inside is zero turns any expression with absolute values into ordinary algebra on each piece.`,
       before:``,
       after:``,
       link:'',
@@ -554,8 +558,39 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Idea', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Meaning', formula: '$|x|$ is the distance from $x$ to $0$', example: '$|-3| = |3| = 3$',
+        sub: 'Distance has no direction, so a number and its opposite have the same absolute value, as [what absolute value measures](!#1) explains.' },
+      { name: 'Definition', formula: '$|x| = \\begin{cases} x & \\text{if } x \\geq 0 \\\\ -x & \\text{if } x < 0 \\end{cases}$', example: '$|-6| = -(-6) = 6$',
+        sub: 'Non-negative numbers are left as they are and negative ones change sign; [the piecewise definition](!#2) shows why $-x$ is then positive.' },
+      { name: 'Distance between numbers', formula: '$|a - b| = |b - a|$', example: 'the distance from $-2$ to $5$ is $7$',
+        sub: 'The distance between $a$ and $b$; subtracting in either order gives the same distance, from [distance between numbers](!#3).' },
+      { name: 'What splits over the bars', formula: 'products and quotients, $|ab| = |a|\\,|b|$ and $\\displaystyle \\left|\\frac{a}{b}\\right| = \\frac{|a|}{|b|}$ for $b \\neq 0$; never sums or differences', example: '$|-2 \\cdot 3| = 6$, $\\; |3 - 8| \\neq 3 - 8$',
+        sub: 'The size of a product is the product of the sizes, while a sum can cancel, as [properties of absolute value](!#4) shows.' },
+      { name: 'Square roots', formula: '$\\sqrt{x^2} = |x|$', example: '$\\sqrt{(-4)^2} = 4$',
+        sub: 'The square root sign always means the non-negative root, so the bars are needed; see [square roots and squares](!#5).' },
+      { name: 'Triangle inequality', formula: '$|a + b| \\leq |a| + |b|$, equal exactly when $ab \\geq 0$', example: '$|2 + (-5)| = 3 < 7$',
+        sub: 'When the signs are opposite, part of one number cancels part of the other, as [the triangle inequality](!#6) explains.' },
+      { name: 'Removing the bars', formula: 'split where the inside is $0$; use $A$ or $-A$ on each side', example: '$|x - 2| = 2 - x$ for $x < 2$',
+        sub: 'Use $A$ where the inside $A$ is non-negative and $-A$ where it is negative; [removing the bars](!#7) does this with several bars at once.' },
+      { name: 'Graph', formula: '$y = a|x - h| + k$ is a V with vertex $(h, k)$', example: '$y = 2|x - 1| - 3$: vertex $(1, -3)$',
+        sub: 'The V opens upward when $a > 0$ and downward when $a < 0$, as [the graph of the absolute value function](!#8) shows.' },
+      { name: 'Calculus', formula: 'continuous everywhere, corner at $0$; $\\displaystyle \\int \\frac{1}{x}\\,dx = \\ln|x| + C$', example: 'slopes $-1$ and $1$ meet at $0$',
+        sub: 'The two one-sided slopes disagree at $0$, so there is no derivative there; [absolute value in calculus](!#10) also covers the integrals.' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     figures,
     sectionsContent,
@@ -577,7 +612,7 @@ return {
    }
 
 
-export default function AbsoluteValuePage({ pitfallData,seoData, sectionsContent, introContent, propertiesTable, formsTable, summaryTable, faqQuestions, schemas, figures}) {
+export default function AbsoluteValuePage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, propertiesTable, formsTable, summaryTable, faqQuestions, schemas, figures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -710,8 +745,16 @@ export default function AbsoluteValuePage({ pitfallData,seoData, sectionsContent
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="absolute-value-formula-summary"
+            title="Absolute value facts"
+            source="/algebra/absolute-value"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj13.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

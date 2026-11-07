@@ -2297,6 +2297,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
@@ -2307,7 +2308,8 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2957,7 +2959,7 @@ An independent set of exactly $n$ vectors is automatically a basis. Spanning com
 
 @academic[pitfall,aside:true,width:35%:Counting without checking independence
 Calling $(1, 2, 3)$, $(2, 4, 6)$, $(0, 0, 1)$ a basis of $\\mathbb{R}^3$ because there are three of them overlooks $(2, 4, 6) = 2(1, 2, 3)$. Their matrix has only $2$ pivots, so they span a plane and are not a basis.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-without-checking-independence)]@
 
 In a typical exercise the vectors are written as the columns of a matrix, and the question is whether they form a basis. The count is compared with the dimension first. When the two agree, one further test settles the question, for example row reducing that matrix and counting its pivots: in $\\mathbb{R}^3$, three vectors whose matrix has three pivots, or equivalently a nonzero determinant, are a basis.
 
@@ -2998,7 +3000,7 @@ The inequality is strict ($\\dim(W) < \\dim(V)$) for every proper subspace — a
 
 @academic[pitfall,aside:true,width:35%:Counting components instead of directions
 Calling the plane $x + y + z = 0$ three-dimensional because its vectors have three entries gives $\\dim = 3$. It has the basis $(-1, 1, 0)$, $(-1, 0, 1)$, so its dimension is $2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-components-instead-of-directions)]@
 
 In $\\mathbb{R}^3$, the possible subspace dimensions are $0$ (the zero vector), $1$ (a line through the origin), $2$ (a plane through the origin), and $3$ ($\\mathbb{R}^3$ itself). There is no subspace of dimension $\\frac{3}{2}$ or $\\pi$ — dimension is always a non-negative integer.
 
@@ -3020,7 +3022,7 @@ $$\\dim(W_1 + W_2) = \\dim(W_1) + \\dim(W_2) - \\dim(W_1 \\cap W_2)$$
 
 @academic[pitfall,aside:true,width:35%:Leaving out the intersection
 Adding the dimensions of the $xy$-plane and the $yz$-plane gives $2 + 2 = 4$, more than $\\dim(\\mathbb{R}^3) = 3$. The planes share the $y$-axis, so $\\dim(W_1 + W_2) = 2 + 2 - 1 = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-out-the-intersection)]@
 
 This is the linear algebra analogue of the inclusion-exclusion formula for counting elements in the union of two sets. The intersection is subtracted because vectors in $W_1 \\cap W_2$ are counted once in $\\dim(W_1)$ and once in $\\dim(W_2)$, but should only contribute once to the dimension of the sum.
 
@@ -3072,7 +3074,7 @@ Interpreted through the lens of [linear transformations](!/linear-algebra/transf
 
 @academic[pitfall,aside:true,width:35%:Subtracting the rank from the row count
 For a $3 \\times 5$ matrix of rank $2$, taking $3 - 2$ gives nullity $1$. The null space lies in $\\mathbb{R}^5$, so the nullity is $5 - 2 = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-the-rank-from-the-row-count)]@
 
 The rank-nullity theorem is the fundamental bridge between abstract dimension theory and concrete matrix computation. It connects the number of pivot columns (rank) to the number of free variables (nullity), and it guarantees that every question about the dimension of a null space or column space reduces to row reduction and pivot counting.`,
     before: ``,
@@ -3101,79 +3103,20 @@ $\\mathbb{R}^3$, $\\mathcal{P}_2$, and the solution space of a third-order homog
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the dimension formulas of the page in six rows. Each row names the formula, states it and says what it gives, with a line under the name on when it holds and a link to the section that explains it.
+
+It starts from the definition of dimension as the size of any basis and the bound that keeps a subspace no larger than the whole space. Three rows treat sums of subspaces: the dimension of a sum, the test for a direct sum, and how dimensions add in one. The rank-nullity theorem closes the list, while the limits on how many vectors can be independent or spanning sit in the section before.`,
+    before: ``,
+    after: `Most dimension questions come down to counting basis vectors. Once a basis of each subspace is known, the sum formula, the direct sum test and rank-nullity follow by arithmetic, and the count shows at once whether a subspace can be the whole space.`,
+    link: '',
+  },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Five mistakes account for many wrong dimension counts. Four are marked with a box where they happen in the sections above, and the first, the offset for polynomial spaces, is pointed out in the section on standard spaces. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the degree as the dimension**
-
-The dimension of $\\mathcal{P}_n$ is read off its subscript, so the polynomials of degree at most $2$ are said to form a two-dimensional space. The constant term is left out of the count.
-
-Wrong working: every polynomial of degree at most $2$ is built from $x$ and $x^2$, so $\\dim(\\mathcal{P}_2) = 2$.
-
-Right working: a general element is $a_0 + a_1 x + a_2 x^2$, with three free coefficients. The basis is $\\{1, x, x^2\\}$, which has three elements, so $\\dim(\\mathcal{P}_2) = 3$. In general $\\dim(\\mathcal{P}_n) = n + 1$.
-
-Why it happens: the degree $n$ names the highest power, the last index in the list $x^0, x^1, \\dots, x^n$, and that list has $n + 1$ entries.
-
-How to check: test a constant. The polynomial $p(x) = 5$ belongs to $\\mathcal{P}_2$, but no combination $a x + b x^2$ equals it, because every such combination is $0$ at $x = 0$. A set that misses a constant cannot be a basis.
-
-**Counting without checking independence**
-
-A set of exactly $n$ vectors in an $n$-dimensional space is declared a basis because the count matches the dimension. The shortcut needs independence, or spanning, as well; the count alone settles nothing.
-
-Wrong working: $(1, 2, 3)$, $(2, 4, 6)$ and $(0, 0, 1)$ are three vectors in $\\mathbb{R}^3$, and $\\dim(\\mathbb{R}^3) = 3$, so they form a basis.
-
-Right working: put the vectors in the columns of a matrix and row reduce.
-$$\\begin{pmatrix} 1 & 2 & 0 \\\\ 2 & 4 & 0 \\\\ 3 & 6 & 1 \\end{pmatrix} \\to \\begin{pmatrix} 1 & 2 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
-There are only $2$ pivots. The set is dependent, since $(2, 4, 6) = 2(1, 2, 3)$, and its span is the plane of all vectors $(a, 2a, 3a + c)$. The vector $(1, 0, 0)$ is not in it, so the set does not span $\\mathbb{R}^3$ and is not a basis.
-
-Why it happens: the shortcut "$n$ independent vectors in an $n$-dimensional space form a basis" is remembered as "$n$ vectors form a basis", and the condition drops out.
-
-How to check: for $n$ vectors in $\\mathbb{R}^n$, compute the determinant of their matrix. Here the first two columns are proportional, so the determinant is $0$ and the vectors are not a basis.
-
-**Counting components instead of directions**
-
-The dimension of a subspace of $\\mathbb{R}^3$ is taken to be $3$ because its vectors have three entries. The number of entries describes the space the vectors live in; the dimension of the subspace counts the independent directions inside it.
-
-Wrong working: $W = \\{(x, y, z) : x + y + z = 0\\}$ consists of vectors with three components, so $\\dim(W) = 3$.
-
-Right working: solve the equation for $x$, so $x = -y - z$ with $y$ and $z$ free.
-$$(x, y, z) = y(-1, 1, 0) + z(-1, 0, 1)$$
-The two vectors are independent and span $W$, so $\\dim(W) = 2$: $W$ is a plane through the origin.
-
-Why it happens: for $\\mathbb{R}^n$ itself the number of components and the dimension agree, and the coincidence is carried over to every subspace.
-
-How to check: use the subspace inequality. If $\\dim(W) = 3$, then $W$ would be all of $\\mathbb{R}^3$. But $(1, 0, 0)$ is not in $W$, because $1 + 0 + 0 \\neq 0$, so $\\dim(W) < 3$.
-
-**Leaving out the intersection**
-
-The dimension of a sum of subspaces is found by adding the two dimensions, and the correction term $\\dim(W_1 \\cap W_2)$ is dropped. Plain addition is correct only for a direct sum.
-
-Wrong working: in $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane, spanned by $\\mathbf{e}_1$ and $\\mathbf{e}_2$, and $W_2$ the $yz$-plane, spanned by $\\mathbf{e}_2$ and $\\mathbf{e}_3$. Then $\\dim(W_1 + W_2) = 2 + 2 = 4$.
-
-Right working: the two planes meet in the $y$-axis, spanned by $\\mathbf{e}_2$, so $\\dim(W_1 \\cap W_2) = 1$.
-$$\\dim(W_1 + W_2) = 2 + 2 - 1 = 3$$
-The sum is all of $\\mathbb{R}^3$.
-
-Why it happens: in the direct-sum example of the $xy$-plane and the $z$-axis the dimensions really do add, and the same step is repeated for subspaces that overlap.
-
-How to check: the dimension of a sum can never exceed the dimension of the whole space. A result of $4$ inside $\\mathbb{R}^3$ is impossible, so something was counted twice. Listing the spanning vectors shows what: $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_2, \\mathbf{e}_3$ contains $\\mathbf{e}_2$ twice.
-
-**Subtracting the rank from the row count**
-
-The nullity is computed as $m - \\text{rank}(A)$, the number of rows minus the rank. The null space lives in the domain $\\mathbb{R}^n$, so the rank is subtracted from the number of columns.
-
-Wrong working: take
-$$A = \\begin{pmatrix} 1 & 0 & 2 & 0 & 1 \\\\ 0 & 1 & 3 & 1 & 0 \\\\ 1 & 1 & 5 & 1 & 1 \\end{pmatrix}$$
-The third row is the sum of the first two, so $\\text{rank}(A) = 2$, and $\\dim(\\text{Null}\\,A) = 3 - 2 = 1$.
-
-Right working: $A$ is $3 \\times 5$, so $n = 5$ and $\\dim(\\text{Null}\\,A) = 5 - 2 = 3$. The pivots are in columns $1$ and $2$, the variables $x_3, x_4, x_5$ are free, and the three null-space vectors $(-2, -3, 1, 0, 0)$, $(0, -1, 0, 1, 0)$ and $(-1, 0, 0, 0, 1)$ form a basis.
-
-Why it happens: $m$ comes first in "$m \\times n$", and the rank is often read from the nonzero rows of the echelon form, so the row count looks like the natural number to subtract from.
-
-How to check: count free variables. Every column without a pivot gives one free variable, so the nullity is the number of columns minus the number of pivots, here $5 - 2 = 3$. The number $m - r = 1$ is the dimension of a different space, the null space of $A^T$.`,
+    content: `Five mistakes account for many wrong dimension counts. Four are marked with a box where they happen in the sections above, and the first, the offset for polynomial spaces, is pointed out in the section on standard spaces. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip counts the wrong thing. $\\mathcal{P}_n$ has dimension $n + 1$, $n$ vectors form a basis only when they are independent, the dimension of a subspace counts directions and not entries, $\\dim(W_1 + W_2)$ subtracts $\\dim(W_1 \\cap W_2)$, and the nullity is $n - \\text{rank}(A)$. Testing a constant polynomial, computing a determinant, or remembering that no subspace exceeds the dimension of its space catches each slip.`,
     link: ``,
   },
 }
@@ -3413,8 +3356,72 @@ const schemas = {
 
 
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-degree-as-the-dimension', name: `Taking the degree as the dimension`, errorAt: 0,
+        what: `The dimension of $\\mathcal{P}_n$ is read off its subscript, so the polynomials of degree at most $2$ are said to form a two-dimensional space. The constant term is left out of the count.`,
+        wrong: [`Every polynomial of degree at most $2$ is built from $x$ and $x^2$, so $\\dim(\\mathcal{P}_2) = 2$.`],
+        right: [`A general element is $a_0 + a_1 x + a_2 x^2$, with three free coefficients. The basis is $\\{1, x, x^2\\}$, which has three elements, so $\\dim(\\mathcal{P}_2) = 3$. In general $\\dim(\\mathcal{P}_n) = n + 1$.`],
+        why: `The degree $n$ names the highest power, the last index in the list $x^0, x^1, \\dots, x^n$, and that list has $n + 1$ entries.`,
+        check: `Test a constant. The polynomial $p(x) = 5$ belongs to $\\mathcal{P}_2$, but no combination $a x + b x^2$ equals it, because every such combination is $0$ at $x = 0$. A set that misses a constant cannot be a basis.` },
+      { id: 'counting-without-checking-independence', name: `Counting without checking independence`, errorAt: 0,
+        what: `A set of exactly $n$ vectors in an $n$-dimensional space is declared a basis because the count matches the dimension. The shortcut needs independence, or spanning, as well; the count alone settles nothing.`,
+        wrong: [`$(1, 2, 3)$, $(2, 4, 6)$ and $(0, 0, 1)$ are three vectors in $\\mathbb{R}^3$, and $\\dim(\\mathbb{R}^3) = 3$, so they form a basis.`],
+        right: [`Put the vectors in the columns of a matrix and row reduce.`, `$$\\begin{pmatrix} 1 & 2 & 0 \\\\ 2 & 4 & 0 \\\\ 3 & 6 & 1 \\end{pmatrix} \\to \\begin{pmatrix} 1 & 2 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$`, `There are only $2$ pivots. The set is dependent, since $(2, 4, 6) = 2(1, 2, 3)$, and its span is the plane of all vectors $(a, 2a, 3a + c)$. The vector $(1, 0, 0)$ is not in it, so the set does not span $\\mathbb{R}^3$ and is not a basis.`],
+        why: `The shortcut "$n$ independent vectors in an $n$-dimensional space form a basis" is remembered as "$n$ vectors form a basis", and the condition drops out.`,
+        check: `For $n$ vectors in $\\mathbb{R}^n$, compute the determinant of their matrix. Here the first two columns are proportional, so the determinant is $0$ and the vectors are not a basis.` },
+      { id: 'counting-components-instead-of-directions', name: `Counting components instead of directions`, errorAt: 0,
+        what: `The dimension of a subspace of $\\mathbb{R}^3$ is taken to be $3$ because its vectors have three entries. The number of entries describes the space the vectors live in; the dimension of the subspace counts the independent directions inside it.`,
+        wrong: [`$W = \\{(x, y, z) : x + y + z = 0\\}$ consists of vectors with three components, so $\\dim(W) = 3$.`],
+        right: [`Solve the equation for $x$, so $x = -y - z$ with $y$ and $z$ free.`, `$$(x, y, z) = y(-1, 1, 0) + z(-1, 0, 1)$$`, `The two vectors are independent and span $W$, so $\\dim(W) = 2$: $W$ is a plane through the origin.`],
+        why: `For $\\mathbb{R}^n$ itself the number of components and the dimension agree, and the coincidence is carried over to every subspace.`,
+        check: `Use the subspace inequality. If $\\dim(W) = 3$, then $W$ would be all of $\\mathbb{R}^3$. But $(1, 0, 0)$ is not in $W$, because $1 + 0 + 0 \\neq 0$, so $\\dim(W) < 3$.` },
+      { id: 'leaving-out-the-intersection', name: `Leaving out the intersection`, errorAt: 1,
+        what: `The dimension of a sum of subspaces is found by adding the two dimensions, and the correction term $\\dim(W_1 \\cap W_2)$ is dropped. Plain addition is correct only for a direct sum.`,
+        wrong: [`In $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane, spanned by $\\mathbf{e}_1$ and $\\mathbf{e}_2$, and $W_2$ the $yz$-plane, spanned by $\\mathbf{e}_2$ and $\\mathbf{e}_3$.`, `Then $\\dim(W_1 + W_2) = 2 + 2 = 4$.`],
+        right: [`In $\\mathbb{R}^3$, let $W_1$ be the $xy$-plane, spanned by $\\mathbf{e}_1$ and $\\mathbf{e}_2$, and $W_2$ the $yz$-plane, spanned by $\\mathbf{e}_2$ and $\\mathbf{e}_3$.`, `The two planes meet in the $y$-axis, spanned by $\\mathbf{e}_2$, so $\\dim(W_1 \\cap W_2) = 1$.`, `$$\\dim(W_1 + W_2) = 2 + 2 - 1 = 3$$`, `The sum is all of $\\mathbb{R}^3$.`],
+        why: `In the direct-sum example of the $xy$-plane and the $z$-axis the dimensions really do add, and the same step is repeated for subspaces that overlap.`,
+        check: `The dimension of a sum can never exceed the dimension of the whole space. A result of $4$ inside $\\mathbb{R}^3$ is impossible, so something was counted twice. Listing the spanning vectors shows what: $\\mathbf{e}_1, \\mathbf{e}_2, \\mathbf{e}_2, \\mathbf{e}_3$ contains $\\mathbf{e}_2$ twice.` },
+      { id: 'subtracting-the-rank-from-the-row-count', name: `Subtracting the rank from the row count`, errorAt: 0,
+        what: `The nullity is computed as $m - \\text{rank}(A)$, the number of rows minus the rank. The null space lives in the domain $\\mathbb{R}^n$, so the rank is subtracted from the number of columns.`,
+        wrong: [`Take
+$$A = \\begin{pmatrix} 1 & 0 & 2 & 0 & 1 \\\\ 0 & 1 & 3 & 1 & 0 \\\\ 1 & 1 & 5 & 1 & 1 \\end{pmatrix}$$`, `The third row is the sum of the first two, so $\\text{rank}(A) = 2$, and $\\dim(\\text{Null}\\,A) = 3 - 2 = 1$.`],
+        right: [`$A$ is $3 \\times 5$, so $n = 5$ and $\\dim(\\text{Null}\\,A) = 5 - 2 = 3$. The pivots are in columns $1$ and $2$, the variables $x_3, x_4, x_5$ are free, and the three null-space vectors $(-2, -3, 1, 0, 0)$, $(0, -1, 0, 1, 0)$ and $(-1, 0, 0, 0, 1)$ form a basis.`],
+        why: `$m$ comes first in "$m \\times n$", and the rank is often read from the nonzero rows of the echelon form, so the row count looks like the natural number to subtract from.`,
+        check: `Count free variables. Every column without a pivot gives one free variable, so the nullity is the number of columns minus the number of pivots, here $5 - 2 = 3$. The number $m - r = 1$ is the dimension of a different space, the null space of $A^T$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'says', label: 'What it gives' },
+    ],
+    rows: [
+      { name: 'Dimension', formula: '$\\dim(V) = |\\mathcal{B}|$', says: 'the number of vectors in any basis $\\mathcal{B}$ of $V$',
+        sub: 'Well defined because all bases have the same size, from [the definition](!#1).' },
+      { name: 'Subspace dimension', formula: '$W \\subseteq V \\Rightarrow \\dim(W) \\leq \\dim(V)$', says: 'a subspace is never larger than the space, with equality only when $W = V$',
+        sub: 'Holds in a finite-dimensional space, as [dimension of subspaces](!#7) shows.' },
+      { name: 'Dimension of a sum', formula: '$\\dim(W_1 + W_2) = \\dim(W_1) + \\dim(W_2) - \\dim(W_1 \\cap W_2)$', says: 'the dimension of the sum of two subspaces',
+        sub: 'Like inclusion-exclusion, it subtracts the overlap counted twice; see [the dimension formula for subspace sums](!#8).' },
+      { name: 'Direct sum test', formula: '$V = W_1 \\oplus W_2 \\iff V = W_1 + W_2$ and $W_1 \\cap W_2 = \\{\\mathbf{0}\\}$', says: 'when a sum is direct',
+        sub: 'A direct sum is one whose two subspaces meet only at the origin, as [the dimension formula for subspace sums](!#8) explains.' },
+      { name: 'Direct sum dimension', formula: '$V = W_1 \\oplus W_2 \\Rightarrow \\dim(V) = \\dim(W_1) + \\dim(W_2)$', says: 'the dimensions simply add',
+        sub: 'The sum formula with nothing to subtract for the overlap, from [the dimension formula for subspace sums](!#8).' },
+      { name: 'Rank-nullity theorem', formula: '$\\dim(\\text{Col}\\,A) + \\dim(\\text{Null}\\,A) = n$', says: 'for an $m \\times n$ matrix, the column space and null space dimensions add up to $n$',
+        sub: 'The $n$ dimensions of the domain split between image and kernel, as [the rank-nullity theorem](!#9) explains.' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
+    pitfallData,
       basisSizeChain,
     finiteInfiniteDimension,
     setSizeLevels,
@@ -3446,7 +3453,7 @@ const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function DimensionPage({basisSizeChain, finiteInfiniteDimension, setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DimensionPage({ formulaSummaryData, pitfallData,basisSizeChain, finiteInfiniteDimension, setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3688,11 +3695,38 @@ $$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ o
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="dimension-formula-summary"
+            title="Dimension formulas"
+            source="/linear-algebra/vector-spaces/dimension"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.pitfalls.title,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="dimension-pitfalls"
+            title="Common pitfalls with dimension"
+            source="/linear-algebra/vector-spaces/dimension"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -811,6 +811,7 @@ import { renderMultiplesLine } from '@/app/utils/illustrations/arithmetic/divisi
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
@@ -1343,6 +1344,15 @@ The [GCD](!/arithmetic/divisibility/gcd) — greatest common divisor — relies 
       link:'',
   
     },
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary collects the formulas of the page in nine rows. Each row names a formula with a line on what it says and a link to its section, states it, and gives a short example from the page.
+
+The first five rows are about the operation: the division equation that defines the remainder, the link to exact divisibility, the range the remainder stays in, the formula that computes it with the floor, and the edge cases of a small dividend and a divisor of one. The last four are about congruence: its meaning, the test through the difference, and the three properties that make it behave like equality.`,
+      before: ``,
+      after: `Keep the operation and the relation apart: a mod n is one number between zero and n minus one, while a congruence is a statement that is true or false. The remainder formula computes the first, and the difference test checks the second.`,
+      link: '',
+    },
     obj16:{
       title:`Common Pitfalls`,
       content:`Four mistakes account for many wrong remainders. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
@@ -1588,8 +1598,39 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Formula', kind: 'name' },
+      { key: 'formula', label: 'Statement', kind: 'formula' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Division equation', formula: '$a = n \\cdot q + r, \\qquad 0 \\leq r < n$', example: '$17 = 5 \\cdot 3 + 2$, so $17 \\bmod 5 = 2$',
+        sub: 'Modulo returns the remainder $r$ of this equation, as [what modulo is](!#1) explains.' },
+      { name: 'Modulo and divisibility', formula: '$a \\bmod n = 0$ exactly when $n \\mid a$', example: '$24 \\bmod 6 = 0$ and $6 \\mid 24$',
+        sub: 'A zero remainder means exact division, and a nonzero one says by how much the division misses ([modulo and divisibility](!#3)).' },
+      { name: 'Range of remainders', formula: '$a \\bmod n$ is one of $0, 1, 2, \\ldots, n - 1$', example: '$347 \\bmod 10 = 7$',
+        sub: 'Exactly $n$ possible values, never $n$ itself, as [the range of remainders](!#4) shows.' },
+      { name: 'Computing a remainder', formula: '$\\displaystyle a \\bmod n = a - n \\cdot \\left\\lfloor \\frac{a}{n} \\right\\rfloor$', example: '$47 \\bmod 5 = 47 - 5 \\cdot 9 = 2$',
+        sub: 'Divide, keep the integer part, multiply back and subtract, the steps of [how to compute a remainder](!#51).' },
+      { name: 'Edge cases', formula: '$a \\bmod n = a$ for $0 \\leq a < n$, and $a \\bmod 1 = 0$', example: '$3 \\bmod 10 = 3$',
+        sub: 'A number already below $n$ needs no reduction, while $a \\bmod 0$ is undefined, as [the edge cases](!#61) explain.' },
+      { name: 'Congruence', formula: '$a \\equiv b \\pmod{n}$ means $a \\bmod n = b \\bmod n$', example: '$17 \\equiv 5 \\pmod{12}$',
+        sub: 'Two numbers with the same remainder; [congruence](!#5) is a statement about them, not an operation.' },
+      { name: 'Difference test', formula: '$a \\equiv b \\pmod{n}$ exactly when $n \\mid (a - b)$', example: '$23 - 2 = 21$ and $7 \\mid 21$, so $23 \\equiv 2 \\pmod{7}$',
+        sub: 'An equivalent way to test a congruence through the difference, also from [congruence](!#5).' },
+      { name: 'Reflexive and symmetric', formula: '$a \\equiv a$, and $a \\equiv b$ gives $b \\equiv a \\pmod{n}$', example: '$17 \\equiv 5$ and $5 \\equiv 17 \\pmod{12}$',
+        sub: 'Congruence behaves like equality: $a - a = 0$ is divisible by $n$, and so is $b - a$ when $a - b$ is, as [the properties of congruence](!#6) show.' },
+      { name: 'Transitive', formula: '$a \\equiv b$ and $b \\equiv c$ give $a \\equiv c \\pmod{n}$', example: 'modulo $3$: three classes, with remainders $0$, $1$ and $2$',
+        sub: 'With the other two properties it splits the integers into congruence classes, as [the properties of congruence](!#6) explain.' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     moduloDivisibilityCases,
     demoUnits,
@@ -1618,7 +1659,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function ModuloPage({ pitfallData,moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ModuloPage({ formulaSummaryData, pitfallData,moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1817,6 +1858,24 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+        ]
+    },
+    {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="modulo-formula-summary"
+            title="Modulo formulas"
+            source="/arithmetic/modulo"
+            related={false}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

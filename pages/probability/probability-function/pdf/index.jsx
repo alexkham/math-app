@@ -15,12 +15,14 @@ import continuousCdfDiagrams from '@/app/components/visualizations/probability/c
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -246,7 +248,7 @@ The support determines:
 
 @academic[pitfall,aside:true,width:35%:Using the formula outside the support
 Integrating $2e^{-2x}$ from $-\\infty$ to $1$ for an exponential with $\\lambda = 2$ diverges, because the formula grows without bound for $x < 0$. The density is $0$ there, so $P(X < 1) = \\int_0^1 2e^{-2x}\\,dx = 1 - e^{-2} \\approx 0.865$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-formula-outside-the-support)]@
 
 When computing $P(X \\in A)$ for some set $A$, only integrate over the intersection of $A$ with the support. Outside the support contributes nothing—integrating over those regions just adds zeros.
     `,
@@ -482,7 +484,7 @@ $$P(1 \\leq X \\leq 3) = \\int_1^3 2e^{-2x}dx = [-e^{-2x}]_1^3 = e^{-2} - e^{-6}
 
 @academic[pitfall,aside:true,width:35%:Dropping the minus sign of the antiderivative
 Taking $e^{-2x}$ as the antiderivative of $2e^{-2x}$ gives $e^{-6} - e^{-2} \\approx -0.133$, a negative probability. The antiderivative is $-e^{-2x}$, so $P(1 \\leq X \\leq 3) = e^{-2} - e^{-6} \\approx 0.133$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-minus-sign-of-the-antiderivative)]@
 
 The exponential example follows the pattern every interval probability uses: find an antiderivative of the density, evaluate it at the upper limit, and subtract its value at the lower limit. Because this density decreases, the interval $[1, 3]$ holds far less probability than the interval $[0, 2]$ of the same length, which holds $1 - e^{-4} \\approx 0.982$.
 
@@ -732,7 +734,7 @@ The density drops to $\\frac{1}{3}$ because the interval stretched by factor 3.
 
 @academic[pitfall,aside:true,width:35%:Leaving out the factor 1/|a|
 Writing $f_Y(y) = f_X\\left(\\frac{y}{3}\\right) = 1$ on $[0, 3]$ substitutes without the factor, and the area under $f_Y$ becomes $3$. With the factor, $f_Y(y) = \\frac{1}{3} \\cdot 1 = \\frac{1}{3}$ and the area is $1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-out-the-factor-1-a)]@
 
 Two things happen in the linear formula. The argument $\\frac{y - b}{a}$ sends each value $y$ back to the value of $X$ it came from, which fixes where the density sits on the new axis. The factor in front sets how tall the density is there.
 
@@ -1011,56 +1013,20 @@ Don't use $f(x)$ when you need cumulative probability—that's $F(x) = \\int_{-\
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary sorts the formulas of the page into five families: the density and its axioms, computing probabilities, location and spread, transformations, and the connection to the CDF. Each family has a line on what it covers, and each formula a note on what it gives with a link to the section that explains it. The buttons above the cards show one family at a time.
+
+The first family states that single points carry no probability, that probability is area, and the two axioms. The second handles endpoints and tails. The third gives the mean, median, mode, variance and standard deviation. The last two find the density of a transformed variable and move between density and CDF.`,
+    before: ``,
+    after: `Every probability from a density is an area, so the work is always an integral over the right region. Read a value of the density as a rate, never as a probability: it can be larger than one, while the area under the whole curve is exactly one.`,
+    link: '',
+  },
   obj16: {
     title: `Common Pitfalls`,
-    content: `Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Using the formula outside the support**
-
-A density is given by a formula on its support and is $0$ elsewhere. When a probability is set up, the formula is integrated over the whole interval of the event, including the part that lies outside the support.
-
-Wrong working: for the exponential density $f(x) = 2e^{-2x}$, $x \\geq 0$,
-$$P(X < 1) = \\int_{-\\infty}^{1} 2e^{-2x}\\,dx = \\left[-e^{-2x}\\right]_{-\\infty}^{1}$$
-As $x \\to -\\infty$, $e^{-2x}$ grows without bound, so the integral diverges.
-
-Right working: the density is $0$ for $x < 0$, so only the part of the event inside the support counts.
-$$P(X < 1) = \\int_{0}^{1} 2e^{-2x}\\,dx = \\left[-e^{-2x}\\right]_{0}^{1} = 1 - e^{-2} \\approx 0.865$$
-
-Why it happens: the formula is the part of the PDF that is written large, while the condition $x \\geq 0$ sits beside it and is easy to drop. The tail formula $P(X < a) = \\int_{-\\infty}^{a} f_X(x)\\,dx$ then invites the lower limit $-\\infty$.
-
-How to check: a probability is a number between $0$ and $1$. An infinite or negative result, or one above $1$, means the integral has run where the density is $0$. Writing the support next to the limits before integrating catches it.
-
-**Dropping the minus sign of the antiderivative**
-
-An interval probability for the exponential density is set up correctly, but the antiderivative of $e^{-2x}$ is taken without the factor that comes from the chain rule, so its sign is lost.
-
-Wrong working:
-$$\\int_1^3 2e^{-2x}\\,dx = \\left[e^{-2x}\\right]_1^3 = e^{-6} - e^{-2} \\approx 0.0025 - 0.1353 = -0.133$$
-
-Right working: differentiating $-e^{-2x}$ gives $2e^{-2x}$, so $-e^{-2x}$ is the antiderivative.
-$$\\int_1^3 2e^{-2x}\\,dx = \\left[-e^{-2x}\\right]_1^3 = -e^{-6} + e^{-2} \\approx 0.133$$
-
-Why it happens: $e^{x}$ is its own antiderivative, and that rule is carried over to $e^{-2x}$ without accounting for the inner factor $-2$.
-
-How to check: differentiate the antiderivative and compare it with the density; $\\frac{d}{dx}e^{-2x} = -2e^{-2x}$, which has the wrong sign. A negative probability is always a sign of an error.
-
-**Leaving out the factor 1/|a|**
-
-The PDF of a linear transformation $Y = aX + b$ is found by substituting $\\frac{y - b}{a}$ into $f_X$, and the factor $\\frac{1}{|a|}$ in front is left out.
-
-Wrong working: for $X$ uniform on $[0, 1]$ and $Y = 3X$,
-$$f_Y(y) = f_X\\left(\\frac{y}{3}\\right) = 1 \\text{ for } y \\in [0, 3]$$
-The area under this function is $1 \\cdot 3 = 3$.
-
-Right working: the factor $\\frac{1}{|a|} = \\frac{1}{3}$ scales the height.
-$$f_Y(y) = \\frac{1}{3} f_X\\left(\\frac{y}{3}\\right) = \\frac{1}{3} \\text{ for } y \\in [0, 3]$$
-The area is $\\frac{1}{3} \\cdot 3 = 1$.
-
-Why it happens: for a PMF the substitution alone is correct, because each value keeps its own probability when it is moved. A density is probability per unit length, and stretching the axis by a factor $3$ spreads the same probability over three times the length.
-
-How to check: integrate the new density over its support. If the area is not $1$, the factor is missing; here the wrong answer has area $3$, exactly $|a|$.`,
+    content: `Each of the three mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses a piece when a density is integrated or transformed. The formula holds only on its support, the antiderivative of $e^{-2x}$ is $-\\frac{1}{2}e^{-2x}$, and the density of $aX + b$ carries the factor $\\frac{1}{|a|}$. Checking that every probability lies between $0$ and $1$, differentiating the antiderivative, or integrating the new density, catches each slip.`,
     link: '',
   }
 }
@@ -1282,8 +1248,80 @@ const schemas = {
   };
 
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'using-the-formula-outside-the-support', name: `Using the formula outside the support`, errorAt: 0,
+        what: `A density is given by a formula on its support and is $0$ elsewhere. When a probability is set up, the formula is integrated over the whole interval of the event, including the part that lies outside the support.`,
+        wrong: [`For the exponential density $f(x) = 2e^{-2x}$, $x \\geq 0$,
+$$P(X < 1) = \\int_{-\\infty}^{1} 2e^{-2x}\\,dx$$
+$$= \\left[-e^{-2x}\\right]_{-\\infty}^{1}$$`, `As $x \\to -\\infty$, $e^{-2x}$ grows without bound, so the integral diverges.`],
+        right: [`The density is $0$ for $x < 0$, so only the part of the event inside the support counts.`, `$$P(X < 1) = \\int_{0}^{1} 2e^{-2x}\\,dx$$
+$$= \\left[-e^{-2x}\\right]_{0}^{1}$$
+$$= 1 - e^{-2} \\approx 0.865$$`],
+        why: `The formula is the part of the PDF that is written large, while the condition $x \\geq 0$ sits beside it and is easy to drop. The tail formula $P(X < a) = \\int_{-\\infty}^{a} f_X(x)\\,dx$ then invites the lower limit $-\\infty$.`,
+        check: `A probability is a number between $0$ and $1$. An infinite or negative result, or one above $1$, means the integral has run where the density is $0$. Writing the support next to the limits before integrating catches it.` },
+      { id: 'dropping-the-minus-sign-of-the-antiderivative', name: `Dropping the minus sign of the antiderivative`, errorAt: 0,
+        what: `An interval probability for the exponential density is set up correctly, but the antiderivative of $e^{-2x}$ is taken without the factor that comes from the chain rule, so its sign is lost.`,
+        wrong: [`$$\\int_1^3 2e^{-2x}\\,dx = \\left[e^{-2x}\\right]_1^3$$
+$$= e^{-6} - e^{-2} \\approx 0.0025 - 0.1353$$
+$$= -0.133$$`],
+        right: [`Differentiating $-e^{-2x}$ gives $2e^{-2x}$, so $-e^{-2x}$ is the antiderivative.`, `$$\\int_1^3 2e^{-2x}\\,dx = \\left[-e^{-2x}\\right]_1^3$$
+$$= -e^{-6} + e^{-2} \\approx 0.133$$`],
+        why: `$e^{x}$ is its own antiderivative, and that rule is carried over to $e^{-2x}$ without accounting for the inner factor $-2$.`,
+        check: `Differentiate the antiderivative and compare it with the density; $\\frac{d}{dx}e^{-2x} = -2e^{-2x}$, which has the wrong sign. A negative probability is always a sign of an error.` },
+      { id: 'leaving-out-the-factor-1-a', name: `Leaving out the factor 1/|a|`, errorAt: 0,
+        what: `The PDF of a linear transformation $Y = aX + b$ is found by substituting $\\frac{y - b}{a}$ into $f_X$, and the factor $\\frac{1}{|a|}$ in front is left out.`,
+        wrong: [`For $X$ uniform on $[0, 1]$ and $Y = 3X$,
+$$f_Y(y) = f_X\\left(\\frac{y}{3}\\right) = 1 \\text{ for } y \\in [0, 3]$$`, `The area under this function is $1 \\cdot 3 = 3$.`],
+        right: [`The factor $\\frac{1}{|a|} = \\frac{1}{3}$ scales the height.`, `$$f_Y(y) = \\frac{1}{3} f_X\\left(\\frac{y}{3}\\right)$$
+$$= \\frac{1}{3} \\text{ for } y \\in [0, 3]$$`, `The area is $\\frac{1}{3} \\cdot 3 = 1$.`],
+        why: `For a PMF the substitution alone is correct, because each value keeps its own probability when it is moved. A density is probability per unit length, and stretching the axis by a factor $3$ spreads the same probability over three times the length.`,
+        check: `Integrate the new density over its support. If the area is not $1$, the factor is missing; here the wrong answer has area $3$, exactly $|a|$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'basics', name: 'Density and its axioms', sub: 'A density is a rate of probability per unit, not a probability.', pairs: [
+        [{ formula: '$P(X = a) = 0$', text: 'Every single value has probability zero, the paradox [definition and physical intuition](!#1) starts from.' },
+         { formula: '$\\displaystyle P(a \\leq X \\leq b) = \\int_a^b f_X(x)dx$', text: 'Probability is the area under the density over an interval, the core calculation of [calculations using the PDF](!#8).' }],
+        [{ formula: '$f_X(x) \\geq 0$', text: 'The density is zero or positive for every $x$, the first of [the two axioms](!#5).' },
+         { formula: '$\\displaystyle \\int_{-\\infty}^{\\infty} f_X(x)dx = 1$', text: 'The total area under the density is one, the second of [the two axioms](!#5).' }],
+      ] },
+      { id: 'calc', name: 'Computing probabilities', sub: 'Endpoints do not matter, and tails come from one integral or its complement.', pairs: [
+        [{ formula: '$P(X < a) = P(X \\leq a)$', text: 'Adding or removing a single point changes nothing, so strict and non-strict inequalities agree ([calculations](!#8)).' },
+         { formula: '$\\displaystyle P(X < a) = \\int_{-\\infty}^a f_X(x)dx$', text: 'The lower tail is the area to the left of $a$ ([calculations using the PDF](!#8)).' }],
+        [{ formula: '$\\displaystyle P(X > a) = \\int_a^{\\infty} f_X(x)dx = 1 - P(X \\leq a)$', text: 'The upper tail, by integration or by the complement, whichever is easier ([calculations](!#8)).' }, ''],
+      ] },
+      { id: 'measures', name: 'Location and spread', sub: 'The mean, median, mode and spread measures computed from the density.', pairs: [
+        [{ formula: '$\\displaystyle E[X] = \\int_{-\\infty}^{\\infty} x \\cdot f_X(x)dx$', text: 'The balance point of the density curve, from [location measures](!#9).' },
+         { formula: '$\\displaystyle P(X \\leq m) = \\int_{-\\infty}^m f_X(x)dx = 0.5$', text: 'The median splits the area in half, where the CDF equals one half ([location measures](!#9)).' }],
+        [{ formula: '$\\text{mode} = \\arg\\max_x f_X(x)$', text: 'The highest point of the density, possibly at an end of the support ([location measures](!#9)).' },
+         { formula: '$\\displaystyle \\text{Var}(X) = \\int_{-\\infty}^{\\infty} (x - E[X])^2 \\cdot f_X(x)dx$', text: 'Squared distances from the mean, weighted by density, from [spread measures](!#10).' }],
+        [{ formula: '$\\text{Var}(X) = E[X^2] - (E[X])^2$', text: 'The shortcut, with $E[X^2]$ also found by integrating against the density ([spread measures](!#10)).' },
+         { formula: '$\\text{SD}(X) = \\sqrt{\\text{Var}(X)}$', text: 'Brings the spread back to the original units, next to the interquartile range $Q_3 - Q_1$ in [spread measures](!#10).' }],
+      ] },
+      { id: 'transform', name: 'Transformations', sub: 'The density of a new variable $Y = g(X)$.', pairs: [
+        [{ formula: '$\\displaystyle f_Y(y) = \\frac{1}{|a|} f_X\\left(\\frac{y - b}{a}\\right)$', text: 'For $Y = aX + b$ with $a \\neq 0$; the factor in front rescales the height ([transformations](!#11)).' },
+         { formula: '$\\displaystyle f_Y(y) = f_X(g^{-1}(y)) \\cdot \\left|\\frac{d}{dy}g^{-1}(y)\\right|$', text: 'For an invertible $g$; the derivative term measures how $g$ stretches or compresses ([transformations](!#11)).' }],
+        [{ formula: '$F_Y(y) = P(g(X) \\leq y)$', text: 'The CDF method: find the CDF of $Y$ first, then differentiate ([transformations](!#11)).' },
+         { formula: "$\\displaystyle f_Y(y) = \\sum_{x: g(x) = y} \\frac{f_X(x)}{|g'(x)|}$", text: 'When $g$ is not one-to-one, add the contributions of every $x$ that maps to $y$ ([transformations](!#11)).' }],
+      ] },
+      { id: 'cdf', name: 'Connection to the CDF', sub: 'Integrating the density gives the CDF, and differentiating the CDF gives the density back.', pairs: [
+        [{ formula: '$\\displaystyle F_X(x) = P(X \\leq x) = \\int_{-\\infty}^x f_X(t)dt$', text: 'The accumulated area up to $x$, from [connection to CDF](!#12).' },
+         { formula: '$\\displaystyle f_X(x) = \\frac{d}{dx}F_X(x)$', text: 'The density is the slope of the CDF, the fundamental theorem at work ([connection to CDF](!#12)).' }],
+      ] },
+    ],
+  };
+
    return {
   props:{
+    formulaSummaryData,
+    pitfallData,
       pdfCdfChain,
     pdfViewTree,
     demoUnits,
@@ -1305,7 +1343,7 @@ const schemas = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PDFPage({pdfCdfChain, pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PDFPage({ formulaSummaryData, pitfallData,pdfCdfChain, pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -1544,11 +1582,38 @@ Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="pdf-formula-summary"
+            title="PDF formulas"
+            source="/probability/probability-function/pdf"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:'',
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="pdf-pitfalls"
+            title="Common pitfalls with the PDF"
+            source="/probability/probability-function/pdf"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

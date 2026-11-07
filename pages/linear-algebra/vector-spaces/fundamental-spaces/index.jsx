@@ -3032,6 +3032,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -3609,7 +3610,7 @@ The $3 \\times 4$ matrix has rank $2$, so the null space has dimension $4 - 2 = 
 
 @academic[pitfall,aside:true,width:35%:Keeping the signs from the reduced form
 Reading $x_1 = 3x_2 - 3x_4$ off the row $x_1 + 3x_2 - 3x_4 = 0$ gives $(3, 1, 0, 0)$, and $A$ sends it to $(6, 12, -6)$, not $\\mathbf{0}$. Moving the terms across flips the signs, $x_1 = -3x_2 + 3x_4$, which gives $(-3, 1, 0, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-keeping-the-signs-from-the-reduced-form)]@
 
 In the example, the reduced form of $A$ has the nonzero rows $(1, 3, 0, -3)$ and $(0, 0, 1, 1)$, with pivots in columns $1$ and $3$, so $x_2$ and $x_4$ are the free variables. Each nonzero row is an equation linking one pivot variable to the free ones, and it is solved for that pivot variable before any values are chosen. The two choices $x_2 = 1, x_4 = 0$ and $x_2 = 0, x_4 = 1$ then produce the two basis vectors.`,
     before: ``,
@@ -3670,7 +3671,7 @@ $$\\dim(\\text{Col}(A)) + \\dim(\\text{Null}(A^T)) = r + (m - r) = m$$]@
 
 @academic[pitfall,aside:true,width:35%:Swapping the row and column counts
 For a $2 \\times 5$ matrix of rank $2$, swapping the sizes gives $\\dim(\\text{Null}\\,A) = 2 - 2 = 0$, as if $A$ were one-to-one. The null space lies in $\\mathbb{R}^5$, so $\\dim(\\text{Null}\\,A) = 5 - 2 = 3$, and $\\dim(\\text{Null}\\,A^T) = 2 - 2 = 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-swapping-the-row-and-column-counts)]@
 
 The first equation is the rank-nullity theorem. The second is its transpose analogue. Together they say that the four subspaces account for every dimension of both the domain and the codomain — nothing is missing and nothing is double-counted.
 
@@ -3691,7 +3692,7 @@ Every vector in the null space is perpendicular to every row of $A$, because $A\
 
 @academic[pitfall,aside:true,width:35%:Pairing the null space with the column space
 Taking $\\text{Col}(A)$ as the partner of $\\text{Null}(A)$ fails for $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$, where both are the line through $(1, 0)$ and are not perpendicular. The partner of $\\text{Null}(A)$ is $\\text{Row}(A)$, the line through $(0, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-pairing-the-null-space-with-the-column-space)]@
 
 In $\\mathbb{R}^m$, the column space and the left null space are orthogonal complements. Every vector in $\\text{Null}(A^T)$ is perpendicular to every column of $A$ (since $A^T\\mathbf{y} = \\mathbf{0}$ means $\\mathbf{y}$ dots to zero with each column). Every vector in $\\mathbb{R}^m$ decomposes uniquely as a column-space component plus a left-null-space component.
 
@@ -3743,62 +3744,9 @@ For the zero matrix ($r = 0$): the column space and row space are both $\\{\\mat
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers about the four subspaces. Three are marked with a box where they happen in the sections above, and the first, taking the pivot columns from the reduced matrix, is pointed out in the column-space section. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Taking the pivot columns from the reduced matrix**
-
-A basis for the column space is read from the columns of the reduced form instead of the original matrix. Row operations change the column space, so the reduced columns usually span a different subspace, even though there are the right number of them.
-
-Wrong working: for the running example, the reduced form is
-$$R = \\begin{pmatrix} 1 & 3 & 0 & -3 \\\\ 0 & 0 & 1 & 1 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$$
-with pivots in columns $1$ and $3$. Its pivot columns are $(1, 0, 0)$ and $(0, 1, 0)$, so $\\text{Col}(A)$ is taken to be the plane of vectors whose third entry is $0$.
-
-Right working: the pivot positions say which columns to keep, and the vectors are taken from $A$ itself: $(1, 2, -1)$ and $(2, 5, 0)$, columns $1$ and $3$ of $A$. The other two columns are combinations of these: column $2$ is $3(1, 2, -1) = (3, 6, -3)$, and column $4$ is $-3(1, 2, -1) + (2, 5, 0) = (-1, -1, 3)$.
-
-Why it happens: for the row space the reduced form is used directly, and the same habit is carried over to the columns. The dimension comes out right either way, so the count gives no warning.
-
-How to check: every column of $A$ must lie in the proposed space. Column $1$ of $A$ is $(1, 2, -1)$, whose third entry is $-1$, so it is not in the plane spanned by $(1, 0, 0)$ and $(0, 1, 0)$.
-
-**Keeping the signs from the reduced form**
-
-When the null-space basis is built, the coefficients of the free variables are copied from the reduced form as they stand. Each row of $R$ is an equation with $0$ on the right, and moving the free terms to the other side changes their signs.
-
-Wrong working: from the rows $x_1 + 3x_2 - 3x_4 = 0$ and $x_3 + x_4 = 0$, write $x_1 = 3x_2 - 3x_4$ and $x_3 = x_4$. Setting $x_2 = 1, x_4 = 0$ and then $x_2 = 0, x_4 = 1$ gives $(3, 1, 0, 0)$ and $(-3, 0, 1, 1)$.
-
-Right working: solving for the pivot variables gives $x_1 = -3x_2 + 3x_4$ and $x_3 = -x_4$. The same two choices give
-$$(-3, 1, 0, 0) \\quad \\text{and} \\quad (3, 0, -1, 1)$$
-
-Why it happens: the row $(1, 3, 0, -3)$ lists the coefficients on the left-hand side, and reading them off as the solution skips the step of moving terms across the equals sign.
-
-How to check: multiply each basis vector by $A$; every product must be the zero vector. Here $A(3, 1, 0, 0) = (6, 12, -6)$ and $A(-3, 0, 1, 1) = (-2, -2, 6)$, while $A(-3, 1, 0, 0)$ and $A(3, 0, -1, 1)$ are both $\\mathbf{0}$.
-
-**Swapping the row and column counts**
-
-The nullity is computed as $m - r$ and the left nullity as $n - r$. The null space lives in the domain $\\mathbb{R}^n$, whose dimension is the number of columns, and the left null space lives in $\\mathbb{R}^m$, whose dimension is the number of rows.
-
-Wrong working: take the $2 \\times 5$ matrix
-$$A = \\begin{pmatrix} 1 & 0 & 1 & 2 & 0 \\\\ 0 & 1 & 1 & 0 & 3 \\end{pmatrix}$$
-of rank $2$. Then $\\dim(\\text{Null}\\,A) = 2 - 2 = 0$ and $\\dim(\\text{Null}\\,A^T) = 5 - 2 = 3$, which would make the map one-to-one.
-
-Right working: $\\dim(\\text{Null}\\,A) = 5 - 2 = 3$ and $\\dim(\\text{Null}\\,A^T) = 2 - 2 = 0$. The free variables are $x_3, x_4, x_5$, and they give the null-space basis $(-1, -1, 1, 0, 0)$, $(-2, 0, 0, 1, 0)$, $(0, -3, 0, 0, 1)$.
-
-Why it happens: $m$ comes first in "$m \\times n$", and the two formulas $n - r$ and $m - r$ look alike, so they are easy to exchange.
-
-How to check: count the entries of the vectors. A solution of $A\\mathbf{x} = \\mathbf{0}$ has one entry per column, here five, and a matrix with $2$ rows has at most $2$ pivots among its $5$ columns, which leaves at least $3$ free variables. The two sums $r + (n - r) = n$ and $r + (m - r) = m$ must also come out right.
-
-**Pairing the null space with the column space**
-
-$\\text{Null}(A)$ is taken to be the orthogonal complement of $\\text{Col}(A)$. The true pairs are the row space with the null space in $\\mathbb{R}^n$, and the column space with the left null space in $\\mathbb{R}^m$.
-
-Wrong working: for $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$, the equation $A\\mathbf{x} = \\mathbf{0}$ says $x_2 = 0$, so $\\text{Null}(A)$ is the line through $(1, 0)$. The columns are $(0, 0)$ and $(1, 0)$, so $\\text{Col}(A)$ is the same line. Calling them orthogonal complements fails at once: $(1, 0) \\cdot (1, 0) = 1$, not $0$.
-
-Right working: the rows of $A$ are $(0, 1)$ and $(0, 0)$, so $\\text{Row}(A)$ is the line through $(0, 1)$, and $(0, 1) \\cdot (1, 0) = 0$. Its dimension and that of the null space add to $1 + 1 = 2$. On the other side, $A^T\\mathbf{y} = (0, y_1)$, so $\\text{Null}(A^T)$ is the line through $(0, 1)$, perpendicular to $\\text{Col}(A)$.
-
-Why it happens: the column space and the null space are the two subspaces met first and used most, and both are named after $A$ itself rather than $A^T$, so they are remembered as a pair.
-
-How to check: partners must live in the same space. For the $3 \\times 4$ running example, $\\text{Null}(A)$ lies in $\\mathbb{R}^4$ and $\\text{Col}(A)$ in $\\mathbb{R}^3$, so they cannot be complements at all. A second test is the dot product: a null-space vector dotted with any row of $A$ gives $0$, because that is what $A\\mathbf{x} = \\mathbf{0}$ says.`,
+    content: `Four mistakes account for many wrong answers about the four subspaces. Three are marked with a box where they happen in the sections above, and the first, taking the pivot columns from the reduced matrix, is pointed out in the column-space section. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip mixes up the four fundamental subspaces. The column space takes the pivot columns of $A$ itself, a null-space basis changes the signs of the free-variable coefficients, the nullity is $n - r$ and the left nullity $m - r$, and the null space is the orthogonal complement of the row space, not of the column space. Multiplying each basis vector by $A$, or checking that partners live in the same space, catches each slip.`,
     link: ``,
   },
 }
@@ -4001,8 +3949,43 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'taking-the-pivot-columns-from-the-reduced-matrix', name: `Taking the pivot columns from the reduced matrix`, errorAt: 0,
+        what: `A basis for the column space is read from the columns of the reduced form instead of the original matrix. Row operations change the column space, so the reduced columns usually span a different subspace, even though there are the right number of them.`,
+        wrong: [`For the running example, the reduced form is
+$$R = \\begin{pmatrix} 1 & 3 & 0 & -3 \\\\ 0 & 0 & 1 & 1 \\\\ 0 & 0 & 0 & 0 \\end{pmatrix}$$`, `With pivots in columns $1$ and $3$. Its pivot columns are $(1, 0, 0)$ and $(0, 1, 0)$, so $\\text{Col}(A)$ is taken to be the plane of vectors whose third entry is $0$.`],
+        right: [`The pivot positions say which columns to keep, and the vectors are taken from $A$ itself: $(1, 2, -1)$ and $(2, 5, 0)$, columns $1$ and $3$ of $A$. The other two columns are combinations of these: column $2$ is $3(1, 2, -1) = (3, 6, -3)$, and column $4$ is $-3(1, 2, -1) + (2, 5, 0) = (-1, -1, 3)$.`],
+        why: `For the row space the reduced form is used directly, and the same habit is carried over to the columns. The dimension comes out right either way, so the count gives no warning.`,
+        check: `Every column of $A$ must lie in the proposed space. Column $1$ of $A$ is $(1, 2, -1)$, whose third entry is $-1$, so it is not in the plane spanned by $(1, 0, 0)$ and $(0, 1, 0)$.` },
+      { id: 'keeping-the-signs-from-the-reduced-form', name: `Keeping the signs from the reduced form`, errorAt: 0,
+        what: `When the null-space basis is built, the coefficients of the free variables are copied from the reduced form as they stand. Each row of $R$ is an equation with $0$ on the right, and moving the free terms to the other side changes their signs.`,
+        wrong: [`From the rows $x_1 + 3x_2 - 3x_4 = 0$ and $x_3 + x_4 = 0$, write $x_1 = 3x_2 - 3x_4$ and $x_3 = x_4$. Setting $x_2 = 1, x_4 = 0$ and then $x_2 = 0, x_4 = 1$ gives $(3, 1, 0, 0)$ and $(-3, 0, 1, 1)$.`],
+        right: [`Solving for the pivot variables gives $x_1 = -3x_2 + 3x_4$ and $x_3 = -x_4$. The same two choices give
+$$(-3, 1, 0, 0) \\quad \\text{and} \\quad (3, 0, -1, 1)$$`],
+        why: `The row $(1, 3, 0, -3)$ lists the coefficients on the left-hand side, and reading them off as the solution skips the step of moving terms across the equals sign.`,
+        check: `Multiply each basis vector by $A$; every product must be the zero vector. Here $A(3, 1, 0, 0) = (6, 12, -6)$ and $A(-3, 0, 1, 1) = (-2, -2, 6)$, while $A(-3, 1, 0, 0)$ and $A(3, 0, -1, 1)$ are both $\\mathbf{0}$.` },
+      { id: 'swapping-the-row-and-column-counts', name: `Swapping the row and column counts`, errorAt: 0,
+        what: `The nullity is computed as $m - r$ and the left nullity as $n - r$. The null space lives in the domain $\\mathbb{R}^n$, whose dimension is the number of columns, and the left null space lives in $\\mathbb{R}^m$, whose dimension is the number of rows.`,
+        wrong: [`Take the $2 \\times 5$ matrix
+$$A = \\begin{pmatrix} 1 & 0 & 1 & 2 & 0 \\\\ 0 & 1 & 1 & 0 & 3 \\end{pmatrix}$$`, `Of rank $2$. Then $\\dim(\\text{Null}\\,A) = 2 - 2 = 0$ and $\\dim(\\text{Null}\\,A^T) = 5 - 2 = 3$, which would make the map one-to-one.`],
+        right: [`$\\dim(\\text{Null}\\,A) = 5 - 2 = 3$ and $\\dim(\\text{Null}\\,A^T) = 2 - 2 = 0$. The free variables are $x_3, x_4, x_5$, and they give the null-space basis $(-1, -1, 1, 0, 0)$, $(-2, 0, 0, 1, 0)$, $(0, -3, 0, 0, 1)$.`],
+        why: `$m$ comes first in "$m \\times n$", and the two formulas $n - r$ and $m - r$ look alike, so they are easy to exchange.`,
+        check: `Count the entries of the vectors. A solution of $A\\mathbf{x} = \\mathbf{0}$ has one entry per column, here five, and a matrix with $2$ rows has at most $2$ pivots among its $5$ columns, which leaves at least $3$ free variables. The two sums $r + (n - r) = n$ and $r + (m - r) = m$ must also come out right.` },
+      { id: 'pairing-the-null-space-with-the-column-space', name: `Pairing the null space with the column space`, errorAt: 1,
+        what: `$\\text{Null}(A)$ is taken to be the orthogonal complement of $\\text{Col}(A)$. The true pairs are the row space with the null space in $\\mathbb{R}^n$, and the column space with the left null space in $\\mathbb{R}^m$.`,
+        wrong: [`For $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$,`, `The equation $A\\mathbf{x} = \\mathbf{0}$ says $x_2 = 0$, so $\\text{Null}(A)$ is the line through $(1, 0)$. The columns are $(0, 0)$ and $(1, 0)$, so $\\text{Col}(A)$ is the same line. Calling them orthogonal complements fails at once: $(1, 0) \\cdot (1, 0) = 1$, not $0$.`],
+        right: [`For $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$,`, `The rows of $A$ are $(0, 1)$ and $(0, 0)$, so $\\text{Row}(A)$ is the line through $(0, 1)$, and $(0, 1) \\cdot (1, 0) = 0$. Its dimension and that of the null space add to $1 + 1 = 2$. On the other side, $A^T\\mathbf{y} = (0, y_1)$, so $\\text{Null}(A^T)$ is the line through $(0, 1)$, perpendicular to $\\text{Col}(A)$.`],
+        why: `The column space and the null space are the two subspaces met first and used most, and both are named after $A$ itself rather than $A^T$, so they are remembered as a pair.`,
+        check: `Partners must live in the same space. For the $3 \\times 4$ running example, $\\text{Null}(A)$ lies in $\\mathbb{R}^4$ and $\\text{Col}(A)$ in $\\mathbb{R}^3$, so they cannot be complements at all. A second test is the dot product: a null-space vector dotted with any row of $A$ gives $0$, because that is what $A\\mathbf{x} = \\mathbf{0}$ says.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     fundamentalSpacesTree,
     demoUnits,
     conceptIntroFigures,
@@ -4024,7 +4007,7 @@ return {
 }
    }
 
-export default function FundamentalSubspacesPage({fundamentalSpacesTree, seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FundamentalSubspacesPage({ pitfallData,fundamentalSpacesTree, seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4245,6 +4228,15 @@ $$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="fundamental-space-pitfalls"
+            title="Common pitfalls with the four fundamental subspaces"
+            source="/linear-algebra/vector-spaces/fundamental-spaces"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

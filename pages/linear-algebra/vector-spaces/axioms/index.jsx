@@ -1102,10 +1102,12 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1792,7 +1794,7 @@ The set of positive real numbers with ordinary addition is not a vector space. T
 
 @academic[pitfall,aside:true,width:35%:Trying only positive scalars
 Testing scalar closure with $c = 2$ or $c = \\frac{1}{2}$ keeps $x = 3$ positive, so the test seems to pass. But $(-1) \\cdot 3 = -3$ and $0 \\cdot 3 = 0$ are not positive: the positive reals fail closure under scalar multiplication as well.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-trying-only-positive-scalars)]@
 
 Scaling on this set is the ordinary product $cx$ of a scalar and a positive number. The scalars come from the field and the vectors from the set, and here the two are different: the field is all of $\\mathbb{R}$, while the set is only its positive part. Each scaling axiom pairs one element of the field with one element of the set.
 
@@ -1800,7 +1802,7 @@ The set $\\mathbb{R}^2$ can be equipped with non-standard operations that violat
 
 @academic[pitfall,aside:true,width:35%:Using the subspace test on new operations
 Testing only the two closure axioms, as for a subspace, passes $\\oplus$: every $(u_1 + v_1, 0)$ and every $c\\mathbf{v}$ lies in $\\mathbb{R}^2$. Yet $(1, 2) \\oplus \\mathbf{z} = (1 + z_1, 0)$ never equals $(1, 2)$, so there is no zero vector and this is not a vector space.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-subspace-test-on-new-operations)]@
 
 The points here are those of the whole plane, which is a vector space under the usual operations. Replacing the addition creates a new candidate, and the question is no longer which points belong to the set but how the new operation behaves on them. The same set can be a vector space under one pair of operations and fail to be one under another.
 
@@ -1839,7 +1841,7 @@ If $c\\mathbf{v} = \\mathbf{0}$, then $c = 0$ or $\\mathbf{v} = \\mathbf{0}$. A 
 
 @academic[pitfall,aside:true,width:35%:Dividing by a vector
 Dividing both sides of $c\\mathbf{v} = d\\mathbf{v}$ by $\\mathbf{v}$ to get $c = d$ uses an operation the axioms never define, and it fails for $\\mathbf{v} = \\mathbf{0}$: $2 \\cdot \\mathbf{0} = 5 \\cdot \\mathbf{0}$ although $2 \\neq 5$. The correct conclusion is $c = d$ or $\\mathbf{v} = \\mathbf{0}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-a-vector)]@
 
 This fact is what takes the place of cancellation in equations between vectors. An equation of the form $c\\mathbf{v} = d\\mathbf{v}$ is first collected on one side with the distributive axiom, giving $(c - d)\\mathbf{v} = \\mathbf{0}$, and the rule above then splits it into two cases.
 
@@ -1871,47 +1873,20 @@ The ten axioms are not arbitrary — they are a compact set of conditions that s
     after: ``,
     link: ``,
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary sets out the ten vector space axioms of the page with the standard example and the first consequences, in four families. Each family opens with a line linking to its section, and each formula carries a sentence on what it requires or says. The buttons above the cards show one family at a time.
+
+The first five axioms govern addition: closure, order, grouping, a zero vector and inverses. The next five govern scaling: closure, scaling twice, the two distributive laws and the scalar one. The standard example works the operations entry by entry on lists of numbers, and the consequences show that zero and minus one behave as expected.`,
+    before: ``,
+    after: `To check whether a set is a vector space, test closure first, since a sum or a multiple that leaves the set settles the question at once. Most of the other axioms are inherited from ordinary arithmetic, but the zero vector must lie in the set itself.`,
+    link: '',
+  },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again when the axioms are checked by hand. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Trying only positive scalars**
-
-Closure under scalar multiplication is tested with a few convenient scalars, usually positive ones, and the set passes. The scalars of a real vector space are all real numbers, and the negative scalars and $0$ are where such a test most often fails.
-
-Wrong working: for the positive real numbers with ordinary operations, $2 \\cdot 3 = 6$ and $\\frac{1}{2} \\cdot 3 = \\frac{3}{2}$ are positive, so the set is declared closed under scaling.
-
-Right working: the axiom demands $cx > 0$ for every real $c$ and every $x > 0$. Taking $c = -1$ and $x = 3$ gives $(-1) \\cdot 3 = -3$, which is not positive. Scalar closure fails, in addition to the missing zero vector.
-
-Why it happens: in pictures and examples, scaling usually means stretching by a positive factor, and the scalars are thought of as sizes rather than as all the elements of the field.
-
-How to check: always try $c = -1$ and $c = 0$. Scaling by $-1$ must give the additive inverse and scaling by $0$ must give the zero vector, so both results have to lie in the set.
-
-**Using the subspace test on new operations**
-
-For a subset of a known vector space with the same operations, closure under addition and under scaling is enough, because the other eight axioms are inherited. With operations defined from scratch nothing is inherited, and checking only the two closures proves nothing.
-
-Wrong working: on $\\mathbb{R}^2$ with $(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)$ and ordinary scaling, the result $(u_1 + v_1, 0)$ is a point of $\\mathbb{R}^2$, and so is $c\\mathbf{v}$. Both closures hold, so the set is declared a vector space.
-
-Right working: test the other axioms too. A zero vector $\\mathbf{z}$ would need $(1, 2) \\oplus \\mathbf{z} = (1 + z_1, 0) = (1, 2)$, which is impossible because $0 \\neq 2$. The distributive law fails as well: with $c = 2$, $d = 3$ and $\\mathbf{v} = (1, 2)$, $(c + d)\\mathbf{v} = 5(1, 2) = (5, 10)$, while $c\\mathbf{v} \\oplus d\\mathbf{v} = (2, 4) \\oplus (3, 6) = (5, 0)$. The set is not a vector space.
-
-Why it happens: the subspace test is the version of the check that comes up most often, and its shortcut is carried over to settings where the eight inherited axioms were never established.
-
-How to check: ask whether the operations are the usual ones of a larger vector space. If they are not, all ten axioms have to be verified, and the zero vector is a good place to start.
-
-**Dividing by a vector**
-
-An equation such as $c\\mathbf{v} = d\\mathbf{v}$ is simplified by cancelling $\\mathbf{v}$ on both sides, as if $\\mathbf{v}$ were a nonzero number. A vector space has no division by vectors, and the cancellation loses a case.
-
-Wrong working: from $c\\mathbf{v} = d\\mathbf{v}$, divide both sides by $\\mathbf{v}$ and conclude $c = d$.
-
-Right working: add $-(d\\mathbf{v})$ to both sides and use distributivity over scalars: $(c - d)\\mathbf{v} = \\mathbf{0}$. Since a vector space has no zero divisors, $c - d = 0$ or $\\mathbf{v} = \\mathbf{0}$, so $c = d$ or $\\mathbf{v} = \\mathbf{0}$.
-
-Why it happens: with real numbers, $ca = da$ and $a \\neq 0$ give $c = d$ by dividing, and the same step looks natural with a bold letter in place of $a$.
-
-How to check: substitute $\\mathbf{v} = \\mathbf{0}$. Then $2 \\cdot \\mathbf{0} = \\mathbf{0} = 5 \\cdot \\mathbf{0}$, so the equation holds with $c = 2$ and $d = 5$, and any argument that concluded $c = d$ has missed this case.`,
+    content: `Three mistakes come up again and again when the axioms are checked by hand. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip tests a vector space too lightly. Closure under scaling must hold for negative scalars and for $0$ too, new operations need all ten axioms and not just the two closures, and $c\\mathbf{v} = d\\mathbf{v}$ gives $c = d$ only when $\\mathbf{v} \\neq \\mathbf{0}$. Trying $c = -1$ and $c = 0$, or substituting $\\mathbf{v} = \\mathbf{0}$, catches each slip.`,
     link: ``,
   },
 }
@@ -2047,8 +2022,65 @@ const conceptIntroFigures = {
     kindsTable: ciKindsTable,
   };
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'trying-only-positive-scalars', name: `Trying only positive scalars`, errorAt: 0,
+        what: `Closure under scalar multiplication is tested with a few convenient scalars, usually positive ones, and the set passes. The scalars of a real vector space are all real numbers, and the negative scalars and $0$ are where such a test most often fails.`,
+        wrong: [`For the positive real numbers with ordinary operations, $2 \\cdot 3 = 6$ and $\\frac{1}{2} \\cdot 3 = \\frac{3}{2}$ are positive, so the set is declared closed under scaling.`],
+        right: [`The axiom demands $cx > 0$ for every real $c$ and every $x > 0$. Taking $c = -1$ and $x = 3$ gives $(-1) \\cdot 3 = -3$, which is not positive. Scalar closure fails, in addition to the missing zero vector.`],
+        why: `In pictures and examples, scaling usually means stretching by a positive factor, and the scalars are thought of as sizes rather than as all the elements of the field.`,
+        check: `Always try $c = -1$ and $c = 0$. Scaling by $-1$ must give the additive inverse and scaling by $0$ must give the zero vector, so both results have to lie in the set.` },
+      { id: 'using-the-subspace-test-on-new-operations', name: `Using the subspace test on new operations`, errorAt: 0,
+        what: `For a subset of a known vector space with the same operations, closure under addition and under scaling is enough, because the other eight axioms are inherited. With operations defined from scratch nothing is inherited, and checking only the two closures proves nothing.`,
+        wrong: [`On $\\mathbb{R}^2$ with $(u_1, u_2) \\oplus (v_1, v_2) = (u_1 + v_1, 0)$ and ordinary scaling, the result $(u_1 + v_1, 0)$ is a point of $\\mathbb{R}^2$, and so is $c\\mathbf{v}$. Both closures hold, so the set is declared a vector space.`],
+        right: [`Test the other axioms too. A zero vector $\\mathbf{z}$ would need $(1, 2) \\oplus \\mathbf{z} = (1 + z_1, 0) = (1, 2)$, which is impossible because $0 \\neq 2$. The distributive law fails as well: with $c = 2$, $d = 3$ and $\\mathbf{v} = (1, 2)$, $(c + d)\\mathbf{v} = 5(1, 2) = (5, 10)$, while $c\\mathbf{v} \\oplus d\\mathbf{v} = (2, 4) \\oplus (3, 6) = (5, 0)$. The set is not a vector space.`],
+        why: `The subspace test is the version of the check that comes up most often, and its shortcut is carried over to settings where the eight inherited axioms were never established.`,
+        check: `Ask whether the operations are the usual ones of a larger vector space. If they are not, all ten axioms have to be verified, and the zero vector is a good place to start.` },
+      { id: 'dividing-by-a-vector', name: `Dividing by a vector`, errorAt: 0,
+        what: `An equation such as $c\\mathbf{v} = d\\mathbf{v}$ is simplified by cancelling $\\mathbf{v}$ on both sides, as if $\\mathbf{v}$ were a nonzero number. A vector space has no division by vectors, and the cancellation loses a case.`,
+        wrong: [`From $c\\mathbf{v} = d\\mathbf{v}$, divide both sides by $\\mathbf{v}$ and conclude $c = d$.`],
+        right: [`Add $-(d\\mathbf{v})$ to both sides and use distributivity over scalars: $(c - d)\\mathbf{v} = \\mathbf{0}$. Since a vector space has no zero divisors, $c - d = 0$ or $\\mathbf{v} = \\mathbf{0}$, so $c = d$ or $\\mathbf{v} = \\mathbf{0}$.`],
+        why: `With real numbers, $ca = da$ and $a \\neq 0$ give $c = d$ by dividing, and the same step looks natural with a bold letter in place of $a$.`,
+        check: `Substitute $\\mathbf{v} = \\mathbf{0}$. Then $2 \\cdot \\mathbf{0} = \\mathbf{0} = 5 \\cdot \\mathbf{0}$, so the equation holds with $c = 2$ and $d = 5$, and any argument that concluded $c = d$ has missed this case.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'addition', name: 'Addition axioms', sub: 'Axioms 1 to 5 of [the ten axioms](!#2), for all $\\mathbf{u}, \\mathbf{v}, \\mathbf{w}$ in $V$.', pairs: [
+        [{ formula: '$\\mathbf{u} + \\mathbf{v} \\in V$', text: 'Axiom 1, closure: the sum of two vectors stays in the space, as [the ten axioms](!#2) require.' },
+         { formula: '$\\mathbf{u} + \\mathbf{v} = \\mathbf{v} + \\mathbf{u}$', text: 'Axiom 2: the order of the two vectors does not change the sum, from [the ten axioms](!#2).' }],
+        [{ formula: '$(\\mathbf{u} + \\mathbf{v}) + \\mathbf{w} = \\mathbf{u} + (\\mathbf{v} + \\mathbf{w})$', text: 'Axiom 3: the grouping of three vectors does not change the sum, from [the ten axioms](!#2).' },
+         { formula: '$\\exists\\, \\mathbf{0} \\in V: \\mathbf{v} + \\mathbf{0} = \\mathbf{v}$', text: 'Axiom 4: the space holds a zero vector that changes nothing when added, as [the ten axioms](!#2) state.' }],
+        [{ formula: '$\\exists\\, -\\mathbf{v} \\in V: \\mathbf{v} + (-\\mathbf{v}) = \\mathbf{0}$', text: 'Axiom 5: every vector has an additive inverse in the space, from [the ten axioms](!#2).' }, ''],
+      ] },
+      { id: 'scaling', name: 'Scalar multiplication axioms', sub: 'Axioms 6 to 10 of [the ten axioms](!#2), for all scalars $c, d$ in the field $\\mathbb{F}$.', pairs: [
+        [{ formula: '$c\\mathbf{v} \\in V$', text: 'Axiom 6, closure: a scalar multiple of a vector stays in the space, as [the ten axioms](!#2) require.' },
+         { formula: '$c(d\\mathbf{v}) = (cd)\\mathbf{v}$', text: 'Axiom 7: scaling twice is the same as scaling once by the product, from [the ten axioms](!#2).' }],
+        [{ formula: '$c(\\mathbf{u} + \\mathbf{v}) = c\\mathbf{u} + c\\mathbf{v}$', text: 'Axiom 8: a scalar distributes over a sum of vectors, from [the ten axioms](!#2).' },
+         { formula: '$(c + d)\\mathbf{v} = c\\mathbf{v} + d\\mathbf{v}$', text: 'Axiom 9: a vector distributes over a sum of scalars, from [the ten axioms](!#2).' }],
+        [{ formula: '$1\\mathbf{v} = \\mathbf{v}$', text: 'Axiom 10: the scalar 1 leaves every vector unchanged, as [the ten axioms](!#2) state.' }, ''],
+      ] },
+      { id: 'rn', name: 'The standard example', sub: 'Ordered lists of real numbers with entry-by-entry operations, from [the standard example](!#4).', pairs: [
+        [{ formula: '$\\mathbb{R}^n = \\{(v_1, v_2, \\dots, v_n) : v_i \\in \\mathbb{R}\\}$', text: 'The set of all ordered $n$-tuples of real numbers, the most concrete space in [the standard example](!#4).' }, ''],
+        [{ formula: '$(u_1, \\dots, u_n) + (v_1, \\dots, v_n) = (u_1 + v_1, \\dots, u_n + v_n)$', text: 'Addition entry by entry, so closure is immediate, as [the standard example](!#4) shows.' },
+         { formula: '$c(v_1, \\dots, v_n) = (cv_1, \\dots, cv_n)$', text: 'Scaling multiplies every entry by $c$, from [the standard example](!#4).' }],
+      ] },
+      { id: 'consequences', name: 'Consequences', sub: 'Facts proved from the ten axioms alone, in [immediate consequences of the axioms](!#9).', pairs: [
+        [{ formula: '$0\\mathbf{v} = \\mathbf{0}, \\quad c\\mathbf{0} = \\mathbf{0}$', text: 'The scalar zero and the zero vector both give the zero vector; [the consequences](!#9) prove it with distributivity.' },
+         { formula: '$(-1)\\mathbf{v} = -\\mathbf{v}$', text: 'Scaling by $-1$ gives the additive inverse, as [the consequences](!#9) show.' }],
+      ] },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     sectionsContent,
     introContent,
     vectorSpaceAxioms,
@@ -2069,7 +2101,7 @@ return {
 }
    }
 
-export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introContent, vectorSpaceAxioms, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
+export default function VectorSpaceAxiomsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, vectorSpaceAxioms, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2270,11 +2302,38 @@ export default function VectorSpaceAxiomsPage({seoData, sectionsContent, introCo
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="vector-space-axiom-formula-summary"
+            title="Vector space axioms"
+            source="/linear-algebra/vector-spaces/axioms"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.pitfalls.title,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="vector-space-axiom-pitfalls"
+            title="Common pitfalls with the vector space axioms"
+            source="/linear-algebra/vector-spaces/axioms"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

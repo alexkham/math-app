@@ -1513,6 +1513,9 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -2398,7 +2401,7 @@ Each input is negated before the function acts: the output at $x$ equals the ori
 
 @academic[pitfall,aside:true,width:35%:Negating the output instead of the input
 Reflecting $f(x) = (x - 2)^2$ in the $y$-axis as $-(x - 2)^2$ flips it across the $x$-axis instead: the vertex stays at $(2, 0)$ and the parabola opens downward. The $y$-axis mirror image is $f(-x) = (-x - 2)^2 = (x + 2)^2$, with vertex $(-2, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-negating-the-output-instead-of-the-input)]@
 
 For $f(x) = \\sqrt{x}$, the function $g(x) = \\sqrt{-x}$ reflects the half-curve across the $y$-axis. The original exists for $x \\geq 0$; the reflection exists for $x \\leq 0$.
 
@@ -2471,7 +2474,7 @@ The effect is counterintuitive: multiplying $x$ by a number greater than $1$ mak
 
 @academic[pitfall,aside:true,width:35%:Raising only x to the power
 Writing $f(2x)$ for $f(x) = x^3$ as $2x^3$ cubes only the $x$ and gives $2$ at $x = 1$, a vertical stretch. The whole input is cubed: $f(2x) = (2x)^3 = 8x^3$, which reaches $f(2) = 8$ already at $x = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-raising-only-x-to-the-power)]@
 
 For $f(x) = x^2$, the function $g(x) = (2x)^2 = 4x^2$ compresses the parabola horizontally by a factor of $2$. Points at $x = 1$ and $x = -1$ now achieve the heights that $f$ achieved at $x = 2$ and $x = -2$.
 
@@ -2535,7 +2538,7 @@ Then, apply vertical transformations in the order they appear when reading outwa
 
 @academic[pitfall,aside:true,width:35%:Reading the shift before factoring
 Reading $g(x) = (2x - 6)^2$ as a shift right by $6$ puts the vertex at $x = 6$, where $g(6) = 36$. Factoring first, $2x - 6 = 2(x - 3)$, gives $h = 3$: the vertex is $(3, 0)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-shift-before-factoring)]@
 
 For $g(x) = 3f(2(x - 1)) + 4$:
 
@@ -2576,7 +2579,7 @@ $$y = -2(x - 3)^2 - 2$$]@
 
 @academic[pitfall,aside:true,width:35%:Copying the vertex sign into the bracket
 Writing the vertex $(3, -2)$ as $y = -2(x + 3)^2 - 2$ puts the vertex at $(-3, -2)$, and the check point $(4, -4)$ then gives $-100$. The bracket holds $x - h$: $y = -2(x - 3)^2 - 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-copying-the-vertex-sign-into-the-bracket)]@
 
 Step 5 is where the picture becomes a formula. The two coordinates of the vertex end up in different places: the vertical one stands alone at the end, where it is added to every output, and the horizontal one goes inside the bracket next to $x$, where it acts on the input before the squaring. The steepness found in Step 4 becomes the coefficient in front.
 
@@ -2633,7 +2636,10 @@ Tracking these features during transformation confirms that the algebraic and ge
 
   obj14: {
     title: `Summary of Transformations`,
-    content: `The three transformation types — shifts, scalings (stretch/compression), and reflections — each appear in both horizontal and vertical form, giving six basic transformations governed by the four parameters $a$, $b$, $h$, $k$ in the general form $g(x) = a \\cdot f(b(x - h)) + k$. The table below collects each transformation with its form, geometric effect, and the parameter condition that distinguishes its variants — useful as a reference card when sketching transformed graphs or reading equations off of them.`,
+    content: `This summary arranges the six basic transformations of a graph in three rows, shifts, stretches and compressions, and reflections, each in a vertical and a horizontal version. Above them sits the general form, in which four parameters control all six. Each cell gives the form, its effect on the graph with a link to its section, and the condition that decides the direction.
+
+The vertical column changes the outputs and moves the graph the way the sign suggests. The horizontal column changes the inputs and runs against intuition: subtracting inside moves the graph right, and a large factor on the input makes it narrower. A note at the bottom points to combining all four at once.`,
+    formulaSheetAfter: `To read a transformed equation, sort its parameters first: what sits outside the function acts vertically and as expected, what sits inside acts horizontally and in reverse. Then apply the shifts, stretches and reflections one at a time to the original graph.`,
     before: ``,
     after: ``,
     link: '',
@@ -2641,57 +2647,9 @@ Tracking these features during transformation confirms that the algebraic and ge
 
   obj15: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when transforming functions and reading transformed equations. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Negating the output instead of the input**
-
-Asked to reflect a graph in the $y$-axis, the minus sign is placed in front of the whole function instead of on the input. That produces the reflection in the $x$-axis, a different graph.
-
-Wrong working: for $f(x) = (x - 2)^2$, the reflection in the $y$-axis is written as $-(x - 2)^2$. Its vertex is still $(2, 0)$, and the parabola now opens downward.
-
-Right working: a reflection in the $y$-axis replaces $x$ with $-x$: $f(-x) = (-x - 2)^2 = (x + 2)^2$. The vertex moves to $(-2, 0)$, and the parabola still opens upward.
-
-Why it happens: both reflections use a single minus sign, and "reflect" suggests turning the graph over, which is what $-f(x)$ does.
-
-How to check: a reflection in the $y$-axis keeps the $y$-intercept, since $f(-0) = f(0)$. Here $f(0) = 4$, and $(0 + 2)^2 = 4$ agrees, while $-(0 - 2)^2 = -4$ does not.
-
-**Raising only x to the power**
-
-When $bx$ is substituted into a power function, the power is applied to $x$ alone and $b$ is left outside. The result is a vertical stretch $b \\cdot f(x)$, not the horizontal compression $f(bx)$.
-
-Wrong working: for $f(x) = x^3$, $f(2x)$ is written as $2x^3$. At $x = 1$ this gives $2$.
-
-Right working: the whole input is cubed: $f(2x) = (2x)^3 = 2^3 x^3 = 8x^3$. At $x = 1$ it gives $8 = f(2)$: the height $f$ reached at $x = 2$ is now reached at $x = 1$, which is the horizontal compression by a factor of $2$.
-
-Why it happens: $2x^3$ looks like "$x^3$ with $2x$ in place of $x$", but a power acts before multiplication, so $2x^3$ means $2 \\cdot x^3$, which is $2f(x)$.
-
-How to check: evaluate at one input. $f(2x)$ at $x = 1$ must equal $f(2)$; here $2 \\cdot 1^3 = 2$, while $f(2) = 8$.
-
-**Reading the shift before factoring**
-
-In an inside expression like $bx - c$, the number $c$ is read as the horizontal shift. The shift is the $h$ of the factored form $b(x - h)$, so $h = c/b$.
-
-Wrong working: $g(x) = (2x - 6)^2$ is read as "compress by $2$, shift right $6$", and the vertex is placed at $x = 6$. But $g(6) = (12 - 6)^2 = 36$, not $0$.
-
-Right working: $2x - 6 = 2(x - 3)$, so $b = 2$ and $h = 3$. The vertex is at $(3, 0)$, and indeed $g(3) = (6 - 6)^2 = 0$.
-
-Why it happens: in $f(x - h)$ the number next to $x$ is the shift, and the habit carries over when a factor $b$ stands in front of $x$. The factor acts on the shift as well, dividing it by $b$.
-
-How to check: the parent's vertex sits where the inside equals $0$. Solve $2x - 6 = 0$ to get $x = 3$.
-
-**Copying the vertex sign into the bracket**
-
-When an equation is written from a graph, the horizontal coordinate of the vertex is copied into the bracket with its sign unchanged, as if the bracket held $x + h$.
-
-Wrong working: for a downward parabola with vertex $(3, -2)$ and steepness $2$, the equation is written as $y = -2(x + 3)^2 - 2$. Its vertex is $(-3, -2)$, the mirror image of the intended one.
-
-Right working: vertex form is $a(x - h)^2 + k$, so $h = 3$ goes in as $x - 3$ and $k = -2$ is added at the end: $y = -2(x - 3)^2 - 2$. The point $(4, -4)$ checks: $-2(4 - 3)^2 - 2 = -4$.
-
-Why it happens: $k$ keeps its sign in the formula while $h$ appears with the opposite sign, and the two coordinates are read off the graph in the same way.
-
-How to check: substitute a second visible point, as in Step 6. With the wrong equation, $(4, -4)$ gives $-2(4 + 3)^2 - 2 = -100$, far from $-4$.`,
+    content: `Four mistakes come up again and again when transforming functions and reading transformed equations. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip changes the wrong part of the formula. A reflection in the $y$-axis replaces $x$ with $-x$, $f(2x)$ puts $2x$ into every place that held $x$, a horizontal shift is read only after the factor of $x$ is taken out, and the vertex form puts $x - h$ in the bracket. Evaluating the new formula at one input, or substituting a known point, catches each slip.`,
     link: '',
   },
 
@@ -2904,8 +2862,73 @@ const faqQuestions = {
     }),
   };
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj15 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'negating-the-output-instead-of-the-input', name: `Negating the output instead of the input`, errorAt: 1,
+        what: `Asked to reflect a graph in the $y$-axis, the minus sign is placed in front of the whole function instead of on the input. That produces the reflection in the $x$-axis, a different graph.`,
+        wrong: [`For $f(x) = (x - 2)^2$,`, `The reflection in the $y$-axis is written as $-(x - 2)^2$. Its vertex is still $(2, 0)$, and the parabola now opens downward.`],
+        right: [`For $f(x) = (x - 2)^2$,`, `A reflection in the $y$-axis replaces $x$ with $-x$: $f(-x) = (-x - 2)^2 = (x + 2)^2$. The vertex moves to $(-2, 0)$, and the parabola still opens upward.`],
+        why: `Both reflections use a single minus sign, and "reflect" suggests turning the graph over, which is what $-f(x)$ does.`,
+        check: `A reflection in the $y$-axis keeps the $y$-intercept, since $f(-0) = f(0)$. Here $f(0) = 4$, and $(0 + 2)^2 = 4$ agrees, while $-(0 - 2)^2 = -4$ does not.` },
+      { id: 'raising-only-x-to-the-power', name: `Raising only x to the power`, errorAt: 1,
+        what: `When $bx$ is substituted into a power function, the power is applied to $x$ alone and $b$ is left outside. The result is a vertical stretch $b \\cdot f(x)$, not the horizontal compression $f(bx)$.`,
+        wrong: [`For $f(x) = x^3$,`, `$f(2x)$ is written as $2x^3$. At $x = 1$ this gives $2$.`],
+        right: [`For $f(x) = x^3$,`, `The whole input is cubed: $f(2x) = (2x)^3 = 2^3 x^3 = 8x^3$. At $x = 1$ it gives $8 = f(2)$: the height $f$ reached at $x = 2$ is now reached at $x = 1$, which is the horizontal compression by a factor of $2$.`],
+        why: `$2x^3$ looks like "$x^3$ with $2x$ in place of $x$", but a power acts before multiplication, so $2x^3$ means $2 \\cdot x^3$, which is $2f(x)$.`,
+        check: `Evaluate at one input. $f(2x)$ at $x = 1$ must equal $f(2)$; here $2 \\cdot 1^3 = 2$, while $f(2) = 8$.` },
+      { id: 'reading-the-shift-before-factoring', name: `Reading the shift before factoring`, errorAt: 0,
+        what: `In an inside expression like $bx - c$, the number $c$ is read as the horizontal shift. The shift is the $h$ of the factored form $b(x - h)$, so $h = c/b$.`,
+        wrong: [`$g(x) = (2x - 6)^2$ is read as "compress by $2$, shift right $6$", and the vertex is placed at $x = 6$. But $g(6) = (12 - 6)^2 = 36$, not $0$.`],
+        right: [`$2x - 6 = 2(x - 3)$, so $b = 2$ and $h = 3$. The vertex is at $(3, 0)$, and indeed $g(3) = (6 - 6)^2 = 0$.`],
+        why: `In $f(x - h)$ the number next to $x$ is the shift, and the habit carries over when a factor $b$ stands in front of $x$. The factor acts on the shift as well, dividing it by $b$.`,
+        check: `The parent's vertex sits where the inside equals $0$. Solve $2x - 6 = 0$ to get $x = 3$.` },
+      { id: 'copying-the-vertex-sign-into-the-bracket', name: `Copying the vertex sign into the bracket`, errorAt: 0,
+        what: `When an equation is written from a graph, the horizontal coordinate of the vertex is copied into the bracket with its sign unchanged, as if the bracket held $x + h$.`,
+        wrong: [`For a downward parabola with vertex $(3, -2)$ and steepness $2$, the equation is written as $y = -2(x + 3)^2 - 2$. Its vertex is $(-3, -2)$, the mirror image of the intended one.`],
+        right: [`Vertex form is $a(x - h)^2 + k$, so $h = 3$ goes in as $x - 3$ and $k = -2$ is added at the end: $y = -2(x - 3)^2 - 2$. The point $(4, -4)$ checks: $-2(4 - 3)^2 - 2 = -4$.`],
+        why: `$k$ keeps its sign in the formula while $h$ appears with the opposite sign, and the two coordinates are read off the graph in the same way.`,
+        check: `Substitute a second visible point, as in Step 6. With the wrong equation, $(4, -4)$ gives $-2(4 + 3)^2 - 2 = -100$, far from $-4$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: '$g(x) = a \\cdot f(b(x - h)) + k$',
+    generalLabel: 'The general form',
+    sides: [
+      { name: 'Vertical', sub: 'changes the outputs, outside $f$', tag: 'follows the sign', tone: 'direct' },
+      { name: 'Horizontal', sub: 'changes the inputs, inside $f$', tag: 'counterintuitive', tone: 'reversed' },
+    ],
+    rows: [
+      { op: 'Shift', cells: [
+        { formula: '$g(x) = f(x) + k$', effect: 'Shifts the graph vertically by $k$; every point moves the same distance, as [vertical translations](!#3) shows.',
+          condition: 'up if $k > 0$, down if $k < 0$' },
+        { formula: '$g(x) = f(x - h)$', effect: 'Shifts the graph horizontally by $h$; subtracting inside moves it the positive way, from [horizontal translations](!#4).',
+          condition: 'right if $h > 0$, left if $h < 0$' },
+      ] },
+      { op: 'Stretch / compression', cells: [
+        { formula: '$g(x) = a \\cdot f(x)$', effect: 'Scales the $y$-values by the factor $a$ while the $x$-coordinates stay fixed ([vertical stretch and compression](!#7)).',
+          condition: 'stretch if $|a| > 1$, compress if $0 < |a| < 1$' },
+        { formula: '$g(x) = f(bx)$', effect: 'Scales the $x$-values by the factor $1/b$, so a larger $b$ makes the graph narrower ([horizontal stretch and compression](!#8)).',
+          condition: 'compress if $|b| > 1$, stretch if $0 < |b| < 1$' },
+      ] },
+      { op: 'Reflection', cells: [
+        { formula: '$g(x) = -f(x)$', effect: 'Flips the graph across the $x$-axis by negating every output, from [vertical reflections](!#5).',
+          condition: 'occurs when $a < 0$' },
+        { formula: '$g(x) = f(-x)$', effect: 'Flips the graph across the $y$-axis by negating every input before $f$ acts ([horizontal reflections](!#6)).',
+          condition: 'occurs when $b < 0$' },
+      ] },
+    ],
+    note: { label: 'All four together', text: 'The general form combines every row, and [combining transformations](!#9) reads $a$, $b$, $h$ and $k$ off a single equation.' },
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -2927,7 +2950,7 @@ const faqQuestions = {
     }
    }
 
-export default function TransformationsPage({
+export default function TransformationsPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -3189,6 +3212,15 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
+          <DiagramFrame
+            key={'obj15-mistakes'}
+            id="transformation-pitfalls"
+            title="Common pitfalls with transformations"
+            source="/functions/transformations"
+            after={sectionsContent.obj15.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3197,11 +3229,16 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="function-transformation-formula-summary"
+            title="The six basic transformations"
+            source="/functions/transformations"
+            related={{ href: '/functions/formulas', label: 'All function formulas' }}
+            after={sectionsContent.obj14.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="paired" />
+          </DiagramFrame>,
         ]
     },
 

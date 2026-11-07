@@ -28,6 +28,9 @@ import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/co
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -280,7 +283,7 @@ $$P(X \\geq k) = 1 - P(X \\leq k-1) = 1 - F_X(k-1)$$]@
 
 @academic[pitfall,aside:true,width:35%:Treating at least as more than
 For $n = 5$, $p = 0.5$, writing $P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{26}{32} = \\frac{6}{32}$ drops the $10$ sequences with exactly $3$ successes. The right cut is $1 - F_X(2) = 1 - \\frac{16}{32} = \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-at-least-as-more-than)]@
 
 The two complement rules look almost the same, and the whole difference between them is one value of $k$. A binomial count takes only whole-number values, so the wording of a question decides exactly which counts are kept: "more than", "at least", "fewer than" and "at most" each draw the line at a different place. The complement is taken on the other side of that line, and the CDF is read at the last count that falls outside the event. For a continuous variable a single point carries no probability and this bookkeeping would not matter; for the binomial, each count carries its own share of the total.
   `,
@@ -338,7 +341,7 @@ $$E[X] = 10 \\times 0.5 = 5$$]@
 
 @academic[pitfall,aside:true,width:35%:Expecting exactly np successes
 Reading $E[X] = 5$ as the number of heads ten flips will give overstates it: $P(X = 5) = \\frac{252}{1024} \\approx 0.246$, so about three runs in four end with some other count.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-expecting-exactly-np-successes)]@
 
 The expected number of heads in 10 flips is 5, which aligns perfectly with our intuition about a fair coin.
 
@@ -535,7 +538,7 @@ $P(X = 3) = \\binom{5}{3} (0.5)^3 (0.5)^{5-3} = 10 \\cdot 0.125 \\cdot 0.25 = 0.
 
 @academic[pitfall,aside:true,width:35%:Dropping the binomial coefficient
 Computing $P(X = 3)$ as $(0.5)^3 (0.5)^2 = 0.03125$ gives the chance of one sequence, such as HHHTT. There are $\\binom{5}{3} = 10$ such sequences, so $P(X = 3) = 0.3125$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-binomial-coefficient)]@
 
 This means there's a 31.25% chance of getting exactly 3 heads in 5 coin flips.
 
@@ -623,7 +626,10 @@ Every bar of the PMF is computed with the same three-factor product, whatever th
     obj16:{
   
       title:`Binomial at a Glance`,
-      content:`The table below collects the full anatomy of the binomial distribution into a single reference card — its parameters and support, the PMF and CDF, the mean and variance formulas, mode and median behavior, the Bernoulli special case, the Poisson approximation for rare events, and a canonical coin-flipping example.`,
+      content:`This summary gathers the binomial distribution on one card of ten rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the number of trials, the chance of success on each, and the counts that can occur. Then come the probability of an exact count, the running total up to a count, the mean, the variance with the standard deviation, and the mode and median. The last rows give the single-trial special case, the Poisson approximation for rare events and the fair-coin example.`,
+      formulaSheetAfter: `Most binomial questions come down to two rows: an exact count uses the probability of one value, while at most, more than and at least use the running total or its complement. The mean and the variance then say where the count should land and how far it may stray.`,
       before:``,
       after:``,
       link:'',
@@ -631,51 +637,9 @@ Every bar of the PMF is computed with the same three-factor product, whatever th
     },
     obj17:{
       title:`Common Pitfalls`,
-      content:`Three mistakes account for most wrong answers in binomial problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating at least as more than**
-
-The question asks for at least $k$ successes, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.
-
-Wrong working: for $n = 5$ and $p = 0.5$,
-$$P(X \\geq 3) = 1 - F_X(3) = 1 - \\frac{26}{32} = \\frac{6}{32}$$
-
-Right working: at least $3$ means $3$, $4$ or $5$ successes, so the complement is at most $2$.
-$$P(X \\geq 3) = 1 - F_X(2) = 1 - \\frac{16}{32} = \\frac{1}{2}$$
-
-Why it happens: the two rules $1 - F_X(k)$ and $1 - F_X(k-1)$ differ by a single symbol, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
-
-How to check: add the PMF values of the counts in the event. $P(X = 3) + P(X = 4) + P(X = 5) = \\frac{10 + 5 + 1}{32} = \\frac{1}{2}$.
-
-**Expecting exactly np successes**
-
-The mean $np$ is read as the number of successes the experiment will produce, or as a count that is very likely to come up.
-
-Wrong working: ten flips of a fair coin have $E[X] = 10 \\times 0.5 = 5$, so ten flips give $5$ heads.
-
-Right working: $5$ is the most likely count, but it is far from certain.
-$$P(X = 5) = \\binom{10}{5} (0.5)^{10} = \\frac{252}{1024} \\approx 0.246$$
-About three runs of ten flips in four end with some other count. The value $5$ is the long-run average of the counts over many runs.
-
-Why it happens: in everyday language "expected" means "predicted", while in probability it means a weighted average of all the possible values.
-
-How to check: ask whether $np$ is a possible count at all. Five flips of a fair coin have $E[X] = 5 \\times 0.5 = 2.5$, a number of heads that can never occur.
-
-**Dropping the binomial coefficient**
-
-The probability of exactly $k$ successes is computed as $p^k (1-p)^{n-k}$ alone, without the factor $\\binom{n}{k}$.
-
-Wrong working: for $5$ fair coin flips,
-$$P(X = 3) = (0.5)^3 (0.5)^2 = 0.03125$$
-
-Right working: $(0.5)^3 (0.5)^2$ is the probability of one particular sequence, such as HHHTT. The coefficient counts the $\\binom{5}{3} = 10$ sequences with three heads.
-$$P(X = 3) = 10 \\times 0.03125 = 0.3125$$
-
-Why it happens: the product of powers already looks like the probability of three successes and two failures, and counting the orders is a separate step that is easy to skip.
-
-How to check: the PMF values must add up to $1$. Without the coefficients, the six values for $k = 0, 1, \\ldots, 5$ are all $(0.5)^5 = \\frac{1}{32}$, and they add up to only $\\frac{6}{32}$.`,
+      content:`Three mistakes account for most wrong answers in binomial problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip miscounts the successes. At least $k$ includes $k$ itself, so the complement uses $F(k - 1)$; the mean $np$ is a long-run average, not the count to expect, and it need not even be a possible count; and every arrangement of the $k$ successes is counted by $\\binom{n}{k}$. Adding the PMF values of the event, or checking that all the PMF values add up to $1$, catches each slip.`,
       link:'',
     },
     links:{
@@ -905,8 +869,72 @@ How to check: the PMF values must add up to $1$. Without the coefficients, the s
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj17 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-at-least-as-more-than', name: `Treating at least as more than`, errorAt: 1,
+        what: `The question asks for at least $k$ successes, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.`,
+        wrong: [`For $n = 5$ and $p = 0.5$,`, `$$P(X \\geq 3) = 1 - F_X(3)$$
+$$= 1 - \\frac{26}{32} = \\frac{6}{32}$$`],
+        right: [`For $n = 5$ and $p = 0.5$,`, `At least $3$ means $3$, $4$ or $5$ successes, so the complement is at most $2$.`, `$$P(X \\geq 3) = 1 - F_X(2)$$
+$$= 1 - \\frac{16}{32} = \\frac{1}{2}$$`],
+        why: `The two rules $1 - F_X(k)$ and $1 - F_X(k-1)$ differ by a single symbol, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.`,
+        check: `Add the PMF values of the counts in the event. $P(X = 3) + P(X = 4) + P(X = 5) = \\frac{10 + 5 + 1}{32} = \\frac{1}{2}$.` },
+      { id: 'expecting-exactly-np-successes', name: `Expecting exactly np successes`, errorAt: 0,
+        what: `The mean $np$ is read as the number of successes the experiment will produce, or as a count that is very likely to come up.`,
+        wrong: [`Ten flips of a fair coin have $E[X] = 10 \\times 0.5 = 5$, so ten flips give $5$ heads.`],
+        right: [`$5$ is the most likely count, but it is far from certain.`, `$$P(X = 5) = \\binom{10}{5} (0.5)^{10}$$
+$$= \\frac{252}{1024} \\approx 0.246$$`, `About three runs of ten flips in four end with some other count. The value $5$ is the long-run average of the counts over many runs.`],
+        why: `In everyday language "expected" means "predicted", while in probability it means a weighted average of all the possible values.`,
+        check: `Ask whether $np$ is a possible count at all. Five flips of a fair coin have $E[X] = 5 \\times 0.5 = 2.5$, a number of heads that can never occur.` },
+      { id: 'dropping-the-binomial-coefficient', name: `Dropping the binomial coefficient`, errorAt: 0,
+        what: `The probability of exactly $k$ successes is computed as $p^k (1-p)^{n-k}$ alone, without the factor $\\binom{n}{k}$.`,
+        wrong: [`For $5$ fair coin flips,
+$$P(X = 3) = (0.5)^3 (0.5)^2 = 0.03125$$`],
+        right: [`$(0.5)^3 (0.5)^2$ is the probability of one particular sequence, such as HHHTT. The coefficient counts the $\\binom{5}{3} = 10$ sequences with three heads.`, `$$P(X = 3) = 10 \\times 0.03125$$
+$$= 0.3125$$`],
+        why: `The product of powers already looks like the probability of three successes and two failures, and counting the orders is a separate step that is easy to skip.`,
+        check: `The PMF values must add up to $1$. Without the coefficients, the six values for $k = 0, 1, \\ldots, 5$ are all $(0.5)^5 = \\frac{1}{32}$, and they add up to only $\\frac{6}{32}$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameters', formula: '$n$, the number of trials (a positive integer); $p \\in [0, 1]$, the success probability per trial', note: 'trials are independent; $p$ is constant across trials',
+        sub: 'The two numbers that fix the whole distribution, as [the parameters section](!#2) explains.' },
+      { name: 'Support', formula: '$k \\in \\{0, 1, 2, \\ldots, n\\}$', note: 'finite: exactly $n + 1$ possible success counts',
+        sub: 'The success counts that can occur, set out with [the PMF and its support](!#4).' },
+      { name: 'PMF', formula: '$\\displaystyle P(X = k) = \\binom{n}{k} p^k (1-p)^{n-k}, \\quad k = 0, 1, 2, \\ldots, n$', note: 'ways to arrange $k$ successes times the probability of one such sequence; sums to $1$ by the binomial theorem',
+        sub: 'The probability of exactly $k$ successes, built factor by factor in [the PMF section](!#4).' },
+      { name: 'CDF', formula: '$\\displaystyle F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\binom{n}{i} p^i (1-p)^{n-i}$', note: 'step function on integers; no simple closed form',
+        sub: 'The probability of at most $k$ successes; [the CDF section](!#5) also turns it into more-than and at-least probabilities.' },
+      { name: 'Expected value', formula: '$E[X] = np$', note: 'sum of $n$ Bernoulli means by linearity',
+        sub: 'The long-run average number of successes, derived in [the expected value section](!#6).' },
+      { name: 'Variance', formula: '$\\mathrm{Var}(X) = np(1-p)$; $\\sigma = \\sqrt{np(1-p)}$', note: 'largest at $p = 0.5$; shrinks as $p$ approaches $0$ or $1$',
+        sub: 'How widely the count spreads around $np$, worked out in [variance and standard deviation](!#7).' },
+      { name: 'Mode and median', formula: '$\\text{Mode} = \\lfloor (n+1)p \\rfloor$, or two adjacent modes when $(n + 1)p$ is an integer; the median lies within $1$ of $np$', note: 'symmetric when $p = 0.5$: mode, median and mean coincide',
+        sub: 'The most likely count and the middle of the distribution, found in [mode and median](!#8).' },
+      { name: 'Special case', formula: '$\\operatorname{Bin}(1, p) = \\operatorname{Bernoulli}(p)$', note: '$n = 1$ reduces to a single Bernoulli trial',
+        sub: 'With one trial the binomial is the Bernoulli distribution, as [the key terms](!#0) point out.' },
+      { name: 'Poisson approximation', formula: '$\\operatorname{Bin}(n, p) \\approx \\operatorname{Poisson}(np)$ when $n$ is large and $p$ is small', note: 'law of rare events; rule of thumb $n > 20$, $p < 0.05$',
+        sub: 'Many trials with a small chance each give counts close to [the Poisson distribution](!/probability/distributions/discrete/poisson) with rate $np$.' },
+      { name: 'Canonical example', formula: 'flipping a fair coin $10$ times: $n = 10$, $p = 0.5$', note: '$E[X] = 5$, $\\mathrm{Var}(X) = 2.5$, $\\sigma \\approx 1.58$',
+        sub: 'The coin-flip setting the page keeps returning to; [the expected value section](!#6) works out its mean.' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -927,7 +955,7 @@ How to check: the PMF values must add up to $1$. Without the coefficients, the s
     }
    }
 
-export default function BinomialDistributionPage({
+export default function BinomialDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1142,8 +1170,16 @@ export default function BinomialDistributionPage({
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="binomial-distribution-formula-summary"
+            title="Binomial distribution at a glance"
+            source="/probability/distributions/discrete/binomial"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.obj16.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1152,6 +1188,15 @@ export default function BinomialDistributionPage({
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <DiagramFrame
+            key={'obj17-mistakes'}
+            id="binomial-pitfalls"
+            title="Common pitfalls with the binomial distribution"
+            source="/probability/distributions/discrete/binomial"
+            after={sectionsContent.obj17.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

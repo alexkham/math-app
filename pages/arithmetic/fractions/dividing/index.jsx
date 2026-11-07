@@ -696,6 +696,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1015,7 +1016,10 @@ If a pipe fills $\\frac{1}{4}$ of a tank in $\\frac{1}{2}$ hour, the rate is $\\
 
     obj9:{
       title:`Dividing Fractions at a Glance`,
-      content:`The page covered fraction division across every input flavor — basic rule, whole numbers in either position, mixed numbers, cross-canceling, the reciprocal concept that powers the rule, and the &quot;how many fit&quot; interpretation behind word problems. The table below collects each situation with the move to make and a worked example.`,
+      content:`This summary collects each situation from the page in ten rows: the situation with a line on where it is explained and a link to its section, the move to make, and a worked example. Links in the moves lead on to the definition of the reciprocal and to mixed numbers.
+
+It begins with the reciprocal and the one number that has none, then gives the basic rule of keep, change, flip and its versions for whole numbers on either side and for mixed numbers. Cross-canceling after the flip keeps the numbers small. The last rows say why the rule works and read division as how many groups fit, the template behind word problems.`,
+      formulaSheetAfter: `Every division of fractions becomes a multiplication once the divisor is flipped, so the only new step is finding the right reciprocal. Flip the second number only, never the first, and check the size of the answer against the original as the whole-number rows describe.`,
       before:``,
       after:``,
       link:'',
@@ -1262,8 +1266,41 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table capstoneTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Situation', kind: 'name' },
+      { key: 'rule', label: 'What to do' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Reciprocal of a fraction', rule: 'swap numerator and denominator to get the [reciprocal](!/arithmetic/definitions#reciprocal); the product with the original is always 1', example: 'reciprocal of $\\displaystyle \\frac{3}{4}$ is $\\displaystyle \\frac{4}{3}$; $\\displaystyle \\frac{3}{4} \\times \\frac{4}{3} = 1$',
+        sub: 'The tool behind every division of fractions, from [reciprocals](!#1).' },
+      { name: 'Zero has no reciprocal', rule: 'flipping $\\frac{0}{1}$ gives $\\frac{1}{0}$, which is undefined', example: 'cannot divide by $0$',
+        sub: 'The one number that cannot be flipped, as [reciprocals](!#1) notes.' },
+      { name: 'Fraction ÷ fraction', rule: 'keep, change, flip: multiply the first by the reciprocal of the second, $\\displaystyle \\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c} = \\frac{a \\times d}{b \\times c}$', example: '$\\displaystyle \\frac{2}{3} \\div \\frac{4}{5} = \\frac{2}{3} \\times \\frac{5}{4} = \\frac{5}{6}$',
+        sub: 'Every division of fractions becomes a multiplication, as [the basic rule](!#2) shows.' },
+      { name: 'Fraction ÷ whole number', rule: 'write the whole over 1, then multiply by its reciprocal; result is smaller than the original when the fraction is positive and the whole number is greater than 1', example: '$\\displaystyle \\frac{3}{4} \\div 2 = \\frac{3}{4} \\times \\frac{1}{2} = \\frac{3}{8}$',
+        sub: 'The same rule with the whole number written as a fraction, from [dividing by whole numbers](!#4).' },
+      { name: 'Whole number ÷ fraction', rule: 'multiply the whole by the reciprocal of the fraction; if the fraction is between 0 and 1 and the whole is positive, result is larger than the whole', example: '$\\displaystyle 6 \\div \\frac{1}{2} = 6 \\times 2 = 12$',
+        sub: 'Many small pieces fit into a whole number, as [dividing whole numbers by fractions](!#5) shows.' },
+      { name: 'Mixed ÷ mixed', rule: 'convert both [mixed numbers](!/arithmetic/fractions/mixed-numbers) to improper fractions first, then keep, change, flip', example: '$\\displaystyle 3\\frac{1}{2} \\div 1\\frac{3}{4} = \\frac{7}{2} \\times \\frac{4}{7} = 2$',
+        sub: 'Improper fractions turn the problem into the basic rule, as [dividing mixed numbers](!#6) shows.' },
+      { name: 'After flipping', rule: 'cross-cancel any numerator with any denominator that share a common factor before multiplying', example: '$\\displaystyle \\frac{8}{9} \\times \\frac{3}{4} \\to \\frac{2}{3} \\times \\frac{1}{1} = \\frac{2}{3}$',
+        sub: 'Cancelling after the flip and before multiplying keeps the numbers small, from [simplifying and cross-canceling](!#7).' },
+      { name: 'Why it works', rule: 'multiplication by a reciprocal undoes multiplication; division and multiplying by the reciprocal are the same operation', example: '$\\displaystyle x \\div \\frac{c}{d} = x \\times \\frac{d}{c}$',
+        sub: 'The reason behind keep, change, flip, set out in [why multiply by the reciprocal](!#3).' },
+      { name: '"How many fit" meaning', rule: '$a \\div b$ answers how many copies of $b$ fit into $a$, the basis of most word problems', example: '$\\displaystyle \\frac{3}{4} \\div \\frac{1}{4} = 3$: three quarters fit in $\\displaystyle \\frac{3}{4}$',
+        sub: 'The reading of division used in portioning and measurement, from [word problems and applications](!#8).' },
+      { name: 'Word-problem template', rule: 'amount ÷ size per group → number of groups', example: '$4$ cups $\\displaystyle \\div \\frac{2}{3}$ cup per batch $= 6$ batches',
+        sub: 'The pattern behind the portioning problems in [word problems and applications](!#8).' },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
     pitfallData,
     sectionsContent,
     introContent,
@@ -1284,7 +1321,7 @@ return {
    }
 
 
-export default function DividingPage({ pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DividingPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1437,8 +1474,16 @@ Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="fraction-division-formula-summary"
+            title="Dividing fractions"
+            source="/arithmetic/fractions/dividing"
+            related={false}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

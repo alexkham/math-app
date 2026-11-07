@@ -20,7 +20,8 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -497,7 +498,7 @@ encapsulates all three: the right side requires $f(a)$ to exist, the left side r
 
 @academic[pitfall,aside:true,width:35%:Stopping after two conditions
 Seeing that $f(1)$ is defined and $\\lim_{x \\to 1} f(x)$ exists, and calling $f$ continuous, skips condition 3. For $f(x) = x^2$ when $x \\neq 1$ and $f(1) = 3$, the limit is $1 \\neq 3$, so $f$ is not continuous at $1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-after-two-conditions)]@
 
 In practice the conditions are checked in this order, at one specific point $a$. The first is about the single number $f(a)$, the second about the values of $f$ at points near $a$, and the third compares the two numbers these steps produce. The second condition deliberately ignores $f(a)$: the limit is built from values near $a$, never from the value at $a$ itself.
 `,
@@ -557,7 +558,7 @@ For closed intervals $[a, b]$, the definition adjusts at endpoints where only on
 
 @academic[pitfall,aside:true,width:35%:Asking for a two-sided limit at an endpoint
 Rejecting $\\sqrt{x}$ on $[0, 4]$ because there are no values left of $0$, and so no two-sided limit there, asks too much. At a left endpoint only the right side counts: $\\lim_{x \\to 0^+} \\sqrt{x} = 0 = \\sqrt{0}$, and $\\sqrt{x}$ is continuous on $[0, 4]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-asking-for-a-two-sided-limit-at-an-endpoint)]@
 
 [One-sided continuity](!/calculus/limits/one-sided) handles the boundaries where the domain restricts approach to a single direction.
 
@@ -600,7 +601,7 @@ For $x \\neq 1$, this simplifies to $x + 1$. The limit as $x \\to 1$ is $2$. But
 
 @academic[pitfall,aside:true,width:35%:Reading the value off the simplified formula
 Cancelling to $x + 1$ and then setting $f(1) = 1 + 1 = 2$ treats $f$ as $x + 1$ at $x = 1$ as well, and calls it continuous. The original formula gives $\\frac{0}{0}$ at $1$, so $f(1)$ is undefined and $f$ is discontinuous there.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-value-off-the-simplified-formula)]@
 
 The graph shows a hole at $(1, 2)$. The discontinuity is removable because redefining $f(1) = 2$ fills the hole and makes the function continuous.
 
@@ -648,7 +649,7 @@ $$\\lim_{x \\to 0^-} \\frac{1}{x} = -\\infty \\qquad \\lim_{x \\to 0^+} \\frac{1
 
 @academic[pitfall,aside:true,width:35%:Calling every zero of the denominator an asymptote
 Taking $x = 1$ as a vertical asymptote of $\\frac{x^2 - 1}{x - 1}$ because its denominator is $0$ there misses the cancellation: near $1$ the function equals $x + 1$, which tends to $2$, so the graph has a hole. Cancel common factors first; a zero left in the denominator, as with $\\frac{1}{x}$ at $0$, gives the asymptote.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-calling-every-zero-of-the-denominator-an-asymptote)]@
 
 The graph has a [vertical asymptote](!/calculus/limits/infinity) at $x = 0$. No finite value can serve as $f(0)$ because the function escapes to infinity from both sides.
 
@@ -728,7 +729,7 @@ $$f \\text{ continuous on } [a,b], \\; k \\text{ between } f(a) \\text{ and } f(
 
 @academic[pitfall,aside:true,width:35%:Reading the theorem backwards
 For $f(x) = x^2$ on $[-1, 1]$, $f(-1) = f(1) = 1$, and concluding from this that $f$ never takes the value $0$ reverses the theorem. It speaks only about values between $f(a)$ and $f(b)$; here $f(0) = 0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-theorem-backwards)]@
 
 Continuous functions hit every intermediate value—no skipping. The graph cannot jump from $f(a)$ to $f(b)$ without passing through every height in between.
 
@@ -760,7 +761,7 @@ Since $f$ is continuous and changes sign, IVT guarantees a root between $1$ and 
 
 @academic[pitfall,aside:true,width:35%:Skipping the continuity check
 Citing only the sign change of $f(x) = \\frac{1}{x}$, $f(-1) = -1 < 0 < 1 = f(1)$, predicts a root in $(-1, 1)$, yet $\\frac{1}{x} = 0$ has no solution. $f$ is not continuous at $0$, so the theorem does not apply on $[-1, 1]$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-continuity-check)]@
 
 The argument rests on two separate facts about $f$. The signs at the endpoints come from evaluating $f(1)$ and $f(2)$; continuity on the whole of $[1, 2]$ comes from knowing that $x^3 - x - 1$ is a polynomial. Only together do they force the graph to meet the $x$-axis somewhere between $1$ and $2$.
 
@@ -781,83 +782,9 @@ Continuity isn&apos;t just a property a function might happen to have; it&apos;s
   },
   obj14: {
     title: `Common Pitfalls`,
-    content: `
-Six mistakes cause most wrong answers about continuity. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Stopping after two conditions**
-
-The function has a value at the point and a limit there, and it is declared continuous without the two numbers being compared. This happens most often with functions defined piecewise, where the value at the point is assigned separately from the formula around it.
-
-Wrong working: let $f(x) = x^2$ for $x \\neq 1$ and $f(1) = 3$. Then $f(1) = 3$ is defined, and $\\lim_{x \\to 1} f(x) = 1^2 = 1$ exists, so $f$ is continuous at $1$.
-
-Right working: condition 3 asks whether the limit equals the value. Here $\\lim_{x \\to 1} f(x) = 1$ and $f(1) = 3$, and $1 \\neq 3$, so $f$ is not continuous at $1$. The discontinuity is removable: redefining $f(1) = 1$ repairs it.
-
-Why it happens: conditions 1 and 2 are the ones that take work, the evaluation and the limit. Once both have succeeded, the comparison looks automatic and is left out.
-
-How to check: write the equation $\\lim_{x \\to a} f(x) = f(a)$ with both sides filled in by numbers. Here it reads $1 = 3$, which is false.
-
-**Asking for a two-sided limit at an endpoint**
-
-At the endpoint of a closed interval, the two-sided limit is demanded, as at an interior point. When the function is not defined on one side, the limit seems not to exist and the function is declared discontinuous.
-
-Wrong working: on $[0, 4]$, the function $\\sqrt{x}$ has no values for $x < 0$, so $\\lim_{x \\to 0^-} \\sqrt{x}$ does not exist, so there is no two-sided limit at $0$, so $\\sqrt{x}$ is not continuous on $[0, 4]$.
-
-Right working: on a closed interval, only right-continuity is required at the left endpoint and only left-continuity at the right endpoint. Here $\\lim_{x \\to 0^+} \\sqrt{x} = 0 = \\sqrt{0}$ and $\\lim_{x \\to 4^-} \\sqrt{x} = 2 = \\sqrt{4}$, and $\\sqrt{x}$ is continuous at every point of $(0, 4)$. So $\\sqrt{x}$ is continuous on $[0, 4]$.
-
-Why it happens: continuity at a point is learned with the two-sided limit, and that version is then applied at endpoints unchanged.
-
-How to check: ask whether the interval, or the domain, contains points on both sides of the point. If it contains points on one side only, the one-sided limit from that side is the one to compute.
-
-**Reading the value off the simplified formula**
-
-A formula that gives $0/0$ at a point is simplified, and the simplified formula is then used to supply the missing value, as if the two formulas were the same function.
-
-Wrong working: $f(x) = \\dfrac{x^2 - 1}{x - 1} = \\dfrac{(x - 1)(x + 1)}{x - 1} = x + 1$, so $f(1) = 2 = \\lim_{x \\to 1} f(x)$, and $f$ is continuous at $1$.
-
-Right working: the cancellation holds only for $x \\neq 1$. At $x = 1$ the original formula gives $\\dfrac{1 - 1}{1 - 1} = \\dfrac{0}{0}$, so $f(1)$ is undefined and condition 1 fails. The limit is $2$, so the discontinuity is removable. The function $x + 1$ is the repaired function, a different function from $f$.
-
-Why it happens: in algebra, simplifying an expression is treated as producing an equal expression, and the restriction $x \\neq 1$ disappears from view once the factor has been cancelled.
-
-How to check: substitute the point into the original formula, never into the simplified one. If the original gives $0/0$, the function has no value there.
-
-**Calling every zero of the denominator an asymptote**
-
-For a rational function, every zero of the denominator is taken to be a vertical asymptote, and so an infinite discontinuity.
-
-Wrong working: the denominator of $\\dfrac{x^2 - 1}{x - 1}$ is $0$ at $x = 1$, so the graph has a vertical asymptote at $x = 1$ and the discontinuity is infinite.
-
-Right working: the numerator is also $0$ at $x = 1$, and the two share the factor $x - 1$. For $x \\neq 1$ the function equals $x + 1$, which tends to $2$ as $x \\to 1$. The limit exists, so the discontinuity is removable: a hole at $(1, 2)$. Compare $\\dfrac{1}{x}$ at $0$: nothing cancels, the numerator stays $1$, and the one-sided limits are $-\\infty$ and $+\\infty$.
-
-Why it happens: division by zero is associated with blowing up, and for the first examples met, such as $\\dfrac{1}{x}$, it does.
-
-How to check: substitute the point into the numerator as well. A nonzero number over $0$ gives an infinite discontinuity. If both are $0$, cancel the common factor and look again. Values near the point show it too: $\\dfrac{x^2 - 1}{x - 1}$ gives $2.01$ at $x = 1.01$ and $1.99$ at $x = 0.99$, with no sign of blowing up.
-
-**Reading the theorem backwards**
-
-When the value $k$ does not lie between $f(a)$ and $f(b)$, for instance when $f(a)$ and $f(b)$ have the same sign and $k = 0$, the theorem is taken to say that $f$ never reaches $k$ on $[a, b]$.
-
-Wrong working: $f(x) = x^2$ on $[-1, 1]$ has $f(-1) = 1$ and $f(1) = 1$. There is no sign change, so $x^2 = 0$ has no solution in $(-1, 1)$.
-
-Right working: the theorem only goes one way. If $f$ is continuous and $k$ lies between $f(a)$ and $f(b)$, then $f(c) = k$ for some $c$; if $k$ does not lie between them, the theorem says nothing. Here $f(0) = 0$, so the equation has the solution $x = 0$.
-
-Why it happens: the theorem is used as a test for roots, and a test is expected to answer both yes and no.
-
-How to check: read a missing sign change as "no conclusion", not as "no root". Evaluating at an interior point settles it here: $f(0) = 0$.
-
-**Skipping the continuity check**
-
-A sign change of $f$ at the two endpoints is taken as enough to guarantee a root, without checking that $f$ is continuous on the whole interval.
-
-Wrong working: $f(x) = \\dfrac{1}{x}$ has $f(-1) = -1 < 0$ and $f(1) = 1 > 0$, so by the theorem $\\dfrac{1}{c} = 0$ for some $c$ in $(-1, 1)$.
-
-Right working: $\\dfrac{1}{x}$ is undefined at $0$, which lies in $[-1, 1]$, so $f$ is not continuous on $[-1, 1]$ and the theorem does not apply. In fact $\\dfrac{1}{c}$ is never $0$: the sign changes across the vertical asymptote at $x = 0$, not through a root.
-
-Why it happens: in most exercises the function is a polynomial, continuity holds automatically, and checking it becomes a step that is easy to skip.
-
-How to check: list the points of $[a, b]$ where $f$ is undefined or changes formula, such as zeros of a denominator or the break points of a piecewise definition. If there are any, continuity on $[a, b]$ has to be settled before the theorem is used.
-`,
+    content: `Six mistakes cause most wrong answers about continuity. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip checks continuity, or uses the intermediate value theorem, with a condition missing. Continuity needs the limit to equal $f(a)$, not just both to exist; at an endpoint only a one-sided limit is asked for; the value comes from the original formula, not the simplified one; a zero of the denominator is an asymptote only when the numerator is not $0$ there; a missing sign change proves nothing about roots; and the theorem needs a function continuous on the whole interval. Writing out $\\lim_{x \\to a} f(x) = f(a)$ with numbers, or listing the points where $f$ is undefined, catches each slip.`,
     link: ``
   }
 };
@@ -1106,8 +1033,52 @@ const schemas = {
   };
 
 
+  // MistakeFix batch 15, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj14 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'stopping-after-two-conditions', name: `Stopping after two conditions`, errorAt: 1,
+        what: `The function has a value at the point and a limit there, and it is declared continuous without the two numbers being compared. This happens most often with functions defined piecewise, where the value at the point is assigned separately from the formula around it.`,
+        wrong: [`Let $f(x) = x^2$ for $x \\neq 1$ and $f(1) = 3$.`, `Then $f(1) = 3$ is defined, and $\\lim_{x \\to 1} f(x) = 1^2 = 1$ exists, so $f$ is continuous at $1$.`],
+        right: [`Let $f(x) = x^2$ for $x \\neq 1$ and $f(1) = 3$.`, `Condition 3 asks whether the limit equals the value. Here $\\lim_{x \\to 1} f(x) = 1$ and $f(1) = 3$, and $1 \\neq 3$, so $f$ is not continuous at $1$. The discontinuity is removable: redefining $f(1) = 1$ repairs it.`],
+        why: `Conditions 1 and 2 are the ones that take work, the evaluation and the limit. Once both have succeeded, the comparison looks automatic and is left out.`,
+        check: `Write the equation $\\lim_{x \\to a} f(x) = f(a)$ with both sides filled in by numbers. Here it reads $1 = 3$, which is false.` },
+      { id: 'asking-for-a-two-sided-limit-at-an-endpoint', name: `Asking for a two-sided limit at an endpoint`, errorAt: 0,
+        what: `At the endpoint of a closed interval, the two-sided limit is demanded, as at an interior point. When the function is not defined on one side, the limit seems not to exist and the function is declared discontinuous.`,
+        wrong: [`On $[0, 4]$, the function $\\sqrt{x}$ has no values for $x < 0$, so $\\lim_{x \\to 0^-} \\sqrt{x}$ does not exist, so there is no two-sided limit at $0$, so $\\sqrt{x}$ is not continuous on $[0, 4]$.`],
+        right: [`On a closed interval, only right-continuity is required at the left endpoint and only left-continuity at the right endpoint. Here $\\lim_{x \\to 0^+} \\sqrt{x} = 0 = \\sqrt{0}$ and $\\lim_{x \\to 4^-} \\sqrt{x} = 2 = \\sqrt{4}$, and $\\sqrt{x}$ is continuous at every point of $(0, 4)$. So $\\sqrt{x}$ is continuous on $[0, 4]$.`],
+        why: `Continuity at a point is learned with the two-sided limit, and that version is then applied at endpoints unchanged.`,
+        check: `Ask whether the interval, or the domain, contains points on both sides of the point. If it contains points on one side only, the one-sided limit from that side is the one to compute.` },
+      { id: 'reading-the-value-off-the-simplified-formula', name: `Reading the value off the simplified formula`, errorAt: 0,
+        what: `A formula that gives $0/0$ at a point is simplified, and the simplified formula is then used to supply the missing value, as if the two formulas were the same function.`,
+        wrong: [`$f(x) = \\dfrac{x^2 - 1}{x - 1} = \\dfrac{(x - 1)(x + 1)}{x - 1} = x + 1$, so $f(1) = 2 = \\lim_{x \\to 1} f(x)$, and $f$ is continuous at $1$.`],
+        right: [`The cancellation holds only for $x \\neq 1$. At $x = 1$ the original formula gives $\\dfrac{1 - 1}{1 - 1} = \\dfrac{0}{0}$, so $f(1)$ is undefined and condition 1 fails. The limit is $2$, so the discontinuity is removable. The function $x + 1$ is the repaired function, a different function from $f$.`],
+        why: `In algebra, simplifying an expression is treated as producing an equal expression, and the restriction $x \\neq 1$ disappears from view once the factor has been cancelled.`,
+        check: `Substitute the point into the original formula, never into the simplified one. If the original gives $0/0$, the function has no value there.` },
+      { id: 'calling-every-zero-of-the-denominator-an-asymptote', name: `Calling every zero of the denominator an asymptote`, errorAt: 0,
+        what: `For a rational function, every zero of the denominator is taken to be a vertical asymptote, and so an infinite discontinuity.`,
+        wrong: [`The denominator of $\\dfrac{x^2 - 1}{x - 1}$ is $0$ at $x = 1$, so the graph has a vertical asymptote at $x = 1$ and the discontinuity is infinite.`],
+        right: [`The numerator is also $0$ at $x = 1$, and the two share the factor $x - 1$. For $x \\neq 1$ the function equals $x + 1$, which tends to $2$ as $x \\to 1$. The limit exists, so the discontinuity is removable: a hole at $(1, 2)$. Compare $\\dfrac{1}{x}$ at $0$: nothing cancels, the numerator stays $1$, and the one-sided limits are $-\\infty$ and $+\\infty$.`],
+        why: `Division by zero is associated with blowing up, and for the first examples met, such as $\\dfrac{1}{x}$, it does.`,
+        check: `Substitute the point into the numerator as well. A nonzero number over $0$ gives an infinite discontinuity. If both are $0$, cancel the common factor and look again. Values near the point show it too: $\\dfrac{x^2 - 1}{x - 1}$ gives $2.01$ at $x = 1.01$ and $1.99$ at $x = 0.99$, with no sign of blowing up.` },
+      { id: 'reading-the-theorem-backwards', name: `Reading the theorem backwards`, errorAt: 1,
+        what: `When the value $k$ does not lie between $f(a)$ and $f(b)$, for instance when $f(a)$ and $f(b)$ have the same sign and $k = 0$, the theorem is taken to say that $f$ never reaches $k$ on $[a, b]$.`,
+        wrong: [`$f(x) = x^2$ on $[-1, 1]$ has $f(-1) = 1$ and $f(1) = 1$.`, `There is no sign change, so $x^2 = 0$ has no solution in $(-1, 1)$.`],
+        right: [`$f(x) = x^2$ on $[-1, 1]$ has $f(-1) = 1$ and $f(1) = 1$.`, `The theorem only goes one way. If $f$ is continuous and $k$ lies between $f(a)$ and $f(b)$, then $f(c) = k$ for some $c$; if $k$ does not lie between them, the theorem says nothing. Here $f(0) = 0$, so the equation has the solution $x = 0$.`],
+        why: `The theorem is used as a test for roots, and a test is expected to answer both yes and no.`,
+        check: `Read a missing sign change as "no conclusion", not as "no root". Evaluating at an interior point settles it here: $f(0) = 0$.` },
+      { id: 'skipping-the-continuity-check', name: `Skipping the continuity check`, errorAt: 0,
+        what: `A sign change of $f$ at the two endpoints is taken as enough to guarantee a root, without checking that $f$ is continuous on the whole interval.`,
+        wrong: [`$f(x) = \\dfrac{1}{x}$ has $f(-1) = -1 < 0$ and $f(1) = 1 > 0$, so by the theorem $\\dfrac{1}{c} = 0$ for some $c$ in $(-1, 1)$.`],
+        right: [`$\\dfrac{1}{x}$ is undefined at $0$, which lies in $[-1, 1]$, so $f$ is not continuous on $[-1, 1]$ and the theorem does not apply. In fact $\\dfrac{1}{c}$ is never $0$: the sign changes across the vertical asymptote at $x = 0$, not through a root.`],
+        why: `In most exercises the function is a polynomial, continuity holds automatically, and checking it becomes a step that is easy to skip.`,
+        check: `List the points of $[a, b]$ where $f$ is undefined or changes formula, such as zeros of a denominator or the break points of a piecewise definition. If there are any, continuity on $[a, b]$ has to be settled before the theorem is used.` },
+    ],
+  };
+
 return {
   props: {
+    pitfallData,
       ivtConverse,
     demoUnits,
     conceptIntroFigures,
@@ -1139,7 +1110,7 @@ const siteTheme = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function ContinuityPage({ivtConverse, seoData, sectionsContent, introContent, discontinuityTypes, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ContinuityPage({ pitfallData,ivtConverse, seoData, sectionsContent, introContent, discontinuityTypes, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1394,6 +1365,15 @@ The theorem is often applied to a function built for the purpose rather than to 
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'obj14-mistakes'}
+            id="continuity-pitfalls"
+            title="Common pitfalls with continuity"
+            source="/calculus/limits/continuity"
+            after={sectionsContent.obj14.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

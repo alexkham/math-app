@@ -9,9 +9,12 @@ import Sections from '@/app/components/page-components/section/Sections'
 import SectionTableOfContents from '@/app/components/page-components/section/SectionTableofContents'
 import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
-export default function TautologiesTruthTablesPage({ seoData, keyWords, tautologyExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
+export default function TautologiesTruthTablesPage({ formulaSummaryData, pitfallData, seoData, keyWords, tautologyExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
 
     const tautologyOperators = {
         'P ∨ ¬P': { 
@@ -170,10 +173,39 @@ export default function TautologiesTruthTablesPage({ seoData, keyWords, tautolog
         content: [sectionsContent.obj11.content]
       },
       {
+          id:'formula-summary',
+          title:sectionsContent.formulaSummary.title,
+          link:sectionsContent.formulaSummary.link,
+          content:[
+            sectionsContent.formulaSummary.content,
+            <DiagramFrame
+              key={'formula-summary'}
+              id="tautology-pattern-formula-summary"
+              title="Tautology patterns"
+              source="/logic/truth-tables/tautologies"
+              related={{ href: '/logic/formulas', label: 'All logic formulas' }}
+              after={sectionsContent.formulaSummary.after}
+            >
+              <FormulaSheet data={formulaSummaryData} variant="tiles" />
+            </DiagramFrame>,
+          ]
+      },
+      {
         id: 'pitfalls',
         title: sectionsContent.pitfalls.title,
         link: sectionsContent.pitfalls.link,
-        content: [sectionsContent.pitfalls.content]
+        content: [
+          sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="tautology-table-pitfalls"
+            title="Common pitfalls with tautologies and inference rules"
+            source="/logic/truth-tables/tautologies"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
+        ]
       },
       // faq: rendered component — must be built here, not in getStaticProps
       {
@@ -390,7 +422,7 @@ Three marks travel with the idea and do not appear in truth tables themselves. T
 
 @academic[pitfall,aside:true,width:35%:Checking only some rows
 Calling P → Q a tautology after the rows P = T, Q = T and P = F, Q = F, where it is T, misses the row P = T, Q = F, where it is F. A tautology must be T in all 2ⁿ rows.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-only-some-rows)]@
 
 Deciding whether a formula is a tautology is a finite task. A formula with n variables has 2ⁿ rows: two for a formula in P alone, four for one in P and Q, eight once R is added. Each row is evaluated on its own, and the verdict is read from the final column as a whole.
 
@@ -474,7 +506,7 @@ Hypothetical syllogism is the logical basis for chain reasoning in mathematics: 
 
 @academic[pitfall,aside:true,width:35%:Chaining through a shared consequent
 From P → Q and R → Q, concluding P → R fails at P = T, Q = T, R = F: both premises are T, but P → R is F. Q must be the consequent of the first link and the antecedent of the second, as in P → Q and Q → R.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-chaining-through-a-shared-consequent)]@
 
 In a longer proof the links of a chain are often established far apart, in separate lemmas or steps, and joined only at the end. Joining them means keeping the outer propositions, P and R, and dropping the middle one, Q, that the two links share.
 
@@ -494,7 +526,7 @@ The truth table confirms this is a [tautology](!/logic/propositional-logic/seman
 
 @academic[pitfall,aside:true,width:35%:Affirming the consequent
 Concluding P from P → Q and Q fails at P = F, Q = T: both premises are T, but P is F. The known fact has to be the antecedent, so ((P → Q) ∧ Q) → P is not a tautology.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-affirming-the-consequent)]@
 
 Modus ponens is the engine of forward reasoning. Given a known fact P and a rule P → Q, we conclude Q. Nearly every mathematical proof uses modus ponens, often implicitly, when applying a theorem to specific premises.`,
       before: ``,
@@ -537,7 +569,7 @@ The truth table confirms that this formula is a [tautology](!/logic/propositiona
 
 @academic[pitfall,aside:true,width:35%:Affirming a disjunct
 Concluding ¬Q from P ∨ Q and P fails at P = T, Q = T: both premises are T, but ¬Q is F. The disjunction is inclusive, so only a false disjunct lets the other one be concluded.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-affirming-a-disjunct)]@
 
 Disjunctive syllogism is one of the most commonly used inference rules in natural deduction and everyday reasoning. It formalizes the intuitive argument: "it&apos;s one or the other; it&apos;s not this one; therefore it&apos;s the other."`,
       before: ``,
@@ -552,78 +584,27 @@ The biconditional P ↔ Q is true when P and Q share the same truth value (both 
 
 @academic[pitfall,aside:true,width:35%:Proving only one direction
 Stopping after a proof of P → Q does not establish P ↔ Q: at P = F, Q = T, P → Q is T but P ↔ Q is F. That row is ruled out only by Q → P, which is F there.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-proving-only-one-direction)]@
 
 This decomposition is the standard way to prove a biconditional in mathematics: prove the forward direction (P → Q) and the backward direction (Q → P) separately, then combine them.`,
       before: ``,
       after: ``,
       link: ``,
     },
+    formulaSummary: {
+      title: `Formula Summary`,
+      content: `This summary collects the tautologies of the page as cards, in the order of their sections. Each card names a tautology, gives the formula, and adds a sentence on what it allows with a link to its section; badges mark the two that the page ties to classical logic.
+
+The cards open with the law of excluded middle and implication comparability, then move through the inference rules: conjunction elimination, hypothetical syllogism, modus ponens, the positive antecedent principle, implication over disjunction and disjunctive syllogism. Biconditional decomposition and the contrapositive equivalence close the set.`,
+      before: ``,
+      after: `Most of these tautologies are rules of inference in disguise: once the antecedent is accepted, the consequent may be written down. A pattern that is not on the list, such as affirming the consequent, has to be tested first, and one row with true premises and a false conclusion rejects it.`,
+      link: '',
+    },
     pitfalls: {
       title: `Common Pitfalls`,
-      content: `Five slips account for many wrong answers when tautologies are checked or used as inference rules. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Checking only some rows**
-
-A formula is evaluated on a few rows, comes out T in each of them, and is declared a tautology. A single F row anywhere in the table is enough to show that it is not one.
-
-Wrong working: for P → Q, take P = T, Q = T: T → T is T. Take P = F, Q = F: F → F is T. Both rows give T, so P → Q is a tautology.
-
-Right working: two variables give four rows. For (P, Q) equal to (T, T), (T, F), (F, T), (F, F), the formula P → Q takes the values T, F, T, T. The row (T, F) gives F, so P → Q is not a tautology. By contrast, (P ∧ Q) → P is T in all four rows.
-
-Why it happens: the rows where the variables share a value are the easiest to evaluate, and a run of T values feels like evidence. A truth table settles the question only when it is complete.
-
-How to check: count the rows first, 2ⁿ for n variables, and fill in every one. To refute a claimed tautology, search directly for an F row; for an implication, that is a row where the antecedent is T and the consequent is F.
-
-**Chaining through a shared consequent**
-
-Two implications that end in the same proposition are joined as if they formed a chain. P → Q and R → Q both lead into Q, so nothing in them leads from P to R.
-
-Wrong working: "If it rains, the ground is wet. If the sprinkler runs, the ground is wet. So if it rains, the sprinkler runs." In symbols, ((P → Q) ∧ (R → Q)) → (P → R).
-
-Right working: at P = T, Q = T, R = F, the premise P → Q is T → T, which is T, and R → Q is F → T, which is T, so the antecedent is T. The conclusion P → R is T → F, which is F. The formula is F in that row and is not a tautology. Hypothetical syllogism needs Q → R, with Q as the antecedent of the second link; then ((P → Q) ∧ (Q → R)) → (P → R) is T in all eight rows.
-
-Why it happens: both premises mention Q, and the shared letter looks like the link between them. In syllogistic logic the same pattern is known as the fallacy of the undistributed middle.
-
-How to check: write the links one under the other; the consequent of each line must be the antecedent of the next. Or test a row with P = T and R = F, where the conclusion is F: if both premises can be T there, the chain fails.
-
-**Affirming the consequent**
-
-From a rule P → Q and the fact Q, the conclusion P is drawn. Modus ponens works only from the antecedent; knowing the consequent says nothing about P.
-
-Wrong working: "If it rains, the ground is wet. The ground is wet. So it rained." In symbols, ((P → Q) ∧ Q) → P.
-
-Right working: at P = F, Q = T, the premise P → Q is F → T, which is T, and Q is T, so the antecedent is T, while the conclusion P is F. The formula is F in that row, so it is not a tautology: the ground can be wet from a sprinkler. Modus ponens, ((P → Q) ∧ P) → Q, is T in all four rows.
-
-Why it happens: both arguments combine an implication with one of its parts, and the rule is remembered as "the implication plus one part gives the other part".
-
-How to check: look for a row where the premises are T and the conclusion is F. For a conclusion P, try P = F: with Q = T both premises hold, so the argument is invalid.
-
-**Affirming a disjunct**
-
-From P ∨ Q and P, the conclusion ¬Q is drawn, as if "or" meant "one but not both".
-
-Wrong working: "The light is on or the fan is on. The light is on. So the fan is off." In symbols, ((P ∨ Q) ∧ P) → ¬Q.
-
-Right working: at P = T, Q = T, the premise P ∨ Q is T and P is T, so the antecedent is T, while the conclusion ¬Q is F. The formula is F in that row. The connective ∨ is inclusive, so P ∨ Q allows both disjuncts to be true. Disjunctive syllogism uses a false disjunct instead: ((P ∨ Q) ∧ ¬P) → Q is T in all four rows.
-
-Why it happens: everyday "or" often means one or the other but not both, as in "tea or coffee", so knowing one alternative seems to rule out the other.
-
-How to check: test the row where both disjuncts are T. If the conclusion fails there, the argument relied on an exclusive or.
-
-**Proving only one direction**
-
-To prove P ↔ Q, only the forward direction P → Q is proved, and the biconditional is claimed.
-
-Wrong working: from "if n is divisible by 4 then n is even", conclude "n is divisible by 4 if and only if n is even".
-
-Right working: at P = F, Q = T (for example n = 6, which is even but not divisible by 4), the formula P → Q is F → T, which is T, while P ↔ Q is F. The backward direction Q → P is T → F, which is F in that row, and it is the part that was never proved. Only P → Q and Q → P together give P ↔ Q, since (P → Q) ∧ (Q → P) has the same truth table as P ↔ Q.
-
-Why it happens: the forward direction is often the one stated first, or the easier one, and once it is done the proof feels complete.
-
-How to check: before writing "if and only if", make sure the proof has two parts, one for each arrow. A quick test: look for a case where Q is true and P is false, such as n = 6 in the example.`,
+      content: `Five slips account for many wrong answers when tautologies are checked or used as inference rules. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before: ``,
-      after: ``,
+      after: `Each slip accepts a pattern of reasoning without testing it. A tautology needs every row, a chain of implications must link the consequent of one to the antecedent of the next, affirming the consequent and affirming a disjunct are not valid forms, and an if-and-only-if needs both directions. Looking for a single row where the premises are T and the conclusion is F catches each slip.`,
       link: ``,
     },
     faq: {
@@ -727,8 +708,74 @@ How to check: before writing "if and only if", make sure the proof has two parts
     }
   }
 
+  // MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'checking-only-some-rows', name: `Checking only some rows`, errorAt: 0,
+        what: `A formula is evaluated on a few rows, comes out T in each of them, and is declared a tautology. A single F row anywhere in the table is enough to show that it is not one.`,
+        wrong: [`For P → Q, take P = T, Q = T: T → T is T. Take P = F, Q = F: F → F is T. Both rows give T, so P → Q is a tautology.`],
+        right: [`Two variables give four rows. For (P, Q) equal to (T, T), (T, F), (F, T), (F, F), the formula P → Q takes the values T, F, T, T. The row (T, F) gives F, so P → Q is not a tautology. By contrast, (P ∧ Q) → P is T in all four rows.`],
+        why: `The rows where the variables share a value are the easiest to evaluate, and a run of T values feels like evidence. A truth table settles the question only when it is complete.`,
+        check: `Count the rows first, 2ⁿ for n variables, and fill in every one. To refute a claimed tautology, search directly for an F row; for an implication, that is a row where the antecedent is T and the consequent is F.` },
+      { id: 'chaining-through-a-shared-consequent', name: `Chaining through a shared consequent`, errorAt: 0,
+        what: `Two implications that end in the same proposition are joined as if they formed a chain. P → Q and R → Q both lead into Q, so nothing in them leads from P to R.`,
+        wrong: [`"If it rains, the ground is wet. If the sprinkler runs, the ground is wet. So if it rains, the sprinkler runs." In symbols, ((P → Q) ∧ (R → Q)) → (P → R).`],
+        right: [`At P = T, Q = T, R = F, the premise P → Q is T → T, which is T, and R → Q is F → T, which is T, so the antecedent is T. The conclusion P → R is T → F, which is F. The formula is F in that row and is not a tautology. Hypothetical syllogism needs Q → R, with Q as the antecedent of the second link; then ((P → Q) ∧ (Q → R)) → (P → R) is T in all eight rows.`],
+        why: `Both premises mention Q, and the shared letter looks like the link between them. In syllogistic logic the same pattern is known as the fallacy of the undistributed middle.`,
+        check: `Write the links one under the other; the consequent of each line must be the antecedent of the next. Or test a row with P = T and R = F, where the conclusion is F: if both premises can be T there, the chain fails.` },
+      { id: 'affirming-the-consequent', name: `Affirming the consequent`, errorAt: 0,
+        what: `From a rule P → Q and the fact Q, the conclusion P is drawn. Modus ponens works only from the antecedent; knowing the consequent says nothing about P.`,
+        wrong: [`"If it rains, the ground is wet. The ground is wet. So it rained." In symbols, ((P → Q) ∧ Q) → P.`],
+        right: [`At P = F, Q = T, the premise P → Q is F → T, which is T, and Q is T, so the antecedent is T, while the conclusion P is F. The formula is F in that row, so it is not a tautology: the ground can be wet from a sprinkler. Modus ponens, ((P → Q) ∧ P) → Q, is T in all four rows.`],
+        why: `Both arguments combine an implication with one of its parts, and the rule is remembered as "the implication plus one part gives the other part".`,
+        check: `Look for a row where the premises are T and the conclusion is F. For a conclusion P, try P = F: with Q = T both premises hold, so the argument is invalid.` },
+      { id: 'affirming-a-disjunct', name: `Affirming a disjunct`, errorAt: 0,
+        what: `From P ∨ Q and P, the conclusion ¬Q is drawn, as if "or" meant "one but not both".`,
+        wrong: [`"The light is on or the fan is on. The light is on. So the fan is off." In symbols, ((P ∨ Q) ∧ P) → ¬Q.`],
+        right: [`At P = T, Q = T, the premise P ∨ Q is T and P is T, so the antecedent is T, while the conclusion ¬Q is F. The formula is F in that row. The connective ∨ is inclusive, so P ∨ Q allows both disjuncts to be true. Disjunctive syllogism uses a false disjunct instead: ((P ∨ Q) ∧ ¬P) → Q is T in all four rows.`],
+        why: `Everyday "or" often means one or the other but not both, as in "tea or coffee", so knowing one alternative seems to rule out the other.`,
+        check: `Test the row where both disjuncts are T. If the conclusion fails there, the argument relied on an exclusive or.` },
+      { id: 'proving-only-one-direction', name: `Proving only one direction`, errorAt: 0,
+        what: `To prove P ↔ Q, only the forward direction P → Q is proved, and the biconditional is claimed.`,
+        wrong: [`From "if n is divisible by 4 then n is even", conclude "n is divisible by 4 if and only if n is even".`],
+        right: [`At P = F, Q = T (for example n = 6, which is even but not divisible by 4), the formula P → Q is F → T, which is T, while P ↔ Q is F. The backward direction Q → P is T → F, which is F in that row, and it is the part that was never proved. Only P → Q and Q → P together give P ↔ Q, since (P → Q) ∧ (Q → P) has the same truth table as P ↔ Q.`],
+        why: `The forward direction is often the one stated first, or the easier one, and once it is done the proof feels complete.`,
+        check: `Before writing "if and only if", make sure the proof has two parts, one for each arrow. A quick test: look for a case where Q is true and P is false, such as n = 6 in the example.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Law of excluded middle', formula: '$P \\lor \\neg P$', restriction: 'rejected in intuitionistic logic',
+        text: 'Either a proposition or its negation is true, so the formula is T in both rows of [the law of excluded middle](!#3).' },
+      { name: 'Implication comparability', formula: '$(P \\to Q) \\lor (Q \\to P)$',
+        text: 'Of any two propositions at least one implies the other, a result of how [implication comparability](!#4) treats a false antecedent.' },
+      { name: 'Conjunction elimination', formula: '$(P \\land Q) \\to P$',
+        text: 'Either part of a conjunction can be inferred; [conjunction elimination](!#5) also gives $(P \\land Q) \\to Q$.' },
+      { name: 'Hypothetical syllogism', formula: '$((P \\to Q) \\land (Q \\to R)) \\to (P \\to R)$',
+        text: 'Implications chain end to end, which is how [hypothetical syllogism](!#6) supports chain reasoning.' },
+      { name: 'Modus ponens', formula: '$((P \\to Q) \\land P) \\to Q$',
+        text: 'From a rule and its antecedent the consequent follows; [modus ponens](!#7) is the engine of forward reasoning.' },
+      { name: 'Positive antecedent principle', formula: '$P \\to (Q \\to P)$',
+        text: 'A true proposition is implied by any other, and [the positive antecedent principle](!#8) often appears as an axiom in Hilbert-style systems.' },
+      { name: 'Implication over disjunction', formula: '$(P \\to (Q \\lor R)) \\to ((P \\to Q) \\lor (P \\to R))$', restriction: 'valid in classical logic',
+        text: 'If $P$ implies a disjunction, it implies at least one of its parts, as [implication over disjunction](!#9) shows.' },
+      { name: 'Disjunctive syllogism', formula: '$((P \\lor Q) \\land \\neg P) \\to Q$',
+        text: 'Ruling out one part of a disjunction forces the other, the argument of [disjunctive syllogism](!#10).' },
+      { name: 'Biconditional decomposition', formula: '$(P \\leftrightarrow Q) \\to ((P \\to Q) \\land (Q \\to P))$',
+        text: 'A biconditional gives both directions of implication, the standard way [biconditional decomposition](!#11) splits an if-and-only-if proof.' },
+      { name: 'Contrapositive equivalence', formula: '$(P \\to Q) \\leftrightarrow (\\neg Q \\to \\neg P)$',
+        text: 'An implication says the same as its contrapositive, one of the [key tautological patterns](!#2).' },
+    ],
+  };
+
   return {
     props: {
+    formulaSummaryData,
+    pitfallData,
       keyWords,
       tautologyExplanations,
       menuItems,

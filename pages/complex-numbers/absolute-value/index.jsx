@@ -17,6 +17,9 @@ import distanceMidpointDiagrams from '@/app/components/calculators/complex-numbe
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -565,7 +568,7 @@ Computation proceeds by squaring both components, adding, and taking the square 
 
 @academic[pitfall,aside:true,width:35%:Squaring the i with the imaginary part
 Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$, which is not even a real number. The imaginary part is the real number $b = 4$, so $|3 + 4i| = \\sqrt{9 + 16} = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-the-i-with-the-imaginary-part)]@
 
 The geometric picture makes modulus tangible. Draw the point, draw the line segment connecting it to the origin, and measure that segment's length. Every complex number possesses exactly one modulus, always a non-negative real value. Numbers closer to the origin have smaller moduli; numbers farther away have larger moduli. The modulus provides the only meaningful sense of "size" for complex numbers, since $\\mathbb{C}$ lacks the ordering that lets us compare real numbers directly.`,
   after: ``,
@@ -650,7 +653,7 @@ The cross terms cancel, and since $i^2 = -1$, the imaginary square becomes posit
 
 @academic[pitfall,aside:true,width:35%:Multiplying z by itself
 Computing $|z|^2$ for $z = 3 + 4i$ as $z \\cdot z$ gives $(3 + 4i)^2 = -7 + 24i$, which is not even real. The conjugate gives $(3 + 4i)(3 - 4i) = 9 + 16 = 25 = |z|^2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-z-by-itself)]@
 
 This identity appears everywhere in complex analysis. It explains why multiplying by the conjugate eliminates imaginary components — the product is guaranteed real. It provides a quick way to compute modulus: rather than taking a square root, compute $z \\cdot \\bar{z}$ and recognize the result as $|z|^2$.
 
@@ -745,7 +748,7 @@ The modulus of a sum never exceeds the sum of the moduli. Equality can occur, bu
 
 @academic[pitfall,aside:true,width:35%:Splitting the modulus of a sum
 Writing $|3 + 4i| = |3| + |4i| = 7$ treats the inequality as an equation. The direct distance is $|3 + 4i| = \\sqrt{9 + 16} = 5$, shorter than the two legs together.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-splitting-the-modulus-of-a-sum)]@
 
 The name comes from geometry. In the [complex plane](!/complex-numbers/geometric-representation), the numbers $0$, $z_1$, and $z_1 + z_2$ form vertices of a triangle (possibly degenerate). The side from $0$ to $z_1 + z_2$ has length $|z_1 + z_2|$. The path from $0$ to $z_1$ and then from $z_1$ to $z_1 + z_2$ has total length $|z_1| + |z_2|$. The direct path cannot exceed the detour — a triangle's side never surpasses the sum of the other two sides.
 
@@ -849,7 +852,7 @@ Circles admit elegant description through modulus. The set of all complex number
 
 @academic[pitfall,aside:true,width:35%:Reading the centre with the wrong sign
 Taking $2 - i$ as the centre of $|z + 2 - i| = 3$ keeps the signs as they stand inside the bars. Written as $|z - (-2 + i)| = 3$, the circle has centre $-2 + i$ and radius $3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-the-centre-with-the-wrong-sign)]@
 
 In practice the equation rarely arrives in this tidy shape. A problem may give $|z + 2 - i| = 3$ or $|z - 1 + 4i| \\leq 2$, with the centre mixed in among the other terms inside the bars. Finding the centre and the radius is then the first step of the problem, and everything drawn afterwards depends on it.
 
@@ -859,7 +862,10 @@ The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only 
 },
     obj9:{
       title:`Summary: How |z| Behaves Under Every Operation on z`,
-      content:`The modulus is most usefully understood not in isolation but through how it behaves when complex numbers are combined or transformed. The table below classifies every standard operation on z by its effect on |z| — some operations leave the modulus exactly unchanged, some transform it in a clean multiplicative way that mirrors the operation itself, and some yield only an inequality rather than an equality.`,
+      content:`This summary sorts the operations on complex numbers by what they do to the modulus, in three families shown one at a time with the buttons above the cards. Each card gives the rule for one operation, with a line on what it says and a link to the section that explains it.
+
+Invariant operations leave the modulus exactly as it was: the conjugate and the additive inverse. Multiplicative ones change it by the same operation, so products, quotients, integer powers and the inverse carry straight over to the moduli. Sums and differences are only bounded, by the triangle inequality and its reverse.`,
+      formulaSheetAfter: `Before computing a modulus, check which family the expression belongs to. Products, quotients and powers split at once into simpler moduli, while a sum or a difference only gives an estimate, so for an exact value it has to be worked out in full.`,
       before:``,
       after:``,
       link:'',
@@ -921,57 +927,9 @@ The inequality $|z - z_0| < r$ can be rewritten as $z_0 - r < z < z_0 + r$ only 
   
     obj16:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for many of the wrong answers in modulus work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Squaring the i with the imaginary part**
-
-In $|a + bi| = \\sqrt{a^2 + b^2}$, the letter $b$ stands for the imaginary part, which is a real number. Squaring the whole term $bi$ instead brings in $i^2 = -1$, and the plus under the root turns into a minus.
-
-Wrong working: for $z = 3 + 4i$, $|z| = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 + 16i^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.
-
-Right working: the real part is $a = 3$ and the imaginary part is $b = 4$, so $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.
-
-Why it happens: the term $4i$ is what appears in the number, and it is squared as it stands. The imaginary part is $4$; the $i$ only marks the axis it lies along.
-
-How to check: a modulus is a distance, so it is a real number and never negative. A negative number under the root, or an $i$ in the answer, means the $i$ was squared.
-
-**Multiplying z by itself**
-
-The identity $z \\cdot \\bar{z} = |z|^2$ is replaced by $z \\cdot z$, as if $|z|^2$ and $z^2$ were the same thing. For real numbers they are, since $|x|^2 = x^2$, but for complex numbers they are not.
-
-Wrong working: for $z = 3 + 4i$, $|z|^2 = z^2 = (3 + 4i)^2 = 9 + 24i + 16i^2 = -7 + 24i$.
-
-Right working: $z \\cdot \\bar{z} = (3 + 4i)(3 - 4i) = 9 - 12i + 12i - 16i^2 = 9 + 16 = 25$, so $|z|^2 = 25$ and $|z| = 5$.
-
-Why it happens: the square of a real absolute value is the square of the number itself, and that habit carries over. The conjugate in the identity is then easy to drop.
-
-How to check: $|z|^2$ is a non-negative real number. If the result still has an imaginary part, or comes out negative, the conjugate is missing. For $z = i$, $z^2 = -1$ while $|i|^2 = i \\cdot (-i) = 1$.
-
-**Splitting the modulus of a sum**
-
-The product rule $|z_1 z_2| = |z_1||z_2|$ is copied onto sums, and $|z_1 + z_2|$ is replaced by $|z_1| + |z_2|$. The triangle inequality only says that the first is at most the second.
-
-Wrong working: $|3 + 4i| = |3| + |4i| = 3 + 4 = 7$.
-
-Right working: $|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. Here $|3| + |4i| = 7$, and $5 < 7$, as the triangle inequality allows.
-
-Why it happens: the modulus behaves so well with products, quotients and powers that the same kind of rule is expected for sums.
-
-How to check: equality needs the two numbers to point in the same direction from the origin. $3$ lies on the real axis and $4i$ on the imaginary axis, so the triangle does not collapse and the sum of the moduli is strictly larger.
-
-**Reading the centre with the wrong sign**
-
-In $|z - z_0| = r$ the centre is the number subtracted from $z$. When the equation has a plus sign or several terms inside the bars, the centre is read off with the signs exactly as they appear.
-
-Wrong working: $|z + 2 - i| = 3$ is taken as the circle with centre $2 - i$ and radius $3$.
-
-Right working: $z + 2 - i = z - (-2 + i)$, so the equation is $|z - (-2 + i)| = 3$, the circle with centre $-2 + i$ and radius $3$.
-
-Why it happens: the centre stands inside the bars with its signs reversed, and the minus in $z - z_0$ is easy to overlook when the expression is not written in that form.
-
-How to check: substitute the supposed centre. At the true centre $z = -2 + i$ the left side is $|0| = 0$. At $z = 2 - i$ it is $|4 - 2i| = \\sqrt{20}$, not $0$, so $2 - i$ is not the centre.`,
+      content:`Four mistakes account for many of the wrong answers in modulus work. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip treats the modulus like ordinary algebra. $|a + bi| = \\sqrt{a^2 + b^2}$ squares the real number $b$, not $bi$; $|z|^2$ is $z\\bar{z}$, not $z^2$; the modulus of a sum is at most the sum of the moduli, and usually less; and $|z + 2 - i| = 3$ is the circle centred at $-2 + i$. Remembering that a modulus is a real distance, never negative, and substituting the supposed centre, catches each slip.`,
       link:'',
     },
 
@@ -1152,8 +1110,62 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'squaring-the-i-with-the-imaginary-part', name: `Squaring the i with the imaginary part`, errorAt: 1,
+        what: `In $|a + bi| = \\sqrt{a^2 + b^2}$, the letter $b$ stands for the imaginary part, which is a real number. Squaring the whole term $bi$ instead brings in $i^2 = -1$, and the plus under the root turns into a minus.`,
+        wrong: [`For $z = 3 + 4i$,`, `$|z| = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 + 16i^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.`],
+        right: [`For $z = 3 + 4i$,`, `The real part is $a = 3$ and the imaginary part is $b = 4$, so $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.`],
+        why: `The term $4i$ is what appears in the number, and it is squared as it stands. The imaginary part is $4$; the $i$ only marks the axis it lies along.`,
+        check: `A modulus is a distance, so it is a real number and never negative. A negative number under the root, or an $i$ in the answer, means the $i$ was squared.` },
+      { id: 'multiplying-z-by-itself', name: `Multiplying z by itself`, errorAt: 1,
+        what: `The identity $z \\cdot \\bar{z} = |z|^2$ is replaced by $z \\cdot z$, as if $|z|^2$ and $z^2$ were the same thing. For real numbers they are, since $|x|^2 = x^2$, but for complex numbers they are not.`,
+        wrong: [`For $z = 3 + 4i$,`, `$|z|^2 = z^2 = (3 + 4i)^2 = 9 + 24i + 16i^2 = -7 + 24i$.`],
+        right: [`For $z = 3 + 4i$,`, `$z \\cdot \\bar{z} = (3 + 4i)(3 - 4i) = 9 - 12i + 12i - 16i^2 = 9 + 16 = 25$, so $|z|^2 = 25$ and $|z| = 5$.`],
+        why: `The square of a real absolute value is the square of the number itself, and that habit carries over. The conjugate in the identity is then easy to drop.`,
+        check: `$|z|^2$ is a non-negative real number. If the result still has an imaginary part, or comes out negative, the conjugate is missing. For $z = i$, $z^2 = -1$ while $|i|^2 = i \\cdot (-i) = 1$.` },
+      { id: 'splitting-the-modulus-of-a-sum', name: `Splitting the modulus of a sum`, errorAt: 0,
+        what: `The product rule $|z_1 z_2| = |z_1||z_2|$ is copied onto sums, and $|z_1 + z_2|$ is replaced by $|z_1| + |z_2|$. The triangle inequality only says that the first is at most the second.`,
+        wrong: [`$|3 + 4i| = |3| + |4i| = 3 + 4 = 7$.`],
+        right: [`$|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. Here $|3| + |4i| = 7$, and $5 < 7$, as the triangle inequality allows.`],
+        why: `The modulus behaves so well with products, quotients and powers that the same kind of rule is expected for sums.`,
+        check: `Equality needs the two numbers to point in the same direction from the origin. $3$ lies on the real axis and $4i$ on the imaginary axis, so the triangle does not collapse and the sum of the moduli is strictly larger.` },
+      { id: 'reading-the-centre-with-the-wrong-sign', name: `Reading the centre with the wrong sign`, errorAt: 0,
+        what: `In $|z - z_0| = r$ the centre is the number subtracted from $z$. When the equation has a plus sign or several terms inside the bars, the centre is read off with the signs exactly as they appear.`,
+        wrong: [`$|z + 2 - i| = 3$ is taken as the circle with centre $2 - i$ and radius $3$.`],
+        right: [`$z + 2 - i = z - (-2 + i)$, so the equation is $|z - (-2 + i)| = 3$, the circle with centre $-2 + i$ and radius $3$.`],
+        why: `The centre stands inside the bars with its signs reversed, and the minus in $z - z_0$ is easy to overlook when the expression is not written in that form.`,
+        check: `Substitute the supposed centre. At the true centre $z = -2 + i$ the left side is $|0| = 0$. At $z = 2 - i$ it is $|4 - 2i| = \\sqrt{20}$, not $0$, so $2 - i$ is not the centre.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'invariant', name: 'Invariant', sub: 'Operations that leave the modulus exactly as it was.', pairs: [
+        [{ formula: '$|\\overline{z}| = |z|$', text: 'The conjugate $\\bar{z}$ reflects $z$ across the real axis, which keeps its distance from the origin, as [properties of modulus](!#4) shows.' },
+         { formula: '$|-z| = |z|$', text: 'The additive inverse $-z$ is $z$ times $-1$, so by [the product rule](!#4) its modulus is $|-1| \\cdot |z| = |z|$.' }],
+      ] },
+      { id: 'multiplicative', name: 'Multiplicative', sub: 'The moduli combine by the same operation that combines the numbers.', pairs: [
+        [{ formula: '$|z_1 \\cdot z_2| = |z_1| \\cdot |z_2|$', text: 'The modulus of a product $z_1 \\cdot z_2$ is the product of the moduli, from [properties of modulus](!#4).' },
+         { formula: '$\\displaystyle \\left|\\frac{z_1}{z_2}\\right| = \\frac{|z_1|}{|z_2|}$', text: 'The modulus of a quotient is the quotient of the moduli, for $z_2 \\neq 0$, as [the quotient rule](!#4) states.' }],
+        [{ formula: '$|z^n| = |z|^n$', text: 'An integer power $z^n$ raises the modulus to the same exponent, from [the power rule](!#4).' },
+         { formula: '$\\displaystyle |z^{-1}| = \\frac{1}{|z|}$', text: 'The multiplicative inverse, for $z \\neq 0$, takes the reciprocal of the modulus: [the quotient rule](!#4) with $z_1 = 1$.' }],
+      ] },
+      { id: 'bounded', name: 'Bounded', sub: 'Sums and differences give only an inequality, not an equality.', pairs: [
+        [{ formula: '$|z_1 + z_2| \\leq |z_1| + |z_2|$', text: 'The modulus of a sum never exceeds the sum of the moduli: [the triangle inequality](!#5).' },
+         { formula: '$\\bigl||z_1| - |z_2|\\bigr| \\leq |z_1 - z_2|$', text: 'The modulus of a difference is at least the gap between the two moduli: [the reverse triangle inequality](!#7).' }],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1177,7 +1189,7 @@ const schemas = {
 
 
 
-export default function AbsoluteValuePage({
+export default function AbsoluteValuePage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1242,7 +1254,7 @@ $$|z|^2 = a^2 + b^2$$
           `Computation proceeds by squaring both components, adding, and taking the square root. For $z = 3 + 4i$, we calculate $|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$. The famous 3-4-5 right triangle appears here — the complex number $3 + 4i$ lies exactly 5 units from the origin. For $z = -2 + i$, the modulus is $|z| = \\sqrt{(-2)^2 + 1^2} = \\sqrt{4 + 1} = \\sqrt{5}$, an irrational distance approximately equal to $2.236$.`,
           `@academic[pitfall,aside:true,width:35%:Squaring the i with the imaginary part
 Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$, which is not even a real number. The imaginary part is the real number $b = 4$, so $|3 + 4i| = \\sqrt{9 + 16} = 5$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-squaring-the-i-with-the-imaginary-part)]@`,
           <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
           `The geometric picture makes modulus tangible. Draw the point, draw the line segment connecting it to the origin, and measure that segment's length. Every complex number possesses exactly one modulus, always a non-negative real value. Numbers closer to the origin have smaller moduli; numbers farther away have larger moduli. The modulus provides the only meaningful sense of "size" for complex numbers, since $\\mathbb{C}$ lacks the ordering that lets us compare real numbers directly.`,
           <div key={'unit-modulus'} dangerouslySetInnerHTML={{ __html: demoUnits.modulus }} />,
@@ -1394,11 +1406,16 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="complex-modulus-formula-summary"
+            title="Modulus rules"
+            source="/complex-numbers/absolute-value"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1407,6 +1424,15 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="complex-modulus-pitfalls"
+            title="Common pitfalls with the modulus"
+            source="/complex-numbers/absolute-value"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -696,6 +696,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1051,7 +1052,10 @@ Improper borrowing with mixed numbers causes errors in subtraction. When borrowi
   },
     obj9:{
       title:`Adding and Subtracting Fractions at a Glance`,
-      content:`The page covered same-denominator combination, why common denominators are required, finding and applying the LCD, the four mixed-number cases, working with whole numbers, and the most common errors. The table below collects the rules and identities worth keeping at hand.`,
+      content:`This summary collects the rules and identities of the page in ten rows. Each row names a rule with a line on why it matters and a link to its section, states the rule, and gives a worked example; links in the statements lead to the pages on least common multiples and equivalent fractions.
+
+It starts with the same-denominator rule and the reason different denominators must be matched, then finds the least common denominator, converts each fraction and combines the numerators. Rows for whole numbers follow: adding one to a fraction, subtracting a fraction from one, and borrowing in mixed numbers. The last two rows guard against adding denominators and leaving the answer unsimplified.`,
+      formulaSheetAfter: `The denominator only names the size of the pieces, so it is matched first and then left alone while the numerators are added or subtracted. Every slip in these rows comes from changing the denominator, or from forgetting to reduce at the end.`,
       before:``,
       after:``,
       link:'',
@@ -1295,8 +1299,41 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table capstoneTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Concept', kind: 'name' },
+      { key: 'rule', label: 'Statement' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Same-denominator rule', rule: 'combine numerators, keep the denominator unchanged: $\\displaystyle \\frac{a}{c} + \\frac{b}{c} = \\frac{a + b}{c}$ and $\\displaystyle \\frac{a}{c} - \\frac{b}{c} = \\frac{a - b}{c}$', example: '$\\displaystyle \\frac{2}{7} + \\frac{3}{7} = \\frac{5}{7}$',
+        sub: 'The denominator names the size of the pieces, so only their count changes, as [the same-denominator case](!#1) shows.' },
+      { name: 'Why a common denominator is required', rule: 'different denominators name different-size pieces, like feet and inches; convert before combining', example: '$\\displaystyle \\frac{1}{3} + \\frac{1}{4}$ must become twelfths',
+        sub: 'Thirds and fourths are not the same unit, as [why common denominators are required](!#2) explains.' },
+      { name: 'LCD = LCM of denominators', rule: 'the least common denominator is the [least common multiple](!/arithmetic/divisibility/lcm) of the denominators', example: '$\\text{LCD}(3, 4) = 12$',
+        sub: 'The smallest denominator both fractions can be rewritten with, from [finding a common denominator](!#3).' },
+      { name: 'Conversion step', rule: 'multiply numerator and denominator by the factor that reaches the LCD; this produces an [equivalent fraction](!/arithmetic/fractions/equivalent)', example: '$\\displaystyle \\frac{2}{3} = \\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$',
+        sub: 'The factor is the LCD divided by the old denominator, as [converting to a common denominator](!#4) shows.' },
+      { name: 'After conversion', rule: 'add or subtract the numerators; the common denominator carries through', example: '$\\displaystyle \\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$',
+        sub: 'The rewritten fractions fall under the same-denominator rule, the last step of [converting to a common denominator](!#4).' },
+      { name: 'Whole + fraction', rule: 'place them side by side as a mixed number; no arithmetic needed', example: '$\\displaystyle 5 + \\frac{3}{4} = 5\\frac{3}{4}$',
+        sub: 'The whole part and the fraction simply sit together, as [working with whole numbers](!#7) shows.' },
+      { name: 'Whole − fraction', rule: 'rewrite the whole $n$ as $n - 1$ plus a fraction whose numerator and denominator both equal the denominator, then subtract the fraction', example: '$\\displaystyle 5 - \\frac{3}{4} = 4\\frac{4}{4} - \\frac{3}{4} = 4\\frac{1}{4}$',
+        sub: 'One whole is opened up into pieces of the right size first, as [working with whole numbers](!#7) shows.' },
+      { name: 'Borrowing uses the denominator', rule: 'when borrowing 1 from the whole, it becomes a fraction with the current denominator, not the literal 1', example: '$\\displaystyle 5\\frac{1}{4} \\to 4\\frac{5}{4}$ (the borrowed $1$ is $\\frac{4}{4}$)',
+        sub: 'Needed when the first fractional part is smaller than the second, as [subtracting mixed numbers](!#6) shows.' },
+      { name: 'Never add denominators', rule: 'denominators name piece size and do not change when combining; only numerators combine', example: '$\\displaystyle \\frac{1}{2} + \\frac{1}{3} \\neq \\frac{2}{5}$ (it is $\\frac{5}{6}$)',
+        sub: 'The most frequent error with fractions, first among [the common mistakes](!#8).' },
+      { name: 'Reduce the final result', rule: 'simplify the sum or difference to [lowest terms](!/arithmetic/fractions/equivalent)', example: '$\\displaystyle \\frac{4}{8} \\to \\frac{1}{2}$',
+        sub: 'An unsimplified answer leaves the work incomplete, as [the common mistakes](!#8) note.' },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
     pitfallData,
     sectionsContent,
     introContent,
@@ -1318,7 +1355,7 @@ return {
    }
 
 
-export default function AddingSubtractingPage({ pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function AddingSubtractingPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1477,8 +1514,16 @@ export default function AddingSubtractingPage({ pitfallData,seoData, sectionsCon
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="fraction-addition-formula-summary"
+            title="Adding and subtracting fractions"
+            source="/arithmetic/fractions/adding-subtracting"
+            related={false}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

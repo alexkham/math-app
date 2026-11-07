@@ -901,6 +901,7 @@ import NestedContainment from '@/app/components/infographics/NestedContainment/N
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1176,7 +1177,7 @@ $$Re(z) = a \\quad \\text{and} \\quad Im(z) = b$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the sign of the imaginary part
 Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -5)$ up to $(4, 5)$, which is the conjugate. Written as $4 + (-5)i$, the number has $Im(z) = -5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-sign-of-the-imaginary-part)]@
 
 Note that the imaginary part is $b$ itself — a real number — not $bi$. The term "imaginary part" indicates which component of the number the value describes, not the nature of $b$ as a quantity.
 
@@ -1240,7 +1241,7 @@ notation: {
 
 @academic[pitfall,aside:true,width:35%:Subtracting only the real part
 Writing $(5 + i) - (2 - 3i)$ as $5 + i - 2 - 3i$ takes away only the $2$ and gives $3 - 2i$. The minus applies to both parts of the second number: $5 + i - 2 + 3i = 3 + 4i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-only-the-real-part)]@
 
 Subtraction uses the same bookkeeping: real parts are subtracted from real parts, and imaginary parts from imaginary parts. For the same pair, the real parts give $3 - 1 = 2$ and the imaginary parts give $2 - (-5) = 7$, so $z_1 - z_2 = 2 + 7i$, the value listed in the table below. A negative imaginary part in $z_2$ turns that second subtraction into an addition.
 
@@ -1253,7 +1254,7 @@ The product $(2 + 3i)(4 - i)$ expands to $8 - 2i + 12i - 3i^2$, and since $i^2 =
 
 @academic[pitfall,aside:true,width:35%:Multiplying only the denominator
 Multiplying just the denominator of $\\frac{3 + 2i}{1 - 4i}$ by $1 + 4i$ gives $\\frac{3 + 2i}{17}$, a different number. Both parts are multiplied: $\\frac{(3 + 2i)(1 + 4i)}{17} = \\frac{-5 + 14i}{17}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-only-the-denominator)]@
 
 Multiplying by $\\frac{1 + 4i}{1 + 4i}$ is multiplying by $1$, so the value of the fraction does not change, only its form. Once the denominator is real, it divides the real part and the imaginary part of the numerator separately, which puts the answer in standard $a + bi$ form. The table below gives the finished quotient next to the other three operations.`,
   after: ``,
@@ -1271,7 +1272,7 @@ This geometric perspective reveals structure invisible in pure algebra. The [con
 
 @academic[pitfall,aside:true,width:35%:Squaring the whole imaginary term
 Putting $4i$ into the formula gives $|3 + 4i| = \\sqrt{3^2 + (4i)^2} = \\sqrt{-7}$, which is not a distance. The formula uses the imaginary part $b = 4$: $|3 + 4i| = \\sqrt{9 + 16} = 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-the-whole-imaginary-term)]@
 
 For the point $3 + 4i$, the segment from the origin is the hypotenuse of a right triangle. Its horizontal leg runs along the real axis and its vertical leg runs parallel to the imaginary axis, and the lengths of the two legs are the coordinates of the point. The modulus is computed from those two lengths alone.
 
@@ -1363,7 +1364,7 @@ If $w = R\\text{cis}\\phi$, the $n$-th roots follow the formula $z_k = R^{1/n}\\
 
 @academic[pitfall,aside:true,width:35%:Stopping at one root
 Answering $z^3 = 8$ with $z = 2$ alone finds one of three roots. With $8 = 8\\text{cis}(0°)$ and $k = 0, 1, 2$, the roots are $2$, $2\\text{cis}(120°) = -1 + \\sqrt{3}i$ and $2\\text{cis}(240°) = -1 - \\sqrt{3}i$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-at-one-root)]@
 
 The roots of unity — solutions to $z^n = 1$ — deserve special attention. Since $1 = 1\\text{cis}(0°)$, the $n$-th roots of unity are $z_k = \\text{cis}\\left(\\frac{360°k}{n}\\right)$. For $n = 4$, the fourth roots of unity are $1$, $i$, $-1$, and $-i$, forming a square on the unit circle. For $n = 6$, we obtain a regular hexagon. These roots appear throughout mathematics: in Fourier analysis, in polynomial factorization, in signal processing, and in the study of symmetry. The primitive root $\\omega = \\text{cis}\\left(\\frac{360°}{n}\\right)$ generates all others as powers: $\\omega^0, \\omega^1, \\omega^2, \\ldots, \\omega^{n-1}$.`,
   after: ``,
@@ -1446,81 +1447,9 @@ Certain equations showcase the interplay between conjugation and powers. For $n 
   
     obj16: {
       title: `Common Pitfalls`,
-      content: `Six mistakes come up again and again in a first course on complex numbers. Five are marked where they happen in the sections above; ignoring the quadrant of the argument is the one that **Trigonometric Representation** already warns about. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the sign of the imaginary part**
-
-When the imaginary term is subtracted, as in $4 - 5i$, the minus sign is left behind and only the number after it is reported as the imaginary part.
-
-Wrong working: $4 - 5i$ has $Im(z) = 5$.
-
-Right working: in standard form $4 - 5i = 4 + (-5)i$, so $Re(z) = 4$ and $Im(z) = -5$.
-
-Why it happens: the minus looks like the operation between the two terms rather than part of the coefficient of $i$.
-
-How to check: plot the point. $Im(z) = -5$ puts $4 - 5i$ five units below the real axis, at $(4, -5)$. An imaginary part of $5$ would put it at $(4, 5)$, which is the conjugate $4 + 5i$.
-
-**Subtracting only the real part**
-
-In $z_1 - z_2$ the minus sign is applied to the real part of $z_2$ but not to its imaginary part, as if the brackets were not there.
-
-Wrong working: $(5 + i) - (2 - 3i) = 5 + i - 2 - 3i = 3 - 2i$.
-
-Right working: the minus sign changes the sign of both parts of $z_2$: $(5 + i) - (2 - 3i) = 5 + i - 2 + 3i = 3 + 4i$. Part by part, $5 - 2 = 3$ and $1 - (-3) = 4$.
-
-Why it happens: dropping brackets after a minus sign is a slip that already happens with real binomials, and a negative imaginary part turns it into a double negative.
-
-How to check: add the second number back. $(3 + 4i) + (2 - 3i) = 5 + i$ returns the first number, while $(3 - 2i) + (2 - 3i) = 5 - 5i$ does not.
-
-**Multiplying only the denominator**
-
-To make the denominator real, only the denominator is multiplied by its conjugate and the numerator is left as it was.
-
-Wrong working: $\\frac{3 + 2i}{1 - 4i} = \\frac{3 + 2i}{(1 - 4i)(1 + 4i)} = \\frac{3 + 2i}{17}$.
-
-Right working: multiply the numerator and the denominator by $1 + 4i$: $\\frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)} = \\frac{3 + 12i + 2i + 8i^2}{17} = \\frac{-5 + 14i}{17}$.
-
-Why it happens: the step that makes the denominator real is remembered, while the reason it is allowed, multiplying by $\\frac{1 + 4i}{1 + 4i} = 1$, is forgotten.
-
-How to check: multiply the answer by the original denominator. $\\frac{-5 + 14i}{17} \\cdot (1 - 4i) = \\frac{-5 + 20i + 14i - 56i^2}{17} = \\frac{51 + 34i}{17} = 3 + 2i$, the original numerator.
-
-**Squaring the whole imaginary term**
-
-In $|z| = \\sqrt{a^2 + b^2}$, the term $bi$ is put in place of $b$, so the $i$ is squared along with it.
-
-Wrong working: $|3 + 4i| = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.
-
-Right working: $a = 3$ and $b = 4$ are the two coordinates of the point $(3, 4)$, so $|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$.
-
-Why it happens: the formula is read as "square each term of $z$", and the imaginary term of $3 + 4i$ is $4i$.
-
-How to check: a modulus is a distance, so it is always a real number that is at least $0$. A negative number under the root, or an answer containing $i$, means the $i$ went into the formula.
-
-**Ignoring the quadrant**
-
-The argument is found from $\\tan\\theta = \\frac{b}{a}$ alone, and the calculator's arctangent is taken as the answer whatever the quadrant of $z$.
-
-Wrong working: for $z = -1 + i$, $\\tan\\theta = \\frac{1}{-1} = -1$, so $\\theta = \\arctan(-1) = -45°$.
-
-Right working: $-1 + i$ has a negative real part and a positive imaginary part, so it lies in the second quadrant. The angle there with tangent $-1$ is $180° - 45° = 135°$, so $\\arg(-1 + i) = 135°$ and $-1 + i = \\sqrt{2}\\text{cis}(135°)$.
-
-Why it happens: the arctangent only returns angles between $-90°$ and $90°$, so it cannot tell $-1 + i$ from $1 - i$, which has the same tangent.
-
-How to check: convert back. $\\sqrt{2}\\text{cis}(-45°) = 1 - i$, which is not the starting number, while $\\sqrt{2}\\text{cis}(135°) = -1 + i$.
-
-**Stopping at one root**
-
-An equation $z^n = w$ is solved like a real equation, by taking a single $n$-th root, and the other $n - 1$ roots are never looked for.
-
-Wrong working: $z^3 = 8$, so $z = 2$, the real cube root of $8$.
-
-Right working: write $8 = 8\\text{cis}(0°)$. The roots are $z_k = 2\\text{cis}\\left(\\frac{360°k}{3}\\right)$ for $k = 0, 1, 2$: $2$, $2\\text{cis}(120°) = -1 + \\sqrt{3}i$ and $2\\text{cis}(240°) = -1 - \\sqrt{3}i$.
-
-Why it happens: over the real numbers $x^3 = 8$ has only one solution, and that habit carries over.
-
-How to check: an equation $z^n = w$ with $w \\neq 0$ has exactly $n$ roots, spaced $\\frac{360°}{n}$ apart on one circle. Cubing a candidate confirms it: $(-1 + \\sqrt{3}i)^2 = -2 - 2\\sqrt{3}i$, and $(-2 - 2\\sqrt{3}i)(-1 + \\sqrt{3}i) = 2 - 2\\sqrt{3}i + 2\\sqrt{3}i + 6 = 8$.`,
+      content: `Six mistakes come up again and again in a first course on complex numbers. Five are marked where they happen in the sections above; ignoring the quadrant of the argument is the one that **Trigonometric Representation** already warns about. Here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip loses a sign or a step. $Im(4 - 5i) = -5$, a subtraction changes the sign of both parts of the second number, a quotient multiplies the numerator by the conjugate as well, the modulus squares $b$ and not $bi$, the argument depends on the quadrant, and $z^3 = 8$ has three roots. Adding back, multiplying back, or converting back catches each slip.`,
       link:'',
     },
 
@@ -1751,8 +1680,52 @@ const faqQuestions = {
     ],
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-sign-of-the-imaginary-part', name: `Dropping the sign of the imaginary part`, errorAt: 0,
+        what: `When the imaginary term is subtracted, as in $4 - 5i$, the minus sign is left behind and only the number after it is reported as the imaginary part.`,
+        wrong: [`$4 - 5i$ has $Im(z) = 5$.`],
+        right: [`In standard form $4 - 5i = 4 + (-5)i$, so $Re(z) = 4$ and $Im(z) = -5$.`],
+        why: `The minus looks like the operation between the two terms rather than part of the coefficient of $i$.`,
+        check: `Plot the point. $Im(z) = -5$ puts $4 - 5i$ five units below the real axis, at $(4, -5)$. An imaginary part of $5$ would put it at $(4, 5)$, which is the conjugate $4 + 5i$.` },
+      { id: 'subtracting-only-the-real-part', name: `Subtracting only the real part`, errorAt: 0,
+        what: `In $z_1 - z_2$ the minus sign is applied to the real part of $z_2$ but not to its imaginary part, as if the brackets were not there.`,
+        wrong: [`$(5 + i) - (2 - 3i) = 5 + i - 2 - 3i = 3 - 2i$.`],
+        right: [`The minus sign changes the sign of both parts of $z_2$: $(5 + i) - (2 - 3i) = 5 + i - 2 + 3i = 3 + 4i$. Part by part, $5 - 2 = 3$ and $1 - (-3) = 4$.`],
+        why: `Dropping brackets after a minus sign is a slip that already happens with real binomials, and a negative imaginary part turns it into a double negative.`,
+        check: `Add the second number back. $(3 + 4i) + (2 - 3i) = 5 + i$ returns the first number, while $(3 - 2i) + (2 - 3i) = 5 - 5i$ does not.` },
+      { id: 'multiplying-only-the-denominator', name: `Multiplying only the denominator`, errorAt: 0,
+        what: `To make the denominator real, only the denominator is multiplied by its conjugate and the numerator is left as it was.`,
+        wrong: [`$\\frac{3 + 2i}{1 - 4i} = \\frac{3 + 2i}{(1 - 4i)(1 + 4i)} = \\frac{3 + 2i}{17}$.`],
+        right: [`Multiply the numerator and the denominator by $1 + 4i$: $\\frac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)} = \\frac{3 + 12i + 2i + 8i^2}{17} = \\frac{-5 + 14i}{17}$.`],
+        why: `The step that makes the denominator real is remembered, while the reason it is allowed, multiplying by $\\frac{1 + 4i}{1 + 4i} = 1$, is forgotten.`,
+        check: `Multiply the answer by the original denominator. $\\frac{-5 + 14i}{17} \\cdot (1 - 4i) = \\frac{-5 + 20i + 14i - 56i^2}{17} = \\frac{51 + 34i}{17} = 3 + 2i$, the original numerator.` },
+      { id: 'squaring-the-whole-imaginary-term', name: `Squaring the whole imaginary term`, errorAt: 0,
+        what: `In $|z| = \\sqrt{a^2 + b^2}$, the term $bi$ is put in place of $b$, so the $i$ is squared along with it.`,
+        wrong: [`$|3 + 4i| = \\sqrt{3^2 + (4i)^2} = \\sqrt{9 - 16} = \\sqrt{-7}$.`],
+        right: [`$a = 3$ and $b = 4$ are the two coordinates of the point $(3, 4)$, so $|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$.`],
+        why: `The formula is read as "square each term of $z$", and the imaginary term of $3 + 4i$ is $4i$.`,
+        check: `A modulus is a distance, so it is always a real number that is at least $0$. A negative number under the root, or an answer containing $i$, means the $i$ went into the formula.` },
+      { id: 'ignoring-the-quadrant', name: `Ignoring the quadrant`, errorAt: 1,
+        what: `The argument is found from $\\tan\\theta = \\frac{b}{a}$ alone, and the calculator's arctangent is taken as the answer whatever the quadrant of $z$.`,
+        wrong: [`For $z = -1 + i$, $\\tan\\theta = \\frac{1}{-1} = -1$,`, `So $\\theta = \\arctan(-1) = -45°$.`],
+        right: [`For $z = -1 + i$, $\\tan\\theta = \\frac{1}{-1} = -1$,`, `$-1 + i$ has a negative real part and a positive imaginary part, so it lies in the second quadrant. The angle there with tangent $-1$ is $180° - 45° = 135°$, so $\\arg(-1 + i) = 135°$ and $-1 + i = \\sqrt{2}\\text{cis}(135°)$.`],
+        why: `The arctangent only returns angles between $-90°$ and $90°$, so it cannot tell $-1 + i$ from $1 - i$, which has the same tangent.`,
+        check: `Convert back. $\\sqrt{2}\\text{cis}(-45°) = 1 - i$, which is not the starting number, while $\\sqrt{2}\\text{cis}(135°) = -1 + i$.` },
+      { id: 'stopping-at-one-root', name: `Stopping at one root`, errorAt: 0,
+        what: `An equation $z^n = w$ is solved like a real equation, by taking a single $n$-th root, and the other $n - 1$ roots are never looked for.`,
+        wrong: [`$z^3 = 8$, so $z = 2$, the real cube root of $8$.`],
+        right: [`Write $8 = 8\\text{cis}(0°)$. The roots are $z_k = 2\\text{cis}\\left(\\frac{360°k}{3}\\right)$ for $k = 0, 1, 2$: $2$, $2\\text{cis}(120°) = -1 + \\sqrt{3}i$ and $2\\text{cis}(240°) = -1 - \\sqrt{3}i$.`],
+        why: `Over the real numbers $x^3 = 8$ has only one solution, and that habit carries over.`,
+        check: `An equation $z^n = w$ with $w \\neq 0$ has exactly $n$ roots, spaced $\\frac{360°}{n}$ apart on one circle. Cubing a candidate confirms it: $(-1 + \\sqrt{3}i)^2 = -2 - 2\\sqrt{3}i$, and $(-2 - 2\\sqrt{3}i)(-1 + \\sqrt{3}i) = 2 - 2\\sqrt{3}i + 2\\sqrt{3}i + 6 = 8$.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     numberSystemNest,
     complexFormTree,
     demoUnits,
@@ -1779,7 +1752,7 @@ const faqQuestions = {
     }
    }
 
-export default function ComplexNumbersBasicsPage({numberSystemNest, complexFormTree, seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ComplexNumbersBasicsPage({ pitfallData,numberSystemNest, complexFormTree, seoData, sectionsContent, introContent, obj1Table, obj3Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1851,7 +1824,7 @@ $$Re(z) = a \\quad \\text{and} \\quad Im(z) = b$$]@`,
         content: [
           `@academic[pitfall,aside:true,width:35%:Dropping the sign of the imaginary part
 Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -5)$ up to $(4, 5)$, which is the conjugate. Written as $4 + (-5)i$, the number has $Im(z) = -5$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-dropping-the-sign-of-the-imaginary-part)]@`,
         ],
       },
       {
@@ -2022,6 +1995,15 @@ Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="complex-basics-pitfalls"
+            title="Common pitfalls with complex numbers"
+            source="/complex-numbers/basics"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

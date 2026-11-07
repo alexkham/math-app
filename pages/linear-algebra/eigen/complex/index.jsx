@@ -1587,7 +1587,8 @@ import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiag
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import ConceptCompare from '@/app/components/infographics/ConceptCompare'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2029,7 +2030,7 @@ $$\\lambda = \\frac{4 \\pm \\sqrt{-4}}{2} = 2 \\pm i$$]@
 
 @academic[pitfall,aside:true,width:35%:Taking the determinant as the modulus
 Reading $\\det(A) = 5$ as the modulus says distances are scaled by $5$. But $\\det(A) = a^2 + b^2 = r^2$, so $r = \\sqrt{5} \\approx 2.24$; the factor $5$ belongs to areas.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-the-determinant-as-the-modulus)]@
 
 The modulus is $r = \\sqrt{4 + 1} = \\sqrt{5}$ and the argument is $\\theta = \\arctan(1/2)$. In the basis of the real canonical form, the transformation rotates by $\\arctan(1/2) \\approx 26.6°$ while scaling distances by $\\sqrt{5} \\approx 2.24$. Since $r > 1$, repeated application spirals outward.`,
     before: ``,
@@ -2065,7 +2066,7 @@ The similarity is achieved by the real matrix $P = [\\mathbf{w} \\; \\mathbf{u}]
 
 @academic[pitfall,aside:true,width:35%:Putting the real part first
 Taking $P = [\\mathbf{u} \\; \\mathbf{w}] = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}$ gives $P^{-1}AP = \\begin{pmatrix} 2 & 1 \\\\ -1 & 2 \\end{pmatrix}$, a rotation the other way. With $P = [\\mathbf{w} \\; \\mathbf{u}] = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}$ the result is $\\begin{pmatrix} 2 & -1 \\\\ 1 & 2 \\end{pmatrix}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-putting-the-real-part-first)]@
 
 For the running example, $\\lambda = 2 + i$ and $\\mathbf{v} = (1 + i, 1)^T$ from the previous section, so $\\mathbf{u} = (1, 1)^T$ and $\\mathbf{w} = (1, 0)^T$. These two real vectors become the columns of $P$, and $P^{-1}AP$ should come out as the block with $a = 2$ and $b = 1$. Computing it is a direct check on the eigenvector found above.
 
@@ -2106,7 +2107,7 @@ In the discrete system $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$, an eigenvalue $\\la
 
 @academic[pitfall,aside:true,width:35%:Using the real-part test on a discrete system
 Judging $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ by the sign of the real part calls $\\lambda = \\frac{1}{2} \\pm \\frac{1}{2}i$ unstable, since $\\operatorname{Re}(\\lambda) > 0$. Here the modulus decides: $|\\lambda| = \\frac{\\sqrt{2}}{2} \\approx 0.71 < 1$, so the iterates spiral in to $\\mathbf{0}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-real-part-test-on-a-discrete-system)]@
 
 In the continuous system $\\mathbf{x}' = A\\mathbf{x}$, an eigenvalue $\\lambda = a + bi$ contributes a term $e^{at}(\\cos bt, \\sin bt)$ to the solution. The real part $a$ determines exponential growth ($a > 0$) or decay ($a < 0$). The imaginary part $b$ determines the oscillation frequency. When $a = 0$, the oscillation is sustained. When $a < 0$, it is damped. When $a > 0$, it grows without bound.
 
@@ -2140,75 +2141,9 @@ The choice between working over $\\mathbb{R}$ and $\\mathbb{C}$ is a recurring t
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Four mistakes come up again and again when working with complex eigenvalues. Three are marked with a box where they happen in the sections above, and the first, the formula for the angle, is flagged in the text of the 2×2 section. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading the angle from the arctangent alone**
-
-The argument $\\theta$ of $a + bi$ is computed as $\\arctan(b/a)$ whatever the sign of $a$. The arctangent only returns angles between $-90°$ and $90°$, so when $a < 0$ the angle lands in the wrong half of the plane.
-
-Wrong working: for the pair $-1 \\pm i$ of the $4 \\times 4$ example, $r = \\sqrt{2}$ and
-$$\\theta = \\arctan\\left(\\frac{1}{-1}\\right) = -45°$$
-$$\\sqrt{2}\\begin{pmatrix} \\cos(-45°) & -\\sin(-45°) \\\\ \\sin(-45°) & \\cos(-45°) \\end{pmatrix} = \\begin{pmatrix} 1 & 1 \\\\ -1 & 1 \\end{pmatrix}$$
-which is not the block $\\begin{pmatrix} -1 & -1 \\\\ 1 & -1 \\end{pmatrix}$ of that pair.
-
-Right working: use $\\cos\\theta = a/r$ and $\\sin\\theta = b/r$ together.
-$$\\cos\\theta = -\\frac{1}{\\sqrt{2}}, \\quad \\sin\\theta = \\frac{1}{\\sqrt{2}} \\quad\\Rightarrow\\quad \\theta = 135°$$
-$$\\sqrt{2}\\begin{pmatrix} \\cos 135° & -\\sin 135° \\\\ \\sin 135° & \\cos 135° \\end{pmatrix} = \\begin{pmatrix} -1 & -1 \\\\ 1 & -1 \\end{pmatrix}$$
-
-Why it happens: most worked examples, including $2 \\pm i$ on this page, have $a > 0$, where $\\arctan(b/a)$ is correct, so the shortcut is remembered as the rule.
-
-How to check: the signs of $\\cos\\theta$ and $\\sin\\theta$ must match the signs of $a$ and $b$. Here $a < 0$ and $b > 0$, so $\\theta$ lies between $90°$ and $180°$.
-
-**Taking the determinant as the modulus**
-
-The determinant $\\det(A) = a^2 + b^2$ is read as the modulus $r$ of the eigenvalues, so the scaling factor comes out squared.
-
-Wrong working: for $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$,
-$$\\det(A) = 3 \\cdot 1 - (-2) \\cdot 1 = 5 \\quad\\Rightarrow\\quad r = 5$$
-and the rotation-scaling is said to stretch distances by $5$.
-
-Right working: the eigenvalues are $2 \\pm i$, and
-$$r = |2 + i| = \\sqrt{2^2 + 1^2} = \\sqrt{5} \\approx 2.24, \\qquad \\det(A) = (2 + i)(2 - i) = 5 = r^2$$
-In the basis of the real canonical form, distances are scaled by $\\sqrt{5}$; the factor $5$ is how much areas grow.
-
-Why it happens: the determinant is often described as the scaling factor of a transformation. It is the factor for areas, and in the plane that is the square of the factor for lengths.
-
-How to check: for a real $2 \\times 2$ matrix with a complex pair, $r = \\sqrt{\\det(A)}$. The verdict on growth is the same either way, since $r > 1$ exactly when $\\det(A) > 1$, so only the rate gives the slip away.
-
-**Putting the real part first**
-
-The matrix $P$ is built with the real part $\\mathbf{u}$ of the eigenvector as its first column and the imaginary part $\\mathbf{w}$ second. The result is still a rotation-scaling block, but the sign of $b$ is flipped, so it turns the other way.
-
-Wrong working: with $\\mathbf{v} = (1 + i, 1)^T$, $\\mathbf{u} = (1, 1)^T$ and $\\mathbf{w} = (1, 0)^T$,
-$$P = [\\mathbf{u} \\; \\mathbf{w}] = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix}, \\qquad P^{-1} = \\begin{pmatrix} 0 & 1 \\\\ 1 & -1 \\end{pmatrix}$$
-$$P^{-1}AP = \\begin{pmatrix} 0 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 1 & 3 \\\\ 2 & 1 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 \\\\ -1 & 2 \\end{pmatrix}$$
-the block for $a = 2$ and $b = -1$, a rotation by $-\\theta$.
-
-Right working: imaginary part first.
-$$P = [\\mathbf{w} \\; \\mathbf{u}] = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix}, \\qquad P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}$$
-$$P^{-1}AP = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 3 & 1 \\\\ 1 & 2 \\end{pmatrix} = \\begin{pmatrix} 2 & -1 \\\\ 1 & 2 \\end{pmatrix}$$
-
-Why it happens: $\\mathbf{v} = \\mathbf{u} + i\\mathbf{w}$ lists the real part first, and that order is carried into $P$. Some textbooks do use $[\\mathbf{u} \\; \\mathbf{w}]$, but pair it with the eigenvalue $a - bi$, and the two conventions get mixed.
-
-How to check: $A\\mathbf{w}$ must equal $a\\mathbf{w} + b\\mathbf{u}$. Here $A\\mathbf{w} = (3, 1)^T = 2(1, 0)^T + 1 \\cdot (1, 1)^T$, so $\\mathbf{w}$ belongs in the first column, and the entry below the diagonal of $P^{-1}AP$ must be $b = 1$.
-
-**Using the real-part test on a discrete system**
-
-The stability of $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ is judged by the sign of $\\operatorname{Re}(\\lambda)$, the test for continuous systems, or the other way round: $\\mathbf{x}' = A\\mathbf{x}$ is judged by $|\\lambda|$.
-
-Wrong working: $A = \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ 1 & 1 \\end{pmatrix}$ has $\\text{tr}(A) = 1$ and $\\det(A) = \\frac{1}{2}$, so
-$$\\lambda = \\frac{1 \\pm \\sqrt{1 - 2}}{2} = \\frac{1}{2} \\pm \\frac{1}{2}i, \\qquad \\operatorname{Re}(\\lambda) = \\frac{1}{2} > 0$$
-and the discrete system is declared unstable.
-
-Right working: for a discrete system the modulus decides.
-$$|\\lambda| = \\sqrt{\\frac{1}{4} + \\frac{1}{4}} = \\frac{\\sqrt{2}}{2} \\approx 0.71 < 1$$
-Starting from $\\mathbf{x}_0 = (1, 0)^T$, the iterates $(\\frac{1}{2}, \\frac{1}{2})^T$ and $(0, \\frac{1}{2})^T$ have lengths $0.71$ and $0.5$: the trajectory spirals in to $\\mathbf{0}$. For $\\mathbf{x}' = A\\mathbf{x}$ with the same matrix the verdict reverses: $|\\lambda| < 1$, but $\\operatorname{Re}(\\lambda) > 0$, and the solutions grow like $e^{t/2}$.
-
-Why it happens: both tests compare an eigenvalue with a boundary, the unit circle for discrete systems and the imaginary axis for continuous ones, and the two boundaries are easily swapped.
-
-How to check: ask what the system does to the part of $\\mathbf{x}$ along an eigenvector. A discrete step multiplies it by $\\lambda$, so after $n$ steps its size is $|\\lambda|^n$; a continuous solution behaves like $e^{\\lambda t}$, whose size is $e^{at}$.`,
+    content: `Four mistakes come up again and again when working with complex eigenvalues. Three are marked with a box where they happen in the sections above, and the first, the formula for the angle, is flagged in the text of the 2×2 section. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses a piece of the polar picture of a complex eigenvalue. The angle must match the signs of the real and imaginary parts, the modulus is $\\sqrt{\\det(A)}$, the imaginary part $\\mathbf{w}$ goes first in $P$, and a discrete system is stable when $|\\lambda| < 1$, not when $\\operatorname{Re}(\\lambda) < 0$. Checking the signs, or testing $A\\mathbf{w} = a\\mathbf{w} + b\\mathbf{u}$, catches each slip.`,
     link: ``,
   },
 }
@@ -2431,8 +2366,60 @@ const schemas = {
 
 
 
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-the-angle-from-the-arctangent-alone', name: `Reading the angle from the arctangent alone`, errorAt: 0,
+        what: `The argument $\\theta$ of $a + bi$ is computed as $\\arctan(b/a)$ whatever the sign of $a$. The arctangent only returns angles between $-90°$ and $90°$, so when $a < 0$ the angle lands in the wrong half of the plane.`,
+        wrong: [`For the pair $-1 \\pm i$ of the $4 \\times 4$ example, $r = \\sqrt{2}$ and
+$$\\theta = \\arctan\\left(\\frac{1}{-1}\\right) = -45°$$`, `$$\\sqrt{2}\\begin{pmatrix} \\cos(-45°) & -\\sin(-45°) \\\\ \\sin(-45°) & \\cos(-45°) \\end{pmatrix}$$
+$$= \\begin{pmatrix} 1 & 1 \\\\ -1 & 1 \\end{pmatrix}$$`, `Which is not the block $\\begin{pmatrix} -1 & -1 \\\\ 1 & -1 \\end{pmatrix}$ of that pair.`],
+        right: [`Use $\\cos\\theta = a/r$ and $\\sin\\theta = b/r$ together.`, `$$\\cos\\theta = -\\frac{1}{\\sqrt{2}},$$
+$$\\sin\\theta = \\frac{1}{\\sqrt{2}}$$
+$$\\Rightarrow$$
+$$\\theta = 135°$$`, `$$\\sqrt{2}\\begin{pmatrix} \\cos 135° & -\\sin 135° \\\\ \\sin 135° & \\cos 135° \\end{pmatrix}$$
+$$= \\begin{pmatrix} -1 & -1 \\\\ 1 & -1 \\end{pmatrix}$$`],
+        why: `Most worked examples, including $2 \\pm i$ on this page, have $a > 0$, where $\\arctan(b/a)$ is correct, so the shortcut is remembered as the rule.`,
+        check: `The signs of $\\cos\\theta$ and $\\sin\\theta$ must match the signs of $a$ and $b$. Here $a < 0$ and $b > 0$, so $\\theta$ lies between $90°$ and $180°$.` },
+      { id: 'taking-the-determinant-as-the-modulus', name: `Taking the determinant as the modulus`, errorAt: 1,
+        what: `The determinant $\\det(A) = a^2 + b^2$ is read as the modulus $r$ of the eigenvalues, so the scaling factor comes out squared.`,
+        wrong: [`For $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$,`, `$$\\det(A) = 3 \\cdot 1 - (-2) \\cdot 1 = 5$$
+$$\\Rightarrow$$
+$$r = 5$$`, `And the rotation-scaling is said to stretch distances by $5$.`],
+        right: [`For $A = \\begin{pmatrix} 3 & -2 \\\\ 1 & 1 \\end{pmatrix}$,`, `The eigenvalues are $2 \\pm i$, and
+$$r = |2 + i| = \\sqrt{2^2 + 1^2} = \\sqrt{5}$$
+$$\\approx 2.24,$$
+$$\\det(A) = (2 + i)(2 - i) = 5$$
+$$= r^2$$`, `In the basis of the real canonical form, distances are scaled by $\\sqrt{5}$; the factor $5$ is how much areas grow.`],
+        why: `The determinant is often described as the scaling factor of a transformation. It is the factor for areas, and in the plane that is the square of the factor for lengths.`,
+        check: `For a real $2 \\times 2$ matrix with a complex pair, $r = \\sqrt{\\det(A)}$. The verdict on growth is the same either way, since $r > 1$ exactly when $\\det(A) > 1$, so only the rate gives the slip away.` },
+      { id: 'putting-the-real-part-first', name: `Putting the real part first`, errorAt: 1,
+        what: `The matrix $P$ is built with the real part $\\mathbf{u}$ of the eigenvector as its first column and the imaginary part $\\mathbf{w}$ second. The result is still a rotation-scaling block, but the sign of $b$ is flipped, so it turns the other way.`,
+        wrong: [`With $\\mathbf{v} = (1 + i, 1)^T$, $\\mathbf{u} = (1, 1)^T$ and $\\mathbf{w} = (1, 0)^T$,`, `$$P = [\\mathbf{u} \\; \\mathbf{w}] = \\begin{pmatrix} 1 & 1 \\\\ 1 & 0 \\end{pmatrix},$$
+$$P^{-1} = \\begin{pmatrix} 0 & 1 \\\\ 1 & -1 \\end{pmatrix}$$`, `$$P^{-1}AP$$
+$$= \\begin{pmatrix} 0 & 1 \\\\ 1 & -1 \\end{pmatrix}\\begin{pmatrix} 1 & 3 \\\\ 2 & 1 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 2 & 1 \\\\ -1 & 2 \\end{pmatrix}$$`, `The block for $a = 2$ and $b = -1$, a rotation by $-\\theta$.`],
+        right: [`With $\\mathbf{v} = (1 + i, 1)^T$, $\\mathbf{u} = (1, 1)^T$ and $\\mathbf{w} = (1, 0)^T$,`, `Imaginary part first.`, `$$P = [\\mathbf{w} \\; \\mathbf{u}] = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\end{pmatrix},$$
+$$P^{-1} = \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}$$`, `$$P^{-1}AP$$
+$$= \\begin{pmatrix} 1 & -1 \\\\ 0 & 1 \\end{pmatrix}\\begin{pmatrix} 3 & 1 \\\\ 1 & 2 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 2 & -1 \\\\ 1 & 2 \\end{pmatrix}$$`],
+        why: `$\\mathbf{v} = \\mathbf{u} + i\\mathbf{w}$ lists the real part first, and that order is carried into $P$. Some textbooks do use $[\\mathbf{u} \\; \\mathbf{w}]$, but pair it with the eigenvalue $a - bi$, and the two conventions get mixed.`,
+        check: `$A\\mathbf{w}$ must equal $a\\mathbf{w} + b\\mathbf{u}$. Here $A\\mathbf{w} = (3, 1)^T = 2(1, 0)^T + 1 \\cdot (1, 1)^T$, so $\\mathbf{w}$ belongs in the first column, and the entry below the diagonal of $P^{-1}AP$ must be $b = 1$.` },
+      { id: 'using-the-real-part-test-on-a-discrete-system', name: `Using the real-part test on a discrete system`, errorAt: 0,
+        what: `The stability of $\\mathbf{x}_{n+1} = A\\mathbf{x}_n$ is judged by the sign of $\\operatorname{Re}(\\lambda)$, the test for continuous systems, or the other way round: $\\mathbf{x}' = A\\mathbf{x}$ is judged by $|\\lambda|$.`,
+        wrong: [`$A = \\frac{1}{2}\\begin{pmatrix} 1 & -1 \\\\ 1 & 1 \\end{pmatrix}$ has $\\text{tr}(A) = 1$ and $\\det(A) = \\frac{1}{2}$, so
+$$\\lambda = \\frac{1 \\pm \\sqrt{1 - 2}}{2} = \\frac{1}{2} \\pm \\frac{1}{2}i,$$
+$$\\operatorname{Re}(\\lambda) = \\frac{1}{2} > 0$$`, `And the discrete system is declared unstable.`],
+        right: [`For a discrete system the modulus decides.`, `$$|\\lambda| = \\sqrt{\\frac{1}{4} + \\frac{1}{4}} = \\frac{\\sqrt{2}}{2} \\approx 0.71 < 1$$`, `Starting from $\\mathbf{x}_0 = (1, 0)^T$, the iterates $(\\frac{1}{2}, \\frac{1}{2})^T$ and $(0, \\frac{1}{2})^T$ have lengths $0.71$ and $0.5$: the trajectory spirals in to $\\mathbf{0}$. For $\\mathbf{x}' = A\\mathbf{x}$ with the same matrix the verdict reverses: $|\\lambda| < 1$, but $\\operatorname{Re}(\\lambda) > 0$, and the solutions grow like $e^{t/2}$.`],
+        why: `Both tests compare an eigenvalue with a boundary, the unit circle for discrete systems and the imaginary axis for continuous ones, and the two boundaries are easily swapped.`,
+        check: `Ask what the system does to the part of $\\mathbf{x}$ along an eigenvector. A discrete step multiplies it by $\\lambda$, so after $n$ steps its size is $|\\lambda|^n$; a continuous solution behaves like $e^{\\lambda t}$, whose size is $e^{at}$.` },
+    ],
+  };
+
   return {
   props: {
+    pitfallData,
       realVsComplexField,
     realCanonicalBeforeAfter,
     demoUnits,
@@ -2459,7 +2446,7 @@ const schemas = {
 
 const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-  export default function ComplexEigenvaluesPage({realVsComplexField, 
+  export default function ComplexEigenvaluesPage({ pitfallData,realVsComplexField, 
     realCanonicalBeforeAfter,
     seoData,
     sectionsContent,
@@ -2694,6 +2681,15 @@ const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold:
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="complex-eigenvalue-pitfalls"
+            title="Common pitfalls with complex eigenvalues"
+            source="/linear-algebra/eigen/complex"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

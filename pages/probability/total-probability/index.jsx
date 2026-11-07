@@ -949,6 +949,9 @@ import partitionVennDiagrams from '@/app/components/probability/conditional-prob
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1781,7 +1784,7 @@ Without total probability, you have no way to compute $P(A)$ from the conditiona
 
 @academic[pitfall,aside:true,width:35%:Reversing the condition
 Reading $P(\\text{positive} \\mid \\text{disease}) = 0.95$ as the chance of disease after a positive test ignores the healthy majority. With Example 1's total $P(\\text{positive}) = 0.1085$ as the denominator, $P(\\text{disease} \\mid \\text{positive}) = \\frac{0.0095}{0.1085} \\approx 0.088$.
-[Read more](!#mistakes)]@
+[Read more](!#pitfall-reversing-the-condition)]@
 
 Example 1 above fits this flow directly. The cases are infected and healthy, the observed event is a positive test, and the conditional probabilities the problem gives are the test's rates within each group. The question a patient asks runs the other way: given the positive result, how likely is the disease?
 
@@ -1794,8 +1797,7 @@ Bayes and total probability are two sides of the same reasoning framework. Total
     },
     mistakes:{
       title:`Common Mistakes`,
-      content:`
-**Using non-disjoint cases**
+      content:`**Using non-disjoint cases**
 
 The cases must be mutually exclusive. If $B₁$ and $B₂$ can both occur, you'll double-count probability. Example: splitting by "rain" and "bad weather" overlaps since rain is bad weather.
 
@@ -1837,21 +1839,9 @@ The weights must be $P(Bᵢ)$, not $P(Bᵢ | A)$ or other quantities.
 
 Fix: verify you're using prior probabilities of cases, not posteriors.
 
-Each mistake violates the fundamental structure: a valid partition with properly weighted conditional contributions.
-
-**Reversing the condition**
-
-Bayes' theorem is set up from the conditional probabilities a problem gives, and the given $P(A \\mid B_i)$ is read as the $P(B_i \\mid A)$ being asked for. In medical testing this turns the accuracy of the test into the patient's chance of being ill.
-
-Wrong working: in Example 1 the test detects the disease with probability $0.95$, so a positive result is taken to mean $P(\\text{disease} \\mid \\text{positive}) = 0.95$.
-
-Right working: the numerator is $P(\\text{positive} \\mid \\text{disease})\\,P(\\text{disease}) = 0.95 \\times 0.01 = 0.0095$. The denominator is the total probability of a positive test, $0.0095 + 0.10 \\times 0.99 = 0.1085$. So $P(\\text{disease} \\mid \\text{positive}) = \\frac{0.0095}{0.1085} \\approx 0.088$, under nine percent.
-
-Why it happens: both quantities use the same two events with a bar between them, and the one the problem states is the one in front of the reader. The healthy group is ninety-nine times larger, and its false positives make up $0.099$ of the $0.1085$; nothing in the number $0.95$ shows that.
-
-How to check: count people. Out of 10,000, the 100 infected give 95 positives and the 9,900 healthy give 990. Of the 1,085 positives only 95 are infected, and $\\frac{95}{1085} \\approx 0.088$.`,
+Each mistake violates the fundamental structure: a valid partition with properly weighted conditional contributions.`,
       before:``,
-      after:``,
+      after: `Bayes' theorem turns the given $P(A \\mid B_i)$ into the $P(B_i \\mid A)$ that is asked for, and the two are different numbers. Counting people in a population of $10{,}000$ catches the slip.`,
   
     },
     matters:{
@@ -1935,8 +1925,10 @@ Total probability sits at the center of a web of interconnected ideas. Master it
     },
     summary:{
       title:`Total Probability at a Glance`,
-      content:`
-The law of total probability sits at the center of a small constellation of related rules — conditional probability, the chain rule, mixture distributions, and Bayes' theorem — and its formula reappears throughout this page in different guises. The table below collects the most-used facts in one place, with each row pairing an aspect of the law (its formula, its requirements, its meaning, or its role elsewhere) with the symbolic statement that captures it and a brief note on its interpretation or use.`,
+      content:`The law of total probability sits at the center of a small group of related rules: conditional probability, the chain rule, mixture distributions and Bayes' theorem, and its formula comes back throughout this page in different forms. This summary collects the most-used facts in ten rows, each with an aspect of the law, its symbolic statement and a note.
+
+The first rows give what the law computes, its discrete and continuous forms, and the partition it requires. Then come the meaning of each term, the equivalent sum of joint probabilities, the direction of the reasoning, the role of the law in Bayes' theorem, its reading as a weighted average, and the situations that call for it.`,
+      formulaSheetAfter: `The formula is only as good as the cases fed into it. List the cases, confirm that they are disjoint and cover the whole sample space, and only then multiply each conditional probability by the weight of its case and add.`,
       before:``,
       after:``,
     },
@@ -2026,8 +2018,55 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
     }),
   };
 
+  // MistakeFix batch 19, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.mistakes into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reversing-the-condition', name: `Reversing the condition`, errorAt: 0,
+        what: `Bayes' theorem is set up from the conditional probabilities a problem gives, and the given $P(A \\mid B_i)$ is read as the $P(B_i \\mid A)$ being asked for. In medical testing this turns the accuracy of the test into the patient's chance of being ill.`,
+        wrong: [`In Example 1 the test detects the disease with probability $0.95$, so a positive result is taken to mean $P(\\text{disease} \\mid \\text{positive}) = 0.95$.`],
+        right: [`The numerator is $P(\\text{positive} \\mid \\text{disease})\\,P(\\text{disease}) = 0.95 \\times 0.01 = 0.0095$. The denominator is the total probability of a positive test, $0.0095 + 0.10 \\times 0.99 = 0.1085$. So $P(\\text{disease} \\mid \\text{positive}) = \\frac{0.0095}{0.1085} \\approx 0.088$, under nine percent.`],
+        why: `Both quantities use the same two events with a bar between them, and the one the problem states is the one in front of the reader. The healthy group is ninety-nine times larger, and its false positives make up $0.099$ of the $0.1085$; nothing in the number $0.95$ shows that.`,
+        check: `Count people. Out of 10,000, the 100 infected give 95 positives and the 9,900 healthy give 990. Of the 1,085 positives only 95 are infected, and $\\frac{95}{1085} \\approx 0.088$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or principle', kind: 'formula' },
+      { key: 'note', label: 'Note' },
+    ],
+    rows: [
+      { name: 'What it computes', formula: '$P(A)$', note: 'the unconditional probability of event $A$',
+        sub: 'The overall chance of $A$, assembled from its chances within each case, as [the law of total probability](!#law) states.' },
+      { name: 'Discrete formula', formula: '$\\displaystyle P(A) = \\sum_i P(A \\mid B_i)\\,P(B_i)$', note: 'conditional times weight, summed over the cases',
+        sub: 'One term per case of the partition, from [the law of total probability](!#law).' },
+      { name: 'Continuous formula', formula: '$\\displaystyle P(A) = \\int P(A \\mid B = b)\\, f(b)\\, db$', note: 'the conditioning variable has density $f(b)$',
+        sub: 'When the cases become a range of values the sum becomes an integral ([the law of total probability](!#law)).' },
+      { name: 'Required structure', formula: '$\\bigcup_i B_i = \\Omega, \\quad B_i \\cap B_j = \\varnothing$ for $i \\neq j$', note: 'cases must be both exhaustive and disjoint',
+        sub: 'Every outcome belongs to exactly one case, which is [why the law works](!#why).' },
+      { name: 'Each term means', formula: '$P(A \\mid B_i)\\,P(B_i) = P(A \\cap B_i)$', note: 'the chain rule converts a term into a joint probability',
+        sub: 'The multiplication rule read inside the sum, as [chain rule as a complementary mechanism](!#chain) shows.' },
+      { name: 'Equivalent form', formula: '$\\displaystyle P(A) = \\sum_i P(A \\cap B_i)$', note: 'marginalizing the joint distribution over the partition',
+        sub: 'The disjoint pieces of $A$ simply add, the first step of [why the law works](!#why).' },
+      { name: 'Direction', formula: 'cases $\\rightarrow$ outcome', note: 'aggregates conditional pieces forward into the overall probability',
+        sub: "Bayes' theorem runs the other way, from outcome back to cases ([relationship to Bayes' theorem](!#bayes))." },
+      { name: "Role in Bayes' theorem", formula: '$\\displaystyle P(B_i \\mid A) = \\frac{P(A \\mid B_i)\\,P(B_i)}{\\sum_j P(A \\mid B_j)\\,P(B_j)}$', note: 'the law is the denominator of $P(B_i \\mid A)$; it supplies the normalization constant that makes posteriors sum to $1$',
+        sub: "The sum below the line is the law of total probability, as [relationship to Bayes' theorem](!#bayes) writes out." },
+      { name: 'Statistical interpretation', formula: '$P(A) = E[P(A \\mid B)]$', note: 'a weighted average, the expectation of a conditional probability',
+        sub: 'The weights are the case probabilities $P(B_i)$, from [connections to other ideas](!#other).' },
+      { name: 'Typical use', formula: 'hidden state, mixed source, multiple pathway', note: 'apply whenever the outcome depends on which case occurs',
+        sub: 'The situations [why total probability matters in practice](!#matters) describes.' },
+    ],
+  };
+
   return {
     props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -2050,7 +2089,7 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
   }
 }
 
-export default function TotalProbabilityPage({
+export default function TotalProbabilityPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2257,6 +2296,15 @@ export default function TotalProbabilityPage({
           sectionsContent.mistakes.content,
           <div key={'mistakes-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'mistakes-mistakes'}
+            id="total-probability-pitfalls"
+            title="Common pitfalls with total probability and Bayes' theorem"
+            source="/probability/total-probability"
+            after={sectionsContent.mistakes.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2281,8 +2329,16 @@ export default function TotalProbabilityPage({
         link:'',
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="total-probability-formula-summary"
+            title="Total probability formulas"
+            source="/probability/total-probability"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.summary.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

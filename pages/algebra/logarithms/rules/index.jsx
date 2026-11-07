@@ -12,6 +12,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -549,7 +550,10 @@ Condensing is essential for solving [equations](!/algebra/logarithms/equations) 
 
   obj8: {
     title: `Summary of Logarithm Rules`,
-    content: `The four rules together form a single transformation system: each one converts an operation inside the argument into a different operation on the outside. The table below collects the rules in one place — identity, what gets transformed, and a quick numerical example — useful as a reference card while expanding or condensing expressions.`,
+    content: `This summary collects the four logarithm rules on one card, as a reference for expanding and condensing expressions. Each row gives the rule's name, its identity, and what it transforms, written as the operation inside the logarithm next to the operation it becomes outside. Under each name sits a worked number example and a link to the section that derives the rule.
+
+The product, quotient and power rules turn multiplication into addition, division into subtraction, and an exponent into a coefficient in front. The change of base formula is of a different kind: it rewrites a logarithm in any new base, which is how a logarithm in an unusual base is computed on a calculator.`,
+    formulaSheetAfter: `Read from left to right, each of the first three rules expands one logarithm into simpler pieces; read from right to left, it condenses several logarithms into one. Change of base is the only rule that alters the base itself, and it is derived from the power rule.`,
     before: ``,
     after: ``,
     link: '',
@@ -795,8 +799,29 @@ $$= \\log(x^2 y)$$`,
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Rule', kind: 'name' },
+      { key: 'formula', label: 'Identity', kind: 'formula' },
+      { key: 'turns', label: 'What it transforms', kind: 'transform' },
+    ],
+    rows: [
+      { name: 'Product', formula: '$\\log_a(xy) = \\log_a(x) + \\log_a(y)$', turns: ['multiplication inside', 'addition outside'],
+        sub: 'For example, $\\log_2(8 \\cdot 4) = 3 + 2 = 5$; [the product rule](!#1) derives it from $a^m \\cdot a^n = a^{m+n}$.' },
+      { name: 'Quotient', formula: '$\\displaystyle \\log_a\\left(\\frac{x}{y}\\right) = \\log_a(x) - \\log_a(y)$', turns: ['division inside', 'subtraction outside'],
+        sub: 'For example, $\\log_3(81/9) = 4 - 2 = 2$; [the quotient rule](!#2) shows where it comes from.' },
+      { name: 'Power', formula: '$\\log_a(x^n) = n \\cdot \\log_a(x)$', turns: ['exponent inside', 'coefficient outside'],
+        sub: 'For example, $\\log_2(8^3) = 3 \\cdot 3 = 9$; [the power rule](!#3) shows it also holds for fractional and negative $n$.' },
+      { name: 'Change of base', formula: '$\\displaystyle \\log_a(x) = \\frac{\\log_b(x)}{\\log_b(a)}$', turns: 'rewrites a logarithm in any new base $b$',
+        sub: 'For example, $\\log_2(7) = \\log(7) / \\log(2) \\approx 2.807$, worked on a calculator as in [the change of base formula](!#4).' },
+    ],
+  };
+
    return {
   props: {
+    formulaSummaryData,
     logErrors,
     changeOfBaseAnatomy,
     logRuleTree,
@@ -819,7 +844,7 @@ $$= \\log(x^2 y)$$`,
 }
    }
 
- export default function LogarithmRulesPage({changeOfBaseAnatomy, logRuleTree, logErrors,
+ export default function LogarithmRulesPage({ formulaSummaryData,changeOfBaseAnatomy, logRuleTree, logErrors,
    seoData,
    sectionsContent,
    introContent,
@@ -1007,11 +1032,16 @@ The graph also suggests a way to multiply without multiplying. Suppose a table l
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="logarithm-rule-formula-summary"
+            title="Logarithm rules"
+            source="/algebra/logarithms/rules"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="logarithm-rules-tree"

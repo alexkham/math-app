@@ -831,6 +831,7 @@ import NestedContainment from '@/app/components/infographics/NestedContainment/N
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1284,7 +1285,7 @@ This single condition captures both closure properties simultaneously.
 
 @academic[pitfall,aside:true,width:35%:Stopping at the zero vector
 Taking $\\{(x, y) : y = x^2\\}$ as a subspace because it contains $(0, 0)$ skips closure: $2 \\cdot (1, 1) = (2, 2)$ is not in the set, since $2 \\neq 2^2$. Containing $\\mathbf{0}$ is necessary but not sufficient, and this set is not a subspace.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-at-the-zero-vector)]@
 
 The requirement that $W$ be nonempty is essential. Once at least one vector $\\mathbf{v}$ is known to lie in $W$, closure under scalar multiplication with $c = 0$ guarantees $\\mathbf{0} = 0\\mathbf{v} \\in W$. So the zero vector belongs to every subspace. Conversely, if $\\mathbf{0} \\notin W$, then $W$ cannot be a subspace — this is often the fastest way to disqualify a candidate.
 
@@ -1337,7 +1338,7 @@ The dimension of the null space is the nullity. By the [rank-nullity theorem](!/
 
 @academic[pitfall,aside:true,width:35%:Counting rows instead of columns
 For $A = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ of rank $2$, using its $2$ rows gives nullity $2 - 2 = 0$, yet $(-1, -1, 1)$ solves $A\\mathbf{x} = \\mathbf{0}$. With $n = 3$ columns, the nullity is $3 - 2 = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-counting-rows-instead-of-columns)]@
 
 The count can be read off the reduced form of $A$. Every column holds either a pivot or a free variable, the pivot columns number $\\text{rank}(A)$, and each free variable contributes one vector to a basis of the null space. With $n$ columns in all, that leaves $n - \\text{rank}(A)$ free variables.`,
     before: ``,
@@ -1404,7 +1405,7 @@ $$\\dim(W_1 + W_2) = \\dim(W_1) + \\dim(W_2) - \\dim(W_1 \\cap W_2)$$
 
 @academic[pitfall,aside:true,width:35%:Adding dimensions without the overlap
 Adding the dimensions of the $xy$-plane and the $xz$-plane in $\\mathbb{R}^3$ gives $\\dim(W_1 + W_2) = 2 + 2 = 4$, more than $\\dim \\mathbb{R}^3 = 3$. The planes share the $x$-axis, so the sum has dimension $2 + 2 - 1 = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-dimensions-without-the-overlap)]@
 
 The subtracted term accounts for overlap. A basis of $W_1 \\cap W_2$ can be extended to a basis of $W_1$ and to a basis of $W_2$, so the directions shared by both subspaces are counted once in $\\dim(W_1)$ and again in $\\dim(W_2)$; subtracting $\\dim(W_1 \\cap W_2)$ counts them a single time.
 
@@ -1442,45 +1443,9 @@ This decomposition separates the particular and homogeneous contributions. The p
   },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Three mistakes come up again and again with subspaces. Each one is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Stopping at the zero vector**
-
-A candidate set is checked for the zero vector, found to contain it, and declared a subspace without the two closure conditions being tested.
-
-Wrong working: $W = \\{(x, y) : y = x^2\\}$ contains $(0, 0)$, since $0 = 0^2$, so $W$ is taken to be a subspace of $\\mathbb{R}^2$.
-
-Right working: test closure with vectors from $W$. The point $(1, 1)$ is in $W$, but $2 \\cdot (1, 1) = (2, 2)$, and $2 \\neq 2^2 = 4$, so $(2, 2) \\notin W$. Addition fails as well: $(1, 1)$ and $(-1, 1)$ are in $W$, but $(1, 1) + (-1, 1) = (0, 2)$, and $2 \\neq 0^2$. $W$ is not a subspace.
-
-Why it happens: the zero-vector check is the quickest test and often the one that settles the question, so it gets treated as the whole test. It works in one direction only: a set without $\\mathbf{0}$ is ruled out, but a set with $\\mathbf{0}$ still has to pass both closure conditions.
-
-How to check: after the zero-vector check, try one sum and one multiple with a negative scalar, using vectors from the set. A single result outside $W$ settles the question; if none turns up, prove closure with general vectors and a general scalar.
-
-**Counting rows instead of columns**
-
-The rank-nullity theorem is applied with the number of rows $m$ in place of the number of columns $n$, so the nullity comes out as $m - \\text{rank}(A)$.
-
-Wrong working: $A = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ has rank $2$ and $2$ rows, so the nullity is taken as $2 - 2 = 0$ and $\\text{Null}(A)$ as $\\{\\mathbf{0}\\}$.
-
-Right working: the null space lives in $\\mathbb{R}^n$, with $n = 3$ the number of columns. $A$ is already in reduced form, with pivots in columns $1$ and $2$ and $x_3$ free. The equations $x_1 + x_3 = 0$ and $x_2 + x_3 = 0$ give $\\mathbf{x} = x_3(-1, -1, 1)$, so $\\text{Null}(A) = \\text{Span}\\{(-1, -1, 1)\\}$ and the nullity is $3 - 2 = 1$.
-
-Why it happens: an $m \\times n$ matrix has two sizes, and the rows are what one sees when writing out the equations, while the null space is a set of inputs, one entry per column.
-
-How to check: count the free variables in the reduced form, one for each column without a pivot. Here column $3$ has no pivot, so the nullity is $1$. Multiplying back confirms it: $A(-1, -1, 1) = (-1 + 1, -1 + 1) = (0, 0)$.
-
-**Adding dimensions without the overlap**
-
-The dimension of a sum of subspaces is taken as $\\dim(W_1) + \\dim(W_2)$, leaving out the correction for the intersection.
-
-Wrong working: the $xy$-plane $W_1$ and the $xz$-plane $W_2$ in $\\mathbb{R}^3$ both have dimension $2$, so $\\dim(W_1 + W_2) = 2 + 2 = 4$.
-
-Right working: the two planes meet in the $x$-axis, so $\\dim(W_1 \\cap W_2) = 1$ and $\\dim(W_1 + W_2) = 2 + 2 - 1 = 3$. The sum is all of $\\mathbb{R}^3$: any $(a, b, c)$ equals $(a, b, 0) + (0, 0, c)$.
-
-Why it happens: for a direct sum the dimensions do simply add, and that case is carried over to sums whose pieces overlap.
-
-How to check: a subspace can never have a larger dimension than the space it lies in. A result of $4$ inside $\\mathbb{R}^3$ is impossible, so the overlap has been missed.`,
+    content: `Three mistakes come up again and again with subspaces. Each one is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip stops a subspace test too early, or counts the wrong thing. The zero vector is only the first of three conditions, the nullity is $n - \\text{rank}(A)$, and $\\dim(W_1 + W_2)$ subtracts the dimension of the overlap. Trying one sum and one negative multiple, or counting the free variables, catches each slip.`,
     link: ``,
   },
 }
@@ -1664,8 +1629,34 @@ const schemas = {
     chainSymbol: '⊆',
   };
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'stopping-at-the-zero-vector', name: `Stopping at the zero vector`, errorAt: 0,
+        what: `A candidate set is checked for the zero vector, found to contain it, and declared a subspace without the two closure conditions being tested.`,
+        wrong: [`$W = \\{(x, y) : y = x^2\\}$ contains $(0, 0)$, since $0 = 0^2$, so $W$ is taken to be a subspace of $\\mathbb{R}^2$.`],
+        right: [`Test closure with vectors from $W$. The point $(1, 1)$ is in $W$, but $2 \\cdot (1, 1) = (2, 2)$, and $2 \\neq 2^2 = 4$, so $(2, 2) \\notin W$. Addition fails as well: $(1, 1)$ and $(-1, 1)$ are in $W$, but $(1, 1) + (-1, 1) = (0, 2)$, and $2 \\neq 0^2$. $W$ is not a subspace.`],
+        why: `The zero-vector check is the quickest test and often the one that settles the question, so it gets treated as the whole test. It works in one direction only: a set without $\\mathbf{0}$ is ruled out, but a set with $\\mathbf{0}$ still has to pass both closure conditions.`,
+        check: `After the zero-vector check, try one sum and one multiple with a negative scalar, using vectors from the set. A single result outside $W$ settles the question; if none turns up, prove closure with general vectors and a general scalar.` },
+      { id: 'counting-rows-instead-of-columns', name: `Counting rows instead of columns`, errorAt: 0,
+        what: `The rank-nullity theorem is applied with the number of rows $m$ in place of the number of columns $n$, so the nullity comes out as $m - \\text{rank}(A)$.`,
+        wrong: [`$A = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ has rank $2$ and $2$ rows, so the nullity is taken as $2 - 2 = 0$ and $\\text{Null}(A)$ as $\\{\\mathbf{0}\\}$.`],
+        right: [`The null space lives in $\\mathbb{R}^n$, with $n = 3$ the number of columns. $A$ is already in reduced form, with pivots in columns $1$ and $2$ and $x_3$ free. The equations $x_1 + x_3 = 0$ and $x_2 + x_3 = 0$ give $\\mathbf{x} = x_3(-1, -1, 1)$, so $\\text{Null}(A) = \\text{Span}\\{(-1, -1, 1)\\}$ and the nullity is $3 - 2 = 1$.`],
+        why: `An $m \\times n$ matrix has two sizes, and the rows are what one sees when writing out the equations, while the null space is a set of inputs, one entry per column.`,
+        check: `Count the free variables in the reduced form, one for each column without a pivot. Here column $3$ has no pivot, so the nullity is $1$. Multiplying back confirms it: $A(-1, -1, 1) = (-1 + 1, -1 + 1) = (0, 0)$.` },
+      { id: 'adding-dimensions-without-the-overlap', name: `Adding dimensions without the overlap`, errorAt: 0,
+        what: `The dimension of a sum of subspaces is taken as $\\dim(W_1) + \\dim(W_2)$, leaving out the correction for the intersection.`,
+        wrong: [`The $xy$-plane $W_1$ and the $xz$-plane $W_2$ in $\\mathbb{R}^3$ both have dimension $2$, so $\\dim(W_1 + W_2) = 2 + 2 = 4$.`],
+        right: [`The two planes meet in the $x$-axis, so $\\dim(W_1 \\cap W_2) = 1$ and $\\dim(W_1 + W_2) = 2 + 2 - 1 = 3$. The sum is all of $\\mathbb{R}^3$: any $(a, b, c)$ equals $(a, b, 0) + (0, 0, c)$.`],
+        why: `For a direct sum the dimensions do simply add, and that case is carried over to sums whose pieces overlap.`,
+        check: `A subspace can never have a larger dimension than the space it lies in. A result of $4$ inside $\\mathbb{R}^3$ is impossible, so the overlap has been missed.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     subspaceOpNest,
     demoUnits,
     conceptIntroFigures,
@@ -1688,7 +1679,7 @@ return {
 
    }
 
-export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SubspacesPage({ pitfallData,subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1899,6 +1890,15 @@ export default function SubspacesPage({subspaceOpNest, seoData, sectionsContent,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="subspace-pitfalls"
+            title="Common pitfalls with subspaces"
+            source="/linear-algebra/vector-spaces/subspaces"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

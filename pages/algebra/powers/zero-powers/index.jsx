@@ -15,6 +15,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -427,7 +428,10 @@ The endpoint: [exponential functions](!/algebra/powers/exponential-functions) $f
     },
     obj9:{
       title:`Summary of Zero in Exponentiation`,
-      content:`The four scenarios for zero in an exponential expression each resolve differently. The table below collects them with their canonical expression, the resulting value or status, and the reason behind it — including the discrete-math vs analysis split that makes $0^0$ a context-dependent case.`,
+      content:`This summary collects the five cases of zero in a power on one card. Each row names the case, gives the expression and states its value or status, with a line under the name on the reason behind it and a link to the section that explains it.
+
+The first two rows put zero in the base: a positive exponent gives zero, and a negative exponent leads to a division by zero, so the result is undefined. The third puts zero in the exponent of any other base and gives one. The last two rows put zero in both places, which discrete mathematics sets to one by convention and analysis treats as indeterminate.`,
+      formulaSheetAfter: `Zero behaves well in one role at a time. As a base it survives positive exponents, as an exponent it gives one, and when it fills both places the answer depends on the field, so a value for zero to the power zero should always come with its context.`,
       before:``,
       after:``,
       link:'',
@@ -810,8 +814,31 @@ $$5x^0 = 5 \\cdot x^0 = 5 \\cdot 1 = 5 \\quad (x \\neq 0)$$`, `With parentheses 
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Scenario', kind: 'name' },
+      { key: 'formula', label: 'Expression', kind: 'formula' },
+      { key: 'value', label: 'Value or status' },
+    ],
+    rows: [
+      { name: 'Zero base, positive exponent', formula: '$0^n, \\quad n > 0$', value: '$0$',
+        sub: 'Any product with a zero factor is zero, as [zero as a base with positive exponents](!#1) shows.' },
+      { name: 'Zero base, negative exponent', formula: '$\\displaystyle 0^{-n} = \\frac{1}{0^n} = \\frac{1}{0}$', value: 'undefined',
+        sub: 'The reciprocal ends in a division by zero, which [zero as a base with negative exponents](!#2) explains.' },
+      { name: 'Nonzero base, zero exponent', formula: '$a^0, \\quad a \\neq 0$', value: '$1$',
+        sub: 'Forced by the quotient rule and by the empty-product convention, both worked through in [zero as an exponent](!#3).' },
+      { name: 'Both zero, discrete mathematics', formula: '$0^0$', value: '$1$ by convention',
+        sub: 'Required by the binomial theorem, power series and counting, as [zero to the power zero in discrete mathematics](!#5) shows.' },
+      { name: 'Both zero, analysis', formula: '$0^0$', value: 'indeterminate',
+        sub: 'The limit depends on the path: $x^x \\to 1$ but $0^x \\to 0$ as $x \\to 0^+$, as [zero to the power zero in analysis](!#6) explains.' },
+    ],
+  };
+
 return {
   props:{
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -835,7 +862,7 @@ return {
    }
 
 // export default function ZeroPowersPage({seoData,sectionsContent , introContent}) {
-export default function ZeroPowersPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ZeroPowersPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1005,11 +1032,16 @@ Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exp
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="zero-power-formula-summary"
+            title="Zero in exponentiation"
+            source="/algebra/powers/zero-powers"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -863,6 +863,7 @@ import orthogonalDiagrams from '@/app/components/linear-algebra copy/matrix/orth
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1316,7 +1317,7 @@ Any orthogonal set can be made orthonormal by normalizing each vector: $\\hat{\\
 
 @academic[pitfall,aside:true,width:35%:Dividing by the squared length
 Dividing by $\\mathbf{v} \\cdot \\mathbf{v} = 6$ instead of $\\|\\mathbf{v}\\| = \\sqrt{6}$ turns $(1, -2, 1)$ into $\\tfrac{1}{6}(1, -2, 1)$, whose length is $\\tfrac{1}{\\sqrt{6}} \\approx 0.41$. The unit vector is $\\tfrac{1}{\\sqrt{6}}(1, -2, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-squared-length)]@
 
 For the set $(1, 1, 1)$, $(1, -2, 1)$, $(1, 0, -1)$ from the first section, the three vectors have squared lengths $3$, $6$ and $2$, so each one is rescaled by a different factor. The right angles survive the rescaling: scaling two vectors multiplies their dot product by the two scale factors, and zero stays zero.
 
@@ -1364,7 +1365,7 @@ So $\\mathbf{x} = 2\\sqrt{2}\\,\\mathbf{q}_1 + \\sqrt{6}\\,\\mathbf{q}_2 + 0 \\c
 
 @academic[pitfall,aside:true,width:35%:Dropping the denominator
 Using $c_i = \\mathbf{x} \\cdot \\mathbf{v}_i$ for the set $(1, 1, 1)$, $(1, -2, 1)$, $(1, 0, -1)$ and $\\mathbf{x} = (3, 1, 2)$ gives $(6, 3, 1)$, which rebuilds $(10, 0, 8)$, not $\\mathbf{x}$. Dividing by $3$, $6$ and $2$ gives $(2, \\tfrac{1}{2}, \\tfrac{1}{2})$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-denominator)]@
 
 The worked example uses unit vectors, which is why each coordinate came from a single dot product. Orthogonal bases met in practice are often not normalized, such as the set $(1, 1, 1)$, $(1, -2, 1)$, $(1, 0, -1)$ from the first section, and their coordinates are still read off one at a time, with no system to solve.`,
     before: ``,
@@ -1381,7 +1382,7 @@ The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\p
 
 @academic[pitfall,aside:true,width:35%:Stopping at orthogonal columns
 Taking $M^{-1} = M^T$ for $M = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, whose columns are perpendicular but of length $\\sqrt{2}$, fails: $M^TM = 2I$, so $M^{-1} = \\tfrac{1}{2}M^T$, and $\\det M = -2$. Dividing each column by $\\sqrt{2}$ gives an orthogonal matrix.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-stopping-at-orthogonal-columns)]@
 
 The defining geometric property is that orthogonal matrices preserve the dot product: $(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v}) = \\mathbf{u}^TQ^TQ\\mathbf{v} = \\mathbf{u}^T\\mathbf{v} = \\mathbf{u} \\cdot \\mathbf{v}$. Preserving the dot product automatically preserves lengths ($\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$), angles, and distances. An orthogonal matrix is a rigid motion of $\\mathbb{R}^n$ — it rearranges vectors without distorting any geometric relationship.`,
     before: ``,
@@ -1447,54 +1448,9 @@ The [reflection tool](!/linear-algebra/visual-tools/reflection-2d) shows the ori
   },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Three mistakes cause many wrong answers with orthogonal sets. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Dividing by the squared length**
-
-Normalizing a vector means dividing it by its length $\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}$. The square root is left out, and the vector is divided by $\\mathbf{v} \\cdot \\mathbf{v}$ instead.
-
-Wrong working:
-$$\\mathbf{v} = (1, -2, 1), \\quad \\mathbf{v} \\cdot \\mathbf{v} = 6, \\quad \\frac{\\mathbf{v}}{6} = \\left(\\tfrac{1}{6}, -\\tfrac{1}{3}, \\tfrac{1}{6}\\right)$$
-Its length is $\\sqrt{\\tfrac{1}{36} + \\tfrac{1}{9} + \\tfrac{1}{36}} = \\sqrt{\\tfrac{1}{6}} \\approx 0.41$, so the result is not a unit vector.
-
-Right working:
-$$\\|\\mathbf{v}\\| = \\sqrt{6}, \\quad \\hat{\\mathbf{v}} = \\frac{1}{\\sqrt{6}}(1, -2, 1), \\quad \\hat{\\mathbf{v}} \\cdot \\hat{\\mathbf{v}} = \\frac{1 + 4 + 1}{6} = 1$$
-
-Why it happens: the squared length $\\mathbf{v} \\cdot \\mathbf{v}$ is the number already at hand. It is the denominator of the coordinate formula $c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v}_i}$ and of projection formulas, while normalizing needs the length itself.
-
-How to check: take the dot product of the result with itself; it must be $1$. After dividing by $\\mathbf{v} \\cdot \\mathbf{v}$ it is $\\frac{1}{\\mathbf{v} \\cdot \\mathbf{v}}$ instead, here $\\tfrac{1}{6}$.
-
-**Dropping the denominator**
-
-The coordinate formula for an orthonormal basis, $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$, is applied to an orthogonal basis whose vectors are not unit vectors. The denominator $\\mathbf{v}_i \\cdot \\mathbf{v}_i$ equals $1$ only when $\\|\\mathbf{v}_i\\| = 1$.
-
-Wrong working: with $\\mathbf{v}_1 = (1, 1, 1)$, $\\mathbf{v}_2 = (1, -2, 1)$, $\\mathbf{v}_3 = (1, 0, -1)$ and $\\mathbf{x} = (3, 1, 2)$,
-$$\\mathbf{x} \\cdot \\mathbf{v}_1 = 6, \\quad \\mathbf{x} \\cdot \\mathbf{v}_2 = 3, \\quad \\mathbf{x} \\cdot \\mathbf{v}_3 = 1$$
-Taking these as the coordinates gives $6\\mathbf{v}_1 + 3\\mathbf{v}_2 + 1\\mathbf{v}_3 = (10, 0, 8)$, not $\\mathbf{x}$.
-
-Right working: divide each dot product by $\\mathbf{v}_i \\cdot \\mathbf{v}_i$, which is $3$, $6$ and $2$.
-$$c_1 = \\frac{6}{3} = 2, \\quad c_2 = \\frac{3}{6} = \\frac{1}{2}, \\quad c_3 = \\frac{1}{2}$$
-Then $2\\mathbf{v}_1 + \\tfrac{1}{2}\\mathbf{v}_2 + \\tfrac{1}{2}\\mathbf{v}_3 = (2 + \\tfrac{1}{2} + \\tfrac{1}{2}, \\; 2 - 1 + 0, \\; 2 + \\tfrac{1}{2} - \\tfrac{1}{2}) = (3, 1, 2)$.
-
-Why it happens: the orthonormal formula is the one that gets remembered, because it is shorter and worked examples tend to use unit vectors. Orthogonal sets with whole-number entries, such as this one, are rarely normalized.
-
-How to check: rebuild $\\mathbf{x}$ from the coordinates. With the denominator missing, each coordinate is too large by the factor $\\mathbf{v}_i \\cdot \\mathbf{v}_i$.
-
-**Stopping at orthogonal columns**
-
-A square matrix whose columns are pairwise perpendicular is treated as an orthogonal matrix, and its transpose is used as its inverse. The definition also requires every column to have length $1$.
-
-Wrong working:
-$$M = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}, \\quad M^{-1} = M^T = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$
-But $M^TM = \\begin{pmatrix} 2 & 0 \\\\ 0 & 2 \\end{pmatrix} = 2I$, not $I$, so $M^T$ is not the inverse.
-
-Right working: the columns have length $\\sqrt{2}$, so $M^{-1} = \\tfrac{1}{2}M^T = \\begin{pmatrix} \\tfrac{1}{2} & \\tfrac{1}{2} \\\\ \\tfrac{1}{2} & -\\tfrac{1}{2} \\end{pmatrix}$. Dividing each column by $\\sqrt{2}$ gives the orthogonal matrix $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, with $Q^TQ = I$ and $Q^{-1} = Q^T$.
-
-Why it happens: the name says orthogonal, and the columns are orthogonal. Unit length is part of the definition but not of the name.
-
-How to check: compute $M^TM$. A diagonal result with entries other than $1$ means the columns are orthogonal but not unit length. The determinant is a quick test too: an orthogonal matrix has $\\det = \\pm 1$, and here $\\det M = -2$.`,
+    content: `Three mistakes cause many wrong answers with orthogonal sets. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip leaves out a length. Normalizing divides by $\\|\\mathbf{v}\\|$, not by $\\mathbf{v} \\cdot \\mathbf{v}$; coordinates in an orthogonal basis divide by $\\mathbf{v}_i \\cdot \\mathbf{v}_i$; and an orthogonal matrix needs unit columns. Dotting a result with itself, rebuilding $\\mathbf{x}$, or computing $M^TM$ catches each slip.`,
     link: ``,
   },
 }
@@ -1660,8 +1616,43 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 22, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dividing-by-the-squared-length', name: `Dividing by the squared length`, errorAt: 0,
+        what: `Normalizing a vector means dividing it by its length $\\|\\mathbf{v}\\| = \\sqrt{\\mathbf{v} \\cdot \\mathbf{v}}$. The square root is left out, and the vector is divided by $\\mathbf{v} \\cdot \\mathbf{v}$ instead.`,
+        wrong: [`$$\\mathbf{v} = (1, -2, 1),$$
+$$\\mathbf{v} \\cdot \\mathbf{v} = 6,$$
+$$\\frac{\\mathbf{v}}{6} = \\left(\\tfrac{1}{6}, -\\tfrac{1}{3}, \\tfrac{1}{6}\\right)$$`, `Its length is $\\sqrt{\\tfrac{1}{36} + \\tfrac{1}{9} + \\tfrac{1}{36}} = \\sqrt{\\tfrac{1}{6}} \\approx 0.41$, so the result is not a unit vector.`],
+        right: [`$$\\|\\mathbf{v}\\| = \\sqrt{6},$$
+$$\\hat{\\mathbf{v}} = \\frac{1}{\\sqrt{6}}(1, -2, 1),$$
+$$\\hat{\\mathbf{v}} \\cdot \\hat{\\mathbf{v}} = \\frac{1 + 4 + 1}{6} = 1$$`],
+        why: `The squared length $\\mathbf{v} \\cdot \\mathbf{v}$ is the number already at hand. It is the denominator of the coordinate formula $c_i = \\frac{\\mathbf{x} \\cdot \\mathbf{v}_i}{\\mathbf{v}_i \\cdot \\mathbf{v}_i}$ and of projection formulas, while normalizing needs the length itself.`,
+        check: `Take the dot product of the result with itself; it must be $1$. After dividing by $\\mathbf{v} \\cdot \\mathbf{v}$ it is $\\frac{1}{\\mathbf{v} \\cdot \\mathbf{v}}$ instead, here $\\tfrac{1}{6}$.` },
+      { id: 'dropping-the-denominator', name: `Dropping the denominator`, errorAt: 1,
+        what: `The coordinate formula for an orthonormal basis, $c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$, is applied to an orthogonal basis whose vectors are not unit vectors. The denominator $\\mathbf{v}_i \\cdot \\mathbf{v}_i$ equals $1$ only when $\\|\\mathbf{v}_i\\| = 1$.`,
+        wrong: [`With $\\mathbf{v}_1 = (1, 1, 1)$, $\\mathbf{v}_2 = (1, -2, 1)$, $\\mathbf{v}_3 = (1, 0, -1)$ and $\\mathbf{x} = (3, 1, 2)$,`, `$$\\mathbf{x} \\cdot \\mathbf{v}_1 = 6,$$
+$$\\mathbf{x} \\cdot \\mathbf{v}_2 = 3,$$
+$$\\mathbf{x} \\cdot \\mathbf{v}_3 = 1$$`, `Taking these as the coordinates gives $6\\mathbf{v}_1 + 3\\mathbf{v}_2 + 1\\mathbf{v}_3 = (10, 0, 8)$, not $\\mathbf{x}$.`],
+        right: [`With $\\mathbf{v}_1 = (1, 1, 1)$, $\\mathbf{v}_2 = (1, -2, 1)$, $\\mathbf{v}_3 = (1, 0, -1)$ and $\\mathbf{x} = (3, 1, 2)$,`, `Divide each dot product by $\\mathbf{v}_i \\cdot \\mathbf{v}_i$, which is $3$, $6$ and $2$.`, `$$c_1 = \\frac{6}{3} = 2,$$
+$$c_2 = \\frac{3}{6} = \\frac{1}{2},$$
+$$c_3 = \\frac{1}{2}$$`, `Then $2\\mathbf{v}_1 + \\tfrac{1}{2}\\mathbf{v}_2 + \\tfrac{1}{2}\\mathbf{v}_3 = (2 + \\tfrac{1}{2} + \\tfrac{1}{2}, \\; 2 - 1 + 0, \\; 2 + \\tfrac{1}{2} - \\tfrac{1}{2}) = (3, 1, 2)$.`],
+        why: `The orthonormal formula is the one that gets remembered, because it is shorter and worked examples tend to use unit vectors. Orthogonal sets with whole-number entries, such as this one, are rarely normalized.`,
+        check: `Rebuild $\\mathbf{x}$ from the coordinates. With the denominator missing, each coordinate is too large by the factor $\\mathbf{v}_i \\cdot \\mathbf{v}_i$.` },
+      { id: 'stopping-at-orthogonal-columns', name: `Stopping at orthogonal columns`, errorAt: 0,
+        what: `A square matrix whose columns are pairwise perpendicular is treated as an orthogonal matrix, and its transpose is used as its inverse. The definition also requires every column to have length $1$.`,
+        wrong: [`$$M = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix},$$
+$$M^{-1} = M^T = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$`, `But $M^TM = \\begin{pmatrix} 2 & 0 \\\\ 0 & 2 \\end{pmatrix} = 2I$, not $I$, so $M^T$ is not the inverse.`],
+        right: [`The columns have length $\\sqrt{2}$, so $M^{-1} = \\tfrac{1}{2}M^T = \\begin{pmatrix} \\tfrac{1}{2} & \\tfrac{1}{2} \\\\ \\tfrac{1}{2} & -\\tfrac{1}{2} \\end{pmatrix}$. Dividing each column by $\\sqrt{2}$ gives the orthogonal matrix $Q = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, with $Q^TQ = I$ and $Q^{-1} = Q^T$.`],
+        why: `The name says orthogonal, and the columns are orthogonal. Unit length is part of the definition but not of the name.`,
+        check: `Compute $M^TM$. A diagonal result with entries other than $1$ means the columns are orthogonal but not unit length. The determinant is a quick test too: an orthogonal matrix has $\\det = \\pm 1$, and here $\\det M = -2$.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1684,7 +1675,7 @@ return {
 
 // export default function OrthogonalSetsPage({seoData,sectionsContent , introContent}) {
 
-export default function OrthogonalSetsPage({
+export default function OrthogonalSetsPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1906,6 +1897,15 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="orthogonal-set-pitfalls"
+            title="Common pitfalls with orthogonal sets"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

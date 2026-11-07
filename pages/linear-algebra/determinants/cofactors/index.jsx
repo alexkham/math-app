@@ -940,6 +940,7 @@ import determinantDiagrams from '@/app/components/linear-algebra copy/determinan
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1493,7 +1494,7 @@ $$\\det(A) = 1(23) + 3(-12) + 0 + 2(17) = 23 - 36 + 34 = 21$$]@
 
 @academic[pitfall,aside:true,width:35%:Dropping the sign factor
 Using the minors in place of the cofactors gives $1(23) + 3(12) + 0 + 2(-17) = 25$. With the signs $+, -, +, -$ of row $1$, the sum is $23 - 36 + 34 = 21$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-sign-factor)]@
 
 Every term of the expansion is built from three pieces: an entry of the chosen row, the minor left after deleting that entry's row and column, and the sign the checkerboard gives to its position. The minors are plain determinants of the smaller matrices and carry no sign of their own; the sign enters only when each minor is turned into a cofactor.
 
@@ -1562,7 +1563,7 @@ where each entry was computed in the earlier sections. As a check, the Laplace e
 
 @academic[pitfall,aside:true,width:35%:Starting every row with a plus sign
 Giving row $2$ the signs $+, -, +$ turns its expansion into $0(29) - 3(8) + (-2)(-18) = 12$. Row $2$ starts with $(-1)^{2+1} = -1$, so its signs are $-, +, -$ and the sum is $-12$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-starting-every-row-with-a-plus-sign)]@
 
 The cofactor matrix encodes every possible cofactor expansion simultaneously — each row of $\\text{cof}(A)$ contains the cofactors needed for expansion along the corresponding row of $A$, and each column contains those needed for column expansion.`,
     before: ``,
@@ -1590,7 +1591,7 @@ The adjugate satisfies
 
 @academic[pitfall,aside:true,width:35%:Forgetting to transpose the cofactors
 Using $\\operatorname{cof}(A)$ itself as the adjugate pairs row $1$ of $A$ with column $1$ of $\\operatorname{cof}(A)$: $2(20) + 5(-29) + 1(-13) = -118$, not $-12$. After the transpose, row $1$ meets its own cofactors: $2(20) + 5(-8) + 1(-12) = -12$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-transpose-the-cofactors)]@
 
 To see why, consider the $(i,k)$ entry of the product $A \\cdot \\operatorname{adj}(A)$. This is $\\sum_{j=1}^{n} a_{ij} \\cdot [\\operatorname{adj}(A)]_{jk} = \\sum_{j=1}^{n} a_{ij} \\, C_{kj}$. When $i = k$, this sum is exactly the Laplace expansion of $\\det(A)$ along row $i$, so the diagonal entries equal $\\det(A)$. When $i \\neq k$, the sum pairs the entries of row $i$ with the cofactors of a different row $k$. This is equivalent to computing the determinant of a matrix with two identical rows (row $i$ appears in both its own position and row $k$'s), which is always zero. So the off-diagonal entries vanish.
 
@@ -1631,52 +1632,9 @@ The Laplace expansion is best understood as a theoretical instrument. It defines
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `Three slips come up again and again in cofactor work. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the sign factor**
-
-The entries of the expansion row are multiplied by their minors $M_{ij}$ instead of their cofactors $C_{ij}$. The checkerboard signs never enter, so every term at a position where $i + j$ is odd comes out with the wrong sign.
-
-Wrong working: for the $4 \\times 4$ matrix of the worked example, expanding along row $1$ with the minors $M_{11} = 23$, $M_{12} = 12$, $M_{14} = -17$,
-$$1 \\cdot 23 + 3 \\cdot 12 + 0 + 2 \\cdot (-17) = 23 + 36 - 34 = 25$$
-
-Right working: the positions $(1,1), (1,2), (1,3), (1,4)$ carry the signs $+, -, +, -$, so $C_{12} = -12$ and $C_{14} = +17$.
-$$1 \\cdot 23 + 3 \\cdot (-12) + 0 + 2 \\cdot 17 = 23 - 36 + 34 = 21$$
-
-Why it happens: the minors take all the effort, and once they are found the expansion looks finished. The $2 \\times 2$ minors already contain a minus sign of their own, in $ad - bc$, which makes it easy to believe the signs have been taken care of.
-
-How to check: expand along a second row. Along row $3$, which is $(0, 4, -1, 3)$, the minors are $M_{32} = -12$, $M_{33} = -3$, $M_{34} = 10$, and with the signs $-, +, -$ at those positions the sum is $4 \\cdot 12 + (-1)(-3) + 3 \\cdot (-10) = 48 + 3 - 30 = 21$, matching row $1$. Without signs the same row gives $4(-12) + (-1)(-3) + 3(10) = -15$, which disagrees with the $25$ from row $1$.
-
-**Starting every row with a plus sign**
-
-The signs $+, -, +$ are written down afresh at the start of every row or column instead of being read from the checkerboard. Along an odd-numbered row or column the pattern really does start with $+$, so the slip goes unnoticed there; along an even-numbered one every sign is reversed, and so is the determinant.
-
-Wrong working: for $A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$, row $2$ has the minors $M_{21} = 29$, $M_{22} = 8$, $M_{23} = -18$. With the signs $+, -, +$,
-$$0 \\cdot 29 - 3 \\cdot 8 + (-2)(-18) = 0 - 24 + 36 = 12$$
-
-Right working: the sign at position $(2,1)$ is $(-1)^{2+1} = -1$, so row $2$ runs $-, +, -$.
-$$-0 \\cdot 29 + 3 \\cdot 8 - (-2)(-18) = 0 + 24 - 36 = -12$$
-which matches the expansions along rows $1$ and $3$.
-
-Why it happens: most first examples are expanded along row $1$, where the pattern begins with $+$, and the habit is carried over to the other rows.
-
-How to check: the first sign of row $i$ is $(-1)^{i+1}$, plus for odd rows and minus for even rows. If a second expansion gives the same size but the opposite sign, this slip is the usual cause.
-
-**Forgetting to transpose the cofactors**
-
-The cofactor matrix itself is used as the adjugate. The identity $A \\cdot \\operatorname{adj}(A) = \\det(A) \\, I$ then fails, and so does the inverse formula built on it. The slip is invisible only when $\\operatorname{cof}(A)$ happens to be symmetric.
-
-Wrong working: with the running example,
-$$A \\cdot \\operatorname{cof}(A) = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix} \\begin{pmatrix} 20 & -8 & -12 \\\\ -29 & 8 & 18 \\\\ -13 & 4 & 6 \\end{pmatrix} = \\begin{pmatrix} -118 & 28 & 72 \\\\ -61 & 16 & 42 \\\\ -27 & 0 & 6 \\end{pmatrix}$$
-which is not a multiple of $I$, so dividing it by $\\det(A) = -12$ does not give $A^{-1}$.
-
-Right working: transpose first, $\\operatorname{adj}(A) = \\operatorname{cof}(A)^T$. The product is then $-12 \\, I$, as in the verification of the adjugate section.
-
-Why it happens: the cofactor matrix is where all the work goes, and the transpose is a last step with no arithmetic in it. The cofactor $C_{ij}$ belongs to position $(i,j)$ of $A$, so it feels natural to leave it there.
-
-How to check: every diagonal entry of $A$ times the candidate adjugate is a Laplace expansion and must equal $\\det(A)$. Row $2$ of $A$ against column $2$ of the true adjugate gives $0(-29) + 3(8) + (-2)(18) = -12$; against column $2$ of $\\operatorname{cof}(A)$ it gives $0(-8) + 3(8) + (-2)(4) = 16$.`,
+    content: `Three slips come up again and again in cofactor work. Each is marked with a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses a sign or a transpose. A cofactor is $(-1)^{i+j}$ times its minor, the signs of each row are read from the checkerboard, and the adjugate is the transpose of the cofactor matrix. Expanding along a second row, or checking that $A \\cdot \\operatorname{adj}(A) = \\det(A)\\,I$, catches each slip.`,
     link: ``,
   },
 }
@@ -1836,8 +1794,45 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-sign-factor', name: `Dropping the sign factor`, errorAt: 0,
+        what: `The entries of the expansion row are multiplied by their minors $M_{ij}$ instead of their cofactors $C_{ij}$. The checkerboard signs never enter, so every term at a position where $i + j$ is odd comes out with the wrong sign.`,
+        wrong: [`For the $4 \\times 4$ matrix of the worked example, expanding along row $1$ with the minors $M_{11} = 23$, $M_{12} = 12$, $M_{14} = -17$,
+$$1 \\cdot 23 + 3 \\cdot 12 + 0$$
+$$+ 2 \\cdot (-17) = 23 + 36 - 34$$
+$$= 25$$`],
+        right: [`The positions $(1,1), (1,2), (1,3), (1,4)$ carry the signs $+, -, +, -$, so $C_{12} = -12$ and $C_{14} = +17$.`, `$$1 \\cdot 23 + 3 \\cdot (-12) + 0$$
+$$+ 2 \\cdot 17 = 23 - 36 + 34$$
+$$= 21$$`],
+        why: `The minors take all the effort, and once they are found the expansion looks finished. The $2 \\times 2$ minors already contain a minus sign of their own, in $ad - bc$, which makes it easy to believe the signs have been taken care of.`,
+        check: `Expand along a second row. Along row $3$, which is $(0, 4, -1, 3)$, the minors are $M_{32} = -12$, $M_{33} = -3$, $M_{34} = 10$, and with the signs $-, +, -$ at those positions the sum is $4 \\cdot 12 + (-1)(-3) + 3 \\cdot (-10) = 48 + 3 - 30 = 21$, matching row $1$. Without signs the same row gives $4(-12) + (-1)(-3) + 3(10) = -15$, which disagrees with the $25$ from row $1$.` },
+      { id: 'starting-every-row-with-a-plus-sign', name: `Starting every row with a plus sign`, errorAt: 1,
+        what: `The signs $+, -, +$ are written down afresh at the start of every row or column instead of being read from the checkerboard. Along an odd-numbered row or column the pattern really does start with $+$, so the slip goes unnoticed there; along an even-numbered one every sign is reversed, and so is the determinant.`,
+        wrong: [`For $A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$,`, `Row $2$ has the minors $M_{21} = 29$, $M_{22} = 8$, $M_{23} = -18$. With the signs $+, -, +$,
+$$0 \\cdot 29 - 3 \\cdot 8 + (-2)(-18)$$
+$$= 0 - 24 + 36 = 12$$`],
+        right: [`For $A = \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix}$,`, `The sign at position $(2,1)$ is $(-1)^{2+1} = -1$, so row $2$ runs $-, +, -$.`, `$$-0 \\cdot 29 + 3 \\cdot 8 - (-2)(-18)$$
+$$= 0 + 24 - 36 = -12$$`, `Which matches the expansions along rows $1$ and $3$.`],
+        why: `Most first examples are expanded along row $1$, where the pattern begins with $+$, and the habit is carried over to the other rows.`,
+        check: `The first sign of row $i$ is $(-1)^{i+1}$, plus for odd rows and minus for even rows. If a second expansion gives the same size but the opposite sign, this slip is the usual cause.` },
+      { id: 'forgetting-to-transpose-the-cofactors', name: `Forgetting to transpose the cofactors`, errorAt: 0,
+        what: `The cofactor matrix itself is used as the adjugate. The identity $A \\cdot \\operatorname{adj}(A) = \\det(A) \\, I$ then fails, and so does the inverse formula built on it. The slip is invisible only when $\\operatorname{cof}(A)$ happens to be symmetric.`,
+        wrong: [`With the running example,
+$$A \\cdot \\operatorname{cof}(A)$$
+$$= \\begin{pmatrix} 2 & 5 & 1 \\\\ 0 & 3 & -2 \\\\ 4 & 1 & 6 \\end{pmatrix} \\begin{pmatrix} 20 & -8 & -12 \\\\ -29 & 8 & 18 \\\\ -13 & 4 & 6 \\end{pmatrix}$$
+$$= \\begin{pmatrix} -118 & 28 & 72 \\\\ -61 & 16 & 42 \\\\ -27 & 0 & 6 \\end{pmatrix}$$`, `Which is not a multiple of $I$, so dividing it by $\\det(A) = -12$ does not give $A^{-1}$.`],
+        right: [`Transpose first, $\\operatorname{adj}(A) = \\operatorname{cof}(A)^T$. The product is then $-12 \\, I$, as in the verification of the adjugate section.`],
+        why: `The cofactor matrix is where all the work goes, and the transpose is a last step with no arithmetic in it. The cofactor $C_{ij}$ belongs to position $(i,j)$ of $A$, so it feels natural to leave it there.`,
+        check: `Every diagonal entry of $A$ times the candidate adjugate is a Laplace expansion and must equal $\\det(A)$. Row $2$ of $A$ against column $2$ of the true adjugate gives $0(-29) + 3(8) + (-2)(18) = -12$; against column $2$ of $\\operatorname{cof}(A)$ it gives $0(-8) + 3(8) + (-2)(4) = 16$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1858,7 +1853,7 @@ const schemas = {
 }
    }
 
-   export default function CofactorsPage({
+   export default function CofactorsPage({ pitfallData,
      seoData,
      sectionsContent,
      introContent,
@@ -2063,6 +2058,15 @@ $$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="cofactor-pitfalls"
+            title="Common pitfalls with cofactors"
+            source="/linear-algebra/determinants/cofactors"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -13,6 +13,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -774,7 +775,10 @@ The most persistent algebraic error is distributing an exponent over a sum: $(a 
 
   obj11: {
     title: `Master Reference of Exponent Laws`,
-    content: `Every rule introduced above belongs to a single family of identities — the laws of exponents. The table below is the master reference: each rule with its formula, a representative example, and the domain restriction that determines when it applies. This is the page in one card, useful both to review and to look up while solving problems elsewhere.`,
+    content: `This summary collects all eight laws of exponents from the page on one set of cards. Each card gives the name of the law, its formula and a worked example, with a line on what the law does and a link to the section that explains it. A badge at the bottom of each card states when the law holds.
+
+The first five cards combine powers: the product and the quotient of powers with the same base, a power raised to a power, and a power of a product or of a quotient. The last three extend the meaning of an exponent to negative numbers, to zero and to fractions, and their badges keep a zero base or an even root of a negative number out.`,
+    formulaSheetAfter: `Before applying a law, check two things on its card: that the expression has the shape the law needs, such as matching bases or a product rather than a sum, and that the base meets the condition in the badge. Most slips with exponents come from skipping one of these checks.`,
     before: ``,
     after: ``,
     link: '',
@@ -1035,8 +1039,32 @@ $$= \\sqrt{9} = 3$$`],
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Product', formula: '$a^m \\cdot a^n = a^{m+n}$', example: '$x^3 \\cdot x^5 = x^8$', restriction: 'the bases must match',
+        text: 'Multiplying powers of the same base adds the exponents, as [the product rule](!#1) shows by counting factors.' },
+      { name: 'Quotient', formula: '$\\displaystyle \\frac{a^m}{a^n} = a^{m-n}$', example: '$\\displaystyle \\frac{x^7}{x^2} = x^5$', restriction: '$a \\neq 0$',
+        text: 'Dividing powers of the same base subtracts the exponent of the denominator, from [the quotient rule](!#2).' },
+      { name: 'Power of a power', formula: '$(a^m)^n = a^{mn}$', example: '$(x^3)^4 = x^{12}$', restriction: 'not the same as the stacked $a^{m^n}$',
+        text: 'Raising a power to a power multiplies the exponents; [power of a power](!#3) explains why the brackets matter.' },
+      { name: 'Power of a product', formula: '$(ab)^n = a^n \\cdot b^n$', example: '$(3x)^4 = 81x^4$', restriction: 'for products, not sums',
+        text: 'The exponent goes to every factor inside the brackets, including the number in front, as [power of a product](!#4) shows.' },
+      { name: 'Power of a quotient', formula: '$\\displaystyle \\left(\\frac{a}{b}\\right)^n = \\frac{a^n}{b^n}$', example: '$\\displaystyle \\left(\\frac{2}{5}\\right)^3 = \\frac{8}{125}$', restriction: '$b \\neq 0$',
+        text: 'The exponent goes to the numerator and to the denominator separately, from [power of a quotient](!#5).' },
+      { name: 'Negative exponent', formula: '$\\displaystyle a^{-n} = \\frac{1}{a^n}$', example: '$\\displaystyle 4^{-2} = \\frac{1}{16}$', restriction: '$a \\neq 0$',
+        text: 'A negative exponent stands for the reciprocal of the positive power, as [the negative exponent rule](!#6) shows.' },
+      { name: 'Zero exponent', formula: '$a^0 = 1$', example: '$7^0 = 1, \\quad (-3)^0 = 1$', restriction: '$a \\neq 0$, so $0^0$ is excluded',
+        text: 'Any nonzero base to the power zero is 1, which keeps the quotient rule working when the exponents are equal ([the zero exponent rule](!#7)).' },
+      { name: 'Rational exponent', formula: '$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$', example: '$8^{2/3} = \\left(\\sqrt[3]{8}\\right)^2 = 4$', restriction: '$a \\geq 0$ when $n$ is even',
+        text: 'The denominator of the exponent is a root and the numerator a power, taken in either order, as [the rational exponent rule](!#8) shows.' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
     pitfallData,
     exponentLawCards,
     expQuotientCases,
@@ -1063,7 +1091,7 @@ $$= \\sqrt{9} = 3$$`],
 // export default function RulesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RulesPage({ pitfallData,exponentLawCards, expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RulesPage({ formulaSummaryData, pitfallData,exponentLawCards, expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1264,11 +1292,16 @@ Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="exponent-law-formula-summary"
+            title="Exponent laws"
+            source="/algebra/powers/exponent-rules"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj11.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
           `The same eight laws as cards, sorted by whether they carry a restriction. Click a verdict in the legend to see only the restricted ones.`,
           <DiagramFrame
             key={'obj11-propsheet'}

@@ -804,6 +804,7 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1116,7 +1117,7 @@ In $\\mathbb{R}^2$, direction can be described by the angle $\\alpha$ that the v
 
 @academic[pitfall,aside:true,width:35%:Skipping the quadrant adjustment
 Reading the angle of $(-1, -1)$ as $\\arctan\\left(\\frac{-1}{-1}\\right) = \\arctan(1) = 45^\\circ$ points it into the first quadrant. Both components are negative, so the vector lies in the third quadrant: $\\alpha = 45^\\circ + 180^\\circ = 225^\\circ$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-skipping-the-quadrant-adjustment)]@
 
 Finding the angle of a specific vector takes two readings of its components. The ratio $\\frac{v_2}{v_1}$ fixes the slope of the line the vector lies along, and the signs of $v_1$ and $v_2$ fix which way along that line it points. Both readings go into the final angle, measured from the positive $x$-axis.
 
@@ -1205,7 +1206,7 @@ $$\\mathbf{a} = \\mathbf{b} \\iff a_i = b_i \\text{ for every } i = 1, 2, \\ldot
 
 @academic[pitfall,aside:true,width:35%:Comparing only the lengths
 Calling $(3, 4)$ and $(4, 3)$ equal because both have length $5$ skips the components. They differ in the first slot, $3 \\neq 4$, so $(3, 4) \\neq (4, 3)$: the two arrows point in different directions.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-comparing-only-the-lengths)]@
 
 There is no partial equality for vectors. If even a single component differs, the vectors are not equal. This all-or-nothing criterion is the algebraic version of the geometric requirement: equal vectors must have the same magnitude and the same direction.
 
@@ -1255,7 +1256,7 @@ In $\\mathbb{R}^2$ and $\\mathbb{R}^3$, orthogonality corresponds to perpendicul
 
 @academic[pitfall,aside:true,width:35%:Reading not orthogonal as parallel
 Concluding that $(1, 2)$ and $(3, 1)$ are parallel because $1 \\cdot 3 + 2 \\cdot 1 = 5 \\neq 0$ skips a case. Their ratios differ, $\\frac{1}{3} \\neq \\frac{2}{1}$, so the pair is neither parallel nor orthogonal: the vectors meet at $45^\\circ$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-not-orthogonal-as-parallel)]@
 
 Orthogonality is in a sense the opposite extreme of parallelism. Parallel vectors are maximally aligned — one lies entirely along the direction of the other. Orthogonal vectors have zero alignment — projecting one onto the other yields the zero vector. Between these extremes lies every other angular relationship, measured quantitatively by the dot product.
 
@@ -1274,7 +1275,7 @@ Under addition, vectors are commutative ($\\mathbf{a} + \\mathbf{b} = \\mathbf{b
 
 @academic[pitfall,aside:true,width:35%:Scaling only the first vector
 Writing $2\\big((1, 0) + (0, 3)\\big)$ as $(2, 0) + (0, 3) = (2, 3)$ leaves the second vector unscaled. The scalar multiplies every term: $(2, 0) + (0, 6) = (2, 6)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-scaling-only-the-first-vector)]@
 
 In a computation, the distributive laws let a scalar be applied before or after an addition. The vector $3(\\mathbf{a} + \\mathbf{b})$ can be found by adding first and scaling the sum, or by scaling $\\mathbf{a}$ and $\\mathbf{b}$ separately and adding the results. The two routes always end at the same vector, so either one serves as a check on the other.
 
@@ -1292,64 +1293,9 @@ These eight properties are not specific to vectors in $\\mathbb{R}^n$ — togeth
   },
   obj9: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for most wrong answers about vector properties. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Skipping the quadrant adjustment**
-
-The direction angle of a vector in $\\mathbb{R}^2$ is read straight from $\\arctan\\left(\\frac{v_2}{v_1}\\right)$, and the signs of the components are never looked at. The arctangent only returns angles between $-90^\\circ$ and $90^\\circ$, so every vector with a negative first component gets an angle on the wrong side.
-
-Wrong working:
-$$\\mathbf{v} = (-1, -1), \\qquad \\alpha = \\arctan\\left(\\frac{-1}{-1}\\right) = \\arctan(1) = 45^\\circ$$
-
-Right working: both components are negative, so the vector lies in the third quadrant, and $180^\\circ$ is added to the arctangent.
-$$\\alpha = 45^\\circ + 180^\\circ = 225^\\circ$$
-
-Why it happens: the ratio $\\frac{-1}{-1}$ equals $1$, the same as $\\frac{1}{1}$, so the signs cancel before the arctangent ever sees them.
-
-How to check: the cosine and sine of the angle must have the signs of $v_1$ and $v_2$. For $45^\\circ$ both are positive, which does not match $(-1, -1)$. For $225^\\circ$ both equal $-\\frac{\\sqrt{2}}{2}$, which does.
-
-**Comparing only the lengths**
-
-Two vectors are declared equal because their magnitudes match, or because they contain the same numbers in a different order.
-
-Wrong working:
-$$\\|(3, 4)\\| = \\sqrt{9 + 16} = 5, \\quad \\|(4, 3)\\| = \\sqrt{16 + 9} = 5, \\quad \\text{so } (3, 4) = (4, 3)$$
-
-Right working: compare the vectors component by component. The first components are $3$ and $4$, and $3 \\neq 4$, so $(3, 4) \\neq (4, 3)$. One differing component is enough.
-
-Why it happens: the magnitude is the single number most often computed for a vector, and it is tempting to let it stand for the whole vector. But a length is shared by many vectors: every vector whose tip lies on the circle of radius $5$ has length $5$.
-
-How to check: subtract the two vectors. Equal vectors have difference $\\mathbf{0}$, and here $(3, 4) - (4, 3) = (-1, 1) \\neq \\mathbf{0}$.
-
-**Reading not orthogonal as parallel**
-
-A nonzero dot product is taken to mean that the two vectors are parallel, as if every pair had to be one or the other.
-
-Wrong working:
-$$(1, 2) \\cdot (3, 1) = 3 + 2 = 5 \\neq 0, \\quad \\text{so } (1, 2) \\parallel (3, 1)$$
-
-Right working: parallelism has its own test. $(1, 2) = c(3, 1)$ would need $c = \\frac{1}{3}$ from the first component and $c = 2$ from the second, so no such scalar exists. The pair is neither parallel nor orthogonal; the angle between them satisfies
-$$\\cos\\theta = \\frac{5}{\\sqrt{5}\\,\\sqrt{10}} = \\frac{1}{\\sqrt{2}}, \\qquad \\theta = 45^\\circ$$
-
-Why it happens: parallelism and orthogonality are introduced together as opposite extremes, and the wide range of angles between them is easy to forget.
-
-How to check: run both tests separately. Parallel vectors are scalar multiples of each other; orthogonal vectors have dot product $0$. A pair that fails both is neither.
-
-**Scaling only the first vector**
-
-A scalar multiplies a sum of vectors, but it is applied to the first vector only, and the rest are copied unchanged.
-
-Wrong working:
-$$2\\big((1, 0) + (0, 3)\\big) = (2, 0) + (0, 3) = (2, 3)$$
-
-Right working: by the distributive law $c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$, the scalar reaches every term.
-$$2\\big((1, 0) + (0, 3)\\big) = (2, 0) + (0, 6) = (2, 6)$$
-
-Why it happens: the scalar is written right next to the first vector, and the bracket that carries it to the others is easy to lose.
-
-How to check: take the other route and add first. $(1, 0) + (0, 3) = (1, 3)$, and $2(1, 3) = (2, 6)$, which differs from $(2, 3)$.`,
+    content: `Four mistakes account for most wrong answers about vector properties. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip compares vectors by too little. A direction angle must match the signs of both components, equal vectors agree component by component and not only in length, parallel and orthogonal are separate tests that most pairs fail, and a scalar multiplies every vector in a sum. Checking the signs of the cosine and sine, subtracting the vectors, or adding first catches each slip.`,
     link: '',
   },
 };
@@ -1535,8 +1481,49 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 24, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj9 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'skipping-the-quadrant-adjustment', name: `Skipping the quadrant adjustment`, errorAt: 0,
+        what: `The direction angle of a vector in $\\mathbb{R}^2$ is read straight from $\\arctan\\left(\\frac{v_2}{v_1}\\right)$, and the signs of the components are never looked at. The arctangent only returns angles between $-90^\\circ$ and $90^\\circ$, so every vector with a negative first component gets an angle on the wrong side.`,
+        wrong: [`$$\\mathbf{v} = (-1, -1),$$
+$$\\alpha = \\arctan\\left(\\frac{-1}{-1}\\right)$$
+$$= \\arctan(1) = 45^\\circ$$`],
+        right: [`Both components are negative, so the vector lies in the third quadrant, and $180^\\circ$ is added to the arctangent.`, `$$\\alpha = 45^\\circ + 180^\\circ = 225^\\circ$$`],
+        why: `The ratio $\\frac{-1}{-1}$ equals $1$, the same as $\\frac{1}{1}$, so the signs cancel before the arctangent ever sees them.`,
+        check: `The cosine and sine of the angle must have the signs of $v_1$ and $v_2$. For $45^\\circ$ both are positive, which does not match $(-1, -1)$. For $225^\\circ$ both equal $-\\frac{\\sqrt{2}}{2}$, which does.` },
+      { id: 'comparing-only-the-lengths', name: `Comparing only the lengths`, errorAt: 0,
+        what: `Two vectors are declared equal because their magnitudes match, or because they contain the same numbers in a different order.`,
+        wrong: [`$$\\|(3, 4)\\| = \\sqrt{9 + 16} = 5,$$
+$$\\|(4, 3)\\| = \\sqrt{16 + 9} = 5,$$
+$$\\text{so } (3, 4) = (4, 3)$$`],
+        right: [`Compare the vectors component by component. The first components are $3$ and $4$, and $3 \\neq 4$, so $(3, 4) \\neq (4, 3)$. One differing component is enough.`],
+        why: `The magnitude is the single number most often computed for a vector, and it is tempting to let it stand for the whole vector. But a length is shared by many vectors: every vector whose tip lies on the circle of radius $5$ has length $5$.`,
+        check: `Subtract the two vectors. Equal vectors have difference $\\mathbf{0}$, and here $(3, 4) - (4, 3) = (-1, 1) \\neq \\mathbf{0}$.` },
+      { id: 'reading-not-orthogonal-as-parallel', name: `Reading not orthogonal as parallel`, errorAt: 0,
+        what: `A nonzero dot product is taken to mean that the two vectors are parallel, as if every pair had to be one or the other.`,
+        wrong: [`$$(1, 2) \\cdot (3, 1) = 3 + 2$$
+$$= 5 \\neq 0,$$
+$$\\text{so } (1, 2) \\parallel (3, 1)$$`],
+        right: [`Parallelism has its own test. $(1, 2) = c(3, 1)$ would need $c = \\frac{1}{3}$ from the first component and $c = 2$ from the second, so no such scalar exists. The pair is neither parallel nor orthogonal; the angle between them satisfies
+$$\\cos\\theta = \\frac{5}{\\sqrt{5}\\,\\sqrt{10}} = \\frac{1}{\\sqrt{2}}, \\qquad \\theta = 45^\\circ$$`],
+        why: `Parallelism and orthogonality are introduced together as opposite extremes, and the wide range of angles between them is easy to forget.`,
+        check: `Run both tests separately. Parallel vectors are scalar multiples of each other; orthogonal vectors have dot product $0$. A pair that fails both is neither.` },
+      { id: 'scaling-only-the-first-vector', name: `Scaling only the first vector`, errorAt: 0,
+        what: `A scalar multiplies a sum of vectors, but it is applied to the first vector only, and the rest are copied unchanged.`,
+        wrong: [`$$2\\big((1, 0) + (0, 3)\\big)$$
+$$= (2, 0) + (0, 3) = (2, 3)$$`],
+        right: [`By the distributive law $c(\\mathbf{a} + \\mathbf{b}) = c\\mathbf{a} + c\\mathbf{b}$, the scalar reaches every term.`, `$$2\\big((1, 0) + (0, 3)\\big)$$
+$$= (2, 0) + (0, 6) = (2, 6)$$`],
+        why: `The scalar is written right next to the first vector, and the bracket that carries it to the others is easy to lose.`,
+        check: `Take the other route and add first. $(1, 0) + (0, 3) = (1, 3)$, and $2(1, 3) = (2, 6)$, which differs from $(2, 3)$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     parallelCases,
     demoUnits,
     conceptIntroFigures,
@@ -1558,7 +1545,7 @@ const schemas = {
    }
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function VectorPropertiesPage({parallelCases, seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function VectorPropertiesPage({ pitfallData,parallelCases, seoData, sectionsContent, introContent, obj6Table, vectorProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1743,6 +1730,15 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-mistakes'}
+            id="vector-property-pitfalls"
+            title="Common pitfalls with the properties of vectors"
+            source="/linear-algebra/vectors/properties"
+            after={sectionsContent.obj9.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1108,6 +1108,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import innerProductDiagrams from '@/app/components/linear-algebra copy/matrix/innerProductDiagrams'
@@ -1118,6 +1119,7 @@ import MatrixOperation from '@/app/components/infographics/linear-algebra/Matrix
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1623,7 +1625,7 @@ This definition works in any dimension. In $\\mathbb{R}^2$, the dot product of $
 
 @academic[pitfall,aside:true,width:35%:Leaving the products as a vector
 Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $(3, -8)$ stops halfway. The products are added: $3 + (-8) = -5$, a single number.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-products-as-a-vector)]@
 
 The dot product differs fundamentally from [vector addition](!/linear-algebra/vectors/basic-operations) and scalar multiplication. Those operations take vectors and produce vectors. The dot product takes two vectors and collapses them into a single number, discarding the directional structure in favor of a measurement of alignment.
 
@@ -1692,7 +1694,7 @@ Now expand $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ by writing it as $(\\mathbf{a} - 
 
 @academic[pitfall,aside:true,width:35%:Dropping the middle term
 Squaring term by term, $\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2$, loses $-2(\\mathbf{a} \\cdot \\mathbf{b})$. For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ it gives $27$, but $\\mathbf{a} - \\mathbf{b} = (3, -2)$ has squared length $13 = 27 - 2(7)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-middle-term)]@
 
 Distributing $(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$ produces four dot products, just as multiplying out $(x - y)^2$ produces four terms. Two of them are the squared lengths $\\mathbf{a} \\cdot \\mathbf{a}$ and $\\mathbf{b} \\cdot \\mathbf{b}$, and the other two, $-\\mathbf{a} \\cdot \\mathbf{b}$ and $-\\mathbf{b} \\cdot \\mathbf{a}$, merge into one by commutativity. That merged term is the only place where the two vectors meet, and it is the term the law of cosines matches with $-2\\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$.`,
     before: ``,
@@ -1769,7 +1771,7 @@ $$\\cos\\theta = \\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{a}\\|\\,\\|\
 
 @academic[pitfall,aside:true,width:35%:Dividing by the squared lengths
 For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$, using $17$ and $10$ in the denominator gives $\\cos\\theta = \\frac{7}{170} \\approx 0.041$, so $\\theta \\approx 87.6^\\circ$. The norms are $\\sqrt{17}$ and $\\sqrt{10}$: $\\cos\\theta = \\frac{7}{\\sqrt{170}} \\approx 0.537$ and $\\theta \\approx 57.5^\\circ$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-squared-lengths)]@
 
 This formula is defined only when both vectors are nonzero, since division by zero is undefined. The angle $\\theta$ lies in the interval $[0, \\pi]$, covering all possibilities from vectors pointing in the same direction ($\\theta = 0$) to vectors pointing in exactly opposite directions ($\\theta = \\pi$).
 
@@ -1877,7 +1879,7 @@ $$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{\\mathbf{a} \\cdot \\mathbf{
 
 @academic[pitfall,aside:true,width:35%:Dividing by the length instead of its square
 Projecting $\\mathbf{a} = (4, 2)$ onto $\\mathbf{b} = (1, 1)$ with $\\|\\mathbf{b}\\| = \\sqrt{2}$ in the denominator gives $\\frac{6}{\\sqrt{2}}(1, 1) \\approx (4.24, 4.24)$, of length $6$, longer than $\\mathbf{a}$ itself. With $\\|\\mathbf{b}\\|^2 = 2$, the projection is $3(1, 1) = (3, 3)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-length-instead-of-its-square)]@
 
 Equivalently, the denominator can be written $\\mathbf{b} \\cdot \\mathbf{b}$. The coefficient $\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\mathbf{b} \\cdot \\mathbf{b}}$ rescales $\\mathbf{b}$ so that the output has the appropriate length and orientation. What results is a vector parallel to $\\mathbf{b}$ whose norm equals $|\\text{comp}_{\\mathbf{b}}\\,\\mathbf{a}|$.
 
@@ -1911,83 +1913,20 @@ This two-part split reappears in more sophisticated forms throughout linear alge
     after: ``,
     link: '',
   },
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary gathers the dot product formulas that the uses in the section before do not list, in three families. Each family opens with a line linking to its section, and each formula carries a sentence on what it says. The buttons above the cards show one family at a time.
+
+The first family gives the two definitions, one from components and one from lengths and the angle. The second holds the algebra rules: order does not matter, the product splits over sums, scalars come out, and a vector dotted with itself is its squared length. The last splits a vector into a part along another vector and a part perpendicular to it.`,
+    before: ``,
+    after: `The two definitions are what make the dot product useful: the component sum is easy to compute, and the cosine form says what the number means. Working out the sum and reading it through the cosine turns the arithmetic into a statement about angles.`,
+    link: '',
+  },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Five mistakes come up again and again in dot product work. Four of them are marked where they happen in the sections above; the fifth is the cancellation law that the properties card lists as failing. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Leaving the products as a vector**
-
-The components are multiplied in pairs, and the list of products is given as the answer, the way vector addition gives a list of sums. The second half of the definition, adding the products, never happens.
-
-Wrong working:
-$$(3, 4) \\cdot (1, -2) = (3 \\cdot 1,\\ 4 \\cdot (-2)) = (3, -8)$$
-
-Right working: the products are added.
-$$(3, 4) \\cdot (1, -2) = 3(1) + 4(-2) = 3 - 8 = -5$$
-
-Why it happens: vector addition and scalar multiplication both work component by component and return a vector, and the first step of the dot product looks exactly the same.
-
-How to check: the result of a dot product is one number. An answer that still has components is missing the sum.
-
-**Dropping the middle term**
-
-A squared length of a difference or a sum is expanded as if the square could be taken term by term, and the cross term $-2(\\mathbf{a} \\cdot \\mathbf{b})$ disappears.
-
-Wrong working, for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$:
-$$\\|\\mathbf{a} - \\mathbf{b}\\|^2 = \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 = 17 + 10 = 27$$
-
-Right working: expand the dot product with distributivity and merge the two middle terms by commutativity.
-$$(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b}) = \\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2 = 17 - 2(7) + 10 = 13$$
-
-Why it happens: the square on $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ looks like the square of a number, and the same slip as $(x - y)^2 = x^2 - y^2$ carries over to vectors.
-
-How to check: compute the difference first. $\\mathbf{a} - \\mathbf{b} = (3, -2)$, and $3^2 + (-2)^2 = 13$. The term-by-term version is right only when $\\mathbf{a} \\cdot \\mathbf{b} = 0$, which is the Pythagorean theorem.
-
-**Cancelling a vector from both sides**
-
-From $\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{a} \\cdot \\mathbf{c}$ with $\\mathbf{a} \\neq \\mathbf{0}$, the vector $\\mathbf{a}$ is divided out to conclude $\\mathbf{b} = \\mathbf{c}$, as with numbers.
-
-Wrong working, with the vectors from the properties card:
-$$\\mathbf{a} = (1, 0),\\ \\mathbf{b} = (2, 5),\\ \\mathbf{c} = (2, 9): \\quad \\mathbf{a} \\cdot \\mathbf{b} = 2 = \\mathbf{a} \\cdot \\mathbf{c} \\implies \\mathbf{b} = \\mathbf{c}$$
-But $\\mathbf{b} \\neq \\mathbf{c}$.
-
-Right working: move everything to one side and use distributivity.
-$$\\mathbf{a} \\cdot \\mathbf{b} - \\mathbf{a} \\cdot \\mathbf{c} = \\mathbf{a} \\cdot (\\mathbf{b} - \\mathbf{c}) = 0$$
-The equation only says that $\\mathbf{b} - \\mathbf{c}$ is orthogonal to $\\mathbf{a}$. Here $\\mathbf{b} - \\mathbf{c} = (0, -4)$, and $(1, 0) \\cdot (0, -4) = 0$.
-
-Why it happens: for numbers, $ab = ac$ with $a \\neq 0$ does give $b = c$. The dot product has no inverse to divide by, because it only sees the part of $\\mathbf{b}$ that lies along $\\mathbf{a}$.
-
-How to check: compute $\\mathbf{b} - \\mathbf{c}$ and dot it with $\\mathbf{a}$. A result of $0$ with $\\mathbf{b} - \\mathbf{c} \\neq \\mathbf{0}$ shows that $\\mathbf{b}$ and $\\mathbf{c}$ can differ.
-
-**Dividing by the squared lengths**
-
-In the angle formula, the denominator is filled with $\\mathbf{a} \\cdot \\mathbf{a}$ and $\\mathbf{b} \\cdot \\mathbf{b}$, which are the squared lengths, instead of the lengths themselves.
-
-Wrong working, for $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 7$:
-$$\\cos\\theta = \\frac{7}{17 \\cdot 10} = \\frac{7}{170} \\approx 0.041, \\quad \\theta \\approx 87.6^\\circ$$
-
-Right working: $\\|\\mathbf{a}\\| = \\sqrt{17}$ and $\\|\\mathbf{b}\\| = \\sqrt{10}$.
-$$\\cos\\theta = \\frac{7}{\\sqrt{17}\\,\\sqrt{10}} = \\frac{7}{\\sqrt{170}} \\approx 0.537, \\quad \\theta \\approx 57.5^\\circ$$
-
-Why it happens: the values $17$ and $10$ come out of the same kind of sum of products as $\\mathbf{a} \\cdot \\mathbf{b}$, and the square root that turns them into lengths is easy to leave out.
-
-How to check: the angle must not change when a vector is stretched. Doubling $\\mathbf{a}$ to $(8, 2)$ gives $\\frac{14}{68 \\cdot 10} \\approx 0.021$ with the squared lengths, a different angle, while the correct formula gives $\\frac{14}{\\sqrt{680}} \\approx 0.537$ again.
-
-**Dividing by the length instead of its square**
-
-The vector projection is written with $\\|\\mathbf{b}\\|$ in the denominator, copied from the scalar projection, instead of $\\|\\mathbf{b}\\|^2$.
-
-Wrong working, for $\\mathbf{a} = (4, 2)$ and $\\mathbf{b} = (1, 1)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 6$:
-$$\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|}\\,\\mathbf{b} = \\frac{6}{\\sqrt{2}}(1, 1) \\approx (4.24, 4.24)$$
-
-Right working: $\\|\\mathbf{b}\\|^2 = \\mathbf{b} \\cdot \\mathbf{b} = 2$.
-$$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{6}{2}(1, 1) = (3, 3)$$
-
-Why it happens: the scalar projection divides by $\\|\\mathbf{b}\\|$ once, and the vector projection looks like the same fraction placed in front of $\\mathbf{b}$. But $\\mathbf{b}$ is not a unit vector, so a second division by $\\|\\mathbf{b}\\|$ is needed to turn it into one.
-
-How to check: a projection is never longer than the vector projected. The wrong answer has length $6$, more than $\\|\\mathbf{a}\\| = \\sqrt{20} \\approx 4.47$. Also, $\\mathbf{a}$ minus its projection must be orthogonal to $\\mathbf{b}$: $(4, 2) - (3, 3) = (1, -1)$, and $(1, -1) \\cdot (1, 1) = 0$.`,
+    content: `Five mistakes come up again and again in dot product work. Four of them are marked where they happen in the sections above; the fifth is the cancellation law that the properties card lists as failing. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip treats the dot product like an ordinary product or like a vector. It is one number, the sum of the paired products; $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ keeps the cross term $-2\\,\\mathbf{a} \\cdot \\mathbf{b}$; $\\mathbf{a}$ cannot be cancelled from $\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{a} \\cdot \\mathbf{c}$; the angle formula divides by the lengths, not their squares; and the vector projection divides by $\\|\\mathbf{b}\\|^2$. Computing the difference first, stretching a vector, or checking that a projection is no longer than the vector catches each slip.`,
     link: '',
   },
 };
@@ -2201,8 +2140,80 @@ const schemas = {
     anchor: '#1',
   };
 
+  // MistakeFix batch 24, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'leaving-the-products-as-a-vector', name: `Leaving the products as a vector`, errorAt: 0,
+        what: `The components are multiplied in pairs, and the list of products is given as the answer, the way vector addition gives a list of sums. The second half of the definition, adding the products, never happens.`,
+        wrong: [`$$(3, 4) \\cdot (1, -2)$$
+$$= (3 \\cdot 1,\\ 4 \\cdot (-2)) = (3, -8)$$`],
+        right: [`The products are added.`, `$$(3, 4) \\cdot (1, -2)$$
+$$= 3(1) + 4(-2) = 3 - 8 = -5$$`],
+        why: `Vector addition and scalar multiplication both work component by component and return a vector, and the first step of the dot product looks exactly the same.`,
+        check: `The result of a dot product is one number. An answer that still has components is missing the sum.` },
+      { id: 'dropping-the-middle-term', name: `Dropping the middle term`, errorAt: 1,
+        what: `A squared length of a difference or a sum is expanded as if the square could be taken term by term, and the cross term $-2(\\mathbf{a} \\cdot \\mathbf{b})$ disappears.`,
+        wrong: [`For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$:`, `$$\\|\\mathbf{a} - \\mathbf{b}\\|^2$$
+$$= \\|\\mathbf{a}\\|^2 + \\|\\mathbf{b}\\|^2 = 17 + 10$$
+$$= 27$$`],
+        right: [`For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$:`, `Expand the dot product with distributivity and merge the two middle terms by commutativity.`, `$$(\\mathbf{a} - \\mathbf{b}) \\cdot (\\mathbf{a} - \\mathbf{b})$$
+$$= \\|\\mathbf{a}\\|^2 - 2(\\mathbf{a} \\cdot \\mathbf{b}) + \\|\\mathbf{b}\\|^2$$
+$$= 17 - 2(7) + 10 = 13$$`],
+        why: `The square on $\\|\\mathbf{a} - \\mathbf{b}\\|^2$ looks like the square of a number, and the same slip as $(x - y)^2 = x^2 - y^2$ carries over to vectors.`,
+        check: `Compute the difference first. $\\mathbf{a} - \\mathbf{b} = (3, -2)$, and $3^2 + (-2)^2 = 13$. The term-by-term version is right only when $\\mathbf{a} \\cdot \\mathbf{b} = 0$, which is the Pythagorean theorem.` },
+      { id: 'cancelling-a-vector-from-both-sides', name: `Cancelling a vector from both sides`, errorAt: 0,
+        what: `From $\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{a} \\cdot \\mathbf{c}$ with $\\mathbf{a} \\neq \\mathbf{0}$, the vector $\\mathbf{a}$ is divided out to conclude $\\mathbf{b} = \\mathbf{c}$, as with numbers.`,
+        wrong: [`With the vectors from the properties card:
+$$\\mathbf{a} = (1, 0),\\ \\mathbf{b} = (2, 5),\\ \\mathbf{c}$$
+$$= (2, 9):$$
+$$\\mathbf{a} \\cdot \\mathbf{b} = 2 = \\mathbf{a} \\cdot \\mathbf{c} \\implies \\mathbf{b} = \\mathbf{c}$$`, `But $\\mathbf{b} \\neq \\mathbf{c}$.`],
+        right: [`Move everything to one side and use distributivity.`, `$$\\mathbf{a} \\cdot \\mathbf{b} - \\mathbf{a} \\cdot \\mathbf{c} = \\mathbf{a} \\cdot (\\mathbf{b} - \\mathbf{c}) = 0$$`, `The equation only says that $\\mathbf{b} - \\mathbf{c}$ is orthogonal to $\\mathbf{a}$. Here $\\mathbf{b} - \\mathbf{c} = (0, -4)$, and $(1, 0) \\cdot (0, -4) = 0$.`],
+        why: `For numbers, $ab = ac$ with $a \\neq 0$ does give $b = c$. The dot product has no inverse to divide by, because it only sees the part of $\\mathbf{b}$ that lies along $\\mathbf{a}$.`,
+        check: `Compute $\\mathbf{b} - \\mathbf{c}$ and dot it with $\\mathbf{a}$. A result of $0$ with $\\mathbf{b} - \\mathbf{c} \\neq \\mathbf{0}$ shows that $\\mathbf{b}$ and $\\mathbf{c}$ can differ.` },
+      { id: 'dividing-by-the-squared-lengths', name: `Dividing by the squared lengths`, errorAt: 1,
+        what: `In the angle formula, the denominator is filled with $\\mathbf{a} \\cdot \\mathbf{a}$ and $\\mathbf{b} \\cdot \\mathbf{b}$, which are the squared lengths, instead of the lengths themselves.`,
+        wrong: [`For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 7$:`, `$$\\cos\\theta = \\frac{7}{17 \\cdot 10} = \\frac{7}{170} \\approx 0.041,$$
+$$\\theta \\approx 87.6^\\circ$$`],
+        right: [`For $\\mathbf{a} = (4, 1)$ and $\\mathbf{b} = (1, 3)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 7$:`, `$\\|\\mathbf{a}\\| = \\sqrt{17}$ and $\\|\\mathbf{b}\\| = \\sqrt{10}$.`, `$$\\cos\\theta = \\frac{7}{\\sqrt{17}\\,\\sqrt{10}} = \\frac{7}{\\sqrt{170}}$$
+$$\\approx 0.537,$$
+$$\\theta \\approx 57.5^\\circ$$`],
+        why: `The values $17$ and $10$ come out of the same kind of sum of products as $\\mathbf{a} \\cdot \\mathbf{b}$, and the square root that turns them into lengths is easy to leave out.`,
+        check: `The angle must not change when a vector is stretched. Doubling $\\mathbf{a}$ to $(8, 2)$ gives $\\frac{14}{68 \\cdot 10} \\approx 0.021$ with the squared lengths, a different angle, while the correct formula gives $\\frac{14}{\\sqrt{680}} \\approx 0.537$ again.` },
+      { id: 'dividing-by-the-length-instead-of-its-square', name: `Dividing by the length instead of its square`, errorAt: 1,
+        what: `The vector projection is written with $\\|\\mathbf{b}\\|$ in the denominator, copied from the scalar projection, instead of $\\|\\mathbf{b}\\|^2$.`,
+        wrong: [`For $\\mathbf{a} = (4, 2)$ and $\\mathbf{b} = (1, 1)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 6$:`, `$$\\frac{\\mathbf{a} \\cdot \\mathbf{b}}{\\|\\mathbf{b}\\|}\\,\\mathbf{b} = \\frac{6}{\\sqrt{2}}(1, 1) \\approx (4.24, 4.24)$$`],
+        right: [`For $\\mathbf{a} = (4, 2)$ and $\\mathbf{b} = (1, 1)$ with $\\mathbf{a} \\cdot \\mathbf{b} = 6$:`, `$\\|\\mathbf{b}\\|^2 = \\mathbf{b} \\cdot \\mathbf{b} = 2$.`, `$$\\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} = \\frac{6}{2}(1, 1) = (3, 3)$$`],
+        why: `The scalar projection divides by $\\|\\mathbf{b}\\|$ once, and the vector projection looks like the same fraction placed in front of $\\mathbf{b}$. But $\\mathbf{b}$ is not a unit vector, so a second division by $\\|\\mathbf{b}\\|$ is needed to turn it into one.`,
+        check: `A projection is never longer than the vector projected. The wrong answer has length $6$, more than $\\|\\mathbf{a}\\| = \\sqrt{20} \\approx 4.47$. Also, $\\mathbf{a}$ minus its projection must be orthogonal to $\\mathbf{b}$: $(4, 2) - (3, 3) = (1, -1)$, and $(1, -1) \\cdot (1, 1) = 0$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'definitions', name: 'Two definitions', sub: 'The same number found from the components or from the lengths and the angle, as [the geometric definition](!#2) proves.', pairs: [
+        [{ formula: '$\\displaystyle \\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n = \\sum_{i=1}^{n} a_ib_i$', text: 'Multiply matching components and add the products to get one number, as [the algebraic definition](!#1) shows.' },
+         { formula: '$\\mathbf{a} \\cdot \\mathbf{b} = \\|\\mathbf{a}\\|\\,\\|\\mathbf{b}\\|\\cos\\theta$', text: 'The product of the two lengths and the cosine of the angle between the vectors, which [the geometric definition](!#2) derives from the law of cosines.' }],
+      ] },
+      { id: 'rules', name: 'Algebra rules', sub: 'The rules that make the dot product predictable in calculations, from [properties of the dot product](!#3).', pairs: [
+        [{ formula: '$\\mathbf{a} \\cdot \\mathbf{b} = \\mathbf{b} \\cdot \\mathbf{a}$', text: 'The order of the two vectors does not matter, as [properties of the dot product](!#3) shows.' },
+         { formula: '$\\mathbf{a} \\cdot (\\mathbf{b} + \\mathbf{c}) = \\mathbf{a} \\cdot \\mathbf{b} + \\mathbf{a} \\cdot \\mathbf{c}$', text: 'The product with a sum breaks apart term by term, from [properties of the dot product](!#3).' }],
+        [{ formula: '$(c\\mathbf{a}) \\cdot \\mathbf{b} = c(\\mathbf{a} \\cdot \\mathbf{b})$', text: 'A scalar inside either vector can be pulled out of the product, as [properties of the dot product](!#3) notes.' },
+         { formula: '$\\mathbf{a} \\cdot \\mathbf{a} = \\|\\mathbf{a}\\|^2 \\geq 0$', text: 'A vector dotted with itself gives its squared length, which is zero only for the zero vector; see [properties of the dot product](!#3).' }],
+      ] },
+      { id: 'split', name: 'Splitting a vector', sub: 'Two pieces of $\\mathbf{a}$, one along a nonzero vector $\\mathbf{b}$ and one at a right angle to it, from [orthogonal projection](!#9).', pairs: [
+        [{ formula: '$\\mathbf{a}_{\\perp} = \\mathbf{a} - \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a}$', text: 'Removing the projection leaves the part perpendicular to $\\mathbf{b}$, with $\\mathbf{a}_{\\perp} \\cdot \\mathbf{b} = 0$, as [orthogonal projection](!#9) shows.' },
+         { formula: '$\\mathbf{a} = \\text{proj}_{\\mathbf{b}}\\,\\mathbf{a} + \\mathbf{a}_{\\perp}$', text: 'The two pieces add back to the original vector, from [orthogonal projection](!#9).' }],
+      ] },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     dotProductAnatomy,
     demoUnits,
     conceptIntroFigures,
@@ -2225,7 +2236,7 @@ const schemas = {
   }
 }
    }
-export default function DotProductPage({dotProductAnatomy, seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DotProductPage({ formulaSummaryData, pitfallData,dotProductAnatomy, seoData, sectionsContent, introContent, obj2Table, dotProductLaws, obj6Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2261,7 +2272,7 @@ $$\\mathbf{a} \\cdot \\mathbf{b} = a_1b_1 + a_2b_2 + \\cdots + a_nb_n = \\sum_{i
           `The dot product differs fundamentally from [vector addition](!/linear-algebra/vectors/basic-operations) and scalar multiplication. Those operations take vectors and produce vectors. The dot product takes two vectors and collapses them into a single number, discarding the directional structure in favor of a measurement of alignment.`,
           `@academic[pitfall,aside:true,width:35%:Leaving the products as a vector
 Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $(3, -8)$ stops halfway. The products are added: $3 + (-8) = -5$, a single number.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-leaving-the-products-as-a-vector)]@`,
           `The notation uses a centered dot between the two vectors. Other names for the same operation are the inner product and the scalar product — the latter emphasizing that the output is a scalar, not a vector.`,
         ],
       },
@@ -2450,11 +2461,38 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="dot-product-formula-summary"
+            title="Dot product formulas"
+            source="/linear-algebra/vectors/dot-product"
+            related={{ href: '/linear-algebra/formulas', label: 'All linear algebra formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="dot-product-pitfalls"
+            title="Common pitfalls with the dot product"
+            source="/linear-algebra/vectors/dot-product"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

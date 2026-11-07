@@ -1566,9 +1566,11 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2337,7 +2339,7 @@ Most functions fall into the third category. The function $f(x) = x^2 + x$ satis
 
 @academic[pitfall,aside:true,width:35%:Judging by the exponents alone
 Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -x^3 + 1$, while $-f(x) = -x^3 - 1$. The constant does not change sign, so $f$ is neither even nor odd.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-judging-by-the-exponents-alone)]@
 
 For polynomials the substitution can be read term by term, since $(-x)^n = x^n$ when $n$ is even and $(-x)^n = -x^n$ when $n$ is odd. Each term either keeps its sign or flips it, and the function is even or odd only when all of its terms do the same.
 
@@ -2382,7 +2384,7 @@ The horizontal line test identifies one-to-one functions graphically. If every h
 
 @academic[pitfall,aside:true,width:35%:Confusing one-to-one with being a function
 Since each input of $f(x) = |x|$ has one output, $f$ is called one-to-one. That is only the function condition; one-to-one asks about outputs, and $f(-2) = f(2) = 2$, so $|x|$ is not one-to-one.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-confusing-one-to-one-with-being-a-function)]@
 
 Because each output comes from a unique input, the process can be reversed — given an output, identify the input that produced it. This reversal defines the inverse.
 
@@ -2466,7 +2468,7 @@ Strictly monotonic functions are always one-to-one. Because they never produce t
 
 @academic[pitfall,aside:true,width:35%:Joining intervals of decrease
 Since $f(x) = 1/x$ falls on $(-\\infty, 0)$ and on $(0, \\infty)$, it is called decreasing on its whole domain. But $-1 < 1$ and $f(-1) = -1 < f(1) = 1$; it is decreasing on each interval separately, not monotonic.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-joining-intervals-of-decrease)]@
 
 Many functions are monotonic on pieces of their domain but not overall. The function $f(x) = \\sin(x)$ increases on some intervals and decreases on others. It is not monotonic on $\\mathbb{R}$, but it is strictly increasing on $[-\\pi/2, \\pi/2]$, enabling the definition of $\\arcsin$ on that restricted domain.`,
     before: ``,
@@ -2531,7 +2533,7 @@ To find absolute extrema on $[a, b]$: identify all local extrema in $(a, b)$, ev
 
 @academic[pitfall,aside:true,width:35%:Forgetting the endpoints
 Comparing only the turning points of $f(x) = x^3 - 3x$ on $[-2, 3]$ gives the absolute maximum $f(-1) = 2$. The endpoint $x = 3$ gives $f(3) = 27 - 9 = 18$, the true absolute maximum.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-the-endpoints)]@
 
 The list of candidates is short: the turning points inside the interval and its two ends. A turning point is high or low only compared with its neighbors, while an end of the interval can be highest or lowest simply because the graph stops there. Comparing the values at all the candidates settles both absolute extrema at once.
 
@@ -2567,7 +2569,7 @@ A removable discontinuity (or hole) occurs when the limit exists but the functio
 
 @academic[pitfall,aside:true,width:35%:Cancelling away the hole
 Simplifying $\\frac{x^2 - 1}{x - 1}$ to $x + 1$ and stating $f(1) = 2$ fills in a point that is missing: at $x = 1$ the formula gives $\\frac{0}{0}$. The limit is $2$, but $f(1)$ is undefined.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-cancelling-away-the-hole)]@
 
 Factoring is the usual way to find such a hole. When the numerator and the denominator share a factor, the function agrees with a simpler expression everywhere except where that factor is zero, and the limit at that point can be read from the simpler expression. The graph is the simpler curve with one point removed.
 
@@ -2685,7 +2687,7 @@ $$\\frac{f(3) - f(1)}{3 - 1} = \\frac{9 - 1}{2} = 4$$]@
 
 @academic[pitfall,aside:true,width:35%:Subtracting in mismatched order
 Taking the outputs in one order and the inputs in the other gives $\\frac{f(3) - f(1)}{1 - 3} = \\frac{8}{-2} = -4$, a decrease. Both differences must start from the same endpoint: $\\frac{9 - 1}{3 - 1} = 4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-in-mismatched-order)]@
 
 The function increases by an average of $4$ units in output for each unit of input over this interval.
 
@@ -2719,83 +2721,20 @@ Full analysis of concavity uses calculus — specifically, the second derivative
     link: '',
   },
 
+  formulaSummary: {
+    title: `Formula Summary`,
+    content: `This summary collects the properties of the page that come with a formula, one card each. Every card names the property, states its condition, and adds a line on what it means for the graph, with a link to the section that explains it. A badge under each formula says where the condition has to hold.
+
+The first cards cover symmetry, with the tests for even and odd functions, and the condition for a one-to-one function. Increasing, decreasing and bounded functions follow, described by inequalities between outputs. The last two cards give the condition for a periodic function and the average rate of change over an interval.`,
+    before: ``,
+    after: `Each condition is checked by putting numbers or symbols into the function and comparing the outputs. A single input that breaks a condition is enough to rule the property out, while proving it needs the condition for every input the badge names.`,
+    link: '',
+  },
   obj20: {
     title: `Common Pitfalls`,
-    content: `Six mistakes come up again and again when the properties on this page are tested. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Judging by the exponents alone**
-
-A function is called even or odd from the look of its formula: odd powers suggest odd, even powers suggest even. The test itself, comparing $f(-x)$ with $f(x)$ and $-f(x)$, is skipped, and a single term of the other kind goes unnoticed.
-
-Wrong working: $f(x) = x^3 + 1$ has the odd power $x^3$, so $f$ is declared odd.
-
-Right working: $f(-x) = (-x)^3 + 1 = -x^3 + 1$. This is not $f(x) = x^3 + 1$, and not $-f(x) = -x^3 - 1$, so $f$ is neither even nor odd. The constant $1$ is the term $1 \\cdot x^0$, an even power, and it keeps its sign.
-
-Why it happens: for a single power the shortcut is right, $x^3$ is odd and $x^4$ is even, so it is carried over to sums whose terms disagree.
-
-How to check: substitute one pair of inputs. Here $f(1) = 2$ and $f(-1) = 0$; an odd function would need $f(-1) = -2$, and an even one $f(-1) = 2$.
-
-**Confusing one-to-one with being a function**
-
-The two conditions are mixed up. Being a function means each input has one output; being one-to-one means each output comes from one input. A rule can satisfy the first and fail the second.
-
-Wrong working: for $f(x) = |x|$, every input has exactly one absolute value, so $f$ is declared one-to-one.
-
-Right working: $f(-2) = 2$ and $f(2) = 2$. Two different inputs share the output $2$, so $|x|$ is not one-to-one. It is a function, since no input has two outputs.
-
-Why it happens: both conditions are phrased with "one" and "each", and both come with a line test, vertical for functions and horizontal for one-to-one.
-
-How to check: look for two different inputs with the same output, or draw a horizontal line. The line $y = 2$ meets the graph of $|x|$ at $(-2, 2)$ and $(2, 2)$.
-
-**Joining intervals of decrease**
-
-A function decreases on two separate intervals, and the two facts are combined into one statement about the whole domain. Decreasing on a set needs $f(a) > f(b)$ for every $a < b$ in the set, including pairs taken from different intervals.
-
-Wrong working: $f(x) = 1/x$ is decreasing on $(-\\infty, 0)$ and on $(0, \\infty)$, so it is declared decreasing on its whole domain, a monotonic function.
-
-Right working: take $a = -1$ and $b = 1$. Then $a < b$, but $f(-1) = -1 < 1 = f(1)$. The function is decreasing on each interval separately; on its whole domain it is not monotonic.
-
-Why it happens: the graph falls everywhere it is drawn, and the break at $x = 0$, where the outputs pass from large negative to large positive values, is easy to overlook.
-
-How to check: pick one input from each interval and compare. For a function decreasing on the union, the left input must give the larger output.
-
-**Forgetting the endpoints**
-
-Absolute extrema on a closed interval are looked for only at the turning points, and the values at the two ends of the interval are never computed.
-
-Wrong working: for $f(x) = x^3 - 3x$ on $[-2, 3]$, the turning points give $f(-1) = 2$ and $f(1) = -2$, so the absolute maximum is given as $2$.
-
-Right working: add the endpoints. $f(-2) = -8 + 6 = -2$ and $f(3) = 27 - 9 = 18$. Comparing $-2$, $2$, $-2$ and $18$, the absolute maximum is $18$, at $x = 3$, and the absolute minimum is $-2$, reached at both $x = -2$ and $x = 1$.
-
-Why it happens: local extrema are found first and look like the natural candidates, since they are the peaks and valleys of the graph.
-
-How to check: evaluate $f$ at a few points of the interval, the ends included. A single value larger than the claimed maximum, such as $f(3) = 18 > 2$, shows that the claim is wrong.
-
-**Cancelling away the hole**
-
-A rational function is simplified by cancelling a common factor, and the simplified formula is then used at the point where that factor is zero. The original function is undefined there.
-
-Wrong working: $f(x) = \\frac{x^2 - 1}{x - 1} = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1$, so $f(1) = 2$ and $f$ is continuous at $x = 1$.
-
-Right working: the cancellation is valid only for $x \\neq 1$. At $x = 1$ the original formula gives $\\frac{1 - 1}{1 - 1} = \\frac{0}{0}$, so $f(1)$ is undefined. The limit as $x \\to 1$ is $2$, and the graph is the line $y = x + 1$ with the point $(1, 2)$ missing: a removable discontinuity.
-
-Why it happens: after cancelling, the factor that caused the problem is no longer visible, and the simpler formula looks like the same function.
-
-How to check: substitute into the original formula, not the simplified one. A result of $\\frac{0}{0}$ there signals a hole.
-
-**Subtracting in mismatched order**
-
-In the formula $\\frac{f(b) - f(a)}{b - a}$, the two differences are taken in opposite orders: the outputs from right to left and the inputs from left to right, or the other way round.
-
-Wrong working: for $f(x) = x^2$ on $[1, 3]$, $\\frac{f(3) - f(1)}{1 - 3} = \\frac{9 - 1}{-2} = -4$.
-
-Right working: both differences start at the same endpoint. $\\frac{f(3) - f(1)}{3 - 1} = \\frac{8}{2} = 4$, or equally $\\frac{f(1) - f(3)}{1 - 3} = \\frac{-8}{-2} = 4$.
-
-Why it happens: the endpoints are read off in whatever order they come to mind, and nothing in the arithmetic flags the wrong sign.
-
-How to check: compare the sign with the graph. On $[1, 3]$ the outputs rise from $1$ to $9$, so the average rate of change must be positive.`,
+    content: `Six mistakes come up again and again when the properties on this page are tested. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip tests a property too loosely. Odd and even are decided by $f(-x)$, not by the exponents; a function sends each input to one output, while one-to-one also forbids two inputs sharing an output; a function decreasing on two separate intervals need not decrease across them; an absolute maximum on a closed interval can sit at an endpoint; a hole stays undefined after cancelling; and both differences in a rate of change start from the same endpoint. Substituting a pair of inputs, or evaluating at the endpoints, catches each slip.`,
     link: '',
   },
 
@@ -3156,8 +3095,76 @@ const faqQuestions = {
   };
 
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj20 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'judging-by-the-exponents-alone', name: `Judging by the exponents alone`, errorAt: 0,
+        what: `A function is called even or odd from the look of its formula: odd powers suggest odd, even powers suggest even. The test itself, comparing $f(-x)$ with $f(x)$ and $-f(x)$, is skipped, and a single term of the other kind goes unnoticed.`,
+        wrong: [`$f(x) = x^3 + 1$ has the odd power $x^3$, so $f$ is declared odd.`],
+        right: [`$f(-x) = (-x)^3 + 1 = -x^3 + 1$. This is not $f(x) = x^3 + 1$, and not $-f(x) = -x^3 - 1$, so $f$ is neither even nor odd. The constant $1$ is the term $1 \\cdot x^0$, an even power, and it keeps its sign.`],
+        why: `For a single power the shortcut is right, $x^3$ is odd and $x^4$ is even, so it is carried over to sums whose terms disagree.`,
+        check: `Substitute one pair of inputs. Here $f(1) = 2$ and $f(-1) = 0$; an odd function would need $f(-1) = -2$, and an even one $f(-1) = 2$.` },
+      { id: 'confusing-one-to-one-with-being-a-function', name: `Confusing one-to-one with being a function`, errorAt: 1,
+        what: `The two conditions are mixed up. Being a function means each input has one output; being one-to-one means each output comes from one input. A rule can satisfy the first and fail the second.`,
+        wrong: [`For $f(x) = |x|$,`, `Every input has exactly one absolute value, so $f$ is declared one-to-one.`],
+        right: [`For $f(x) = |x|$,`, `$f(-2) = 2$ and $f(2) = 2$. Two different inputs share the output $2$, so $|x|$ is not one-to-one. It is a function, since no input has two outputs.`],
+        why: `Both conditions are phrased with "one" and "each", and both come with a line test, vertical for functions and horizontal for one-to-one.`,
+        check: `Look for two different inputs with the same output, or draw a horizontal line. The line $y = 2$ meets the graph of $|x|$ at $(-2, 2)$ and $(2, 2)$.` },
+      { id: 'joining-intervals-of-decrease', name: `Joining intervals of decrease`, errorAt: 0,
+        what: `A function decreases on two separate intervals, and the two facts are combined into one statement about the whole domain. Decreasing on a set needs $f(a) > f(b)$ for every $a < b$ in the set, including pairs taken from different intervals.`,
+        wrong: [`$f(x) = 1/x$ is decreasing on $(-\\infty, 0)$ and on $(0, \\infty)$, so it is declared decreasing on its whole domain, a monotonic function.`],
+        right: [`Take $a = -1$ and $b = 1$. Then $a < b$, but $f(-1) = -1 < 1 = f(1)$. The function is decreasing on each interval separately; on its whole domain it is not monotonic.`],
+        why: `The graph falls everywhere it is drawn, and the break at $x = 0$, where the outputs pass from large negative to large positive values, is easy to overlook.`,
+        check: `Pick one input from each interval and compare. For a function decreasing on the union, the left input must give the larger output.` },
+      { id: 'forgetting-the-endpoints', name: `Forgetting the endpoints`, errorAt: 0,
+        what: `Absolute extrema on a closed interval are looked for only at the turning points, and the values at the two ends of the interval are never computed.`,
+        wrong: [`For $f(x) = x^3 - 3x$ on $[-2, 3]$, the turning points give $f(-1) = 2$ and $f(1) = -2$, so the absolute maximum is given as $2$.`],
+        right: [`Add the endpoints. $f(-2) = -8 + 6 = -2$ and $f(3) = 27 - 9 = 18$. Comparing $-2$, $2$, $-2$ and $18$, the absolute maximum is $18$, at $x = 3$, and the absolute minimum is $-2$, reached at both $x = -2$ and $x = 1$.`],
+        why: `Local extrema are found first and look like the natural candidates, since they are the peaks and valleys of the graph.`,
+        check: `Evaluate $f$ at a few points of the interval, the ends included. A single value larger than the claimed maximum, such as $f(3) = 18 > 2$, shows that the claim is wrong.` },
+      { id: 'cancelling-away-the-hole', name: `Cancelling away the hole`, errorAt: 0,
+        what: `A rational function is simplified by cancelling a common factor, and the simplified formula is then used at the point where that factor is zero. The original function is undefined there.`,
+        wrong: [`$f(x) = \\frac{x^2 - 1}{x - 1} = \\frac{(x - 1)(x + 1)}{x - 1} = x + 1$, so $f(1) = 2$ and $f$ is continuous at $x = 1$.`],
+        right: [`The cancellation is valid only for $x \\neq 1$. At $x = 1$ the original formula gives $\\frac{1 - 1}{1 - 1} = \\frac{0}{0}$, so $f(1)$ is undefined. The limit as $x \\to 1$ is $2$, and the graph is the line $y = x + 1$ with the point $(1, 2)$ missing: a removable discontinuity.`],
+        why: `After cancelling, the factor that caused the problem is no longer visible, and the simpler formula looks like the same function.`,
+        check: `Substitute into the original formula, not the simplified one. A result of $\\frac{0}{0}$ there signals a hole.` },
+      { id: 'subtracting-in-mismatched-order', name: `Subtracting in mismatched order`, errorAt: 0,
+        what: `In the formula $\\frac{f(b) - f(a)}{b - a}$, the two differences are taken in opposite orders: the outputs from right to left and the inputs from left to right, or the other way round.`,
+        wrong: [`For $f(x) = x^2$ on $[1, 3]$, $\\frac{f(3) - f(1)}{1 - 3} = \\frac{9 - 1}{-2} = -4$.`],
+        right: [`Both differences start at the same endpoint. $\\frac{f(3) - f(1)}{3 - 1} = \\frac{8}{2} = 4$, or equally $\\frac{f(1) - f(3)}{1 - 3} = \\frac{-8}{-2} = 4$.`],
+        why: `The endpoints are read off in whatever order they come to mind, and nothing in the arithmetic flags the wrong sign.`,
+        check: `Compare the sign with the graph. On $[1, 3]$ the outputs rise from $1$ to $9$, so the average rate of change must be positive.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Even', formula: '$f(-x) = f(x)$', restriction: 'for all $x$ in the domain',
+        text: 'Negating the input leaves the output unchanged, so the graph is symmetric about the $y$-axis ([even and odd functions](!#1)).' },
+      { name: 'Odd', formula: '$f(-x) = -f(x)$', restriction: 'for all $x$ in the domain',
+        text: 'Negating the input negates the output, so the graph is symmetric about the origin, from [even and odd functions](!#1).' },
+      { name: 'One-to-one', formula: '$f(a) = f(b) \\implies a = b$', restriction: 'for all $a$ and $b$ in the domain',
+        text: 'Different inputs always give different outputs, which the horizontal line test checks on a graph ([one-to-one functions](!#3)).' },
+      { name: 'Increasing', formula: '$a < b \\implies f(a) < f(b)$', restriction: 'for $a$ and $b$ in the interval',
+        text: 'Larger inputs give larger outputs, so the graph rises from left to right ([increasing and decreasing](!#6)).' },
+      { name: 'Decreasing', formula: '$a < b \\implies f(a) > f(b)$', restriction: 'for $a$ and $b$ in the interval',
+        text: 'Larger inputs give smaller outputs and the graph falls, as [increasing and decreasing](!#6) defines.' },
+      { name: 'Bounded', formula: '$m \\leq f(x) \\leq M$', restriction: 'for all $x$ in the domain',
+        text: 'Bounded below by $m$ and above by $M$, the graph stays between two horizontal lines ([boundedness](!#8)).' },
+      { name: 'Periodic', formula: '$f(x + p) = f(x)$', restriction: 'for some $p > 0$ and all $x$',
+        text: 'The values repeat every $p$ units, and the smallest such $p$ is the period, as [periodicity](!#15) explains.' },
+      { name: 'Average rate of change', formula: '$\\displaystyle \\frac{f(b) - f(a)}{b - a}$', restriction: 'over the interval $[a, b]$',
+        text: 'The slope of the secant line through $(a, f(a))$ and $(b, f(b))$, from [average rate of change](!#17).' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
       evtCard,
     localExtremaProfile,
     functionPropertiesOutline,
@@ -3186,7 +3193,7 @@ const faqQuestions = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PropertiesPage({evtCard, localExtremaProfile, functionPropertiesOutline, 
+export default function PropertiesPage({ formulaSummaryData, pitfallData,evtCard, localExtremaProfile, functionPropertiesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -3277,7 +3284,7 @@ $$f(-x) = -f(x) \\quad \\text{for all } x \\in \\text{Dom}(f)$$
           `@academic[rule_plain:For a function to be even or odd, its domain must be symmetric about the origin — if $x$ is in the domain, so is $-x$.]@`,
           `@academic[pitfall,aside:true,width:35%:Judging by the exponents alone
 Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -x^3 + 1$, while $-f(x) = -x^3 - 1$. The constant does not change sign, so $f$ is neither even nor odd.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-judging-by-the-exponents-alone)]@`,
         ],
       },
       {
@@ -3509,11 +3516,38 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="function-property-formula-summary"
+            title="Function property conditions"
+            source="/functions/properties"
+            related={{ href: '/functions/formulas', label: 'All function formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj20.title,
         link:sectionsContent.obj20.link,
         content:[
           sectionsContent.obj20.content,
+          <DiagramFrame
+            key={'obj20-mistakes'}
+            id="function-property-pitfalls"
+            title="Common pitfalls with the properties of functions"
+            source="/functions/properties"
+            after={sectionsContent.obj20.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

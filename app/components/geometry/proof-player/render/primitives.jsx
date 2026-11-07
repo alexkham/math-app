@@ -112,11 +112,12 @@ export function Circle({ o, hl }) {
   );
 }
 
-// at / from / to — draws the smaller angle between the two rays
+// at / from / to — draws the smaller angle between the two rays; an optional
+// `radius` fixes the arc size (for nested angles at one vertex)
 export function Angle({ o, hl, ctx }) {
   const [v, p1, p2] = o.pts;
   const { a1, d } = angleGeom(v, p1, p2);
-  const r = Math.max(14, Math.min(34, 0.3 * Math.min(dist(v, p1), dist(v, p2))));
+  const r = o.radius || Math.max(14, Math.min(34, 0.3 * Math.min(dist(v, p1), dist(v, p2))));
   const x1 = v.x + r * Math.cos(a1);
   const y1 = v.y + r * Math.sin(a1);
   const x2 = v.x + r * Math.cos(a1 + d);

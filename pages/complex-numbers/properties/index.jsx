@@ -1351,6 +1351,7 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -2019,7 +2020,7 @@ The multiplicative inverse is $z^{-1} = \\frac{\\overline{z}}{|z|^2}$.
 
 @academic[pitfall,aside:true,width:35%:Dividing by the modulus instead of its square
 For $z = 1 + i$, taking $z^{-1} = \\frac{1 - i}{\\sqrt{2}}$ divides by $|z|$, and then $(1 + i) \\cdot \\frac{1 - i}{\\sqrt{2}} = \\sqrt{2}$, not $1$. Dividing by $|z|^2 = 2$ gives $z^{-1} = \\frac{1 - i}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-modulus-instead-of-its-square)]@
 
 The conjugate in the numerator is what makes the formula work. Multiplying $z$ by $\\overline{z}$ produces the real number $|z|^2$, so the product $z \\cdot z^{-1}$ becomes $\\frac{z \\cdot \\overline{z}}{|z|^2}$, a real number divided by itself. The inverse is found without solving any equation, only by conjugating and scaling.
 
@@ -2102,7 +2103,7 @@ $$z \\cdot \\overline{z} = |z|^2$$]@
 
 @academic[pitfall,aside:true,width:35%:Forgetting that i squared is −1
 Expanding $(2 + 3i)(2 - 3i)$ to $4 - 9 = -5$ takes $(3i)^2$ to be $9$. In fact $(3i)^2 = 9i^2 = -9$, so the product is $4 - (-9) = 13 = |2 + 3i|^2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-that-i-squared-is-1)]@
 
 A complex number multiplied by its conjugate yields the square of its [modulus](!/complex-numbers/absolute-value) — always a non-negative real number. This property is essential for [division](!/complex-numbers/operations) of complex numbers.`,
   before: ``,
@@ -2175,7 +2176,7 @@ $$|z_1 + z_2| \\leq |z_1| + |z_2|$$
 
 @academic[pitfall,aside:true,width:35%:Adding the moduli of a sum
 Writing $|3 + 4i| = |3| + |4i| = 7$ treats the triangle inequality as an equality. The modulus of the sum is $\\sqrt{3^2 + 4^2} = 5$, which is less than $7$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-moduli-of-a-sum)]@
 
 The distance from the origin to $z_1 + z_2$ never exceeds the sum of individual distances. Geometrically, one side of a triangle cannot exceed the sum of the other two sides.
 
@@ -2209,7 +2210,7 @@ $$\\arg(z_1 \\cdot z_2) = \\arg(z_1) + \\arg(z_2)$$
 
 @academic[pitfall,aside:true,width:35%:Leaving the sum outside the principal range
 Adding $\\text{Arg}(-1) = \\pi$ and $\\text{Arg}(i) = \\frac{\\pi}{2}$ gives $\\frac{3\\pi}{2}$ for the product $-i$, outside $(-\\pi, \\pi]$. Subtracting $2\\pi$ gives the principal value $\\text{Arg}(-i) = -\\frac{\\pi}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-the-sum-outside-the-principal-range)]@
 
 Multiplying complex numbers adds their arguments. Geometrically, multiplication rotates by the sum of the angles.
 
@@ -2405,69 +2406,9 @@ Although $z_1 < z_2$ is meaningless for complex numbers, we can compare their [m
     },
     obj16:{
       title:`Common Pitfalls`,
-      content:`Five mistakes come up again and again when these properties are put to work. Four are marked where they happen in the sections above; the square-root rule is the one the field section already warns about. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying square roots of negative numbers**
-
-The real rule $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$ is carried over to negative numbers, whose square roots are imaginary. The two minus signs under the roots are multiplied away before the roots are taken.
-
-Wrong working: $\\sqrt{-4} \\cdot \\sqrt{-9} = \\sqrt{(-4)(-9)} = \\sqrt{36} = 6$.
-
-Right working: take each root first, $\\sqrt{-4} = 2i$ and $\\sqrt{-9} = 3i$, then multiply: $2i \\cdot 3i = 6i^2 = -6$.
-
-Why it happens: the rule holds for every pair of non-negative reals, so it feels like a general rule of arithmetic. It depends on real square roots and is not one of the field axioms.
-
-How to check: write every square root of a negative number as a multiple of $i$ before doing anything else; the factor $i \\cdot i = -1$ then appears on its own.
-
-**Dividing by the modulus instead of its square**
-
-The inverse formula $z^{-1} = \\frac{\\overline{z}}{|z|^2}$ is copied with $|z|$ in the denominator instead of $|z|^2$.
-
-Wrong working: for $z = 1 + i$, $|z| = \\sqrt{2}$, so $z^{-1} = \\frac{1 - i}{\\sqrt{2}}$. Then $(1 + i) \\cdot \\frac{1 - i}{\\sqrt{2}} = \\frac{2}{\\sqrt{2}} = \\sqrt{2}$.
-
-Right working: $|z|^2 = 1^2 + 1^2 = 2$, so $z^{-1} = \\frac{1 - i}{2} = \\frac{1}{2} - \\frac{1}{2}i$. Check: $(1 + i) \\cdot \\frac{1 - i}{2} = \\frac{1 - i^2}{2} = \\frac{2}{2} = 1$.
-
-Why it happens: the modulus and its square look alike, and dividing $z$ by $|z|$ is a familiar step, the one that gives a number of length $1$ in the same direction.
-
-How to check: multiply $z$ by the proposed inverse. The product must be exactly $1$; a result equal to $|z|$, here $\\sqrt{2}$, shows that one factor of $|z|$ is missing.
-
-**Forgetting that i squared is −1**
-
-In $z \\cdot \\overline{z} = (a + bi)(a - bi)$, the difference-of-squares pattern gives $a^2 - (bi)^2$, and $(bi)^2$ is then taken to be $b^2$.
-
-Wrong working: $(2 + 3i)(2 - 3i) = 4 - 9 = -5$.
-
-Right working: $(2 + 3i)(2 - 3i) = 4 - (3i)^2 = 4 - 9i^2 = 4 + 9 = 13$. Since $|2 + 3i| = \\sqrt{4 + 9} = \\sqrt{13}$, this is $|2 + 3i|^2 = 13$, as the identity requires.
-
-Why it happens: the real pattern $(x + y)(x - y) = x^2 - y^2$ is applied with $y = 3$ instead of $y = 3i$.
-
-How to check: $z \\cdot \\overline{z}$ is never negative. A negative result such as $-5$ shows the slip at once; the answer must equal $a^2 + b^2$.
-
-**Adding the moduli of a sum**
-
-The modulus of a sum is replaced by the sum of the moduli, as if the triangle inequality were an equation. It only says that $|z_1 + z_2|$ is at most $|z_1| + |z_2|$.
-
-Wrong working: $|3 + 4i| = |3| + |4i| = 3 + 4 = 7$.
-
-Right working: $|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. The sum of the moduli, $7$, is only an upper bound.
-
-Why it happens: the conjugate passes through sums and the modulus passes through products, so it is tempting to expect the modulus to pass through sums as well.
-
-How to check: picture the two numbers as arrows. Unless they point in the same direction, the arrow of the sum is shorter than the two arrows laid end to end. Here $3$ points right and $4i$ points up, so the result must be less than $7$.
-
-**Leaving the sum outside the principal range**
-
-The rule $\\arg(z_1 z_2) = \\arg(z_1) + \\arg(z_2)$ is applied to principal arguments, and the sum is reported as the principal argument of the product even when it falls outside the interval $(-\\pi, \\pi]$.
-
-Wrong working: $\\text{Arg}(-1) = \\pi$ and $\\text{Arg}(i) = \\frac{\\pi}{2}$, so $\\text{Arg}((-1) \\cdot i) = \\frac{3\\pi}{2}$.
-
-Right working: the sum $\\frac{3\\pi}{2}$ is a valid argument of $-i$, but it lies outside $(-\\pi, \\pi]$. Subtracting $2\\pi$ gives $\\text{Arg}(-i) = \\frac{3\\pi}{2} - 2\\pi = -\\frac{\\pi}{2}$.
-
-Why it happens: the rule holds for $\\arg$, which allows any multiple of $2\\pi$, while $\\text{Arg}$ must land in one fixed interval.
-
-How to check: compute the product, here $-i$, and locate it. It lies on the negative imaginary axis, where the principal argument is $-\\frac{\\pi}{2}$.`,
+      content:`Five mistakes come up again and again when these properties are put to work. Four are marked where they happen in the sections above; the square-root rule is the one the field section already warns about. Here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip applies a rule outside the place where it holds. $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$ fails for two negative numbers, the inverse divides by $|z|^2$, $z\\bar{z} = a^2 + b^2$ because $i^2 = -1$, the modulus of a sum is at most the sum of the moduli, and a sum of principal arguments may need $2\\pi$ subtracted. Multiplying back, or locating the product on the plane, catches each slip.`,
       link:'',
     },
   
@@ -2688,8 +2629,46 @@ const schemas = {
     footnote: 'Argument laws hold modulo $2\\pi$; with the principal value $\\text{Arg}$, a result may need $2\\pi$ added or subtracted to stay in $(-\\pi, \\pi]$.',
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-square-roots-of-negative-numbers', name: `Multiplying square roots of negative numbers`, errorAt: 0,
+        what: `The real rule $\\sqrt{a}\\sqrt{b} = \\sqrt{ab}$ is carried over to negative numbers, whose square roots are imaginary. The two minus signs under the roots are multiplied away before the roots are taken.`,
+        wrong: [`$\\sqrt{-4} \\cdot \\sqrt{-9} = \\sqrt{(-4)(-9)} = \\sqrt{36} = 6$.`],
+        right: [`Take each root first, $\\sqrt{-4} = 2i$ and $\\sqrt{-9} = 3i$, then multiply: $2i \\cdot 3i = 6i^2 = -6$.`],
+        why: `The rule holds for every pair of non-negative reals, so it feels like a general rule of arithmetic. It depends on real square roots and is not one of the field axioms.`,
+        check: `Write every square root of a negative number as a multiple of $i$ before doing anything else; the factor $i \\cdot i = -1$ then appears on its own.` },
+      { id: 'dividing-by-the-modulus-instead-of-its-square', name: `Dividing by the modulus instead of its square`, errorAt: 1,
+        what: `The inverse formula $z^{-1} = \\frac{\\overline{z}}{|z|^2}$ is copied with $|z|$ in the denominator instead of $|z|^2$.`,
+        wrong: [`For $z = 1 + i$, $|z| = \\sqrt{2}$,`, `So $z^{-1} = \\frac{1 - i}{\\sqrt{2}}$. Then $(1 + i) \\cdot \\frac{1 - i}{\\sqrt{2}} = \\frac{2}{\\sqrt{2}} = \\sqrt{2}$.`],
+        right: [`For $z = 1 + i$, $|z| = \\sqrt{2}$,`, `$|z|^2 = 1^2 + 1^2 = 2$, so $z^{-1} = \\frac{1 - i}{2} = \\frac{1}{2} - \\frac{1}{2}i$. Check: $(1 + i) \\cdot \\frac{1 - i}{2} = \\frac{1 - i^2}{2} = \\frac{2}{2} = 1$.`],
+        why: `The modulus and its square look alike, and dividing $z$ by $|z|$ is a familiar step, the one that gives a number of length $1$ in the same direction.`,
+        check: `Multiply $z$ by the proposed inverse. The product must be exactly $1$; a result equal to $|z|$, here $\\sqrt{2}$, shows that one factor of $|z|$ is missing.` },
+      { id: 'forgetting-that-i-squared-is-1', name: `Forgetting that i squared is −1`, errorAt: 0,
+        what: `In $z \\cdot \\overline{z} = (a + bi)(a - bi)$, the difference-of-squares pattern gives $a^2 - (bi)^2$, and $(bi)^2$ is then taken to be $b^2$.`,
+        wrong: [`$(2 + 3i)(2 - 3i) = 4 - 9 = -5$.`],
+        right: [`$(2 + 3i)(2 - 3i) = 4 - (3i)^2 = 4 - 9i^2 = 4 + 9 = 13$. Since $|2 + 3i| = \\sqrt{4 + 9} = \\sqrt{13}$, this is $|2 + 3i|^2 = 13$, as the identity requires.`],
+        why: `The real pattern $(x + y)(x - y) = x^2 - y^2$ is applied with $y = 3$ instead of $y = 3i$.`,
+        check: `$z \\cdot \\overline{z}$ is never negative. A negative result such as $-5$ shows the slip at once; the answer must equal $a^2 + b^2$.` },
+      { id: 'adding-the-moduli-of-a-sum', name: `Adding the moduli of a sum`, errorAt: 0,
+        what: `The modulus of a sum is replaced by the sum of the moduli, as if the triangle inequality were an equation. It only says that $|z_1 + z_2|$ is at most $|z_1| + |z_2|$.`,
+        wrong: [`$|3 + 4i| = |3| + |4i| = 3 + 4 = 7$.`],
+        right: [`$|3 + 4i| = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. The sum of the moduli, $7$, is only an upper bound.`],
+        why: `The conjugate passes through sums and the modulus passes through products, so it is tempting to expect the modulus to pass through sums as well.`,
+        check: `Picture the two numbers as arrows. Unless they point in the same direction, the arrow of the sum is shorter than the two arrows laid end to end. Here $3$ points right and $4i$ points up, so the result must be less than $7$.` },
+      { id: 'leaving-the-sum-outside-the-principal-range', name: `Leaving the sum outside the principal range`, errorAt: 0,
+        what: `The rule $\\arg(z_1 z_2) = \\arg(z_1) + \\arg(z_2)$ is applied to principal arguments, and the sum is reported as the principal argument of the product even when it falls outside the interval $(-\\pi, \\pi]$.`,
+        wrong: [`$\\text{Arg}(-1) = \\pi$ and $\\text{Arg}(i) = \\frac{\\pi}{2}$, so $\\text{Arg}((-1) \\cdot i) = \\frac{3\\pi}{2}$.`],
+        right: [`The sum $\\frac{3\\pi}{2}$ is a valid argument of $-i$, but it lies outside $(-\\pi, \\pi]$. Subtracting $2\\pi$ gives $\\text{Arg}(-i) = \\frac{3\\pi}{2} - 2\\pi = -\\frac{\\pi}{2}$.`],
+        why: `The rule holds for $\\arg$, which allows any multiple of $2\\pi$, while $\\text{Arg}$ must land in one fixed interval.`,
+        check: `Compute the product, here $-i$, and locate it. It lies on the negative imaginary axis, where the principal argument is $-\\frac{\\pi}{2}$.` },
+    ],
+  };
+
   return {
   props:{
+    pitfallData,
     complexOperationProperties,
     complexPropertyTree,
     demoUnits,
@@ -2713,7 +2692,7 @@ const schemas = {
    }
 
 
-export default function PropertiesPage({complexOperationProperties, complexPropertyTree, 
+export default function PropertiesPage({ pitfallData,complexOperationProperties, complexPropertyTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -2920,6 +2899,15 @@ export default function PropertiesPage({complexOperationProperties, complexPrope
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="complex-property-pitfalls"
+            title="Common pitfalls with the properties of complex numbers"
+            source="/complex-numbers/properties"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

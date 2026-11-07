@@ -1043,11 +1043,13 @@ import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFuncti
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1603,7 +1605,7 @@ Examples:
 
 @academic[pitfall,aside:true,width:35%:Multiplying the period by B
 Treating $B$ as a stretch factor gives $y = \\sin(3x)$ a period of $3 \\cdot 2\\pi = 6\\pi$. A larger $B$ makes the cycle shorter: $T = \\frac{2\\pi}{3}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-the-period-by-b)]@
 
 The period is arguably the most important parameter for applications. When modeling a real-world oscillation — a sound wave, an alternating current, a tidal cycle — the period (or its reciprocal, the frequency) is typically the first quantity determined from data. The coefficient $B$ is then computed from $B = \\frac{2\\pi}{T}$.`,
     before: ``,
@@ -1623,7 +1625,7 @@ It is important to factor correctly. The expression $y = \\sin(2x - \\pi)$ has $
 
 @academic[pitfall,aside:true,width:35%:Shifting the wrong way
 Reading the plus sign in $y = \\sin\\left(x + \\frac{\\pi}{3}\\right)$ as a move to the right starts the cycle at $x = \\frac{\\pi}{3}$. Setting $x + \\frac{\\pi}{3} = 0$ gives $x = -\\frac{\\pi}{3}$: the graph moves $\\frac{\\pi}{3}$ to the left.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-shifting-the-wrong-way)]@
 
 Phase shift is particularly important in the relationship between sine and cosine. The identity $\\cos(x) = \\sin(x + \\frac{\\pi}{2})$ means the cosine graph is the sine graph shifted $\\frac{\\pi}{2}$ to the left. Conversely, $\\sin(x) = \\cos(x - \\frac{\\pi}{2})$ — sine is cosine shifted $\\frac{\\pi}{2}$ to the right. When writing the equation of a graph, the choice between sine and cosine often reduces to which starting point — zero crossing or maximum — aligns more naturally with the given graph, and the phase shift accounts for any remaining displacement.
 
@@ -1655,7 +1657,7 @@ $$|A| = \\frac{\\text{max} - \\text{min}}{2}$$]@
 
 @academic[pitfall,aside:true,width:35%:Measuring the amplitude from the x-axis
 For $y = \\sin(x) + 3$, the peak height $4$ is taken as the amplitude. Amplitude is measured from the midline $y = 3$: $|A| = \\frac{4 - 2}{2} = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-measuring-the-amplitude-from-the-x-axis)]@
 
 These two readings — midline and amplitude — are usually the first step in determining the equation of a sinusoidal graph. The period is read next (the horizontal distance for one full cycle), and the phase shift is determined last by identifying where a standard cycle begins relative to the $y$-axis.`,
     before: ``,
@@ -1714,7 +1716,7 @@ These two readings — midline and amplitude — are usually the first step in d
 
 @academic[pitfall,aside:true,width:35%:Reading half a cycle as the period
 A graph with a maximum at $x = 0$ and the next minimum at $x = \\frac{\\pi}{2}$ is given period $\\frac{\\pi}{2}$ and $B = 4$. Peak to trough is half a cycle: the period is $\\pi$ and $B = \\frac{2\\pi}{\\pi} = 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-half-a-cycle-as-the-period)]@
 
 The result is not unique. The equation $y = 3\\sin(2x - \\frac{\\pi}{2}) + 1$ and $y = 3\\cos(2x - \\pi) + 1$ could describe the same graph with different phase shifts. Any correct equation that matches all four parameters — amplitude, period, phase, and midline — is valid.`,
     before: ``,
@@ -1743,7 +1745,7 @@ To graph a transformed function like $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\fra
 
 @academic[pitfall,aside:true,width:35%:Starting the cycle at zero
 Placing the key points at $x = 0, \\frac{3}{2}, 3, \\frac{9}{2}, 6$ puts the midline value $1$ at $x = 0$, but $y(0) = -2\\sin\\left(-\\frac{\\pi}{6}\\right) + 1 = 2$. The cycle starts at the phase shift, $x = \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-starting-the-cycle-at-zero)]@
 
 This method produces an accurate sketch without a calculator or graphing software. It works for any sinusoidal function, regardless of how many transformations are applied, because the key-point structure is invariant — only the locations and heights of the five points change.`,
     before: ``,
@@ -1788,71 +1790,21 @@ This method produces an accurate sketch without a calculator or graphing softwar
 
     },
 
+    formulaSummary:{
+      title:`Formula Summary`,
+      content:`This summary gathers the formulas for the graphs of sine and cosine on one set of cards. Each card gives the name, the formula, a note on what it does and a link to its section; two of them also carry an example from the page.
+
+The first card is the general sinusoidal form, whose four numbers set the amplitude, the period, the phase shift and the midline. The next cards take those one at a time: the period for sine and cosine and for tangent and cotangent, the phase shift, and the midline and amplitude read off a graph. The last card shows the cosine curve as the sine curve moved a quarter of a cycle to the left.`,
+      before:``,
+      after:`Together the cards turn a graph into its equation and back. The highest and lowest values give the midline and the amplitude, the length of one cycle gives the period, and the point where a cycle starts gives the phase shift.`,
+      link:'',
+    },
+
     obj16:{
       title:`Common Pitfalls`,
-      content:`Five mistakes come up again and again when reading and drawing the graphs of $y = A\\sin(Bx - C) + D$. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Multiplying the period by B**
-
-The coefficient $B$ is treated like $A$, as a stretch factor: the basic period $2\\pi$ is multiplied by $B$ instead of divided by it. A larger $B$ then seems to give a longer cycle, when it gives a shorter one.
-
-Wrong working: for $y = \\sin(3x)$, the period is computed as $3 \\cdot 2\\pi = 6\\pi$, and one cycle is drawn over $[0, 6\\pi]$.
-
-Right working: $T = \\frac{2\\pi}{|B|} = \\frac{2\\pi}{3}$. The argument $3x$ runs through a full $2\\pi$ while $x$ runs from $0$ to $\\frac{2\\pi}{3}$, so three cycles fit in $[0, 2\\pi]$.
-
-Why it happens: outside the function, a factor of $3$ makes the graph three times taller, so a factor of $3$ inside seems to make it three times wider. A factor on the input works the other way: the input reaches each value three times sooner.
-
-How to check: find where the argument equals $2\\pi$. From $3x = 2\\pi$, $x = \\frac{2\\pi}{3}$, and that is where the first cycle ends.
-
-**Shifting the wrong way**
-
-The sign inside the brackets is read as the direction of the shift: a plus sign as a move to the right, a minus sign as a move to the left. The graph actually moves the opposite way.
-
-Wrong working: $y = \\sin\\left(x + \\frac{\\pi}{3}\\right)$ is drawn as the sine curve moved $\\frac{\\pi}{3}$ to the right, with the cycle starting at $x = \\frac{\\pi}{3}$.
-
-Right working: in the form $A\\sin(Bx - C) + D$, $x + \\frac{\\pi}{3} = x - \\left(-\\frac{\\pi}{3}\\right)$, so $B = 1$, $C = -\\frac{\\pi}{3}$, and the phase shift is $\\frac{C}{B} = -\\frac{\\pi}{3}$. Setting $x + \\frac{\\pi}{3} = 0$ gives the same start, $x = -\\frac{\\pi}{3}$: the graph moves $\\frac{\\pi}{3}$ to the left.
-
-Why it happens: on a number line a plus sign means moving right. Inside the function the $\\frac{\\pi}{3}$ is added to the input, so every output is reached $\\frac{\\pi}{3}$ earlier, which on the graph is further left.
-
-How to check: substitute the claimed starting point. At $x = -\\frac{\\pi}{3}$ the argument is $0$, so $y = \\sin(0) = 0$ with the curve rising, the start of a standard cycle. At $x = \\frac{\\pi}{3}$, $y = \\sin\\left(\\frac{2\\pi}{3}\\right) = \\frac{\\sqrt{3}}{2}$, which is not.
-
-**Measuring the amplitude from the x-axis**
-
-The amplitude is read as the height of the peak above the $x$-axis. The two agree only when the midline is $y = 0$; after a vertical shift they differ.
-
-Wrong working: $y = \\sin(x) + 3$ peaks at $y = 4$, so the amplitude is given as $4$.
-
-Right working: the graph runs between $2$ and $4$. The midline is $D = \\frac{4 + 2}{2} = 3$ and the amplitude is $|A| = \\frac{4 - 2}{2} = 1$, which matches $A = 1$ in the equation.
-
-Why it happens: the first graphs of sine and cosine have midline $y = 0$, where the peak height and the amplitude are the same number, and the habit carries over to shifted graphs.
-
-How to check: the maximum must equal $D + |A|$. With $D = 3$ and an amplitude of $4$, the maximum would be $7$, not $4$.
-
-**Reading half a cycle as the period**
-
-The period is read as the distance from a maximum to the next minimum. That distance covers only half a cycle; a full cycle runs from a maximum to the next maximum.
-
-Wrong working: a graph has a maximum at $x = 0$ and the next minimum at $x = \\frac{\\pi}{2}$. The period is taken as $\\frac{\\pi}{2}$, giving $B = \\frac{2\\pi}{\\pi/2} = 4$.
-
-Right working: the next maximum comes another $\\frac{\\pi}{2}$ further on, at $x = \\pi$, so the period is $\\pi$ and $B = \\frac{2\\pi}{\\pi} = 2$.
-
-Why it happens: the maximum and the minimum are the most visible points, and they have already been read in Steps 1 and 2, so measuring between them seems natural.
-
-How to check: the period is the distance between two matching points: peak to peak, trough to trough, or two rising midline crossings. Between a peak and a trough there is only half of it.
-
-**Starting the cycle at zero**
-
-The five key points are placed from $x = 0$, as for the untransformed function, and the phase shift is never used. The shape comes out right, but the whole curve sits in the wrong place.
-
-Wrong working: for $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\frac{\\pi}{6}\\right) + 1$, with period $6$, the key points are placed at $x = 0, \\frac{3}{2}, 3, \\frac{9}{2}, 6$ with heights $1, -1, 1, 3, 1$.
-
-Right working: the cycle begins where the argument is zero: $\\frac{\\pi}{3}x - \\frac{\\pi}{6} = 0$ gives $x = \\frac{1}{2}$. The key points are $x = \\frac{1}{2}, 2, \\frac{7}{2}, 5, \\frac{13}{2}$, with the same heights $1, -1, 1, 3, 1$.
-
-Why it happens: the key points of $y = \\sin(x)$ start at the origin, and that picture is remembered as the starting place for every sine graph.
-
-How to check: substitute the first key point into the equation. At $x = 0$, $y = -2\\sin\\left(-\\frac{\\pi}{6}\\right) + 1 = 2$, not the midline value $1$; at $x = \\frac{1}{2}$, $y = -2\\sin(0) + 1 = 1$.`,
+      content:`Five mistakes come up again and again when reading and drawing the graphs of $y = A\\sin(Bx - C) + D$. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip misreads one parameter of $y = A\\sin(Bx - C) + D$. The period is $\\frac{2\\pi}{|B|}$, the phase shift $\\frac{C}{B}$ moves $\\sin\\left(x + \\frac{\\pi}{3}\\right)$ to the left, the amplitude is measured from the midline $D$, a peak and the next trough are only half a period apart, and a cycle starts where the argument is zero. Substituting the claimed key points into the equation catches each slip.`,
       link:'',
     },
 
@@ -2251,8 +2203,68 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     ],
   };
 
+  // MistakeFix batch 9, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj16 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'multiplying-the-period-by-b', name: `Multiplying the period by B`, errorAt: 1,
+        what: `The coefficient $B$ is treated like $A$, as a stretch factor: the basic period $2\\pi$ is multiplied by $B$ instead of divided by it. A larger $B$ then seems to give a longer cycle, when it gives a shorter one.`,
+        wrong: [`For $y = \\sin(3x)$,`, `The period is computed as $3 \\cdot 2\\pi = 6\\pi$, and one cycle is drawn over $[0, 6\\pi]$.`],
+        right: [`For $y = \\sin(3x)$,`, `$T = \\frac{2\\pi}{|B|} = \\frac{2\\pi}{3}$. The argument $3x$ runs through a full $2\\pi$ while $x$ runs from $0$ to $\\frac{2\\pi}{3}$, so three cycles fit in $[0, 2\\pi]$.`],
+        why: `Outside the function, a factor of $3$ makes the graph three times taller, so a factor of $3$ inside seems to make it three times wider. A factor on the input works the other way: the input reaches each value three times sooner.`,
+        check: `Find where the argument equals $2\\pi$. From $3x = 2\\pi$, $x = \\frac{2\\pi}{3}$, and that is where the first cycle ends.` },
+      { id: 'shifting-the-wrong-way', name: `Shifting the wrong way`, errorAt: 0,
+        what: `The sign inside the brackets is read as the direction of the shift: a plus sign as a move to the right, a minus sign as a move to the left. The graph actually moves the opposite way.`,
+        wrong: [`$y = \\sin\\left(x + \\frac{\\pi}{3}\\right)$ is drawn as the sine curve moved $\\frac{\\pi}{3}$ to the right, with the cycle starting at $x = \\frac{\\pi}{3}$.`],
+        right: [`In the form $A\\sin(Bx - C) + D$, $x + \\frac{\\pi}{3} = x - \\left(-\\frac{\\pi}{3}\\right)$, so $B = 1$, $C = -\\frac{\\pi}{3}$, and the phase shift is $\\frac{C}{B} = -\\frac{\\pi}{3}$. Setting $x + \\frac{\\pi}{3} = 0$ gives the same start, $x = -\\frac{\\pi}{3}$: the graph moves $\\frac{\\pi}{3}$ to the left.`],
+        why: `On a number line a plus sign means moving right. Inside the function the $\\frac{\\pi}{3}$ is added to the input, so every output is reached $\\frac{\\pi}{3}$ earlier, which on the graph is further left.`,
+        check: `Substitute the claimed starting point. At $x = -\\frac{\\pi}{3}$ the argument is $0$, so $y = \\sin(0) = 0$ with the curve rising, the start of a standard cycle. At $x = \\frac{\\pi}{3}$, $y = \\sin\\left(\\frac{2\\pi}{3}\\right) = \\frac{\\sqrt{3}}{2}$, which is not.` },
+      { id: 'measuring-the-amplitude-from-the-x-axis', name: `Measuring the amplitude from the x-axis`, errorAt: 0,
+        what: `The amplitude is read as the height of the peak above the $x$-axis. The two agree only when the midline is $y = 0$; after a vertical shift they differ.`,
+        wrong: [`$y = \\sin(x) + 3$ peaks at $y = 4$, so the amplitude is given as $4$.`],
+        right: [`The graph runs between $2$ and $4$. The midline is $D = \\frac{4 + 2}{2} = 3$ and the amplitude is $|A| = \\frac{4 - 2}{2} = 1$, which matches $A = 1$ in the equation.`],
+        why: `The first graphs of sine and cosine have midline $y = 0$, where the peak height and the amplitude are the same number, and the habit carries over to shifted graphs.`,
+        check: `The maximum must equal $D + |A|$. With $D = 3$ and an amplitude of $4$, the maximum would be $7$, not $4$.` },
+      { id: 'reading-half-a-cycle-as-the-period', name: `Reading half a cycle as the period`, errorAt: 1,
+        what: `The period is read as the distance from a maximum to the next minimum. That distance covers only half a cycle; a full cycle runs from a maximum to the next maximum.`,
+        wrong: [`A graph has a maximum at $x = 0$ and the next minimum at $x = \\frac{\\pi}{2}$.`, `The period is taken as $\\frac{\\pi}{2}$, giving $B = \\frac{2\\pi}{\\pi/2} = 4$.`],
+        right: [`A graph has a maximum at $x = 0$ and the next minimum at $x = \\frac{\\pi}{2}$.`, `The next maximum comes another $\\frac{\\pi}{2}$ further on, at $x = \\pi$, so the period is $\\pi$ and $B = \\frac{2\\pi}{\\pi} = 2$.`],
+        why: `The maximum and the minimum are the most visible points, and they have already been read in Steps 1 and 2, so measuring between them seems natural.`,
+        check: `The period is the distance between two matching points: peak to peak, trough to trough, or two rising midline crossings. Between a peak and a trough there is only half of it.` },
+      { id: 'starting-the-cycle-at-zero', name: `Starting the cycle at zero`, errorAt: 1,
+        what: `The five key points are placed from $x = 0$, as for the untransformed function, and the phase shift is never used. The shape comes out right, but the whole curve sits in the wrong place.`,
+        wrong: [`For $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\frac{\\pi}{6}\\right) + 1$,`, `With period $6$, the key points are placed at $x = 0, \\frac{3}{2}, 3, \\frac{9}{2}, 6$ with heights $1, -1, 1, 3, 1$.`],
+        right: [`For $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\frac{\\pi}{6}\\right) + 1$,`, `The cycle begins where the argument is zero: $\\frac{\\pi}{3}x - \\frac{\\pi}{6} = 0$ gives $x = \\frac{1}{2}$. The key points are $x = \\frac{1}{2}, 2, \\frac{7}{2}, 5, \\frac{13}{2}$, with the same heights $1, -1, 1, 3, 1$.`],
+        why: `The key points of $y = \\sin(x)$ start at the origin, and that picture is remembered as the starting place for every sine graph.`,
+        check: `Substitute the first key point into the equation. At $x = 0$, $y = -2\\sin\\left(-\\frac{\\pi}{6}\\right) + 1 = 2$, not the midline value $1$; at $x = \\frac{1}{2}$, $y = -2\\sin(0) + 1 = 1$.` },
+    ],
+  };
+
+  // FormulaSheet pilot 2026-11-05: the page's own formula boxes, unchanged, as tiles.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'General sinusoidal form', formula: '$y = A\\sin(Bx - C) + D$',
+        text: 'Every transformed sine curve has this shape: $A$ sets the amplitude, $B$ the period, $C$ the phase shift and $D$ the midline, as [the general sinusoidal form](!#5) explains.' },
+      { name: 'Period of sine and cosine', formula: '$\\displaystyle T = \\frac{2\\pi}{|B|}$',
+        text: 'The length of one cycle, also for cosecant and secant. In [the period section](!#7), a larger $|B|$ squeezes more cycles into the same interval.' },
+      { name: 'Period of tangent and cotangent', formula: '$\\displaystyle T = \\frac{\\pi}{|B|}$',
+        text: 'Their basic cycle is $\\pi$ instead of $2\\pi$, so [the same rule](!#7) divides $\\pi$ by $|B|$.' },
+      { name: 'Phase shift', formula: '$\\displaystyle \\text{phase shift} = \\frac{C}{B}$', example: '$y = \\sin(2x - \\pi)$: $\\frac{\\pi}{2}$ to the right',
+        text: 'A positive shift moves the graph right and a negative one moves it left; [the phase shift section](!#8) shows why $B$ must be factored out first.' },
+      { name: 'Midline', formula: '$\\displaystyle D = \\frac{\\text{max} + \\text{min}}{2}$', example: '$y = \\sin(x) + 3$: between $2$ and $4$',
+        text: 'The horizontal line the graph oscillates around, halfway between its highest and lowest values; see [vertical shift and midline](!#9).' },
+      { name: 'Amplitude', formula: '$\\displaystyle |A| = \\frac{\\text{max} - \\text{min}}{2}$',
+        text: 'Half the distance from the lowest to the highest value, read straight off a graph in [vertical shift and midline](!#9).' },
+      { name: 'Cosine as a shifted sine', formula: '$\\displaystyle \\cos(x) = \\sin\\left(x + \\frac{\\pi}{2}\\right)$',
+        text: 'The cosine curve is the sine curve moved $\\frac{\\pi}{2}$ to the left, a quarter of a cycle, as [the graph of the cosine function](!#2) shows.' },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
+    formulaSummaryData,
     phaseShiftBeforeAfter,
     tangentProfile,
     cosineProfile,
@@ -2281,7 +2293,7 @@ Beyond recognition, the central skill is transformation. The general sinusoidal 
     }
    }
 
-export default function GraphsPage({phaseShiftBeforeAfter, tangentProfile, cosineProfile, sineProfile, sineKeyPointProfile, reciprocalGraphTree, seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function GraphsPage({ pitfallData,formulaSummaryData,phaseShiftBeforeAfter, tangentProfile, cosineProfile, sineProfile, sineKeyPointProfile, reciprocalGraphTree, seoData,sectionsContent , introContent, obj4Table, obj9Table, obj10Table, obj11Table, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2587,11 +2599,39 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="graph-formula-summary"
+            title="Formulas for trigonometric graphs"
+            source="/trigonometry/graphs"
+            related={{ href: '/trigonometry/formulas', label: 'All trigonometry formulas' }}
+          
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'pitfalls',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'obj16-mistakes'}
+            id="trig-graph-pitfalls"
+            title="Common pitfalls with trigonometric graphs"
+            source="/trigonometry/graphs"
+            after={sectionsContent.obj16.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // {

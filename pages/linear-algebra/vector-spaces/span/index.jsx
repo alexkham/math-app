@@ -973,6 +973,7 @@ import spanMembershipDiagrams from '@/app/components/linear-algebra copy/matrix/
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1420,7 +1421,7 @@ The pattern is consistent: the dimension of the span equals the largest number o
 
 @academic[pitfall,aside:true,width:35%:Treating the count as enough
 Calling $(1, 2)$, $(2, 4)$, $(3, 6)$ a spanning set of $\\mathbb{R}^2$ because there are at least two of them ignores that all three are multiples of $(1, 2)$. Their span is the line $y = 2x$, and $(1, 0)$ is never reached.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-the-count-as-enough)]@
 
 Fewer than $n$ vectors cannot reach every direction — their span is a proper subspace of [dimension](!/linear-algebra/vector-spaces/dimension) less than $n$. A spanning set with exactly $n$ independent vectors is a [basis](!/linear-algebra/vector-spaces/basis). A spanning set with more than $n$ vectors contains redundancies that can be removed.
 
@@ -1462,7 +1463,7 @@ No contradiction. The solution is $c_1 = 5$, $c_2 = 3$, so $(5, 3, 11) = 5(1, 0,
 
 @academic[pitfall,aside:true,width:35%:Reducing without the target column
 Reducing only $A = [(1, 0, 1) \\; (0, 1, 2)]$ finds a pivot in each column, whatever $\\mathbf{b}$ is, and would put $(5, 3, 7)$ in the span. With $\\mathbf{b}$ attached the last row reads $0 = -4$, so it is not.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reducing-without-the-target-column)]@
 
 Both examples use the same two vectors, so the first two columns reduce in exactly the same way in each: pivots in rows $1$ and $2$, and zeros beneath them in row $3$. The two examples part only in the last column. Its third entry ends as $-4$ for $(5, 3, 7)$ and as $0$ for $(5, 3, 11)$, and that one entry is the whole difference between a vector outside the span and a vector inside it.`,
     before: ``,
@@ -1477,7 +1478,7 @@ Row reduce $A$. The columns span $\\mathbb{R}^n$ if and only if every row of the
 
 @academic[pitfall,aside:true,width:35%:Looking for pivots in the columns
 Saying $(1, 0)$, $(0, 1)$, $(1, 1)$ fail to span $\\mathbb{R}^2$ because column $3$ of $\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ has no pivot reads the wrong direction. Both rows have a pivot, so the set spans $\\mathbb{R}^2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-looking-for-pivots-in-the-columns)]@
 
 For the square case — $n$ vectors in $\\mathbb{R}^n$ — spanning reduces to a [determinant](!/linear-algebra/determinants) test: the columns span $\\mathbb{R}^n$ if and only if $\\det(A) \\neq 0$. This is equivalent to independence when the count matches the dimension, which is why the spanning and independence conditions coincide for sets of exactly $n$ vectors in $\\mathbb{R}^n$.
 
@@ -1518,7 +1519,7 @@ Removing redundant vectors from a spanning set one at a time, until none is left
 
 @academic[pitfall,aside:true,width:35%:Using the echelon columns as the basis
 For $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$ the pivot columns of the echelon form are $(1, 0, 0)$ and $(0, 1, 0)$, which span the plane $z = 0$ and miss $(1, 0, 1)$. The basis is the original pair $(1, 0, 1)$, $(0, 1, 2)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-echelon-columns-as-the-basis)]@
 
 For example, if four vectors in $\\mathbb{R}^3$ are given and row reduction reveals pivots in columns $1$, $2$, and $4$, then the original first, second, and fourth vectors form a basis for the span. The third vector is a combination of the first two.
 
@@ -1553,67 +1554,9 @@ In abstract spaces, the column-matrix approach is unavailable. Testing whether a
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong answers to span questions. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating the count as enough**
-
-A set with at least $n$ vectors is taken to span $\\mathbb{R}^n$ without any further check. The count is needed for spanning, but it does not guarantee it.
-
-Wrong working: the set $\\{(1, 2), (2, 4), (3, 6)\\}$ has three vectors in $\\mathbb{R}^2$, more than the two required, so it is called a spanning set.
-
-Right working: $(2, 4) = 2(1, 2)$ and $(3, 6) = 3(1, 2)$, so every combination is a multiple of $(1, 2)$:
-$$c_1(1, 2) + c_2(2, 4) + c_3(3, 6) = (c_1 + 2c_2 + 3c_3)(1, 2)$$
-The span is the line $y = 2x$. Testing $\\mathbf{b} = (1, 0)$ shows the gap:
-$$\\left(\\begin{array}{ccc|c} 1 & 2 & 3 & 1 \\\\ 2 & 4 & 6 & 0 \\end{array}\\right) \\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{ccc|c} 1 & 2 & 3 & 1 \\\\ 0 & 0 & 0 & -2 \\end{array}\\right)$$
-The last row reads $0 = -2$, so $(1, 0)$ is not in the span, and the set does not span $\\mathbb{R}^2$.
-
-Why it happens: the rule says a spanning set of $\\mathbb{R}^n$ needs at least $n$ vectors. Read backwards, it turns into "$n$ vectors are enough", which is a different and false statement.
-
-How to check: row-reduce and count the rows that hold a pivot. Here the echelon form of the coefficient matrix has one pivot row out of two, so the set misses a direction.
-
-**Reducing without the target column**
-
-To decide whether $\\mathbf{b}$ is in a span, only the matrix $A$ of the given vectors is reduced. When every column of $A$ has a pivot, $\\mathbf{b}$ is declared to be in the span.
-
-Wrong working: for $\\mathbf{b} = (5, 3, 7)$ and the vectors $(1, 0, 1)$, $(0, 1, 2)$,
-$$\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 2 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 2 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$$
-Both columns have a pivot, so $(5, 3, 7)$ is called a member of the span.
-
-Right working: reduce the augmented matrix $[A \\mid \\mathbf{b}]$, as in the first example of the membership section. The same steps end in the row $[0 \\; 0 \\mid -4]$, which reads $0 = -4$. The system is inconsistent and $(5, 3, 7)$ is not in the span. Pivots in every column of $A$ only say that the two vectors are independent, and that is true whichever $\\mathbf{b}$ is tested.
-
-Why it happens: the independence test reduces $A$ alone, and the membership test looks almost the same, so the extra column is dropped.
-
-How to check: substitute the combination back. The first two rows force $c_1 = 5$ and $c_2 = 3$, and $5(1, 0, 1) + 3(0, 1, 2) = (5, 3, 11)$, not $(5, 3, 7)$.
-
-**Looking for pivots in the columns**
-
-To decide whether a set spans $\\mathbb{R}^n$, the columns of the echelon form are searched for pivots. A column without a pivot is taken to mean that the set fails to span.
-
-Wrong working: for $\\{(1, 0), (0, 1), (1, 1)\\}$ the matrix is already in echelon form,
-$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$$
-Column $3$ has no pivot, so the set is said not to span $\\mathbb{R}^2$.
-
-Right working: spanning is read from the rows. Both rows hold a pivot, so $A\\mathbf{c} = \\mathbf{b}$ is consistent for every $\\mathbf{b} = (b_1, b_2)$: with the free variable $c_3 = 0$, the solution is $c_1 = b_1$, $c_2 = b_2$. The set spans $\\mathbb{R}^2$. The pivotless column says something else: $(1, 1)$ is redundant, since $(1, 1) = (1, 0) + (0, 1)$.
-
-Why it happens: the independence test reads the columns, and both tests use the same echelon form, so the habit of checking columns carries over.
-
-How to check: count the rows that hold a pivot and compare with $n$. Or test one target directly: $(2, -3) = 2(1, 0) - 3(0, 1) + 0(1, 1)$.
-
-**Using the echelon columns as the basis**
-
-To trim a spanning set to a basis, the vectors are row-reduced and the pivot columns of the echelon form are kept as the basis. Row operations change the columns, so these are not the vectors that were given.
-
-Wrong working: for $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$,
-$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 2 & 3 \\end{pmatrix} \\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 2 & 2 \\end{pmatrix} \\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$
-The pivots are in columns $1$ and $2$, and the basis is written as $\\{(1, 0, 0), (0, 1, 0)\\}$.
-
-Right working: the pivot positions point back to the original vectors. The basis is $\\{(1, 0, 1), (0, 1, 2)\\}$, and the third vector is redundant: $(1, 1, 3) = (1, 0, 1) + (0, 1, 2)$. The span is the plane $z = x + 2y$, while $(1, 0, 0)$ and $(0, 1, 0)$ span the different plane $z = 0$.
-
-Why it happens: the echelon form is the matrix at hand once the reduction is finished. Row operations keep the relations among the columns, which is why the pivot positions are right, but they change the columns themselves.
-
-How to check: test a basis vector against the original set. Every vector in the span satisfies $z = x + 2y$, and $(1, 0, 0)$ gives $0 \\neq 1$, so it is not in the span at all.`,
+    content: `Four mistakes account for many wrong answers to span questions. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip reads the reduction the wrong way. Having $n$ vectors does not guarantee spanning $\\mathbb{R}^n$, deciding whether $\\mathbf{b}$ is in a span needs the augmented column, spanning needs a pivot in every row, and a basis of the span keeps the original vectors at the pivot positions. Counting the rows that hold a pivot, or substituting the combination back, catches each slip.`,
     link: ``,
   },
 }
@@ -1799,8 +1742,50 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 23, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-the-count-as-enough', name: `Treating the count as enough`, errorAt: 0,
+        what: `A set with at least $n$ vectors is taken to span $\\mathbb{R}^n$ without any further check. The count is needed for spanning, but it does not guarantee it.`,
+        wrong: [`The set $\\{(1, 2), (2, 4), (3, 6)\\}$ has three vectors in $\\mathbb{R}^2$, more than the two required, so it is called a spanning set.`],
+        right: [`$(2, 4) = 2(1, 2)$ and $(3, 6) = 3(1, 2)$, so every combination is a multiple of $(1, 2)$:
+$$c_1(1, 2) + c_2(2, 4)$$
+$$+ c_3(3, 6) = (c_1 + 2c_2 + 3c_3)(1, 2)$$`, `The span is the line $y = 2x$. Testing $\\mathbf{b} = (1, 0)$ shows the gap:
+$$\\left(\\begin{array}{ccc|c} 1 & 2 & 3 & 1 \\\\ 2 & 4 & 6 & 0 \\end{array}\\right)$$
+$$\\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{ccc|c} 1 & 2 & 3 & 1 \\\\ 0 & 0 & 0 & -2 \\end{array}\\right)$$`, `The last row reads $0 = -2$, so $(1, 0)$ is not in the span, and the set does not span $\\mathbb{R}^2$.`],
+        why: `The rule says a spanning set of $\\mathbb{R}^n$ needs at least $n$ vectors. Read backwards, it turns into "$n$ vectors are enough", which is a different and false statement.`,
+        check: `Row-reduce and count the rows that hold a pivot. Here the echelon form of the coefficient matrix has one pivot row out of two, so the set misses a direction.` },
+      { id: 'reducing-without-the-target-column', name: `Reducing without the target column`, errorAt: 0,
+        what: `To decide whether $\\mathbf{b}$ is in a span, only the matrix $A$ of the given vectors is reduced. When every column of $A$ has a pivot, $\\mathbf{b}$ is declared to be in the span.`,
+        wrong: [`For $\\mathbf{b} = (5, 3, 7)$ and the vectors $(1, 0, 1)$, $(0, 1, 2)$,
+$$\\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 1 & 2 \\end{pmatrix}$$
+$$\\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 2 \\end{pmatrix}$$
+$$\\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$$`, `Both columns have a pivot, so $(5, 3, 7)$ is called a member of the span.`],
+        right: [`Reduce the augmented matrix $[A \\mid \\mathbf{b}]$, as in the first example of the membership section. The same steps end in the row $[0 \\; 0 \\mid -4]$, which reads $0 = -4$. The system is inconsistent and $(5, 3, 7)$ is not in the span. Pivots in every column of $A$ only say that the two vectors are independent, and that is true whichever $\\mathbf{b}$ is tested.`],
+        why: `The independence test reduces $A$ alone, and the membership test looks almost the same, so the extra column is dropped.`,
+        check: `Substitute the combination back. The first two rows force $c_1 = 5$ and $c_2 = 3$, and $5(1, 0, 1) + 3(0, 1, 2) = (5, 3, 11)$, not $(5, 3, 7)$.` },
+      { id: 'looking-for-pivots-in-the-columns', name: `Looking for pivots in the columns`, errorAt: 0,
+        what: `To decide whether a set spans $\\mathbb{R}^n$, the columns of the echelon form are searched for pivots. A column without a pivot is taken to mean that the set fails to span.`,
+        wrong: [`For $\\{(1, 0), (0, 1), (1, 1)\\}$ the matrix is already in echelon form,
+$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$$`, `Column $3$ has no pivot, so the set is said not to span $\\mathbb{R}^2$.`],
+        right: [`Spanning is read from the rows. Both rows hold a pivot, so $A\\mathbf{c} = \\mathbf{b}$ is consistent for every $\\mathbf{b} = (b_1, b_2)$: with the free variable $c_3 = 0$, the solution is $c_1 = b_1$, $c_2 = b_2$. The set spans $\\mathbb{R}^2$. The pivotless column says something else: $(1, 1)$ is redundant, since $(1, 1) = (1, 0) + (0, 1)$.`],
+        why: `The independence test reads the columns, and both tests use the same echelon form, so the habit of checking columns carries over.`,
+        check: `Count the rows that hold a pivot and compare with $n$. Or test one target directly: $(2, -3) = 2(1, 0) - 3(0, 1) + 0(1, 1)$.` },
+      { id: 'using-the-echelon-columns-as-the-basis', name: `Using the echelon columns as the basis`, errorAt: 1,
+        what: `To trim a spanning set to a basis, the vectors are row-reduced and the pivot columns of the echelon form are kept as the basis. Row operations change the columns, so these are not the vectors that were given.`,
+        wrong: [`For $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$,`, `$$\\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 1 & 2 & 3 \\end{pmatrix}$$
+$$\\xrightarrow{R_3 - R_1} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 2 & 2 \\end{pmatrix}$$
+$$\\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0 & 0 \\end{pmatrix}$$`, `The pivots are in columns $1$ and $2$, and the basis is written as $\\{(1, 0, 0), (0, 1, 0)\\}$.`],
+        right: [`For $(1, 0, 1)$, $(0, 1, 2)$, $(1, 1, 3)$,`, `The pivot positions point back to the original vectors. The basis is $\\{(1, 0, 1), (0, 1, 2)\\}$, and the third vector is redundant: $(1, 1, 3) = (1, 0, 1) + (0, 1, 2)$. The span is the plane $z = x + 2y$, while $(1, 0, 0)$ and $(0, 1, 0)$ span the different plane $z = 0$.`],
+        why: `The echelon form is the matrix at hand once the reduction is finished. Row operations keep the relations among the columns, which is why the pivot positions are right, but they change the columns themselves.`,
+        check: `Test a basis vector against the original set. Every vector in the span satisfies $z = x + 2y$, and $(1, 0, 0)$ gives $0 \\neq 1$, so it is not in the span at all.` },
+    ],
+  };
+
 return {
   props:{
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1823,7 +1808,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function SpanPage({seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SpanPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2028,6 +2013,15 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="span-pitfalls"
+            title="Common pitfalls with span"
+            source="/linear-algebra/vector-spaces/span"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

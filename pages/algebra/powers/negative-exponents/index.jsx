@@ -16,6 +16,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -409,7 +410,10 @@ To check a negative power with your own numbers, use the [exponent calculator](!
 },
     obj7:{
       title:`Summary of Negative-Exponent Rules`,
-      content:`The page's rules — the boundary at $a^0$, the definition of $a^{-n}$, and the operational moves that follow — form a small family of equivalences. The table below collects them as a single reference card, with each pattern paired to its formula, a worked example, and the condition or interpretation that goes with it.`,
+      content:`This summary collects the rules of the page on one set of cards. Each card gives the name of the pattern, its formula and a worked example, with a line on how to read or apply it and a link to the section that explains it. The two cards that define a power carry a badge with the condition on the base.
+
+The first card is the boundary at zero, with a pointer to the page on the zero to the zero case. The second defines a negative exponent as a reciprocal, and the third is its simplest case, the reciprocal of a single number. The last three are the moves that follow: flipping a fraction, lifting a power out of a denominator, and moving factors across the fraction bar.`,
+      formulaSheetAfter: `Every card is the same idea: a negative exponent asks for a reciprocal. When an expression looks crowded, move each factor with a negative exponent to the other side of the fraction bar first, then simplify with the usual laws of exponents.`,
       before:``,
       after:``,
       link:'',
@@ -654,8 +658,28 @@ $$= 4 \\cdot \\frac{1}{a^6} = \\frac{4}{a^6}$$`],
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Zero exponent', formula: '$a^0 = 1$', example: '$7^0 = 1$', restriction: '$a \\neq 0$',
+        text: 'The boundary case, forced by the quotient rule when the exponents are equal, as [the zero exponent](!#2) shows; the case $0^0$ is treated on [zero powers](!/algebra/powers/zero-powers).' },
+      { name: 'Negative exponent', formula: '$\\displaystyle a^{-n} = \\frac{1}{a^n}$', example: '$\\displaystyle 2^{-3} = \\frac{1}{8}$', restriction: '$a \\neq 0$',
+        text: 'A negative exponent means the reciprocal of the positive power, from [the definition of negative exponents](!#3).' },
+      { name: 'Multiplicative inverse', formula: '$\\displaystyle a^{-1} = \\frac{1}{a}$', example: '$\\displaystyle 5^{-1} = \\frac{1}{5}$',
+        text: 'The case $n = 1$: $a^{-1}$ is the standard way to write the reciprocal of $a$, as [double negatives and reciprocals](!#4) explains.' },
+      { name: 'Negative exponent on a fraction', formula: '$\\displaystyle \\left(\\frac{a}{b}\\right)^{-n} = \\left(\\frac{b}{a}\\right)^n$', example: '$\\displaystyle \\left(\\frac{2}{5}\\right)^{-3} = \\frac{125}{8}$',
+        text: 'Flip the fraction first, then apply the positive exponent, as worked through in [double negatives and reciprocals](!#4).' },
+      { name: 'Negative exponent in the denominator', formula: '$\\displaystyle \\frac{1}{a^{-n}} = a^n$', example: '$\\displaystyle \\frac{1}{x^{-2}} = x^2$',
+        text: 'The term moves across the fraction bar to the numerator, since the reciprocal of a reciprocal is the original ([double negatives and reciprocals](!#4)).' },
+      { name: 'Cross-bar (both signs flip)', formula: '$\\displaystyle \\frac{a^{-m}}{b^{-n}} = \\frac{b^n}{a^m}$', example: '$\\displaystyle \\frac{a^{-2}}{b^{-3}} = \\frac{b^3}{a^2}$',
+        text: 'Each negative exponent crosses the bar and becomes positive, as [double negatives and reciprocals](!#4) shows.' },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
     pitfallData,
     conceptIntroFigures: {
       powersTable: ciPowersTable,
@@ -681,7 +705,7 @@ return {
 
 // export default function NegativeExponentsPage({seoData,sectionsContent , introContent}) {
 
-export default function NegativeExponentsPage({ pitfallData,seoData, sectionsContent, introContent, obj1Table, obj5Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
+export default function NegativeExponentsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj1Table, obj5Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -857,11 +881,16 @@ No finite sum of negative powers of $2$ equals $\\frac{1}{10}$: such a sum is a 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="negative-exponent-formula-summary"
+            title="Negative exponent rules"
+            source="/algebra/powers/negative-exponents"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj7.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {

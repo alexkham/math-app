@@ -687,6 +687,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -979,7 +980,10 @@ Multiplying by a fraction's reciprocal produces 1. The product $\\frac{3}{4} \\t
   },
     obj8:{
       title:`Multiplying Fractions at a Glance`,
-      content:`The page covered fraction multiplication across several flavors — the basic rule, whole numbers, mixed numbers, multiple fractions in a row, the &quot;of&quot; convention, cross-canceling, and the three identity-style special cases involving 1, 0, and the reciprocal. The table below collects each situation with the move to make and a worked example.`,
+      content:`This summary collects each situation from the page in nine rows: the situation with a line on why the move works and a link to its section, the move to make, and a worked example. Links in the moves lead on to mixed numbers, equivalent fractions, reciprocals and dividing fractions.
+
+It opens with the basic rule, numerators times numerators and denominators times denominators, then extends it to whole numbers, mixed numbers and chains of three or more fractions, and to the word of in a phrase. Cross-canceling before computing keeps the numbers small. The last three rows are the special cases: multiplying by one, by zero and by the reciprocal.`,
+      formulaSheetAfter: `Multiplying fractions needs no common denominator, which makes it the simplest of the four operations. Convert mixed numbers first, cancel common factors across the fractions before multiplying, and the products stay small enough to reduce at a glance.`,
       before:``,
       after:``,
       link:'',
@@ -1243,8 +1247,39 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table capstoneTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Situation', kind: 'name' },
+      { key: 'rule', label: 'What to do' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Fraction × fraction', rule: 'multiply numerators, multiply denominators: $\\displaystyle \\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$', example: '$\\displaystyle \\frac{2}{3} \\times \\frac{4}{5} = \\frac{8}{15}$',
+        sub: 'No common denominator is needed, as [the basic rule](!#1) shows.' },
+      { name: 'Fraction × whole number', rule: 'write the whole number over 1, or multiply only the numerator', example: '$\\displaystyle \\frac{3}{4} \\times 5 = \\frac{15}{4} = 3\\frac{3}{4}$',
+        sub: 'The whole number multiplies the numerator and leaves the denominator, as [multiplying by whole numbers](!#2) shows.' },
+      { name: 'Mixed × mixed', rule: 'convert each [mixed number](!/arithmetic/fractions/mixed-numbers) to an improper fraction first; never multiply whole and fractional parts separately', example: '$\\displaystyle 2\\frac{1}{3} \\times 1\\frac{1}{2} = \\frac{7}{3} \\times \\frac{3}{2} = \\frac{7}{2} = 3\\frac{1}{2}$',
+        sub: 'Improper fractions turn the product into the basic rule, as [multiplying mixed numbers](!#4) shows.' },
+      { name: 'Three or more fractions', rule: 'multiply all numerators and all denominators; cancel across every pair before computing', example: '$\\displaystyle \\frac{2}{3} \\times \\frac{3}{4} \\times \\frac{4}{5} = \\frac{2}{5}$',
+        sub: 'The same rule stretched to a chain of factors, from [multiplying more than two fractions](!#5).' },
+      { name: 'The word "of"', rule: 'translate "of" to $\\times$', example: '$\\displaystyle \\frac{2}{3}$ of $\\displaystyle 12 \\to \\frac{2}{3} \\times 12 = 8$',
+        sub: 'A fraction of an amount is a product, as [the word of means multiply](!#6) shows.' },
+      { name: 'Before computing', rule: 'cross-cancel any numerator with any denominator that share a common factor', example: '$\\displaystyle \\frac{4}{9} \\times \\frac{3}{8} \\to \\frac{1}{3} \\times \\frac{1}{2} = \\frac{1}{6}$',
+        sub: 'Cancelling first keeps the numbers small, as [cross-canceling](!#3) shows.' },
+      { name: 'Times 1', rule: 'result is unchanged; basis for [equivalent fractions](!/arithmetic/fractions/equivalent) via $\\displaystyle 1 = \\frac{n}{n}$', example: '$\\displaystyle \\frac{2}{3} \\times \\frac{5}{5} = \\frac{10}{15}$',
+        sub: 'The first of [the special cases](!#7).' },
+      { name: 'Times 0', rule: 'result is 0', example: '$\\displaystyle \\frac{5}{7} \\times 0 = 0$',
+        sub: 'The numerator of the product is zero, one of [the special cases](!#7).' },
+      { name: 'Times the reciprocal', rule: 'result is 1; the [reciprocal](!/arithmetic/definitions#reciprocal) is the foundation for [dividing fractions](!/arithmetic/fractions/dividing)', example: '$\\displaystyle \\frac{3}{4} \\times \\frac{4}{3} = \\frac{12}{12} = 1$',
+        sub: 'A fraction and its flip cancel completely, the last of [the special cases](!#7).' },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
     pitfallData,
     sectionsContent,
     introContent,
@@ -1264,7 +1299,7 @@ return {
 }
    }
 
-export default function MultiplyingPage({ pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MultiplyingPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1408,8 +1443,16 @@ Keeping the shared denominator, as in addition, turns $\\frac{2}{5} \\times \\fr
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="fraction-multiplication-formula-summary"
+            title="Multiplying fractions"
+            source="/arithmetic/fractions/multiplying"
+            related={false}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {

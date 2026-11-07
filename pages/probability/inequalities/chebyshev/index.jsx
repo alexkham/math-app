@@ -666,6 +666,8 @@ import chebyshevDiagrams from '@/app/components/probability/inequalities/chebysh
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -947,7 +949,7 @@ $$\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\v
 
 @academic[pitfall,aside:true,width:35%:Treating the variance as the standard deviation
 With variance $4$ and a deviation of $3$, taking $\\sigma = 4$ gives $k = \\frac{3}{4}$ and a bound of $\\frac{16}{9}$, which says nothing. The standard deviation is $\\sigma = \\sqrt{4} = 2$, so $k = \\frac{3}{2}$ and the bound is $\\frac{1}{k^2} = \\frac{4}{9} \\approx 0.44$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-the-variance-as-the-standard-deviation)]@
 
 The bound depends only on the variance and makes no assumptions about the form of the distribution.
 
@@ -1031,7 +1033,7 @@ Chebyshev's inequality incorporates additional information: the variance. By mea
 
 @academic[pitfall,aside:true,width:35%:Halving the bound for one tail
 Splitting $\\frac{1}{k^2}$ equally between the tails gives $\\mathbb{P}(X - \\mu \\ge 2\\sigma) \\le 0.125$. But $X = 2$ with probability $0.2$ and $X = -0.5$ with probability $0.8$ has $\\mu = 0$, $\\sigma = 1$ and that tail equal to $0.2$; without symmetry, one tail is bounded only by the full $\\frac{1}{4}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-halving-the-bound-for-one-tail)]@
 
 In effect, Chebyshev's inequality applies Markov's idea to squared deviations from the mean. This extra structure tightens the bound while still avoiding any assumptions about the exact form of the distribution.
 
@@ -1135,71 +1137,9 @@ For this reason, Chebyshev's inequality is a central tool in probability theory:
     },
     pitfalls:{
       title:`Common Pitfalls`,
-      content:`Four mistakes account for most wrong uses of Chebyshev's inequality. Three of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating the variance as the standard deviation**
-
-A problem gives the variance, and that number is used where the standard deviation belongs, either to convert the distance into $k$ or as the $\\sigma$ in $\\varepsilon = k\\sigma$.
-
-Wrong working: for a variable with mean $10$ and variance $4$, and a deviation of $3$,
-$$k = \\frac{3}{4}, \\qquad \\frac{1}{k^2} = \\frac{16}{9} \\approx 1.78$$
-A bound above $1$ says nothing.
-
-Right working: the standard deviation is $\\sigma = \\sqrt{4} = 2$.
-$$k = \\frac{3}{2}, \\qquad \\frac{1}{k^2} = \\frac{4}{9} \\approx 0.44$$
-The second form gives the same number directly: $\\frac{\\sigma^2}{\\varepsilon^2} = \\frac{4}{9}$.
-
-Why it happens: both numbers describe spread, and problems give one or the other. The letter $\\sigma^2$ in the second form makes it easy to forget that the first form needs $\\sigma$ itself.
-
-How to check: compute the bound both ways. The $k$ route and the $\\varepsilon$ route must give the same number; here $\\frac{16}{9}$ against $\\frac{4}{9}$ shows that one of them used the wrong spread.
-
-**Reading the bound as the probability**
-
-The bound is reported as the chance of a large deviation, as if Chebyshev computed it rather than capped it.
-
-Wrong working: for a normal variable with mean $10$ and variance $4$,
-$$\\mathbb{P}\\big(|X - 10| \\ge 3\\big) \\approx \\frac{4}{9} \\approx 0.44$$
-
-Right working: Chebyshev only says the probability is at most $\\frac{4}{9}$. For this normal variable the deviation is $1.5$ standard deviations, and the true probability is
-$$\\mathbb{P}\\big(|Z| \\ge 1.5\\big) \\approx 0.134$$
-about a third of the bound.
-
-Why it happens: the bound is the only number the calculation produces, and with nothing else on the page it gets read as the answer.
-
-How to check: write $\\le$ in the answer, never $=$ or $\\approx$. If the distribution is known, compute the true probability and compare; it should come out at or below the bound, often far below.
-
-**Halving the bound for one tail**
-
-Only one direction matters, say $X$ far above its mean, and the two-sided bound $\\frac{1}{k^2}$ is split in half on the assumption that the two tails share it equally.
-
-Wrong working: with $k = 2$,
-$$\\mathbb{P}(X - \\mu \\ge 2\\sigma) \\le \\frac{1}{2} \\cdot \\frac{1}{4} = 0.125$$
-
-Right working: take $X = 2$ with probability $0.2$ and $X = -0.5$ with probability $0.8$. Then
-$$\\mu = 0.2 \\cdot 2 + 0.8 \\cdot (-0.5) = 0, \\qquad \\sigma^2 = 0.2 \\cdot 4 + 0.8 \\cdot 0.25 = 1$$
-and $\\mathbb{P}(X - \\mu \\ge 2\\sigma) = \\mathbb{P}(X \\ge 2) = 0.2$, more than $0.125$. Without symmetry, the event $X - \\mu \\ge k\\sigma$ is contained in $|X - \\mu| \\ge k\\sigma$, so the safe one-sided bound is the full $\\frac{1}{k^2} = 0.25$.
-
-Why it happens: the picture of a bell curve with two equal tails is the default, and Chebyshev assumes nothing about shape, symmetry included.
-
-How to check: ask whether the distribution is known to be symmetric about its mean. If it is not, keep the whole $\\frac{1}{k^2}$ for a single tail.
-
-**Using the variance of one roll for the average**
-
-Chebyshev is applied to the average of $n$ observations, but the variance put into the bound is that of a single observation.
-
-Wrong working: for the average of $n$ die rolls and $\\varepsilon = 0.5$,
-$$\\mathbb{P}\\big(|\\bar{X}_n - 3.5| \\ge 0.5\\big) \\le \\frac{35/12}{0.25} \\approx 11.67$$
-for every $n$, a bound that never says anything.
-
-Right working: for independent rolls, the average has variance $\\frac{\\sigma^2}{n} = \\frac{35}{12n}$, so
-$$\\mathbb{P}\\big(|\\bar{X}_n - 3.5| \\ge 0.5\\big) \\le \\frac{35/12}{0.25\\, n} \\approx \\frac{11.67}{n}$$
-which is about $0.117$ at $n = 100$ and falls toward $0$ as $n$ grows.
-
-Why it happens: the variance of one roll is the number that is easy to compute, and the step from one roll to the average is skipped.
-
-How to check: the bound for an average must shrink as $n$ grows. If $n$ does not appear in it, the variance of the average was never used.`,
+      content:`Four mistakes account for most wrong uses of Chebyshev's inequality. Three of them are marked where they happen in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip changes what goes into the bound or what comes out of it. The distance is measured in standard deviations, not in units of the variance; the result is an upper bound, not a probability; one tail keeps the whole $\\frac{1}{k^2}$ unless the distribution is symmetric; and the average of $n$ observations has variance $\\frac{\\sigma^2}{n}$. Computing the bound two ways, or checking that it shrinks as $n$ grows, catches each slip.`,
       link:'',
 
     },
@@ -1299,8 +1239,48 @@ The result is deliberately general. It applies without assuming any particular d
     }),
   };
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-the-variance-as-the-standard-deviation', name: `Treating the variance as the standard deviation`, errorAt: 0,
+        what: `A problem gives the variance, and that number is used where the standard deviation belongs, either to convert the distance into $k$ or as the $\\sigma$ in $\\varepsilon = k\\sigma$.`,
+        wrong: [`For a variable with mean $10$ and variance $4$, and a deviation of $3$,
+$$k = \\frac{3}{4}, \\qquad \\frac{1}{k^2} = \\frac{16}{9} \\approx 1.78$$`, `A bound above $1$ says nothing.`],
+        right: [`The standard deviation is $\\sigma = \\sqrt{4} = 2$.`, `$$k = \\frac{3}{2}, \\qquad \\frac{1}{k^2} = \\frac{4}{9} \\approx 0.44$$`, `The second form gives the same number directly: $\\frac{\\sigma^2}{\\varepsilon^2} = \\frac{4}{9}$.`],
+        why: `Both numbers describe spread, and problems give one or the other. The letter $\\sigma^2$ in the second form makes it easy to forget that the first form needs $\\sigma$ itself.`,
+        check: `Compute the bound both ways. The $k$ route and the $\\varepsilon$ route must give the same number; here $\\frac{16}{9}$ against $\\frac{4}{9}$ shows that one of them used the wrong spread.` },
+      { id: 'reading-the-bound-as-the-probability', name: `Reading the bound as the probability`, errorAt: 0,
+        what: `The bound is reported as the chance of a large deviation, as if Chebyshev computed it rather than capped it.`,
+        wrong: [`For a normal variable with mean $10$ and variance $4$,
+$$\\mathbb{P}\\big(|X - 10| \\ge 3\\big) \\approx \\frac{4}{9} \\approx 0.44$$`],
+        right: [`Chebyshev only says the probability is at most $\\frac{4}{9}$. For this normal variable the deviation is $1.5$ standard deviations, and the true probability is
+$$\\mathbb{P}\\big(|Z| \\ge 1.5\\big) \\approx 0.134$$`, `About a third of the bound.`],
+        why: `The bound is the only number the calculation produces, and with nothing else on the page it gets read as the answer.`,
+        check: `Write $\\le$ in the answer, never $=$ or $\\approx$. If the distribution is known, compute the true probability and compare; it should come out at or below the bound, often far below.` },
+      { id: 'halving-the-bound-for-one-tail', name: `Halving the bound for one tail`, errorAt: 1,
+        what: `Only one direction matters, say $X$ far above its mean, and the two-sided bound $\\frac{1}{k^2}$ is split in half on the assumption that the two tails share it equally.`,
+        wrong: [`With $k = 2$,`, `$$\\mathbb{P}(X - \\mu \\ge 2\\sigma) \\le \\frac{1}{2} \\cdot \\frac{1}{4} = 0.125$$`],
+        right: [`With $k = 2$,`, `Take $X = 2$ with probability $0.2$ and $X = -0.5$ with probability $0.8$. Then
+$$\\mu = 0.2 \\cdot 2 + 0.8 \\cdot (-0.5)$$
+$$= 0,$$
+$$\\sigma^2 = 0.2 \\cdot 4 + 0.8 \\cdot 0.25 = 1$$`, `And $\\mathbb{P}(X - \\mu \\ge 2\\sigma) = \\mathbb{P}(X \\ge 2) = 0.2$, more than $0.125$. Without symmetry, the event $X - \\mu \\ge k\\sigma$ is contained in $|X - \\mu| \\ge k\\sigma$, so the safe one-sided bound is the full $\\frac{1}{k^2} = 0.25$.`],
+        why: `The picture of a bell curve with two equal tails is the default, and Chebyshev assumes nothing about shape, symmetry included.`,
+        check: `Ask whether the distribution is known to be symmetric about its mean. If it is not, keep the whole $\\frac{1}{k^2}$ for a single tail.` },
+      { id: 'using-the-variance-of-one-roll-for-the-average', name: `Using the variance of one roll for the average`, errorAt: 0,
+        what: `Chebyshev is applied to the average of $n$ observations, but the variance put into the bound is that of a single observation.`,
+        wrong: [`For the average of $n$ die rolls and $\\varepsilon = 0.5$,
+$$\\mathbb{P}\\big(|\\bar{X}_n - 3.5| \\ge 0.5\\big) \\le \\frac{35/12}{0.25} \\approx 11.67$$`, `For every $n$, a bound that never says anything.`],
+        right: [`For independent rolls, the average has variance $\\frac{\\sigma^2}{n} = \\frac{35}{12n}$, so
+$$\\mathbb{P}\\big(|\\bar{X}_n - 3.5| \\ge 0.5\\big) \\le \\frac{35/12}{0.25\\, n} \\approx \\frac{11.67}{n}$$`, `Which is about $0.117$ at $n = 100$ and falls toward $0$ as $n$ grows.`],
+        why: `The variance of one roll is the number that is easy to compute, and the step from one roll to the average is skipped.`,
+        check: `The bound for an average must shrink as $n$ grows. If $n$ does not appear in it, the variance of the average was never used.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1319,7 +1299,7 @@ The result is deliberately general. It applies without assuming any particular d
   }
 }
 
-export default function ChebyshevInequalityPage({
+export default function ChebyshevInequalityPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1389,7 +1369,7 @@ $$\\mathbb{P}\\big(|X - \\mu| \\ge \\varepsilon\\big) \\le \\frac{\\sigma^2}{\\v
         content: [
           `@academic[pitfall,aside:true,width:35%:Treating the variance as the standard deviation
 With variance $4$ and a deviation of $3$, taking $\\sigma = 4$ gives $k = \\frac{3}{4}$ and a bound of $\\frac{16}{9}$, which says nothing. The standard deviation is $\\sigma = \\sqrt{4} = 2$, so $k = \\frac{3}{2}$ and the bound is $\\frac{1}{k^2} = \\frac{4}{9} \\approx 0.44$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-treating-the-variance-as-the-standard-deviation)]@`,
           `For $k \\le 1$ the bound is at least $1$ and says nothing. How it improves on its parent result is shown in [why Chebyshev improves on Markov](!/probability/inequalities/chebyshev#4).`,
         ],
       },
@@ -1483,7 +1463,7 @@ With variance $4$ and a deviation of $3$, taking $\\sigma = 4$ gives $k = \\frac
                   <div key={'unit-chebLln'} dangerouslySetInnerHTML={{ __html: demoUnits.chebLln }} />,
           `@academic[pitfall,aside:true,width:35%:Using the variance of one roll for the average
 Putting the variance of a single roll, $\\frac{35}{12}$, into the bound gives $\\frac{35/12}{0.25} \\approx 11.67$ for every $n$, which says nothing. The average of $n$ rolls has variance $\\frac{35}{12n}$, so the bound is $\\frac{11.67}{n}$, at most $0.117$ at $n = 100$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-variance-of-one-roll-for-the-average)]@
 
 In the die example the quantity being controlled is the average of the rolls, and the tolerance $\\varepsilon = 0.5$ stays fixed however many rolls are taken. The threshold does not move as $n$ grows; the bound responds only through the spread that is divided by $\\varepsilon^2$. Each roll on its own is exactly as variable after a hundred rolls as after one.`,
           `A bound that tends to 0 as n grows is exactly what the weak law of large numbers states.`,
@@ -1531,6 +1511,15 @@ In the die example the quantity being controlled is the average of the rolls, an
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="chebyshev-pitfalls"
+            title="Common pitfalls with Chebyshev's inequality"
+            source="/probability/inequalities/chebyshev"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

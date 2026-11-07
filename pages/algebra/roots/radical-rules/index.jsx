@@ -13,6 +13,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -721,7 +722,10 @@ Extracting perfect powers, rationalizing denominators, reducing indices, and com
 
   obj8: {
     title: `Summary of Radical Rules`,
-    content: `The four rules introduced in the sections above collect into a single reference card. Each row gives a rule, its general formula, the exponent law from which it derives, and a numerical example — useful for review at a glance and as a working reference when applying the rules to specific expressions.`,
+    content: `This summary sets the four radical rules beside the exponent laws they come from. Each row is one rule: product, quotient, power and nested roots. The left column gives the rule in radical form with a worked number example, a condition where one applies, and a link to the section that explains it; the right column gives the same rule written with fractional exponents and names the exponent law behind it.
+
+Above the rows sits the link between the two columns, a root written as an exponent. Below them a note recalls when the rules hold: the indices must match, and an even root needs a radicand that is not negative.`,
+    formulaSheetAfter: `Each radical rule is an exponent law in different notation, so a forgotten rule can be rebuilt by rewriting the roots as fractional powers. The exponent form also reaches cases the radical rules cannot, such as multiplying roots with different indices.`,
     before: ``,
     after: ``,
     link: '',
@@ -1042,8 +1046,42 @@ $$= \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$`, `Starting
     ],
   };
 
+  // Formula Summary 2026-11-06: replaces the summary table summaryTable, same rows.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: '$\\sqrt[n]{a} = a^{1/n}$',
+    generalLabel: 'A root as an exponent',
+    sides: [
+      { name: 'Radical form', sub: 'the rule written with roots', tone: 'direct' },
+      { name: 'Exponent form', sub: 'the exponent law it comes from', tone: 'reversed' },
+    ],
+    rows: [
+      { op: 'Product', cells: [
+        { formula: '$\\sqrt[n]{ab} = \\sqrt[n]{a} \\cdot \\sqrt[n]{b}$', effect: 'One root of a product splits into two roots: $\\sqrt{12} = \\sqrt{4} \\cdot \\sqrt{3} = 2\\sqrt{3}$, as in [the product rule](!#1).',
+          condition: 'both roots need the same index' },
+        { formula: '$(ab)^{1/n} = a^{1/n} \\cdot b^{1/n}$', effect: 'The power of a product rule, with the exponent $1/n$.' },
+      ] },
+      { op: 'Quotient', cells: [
+        { formula: '$\\displaystyle \\sqrt[n]{\\frac{a}{b}} = \\frac{\\sqrt[n]{a}}{\\sqrt[n]{b}}$', effect: 'A root of a fraction is the root of the top over the root of the bottom: $\\sqrt{49/16} = 7/4$, from [the quotient rule](!#2).',
+          condition: '$b \\neq 0$' },
+        { formula: '$\\displaystyle \\left(\\frac{a}{b}\\right)^{1/n} = \\frac{a^{1/n}}{b^{1/n}}$', effect: 'The power of a quotient rule, with the exponent $1/n$.' },
+      ] },
+      { op: 'Power', cells: [
+        { formula: '$\\sqrt[n]{a^m} = a^{m/n}$', effect: 'The exponent goes on top and the index below: $\\sqrt[3]{8^2} = 8^{2/3} = 4$, as [the power rule](!#3) shows.',
+          condition: 'the root may come first: $\\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$' },
+        { formula: '$(a^m)^{1/n} = a^{m/n}$', effect: 'The power of a power rule: the exponents $m$ and $1/n$ multiply.' },
+      ] },
+      { op: 'Nested', cells: [
+        { formula: '$\\sqrt[m]{\\sqrt[n]{a}} = \\sqrt[mn]{a}$', effect: 'A root inside a root becomes one root whose index is the product: $\\sqrt{\\sqrt{16}} = \\sqrt[4]{16} = 2$, from [radical of a radical](!#4).' },
+        { formula: '$\\left(a^{1/n}\\right)^{1/m} = a^{1/(mn)}$', effect: 'The power of a power rule again, with the exponents $1/n$ and $1/m$.' },
+      ] },
+    ],
+    note: { label: 'When the rules hold', text: 'The indices must match, and under an even root the radicands must not be negative; [when rules apply](!#5) goes through every restriction.' },
+  };
+
    return {
   props: {
+    formulaSummaryData,
     pitfallData,
     radicalRuleIndexProperties,
     radicalRuleTree,
@@ -1067,7 +1105,7 @@ $$= \\sqrt{36 \\cdot 2} = \\sqrt{36} \\cdot \\sqrt{2} = 6\\sqrt{2}$$`, `Starting
 }
    }
 
-export default function RadicalRulesPage({ pitfallData,radicalRuleIndexProperties, radicalRuleTree, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RadicalRulesPage({ formulaSummaryData, pitfallData,radicalRuleIndexProperties, radicalRuleTree, seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1253,11 +1291,16 @@ Splitting $\\sqrt{36 + 64}$ like a product gives $\\sqrt{36} + \\sqrt{64} = 14$.
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="radical-rule-formula-summary"
+            title="Radical rules and exponent laws"
+            source="/algebra/roots/radical-rules"
+            related={{ href: '/algebra/formulas', label: 'All algebra formulas' }}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="paired" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="radical-rules-tree"

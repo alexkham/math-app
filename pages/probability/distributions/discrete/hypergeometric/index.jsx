@@ -859,6 +859,9 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
 
@@ -1113,7 +1116,7 @@ $$P(X > k) = 1 - F_X(k)$$]@
 
 @academic[pitfall,aside:true,width:35%:Treating at least as more than
 For at least one ace in a five-card hand, writing $1 - F_X(1)$ also removes the hands with exactly one ace, giving $P(X \\geq 2) \\approx 0.042$. The right cut is $1 - F_X(0) \\approx 0.341$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-at-least-as-more-than)]@
 
 The complement rule above covers one wording, and questions use several: "more than", "at least", "fewer than" and "at most". The count of successes takes only whole-number values, so each wording keeps a different set of counts, and the complement keeps the counts on the other side of that line. The CDF is then read at the last count that falls outside the event.
   `,
@@ -1256,7 +1259,7 @@ $$\\sigma \\approx \\sqrt{0.327} \\approx 0.572$$]@
 
 @academic[pitfall,aside:true,width:35%:Leaving out the correction factor
 Dropping $\\frac{47}{51}$ gives the binomial variance $5 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} = \\frac{60}{169} \\approx 0.355$, too large for cards that are not put back. With the factor, $\\mathrm{Var}(X) \\approx 0.33$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-out-the-correction-factor)]@
 
 The relatively small variance reflects the limited range of possible outcomes (0 to 4 aces) and the constraining effect of sampling without replacement from a finite deck.
   `,
@@ -1354,7 +1357,7 @@ $$P(X = 2) = \\frac{\\binom{13}{2} \\binom{52-13}{5-2}}{\\binom{52}{5}} = \\frac
 
 @academic[pitfall,aside:true,width:35%:Treating the draws as independent
 Using the binomial with $p = \\frac{13}{52} = \\frac{1}{4}$ gives $\\binom{5}{2}(0.25)^2(0.75)^3 \\approx 0.264$, as if each card went back. Without replacement the count of hands gives $P(X = 2) \\approx 0.274$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-the-draws-as-independent)]@
 
 This means there's about a 27.4% chance of getting exactly 2 hearts when drawing 5 cards from a standard deck.
 
@@ -1442,7 +1445,10 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
     obj16:{
   
       title:`Hypergeometric at a Glance`,
-      content:`The table below collects the full anatomy of the hypergeometric distribution into a single reference card — its three parameters, support bounds, the PMF and CDF, the mean and variance formulas (including the finite-population correction), mode and median behavior, the binomial approximation, and a canonical card-drawing example.`,
+      content:`This summary gathers the hypergeometric distribution on one card of ten rows. Each row names one part of the distribution with a line on what it gives and a link to the section that explains it, then states the formula or fact and adds a note or a worked number.
+
+The first rows fix the setup: the population size, the successes it holds, the sample size, and the counts a sample can contain. Then come the probability of an exact count, the running total up to a count, the mean, the variance and the correction factor that sampling without replacement brings, and the mode and median. The last rows give the binomial approximation for large populations and the card-drawing example.`,
+      formulaSheetAfter: `Every probability here is a count of hands: favorable choices of successes and failures over all possible samples. The correction factor is the one thing that separates the variance from the binomial one, and it fades as the population grows large next to the sample.`,
       before:``,
       after:``,
       link:'',
@@ -1450,51 +1456,9 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
     },
     obj17:{
       title:`Common Pitfalls`,
-      content:`Three mistakes come up again and again in hypergeometric problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating at least as more than**
-
-The question asks for at least $k$ successes, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.
-
-Wrong working: for at least one ace in a five-card hand ($N = 52$, $K = 4$, $n = 5$),
-$$P(X \\geq 1) = 1 - F_X(1) \\approx 1 - (0.659 + 0.299) = 0.042$$
-
-Right working: at least one ace means $1$, $2$, $3$ or $4$ aces, so the complement is a hand with no ace at all.
-$$P(X \\geq 1) = 1 - F_X(0) = 1 - \\frac{\\binom{48}{5}}{\\binom{52}{5}} = 1 - \\frac{1712304}{2598960} \\approx 0.341$$
-
-Why it happens: the rules $1 - F_X(k)$ and $1 - F_X(k-1)$ differ by a single symbol, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.
-
-How to check: the event contains the hands with exactly one ace, and those alone have probability $\\frac{4 \\cdot \\binom{48}{4}}{\\binom{52}{5}} = \\frac{778320}{2598960} \\approx 0.299$. An answer below that, such as $0.042$, cannot be right.
-
-**Leaving out the correction factor**
-
-The variance of a sample drawn without replacement is computed with the binomial formula $np(1-p)$ and $p = \\frac{K}{N}$, and the factor $\\frac{N-n}{N-1}$ is left out.
-
-Wrong working: for the number of aces in five cards,
-$$\\mathrm{Var}(X) = 5 \\cdot \\frac{4}{52} \\cdot \\frac{48}{52} = \\frac{60}{169} \\approx 0.355$$
-
-Right working: the cards are not put back, so the finite population correction applies.
-$$\\mathrm{Var}(X) = \\frac{60}{169} \\cdot \\frac{47}{51} = \\frac{940}{2873} \\approx 0.33$$
-
-Why it happens: the mean $n \\cdot \\frac{K}{N}$ is the same as the binomial mean with $p = \\frac{K}{N}$, so it is natural to expect the variance to match as well. Only the variance feels the dependence between the draws.
-
-How to check: take the whole population as the sample, $n = N$. Drawing all $52$ cards always gives $4$ aces, so the variance must be $0$. The correction factor $\\frac{52-52}{51}$ gives exactly $0$, while the binomial formula gives $52 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} = \\frac{48}{13} \\approx 3.69$.
-
-**Treating the draws as independent**
-
-The probability of $k$ successes in draws without replacement is computed with the binomial formula, as if every draw had the same chance $\\frac{K}{N}$ whatever came before.
-
-Wrong working: for exactly $2$ hearts in $5$ cards, with $p = \\frac{13}{52} = \\frac{1}{4}$,
-$$P(X = 2) = \\binom{5}{2} (0.25)^2 (0.75)^3 = 10 \\cdot 0.0625 \\cdot 0.421875 \\approx 0.264$$
-
-Right working: count the hands.
-$$P(X = 2) = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}} = \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$$
-
-Why it happens: the binomial formula is usually learned first, and a question with a fixed number of draws and a success rate of $\\frac{1}{4}$ looks like a binomial question on the surface. Whether the cards go back is easy to overlook.
-
-How to check: look at an extreme count, where the gap is largest. For five hearts in five cards the binomial gives $(0.25)^5 \\approx 0.00098$, while the count of hands gives $\\frac{\\binom{13}{5}}{\\binom{52}{5}} = \\frac{1287}{2598960} \\approx 0.00050$, about half as much: each heart drawn makes the next one less likely.`,
+      content:`Three mistakes come up again and again in hypergeometric problems. Each one is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip miscounts the event or treats the draws as if each item went back. At least $k$ includes $k$ itself, the variance carries the correction factor $\\frac{N - n}{N - 1}$, and the chance on each draw changes as items are removed. Taking the whole population as the sample, or looking at an extreme count, catches each slip.`,
       link:'',
     },
      links:{
@@ -1707,8 +1671,77 @@ const hypergeometricExplanations = {
     }),
   };
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj17 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-at-least-as-more-than', name: `Treating at least as more than`, errorAt: 0,
+        what: `The question asks for at least $k$ successes, and the complement rule for more than $k$ is used, so the CDF is read at $k$ instead of at $k - 1$.`,
+        wrong: [`For at least one ace in a five-card hand ($N = 52$, $K = 4$, $n = 5$),
+$$P(X \\geq 1) = 1 - F_X(1)$$
+$$\\approx 1 - (0.659 + 0.299) = 0.042$$`],
+        right: [`At least one ace means $1$, $2$, $3$ or $4$ aces, so the complement is a hand with no ace at all.`, `$$P(X \\geq 1) = 1 - F_X(0)$$
+$$= 1 - \\frac{\\binom{48}{5}}{\\binom{52}{5}} = 1 - \\frac{1712304}{2598960}$$
+$$\\approx 0.341$$`],
+        why: `The rules $1 - F_X(k)$ and $1 - F_X(k-1)$ differ by a single symbol, and for continuous variables the difference between $>$ and $\\geq$ never matters, so the habit of ignoring it carries over.`,
+        check: `The event contains the hands with exactly one ace, and those alone have probability $\\frac{4 \\cdot \\binom{48}{4}}{\\binom{52}{5}} = \\frac{778320}{2598960} \\approx 0.299$. An answer below that, such as $0.042$, cannot be right.` },
+      { id: 'leaving-out-the-correction-factor', name: `Leaving out the correction factor`, errorAt: 0,
+        what: `The variance of a sample drawn without replacement is computed with the binomial formula $np(1-p)$ and $p = \\frac{K}{N}$, and the factor $\\frac{N-n}{N-1}$ is left out.`,
+        wrong: [`For the number of aces in five cards,
+$$\\mathrm{Var}(X) = 5 \\cdot \\frac{4}{52} \\cdot \\frac{48}{52} = \\frac{60}{169} \\approx 0.355$$`],
+        right: [`The cards are not put back, so the finite population correction applies.`, `$$\\mathrm{Var}(X) = \\frac{60}{169} \\cdot \\frac{47}{51} = \\frac{940}{2873}$$
+$$\\approx 0.33$$`],
+        why: `The mean $n \\cdot \\frac{K}{N}$ is the same as the binomial mean with $p = \\frac{K}{N}$, so it is natural to expect the variance to match as well. Only the variance feels the dependence between the draws.`,
+        check: `Take the whole population as the sample, $n = N$. Drawing all $52$ cards always gives $4$ aces, so the variance must be $0$. The correction factor $\\frac{52-52}{51}$ gives exactly $0$, while the binomial formula gives $52 \\cdot \\frac{1}{13} \\cdot \\frac{12}{13} = \\frac{48}{13} \\approx 3.69$.` },
+      { id: 'treating-the-draws-as-independent', name: `Treating the draws as independent`, errorAt: 0,
+        what: `The probability of $k$ successes in draws without replacement is computed with the binomial formula, as if every draw had the same chance $\\frac{K}{N}$ whatever came before.`,
+        wrong: [`For exactly $2$ hearts in $5$ cards, with $p = \\frac{13}{52} = \\frac{1}{4}$,
+$$P(X = 2) = \\binom{5}{2} (0.25)^2 (0.75)^3$$
+$$= 10 \\cdot 0.0625 \\cdot 0.421875$$
+$$\\approx 0.264$$`],
+        right: [`Count the hands.`, `$$P(X = 2) = \\frac{\\binom{13}{2} \\binom{39}{3}}{\\binom{52}{5}}$$
+$$= \\frac{78 \\cdot 9139}{2598960} \\approx 0.274$$`],
+        why: `The binomial formula is usually learned first, and a question with a fixed number of draws and a success rate of $\\frac{1}{4}$ looks like a binomial question on the surface. Whether the cards go back is easy to overlook.`,
+        check: `Look at an extreme count, where the gap is largest. For five hearts in five cards the binomial gives $(0.25)^5 \\approx 0.00098$, while the count of hands gives $\\frac{\\binom{13}{5}}{\\binom{52}{5}} = \\frac{1287}{2598960} \\approx 0.00050$, about half as much: each heart drawn makes the next one less likely.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Aspect', kind: 'name' },
+      { key: 'formula', label: 'Formula or statement', kind: 'formula' },
+      { key: 'note', label: 'Note or example' },
+    ],
+    rows: [
+      { name: 'Parameters', formula: '$N$, the population size; $K$, the successes in the population; $n$, the sample size, with $n \\leq N$', note: 'draws are made without replacement; trials are not independent',
+        sub: 'The three counts that fix the distribution, as [the parameters section](!#2) explains.' },
+      { name: 'Support', formula: '$k \\in \\{\\max(0, n - N + K), \\ldots, \\min(n, K)\\}$', note: 'bounded by the physical availability of successes and failures',
+        sub: 'The numbers of successes a sample can hold, set out with [the PMF and its support](!#4).' },
+      { name: 'PMF', formula: '$\\displaystyle P(X = k) = \\frac{\\binom{K}{k} \\binom{N-K}{n-k}}{\\binom{N}{n}}$', note: "favorable combinations over total combinations (Vandermonde's identity)",
+        sub: 'The probability of exactly $k$ successes in the sample, built from counting in [the PMF section](!#4).' },
+      { name: 'CDF', formula: '$\\displaystyle F_X(k) = P(X \\leq k) = \\sum_{i=0}^{k} \\frac{\\binom{K}{i}\\binom{N-K}{n-i}}{\\binom{N}{n}}$', note: 'no closed form; computed numerically',
+        sub: 'The probability of at most $k$ successes, from [the CDF section](!#5).' },
+      { name: 'Expected value', formula: '$\\displaystyle E[X] = n \\cdot \\frac{K}{N}$', note: 'sample size times the population proportion of successes',
+        sub: 'The average number of successes in the sample, derived in [the expected value section](!#6).' },
+      { name: 'Variance', formula: '$\\displaystyle \\mathrm{Var}(X) = n \\cdot \\frac{K}{N} \\cdot \\frac{N-K}{N} \\cdot \\frac{N-n}{N-1}$', note: 'the binomial variance with $p = K/N$, times the finite population correction',
+        sub: 'How widely the count of successes spreads, worked out in [variance and standard deviation](!#7).' },
+      { name: 'Finite population correction', formula: '$\\displaystyle \\frac{N-n}{N-1}$, always at most $1$; it goes to $0$ as $n \\to N$', note: 'shrinks the variance compared with the binomial; a full census has zero variability',
+        sub: 'The factor that accounts for sampling without replacement, explained in [variance and standard deviation](!#7).' },
+      { name: 'Mode and median', formula: '$\\displaystyle \\text{Mode} = \\left\\lfloor \\frac{(n+1)(K+1)}{N+2} \\right\\rfloor$; the median is close to the mean and found numerically', note: 'both sit near $nK/N$; symmetric when $K = N/2$',
+        sub: 'The most likely count and the middle of the distribution, found in [mode and median](!#8).' },
+      { name: 'Binomial approximation', formula: '$\\operatorname{Hyp}(N, K, n) \\approx \\operatorname{Bin}(n, K/N)$ when $N \\gg n$', note: 'rule of thumb: $n < 0.05 \\cdot N$, when depletion becomes negligible',
+        sub: 'A small sample from a large population behaves almost as if each item went back, as [applications and examples](!#11) notes.' },
+      { name: 'Canonical example', formula: 'draw 5 cards from 52 and count the hearts: $N = 52$, $K = 13$, $n = 5$', note: '$E[X] = 1.25$; $P(X = 2) \\approx 0.274$',
+        sub: 'The card-drawing setting worked through in [applications and examples](!#11).' },
+    ],
+  };
+
    return {
       props:{
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
          sectionsContent,
@@ -1729,7 +1762,7 @@ const hypergeometricExplanations = {
     }
    }
 
-export default function HypergeometricDistributionPage({
+export default function HypergeometricDistributionPage({ formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1936,8 +1969,16 @@ export default function HypergeometricDistributionPage({
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="hypergeometric-distribution-formula-summary"
+            title="Hypergeometric distribution at a glance"
+            source="/probability/distributions/discrete/hypergeometric"
+            related={{ href: '/probability/formulas', label: 'All probability formulas' }}
+            after={sectionsContent.obj16.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1946,6 +1987,15 @@ export default function HypergeometricDistributionPage({
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
+          <DiagramFrame
+            key={'obj17-mistakes'}
+            id="hypergeometric-pitfalls"
+            title="Common pitfalls with the hypergeometric distribution"
+            source="/probability/distributions/discrete/hypergeometric"
+            after={sectionsContent.obj17.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

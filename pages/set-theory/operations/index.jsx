@@ -2793,6 +2793,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -3184,9 +3185,10 @@ The symmetric difference with the empty set leaves a set unchanged: $A \\triangl
   },
   obj6: {
     title: `Summary: All Five Operations at a Glance`,
-    content: `
-The five operations introduced above share a uniform structure: each consumes one or two sets and returns a new set, defined by a precise membership condition. The capstone table below collects them all in one place — every operation with its [notation](!/math-symbols/set-theory), its membership rule, the result on a single worked example ($A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$, $U = \\{1, 2, 3, 4, 5\\}$), and its key algebraic properties.
-    `,
+    content: `This summary sets out the five operations of the page, one family each; the buttons above the cards show one family at a time. A line under each name says which elements the operation keeps, gives other ways its [notation](!/math-symbols/set-theory) is written, names any identity element and links to its section.
+
+Each family opens with the definition beside its result on one shared example in a universal set of the numbers one to five. Union, intersection and symmetric difference show their commutative and associative laws. The complement adds the double complement and two complement laws, and set difference becomes an intersection with a complement.`,
+    formulaSheetAfter: `The definitions are the safest test of any law: pick one element, see where it sits, and follow it through both sides. Union, intersection and symmetric difference can be reordered and regrouped freely, while set difference cannot, so its order has to be kept as written.`,
     before: ``,
     after: ``,
     link: '',
@@ -3394,8 +3396,49 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'union', name: 'Union', sub: 'Keeps the elements that belong to $A$ or $B$, the inclusive or; its identity element is $\\emptyset$. [Union](!#1) defines it and states its laws.', pairs: [
+        [{ formula: '$A \\cup B = \\{x : x \\in A \\text{ or } x \\in B\\}$', text: 'An element that lies in both sets is taken once.' },
+         { formula: '$A \\cup B = \\{1, 2, 3, 4, 5\\}$', text: 'The result for $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$.' }],
+        [{ formula: '$A \\cup B = B \\cup A$', text: 'Commutative: the order of the two sets does not matter.' },
+         { formula: '$(A \\cup B) \\cup C = A \\cup (B \\cup C)$', text: 'Associative: the brackets can move freely.' }],
+      ] },
+      { id: 'intersection', name: 'Intersection', sub: 'Keeps the elements that belong to both $A$ and $B$; its identity element is $U$. [Intersection](!#2) defines it and states its laws.', pairs: [
+        [{ formula: '$A \\cap B = \\{x : x \\in A \\text{ and } x \\in B\\}$', text: 'Only the shared elements survive.' },
+         { formula: '$A \\cap B = \\{3\\}$', text: 'The result for $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$.' }],
+        [{ formula: '$A \\cap B = B \\cap A$', text: 'Commutative: the order of the two sets does not matter.' },
+         { formula: '$(A \\cap B) \\cap C = A \\cap (B \\cap C)$', text: 'Associative: the brackets can move freely.' }],
+        [{ formula: '$A \\cap B = \\emptyset$', text: 'The result when $A$ and $B$ are disjoint.' }, ''],
+      ] },
+      { id: 'complement', name: 'Complement', sub: "Keeps the elements of $U$ that are not in $A$, from one set only; also written $A'$, $\\overline{A}$ or $U \\setminus A$. See [complement](!#3).", pairs: [
+        [{ formula: '$A^c = \\{x \\in U : x \\notin A\\}$', text: 'The complement depends on the universal set $U$.' },
+         { formula: '$A^c = \\{4, 5\\}$', text: 'The result for $A = \\{1, 2, 3\\}$ in $U = \\{1, 2, 3, 4, 5\\}$.' }],
+        [{ formula: '$(A^c)^c = A$', text: 'Taking the complement twice returns the original set.' }, ''],
+        [{ formula: '$A \\cup A^c = U$', text: 'A set and its complement together fill the universal set.' },
+         { formula: '$A \\cap A^c = \\emptyset$', text: 'A set and its complement share no element.' }],
+      ] },
+      { id: 'difference', name: 'Set difference', sub: 'Keeps the elements that are in $A$ but not in $B$; also written $A - B$. See [set difference](!#4).', pairs: [
+        [{ formula: '$A \\setminus B = \\{x : x \\in A \\text{ and } x \\notin B\\}$', text: 'Elements are only ever taken away from $A$.' },
+         { formula: '$A \\setminus B = \\{1, 2\\}, \\quad B \\setminus A = \\{4, 5\\}$', text: 'For $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$ the two orders differ, so difference is not commutative.' }],
+        [{ formula: '$A \\setminus B = A \\cap B^c$', text: 'A difference is an intersection with a complement.' }, ''],
+      ] },
+      { id: 'symmetric', name: 'Symmetric difference', sub: 'Keeps the elements that are in exactly one of $A$ and $B$; its identity element is $\\emptyset$. See [symmetric difference](!#5).', pairs: [
+        [{ formula: '$A \\triangle B = (A \\setminus B) \\cup (B \\setminus A)$', text: 'What each set has that the other lacks.' },
+         { formula: '$A \\triangle B = (A \\cup B) \\setminus (A \\cap B)$', text: 'The same set: the union with the overlap removed.' }],
+        [{ formula: '$A \\triangle B = \\{1, 2, 4, 5\\}$', text: 'The result for $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$.' },
+         { formula: '$A \\triangle A = \\emptyset$', text: 'A set leaves nothing when compared with itself.' }],
+        [{ formula: '$A \\triangle B = B \\triangle A$', text: 'Commutative: the order of the two sets does not matter.' },
+         { formula: '$(A \\triangle B) \\triangle C = A \\triangle (B \\triangle C)$', text: 'Associative: the brackets can move freely.' }],
+      ] },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
     pitfallData,
     sectionsContent,
     introContent,
@@ -3414,7 +3457,7 @@ const schemas = {
   }
 }
    }
-export default function SetOperationsPage({ pitfallData,seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SetOperationsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3602,11 +3645,16 @@ $$\\bigcup_{i=1}^{n} A_i = A_1 \\cup A_2 \\cup \\cdots \\cup A_n$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="set-operation-formula-summary"
+            title="Set operations and their laws"
+            source="/set-theory/operations"
+            related={{ href: '/set-theory/formulas', label: 'All set theory formulas' }}
+            after={sectionsContent.obj6.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
         ]
     },
 

@@ -1015,6 +1015,7 @@ import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationsh
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1641,9 +1642,10 @@ Even small sets have more partitions than a first glance suggests. The set $\\{1
   },
   obj6: {
     title: `Summary: How Sets Relate`,
-    content: `
-The five relationships introduced above describe the main ways sets can be related to one another — from identity, through size equivalence, through varying degrees of overlap, to the multi-set case of partitioning. The capstone table below collects them all with the defining condition, a worked example, and the key fact that distinguishes each relationship from the others.
-    `,
+    content: `This summary sets the five relationships of the page side by side, one card each. Every card gives the name of the relationship, its defining condition, a short example and a line on the fact that tells it apart from the others, with a link to the section that explains it.
+
+Equal sets have the same elements and are proved equal by showing that each is a subset of the other. Equivalent sets only have the same size, so equal sets are always equivalent but not the reverse. Disjoint sets share nothing, which probability calls mutually exclusive. Overlapping sets share something while each keeps elements of its own, and a partition cuts a set into non-empty pieces that do not overlap.`,
+    formulaSheetAfter: `To decide which relationship holds, check the conditions one at a time: the same elements, the same size, nothing in common, or a shared part with something left over on each side. A partition asks for all three of its conditions at once, and a single empty piece breaks it.`,
     before: ``,
     after: ``,
     link: '',
@@ -1880,8 +1882,26 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Equal sets', formula: '$A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$', example: '$\\{1, 2, 3\\} = \\{3, 1, 2\\}$',
+        text: 'The same elements, in any order. Equality is proved by mutual [subset](!/set-theory/subsets) containment, $A \\subseteq B$ and $B \\subseteq A$, as [equal sets](!#1) shows.' },
+      { name: 'Equivalent sets', formula: '$|A| = |B|$', example: '$\\{a, b, c\\} \\sim \\{1, 2, 3\\}, \\quad \\mathbb{N} \\sim \\mathbb{Z}$',
+        text: 'The same [cardinality](!/set-theory/cardinality), written $A \\sim B$. Equal sets are always equivalent, but not the other way around ([equivalent sets](!#2)).' },
+      { name: 'Disjoint sets', formula: '$A \\cap B = \\emptyset$', example: '$\\{1, 2, 3\\}$ and $\\{4, 5, 6\\}$; the evens and the odds',
+        text: 'No common elements; for more sets, $A_i \\cap A_j = \\emptyset$ for every pair. In [probability](!/probability/events) such sets are called mutually exclusive, as [disjoint sets](!#3) notes.' },
+      { name: 'Overlapping sets', formula: '$A \\cap B \\neq \\emptyset \\quad \\text{and} \\quad A \\not\\subseteq B \\quad \\text{and} \\quad B \\not\\subseteq A$', example: '$\\{1, 2, 3\\}$ and $\\{2, 3, 4\\}$',
+        text: 'Both $A \\setminus B$ and $B \\setminus A$ are non-empty: the circles meet in a lens-shaped region of the Venn diagram, as [overlapping sets](!#4) shows.' },
+      { name: 'Partition of S', formula: '$A_1 \\cup A_2 \\cup \\cdots \\cup A_n = S$', restriction: '$A_i \\neq \\emptyset$ for all $i$; $A_i \\cap A_j = \\emptyset$ for $i \\neq j$', example: 'the evens and the odds of $\\mathbb{Z}$; the residue classes mod $n$',
+        text: 'The sets $A_1, A_2, \\ldots, A_n$ partition $S$: non-empty, pairwise disjoint subsets whose union is $S$, so every element of $S$ belongs to exactly one piece ([partitions](!#5)).' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1904,7 +1924,7 @@ const schemas = {
 
  
 
-export default function SetRelationshipsPage({ pitfallData,demoUnits, seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
+export default function SetRelationshipsPage({ formulaSummaryData, pitfallData,demoUnits, seoData, sectionsContent, introContent, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2064,11 +2084,16 @@ Showing $A \\subseteq B$ for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$ and stoppi
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="set-relationship-formula-summary"
+            title="How sets relate"
+            source="/set-theory/relationships"
+            related={{ href: '/set-theory/formulas', label: 'All set theory formulas' }}
+            after={sectionsContent.obj6.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     // {

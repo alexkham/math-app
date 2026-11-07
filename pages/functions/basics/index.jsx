@@ -899,6 +899,7 @@ import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/Taxon
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1238,7 +1239,7 @@ The test works because a vertical line consists of all points with a fixed $x$-v
 
 @academic[pitfall,aside:true,width:35%:Testing with horizontal lines
 Checking $y = x^2$ with the horizontal line $y = 4$ finds two crossings, at $x = -2$ and $x = 2$, and rejects the graph. Two inputs sharing the output $4$ is allowed, so the graph is still a function; only vertical lines decide it.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-testing-with-horizontal-lines)]@
 
 A parabola opening upward passes the test: every vertical line hits it at most once. A circle fails: vertical lines through the interior hit it twice. A horizontal line passes: each vertical line intersects it exactly once. A vertical line fails spectacularly: a single vertical line intersects it infinitely many times.
 
@@ -1322,7 +1323,7 @@ $$f(a + 2) = (a + 2)^2 + 1 = a^2 + 4a + 4 + 1 = a^2 + 4a + 5$$]@
 
 @academic[pitfall,aside:true,width:35%:Squaring a sum term by term
 Writing $(a + 2)^2$ as $a^2 + 4$ gives $f(a + 2) = a^2 + 5$, which at $a = 1$ is $6$, not $f(3) = 10$. The square has a middle term: $(a + 2)^2 = a^2 + 4a + 4$, so $f(a + 2) = a^2 + 4a + 5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-a-sum-term-by-term)]@
 
 The parentheses around $a + 2$ are essential — without them, order of operations produces errors.
 
@@ -1360,7 +1361,7 @@ From an equation, consider whether solving for $y$ yields a unique value for eac
 
 @academic[pitfall,aside:true,width:35%:Dropping the negative root
 Solving $y^2 = x$ as $y = \\sqrt{x}$ keeps one root and makes the equation look like a function. At $x = 9$ both $y = 3$ and $y = -3$ satisfy it, since $y = \\pm\\sqrt{x}$; it does not define $y$ as a function of $x$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-negative-root)]@
 
 Solving for $y$ is where the equation test is decided. What matters is how many values of $y$ the solved form returns for a single $x$: exactly one for every $x$ means a function, two or more for any $x$ means a relation that is not a function.
 
@@ -1384,7 +1385,7 @@ The $y$-intercept is the output when the input is zero, namely $f(0)$. On a grap
 
 @academic[pitfall,aside:true,width:35%:Confusing zeros with the y-intercept
 Answering "find the zeros of $f(x) = x^2 - 5x + 6$" with $f(0) = 6$ finds the $y$-intercept instead. The zeros solve $f(x) = 0$: $(x - 2)(x - 3) = 0$, so $x = 2$ and $x = 3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-confusing-zeros-with-the-y-intercept)]@
 
 Zeros and the $y$-intercept both involve setting something equal to zero, which is why they sit side by side here. For zeros, the output is set to $0$ and the equation is solved for the input; for the $y$-intercept, the input is set to $0$ and the output is computed. On a graph, the first are read on the horizontal axis, the second on the vertical one.
 
@@ -1406,7 +1407,7 @@ A function $d(t)$ might give the position in meters, measured from the starting 
 
 @academic[pitfall,aside:true,width:35%:Reading function values backwards
 Reading $d(4) = 12$ as "after $12$ seconds the object has gone $4$ meters" swaps input and output. The input sits inside the parentheses, $t = 4$ seconds; the output is the distance, $12$ meters.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-function-values-backwards)]@
 
 Interpreting functions in context means translating between mathematical statements and real-world meaning. What does $f(5) = 20$ mean? What does it mean for the function to be increasing? What real-world constraint limits the domain?
 
@@ -1418,81 +1419,9 @@ Context also imposes restrictions absent from pure mathematics. Time cannot be n
 
   obj12: {
     title: `Common Pitfalls`,
-    content: `Six mistakes come up again and again in first work with functions. Five are marked where they happen in the sections above; rejecting a shared output is the one that **What is a Function** already points out. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Rejecting a shared output**
-
-When checking whether a rule is a function, two inputs with the same output are counted as a violation. The definition restricts each input to one output; it says nothing against an output being reached more than once.
-
-Wrong working: for $f(x) = x^2$, $f(2) = 4$ and $f(-2) = 4$, so one output comes from two inputs and $f$ is declared not a function.
-
-Right working: each input has exactly one output, $2 \\mapsto 4$ and $-2 \\mapsto 4$, so $f$ is a function. In the same way $\\{(2, 5), (3, 7), (4, 5)\\}$ is a function even though $5$ appears twice.
-
-Why it happens: the condition is remembered as "one input, one output" and then applied in both directions. The two-way version is a different, stronger property, being one-to-one, which matters later for inverses.
-
-How to check: look only for a repeated input with different outputs. Repeated outputs never decide the question.
-
-**Testing with horizontal lines**
-
-The line test is run with horizontal lines instead of vertical ones. A horizontal line collects points with the same $y$-value, so two crossings mean two inputs share one output, which a function is allowed to do.
-
-Wrong working: the line $y = 4$ meets $y = x^2$ at $(-2, 4)$ and $(2, 4)$; two crossings, so the graph is rejected.
-
-Right working: a vertical line $x = c$ meets $y = x^2$ only at $(c, c^2)$, one point for every $c$, so $y = x^2$ is a function.
-
-Why it happens: the horizontal line test looks the same and is taught soon after, as the test for one-to-one functions.
-
-How to check: ask what the line holds fixed. A vertical line fixes the input $x$, and the definition of a function is a statement about one input at a time.
-
-**Squaring a sum term by term**
-
-When a function is evaluated at an expression, the substitution is done correctly but the bracket is expanded as if $(a + 2)^2$ were $a^2 + 2^2$.
-
-Wrong working: $f(a + 2) = (a + 2)^2 + 1 = a^2 + 4 + 1 = a^2 + 5$.
-
-Right working: $(a + 2)^2 = (a + 2)(a + 2) = a^2 + 2a + 2a + 4 = a^2 + 4a + 4$, so $f(a + 2) = a^2 + 4a + 5$.
-
-Why it happens: squaring does pass through products, $(2a)^2 = 4a^2$, and the same move is carried over to sums, where it fails.
-
-How to check: substitute a number. At $a = 1$ the input is $3$ and $f(3) = 3^2 + 1 = 10$; the right result gives $1 + 4 + 5 = 10$, the wrong one gives $1 + 5 = 6$.
-
-**Dropping the negative root**
-
-To test an equation, it is solved for $y$, but an even root is taken with only its positive value, so the equation seems to give one $y$ per $x$.
-
-Wrong working: $y^2 = x$ gives $y = \\sqrt{x}$, one value for each $x$, so the equation is declared a function.
-
-Right working: $y^2 = x$ gives $y = \\pm\\sqrt{x}$. At $x = 9$ both $y = 3$ and $y = -3$ satisfy $y^2 = 9$: one input, two outputs, so $y$ is not a function of $x$. The equation $y = \\sqrt{x}$ on its own is a function; it describes only the upper half of the curve.
-
-Why it happens: the radical sign means the non-negative root, so writing $\\sqrt{x}$ quietly discards the second solution.
-
-How to check: pick one $x > 0$ and substitute both candidate values of $y$ into the original equation. If both work, the equation is not a function of $x$.
-
-**Confusing zeros with the y-intercept**
-
-Both ideas involve zero. Asked for the zeros, $f(0)$ is computed, which sets the input to zero instead of the output.
-
-Wrong working: for $f(x) = x^2 - 5x + 6$, $f(0) = 0 - 0 + 6 = 6$, so the zero is given as $6$.
-
-Right working: solve $x^2 - 5x + 6 = 0$. Factoring gives $(x - 2)(x - 3) = 0$, so $x = 2$ or $x = 3$; indeed $f(2) = 4 - 10 + 6 = 0$ and $f(3) = 9 - 15 + 6 = 0$. The value $6$ is the $y$-intercept, the point $(0, 6)$.
-
-Why it happens: the word "zero" appears in both definitions, once for the output and once for the input.
-
-How to check: a zero is an input, and substituting it must give $0$. Here $f(6) = 36 - 30 + 6 = 12$, not $0$, so $6$ is not a zero.
-
-**Reading function values backwards**
-
-In a statement such as $d(4) = 12$ from a real context, the two numbers are swapped: the output is read as the input and the other way round.
-
-Wrong working: $d(4) = 12$ is read as "after $12$ seconds the object has gone $4$ meters", which is the statement $d(12) = 4$.
-
-Right working: the number inside the parentheses is the input, $t = 4$ seconds, and the value of the function is the output, $12$ meters. So after $4$ seconds the object has gone $12$ meters. In the same way $C(100) = 450$ says that $100$ items cost $450$ dollars.
-
-Why it happens: in everyday speech the quantity being asked about often comes first, and once both are plain numbers nothing on the page says which is which.
-
-How to check: attach the units. The input of $d$ is measured in seconds and its output in meters, so $d(4) = 12$ reads "at $4$ seconds, $12$ meters". The domain helps too: if the motion is observed on $[0, 10]$, a time of $12$ seconds is not even an allowed input.`,
+    content: `Six mistakes come up again and again in first work with functions. Five are marked where they happen in the sections above; rejecting a shared output is the one that **What is a Function** already points out. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip misreads the definition of a function. Only an input with two outputs disqualifies a relation, so shared outputs and horizontal lines decide nothing; $(a + 2)^2$ has a middle term; $y^2 = x$ gives two values of $y$; a zero is an input that gives $0$, not the $y$-intercept; and in $d(4) = 12$ the number in brackets is the input. Substituting a number, or attaching the units, catches each slip.`,
     link: '',
   },
 
@@ -1745,8 +1674,52 @@ const faqQuestions = {
     ],
   };
 
+  // MistakeFix batch 10, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj12 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'rejecting-a-shared-output', name: `Rejecting a shared output`, errorAt: 1,
+        what: `When checking whether a rule is a function, two inputs with the same output are counted as a violation. The definition restricts each input to one output; it says nothing against an output being reached more than once.`,
+        wrong: [`For $f(x) = x^2$, $f(2) = 4$ and $f(-2) = 4$,`, `So one output comes from two inputs and $f$ is declared not a function.`],
+        right: [`For $f(x) = x^2$, $f(2) = 4$ and $f(-2) = 4$,`, `Each input has exactly one output, $2 \\mapsto 4$ and $-2 \\mapsto 4$, so $f$ is a function. In the same way $\\{(2, 5), (3, 7), (4, 5)\\}$ is a function even though $5$ appears twice.`],
+        why: `The condition is remembered as "one input, one output" and then applied in both directions. The two-way version is a different, stronger property, being one-to-one, which matters later for inverses.`,
+        check: `Look only for a repeated input with different outputs. Repeated outputs never decide the question.` },
+      { id: 'testing-with-horizontal-lines', name: `Testing with horizontal lines`, errorAt: 0,
+        what: `The line test is run with horizontal lines instead of vertical ones. A horizontal line collects points with the same $y$-value, so two crossings mean two inputs share one output, which a function is allowed to do.`,
+        wrong: [`The line $y = 4$ meets $y = x^2$ at $(-2, 4)$ and $(2, 4)$; two crossings, so the graph is rejected.`],
+        right: [`A vertical line $x = c$ meets $y = x^2$ only at $(c, c^2)$, one point for every $c$, so $y = x^2$ is a function.`],
+        why: `The horizontal line test looks the same and is taught soon after, as the test for one-to-one functions.`,
+        check: `Ask what the line holds fixed. A vertical line fixes the input $x$, and the definition of a function is a statement about one input at a time.` },
+      { id: 'squaring-a-sum-term-by-term', name: `Squaring a sum term by term`, errorAt: 0,
+        what: `When a function is evaluated at an expression, the substitution is done correctly but the bracket is expanded as if $(a + 2)^2$ were $a^2 + 2^2$.`,
+        wrong: [`$f(a + 2) = (a + 2)^2 + 1 = a^2 + 4 + 1 = a^2 + 5$.`],
+        right: [`$(a + 2)^2 = (a + 2)(a + 2) = a^2 + 2a + 2a + 4 = a^2 + 4a + 4$, so $f(a + 2) = a^2 + 4a + 5$.`],
+        why: `Squaring does pass through products, $(2a)^2 = 4a^2$, and the same move is carried over to sums, where it fails.`,
+        check: `Substitute a number. At $a = 1$ the input is $3$ and $f(3) = 3^2 + 1 = 10$; the right result gives $1 + 4 + 5 = 10$, the wrong one gives $1 + 5 = 6$.` },
+      { id: 'dropping-the-negative-root', name: `Dropping the negative root`, errorAt: 0,
+        what: `To test an equation, it is solved for $y$, but an even root is taken with only its positive value, so the equation seems to give one $y$ per $x$.`,
+        wrong: [`$y^2 = x$ gives $y = \\sqrt{x}$, one value for each $x$, so the equation is declared a function.`],
+        right: [`$y^2 = x$ gives $y = \\pm\\sqrt{x}$. At $x = 9$ both $y = 3$ and $y = -3$ satisfy $y^2 = 9$: one input, two outputs, so $y$ is not a function of $x$. The equation $y = \\sqrt{x}$ on its own is a function; it describes only the upper half of the curve.`],
+        why: `The radical sign means the non-negative root, so writing $\\sqrt{x}$ quietly discards the second solution.`,
+        check: `Pick one $x > 0$ and substitute both candidate values of $y$ into the original equation. If both work, the equation is not a function of $x$.` },
+      { id: 'confusing-zeros-with-the-y-intercept', name: `Confusing zeros with the y-intercept`, errorAt: 1,
+        what: `Both ideas involve zero. Asked for the zeros, $f(0)$ is computed, which sets the input to zero instead of the output.`,
+        wrong: [`For $f(x) = x^2 - 5x + 6$, $f(0) = 0 - 0 + 6 = 6$,`, `So the zero is given as $6$.`],
+        right: [`For $f(x) = x^2 - 5x + 6$, $f(0) = 0 - 0 + 6 = 6$,`, `Solve $x^2 - 5x + 6 = 0$. Factoring gives $(x - 2)(x - 3) = 0$, so $x = 2$ or $x = 3$; indeed $f(2) = 4 - 10 + 6 = 0$ and $f(3) = 9 - 15 + 6 = 0$. The value $6$ is the $y$-intercept, the point $(0, 6)$.`],
+        why: `The word "zero" appears in both definitions, once for the output and once for the input.`,
+        check: `A zero is an input, and substituting it must give $0$. Here $f(6) = 36 - 30 + 6 = 12$, not $0$, so $6$ is not a zero.` },
+      { id: 'reading-function-values-backwards', name: `Reading function values backwards`, errorAt: 0,
+        what: `In a statement such as $d(4) = 12$ from a real context, the two numbers are swapped: the output is read as the input and the other way round.`,
+        wrong: [`$d(4) = 12$ is read as "after $12$ seconds the object has gone $4$ meters", which is the statement $d(12) = 4$.`],
+        right: [`The number inside the parentheses is the input, $t = 4$ seconds, and the value of the function is the output, $12$ meters. So after $4$ seconds the object has gone $12$ meters. In the same way $C(100) = 450$ says that $100$ items cost $450$ dollars.`],
+        why: `In everyday speech the quantity being asked about often comes first, and once both are plain numbers nothing on the page says which is which.`,
+        check: `Attach the units. The input of $d$ is measured in seconds and its output in meters, so $d(4) = 12$ reads "at $4$ seconds, $12$ meters". The domain helps too: if the motion is observed on $[0, 10]$, a time of $12$ seconds is not even an allowed input.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     functionTopicsOutline,
     representationTree,
          sectionsContent,
@@ -1772,7 +1745,7 @@ const faqQuestions = {
     }
    }
 
-export default function FunctionsBasicsPage({functionTopicsOutline, representationTree, 
+export default function FunctionsBasicsPage({ pitfallData,functionTopicsOutline, representationTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1988,6 +1961,15 @@ Formulas are finite strings of symbols, so they can be listed one by one; the fu
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-mistakes'}
+            id="function-basics-pitfalls"
+            title="Common pitfalls in first work with functions"
+            source="/functions/basics"
+            after={sectionsContent.obj12.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

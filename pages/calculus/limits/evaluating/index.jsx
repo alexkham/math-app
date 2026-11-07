@@ -19,6 +19,8 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -364,7 +366,7 @@ $$= \\lim_{x \\to 2} (x + 2) = 4$$]@
 
 @academic[pitfall,aside:true,width:35%:Cancelling terms instead of factors
 Striking out an $x$ in $x^2$ and in $x - 2$ turns $\\frac{x^2 - 4}{x - 2}$ into $\\frac{x - 4}{-2}$, which tends to $1$ as $x \\to 2$. Factoring first gives $\\frac{(x - 2)(x + 2)}{x - 2} = x + 2$, and the limit is $4$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-cancelling-terms-instead-of-factors)]@
 
 The cancellation is valid because the limit considers $x$ near $2$, not at $2$. For $x \\neq 2$, the factor $(x - 2)$ is nonzero and cancels legitimately.
 
@@ -399,7 +401,7 @@ $$= \\lim_{x \\to 0} \\frac{1}{\\sqrt{x + 1} + 1} = \\frac{1}{2}$$]@
 
 @academic[pitfall,aside:true,width:35%:Multiplying only the numerator
 Multiplying just the top by $\\sqrt{x + 1} + 1$ turns the expression into $\\frac{x}{x} = 1$, a different function, and gives the limit $1$. Multiplying top and bottom keeps the value: $\\frac{1}{\\sqrt{x + 1} + 1} \\to \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-multiplying-only-the-numerator)]@
 
 The factor $\\dfrac{\\sqrt{x + 1} + 1}{\\sqrt{x + 1} + 1}$ equals $1$ for every $x$ near $0$, so multiplying by it changes the form of the expression and not its value. What the new form gains is the difference of squares in the numerator: the radical disappears, and the factor $x$ that caused the $0/0$ comes out into the open, where it can be cancelled against the $x$ in the denominator.
 `,
@@ -476,7 +478,7 @@ $$= \\frac{3 + 0 - 0}{2 - 0} = \\frac{3}{2}$$]@
 
 @academic[pitfall,aside:true,width:35%:Setting infinity over infinity to 1
 Reading $\\frac{\\infty}{\\infty}$ as $1$ gives $1$ for $\\lim_{x \\to \\infty} \\frac{3x^2 + 5x - 1}{2x^2 - 7}$. At $x = 1000$ the quotient is already about $1.50$; dividing by $x^2$ gives the limit $\\frac{3}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-setting-infinity-over-infinity-to-1)]@
 
 This technique isolates the dominant terms that control behavior at infinity.
 
@@ -506,7 +508,7 @@ $$= 3 \\cdot \\lim_{u \\to 0} \\frac{\\sin u}{u} = 3 \\cdot 1 = 3$$]@
 
 @academic[pitfall,aside:true,width:35%:Using the special limit without matching the argument
 Treating $\\frac{\\sin 3x}{x}$ as $\\frac{\\sin u}{u}$ gives $1$, but the denominator is $x$, not $3x$. At $x = 0.01$ the quotient is about $2.9996$; matching the argument gives $3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-special-limit-without-matching-the-argument)]@
 
 The factor $\\dfrac{3}{3}$ equals $1$, so it changes the form of the expression and not its value. Its job is to make the denominator equal to the argument of the sine, so that the substitution $u = 3x$ produces the standard form exactly. The factor $3$ left outside the limit is what carries the answer.
 `,
@@ -531,7 +533,7 @@ $$\\lim_{x \\to 0^+} \\frac{|x|}{x} = 1 \\qquad \\lim_{x \\to 0^-} \\frac{|x|}{x
 
 @academic[pitfall,aside:true,width:35%:Dropping the absolute value
 Replacing $|x|$ by $x$ simplifies $\\frac{|x|}{x}$ to $1$ and gives the limit $1$. That holds only for $x > 0$; for $x < 0$, $|x| = -x$ and the quotient is $-1$, so the left-hand limit is $-1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-absolute-value)]@
 
 The one-sided limits differ, so the two-sided limit does not exist.
 
@@ -611,83 +613,9 @@ Every limit evaluation problem on this page follows the same arc: try direct sub
   },
   obj14: {
     title: `Common Pitfalls`,
-    content: `
-Six mistakes cause most wrong answers when limits are evaluated by algebra. Five of them are marked where they happen in the sections above; the first is the one the section on failed substitution warns against. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Reading 0/0 as the answer**
-
-Substitution gives $\\dfrac{0}{0}$, and that result is turned into an answer: $0$ because the numerator is $0$, $1$ because the two parts are equal, or "does not exist" because of the division by zero.
-
-Wrong working: substituting $x = 2$ into $\\dfrac{x^2 - 4}{x - 2}$ gives $\\dfrac{0}{0}$, so $\\lim_{x \\to 2} \\dfrac{x^2 - 4}{x - 2} = 0$.
-
-Right working: $\\dfrac{0}{0}$ only says that more work is needed. Factoring gives $\\lim_{x \\to 2} \\dfrac{(x - 2)(x + 2)}{x - 2} = \\lim_{x \\to 2} (x + 2) = 4$.
-
-Why it happens: $\\dfrac{0}{0}$ looks like a number, and three familiar rules each seem to apply to it: $0$ over anything is $0$, anything over itself is $1$, and division by $0$ is undefined. They contradict each other, which is exactly why the form decides nothing.
-
-How to check: evaluate the expression at points close to $2$. At $x = 2.01$ it gives $4.01$ and at $x = 1.99$ it gives $3.99$, far from $0$ and closing in on $4$.
-
-**Cancelling terms instead of factors**
-
-In a fraction such as $\\dfrac{x^2 - 4}{x - 2}$, matching symbols are struck out of single terms of the numerator and the denominator, before anything has been factored.
-
-Wrong working: strike one $x$ out of $x^2$ and the $x$ out of $x - 2$, leaving $\\dfrac{x - 4}{-2}$. Substituting $x = 2$ gives $\\dfrac{-2}{-2} = 1$.
-
-Right working: factor first. $\\dfrac{x^2 - 4}{x - 2} = \\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$ for $x \\neq 2$, and the limit is $2 + 2 = 4$.
-
-Why it happens: cancelling works on factors, $\\dfrac{x \\cdot a}{x \\cdot b} = \\dfrac{a}{b}$, and the same crossing out looks just as natural inside sums, where it does not hold.
-
-How to check: compare the original and the rewritten expression at any convenient value. At $x = 3$ the original gives $\\dfrac{9 - 4}{3 - 2} = 5$, the wrong form gives $\\dfrac{3 - 4}{-2} = 0.5$, and $x + 2$ gives $5$.
-
-**Multiplying only the numerator**
-
-When rationalizing, the conjugate is multiplied into the numerator only. The expression that results is a different function, and its limit is a different number.
-
-Wrong working: $\\dfrac{(\\sqrt{x + 1} - 1)(\\sqrt{x + 1} + 1)}{x} = \\dfrac{(x + 1) - 1}{x} = \\dfrac{x}{x} = 1$, so the limit is $1$.
-
-Right working: multiply the numerator and the denominator by $\\sqrt{x + 1} + 1$, which multiplies the expression by $1$. Then $\\dfrac{x}{x(\\sqrt{x + 1} + 1)} = \\dfrac{1}{\\sqrt{x + 1} + 1}$, and the limit as $x \\to 0$ is $\\dfrac{1}{1 + 1} = \\dfrac{1}{2}$.
-
-Why it happens: the conjugate is thought of as a tool for removing the radical from the numerator, and the denominator, which has no radical, seems to need nothing.
-
-How to check: the rewritten expression must have the same value as the original at any allowed $x$. At $x = 3$ the original gives $\\dfrac{2 - 1}{3} = \\dfrac{1}{3}$; the right form gives $\\dfrac{1}{2 + 1} = \\dfrac{1}{3}$, the wrong form gives $1$.
-
-**Setting infinity over infinity to 1**
-
-As $x \\to \\infty$, the numerator and the denominator both grow without bound, and $\\dfrac{\\infty}{\\infty}$ is cancelled to $1$ as if $\\infty$ were a number.
-
-Wrong working: in $\\lim_{x \\to \\infty} \\dfrac{3x^2 + 5x - 1}{2x^2 - 7}$ both parts tend to $\\infty$, so the limit is $\\dfrac{\\infty}{\\infty} = 1$.
-
-Right working: divide every term by $x^2$. The expression becomes $\\dfrac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$, which tends to $\\dfrac{3}{2}$.
-
-Why it happens: a number divided by itself is $1$, and $\\infty$ is handled like a number. But the two infinities can grow at different rates: $\\dfrac{x^2}{x}$ is also of the form $\\dfrac{\\infty}{\\infty}$ and tends to $\\infty$, while $\\dfrac{x}{x^2}$ tends to $0$.
-
-How to check: evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{3004999}{1999993} \\approx 1.5025$, close to $1.5$ and not to $1$.
-
-**Using the special limit without matching the argument**
-
-The special limit $\\lim_{u \\to 0} \\dfrac{\\sin u}{u} = 1$ is applied to an expression that has the sine of one quantity over a different quantity.
-
-Wrong working: $\\lim_{x \\to 0} \\dfrac{\\sin 3x}{x} = 1$, by the special limit.
-
-Right working: the denominator has to match the argument of the sine. $\\dfrac{\\sin 3x}{x} = 3 \\cdot \\dfrac{\\sin 3x}{3x}$, and with $u = 3x$ the limit is $3 \\cdot 1 = 3$.
-
-Why it happens: the expression has the shape "sine of something over something", and the pattern is recognized by its shape before the two somethings are compared.
-
-How to check: evaluate at a small $x$. At $x = 0.01$, $\\dfrac{\\sin 0.03}{0.01} \\approx 2.9996$. For small angles $\\sin 3x \\approx 3x$, which also points to $3$.
-
-**Dropping the absolute value**
-
-The absolute value is removed as if $|x| = x$ for all $x$, so the expression is simplified to a single formula and only one limit is computed.
-
-Wrong working: $\\dfrac{|x|}{x} = \\dfrac{x}{x} = 1$, so $\\lim_{x \\to 0} \\dfrac{|x|}{x} = 1$.
-
-Right working: $|x| = x$ only for $x \\geq 0$. For $x > 0$ the quotient is $1$, and for $x < 0$ it is $\\dfrac{-x}{x} = -1$. The one-sided limits are $1$ and $-1$, so the two-sided limit does not exist.
-
-Why it happens: the values pictured for $x$ are usually positive, and for those the absolute value changes nothing.
-
-How to check: try one negative value. At $x = -0.1$ the quotient is $\\dfrac{0.1}{-0.1} = -1$, not $1$.
-`,
+    content: `Six mistakes cause most wrong answers when limits are evaluated by algebra. Five of them are marked where they happen in the sections above; the first is the one the section on failed substitution warns against. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip stops at the form of the limit instead of finding its value. $\\frac{0}{0}$ calls for factoring, factors cancel but terms do not, a conjugate multiplies the denominator too, $\\frac{\\infty}{\\infty}$ is settled by the leading terms, $\\frac{\\sin 3x}{x}$ tends to $3$, and $|x|$ is $-x$ for negative $x$. Evaluating at points close to the limit point catches each slip.`,
     link: ``
   }
 };
@@ -968,9 +896,73 @@ const schemas = {
         details: 'Treating $\\frac{\\sin 3x}{x}$ as $\\frac{\\sin u}{u}$ gives $1$, but the denominator is $x$, not $3x$. At $x = 0.01$ the quotient is about $2.9996$.' },
     ],
   };
+  // ScopeCard data (direct-substitution-scope); every fact is from the section text
+  const substitutionScope = {
+    header: { kicker: 'Evaluating limits', title: 'Direct substitution', lede: 'Try it first; read the result before trusting it.' },
+    rule: { name: 'Direct substitution', expr: '$\\lim_{x \\to a} f(x) = f(a)$', condition: '$f(a)$ is a finite number with no division by zero: $f$ continuous at $a$' },
+    inside: { title: 'Substitution gives the limit', items: [
+      { id: 'poly', expr: 'Polynomials', why: 'Always.' },
+      { id: 'rat', expr: 'Rational functions', why: 'When the denominator is nonzero at $a$.' },
+      { id: 'elem', expr: 'Exponential, logarithmic and trigonometric functions', why: 'At points in their domains.' },
+      { id: 'comb', expr: 'Sums, products and compositions of continuous functions', why: 'Continuity at $a$ makes the limit equal the function value.' },
+    ] },
+    outside: { title: 'Substitution fails', items: [
+      { id: 'zero', expr: '$\\lim_{x \\to 2} \\dfrac{x^2 - 4}{x - 2}$ gives $\\dfrac{0}{0}$', why: 'Indeterminate: the limit is not zero, not undefined, not nonexistent, just not yet determined.' },
+      { id: 'undef', expr: 'An undefined expression at $a$', why: 'Division by zero with a nonzero numerator, or a point outside the domain.' },
+    ] },
+    edgeCases: { badge: 'What 0/0 means', items: [
+      { id: 'factor', marker: '$0/0$', body: 'Numerator and denominator share a common factor of $(x - 2)$; removing it reveals the limit.' },
+    ] },
+  };
+
+
+  // MistakeFix batch 15, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj14 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'reading-0-0-as-the-answer', name: `Reading 0/0 as the answer`, errorAt: 0,
+        what: `Substitution gives $\\dfrac{0}{0}$, and that result is turned into an answer: $0$ because the numerator is $0$, $1$ because the two parts are equal, or "does not exist" because of the division by zero.`,
+        wrong: [`Substituting $x = 2$ into $\\dfrac{x^2 - 4}{x - 2}$ gives $\\dfrac{0}{0}$, so $\\lim_{x \\to 2} \\dfrac{x^2 - 4}{x - 2} = 0$.`],
+        right: [`$\\dfrac{0}{0}$ only says that more work is needed. Factoring gives $\\lim_{x \\to 2} \\dfrac{(x - 2)(x + 2)}{x - 2} = \\lim_{x \\to 2} (x + 2) = 4$.`],
+        why: `$\\dfrac{0}{0}$ looks like a number, and three familiar rules each seem to apply to it: $0$ over anything is $0$, anything over itself is $1$, and division by $0$ is undefined. They contradict each other, which is exactly why the form decides nothing.`,
+        check: `Evaluate the expression at points close to $2$. At $x = 2.01$ it gives $4.01$ and at $x = 1.99$ it gives $3.99$, far from $0$ and closing in on $4$.` },
+      { id: 'cancelling-terms-instead-of-factors', name: `Cancelling terms instead of factors`, errorAt: 0,
+        what: `In a fraction such as $\\dfrac{x^2 - 4}{x - 2}$, matching symbols are struck out of single terms of the numerator and the denominator, before anything has been factored.`,
+        wrong: [`Strike one $x$ out of $x^2$ and the $x$ out of $x - 2$, leaving $\\dfrac{x - 4}{-2}$. Substituting $x = 2$ gives $\\dfrac{-2}{-2} = 1$.`],
+        right: [`Factor first. $\\dfrac{x^2 - 4}{x - 2} = \\dfrac{(x - 2)(x + 2)}{x - 2} = x + 2$ for $x \\neq 2$, and the limit is $2 + 2 = 4$.`],
+        why: `Cancelling works on factors, $\\dfrac{x \\cdot a}{x \\cdot b} = \\dfrac{a}{b}$, and the same crossing out looks just as natural inside sums, where it does not hold.`,
+        check: `Compare the original and the rewritten expression at any convenient value. At $x = 3$ the original gives $\\dfrac{9 - 4}{3 - 2} = 5$, the wrong form gives $\\dfrac{3 - 4}{-2} = 0.5$, and $x + 2$ gives $5$.` },
+      { id: 'multiplying-only-the-numerator', name: `Multiplying only the numerator`, errorAt: 0,
+        what: `When rationalizing, the conjugate is multiplied into the numerator only. The expression that results is a different function, and its limit is a different number.`,
+        wrong: [`$\\dfrac{(\\sqrt{x + 1} - 1)(\\sqrt{x + 1} + 1)}{x} = \\dfrac{(x + 1) - 1}{x} = \\dfrac{x}{x} = 1$, so the limit is $1$.`],
+        right: [`Multiply the numerator and the denominator by $\\sqrt{x + 1} + 1$, which multiplies the expression by $1$. Then $\\dfrac{x}{x(\\sqrt{x + 1} + 1)} = \\dfrac{1}{\\sqrt{x + 1} + 1}$, and the limit as $x \\to 0$ is $\\dfrac{1}{1 + 1} = \\dfrac{1}{2}$.`],
+        why: `The conjugate is thought of as a tool for removing the radical from the numerator, and the denominator, which has no radical, seems to need nothing.`,
+        check: `The rewritten expression must have the same value as the original at any allowed $x$. At $x = 3$ the original gives $\\dfrac{2 - 1}{3} = \\dfrac{1}{3}$; the right form gives $\\dfrac{1}{2 + 1} = \\dfrac{1}{3}$, the wrong form gives $1$.` },
+      { id: 'setting-infinity-over-infinity-to-1', name: `Setting infinity over infinity to 1`, errorAt: 0,
+        what: `As $x \\to \\infty$, the numerator and the denominator both grow without bound, and $\\dfrac{\\infty}{\\infty}$ is cancelled to $1$ as if $\\infty$ were a number.`,
+        wrong: [`In $\\lim_{x \\to \\infty} \\dfrac{3x^2 + 5x - 1}{2x^2 - 7}$ both parts tend to $\\infty$, so the limit is $\\dfrac{\\infty}{\\infty} = 1$.`],
+        right: [`Divide every term by $x^2$. The expression becomes $\\dfrac{3 + \\frac{5}{x} - \\frac{1}{x^2}}{2 - \\frac{7}{x^2}}$, which tends to $\\dfrac{3}{2}$.`],
+        why: `A number divided by itself is $1$, and $\\infty$ is handled like a number. But the two infinities can grow at different rates: $\\dfrac{x^2}{x}$ is also of the form $\\dfrac{\\infty}{\\infty}$ and tends to $\\infty$, while $\\dfrac{x}{x^2}$ tends to $0$.`,
+        check: `Evaluate at a large $x$. At $x = 1000$ the quotient is $\\dfrac{3004999}{1999993} \\approx 1.5025$, close to $1.5$ and not to $1$.` },
+      { id: 'using-the-special-limit-without-matching-the-argument', name: `Using the special limit without matching the argument`, errorAt: 0,
+        what: `The special limit $\\lim_{u \\to 0} \\dfrac{\\sin u}{u} = 1$ is applied to an expression that has the sine of one quantity over a different quantity.`,
+        wrong: [`$\\lim_{x \\to 0} \\dfrac{\\sin 3x}{x} = 1$, by the special limit.`],
+        right: [`The denominator has to match the argument of the sine. $\\dfrac{\\sin 3x}{x} = 3 \\cdot \\dfrac{\\sin 3x}{3x}$, and with $u = 3x$ the limit is $3 \\cdot 1 = 3$.`],
+        why: `The expression has the shape "sine of something over something", and the pattern is recognized by its shape before the two somethings are compared.`,
+        check: `Evaluate at a small $x$. At $x = 0.01$, $\\dfrac{\\sin 0.03}{0.01} \\approx 2.9996$. For small angles $\\sin 3x \\approx 3x$, which also points to $3$.` },
+      { id: 'dropping-the-absolute-value', name: `Dropping the absolute value`, errorAt: 0,
+        what: `The absolute value is removed as if $|x| = x$ for all $x$, so the expression is simplified to a single formula and only one limit is computed.`,
+        wrong: [`$\\dfrac{|x|}{x} = \\dfrac{x}{x} = 1$, so $\\lim_{x \\to 0} \\dfrac{|x|}{x} = 1$.`],
+        right: [`$|x| = x$ only for $x \\geq 0$. For $x > 0$ the quotient is $1$, and for $x < 0$ it is $\\dfrac{-x}{x} = -1$. The one-sided limits are $1$ and $-1$, so the two-sided limit does not exist.`],
+        why: `The values pictured for $x$ are usually positive, and for those the absolute value changes nothing.`,
+        check: `Try one negative value. At $x = -0.1$ the quotient is $\\dfrac{0.1}{-0.1} = -1$, not $1$.` },
+    ],
+  };
 
 return {
   props: {
+    pitfallData,
+      substitutionScope,
     demoUnits,
     conceptIntroFigures,
     factorCancelSteps,
@@ -996,7 +988,9 @@ return {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures, factorCancelSteps, conjugateLimitSteps, expandSimplifySteps, strategicOneSteps, knownLimitSteps}) {
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function PageTemplate({ pitfallData,substitutionScope, seoData, sectionsContent, introContent, obj1Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures, factorCancelSteps, conjugateLimitSteps, expandSimplifySteps, strategicOneSteps, knownLimitSteps}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1091,6 +1085,16 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
           <div key={'unit-holeLimit'} dangerouslySetInnerHTML={{ __html: demoUnits.holeLimit }} />,
           `Factoring in section 4 removes the common factor x − 2 and fills in the value 4.`,
           `@academic[punchline:A $0/0$ from substitution decides nothing: the limit has to be read from the values near the point.]@`,
+          <DiagramFrame
+            key={'obj2-scope'}
+            id="direct-substitution-scope"
+            title="Where direct substitution works and where it stops"
+            source="/calculus/limits/evaluating"
+            before={`The card draws the line around direct substitution: the cases where plugging in $a$ gives the limit, and the one outcome that means more work.`}
+            after={`A $0/0$ result is not an answer. It says the expression’s behaviour near $a$ is not yet determined.`}
+          >
+            <ScopeCard data={substitutionScope} variant="boundary" theme={scopeTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1291,6 +1295,15 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'obj14-mistakes'}
+            id="evaluating-limit-pitfalls"
+            title="Common pitfalls in evaluating limits"
+            source="/calculus/limits/evaluating"
+            after={sectionsContent.obj14.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

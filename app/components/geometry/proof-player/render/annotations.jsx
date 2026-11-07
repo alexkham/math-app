@@ -5,11 +5,13 @@
 //   ticks       of: [a, b], n   — equal-length marks
 //   rightAngle  at, from, to    — square corner marker
 //   parallel    of: [a, b], n   — chevrons along a segment
+//   sideLabel   of: [a, b], text — a name (a, b, c) beside a segment, pushed
+//               away from the figure's centre, or to a fixed side (±1)
 // ===========================================================
 
 import React from 'react';
 import { unit, mid } from '../engine/math';
-import { PALETTE, colorOf } from './primitives';
+import { PALETTE, SERIF, colorOf } from './primitives';
 
 const markStroke = (o, hl) => ({
   stroke: hl ? PALETTE.hl : colorOf(o.color, PALETTE.ink),
@@ -65,4 +67,27 @@ export function ParallelArrows({ o, hl }) {
     );
   }
   return <g>{marks}</g>;
+}
+
+export function SideLabel({ o, hl, ctx }) {
+  const [p, q] = o.pts;
+  const m = mid(p, q);
+  const off = o.offset || 16;
+  let n;
+  if (o.side) {
+    const u = unit(p, q);
+    n = { x: u.y * o.side, y: -u.x * o.side };
+  } else {
+    n = unit(ctx.center, m);
+  }
+  return (
+    <text
+      x={m.x + n.x * off} y={m.y + n.y * off}
+      textAnchor="middle" dominantBaseline="central"
+      fontFamily={SERIF} fontStyle="italic" fontSize={o.size || 16} fontWeight={600}
+      fill={hl ? PALETTE.hl : colorOf(o.color, PALETTE.ink)}
+    >
+      {o.text}
+    </text>
+  );
 }

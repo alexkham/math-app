@@ -2836,6 +2836,8 @@ import luDiagrams from '@/app/components/linear-algebra copy/matrix/luDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
+import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -3309,7 +3311,7 @@ Verification: $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \
 
 @academic[pitfall,aside:true,width:35%:Storing the negated multiplier
 Writing $-2$, $1$, $3$ below the diagonal because those are the amounts added gives $L = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & 3 & 1 \\end{pmatrix}$ and $LU = \\begin{pmatrix} 2 & 1 & -1 \\\\ -4 & -4 & 6 \\\\ 2 & -5 & 25 \\end{pmatrix} \\neq A$. The entries of $L$ are the multipliers $m_{21} = 2$, $m_{31} = -1$, $m_{32} = -3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-storing-the-negated-multiplier)]@
 
 Reading $L$ off the elimination takes no extra arithmetic. Each multiplier is filed at the position of the zero it created: $m_{21}$ at $(2, 1)$, $m_{31}$ at $(3, 1)$ and $m_{32}$ at $(3, 2)$. Multiplying $L$ by $U$ then reverses the row operations one by one, which is why the product rebuilds $A$ exactly.
 
@@ -3355,7 +3357,7 @@ where $P$ is the product of all row-swap [permutation matrices](!/linear-algebra
 
 @academic[pitfall,aside:true,width:35%:Choosing the largest signed entry
 In a pivot column holding $2$ and $-5$, keeping $2$ because $2 > -5$ gives the multiplier $-5/2$, larger than $1$ in size. Partial pivoting compares $|2|$ with $|-5|$, swaps the $-5$ row up, and the multiplier becomes $2/(-5) = -2/5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-choosing-the-largest-signed-entry)]@
 
 Partial pivoting also improves numerical stability. Small pivots amplify rounding errors (dividing by a number near zero magnifies imprecision), and selecting the largest available pivot keeps the multipliers in $L$ bounded by $1$ in absolute value, limiting error accumulation.
 
@@ -3377,7 +3379,7 @@ Back substitution: solve $U\\mathbf{x} = \\mathbf{y}$ for $\\mathbf{x}$. Since $
 
 @academic[pitfall,aside:true,width:35%:Forgetting to permute the right-hand side
 For $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$, one swap gives $L = I$ and $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$. Solving with $\\mathbf{b} = (2, 4)$ instead of $P\\mathbf{b}$ gives $\\mathbf{x} = (0, 2)$, but $A\\mathbf{x} = (4, 2)$. With $P\\mathbf{b} = (4, 2)$, $\\mathbf{x} = (1, 1)$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-forgetting-to-permute-the-right-hand-side)]@
 
 The factorization itself costs $\\frac{2}{3}n^3$ operations. Each subsequent solve costs $O(n^2)$. For $k$ systems with the same coefficient matrix but different right-hand sides $\\mathbf{b}_1, \\dots, \\mathbf{b}_k$: factor once at cost $\\frac{2}{3}n^3$, then solve $k$ times at cost $2kn^2$. When $k$ is large, the per-system cost drops to essentially $O(n^2)$ — far cheaper than $k$ independent eliminations at $\\frac{2}{3}n^3$ each.`,
     before: ``,
@@ -3395,7 +3397,7 @@ where $s$ is the number of row swaps recorded in $P$. Without pivoting ($s = 0$)
 
 @academic[pitfall,aside:true,width:35%:Dropping the sign of the row swaps
 For $A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, one swap gives $U = I$, and multiplying its pivots alone gives $\\det A = 1$. With $s = 1$, $\\det A = (-1)^1 \\cdot 1 = -1$, which matches $0 \\cdot 0 - 1 \\cdot 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-sign-of-the-row-swaps)]@
 
 This makes determinant computation essentially free once LU is available — just multiply the diagonal of $U$ and account for the sign. It is far more efficient than cofactor expansion, and it is the method every numerical library uses.`,
     before: ``,
@@ -3456,62 +3458,9 @@ These options can be set side by side on cost per system, cost amortized over ma
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `Four mistakes account for many wrong factorizations and wrong answers obtained from correct ones. Each is marked with a box where it happens in the sections above; here each is worked through in full.
-
-**Storing the negated multiplier**
-
-The row operation is written as "row $2$ minus $2$ times row $1$", and the $-2$ from that operation is copied into $L$. The same is done for every step, so every entry below the diagonal of $L$ has the wrong sign.
-
-Wrong working: for the worked example, the operations add $-2$ times row $1$ to row $2$, $1$ times row $1$ to row $3$ and $3$ times row $2$ to row $3$. Storing those amounts gives
-$$LU = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & 3 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 & -1 \\\\ -4 & -4 & 6 \\\\ 2 & -5 & 25 \\end{pmatrix} \\neq A$$
-
-Right working: $L$ holds the multipliers $m_{21} = 2$, $m_{31} = -1$, $m_{32} = -3$, the numbers that were subtracted.
-$$LU = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & -3 & 1 \\end{pmatrix}\\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix} = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$$
-
-Why it happens: the elementary matrix $E_1$ of the first step really does carry $-2$ in position $(2, 1)$. But $L$ is built from the inverses $E_i^{-1}$, and each inverse negates its multiplier.
-
-How to check: the first column of $LU$ is $u_{11}$ times the first column of $L$, and it must equal the first column of $A$. Here $2 \\cdot (1, 2, -1) = (2, 4, -2)$ is correct, while $2 \\cdot (1, -2, 1) = (2, -4, 2)$ is not.
-
-**Choosing the largest signed entry**
-
-Partial pivoting is applied by picking the largest number in the pivot column, comparing signed values instead of absolute values. A negative entry of large size is passed over.
-
-Wrong working: for $A = \\begin{pmatrix} 2 & 1 \\\\ -5 & 3 \\end{pmatrix}$, $2 > -5$, so row $1$ stays as the pivot row. The multiplier is $m_{21} = -5/2$, and
-$$L = \\begin{pmatrix} 1 & 0 \\\\ -5/2 & 1 \\end{pmatrix}, \\quad U = \\begin{pmatrix} 2 & 1 \\\\ 0 & 11/2 \\end{pmatrix}$$
-This is a valid $A = LU$, but not the partial-pivoting factorization: the multiplier exceeds $1$ in size.
-
-Right working: $|-5| > |2|$, so the rows are swapped and $PA = \\begin{pmatrix} -5 & 3 \\\\ 2 & 1 \\end{pmatrix}$. The multiplier is $m_{21} = 2/(-5) = -2/5$, and
-$$L = \\begin{pmatrix} 1 & 0 \\\\ -2/5 & 1 \\end{pmatrix}, \\quad U = \\begin{pmatrix} -5 & 3 \\\\ 0 & 11/5 \\end{pmatrix}$$
-
-Why it happens: "largest" is read as the largest number. When all entries in the column are positive the two readings agree, so the difference shows up only with negative entries.
-
-How to check: every multiplier stored in $L$ must satisfy $|l_{ij}| \\le 1$. A multiplier of larger size means a larger pivot was available and was skipped.
-
-**Forgetting to permute the right-hand side**
-
-After computing $PA = LU$, forward substitution is run on $\\mathbf{b}$ itself. The rows of $A$ were reordered, but the entries of $\\mathbf{b}$ were not.
-
-Wrong working: for $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$ and $\\mathbf{b} = (2, 4)$, one swap gives $P = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, $L = I$ and $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$. Solving $L\\mathbf{y} = \\mathbf{b}$ gives $\\mathbf{y} = (2, 4)$. Back substitution gives $2x_2 = 4$, so $x_2 = 2$, and $3x_1 + 2 = 2$, so $x_1 = 0$. But $A(0, 2) = (4, 2) \\neq \\mathbf{b}$.
-
-Right working: $P\\mathbf{b} = (4, 2)$, so $\\mathbf{y} = (4, 2)$. Then $2x_2 = 2$ gives $x_2 = 1$, and $3x_1 + 1 = 4$ gives $x_1 = 1$. Check: $A(1, 1) = (2, 4) = \\mathbf{b}$.
-
-Why it happens: $P$ is used during the factorization and then put aside, and $L$ and $U$ look as if they factor $A$ itself. They factor $PA$.
-
-How to check: substitute the answer into the original system $A\\mathbf{x} = \\mathbf{b}$, not into $LU\\mathbf{x} = \\mathbf{b}$.
-
-**Dropping the sign of the row swaps**
-
-The determinant is taken as the product of the pivots on the diagonal of $U$, and the row swaps recorded in $P$ are ignored.
-
-Wrong working: for $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$, one swap gives $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$, and the product of the pivots is $3 \\cdot 2 = 6$.
-
-Right working: with $s = 1$ swap, $\\det A = (-1)^1 \\cdot 3 \\cdot 2 = -6$. Directly, $\\det A = 0 \\cdot 1 - 2 \\cdot 3 = -6$.
-
-Why it happens: without pivoting the determinant is exactly the product of the pivots, and that is the form most often remembered. The sign factor only appears once $P$ is in play.
-
-How to check: count the swaps, or compute $\\det P$, which is $+1$ or $-1$. For a $2 \\times 2$ matrix, compare with $ad - bc$.`,
+    content: `Four mistakes account for many wrong factorizations and wrong answers obtained from correct ones. Each is marked with a box where it happens in the sections above; here each is worked through in full.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses track of what $L$, $U$ and $P$ record. $L$ stores the multiplier itself, not its negative; partial pivoting picks the entry of largest absolute value; $\\mathbf{b}$ is permuted by $P$ before forward substitution; and $\\det(A)$ is the product of the pivots times $\\det(P) = \\pm 1$. Multiplying $LU$ back, checking that every multiplier satisfies $|l_{ij}| \\le 1$, or substituting into the original system catches each slip.`,
     link: ``,
   },
 }
@@ -3671,10 +3620,70 @@ const schemas = {
       href: '/linear-algebra/visual-tools/lu-decomposition',
       linkText: 'LU decomposition visualizer',
     }),
+  };  // ScopeCard data (lu-without-pivoting-scope); every fact is from the section text
+  const luScope = {
+    header: { kicker: 'LU decomposition', title: 'LU without row swaps', lede: 'For an invertible $A$, the plain factorization exists exactly when no pivot is zero.' },
+    rule: { name: 'Plain LU', expr: '$A = LU$', condition: 'every leading principal submatrix of $A$ is nonsingular: the upper-left $k \\times k$ block has nonzero determinant for $k = 1, \\dots, n$' },
+    inside: { title: 'Factorization exists', items: [
+      { id: 'minors', expr: 'All leading principal minors nonzero', why: 'Elimination never meets a zero in a pivot position.' },
+    ] },
+    outside: { title: 'No plain LU', items: [
+      { id: 'swap', expr: '$A = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$', why: 'The $(1,1)$ entry is zero, and no multiple of row $1$ can create a nonzero pivot.' },
+      { id: 'zero', expr: 'A zero in any pivot position during elimination', why: 'No row-addition operation can produce a nonzero pivot; a row swap is required.' },
+    ] },
+    edgeCases: { badge: 'The fix', items: [
+      { id: 'pa', marker: '$PA = LU$', body: 'After swapping the two rows, elimination proceeds immediately: the pivoted version is needed.' },
+    ] },
+  };
+
+
+
+  // MistakeFix batch 20, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'storing-the-negated-multiplier', name: `Storing the negated multiplier`, errorAt: 1,
+        what: `The row operation is written as "row $2$ minus $2$ times row $1$", and the $-2$ from that operation is copied into $L$. The same is done for every step, so every entry below the diagonal of $L$ has the wrong sign.`,
+        wrong: [`For the worked example, the operations add $-2$ times row $1$ to row $2$, $1$ times row $1$ to row $3$ and $3$ times row $2$ to row $3$.`, `Storing those amounts in $L$, next to the same $U$, gives
+$$L = \\begin{pmatrix} 1 & 0 & 0 \\\\ -2 & 1 & 0 \\\\ 1 & 3 & 1 \\end{pmatrix}$$
+$$U = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix}$$
+$$LU$$
+$$= \\begin{pmatrix} 2 & 1 & -1 \\\\ -4 & -4 & 6 \\\\ 2 & -5 & 25 \\end{pmatrix} \\neq A$$`],
+        right: [`For the worked example, the operations add $-2$ times row $1$ to row $2$, $1$ times row $1$ to row $3$ and $3$ times row $2$ to row $3$.`, `$L$ holds the multipliers $m_{21} = 2$, $m_{31} = -1$, $m_{32} = -3$, the numbers that were subtracted.`, `$$L = \\begin{pmatrix} 1 & 0 & 0 \\\\ 2 & 1 & 0 \\\\ -1 & -3 & 1 \\end{pmatrix}$$
+$$U = \\begin{pmatrix} 2 & 1 & -1 \\\\ 0 & -2 & 4 \\\\ 0 & 0 & 14 \\end{pmatrix}$$
+$$LU$$
+$$= \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix} = A$$`],
+        why: `The elementary matrix $E_1$ of the first step really does carry $-2$ in position $(2, 1)$. But $L$ is built from the inverses $E_i^{-1}$, and each inverse negates its multiplier.`,
+        check: `The first column of $LU$ is $u_{11}$ times the first column of $L$, and it must equal the first column of $A$. Here $2 \\cdot (1, 2, -1) = (2, 4, -2)$ is correct, while $2 \\cdot (1, -2, 1) = (2, -4, 2)$ is not.` },
+      { id: 'choosing-the-largest-signed-entry', name: `Choosing the largest signed entry`, errorAt: 0,
+        what: `Partial pivoting is applied by picking the largest number in the pivot column, comparing signed values instead of absolute values. A negative entry of large size is passed over.`,
+        wrong: [`For $A = \\begin{pmatrix} 2 & 1 \\\\ -5 & 3 \\end{pmatrix}$, $2 > -5$, so row $1$ stays as the pivot row. The multiplier is $m_{21} = -5/2$, and
+$$L = \\begin{pmatrix} 1 & 0 \\\\ -5/2 & 1 \\end{pmatrix},$$
+$$U = \\begin{pmatrix} 2 & 1 \\\\ 0 & 11/2 \\end{pmatrix}$$`, `This is a valid $A = LU$, but not the partial-pivoting factorization: the multiplier exceeds $1$ in size.`],
+        right: [`$|-5| > |2|$, so the rows are swapped and $PA = \\begin{pmatrix} -5 & 3 \\\\ 2 & 1 \\end{pmatrix}$. The multiplier is $m_{21} = 2/(-5) = -2/5$, and
+$$L = \\begin{pmatrix} 1 & 0 \\\\ -2/5 & 1 \\end{pmatrix},$$
+$$U = \\begin{pmatrix} -5 & 3 \\\\ 0 & 11/5 \\end{pmatrix}$$`],
+        why: `"largest" is read as the largest number. When all entries in the column are positive the two readings agree, so the difference shows up only with negative entries.`,
+        check: `Every multiplier stored in $L$ must satisfy $|l_{ij}| \\le 1$. A multiplier of larger size means a larger pivot was available and was skipped.` },
+      { id: 'forgetting-to-permute-the-right-hand-side', name: `Forgetting to permute the right-hand side`, errorAt: 1,
+        what: `After computing $PA = LU$, forward substitution is run on $\\mathbf{b}$ itself. The rows of $A$ were reordered, but the entries of $\\mathbf{b}$ were not.`,
+        wrong: [`For $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$ and $\\mathbf{b} = (2, 4)$,`, `One swap gives $P = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$, $L = I$ and $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$. Solving $L\\mathbf{y} = \\mathbf{b}$ gives $\\mathbf{y} = (2, 4)$. Back substitution gives $2x_2 = 4$, so $x_2 = 2$, and $3x_1 + 2 = 2$, so $x_1 = 0$. But $A(0, 2) = (4, 2) \\neq \\mathbf{b}$.`],
+        right: [`For $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$ and $\\mathbf{b} = (2, 4)$,`, `$P\\mathbf{b} = (4, 2)$, so $\\mathbf{y} = (4, 2)$. Then $2x_2 = 2$ gives $x_2 = 1$, and $3x_1 + 1 = 4$ gives $x_1 = 1$. Check: $A(1, 1) = (2, 4) = \\mathbf{b}$.`],
+        why: `$P$ is used during the factorization and then put aside, and $L$ and $U$ look as if they factor $A$ itself. They factor $PA$.`,
+        check: `Substitute the answer into the original system $A\\mathbf{x} = \\mathbf{b}$, not into $LU\\mathbf{x} = \\mathbf{b}$.` },
+      { id: 'dropping-the-sign-of-the-row-swaps', name: `Dropping the sign of the row swaps`, errorAt: 1,
+        what: `The determinant is taken as the product of the pivots on the diagonal of $U$, and the row swaps recorded in $P$ are ignored.`,
+        wrong: [`For $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$,`, `One swap gives $U = \\begin{pmatrix} 3 & 1 \\\\ 0 & 2 \\end{pmatrix}$, and the product of the pivots is $3 \\cdot 2 = 6$.`],
+        right: [`For $A = \\begin{pmatrix} 0 & 2 \\\\ 3 & 1 \\end{pmatrix}$,`, `With $s = 1$ swap, $\\det A = (-1)^1 \\cdot 3 \\cdot 2 = -6$. Directly, $\\det A = 0 \\cdot 1 - 2 \\cdot 3 = -6$.`],
+        why: `Without pivoting the determinant is exactly the product of the pivots, and that is the form most often remembered. The sign factor only appears once $P$ is in play.`,
+        check: `Count the swaps, or compute $\\det P$, which is $+1$ or $-1$. For a $2 \\times 2$ matrix, compare with $ad - bc$.` },
+    ],
   };
 
   return {
   props:{
+    pitfallData,
+      luScope,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -3696,7 +3705,9 @@ const schemas = {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function LUDecompositionPage({
+const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
+
+export default function LUDecompositionPage({ pitfallData,luScope, 
   seoData,
   sectionsContent,
   introContent,
@@ -3836,6 +3847,16 @@ export default function LUDecompositionPage({
         content:[
           sectionsContent.obj4.content,
           `@academic[punchline:Row additions can never turn a zero pivot into a usable one; for an invertible matrix, only a row swap can.]@`,
+          <DiagramFrame
+            key={'obj4-scope'}
+            id="lu-without-pivoting-scope"
+            title="When LU exists without pivoting"
+            source="/linear-algebra/decompositions/lower-upper"
+            before={`The card marks the condition for a plain $A = LU$ and the matrix that sits just outside it.`}
+            after={`A zero pivot is not the end of the factorization, only of the unpivoted one: a row swap restores it as $PA = LU$.`}
+          >
+            <ScopeCard data={luScope} variant="boundary" theme={scopeTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3923,6 +3944,15 @@ Large entries in $U$ matter because rounding errors are made relative to the num
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="lu-pitfalls"
+            title="Common pitfalls with the LU decomposition"
+            source="/linear-algebra/decompositions/lower-upper"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

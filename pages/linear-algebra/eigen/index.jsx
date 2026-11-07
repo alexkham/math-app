@@ -592,6 +592,7 @@ import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -803,7 +804,7 @@ $$\\det(A - \\lambda I) = 0$$
 
 @academic[pitfall,aside:true,width:35%:Subtracting λ from every entry
 Subtracting $\\lambda$ from all four entries of $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$ gives $(4 - \\lambda)(3 - \\lambda) - (2 - \\lambda)(1 - \\lambda) = 10 - 4\\lambda$, with the single root $\\lambda = 5/2$. Since $\\lambda I$ puts $\\lambda$ only on the diagonal, $\\det(A - \\lambda I) = \\lambda^2 - 7\\lambda + 10$, with roots $2$ and $5$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-subtracting-from-every-entry)]@
 
 This [determinant](!/linear-algebra/determinants) condition is the [characteristic equation](!/linear-algebra/eigen/characteristic-equation). It converts the eigenvalue problem from a geometric question ("which directions survive?") into an algebraic one ("which values of $\\lambda$ make this determinant vanish?"). The characteristic equation is a polynomial of degree $n$ in $\\lambda$, and its roots are the eigenvalues.`,
     before: ``,
@@ -827,7 +828,7 @@ It contains the zero vector and is closed under addition and scalar multiplicati
 
 @academic[pitfall,aside:true,width:35%:Accepting the zero solution
 Reporting $\\mathbf{v} = \\mathbf{0}$ when $A - \\lambda I$ reduces with no free variable hides an error in $\\lambda$. For $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$, a sign slip gives $\\lambda = -2$, and $A + 2I = \\begin{pmatrix} 6 & 2 \\\\ 1 & 5 \\end{pmatrix}$ has $\\det = 28 \\neq 0$, so only $\\mathbf{0}$ solves it. The true eigenvalue $\\lambda = 2$ leaves a free variable and gives $\\mathbf{v} = (-1, 1)^T$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-accepting-the-zero-solution)]@
 
 The [dimension](!/linear-algebra/vector-spaces/dimension) of the eigenspace is called the geometric multiplicity of $\\lambda$. Finding a [basis](!/linear-algebra/vector-spaces) for the eigenspace is a standard null-space computation: row reduce $A - \\lambda I$ and extract the general solution in parametric form. Each free variable contributes one basis vector to the eigenspace.
 
@@ -865,7 +866,7 @@ For $\\lambda_2 = 5$: $(A - 5I)\\mathbf{v} = \\begin{pmatrix} -1 & 2 \\\\ 1 & -2
 
 @academic[pitfall,aside:true,width:35%:Reading eigenvalues off the diagonal
 Taking the diagonal entries $4$ and $3$ of $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$ as its eigenvalues fails: $\\det(A - 4I) = 0 \\cdot (-1) - 2 \\cdot 1 = -2 \\neq 0$. The eigenvalues are $2$ and $5$; the diagonal gives them only for diagonal and triangular matrices.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-eigenvalues-off-the-diagonal)]@
 
 The matrix in the worked example is neither diagonal nor triangular: both of its off-diagonal entries are nonzero. Its determinant $\\det(A - \\lambda I)$ is therefore not a plain product of diagonal terms, since the off-diagonal product $2 \\cdot 1$ is subtracted from it, and the eigenvalues come only from solving the full quadratic. The eigenvectors, too, point in directions other than $\\mathbf{e}_1$ and $\\mathbf{e}_2$.
 
@@ -914,54 +915,9 @@ The eigenvalue decomposition is arguably the single most important factorization
   },
   obj10: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for many wrong answers when eigenvalues and eigenvectors are computed by hand. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side, using the matrix $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$ from the worked example.
-
-**Subtracting λ from every entry**
-
-The matrix $A - \\lambda I$ is formed by subtracting $\\lambda$ from every entry of $A$, as if $\\lambda I$ were a matrix filled with $\\lambda$. The identity matrix has ones only on the diagonal, so $\\lambda I$ changes only the diagonal entries.
-
-Wrong working:
-$$\\det\\begin{pmatrix} 4 - \\lambda & 2 - \\lambda \\\\ 1 - \\lambda & 3 - \\lambda \\end{pmatrix} = (\\lambda^2 - 7\\lambda + 12) - (\\lambda^2 - 3\\lambda + 2) = 10 - 4\\lambda$$
-The $\\lambda^2$ terms cancel, and the only root is $\\lambda = 5/2$.
-
-Right working: only the diagonal changes.
-$$\\det\\begin{pmatrix} 4 - \\lambda & 2 \\\\ 1 & 3 - \\lambda \\end{pmatrix} = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$$
-The eigenvalues are $\\lambda_1 = 2$ and $\\lambda_2 = 5$.
-
-Why it happens: $\\lambda$ is a scalar, and subtracting a scalar from a matrix seems to call for touching every entry, the way multiplying a matrix by a scalar does. Writing $A - \\lambda$ without the $I$ makes the slip even easier.
-
-How to check: count the degree. The characteristic polynomial of an $n \\times n$ matrix has degree $n$, so a $2 \\times 2$ matrix must give a quadratic; $10 - 4\\lambda$ is linear. The trace check also fails: the eigenvalues must add up to $\\text{tr}(A) = 7$, and $5/2$ does not.
-
-**Accepting the zero solution**
-
-An eigenvalue has been found, $A - \\lambda I$ is row reduced, and every column gets a pivot. The only solution of $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ is then $\\mathbf{v} = \\mathbf{0}$, and this is written down as the eigenvector, or the eigenspace is reported as $\\{\\mathbf{0}\\}$.
-
-Wrong working: the characteristic polynomial $\\lambda^2 - 7\\lambda + 10$ is factored with the wrong signs as $(\\lambda + 2)(\\lambda + 5)$, giving $\\lambda = -2$. Then
-$$A + 2I = \\begin{pmatrix} 6 & 2 \\\\ 1 & 5 \\end{pmatrix} \\longrightarrow \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$$
-so the only solution is $\\mathbf{v} = \\mathbf{0}$, which is reported as the eigenvector.
-
-Right working: a pivot in every column means $A + 2I$ is invertible ($\\det = 30 - 2 = 28 \\neq 0$), so $-2$ is not an eigenvalue at all. Going back, $\\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$. For $\\lambda = 2$:
-$$A - 2I = \\begin{pmatrix} 2 & 2 \\\\ 1 & 1 \\end{pmatrix} \\longrightarrow \\begin{pmatrix} 1 & 1 \\\\ 0 & 0 \\end{pmatrix}$$
-The free variable $v_2 = t$ gives $v_1 = -t$, so $\\mathbf{v}_1 = (-1, 1)^T$, and indeed $A\\mathbf{v}_1 = (-2, 2)^T = 2\\mathbf{v}_1$.
-
-Why it happens: row reduction always ends in some answer, and $\\mathbf{v} = \\mathbf{0}$ really does satisfy the equation, so the computation looks finished. The zero vector is excluded from the definition precisely because it solves $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ for every $\\lambda$.
-
-How to check: at a true eigenvalue, $\\det(A - \\lambda I) = 0$ and the reduced matrix has at least one zero row. If the reduction leaves no free variable, the error is upstream, in the eigenvalue.
-
-**Reading eigenvalues off the diagonal**
-
-The shortcut for diagonal and triangular matrices, where the eigenvalues are the diagonal entries, is applied to a matrix that has nonzero entries both above and below the diagonal.
-
-Wrong working: the diagonal of $A$ holds $4$ and $3$, so the eigenvalues are taken to be $4$ and $3$.
-
-Right working: the characteristic polynomial is $\\det(A - \\lambda I) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$, so the eigenvalues are $2$ and $5$. Neither diagonal entry is an eigenvalue:
-$$\\det(A - 4I) = \\det\\begin{pmatrix} 0 & 2 \\\\ 1 & -1 \\end{pmatrix} = -2, \\qquad \\det(A - 3I) = \\det\\begin{pmatrix} 1 & 2 \\\\ 1 & 0 \\end{pmatrix} = -2$$
-
-Why it happens: diagonal and triangular matrices are the first examples met, and for them the rule is exact. The diagonal also has the right sum, $4 + 3 = 7 = 2 + 5$, so a quick trace check does not catch the error.
-
-How to check: use the product instead of the sum. The eigenvalues must multiply to $\\det(A) = 12 - 2 = 10$, and $2 \\cdot 5 = 10$, while $4 \\cdot 3 = 12$. Or substitute a candidate into $\\det(A - \\lambda I)$: a true eigenvalue gives $0$.`,
+    content: `Three mistakes account for many wrong answers when eigenvalues and eigenvectors are computed by hand. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side, using the matrix $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$ from the worked example.`,
     before: ``,
-    after: ``,
+    after: `Each slip mishandles $A - \\lambda I$. It subtracts $\\lambda$ only on the diagonal; at a true eigenvalue it has a nonzero null space, so a lone zero solution means the eigenvalue is wrong; and the diagonal entries are the eigenvalues only for diagonal and triangular matrices. Checking the degree of the polynomial, or that the eigenvalues multiply to $\\det(A)$, catches each slip.`,
     link: ``,
   },
 }
@@ -1138,8 +1094,44 @@ const schemas = {
     }
   }
 
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'subtracting-from-every-entry', name: `Subtracting λ from every entry`, errorAt: 0,
+        what: `The matrix $A - \\lambda I$ is formed by subtracting $\\lambda$ from every entry of $A$, as if $\\lambda I$ were a matrix filled with $\\lambda$. The identity matrix has ones only on the diagonal, so $\\lambda I$ changes only the diagonal entries.`,
+        wrong: [`$$\\det\\begin{pmatrix} 4 - \\lambda & 2 - \\lambda \\\\ 1 - \\lambda & 3 - \\lambda \\end{pmatrix}$$
+$$= (\\lambda^2 - 7\\lambda + 12)$$
+$$- (\\lambda^2 - 3\\lambda + 2)$$
+$$= 10 - 4\\lambda$$`, `The $\\lambda^2$ terms cancel, and the only root is $\\lambda = 5/2$.`],
+        right: [`Only the diagonal changes.`, `$$\\det\\begin{pmatrix} 4 - \\lambda & 2 \\\\ 1 & 3 - \\lambda \\end{pmatrix}$$
+$$= (4 - \\lambda)(3 - \\lambda) - 2$$
+$$= \\lambda^2 - 7\\lambda + 10$$
+$$= (\\lambda - 2)(\\lambda - 5)$$`, `The eigenvalues are $\\lambda_1 = 2$ and $\\lambda_2 = 5$.`],
+        why: `$\\lambda$ is a scalar, and subtracting a scalar from a matrix seems to call for touching every entry, the way multiplying a matrix by a scalar does. Writing $A - \\lambda$ without the $I$ makes the slip even easier.`,
+        check: `Count the degree. The characteristic polynomial of an $n \\times n$ matrix has degree $n$, so a $2 \\times 2$ matrix must give a quadratic; $10 - 4\\lambda$ is linear. The trace check also fails: the eigenvalues must add up to $\\text{tr}(A) = 7$, and $5/2$ does not.` },
+      { id: 'accepting-the-zero-solution', name: `Accepting the zero solution`, errorAt: 0,
+        what: `An eigenvalue has been found, $A - \\lambda I$ is row reduced, and every column gets a pivot. The only solution of $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ is then $\\mathbf{v} = \\mathbf{0}$, and this is written down as the eigenvector, or the eigenspace is reported as $\\{\\mathbf{0}\\}$.`,
+        wrong: [`The characteristic polynomial $\\lambda^2 - 7\\lambda + 10$ is factored with the wrong signs as $(\\lambda + 2)(\\lambda + 5)$, giving $\\lambda = -2$. Then
+$$A + 2I = \\begin{pmatrix} 6 & 2 \\\\ 1 & 5 \\end{pmatrix} \\longrightarrow \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$$`, `So the only solution is $\\mathbf{v} = \\mathbf{0}$, which is reported as the eigenvector.`],
+        right: [`A pivot in every column means $A + 2I$ is invertible ($\\det = 30 - 2 = 28 \\neq 0$), so $-2$ is not an eigenvalue at all. Going back, $\\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$. For $\\lambda = 2$:
+$$A - 2I = \\begin{pmatrix} 2 & 2 \\\\ 1 & 1 \\end{pmatrix} \\longrightarrow \\begin{pmatrix} 1 & 1 \\\\ 0 & 0 \\end{pmatrix}$$`, `The free variable $v_2 = t$ gives $v_1 = -t$, so $\\mathbf{v}_1 = (-1, 1)^T$, and indeed $A\\mathbf{v}_1 = (-2, 2)^T = 2\\mathbf{v}_1$.`],
+        why: `Row reduction always ends in some answer, and $\\mathbf{v} = \\mathbf{0}$ really does satisfy the equation, so the computation looks finished. The zero vector is excluded from the definition precisely because it solves $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ for every $\\lambda$.`,
+        check: `At a true eigenvalue, $\\det(A - \\lambda I) = 0$ and the reduced matrix has at least one zero row. If the reduction leaves no free variable, the error is upstream, in the eigenvalue.` },
+      { id: 'reading-eigenvalues-off-the-diagonal', name: `Reading eigenvalues off the diagonal`, errorAt: 0,
+        what: `The shortcut for diagonal and triangular matrices, where the eigenvalues are the diagonal entries, is applied to a matrix that has nonzero entries both above and below the diagonal.`,
+        wrong: [`The diagonal of $A$ holds $4$ and $3$, so the eigenvalues are taken to be $4$ and $3$.`],
+        right: [`The characteristic polynomial is $\\det(A - \\lambda I) = (4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = (\\lambda - 2)(\\lambda - 5)$, so the eigenvalues are $2$ and $5$. Neither diagonal entry is an eigenvalue:
+$$\\det(A - 4I) = \\det\\begin{pmatrix} 0 & 2 \\\\ 1 & -1 \\end{pmatrix} = -2,$$
+$$\\det(A - 3I) = \\det\\begin{pmatrix} 1 & 2 \\\\ 1 & 0 \\end{pmatrix} = -2$$`],
+        why: `Diagonal and triangular matrices are the first examples met, and for them the rule is exact. The diagonal also has the right sum, $4 + 3 = 7 = 2 + 5$, so a quick trace check does not catch the error.`,
+        check: `Use the product instead of the sum. The eigenvalues must multiply to $\\det(A) = 12 - 2 = 10$, and $2 \\cdot 5 = 10$, while $4 \\cdot 3 = 12$. Or substitute a candidate into $\\det(A - \\lambda I)$: a true eigenvalue gives $0$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
     faqQuestions,
     eigenGrowthCases,
     demoUnits,
@@ -1164,7 +1156,7 @@ const schemas = {
 
    const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function EigenvaluesPage({faqQuestions, eigenGrowthCases,
+export default function EigenvaluesPage({ pitfallData,faqQuestions, eigenGrowthCases,
      seoData,
      sectionsContent,
      introContent,
@@ -1341,6 +1333,15 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="eigenvalue-pitfalls"
+            title="Common pitfalls with eigenvalues"
+            source="/linear-algebra/eigen"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

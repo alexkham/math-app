@@ -21,6 +21,7 @@ import ComparisonTable2 from '@/app/components/infographics/comparison-table/Com
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -728,7 +729,7 @@ Understanding whether your [random variable](!/probability/random-variables) is 
 
 @academic[pitfall,aside:true,width:35%:Treating the density as a point probability
 Writing $P(X < 3) = F(3) - f(3)$ for $X \\sim U(0, 10)$ gives $0.3 - 0.1 = 0.2$. A single point has probability $0$, so $P(X < 3) = P(X \\leq 3) = 0.3$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-the-density-as-a-point-probability)]@
 
 The switch from sums to areas also changes the role of the ends of an interval. In a discrete model, a strict or non-strict inequality decides whether the boundary value is counted. In a continuous model, the boundary is a single point on the axis, and the probability comes from the area between the ends.
 
@@ -897,7 +898,7 @@ The cumulative distribution function F(x) = P(X ≤ x) answers the question "wha
 
 @academic[pitfall,aside:true,width:35%:Reading F(x) as the right tail
 Taking $F(2)$ as $P(X > 2)$ for an exponential with $\\lambda = 1$ gives $1 - e^{-2} \\approx 0.865$, which is $P(X \\leq 2)$. The right tail is $P(X > 2) = 1 - F(2) = e^{-2} \\approx 0.135$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-f-x-as-the-right-tail)]@
 
 F always measures the area to the left of its argument. An event that lies to the right of a point, or between two points, is therefore built from left-hand areas and the total area of 1.
 
@@ -934,7 +935,7 @@ The simplest approach matches theoretical moments to sample moments. For a [norm
 
 @academic[pitfall,aside:true,width:35%:Using the sample mean as the rate
 Taking $\\hat{\\lambda} = \\bar{x}$ for waiting times with sample mean $\\bar{x} = 4$ minutes gives a rate of 4 events per minute. Matching $E[X] = \\frac{1}{\\lambda}$ to $\\bar{x}$ gives $\\hat{\\lambda} = \\frac{1}{4} = 0.25$ per minute.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-sample-mean-as-the-rate)]@
 
 Each match runs through the formula that ties the parameter to the moment. For the normal distribution, μ is itself the mean. For the exponential, λ is a rate, counted in events per unit of time, while the sample mean x̄ is measured in units of time.
 
@@ -964,7 +965,7 @@ The most important transformation in statistics converts any normal distribution
 
 @academic[pitfall,aside:true,width:35%:Dividing by the variance
 Standardizing $x = 7$ from $X \\sim N(5, 2^2)$ with the variance gives $z = \\frac{7 - 5}{4} = 0.5$. With the standard deviation $\\sigma = 2$, $z = \\frac{7 - 5}{2} = 1$: the value is one standard deviation above the mean.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dividing-by-the-variance)]@
 
 A z-score counts standard deviations, so it carries no units. A height and a test score can both have z = 1, which means each lies one standard deviation above its own mean.
 
@@ -1066,65 +1067,9 @@ Changing parameters reshapes the distribution dynamically. For the normal distri
     },
     obj6:{
       title:`Common Pitfalls`,
-      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Treating the density as a point probability**
-
-A probability with a strict inequality is computed by taking the non-strict one and removing the boundary value, as for a discrete variable. The density at the boundary is used as the probability of that value.
-
-Wrong working: for $X \\sim U(0, 10)$, with $F(3) = \\frac{3}{10} = 0.3$ and $f(3) = \\frac{1}{10} = 0.1$,
-$$P(X < 3) = P(X \\leq 3) - P(X = 3) = F(3) - f(3) = 0.3 - 0.1 = 0.2$$
-
-Right working: a single point has probability $0$ for a continuous variable, so nothing is removed.
-$$P(X < 3) = P(X \\leq 3) - 0 = F(3) = \\frac{3 - 0}{10 - 0} = 0.3$$
-
-Why it happens: for a discrete variable, $P(X < 3)$ and $P(X \\leq 3)$ differ by the probability of the value $3$, and that habit is carried over. The density $f(3)$ looks like the natural stand-in for $P(X = 3)$, but it is a height, not an area.
-
-How to check: shrink the interval. $P(3 \\leq X \\leq 3 + h) = 0.1h$ for $X \\sim U(0, 10)$, which goes to $0$ as $h$ goes to $0$; whatever the density, the area above one point is $0$.
-
-**Reading F(x) as the right tail**
-
-A question asks for the probability that $X$ exceeds a value, and $F$ at that value is given as the answer. $F$ is the area to the left.
-
-Wrong working: for an exponential variable with $\\lambda = 1$,
-$$P(X > 2) = F(2) = 1 - e^{-2} \\approx 0.865$$
-
-Right working: the right tail is what remains of the total area after the left part.
-$$P(X > 2) = 1 - F(2) = 1 - (1 - e^{-2}) = e^{-2} \\approx 0.135$$
-
-Why it happens: the CDF is the number that tables and software return, and it is easy to report it without asking which side of the point it covers. For the exponential, $F(x) = 1 - e^{-\\lambda x}$ already contains a "$1 -$", which makes it look like a complement.
-
-How to check: compare with the shape. The exponential density with $\\lambda = 1$ is highest at $0$ and falls quickly, so most of the area lies below $2$, and the probability of exceeding $2$ must be small.
-
-**Using the sample mean as the rate**
-
-In the method of moments for the exponential distribution, the sample mean is used directly as the estimate of $\\lambda$. But $\\lambda$ is a rate, and the mean of the distribution is $\\frac{1}{\\lambda}$.
-
-Wrong working: waiting times between arrivals have sample mean $\\bar{x} = 4$ minutes, so
-$$\\hat{\\lambda} = \\bar{x} = 4 \\text{ per minute}$$
-
-Right working: the theoretical mean $\\frac{1}{\\lambda}$ is matched to the sample mean, and the equation is solved for $\\lambda$.
-$$\\frac{1}{\\hat{\\lambda}} = \\bar{x} = 4 \\quad\\Rightarrow\\quad \\hat{\\lambda} = \\frac{1}{4} = 0.25 \\text{ per minute}$$
-
-Why it happens: for the normal distribution the parameter $\\mu$ is the mean, so the sample mean is the estimate directly; the same shortcut is carried over to a distribution whose parameter is not the mean.
-
-How to check: look at the units. A mean of 4 minutes between arrivals means one arrival every 4 minutes, which is a quarter of an arrival per minute; a rate of 4 per minute would mean an arrival every 15 seconds.
-
-**Dividing by the variance**
-
-A normal value is standardized with $\\sigma^2$ in the denominator instead of $\\sigma$, often because the distribution is written as $N(\\mu, \\sigma^2)$ and the second number is copied straight into the formula.
-
-Wrong working: for $X \\sim N(5, 2^2)$, written $N(5, 4)$, and $x = 7$,
-$$z = \\frac{7 - 5}{4} = 0.5$$
-
-Right working: the denominator is the standard deviation $\\sigma = \\sqrt{4} = 2$.
-$$z = \\frac{x - \\mu}{\\sigma} = \\frac{7 - 5}{2} = 1$$
-
-Why it happens: the usual notation $N(\\mu, \\sigma^2)$ puts the variance in the second place, while the z-score formula needs its square root.
-
-How to check: $7$ is exactly one step of $\\sigma = 2$ above the mean $5$, so its z-score must be $1$. A z-score is a count of standard deviations, and it has to agree with that count on simple values.`,
+      content:`Each of the four mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before:``,
-      after:``,
+      after: `Each slip reads a continuous distribution with a rule from somewhere else. A single point has probability $0$, so strict and non-strict inequalities give the same answer; $F(x)$ is the area to the left, so the right tail is $1 - F(x)$; the method of moments estimates the rate as $\\frac{1}{\\bar{x}}$; and a z-score divides by $\\sigma$, not by $\\sigma^2$. Shrinking the interval, comparing with the shape of the density, or checking the units catches each slip.`,
 
     },
   
@@ -1276,8 +1221,54 @@ This section organizes continuous distributions, highlights their shared structu
     }
   }
 
+  // MistakeFix batch 17, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj6 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'treating-the-density-as-a-point-probability', name: `Treating the density as a point probability`, errorAt: 1,
+        what: `A probability with a strict inequality is computed by taking the non-strict one and removing the boundary value, as for a discrete variable. The density at the boundary is used as the probability of that value.`,
+        wrong: [`For $X \\sim U(0, 10)$,`, `With $F(3) = \\frac{3}{10} = 0.3$ and $f(3) = \\frac{1}{10} = 0.1$,
+$$P(X < 3)$$
+$$= P(X \\leq 3) - P(X = 3)$$
+$$= F(3) - f(3) = 0.3 - 0.1$$
+$$= 0.2$$`],
+        right: [`For $X \\sim U(0, 10)$,`, `A single point has probability $0$ for a continuous variable, so nothing is removed.`, `$$P(X < 3) = P(X \\leq 3) - 0$$
+$$= F(3)$$
+$$= \\frac{3 - 0}{10 - 0} = 0.3$$`],
+        why: `For a discrete variable, $P(X < 3)$ and $P(X \\leq 3)$ differ by the probability of the value $3$, and that habit is carried over. The density $f(3)$ looks like the natural stand-in for $P(X = 3)$, but it is a height, not an area.`,
+        check: `Shrink the interval. $P(3 \\leq X \\leq 3 + h) = 0.1h$ for $X \\sim U(0, 10)$, which goes to $0$ as $h$ goes to $0$; whatever the density, the area above one point is $0$.` },
+      { id: 'reading-f-x-as-the-right-tail', name: `Reading F(x) as the right tail`, errorAt: 0,
+        what: `A question asks for the probability that $X$ exceeds a value, and $F$ at that value is given as the answer. $F$ is the area to the left.`,
+        wrong: [`For an exponential variable with $\\lambda = 1$,
+$$P(X > 2) = F(2) = 1 - e^{-2}$$
+$$\\approx 0.865$$`],
+        right: [`The right tail is what remains of the total area after the left part.`, `$$P(X > 2) = 1 - F(2)$$
+$$= 1 - (1 - e^{-2})$$
+$$= e^{-2} \\approx 0.135$$`],
+        why: `The CDF is the number that tables and software return, and it is easy to report it without asking which side of the point it covers. For the exponential, $F(x) = 1 - e^{-\\lambda x}$ already contains a "$1 -$", which makes it look like a complement.`,
+        check: `Compare with the shape. The exponential density with $\\lambda = 1$ is highest at $0$ and falls quickly, so most of the area lies below $2$, and the probability of exceeding $2$ must be small.` },
+      { id: 'using-the-sample-mean-as-the-rate', name: `Using the sample mean as the rate`, errorAt: 0,
+        what: `In the method of moments for the exponential distribution, the sample mean is used directly as the estimate of $\\lambda$. But $\\lambda$ is a rate, and the mean of the distribution is $\\frac{1}{\\lambda}$.`,
+        wrong: [`Waiting times between arrivals have sample mean $\\bar{x} = 4$ minutes, so
+$$\\hat{\\lambda} = \\bar{x} = 4 \\text{ per minute}$$`],
+        right: [`The theoretical mean $\\frac{1}{\\lambda}$ is matched to the sample mean, and the equation is solved for $\\lambda$.`, `$$\\frac{1}{\\hat{\\lambda}} = \\bar{x} = 4$$
+$$\\Rightarrow$$
+$$\\hat{\\lambda} = \\frac{1}{4} = 0.25 \\text{ per minute}$$`],
+        why: `For the normal distribution the parameter $\\mu$ is the mean, so the sample mean is the estimate directly; the same shortcut is carried over to a distribution whose parameter is not the mean.`,
+        check: `Look at the units. A mean of 4 minutes between arrivals means one arrival every 4 minutes, which is a quarter of an arrival per minute; a rate of 4 per minute would mean an arrival every 15 seconds.` },
+      { id: 'dividing-by-the-variance', name: `Dividing by the variance`, errorAt: 1,
+        what: `A normal value is standardized with $\\sigma^2$ in the denominator instead of $\\sigma$, often because the distribution is written as $N(\\mu, \\sigma^2)$ and the second number is copied straight into the formula.`,
+        wrong: [`For $X \\sim N(5, 2^2)$,`, `Written $N(5, 4)$, and $x = 7$,
+$$z = \\frac{7 - 5}{4} = 0.5$$`],
+        right: [`For $X \\sim N(5, 2^2)$,`, `The denominator is the standard deviation $\\sigma = \\sqrt{4} = 2$.`, `$$z = \\frac{x - \\mu}{\\sigma} = \\frac{7 - 5}{2} = 1$$`],
+        why: `The usual notation $N(\\mu, \\sigma^2)$ puts the variance in the second place, while the z-score formula needs its square root.`,
+        check: `$7$ is exactly one step of $\\sigma = 2$ above the mean $5$, so its z-score must be $1$. A z-score is a count of standard deviations, and it has to agree with that count on simple values.` },
+    ],
+  };
+
    return {
       props:{
+    pitfallData,
     faqQuestions,
     discreteContinuousComparison,
     continuousFamilyOutline,
@@ -1300,7 +1291,7 @@ This section organizes continuous distributions, highlights their shared structu
     }
    }
 
-export default function ContinuousDistributionsPage({discreteContinuousComparison, continuousFamilyOutline, seoData,sectionsContent , introContent,
+export default function ContinuousDistributionsPage({ pitfallData,discreteContinuousComparison, continuousFamilyOutline, seoData,sectionsContent , introContent,
     normalTable,
          exponentialTable,
          continuousUniformTable, demoUnits, conceptIntroFigures, faqQuestions
@@ -1688,6 +1679,15 @@ export default function ContinuousDistributionsPage({discreteContinuousCompariso
         link:'',
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-mistakes'}
+            id="continuous-distribution-pitfalls"
+            title="Common pitfalls with continuous distributions"
+            source="/probability/distributions/continuous"
+            after={sectionsContent.obj6.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

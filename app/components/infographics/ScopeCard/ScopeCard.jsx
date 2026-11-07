@@ -82,7 +82,7 @@
 import React from 'react';
 
 // Replace this with the real path in your tree.
-import {processContent} from '../../utils/contentProcessor'
+import {processContent} from '@/app/utils/contentProcessor'
 
 /* ------------------------------------------------------------------ */
 /*  theme                                                              */
@@ -529,7 +529,7 @@ function Boundary({ data }) {
           defaultTitle="Inside scope"
           mark={'\u2713'}
         />
-        <div className="sc-divider"></div>
+        <div className="sc-divider" data-keep-position=""></div>
         <Zone
           zone={data.outside}
           side="out"

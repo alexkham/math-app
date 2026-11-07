@@ -1372,9 +1372,11 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -2147,7 +2149,7 @@ $$\\arg(z^{-1}) = -\\arg(z)$$]@
 
 @academic[pitfall,aside:true,width:35%:Inverting only the modulus
 For $|z| = 2$ and $\\arg(z) = \\frac{\\pi}{3}$, taking the number with modulus $\\frac{1}{2}$ and the same argument gives a product with $z$ of argument $\\frac{2\\pi}{3}$, which is not $1$. The argument negates too: $\\arg(z^{-1}) = -\\frac{\\pi}{3}$.
-[Read more](!#11)]@
+[Read more](!#pitfall-inverting-only-the-modulus)]@
 
 If $z$ points in direction $\\theta$, then $z^{-1}$ points in direction $-\\theta$. A number in the upper half-plane has its inverse in the lower half-plane, and vice versa. A number at angle $\\frac{\\pi}{4}$ (northeast) has its inverse at angle $-\\frac{\\pi}{4}$ (southeast).
 
@@ -2285,7 +2287,7 @@ $$\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{5} = \\frac{5 - 10i + 3i - 6
 
 @academic[pitfall,aside:true,width:35%:Dividing by the modulus, not its square
 Dividing $(5 + 3i)(1 - 2i) = 11 - 7i$ by $|1 + 2i| = \\sqrt{5}$ gives $\\frac{11 - 7i}{\\sqrt{5}}$, too long by a factor of $\\sqrt{5}$. The divisor is $|1 + 2i|^2 = 5$, so the quotient is $\\frac{11}{5} - \\frac{7}{5}i$.
-[Read more](!#11)]@
+[Read more](!#pitfall-dividing-by-the-modulus-not-its-square)]@
 
 The work splits into two products. The numerator $5 + 3i$ is multiplied by the conjugate $1 - 2i$, giving $11 - 7i$, and the denominator $1 + 2i$ is multiplied by the same conjugate, giving the real number $5$. Each part of $11 - 7i$ is then divided by that real number, and the quotient lands in standard form.
 
@@ -2320,6 +2322,15 @@ Uniqueness justifies the notation $z^{-1}$ and $\\frac{1}{z}$. If multiple inver
 },
 
 
+formulaSummary: {
+  title: `Formula Summary`,
+  content: `This summary collects the formulas for the multiplicative inverse in four families, shown one at a time with the buttons above the cards. Each card gives a formula with a line on what it says and a link to the section that explains it.
+
+The first family finds the inverse of a nonzero number from its conjugate and its squared modulus, in two layouts, and notes when it equals the conjugate. The second gives its distance from the origin and its angle. The third collects the rules for a double inverse, products, conjugates and powers, and the last turns division into multiplication by the inverse.`,
+  before: ``,
+  after: `A quick check on any inverse is to multiply it by the original number: the product must be exactly one. Forgetting to divide the conjugate by the squared modulus is the usual slip, and this check catches it at once unless the number lies on the unit circle.`,
+  link: '',
+},
 obj11: {
   title: `Common Mistakes`,
   content: `Several errors recur when students compute multiplicative inverses of complex numbers.
@@ -2332,33 +2343,9 @@ Confusing $z^{-1}$ with $-z$ conflates two unrelated operations. The multiplicat
 
 Confusing $z^{-1}$ with $\\overline{z}$ is another pitfall. They are equal only on the unit circle. For $z = 3 + 4i$, the conjugate is $3 - 4i$ while the inverse is $\\frac{3 - 4i}{25}$. Forgetting to divide by $|z|^2$ leaves the answer off by a factor of $25$.
 
-Leaving a complex denominator unreduced is incomplete. A final answer like $\\frac{2 + 3i}{1 - i}$ requires rationalization. Multiply by $\\frac{1 + i}{1 + i}$ to obtain a real denominator and express the result in standard [algebraic form](!/complex-numbers/algebraic-form).
-
-**Inverting only the modulus**
-
-In polar form, the modulus of $z$ is replaced by its reciprocal, but the argument is copied unchanged. The result has the right distance from the origin and points in the wrong direction.
-
-Wrong working: for $z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$, $z^{-1} = \\frac{1}{2}\\,\\text{cis}\\,\\frac{\\pi}{3}$.
-
-Right working: the modulus inverts and the argument negates, so $z^{-1} = \\frac{1}{2}\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right)$. Then $z \\cdot z^{-1} = 2 \\cdot \\frac{1}{2}\\,\\text{cis}\\left(\\frac{\\pi}{3} - \\frac{\\pi}{3}\\right) = \\text{cis}\\,0 = 1$.
-
-Why it happens: for real numbers the inverse is just the reciprocal, so the step is applied to the length alone. The arguments of real numbers, $0$ and $\\pi$, give the same direction when negated, so the angle never had to change before.
-
-How to check: multiply the answer by $z$. Moduli multiply and arguments add, so the wrong answer gives $2 \\cdot \\frac{1}{2}\\,\\text{cis}\\left(\\frac{\\pi}{3} + \\frac{\\pi}{3}\\right) = \\text{cis}\\,\\frac{2\\pi}{3}$, not $1$.
-
-**Dividing by the modulus, not its square**
-
-The conjugate method divides by $|z|^2$, but the denominator is written as $|z|$, the modulus itself. The result points in the right direction but has the wrong length.
-
-Wrong working: $\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{|1 + 2i|} = \\frac{11 - 7i}{\\sqrt{5}}$.
-
-Right working: $(1 + 2i)(1 - 2i) = 1 + 4 = 5 = |1 + 2i|^2$, so $\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{5} = \\frac{11 - 7i}{5} = \\frac{11}{5} - \\frac{7}{5}i$.
-
-Why it happens: the modulus is the quantity usually named and computed, and the square is easy to lose next to $\\sqrt{a^2 + b^2}$. Multiplying the denominator by its conjugate gives $a^2 + b^2$ itself, with no square root.
-
-How to check: multiply the answer by the denominator; it must give the numerator back. $\\left(\\frac{11}{5} - \\frac{7}{5}i\\right)(1 + 2i) = \\frac{11}{5} + \\frac{22}{5}i - \\frac{7}{5}i - \\frac{14}{5}i^2 = 5 + 3i$, while the wrong answer gives $\\frac{(11 - 7i)(1 + 2i)}{\\sqrt{5}} = \\frac{25 + 15i}{\\sqrt{5}} = \\sqrt{5}\\,(5 + 3i)$.`,
+Leaving a complex denominator unreduced is incomplete. A final answer like $\\frac{2 + 3i}{1 - i}$ requires rationalization. Multiply by $\\frac{1 + i}{1 + i}$ to obtain a real denominator and express the result in standard [algebraic form](!/complex-numbers/algebraic-form).`,
   before: ``,
-  after: ``,
+  after: `Both slips leave out half of the inverse. In polar form the modulus inverts and the argument changes sign, and in algebraic form the conjugate is divided by $|z|^2$, not by $|z|$. Multiplying the answer by $z$, which must give exactly $1$, catches both.`,
   link: '',
 },
     obj12:{
@@ -2626,8 +2613,55 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 12, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'inverting-only-the-modulus', name: `Inverting only the modulus`, errorAt: 1,
+        what: `In polar form, the modulus of $z$ is replaced by its reciprocal, but the argument is copied unchanged. The result has the right distance from the origin and points in the wrong direction.`,
+        wrong: [`For $z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$,`, `$z^{-1} = \\frac{1}{2}\\,\\text{cis}\\,\\frac{\\pi}{3}$.`],
+        right: [`For $z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$,`, `The modulus inverts and the argument negates, so $z^{-1} = \\frac{1}{2}\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right)$. Then $z \\cdot z^{-1} = 2 \\cdot \\frac{1}{2}\\,\\text{cis}\\left(\\frac{\\pi}{3} - \\frac{\\pi}{3}\\right) = \\text{cis}\\,0 = 1$.`],
+        why: `For real numbers the inverse is just the reciprocal, so the step is applied to the length alone. The arguments of real numbers, $0$ and $\\pi$, give the same direction when negated, so the angle never had to change before.`,
+        check: `Multiply the answer by $z$. Moduli multiply and arguments add, so the wrong answer gives $2 \\cdot \\frac{1}{2}\\,\\text{cis}\\left(\\frac{\\pi}{3} + \\frac{\\pi}{3}\\right) = \\text{cis}\\,\\frac{2\\pi}{3}$, not $1$.` },
+      { id: 'dividing-by-the-modulus-not-its-square', name: `Dividing by the modulus, not its square`, errorAt: 0,
+        what: `The conjugate method divides by $|z|^2$, but the denominator is written as $|z|$, the modulus itself. The result points in the right direction but has the wrong length.`,
+        wrong: [`$\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{|1 + 2i|} = \\frac{11 - 7i}{\\sqrt{5}}$.`],
+        right: [`$(1 + 2i)(1 - 2i) = 1 + 4 = 5 = |1 + 2i|^2$, so $\\frac{5 + 3i}{1 + 2i} = \\frac{(5 + 3i)(1 - 2i)}{5} = \\frac{11 - 7i}{5} = \\frac{11}{5} - \\frac{7}{5}i$.`],
+        why: `The modulus is the quantity usually named and computed, and the square is easy to lose next to $\\sqrt{a^2 + b^2}$. Multiplying the denominator by its conjugate gives $a^2 + b^2$ itself, with no square root.`,
+        check: `Multiply the answer by the denominator; it must give the numerator back. $\\left(\\frac{11}{5} - \\frac{7}{5}i\\right)(1 + 2i) = \\frac{11}{5} + \\frac{22}{5}i - \\frac{7}{5}i - \\frac{14}{5}i^2 = 5 + 3i$, while the wrong answer gives $\\frac{(11 - 7i)(1 + 2i)}{\\sqrt{5}} = \\frac{25 + 15i}{\\sqrt{5}} = \\sqrt{5}\\,(5 + 3i)$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    groups: [
+      { id: 'inverse', name: 'The inverse', sub: 'The reciprocal of a nonzero complex number.', pairs: [
+        [{ formula: '$\\displaystyle z^{-1} = \\frac{\\overline{z}}{|z|^2} = \\frac{a - bi}{a^2 + b^2}$', text: 'The conjugate divided by the squared modulus, for $z \\neq 0$, as [the multiplicative inverse of a complex number](!#2) shows.' },
+         { formula: '$\\displaystyle z^{-1} = \\frac{a}{a^2 + b^2} - \\frac{b}{a^2 + b^2}i$', text: 'The same inverse in standard form, with the real and the imaginary part apart, from [the same section](!#2).' }],
+        [{ formula: '$z^{-1} = \\overline{z}$', text: 'On the unit circle, where $|z| = 1$, the inverse equals the conjugate; off it they always differ ([inverse vs. conjugate](!#7)).' }, ''],
+      ] },
+      { id: 'plane', name: 'In the plane', sub: 'Where the inverse sits compared with the number.', pairs: [
+        [{ formula: '$\\displaystyle |z^{-1}| = \\frac{1}{|z|}$', text: 'The inverse lies at the reciprocal distance from the origin, as [the geometric interpretation](!#5) shows.' },
+         { formula: '$\\arg(z^{-1}) = -\\arg(z)$', text: 'Its angle is the negative of the original one, a reflection across the real axis ([geometric interpretation](!#5)).' }],
+      ] },
+      { id: 'rules', name: 'Rules', sub: 'How the inverse combines with other operations.', pairs: [
+        [{ formula: '$(z^{-1})^{-1} = z$', text: 'Inverting twice gives the number back, from [properties of multiplicative inverse](!#6).' },
+         { formula: '$(z_1 \\cdot z_2)^{-1} = z_1^{-1} \\cdot z_2^{-1}$', text: 'The inverse of a product is the product of the inverses, as [the properties](!#6) show.' }],
+        [{ formula: '$(\\overline{z})^{-1} = \\overline{z^{-1}}$', text: 'Inverting and taking the conjugate give the same result in either order ([properties of multiplicative inverse](!#6)).' },
+         { formula: '$(z^n)^{-1} = (z^{-1})^n = z^{-n}$', text: 'The inverse of a power is the same power of the inverse, from [the properties](!#6).' }],
+      ] },
+      { id: 'division', name: 'Division', sub: 'Dividing means multiplying by the inverse.', pairs: [
+        [{ formula: '$\\displaystyle \\frac{z_1}{z_2} = z_1 \\cdot z_2^{-1}$', text: 'Division by $z_2 \\neq 0$ is multiplication by its inverse, as [connection to division](!#9) shows.' },
+         { formula: '$\\displaystyle \\frac{z_1}{z_2} = z_1 \\cdot \\frac{\\overline{z_2}}{|z_2|^2} = \\frac{z_1 \\cdot \\overline{z_2}}{|z_2|^2}$', text: 'Putting in the inverse formula gives the usual rule: multiply by the conjugate and divide by the squared modulus ([connection to division](!#9)).' }],
+      ] },
+    ],
+  };
+
   return {
   props:{
+    formulaSummaryData,
+    pitfallData,
     realInverseCases,
     complexInverseCases,
     demoUnits,
@@ -2654,7 +2688,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function MultiplicativeInversePage({realInverseCases, complexInverseCases, 
+export default function MultiplicativeInversePage({ formulaSummaryData, pitfallData,realInverseCases, complexInverseCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2883,6 +2917,24 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
         ]
     },
     {
+        id:'formula-summary',
+        title:sectionsContent.formulaSummary.title,
+        link:sectionsContent.formulaSummary.link,
+        content:[
+          sectionsContent.formulaSummary.content,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="multiplicative-inverse-formula-summary"
+            title="Multiplicative inverse formulas"
+            source="/complex-numbers/multiplicative-inverse"
+            related={{ href: '/complex-numbers/formulas', label: 'All complex number formulas' }}
+            after={sectionsContent.formulaSummary.after}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="grouped" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'11',
         title:sectionsContent.obj11.title,
         link:sectionsContent.obj11.link,
@@ -2893,6 +2945,15 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj11Table }}
           />,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="multiplicative-inverse-pitfalls"
+            title="Common pitfalls with the multiplicative inverse"
+            source="/complex-numbers/multiplicative-inverse"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

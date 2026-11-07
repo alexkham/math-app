@@ -511,6 +511,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
 export async function getStaticProps(){
@@ -858,7 +860,7 @@ Probability uses the same basic operations as set theory, but with a different p
 
 @academic[pitfall,aside:true,width:35%:Dropping the overlap from a union
 Taking "even or greater than 3" on a die as one or the other but not both gives $\\{2, 5\\}$ and $P = \\frac{2}{6}$. The union keeps the overlap: $\\{2, 4, 5, 6\\}$, so $P = \\frac{4}{6} = \\frac{2}{3}$.
-[Read more](!#mistakes)]@
+[Read more](!#pitfall-dropping-the-overlap-from-a-union)]@
 
 Each operation can be tried on a single die roll. With $A = \\{2, 4, 6\\}$, the event "even", and $B = \\{4, 5, 6\\}$, the event "greater than 3", the union $A \\cup B$ is the event "even or greater than 3", the intersection $A \\cap B$ is "even and greater than 3", and the complement $A^c$ is "odd".
 `,
@@ -892,25 +894,9 @@ A probability model is built from three parts: the sample space, the collection 
     },
     mistakes:{
       title:`Common Mistakes and Misunderstandings`,
-      content:`
-Several errors show up repeatedly when learners first connect sets to probability. One common mistake is confusing a single outcome with an event, even though an event can contain many outcomes. Another is mixing up union and intersection, which leads to incorrect interpretations such as treating "A or B" as "A and B." Some people treat complements incorrectly by forgetting that they are defined relative to the entire sample space, not just the part of the problem they happen to be focusing on. In continuous settings, a frequent misunderstanding is expecting individual points to have nonzero probability, even though their probability is actually zero. Recognizing these mistakes early helps prevent deeper errors when working with conditional probability, independence, and probability distributions.
-
-**Dropping the overlap from a union**
-
-The event "A or B" is read as one or the other but not both, so the outcomes that belong to both events are left out. In probability, "or" is inclusive: the union keeps every outcome that is in $A$, in $B$, or in both.
-
-Wrong working: on a die, with $A = \\{2, 4, 6\\}$ (even) and $B = \\{4, 5, 6\\}$ (greater than 3), only the outcomes in exactly one of the events are kept.
-$$\\{2, 5\\}, \\quad P = \\frac{2}{6} = \\frac{1}{3}$$
-
-Right working: the union also keeps the overlap $A \\cap B = \\{4, 6\\}$.
-$$A \\cup B = \\{2, 4, 5, 6\\}, \\quad P(A \\cup B) = \\frac{4}{6} = \\frac{2}{3}$$
-
-Why it happens: in everyday speech "or" often means one choice only, as in "tea or coffee". The set union carries no such restriction.
-
-How to check: the union contains each of the two events, so its probability is never smaller than the larger of $P(A)$ and $P(B)$. Here $P(A) = \\frac{3}{6}$, and the wrong answer $\\frac{2}{6}$ is smaller.
-`,
+      content:`Several errors show up repeatedly when learners first connect sets to probability. One common mistake is confusing a single outcome with an event, even though an event can contain many outcomes. Another is mixing up union and intersection, which leads to incorrect interpretations such as treating "A or B" as "A and B." Some people treat complements incorrectly by forgetting that they are defined relative to the entire sample space, not just the part of the problem they happen to be focusing on. In continuous settings, a frequent misunderstanding is expecting individual points to have nonzero probability, even though their probability is actually zero. Recognizing these mistakes early helps prevent deeper errors when working with conditional probability, independence, and probability distributions.`,
       before:``,
-      after:``,
+      after: `In probability, or is inclusive: the union $A \\cup B$ contains the outcomes that lie in both events, and $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. Checking that the union is never less likely than the larger of the two events catches the slip.`,
   
     },
     connection:{
@@ -1024,8 +1010,23 @@ Probability starts with sets. Before we talk about events, sample spaces, random
   };
 
 
+  // MistakeFix batch 19, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.mistakes into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-overlap-from-a-union', name: `Dropping the overlap from a union`, errorAt: 0,
+        what: `The event "A or B" is read as one or the other but not both, so the outcomes that belong to both events are left out. In probability, "or" is inclusive: the union keeps every outcome that is in $A$, in $B$, or in both.`,
+        wrong: [`On a die, with $A = \\{2, 4, 6\\}$ (even) and $B = \\{4, 5, 6\\}$ (greater than 3), only the outcomes in exactly one of the events are kept.`, `$$\\{2, 5\\}, \\quad P = \\frac{2}{6} = \\frac{1}{3}$$`],
+        right: [`The union also keeps the overlap $A \\cap B = \\{4, 6\\}$.`, `$$A \\cup B = \\{2, 4, 5, 6\\},$$
+$$P(A \\cup B) = \\frac{4}{6} = \\frac{2}{3}$$`],
+        why: `In everyday speech "or" often means one choice only, as in "tea or coffee". The set union carries no such restriction.`,
+        check: `The union contains each of the two events, so its probability is never smaller than the larger of $P(A)$ and $P(B)$. Here $P(A) = \\frac{3}{6}$, and the wrong answer $\\frac{2}{6}$ is smaller.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
       sectionsContent,
@@ -1046,7 +1047,7 @@ Probability starts with sets. Before we talk about events, sample spaces, random
   }
 }
 
-export default function SetsInProbabilityPage({
+export default function SetsInProbabilityPage({ pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1218,6 +1219,15 @@ export default function SetsInProbabilityPage({
           sectionsContent.mistakes.content,
           <div key={'mistakes-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'mistakes-mistakes'}
+            id="probability-set-pitfalls"
+            title="Common pitfalls with events as sets"
+            source="/probability/sets"
+            after={sectionsContent.mistakes.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     {

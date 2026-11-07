@@ -702,6 +702,7 @@ import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fr
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1045,7 +1046,10 @@ Mixing up which fraction to flip leads to inverted answers. In $\\frac{a}{b} \\d
   },
     obj8:{
       title:`Complex Fractions at a Glance`,
-      content:`The page covered what a complex fraction is, two simplification methods (division and LCD), the special cases with sums, mixed numbers, or nesting, and the common pitfalls. The table below collects every situation encountered with the move to make and a worked example.`,
+      content:`This summary collects every situation from the page in ten rows. Each row names the situation with a line on where it is explained and a link to its section, gives the move to make, and works an example; links in the moves lead on to mixed numbers and to lowest terms.
+
+It starts with what a complex fraction is and the main bar read as division, then simplifies a fraction over a fraction, a fraction over a whole number and a whole number over a fraction. Rows for sums or differences inside, mixed numbers inside and nested fractions follow. The last two rows warn that only the divisor is flipped and that the result still needs reducing.`,
+      formulaSheetAfter: `Read the main bar as division and a complex fraction stops being special: it becomes one division of fractions. Clear sums, mixed numbers and inner layers first, flip only the bottom fraction, and then reduce whatever is left.`,
       before:``,
       after:``,
       link:'',
@@ -1281,8 +1285,41 @@ const schemas = {
     ],
   };
 
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table capstoneTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Situation', kind: 'name' },
+      { key: 'rule', label: 'What to do' },
+      { key: 'example', label: 'Example', kind: 'example' },
+    ],
+    rows: [
+      { name: 'Definition', rule: 'a fraction with a fraction in its numerator, denominator, or both', example: '$\\displaystyle \\frac{\\frac{3}{4}}{\\frac{5}{6}}$',
+        sub: 'The main bar separates the overall numerator from the overall denominator, as [what a complex fraction is](!#1) explains.' },
+      { name: 'Main bar = division', rule: 'the overall fraction bar represents division of top by bottom', example: '$\\displaystyle \\frac{\\frac{a}{b}}{\\frac{c}{d}} = \\frac{a}{b} \\div \\frac{c}{d}$',
+        sub: 'This turns every complex fraction into a division of fractions, the start of [simplifying by division](!#2).' },
+      { name: 'Fraction over fraction', rule: 'keep, change, flip: multiply top by reciprocal of bottom', example: '$\\displaystyle \\frac{\\frac{3}{4}}{\\frac{5}{6}} = \\frac{3}{4} \\times \\frac{6}{5} = \\frac{9}{10}$',
+        sub: 'The rule for dividing fractions applied to the main bar, as [simplifying by division](!#2) shows.' },
+      { name: 'Fraction over whole', rule: 'write the whole number over 1, then proceed', example: '$\\displaystyle \\frac{\\frac{2}{3}}{4} = \\frac{2}{3} \\times \\frac{1}{4} = \\frac{1}{6}$',
+        sub: 'The same approach works when only the numerator holds a fraction, as [simplifying by division](!#2) notes.' },
+      { name: 'Whole over fraction', rule: 'multiply the whole by the reciprocal of the fraction', example: '$\\displaystyle \\frac{4}{\\frac{2}{5}} = 4 \\times \\frac{5}{2} = 10$',
+        sub: 'And when only the denominator holds one, again from [simplifying by division](!#2).' },
+      { name: 'Sums or differences inside', rule: 'combine that part first (or use the LCD method), then simplify the resulting complex fraction', example: '$\\displaystyle \\frac{\\frac{1}{2} + \\frac{1}{3}}{\\frac{1}{4}} \\to \\frac{\\frac{5}{6}}{\\frac{1}{4}} = \\frac{10}{3}$',
+        sub: 'A sum in the numerator or the denominator is one fraction only after it is combined, as [sums or differences](!#4) shows.' },
+      { name: 'Mixed numbers inside', rule: 'convert every [mixed number](!/arithmetic/fractions/mixed-numbers) to an improper fraction first', example: '$\\displaystyle \\frac{2\\frac{1}{2}}{1\\frac{1}{4}} = \\frac{5}{2} \\times \\frac{4}{5} = 2$',
+        sub: 'After the conversion the usual division applies, from [complex fractions with mixed numbers](!#5).' },
+      { name: 'Nested complex fraction', rule: 'resolve the innermost fraction first, then work outward', example: '$\\displaystyle \\frac{1}{\\frac{1}{\\frac{1}{2}}} \\to \\frac{1}{2}$',
+        sub: 'One layer at a time, from the inside, as [nested complex fractions](!#6) shows.' },
+      { name: 'Only the divisor flips', rule: 'in $\\frac{a}{b} \\div \\frac{c}{d}$, the dividend $\\frac{a}{b}$ stays put; never flip it', example: '$\\displaystyle \\frac{\\frac{2}{3}}{\\frac{4}{5}}$ needs $\\displaystyle \\times \\frac{5}{4}$, not $\\displaystyle \\times \\frac{4}{5}$',
+        sub: 'Flipping the wrong fraction inverts the answer, one of [the common mistakes](!#7).' },
+      { name: 'Reduce the final result', rule: 'after clearing the complex structure, check whether the answer simplifies to [lowest terms](!/arithmetic/fractions/equivalent)', example: '$\\displaystyle \\frac{18}{20} \\to \\frac{9}{10}$',
+        sub: 'An unreduced answer is unfinished, as [the common mistakes](!#7) note.' },
+    ],
+  };
+
 return {
   props: {
+    formulaSummaryData,
     pitfallData,
     sectionsContent,
     introContent,
@@ -1304,7 +1341,7 @@ return {
    }
 
 
-export default function ComplexFractionsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ComplexFractionsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1458,8 +1495,16 @@ Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\fr
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="complex-fraction-formula-summary"
+            title="Simplifying complex fractions"
+            source="/arithmetic/fractions/complex"
+            related={false}
+            after={sectionsContent.obj8.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

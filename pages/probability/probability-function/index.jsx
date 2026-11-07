@@ -729,6 +729,7 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1144,7 +1145,7 @@ Together, all possible outcomes must absorb all the probability.
 
 @academic[pitfall,aside:true,width:35%:Requiring a density to stay below 1
 Rejecting $f(x) = 2$ on $[0, \\frac{1}{2}]$ because $2 > 1$ applies the PMF bound $p(x) \\leq 1$ to a density. Its area is $2 \\cdot \\frac{1}{2} = 1$, so it is a valid PDF.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-requiring-a-density-to-stay-below-1)]@
 
 There are other characteristics that can describe how a probability function behaves, but these two are the essential ones. Everything else you'll ever see—how intervals get probabilities, how events combine, how distributions are shaped—comes from the basic axioms of probability and the conclusions that follow from them. These two conditions are the foundation, and the rest grows naturally from there.
 `,
@@ -1263,7 +1264,7 @@ Visualizing a PMF typically involves vertical bars or "impulses" at each possibl
 
 @academic[pitfall,aside:true,width:35%:Including the boundary value
 Reading $P(X > 3)$ for the die as $P(X \\geq 3)$ adds the face $3$ and gives $\\frac{4}{6} = \\frac{2}{3}$. Only the faces $4, 5, 6$ satisfy $X > 3$, so $P(X > 3) = \\frac{3}{6} = \\frac{1}{2}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-including-the-boundary-value)]@
 
 For the die, an event such as $X > 3$ is answered by listing the faces that belong to it and adding their masses. Each face carries its own $\\frac{1}{6}$, so every face that enters the list changes the total by that amount. This is the step where the inequality sign in the event is turned into a concrete list of values.
       `,
@@ -1340,35 +1341,9 @@ The probability function is the bridge between the physical world of experiments
     },
     pitfalls: {
       title: `Common Pitfalls`,
-      content: `Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Including the boundary value**
-
-An event is written with a strict inequality, such as $X > 3$, and the boundary value is counted as if the inequality were $\\geq$. For a discrete variable the boundary value carries its own mass, so including it changes the answer.
-
-Wrong working: for a fair die,
-$$P(X > 3) = p(3) + p(4) + p(5) + p(6) = \\frac{4}{6} = \\frac{2}{3}$$
-
-Right working: only the faces greater than $3$ belong to the event.
-$$P(X > 3) = p(4) + p(5) + p(6) = \\frac{3}{6} = \\frac{1}{2}$$
-
-Why it happens: for a continuous variable a single point has probability zero, so $>$ and $\\geq$ give the same answer. The habit carries over to discrete variables, where it does not hold.
-
-How to check: write the event as a list of values before adding. Here $X > 3$ lists the faces $4, 5, 6$, so the answer must be $3 \\cdot \\frac{1}{6} = \\frac{1}{2}$. Also, $P(X > 3)$ and $P(X \\leq 3)$ must add to $1$: the right answer gives $\\frac{1}{2} + \\frac{1}{2} = 1$, while the wrong one gives $\\frac{2}{3} + \\frac{1}{2} = \\frac{7}{6}$.
-
-**Requiring a density to stay below 1**
-
-A function is checked as a PDF and rejected because its height goes above $1$ somewhere. The bound $p(x) \\leq 1$ belongs to a PMF, whose values are probabilities; a density value is not a probability.
-
-Wrong working: $f(x) = 2$ on $[0, \\frac{1}{2}]$ and $0$ elsewhere has $f(x) = 2 > 1$, so it is declared not to be a probability function.
-
-Right working: check the two properties. $f(x) \\geq 0$ everywhere, and the total area is $\\int_0^{1/2} 2\\,dx = 2 \\cdot \\frac{1}{2} = 1$. Both hold, so $f$ is a valid PDF: the uniform density on $[0, \\frac{1}{2}]$.
-
-Why it happens: the first probability functions met are PMFs, where every value is a probability between $0$ and $1$, and the same picture is carried over to the height of a density curve.
-
-How to check: compute a probability from the density instead of reading its height. $P(0 \\leq X \\leq \\frac{1}{4}) = 2 \\cdot \\frac{1}{4} = \\frac{1}{2}$, a proper probability, even though the height is $2$.`,
+      content: `Each of the two mistakes below is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
       before: ``,
-      after: ``,
+      after: `Both slips apply a rule from the wrong kind of probability function. For a discrete variable $X > 3$ leaves out the value $3$, and a density may rise above $1$, since only its area is a probability. Listing the values of the event, or computing a probability from the density, catches both.`,
     },
     obj5:{
   
@@ -1467,8 +1442,31 @@ The probability function is the mathematical core of any random variable. It is 
     ],
   };
 
+  // MistakeFix batch 18, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'including-the-boundary-value', name: `Including the boundary value`, errorAt: 0,
+        what: `An event is written with a strict inequality, such as $X > 3$, and the boundary value is counted as if the inequality were $\\geq$. For a discrete variable the boundary value carries its own mass, so including it changes the answer.`,
+        wrong: [`For a fair die,
+$$P(X > 3) = p(3) + p(4) + p(5) + p(6)$$
+$$= \\frac{4}{6} = \\frac{2}{3}$$`],
+        right: [`Only the faces greater than $3$ belong to the event.`, `$$P(X > 3) = p(4) + p(5) + p(6)$$
+$$= \\frac{3}{6} = \\frac{1}{2}$$`],
+        why: `For a continuous variable a single point has probability zero, so $>$ and $\\geq$ give the same answer. The habit carries over to discrete variables, where it does not hold.`,
+        check: `Write the event as a list of values before adding. Here $X > 3$ lists the faces $4, 5, 6$, so the answer must be $3 \\cdot \\frac{1}{6} = \\frac{1}{2}$. Also, $P(X > 3)$ and $P(X \\leq 3)$ must add to $1$: the right answer gives $\\frac{1}{2} + \\frac{1}{2} = 1$, while the wrong one gives $\\frac{2}{3} + \\frac{1}{2} = \\frac{7}{6}$.` },
+      { id: 'requiring-a-density-to-stay-below-1', name: `Requiring a density to stay below 1`, errorAt: 0,
+        what: `A function is checked as a PDF and rejected because its height goes above $1$ somewhere. The bound $p(x) \\leq 1$ belongs to a PMF, whose values are probabilities; a density value is not a probability.`,
+        wrong: [`$f(x) = 2$ on $[0, \\frac{1}{2}]$ and $0$ elsewhere has $f(x) = 2 > 1$, so it is declared not to be a probability function.`],
+        right: [`Check the two properties. $f(x) \\geq 0$ everywhere, and the total area is $\\int_0^{1/2} 2\\,dx = 2 \\cdot \\frac{1}{2} = 1$. Both hold, so $f$ is a valid PDF: the uniform density on $[0, \\frac{1}{2}]$.`],
+        why: `The first probability functions met are PMFs, where every value is a probability between $0$ and $1$, and the same picture is carried over to the height of a density curve.`,
+        check: `Compute a probability from the density instead of reading its height. $P(0 \\leq X \\leq \\frac{1}{4}) = 2 \\cdot \\frac{1}{4} = \\frac{1}{2}$, a proper probability, even though the height is $2$.` },
+    ],
+  };
+
   return {
     props: {
+    pitfallData,
     pmfPdfTree,
     demoUnits,
       sectionsContent,
@@ -1490,7 +1488,7 @@ The probability function is the mathematical core of any random variable. It is 
   }
 }
 
-export default function ProbabilityFunctionPage({pmfPdfTree, 
+export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1653,6 +1651,15 @@ export default function ProbabilityFunctionPage({pmfPdfTree,
         link:'',
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="probability-function-pitfalls"
+            title="Common pitfalls with probability functions"
+            source="/probability/probability-function"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

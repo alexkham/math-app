@@ -10,6 +10,28 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix batch 11, 2026-11-03: the "Common Pitfalls" entries, moved word for word into the MistakeFix data (trace layout).
+const pitfallData = {
+  mistakes: [
+    { id: 'checking-only-some-rows', name: `Checking only some rows`, errorAt: 1,
+      what: `Two formulas are tested for equivalence on a few rows only, and because they agree there, they are called equivalent. Equivalence asks for the same truth value in every row of the truth table, so a single row where they differ settles the question.`,
+      wrong: [`For $p \\to q$ and $q \\to p$, the row $p = T$, $q = T$ gives T and T, and the row $p = F$, $q = F$ gives T and T.`, `The formulas agree in both rows, so they are called equivalent.`],
+      right: [`For $p \\to q$ and $q \\to p$, the row $p = T$, $q = T$ gives T and T, and the row $p = F$, $q = F$ gives T and T.`, `List all four rows for $(p, q)$, namely $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$. The column of $p \\to q$ is T, F, T, T and the column of $q \\to p$ is T, T, F, T. The columns differ in the rows $(T, F)$ and $(F, T)$, so $p \\to q \\not\\equiv q \\to p$.`],
+      why: `The rows where both variables have the same value are the first ones that come to mind, and there the two formulas look alike. The rows with mixed values are exactly the ones that tell them apart.`,
+      check: `Count the rows before comparing: $2^n$ rows for $n$ variables. Equivalence holds only if the two columns match in all of them, which is the same as the biconditional of the two formulas being a tautology.` },
+    { id: 'treating-not-always-true-as-always-false', name: `Treating not always true as always false`, errorAt: 1,
+      what: `A formula that is not a tautology is put straight into the contradiction category. Not being always true only means being false in at least one row; the formula may still be true in other rows, and then it is a contingency.`,
+      wrong: [`$p \\land q$ is F at $p = T$, $q = F$, at $p = F$, $q = T$ and at $p = F$, $q = F$.`, `It is not a tautology, so it is called a contradiction and unsatisfiable.`],
+      right: [`$p \\land q$ is F at $p = T$, $q = F$, at $p = F$, $q = T$ and at $p = F$, $q = F$.`, `The column of $p \\land q$ for $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$ is T, F, F, F. The single T in the row $p = T$, $q = T$ makes it satisfiable, and the three F values make it not a tautology. It is a contingency.`],
+      why: `Tautology and contradiction are presented as a pair of opposites, so the middle category is easy to forget. A column that is mostly F also looks like a column that is all F.`,
+      check: `Look for one row with T and one row with F. If both exist, the formula is a contingency; only a column with no T at all marks a contradiction.` },
+  ],
+};
+const pitfallClosing = `Both slips stop the truth table early. An equivalence must hold in all $2^n$ rows, and a formula that is not a tautology is a contradiction only if no row at all makes it true. Counting the rows first, then looking for one T and one F, catches both.`;
+
 
 export async function getStaticProps() {
  const { default: logicFormulasList } = await import('@/app/api/db/formulas/logic/logicFormulasList')
@@ -286,7 +308,7 @@ $p∨q$ is satisfiable because it’s true in cases where either $p$ or $q$ is t
       content: [
         `@academic[pitfall,aside:true,width:35%:Treating not always true as always false
 Calling $p \\land q$ a contradiction because it is F in three of its four rows ignores the row $p = T$, $q = T$, where it is T. Not a tautology only means F in at least one row; $p \\land q$ is a contingency.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-treating-not-always-true-as-always-false)]@`,
         `Sorting a formula into its category is a search over assignments. A single row with T is enough to show that a formula is satisfiable, and that row is checked in moments once it has been found. Showing that a formula is unsatisfiable is harder: every one of the $2^n$ rows has to come out F, and the number of rows doubles with each new variable.`,
         `@academic[fact,aside:true,width:35%:The first NP-complete problem
 Deciding whether a formula is satisfiable was the first problem proved NP-complete, by Stephen Cook in 1971. A fast method for it would give a fast method for every problem whose answers can be checked quickly, and none is known.]@`,
@@ -309,7 +331,7 @@ Deciding whether a formula is satisfiable was the first problem proved NP-comple
 This means that for every possible truth assignment,$A$ and $B$ yield the same truth value.
 @academic[pitfall,aside:true,width:35%:Checking only some rows
 Calling $p \\to q$ and $q \\to p$ equivalent because they agree at $p = q = T$ and $p = q = F$ misses the row $p = T$, $q = F$, where $p \\to q$ is F and $q \\to p$ is T. One differing row is enough, so they are not equivalent.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-checking-only-some-rows)]@
 To test two formulas for equivalence, build one truth table with a column for each formula and compare the two columns row by row. With $n$ variables the table has $2^n$ rows, so two variables give four rows and three variables give eight. The verdict depends on all of these rows taken together, not on any single one of them.
 Logical equivalences form the foundation of [propositional logic laws](!/logic/propositional-logic#laws). Many logical laws are logical equivalences that help us simplify, manipulate, or prove logical expressions.
 However, not all logical equivalences are laws. Some are specific derivations that are still true but are not considered "fundamental" enough to be named as laws.
@@ -363,7 +385,7 @@ $p∨q$ is satisfiable because it’s true in cases where either $p$ or $q$ is t
 
 @academic[pitfall,aside:true,width:35%:Treating not always true as always false
 Calling $p \\land q$ a contradiction because it is F in three of its four rows ignores the row $p = T$, $q = T$, where it is T. Not a tautology only means F in at least one row; $p \\land q$ is a contingency.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-treating-not-always-true-as-always-false)]@
 To place a formula in one of the three categories, evaluate it in every row of its truth table and look at the whole column of results. A column with T in every row marks a tautology, and a column with F in every row marks a contradiction. Any mixture of T and F, however uneven, marks a contingency.
 
 **These three categories exhaust all possibilities** for a proposition in classical logic. Every proposition must be one of these. 
@@ -396,31 +418,18 @@ Sorting a formula into its category is a search over assignments. A single row w
   {
     id:'pitfalls',
     title:'Common Pitfalls',
-    content:`Two slips account for many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Checking only some rows**
-
-Two formulas are tested for equivalence on a few rows only, and because they agree there, they are called equivalent. Equivalence asks for the same truth value in every row of the truth table, so a single row where they differ settles the question.
-
-Wrong working: for $p \\to q$ and $q \\to p$, the row $p = T$, $q = T$ gives T and T, and the row $p = F$, $q = F$ gives T and T. The formulas agree in both rows, so they are called equivalent.
-
-Right working: list all four rows for $(p, q)$, namely $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$. The column of $p \\to q$ is T, F, T, T and the column of $q \\to p$ is T, T, F, T. The columns differ in the rows $(T, F)$ and $(F, T)$, so $p \\to q \\not\\equiv q \\to p$.
-
-Why it happens: the rows where both variables have the same value are the first ones that come to mind, and there the two formulas look alike. The rows with mixed values are exactly the ones that tell them apart.
-
-How to check: count the rows before comparing: $2^n$ rows for $n$ variables. Equivalence holds only if the two columns match in all of them, which is the same as the biconditional of the two formulas being a tautology.
-
-**Treating not always true as always false**
-
-A formula that is not a tautology is put straight into the contradiction category. Not being always true only means being false in at least one row; the formula may still be true in other rows, and then it is a contingency.
-
-Wrong working: $p \\land q$ is F at $p = T$, $q = F$, at $p = F$, $q = T$ and at $p = F$, $q = F$. It is not a tautology, so it is called a contradiction and unsatisfiable.
-
-Right working: the column of $p \\land q$ for $(T, T)$, $(T, F)$, $(F, T)$, $(F, F)$ is T, F, F, F. The single T in the row $p = T$, $q = T$ makes it satisfiable, and the three F values make it not a tautology. It is a contingency.
-
-Why it happens: tautology and contradiction are presented as a pair of opposites, so the middle category is easy to forget. A column that is mostly F also looks like a column that is all F.
-
-How to check: look for one row with T and one row with F. If both exist, the formula is a contingency; only a column with no T at all marks a contradiction.`
+    content:[
+      `Two slips account for many wrong answers on the topics of this page. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
+      <DiagramFrame
+        key={'pitfalls-mistakes'}
+        id="semantics-pitfalls"
+        title="Common pitfalls in semantics"
+        source="/logic/propositional-logic/semantics"
+        after={pitfallClosing}
+      >
+        <MistakeFix data={pitfallData} variant="trace" />
+      </DiagramFrame>,
+    ]
   },
   // faq: rendered component — must be built here, not in getStaticProps
   {

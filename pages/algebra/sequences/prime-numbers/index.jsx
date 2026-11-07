@@ -20,6 +20,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 
 
 export async function getStaticProps(){
@@ -640,9 +641,24 @@ $$\\text{lcm}(60, 252) = 2^2 \\cdot 3^2 \\cdot 5 \\cdot 7 = 1260$$`],
         check: `The GCD must divide both numbers. $60 \\div 36$ is not a whole number, while $60 \\div 12 = 5$ and $252 \\div 12 = 21$. A second check: the GCD times the LCM equals the product of the two numbers, $12 \\cdot 1260 = 15120 = 60 \\cdot 252$.` },
     ],
   };
+  // TheoremCard data (prime-number-theorem-apply); every fact is from the section text
+  const primeNumberApply = {
+    header: { kicker: 'Prime numbers', title: 'The Prime Number Theorem', lede: 'Primes become rarer among larger integers, and the theorem says precisely how.' },
+    theorem: {
+      statement: 'With $\\pi(n)$ the number of primes up to $n$: $\\pi(n) \\approx \\dfrac{n}{\\ln n}$ as $n$ grows large.',
+      steps: [
+        { label: 'Count', text: 'Among the first $100$ integers, $25$ are prime; among the first $1{,}000$, $168$; among the first $1{,}000{,}000$, $78{,}498$.' },
+        { label: 'Approximate', text: '$\\pi(n) \\approx n / \\ln n$.' },
+        { label: 'Relative accuracy', hit: true, text: 'The ratio $\\dfrac{\\pi(n)}{n / \\ln n}$ approaches $1$.' },
+        { label: 'Average gap', text: 'Near $n$, roughly one in every $\\ln n$ integers is prime: about $13.8$ near $10^6$, about $27.6$ near $10^{12}$.' },
+      ],
+    },
+  };
+
 
    return {
   props:{
+      primeNumberApply,
     pitfallData,
     primeTypeTree,
      sectionsContent,
@@ -662,7 +678,9 @@ description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve 
 }
    }
 
-export default function PrimeNumbersPage({ pitfallData,primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+
+export default function PrimeNumbersPage({primeNumberApply,  pitfallData,primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -815,6 +833,16 @@ $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@`,
           <div key={'unit-primeCount'} dangerouslySetInnerHTML={{ __html: demoUnits.primeCount }} />,
           `Below 100 the estimate runs low by about 3; in relative terms the gap shrinks as n grows.`,
           `@academic[punchline:Primes never run out, but they thin out at a steady rate: near $n$, about one integer in $\\ln n$ is prime.]@`,
+          <DiagramFrame
+            key={'obj6-theorem'}
+            id="prime-number-theorem-apply"
+            title="The prime number theorem, read off"
+            source="/algebra/sequences/prime-numbers"
+            before={`The theorem as a reading of the counts on this page: how the primes thin out, and how fast.`}
+            after={`Primes spread further apart on average but never disappear.`}
+          >
+            <TheoremCard data={primeNumberApply} variant="apply" theme={theoremTheme} />
+          </DiagramFrame>,
         ]
     },
     {

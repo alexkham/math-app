@@ -1,5 +1,17 @@
 [
   {
+    "id": "abel-ruffini-converse",
+    "title": null,
+    "source": "/algebra/equations",
+    "section": "algebra",
+    "width": 933,
+    "height": 469,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "abs-piecewise-steps",
     "title": null,
     "source": "/functions/piecewise",
@@ -153,6 +165,18 @@
     "section": "probability",
     "width": 933,
     "height": 735,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "binet-formula-apply",
+    "title": null,
+    "source": "/algebra/sequences/fibonacci",
+    "section": "algebra",
+    "width": 933,
+    "height": 528,
     "formats": [
       "png",
       "pdf"
@@ -333,6 +357,18 @@
     "section": "calculus",
     "width": 933,
     "height": 1213,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "common-vs-natural-when",
+    "title": null,
+    "source": "/algebra/logarithms/common-natural",
+    "section": "algebra",
+    "width": 933,
+    "height": 486,
     "formats": [
       "png",
       "pdf"
@@ -983,6 +1019,18 @@
     ]
   },
   {
+    "id": "diagonalization-fails-scope",
+    "title": null,
+    "source": "/linear-algebra/eigen/diagonalization",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 714,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "diagonalization-kinds",
     "title": null,
     "source": "/linear-algebra/eigen/diagonalization",
@@ -1025,6 +1073,18 @@
     "section": "calculus",
     "width": 933,
     "height": 648,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "direct-substitution-scope",
+    "title": null,
+    "source": "/calculus/limits/evaluating",
+    "section": "calculus",
+    "width": 933,
+    "height": 811,
     "formats": [
       "png",
       "pdf"
@@ -1335,6 +1395,18 @@
     ]
   },
   {
+    "id": "factor-theorem-iff",
+    "title": null,
+    "source": "/algebra/polynomials/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 415,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "factoring-before-after",
     "title": null,
     "source": "/algebra/polynomials",
@@ -1540,6 +1612,18 @@
     ]
   },
   {
+    "id": "fundamental-theorem-algebra-converse",
+    "title": null,
+    "source": "/algebra/polynomials/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 476,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "fundamental-theorem-chain",
     "title": null,
     "source": "/calculus/integrals/rules",
@@ -1730,6 +1814,19 @@
     "height": 1261,
     "formats": [
       "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "integer-root-theorem-chain",
+    "title": null,
+    "source": "/algebra/polynomials/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 361,
+    "formats": [
+      "png",
+      "svg",
       "pdf"
     ]
   },
@@ -1999,6 +2096,18 @@
     ]
   },
   {
+    "id": "linearity-conditions-scope",
+    "title": null,
+    "source": "/linear-algebra/transformations/properties",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 717,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "literal-inequality-sign-cases",
     "title": null,
     "source": "/algebra/inequalities/linear",
@@ -2048,6 +2157,18 @@
     ]
   },
   {
+    "id": "log-domain-scope",
+    "title": null,
+    "source": "/algebra/logarithms/equations",
+    "section": "algebra",
+    "width": 933,
+    "height": 700,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "log-equation-decision",
     "title": null,
     "source": "/algebra/logarithms/equations",
@@ -2066,6 +2187,30 @@
     "section": "algebra",
     "width": 933,
     "height": 801,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "log-one-to-one-card",
+    "title": null,
+    "source": "/algebra/logarithms/properties",
+    "section": "algebra",
+    "width": 933,
+    "height": 341,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "log-vs-ln-bridge",
+    "title": null,
+    "source": "/algebra/logarithms/common-natural",
+    "section": "algebra",
+    "width": 933,
+    "height": 457,
     "formats": [
       "png",
       "pdf"
@@ -2150,6 +2295,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 691,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "lu-without-pivoting-scope",
+    "title": null,
+    "source": "/linear-algebra/decompositions/lower-upper",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 730,
     "formats": [
       "png",
       "pdf"
@@ -2470,6 +2627,18 @@
     ]
   },
   {
+    "id": "one-to-one-requirement-scope",
+    "title": null,
+    "source": "/functions/inverse",
+    "section": "functions",
+    "width": 933,
+    "height": 579,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "operation-property-matrix",
     "title": null,
     "source": "/arithmetic/properties",
@@ -2657,6 +2826,18 @@
     "section": "algebra",
     "width": 933,
     "height": 1427,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "prime-number-theorem-apply",
+    "title": null,
+    "source": "/algebra/sequences/prime-numbers",
+    "section": "algebra",
+    "width": 933,
+    "height": 514,
     "formats": [
       "png",
       "pdf"
@@ -3085,6 +3266,18 @@
     ]
   },
   {
+    "id": "rational-domain-scope",
+    "title": null,
+    "source": "/algebra/equations/rational",
+    "section": "algebra",
+    "width": 933,
+    "height": 701,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "rational-equation-subtypes-tree",
     "title": null,
     "source": "/algebra/equations/rational",
@@ -3115,6 +3308,31 @@
     "section": "functions",
     "width": 933,
     "height": 776,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rational-root-limits-converse",
+    "title": null,
+    "source": "/algebra/polynomials/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 438,
+    "formats": [
+      "png",
+      "svg",
+      "pdf"
+    ]
+  },
+  {
+    "id": "rational-root-theorem-apply",
+    "title": null,
+    "source": "/algebra/polynomials/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 580,
     "formats": [
       "png",
       "pdf"
@@ -3223,6 +3441,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 1046,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "remainder-theorem-chain",
+    "title": null,
+    "source": "/algebra/polynomials/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 322,
     "formats": [
       "png",
       "pdf"
@@ -3833,6 +4063,18 @@
     ]
   },
   {
+    "id": "terms-to-zero-scope",
+    "title": null,
+    "source": "/algebra/sequences/harmonic",
+    "section": "algebra",
+    "width": 933,
+    "height": 658,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "trace-properties",
     "title": null,
     "source": "/linear-algebra/matrix/trace",
@@ -3991,12 +4233,36 @@
     ]
   },
   {
+    "id": "two-sided-existence-scope",
+    "title": null,
+    "source": "/calculus/limits/two-sided",
+    "section": "calculus",
+    "width": 933,
+    "height": 681,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
     "id": "two-sided-limit-failures-tree",
     "title": null,
     "source": "/calculus/limits/two-sided",
     "section": "calculus",
     "width": 933,
     "height": 647,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "uniqueness-condition-scope",
+    "title": null,
+    "source": "/linear-algebra/linear-systems/solvability",
+    "section": "linear-algebra",
+    "width": 933,
+    "height": 699,
     "formats": [
       "png",
       "pdf"
@@ -4117,6 +4383,18 @@
     "section": "linear-algebra",
     "width": 933,
     "height": 1157,
+    "formats": [
+      "png",
+      "pdf"
+    ]
+  },
+  {
+    "id": "vieta-formulas-apply",
+    "title": null,
+    "source": "/algebra/polynomials/rules",
+    "section": "algebra",
+    "width": 933,
+    "height": 548,
     "formats": [
       "png",
       "pdf"

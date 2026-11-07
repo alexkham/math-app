@@ -921,6 +921,9 @@ import functionTangentLineDiagrams from '@/app/components/calculus/visualizers/f
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
 export async function getStaticProps(){
@@ -1340,7 +1343,7 @@ The differential $dy$ depends on two things: the point $x$ (which determines the
 
 @academic[pitfall,aside:true,width:35%:Dropping the dx
 Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$ for any step. With $dx = 0.1$, $dy = 3(2)^2(0.1) = 1.2$, close to the actual $\\Delta y = 1.261$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-dx)]@
 
 Geometrically, $dy$ is the vertical change along the tangent line at $x$ when the horizontal position shifts by $dx$. The tangent line rises (or falls) at rate $f'(x)$, so a horizontal shift of $dx$ produces a vertical shift of $f'(x) \\cdot dx$.
 
@@ -1445,7 +1448,7 @@ To approximate $\\sqrt{4.03}$: take $f(x) = \\sqrt{x}$, $x = 4$, $dx = 0.03$. Th
 
 @academic[pitfall,aside:true,width:35%:Reporting the change as the value
 Stopping at $dy = \\frac{1}{4}(0.03) = 0.0075$ gives only the change in $f$, not $\\sqrt{4.03}$. The estimate adds the known value: $f(4) + dy = 2 + 0.0075 = 2.0075$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reporting-the-change-as-the-value)]@
 
 The linearization can also be written as $L(x) = f(a) + f'(a)(x - a)$, the tangent line at $x = a$ used as a function. For $x$ near $a$, $L(x) \\approx f(x)$. The quality of the approximation depends on two factors: the size of $|x - a|$ and the magnitude of $f''$ near $a$, which controls how quickly the curve diverges from its tangent.
 
@@ -1488,7 +1491,7 @@ For $f(x) = x^n$: $\\frac{f'(x)}{f(x)} = \\frac{n}{x}$, so the relative error in
 
 @academic[pitfall,aside:true,width:35%:Doubling the absolute error
 For $x = 10 \\pm 0.1$, taking the error in $x^2$ as $2(0.1) = 0.2$ applies the rule to the wrong error. The rule doubles the relative error, from 1% to 2%, so $|dy| = 2(10)(0.1) = 2$ and $x^2 = 100 \\pm 2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-doubling-the-absolute-error)]@
 
 In practice the rule is applied in three steps. A measured value comes with an absolute uncertainty, a $\\pm$ figure such as $\\pm 0.1$, and dividing it by the value turns it into a relative error. The rule scales that relative error by $|n|$, and multiplying the result by the computed value $x^n$ turns it back into a $\\pm$ figure for the output. For a cube, $n = 3$, and the same steps give the uncertainty in a volume computed from a measured edge.
 
@@ -1517,7 +1520,7 @@ For the area of a rectangle $A = lw$: $dA = w\\,dl + l\\,dw$. If $l = 10 \\pm 0.
 
 @academic[pitfall,aside:true,width:35%:Adding the input errors unweighted
 Adding the errors directly gives $dA = 0.1 + 0.05 = 0.15$ and $A \\approx 50 \\pm 0.15$. Each error has to be multiplied by its partial derivative: $dA = 5(0.1) + 10(0.05) = 1.0$, so $A \\approx 50 \\pm 1.0$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-adding-the-input-errors-unweighted)]@
 
 For the volume of a cylinder $V = \\pi r^2 h$: $dV = 2\\pi r h\\,dr + \\pi r^2\\,dh$. The radius error is amplified by $2\\pi r h$ and the height error by $\\pi r^2$. Since $r$ enters as a square, its error contributes more heavily—consistent with the power-law scaling of relative error.
 
@@ -1578,68 +1581,19 @@ When $f'(x) = 0$, the first term drops out and the second-order term is the whol
   },
   obj9: {
     title: `Summary: What Differentials Are Good For`,
-    content: `
-The single formula $dy = f'(x)\\,dx$ underlies every application of differentials covered above. The table below collects those applications side by side, pairing each with the formula it specializes to, a worked example from the page, and the situation where it earns its place over alternatives. Together, these capture the practical payoff of treating $dx$ and $dy$ as independent quantities rather than parts of an unbreakable $dy/dx$ symbol.
-`,
+    content: `Every use of differentials on this page rests on one relation: the derivative times a small change in the input predicts the change in the output. Six cards set out those uses, each with its formula, a worked example from the page, and a line on where it earns its place over other methods, linked to its section.
+
+The first three cards estimate a nearby value, the absolute error from one measurement and the relative error. The next two treat the differentials as quantities of their own, to combine errors from several inputs and to work with the symbols directly, and the last adds a second-order term for a closer estimate.`,
+    formulaSheetAfter: `All six uses are the tangent line in a different setting, so each estimate is good only while the change in the input stays small. When it grows, the second-order term on the last card shows how large the gap between the estimate and the actual change becomes.`,
     before: ``,
     after: ``,
     link: '',
   },
   obj10: {
     title: `Common Pitfalls`,
-    content: `
-Four mistakes cause most wrong answers when differentials are used for estimates and error bounds. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Dropping the dx**
-
-The differential $dy$ is written down as the derivative alone, without the factor $dx$. The result no longer depends on the step, so it cannot describe a change.
-
-Wrong working: for $y = x^3$, $dy = 3x^2$. At $x = 2$ this gives $dy = 12$, for a step of $0.1$ and for a step of $0.001$ alike.
-
-Right working: $dy = f'(x)\\,dx = 3x^2\\,dx$. At $x = 2$ with $dx = 0.1$, $dy = 12(0.1) = 1.2$. The actual change is $\\Delta y = 2.1^3 - 2^3 = 9.261 - 8 = 1.261$, close to $1.2$ and nowhere near $12$.
-
-Why it happens: the derivative is computed first and stands on its own in prime notation; the differential is the same expression with $dx$ attached, and the factor is easy to leave off.
-
-How to check: $dy$ must scale with $dx$. Halving the step should halve $dy$; if the answer contains no $dx$, nothing changes, and the factor is missing.
-
-**Reporting the change as the value**
-
-In a linear approximation, the differential $dy = f'(a)\\,dx$ is computed and given as the approximate value of $f$, although it is only the change from the known value $f(a)$.
-
-Wrong working: for $\\sqrt{4.03}$ with $a = 4$ and $dx = 0.03$, $dy = \\frac{1}{4}(0.03) = 0.0075$, so $\\sqrt{4.03} \\approx 0.0075$.
-
-Right working: $\\sqrt{4.03} \\approx f(4) + f'(4)\\,dx = 2 + 0.0075 = 2.0075$.
-
-Why it happens: the differential is the step that takes the work, and once it is done the problem feels finished; the known value $f(a)$ was found at the start and is forgotten by the end.
-
-How to check: the estimate must be close to the known value $f(a)$, because $x$ is close to $a$. $\\sqrt{4.03}$ has to be a little more than $\\sqrt{4} = 2$.
-
-**Doubling the absolute error**
-
-The power rule for errors, that $x^n$ carries $|n|$ times the relative error of $x$, is applied to the absolute error, the $\\pm$ figure of the measurement.
-
-Wrong working: $x = 10 \\pm 0.1$, so $x^2 = 100 \\pm 2(0.1) = 100 \\pm 0.2$.
-
-Right working: the relative error of $x$ is $\\frac{0.1}{10}$, which is 1%. Squaring doubles it to 2%, and 2% of $100$ is $2$, so $x^2 = 100 \\pm 2$. The differential gives the same: $|dy| = 2x\\,|dx| = 2(10)(0.1) = 2$.
-
-Why it happens: "squaring doubles the error" is remembered without the word relative, and the $\\pm$ figure is the error that is written down.
-
-How to check: square the largest possible value. $10.1^2 = 102.01$, about $2$ above $100$, not $0.2$.
-
-**Adding the input errors unweighted**
-
-For a quantity that depends on several measurements, the input errors are added as they are, without the partial derivatives that turn each one into a change of the result.
-
-Wrong working: for $A = lw$ with $l = 10 \\pm 0.1$ and $w = 5 \\pm 0.05$, $dA = 0.1 + 0.05 = 0.15$, so $A \\approx 50 \\pm 0.15$.
-
-Right working: $dA = \\frac{\\partial A}{\\partial l}\\,dl + \\frac{\\partial A}{\\partial w}\\,dw = w\\,dl + l\\,dw = 5(0.1) + 10(0.05) = 1.0$, so $A \\approx 50 \\pm 1.0$.
-
-Why it happens: the errors in length and width are both lengths, so adding them looks natural. But an error $dl$ in the length adds or removes a strip of size $w \\times dl$, so it changes the area by $w$ times as much.
-
-How to check: compute the area at the largest values. $(10.1)(5.05) = 51.005$, about $1$ above $50$, not $0.15$.
-`,
+    content: `Four mistakes cause most wrong answers when differentials are used for estimates and error bounds. Each is marked where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip loses track of what a differential measures. $dy = f'(x)\\,dx$ needs its $dx$, the linear estimate of $f(a + dx)$ adds $dy$ to $f(a)$, squaring doubles the relative error rather than the absolute one, and each input error is weighted by its partial derivative. Working out the exact value at the largest inputs catches each slip.`,
     link: '',
   },
 };
@@ -1821,8 +1775,60 @@ const schemas = {
     }),
   };
 
+  // MistakeFix batch 13, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj10 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'dropping-the-dx', name: `Dropping the dx`, errorAt: 1,
+        what: `The differential $dy$ is written down as the derivative alone, without the factor $dx$. The result no longer depends on the step, so it cannot describe a change.`,
+        wrong: [`For $y = x^3$,`, `$dy = 3x^2$. At $x = 2$ this gives $dy = 12$, for a step of $0.1$ and for a step of $0.001$ alike.`],
+        right: [`For $y = x^3$,`, `$dy = f'(x)\\,dx = 3x^2\\,dx$. At $x = 2$ with $dx = 0.1$, $dy = 12(0.1) = 1.2$. The actual change is $\\Delta y = 2.1^3 - 2^3 = 9.261 - 8 = 1.261$, close to $1.2$ and nowhere near $12$.`],
+        why: `The derivative is computed first and stands on its own in prime notation; the differential is the same expression with $dx$ attached, and the factor is easy to leave off.`,
+        check: `$dy$ must scale with $dx$. Halving the step should halve $dy$; if the answer contains no $dx$, nothing changes, and the factor is missing.` },
+      { id: 'reporting-the-change-as-the-value', name: `Reporting the change as the value`, errorAt: 0,
+        what: `In a linear approximation, the differential $dy = f'(a)\\,dx$ is computed and given as the approximate value of $f$, although it is only the change from the known value $f(a)$.`,
+        wrong: [`For $\\sqrt{4.03}$ with $a = 4$ and $dx = 0.03$, $dy = \\frac{1}{4}(0.03) = 0.0075$, so $\\sqrt{4.03} \\approx 0.0075$.`],
+        right: [`$\\sqrt{4.03} \\approx f(4) + f'(4)\\,dx = 2 + 0.0075 = 2.0075$.`],
+        why: `The differential is the step that takes the work, and once it is done the problem feels finished; the known value $f(a)$ was found at the start and is forgotten by the end.`,
+        check: `The estimate must be close to the known value $f(a)$, because $x$ is close to $a$. $\\sqrt{4.03}$ has to be a little more than $\\sqrt{4} = 2$.` },
+      { id: 'doubling-the-absolute-error', name: `Doubling the absolute error`, errorAt: 0,
+        what: `The power rule for errors, that $x^n$ carries $|n|$ times the relative error of $x$, is applied to the absolute error, the $\\pm$ figure of the measurement.`,
+        wrong: [`$x = 10 \\pm 0.1$, so $x^2 = 100 \\pm 2(0.1) = 100 \\pm 0.2$.`],
+        right: [`The relative error of $x$ is $\\frac{0.1}{10}$, which is 1%. Squaring doubles it to 2%, and 2% of $100$ is $2$, so $x^2 = 100 \\pm 2$. The differential gives the same: $|dy| = 2x\\,|dx| = 2(10)(0.1) = 2$.`],
+        why: `"squaring doubles the error" is remembered without the word relative, and the $\\pm$ figure is the error that is written down.`,
+        check: `Square the largest possible value. $10.1^2 = 102.01$, about $2$ above $100$, not $0.2$.` },
+      { id: 'adding-the-input-errors-unweighted', name: `Adding the input errors unweighted`, errorAt: 0,
+        what: `For a quantity that depends on several measurements, the input errors are added as they are, without the partial derivatives that turn each one into a change of the result.`,
+        wrong: [`For $A = lw$ with $l = 10 \\pm 0.1$ and $w = 5 \\pm 0.05$, $dA = 0.1 + 0.05 = 0.15$, so $A \\approx 50 \\pm 0.15$.`],
+        right: [`$dA = \\frac{\\partial A}{\\partial l}\\,dl + \\frac{\\partial A}{\\partial w}\\,dw = w\\,dl + l\\,dw = 5(0.1) + 10(0.05) = 1.0$, so $A \\approx 50 \\pm 1.0$.`],
+        why: `The errors in length and width are both lengths, so adding them looks natural. But an error $dl$ in the length adds or removes a strip of size $w \\times dl$, so it changes the area by $w$ times as much.`,
+        check: `Compute the area at the largest values. $(10.1)(5.05) = 51.005$, about $1$ above $50$, not $0.15$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table summaryTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    items: [
+      { name: 'Linear approximation', formula: "$f(x + dx) \\approx f(x) + f'(x)\\, dx$", example: '$\\sqrt{4.03} \\approx 2 + \\tfrac{1}{4}(0.03) = 2.0075$',
+        text: 'Shines for quick estimates near a known value: the tangent line stands in for the curve, as [linear approximation](!#4) shows.' },
+      { name: 'Absolute error', formula: "$|dy| \\approx |f'(x)| \\cdot |dx|$", example: 'error in $x^n$ is $n x^{n-1} \\cdot dx$',
+        text: 'Propagates a single measurement uncertainty $dx$ into the computed result, from [error estimation](!#5).' },
+      { name: 'Relative error', formula: "$\\displaystyle \\frac{|dy|}{|f(x)|} \\approx \\left|\\frac{f'(x)}{f(x)}\\right| \\cdot |dx|$", example: '$x^n$ multiplies relative error by $|n|$',
+        text: 'Shows how uncertainty scales through a power law, as [error estimation](!#5) works out.' },
+      { name: 'Multivariable propagation', formula: '$\\displaystyle dz = \\frac{\\partial f}{\\partial x}\\, dx + \\frac{\\partial f}{\\partial y}\\, dy$', example: 'rectangle: $dA = w\\, dl + l\\, dw$',
+        text: 'Combines the errors from several inputs, one term per variable, as [differentials of multiple variables](!#6) explains.' },
+      { name: 'Notation algebra', formula: '$dy$ and $dx$ as independent quantities', example: 'chain rule cancellation, $\\int \\ldots dx$ substitution',
+        text: 'Lets derivatives be handled symbolically, which is the idea behind [differentials and Leibniz notation](!#7).' },
+      { name: 'Second-order refinement', formula: "$\\displaystyle \\Delta y \\approx f'(x)\\,dx + \\frac{1}{2}f''(x)(dx)^2$", example: 'first two Taylor terms',
+        text: 'Improves accuracy beyond the tangent line by adding the curvature term, from [higher-order differentials](!#8).' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     demoUnits,
     conceptIntroFigures,
     sectionsContent,
@@ -1844,7 +1850,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({seoData, sectionsContent, introContent, obj3Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1899,7 +1905,7 @@ $$dy = f'(x)\\, dx$$
         content: [
           `@academic[pitfall,aside:true,width:35%:Dropping the dx
 Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$ for any step. With $dx = 0.1$, $dy = 3(2)^2(0.1) = 1.2$, close to the actual $\\Delta y = 1.261$.
-[Read more](!#pitfalls)]@`,
+[Read more](!#pitfall-dropping-the-dx)]@`,
         ],
       },
       {
@@ -2024,8 +2030,16 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="differential-formula-summary"
+            title="What differentials are good for"
+            source="/calculus/derivatives/differentials"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.obj9.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2034,6 +2048,15 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-mistakes'}
+            id="differential-pitfalls"
+            title="Common pitfalls with differentials"
+            source="/calculus/derivatives/differentials"
+            after={sectionsContent.obj10.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

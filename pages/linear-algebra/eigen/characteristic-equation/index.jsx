@@ -851,7 +851,8 @@ import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiag
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laEigenNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-eigen'
-import TheoremCard from '@/app/components/infographics/TheoremCard'
+import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 
@@ -1304,7 +1305,7 @@ For $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$: $\\text{tr}(A) = 9$,
 
 @academic[pitfall,aside:true,width:35%:Flipping the sign of the trace term
 Writing $p(\\lambda) = \\lambda^2 + \\text{tr}(A)\\lambda + \\det(A)$ for $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$ gives $\\lambda^2 + 9\\lambda + 14 = (\\lambda + 7)(\\lambda + 2)$ and the eigenvalues $-7$ and $-2$. With the middle term $-\\text{tr}(A)\\lambda$, the roots are $7$ and $2$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-flipping-the-sign-of-the-trace-term)]@
 
 In the worked example, both inputs to the formula are read straight off the matrix: the trace $5 + 4 = 9$ from the diagonal, and the determinant $5 \\cdot 4 - 2 \\cdot 3 = 14$ from the product of the diagonal entries minus the product of the off-diagonal ones. Nothing else about the matrix is needed. The discriminant, computed from the same two numbers, already showed that the two eigenvalues would be real and distinct before either was found.`,
     before: ``,
@@ -1363,7 +1364,7 @@ If $p(\\lambda) = (\\lambda - 2)^3(\\lambda + 1)$, then $\\lambda = 2$ has algeb
 
 @academic[pitfall,aside:true,width:35%:Assuming a double root gives two eigenvectors
 Counting a double root as two independent eigenvectors fails for $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$: $p(\\lambda) = (\\lambda - 2)^2$, but $A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ has only one free variable. The eigenspace $E_2$ is the line through $(1, 0)^T$, so $m_a = 2$ while $m_g = 1$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-assuming-a-double-root-gives-two-eigenvectors)]@
 
 The geometric multiplicity is the dimension of the eigenspace, and it can be strictly smaller than the algebraic multiplicity. When this gap occurs for any eigenvalue, the matrix is not [diagonalizable](!/linear-algebra/eigen/diagonalization).`,
     before: ``,
@@ -1388,7 +1389,7 @@ Verification: $A\\mathbf{v}_1 = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\m
 
 @academic[pitfall,aside:true,width:35%:Taking a row as the eigenvector
 Reading the row $(1, -1/2)$ of the reduced $A - 5I$ as the eigenvector fails: $A(1, -1/2)^T = (0, 5/2)^T$, which is not a multiple of $(1, -1/2)^T$. The eigenvector is a solution of that row's equation, $(1, 2)^T$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-taking-a-row-as-the-eigenvector)]@
 
 In both cases the reduced matrix keeps a single nonzero row, which encodes one equation in the two unknowns: $v_1 - \\frac{1}{2}v_2 = 0$ for $\\lambda_1 = 5$ and $v_1 + v_2 = 0$ for $\\lambda_2 = -1$. Setting the free variable $v_2 = t$ turns each equation into a line of solutions through the origin, and any nonzero point on that line serves as the eigenvector. Choosing $t = 2$ in the first case and $t = 1$ in the second keeps the entries whole.`,
     before: ``,
@@ -1441,52 +1442,9 @@ The [trace](!/linear-algebra/matrix/trace) and [determinant](!/linear-algebra/de
   },
   obj11: {
     title: `Common Pitfalls`,
-    content: `Three mistakes account for many wrong answers when the characteristic polynomial is used to find eigenvalues and eigenvectors. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.
-
-**Flipping the sign of the trace term**
-
-The $2 \\times 2$ shortcut is remembered as $\\lambda^2 + \\text{tr}(A)\\lambda + \\det(A)$, with a plus sign in the middle. Every eigenvalue then comes out with the wrong sign.
-
-Wrong working: for $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$, with $\\text{tr}(A) = 9$ and $\\det(A) = 14$,
-$$\\lambda^2 + 9\\lambda + 14 = (\\lambda + 7)(\\lambda + 2) = 0 \\quad\\Rightarrow\\quad \\lambda = -7, \\; -2$$
-
-Right working: expand the determinant.
-$$(5 - \\lambda)(4 - \\lambda) - 2 \\cdot 3 = \\lambda^2 - 9\\lambda + 20 - 6 = \\lambda^2 - 9\\lambda + 14 = (\\lambda - 7)(\\lambda - 2)$$
-The eigenvalues are $\\lambda_1 = 7$ and $\\lambda_2 = 2$.
-
-Why it happens: in $(a - \\lambda)(d - \\lambda)$ the two cross terms $-a\\lambda$ and $-d\\lambda$ both carry a minus sign. That sign is easy to lose when the result is memorised as a pattern rather than derived from the determinant.
-
-How to check: the eigenvalues must add up to the trace. Here $7 + 2 = 9 = \\text{tr}(A)$, while $-7 + (-2) = -9$. The product check does not help with this slip, because $(-7)(-2) = 14 = \\det(A)$ as well.
-
-**Assuming a double root gives two eigenvectors**
-
-A root of multiplicity $2$ is taken to supply two independent eigenvectors, and the matrix is declared [diagonalizable](!/linear-algebra/eigen/diagonalization) as soon as its characteristic polynomial is factored.
-
-Wrong working: for $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the polynomial is $p(\\lambda) = (2 - \\lambda)^2 = (\\lambda - 2)^2$, so $\\lambda = 2$ has $m_a = 2$. Two eigenvectors, such as $(1, 0)^T$ and $(0, 1)^T$, are assumed, and $A$ is called diagonalizable.
-
-Right working: substitute the root back and count free variables.
-$$A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$$
-The only equation is $v_2 = 0$, and $v_1 = t$ is free, so $E_2$ is the line through $(1, 0)^T$ and $m_g = 1$. The vector $(0, 1)^T$ is not an eigenvector: $A(0, 1)^T = (1, 2)^T$, which is not a multiple of $(0, 1)^T$. With $m_g = 1 < m_a = 2$, the matrix is not diagonalizable.
-
-Why it happens: for distinct roots each root brings exactly one eigenvector direction, and for a matrix such as $2I$ a double root really does bring a whole plane. The polynomial cannot tell the two cases apart: $2I$ and this $A$ both have $p(\\lambda) = (\\lambda - 2)^2$.
-
-How to check: compute the geometric multiplicity directly, as $n - \\text{rank}(A - \\lambda I)$. Here the rank of $A - 2I$ is $1$, so $m_g = 2 - 1 = 1$.
-
-**Taking a row as the eigenvector**
-
-After $A - \\lambda I$ is row reduced, its nonzero row is written down as the eigenvector. The row holds the coefficients of an equation that the eigenvector must satisfy; the eigenvector is a solution of that equation, not the row itself.
-
-Wrong working: for $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ and $\\lambda = 5$, the reduced matrix is $\\begin{pmatrix} 1 & -1/2 \\\\ 0 & 0 \\end{pmatrix}$, and $(1, -1/2)^T$ is taken as the eigenvector. But
-$$A\\begin{pmatrix} 1 \\\\ -1/2 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 5/2 \\end{pmatrix} \\neq 5\\begin{pmatrix} 1 \\\\ -1/2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ -5/2 \\end{pmatrix}$$
-
-Right working: the row says $v_1 - \\frac{1}{2}v_2 = 0$. With $v_2 = t$, $v_1 = t/2$, and $t = 2$ gives $\\mathbf{v}_1 = (1, 2)^T$. Then
-$$A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$$
-
-Why it happens: the reduced matrix is the last thing written before the answer, and its nonzero row looks like a vector of the right size.
-
-How to check: multiply $A$ by the candidate and compare with $\\lambda$ times the candidate. A quicker test: the eigenvector must give $0$ when combined with each row of the reduced matrix. For $(1, -1/2)$ this gives $1 \\cdot 1 + (-1/2)(-1/2) = 5/4 \\neq 0$; for $(1, 2)$ it gives $1 - 1 = 0$.`,
+    content: `Three mistakes account for many wrong answers when the characteristic polynomial is used to find eigenvalues and eigenvectors. Each is marked with a box where it happens in the sections above. Here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip misreads the characteristic polynomial or what it gives. For a $2 \\times 2$ matrix it is $\\lambda^2 - \\text{tr}(A)\\lambda + \\det(A)$; a double root may bring only one independent eigenvector; and an eigenvector solves the equations of the reduced rows rather than being one of them. Checking that the eigenvalues add up to the trace, computing $n - \\text{rank}(A - \\lambda I)$, or multiplying $A$ by the candidate catches each slip.`,
     link: ``,
   },
 }
@@ -1671,8 +1629,45 @@ const schemas = {
 
 
 
+  // MistakeFix batch 21, 2026-11-04: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.obj11 into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'flipping-the-sign-of-the-trace-term', name: `Flipping the sign of the trace term`, errorAt: 1,
+        what: `The $2 \\times 2$ shortcut is remembered as $\\lambda^2 + \\text{tr}(A)\\lambda + \\det(A)$, with a plus sign in the middle. Every eigenvalue then comes out with the wrong sign.`,
+        wrong: [`For $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$,`, `With $\\text{tr}(A) = 9$ and $\\det(A) = 14$,
+$$\\lambda^2 + 9\\lambda + 14 = (\\lambda + 7)(\\lambda + 2)$$
+$$= 0$$
+$$\\Rightarrow$$
+$$\\lambda = -7, \\; -2$$`],
+        right: [`For $A = \\begin{pmatrix} 5 & 2 \\\\ 3 & 4 \\end{pmatrix}$,`, `Expand the determinant.`, `$$(5 - \\lambda)(4 - \\lambda) - 2 \\cdot 3$$
+$$= \\lambda^2 - 9\\lambda + 20 - 6$$
+$$= \\lambda^2 - 9\\lambda + 14$$
+$$= (\\lambda - 7)(\\lambda - 2)$$`, `The eigenvalues are $\\lambda_1 = 7$ and $\\lambda_2 = 2$.`],
+        why: `In $(a - \\lambda)(d - \\lambda)$ the two cross terms $-a\\lambda$ and $-d\\lambda$ both carry a minus sign. That sign is easy to lose when the result is memorised as a pattern rather than derived from the determinant.`,
+        check: `The eigenvalues must add up to the trace. Here $7 + 2 = 9 = \\text{tr}(A)$, while $-7 + (-2) = -9$. The product check does not help with this slip, because $(-7)(-2) = 14 = \\det(A)$ as well.` },
+      { id: 'assuming-a-double-root-gives-two-eigenvectors', name: `Assuming a double root gives two eigenvectors`, errorAt: 1,
+        what: `A root of multiplicity $2$ is taken to supply two independent eigenvectors, and the matrix is declared [diagonalizable](!/linear-algebra/eigen/diagonalization) as soon as its characteristic polynomial is factored.`,
+        wrong: [`For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$,`, `The polynomial is $p(\\lambda) = (2 - \\lambda)^2 = (\\lambda - 2)^2$, so $\\lambda = 2$ has $m_a = 2$. Two eigenvectors, such as $(1, 0)^T$ and $(0, 1)^T$, are assumed, and $A$ is called diagonalizable.`],
+        right: [`For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$,`, `Substitute the root back and count free variables.`, `$$A - 2I = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$$`, `The only equation is $v_2 = 0$, and $v_1 = t$ is free, so $E_2$ is the line through $(1, 0)^T$ and $m_g = 1$. The vector $(0, 1)^T$ is not an eigenvector: $A(0, 1)^T = (1, 2)^T$, which is not a multiple of $(0, 1)^T$. With $m_g = 1 < m_a = 2$, the matrix is not diagonalizable.`],
+        why: `For distinct roots each root brings exactly one eigenvector direction, and for a matrix such as $2I$ a double root really does bring a whole plane. The polynomial cannot tell the two cases apart: $2I$ and this $A$ both have $p(\\lambda) = (\\lambda - 2)^2$.`,
+        check: `Compute the geometric multiplicity directly, as $n - \\text{rank}(A - \\lambda I)$. Here the rank of $A - 2I$ is $1$, so $m_g = 2 - 1 = 1$.` },
+      { id: 'taking-a-row-as-the-eigenvector', name: `Taking a row as the eigenvector`, errorAt: 1,
+        what: `After $A - \\lambda I$ is row reduced, its nonzero row is written down as the eigenvector. The row holds the coefficients of an equation that the eigenvector must satisfy; the eigenvector is a solution of that equation, not the row itself.`,
+        wrong: [`For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ and $\\lambda = 5$,`, `The reduced matrix is $\\begin{pmatrix} 1 & -1/2 \\\\ 0 & 0 \\end{pmatrix}$, and $(1, -1/2)^T$ is taken as the eigenvector. But
+$$A\\begin{pmatrix} 1 \\\\ -1/2 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 0 \\\\ 5/2 \\end{pmatrix} \\neq 5\\begin{pmatrix} 1 \\\\ -1/2 \\end{pmatrix}$$
+$$= \\begin{pmatrix} 5 \\\\ -5/2 \\end{pmatrix}$$`],
+        right: [`For $A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$ and $\\lambda = 5$,`, `The row says $v_1 - \\frac{1}{2}v_2 = 0$. With $v_2 = t$, $v_1 = t/2$, and $t = 2$ gives $\\mathbf{v}_1 = (1, 2)^T$. Then
+$$A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{pmatrix} = 5\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix}$$`],
+        why: `The reduced matrix is the last thing written before the answer, and its nonzero row looks like a vector of the right size.`,
+        check: `Multiply $A$ by the candidate and compare with $\\lambda$ times the candidate. A quicker test: the eigenvector must give $0$ when combined with each row of the reduced matrix. For $(1, -1/2)$ this gives $1 \\cdot 1 + (-1/2)(-1/2) = 5/4 \\neq 0$; for $(1, 2)$ it gives $1 - 1 = 0$.` },
+    ],
+  };
+
    return {
   props: {
+    pitfallData,
       cayleyHamiltonApply,
     demoUnits,
     conceptIntroFigures,
@@ -1695,7 +1690,7 @@ const schemas = {
    }
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function CharacteristicEquationPage({cayleyHamiltonApply, 
+export default function CharacteristicEquationPage({ pitfallData,cayleyHamiltonApply, 
   seoData,
   sectionsContent,
   introContent,
@@ -1922,6 +1917,15 @@ export default function CharacteristicEquationPage({cayleyHamiltonApply,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-mistakes'}
+            id="characteristic-equation-pitfalls"
+            title="Common pitfalls with the characteristic equation"
+            source="/linear-algebra/eigen/characteristic-equation"
+            after={sectionsContent.obj11.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

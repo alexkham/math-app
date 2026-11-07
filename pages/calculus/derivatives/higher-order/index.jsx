@@ -1232,8 +1232,10 @@ import functionDerivativeDiagrams from '@/app/components/functions/derivative/fu
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
 export async function getStaticProps(){
@@ -1822,7 +1824,7 @@ The second derivative $f''(x)$ measures the rate of change of the slope. Where $
 
 @academic[pitfall,aside:true,width:35%:Squaring the first derivative
 Reading $f''(x)$ or $\\frac{d^2y}{dx^2}$ as the square of the first derivative turns $y = x^3$ into $(3x^2)^2 = 9x^4$, which is never negative. Differentiating twice gives $f''(x) = 6x$, and $f''(-1) = -6$: the curve bends down there.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-squaring-the-first-derivative)]@
 
 This information is independent of whether $f$ itself is increasing or decreasing. A function can rise while decelerating ($f' > 0$, $f'' < 0$) or fall while accelerating in the negative direction ($f' < 0$, $f'' < 0$). The first and second derivatives describe different aspects of behavior.
 
@@ -1847,7 +1849,7 @@ The second derivative $s''(t)$ is acceleration: the rate of change of velocity. 
 
 @academic[pitfall,aside:true,width:35%:Reading negative acceleration as slowing down
 Taking $s''(t) < 0$ to mean slowing down fails for $s(t) = -t^2$: at $t = 1$, $s''(1) = -2$, yet the speed $|s'(t)| = 2t$ grows from $2$ at $t = 1$ to $4$ at $t = 2$. Velocity $-2$ and acceleration $-2$ have the same sign, so the object is speeding up.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-reading-negative-acceleration-as-slowing-down)]@
 
 @academic[example:Example
 For the position $s(t) = t^3$ from the first section, the velocity is $3t^2$ and the acceleration is $6t$. At $t = 2$ the velocity is $12$ and the acceleration is $12$, both positive, and the table of values there shows the object covering more ground in each second than in the one before.]@
@@ -1907,7 +1909,7 @@ $$\\frac{d^n}{dx^n}[e^{ax}] = a^n e^{ax}$$
 
 @academic[pitfall,aside:true,width:35%:Using the chain-rule factor only once
 Writing $\\frac{d^3}{dx^3}[e^{2x}] = 2e^{2x}$ keeps the factor $2$ from the first step only. Differentiating three times gives $4e^{2x}$ after the second step and $8e^{2x}$ after the third, so the answer is $8e^{2x}$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-using-the-chain-rule-factor-only-once)]@
 
 Each differentiation multiplies by $a$. After $n$ differentiations, the accumulated constant is $a^n$. This pattern appears in solutions to differential equations, where $e^{ax}$ satisfies equations whose characteristic root is $a$.
 
@@ -1945,7 +1947,7 @@ $$\\frac{d^n}{dx^n}[\\cos x] = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$$
 
 @academic[pitfall,aside:true,width:35%:Dropping the minus sign
 Taking the derivative of $\\cos x$ to be $\\sin x$ makes the cycle $\\sin x \\to \\cos x \\to \\sin x$, of length two, and gives $\\frac{d^2}{dx^2}[\\sin x] = \\sin x$. With $(\\cos x)' = -\\sin x$ the second derivative is $-\\sin x$, and the cycle closes only after four steps.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-dropping-the-minus-sign)]@
 
 For $\\sin(ax)$, the chain rule introduces a factor of $a$ per differentiation: $\\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin\\left(ax + \\frac{n\\pi}{2}\\right)$. The cycle in the trigonometric part persists; only the amplitude grows as $a^n$.
 
@@ -2010,7 +2012,7 @@ $$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x - a)^n$$
 
 @academic[pitfall,aside:true,width:35%:Leaving out the factorials
 Using $f^{(n)}(a)$ as the coefficient without dividing by $n!$ turns the cubic Taylor polynomial of $\\sin x$ at $0$ into $x - x^3$, which gives $0.375$ at $x = 0.5$. With $\\frac{f'''(0)}{3!} = -\\frac{1}{6}$ it is $x - \\frac{x^3}{6} \\approx 0.47917$, close to $\\sin 0.5 \\approx 0.47943$.
-[Read more](!#pitfalls)]@
+[Read more](!#pitfall-leaving-out-the-factorials)]@
 
 Each coefficient depends on a higher-order derivative evaluated at the center point $a$. The zeroth derivative $f^{(0)}(a) = f(a)$ gives the constant term. The first derivative gives the linear term. The second derivative gives the quadratic correction. Each successive term captures finer detail about how $f$ deviates from the lower-order approximation.
 
@@ -2046,80 +2048,21 @@ The table below lays out the main tiers — C⁰, the general C&#8319;, C&#8734;
   },
   overview: {
     title: `nth Derivatives at a Glance`,
-    content: `
-Different function families behave very differently under repeated differentiation: polynomials terminate, exponentials replicate, and trigonometric functions cycle. The table below collects the closed-form nth derivative for each standard function discussed above into a single reference card, with a brief note on what drives the pattern.
-`,
+    content: `Different function families behave very differently under repeated differentiation: polynomials terminate, exponentials replicate, and trigonometric functions cycle.
+
+This summary gives the closed form of the nth derivative for each standard function on the page, one row per function. Each row names the function with a line on where the pattern comes from and a link to its section, states the nth derivative, and adds a note on what drives the pattern and when it applies.
+
+Powers and polynomials come first, where the derivatives run out after enough steps. The reciprocal and the natural logarithm follow, with alternating signs and growing factorials. Three exponential rows show the function repeating itself, scaled by a constant at every step, and the last three rows give the four-step cycle of sine and cosine, including the scaled sine.`,
+    formulaSheetAfter: `The note column tells which way a pattern goes: polynomials run out, exponentials repeat with a constant factor, and sine and cosine cycle every four steps. Spotting the family first gives the hundredth derivative as easily as the second, without differentiating step by step.`,
     before: ``,
     after: ``,
     link: '',
   },
   pitfalls: {
     title: `Common Pitfalls`,
-    content: `
-Five mistakes cause many wrong answers with higher-order derivatives. Each is marked by a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.
-
-**Squaring the first derivative**
-
-The second derivative is computed as the square of the first: $f''(x)$ is read as $(f'(x))^2$, or $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$.
-
-Wrong working: for $y = x^3$, $\\frac{dy}{dx} = 3x^2$, so $\\frac{d^2y}{dx^2} = (3x^2)^2 = 9x^4$. This is never negative, so the curve would be concave up everywhere.
-
-Right working: differentiate $3x^2$ once more, $\\frac{d^2y}{dx^2} = 6x$. At $x = -1$ it is $-6$, so the curve bends down to the left of $0$ and up to the right, as the first section shows.
-
-Why it happens: in $\\frac{d^2y}{dx^2}$ the $2$ looks like an exponent, and in $f''$ the second prime looks like a repeat of the first; both suggest a product of two first derivatives.
-
-How to check: compare the degrees. Each differentiation lowers the degree of a polynomial by one, so the second derivative of $x^3$ must have degree $1$, not $4$.
-
-**Reading negative acceleration as slowing down**
-
-The sign of $s''(t)$ alone is taken to decide whether an object speeds up or slows down: a negative acceleration is read as braking, a positive one as speeding up.
-
-Wrong working: for $s(t) = -t^2$, $s''(t) = -2 < 0$, so the object is slowing down.
-
-Right working: the velocity is $s'(t) = -2t$, and for $t > 0$ the speed is $|s'(t)| = 2t$. At $t = 1$ the speed is $2$, at $t = 2$ it is $4$: the object speeds up. Velocity and acceleration are both negative, and when they have the same sign the speed grows.
-
-Why it happens: in everyday speech "acceleration" means speeding up and "deceleration" slowing down. In calculus a negative acceleration only says that the velocity decreases, and a negative velocity that decreases gets larger in size.
-
-How to check: compare the signs of $s'(t)$ and $s''(t)$ at the moment in question, or compute the speed $|s'(t)|$ at two nearby times.
-
-**Using the chain-rule factor only once**
-
-When $e^{ax}$ is differentiated several times, the factor $a$ from the chain rule is written once, as if it appeared only at the first step.
-
-Wrong working: $\\frac{d^3}{dx^3}[e^{2x}] = 2e^{2x}$.
-
-Right working: each step applies the chain rule again. $\\frac{d}{dx}[e^{2x}] = 2e^{2x}$, $\\frac{d^2}{dx^2}[e^{2x}] = 4e^{2x}$, $\\frac{d^3}{dx^3}[e^{2x}] = 8e^{2x}$, which is $2^3 e^{2x}$, as the formula $a^n e^{ax}$ says.
-
-Why it happens: after the first step, $2e^{2x}$ looks like a constant times an exponential, and the exponential is then treated like $e^x$, whose derivative is itself.
-
-How to check: count the factors. Three differentiations bring in three chain-rule factors of $2$, so the coefficient must be $2 \\cdot 2 \\cdot 2 = 8$. The same count for $a^x$ gives $(\\ln a)^n$.
-
-**Dropping the minus sign**
-
-The derivative of $\\cos x$ is taken to be $\\sin x$ instead of $-\\sin x$. The error is carried into every later step, and the cycle comes out with the wrong length.
-
-Wrong working: $\\sin x \\to \\cos x \\to \\sin x \\to \\cos x$, so $\\frac{d^2}{dx^2}[\\sin x] = \\sin x$ and $\\frac{d^3}{dx^3}[\\sin x] = \\cos x$.
-
-Right working: $\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x$. So $\\frac{d^2}{dx^2}[\\sin x] = -\\sin x$, $\\frac{d^3}{dx^3}[\\sin x] = -\\cos x$, and the cycle closes after four steps.
-
-Why it happens: the derivative of $\\sin x$ has no minus sign, and the derivative of $\\cos x$ is remembered by symmetry with it.
-
-How to check: use the compact formula $\\sin\\left(x + \\frac{n\\pi}{2}\\right)$; for $n = 2$ it gives $\\sin(x + \\pi) = -\\sin x$. Or test one point: $\\sin x$ has a maximum at $x = \\frac{\\pi}{2}$, so its second derivative cannot be positive there, and $-\\sin\\frac{\\pi}{2} = -1$ is negative.
-
-**Leaving out the factorials**
-
-In the Taylor series, the coefficient of $(x - a)^n$ is taken to be $f^{(n)}(a)$, without the division by $n!$.
-
-Wrong working: for $\\sin x$ at $a = 0$, the values $f(0), f'(0), f''(0), f'''(0)$ are $0, 1, 0, -1$, so the cubic Taylor polynomial is $x - x^3$. At $x = 0.5$ it gives $0.375$.
-
-Right working: divide each derivative by $n!$. The cubic term is $\\frac{-1}{3!}x^3 = -\\frac{x^3}{6}$, and the polynomial is $x - \\frac{x^3}{6}$. At $x = 0.5$ it gives $0.5 - 0.02083 \\approx 0.47917$, while $\\sin 0.5 \\approx 0.47943$.
-
-Why it happens: the first two terms, $f(a)$ and $f'(a)(x - a)$, show no division, because $0! = 1! = 1$, and the pattern seems to continue without it.
-
-How to check: differentiate the polynomial $n$ times at the center; it must give back $f^{(n)}(a)$. The third derivative of $x - x^3$ is $-6$, not $f'''(0) = -1$; the third derivative of $x - \\frac{x^3}{6}$ is $-1$.
-`,
+    content: `Five mistakes cause many wrong answers with higher-order derivatives. Each is marked by a box where it happens in the sections above; here each is worked through in full, with the wrong and the right working side by side.`,
     before: ``,
-    after: ``,
+    after: `Each slip takes a derivative of the wrong thing or too few times. The second derivative differentiates the first instead of squaring it; a negative acceleration slows an object down only when the velocity is positive; each differentiation of $e^{2x}$ brings another factor $2$; the derivatives of $\\sin x$ cycle through four functions, signs included; and each Taylor coefficient is divided by $n!$. Working each derivative out step by step catches each slip.`,
     link: '',
   },
 };
@@ -2368,8 +2311,79 @@ const schemas = {
     ],
   };
 
+  // MistakeFix batch 13, 2026-11-03: the "Common Pitfalls" entries, moved word for word
+  // out of sectionsContent.pitfalls into the MistakeFix data (trace layout).
+  const pitfallData = {
+    mistakes: [
+      { id: 'squaring-the-first-derivative', name: `Squaring the first derivative`, errorAt: 1,
+        what: `The second derivative is computed as the square of the first: $f''(x)$ is read as $(f'(x))^2$, or $\\frac{d^2y}{dx^2}$ as $\\left(\\frac{dy}{dx}\\right)^2$.`,
+        wrong: [`For $y = x^3$, $\\frac{dy}{dx} = 3x^2$,`, `So $\\frac{d^2y}{dx^2} = (3x^2)^2 = 9x^4$. This is never negative, so the curve would be concave up everywhere.`],
+        right: [`For $y = x^3$, $\\frac{dy}{dx} = 3x^2$,`, `Differentiate $3x^2$ once more, $\\frac{d^2y}{dx^2} = 6x$. At $x = -1$ it is $-6$, so the curve bends down to the left of $0$ and up to the right, as the first section shows.`],
+        why: `In $\\frac{d^2y}{dx^2}$ the $2$ looks like an exponent, and in $f''$ the second prime looks like a repeat of the first; both suggest a product of two first derivatives.`,
+        check: `Compare the degrees. Each differentiation lowers the degree of a polynomial by one, so the second derivative of $x^3$ must have degree $1$, not $4$.` },
+      { id: 'reading-negative-acceleration-as-slowing-down', name: `Reading negative acceleration as slowing down`, errorAt: 1,
+        what: `The sign of $s''(t)$ alone is taken to decide whether an object speeds up or slows down: a negative acceleration is read as braking, a positive one as speeding up.`,
+        wrong: [`For $s(t) = -t^2$, $s''(t) = -2 < 0$,`, `So the object is slowing down.`],
+        right: [`For $s(t) = -t^2$, $s''(t) = -2 < 0$,`, `The velocity is $s'(t) = -2t$, and for $t > 0$ the speed is $|s'(t)| = 2t$. At $t = 1$ the speed is $2$, at $t = 2$ it is $4$: the object speeds up. Velocity and acceleration are both negative, and when they have the same sign the speed grows.`],
+        why: `In everyday speech "acceleration" means speeding up and "deceleration" slowing down. In calculus a negative acceleration only says that the velocity decreases, and a negative velocity that decreases gets larger in size.`,
+        check: `Compare the signs of $s'(t)$ and $s''(t)$ at the moment in question, or compute the speed $|s'(t)|$ at two nearby times.` },
+      { id: 'using-the-chain-rule-factor-only-once', name: `Using the chain-rule factor only once`, errorAt: 0,
+        what: `When $e^{ax}$ is differentiated several times, the factor $a$ from the chain rule is written once, as if it appeared only at the first step.`,
+        wrong: [`$\\frac{d^3}{dx^3}[e^{2x}] = 2e^{2x}$.`],
+        right: [`Each step applies the chain rule again. $\\frac{d}{dx}[e^{2x}] = 2e^{2x}$, $\\frac{d^2}{dx^2}[e^{2x}] = 4e^{2x}$, $\\frac{d^3}{dx^3}[e^{2x}] = 8e^{2x}$, which is $2^3 e^{2x}$, as the formula $a^n e^{ax}$ says.`],
+        why: `After the first step, $2e^{2x}$ looks like a constant times an exponential, and the exponential is then treated like $e^x$, whose derivative is itself.`,
+        check: `Count the factors. Three differentiations bring in three chain-rule factors of $2$, so the coefficient must be $2 \\cdot 2 \\cdot 2 = 8$. The same count for $a^x$ gives $(\\ln a)^n$.` },
+      { id: 'dropping-the-minus-sign', name: `Dropping the minus sign`, errorAt: 0,
+        what: `The derivative of $\\cos x$ is taken to be $\\sin x$ instead of $-\\sin x$. The error is carried into every later step, and the cycle comes out with the wrong length.`,
+        wrong: [`$\\sin x \\to \\cos x \\to \\sin x \\to \\cos x$, so $\\frac{d^2}{dx^2}[\\sin x] = \\sin x$ and $\\frac{d^3}{dx^3}[\\sin x] = \\cos x$.`],
+        right: [`$\\sin x \\to \\cos x \\to -\\sin x \\to -\\cos x \\to \\sin x$. So $\\frac{d^2}{dx^2}[\\sin x] = -\\sin x$, $\\frac{d^3}{dx^3}[\\sin x] = -\\cos x$, and the cycle closes after four steps.`],
+        why: `The derivative of $\\sin x$ has no minus sign, and the derivative of $\\cos x$ is remembered by symmetry with it.`,
+        check: `Use the compact formula $\\sin\\left(x + \\frac{n\\pi}{2}\\right)$; for $n = 2$ it gives $\\sin(x + \\pi) = -\\sin x$. Or test one point: $\\sin x$ has a maximum at $x = \\frac{\\pi}{2}$, so its second derivative cannot be positive there, and $-\\sin\\frac{\\pi}{2} = -1$ is negative.` },
+      { id: 'leaving-out-the-factorials', name: `Leaving out the factorials`, errorAt: 0,
+        what: `In the Taylor series, the coefficient of $(x - a)^n$ is taken to be $f^{(n)}(a)$, without the division by $n!$.`,
+        wrong: [`For $\\sin x$ at $a = 0$, the values $f(0), f'(0), f''(0), f'''(0)$ are $0, 1, 0, -1$, so the cubic Taylor polynomial is $x - x^3$. At $x = 0.5$ it gives $0.375$.`],
+        right: [`Divide each derivative by $n!$. The cubic term is $\\frac{-1}{3!}x^3 = -\\frac{x^3}{6}$, and the polynomial is $x - \\frac{x^3}{6}$. At $x = 0.5$ it gives $0.5 - 0.02083 \\approx 0.47917$, while $\\sin 0.5 \\approx 0.47943$.`],
+        why: `The first two terms, $f(a)$ and $f'(a)(x - a)$, show no division, because $0! = 1! = 1$, and the pattern seems to continue without it.`,
+        check: `Differentiate the polynomial $n$ times at the center; it must give back $f^{(n)}(a)$. The third derivative of $x - x^3$ is $-6$, not $f'''(0) = -1$; the third derivative of $x - \\frac{x^3}{6}$ is $-1$.` },
+    ],
+  };
+
+  // Formula Summary 2026-11-07: the page's own formulas, replacing the summary table overviewTable.
+  const formulaSummaryData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    columns: [
+      { key: 'name', label: 'Function', kind: 'name' },
+      { key: 'formula', label: 'nth derivative', kind: 'formula' },
+      { key: 'note', label: 'Note' },
+    ],
+    rows: [
+      { name: 'Power', formula: '$\\displaystyle \\frac{d^n}{dx^n}[x^m] = \\frac{m!}{(m-n)!}\\, x^{m-n} \\quad (n \\leq m)$', note: 'falling factorial; becomes the constant $m!$ when $n = m$, and zero for $n > m$',
+        sub: 'For $m$ a positive integer, each step brings the exponent down as a factor, as [the nth derivative of specific forms](!#7) shows.' },
+      { name: 'Polynomial', formula: '$m! \\cdot a_m$ when $n = m$; $\\; 0$ when $n > m$', note: 'terminates after $m + 1$ differentiations',
+        sub: 'For a polynomial of degree $m$ with leading coefficient $a_m$, each differentiation lowers the degree by one, from [the polynomial pattern](!#4).' },
+      { name: 'Reciprocal', formula: '$\\displaystyle \\frac{d^n}{dx^n}\\!\\left[\\frac{1}{x}\\right] = \\frac{(-1)^n\\, n!}{x^{n+1}}$', note: 'alternating sign accompanied by factorial growth in the numerator',
+        sub: 'The power rule with exponent $-1$, applied $n$ times; see [the nth derivative of specific forms](!#7).' },
+      { name: 'Natural logarithm', formula: '$\\displaystyle \\frac{d^n}{dx^n}[\\ln x] = \\frac{(-1)^{n-1}\\, (n-1)!}{x^n} \\quad (n \\geq 1)$', note: "the $1/x$ pattern shifted by one order, since $(\\ln x)' = 1/x$",
+        sub: 'After the first derivative the logarithm turns into the reciprocal, as [the same section](!#7) shows.' },
+      { name: 'Natural exponential', formula: '$\\displaystyle \\frac{d^n}{dx^n}[e^x] = e^x$', note: 'self-replicating; together with its constant multiples $Ce^x$, the only functions with this property',
+        sub: 'Every derivative of $e^x$ is $e^x$ again, as [the exponential pattern](!#5) explains.' },
+      { name: 'Scaled exponential', formula: '$\\displaystyle \\frac{d^n}{dx^n}[e^{ax}] = a^n e^{ax}$', note: 'each differentiation multiplies by $a$, so the constant accumulates as $a^n$',
+        sub: 'The chain rule brings out one factor $a$ per step; see [the exponential pattern](!#5).' },
+      { name: 'General exponential', formula: '$\\displaystyle \\frac{d^n}{dx^n}[a^x] = (\\ln a)^n \\cdot a^x$', note: 'since $a^x = e^{x \\ln a}$, $\\ln a$ takes the role of the multiplier',
+        sub: 'The scaled exponential with $\\ln a$ in place of $a$, as [the exponential pattern](!#5) shows.' },
+      { name: 'Sine', formula: '$\\displaystyle \\frac{d^n}{dx^n}[\\sin x] = \\sin\\!\\left(x + \\frac{n\\pi}{2}\\right)$', note: 'four-fold cycle: $\\sin \\to \\cos \\to -\\sin \\to -\\cos \\to \\sin$',
+        sub: 'One compact formula covers the four cases of the cycle, as [the sine and cosine pattern](!#6) shows.' },
+      { name: 'Cosine', formula: '$\\displaystyle \\frac{d^n}{dx^n}[\\cos x] = \\cos\\!\\left(x + \\frac{n\\pi}{2}\\right)$', note: 'same four-fold cycle, starting from cosine',
+        sub: 'The same compact formula holds for cosine, from [the sine and cosine pattern](!#6).' },
+      { name: 'Scaled sine', formula: '$\\displaystyle \\frac{d^n}{dx^n}[\\sin(ax)] = a^n \\sin\\left(ax + \\frac{n\\pi}{2}\\right)$', note: 'trigonometric cycle persists; amplitude grows as $a^n$',
+        sub: 'The chain rule adds a factor $a$ per step while the cycle carries on; see [the sine and cosine pattern](!#6).' },
+    ],
+  };
+
   return {
   props: {
+    formulaSummaryData,
+    pitfallData,
     smoothnessLevels,
     demoUnits,
     conceptIntroFigures,
@@ -2395,7 +2409,7 @@ const schemas = {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PageTemplate({smoothnessLevels, 
+export default function PageTemplate({ formulaSummaryData, pitfallData,smoothnessLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2595,7 +2609,16 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
         link:sectionsContent.overview.link,
         content:[
           sectionsContent.overview.content,
-          <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+          <DiagramFrame
+            key={'formula-summary'}
+            id="nth-derivative-formula-summary"
+            title="nth derivatives of standard functions"
+            source="/calculus/derivatives/higher-order"
+            related={{ href: '/calculus/formulas', label: 'All calculus formulas' }}
+            after={sectionsContent.overview.formulaSheetAfter}
+          >
+            <FormulaSheet data={formulaSummaryData} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2604,6 +2627,15 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
         link:sectionsContent.pitfalls.link,
         content:[
           sectionsContent.pitfalls.content,
+          <DiagramFrame
+            key={'pitfalls-mistakes'}
+            id="higher-order-derivative-pitfalls"
+            title="Common pitfalls with higher-order derivatives"
+            source="/calculus/derivatives/higher-order"
+            after={sectionsContent.pitfalls.after}
+          >
+            <MistakeFix data={pitfallData} variant="trace" />
+          </DiagramFrame>,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps
