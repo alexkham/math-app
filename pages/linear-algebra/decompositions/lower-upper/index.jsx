@@ -2830,6 +2830,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import luDiagrams from '@/app/components/linear-algebra copy/matrix/luDiagrams'
@@ -3288,9 +3289,8 @@ Gaussian elimination is usually carried out as a list of row operations on an au
 
 Forward elimination on $A$ applies a sequence of row-addition [operations](!/linear-algebra/matrix/operations), each represented by an [elementary matrix](!/linear-algebra/matrix/operations) $E_i$. The product $E_k \\cdots E_2 E_1 A = U$ reduces $A$ to upper triangular form.
 
-Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower triangular matrix that adds a multiple of one row to a row below. [Its inverse simply negates the multiplier](https://linearalgebranotes.com/matrices/elementary-matrix#rule-inverses). The product $L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$ is lower triangular, with the multipliers sitting in the sub-diagonal positions.
-
-## Worked Example
+Rearranging: $A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$. Each $E_i$ is a lower triangular matrix that adds a multiple of one row to a row below. [Its inverse simply negates the multiplier](https://linearalgebranotes.com/matrices/elementary-matrix#rule-inverses). The product $L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$ is lower triangular, with the multipliers sitting in the sub-diagonal positions.`,
+    afterProof: `## Worked Example
 
 @academic[formula_callout:Construction from Gaussian Elimination
 $$A = \\begin{pmatrix} 2 & 1 & -1 \\\\ 4 & 0 & 2 \\\\ -2 & 5 & 3 \\end{pmatrix}$$]@
@@ -3680,8 +3680,21 @@ $$U = \\begin{pmatrix} -5 & 3 \\\\ 0 & 11/5 \\end{pmatrix}$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Building LU from elimination" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$A$ is a product of two triangular matrices, $A = LU$' },
+    steps: [
+      { math: '$E_k \\cdots E_2 E_1 A = U$', tag: 'eliminate', why: 'Forward elimination: each row addition is an elementary matrix $E_i$' },
+      { math: '$A = E_1^{-1} E_2^{-1} \\cdots E_k^{-1} U$', tag: 'rearrange', why: 'Rearranging' },
+      { math: '$L = E_1^{-1} E_2^{-1} \\cdots E_k^{-1}$', tag: 'key step', key: true, why: 'Each $E_i^{-1}$ is lower triangular and simply negates the multiplier, so the product is lower triangular' },
+    ],
+    conclusion: { text: '$A = LU$', say: 'The multipliers sit in the sub-diagonal positions of $L$.' },
+  };
+
   return {
   props:{
+    proofStepsData,
     pitfallData,
       luScope,
     demoUnits,
@@ -3707,7 +3720,7 @@ $$U = \\begin{pmatrix} -5 & 3 \\\\ 0 & 11/5 \\end{pmatrix}$$`],
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function LUDecompositionPage({ pitfallData,luScope, 
+export default function LUDecompositionPage({ proofStepsData, pitfallData,luScope, 
   seoData,
   sectionsContent,
   introContent,
@@ -3819,6 +3832,18 @@ export default function LUDecompositionPage({ pitfallData,luScope,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-lu-from-elimination-proof'}
+            id="lu-from-elimination-proof"
+            title="Building LU from elimination"
+            source="/linear-algebra/decompositions/lower-upper"
+            related={false}
+            before={"The construction above in three lines."}
+            after={"No new computation is needed: $L$ only records the multipliers that elimination already used."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
                   <div key={'unit-construction'} dangerouslySetInnerHTML={{ __html: demoUnits.construction }} />,
           `The factorisation is therefore a by-product of elimination rather than a separate algorithm with its own cost.`,
         ]

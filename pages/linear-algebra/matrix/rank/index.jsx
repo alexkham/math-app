@@ -1996,6 +1996,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -2654,9 +2655,8 @@ Full column rank means $\\text{rank}(A) = n$ — all $n$ columns are independent
 
 Full row rank means $\\text{rank}(A) = m$ — all $m$ rows are independent. When $A$ has full row rank, the system $Ax = \\mathbf{b}$ has at least one solution for every $\\mathbf{b}$, [because the column space is all of](https://linearalgebranotes.com/spaces/column-space#rule-full-row-rank) $\\mathbb{R}^m$.
 
-When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simultaneously: the system has exactly one solution for every right-hand side, and $A$ is [invertible](!/linear-algebra/matrix/inverse).
-
-@academic[punchline:Full column rank allows at most one solution, full row rank at least one; only a square matrix can have both.]@`,
+When $A$ is square ($m = n$) and has full rank $n$, both conditions hold simultaneously: the system has exactly one solution for every right-hand side, and $A$ is [invertible](!/linear-algebra/matrix/inverse).`,
+    afterCases: `@academic[punchline:Full column rank allows at most one solution, full row rank at least one; only a square matrix can have both.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -3087,8 +3087,26 @@ $$\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & 0 \\end{pmatrix}$$`, `W
     ],
   };
 
+  // SpecialCases 2026-11-09: "When the rank is full" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$\\text{rank}(A) \\leq \\min(m, n)$', say: 'for an $m \\times n$ matrix $A$' },
+    cases: [
+      { when: '$\\text{rank}(A) = n$', tag: 'full column rank', rule: 'at most one solution',
+        why: 'No free variables exist.',
+        more: 'All $n$ columns are independent, and the null space is $\\{\\mathbf{0}\\}$.' },
+      { when: '$\\text{rank}(A) = m$', tag: 'full row rank', rule: 'at least one solution',
+        why: 'The column space is all of $\\mathbb{R}^m$.',
+        more: 'All $m$ rows are independent, so $A\\mathbf{x} = \\mathbf{b}$ has a solution for every $\\mathbf{b}$.' },
+      { when: '$m = n = \\text{rank}(A)$', tag: 'square, full rank', rule: 'exactly one solution',
+        why: 'Both conditions hold simultaneously.',
+        more: 'The system has exactly one solution for every right-hand side, and $A$ is invertible.' },
+    ],
+  };
+
    return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
       rankNullityApply,
@@ -3119,7 +3137,7 @@ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', 
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function MatrixRankPage({ formulaSummaryData, pitfallData,rankNullityApply, rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MatrixRankPage({ specialCasesData, formulaSummaryData, pitfallData,rankNullityApply, rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3246,6 +3264,18 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'special-cases-full-rank-special-cases'}
+            id="full-rank-special-cases"
+            title="When the rank is full"
+            source="/linear-algebra/matrix/rank"
+            related={false}
+            before={"One row per way the rank can reach its maximum. Click a row for what it means for $A\\mathbf{x} = \\mathbf{b}$."}
+            after={"Which row applies depends on the entries of $A$, not only on its shape; the shape only caps the rank at $\\min(m, n)$."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterCases,
         ]
     },
     {

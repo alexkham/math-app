@@ -1854,6 +1854,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -2296,9 +2297,8 @@ This formula requires $A^TA$ to be [invertible](!/linear-algebra/matrix/inverse)
 Writing $(A^TA)^{-1} = A^{-1}(A^T)^{-1}$ cancels the formula to $P = I$, but an $m \\times k$ matrix $A$ with $k < m$ has no inverse. For the columns $(1, 0, 1)$ and $(0, 1, 1)$, $P = \\frac{1}{3}\\begin{pmatrix} 2 & -1 & 1 \\\\ -1 & 2 & 1 \\\\ 1 & 1 & 2 \\end{pmatrix}$, not $I$.
 [Read more](!#pitfall-splitting-the-inverse-of-a-product)]@
 
-[The derivation comes from the orthogonality condition](https://linearalgebranotes.com/orthogonality/normal-equations#rule-normal). The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$: $A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$. Solving for $\\hat{\\mathbf{x}}$ gives $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$, so $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$, and $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$.
-
-The alternative is to first orthogonalize the basis using [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt), then use the simpler orthogonal formula. Both approaches give the same projection.`,
+[The derivation comes from the orthogonality condition](https://linearalgebranotes.com/orthogonality/normal-equations#rule-normal). The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$: $A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$. Solving for $\\hat{\\mathbf{x}}$ gives $A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$, so $\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$, and $\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$.`,
+    afterProof: `The alternative is to first orthogonalize the basis using [Gram-Schmidt](!/linear-algebra/orthogonality/gram-schmidt), then use the simpler orthogonal formula. Both approaches give the same projection.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2637,8 +2637,22 @@ $$\\frac{4}{2}(1, 0, 1) + \\frac{5}{2}(0, 1, 1) = \\left(2, \\frac{5}{2}, \\frac
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the projection formula" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$' },
+    steps: [
+      { action: 'Require a perpendicular residual', math: '$A^T(\\mathbf{b} - A\\hat{\\mathbf{x}}) = \\mathbf{0}$', why: 'The residual $\\mathbf{b} - A\\hat{\\mathbf{x}}$ must be perpendicular to every column of $A$.' },
+      { action: 'Rearrange', math: '$A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$' },
+      { action: 'Solve for the coefficients', math: '$\\hat{\\mathbf{x}} = (A^TA)^{-1}A^T\\mathbf{b}$', why: '$A^TA$ is invertible because the columns of $A$ are linearly independent.' },
+      { action: 'Multiply by $A$', math: '$\\hat{\\mathbf{b}} = A\\hat{\\mathbf{x}} = A(A^TA)^{-1}A^T\\mathbf{b}$' },
+    ],
+    conclusion: { text: '$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$' },
+  };
+
 return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2663,7 +2677,7 @@ return {
    }
 
 // export default function ProjectionsPage({seoData,sectionsContent , introContent}) {
-export default function ProjectionsPage({ formulaSummaryData, pitfallData,
+export default function ProjectionsPage({ proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2807,6 +2821,18 @@ Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'proof-steps-projection-arbitrary-basis-steps'}
+            id="projection-arbitrary-basis-steps"
+            title="Deriving the projection formula"
+            source="/linear-algebra/orthogonality/projections"
+            related={false}
+            before={"The derivation above in four steps; use Next and Back to move through them."}
+            after={"Everything follows from the first line: once the residual is perpendicular to the columns, the rest is solving a square system."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterProof,
           <DiagramFrame
             key={'obj4-diagram'}
             id="projection-formulas"

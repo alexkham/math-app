@@ -15,7 +15,7 @@
 // from `of` or from [at, from, to].
 // ===========================================================
 
-import { mid, unit, dist, footOf, lineIntersection } from './math';
+import { mid, unit, dist, footOf, lineIntersection, angleGeom } from './math';
 import { COMPOSITES } from './composites';
 
 const movePoint = (o, pos, model) => ({
@@ -179,6 +179,57 @@ export const POINT_TYPES = {
   // intersection of lines of[0]–of[1] and of[2]–of[3]
   intersection: {
     resolve: (o, P) => lineIntersection(P[o.of[0]], P[o.of[1]], P[o.of[2]], P[o.of[3]])
+  },
+
+  // copy an angle: the ray from `at` that makes with the ray at→from the
+  // same angle as angle[1] sees between angle[0] and angle[2], turned from
+  // at→from towards `toward`; the point is where that ray meets the line
+  // of[0]–of[1]
+  angleCopy: {
+    resolve: (o, P) => {
+      const v = P[o.at];
+      const a = P[o.from];
+      const t = P[o.toward];
+      const [q, w, r] = o.angle.map((k) => P[k]);
+      const theta = Math.abs(angleGeom(w, q, r).d);
+      const dirA = Math.atan2(a.y - v.y, a.x - v.x);
+      const side = Math.sign((a.x - v.x) * (t.y - v.y) - (a.y - v.y) * (t.x - v.x)) || 1;
+      const phi = dirA + side * theta;
+      const far = { x: v.x + 1000 * Math.cos(phi), y: v.y + 1000 * Math.sin(phi) };
+      const k = lineIntersection(v, far, P[o.of[0]], P[o.of[1]]);
+      // rounded so that server and client agree to the last digit
+      return k && { x: Math.round(k.x * 1e6) / 1e6, y: Math.round(k.y * 1e6) / 1e6 };
+    }
+  },
+
+  // `of` turned about `about` by the signed angle from angle[0] to angle[2]
+  // as seen from angle[1] (so a chord turns into an equal chord)
+  rotateBy: {
+    resolve: (o, P) => {
+      const c = P[o.about];
+      const p = P[o.of];
+      const [q, w, r] = o.angle.map((k) => P[k]);
+      const d = angleGeom(w, q, r).d;
+      const dx = p.x - c.x;
+      const dy = p.y - c.y;
+      const x = c.x + dx * Math.cos(d) - dy * Math.sin(d);
+      const y = c.y + dx * Math.sin(d) + dy * Math.cos(d);
+      return { x: Math.round(x * 1e6) / 1e6, y: Math.round(y * 1e6) / 1e6 };
+    }
+  },
+
+  // `of` turned about `about` by a fixed number of degrees (clockwise on screen)
+  rotateDeg: {
+    resolve: (o, P) => {
+      const c = P[o.about];
+      const p = P[o.of];
+      const d = (o.deg * Math.PI) / 180;
+      const dx = p.x - c.x;
+      const dy = p.y - c.y;
+      const x = c.x + dx * Math.cos(d) - dy * Math.sin(d);
+      const y = c.y + dx * Math.sin(d) + dy * Math.cos(d);
+      return { x: Math.round(x * 1e6) / 1e6, y: Math.round(y * 1e6) / 1e6 };
+    }
   }
 };
 
@@ -203,8 +254,10 @@ export function resolve(model) {
 
   for (const o of expand(model)) {
     if (isPointType(o.type)) {
-      const p = POINT_TYPES[o.type].resolve(o, P, params);
-      if (!p) continue;
+      const raw = POINT_TYPES[o.type].resolve(o, P, params);
+      if (!raw) continue;
+      // rounded to a millionth so that server and client render the same numbers
+      const p = { x: Math.round(raw.x * 1e6) / 1e6, y: Math.round(raw.y * 1e6) / 1e6 };
       P[o.id] = p;
       R[o.id] = { ...o, ...p };
     } else {

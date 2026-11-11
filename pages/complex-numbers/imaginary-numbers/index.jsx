@@ -1100,6 +1100,7 @@ import complexExplorerDiagrams from '@/app/components/calculators/complex-number
 import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -1739,9 +1740,8 @@ Pure imaginary numbers occupy the vertical axis exclusively. The number $3i$ sit
 
 This geometric arrangement reveals a beautiful symmetry in the structure of complex numbers. Real numbers provide the "width" of the system, extending left and right from the origin. Imaginary numbers provide the "height," extending up and down. Together they span every direction, allowing complex numbers to fill the entire plane rather than merely a line. A general complex number $a + bi$ appears at coordinates $(a, b)$, combining horizontal and vertical components.
 
-The origin deserves special attention in this picture. Located at $(0, 0)$, it represents the number $0 = 0 + 0i$. This single point lies on both axes simultaneously — it belongs to the real numbers (being located on the horizontal axis) and to the pure imaginary numbers (being located on the vertical axis). No other point shares this property; every other location commits to one category or exists off both axes entirely as a genuinely complex number with nonzero parts.
-
-@academic[punchline:Pure imaginary numbers form a second number line at right angles to the real one, meeting it only at 0.]@`,
+The origin deserves special attention in this picture. Located at $(0, 0)$, it represents the number $0 = 0 + 0i$. This single point lies on both axes simultaneously — it belongs to the real numbers (being located on the horizontal axis) and to the pure imaginary numbers (being located on the vertical axis). No other point shares this property; every other location commits to one category or exists off both axes entirely as a genuinely complex number with nonzero parts.`,
+      afterCases: `@academic[punchline:Pure imaginary numbers form a second number line at right angles to the real one, meeting it only at 0.]@`,
   after: ``,
   link: '',
 },
@@ -2104,8 +2104,28 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-09: "Where pure imaginary numbers sit" (map), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309',
+      caseColors: ['#2563EB', '#06357A', '#B45309', '#475569'], caseInks: ['#2563EB', '#06357A', '#B45309', '#475569'] },
+    general: { label: 'Point', text: '$a + bi$ appears at $(a, b)$' },
+    figure: {
+      kind: 'plane', xLabel: 'Re', yLabel: 'Im', xAxisCase: 0, yAxisCase: 1, originCase: 2,
+      points: [
+        { x: 0, y: 3, label: '3i', case: 1 }, { x: 0, y: -2, label: '−2i', case: 1 },
+      ],
+    },
+    cases: [
+      { name: 'Real axis', when: 'real numbers', text: 'The horizontal axis carries the real numbers, the familiar number line through zero.' },
+      { name: 'Imaginary axis', when: '$bi$', rule: '$bi$ at $(0, b)$', text: 'Pure imaginary numbers occupy the vertical axis exclusively: $3i$ sits three units above the origin, $-2i$ two units below.' },
+      { name: 'Origin', when: '$0 = 0 + 0i$', rule: '$(0, 0)$', text: 'The single point on both axes: it belongs to the real numbers and to the pure imaginary numbers.' },
+      { name: 'Off both axes', when: 'nonzero parts', text: 'A genuinely complex number, combining horizontal and vertical components.' },
+    ],
+  };
+
   return {
   props:{
+    specialCasesData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -2138,7 +2158,7 @@ const siteTheme = {
   warm: '#B45309', warmSoft: '#fef3c7', warmLine: '#fcd34d', warmInk: '#92400e',
 }
 
-export default function ImaginaryNumbersPage({ pitfallData,
+export default function ImaginaryNumbersPage({ specialCasesData, pitfallData,
   seoData,
   numberSystemLadder,
   sectionsContent,
@@ -2325,6 +2345,18 @@ export default function ImaginaryNumbersPage({ pitfallData,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'special-cases-imaginary-axis-special-cases'}
+            id="imaginary-axis-special-cases"
+            title="Where pure imaginary numbers sit"
+            source="/complex-numbers/imaginary-numbers"
+            related={false}
+            before={"The places described above, on the plane. Hover a place to find its points, or a point to find its place."}
+            after={"The vertical axis holds the pure imaginary numbers, the horizontal one the reals, and the origin is the only point they share."}
+          >
+            <SpecialCases data={specialCasesData} variant="map" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterCases,
         ]
     },
     {

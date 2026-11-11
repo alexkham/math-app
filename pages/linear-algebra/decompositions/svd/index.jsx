@@ -8333,6 +8333,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ConceptIntro from '@/app/components/page-components/content-components/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -8999,9 +9000,8 @@ for an invertible square matrix, since the largest singular value of $A^{-1}$ is
 @academic[formula_callout:Spectral Norm and Condition Number
 $$\\frac{\\|\\delta\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} \\leq \\kappa(A)\\,\\frac{\\|\\delta\\mathbf{b}\\|}{\\|\\mathbf{b}\\|}$$]@
 
-A condition number near $1$ means errors pass through unamplified, and [orthogonal matrices](!/linear-algebra/orthogonality/orthogonal-sets) achieve exactly $1$. A condition number of $10^k$ means roughly $k$ decimal digits of accuracy can be lost in solving the system. An infinite condition number means $\\sigma_n = 0$: the matrix is singular.
-
-The determinant says nothing about conditioning. The diagonal matrix with entries $10^{6}$ and $10^{-6}$ has $\\det = 1$ and $\\kappa = 10^{12}$. Ill-conditioning is about the ratio of the stretches, not their product, and [only the singular values expose it](https://calculatematrix.com/matrix-calculators/condition-number#algorithm).
+A condition number near $1$ means errors pass through unamplified, and [orthogonal matrices](!/linear-algebra/orthogonality/orthogonal-sets) achieve exactly $1$. A condition number of $10^k$ means roughly $k$ decimal digits of accuracy can be lost in solving the system. An infinite condition number means $\\sigma_n = 0$: the matrix is singular.`,
+    afterCases: `The determinant says nothing about conditioning. The diagonal matrix with entries $10^{6}$ and $10^{-6}$ has $\\det = 1$ and $\\kappa = 10^{12}$. Ill-conditioning is about the ratio of the stretches, not their product, and [only the singular values expose it](https://calculatematrix.com/matrix-calculators/condition-number#algorithm).
 
 The [SVD tool](!/linear-algebra/visual-tools/singular-value-decomposition) reports both numbers for any $2 \\times 2$ matrix alongside the ellipse whose axes they measure.`,
     before: ``,
@@ -9255,8 +9255,26 @@ $$\\approx 5.83$$`],
     ],
   };
 
+  // SpecialCases 2026-11-09: "Landmark condition numbers" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$\\kappa(A) = \\frac{\\sigma_1}{\\sigma_n} = \\|A\\|_2\\,\\|A^{-1}\\|_2$', say: '$\\frac{\\|\\delta\\mathbf{x}\\|}{\\|\\mathbf{x}\\|} \\leq \\kappa(A)\\,\\frac{\\|\\delta\\mathbf{b}\\|}{\\|\\mathbf{b}\\|}$' },
+    cases: [
+      { when: '$\\kappa \\approx 1$', tag: 'no amplification', rule: 'errors pass through unamplified',
+        why: 'The largest stretch is close to the smallest.',
+        more: 'Orthogonal matrices achieve exactly $1$.' },
+      { when: '$\\kappa = 10^k$', tag: 'digits lost', tone: 'warn', rule: 'roughly $k$ decimal digits lost',
+        why: 'The relative error in $\\mathbf{b}$ can be multiplied by $\\kappa(A)$ in the solution.',
+        more: 'This is the accuracy that can be lost in solving $A\\mathbf{x} = \\mathbf{b}$.' },
+      { when: '$\\kappa = \\infty$', tag: 'singular', tone: 'stop', rule: '$\\sigma_n = 0$',
+        why: 'An infinite condition number means the matrix is singular.',
+        more: 'The formula is stated for an invertible square matrix, where the largest singular value of $A^{-1}$ is $1 / \\sigma_n$.' },
+    ],
+  };
+
   return {
   props:{
+    specialCasesData,
     pitfallData,
       eckartYoungApply,
     svdNest,
@@ -9283,7 +9301,7 @@ $$\\approx 5.83$$`],
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function SVDPage({ pitfallData,eckartYoungApply, svdNest, 
+export default function SVDPage({ specialCasesData, pitfallData,eckartYoungApply, svdNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -9544,6 +9562,18 @@ export default function SVDPage({ pitfallData,eckartYoungApply, svdNest,
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'special-cases-condition-number-edge-cases'}
+            id="condition-number-edge-cases"
+            title="Landmark condition numbers"
+            source="/linear-algebra/decompositions/svd"
+            related={false}
+            before={"One row per landmark value of the condition number. Click a row for more on it."}
+            after={"All three rows read the same ratio $\\sigma_1 / \\sigma_n$: equal stretches at one end, a vanishing smallest stretch at the other."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj13.afterCases,
         ]
     },
     {

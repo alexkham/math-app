@@ -1371,6 +1371,7 @@ import renderCompositionSteps from '@/app/utils/illustrations/functions/composit
 import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTest.v2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -2714,8 +2715,25 @@ const faqQuestions = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Verifying an inverse pair by composition" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$f(x) = 5x - 2$ and $g(x) = \\dfrac{x + 2}{5}$ are inverses' },
+    steps: [
+      { math: '$f(g(x)) = f\\left(\\frac{x + 2}{5}\\right)$', tag: 'substitute', why: 'Put $g(x)$ into $f$' },
+      { math: '$= 5 \\cdot \\frac{x + 2}{5} - 2$', tag: 'apply f', why: '$f$ multiplies by $5$ and subtracts $2$' },
+      { math: '$= (x + 2) - 2$', tag: 'cancel', why: 'The $5$s cancel' },
+      { math: '$= x$', tag: 'first check', key: true, why: 'The first composition returns $x$' },
+      { math: '$g(f(x)) = g(5x - 2)$', tag: 'substitute', why: 'Put $f(x)$ into $g$' },
+      { math: '$= \\frac{(5x - 2) + 2}{5}$', tag: 'apply g', why: '$g$ adds $2$ and divides by $5$' },
+      { math: '$= \\frac{5x}{5} = x$', tag: 'second check', why: 'The second composition returns $x$ as well' },
+    ],
+    conclusion: { text: '$g = f^{-1}$', say: 'Both compositions return $x$.' },
+  };
+
    return {
       props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
       oneToOneScope,
@@ -2745,7 +2763,7 @@ const faqQuestions = {
 
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function InversePage({ formulaSummaryData, pitfallData,oneToOneScope, inversePairOutline, 
+export default function InversePage({ proofStepsData, formulaSummaryData, pitfallData,oneToOneScope, inversePairOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -2909,6 +2927,17 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-verifying-inverses-composition-proof'}
+            id="verifying-inverses-composition-proof"
+            title="Verifying an inverse pair by composition"
+            source="/functions/inverse"
+            related={false}
+            before={"The two compositions above, split at each equals sign, with the reason for every step."}
+            after={"Each composition undoes the other function's operations in reverse order, which is why both chains collapse to $x$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
           <div key={'unit-roundTrip'} dangerouslySetInnerHTML={{ __html: demoUnits.roundTrip }} />,
           `One input is only a check; the algebra above proves the round trip for every x.`,
         ]

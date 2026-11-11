@@ -8,7 +8,9 @@ import '@/pages/pages.css'
 // hero, intro article, the sections that exist (today only Visual Tools),
 // core ideas and how a proof works. Figure cards without an href are
 // planned and render dimmed, not as links.
-// Kept out of public/sitemap.xml by the noindex filter in generate-sitemap.mjs.
+// Kept out of public/sitemap.xml by the noindex filter in generate-sitemap.mjs
+// (added 2026-11-08: the script skips every built page whose HTML carries a
+// robots meta tag containing "noindex").
 
 export async function getStaticProps(){
 
@@ -44,7 +46,7 @@ export async function getStaticProps(){
           title: 'Lines and Angles',
           description: 'The objects everything else is built from: points, lines and the angles they make. Crossing lines, straight angles, parallel lines and their transversals.',
           href: '/geometry/visual-tools#sub-proofs-lines-and-angles',
-          views: ['Vertical angles', 'Parallel lines and a transversal'],
+          views: ['Vertical angles', 'Parallel lines and a transversal', 'Bisectors of a linear pair', 'Angles around a point', 'Perpendicular bisector', 'Angle bisector locus'],
           more: 'Open lines and angles'
         },
         {
@@ -52,7 +54,7 @@ export async function getStaticProps(){
           title: 'Triangle',
           description: 'The simplest polygon and the base of most proofs in the plane: angle relationships, isosceles and equilateral triangles, congruence and the Pythagorean theorem, each on a triangle you can reshape.',
           href: '/geometry/visual-tools#sub-proofs-triangle',
-          views: ['Triangle angle sum', 'Exterior angle theorem', 'Sum of exterior angles', 'Isosceles base angles', 'Triangle inequality', 'Larger side, larger angle', 'Perpendicular is shortest', 'Pythagorean theorem', 'Midsegment theorem', 'Medians and the centroid', 'Angle bisector theorem', 'Circumcentre', 'Incentre', 'Orthocentre', 'Euler line', 'Nine-point circle', 'SSS congruence', 'ASA congruence', 'AAS congruence', 'HL congruence', "Ceva's theorem", "Menelaus' theorem"],
+          views: ['Triangle angle sum', 'Exterior angle theorem', 'Sum of exterior angles', 'Isosceles base angles', 'Triangle inequality', 'Larger side, larger angle', 'Perpendicular is shortest', 'Pythagorean theorem', 'Midsegment theorem', 'Medians and the centroid', 'Angle bisector theorem', 'Circumcentre', 'Incentre', 'Orthocentre', 'Euler line', 'Nine-point circle', 'SSS congruence', 'ASA congruence', 'AAS congruence', 'HL congruence', "Ceva's theorem", "Menelaus' theorem", 'Intercept theorem', 'AA similarity', 'SAS similarity', 'SSS similarity', 'Right triangle altitude theorem', 'Midpoint of the hypotenuse', 'Equilateral triangle', '30-60-90 triangle', 'Isosceles converse'],
           more: 'Open triangle'
         },
         {
@@ -60,7 +62,7 @@ export async function getStaticProps(){
           title: 'Circle',
           description: "All points at one distance from a center. Inscribed and central angles, Thales' theorem, tangents meeting radii at right angles, chords and arcs.",
           href: '/geometry/visual-tools#sub-proofs-circle',
-          views: ["Thales' theorem", 'Inscribed angle theorem', 'Cyclic quadrilateral', 'Tangent and radius', 'Two tangents from a point', 'Perpendicular bisects a chord', 'Intersecting chords', 'Secant and tangent', 'Two secants'],
+          views: ["Thales' theorem", 'Inscribed angle theorem', 'Cyclic quadrilateral', 'Tangent and radius', 'Two tangents from a point', 'Perpendicular bisects a chord', 'Intersecting chords', 'Secant and tangent', 'Two secants', "Ptolemy's theorem", 'Tangent-chord angle', 'Equal chords', 'Simson line', 'Cyclic exterior angle', 'Angles in the same segment'],
           more: 'Open circle'
         },
         {
@@ -68,7 +70,7 @@ export async function getStaticProps(){
           title: 'Quadrilateral',
           description: 'Four-sided figures and their families: parallelograms, rectangles, rhombi, trapezoids. Properties of sides and diagonals, and the 360° angle sum.',
           href: '/geometry/visual-tools#sub-proofs-quadrilateral',
-          views: ['Parallelogram: opposite sides equal', 'Parallelogram: diagonals bisect each other', 'Rhombus: diagonals are perpendicular', 'Rectangle: diagonals are equal', 'Varignon: the midpoint parallelogram', 'Trapezoid midsegment', 'Kite: diagonals are perpendicular'],
+          views: ['Parallelogram: opposite sides equal', 'Parallelogram: diagonals bisect each other', 'Rhombus: diagonals are perpendicular', 'Rectangle: diagonals are equal', 'Varignon: the midpoint parallelogram', 'Trapezoid midsegment', 'Kite: diagonals are perpendicular', 'Isosceles trapezoid', 'Equal opposite sides make a parallelogram', 'Angles of a parallelogram', 'Diagonals of a square'],
           more: 'Open quadrilateral'
         },
         {
@@ -76,7 +78,7 @@ export async function getStaticProps(){
           title: 'Polygon',
           description: 'Figures with any number of sides. Interior angle sums of (n − 2) · 180°, exterior angles that always total 360°, and regular polygons.',
           href: '/geometry/visual-tools#sub-proofs-polygon',
-          views: ['Polygon angle sum'],
+          views: ['Polygon angle sum', 'Polygon exterior angles', 'Regular hexagon', 'Regular polygon angles'],
           more: 'Open polygon'
         }
       ]

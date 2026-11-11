@@ -12,6 +12,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
@@ -371,9 +372,8 @@ $$\\log_a(xy) = \\log_a(x) + \\log_a(y)$$
 
 Multiplication inside the argument becomes addition outside.
 
-Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a^n$. The product $xy = a^m \\cdot a^n = a^{m+n}$. Taking the logarithm: $\\log_a(xy) = m + n = \\log_a(x) + \\log_a(y)$.
-
-@academic[example:Example
+Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a^n$. The product $xy = a^m \\cdot a^n = a^{m+n}$. Taking the logarithm: $\\log_a(xy) = m + n = \\log_a(x) + \\log_a(y)$.`,
+    afterProof: `@academic[example:Example
 $\\log_2(8 \\cdot 4) = \\log_2(8) + \\log_2(4) = 3 + 2 = 5$. Verification: $8 \\cdot 4 = 32 = 2^5$.]@
 
 The rule extends to any number of factors:
@@ -403,9 +403,8 @@ $$\\log_a\\left(\\frac{x}{y}\\right) = \\log_a(x) - \\log_a(y)$$
 
 Division inside the argument becomes subtraction outside.
 
-Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a^n$. The quotient $\\frac{x}{y} = \\frac{a^m}{a^n} = a^{m-n}$. Taking the logarithm: $\\log_a(x/y) = m - n = \\log_a(x) - \\log_a(y)$.
-
-@academic[example:Example
+Derivation: Let $\\log_a(x) = m$ and $\\log_a(y) = n$. Then $x = a^m$ and $y = a^n$. The quotient $\\frac{x}{y} = \\frac{a^m}{a^n} = a^{m-n}$. Taking the logarithm: $\\log_a(x/y) = m - n = \\log_a(x) - \\log_a(y)$.`,
+    afterProof: `@academic[example:Example
 $\\log_3(81/9) = \\log_3(81) - \\log_3(9) = 4 - 2 = 2$. Verification: $81/9 = 9 = 3^2$.]@
 
 @academic[rule_corollary_plain:The quotient rule also yields: $\\log_a(1/x) = \\log_a(1) - \\log_a(x) = 0 - \\log_a(x) = -\\log_a(x)$.]@
@@ -433,9 +432,8 @@ $$\\log_a(x^n) = n \\cdot \\log_a(x)$$
 
 Exponents inside the argument become coefficients outside.
 
-Derivation: Let $\\log_a(x) = m$, so $x = a^m$. Then $x^n = (a^m)^n = a^{mn}$. Taking the logarithm: $\\log_a(x^n) = mn = n \\cdot \\log_a(x)$.
-
-@academic[example:Example
+Derivation: Let $\\log_a(x) = m$, so $x = a^m$. Then $x^n = (a^m)^n = a^{mn}$. Taking the logarithm: $\\log_a(x^n) = mn = n \\cdot \\log_a(x)$.`,
+    afterProof: `@academic[example:Example
 $\\log_2(8^4) = 4 \\cdot \\log_2(8) = 4 \\cdot 3 = 12$. Verification: $8^4 = 4096 = 2^{12}$.]@
 
 The rule holds for any real exponent $n$, including fractions and negatives:
@@ -819,8 +817,56 @@ $$= \\log(x^2 y)$$`,
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the product rule" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\log_a(xy) = \\log_a(x) + \\log_a(y)$' },
+    steps: [
+      { math: '$\\log_a(x) = m, \\quad \\log_a(y) = n$', tag: 'name', why: 'Let the two logarithms be $m$ and $n$' },
+      { math: '$x = a^m, \\quad y = a^n$', tag: 'convert', why: 'The same statements in exponential form' },
+      { math: '$xy = a^m \\cdot a^n$', tag: 'multiply', why: 'The product of $x$ and $y$' },
+      { math: '$= a^{m+n}$', tag: 'key step', key: true, why: 'Same base: the exponents add' },
+      { math: '$\\log_a(xy) = m + n$', tag: 'take log', why: 'Taking the logarithm' },
+      { math: '$= \\log_a(x) + \\log_a(y)$', tag: 'substitute', why: 'Putting back $m = \\log_a(x)$ and $n = \\log_a(y)$' },
+    ],
+    conclusion: { text: '$\\log_a(xy) = \\log_a(x) + \\log_a(y)$', say: 'Multiplication inside the argument becomes addition outside.' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the quotient rule" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\log_a\\left(\\frac{x}{y}\\right) = \\log_a(x) - \\log_a(y)$' },
+    steps: [
+      { math: '$\\log_a(x) = m, \\quad \\log_a(y) = n$', tag: 'name', why: 'Let the two logarithms be $m$ and $n$' },
+      { math: '$x = a^m, \\quad y = a^n$', tag: 'convert', why: 'The same statements in exponential form' },
+      { math: '$\\frac{x}{y} = \\frac{a^m}{a^n}$', tag: 'divide', why: 'The quotient of $x$ and $y$' },
+      { math: '$= a^{m-n}$', tag: 'key step', key: true, why: 'Same base: the exponents subtract' },
+      { math: '$\\log_a(x/y) = m - n$', tag: 'take log', why: 'Taking the logarithm' },
+      { math: '$= \\log_a(x) - \\log_a(y)$', tag: 'substitute', why: 'Putting back $m = \\log_a(x)$ and $n = \\log_a(y)$' },
+    ],
+    conclusion: { text: '$\\log_a\\left(\\frac{x}{y}\\right) = \\log_a(x) - \\log_a(y)$', say: 'Division inside the argument becomes subtraction outside.' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the power rule" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\log_a(x^n) = n \\cdot \\log_a(x)$' },
+    steps: [
+      { math: '$\\log_a(x) = m$', tag: 'name', why: 'Let the logarithm be $m$' },
+      { math: '$x = a^m$', tag: 'convert', why: 'The same statement in exponential form' },
+      { math: '$x^n = (a^m)^n$', tag: 'power', why: 'Raising both sides to the power $n$' },
+      { math: '$= a^{mn}$', tag: 'key step', key: true, why: 'A power of a power: the exponents multiply' },
+      { math: '$\\log_a(x^n) = mn$', tag: 'take log', why: 'Taking the logarithm' },
+      { math: '$= n \\cdot \\log_a(x)$', tag: 'substitute', why: 'Putting back $m = \\log_a(x)$' },
+    ],
+    conclusion: { text: '$\\log_a(x^n) = n \\cdot \\log_a(x)$', say: 'Exponents inside the argument become coefficients outside.' },
+  };
+
    return {
   props: {
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     logErrors,
     changeOfBaseAnatomy,
@@ -844,7 +890,7 @@ $$= \\log(x^2 y)$$`,
 }
    }
 
- export default function LogarithmRulesPage({ formulaSummaryData,changeOfBaseAnatomy, logRuleTree, logErrors,
+ export default function LogarithmRulesPage({ proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData,changeOfBaseAnatomy, logRuleTree, logErrors,
    seoData,
    sectionsContent,
    introContent,
@@ -961,6 +1007,18 @@ Writing $\\log_2(8)$ as $\\frac{\\ln(2)}{\\ln(8)}$ puts the base on top and give
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrame
+            key={'proof-steps-log-product-rule-proof'}
+            id="log-product-rule-proof"
+            title="Deriving the product rule"
+            source="/algebra/logarithms/rules"
+            related={false}
+            before={"The derivation above as a chain, one line per step with its reason. The gold line is the exponent law that does the work."}
+            after={"The logarithm rule is the exponent law $a^m \\cdot a^n = a^{m+n}$ read back as logarithms."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj1.afterProof,
           <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
           `Dividing inputs subtracts heights in the same way, which is the quotient rule.`,
           `@academic[fact,aside:true,width:35%:Multiplying by adding for 350 years
@@ -975,6 +1033,18 @@ The graph also suggests a way to multiply without multiplying. Suppose a table l
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-log-quotient-rule-proof'}
+            id="log-quotient-rule-proof"
+            title="Deriving the quotient rule"
+            source="/algebra/logarithms/rules"
+            related={false}
+            before={"The same four moves as for the product rule, with a quotient in place of the product. The gold line is the exponent law used."}
+            after={"Only the exponent law changes from the product rule: dividing powers subtracts exponents, so the logarithms subtract."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
         ]
     },
     {
@@ -983,6 +1053,18 @@ The graph also suggests a way to multiply without multiplying. Suppose a table l
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-log-power-rule-proof'}
+            id="log-power-rule-proof"
+            title="Deriving the power rule"
+            source="/algebra/logarithms/rules"
+            related={false}
+            before={"The derivation above as a chain. This time one logarithm is enough, and the gold line is the power of a power law."}
+            after={"Raising a power to a power multiplies the exponents, which is why the exponent $n$ comes out in front of the logarithm."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {

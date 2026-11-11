@@ -934,6 +934,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
@@ -1593,9 +1594,8 @@ The adjugate satisfies
 Using $\\operatorname{cof}(A)$ itself as the adjugate pairs row $1$ of $A$ with column $1$ of $\\operatorname{cof}(A)$: $2(20) + 5(-29) + 1(-13) = -118$, not $-12$. After the transpose, row $1$ meets its own cofactors: $2(20) + 5(-8) + 1(-12) = -12$.
 [Read more](!#pitfall-forgetting-to-transpose-the-cofactors)]@
 
-[To see why](https://linearalgebranotes.com/matrices/adjugate#rule-key-identity), consider the $(i,k)$ entry of the product $A \\cdot \\operatorname{adj}(A)$. This is $\\sum_{j=1}^{n} a_{ij} \\cdot [\\operatorname{adj}(A)]_{jk} = \\sum_{j=1}^{n} a_{ij} \\, C_{kj}$. When $i = k$, this sum is exactly the Laplace expansion of $\\det(A)$ along row $i$, so the diagonal entries equal $\\det(A)$. When $i \\neq k$, the sum pairs the entries of row $i$ with the cofactors of a different row $k$. This is equivalent to computing the determinant of a matrix with two identical rows (row $i$ appears in both its own position and row $k$'s), which is always zero. So the off-diagonal entries vanish.
-
-## Verification
+[To see why](https://linearalgebranotes.com/matrices/adjugate#rule-key-identity), consider the $(i,k)$ entry of the product $A \\cdot \\operatorname{adj}(A)$. This is $\\sum_{j=1}^{n} a_{ij} \\cdot [\\operatorname{adj}(A)]_{jk} = \\sum_{j=1}^{n} a_{ij} \\, C_{kj}$. When $i = k$, this sum is exactly the Laplace expansion of $\\det(A)$ along row $i$, so the diagonal entries equal $\\det(A)$. When $i \\neq k$, the sum pairs the entries of row $i$ with the cofactors of a different row $k$. This is equivalent to computing the determinant of a matrix with two identical rows (row $i$ appears in both its own position and row $k$'s), which is always zero. So the off-diagonal entries vanish.`,
+    afterProof: `## Verification
 
 With $\\det(A) = -12$:
 
@@ -1830,8 +1830,22 @@ $$= \\begin{pmatrix} -118 & 28 & 72 \\\\ -61 & 16 & 42 \\\\ -27 & 0 & 6 \\end{pm
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why the adjugate identity holds" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$A \\cdot \\operatorname{adj}(A) = \\det(A) \\, I$' },
+    steps: [
+      { action: 'Write out one entry', math: '$\\displaystyle\\sum_{j=1}^{n} a_{ij} \\cdot [\\operatorname{adj}(A)]_{jk}$', why: 'The $(i,k)$ entry of the product $A \\cdot \\operatorname{adj}(A)$.' },
+      { action: 'Use the transpose', math: '$\\displaystyle= \\sum_{j=1}^{n} a_{ij} \\, C_{kj}$', why: 'The adjugate is the transpose of the cofactor matrix.' },
+      { action: 'Diagonal entries, $i = k$', math: '$\\displaystyle\\sum_{j=1}^{n} a_{ij} \\, C_{kj} = \\det(A)$', why: 'The sum is exactly the Laplace expansion of $\\det(A)$ along row $i$.' },
+      { action: 'Off-diagonal entries, $i \\neq k$', math: '$\\displaystyle\\sum_{j=1}^{n} a_{ij} \\, C_{kj} = 0$', why: 'The entries of row $i$ meet the cofactors of a different row $k$. That is the determinant of a matrix with two identical rows, which is always zero.' },
+    ],
+    conclusion: { text: '$A \\cdot \\operatorname{adj}(A) = \\det(A) \\, I$', say: 'The diagonal entries equal $\\det(A)$ and the off-diagonal entries vanish.' },
+  };
+
    return {
   props: {
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1853,7 +1867,7 @@ $$= \\begin{pmatrix} -118 & 28 & 72 \\\\ -61 & 16 & 42 \\\\ -27 & 0 & 6 \\end{pm
 }
    }
 
-   export default function CofactorsPage({ pitfallData,
+   export default function CofactorsPage({ proofStepsData, pitfallData,
      seoData,
      sectionsContent,
      introContent,
@@ -2016,6 +2030,18 @@ $$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-adjugate-identity-steps'}
+            id="adjugate-identity-steps"
+            title="Why the adjugate identity holds"
+            source="/linear-algebra/determinants/cofactors"
+            related={false}
+            before={"The argument above in four steps; use Next and Back to move through them."}
+            after={"The off-diagonal step is the clever one: a sum that looks like nothing in particular is the expansion of a determinant with a repeated row."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
           `The identity itself asks nothing of $\\det(A)$. The adjugate is built entry by entry from the minors, so it exists for every square matrix, singular or not. For $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$, whose determinant is $0$, the adjugate is $\\begin{pmatrix} 4 & -2 \\\\ -2 & 1 \\end{pmatrix}$, and the product of the two matrices is the zero matrix, exactly as $\\det(A) \\, I$ predicts.`,
           `@academic[punchline:A row paired with its own cofactors gives the determinant; paired with another row's cofactors, it gives zero.]@`,
         ]

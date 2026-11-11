@@ -16,6 +16,7 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
@@ -568,9 +569,8 @@ $$\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$$]@
 Taking only the positive root of $(x - 2)^2 = 9$ gives $x - 2 = 3$, so $x = 5$ alone. Both roots count: $x - 2 = \\pm 3$, so $x = 5$ or $x = -1$.
 [Read more](!#pitfall-dropping-the-negative-square-root)]@
 
-Taking the square root of both sides and isolating $x$ gives the two solutions. The expression under the square root, $b^2 - 4ac$, determines whether those solutions are real or complex.
-
-@academic[example:Example
+Taking the square root of both sides and isolating $x$ gives the two solutions. The expression under the square root, $b^2 - 4ac$, determines whether those solutions are real or complex.`,
+    afterProof: `@academic[example:Example
 As a concrete example, consider $x^2 + 6x + 2 = 0$. Move the constant: $x^2 + 6x = -2$. Half of $6$ is $3$, and $3^2 = 9$. Add $9$ to both sides: $x^2 + 6x + 9 = 7$. Factor: $(x + 3)^2 = 7$. Take roots: $x + 3 = \\pm\\sqrt{7}$. The solutions are $x = -3 + \\sqrt{7}$ and $x = -3 - \\sqrt{7}$.]@`,
     before: ``,
     after: ``,
@@ -1048,8 +1048,22 @@ $$\\Delta = 2^2 - 4(1)(-3) = 4 + 12 = 16 > 0$$`, `So there are two real roots, $
     ],
   };
 
+  // ProofSteps 2026-11-08: "Completing the square on the general equation" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Solve', text: '$ax^2 + bx + c = 0$ by completing the square' },
+    steps: [
+      { action: 'Divide every term by $a$', math: '$\\displaystyle x^2 + \\frac{b}{a}x + \\frac{c}{a} = 0$' },
+      { action: 'Move the constant to the right side', math: '$\\displaystyle x^2 + \\frac{b}{a}x = -\\frac{c}{a}$', why: 'The left side is almost a perfect square trinomial.' },
+      { action: 'Add $\\left(\\frac{b}{2a}\\right)^2$ to both sides', math: '$\\displaystyle x^2 + \\frac{b}{a}x + \\frac{b^2}{4a^2} = \\frac{b^2}{4a^2} - \\frac{c}{a}$', why: 'Adding this term completes the perfect square on the left.' },
+      { action: 'Factor the left side', math: '$\\displaystyle \\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$', why: 'The left side factors as a perfect square.' },
+    ],
+    conclusion: { text: '$x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$', say: 'Taking the square root of both sides and isolating $x$ gives the two solutions: the quadratic formula.' },
+  };
+
    return {
   props: {
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     quadraticFormulaAnatomy,
@@ -1077,7 +1091,7 @@ $$\\Delta = 2^2 - 4(1)(-3) = 4 + 12 = 16 > 0$$`, `So there are two real roots, $
    }
 
 
-export default function QuadraticEquationsPage({ formulaSummaryData, pitfallData,quadraticFormulaAnatomy, quadMethodTree, 
+export default function QuadraticEquationsPage({ proofStepsData, formulaSummaryData, pitfallData,quadraticFormulaAnatomy, quadMethodTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1214,6 +1228,18 @@ $$ax^2 + bx + c = 0$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-quadratic-completing-square-steps'}
+            id="quadratic-completing-square-steps"
+            title="Completing the square on the general equation"
+            source="/algebra/equations/quadratic"
+            related={false}
+            before={"The derivation above, one step per screen: press Next to go from $ax^2 + bx + c = 0$ to the completed square, and Back to retrace a step."}
+            after={"Adding $\\left(\\frac{b}{2a}\\right)^2$ is the step that matters: once the left side is a perfect square, a single square root frees $x$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
                   <div key={'unit-complete'} dangerouslySetInnerHTML={{ __html: demoUnits.complete }} />,
           `The quadratic formula in the next section is this construction carried out once with letters.`,
         ]

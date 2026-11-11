@@ -677,6 +677,7 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -1071,9 +1072,8 @@ The values converge, and the limit is $2^\\pi$.
 @academic[fact,aside:true,width:35%:Hilbert asked what $2^{\\sqrt{2}}$ is
 The limit gives $2^{\\sqrt{2}}$ a value at once, yet whether that value is rational was one of Hilbert's 23 open problems of 1900. It was settled only in the 1930s: $2^{\\sqrt{2}}$ is irrational, and even transcendental, a root of no polynomial with whole-number coefficients.]@
 
-This construction requires the base to be positive. For $a > 0$, the function $a^x$ is continuous and the limit always exists. For $a < 0$, the sequence of rational approximations does not converge to a consistent real value. For $a = 0$, the limit exists only for positive exponents, and it is $0$.
-
-The [irrational exponents](!/algebra/powers/irrational-exponents) page formalizes this limiting process and the domain restriction $a > 0$.
+This construction requires the base to be positive. For $a > 0$, the function $a^x$ is continuous and the limit always exists. For $a < 0$, the sequence of rational approximations does not converge to a consistent real value. For $a = 0$, the limit exists only for positive exponents, and it is $0$.`,
+    afterCases: `The [irrational exponents](!/algebra/powers/irrational-exponents) page formalizes this limiting process and the domain restriction $a > 0$.
 
 @academic[punchline:An irrational power is never computed by itself; it is the one value that powers at nearby rational exponents close in on.]@`,
     before: ``,
@@ -1397,8 +1397,24 @@ $$= x^{3+4} = x^7$$`, `Multiplying the exponents belongs to a power raised to a 
     ],
   };
 
+  // SpecialCases 2026-11-09: "Which bases the limit allows" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$2^\\pi$ is the limit of $2^r$ as rational values $r$ approach $\\pi$' },
+    cases: [
+      { when: '$a > 0$', tag: 'always defined', rule: 'the limit always exists', examples: '$2^{3.1} \\approx 8.574$, $2^{3.14} \\approx 8.815$, $2^{3.1415} \\approx 8.824$',
+        why: 'For $a > 0$, the function $a^x$ is continuous.',
+        more: 'The values $2^3 = 8$, $2^{3.1}$, $2^{3.14}$, $2^{3.1415}$ converge, and the limit is $2^\\pi$.' },
+      { when: '$a < 0$', tag: 'no value', tone: 'stop', rule: 'no consistent real value',
+        why: 'The sequence of rational approximations does not converge to a consistent real value.' },
+      { when: '$a = 0$', tag: 'positive only', tone: 'warn', rule: 'the limit is $0$, for positive exponents only',
+        why: 'The limit exists only for positive exponents, and it is $0$.' },
+    ],
+  };
+
    return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     faqQuestions,
@@ -1425,7 +1441,7 @@ $$= x^{3+4} = x^7$$`, `Multiplying the exponents belongs to a power raised to a 
 
  const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PowersAndExponentsPage({ formulaSummaryData, pitfallData,faqQuestions, exponentTypeCases,seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
+export default function PowersAndExponentsPage({ specialCasesData, formulaSummaryData, pitfallData,faqQuestions, exponentTypeCases,seoData, sectionsContent, introContent, obj10Table, obj11Table, summaryTable, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1573,6 +1589,18 @@ Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'special-cases-irrational-exponent-base-edge-cases'}
+            id="irrational-exponent-base-edge-cases"
+            title="Which bases the limit allows"
+            source="/algebra/powers"
+            related={false}
+            before={"One row per kind of base $a$ in $a^x$. Click the first row for how the limit is reached."}
+            after={"Only a positive base gives a limit for every irrational exponent, which is why the construction requires $a > 0$."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterCases,
         ]
     },
     {

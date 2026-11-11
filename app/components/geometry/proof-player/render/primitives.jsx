@@ -118,10 +118,12 @@ export function Angle({ o, hl, ctx }) {
   const [v, p1, p2] = o.pts;
   const { a1, d } = angleGeom(v, p1, p2);
   const r = o.radius || Math.max(14, Math.min(34, 0.3 * Math.min(dist(v, p1), dist(v, p2))));
-  const x1 = v.x + r * Math.cos(a1);
-  const y1 = v.y + r * Math.sin(a1);
-  const x2 = v.x + r * Math.cos(a1 + d);
-  const y2 = v.y + r * Math.sin(a1 + d);
+  // rounded to a thousandth so that server and client render the same path
+  const q = (n) => Math.round(n * 1000) / 1000;
+  const x1 = q(v.x + r * Math.cos(a1));
+  const y1 = q(v.y + r * Math.sin(a1));
+  const x2 = q(v.x + r * Math.cos(a1 + d));
+  const y2 = q(v.y + r * Math.sin(a1 + d));
   const sweep = d > 0 ? 1 : 0;
   const m = a1 + d / 2;
   const lr = r + (ctx.measures ? 24 : 15);
@@ -136,7 +138,7 @@ export function Angle({ o, hl, ctx }) {
       <path d={`M${v.x} ${v.y}L${x1} ${y1}A${r} ${r} 0 0 ${sweep} ${x2} ${y2}Z`} fill={color} fillOpacity={hl ? 0.32 : 0.16} />
       <path d={arc} fill="none" stroke={color} strokeWidth={hl ? 2.6 : 1.6} />
       {text && (
-        <text x={v.x + lr * Math.cos(m)} y={v.y + lr * Math.sin(m)} {...labelProps(color, 15)}>
+        <text x={q(v.x + lr * Math.cos(m))} y={q(v.y + lr * Math.sin(m))} {...labelProps(color, 15)}>
           {text}
         </text>
       )}

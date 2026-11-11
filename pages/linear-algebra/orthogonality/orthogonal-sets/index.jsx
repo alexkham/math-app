@@ -856,6 +856,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
@@ -1299,9 +1301,8 @@ Suppose $c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\ma
 @academic[formula_callout:Orthogonal Sets Are Independent
 $$c_1(\\mathbf{v}_1 \\cdot \\mathbf{v}_j) + c_2(\\mathbf{v}_2 \\cdot \\mathbf{v}_j) + \\cdots + c_k(\\mathbf{v}_k \\cdot \\mathbf{v}_j) = 0$$]@
 
-Every term with $i \\neq j$ vanishes because $\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0$. Only the $j$-th term survives: $c_j \\|\\mathbf{v}_j\\|^2 = 0$. Since $\\mathbf{v}_j \\neq \\mathbf{0}$, $\\|\\mathbf{v}_j\\|^2 > 0$, so $c_j = 0$. This works for every $j$, so all coefficients are zero.
-
-The key mechanism is that orthogonality isolates each coefficient. Dotting with $\\mathbf{v}_j$ kills every other term, leaving $c_j$ alone. This is why orthogonal bases make coordinates computable by individual dot products — the same isolation principle that proves independence also extracts coordinates.`,
+Every term with $i \\neq j$ vanishes because $\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0$. Only the $j$-th term survives: $c_j \\|\\mathbf{v}_j\\|^2 = 0$. Since $\\mathbf{v}_j \\neq \\mathbf{0}$, $\\|\\mathbf{v}_j\\|^2 > 0$, so $c_j = 0$. This works for every $j$, so all coefficients are zero.`,
+    afterProof: `The key mechanism is that orthogonality isolates each coefficient. Dotting with $\\mathbf{v}_j$ kills every other term, leaving $c_j$ alone. This is why orthogonal bases make coordinates computable by individual dot products — the same isolation principle that proves independence also extracts coordinates.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1378,7 +1379,8 @@ The worked example uses unit vectors, which is why each coordinate came from a s
 
 @academic[rule_theorem_plain:The rows of an orthogonal matrix also form an orthonormal set — orthogonality of columns and rows go together.]@
 
-The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$. When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/transformations/geometric). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
+The [determinant](!/linear-algebra/determinants) of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^TQ) = \\det(Q)^2$.`,
+    afterProof: `When $\\det(Q) = +1$, the matrix represents a [rotation](!/linear-algebra/transformations/geometric). When $\\det(Q) = -1$, it represents a rotation composed with a reflection.
 
 @academic[pitfall,aside:true,width:35%:Stopping at orthogonal columns
 Taking $M^{-1} = M^T$ for $M = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$, whose columns are perpendicular but of length $\\sqrt{2}$, fails: $M^TM = 2I$, so $M^{-1} = \\tfrac{1}{2}M^T$, and $\\det M = -2$. Dividing each column by $\\sqrt{2}$ gives an orthogonal matrix.
@@ -1650,8 +1652,63 @@ $$M^{-1} = M^T = \\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$$`, `But $M^T
     ],
   };
 
+  // ProofSteps 2026-11-08: "Orthogonal sets are independent" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_k\\}$ orthogonal, all nonzero $\\implies$ linearly independent' },
+    steps: [
+      { math: '$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$', tag: 'suppose', why: 'Start from a combination equal to zero' },
+      { math: '$c_1(\\mathbf{v}_1 \\cdot \\mathbf{v}_j) + c_2(\\mathbf{v}_2 \\cdot \\mathbf{v}_j) + \\cdots + c_k(\\mathbf{v}_k \\cdot \\mathbf{v}_j) = 0$', tag: 'dot', why: 'Dot both sides with $\\mathbf{v}_j$' },
+      { math: '$c_j \\|\\mathbf{v}_j\\|^2 = 0$', tag: 'key step', key: true, why: 'Every term with $i \\neq j$ vanishes because $\\mathbf{v}_i \\cdot \\mathbf{v}_j = 0$' },
+      { math: '$c_j = 0$', tag: 'divide', why: 'Since $\\mathbf{v}_j \\neq \\mathbf{0}$, $\\|\\mathbf{v}_j\\|^2 > 0$' },
+    ],
+    conclusion: { text: 'All coefficients are zero, so the set is linearly independent', say: 'This works for every $j$.' },
+  };
+
+  // ProofSteps 2026-11-08: "Determinant of an orthogonal matrix" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\det(Q) = \\pm 1$' },
+    steps: [
+      { math: '$1 = \\det(I)$', tag: 'identity', why: 'The identity matrix has determinant $1$' },
+      { math: '$= \\det(Q^TQ)$', tag: 'orthogonal', why: '$Q^TQ = I$' },
+      { math: '$= \\det(Q)^2$', tag: 'key step', key: true, why: 'The determinant of a product is the product of the determinants, and $\\det(Q^T) = \\det(Q)$' },
+    ],
+    conclusion: { text: '$\\det(Q) = \\pm 1$' },
+  };
+
+  // ProofSteps 2026-11-08: "Orthogonal matrices preserve the dot product" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = \\mathbf{u} \\cdot \\mathbf{v}$' },
+    steps: [
+      { math: '$(Q\\mathbf{u}) \\cdot (Q\\mathbf{v}) = (Q\\mathbf{u})^T(Q\\mathbf{v})$', tag: 'rewrite', why: 'A dot product as a row times a column' },
+      { math: '$= \\mathbf{u}^TQ^TQ\\mathbf{v}$', tag: 'transpose', why: 'The transpose of a product reverses the order' },
+      { math: '$= \\mathbf{u}^T\\mathbf{v}$', tag: 'key step', key: true, why: '$Q^TQ = I$' },
+      { math: '$= \\mathbf{u} \\cdot \\mathbf{v}$', tag: 'rewrite', why: 'Back to dot product notation' },
+    ],
+  };
+
+  // SpecialCases 2026-11-09: "Full and partial orthonormal sets" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$c_i = \\mathbf{x} \\cdot \\mathbf{q}_i$', say: 'coordinates against an orthonormal set $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_k\\}$ in $\\mathbb{R}^n$' },
+    cases: [
+      { when: '$k = n$', tag: "Parseval's identity", rule: '$\\|\\mathbf{x}\\|^2 = \\sum_{i=1}^{n} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2$',
+        why: 'The squared length of $\\mathbf{x}$ equals the sum of the squares of its coordinates.',
+        more: 'This is the Pythagorean theorem applied to $\\mathbf{x} = c_1\\mathbf{q}_1 + \\cdots + c_n\\mathbf{q}_n$.' },
+      { when: '$k < n$', tag: "Bessel's inequality", tone: 'warn', rule: '$\\sum_{i=1}^{k} (\\mathbf{x} \\cdot \\mathbf{q}_i)^2 \\leq \\|\\mathbf{x}\\|^2$',
+        why: 'The set does not span, so the sum accounts for only part of the length.',
+        more: 'The deficit is the squared length of the component orthogonal to the span. Equality holds if and only if $\\mathbf{x}$ is already in the span.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1675,7 +1732,7 @@ return {
 
 // export default function OrthogonalSetsPage({seoData,sectionsContent , introContent}) {
 
-export default function OrthogonalSetsPage({ pitfallData,
+export default function OrthogonalSetsPage({ specialCasesData, proofStepsData3, proofStepsData2, proofStepsData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1799,6 +1856,18 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-orthogonal-set-independence-proof'}
+            id="orthogonal-set-independence-proof"
+            title="Orthogonal sets are independent"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+            related={false}
+            before={"The short proof above, one line per step."}
+            after={"Only two facts are used: the pairwise dot products are zero, and no vector in the set is $\\mathbf{0}$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
         ]
     },
     {
@@ -1836,6 +1905,29 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-orthogonal-sets-determinant-proof'}
+            id="orthogonal-sets-determinant-proof"
+            title="Determinant of an orthogonal matrix"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+            related={false}
+            before={"The one-line argument above, split at each equals sign."}
+            after={"Orthogonality fixes $\\det(Q)^2$ at $1$; the sign that is left is what separates rotations from reflections."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
+          <DiagramFrame
+            key={'proof-steps-orthogonal-sets-dot-product-proof'}
+            id="orthogonal-sets-dot-product-proof"
+            title="Orthogonal matrices preserve the dot product"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+            related={false}
+            before={"The chain above, one equality per line."}
+            after={"The third line is where orthogonality enters: $Q^TQ = I$ removes $Q$ from the product entirely."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
                   <div key={'unit-orthmatrix'} dangerouslySetInnerHTML={{ __html: demoUnits.orthmatrix }} />,
           `Because the inverse is free, orthogonal matrices are the ones numerical work prefers wherever a choice exists.`,
         ]
@@ -1860,6 +1952,17 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'special-cases-parseval-bessel-special-cases'}
+            id="parseval-bessel-special-cases"
+            title="Full and partial orthonormal sets"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+            related={false}
+            before={"Two rows, split by whether the orthonormal set spans $\\mathbb{R}^n$. Click a row for the length bookkeeping behind it."}
+            after={"Bessel's inequality is Parseval's identity with the perpendicular remainder left out, so the two agree exactly when that remainder is zero."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
           `@academic[punchline:In an orthonormal basis, squared length splits exactly among the coordinates, and whatever a partial set misses lies perpendicular to it.]@`,
         ]
     },

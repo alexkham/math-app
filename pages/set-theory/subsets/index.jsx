@@ -1056,6 +1056,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1465,9 +1466,8 @@ If $A = \\{a, b\\}$ and $B = \\{a, b, c\\}$, then $A \\subset B$ because $c \\in
 
 @academic[rule_corollary_plain:The empty set satisfies $\\emptyset \\subset A$ for every non-empty set $A$, since $\\emptyset \\subseteq A$ and $\\emptyset \\neq A$.]@
 
-However, $\\emptyset \\subset \\emptyset$ is false because $\\emptyset = \\emptyset$.
-
-@academic[punchline:A proper subset must leave out at least one element, so no set is a proper subset of itself.]@
+However, $\\emptyset \\subset \\emptyset$ is false because $\\emptyset = \\emptyset$.`,
+    afterCases: `@academic[punchline:A proper subset must leave out at least one element, so no set is a proper subset of itself.]@
     `,
     before: ``,
     after: ``,
@@ -1871,8 +1871,24 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-09: "Where a subset is not proper" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'Definition', text: '$A \\subset B \\iff (A \\subseteq B) \\land (A \\neq B)$' },
+    cases: [
+      { when: '$A = B$', tag: 'not proper', tone: 'warn', rule: '$\\{1, 2\\} \\subset \\{1, 2\\}$ is false', examples: 'while $\\{1, 2\\} \\subseteq \\{1, 2\\}$ is true',
+        why: 'The two sets are equal.',
+        more: 'For a proper subset, there must exist at least one element in $B$ that does not belong to $A$.' },
+      { when: '$\\emptyset$ and a non-empty $A$', tag: 'always proper', rule: '$\\emptyset \\subset A$',
+        why: 'Since $\\emptyset \\subseteq A$ and $\\emptyset \\neq A$.' },
+      { when: '$\\emptyset$ and $\\emptyset$', tag: 'not proper', tone: 'warn', rule: '$\\emptyset \\subset \\emptyset$ is false',
+        why: 'Because $\\emptyset = \\emptyset$.' },
+    ],
+  };
+
   return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     sectionsContent,
@@ -1895,7 +1911,7 @@ const schemas = {
    }
 
 
-export default function SubsetsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SubsetsPage({ specialCasesData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj4Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2001,6 +2017,18 @@ The claim is checked the way the candidates above were: take the set on the left
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'special-cases-proper-subset-edge-cases'}
+            id="proper-subset-edge-cases"
+            title="Where a subset is not proper"
+            source="/set-theory/subsets"
+            related={false}
+            before={"One row per special case of the proper-subset test. Click the first row for the full condition."}
+            after={"The empty set is a proper subset of every non-empty set, and fails only against itself, the one set it equals."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterCases,
         ]
     },
     {

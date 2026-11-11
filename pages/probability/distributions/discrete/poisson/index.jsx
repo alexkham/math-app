@@ -868,6 +868,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
@@ -1172,9 +1173,8 @@ $$E[X] = \\sum_{k=1}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!} = e
 Substituting $j = k - 1$:
 
 @academic[formula_callout:Expected Value (Mean)
-$$E[X] = e^{-\\lambda} \\lambda \\sum_{j=0}^{\\infty} \\frac{\\lambda^j}{j!} = e^{-\\lambda} \\lambda \\cdot e^{\\lambda} = \\lambda$$]@
-
-The result $E[X] = \\lambda$ has a particularly elegant interpretation: the parameter $\\lambda$ is both the rate of occurrence and the expected value. The Poisson distribution is parameterized directly by its mean.
+$$E[X] = e^{-\\lambda} \\lambda \\sum_{j=0}^{\\infty} \\frac{\\lambda^j}{j!} = e^{-\\lambda} \\lambda \\cdot e^{\\lambda} = \\lambda$$]@`,
+     afterProof: `The result $E[X] = \\lambda$ has a particularly elegant interpretation: the parameter $\\lambda$ is both the rate of occurrence and the expected value. The Poisson distribution is parameterized directly by its mean.
 
 ### Example
 
@@ -1238,9 +1238,8 @@ $$\\mathbb{E}[X^2] = \\lambda^2 + \\lambda$$]@
 Applying the shortcut formula:
 
 @academic[formula_callout:Variance and Standard Deviation
-$$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2 = \\lambda$$]@
-
-@academic[fact,aside:true,width:35%:Flying bombs passed the variance test
+$$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2 = \\lambda$$]@`,
+      afterProof: `@academic[fact,aside:true,width:35%:Flying bombs passed the variance test
 In 1946 R. D. Clarke split 144 square kilometres of south London into 576 squares and counted 537 V-1 flying bomb hits. The mean per square was $0.93$ and the variance $0.97$, so the clusters people saw were no more than pure chance produces.]@
 
 The result $\\mathrm{Var}(X) = \\lambda$ reveals a remarkable property: **the Poisson distribution's variance equals its mean**. This equality is a hallmark of the Poisson distribution. The single parameter $\\lambda$ completely determines both the center and the spread of the distribution.
@@ -1768,8 +1767,52 @@ $$P(X = 0) = e^{-4} \\approx 0.018$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the Poisson mean" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$E[X] = \\lambda$' },
+    steps: [
+      { action: 'Substitute the PMF', math: '$\\displaystyle E[X] = \\sum_{k=0}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$', why: 'The general definition with $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$ for $k = 0, 1, 2, \\ldots$' },
+      { action: 'Drop the $k = 0$ term', math: '$\\displaystyle E[X] = \\sum_{k=1}^{\\infty} k \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$', why: 'The $k = 0$ term vanishes, so the sum starts from $k = 1$.' },
+      { action: 'Take out $e^{-\\lambda}$', math: '$\\displaystyle = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{k \\cdot \\lambda^k}{k!}$' },
+      { action: 'Cancel $k$', math: '$\\displaystyle = e^{-\\lambda} \\sum_{k=1}^{\\infty} \\frac{\\lambda^k}{(k-1)!}$' },
+      { action: 'Substitute $j = k - 1$', math: '$\\displaystyle E[X] = e^{-\\lambda} \\lambda \\sum_{j=0}^{\\infty} \\frac{\\lambda^j}{j!}$' },
+      { action: 'Sum the series', math: '$\\displaystyle = e^{-\\lambda} \\lambda \\cdot e^{\\lambda} = \\lambda$', why: 'The sum is the Taylor series of $e^{\\lambda}$.' },
+    ],
+    conclusion: { text: '$E[X] = \\lambda$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the Poisson variance" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\mathrm{Var}(X) = \\lambda$' },
+    steps: [
+      { math: '$\\mathbb{E}[X^2] = \\sum_{k=0}^{\\infty} k^2 \\cdot \\frac{\\lambda^k e^{-\\lambda}}{k!}$', tag: 'PMF', why: 'Using the PMF $P(X = k) = \\frac{\\lambda^k e^{-\\lambda}}{k!}$' },
+      { math: '$= \\lambda^2 + \\lambda$', tag: 'series', why: 'Algebraic manipulation using properties of the exponential series' },
+      { math: '$\\mathrm{Var}(X) = (\\lambda^2 + \\lambda) - \\lambda^2$', tag: 'key step', key: true, why: 'The shortcut formula, with $\\mu = \\lambda$ from the expected value section' },
+      { math: '$= \\lambda$', tag: 'cancel', why: 'The $\\lambda^2$ terms cancel' },
+    ],
+    conclusion: { text: '$\\mathrm{Var}(X) = \\lambda$' },
+  };
+
+  // ProofSteps 2026-11-08: "Why the Poisson probabilities add up to 1" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\sum_{k=0}^{\\infty} P(X = k) = 1$' },
+    steps: [
+      { math: '$\\sum_{k=0}^{\\infty} \\frac{\\lambda^k e^{-\\lambda}}{k!}$', tag: 'PMF', why: 'Add the PMF over the whole support $k = 0, 1, 2, \\ldots$' },
+      { math: '$= e^{-\\lambda} \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!}$', tag: 'factor', why: '$e^{-\\lambda}$ does not depend on $k$' },
+      { math: '$= e^{-\\lambda} \\cdot e^{\\lambda}$', tag: 'series', key: true, why: 'The Taylor series $e^{\\lambda} = \\sum_{k=0}^{\\infty} \\frac{\\lambda^k}{k!}$' },
+      { math: '$= 1$', why: 'The two exponentials cancel' },
+    ],
+    conclusion: { text: 'The probabilities sum to 1' },
+  };
+
    return {
       props:{
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1792,7 +1835,7 @@ $$P(X = 0) = e^{-4} \\approx 0.018$$`],
     }
    }
 
-export default function PoissonDistributionPage({ formulaSummaryData, pitfallData,
+export default function PoissonDistributionPage({ proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1931,6 +1974,17 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
         <div key={'pmf-poisson'} style={{background: 'linear-gradient(to right, #eff6ff 0%, #dbeafe 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #60a5fa',transform:'scale(0.9)'}}>
         {processContent(sectionsContent.obj4.content)}
         </div>,
+        <DiagramFrame
+          key={'proof-steps-poisson-pmf-sums-to-one-proof'}
+          id="poisson-pmf-sums-to-one-proof"
+          title="Why the Poisson probabilities add up to 1"
+          source="/probability/distributions/discrete/poisson"
+          related={false}
+          before={"The sum in the box above, one equals sign at a time."}
+          after={"The Taylor series of $e^{\\lambda}$ is exactly the sum that is left, so it cancels the factor $e^{-\\lambda}$ in front."}
+        >
+          <ProofSteps data={proofStepsData3} variant="chain" />
+        </DiagramFrame>,
 
         <div key={'poisson-pmf-visualization'} style={{transform:'scale(0.8)'}}>
      
@@ -1962,6 +2016,18 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-poisson-mean-steps'}
+            id="poisson-mean-steps"
+            title="Deriving the Poisson mean"
+            source="/probability/distributions/discrete/poisson"
+            related={false}
+            before={"The derivation of the mean one step at a time. Use Next and Back to move through it."}
+            after={"Cancelling $k$ against $k!$ is what makes it work: the shifted sum is the series for $e^{\\lambda}$, which cancels $e^{-\\lambda}$ and leaves $\\lambda$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {
@@ -1970,6 +2036,18 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-poisson-variance-steps'}
+            id="poisson-variance-steps"
+            title="Deriving the Poisson variance"
+            source="/probability/distributions/discrete/poisson"
+            related={false}
+            before={"The variance computation above as a chain, from $\\mathbb{E}[X^2]$ to the shortcut formula."}
+            after={"The gold step subtracts exactly the $\\lambda^2$ that $\\mathbb{E}[X^2]$ contains, so only $\\lambda$ is left."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {

@@ -762,6 +762,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -1230,9 +1231,8 @@ Multiplying any number by zero gives zero.]@
 
 The property holds in both directions: $0 \\cdot a = 0$ as well.
  
-This is sometimes treated as a separate axiom, but it is actually a consequence of the [distributive property](!/arithmetic/properties#5). Starting from $a \\cdot 0 = a \\cdot (0 + 0) = a \\cdot 0 + a \\cdot 0$, subtracting $a \\cdot 0$ from both sides leaves $0 = a \\cdot 0$. The result follows from the structure of arithmetic itself, not from a separate definition.
- 
-The zero property is what prevents zero from having a multiplicative inverse, as discussed in [inverse elements](!/arithmetic/properties#7). It is also why the product of any list of numbers is zero whenever even one of the factors is zero — a fact that underlies factoring techniques in algebra.`,
+This is sometimes treated as a separate axiom, but it is actually a consequence of the [distributive property](!/arithmetic/properties#5). Starting from $a \\cdot 0 = a \\cdot (0 + 0) = a \\cdot 0 + a \\cdot 0$, subtracting $a \\cdot 0$ from both sides leaves $0 = a \\cdot 0$. The result follows from the structure of arithmetic itself, not from a separate definition.`,
+    afterProof: `The zero property is what prevents zero from having a multiplicative inverse, as discussed in [inverse elements](!/arithmetic/properties#7). It is also why the product of any list of numbers is zero whenever even one of the factors is zero — a fact that underlies factoring techniques in algebra.`,
     before: ``,
     after: ``,
     link: '',
@@ -1622,8 +1622,34 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the zero property from distribution" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$a \\cdot 0 = 0$' },
+    steps: [
+      { math: '$a \\cdot 0 = a \\cdot (0 + 0)$', tag: 'rewrite', why: 'Write $0$ as $0 + 0$' },
+      { math: '$= a \\cdot 0 + a \\cdot 0$', tag: 'key step', key: true, why: 'The distributive property' },
+      { math: '$0 = a \\cdot 0$', tag: 'subtract', why: 'Subtracting $a \\cdot 0$ from both sides' },
+    ],
+    conclusion: { text: '$a \\cdot 0 = 0$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving a sign rule" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$(-a)(b) = -(ab)$' },
+    steps: [
+      { math: '$(-a)(b) + ab = (-a + a)(b)$', tag: 'key step', key: true, why: 'The distributive property' },
+      { math: '$= 0 \\cdot b$', tag: 'inverse', why: '$-a$ is the additive inverse of $a$' },
+      { math: '$= 0$', tag: 'zero', why: 'The zero property of multiplication' },
+    ],
+    conclusion: { text: '$(-a)(b) = -(ab)$' },
+  };
+
   return {
   props:{
+    proofStepsData2,
+    proofStepsData,
     pitfallData,
     operationPropertyMatrix,
     arithPropOutline,
@@ -1648,7 +1674,7 @@ const schemas = {
 }
    }
 
-export default function ArithmeticProperties({ pitfallData,operationPropertyMatrix, arithPropOutline, seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ArithmeticProperties({ proofStepsData2, proofStepsData, pitfallData,operationPropertyMatrix, arithPropOutline, seoData, sectionsContent, introContent, obj5Table, obj9Table, obj12Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1797,6 +1823,18 @@ export default function ArithmeticProperties({ pitfallData,operationPropertyMatr
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'proof-steps-zero-property-of-multiplication-proof'}
+            id="zero-property-of-multiplication-proof"
+            title="Deriving the zero property from distribution"
+            source="/arithmetic/properties"
+            related={false}
+            before={"The derivation above, one equality per line, each with its reason."}
+            after={"The distributive property does the work: it splits $a \\cdot (0 + 0)$ into two copies of $a \\cdot 0$, and subtracting one copy leaves $0$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterProof,
         ]
     },
     {
@@ -1805,6 +1843,17 @@ export default function ArithmeticProperties({ pitfallData,operationPropertyMatr
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-sign-rule-negative-times-positive-proof'}
+            id="sign-rule-negative-times-positive-proof"
+            title="Deriving a sign rule"
+            source="/arithmetic/properties"
+            related={false}
+            before={"The derivation of $(-a)(b) = -(ab)$ from the end of the section, one equality per line."}
+            after={"The key line is the first: distribution gathers $-a$ and $a$ into one factor, and their sum is $0$."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
           <div key={'obj9-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj9Table }} />,
           `@academic[punchline:The sign rules are not memorized conventions: distributivity and additive inverses force every one of them.]@`,

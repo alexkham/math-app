@@ -1767,6 +1767,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spectralDiagrams from '@/app/components/linear-algebra copy/matrix/spectralDiagrams'
@@ -2337,9 +2338,8 @@ The spectral decomposition exists only for [symmetric](!/linear-algebra/matrix/t
 
 The singular values are the eigenvalues, and $U = V = Q$: $A = QDQ^T = Q\\Sigma Q^T$.
 
-For a general symmetric matrix with negative eigenvalues, the relationship requires a sign adjustment. [The singular values are the absolute values](https://linearalgebranotes.com/eigen/singular-values#rule-symmetric) $|\\lambda_i|$, and the signs are absorbed into $U$ or $V$. If $\\lambda_i < 0$, the corresponding column of $U$ is negated relative to the corresponding column of $V$.
-
-The [SVD](!/linear-algebra/decompositions/svd) generalizes the spectral decomposition to non-symmetric and non-square matrices. Every property that the spectral decomposition provides for symmetric matrices — rank, pseudoinverse, best low-rank approximation, condition number — the SVD provides for arbitrary matrices. The spectral decomposition is the special case where symmetry allows $U$ and $V$ to coincide.`,
+For a general symmetric matrix with negative eigenvalues, the relationship requires a sign adjustment. [The singular values are the absolute values](https://linearalgebranotes.com/eigen/singular-values#rule-symmetric) $|\\lambda_i|$, and the signs are absorbed into $U$ or $V$. If $\\lambda_i < 0$, the corresponding column of $U$ is negated relative to the corresponding column of $V$.`,
+    afterCases: `The [SVD](!/linear-algebra/decompositions/svd) generalizes the spectral decomposition to non-symmetric and non-square matrices. Every property that the spectral decomposition provides for symmetric matrices — rank, pseudoinverse, best low-rank approximation, condition number — the SVD provides for arbitrary matrices. The spectral decomposition is the special case where symmetry allows $U$ and $V$ to coincide.`,
     before: ``,
     after: ``,
     link: ``,
@@ -2587,8 +2587,23 @@ $$= \\begin{pmatrix} 3/8 & -1/8 \\\\ -1/8 & 3/8 \\end{pmatrix}$$`],
     ],
   };
 
+  // SpecialCases 2026-11-09: "When the two decompositions match" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$A = QDQ^T$', say: 'for a symmetric matrix $A$' },
+    cases: [
+      { when: 'all $\\lambda_i \\geq 0$', tag: 'semi-definite', rule: '$A = QDQ^T = Q\\Sigma Q^T$',
+        why: 'The spectral decomposition and the SVD coincide.',
+        more: 'The singular values are the eigenvalues, and $U = V = Q$.' },
+      { when: 'some $\\lambda_i < 0$', tag: 'sign adjustment', tone: 'warn', rule: '$\\sigma_i = |\\lambda_i|$',
+        why: 'The signs are absorbed into $U$ or $V$.',
+        more: 'If $\\lambda_i < 0$, the corresponding column of $U$ is negated relative to the corresponding column of $V$.' },
+    ],
+  };
+
   return {
   props:{
+    specialCasesData,
     pitfallData,
       spectralChain,
     spectralNest,
@@ -2616,7 +2631,7 @@ $$= \\begin{pmatrix} 3/8 & -1/8 \\\\ -1/8 & 3/8 \\end{pmatrix}$$`],
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function SpectralDecompositionPage({ pitfallData,spectralChain, spectralNest, 
+export default function SpectralDecompositionPage({ specialCasesData, pitfallData,spectralChain, spectralNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -2822,6 +2837,18 @@ The classification is immediate once the decomposition is in hand. Substituting 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'special-cases-spectral-svd-special-cases'}
+            id="spectral-svd-special-cases"
+            title="When the two decompositions match"
+            source="/linear-algebra/decompositions/spectral"
+            related={false}
+            before={"Two rows, split by the signs of the eigenvalues of a symmetric matrix. Click a row for how $U$ and $V$ relate."}
+            after={"In both rows the singular values are the sizes $|\\lambda_i|$ of the eigenvalues; only their signs decide whether $U$ and $V$ can be the same matrix."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterCases,
         ]
     },
     // NEW capstone section: obj10

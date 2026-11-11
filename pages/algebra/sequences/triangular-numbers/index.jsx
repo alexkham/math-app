@@ -17,6 +17,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -269,9 +270,8 @@ $$S = 1 + 2 + 3 + \\cdots + n$$]@
 @academic[formula_callout:Derivation of the Closed Form
 $$S = n + (n-1) + (n-2) + \\cdots + 1$$]@
 
-Adding term by term: each pair sums to $n + 1$, and there are $n$ pairs, giving $2S = n(n+1)$ and $S = \\frac{n(n+1)}{2}$.
-
-An alternative perspective: $T_n = \\binom{n+1}{2}$, the number of ways to choose $2$ items from a set of $n+1$. The binomial coefficient $\\binom{n+1}{2} = \\frac{(n+1)!}{2!(n-1)!} = \\frac{(n+1)n}{2}$ yields the same formula. This connection places triangular numbers inside **combinatorics** — they count unordered pairs. For example, $T_4 = 10$ equals the number of handshakes among $5$ people.
+Adding term by term: each pair sums to $n + 1$, and there are $n$ pairs, giving $2S = n(n+1)$ and $S = \\frac{n(n+1)}{2}$.`,
+    afterProof: `An alternative perspective: $T_n = \\binom{n+1}{2}$, the number of ways to choose $2$ items from a set of $n+1$. The binomial coefficient $\\binom{n+1}{2} = \\frac{(n+1)!}{2!(n-1)!} = \\frac{(n+1)n}{2}$ yields the same formula. This connection places triangular numbers inside **combinatorics** — they count unordered pairs. For example, $T_4 = 10$ equals the number of handshakes among $5$ people.
 
 @academic[formula_callout:Triangular Number as Binomial Coefficient
 $$T_n = \\binom{n+1}{2}$$
@@ -542,8 +542,27 @@ const schemas = {
     ],
   };
 
+  // ProofSteps pilot 2026-11-08: the align layout of the section "The pairing method", from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    align: {
+      rows: [
+        { label: '$S$ =', cells: ['$1$', '$2$', '$\\cdots$', '$n$'] },
+        { label: '$S$ =', cells: ['$n$', '$n-1$', '$\\cdots$', '$1$'] },
+      ],
+      sum: { label: '$2S$ =', cells: ['$n+1$', '$n+1$', '$\\cdots$', '$n+1$'] },
+      result: [
+        { text: 'Each pair sums to $n + 1$, and there are $n$ pairs:' },
+        { math: '$2S = n(n+1)$' },
+        { text: '→' },
+        { math: '$S = \\dfrac{n(n+1)}{2}$' },
+      ],
+    },
+  };
+
    return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -563,7 +582,7 @@ const schemas = {
 }
    }
 
-export default function TriangularNumbersPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function TriangularNumbersPage({ proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
@@ -690,6 +709,18 @@ $$1, 3, 6, 10, 15, 21, 28, 36, 45, 55, \\ldots$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps'}
+            id="triangular-number-pairing-proof"
+            title="The pairing method"
+            source="/algebra/sequences/triangular-numbers"
+            related={false}
+            before={"The two sums lined up term by term. Each column adds to the same value, which is the whole idea of the pairing method."}
+            after={"The method works for any sum whose terms rise by a fixed step, which is why the same pairing gives the sum of an arithmetic sequence."}
+          >
+            <ProofSteps data={proofStepsData} variant="align" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
                   <div key={'unit-binomial'} dangerouslySetInnerHTML={{ __html: demoUnits.binomial }} />,
           `Choosing 2 of n + 1 objects and stacking n rows of dots count the same thing.`,
         ]

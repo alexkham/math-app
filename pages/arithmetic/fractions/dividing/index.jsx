@@ -696,6 +696,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1298,8 +1299,22 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-09: "Two special reciprocals" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'Rule', text: 'Swap numerator and denominator: a number multiplied by its reciprocal always equals 1.' },
+    cases: [
+      { when: 'Whole number', tag: 'denominator 1', rule: 'the reciprocal of $5$ is $\\frac{1}{5}$', examples: '$5 \\times \\frac{1}{5} = 1$',
+        why: 'Since 5 equals $\\frac{5}{1}$, swapping gives $\\frac{1}{5}$.' },
+      { when: '$0$', tag: 'no reciprocal', tone: 'stop', rule: 'Zero has no reciprocal.', examples: 'flipping $\\frac{0}{1}$ produces $\\frac{1}{0}$',
+        why: 'The flipped fraction $\\frac{1}{0}$ is undefined.',
+        more: 'This reflects the impossibility of dividing by zero.' },
+    ],
+  };
+
 return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     sectionsContent,
@@ -1321,7 +1336,7 @@ return {
    }
 
 
-export default function DividingPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DividingPage({ specialCasesData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1406,6 +1421,17 @@ Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
+          <DiagramFrame
+            key={'special-cases-reciprocal-special-cases'}
+            id="reciprocal-special-cases"
+            title="Two special reciprocals"
+            source="/arithmetic/fractions/dividing"
+            related={false}
+            before={"The reciprocal rule for the two special numbers named above, one per row. Click the zero row for the reason behind it."}
+            after={"Both rows start by writing the number as a fraction: $\\frac{5}{1}$ flips cleanly, while $\\frac{0}{1}$ flips to a zero denominator."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
         ]
     },
     {

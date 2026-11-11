@@ -951,6 +951,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1613,9 +1614,8 @@ $$P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 
-That's the law of total probability.
-
-**The deep intuition:**
+That's the law of total probability.`,
+      afterProof: `**The deep intuition:**
 
 @academic[pitfall,aside:true,width:35%:Using overlapping cases
 Splitting a die roll into the cases 1 to 4 and 3 to 6 puts the 4 in both pieces of "even": $P(\\text{even}) = \\frac{2}{6} + \\frac{2}{6} = \\frac{2}{3}$. With the disjoint cases 1 to 3 and 4 to 6, $P(\\text{even}) = \\frac{1}{6} + \\frac{2}{6} = \\frac{1}{2}$.
@@ -1763,9 +1763,8 @@ $$P(Bᵢ | A) = P(A | Bᵢ)·P(Bᵢ) / [∑ P(A | Bⱼ)·P(Bⱼ)]$$
 /probability/formulas#bayes_theorem]@
 
 @academic[formulas_link:Browse all probability formulas
-/probability/formulas]@
-
-**Why this matters:**
+/probability/formulas]@`,
+      afterProof: `**Why this matters:**
 
 The numerator uses the chain rule for one specific case.
 The denominator uses total probability summed across all cases.
@@ -2063,8 +2062,34 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving the law of total probability" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'For disjoint cases $B₁, B₂, ..., Bₙ$ that cover the sample space: $P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$' },
+    steps: [
+      { action: 'Split $A$ across the cases', math: '$A ∩ B₁, A ∩ B₂, ..., A ∩ Bₙ$', why: 'The cases partition the sample space: they are disjoint and exhaustive, so every outcome of $A$ lies in exactly one piece.' },
+      { action: 'Add the disjoint pieces', math: '$P(A) = P(A ∩ B₁) + P(A ∩ B₂) + ... + P(A ∩ Bₙ)$', why: "The cases don't overlap, so the pieces of $A$ don't overlap either, and probabilities of disjoint events add." },
+      { action: 'Use conditional probability', math: '$P(A ∩ Bᵢ) = P(A | Bᵢ)·P(Bᵢ)$', why: 'The definition of conditional probability, for each case.' },
+      { action: 'Substitute into the sum', math: '$P(A) = P(A | B₁)·P(B₁) + P(A | B₂)·P(B₂) + ... + P(A | Bₙ)·P(Bₙ)$' },
+    ],
+    conclusion: { text: '$P(A) = ∑ P(A | Bᵢ)·P(Bᵢ)$' },
+  };
+
+  // ProofSteps 2026-11-08: "Expanding the denominator of Bayes' theorem" (stepper), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: "Bayes' theorem with its denominator written out by total probability" },
+    steps: [
+      { action: "Start from Bayes' theorem", math: '$\\displaystyle P(Bᵢ | A) = \\frac{P(A | Bᵢ)·P(Bᵢ)}{P(A)}$', why: 'It reverses conditioning: $P(A | Bᵢ)$ is known, $P(Bᵢ | A)$ is wanted.' },
+      { action: 'Expand the denominator', math: '$P(A) = ∑ P(A | Bⱼ)·P(Bⱼ)$', why: 'The law of total probability, with the sum running over all cases.' },
+      { action: 'Substitute', math: '$\\displaystyle P(Bᵢ | A) = \\frac{P(A | Bᵢ)·P(Bᵢ)}{∑ P(A | Bⱼ)·P(Bⱼ)}$' },
+    ],
+  };
+
   return {
     props: {
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2089,7 +2114,7 @@ This structure also sets the stage for Bayes' theorem. Bayes reverses conditiona
   }
 }
 
-export default function TotalProbabilityPage({ formulaSummaryData, pitfallData,
+export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2258,6 +2283,18 @@ export default function TotalProbabilityPage({ formulaSummaryData, pitfallData,
         link:'',
         content:[
           sectionsContent.why.content,
+          <DiagramFrame
+            key={'proof-steps-total-probability-law-proof'}
+            id="total-probability-law-proof"
+            title="Proving the law of total probability"
+            source="/probability/total-probability"
+            related={false}
+            before={"The argument above one step at a time, from splitting $A$ across the cases to the law. Use Next and Back to move through it."}
+            after={"The decisive step is adding the disjoint pieces; conditional probability only rewrites each piece as a product."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.why.afterProof,
                   <div key={'unit-u_why_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_why_2 }} />,
           `Conditional probability is the ingredient inside each product.`,
         ]
@@ -2284,6 +2321,18 @@ export default function TotalProbabilityPage({ formulaSummaryData, pitfallData,
         link:'',
         content:[
           sectionsContent.bayes.content,
+          <DiagramFrame
+            key={'proof-steps-total-probability-bayes-denominator-steps'}
+            id="total-probability-bayes-denominator-steps"
+            title="Expanding the denominator of Bayes' theorem"
+            source="/probability/total-probability"
+            related={false}
+            before={"How the denominator is filled in, one step at a time. Use Next and Back to move through it."}
+            after={"Only the denominator changes: total probability replaces $P(A)$ by a sum of products the problem supplies."}
+          >
+            <ProofSteps data={proofStepsData2} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.bayes.afterProof,
           <div key={'bayes-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: bayesTable }} />,
         ]

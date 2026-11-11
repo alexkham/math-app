@@ -20,6 +20,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -467,9 +468,8 @@ The identity holds because the [GCD](!/arithmetic/divisibility/gcd) and LCM part
 
 Consider a prime $p$ appearing with exponent $\\alpha$ in $a$ and $\\beta$ in $b$. Its exponent in $a \\cdot b$ is $\\alpha + \\beta$. Its exponent in the GCD is $\\min(\\alpha, \\beta)$, and in the LCM is $\\max(\\alpha, \\beta)$. Since $\\min(\\alpha, \\beta) + \\max(\\alpha, \\beta) = \\alpha + \\beta$, the exponents in $\\gcd \\cdot \\text{lcm}$ match those in $a \\cdot b$.
 
-This holds for every prime simultaneously, so the products are equal.
-
-The relationship is useful in both directions. Knowing the GCD gives the LCM, and knowing the LCM gives the GCD — each determines the other when $a$ and $b$ are fixed.
+This holds for every prime simultaneously, so the products are equal.`,
+  afterProof: `The relationship is useful in both directions. Knowing the GCD gives the LCM, and knowing the LCM gives the GCD — each determines the other when $a$ and $b$ are fixed.
 
 @academic[punchline:For each prime the GCD keeps the smaller exponent and the LCM the larger, so together they rebuild $a \\cdot b$ exactly.]@`,
   before: ``,
@@ -888,8 +888,22 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving the GCD–LCM relationship" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$' },
+    steps: [
+      { math: 'in $a \\cdot b$: $\\alpha + \\beta$', tag: 'product', why: 'A prime $p$ appears with exponent $\\alpha$ in $a$ and $\\beta$ in $b$' },
+      { math: 'in the GCD: $\\min(\\alpha, \\beta)$', tag: 'GCD', why: 'The GCD takes the smaller exponent' },
+      { math: 'in the LCM: $\\max(\\alpha, \\beta)$', tag: 'LCM', why: 'The LCM takes the larger exponent' },
+      { math: '$\\min(\\alpha, \\beta) + \\max(\\alpha, \\beta) = \\alpha + \\beta$', tag: 'key step', key: true, why: 'So the exponents in $\\gcd \\cdot \\text{lcm}$ match those in $a \\cdot b$' },
+    ],
+    conclusion: { text: '$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$', say: 'This holds for every prime simultaneously, so the products are equal.' },
+  };
+
 return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     lcmMethodTree,
@@ -918,7 +932,7 @@ pfLcmObj4,
    }
 
 
-export default function LCMPage({ formulaSummaryData, pitfallData,lcmMethodTree, seoData, sectionsContent,
+export default function LCMPage({ proofStepsData, formulaSummaryData, pitfallData,lcmMethodTree, seoData, sectionsContent,
    introContent, obj2Table, obj8Table, summaryTable,
    faqQuestions, schemas,
   obj1SvgCommon,
@@ -1145,6 +1159,18 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-gcd-lcm-relationship-proof'}
+            id="gcd-lcm-relationship-proof"
+            title="Proving the GCD–LCM relationship"
+            source="/arithmetic/divisibility/lcm"
+            related={false}
+            before={"The exponent argument above for a single prime $p$, as a chain of four facts."}
+            after={"The proof works one prime at a time, and the gold line is all it needs: the smaller and the larger of two exponents add up to their sum."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {

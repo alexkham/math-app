@@ -13,6 +13,7 @@ import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualize
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -371,9 +372,8 @@ The degree of a polynomial is the highest degree among all its terms. In $4x^3 -
 
 A nonzero constant like $5$ is a polynomial of degree $0$. It has one term, $5x^0$, with exponent zero. Constants are the simplest polynomials — they assign the same value regardless of $x$.
 
-The zero polynomial presents a special case. The expression $0$ has no nonzero terms, so no "highest degree" exists. Conventions vary: some texts leave the degree undefined, others assign $-\\infty$. This technicality rarely affects practical work, but it explains why some theorems explicitly exclude the zero polynomial.
-
-Degree predicts behavior. It limits the number of [roots](!/algebra/polynomials/roots) a polynomial can have, bounds the number of turning points in its [graph](!/algebra/polynomials/graphing), and determines how the polynomial grows as $x$ becomes large. A degree $5$ polynomial behaves fundamentally differently from a degree $2$ polynomial, regardless of their specific coefficients.`,
+The zero polynomial presents a special case. The expression $0$ has no nonzero terms, so no "highest degree" exists. Conventions vary: some texts leave the degree undefined, others assign $-\\infty$. This technicality rarely affects practical work, but it explains why some theorems explicitly exclude the zero polynomial.`,
+    afterCases: `Degree predicts behavior. It limits the number of [roots](!/algebra/polynomials/roots) a polynomial can have, bounds the number of turning points in its [graph](!/algebra/polynomials/graphing), and determines how the polynomial grows as $x$ becomes large. A degree $5$ polynomial behaves fundamentally differently from a degree $2$ polynomial, regardless of their specific coefficients.`,
     before: ``,
     after: ``,
     link: '',
@@ -821,8 +821,23 @@ $$= -27 + 6 + 4 = -17$$`, `The remainder is $-17$.`],
     ],
   };
 
+  // SpecialCases 2026-11-09: "Degree of a constant" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: 'The degree is the highest degree among all the terms: $4x^3 - 2x + 7$ has degree $3$.' },
+    cases: [
+      { when: 'nonzero constant', tag: 'degree 0', rule: 'degree $0$', examples: '$5 = 5x^0$, $7 = 7x^0$',
+        why: 'It has one term, $5x^0$, with exponent zero.',
+        more: 'Constants are the simplest polynomials: they assign the same value regardless of $x$.' },
+      { when: 'zero polynomial', tag: 'no degree', tone: 'stop', rule: 'undefined, or $-\\infty$', examples: 'the expression $0$',
+        why: 'It has no nonzero terms, so no highest degree exists.',
+        more: 'Conventions vary: some texts leave the degree undefined, others assign $-\\infty$. This is why some theorems explicitly exclude the zero polynomial.' },
+    ],
+  };
+
   return {
   props:{
+    specialCasesData,
     pitfallData,
     faqQuestions,
     demoUnits,
@@ -848,7 +863,7 @@ $$= -27 + 6 + 4 = -17$$`, `The remainder is $-17$.`],
 
 
 
-export default function PolynomialsPage({ pitfallData,faqQuestions, seoData,sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits, factoringBeforeAfter, conceptIntroFigures}) {
+export default function PolynomialsPage({ specialCasesData, pitfallData,faqQuestions, seoData,sectionsContent, introContent, obj1Table, obj2Table, obj11Table, summaryTable, schemas, demoUnits, factoringBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -961,6 +976,18 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'special-cases-polynomial-degree-edge-cases'}
+            id="polynomial-degree-edge-cases"
+            title="Degree of a constant"
+            source="/algebra/polynomials"
+            related={false}
+            before={"One row for each kind of constant polynomial. Click a row for the reason behind it."}
+            after={"The rule fails only for $0$, the one polynomial with no nonzero term to take a degree from."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterCases,
         ]
     },
     {

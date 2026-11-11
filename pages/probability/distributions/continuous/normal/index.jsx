@@ -1094,6 +1094,8 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1453,9 +1455,8 @@ $$E[X] = \\mu \\int_{-\\infty}^{\\infty} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2
 
 The first integral equals 1 (total probability of standard normal). The second integral equals 0 by symmetry (integrating an odd function over a symmetric interval).
 
-Therefore: $E[X] = \\mu \\cdot 1 + \\sigma \\cdot 0 = \\mu$
-
-The result $E[X] = \\mu$ reveals a fundamental property of the normal distribution: the parameter $\\mu$ directly represents the mean. The distribution is perfectly symmetric around $\\mu$, making it simultaneously the center of mass, the balance point, and the most likely region of values.
+Therefore: $E[X] = \\mu \\cdot 1 + \\sigma \\cdot 0 = \\mu$`,
+      afterProof: `The result $E[X] = \\mu$ reveals a fundamental property of the normal distribution: the parameter $\\mu$ directly represents the mean. The distribution is perfectly symmetric around $\\mu$, making it simultaneously the center of mass, the balance point, and the most likely region of values.
 
 ### Example
 
@@ -1519,9 +1520,8 @@ $$\\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (\\sigma z)^2 \\cdot \\frac{1}{\
 
 The integral equals 1 (this is the variance of the standard normal distribution).
 
-Therefore: $\\mathrm{Var}(X) = \\sigma^2 \\cdot 1 = \\sigma^2$
-
-The result $\\mathrm{Var}(X) = \\sigma^2$ reveals that the parameter $\\sigma$ directly controls the spread of the distribution. Just as $\\mu$ determines the center, $\\sigma^2$ determines how dispersed values are around that center. A larger $\\sigma$ produces a wider, flatter bell curve; a smaller $\\sigma$ produces a narrow, peaked distribution.
+Therefore: $\\mathrm{Var}(X) = \\sigma^2 \\cdot 1 = \\sigma^2$`,
+      afterProof: `The result $\\mathrm{Var}(X) = \\sigma^2$ reveals that the parameter $\\sigma$ directly controls the spread of the distribution. Just as $\\mu$ determines the center, $\\sigma^2$ determines how dispersed values are around that center. A larger $\\sigma$ produces a wider, flatter bell curve; a smaller $\\sigma$ produces a narrow, peaked distribution.
 
 ### Standard Deviation
 
@@ -1815,9 +1815,8 @@ All probability concentrates at a single value, and the distribution becomes det
 
 ### As σ Increases
 
-As $\\sigma \\to \\infty$, the distribution spreads out indefinitely. The density becomes flatter and approaches zero everywhere, though it never becomes truly uniform over the real line (total probability remains 1).
-
-### Limiting Behavior
+As $\\sigma \\to \\infty$, the distribution spreads out indefinitely. The density becomes flatter and approaches zero everywhere, though it never becomes truly uniform over the real line (total probability remains 1).`,
+      afterCases: `### Limiting Behavior
 
 **Central Limit Theorem Connection:**
 The normal distribution emerges as the limit of many other distributions. For example:
@@ -2318,8 +2317,54 @@ $$= 12.96$$`, `So $\\sigma_Y = 3.6$ and $Y \\sim N(68, 3.6^2)$.`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the normal mean" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$E[X] = \\mu$' },
+    steps: [
+      { action: 'Write the expected value', math: '$\\displaystyle E[X] = \\int_{-\\infty}^{\\infty} x \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$', why: 'Each value $x$ weighted by the normal PDF.' },
+      { action: 'Substitute $z = \\frac{x-\\mu}{\\sigma}$', math: '$\\displaystyle E[X] = \\int_{-\\infty}^{\\infty} (\\mu + \\sigma z) \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$', why: 'Then $x = \\mu + \\sigma z$ and $dx = \\sigma \\, dz$.' },
+      { action: 'Split the integral', math: '$\\displaystyle E[X] = \\mu \\int_{-\\infty}^{\\infty} \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz + \\sigma \\int_{-\\infty}^{\\infty} z \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$' },
+      { action: 'Evaluate both integrals', math: '$E[X] = \\mu \\cdot 1 + \\sigma \\cdot 0 = \\mu$', why: 'The first integral equals 1, the total probability of the standard normal. The second equals 0 by symmetry: an odd function integrated over a symmetric interval.' },
+    ],
+    conclusion: { text: '$E[X] = \\mu$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the normal variance" (stepper), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\mathrm{Var}(X) = \\sigma^2$' },
+    steps: [
+      { action: 'Write the variance', math: '$\\displaystyle \\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (x - \\mu)^2 \\cdot \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}} \\, dx$', why: 'With $\\mu = E[X]$ from the expected value section.' },
+      { action: 'Substitute $z = \\frac{x-\\mu}{\\sigma}$', math: '$\\displaystyle \\mathrm{Var}(X) = \\int_{-\\infty}^{\\infty} (\\sigma z)^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$', why: 'Then $(x-\\mu) = \\sigma z$ and $dx = \\sigma \\, dz$.' },
+      { action: 'Take out $\\sigma^2$', math: '$\\displaystyle = \\sigma^2 \\int_{-\\infty}^{\\infty} z^2 \\cdot \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}} \\, dz$' },
+      { action: 'Evaluate the integral', math: '$\\mathrm{Var}(X) = \\sigma^2 \\cdot 1 = \\sigma^2$', why: 'The integral equals 1: it is the variance of the standard normal distribution.' },
+    ],
+    conclusion: { text: '$\\mathrm{Var}(X) = \\sigma^2$' },
+  };
+
+  // SpecialCases 2026-11-09: "Special values of the parameters" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$' },
+    cases: [
+      { when: '$\\mu = 0,\\ \\sigma = 1$', tag: 'standard normal', rule: '$f(z) = \\frac{1}{\\sqrt{2\\pi}} e^{-\\frac{z^2}{2}}$', examples: '$Z \\sim N(0, 1)$',
+        why: 'Any normal random variable can be standardized to this case.',
+        more: 'The standardization is $Z = \\frac{X - \\mu}{\\sigma} \\sim N(0, 1)$. This transformation is the foundation for z-scores, hypothesis testing, and normal probability tables.' },
+      { when: '$\\sigma \\to 0$', tag: 'degenerate', tone: 'warn', rule: '$\\lim_{\\sigma \\to 0} N(\\mu, \\sigma^2) = \\delta_{\\mu}$', examples: 'a point mass at $\\mu$',
+        why: 'All probability concentrates at a single value.',
+        more: 'The distribution becomes deterministic. This represents the limiting case of no variability.' },
+      { when: '$\\sigma \\to \\infty$', tag: 'spreads out', rule: 'The density becomes flatter and approaches zero everywhere',
+        why: 'The distribution spreads out indefinitely.',
+        more: 'It never becomes truly uniform over the real line: total probability remains 1.' },
+    ],
+  };
+
    return {
       props:{
+    specialCasesData,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2341,7 +2386,7 @@ $$= 12.96$$`, `So $\\sigma_Y = 3.6$ and $Y \\sim N(68, 3.6^2)$.`],
     }
    }
 
-export default function NormalDistributionPage({ formulaSummaryData, pitfallData,
+export default function NormalDistributionPage({ specialCasesData, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2500,6 +2545,18 @@ export default function NormalDistributionPage({ formulaSummaryData, pitfallData
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-normal-mean-steps'}
+            id="normal-mean-steps"
+            title="Deriving the normal mean"
+            source="/probability/distributions/continuous/normal"
+            related={false}
+            before={"The substitution argument one step at a time. Use Next and Back to move through it."}
+            after={"The substitution $z = \\frac{x-\\mu}{\\sigma}$ moves the integral to the standard normal, where one part is the total probability and the other vanishes by symmetry."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {
@@ -2508,6 +2565,18 @@ export default function NormalDistributionPage({ formulaSummaryData, pitfallData
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'proof-steps-normal-variance-steps'}
+            id="normal-variance-steps"
+            title="Deriving the normal variance"
+            source="/probability/distributions/continuous/normal"
+            related={false}
+            before={"The substitution argument for the variance one step at a time. Use Next and Back to move through it."}
+            after={"After the substitution, $\\sigma^2$ comes out in front and the integral left over is the variance of the standard normal, which is $1$."}
+          >
+            <ProofSteps data={proofStepsData2} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterProof,
                   <div key={'unit-sigmaBands'} dangerouslySetInnerHTML={{ __html: demoUnits.sigmaBands }} />,
           `Out to three standard deviations, 140 to 200 cm, the share rises to about 99.7%.`,
         ]
@@ -2554,6 +2623,18 @@ export default function NormalDistributionPage({ formulaSummaryData, pitfallData
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'special-cases-normal-parameter-special-cases'}
+            id="normal-parameter-special-cases"
+            title="Special values of the parameters"
+            source="/probability/distributions/continuous/normal"
+            related={false}
+            before={"One row per special choice of $\\mu$ and $\\sigma$. Click a row for more on what happens there."}
+            after={"The standard case fixes both parameters; the two limits move only $\\sigma$, from a point mass at $\\mu$ to an ever flatter curve."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj14.afterCases,
         ]
     },
     {

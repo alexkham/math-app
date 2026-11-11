@@ -849,6 +849,7 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 
 
 export async function getStaticProps(){
@@ -1564,8 +1565,30 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-08: "Where a complex number can sit" (map), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309',
+      caseColors: ['#2563EB', '#06357A', '#B45309', '#475569'], caseInks: ['#2563EB', '#06357A', '#B45309', '#475569'] },
+    general: { label: 'Point', text: '$z = a + bi$ sits at $(a, b)$' },
+    figure: {
+      kind: 'plane', xLabel: 'Re', yLabel: 'Im', xAxisCase: 0, yAxisCase: 1, originCase: 2,
+      points: [
+        { x: -3, y: 0, label: '−3', case: 0 }, { x: 2, y: 0, label: '2', case: 0 },
+        { x: 0, y: 1, label: 'i', case: 1 }, { x: 0, y: 2, label: '2i', case: 1 }, { x: 0, y: -3, label: '−3i', case: 1 },
+        { x: 3, y: 2, label: '3 + 2i', case: 3 },
+      ],
+    },
+    cases: [
+      { name: 'Real axis', when: '$b = 0$', rule: '$z = a + 0i = a$', text: 'The horizontal axis carries the real numbers, at the points $(a, 0)$.' },
+      { name: 'Imaginary axis', when: '$a = 0$', rule: '$z = 0 + bi = bi$', text: 'The vertical axis carries the pure imaginary numbers, at the points $(0, b)$.' },
+      { name: 'Origin', when: '$a = 0,\\ b = 0$', rule: '$0 = 0 + 0i$', text: 'The only point on both axes: real and pure imaginary at once.' },
+      { name: 'Off both axes', when: '$a \\neq 0,\\ b \\neq 0$', text: 'Inside one of the four quadrants.' },
+    ],
+  };
+
   return {
   props:{
+    specialCasesData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1588,7 +1611,7 @@ const schemas = {
 }
    }
 
-export default function GeometricRepresentationPage({ pitfallData,
+export default function GeometricRepresentationPage({ specialCasesData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1689,6 +1712,17 @@ export default function GeometricRepresentationPage({ pitfallData,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'special-cases-complex-plane-axes-cases'}
+            id="complex-plane-axes-cases"
+            title="Where a complex number can sit"
+            source="/complex-numbers/geometric-representation"
+            related={false}
+            before={"The four places described above, on the plane. Hover a place to find its numbers, or a point to find its place."}
+            after={"Which parts are zero decides the place: one zero puts a number on an axis, two put it at the origin."}
+          >
+            <SpecialCases data={specialCasesData} variant="map" />
+          </DiagramFrame>,
         ]
     },
     {

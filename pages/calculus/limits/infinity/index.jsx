@@ -16,6 +16,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -23,6 +24,28 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// CaseGraph 2026-11-09: "Which side, which infinity" (graph), from the page's own text. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    labels: { switchLabel: 'Approach', interval: 'Side', solution: 'side of approach', inSolution: 'here' },
+    graph: {
+      f: (x) => 1 / (x - 2),
+      x0: -1, x1: 5, y0: -6, y1: 6,
+      cuts: [2], cutLabels: ['2'],
+      factorsLabel: '$x - 2$',
+      switch: {
+        options: [
+          { id: 'right', label: '$2^+$', sign: 1, question: '$\\lim_{x \\to 2^+} \\frac{1}{x - 2}$', answer: '$+\\infty$' },
+          { id: 'left', label: '$2^-$', sign: -1, question: '$\\lim_{x \\to 2^-} \\frac{1}{x - 2}$', answer: '$-\\infty$' },
+        ],
+      },
+    },
+    cases: [
+      { name: '$x < 2$', from: -Infinity, to: 2, signs: [-1] },
+      { name: '$x > 2$', from: 2, to: Infinity, signs: [1] },
+    ],
+  };
 
 
 export async function getStaticProps(){
@@ -505,9 +528,8 @@ $$\\lim_{x \\to 2^+} \\frac{1}{x - 2} = +\\infty$$]@
 For $x$ slightly less than $2$: $x - 2 < 0$ (small negative), so $\\dfrac{1}{x-2}$ is large negative.
 
 @academic[formula_callout:Sign Analysis for Infinite Limits
-$$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$]@
-
-@academic[pitfall,aside:true,width:35%:Ignoring the sign of the numerator
+$$\\lim_{x \\to 2^-} \\frac{1}{x - 2} = -\\infty$$]@`,
+    afterGraph: `@academic[pitfall,aside:true,width:35%:Ignoring the sign of the numerator
 Reading only the small positive denominator in $\\lim_{x \\to 2^+} \\frac{x - 5}{x - 2}$ gives $+\\infty$. The numerator tends to $-3$, so the quotient is negative near $2$ and the limit is $-\\infty$.
 [Read more](!#pitfall-ignoring-the-sign-of-the-numerator)]@
 
@@ -1190,6 +1212,18 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'case-graph-infinite-limit-sign-sides'}
+            id="infinite-limit-sign-sides"
+            title="Which side, which infinity"
+            source="/calculus/limits/infinity"
+            related={false}
+            before={"The two one-sided limits above on one graph. Switch the side of approach, or hover a side to see the sign of $x - 2$ there."}
+            after={"The numerator never changes sign near $2$, so the side of approach alone decides between $+\\infty$ and $-\\infty$."}
+          >
+            <CaseGraph data={caseGraphData} variant="graph" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterGraph,
         ]
     },
     {

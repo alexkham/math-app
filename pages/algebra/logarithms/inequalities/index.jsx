@@ -15,6 +15,29 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
+// CaseGraph 2026-11-09: "Where the reversed direction comes from" (graph), from the page's own text. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Rule', text: '$0 < a < 1$: $\\log_a(x) > k \\implies x < a^k$' },
+    graph: {
+      f: (x) => Math.log(x) / Math.log(0.5) - 3,
+      x0: 0, x1: 0.5, y0: -3, y1: 4,
+      cuts: [0.125], cutLabels: ['1/8'],
+      factorsLabel: '$\\log_{1/2}(x) - 3$',
+      switch: {
+        options: [
+          { id: 'gt', label: '$> 3$', sign: 1, question: '$\\log_{1/2}(x) > 3$', answer: '$0 < x < \\frac{1}{8}$' },
+          { id: 'lt', label: '$< 3$', sign: -1, question: '$\\log_{1/2}(x) < 3$', answer: '$x > \\frac{1}{8}$' },
+        ],
+      },
+    },
+    cases: [
+      { name: '$(0, \\frac{1}{8})$', from: 0, to: 0.125, signs: [1] },
+      { name: '$(\\frac{1}{8}, \\infty)$', from: 0.125, to: Infinity, signs: [-1] },
+    ],
+  };
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
+
 
 export async function getStaticProps(){
 const keyWords = [
@@ -223,9 +246,8 @@ Solve $\\log_{0.1}(x) \\leq -2$.
 Reverse direction:
 $$x \\geq (0.1)^{-2} = 100$$
 
-Solution: $x \\geq 100$.]@
-
-@academic[pitfall,aside:true,width:35%:Keeping the direction with a base below 1
+Solution: $x \\geq 100$.]@`,
+    afterGraph: `@academic[pitfall,aside:true,width:35%:Keeping the direction with a base below 1
 Solving $\\log_{1/2}(x) > 3$ as $x > \\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$ keeps the sign, as for a base above 1. But $\\log_{1/2}$ is decreasing, so the sign flips: $0 < x < \\frac{1}{8}$.
 [Read more](!#pitfall-keeping-the-direction-with-a-base-below-1)]@
 
@@ -742,6 +764,18 @@ With domain: $0 < x \\leq 25$.]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'case-graph-log-base-below-one-sign-graph'}
+            id="log-base-below-one-sign-graph"
+            title="Where the reversed direction comes from"
+            source="/algebra/logarithms/inequalities"
+            related={false}
+            before={"The first example on a graph: $\\log_{1/2}(x) - 3$ is positive exactly where $\\log_{1/2}(x) > 3$. Switch the inequality, or hover an interval."}
+            after={"The curve falls as $x$ grows, so the part above the axis lies left of $\\frac{1}{8}$, not right of it."}
+          >
+            <CaseGraph data={caseGraphData} variant="graph" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterGraph,
         ]
     },
     {

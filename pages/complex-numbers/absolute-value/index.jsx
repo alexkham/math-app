@@ -19,6 +19,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -649,9 +650,8 @@ The proof follows from direct computation. Let $z = a + bi$, so $\\bar{z} = a - 
 @academic[formula_callout:Modulus and the Conjugate
 $$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - (bi)^2 = a^2 - b^2i^2 = a^2 + b^2$$]@
 
-The cross terms cancel, and since $i^2 = -1$, the imaginary square becomes positive. The result $a^2 + b^2$ is precisely $|z|^2$ by definition of modulus.
-
-@academic[pitfall,aside:true,width:35%:Multiplying z by itself
+The cross terms cancel, and since $i^2 = -1$, the imaginary square becomes positive. The result $a^2 + b^2$ is precisely $|z|^2$ by definition of modulus.`,
+      afterProof: `@academic[pitfall,aside:true,width:35%:Multiplying z by itself
 Computing $|z|^2$ for $z = 3 + 4i$ as $z \\cdot z$ gives $(3 + 4i)^2 = -7 + 24i$, which is not even real. The conjugate gives $(3 + 4i)(3 - 4i) = 9 + 16 = 25 = |z|^2$.
 [Read more](!#pitfall-multiplying-z-by-itself)]@
 
@@ -817,9 +817,8 @@ Rearranging gives $|z_1| - |z_2| \\leq |z_1 - z_2|$. The same argument with role
 @academic[formula_callout:The Reverse Triangle Inequality
 $$-|z_1 - z_2| \\leq |z_1| - |z_2| \\leq |z_1 - z_2|$$]@
 
-This is equivalent to $\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$.
-
-The geometric interpretation: $|z_1 - z_2|$ measures the distance between two points in the plane. The quantity $\\big||z_1| - |z_2|\\big|$ measures how much their distances from the origin differ. Two points can be close together (small $|z_1 - z_2|$) even if they lie at very different distances from the origin — but the difference in their radii cannot exceed their separation. Conversely, two points far apart have moduli that may differ substantially, but never by more than the distance between them.`,
+This is equivalent to $\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$.`,
+      afterProof: `The geometric interpretation: $|z_1 - z_2|$ measures the distance between two points in the plane. The quantity $\\big||z_1| - |z_2|\\big|$ measures how much their distances from the origin differ. Two points can be close together (small $|z_1 - z_2|$) even if they lie at very different distances from the origin — but the difference in their radii cannot exceed their separation. Conversely, two points far apart have moduli that may differ substantially, but never by more than the distance between them.`,
   after: ``,
   link: '',
 },
@@ -1162,8 +1161,55 @@ const schemas = {
     ],
   };
 
+  // ProofSteps pilot 2026-11-08: the chain layout of the section "Proving the triangle inequality", from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$|z_1 + z_2| \\leq |z_1| + |z_2|$' },
+    steps: [
+      { math: '$|z_1 + z_2|^2 = (z_1 + z_2) \\cdot \\overline{(z_1 + z_2)}$', tag: 'identity', why: 'The squared modulus of any complex number: $|z|^2 = z \\cdot \\bar{z}$' },
+      { math: '$= (z_1 + z_2)(\\bar{z_1} + \\bar{z_2})$', tag: 'conjugate', why: 'The conjugate of a sum is the sum of the conjugates' },
+      { math: '$= z_1\\bar{z_1} + z_1\\bar{z_2} + z_2\\bar{z_1} + z_2\\bar{z_2}$', tag: 'expand', why: 'Expanding the product' },
+      { math: '$= |z_1|^2 + z_1\\bar{z_2} + \\overline{z_1\\bar{z_2}} + |z_2|^2$', tag: 'identity', why: 'The outer terms are squared moduli; the middle terms are conjugates of each other' },
+      { math: '$= |z_1|^2 + 2\\text{Re}(z_1\\bar{z_2}) + |z_2|^2$', tag: 'conjugates', why: 'A number plus its conjugate is twice its real part' },
+      { math: '$\\leq |z_1|^2 + 2|z_1||z_2| + |z_2|^2$', tag: 'key step', key: true, why: 'The real part never exceeds the modulus: $\\text{Re}(z_1\\bar{z_2}) \\leq |z_1\\bar{z_2}| = |z_1||z_2|$' },
+      { math: '$= (|z_1| + |z_2|)^2$', tag: 'factor', why: 'A perfect square' },
+    ],
+    conclusion: { text: '$|z_1 + z_2| \\leq |z_1| + |z_2|$', say: 'Taking square roots of both sides, valid since all quantities are non-negative.' },
+  };
+
+  // ProofSteps 2026-11-08: "Multiplying a number by its conjugate" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$z \\cdot \\overline{z} = |z|^2 = a^2 + b^2$' },
+    steps: [
+      { math: '$z \\cdot \\bar{z} = (a + bi)(a - bi)$', tag: 'substitute', why: 'Let $z = a + bi$, so $\\bar{z} = a - bi$' },
+      { math: '$= a^2 - (bi)^2$', tag: 'expand', why: 'The cross terms cancel' },
+      { math: '$= a^2 - b^2i^2$', tag: 'square', why: 'Squaring the product $bi$' },
+      { math: '$= a^2 + b^2$', tag: 'key step', key: true, why: 'Since $i^2 = -1$, the imaginary square becomes positive' },
+    ],
+    conclusion: { text: '$z \\cdot \\bar{z} = a^2 + b^2 = |z|^2$', say: 'The result $a^2 + b^2$ is precisely $|z|^2$ by definition of modulus.' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving the reverse triangle inequality" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\bigl||z_1| - |z_2|\\bigr| \\leq |z_1 - z_2|$' },
+    steps: [
+      { math: '$z_1 = (z_1 - z_2) + z_2$', tag: 'rewrite', why: 'Write $z_1$ as a sum' },
+      { math: '$|z_1| = |(z_1 - z_2) + z_2|$', tag: 'modulus', why: 'Take the modulus of both sides' },
+      { math: '$\\leq |z_1 - z_2| + |z_2|$', tag: 'key step', key: true, why: 'Applying the triangle inequality' },
+      { math: '$|z_1| - |z_2| \\leq |z_1 - z_2|$', tag: 'rearrange', why: 'Rearranging' },
+      { math: '$|z_2| - |z_1| \\leq |z_2 - z_1| = |z_1 - z_2|$', tag: 'swap', why: 'The same argument with roles reversed' },
+      { math: '$-|z_1 - z_2| \\leq |z_1| - |z_2| \\leq |z_1 - z_2|$', tag: 'combine', why: 'Combining both inequalities' },
+    ],
+    conclusion: { text: '$\\big||z_1| - |z_2|\\big| \\leq |z_1 - z_2|$', say: 'The double inequality is equivalent to this single statement.' },
+  };
+
   return {
   props:{
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1189,7 +1235,7 @@ const schemas = {
 
 
 
-export default function AbsoluteValuePage({ formulaSummaryData, pitfallData,
+export default function AbsoluteValuePage({ proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1342,6 +1388,18 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-modulus-conjugate-identity-proof'}
+            id="modulus-conjugate-identity-proof"
+            title="Multiplying a number by its conjugate"
+            source="/complex-numbers/absolute-value"
+            related={false}
+            before={"The direct computation above, split at each equals sign, with the reason for every step."}
+            after={"Everything hinges on $i^2 = -1$: it turns the subtracted square $b^2i^2$ into an added $b^2$."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {
@@ -1374,6 +1432,17 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps'}
+            id="triangle-inequality-proof"
+            title="Proving the triangle inequality"
+            source="/complex-numbers/absolute-value"
+            related={false}
+            before={"The same argument as a chain of steps, each with its reason. The gold line is the one place where the equality turns into an inequality."}
+            after={"Everything before the gold line is an identity; the proof stands or falls on that single estimate of the real part."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
           `@academic[punchline:The whole proof rests on one fact: the real part of a complex number never exceeds its modulus.]@`,
         ]
     },
@@ -1383,6 +1452,18 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-reverse-triangle-inequality-proof'}
+            id="reverse-triangle-inequality-proof"
+            title="Proving the reverse triangle inequality"
+            source="/complex-numbers/absolute-value"
+            related={false}
+            before={"The proof above as a chain: one use of the triangle inequality, then the same argument with the roles of $z_1$ and $z_2$ swapped."}
+            after={"The gold line is the ordinary triangle inequality; the rest is the split $z_1 = (z_1 - z_2) + z_2$ and some rearranging."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
           <div
             key={'obj7-table'}
             style={tableWrapStyle}

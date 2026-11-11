@@ -590,6 +590,7 @@ import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiag
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -777,9 +778,8 @@ for some scalar $\\lambda$. The scalar $\\lambda$ is the corresponding eigenvalu
 
 The requirement that $\\mathbf{v} \\neq \\mathbf{0}$ is essential. The zero vector trivially satisfies $A\\mathbf{0} = \\lambda\\mathbf{0}$ for every $\\lambda$, so it carries no information and is excluded by convention.
 
-The eigenvalue $\\lambda$ can be any real or [complex](!/linear-algebra/eigen/complex) number, including zero. When $\\lambda = 0$, the equation $A\\mathbf{v} = \\mathbf{0}$ says that $\\mathbf{v}$ is in the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — [the transformation annihilates that direction entirely](https://linearalgebranotes.com/eigen/eigenvalue-and-eigenvector#rule-zero-eigenvalue).
-
-@academic[rule_plain:Only square matrices have eigenvalues.]@
+The eigenvalue $\\lambda$ can be any real or [complex](!/linear-algebra/eigen/complex) number, including zero. When $\\lambda = 0$, the equation $A\\mathbf{v} = \\mathbf{0}$ says that $\\mathbf{v}$ is in the [null space](!/linear-algebra/vector-spaces/fundamental-spaces) of $A$ — [the transformation annihilates that direction entirely](https://linearalgebranotes.com/eigen/eigenvalue-and-eigenvector#rule-zero-eigenvalue).`,
+    afterCases: `@academic[rule_plain:Only square matrices have eigenvalues.]@
 
 The equation $A\\mathbf{v} = \\lambda\\mathbf{v}$ requires $A\\mathbf{v}$ and $\\lambda\\mathbf{v}$ to live in the same space, which demands that $A$ maps $\\mathbb{R}^n$ to $\\mathbb{R}^n$.`,
     before: ``,
@@ -1129,8 +1129,23 @@ $$\\det(A - 3I) = \\det\\begin{pmatrix} 1 & 2 \\\\ 1 & 0 \\end{pmatrix} = -2$$`]
     ],
   };
 
+  // SpecialCases 2026-11-09: "Where zero enters the definition" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$A\\mathbf{v} = \\lambda\\mathbf{v}, \\quad \\mathbf{v} \\neq \\mathbf{0}$' },
+    cases: [
+      { when: '$\\mathbf{v} = \\mathbf{0}$', tag: 'excluded', tone: 'stop', rule: '$A\\mathbf{0} = \\lambda\\mathbf{0}$ for every $\\lambda$',
+        why: 'The zero vector satisfies the equation trivially, so it carries no information.',
+        more: 'It is excluded by convention: the requirement $\\mathbf{v} \\neq \\mathbf{0}$ is essential.' },
+      { when: '$\\lambda = 0$', tag: 'allowed', rule: '$A\\mathbf{v} = \\mathbf{0}$',
+        why: '$\\mathbf{v}$ is in the null space of $A$.',
+        more: 'The transformation annihilates that direction entirely.' },
+    ],
+  };
+
    return {
   props: {
+    specialCasesData,
     pitfallData,
     faqQuestions,
     eigenGrowthCases,
@@ -1156,7 +1171,7 @@ $$\\det(A - 3I) = \\det\\begin{pmatrix} 1 & 2 \\\\ 1 & 0 \\end{pmatrix} = -2$$`]
 
    const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function EigenvaluesPage({ pitfallData,faqQuestions, eigenGrowthCases,
+export default function EigenvaluesPage({ specialCasesData, pitfallData,faqQuestions, eigenGrowthCases,
      seoData,
      sectionsContent,
      introContent,
@@ -1241,6 +1256,18 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'special-cases-eigenvalue-definition-edge-cases'}
+            id="eigenvalue-definition-edge-cases"
+            title="Where zero enters the definition"
+            source="/linear-algebra/eigen"
+            related={false}
+            before={"Two zero values that the eigenvalue equation treats specially, one for $\\mathbf{v}$ and one for $\\lambda$. Click a row for the reason behind it."}
+            after={"The zero vector is ruled out as an eigenvector, while the zero eigenvalue is allowed and marks a direction that $A$ sends to $\\mathbf{0}$."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterCases,
         ]
     },
     {

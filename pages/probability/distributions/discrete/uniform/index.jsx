@@ -874,6 +874,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
@@ -1193,9 +1194,8 @@ $$\\sum_{x=a}^{b} x = \\frac{(b - a + 1)(a + b)}{2}$$]@
 Substituting back:
 
 @academic[formula_callout:Expected Value (Mean)
-$$E[X] = \\frac{1}{b - a + 1} \\cdot \\frac{(b - a + 1)(a + b)}{2} = \\frac{a + b}{2}$$]@
-
-The result $E[X] = \\frac{a + b}{2}$ captures the symmetry of the uniform distribution: the expected value is simply the midpoint between the minimum and maximum values. Since all outcomes are equally likely, the average naturally falls at the center of the range.
+$$E[X] = \\frac{1}{b - a + 1} \\cdot \\frac{(b - a + 1)(a + b)}{2} = \\frac{a + b}{2}$$]@`,
+  afterProof: `The result $E[X] = \\frac{a + b}{2}$ captures the symmetry of the uniform distribution: the expected value is simply the midpoint between the minimum and maximum values. Since all outcomes are equally likely, the average naturally falls at the center of the range.
 
 ### Example
 
@@ -1262,9 +1262,8 @@ Using the formula for sum of squares: $\\sum_{x=a}^{b} x^2 = \\frac{(b - a + 1)(
 After algebraic manipulation:
 
 @academic[formula_callout:Variance and Standard Deviation
-$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2 = \\frac{(b - a + 1)^2 - 1}{12}$$]@
-
-The result shows that variance depends on the range width $(b - a + 1)$ squared. A wider range of equally likely values produces higher variance. The formula is symmetric and increases quadratically with the spread between $a$ and $b$.
+$$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2 = \\frac{(b - a + 1)^2 - 1}{12}$$]@`,
+  afterProof: `The result shows that variance depends on the range width $(b - a + 1)$ squared. A wider range of equally likely values produces higher variance. The formula is symmetric and increases quadratically with the spread between $a$ and $b$.
 
 ### Standard Deviation
 
@@ -1748,8 +1747,38 @@ $$= \\frac{35}{12} \\approx 2.917$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the discrete uniform mean" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$E[X] = \\frac{a + b}{2}$' },
+    steps: [
+      { math: '$E[X] = \\sum_{x=a}^{b} x \\cdot \\frac{1}{b - a + 1}$', tag: 'PMF', why: 'The general definition with $P(X = x) = \\frac{1}{b - a + 1}$' },
+      { math: '$= \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x$', tag: 'factor', why: 'Take out the constant' },
+      { math: '$\\sum_{x=a}^{b} x = \\frac{(b - a + 1)(a + b)}{2}$', tag: 'key step', key: true, why: 'The sum of the integers from $a$ to $b$' },
+      { math: '$E[X] = \\frac{1}{b - a + 1} \\cdot \\frac{(b - a + 1)(a + b)}{2}$', tag: 'substitute', why: 'Substituting back' },
+      { math: '$= \\frac{a + b}{2}$', tag: 'cancel', why: 'The factor $b - a + 1$ cancels' },
+    ],
+    conclusion: { text: '$E[X] = \\frac{a + b}{2}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the discrete uniform variance" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\mathrm{Var}(X) = \\frac{(b - a + 1)^2 - 1}{12}$' },
+    steps: [
+      { math: '$\\mathbb{E}[X^2] = \\sum_{x=a}^{b} x^2 \\cdot \\frac{1}{b - a + 1}$', tag: 'PMF', why: 'Using the PMF $P(X = x) = \\frac{1}{b - a + 1}$' },
+      { math: '$= \\frac{1}{b - a + 1} \\sum_{x=a}^{b} x^2$', tag: 'factor', why: 'Take out the constant' },
+      { math: '$\\sum_{x=a}^{b} x^2 = \\frac{(b - a + 1)(2b^2 + 2ab + 2a^2 - a + b)}{6}$', tag: 'key step', key: true, why: 'The formula for the sum of squares' },
+      { math: '$\\mathrm{Var}(X) = \\mathbb{E}[X^2] - \\mu^2$', tag: 'shortcut', why: 'The shortcut formula, with $\\mu = \\frac{a + b}{2}$ from the expected value section' },
+      { math: '$= \\frac{(b - a + 1)^2 - 1}{12}$', tag: 'simplify', why: 'After algebraic manipulation' },
+    ],
+    conclusion: { text: '$\\mathrm{Var}(X) = \\frac{(b - a + 1)^2 - 1}{12}$' },
+  };
+
    return {
       props:{
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1772,7 +1801,7 @@ $$= \\frac{35}{12} \\approx 2.917$$`],
     }
    }
 
-export default function DiscreteUniformDistributionPage({ formulaSummaryData, pitfallData,
+export default function DiscreteUniformDistributionPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1948,6 +1977,18 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-discrete-uniform-mean-steps'}
+            id="discrete-uniform-mean-steps"
+            title="Deriving the discrete uniform mean"
+            source="/probability/distributions/discrete/uniform"
+            related={false}
+            before={"The derivation of the mean above as a chain, each line with its reason."}
+            after={"The gold step, the sum of the integers from $a$ to $b$, brings in the factor $b - a + 1$ that cancels the denominator of the PMF."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {
@@ -1956,6 +1997,18 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-discrete-uniform-variance-steps'}
+            id="discrete-uniform-variance-steps"
+            title="Deriving the discrete uniform variance"
+            source="/probability/distributions/discrete/uniform"
+            related={false}
+            before={"The variance computation above as a chain, from $\\mathbb{E}[X^2]$ to the shortcut formula."}
+            after={"The sum of squares is the gold step; after the simplification only the number of values $b - a + 1$ is left in the result."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
                   <div key={'unit-duWidth'} dangerouslySetInnerHTML={{ __html: demoUnits.duWidth }} />,
           `Moving the range left or right changes the mean but never the variance: only n = b − a + 1 counts.`,
         ]

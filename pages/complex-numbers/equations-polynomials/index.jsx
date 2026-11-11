@@ -966,6 +966,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
@@ -1221,9 +1222,8 @@ $$p(z) = a_n(z - z_1)(z - z_2) \\cdots (z - z_n)$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
-where $a_n$ is the leading coefficient and $z_1, z_2, \\ldots, z_n$ are the $n$ roots (possibly with repetitions). A polynomial of degree $n$ has exactly $n$ roots in $\\mathbb{C}$, counted with multiplicity.
-
-@academic[fact,aside:true,width:35%:Gauss stated it with real factors only
+where $a_n$ is the leading coefficient and $z_1, z_2, \\ldots, z_n$ are the $n$ roots (possibly with repetitions). A polynomial of degree $n$ has exactly $n$ roots in $\\mathbb{C}$, counted with multiplicity.`,
+      afterProof: `@academic[fact,aside:true,width:35%:Gauss stated it with real factors only
 Gauss's 1799 doctoral thesis, written at 22, states the theorem without complex numbers: every real polynomial splits into real factors of degree one or two. Pairing each non-real root with its conjugate gives exactly those quadratic factors.]@
 
 This completeness property means $\\mathbb{C}$ is algebraically closed. Every polynomial equation solvable anywhere is solvable in $\\mathbb{C}$. No further extension of the number system is needed to find polynomial roots — complex numbers are the final destination.
@@ -1330,9 +1330,8 @@ Taking $i$ as a root of $z^2 + 2iz - 1$ because $-i$ is one ignores the coeffici
 
 The key step uses $\\overline{a_k} = a_k$ since each coefficient is real, and the property $\\overline{z^k} = (\\bar{z})^k$.
 
-Now suppose $p(z_0) = 0$. Then $\\overline{p(z_0)} = \\bar{0} = 0$, so $p(\\bar{z_0}) = 0$. The conjugate is also a root.
-
-Consequences abound. A real quadratic with complex roots has the form $(z - z_0)(z - \\bar{z_0})$ with conjugate pair $z_0, \\bar{z_0}$. This product expands to $z^2 - 2\\text{Re}(z_0)z + |z_0|^2$, a real quadratic as expected.
+Now suppose $p(z_0) = 0$. Then $\\overline{p(z_0)} = \\bar{0} = 0$, so $p(\\bar{z_0}) = 0$. The conjugate is also a root.`,
+      afterProof: `Consequences abound. A real quadratic with complex roots has the form $(z - z_0)(z - \\bar{z_0})$ with conjugate pair $z_0, \\bar{z_0}$. This product expands to $z^2 - 2\\text{Re}(z_0)z + |z_0|^2$, a real quadratic as expected.
 
 @academic[rule_corollary_plain:A real polynomial of odd degree must have at least one real root.]@
 
@@ -1847,8 +1846,36 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "From one root to a full factorization" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: '$p(z) = a_n(z - z_1)(z - z_2) \\cdots (z - z_n)$' },
+    steps: [
+      { math: '$p(z) = (z - z_1)q(z)$', tag: 'one root', why: 'A polynomial $p(z)$ of degree $n \\geq 1$ has a root $z_1$; $q(z)$ has degree $n - 1$' },
+      { math: '$q(z) = (z - z_2)r(z)$', tag: 'key step', key: true, why: 'If $n - 1 \\geq 1$, the theorem applies again: $q(z)$ has a root $z_2$' },
+      { math: '$p(z) = a_n(z - z_1)(z - z_2) \\cdots (z - z_n)$', tag: 'repeat', why: 'Continue until only a constant remains: the leading coefficient $a_n$' },
+    ],
+    conclusion: { text: '$n$ roots in $\\mathbb{C}$', say: 'A polynomial of degree $n$ has exactly $n$ roots in $\\mathbb{C}$, counted with multiplicity.' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving the conjugate root theorem" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$p(z_0) = 0 \\;\\Rightarrow\\; p(\\overline{z_0}) = 0$ for real coefficients' },
+    steps: [
+      { math: '$\\overline{p(z)} = \\overline{a_nz^n + \\cdots + a_0}$', tag: 'write out', why: 'Let $p(z) = a_nz^n + a_{n-1}z^{n-1} + \\cdots + a_0$ with all $a_k$ real' },
+      { math: '$= a_n\\overline{z^n} + \\cdots + a_0$', tag: 'key step', key: true, why: 'Uses $\\overline{a_k} = a_k$, since each coefficient is real' },
+      { math: '$= a_n(\\bar{z})^n + \\cdots + a_0$', tag: 'powers', why: 'The property $\\overline{z^k} = (\\bar{z})^k$' },
+      { math: '$= p(\\bar{z})$', tag: 'collect', why: 'The same polynomial, evaluated at $\\bar{z}$' },
+      { math: '$\\overline{p(z_0)} = \\bar{0} = 0$', tag: 'root', why: 'Now suppose $p(z_0) = 0$' },
+    ],
+    conclusion: { text: '$p(\\bar{z_0}) = 0$', say: 'The conjugate is also a root.' },
+  };
+
   return {
   props:{
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     complexEquationDecision,
@@ -1874,7 +1901,7 @@ const schemas = {
    }
 
 
-export default function EquationsPolynomialsPage({ formulaSummaryData, pitfallData,complexEquationDecision, 
+export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,complexEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -1976,6 +2003,18 @@ export default function EquationsPolynomialsPage({ formulaSummaryData, pitfallDa
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrameV2
+            key={'proof-steps-fundamental-theorem-factorization-steps'}
+            id="fundamental-theorem-factorization-steps"
+            title="From one root to a full factorization"
+            source="/complex-numbers/equations-polynomials"
+            related={false}
+            before={"The argument above, one root at a time: each use of the theorem splits off one linear factor."}
+            after={"The theorem promises only one root, but applied again to each quotient it delivers all $n$ of them."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrameV2>,
+          sectionsContent.obj2.afterProof,
           `@academic[punchline:One guaranteed root, used again and again, splits every polynomial of degree $n$ into exactly $n$ linear factors over $\\mathbb{C}$.]@`,
         ]
     },
@@ -2008,6 +2047,18 @@ export default function EquationsPolynomialsPage({ formulaSummaryData, pitfallDa
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrameV2
+            key={'proof-steps-conjugate-root-theorem-polynomials-proof'}
+            id="conjugate-root-theorem-polynomials-proof"
+            title="Proving the conjugate root theorem"
+            source="/complex-numbers/equations-polynomials"
+            related={false}
+            before={"The conjugation chain above, split at each equals sign, then the step from $p(z_0) = 0$ to $p(\\bar{z_0}) = 0$."}
+            after={"Real coefficients are what make it work: since $\\overline{a_k} = a_k$, conjugating the value of $p$ only conjugates its input."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrameV2>,
+          sectionsContent.obj5.afterProof,
           <div
             key={'obj5-table'}
             style={tableWrapStyle}

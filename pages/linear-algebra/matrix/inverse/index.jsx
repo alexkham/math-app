@@ -3026,6 +3026,7 @@ import EquivalenceRing from '@/app/components/infographics/linear-algebra/Equiva
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -3738,9 +3739,8 @@ Writing $(AB)^{-1} = A^{-1}B^{-1}$ for $A = \\begin{pmatrix} 1 & 1 \\\\ 0 & 1 \\
 
 This generalizes to any number of factors — $(A_1 A_2 \\cdots A_k)^{-1} = A_k^{-1} \\cdots A_2^{-1} A_1^{-1}$.
 
-The reason is the order in which the matrices act. In $AB\\mathbf{x}$, the matrix $B$ acts on $\\mathbf{x}$ first and $A$ acts second, so getting $\\mathbf{x}$ back means removing $A$ first and $B$ second: $B^{-1}A^{-1}(AB)\\mathbf{x} = B^{-1}(A^{-1}A)B\\mathbf{x} = B^{-1}B\\mathbf{x} = \\mathbf{x}$.
-
-[Transpose and inverse commute](https://linearalgebranotes.com/matrices/transpose#rule-inverse):
+The reason is the order in which the matrices act. In $AB\\mathbf{x}$, the matrix $B$ acts on $\\mathbf{x}$ first and $A$ acts second, so getting $\\mathbf{x}$ back means removing $A$ first and $B$ second: $B^{-1}A^{-1}(AB)\\mathbf{x} = B^{-1}(A^{-1}A)B\\mathbf{x} = B^{-1}B\\mathbf{x} = \\mathbf{x}$.`,
+    afterProof: `[Transpose and inverse commute](https://linearalgebranotes.com/matrices/transpose#rule-inverse):
 
 @academic[formula_callout:inverse_of_transpose|Inverse of Transpose|$$(A^T)^{-1} = (A^{-1})^T$$]@
 @academic[formulas_link:/linear-algebra/formulas#inverse_of_transpose]@
@@ -4124,8 +4124,34 @@ $$A^{-1} = \\frac{1}{1}\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why the inverse of a product reverses the order" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$(AB)^{-1} = B^{-1} A^{-1}$' },
+    steps: [
+      { math: '$B^{-1}A^{-1}(AB)\\mathbf{x} = B^{-1}(A^{-1}A)B\\mathbf{x}$', tag: 'regroup', why: 'Matrix multiplication is associative' },
+      { math: '$= B^{-1}B\\mathbf{x}$', tag: 'key step', key: true, why: '$A$ acted second, so it is removed first: $A^{-1}A = I$' },
+      { math: '$= \\mathbf{x}$', tag: 'cancel', why: 'Then $B$ is removed: $B^{-1}B = I$' },
+    ],
+    conclusion: { text: '$B^{-1}A^{-1}$ undoes $AB$, so $(AB)^{-1} = B^{-1} A^{-1}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Determinant of the inverse" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\det(A^{-1}) = \\frac{1}{\\det(A)}$' },
+    steps: [
+      { math: '$\\det(A)\\det(A^{-1}) = \\det(AA^{-1})$', tag: 'key step', key: true, why: 'The multiplicative property of the determinant' },
+      { math: '$= \\det(I)$', tag: 'inverse', why: '$AA^{-1} = I$' },
+      { math: '$= 1$', tag: 'identity', why: 'The identity matrix has determinant $1$' },
+    ],
+    conclusion: { text: '$\\det(A^{-1}) = \\frac{1}{\\det(A)}$' },
+  };
+
   return {
   props: {
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     inverseMethodDecision,
@@ -4153,7 +4179,7 @@ $$A^{-1} = \\frac{1}{1}\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 
    }
 
 
-export default function MatrixInversePage({ formulaSummaryData, pitfallData,inverseMethodDecision, inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MatrixInversePage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,inverseMethodDecision, inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4315,6 +4341,29 @@ export default function MatrixInversePage({ formulaSummaryData, pitfallData,inve
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-inverse-of-product-proof'}
+            id="inverse-of-product-proof"
+            title="Why the inverse of a product reverses the order"
+            source="/linear-algebra/matrix/inverse"
+            related={false}
+            before={"The check above, one equality per line."}
+            after={"The factors cancel from the inside out, which is why the one applied last has to be undone first."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
+          <DiagramFrame
+            key={'proof-steps-inverse-determinant-proof'}
+            id="inverse-determinant-proof"
+            title="Determinant of the inverse"
+            source="/linear-algebra/matrix/inverse"
+            related={false}
+            before={"The chain above, one equality per line."}
+            after={"The product rule for determinants does the work; the rest is the definition of the inverse."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj6-diagram'}
             id="inverse-properties"

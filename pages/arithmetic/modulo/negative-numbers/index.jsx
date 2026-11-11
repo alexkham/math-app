@@ -779,6 +779,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 
 
 export async function getStaticProps(){
@@ -1346,8 +1347,23 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-09: "When the conversion changes the remainder" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'Formula', text: '$\\text{floored remainder} = ((a \\% \\; n) + n) \\% \\; n$' },
+    cases: [
+      { when: 'Negative remainder', tag: 'add n', tone: 'warn', rule: 'add the modulus to get the floored result', examples: '$-1 + 3 = 2$ for $(-7) \\bmod 3$, $-3 + 5 = 2$ for $(-23) \\bmod 5$',
+        why: 'The addition shifts it into the correct range.',
+        more: 'A truncated remainder that comes out negative is converted to its floored equivalent by adding the modulus.' },
+      { when: 'Non-negative remainder', tag: 'unchanged', rule: 'no conversion is required', examples: 'for positive dividends, both conventions agree',
+        why: 'Adding $n$ and reducing again leaves it unchanged.',
+        more: 'The addition is only needed when the remainder is negative, so the formula works in any language regardless of which convention its $\\%$ operator uses.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
     pitfallData,
     demoUnits,
     sectionsContent,
@@ -1369,7 +1385,7 @@ return {
    }
 
 
-export default function NegativeNumbersPage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function NegativeNumbersPage({ specialCasesData, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1441,6 +1457,17 @@ export default function NegativeNumbersPage({ pitfallData,seoData, sectionsConte
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'special-cases-modulo-convention-conversion-edge-cases'}
+            id="modulo-convention-conversion-edge-cases"
+            title="When the conversion changes the remainder"
+            source="/arithmetic/modulo/negative-numbers"
+            related={false}
+            before={"The universal formula read for the two signs a truncated remainder can have, one per row. Click a row for what the formula does there."}
+            after={"Only the sign of the truncated remainder matters: a negative one is shifted up by $n$, a non-negative one passes through unchanged."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
           `@academic[punchline:Whatever convention a language follows, $((a \\% \\; n) + n) \\% \\; n$ always returns the remainder in $\\{0, 1, \\ldots, n-1\\}$.]@`,
         ]
     },

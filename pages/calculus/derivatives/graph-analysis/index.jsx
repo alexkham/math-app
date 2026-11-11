@@ -19,6 +19,7 @@ import functionOptimizationDiagrams from '@/app/components/functions/optimizatio
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
@@ -601,9 +602,8 @@ $$f'(x) > 0 \\implies f \\text{ increasing}, \\quad f'(x) < 0 \\implies f \\text
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-The proof relies on the [Mean Value Theorem](!/calculus/derivatives/rules). For any two points $x_1 < x_2$ in $(a, b)$, there exists $c$ between them with $f(x_2) - f(x_1) = f'(c)(x_2 - x_1)$. If $f'(c) > 0$ and $x_2 - x_1 > 0$, then $f(x_2) - f(x_1) > 0$, confirming $f$ is increasing.
-
-To find where a function increases or decreases: solve $f'(x) = 0$ and identify where $f'$ is undefined, then test the sign of $f'$ in each resulting interval.
+The proof relies on the [Mean Value Theorem](!/calculus/derivatives/rules). For any two points $x_1 < x_2$ in $(a, b)$, there exists $c$ between them with $f(x_2) - f(x_1) = f'(c)(x_2 - x_1)$. If $f'(c) > 0$ and $x_2 - x_1 > 0$, then $f(x_2) - f(x_1) > 0$, confirming $f$ is increasing.`,
+    afterProof: `To find where a function increases or decreases: solve $f'(x) = 0$ and identify where $f'$ is undefined, then test the sign of $f'$ in each resulting interval.
 
 @academic[pitfall,aside:true,width:35%:Joining intervals across a break
 For $f(x) = -\\frac{1}{x}$, $f'(x) = \\frac{1}{x^2} > 0$ wherever it exists, yet "increasing on $(-\\infty, 0) \\cup (0, \\infty)$" is false: $f(-1) = 1 > f(1) = -1$. The function is increasing on $(-\\infty, 0)$ and on $(0, \\infty)$, separately.
@@ -1191,8 +1191,22 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why a positive derivative means increasing" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: "If $f'(x) > 0$ for all $x$ in $(a, b)$, then $f$ is strictly increasing on $(a, b)$" },
+    steps: [
+      { math: '$x_1 < x_2$', tag: 'pick', why: 'Any two points in $(a, b)$' },
+      { math: "$f(x_2) - f(x_1) = f'(c)(x_2 - x_1)$", tag: 'MVT', key: true, why: 'The Mean Value Theorem gives some $c$ between them' },
+      { math: "$f'(c) > 0, \\quad x_2 - x_1 > 0$", tag: 'signs', why: 'Both factors are positive' },
+      { math: '$f(x_2) - f(x_1) > 0$', tag: 'conclude', why: 'The product of two positive numbers' },
+    ],
+    conclusion: { text: '$f$ is increasing on $(a, b)$', say: 'Larger inputs produce larger outputs.' },
+  };
+
   return {
   props: {
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
       fermatConverse,
@@ -1219,7 +1233,7 @@ const schemas = {
    }
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PageTemplate({ formulaSummaryData, pitfallData,fermatConverse, cubicDirectionProfile, 
+export default function PageTemplate({ proofStepsData, formulaSummaryData, pitfallData,fermatConverse, cubicDirectionProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -1353,6 +1367,18 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrameV2
+            key={'proof-steps-increasing-function-test-proof'}
+            id="increasing-function-test-proof"
+            title="Why a positive derivative means increasing"
+            source="/calculus/derivatives/graph-analysis"
+            related={false}
+            before={"The Mean Value Theorem argument, one line at a time."}
+            after={"The Mean Value Theorem turns a fact about slopes at single points into a comparison of two values of $f$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrameV2>,
+          sectionsContent.obj3.afterProof,
           `The same test, carried out in full for $f(x) = x^3 - 3x$. Its derivative $f'(x) = 3x^2 - 3$ is zero at $x = -1$ and $x = 1$, and those two points split the line into three intervals. One test value in each settles the sign: $f'(-2) = 9$, $f'(0) = -3$ and $f'(2) = 9$.`,
           <DiagramFrameV2
             key={'obj3-profile'}

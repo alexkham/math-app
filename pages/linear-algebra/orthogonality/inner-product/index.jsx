@@ -916,6 +916,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1371,9 +1373,8 @@ $$\\cos\\theta = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\ma
 
 The Cauchy-Schwarz inequality (next section) [guarantees that the right-hand side lies between](https://linearalgebranotes.com/vectors/cauchy-schwarz-inequality#rule-cosine-range) $-1$ and $1$, so the formula always produces a well-defined angle $\\theta \\in [0, \\pi]$.
 
-When $\\cos\\theta = 1$ ($\\theta = 0$), the vectors point in the same direction. When $\\cos\\theta = -1$ ($\\theta = \\pi$), they point in opposite directions. When $\\cos\\theta = 0$ ($\\theta = \\pi/2$), the vectors are orthogonal.
-
-The orthogonality condition $\\mathbf{u} \\cdot \\mathbf{v} = 0$ is the case $\\theta = 90°$. The dot product encodes the full metric geometry of $\\mathbb{R}^n$: length from $\\mathbf{v} \\cdot \\mathbf{v}$, angle from $\\mathbf{u} \\cdot \\mathbf{v}$, and distance from $(\\mathbf{u} - \\mathbf{v}) \\cdot (\\mathbf{u} - \\mathbf{v})$.
+When $\\cos\\theta = 1$ ($\\theta = 0$), the vectors point in the same direction. When $\\cos\\theta = -1$ ($\\theta = \\pi$), they point in opposite directions. When $\\cos\\theta = 0$ ($\\theta = \\pi/2$), the vectors are orthogonal.`,
+    afterCases: `The orthogonality condition $\\mathbf{u} \\cdot \\mathbf{v} = 0$ is the case $\\theta = 90°$. The dot product encodes the full metric geometry of $\\mathbb{R}^n$: length from $\\mathbf{v} \\cdot \\mathbf{v}$, angle from $\\mathbf{u} \\cdot \\mathbf{v}$, and distance from $(\\mathbf{u} - \\mathbf{v}) \\cdot (\\mathbf{u} - \\mathbf{v})$.
 
 @academic[example:Example
 For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdot \\mathbf{v} = 4 - 2 + 6 = 8$, $\\|\\mathbf{u}\\| = \\sqrt{14}$, $\\|\\mathbf{v}\\| = \\sqrt{21}$. So $\\cos\\theta = 8/\\sqrt{294} \\approx 0.467$, giving $\\theta \\approx 62.2°$.]@
@@ -1392,9 +1393,8 @@ For $\\mathbf{u} = (1, 2, 3)$ and $\\mathbf{v} = (4, -1, 2)$: $\\mathbf{u} \\cdo
 
 [Equality holds if and only if one vector is a scalar multiple of the other](https://linearalgebranotes.com/vectors/cauchy-schwarz-inequality#rule-equality) — they are parallel.
 
-The proof considers the expression $\\|\\mathbf{u} - t\\mathbf{v}\\|^2 \\geq 0$ for all $t \\in \\mathbb{R}$. Expanding: $\\|\\mathbf{u}\\|^2 - 2t(\\mathbf{u} \\cdot \\mathbf{v}) + t^2\\|\\mathbf{v}\\|^2 \\geq 0$. This is a quadratic in $t$ that is non-negative everywhere, so its discriminant must be non-positive: $4(\\mathbf{u} \\cdot \\mathbf{v})^2 - 4\\|\\mathbf{u}\\|^2\\|\\mathbf{v}\\|^2 \\leq 0$. Rearranging gives Cauchy-Schwarz.
-
-The inequality is what makes the angle formula legitimate. It guarantees $-1 \\leq \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|} \\leq 1$, so $\\cos\\theta$ takes a valid value. Without Cauchy-Schwarz, the angle formula could produce numbers outside $[-1, 1]$, and the geometric interpretation would collapse.`,
+The proof considers the expression $\\|\\mathbf{u} - t\\mathbf{v}\\|^2 \\geq 0$ for all $t \\in \\mathbb{R}$. Expanding: $\\|\\mathbf{u}\\|^2 - 2t(\\mathbf{u} \\cdot \\mathbf{v}) + t^2\\|\\mathbf{v}\\|^2 \\geq 0$. This is a quadratic in $t$ that is non-negative everywhere, so its discriminant must be non-positive: $4(\\mathbf{u} \\cdot \\mathbf{v})^2 - 4\\|\\mathbf{u}\\|^2\\|\\mathbf{v}\\|^2 \\leq 0$. Rearranging gives Cauchy-Schwarz.`,
+    afterProof: `The inequality is what makes the angle formula legitimate. It guarantees $-1 \\leq \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|} \\leq 1$, so $\\cos\\theta$ takes a valid value. Without Cauchy-Schwarz, the angle formula could produce numbers outside $[-1, 1]$, and the geometric interpretation would collapse.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1412,9 +1412,8 @@ The length of one side of a triangle never exceeds the sum of the other two. Equ
 Writing $\\|\\mathbf{u} + \\mathbf{v}\\| = \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$ for $\\mathbf{u} = (3, 0)$ and $\\mathbf{v} = (0, 4)$ gives $3 + 4 = 7$. The sum is $(3, 4)$, so $\\|\\mathbf{u} + \\mathbf{v}\\| = 5$.
 [Read more](!#pitfall-adding-the-lengths-of-a-sum)]@
 
-[The proof follows from Cauchy-Schwarz](https://linearalgebranotes.com/vectors/norm#rule-triangle). Square both sides: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 \\leq \\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{u}\\|\\|\\mathbf{v}\\| + \\|\\mathbf{v}\\|^2 = (\\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|)^2$. The key step uses $\\mathbf{u} \\cdot \\mathbf{v} \\leq |\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$.
-
-The triangle inequality is essential for the distance function $d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$ to satisfy the metric axioms. It ensures that going from $\\mathbf{u}$ to $\\mathbf{w}$ directly is never longer than going via $\\mathbf{v}$.`,
+[The proof follows from Cauchy-Schwarz](https://linearalgebranotes.com/vectors/norm#rule-triangle). Square both sides: $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2 \\leq \\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{u}\\|\\|\\mathbf{v}\\| + \\|\\mathbf{v}\\|^2 = (\\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|)^2$. The key step uses $\\mathbf{u} \\cdot \\mathbf{v} \\leq |\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$.`,
+    afterProof: `The triangle inequality is essential for the distance function $d(\\mathbf{u}, \\mathbf{v}) = \\|\\mathbf{u} - \\mathbf{v}\\|$ to satisfy the metric axioms. It ensures that going from $\\mathbf{u}$ to $\\mathbf{w}$ directly is never longer than going via $\\mathbf{v}$.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1804,8 +1803,51 @@ $$= 1 + 2(1) + 2 = 5$$`, `Which matches $\\|(2, 1)\\|^2 = 4 + 1 = 5$.`],
     note: { label: 'In every inner product space', text: 'The Cauchy-Schwarz inequality $|\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|$, the triangle inequality $\\|\\mathbf{u} + \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$ and, for perpendicular vectors, the Pythagorean theorem $\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + \\|\\mathbf{v}\\|^2$ hold for any inner product, as [general inner products](!#8) states.' },
   };
 
+  // ProofSteps 2026-11-08: "Proving the Cauchy-Schwarz inequality" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$|\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|$' },
+    steps: [
+      { math: '$\\|\\mathbf{u} - t\\mathbf{v}\\|^2 \\geq 0$', tag: 'start', why: 'True for all $t \\in \\mathbb{R}$' },
+      { math: '$\\|\\mathbf{u}\\|^2 - 2t(\\mathbf{u} \\cdot \\mathbf{v}) + t^2\\|\\mathbf{v}\\|^2 \\geq 0$', tag: 'expand', why: 'Expanding gives a quadratic in $t$ that is non-negative everywhere' },
+      { math: '$4(\\mathbf{u} \\cdot \\mathbf{v})^2 - 4\\|\\mathbf{u}\\|^2\\|\\mathbf{v}\\|^2 \\leq 0$', tag: 'key step', key: true, why: 'So its discriminant must be non-positive' },
+    ],
+    conclusion: { text: '$|\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\| \\, \\|\\mathbf{v}\\|$', say: 'Rearranging gives Cauchy-Schwarz.' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving the triangle inequality" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\|\\mathbf{u} + \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$' },
+    steps: [
+      { math: '$\\|\\mathbf{u} + \\mathbf{v}\\|^2 = \\|\\mathbf{u}\\|^2 + 2\\mathbf{u} \\cdot \\mathbf{v} + \\|\\mathbf{v}\\|^2$', tag: 'square', why: 'Square both sides and expand the left one' },
+      { math: '$\\leq \\|\\mathbf{u}\\|^2 + 2\\|\\mathbf{u}\\|\\|\\mathbf{v}\\| + \\|\\mathbf{v}\\|^2$', tag: 'key step', key: true, why: 'Cauchy-Schwarz: $\\mathbf{u} \\cdot \\mathbf{v} \\leq |\\mathbf{u} \\cdot \\mathbf{v}| \\leq \\|\\mathbf{u}\\|\\|\\mathbf{v}\\|$' },
+      { math: '$= (\\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|)^2$', tag: 'factor', why: 'A perfect square' },
+    ],
+    conclusion: { text: '$\\|\\mathbf{u} + \\mathbf{v}\\| \\leq \\|\\mathbf{u}\\| + \\|\\mathbf{v}\\|$' },
+  };
+
+  // SpecialCases 2026-11-09: "Three special angles" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$\\cos\\theta = \\frac{\\mathbf{u} \\cdot \\mathbf{v}}{\\|\\mathbf{u}\\|\\|\\mathbf{v}\\|}$', say: 'for nonzero $\\mathbf{u}$ and $\\mathbf{v}$, with $\\theta \\in [0, \\pi]$' },
+    cases: [
+      { when: '$\\cos\\theta = 1$', tag: 'same direction', rule: '$\\theta = 0$',
+        why: 'The vectors point in the same direction.',
+        more: 'The Cauchy-Schwarz inequality keeps the right-hand side between $-1$ and $1$; this is the upper end.' },
+      { when: '$\\cos\\theta = -1$', tag: 'opposite', rule: '$\\theta = \\pi$',
+        why: 'They point in opposite directions.',
+        more: 'The Cauchy-Schwarz inequality keeps the right-hand side between $-1$ and $1$; this is the lower end.' },
+      { when: '$\\cos\\theta = 0$', tag: 'orthogonal', rule: '$\\theta = \\pi/2$',
+        why: 'The vectors are orthogonal.' },
+    ],
+  };
+
   return {
   props:{
+    specialCasesData,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
       pythagoreanCard,
@@ -1832,7 +1874,7 @@ $$= 1 + 2(1) + 2 = 5$$`, `Which matches $\\|(2, 1)\\|^2 = 4 + 1 = 5$.`],
 // export default function InnerProductPage({seoData,sectionsContent , introContent}) {
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function InnerProductPage({ formulaSummaryData, pitfallData,pythagoreanCard, 
+export default function InnerProductPage({ specialCasesData, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,pythagoreanCard, 
   seoData,
   sectionsContent,
   introContent,
@@ -1957,6 +1999,18 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'special-cases-vector-angle-edge-cases'}
+            id="vector-angle-edge-cases"
+            title="Three special angles"
+            source="/linear-algebra/orthogonality/inner-product"
+            related={false}
+            before={"One row per special value of $\\cos\\theta$. Click the first two rows to see why they are the extremes."}
+            after={"The three values are the two ends of the range $[-1, 1]$ and its midpoint, where the dot product itself is zero."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterCases,
         ]
     },
     {
@@ -1965,6 +2019,18 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-inner-product-cauchy-schwarz-proof'}
+            id="inner-product-cauchy-schwarz-proof"
+            title="Proving the Cauchy-Schwarz inequality"
+            source="/linear-algebra/orthogonality/inner-product"
+            related={false}
+            before={"The proof above in three lines, starting from a squared length that can never be negative."}
+            after={"The key line is the discriminant: a quadratic that never dips below zero cannot have two real roots."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {
@@ -1973,6 +2039,18 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-inner-product-triangle-inequality-proof'}
+            id="inner-product-triangle-inequality-proof"
+            title="Proving the triangle inequality"
+            source="/linear-algebra/orthogonality/inner-product"
+            related={false}
+            before={"The proof above, one line per step, starting from the squared length of the sum."}
+            after={"Only the middle term changes, and Cauchy-Schwarz is what bounds it."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {

@@ -831,6 +831,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import kernelImageDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/kernel-image/kernelImageDiagrams'
@@ -1290,9 +1291,8 @@ $$T \\text{ injective} \\iff \\ker(T) = \\{\\mathbf{0}\\}$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-[The proof is short](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-kernel-test). If $T(\\mathbf{u}) = T(\\mathbf{v})$, then $T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v}) = \\mathbf{0}$, so $\\mathbf{u} - \\mathbf{v} \\in \\ker(T)$. If the kernel is trivial, $\\mathbf{u} - \\mathbf{v} = \\mathbf{0}$ and $\\mathbf{u} = \\mathbf{v}$.
-
-@academic[rule_theorem_plain:For matrix transformations, injectivity is equivalent to full column rank: $\\text{rank}(A) = n$.]@
+[The proof is short](https://linearalgebranotes.com/maps/injective-surjective-isomorphism#rule-kernel-test). If $T(\\mathbf{u}) = T(\\mathbf{v})$, then $T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v}) = \\mathbf{0}$, so $\\mathbf{u} - \\mathbf{v} \\in \\ker(T)$. If the kernel is trivial, $\\mathbf{u} - \\mathbf{v} = \\mathbf{0}$ and $\\mathbf{u} = \\mathbf{v}$.`,
+    afterProof: `@academic[rule_theorem_plain:For matrix transformations, injectivity is equivalent to full column rank: $\\text{rank}(A) = n$.]@
 
 This means every column is a pivot column, no free variables exist in $A\\mathbf{x} = \\mathbf{0}$, the columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence), and the [determinant](!/linear-algebra/determinants) is nonzero (in the square case).
 
@@ -1620,8 +1620,23 @@ $$(-1, 0, -1, 1, 0), \\qquad (0, -1, -1, 0, 1)$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "A trivial kernel means injective" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'If $\\ker(T) = \\{\\mathbf{0}\\}$, then $T(\\mathbf{u}) = T(\\mathbf{v})$ implies $\\mathbf{u} = \\mathbf{v}$' },
+    steps: [
+      { math: '$T(\\mathbf{u}) = T(\\mathbf{v})$', tag: 'suppose', why: 'Two inputs with the same output' },
+      { math: '$T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v})$', tag: 'linearity', why: 'A linear map preserves subtraction' },
+      { math: '$= \\mathbf{0}$', tag: 'equal outputs', why: 'The two outputs are equal' },
+      { math: '$\\mathbf{u} - \\mathbf{v} \\in \\ker(T)$', tag: 'kernel', why: 'It is sent to $\\mathbf{0}$' },
+      { math: '$\\mathbf{u} - \\mathbf{v} = \\mathbf{0}$', tag: 'key step', key: true, why: 'The kernel is trivial' },
+    ],
+    conclusion: { text: '$\\mathbf{u} = \\mathbf{v}$' },
+  };
+
 return {
   props:{
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1643,7 +1658,7 @@ return {
 }
    }
 
-export default function ImageKernelPage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ImageKernelPage({ proofStepsData, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1763,6 +1778,18 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-injectivity-kernel-criterion-proof'}
+            id="injectivity-kernel-criterion-proof"
+            title="A trivial kernel means injective"
+            source="/linear-algebra/transformations/image-kernel"
+            related={false}
+            before={"The short proof above, one step per line."}
+            after={"Linearity turns a question about two inputs into a question about one vector, $\\mathbf{u} - \\mathbf{v}$, and the kernel answers it."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {

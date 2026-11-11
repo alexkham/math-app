@@ -1374,6 +1374,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -2009,9 +2010,8 @@ Separating real and imaginary parts:
 @academic[formula_callout:Understanding Euler's Formula
 $$= \\left(1 - \\frac{\\theta^2}{2!} + \\frac{\\theta^4}{4!} - \\cdots\\right) + i\\left(\\theta - \\frac{\\theta^3}{3!} + \\frac{\\theta^5}{5!} - \\cdots\\right)$$]@
 
-The real part is the Taylor series for $\\cos\\theta$. The imaginary part is the Taylor series for $\\sin\\theta$. Therefore $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$.
-
-Geometrically, as $\\theta$ increases from $0$, the point $e^{i\\theta}$ traces the unit circle in the [complex plane](!/complex-numbers/geometric-representation). At $\\theta = 0$, we start at $1$. At $\\theta = \\pi/2$, we reach $i$. At $\\theta = \\pi$, we arrive at $-1$. At $\\theta = 2\\pi$, we complete the circle and return to $1$. The exponential $e^{i\\theta}$ parametrizes circular motion.`,
+The real part is the Taylor series for $\\cos\\theta$. The imaginary part is the Taylor series for $\\sin\\theta$. Therefore $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$.`,
+      afterProof: `Geometrically, as $\\theta$ increases from $0$, the point $e^{i\\theta}$ traces the unit circle in the [complex plane](!/complex-numbers/geometric-representation). At $\\theta = 0$, we start at $1$. At $\\theta = \\pi/2$, we reach $i$. At $\\theta = \\pi$, we arrive at $-1$. At $\\theta = 2\\pi$, we complete the circle and return to $1$. The exponential $e^{i\\theta}$ parametrizes circular motion.`,
   after: ``,
   link: '',
 },
@@ -2032,9 +2032,8 @@ $$e^{i\\pi} + 1 = 0$$
 /complex-numbers/formulas#eulers_identity]@
 
 @academic[formulas_link:Browse all complex numbers formulas
-/complex-numbers/formulas]@
-
-This equation — Euler's identity — connects five of mathematics' most fundamental constants in a single statement. The number $e$, base of natural logarithms and central to calculus. The number $i$, foundation of complex arithmetic. The number $\\pi$, ratio of circumference to diameter and key to circular geometry. The number $1$, the multiplicative identity. The number $0$, the additive identity.
+/complex-numbers/formulas]@`,
+      afterProof: `This equation — Euler's identity — connects five of mathematics' most fundamental constants in a single statement. The number $e$, base of natural logarithms and central to calculus. The number $i$, foundation of complex arithmetic. The number $\\pi$, ratio of circumference to diameter and key to circular geometry. The number $1$, the multiplicative identity. The number $0$, the additive identity.
 
 Each constant emerged from different mathematical needs: $e$ from growth and limits, $i$ from algebraic completeness, $\\pi$ from measurement of circles, $1$ and $0$ from the structure of arithmetic itself. That a single equation links all five suggests deep unity beneath apparently disparate branches of mathematics.
 
@@ -2180,9 +2179,8 @@ $$z_1 \\cdot z_2 = r_1e^{i\\theta_1} \\cdot r_2e^{i\\theta_2} = r_1r_2 \\cdot e^
 
 The moduli multiply: $|z_1 \\cdot z_2| = r_1r_2$. The arguments add: $\\arg(z_1 \\cdot z_2) = \\theta_1 + \\theta_2$.
 
-This rule follows from the standard law of exponents: $e^a \\cdot e^b = e^{a+b}$. The complex setting changes nothing about how exponents combine.
-
-@academic[pitfall,aside:true,width:35%:Adding the moduli
+This rule follows from the standard law of exponents: $e^a \\cdot e^b = e^{a+b}$. The complex setting changes nothing about how exponents combine.`,
+      afterProof: `@academic[pitfall,aside:true,width:35%:Adding the moduli
 Adding the moduli along with the arguments turns $(2e^{i\\pi/4})(3e^{i\\pi/4})$ into $5e^{i\\pi/2} = 5i$. Only the arguments add; the moduli multiply, so the product is $6e^{i\\pi/2} = 6i$.
 [Read more](!#pitfall-adding-the-moduli)]@
 
@@ -2647,8 +2645,48 @@ $$= \\sqrt{2}\\left(-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i\\right) = -1 -
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving Euler's formula from Taylor series" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: '$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$' },
+    steps: [
+      { math: '$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\frac{x^4}{4!} + \\cdots$', tag: 'series', why: 'The Taylor series of the exponential function' },
+      { math: '$e^{i\\theta} = 1 + i\\theta + \\frac{(i\\theta)^2}{2!} + \\frac{(i\\theta)^3}{3!} + \\frac{(i\\theta)^4}{4!} + \\cdots$', tag: 'substitute', why: 'Substituting $x = i\\theta$' },
+      { math: '$= 1 + i\\theta - \\frac{\\theta^2}{2!} - \\frac{i\\theta^3}{3!} + \\frac{\\theta^4}{4!} + \\frac{i\\theta^5}{5!} - \\cdots$', tag: 'powers of i', why: 'The powers of $i$ cycle: $i^2 = -1$, $i^3 = -i$, $i^4 = 1$' },
+      { math: '$= \\left(1 - \\frac{\\theta^2}{2!} + \\frac{\\theta^4}{4!} - \\cdots\\right) + i\\left(\\theta - \\frac{\\theta^3}{3!} + \\frac{\\theta^5}{5!} - \\cdots\\right)$', tag: 'key step', key: true, why: 'Separating real and imaginary parts' },
+    ],
+    conclusion: { text: '$e^{i\\theta} = \\cos\\theta + i\\sin\\theta$', say: 'The real part is the Taylor series for $\\cos\\theta$; the imaginary part is the Taylor series for $\\sin\\theta$.' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving Euler's identity" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: '$e^{i\\pi} + 1 = 0$' },
+    steps: [
+      { math: '$e^{i\\pi} = \\cos\\pi + i\\sin\\pi$', tag: 'substitute', why: "Euler's formula with $\\theta = \\pi$" },
+      { math: '$= -1 + 0$', tag: 'key step', key: true, why: '$\\cos\\pi = -1$ and $\\sin\\pi = 0$' },
+      { math: '$= -1$', tag: 'simplify', why: 'The imaginary part vanishes' },
+      { math: '$e^{i\\pi} + 1 = 0$', tag: 'rearrange', why: 'Rearranging' },
+    ],
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the multiplication rule" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: '$z_1 \\cdot z_2 = r_1r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$' },
+    steps: [
+      { math: '$z_1 \\cdot z_2 = r_1e^{i\\theta_1} \\cdot r_2e^{i\\theta_2}$', tag: 'substitute', why: 'Given $z_1 = r_1e^{i\\theta_1}$ and $z_2 = r_2e^{i\\theta_2}$' },
+      { math: '$= r_1r_2 \\cdot e^{i\\theta_1} \\cdot e^{i\\theta_2}$', tag: 'regroup', why: 'Grouping the two moduli together' },
+      { math: '$= r_1r_2 \\cdot e^{i(\\theta_1 + \\theta_2)}$', tag: 'key step', key: true, why: 'The standard law of exponents: $e^a \\cdot e^b = e^{a+b}$' },
+    ],
+    conclusion: { text: '$|z_1 \\cdot z_2| = r_1r_2$ and $\\arg(z_1 \\cdot z_2) = \\theta_1 + \\theta_2$', say: 'The moduli multiply. The arguments add.' },
+  };
+
   return {
   props:{
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2673,7 +2711,7 @@ $$= \\sqrt{2}\\left(-\\frac{\\sqrt{2}}{2} - \\frac{\\sqrt{2}}{2}i\\right) = -1 -
    }
 
 
-export default function ExponentialFormPage({ formulaSummaryData, pitfallData,
+export default function ExponentialFormPage({ proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2789,6 +2827,18 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-euler-formula-taylor-proof'}
+            id="euler-formula-taylor-proof"
+            title="Deriving Euler's formula from Taylor series"
+            source="/complex-numbers/exponential-form"
+            related={false}
+            before={"The series argument above, one line per row: substitute $i\\theta$, reduce the powers of $i$, then split into real and imaginary parts."}
+            after={"The cycle of the powers of $i$ sorts the terms: the even powers land in the real part and the odd powers in the imaginary part."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
           <div
             key={'obj2-table'}
             style={tableWrapStyle}
@@ -2803,6 +2853,18 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-euler-identity-steps'}
+            id="euler-identity-steps"
+            title="Deriving Euler's identity"
+            source="/complex-numbers/exponential-form"
+            related={false}
+            before={"The substitution $\\theta = \\pi$ above, split at each equals sign."}
+            after={"Only two values are needed, $\\cos\\pi = -1$ and $\\sin\\pi = 0$; the last step is a rearrangement."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
                   <div key={'unit-identity'} dangerouslySetInnerHTML={{ __html: demoUnits.identity }} />,
           `The identity is Euler&#8217;s formula evaluated at the one angle where both legs are integers.`,
         ]
@@ -2858,6 +2920,18 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-exponential-form-multiplication-proof'}
+            id="exponential-form-multiplication-proof"
+            title="Deriving the multiplication rule"
+            source="/complex-numbers/exponential-form"
+            related={false}
+            before={"The product above, split at each equals sign, with the reason for each step."}
+            after={"Adding the arguments is adding exponents; only the moduli are multiplied."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
                   <div key={'unit-mult'} dangerouslySetInnerHTML={{ __html: demoUnits.mult }} />,
           `Adding exponents and adding angles are the same operation.`,
         ]

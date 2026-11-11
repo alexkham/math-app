@@ -16,6 +16,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
@@ -404,9 +405,8 @@ Applying the limit definition with $x$ as a free variable produces an expression
 For $f(x) = x^2$:
 
 @academic[formula_callout:Computing the Derivative Function from the Definition
-$$f'(x) = \\lim_{h \\to 0} \\frac{(x+h)^2 - x^2}{h} = \\lim_{h \\to 0} \\frac{2xh + h^2}{h} = \\lim_{h \\to 0} (2x + h) = 2x$$]@
-
-@academic[pitfall,aside:true,width:35%:Squaring a sum term by term
+$$f'(x) = \\lim_{h \\to 0} \\frac{(x+h)^2 - x^2}{h} = \\lim_{h \\to 0} \\frac{2xh + h^2}{h} = \\lim_{h \\to 0} (2x + h) = 2x$$]@`,
+    afterProof: `@academic[pitfall,aside:true,width:35%:Squaring a sum term by term
 Writing $(x + h)^2$ as $x^2 + h^2$ leaves $\\frac{h^2}{h} = h$, which tends to $0$, so $f'(x) = 0$ for every $x$. With $(x + h)^2 = x^2 + 2xh + h^2$ the quotient is $2x + h$, and $f'(x) = 2x$.
 [Read more](!#pitfall-squaring-a-sum-term-by-term)]@
 
@@ -810,8 +810,22 @@ const schemas = {
     ],
   };
 
+  // ProofSteps pilot 2026-11-08: the stepper layout of the section "The derivative of x squared from the definition", from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: "For $f(x) = x^2$: $f'(x) = 2x$" },
+    steps: [
+      { action: 'Write the definition', math: "$\\displaystyle f'(x) = \\lim_{h \\to 0} \\frac{(x+h)^2 - x^2}{h}$", why: 'The limit definition, with $x$ left free so that the answer is a function of $x$.' },
+      { action: 'Expand the square', math: '$\\displaystyle = \\lim_{h \\to 0} \\frac{2xh + h^2}{h}$', why: 'Since $(x + h)^2 = x^2 + 2xh + h^2$, the two $x^2$ terms cancel.' },
+      { action: 'Divide by $h$', math: '$\\displaystyle = \\lim_{h \\to 0} (2x + h)$', why: 'Every term in the numerator has a factor $h$.' },
+      { action: 'Let $h \\to 0$', math: '$= 2x$', why: 'The result is a function: at $x = 3$ the slope is $6$, at $x = -1$ it is $-2$.' },
+    ],
+    conclusion: { text: "$f'(x) = 2x$", say: 'Input $x$, output the slope of the parabola at that $x$.' },
+  };
+
   return {
   props: {
+    proofStepsData,
     pitfallData,
       darbouxConverse,
     smoothNest,
@@ -837,7 +851,7 @@ const schemas = {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PageTemplate({ pitfallData,darbouxConverse, smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ proofStepsData, pitfallData,darbouxConverse, smoothNest, seoData, sectionsContent, introContent, obj6Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -926,6 +940,18 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps'}
+            id="derivative-from-definition-steps"
+            title="The derivative of x squared from the definition"
+            source="/calculus/derivatives/function"
+            related={false}
+            before={"The same computation one step at a time. Use Next and Back, or click a segment of the bar, to move through it."}
+            after={"Every step before the last keeps $h \\neq 0$; only the final step lets $h$ go to zero, once the quotient no longer divides by it."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
         ]
     },
     {

@@ -916,6 +916,7 @@ import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDia
 import renderTriangleLabelV2 from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel.v2'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -1780,8 +1781,22 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the law of cosines" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: '$c^2 = a^2 + b^2 - 2ab\\cos C$' },
+    steps: [
+      { action: 'Place the triangle on axes', math: '$B = (a, 0)$ and $A = (b\\cos C, b\\sin C)$', why: 'Vertex $C$ at the origin, side $a$ along the positive $x$-axis.' },
+      { action: 'Find the distance from $A$ to $B$', math: '$\\displaystyle c = \\sqrt{(b\\cos C - a)^2 + (b\\sin C)^2}$' },
+      { action: 'Square and expand', math: '$c^2 = b^2\\cos^2 C - 2ab\\cos C + a^2 + b^2\\sin^2 C$' },
+      { action: 'Group the squared terms', math: '$= a^2 + b^2(\\cos^2 C + \\sin^2 C) - 2ab\\cos C$' },
+      { action: 'Use the Pythagorean identity', math: '$c^2 = a^2 + b^2 - 2ab\\cos C$', why: 'Since $\\cos^2 C + \\sin^2 C = 1$.' },
+    ],
+  };
+
    return {
       props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     heronAnatomy,
@@ -1809,7 +1824,7 @@ The Law of Sines and the Law of Cosines are those tools. Together, they provide 
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function SinesCosinesLawPage({ formulaSummaryData, pitfallData,heronAnatomy, lawChoiceCases, 
+export default function SinesCosinesLawPage({ proofStepsData, formulaSummaryData, pitfallData,heronAnatomy, lawChoiceCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1963,6 +1978,17 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-law-of-cosines-derivation-steps'}
+            id="law-of-cosines-derivation-steps"
+            title="Deriving the law of cosines"
+            source="/trigonometry/sines-cosines-law"
+            related={false}
+            before={"The coordinate derivation above one step at a time; use Next and Back to move through it."}
+            after={"The Pythagorean identity does the decisive work: it merges $b^2\\cos^2 C$ and $b^2\\sin^2 C$ into a single $b^2$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
                   <div key={'unit-lawCosines'} dangerouslySetInnerHTML={{ __html: demoUnits.lawCosines }} />,
           `The law is thus the Pythagorean theorem with a correction for the angle not being right.`,
         ]

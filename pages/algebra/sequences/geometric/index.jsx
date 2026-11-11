@@ -17,6 +17,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -588,9 +589,8 @@ Factor:
 @academic[formula_callout:Finite Geometric Series
 $$S_n(1 - r) = a_1(1 - r^n)$$]@
 
-Divide by $1 - r$ to isolate $S_n$. When $r = 1$, every term equals $a_1$ and $S_n = na_1$.
-
-For example, the sum $1 + 2 + 4 + 8 + \\cdots + 2^9$ has $a_1 = 1$, $r = 2$, and $n = 10$:
+Divide by $1 - r$ to isolate $S_n$. When $r = 1$, every term equals $a_1$ and $S_n = na_1$.`,
+    afterProof: `For example, the sum $1 + 2 + 4 + 8 + \\cdots + 2^9$ has $a_1 = 1$, $r = 2$, and $n = 10$:
 
 @academic[formula_callout:Finite Geometric Series
 $$S_{10} = 1 \\cdot \\frac{1 - 2^{10}}{1 - 2} = \\frac{1 - 1024}{-1} = 1023$$]@
@@ -924,8 +924,22 @@ $$S = \\frac{1 - 2^9}{1 - 2} = \\frac{1 - 512}{-1} = 511$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the finite geometric series sum" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$' },
+    steps: [
+      { action: 'Write out the sum', math: '$S_n = a_1 + a_1 r + a_1 r^2 + \\cdots + a_1 r^{n-1}$' },
+      { action: 'Multiply $S_n$ by $r$', math: '$rS_n = a_1 r + a_1 r^2 + \\cdots + a_1 r^n$', why: 'Multiplying by $r$ shifts the sum one place along.' },
+      { action: 'Subtract from the original sum', math: '$S_n - rS_n = a_1 - a_1 r^n$', why: 'All but two terms cancel.' },
+      { action: 'Factor', math: '$S_n(1 - r) = a_1(1 - r^n)$' },
+      { action: 'Divide by $1 - r$', math: '$\\displaystyle S_n = a_1 \\cdot \\frac{1 - r^n}{1 - r} \\quad (r \\neq 1)$', why: 'When $r = 1$, every term equals $a_1$ and $S_n = na_1$.' },
+    ],
+  };
+
    return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
      sectionsContent,
@@ -948,7 +962,7 @@ $$S = \\frac{1 - 2^9}{1 - 2} = \\frac{1 - 512}{-1} = 511$$`],
 }
    }
 
-export default function GeometricSequencesPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function GeometricSequencesPage({ proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj1Table, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1097,6 +1111,18 @@ $$a_n = a_1 \\cdot r^{n-1}$$
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-geometric-series-sum-steps'}
+            id="geometric-series-sum-steps"
+            title="Deriving the finite geometric series sum"
+            source="/algebra/sequences/geometric"
+            related={false}
+            before={"The telescoping derivation above, one step per screen: use Next and Back to move through it."}
+            after={"The subtraction is the whole trick: the shifted copy cancels every term except $a_1$ and $a_1 r^n$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
         ]
     },
     {

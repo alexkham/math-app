@@ -14,6 +14,7 @@ import { renderFactorSet } from '@/app/utils/illustrations/arithmetic/divisibili
 import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
@@ -292,9 +293,8 @@ Assume, for contradiction, that only finitely many primes exist: $p_1, p_2, \\ld
 @academic[formula_callout:Infinitude of Primes
 $$N = p_1 \\cdot p_2 \\cdot p_3 \\cdots p_k + 1$$]@
 
-Dividing $N$ by any prime $p_i$ on the list leaves a remainder of $1$, so $N$ is not divisible by any of the listed primes. Either $N$ is itself prime (a prime missing from the list) or $N$ has a prime factor not on the list. In either case, the original list is incomplete.
-
-The argument does not claim that $N$ is prime — it claims that $N$ has a prime factor outside the assumed list. For instance, $2 \\cdot 3 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13 + 1 = 30031 = 59 \\cdot 509$, which is composite, but its factors $59$ and $509$ are primes not in the original set.
+Dividing $N$ by any prime $p_i$ on the list leaves a remainder of $1$, so $N$ is not divisible by any of the listed primes. Either $N$ is itself prime (a prime missing from the list) or $N$ has a prime factor not on the list. In either case, the original list is incomplete.`,
+    afterProof: `The argument does not claim that $N$ is prime — it claims that $N$ has a prime factor outside the assumed list. For instance, $2 \\cdot 3 \\cdot 5 \\cdot 7 \\cdot 11 \\cdot 13 + 1 = 30031 = 59 \\cdot 509$, which is composite, but its factors $59$ and $509$ are primes not in the original set.
 
 No finite collection of primes can account for all of them. New primes always exist beyond any boundary.`,
     before: ``,
@@ -656,8 +656,22 @@ $$\\text{lcm}(60, 252) = 2^2 \\cdot 3^2 \\cdot 5 \\cdot 7 = 1260$$`],
   };
 
 
+  // ProofSteps 2026-11-08: "Euclid's proof that there are infinitely many primes" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'There are infinitely many prime numbers' },
+    steps: [
+      { math: '$p_1, p_2, \\ldots, p_k$', tag: 'assume', why: 'Assume, for contradiction, that these are the only primes' },
+      { math: '$N = p_1 \\cdot p_2 \\cdot p_3 \\cdots p_k + 1$', tag: 'build', why: 'Form the product of all of them, plus $1$' },
+      { math: 'Remainder $1$ for every $p_i$', tag: 'key step', key: true, why: 'So $N$ is not divisible by any of the listed primes' },
+      { math: '$N$ is prime, or has a prime factor not on the list', tag: 'either way', why: 'In either case, the original list is incomplete' },
+    ],
+    conclusion: { text: 'There are infinitely many prime numbers', say: 'No finite collection of primes can account for all of them.' },
+  };
+
    return {
   props:{
+    proofStepsData,
       primeNumberApply,
     pitfallData,
     primeTypeTree,
@@ -680,7 +694,7 @@ description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve 
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PrimeNumbersPage({primeNumberApply,  pitfallData,primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PrimeNumbersPage({ proofStepsData,primeNumberApply,  pitfallData,primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -791,6 +805,18 @@ $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-infinitude-of-primes-proof'}
+            id="infinitude-of-primes-proof"
+            title="Euclid's proof that there are infinitely many primes"
+            source="/algebra/sequences/prime-numbers"
+            related={false}
+            before={"Euclid's argument as a chain of four steps, each with its reason. The gold line is where the assumed list breaks down."}
+            after={"Adding $1$ is the whole trick: it leaves remainder $1$ for every listed prime, so any prime factor of $N$ must be a new one."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
         ]
     },
     {

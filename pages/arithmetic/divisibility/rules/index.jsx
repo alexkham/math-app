@@ -18,6 +18,7 @@ import divisibilityTreeDiagrams from '@/app/components/divisibility/divisibility
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 
 
 export async function getStaticProps(){
@@ -437,9 +438,8 @@ obj3: {
   title: `Divisibility by 3`,
   content: `@academic[rule_plain:A number is divisible by $3$ if the sum of its digits is divisible by $3$.]@
 
-The reason traces to a single congruence: $10 \\equiv 1 \\pmod{3}$. Every power of $10$ is also congruent to $1$ modulo $3$: $10^2 \\equiv 1$, $10^3 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{3}$. The place value drops away entirely, and only the digit itself matters. The number is congruent to the sum of its digits modulo $3$.
-
-The number $729$ illustrates the rule: $7 + 2 + 9 = 18$, and $1 + 8 = 9$. Since $3 \\mid 9$, the number is divisible by $3$ — as shown below.`,
+The reason traces to a single congruence: $10 \\equiv 1 \\pmod{3}$. Every power of $10$ is also congruent to $1$ modulo $3$: $10^2 \\equiv 1$, $10^3 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{3}$. The place value drops away entirely, and only the digit itself matters. The number is congruent to the sum of its digits modulo $3$.`,
+  afterProof: `The number $729$ illustrates the rule: $7 + 2 + 9 = 18$, and $1 + 8 = 9$. Since $3 \\mid 9$, the number is divisible by $3$ — as shown below.`,
   afterFigure: `@academic[pitfall,aside:true,width:35%:Testing 3 by the last digit
 Judging by the last digit, $2{,}143$ passes because it ends in $3$, yet its digit sum $10$ fails and $2143 = 3 \\cdot 714 + 1$. And $1{,}257$ ends in $7$, but $1 + 2 + 5 + 7 = 15$, so $3 \\mid 1257$.
 [Read more](!#pitfall-testing-3-by-the-last-digit)]@
@@ -917,8 +917,22 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why the rule for 3 works" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'A number is divisible by $3$ if the sum of its digits is divisible by $3$.' },
+    steps: [
+      { math: '$10 \\equiv 1 \\pmod{3}$', tag: 'base', why: 'The single congruence the rule traces to' },
+      { math: '$10^2 \\equiv 1$, $10^3 \\equiv 1$, and so on', tag: 'powers', why: 'Every power of $10$ is also congruent to $1$ modulo $3$' },
+      { math: '$d \\cdot 10^k \\equiv d \\cdot 1$', tag: 'one digit', why: 'A digit $d$ in the $k$th place, with its place value' },
+      { math: '$= d \\pmod{3}$', tag: 'key step', key: true, why: 'The place value drops away entirely, and only the digit itself matters' },
+    ],
+    conclusion: { text: 'The number is congruent to the sum of its digits modulo $3$' },
+  };
+
 return {
   props:{
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -948,7 +962,7 @@ drObj10,
 }
    }
 
-export default function DivisibilityRulesPage({ pitfallData,seoData, sectionsContent, introContent, obj11Table,
+export default function DivisibilityRulesPage({ proofStepsData, pitfallData,seoData, sectionsContent, introContent, obj11Table,
    obj13Table, summaryTable, faqQuestions, 
    schemas,
   drObj2,
@@ -1072,6 +1086,18 @@ drObj10, demoUnits, conceptIntroFigures}) {
     link:sectionsContent.obj3.link,
     content:[
       sectionsContent.obj3.content,
+      <DiagramFrame
+        key={'proof-steps-divisibility-by-3-proof'}
+        id="divisibility-by-3-proof"
+        title="Why the rule for 3 works"
+        source="/arithmetic/divisibility/rules"
+        related={false}
+        before={"The reason for the rule as a chain of congruences modulo $3$, from the one fact about $10$ to the share of a single digit."}
+        after={"Once every power of $10$ counts as $1$, the place value of each digit drops away, and that last line is where the rule comes from."}
+      >
+        <ProofSteps data={proofStepsData} variant="chain" />
+      </DiagramFrame>,
+      sectionsContent.obj3.afterProof,
       <div key={'obj3-svg'} style={{ maxWidth: '700px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: drObj3 }} />,
       sectionsContent.obj3.afterFigure,

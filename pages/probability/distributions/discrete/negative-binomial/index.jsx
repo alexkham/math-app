@@ -864,6 +864,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
@@ -1262,9 +1263,8 @@ For the negative binomial distribution, the mode depends on the parameters $r$ a
 The mode is $r + \\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$. When $\\frac{(r-1)(1-p)}{p}$ is a whole number, the value one below is a mode too: two values tie.
 
 **If** $r = 1$**:**
-The mode is $1$ (this reduces to the [geometric distribution](!/probability/distributions/discrete/geometric): success on the first trial is most likely)
-
-**Intuition:** The term $\\frac{(r-1)(1-p)}{p}$ counts the most likely number of failures; adding the $r$ successes turns it into a number of trials. The mode sits a little below the [expected value](!/probability/expected-value) $\\frac{r}{p}$. As $p$ decreases (success becomes rarer), the mode shifts rightward.
+The mode is $1$ (this reduces to the [geometric distribution](!/probability/distributions/discrete/geometric): success on the first trial is most likely)`,
+      afterCases: `**Intuition:** The term $\\frac{(r-1)(1-p)}{p}$ counts the most likely number of failures; adding the $r$ successes turns it into a number of trials. The mode sits a little below the [expected value](!/probability/expected-value) $\\frac{r}{p}$. As $p$ decreases (success becomes rarer), the mode shifts rightward.
 
 @academic[example:Example
 For $r = 5$ and $p = 0.3$:
@@ -1729,8 +1729,21 @@ $$= 10 \\cdot 0.015625 = 0.15625$$`],
     ],
   };
 
+  // SpecialCases 2026-11-09: "Where the mode formula changes" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'If $r > 1$', text: 'Mode $= r + \\lfloor \\frac{(r-1)(1-p)}{p} \\rfloor$' },
+    cases: [
+      { when: '$\\frac{(r-1)(1-p)}{p}$ is whole', tag: 'two modes', tone: 'warn', rule: 'The value one below is a mode too',
+        why: 'Two values tie for the highest probability.' },
+      { when: '$r = 1$', tag: 'geometric', rule: 'Mode $= 1$', examples: '$r = 1$, $p = 0.4$: mode $= 1$',
+        why: 'This reduces to the geometric distribution: success on the first trial is most likely.' },
+    ],
+  };
+
    return {
       props:{
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1753,7 +1766,7 @@ $$= 10 \\cdot 0.015625 = 0.15625$$`],
     }
    }
 
-export default function NegativeBinomialDistributionPage({ formulaSummaryData, pitfallData,
+export default function NegativeBinomialDistributionPage({ specialCasesData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1938,6 +1951,18 @@ export default function NegativeBinomialDistributionPage({ formulaSummaryData, p
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'special-cases-negative-binomial-mode-special-cases'}
+            id="negative-binomial-mode-special-cases"
+            title="Where the mode formula changes"
+            source="/probability/distributions/discrete/negative-binomial"
+            related={false}
+            before={"The mode formula, then the two cases where it gives a different answer, each with its reason."}
+            after={"Both rows change the answer, not the method: a tie adds a second mode, and $r = 1$ turns the distribution into the geometric one."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterCases,
         ]
     },
     {

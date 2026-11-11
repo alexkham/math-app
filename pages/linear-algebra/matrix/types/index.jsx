@@ -886,6 +886,8 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixTypesDiagrams from '@/app/components/matrices/matrixTypesDiagrams'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -1409,9 +1411,8 @@ The first term is symmetric, the second is skew-symmetric, and this splitting is
 @academic[fact,aside:true,width:35%:Skew determinants are perfect squares
 For even order, the determinant of a skew-symmetric matrix is the square of a polynomial in its entries. With $a, b, c, d, e, f$ the six entries above the diagonal of a $4 \\times 4$ one, read row by row, it equals $(af - be + cd)^2$.]@
 
-For matrices of odd order, the determinant is always zero: $\\det(A) = \\det(A^T) = \\det(-A) = (-1)^n \\det(A)$, and when $n$ is odd, this forces $\\det(A) = 0$. For even order, the determinant can be nonzero.
-
-The smallest even case shows what kind of number comes out: $\\det \\begin{pmatrix} 0 & a \\\\ -a & 0 \\end{pmatrix} = a^2$. A $4 \\times 4$ skew-symmetric matrix is fixed by the six entries above its diagonal, since the diagonal is zero and everything below is a negated mirror image. Expanding its determinant by cofactors gives a polynomial of degree four in those six numbers.
+For matrices of odd order, the determinant is always zero: $\\det(A) = \\det(A^T) = \\det(-A) = (-1)^n \\det(A)$, and when $n$ is odd, this forces $\\det(A) = 0$. For even order, the determinant can be nonzero.`,
+    afterProof: `The smallest even case shows what kind of number comes out: $\\det \\begin{pmatrix} 0 & a \\\\ -a & 0 \\end{pmatrix} = a^2$. A $4 \\times 4$ skew-symmetric matrix is fixed by the six entries above its diagonal, since the diagonal is zero and everything below is a negated mirror image. Expanding its determinant by cofactors gives a polynomial of degree four in those six numbers.
 
 In $\\mathbb{R}^3$, the [cross product](!/linear-algebra/vectors/cross-product) $\\mathbf{a} \\times \\mathbf{b}$ can be written as $[\\mathbf{a}]_\\times \\mathbf{b}$, where $[\\mathbf{a}]_\\times$ is the $3 \\times 3$ skew-symmetric matrix
 
@@ -1435,9 +1436,8 @@ This means the columns of $Q$ form an [orthonormal](!/linear-algebra/orthogonali
 The determinant of an orthogonal matrix is $\\pm 1$, since $1 = \\det(I) = \\det(Q^T Q) = \\det(Q)^2$:
 
 @academic[formula_callout:orthogonal_matrix_determinant|Orthogonal Matrix Determinant|$$\\det(Q) = \\pm 1$$]@
-@academic[formulas_link:/linear-algebra/formulas#orthogonal_matrix_determinant]@
-
-When $\\det(Q) = +1$, the matrix is a rotation. When $\\det(Q) = -1$, it involves a reflection.
+@academic[formulas_link:/linear-algebra/formulas#orthogonal_matrix_determinant]@`,
+    afterProof: `When $\\det(Q) = +1$, the matrix is a rotation. When $\\det(Q) = -1$, it involves a reflection.
 
 @academic[rule_plain:The defining geometric property is that orthogonal matrices preserve lengths: $\\|Q\\mathbf{x}\\| = \\|\\mathbf{x}\\|$ for every vector $\\mathbf{x}$.]@
 
@@ -1533,9 +1533,8 @@ Any matrix type can be singular or nonsingular depending on its entries. A diago
 
 @academic[pitfall,aside:true,width:35%:Judging invertibility from the diagonal
 Calling $\\begin{pmatrix} 1 & 2 \\\\ 2 & 4 \\end{pmatrix}$ nonsingular because no diagonal entry is zero misses $\\det = 1 \\cdot 4 - 2 \\cdot 2 = 0$. The diagonal test holds only for diagonal and triangular matrices; this one is singular, its second column twice the first.
-[Read more](!#pitfall-judging-invertibility-from-the-diagonal)]@
-
-Most matrices met in practice have no special pattern at all. For them, deciding whether the matrix is singular takes a computation: evaluating the determinant, [finding the rank by row reduction](https://calculatematrix.com/matrix-calculators/matrix-rank#formula), or spotting a dependence among the columns. Which of the three is quickest depends on the size of the matrix and on how its entries are related.`,
+[Read more](!#pitfall-judging-invertibility-from-the-diagonal)]@`,
+    afterCases: `Most matrices met in practice have no special pattern at all. For them, deciding whether the matrix is singular takes a computation: evaluating the determinant, [finding the rank by row reduction](https://calculatematrix.com/matrix-calculators/matrix-rank#formula), or spotting a dependence among the columns. Which of the three is quickest depends on the size of the matrix and on how its entries are related.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1800,8 +1799,55 @@ $$= \\text{diag}(0, -2)\\,\\text{diag}(2, 0) = O$$`, `The swap $\\begin{pmatrix}
     ],
   };
 
+  // ProofSteps 2026-11-08: "Odd skew-symmetric matrices are singular" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'For odd $n$, a skew-symmetric $A$ has $\\det(A) = 0$' },
+    steps: [
+      { math: '$\\det(A) = \\det(A^T)$', tag: 'transpose', why: 'Transposing does not change the determinant' },
+      { math: '$= \\det(-A)$', tag: 'skew', why: '$A^T = -A$' },
+      { math: '$= (-1)^n \\det(A)$', tag: 'key step', key: true, why: 'Each of the $n$ rows is multiplied by $-1$' },
+    ],
+    conclusion: { text: '$\\det(A) = 0$', say: 'When $n$ is odd, $\\det(A) = -\\det(A)$, which forces $\\det(A) = 0$.' },
+  };
+
+  // ProofSteps 2026-11-08: "Determinant of an orthogonal matrix" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\det(Q) = \\pm 1$' },
+    steps: [
+      { math: '$1 = \\det(I)$', tag: 'identity', why: 'The identity matrix has determinant $1$' },
+      { math: '$= \\det(Q^T Q)$', tag: 'orthogonal', why: '$Q^T Q = I$' },
+      { math: '$= \\det(Q)^2$', tag: 'key step', key: true, why: 'The determinant of a product is the product of the determinants, and $\\det(Q^T) = \\det(Q)$' },
+    ],
+    conclusion: { text: '$\\det(Q) = \\pm 1$' },
+  };
+
+  // SpecialCases 2026-11-09: "Types that settle singularity" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$A \\text{ singular} \\iff \\det(A) = 0 \\iff \\text{rank}(A) < n$' },
+    cases: [
+      { when: 'diagonal', tag: 'check the diagonal', rule: 'singular if any diagonal entry is zero',
+        why: 'The determinant is the product of the diagonal entries.',
+        more: '$\\det(D) = d_1 d_2 \\cdots d_n$' },
+      { when: 'triangular', tag: 'check the diagonal', rule: 'singular if any diagonal entry is zero',
+        why: 'The determinant is the product of the diagonal entries.',
+        more: '$\\det(T) = \\prod_{i=1}^{n} t_{ii}$' },
+      { when: 'orthogonal', tag: 'never singular', rule: '$\\det(Q) = \\pm 1$',
+        why: 'Its determinant is $\\pm 1$, never zero.',
+        more: '$1 = \\det(I) = \\det(Q^T Q) = \\det(Q)^2$' },
+      { when: 'nilpotent', tag: 'always singular', tone: 'warn', rule: 'singular',
+        why: 'All its eigenvalues are zero.',
+        more: 'Every eigenvalue of a nilpotent matrix is zero, which forces the determinant to vanish.' },
+    ],
+  };
+
 return {
   props: {
+    specialCasesData,
+    proofStepsData2,
+    proofStepsData,
     pitfallData,
     permNest,
     demoUnits,
@@ -1826,7 +1872,7 @@ return {
 }
 
 
-export default function MatrixTypesPage({ pitfallData,permNest, demoUnits, seoData, sectionsContent, introContent, obj8Table, obj12Table, matrixTypeProfiles, faqQuestions, schemas, conceptIntroFigures}) {
+export default function MatrixTypesPage({ specialCasesData, proofStepsData2, proofStepsData, pitfallData,permNest, demoUnits, seoData, sectionsContent, introContent, obj8Table, obj12Table, matrixTypeProfiles, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1964,6 +2010,18 @@ export default function MatrixTypesPage({ pitfallData,permNest, demoUnits, seoDa
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-skew-symmetric-odd-determinant-proof'}
+            id="skew-symmetric-odd-determinant-proof"
+            title="Odd skew-symmetric matrices are singular"
+            source="/linear-algebra/matrix/types"
+            related={false}
+            before={"The chain above, one equality per line."}
+            after={"Only the parity of $n$ enters, through the factor $(-1)^n$ in the last line."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
           <div key={'unit-skewSymmetric'} dangerouslySetInnerHTML={{ __html: demoUnits.skewSymmetric }} />,
           `Adding a symmetric and a skew-symmetric matrix can produce any square matrix, which is why the two types are studied as a pair.`,
         ]
@@ -1974,6 +2032,18 @@ export default function MatrixTypesPage({ pitfallData,permNest, demoUnits, seoDa
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-orthogonal-matrix-determinant-proof'}
+            id="orthogonal-matrix-determinant-proof"
+            title="Determinant of an orthogonal matrix"
+            source="/linear-algebra/matrix/types"
+            related={false}
+            before={"The one-line argument above, split at each equals sign."}
+            after={"Orthogonality fixes $\\det(Q)^2$ at $1$; the sign that is left is what separates rotations from reflections."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {
@@ -2001,6 +2071,18 @@ export default function MatrixTypesPage({ pitfallData,permNest, demoUnits, seoDa
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'special-cases-matrix-type-singularity-special-cases'}
+            id="matrix-type-singularity-special-cases"
+            title="Types that settle singularity"
+            source="/linear-algebra/matrix/types"
+            related={false}
+            before={"One row per matrix type whose structure settles singularity in advance. Click a row for the determinant fact behind it."}
+            after={"In every row the verdict comes from the determinant, read off the structure instead of computed."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj10.afterCases,
           `@academic[punchline:Only a few matrix types settle invertibility in advance; for every other matrix it takes a computation.]@`,
         ]
     },

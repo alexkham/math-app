@@ -30,6 +30,7 @@ import probDistNotationSheet from '@/app/components/infographics/NotationCheatSh
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -328,9 +329,8 @@ Each Bernoulli variable has expected value $E[X_i] = p$.
 By the linearity of expectation:
 
 @academic[formula_callout:Expected Value (Mean)
-$$E[X] = E[X_1 + X_2 + \\cdots + X_n] = E[X_1] + E[X_2] + \\cdots + E[X_n] = p + p + \\cdots + p = np$$]@
-
-The result $E[X] = np$ captures a simple and intuitive fact: if you perform $n$ trials, each with probability $p$ of success, you expect on average to get $np$ successes. This is the most natural interpretation of "average number of successes."
+$$E[X] = E[X_1 + X_2 + \\cdots + X_n] = E[X_1] + E[X_2] + \\cdots + E[X_n] = p + p + \\cdots + p = np$$]@`,
+     afterProof: `The result $E[X] = np$ captures a simple and intuitive fact: if you perform $n$ trials, each with probability $p$ of success, you expect on average to get $np$ successes. This is the most natural interpretation of "average number of successes."
 
 ### Example
 
@@ -399,9 +399,8 @@ $$\\mathrm{Var}(X) = np(1-p)$$
 /probability/formulas#binomial_variance]@
 
 @academic[formulas_link:Browse all probability formulas
-/probability/formulas]@
-
-The result $\\mathrm{Var}(X) = np(1-p)$ shows that variance depends on both the number of trials and the probability structure.
+/probability/formulas]@`,
+  afterProof: `The result $\\mathrm{Var}(X) = np(1-p)$ shows that variance depends on both the number of trials and the probability structure.
 
 @academic[rule_corollary_plain:The term $p(1-p)$ is maximized when $p = 0.5$ (a fair coin), meaning maximum variability occurs when success and failure are equally likely.]@
 
@@ -931,8 +930,36 @@ $$= 0.3125$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the binomial mean" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$E[X] = np$' },
+    steps: [
+      { math: '$E[X] = E[X_1 + X_2 + \\cdots + X_n]$', tag: 'decompose', why: '$X$ is the sum of $n$ independent Bernoulli variables, $X_i = 1$ for a success on trial $i$ and $0$ for a failure' },
+      { math: '$= E[X_1] + E[X_2] + \\cdots + E[X_n]$', tag: 'key step', key: true, why: 'Linearity of expectation' },
+      { math: '$= p + p + \\cdots + p$', tag: 'Bernoulli', why: 'Each Bernoulli variable has expected value $E[X_i] = p$' },
+      { math: '$= np$', tag: 'count', why: '$n$ equal terms' },
+    ],
+    conclusion: { text: '$E[X] = np$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the binomial variance" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\mathrm{Var}(X) = np(1-p)$' },
+    steps: [
+      { math: '$X = X_1 + X_2 + \\cdots + X_n$', tag: 'decompose', why: 'The binomial variable is a sum of $n$ independent Bernoulli variables' },
+      { math: '$\\mathrm{Var}(X) = \\mathrm{Var}(X_1) + \\mathrm{Var}(X_2) + \\cdots + \\mathrm{Var}(X_n)$', tag: 'key step', key: true, why: 'For independent variables, variances add' },
+      { math: '$\\mathrm{Var}(X_i) = p(1-p)$', tag: 'Bernoulli', why: 'The variance of each Bernoulli variable' },
+      { math: '$\\mathrm{Var}(X) = np(1-p)$', tag: 'count', why: '$n$ equal terms' },
+    ],
+    conclusion: { text: '$\\mathrm{Var}(X) = np(1-p)$' },
+  };
+
    return {
       props:{
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -955,7 +982,7 @@ $$= 0.3125$$`],
     }
    }
 
-export default function BinomialDistributionPage({ formulaSummaryData, pitfallData,
+export default function BinomialDistributionPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1121,6 +1148,18 @@ export default function BinomialDistributionPage({ formulaSummaryData, pitfallDa
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-binomial-mean-steps'}
+            id="binomial-mean-steps"
+            title="Deriving the binomial mean"
+            source="/probability/distributions/discrete/binomial"
+            related={false}
+            before={"The linearity argument above, one equality at a time, each with the fact it uses."}
+            after={"The gold step does the work: linearity turns one expectation of a sum into $n$ expectations of single trials, each equal to $p$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {
@@ -1129,6 +1168,18 @@ export default function BinomialDistributionPage({ formulaSummaryData, pitfallDa
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-binomial-variance-steps'}
+            id="binomial-variance-steps"
+            title="Deriving the binomial variance"
+            source="/probability/distributions/discrete/binomial"
+            related={false}
+            before={"The same decomposition used for the variance, line by line with the reason for each."}
+            after={"The gold step needs independence: only because the trials are independent do the $n$ variances simply add."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {

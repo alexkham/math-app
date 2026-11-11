@@ -14,6 +14,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -629,9 +630,8 @@ $$\\int \\ln x\\, dx = x\\ln x - x + C$$
 @academic[fact,aside:true,width:35%:Factorials hide in $\\int \\ln x\\, dx$
 The sum $\\ln 1 + \\ln 2 + \\cdots + \\ln n$ is $\\ln n!$, and it stays close to $\\int_1^n \\ln x\\, dx = n\\ln n - n + 1$: for $n = 100$ they are $363.7$ and $361.5$. That is why $n!$ grows like $\\left(\\frac{n}{e}\\right)^n$, the main factor in Stirling's formula.]@
 
-The parts come from $u = \\ln x$ and $dv = dx$, so that $du = \\frac{1}{x}\\, dx$ and $v = x$. The formula then gives $x\\ln x - \\int x \\cdot \\frac{1}{x}\\, dx = x\\ln x - x + C$, and differentiating confirms it: $(x\\ln x - x)' = \\ln x + 1 - 1 = \\ln x$. Over an interval such as $[1, n]$ the antiderivative gives $\\int_1^n \\ln x\\, dx = n\\ln n - n + 1$.
-
-A crucial pattern recognizes when integrands have the form $f'(x)/f(x)$:
+The parts come from $u = \\ln x$ and $dv = dx$, so that $du = \\frac{1}{x}\\, dx$ and $v = x$. The formula then gives $x\\ln x - \\int x \\cdot \\frac{1}{x}\\, dx = x\\ln x - x + C$, and differentiating confirms it: $(x\\ln x - x)' = \\ln x + 1 - 1 = \\ln x$. Over an interval such as $[1, n]$ the antiderivative gives $\\int_1^n \\ln x\\, dx = n\\ln n - n + 1$.`,
+    afterProof: `A crucial pattern recognizes when integrands have the form $f'(x)/f(x)$:
 
 @academic[formula_callout:Logarithmic Derivative Pattern
 $$\\int \\frac{f'(x)}{f(x)}\\, dx = \\ln|f(x)| + C$$
@@ -1023,8 +1023,23 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Integrating ln x by parts" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\int \\ln x\\, dx = x\\ln x - x + C$' },
+    steps: [
+      { action: 'Choose the parts', math: '$u = \\ln x \\qquad dv = dx$' },
+      { action: 'Find $du$ and $v$', math: '$\\displaystyle du = \\frac{1}{x}\\, dx \\qquad v = x$' },
+      { action: 'Apply the formula', math: '$\\displaystyle x\\ln x - \\int x \\cdot \\frac{1}{x}\\, dx$' },
+      { action: 'Integrate what is left', math: '$= x\\ln x - x + C$', why: 'The integrand left over, $x \\cdot \\frac{1}{x}$, is $1$.' },
+      { action: 'Check by differentiating', math: "$(x\\ln x - x)' = \\ln x + 1 - 1 = \\ln x$", why: 'Differentiating confirms the antiderivative.' },
+    ],
+    conclusion: { text: '$\\int \\ln x\\, dx = x\\ln x - x + C$' },
+  };
+
   return {
   props: {
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     specialIntegralsOutline,
@@ -1049,7 +1064,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({ formulaSummaryData, pitfallData,specialIntegralsOutline, secantIntegralSteps, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ proofStepsData, formulaSummaryData, pitfallData,specialIntegralsOutline, secantIntegralSteps, seoData, sectionsContent, introContent, obj4Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1167,6 +1182,18 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,specialIn
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-integral-of-ln-x-steps'}
+            id="integral-of-ln-x-steps"
+            title="Integrating ln x by parts"
+            source="/calculus/integrals/special"
+            related={false}
+            before={"The integration by parts above, one step per screen: use Next and Back to move through it."}
+            after={"Taking $dv = dx$ is what makes it work: $\\ln x$ has a simple derivative, and the integral left over is only $\\int 1\\, dx$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {

@@ -1102,6 +1102,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -1835,9 +1836,8 @@ $$(-1)\\mathbf{v} = -\\mathbf{v}$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-This follows from $\\mathbf{v} + (-1)\\mathbf{v} = 1\\mathbf{v} + (-1)\\mathbf{v} = (1 + (-1))\\mathbf{v} = 0\\mathbf{v} = \\mathbf{0}$.
-
-If $c\\mathbf{v} = \\mathbf{0}$, then $c = 0$ or $\\mathbf{v} = \\mathbf{0}$. A nonzero scalar cannot annihilate a nonzero vector — [there are no zero divisors in a vector space](https://linearalgebranotes.com/spaces/vector-space#rule-no-zero-divisors).
+This follows from $\\mathbf{v} + (-1)\\mathbf{v} = 1\\mathbf{v} + (-1)\\mathbf{v} = (1 + (-1))\\mathbf{v} = 0\\mathbf{v} = \\mathbf{0}$.`,
+    afterProof: `If $c\\mathbf{v} = \\mathbf{0}$, then $c = 0$ or $\\mathbf{v} = \\mathbf{0}$. A nonzero scalar cannot annihilate a nonzero vector — [there are no zero divisors in a vector space](https://linearalgebranotes.com/spaces/vector-space#rule-no-zero-divisors).
 
 @academic[pitfall,aside:true,width:35%:Dividing by a vector
 Dividing both sides of $c\\mathbf{v} = d\\mathbf{v}$ by $\\mathbf{v}$ to get $c = d$ uses an operation the axioms never define, and it fails for $\\mathbf{v} = \\mathbf{0}$: $2 \\cdot \\mathbf{0} = 5 \\cdot \\mathbf{0}$ although $2 \\neq 5$. The correct conclusion is $c = d$ or $\\mathbf{v} = \\mathbf{0}$.
@@ -2077,8 +2077,22 @@ const conceptIntroFigures = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Scaling by minus one gives the additive inverse" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$(-1)\\mathbf{v} = -\\mathbf{v}$' },
+    steps: [
+      { math: '$\\mathbf{v} + (-1)\\mathbf{v} = 1\\mathbf{v} + (-1)\\mathbf{v}$', tag: 'identity', why: 'Scaling by $1$ changes nothing' },
+      { math: '$= (1 + (-1))\\mathbf{v}$', tag: 'key step', key: true, why: 'Distributivity over the sum of scalars' },
+      { math: '$= 0\\mathbf{v}$', tag: 'arithmetic', why: '$1 + (-1) = 0$' },
+      { math: '$= \\mathbf{0}$', tag: 'scalar zero', why: 'The scalar-zero property $0\\mathbf{v} = \\mathbf{0}$' },
+    ],
+    conclusion: { text: '$(-1)\\mathbf{v} = -\\mathbf{v}$', say: 'Added to $\\mathbf{v}$ it gives $\\mathbf{0}$, which is what the additive inverse does.' },
+  };
+
 return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     sectionsContent,
@@ -2101,7 +2115,7 @@ return {
 }
    }
 
-export default function VectorSpaceAxiomsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, vectorSpaceAxioms, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
+export default function VectorSpaceAxiomsPage({ proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, vectorSpaceAxioms, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2272,6 +2286,18 @@ export default function VectorSpaceAxiomsPage({ formulaSummaryData, pitfallData,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-vector-space-negative-one-scalar-proof'}
+            id="vector-space-negative-one-scalar-proof"
+            title="Scaling by minus one gives the additive inverse"
+            source="/linear-algebra/vector-spaces/axioms"
+            related={false}
+            before={"The chain above, one axiom or rule per line."}
+            after={"The last line uses the scalar-zero property proved just before, so the two rules come as a pair."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProof,
           <div
             key={'obj9-table'}
             style={tableWrapStyle}

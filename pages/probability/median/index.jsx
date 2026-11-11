@@ -1571,6 +1571,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
@@ -2252,9 +2253,8 @@ $$1 - e^{-\\lambda m} = 0.5$$]@
 $$e^{-\\lambda m} = 0.5$$]@
 
 @academic[formula_callout:Median for Continuous Distributions
-$$m = \\frac{\\ln(2)}{\\lambda}$$]@
-
-@academic[pitfall,aside:true,width:35%:Setting the density equal to one half
+$$m = \\frac{\\ln(2)}{\\lambda}$$]@`,
+  afterProof: `@academic[pitfall,aside:true,width:35%:Setting the density equal to one half
 Solving $f(m) = 0.5$ instead of $F(m) = 0.5$: for $\\lambda = 2$, $2e^{-2m} = 0.5$ gives $m = \\frac{\\ln 4}{2} \\approx 0.693$. The CDF condition $1 - e^{-2m} = 0.5$ gives $m = \\frac{\\ln 2}{2} \\approx 0.347$.
 [Read more](!#13)]@
 
@@ -3564,8 +3564,21 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the median of the exponential distribution" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Find', text: 'The median $m$ of the exponential distribution with rate $\\lambda$' },
+    steps: [
+      { math: '$1 - e^{-\\lambda m} = 0.5$', tag: 'CDF', why: 'The CDF is $F(x) = 1 - e^{-\\lambda x}$; setting $F(m) = 0.5$' },
+      { math: '$e^{-\\lambda m} = 0.5$', tag: 'rearrange', why: 'Move the exponential to one side' },
+      { math: '$m = \\frac{\\ln(2)}{\\lambda}$', tag: 'key step', key: true, why: 'Take the natural logarithm and divide by $-\\lambda$, using $\\ln(0.5) = -\\ln(2)$' },
+    ],
+    conclusion: { text: '$m = \\frac{\\ln(2)}{\\lambda} \\approx \\frac{0.693}{\\lambda}$' },
+  };
+
    return {
       props:{
+    proofStepsData,
     formulaSummaryData,
     medianMethodDecision,
     demoUnits,
@@ -3593,7 +3606,7 @@ const schemas = {
     }
    }
 
-export default function MedianPage({ formulaSummaryData,medianMethodDecision, 
+export default function MedianPage({ proofStepsData, formulaSummaryData,medianMethodDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -3721,6 +3734,18 @@ export default function MedianPage({ formulaSummaryData,medianMethodDecision,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrameV2
+            key={'proof-steps-median-exponential-derivation-steps'}
+            id="median-exponential-derivation-steps"
+            title="Deriving the median of the exponential distribution"
+            source="/probability/median"
+            related={false}
+            before={"The derivation above as a chain of steps, from the CDF condition to the formula."}
+            after={"Taking logarithms in the last step frees $m$ from the exponent; the rate $\\lambda$ only rescales the result."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrameV2>,
+          sectionsContent.obj3.afterProof,
                   <div key={'unit-u_3_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_0 }} />,
           `Discrete and continuous medians differ in exactly this uniqueness.`,
         ]

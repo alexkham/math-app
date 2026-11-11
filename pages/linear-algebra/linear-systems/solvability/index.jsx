@@ -1763,6 +1763,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
@@ -2334,9 +2335,8 @@ When the system is inconsistent, the hyperplanes have no common point. In $\\mat
 
 When the system has a unique solution, the hyperplanes meet at a single point. This requires at least $n$ independent equations — enough to cut the solution space down from $n$ dimensions to $0$.
 
-When the system has infinitely many solutions, the hyperplanes meet along a flat of dimension $n - r$, where $r = \\text{rank}(A)$. Each independent equation reduces the dimension of the intersection by one, and the rank counts how many equations cut independently. The remaining $n - r$ dimensions are the free directions in the solution set.
-
-@academic[punchline:Solving a linear system is intersecting hyperplanes, and each independent equation cuts the intersection down by one dimension.]@`,
+When the system has infinitely many solutions, the hyperplanes meet along a flat of dimension $n - r$, where $r = \\text{rank}(A)$. Each independent equation reduces the dimension of the intersection by one, and the rank counts how many equations cut independently. The remaining $n - r$ dimensions are the free directions in the solution set.`,
+    afterCases: `@academic[punchline:Solving a linear system is intersecting hyperplanes, and each independent equation cuts the intersection down by one dimension.]@`,
     before: ``,
     after: ``,
     link: ``,
@@ -2699,8 +2699,23 @@ $$\\mathbf{x} = t\\begin{pmatrix} -1 \\\\ 1 \\end{pmatrix}$$`],
     ],
   };
 
+  // SpecialCases 2026-11-09: "Three ways hyperplanes meet" (outcomes), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    path: { label: 'Intersecting', steps: ['Each equation defines a hyperplane of dimension $n - 1$', 'Intersect all $m$ hyperplanes', 'What do they have in common?'] },
+    cases: [
+      { tone: 'normal', when: 'One point', name: 'Unique solution', chain: ['at least $n$ independent equations', 'dimension cut from $n$ to $0$'],
+        text: 'The hyperplanes meet at a single point.', set: '$1$' },
+      { tone: 'good', when: 'A flat', name: 'Infinitely many solutions', chain: ['$r = \\text{rank}(A)$', 'a flat of dimension $n - r$'],
+        text: 'The remaining $n - r$ dimensions are the free directions in the solution set.', set: '$\\infty$' },
+      { tone: 'bad', when: 'No common point', name: 'Inconsistent', chain: ['$\\mathbb{R}^2$: parallel lines', '$\\mathbb{R}^3$: parallel planes'],
+        text: 'In $\\mathbb{R}^3$ the planes can also form a triangular prism: each pair intersects, but no point lies on all three.', set: '$0$' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
     pitfallData,
       uniquenessScope,
       roucheCapelliIff,
@@ -2733,7 +2748,7 @@ const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold:
 
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function SolvabilityPage({ pitfallData,uniquenessScope, roucheCapelliIff, existenceCases, squareSystemCases, 
+export default function SolvabilityPage({ specialCasesData, pitfallData,uniquenessScope, roucheCapelliIff, existenceCases, squareSystemCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2954,6 +2969,18 @@ export default function SolvabilityPage({ pitfallData,uniquenessScope, roucheCap
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'special-cases-hyperplane-intersection-outcomes'}
+            id="hyperplane-intersection-outcomes"
+            title="Three ways hyperplanes meet"
+            source="/linear-algebra/linear-systems/solvability"
+            related={false}
+            before={"The intersection of the hyperplanes, read as a procedure: the question on the left leads to one of three outcomes."}
+            after={"The three algebraic outcomes are the three ways hyperplanes can meet: in one point, along a flat, or not at all."}
+          >
+            <SpecialCases data={specialCasesData} variant="outcomes" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterCases,
         ]
     },
     {

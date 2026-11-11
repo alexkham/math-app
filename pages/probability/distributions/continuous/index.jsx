@@ -17,10 +17,36 @@ import distributionExplorerDiagrams from '@/app/components/probability/explorers
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+
+// FeatureMatrix 2026-11-10: "Matching the data to a distribution", from the page's own text.
+const featureMatrixData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+    features: [
+      { id: 'support', name: 'Support', sub: 'what values it allows', type: 'tag', tags: {
+        all: { label: 'either direction', color: '#06357A', bg: '#dbeafe' },
+        pos: { label: '[0, ∞)', color: '#2563EB', bg: '#eff6ff' },
+        bounded: { label: 'bounded', color: '#B45309', bg: '#fef3c7' } } },
+      { id: 'process', name: 'What generated the data', type: 'text' },
+      { id: 'shape', name: 'Shape', type: 'tag', tags: {
+        sym: { label: 'symmetric, bell-shaped', color: '#06357A', bg: '#dbeafe' },
+        right: { label: 'right-skewed', color: '#B45309', bg: '#fef3c7' } } },
+    ],
+    items: [
+      { id: 'normal', name: 'Normal', values: { support: 'all', process: 'errors or natural variations', shape: 'sym' } },
+      { id: 't', name: 't‑distribution', values: { support: null, process: null, shape: 'sym' } },
+      { id: 'exp', name: 'Exponential', values: { support: 'pos', process: 'time between events', shape: 'right' } },
+      { id: 'gamma', name: 'Gamma', values: { support: 'pos', process: null, shape: 'right' } },
+      { id: 'lognormal', name: 'Lognormal', values: { support: null, process: 'products of random effects, growth processes', shape: 'right' } },
+      { id: 'weibull', name: 'Weibull', values: { support: null, process: 'lifetimes where failure rates change', shape: null } },
+      { id: 'beta', name: 'Beta', values: { support: 'bounded', process: null, shape: null } },
+      { id: 'uniform', name: 'Uniform', values: { support: 'bounded', process: null, shape: null } },
+    ],
+  };
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
@@ -869,9 +895,8 @@ Selecting the appropriate continuous distribution is crucial for accurate modeli
 
 **What generated this data?** Understanding the underlying process is more important than fitting curves. Are you measuring time between events? Use exponential. Modeling lifetimes where failure rates change? Try Weibull. Dealing with products of random effects or growth processes? Consider lognormal. Measuring errors or natural variations? Normal distribution is likely appropriate.
 
-**Is the data symmetric or skewed?** Plot your data first. Symmetric, bell-shaped data suggests normal or t-distributions. Right-skewed data (long tail toward higher values) points to exponential, lognormal, or gamma. Left-skewed data is rarer but might indicate a reflected distribution or beta with certain parameters.
-
-**Common Mistakes to Avoid**
+**Is the data symmetric or skewed?** Plot your data first. Symmetric, bell-shaped data suggests normal or t-distributions. Right-skewed data (long tail toward higher values) points to exponential, lognormal, or gamma. Left-skewed data is rarer but might indicate a reflected distribution or beta with certain parameters.`,
+      afterMatrix: `**Common Mistakes to Avoid**
 
 Don't choose distributions solely by visual fit without considering the process. A skewed dataset might look exponential but actually be lognormal—the difference matters for predictions. Avoid using normal distributions for strictly positive data just because it's familiar. Don't ignore natural boundaries—modeling proportions with a normal distribution can predict impossible values below 0 or above 1.
 
@@ -1421,6 +1446,18 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
         link:'',
         content:[
           sectionsContent.decision.content,
+          <DiagramFrame
+            key={'feature-matrix-choosing-continuous-distribution-matrix'}
+            id="choosing-continuous-distribution-matrix"
+            title="Matching the data to a distribution"
+            source="/probability/distributions/continuous"
+            related={false}
+            before={"The three questions above as columns, one row per distribution the section names. A dash means the section does not say."}
+            after={"No single column decides: the support narrows the field, and the process behind the data picks between what is left."}
+          >
+            <FeatureMatrix data={featureMatrixData} />
+          </DiagramFrame>,
+          sectionsContent.decision.afterMatrix,
         ]
     },
     // {

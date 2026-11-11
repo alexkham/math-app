@@ -625,6 +625,7 @@ import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -1021,9 +1022,8 @@ $$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-is a linear combination of those vectors. Adding two vectors is the special case where $k = 2$ and both scalars equal $1$. Scalar multiplication is the case $k = 1$.
-
-The set of all possible linear combinations of a given collection of vectors is called the span of that collection. The span of a single nonzero vector is a line through the origin. The span of two non-parallel vectors [is a plane](https://linearalgebranotes.com/vectors/span#intuition). The span of three non-coplanar vectors in $\\mathbb{R}^3$ fills the entire space. [Asking whether a particular vector lies in the span](https://calculatematrix.com/vector-calculators/linear-combination#span) of a given set turns out to be equivalent to asking whether a certain [system of equations](!/linear-algebra/linear-systems) has a solution — a connection that links vectors directly to the machinery of matrices and row reduction.
+is a linear combination of those vectors. Adding two vectors is the special case where $k = 2$ and both scalars equal $1$. Scalar multiplication is the case $k = 1$.`,
+    afterCases: `The set of all possible linear combinations of a given collection of vectors is called the span of that collection. The span of a single nonzero vector is a line through the origin. The span of two non-parallel vectors [is a plane](https://linearalgebranotes.com/vectors/span#intuition). The span of three non-coplanar vectors in $\\mathbb{R}^3$ fills the entire space. [Asking whether a particular vector lies in the span](https://calculatematrix.com/vector-calculators/linear-combination#span) of a given set turns out to be equivalent to asking whether a certain [system of equations](!/linear-algebra/linear-systems) has a solution — a connection that links vectors directly to the machinery of matrices and row reduction.
 
 Linear combinations also set the stage for two concepts developed in the [vector spaces](!/linear-algebra/vector-spaces) section: linear independence, which identifies when no vector in a set is redundant, and basis, which captures the minimal spanning set needed to reach every point in a space.
 
@@ -1296,8 +1296,21 @@ $$\\mathbf{a} \\times \\mathbf{b} = (-3, 6, -3)$$`],
     ],
   };
 
+  // SpecialCases 2026-11-09: "Earlier operations as linear combinations" (substitute), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k$' },
+    cases: [
+      { when: '$k = 2,\\ c_1 = c_2 = 1$', result: '$\\mathbf{v}_1 + \\mathbf{v}_2$', name: 'Vector addition',
+        text: 'Adding two vectors is the special case where $k = 2$ and both scalars equal $1$.' },
+      { when: '$k = 1$', result: '$c_1\\mathbf{v}_1$', name: 'Scalar multiplication',
+        text: 'Scalar multiplication is the case $k = 1$.' },
+    ],
+  };
+
    return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     faqQuestions,
@@ -1319,7 +1332,7 @@ $$\\mathbf{a} \\times \\mathbf{b} = (-3, 6, -3)$$`],
   }
 }
    }
-export default function VectorsPage({ formulaSummaryData, pitfallData,vectorTypeTree, seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
+export default function VectorsPage({ specialCasesData, formulaSummaryData, pitfallData,vectorTypeTree, seoData, sectionsContent, introContent, obj3Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1500,6 +1513,18 @@ A 12-megapixel colour photo stores three brightness values per pixel, for red, g
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'special-cases-linear-combination-special-cases'}
+            id="linear-combination-special-cases"
+            title="Earlier operations as linear combinations"
+            source="/linear-algebra/vectors"
+            related={false}
+            before={"Each card fixes the number of vectors $k$, and the scalars where needed, and shows which earlier operation the combination becomes."}
+            after={"Addition and scalar multiplication are both linear combinations; only $k$ and the scalars are fixed in advance."}
+          >
+            <SpecialCases data={specialCasesData} variant="substitute" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterCases,
         ]
     },
     {

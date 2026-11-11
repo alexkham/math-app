@@ -687,6 +687,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1277,8 +1278,23 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-08: "Three special multipliers" (substitute), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'Rule', text: '$\\frac{a}{b} \\times \\frac{c}{d} = \\frac{a \\times c}{b \\times d}$' },
+    cases: [
+      { when: '$\\frac{c}{d} = \\frac{n}{n} = 1$', result: '$\\frac{a}{b} \\times \\frac{n}{n} = \\frac{a}{b}$', name: 'Unchanged',
+        text: 'Multiplying by 1 leaves a fraction unchanged. This is the basis for [equivalent fractions](!/arithmetic/fractions/equivalent).' },
+      { when: '$\\frac{c}{d} = 0$', result: '$\\frac{a}{b} \\times 0 = 0$', name: 'Zero',
+        text: 'The numerator of the product is zero, so the product is zero.' },
+      { when: '$\\frac{c}{d} = \\frac{b}{a}$', result: '$\\frac{3}{4} \\times \\frac{4}{3} = \\frac{12}{12} = 1$', name: 'Reciprocal',
+        text: 'A fraction times its reciprocal is 1. Division is recast as this multiplication in [dividing fractions](!/arithmetic/fractions/dividing).' },
+    ],
+  };
+
 return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     sectionsContent,
@@ -1299,7 +1315,7 @@ return {
 }
    }
 
-export default function MultiplyingPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MultiplyingPage({ specialCasesData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1435,6 +1451,17 @@ Keeping the shared denominator, as in addition, turns $\\frac{2}{5} \\times \\fr
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'special-cases-multiplying-fractions-special-cases'}
+            id="multiplying-fractions-special-cases"
+            title="Three special multipliers"
+            source="/arithmetic/fractions/multiplying"
+            related={false}
+            before={"Each card puts one special second factor into the multiplication rule and shows what comes out."}
+            after={"All three come straight from the rule: only the second factor changes, and the product follows."}
+          >
+            <SpecialCases data={specialCasesData} variant="substitute" />
+          </DiagramFrame>,
         ]
     },
     {

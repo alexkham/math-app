@@ -15,6 +15,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -510,9 +511,8 @@ Again the derivatives are negatives of each other, following from $\\arctan x + 
 @academic[fact,aside:true,width:35%:$\\pi$ hides in the arctangent slope
 Writing $\\frac{1}{1 + x^2} = 1 - x^2 + x^4 - \\cdots$ and undoing the derivative gives $\\arctan x = x - \\frac{x^3}{3} + \\frac{x^5}{5} - \\cdots$, so $\\frac{\\pi}{4} = \\arctan 1 = 1 - \\frac{1}{3} + \\frac{1}{5} - \\cdots$. The Kerala school credited this to Madhava, around 1400, long before Gregory and Leibniz found it in the 1670s.]@
 
-To derive the arctangent formula: let $y = \\arctan x$, so $\\tan y = x$. Differentiating: $\\sec^2 y \\cdot \\frac{dy}{dx} = 1$. Using the identity $\\sec^2 y = 1 + \\tan^2 y = 1 + x^2$ gives $\\frac{dy}{dx} = \\frac{1}{1 + x^2}$.
-
-Unlike arcsine and arccosine, arctangent is defined for all real $x$—no domain restriction. The derivative $\\frac{1}{1 + x^2}$ is always positive, confirming that $\\arctan x$ is strictly increasing. As $x \\to \\pm\\infty$, the derivative approaches zero, reflecting the horizontal asymptotes $y = \\pm\\frac{\\pi}{2}$. The function rises everywhere but flattens out at the extremes.
+To derive the arctangent formula: let $y = \\arctan x$, so $\\tan y = x$. Differentiating: $\\sec^2 y \\cdot \\frac{dy}{dx} = 1$. Using the identity $\\sec^2 y = 1 + \\tan^2 y = 1 + x^2$ gives $\\frac{dy}{dx} = \\frac{1}{1 + x^2}$.`,
+    afterProof: `Unlike arcsine and arccosine, arctangent is defined for all real $x$—no domain restriction. The derivative $\\frac{1}{1 + x^2}$ is always positive, confirming that $\\arctan x$ is strictly increasing. As $x \\to \\pm\\infty$, the derivative approaches zero, reflecting the horizontal asymptotes $y = \\pm\\frac{\\pi}{2}$. The function rises everywhere but flattens out at the extremes.
 
 This derivative appears prominently in [integration](!/calculus/integrals/special): $\\int \\frac{1}{1 + x^2}\\,dx = \\arctan x + C$.
 `,
@@ -538,9 +538,8 @@ $$\\frac{d}{dx}[\\operatorname{arccsc} x] = -\\frac{1}{|x| \\sqrt{x^2 - 1}}$$
 Using $\\frac{1}{x\\sqrt{x^2 - 1}}$ gives the slope $-\\frac{1}{2\\sqrt{3}} \\approx -0.289$ at $x = -2$. But $\\operatorname{arcsec} x$ rises on both parts of its domain, and the formula with $|x|$ gives $\\frac{1}{2\\sqrt{3}} \\approx 0.289$.
 [Read more](!#pitfall-dropping-the-absolute-value)]@
 
-The derivation for arcsecant: let $y = \\text{arcsec}\\, x$, so $\\sec y = x$. Differentiating: $\\sec y \\tan y \\cdot \\frac{dy}{dx} = 1$. Since $\\sec y = x$ and $\\tan y = \\pm\\sqrt{\\sec^2 y - 1} = \\pm\\sqrt{x^2 - 1}$, the sign depends on the quadrant. The absolute value $|x|$ in the formula resolves this: $\\sec y \\tan y = |x|\\sqrt{x^2 - 1}$ across the full domain.
-
-These derivatives are less frequently encountered than the arcsine and arctangent versions. They appear primarily in integrals of the form $\\int \\frac{1}{x\\sqrt{x^2 - 1}}\\,dx$ and in problems involving [trigonometric substitution](!/calculus/integrals/techniques).
+The derivation for arcsecant: let $y = \\text{arcsec}\\, x$, so $\\sec y = x$. Differentiating: $\\sec y \\tan y \\cdot \\frac{dy}{dx} = 1$. Since $\\sec y = x$ and $\\tan y = \\pm\\sqrt{\\sec^2 y - 1} = \\pm\\sqrt{x^2 - 1}$, the sign depends on the quadrant. The absolute value $|x|$ in the formula resolves this: $\\sec y \\tan y = |x|\\sqrt{x^2 - 1}$ across the full domain.`,
+    afterProof: `These derivatives are less frequently encountered than the arcsine and arctangent versions. They appear primarily in integrals of the form $\\int \\frac{1}{x\\sqrt{x^2 - 1}}\\,dx$ and in problems involving [trigonometric substitution](!/calculus/integrals/techniques).
 
 The domain $|x| > 1$ reflects the range of secant: $\\sec y$ never takes values between $-1$ and $1$.
 `,
@@ -1005,8 +1004,38 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the derivative of arctangent" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\frac{d}{dx}[\\arctan x] = \\frac{1}{1 + x^2}$' },
+    steps: [
+      { math: '$\\tan y = x$', tag: 'let', why: 'With $y = \\arctan x$' },
+      { math: '$\\sec^2 y \\cdot \\frac{dy}{dx} = 1$', tag: 'differentiate', why: 'Differentiate both sides' },
+      { math: '$\\sec^2 y = 1 + \\tan^2 y$', tag: 'identity', key: true, why: 'Write the factor in terms of $\\tan y$' },
+      { math: '$= 1 + x^2$', tag: 'substitute', why: 'Since $\\tan y = x$' },
+      { math: '$\\frac{dy}{dx} = \\frac{1}{1 + x^2}$', tag: 'solve', why: 'Divide by $\\sec^2 y$' },
+    ],
+    conclusion: { text: '$\\frac{d}{dx}[\\arctan x] = \\frac{1}{1 + x^2}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the derivative of arcsecant" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\frac{d}{dx}[\\operatorname{arcsec} x] = \\frac{1}{|x| \\sqrt{x^2 - 1}}$' },
+    steps: [
+      { math: '$\\sec y = x$', tag: 'let', why: 'With $y = \\text{arcsec}\\, x$' },
+      { math: '$\\sec y \\tan y \\cdot \\frac{dy}{dx} = 1$', tag: 'differentiate', why: 'Differentiate both sides' },
+      { math: '$\\tan y = \\pm\\sqrt{\\sec^2 y - 1}$', tag: 'identity', why: 'Express $\\tan y$ through $\\sec y$' },
+      { math: '$= \\pm\\sqrt{x^2 - 1}$', tag: 'substitute', why: 'Since $\\sec y = x$; the sign depends on the quadrant' },
+      { math: '$\\sec y \\tan y = |x|\\sqrt{x^2 - 1}$', tag: 'sign', key: true, why: 'The absolute value $|x|$ resolves the sign across the full domain' },
+    ],
+    conclusion: { text: '$\\frac{d}{dx}[\\operatorname{arcsec} x] = \\frac{1}{|x| \\sqrt{x^2 - 1}}$' },
+  };
+
   return {
   props:{
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     specialDerivativesOutline,
@@ -1030,7 +1059,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({ formulaSummaryData, pitfallData,specialDerivativesOutline, 
+export default function PageTemplate({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,specialDerivativesOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1132,6 +1161,18 @@ Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leave
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-arctangent-derivative-proof'}
+            id="arctangent-derivative-proof"
+            title="Deriving the derivative of arctangent"
+            source="/calculus/derivatives/special"
+            related={false}
+            before={"The derivation above, one line at a time."}
+            after={"The identity $\\sec^2 y = 1 + \\tan^2 y$ is the key step: it turns $\\sec^2 y$ into an expression in $x$ alone."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
           <div key={'unit-arctan'} dangerouslySetInnerHTML={{ __html: demoUnits.arctan }} />,
           `The same 1/(1 + x²) is the integrand whose antiderivative is arctan x + C.`,
         ]
@@ -1142,6 +1183,18 @@ Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leave
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-arcsecant-derivative-proof'}
+            id="arcsecant-derivative-proof"
+            title="Deriving the derivative of arcsecant"
+            source="/calculus/derivatives/special"
+            related={false}
+            before={"The derivation above, one line at a time."}
+            after={"The sign is the only delicate step: $\\tan y$ may be negative, and the $|x|$ in the formula takes care of it on the whole domain."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {

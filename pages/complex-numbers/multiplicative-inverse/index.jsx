@@ -1372,6 +1372,7 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -2311,9 +2312,8 @@ Uniqueness follows from a short argument. Suppose $w_1$ and $w_2$ both satisfy $
 @academic[formula_callout:Uniqueness
 $$w_1 = w_1 \\cdot 1 = w_1 \\cdot (z \\cdot w_2) = (w_1 \\cdot z) \\cdot w_2 = 1 \\cdot w_2 = w_2$$]@
 
-Any two multiplicative inverses of the same number must be equal.
-
-This uniqueness is guaranteed by the [field axioms](!/complex-numbers/properties). In any field, multiplicative inverses of nonzero elements are unique. The argument above uses only associativity of multiplication and the property of one as the multiplicative identity.
+Any two multiplicative inverses of the same number must be equal.`,
+  afterProof: `This uniqueness is guaranteed by the [field axioms](!/complex-numbers/properties). In any field, multiplicative inverses of nonzero elements are unique. The argument above uses only associativity of multiplication and the property of one as the multiplicative identity.
 
 Uniqueness justifies the notation $z^{-1}$ and $\\frac{1}{z}$. If multiple inverses existed, these expressions would be ambiguous. Because exactly one inverse exists, the notation refers to a single, well-defined complex number.`,
   before: ``,
@@ -2658,8 +2658,40 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the formula for the inverse" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: '$\\displaystyle z^{-1} = \\frac{\\overline{z}}{|z|^2}$' },
+    steps: [
+      { action: 'Multiply by the conjugate', math: '$\\displaystyle\\frac{1}{a + bi} = \\frac{1}{a + bi} \\cdot \\frac{a - bi}{a - bi}$', why: 'The goal is to rewrite $\\frac{1}{a + bi}$ with a real denominator.' },
+      { action: 'Combine the fractions', math: '$\\displaystyle= \\frac{a - bi}{(a + bi)(a - bi)}$' },
+      { action: 'Simplify the denominator', math: '$(a + bi)(a - bi) = a^2 - (bi)^2$', why: 'The identity $z \\cdot \\overline{z} = |z|^2$ at work.' },
+      { action: 'Use $i^2 = -1$', math: '$= a^2 - b^2i^2 = a^2 + b^2$', why: 'This is a real number: the square of the modulus.' },
+      { action: 'Write the result', math: '$\\displaystyle\\frac{1}{z} = \\frac{a - bi}{a^2 + b^2} = \\frac{\\overline{z}}{|z|^2}$' },
+      { action: 'Check the product', math: '$\\displaystyle z \\cdot z^{-1} = z \\cdot \\frac{\\overline{z}}{|z|^2} = \\frac{z \\cdot \\overline{z}}{|z|^2}$' },
+      { action: 'Cancel', math: '$\\displaystyle= \\frac{|z|^2}{|z|^2} = 1$', why: 'The product of $z$ and $\\overline{z}$ in the numerator equals $|z|^2$, canceling the denominator exactly.' },
+    ],
+    conclusion: { text: '$\\displaystyle z^{-1} = \\frac{\\overline{z}}{|z|^2}$', say: 'Verification confirms the formula works.' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving the inverse is unique" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'If $z \\cdot w_1 = 1$ and $z \\cdot w_2 = 1$, then $w_1 = w_2$' },
+    steps: [
+      { math: '$w_1 = w_1 \\cdot 1$', tag: 'identity', why: 'One is the multiplicative identity' },
+      { math: '$= w_1 \\cdot (z \\cdot w_2)$', tag: 'substitute', why: 'Since $z \\cdot w_2 = 1$' },
+      { math: '$= (w_1 \\cdot z) \\cdot w_2$', tag: 'key step', key: true, why: 'Associativity of multiplication' },
+      { math: '$= 1 \\cdot w_2$', tag: 'substitute', why: 'Since $w_1$ is an inverse of $z$' },
+      { math: '$= w_2$', tag: 'identity', why: 'One is the multiplicative identity' },
+    ],
+    conclusion: { text: '$w_1 = w_2$', say: 'Any two multiplicative inverses of the same number must be equal.' },
+  };
+
   return {
   props:{
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     realInverseCases,
@@ -2688,7 +2720,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function MultiplicativeInversePage({ formulaSummaryData, pitfallData,realInverseCases, complexInverseCases, 
+export default function MultiplicativeInversePage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,realInverseCases, complexInverseCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -2817,6 +2849,17 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-complex-inverse-formula-steps'}
+            id="complex-inverse-formula-steps"
+            title="Deriving the formula for the inverse"
+            source="/complex-numbers/multiplicative-inverse"
+            related={false}
+            before={"The derivation above one step at a time, ending with the check that $z \\cdot z^{-1} = 1$; use Next and Back to move through it."}
+            after={"Multiplying by the conjugate is the whole trick: it turns the denominator into the real number $|z|^2$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2914,6 +2957,18 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'proof-steps-complex-inverse-uniqueness-proof'}
+            id="complex-inverse-uniqueness-proof"
+            title="Proving the inverse is unique"
+            source="/complex-numbers/multiplicative-inverse"
+            related={false}
+            before={"The uniqueness chain above, split at each equals sign, with the rule used at every step."}
+            after={"The gold line is associativity: regrouping $w_1 \\cdot (z \\cdot w_2)$ as $(w_1 \\cdot z) \\cdot w_2$ is what lets the two inverses meet."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj10.afterProof,
         ]
     },
     {

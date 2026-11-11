@@ -821,6 +821,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 
@@ -1332,9 +1333,8 @@ $$\\text{Null}(A) = \\{\\mathbf{x} \\in \\mathbb{R}^n : A\\mathbf{x} = \\mathbf{
 
 the set of all vectors that $A$ maps to the zero vector. This is a subspace of $\\mathbb{R}^n$.
 
-[Verification is direct](https://linearalgebranotes.com/maps/kernel#rule-subspace). The zero vector satisfies $A\\mathbf{0} = \\mathbf{0}$, so $\\mathbf{0} \\in \\text{Null}(A)$. If $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = A\\mathbf{u} + A\\mathbf{v} = \\mathbf{0} + \\mathbf{0} = \\mathbf{0}$, so $\\mathbf{u} + \\mathbf{v} \\in \\text{Null}(A)$. If $A\\mathbf{v} = \\mathbf{0}$, then $A(c\\mathbf{v}) = cA\\mathbf{v} = c\\mathbf{0} = \\mathbf{0}$, so $c\\mathbf{v} \\in \\text{Null}(A)$. Both closure conditions hold.
-
-The dimension of the null space is the nullity. By the [rank-nullity theorem](!/linear-algebra/matrix/rank), $\\text{rank}(A) + \\text{nullity}(A) = n$. When $A$ has full column [rank](!/linear-algebra/matrix/rank) ($\\text{rank} = n$), the null space is $\\{\\mathbf{0}\\}$ and the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ is injective. When the rank is less than $n$, the null space is nontrivial and the map collapses some directions to zero.
+[Verification is direct](https://linearalgebranotes.com/maps/kernel#rule-subspace). The zero vector satisfies $A\\mathbf{0} = \\mathbf{0}$, so $\\mathbf{0} \\in \\text{Null}(A)$. If $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $A(\\mathbf{u} + \\mathbf{v}) = A\\mathbf{u} + A\\mathbf{v} = \\mathbf{0} + \\mathbf{0} = \\mathbf{0}$, so $\\mathbf{u} + \\mathbf{v} \\in \\text{Null}(A)$. If $A\\mathbf{v} = \\mathbf{0}$, then $A(c\\mathbf{v}) = cA\\mathbf{v} = c\\mathbf{0} = \\mathbf{0}$, so $c\\mathbf{v} \\in \\text{Null}(A)$. Both closure conditions hold.`,
+    afterProof: `The dimension of the null space is the nullity. By the [rank-nullity theorem](!/linear-algebra/matrix/rank), $\\text{rank}(A) + \\text{nullity}(A) = n$. When $A$ has full column [rank](!/linear-algebra/matrix/rank) ($\\text{rank} = n$), the null space is $\\{\\mathbf{0}\\}$ and the map $\\mathbf{x} \\mapsto A\\mathbf{x}$ is injective. When the rank is less than $n$, the null space is nontrivial and the map collapses some directions to zero.
 
 @academic[pitfall,aside:true,width:35%:Counting rows instead of columns
 For $A = \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\end{pmatrix}$ of rank $2$, using its $2$ rows gives nullity $2 - 2 = 0$, yet $(-1, -1, 1)$ solves $A\\mathbf{x} = \\mathbf{0}$. With $n = 3$ columns, the nullity is $3 - 2 = 1$.
@@ -1654,8 +1654,21 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "The null space is a subspace" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\text{Null}(A)$ is a subspace of $\\mathbb{R}^n$' },
+    steps: [
+      { action: 'Contains the zero vector', math: '$A\\mathbf{0} = \\mathbf{0}$', why: 'So $\\mathbf{0} \\in \\text{Null}(A)$.' },
+      { action: 'Closed under addition', math: '$A(\\mathbf{u} + \\mathbf{v}) = A\\mathbf{u} + A\\mathbf{v} = \\mathbf{0} + \\mathbf{0} = \\mathbf{0}$', why: 'If $A\\mathbf{u} = \\mathbf{0}$ and $A\\mathbf{v} = \\mathbf{0}$, then $\\mathbf{u} + \\mathbf{v} \\in \\text{Null}(A)$.' },
+      { action: 'Closed under scalar multiplication', math: '$A(c\\mathbf{v}) = cA\\mathbf{v} = c\\mathbf{0} = \\mathbf{0}$', why: 'If $A\\mathbf{v} = \\mathbf{0}$, then $c\\mathbf{v} \\in \\text{Null}(A)$.' },
+    ],
+    conclusion: { text: '$\\text{Null}(A)$ is a subspace of $\\mathbb{R}^n$', say: 'Both closure conditions hold.' },
+  };
+
 return {
   props:{
+    proofStepsData,
     pitfallData,
     subspaceOpNest,
     demoUnits,
@@ -1679,7 +1692,7 @@ return {
 
    }
 
-export default function SubspacesPage({ pitfallData,subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SubspacesPage({ proofStepsData, pitfallData,subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1814,6 +1827,18 @@ export default function SubspacesPage({ pitfallData,subspaceOpNest, seoData, sec
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-null-space-subspace-steps'}
+            id="null-space-subspace-steps"
+            title="The null space is a subspace"
+            source="/linear-algebra/vector-spaces/subspaces"
+            related={false}
+            before={"The verification above in three checks; use Next and Back to move through them."}
+            after={"Each closure check is one use of the rule that $A$ distributes over sums and lets scalars through."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
                   <div key={'unit-nullspace'} dangerouslySetInnerHTML={{ __html: demoUnits.nullspace }} />,
           `The column space in the next section is built the same way, from the pivot columns rather than the free ones.`,
         ]

@@ -1127,6 +1127,8 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1458,9 +1460,8 @@ $$E[X] = \\int_{a}^{b} x \\cdot \\frac{1}{b-a} \\, dx = \\frac{1}{b-a} \\int_{a}
 $$E[X] = \\frac{1}{b-a} \\left[\\frac{x^2}{2}\\right]_{a}^{b} = \\frac{1}{b-a} \\cdot \\frac{b^2 - a^2}{2}$$]@
 
 @academic[formula_callout:Expected Value (Mean)
-$$E[X] = \\frac{1}{b-a} \\cdot \\frac{(b-a)(b+a)}{2} = \\frac{b+a}{2}$$]@
-
-The result $E[X] = \\frac{a+b}{2}$ is the midpoint of the interval $[a, b]$. This makes perfect intuitive sense: when all values in an interval are equally likely, the average value is simply the center of that interval. The distribution is perfectly symmetric, and the expected value is the balance point.
+$$E[X] = \\frac{1}{b-a} \\cdot \\frac{(b-a)(b+a)}{2} = \\frac{b+a}{2}$$]@`,
+      afterProof: `The result $E[X] = \\frac{a+b}{2}$ is the midpoint of the interval $[a, b]$. This makes perfect intuitive sense: when all values in an interval are equally likely, the average value is simply the center of that interval. The distribution is perfectly symmetric, and the expected value is the balance point.
 
 This formula is identical to the [discrete uniform distribution](!/probability/distributions/discrete/uniform#expected-value), showing that whether we count discrete equally-spaced values or measure continuous equally-dense values, the average lands at the center.
 
@@ -1543,9 +1544,8 @@ $$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$$
 /probability/formulas#continuous_uniform_variance]@
 
 @academic[formulas_link:Browse all probability formulas
-/probability/formulas]@
-
-The result $\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$ shows that variance depends only on the interval width $(b-a)$. The divisor of 12 appears because probability mass is spread uniformly—not concentrated anywhere. A wider interval means greater spread; location doesn't matter, only the range size.
+/probability/formulas]@`,
+      afterProof: `The result $\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$ shows that variance depends only on the interval width $(b-a)$. The divisor of 12 appears because probability mass is spread uniformly—not concentrated anywhere. A wider interval means greater spread; location doesn't matter, only the range size.
 
 This formula mirrors the [discrete uniform distribution](!/probability/distributions/discrete/uniform#variance), differing only in technical details between continuous and discrete cases.
 
@@ -1625,9 +1625,8 @@ $$\\frac{m - a}{b - a} = 0.5$$]@
 $$m - a = 0.5(b - a)$$]@
 
 @academic[formula_callout:Mode and Median
-$$m = a + 0.5(b - a) = \\frac{a + b}{2}$$]@
-
-**Intuition:** Because the distribution is perfectly symmetric and uniform, the point that divides probability in half is simply the midpoint of the interval. This also equals the [mean](!/probability/expected-value), as with all symmetric distributions.
+$$m = a + 0.5(b - a) = \\frac{a + b}{2}$$]@`,
+      afterProof: `**Intuition:** Because the distribution is perfectly symmetric and uniform, the point that divides probability in half is simply the midpoint of the interval. This also equals the [mean](!/probability/expected-value), as with all symmetric distributions.
 
 **Example:**
 For a bus arriving uniformly between 2:00 PM and 2:30 PM (interval $[0, 30]$ minutes):
@@ -1679,9 +1678,8 @@ $$\\frac{x_p - a}{b - a} = p$$]@
 $$x_p - a = p(b - a)$$]@
 
 @academic[formula_callout:Quantiles/Percentiles
-$$x_p = a + p(b - a)$$]@
-
-This gives the simple quantile formula:
+$$x_p = a + p(b - a)$$]@`,
+      afterProof: `This gives the simple quantile formula:
 
 @academic[formula_callout:Quantiles/Percentiles
 $$x_p = a + p(b - a)$$]@
@@ -1869,9 +1867,8 @@ $$X \\sim \\text{Uniform}(-c, c)$$]@
 Properties:
 • [Mean](!/probability/expected-value) $= 0$
 • [Variance](!/probability/variance) $= \\frac{(2c)^2}{12} = \\frac{c^2}{3}$
-• Useful for modeling symmetric errors or deviations
-
-### Limiting Behavior and Connections
+• Useful for modeling symmetric errors or deviations`,
+  afterCases: `### Limiting Behavior and Connections
 
 **Relationship to Discrete Uniform:**
 The continuous uniform is the limiting case of the [discrete uniform distribution](!/probability/distributions/discrete/uniform) as the number of possible values increases and their spacing decreases:
@@ -2326,8 +2323,88 @@ $$= 10 + 0.25 \\cdot 20 = 15$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the continuous uniform mean" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$E[X] = \\frac{a+b}{2}$' },
+    steps: [
+      { math: '$E[X] = \\int_{a}^{b} x \\cdot \\frac{1}{b-a} \\, dx$', tag: 'PDF', why: 'The PDF is $f(x) = \\frac{1}{b-a}$ for $a \\leq x \\leq b$, and 0 elsewhere' },
+      { math: '$= \\frac{1}{b-a} \\int_{a}^{b} x \\, dx$', tag: 'factor', why: 'Take out the constant' },
+      { math: '$= \\frac{1}{b-a} \\left[\\frac{x^2}{2}\\right]_{a}^{b}$', tag: 'integrate', why: 'An antiderivative of $x$' },
+      { math: '$= \\frac{1}{b-a} \\cdot \\frac{b^2 - a^2}{2}$', tag: 'evaluate', why: 'At the limits $b$ and $a$' },
+      { math: '$= \\frac{1}{b-a} \\cdot \\frac{(b-a)(b+a)}{2}$', tag: 'key step', key: true, why: 'Factor the difference of squares' },
+      { math: '$= \\frac{b+a}{2}$', tag: 'cancel', why: 'The factor $b - a$ cancels' },
+    ],
+    conclusion: { text: '$E[X] = \\frac{a+b}{2}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the continuous uniform variance" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$' },
+    steps: [
+      { math: '$\\mathbb{E}[X^2] = \\int_{a}^{b} x^2 \\cdot \\frac{1}{b-a} \\, dx$', tag: 'PDF', why: 'The PDF is $f(x) = \\frac{1}{b-a}$ for $a \\leq x \\leq b$' },
+      { math: '$= \\frac{1}{b-a} \\int_{a}^{b} x^2 \\, dx$', tag: 'factor', why: 'Take out the constant' },
+      { math: '$= \\frac{1}{b-a} \\left[\\frac{x^3}{3}\\right]_{a}^{b}$', tag: 'integrate', why: 'An antiderivative of $x^2$' },
+      { math: '$= \\frac{1}{b-a} \\cdot \\frac{b^3 - a^3}{3}$', tag: 'evaluate', why: 'At the limits $b$ and $a$' },
+      { math: '$= \\frac{b^2 + ab + a^2}{3}$', tag: 'factor', why: 'Using the factorization $b^3 - a^3 = (b-a)(b^2 + ab + a^2)$' },
+      { math: '$\\mathrm{Var}(X) = \\frac{b^2 + ab + a^2}{3} - \\left(\\frac{a+b}{2}\\right)^2$', tag: 'key step', key: true, why: 'The computational formula, with $\\mu = \\frac{a+b}{2}$ from the expected value section' },
+      { math: '$= \\frac{(b-a)^2}{12}$', tag: 'simplify', why: 'After algebraic simplification' },
+    ],
+    conclusion: { text: '$\\mathrm{Var}(X) = \\frac{(b-a)^2}{12}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the continuous uniform median" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Find', text: 'The median $m$, where $P(X \\leq m) = 0.5$' },
+    steps: [
+      { math: '$\\frac{m - a}{b - a} = 0.5$', tag: 'key step', key: true, why: 'Setting the CDF $F(x) = \\frac{x - a}{b - a}$ equal to $0.5$ at $x = m$' },
+      { math: '$m - a = 0.5(b - a)$', tag: 'multiply', why: 'Multiply both sides by $b - a$' },
+      { math: '$m = a + 0.5(b - a) = \\frac{a + b}{2}$', tag: 'solve', why: 'Add $a$ and simplify' },
+    ],
+    conclusion: { text: '$\\text{Median} = \\frac{a + b}{2}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the continuous uniform quantile formula" (chain), from the page's own formulas.
+  const proofStepsData4 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Find', text: 'The $p$-th quantile $x_p$, where $P(X \\leq x_p) = p$' },
+    steps: [
+      { math: '$\\frac{x_p - a}{b - a} = p$', tag: 'key step', key: true, why: 'Solving $F(x_p) = p$ with the CDF $F(x) = \\frac{x - a}{b - a}$' },
+      { math: '$x_p - a = p(b - a)$', tag: 'multiply', why: 'Multiply both sides by $b - a$' },
+      { math: '$x_p = a + p(b - a)$', tag: 'solve', why: 'Add $a$' },
+    ],
+    conclusion: { text: '$x_p = a + p(b - a)$' },
+  };
+
+  // SpecialCases 2026-11-09: "Special choices of the interval" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$f(x) = \\begin{cases} \\frac{1}{b-a} & \\text{if } a \\leq x \\leq b \\\\ 0 & \\text{otherwise} \\end{cases}$' },
+    cases: [
+      { when: '$a = 0,\\ b = 1$', tag: 'standard uniform', rule: '$f(x) = 1 \\text{ for } 0 \\leq x \\leq 1$', examples: '$\\text{Uniform}(0, 1)$',
+        why: 'The fundamental distribution in random number generation.',
+        more: 'All other continuous distributions can be generated by transforming uniform $[0, 1]$ random variables using the inverse [CDF](!/probability/cdf) method. Any $X \\sim \\text{Uniform}(a, b)$ transforms to it: $U = \\frac{X - a}{b - a} \\sim \\text{Uniform}(0, 1)$.' },
+      { when: '$b - a \\to 0$', tag: 'point mass', tone: 'warn', rule: '$\\lim_{b \\to a} \\text{Uniform}(a, b) = \\delta_{\\frac{a+b}{2}}$', examples: 'midpoint $\\frac{a+b}{2}$ held constant',
+        why: 'All probability concentrates at a single value.',
+        more: 'The distribution becomes deterministic: no randomness remains.' },
+      { when: '$b - a \\to \\infty$', tag: 'cannot exist', tone: 'stop', rule: '$f(x) = \\frac{1}{b-a} \\to 0$', examples: 'variance $\\frac{(b-a)^2}{12} \\to \\infty$',
+        why: 'The distribution can no longer be normalized over the entire real line.',
+        more: 'Unlike the normal distribution, a uniform distribution over $(-\\infty, \\infty)$ cannot exist as a proper probability distribution.' },
+      { when: '$a = -c,\\ b = c$', tag: 'symmetric', rule: 'Mean $= 0$, variance $= \\frac{(2c)^2}{12} = \\frac{c^2}{3}$', examples: '$X \\sim \\text{Uniform}(-c, c)$ for some $c > 0$',
+        why: 'The distribution is symmetric around zero.',
+        more: 'Useful for modeling symmetric errors or deviations.' },
+    ],
+  };
+
    return {
       props:{
+    specialCasesData,
+    proofStepsData4,
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2349,7 +2426,7 @@ $$= 10 + 0.25 \\cdot 20 = 15$$`],
     }
    }
 
-export default function ContinuousUniformDistributionPage({ formulaSummaryData, pitfallData,
+export default function ContinuousUniformDistributionPage({ specialCasesData, proofStepsData4, proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2508,6 +2585,18 @@ export default function ContinuousUniformDistributionPage({ formulaSummaryData, 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-continuous-uniform-mean-steps'}
+            id="continuous-uniform-mean-steps"
+            title="Deriving the continuous uniform mean"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+            before={"The integral for the mean above as a chain, each line with its reason."}
+            after={"Factoring $b^2 - a^2$ is the gold step: the factor $b - a$ cancels the height $\\frac{1}{b-a}$ of the density."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {
@@ -2516,6 +2605,18 @@ export default function ContinuousUniformDistributionPage({ formulaSummaryData, 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'proof-steps-continuous-uniform-variance-steps'}
+            id="continuous-uniform-variance-steps"
+            title="Deriving the continuous uniform variance"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+            before={"The variance computation above as a chain, from the integral for $\\mathbb{E}[X^2]$ to the computational formula."}
+            after={"Once $\\mathbb{E}[X^2]$ is reduced to $\\frac{b^2 + ab + a^2}{3}$, the gold step subtracts the squared mean, and only the width $b - a$ survives."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterProof,
           `@academic[punchline:Only the width of the interval sets the spread: shifting a uniform moves its mean but never its variance.]@`,
         ]
     },
@@ -2525,6 +2626,18 @@ export default function ContinuousUniformDistributionPage({ formulaSummaryData, 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-continuous-uniform-median-steps'}
+            id="continuous-uniform-median-steps"
+            title="Deriving the continuous uniform median"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+            before={"Solving $F(m) = 0.5$ as a chain of steps, each with what it does."}
+            after={"Because the CDF is linear in $x$, the gold step produces a linear equation, solved in two moves."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProof,
         ]
     },
     {
@@ -2533,6 +2646,18 @@ export default function ContinuousUniformDistributionPage({ formulaSummaryData, 
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'proof-steps-continuous-uniform-quantile-steps'}
+            id="continuous-uniform-quantile-steps"
+            title="Deriving the continuous uniform quantile formula"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+            before={"Solving $F(x_p) = p$ as a chain of steps, each with what it does."}
+            after={"These are the steps of the median with $0.5$ replaced by $p$; at $p = 0.5$ the formula returns the midpoint $\\frac{a + b}{2}$."}
+          >
+            <ProofSteps data={proofStepsData4} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj10.afterProof,
         ]
     },
     {
@@ -2563,6 +2688,18 @@ export default function ContinuousUniformDistributionPage({ formulaSummaryData, 
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'special-cases-continuous-uniform-interval-special-cases'}
+            id="continuous-uniform-interval-special-cases"
+            title="Special choices of the interval"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+            before={"One row per special choice of the endpoints $a$ and $b$. Click a row for more on what happens there."}
+            after={"Every row is the flat density $\\frac{1}{b-a}$ read at one choice of interval: its width alone decides how tall the density stands."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj14.afterCases,
         ]
     },
     {

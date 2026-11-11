@@ -18,6 +18,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -433,9 +434,8 @@ $$f(x) - f(a) = \\frac{f(x) - f(a)}{x - a} \\cdot (x - a)$$]@
 @academic[fact,aside:true,width:35%:Differentiable at one point only
 Let $f(x) = x^2$ for rational $x$ and $f(x) = 0$ for irrational $x$. Its difference quotient at $0$ is at most $|h|$ in size, so $f'(0) = 0$, yet $f$ is not continuous at any other point.]@
 
-As $x \\to a$, the first factor approaches $f'(a)$ (which exists by assumption) and the second factor approaches $0$. Their product approaches $f'(a) \\cdot 0 = 0$, so $\\lim_{x \\to a} f(x) = f(a)$.
-
-The argument is local. It starts from the derivative at the single point $a$ and ends with continuity at that same point, and at no step does it look at the values of $f$ at points near $a$. A derivative at one point is a statement about that point alone.
+As $x \\to a$, the first factor approaches $f'(a)$ (which exists by assumption) and the second factor approaches $0$. Their product approaches $f'(a) \\cdot 0 = 0$, so $\\lim_{x \\to a} f(x) = f(a)$.`,
+    afterProof: `The argument is local. It starts from the derivative at the single point $a$ and ends with continuity at that same point, and at no step does it look at the values of $f$ at points near $a$. A derivative at one point is a statement about that point alone.
 
 This establishes a hierarchy: differentiability is a stronger condition than continuity. Every differentiable function is continuous, but the reverse implication fails. The functions that are continuous but not differentiable at a point form a significant and instructive class.
 `,
@@ -907,8 +907,22 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving that differentiability implies continuity" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'If $f$ is differentiable at $a$, then $f$ is continuous at $a$' },
+    steps: [
+      { math: '$f(x) - f(a) = \\dfrac{f(x) - f(a)}{x - a} \\cdot (x - a)$', tag: 'rewrite', why: 'Rewrite the difference as a product of two factors' },
+      { math: "$\\dfrac{f(x) - f(a)}{x - a} \\to f'(a)$", tag: 'first factor', why: 'As $x \\to a$; the derivative exists by assumption' },
+      { math: '$x - a \\to 0$', tag: 'second factor', why: 'As $x \\to a$' },
+      { math: "$f(x) - f(a) \\to f'(a) \\cdot 0 = 0$", tag: 'product', key: true, why: 'Their product approaches $0$' },
+    ],
+    conclusion: { text: '$\\lim_{x \\to a} f(x) = f(a)$', say: 'So $f$ is continuous at $a$.' },
+  };
+
   return {
   props: {
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     differentiabilityFailureTree,
@@ -932,7 +946,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({ formulaSummaryData, pitfallData,differentiabilityFailureTree, seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ proofStepsData, formulaSummaryData, pitfallData,differentiabilityFailureTree, seoData, sectionsContent, introContent, obj7Table, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1042,6 +1056,18 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-differentiability-implies-continuity-proof'}
+            id="differentiability-implies-continuity-proof"
+            title="Proving that differentiability implies continuity"
+            source="/calculus/derivatives/differentiability"
+            related={false}
+            before={"The direct proof, one line at a time: the rewrite, the limit of each factor, and their product."}
+            after={"The rewrite is the whole trick: it turns $f(x) - f(a)$ into a factor that tends to $f'(a)$ times a factor that tends to $0$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
         ]
     },
     {

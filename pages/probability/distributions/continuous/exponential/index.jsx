@@ -1134,6 +1134,8 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1471,9 +1473,8 @@ $$E[X] = \\left[-x e^{-\\lambda x}\\right]_{0}^{\\infty} + \\int_{0}^{\\infty} e
 The first term vanishes at both limits. For the second term:
 
 @academic[formula_callout:Expected Value (Mean)
-$$E[X] = \\int_{0}^{\\infty} e^{-\\lambda x} \\, dx = \\left[-\\frac{1}{\\lambda} e^{-\\lambda x}\\right]_{0}^{\\infty} = 0 - \\left(-\\frac{1}{\\lambda}\\right) = \\frac{1}{\\lambda}$$]@
-
-The result $E[X] = \\frac{1}{\\lambda}$ captures an intuitive relationship: if events occur at rate $\\lambda$ per unit time, then the average waiting time until the next event is $\\frac{1}{\\lambda}$ time units. A higher rate means shorter average wait times; a lower rate means longer waits.
+$$E[X] = \\int_{0}^{\\infty} e^{-\\lambda x} \\, dx = \\left[-\\frac{1}{\\lambda} e^{-\\lambda x}\\right]_{0}^{\\infty} = 0 - \\left(-\\frac{1}{\\lambda}\\right) = \\frac{1}{\\lambda}$$]@`,
+      afterProof: `The result $E[X] = \\frac{1}{\\lambda}$ captures an intuitive relationship: if events occur at rate $\\lambda$ per unit time, then the average waiting time until the next event is $\\frac{1}{\\lambda}$ time units. A higher rate means shorter average wait times; a lower rate means longer waits.
 
 This parallels the [geometric distribution](!/probability/distributions/discrete/geometric#expected-value), which models waiting in discrete trials. The exponential distribution is the continuous analog, modeling waiting in continuous time.
 
@@ -1545,9 +1546,8 @@ $$\\mathbb{E}[X^2] = \\frac{2}{\\lambda^2}$$]@
 Applying the computational formula:
 
 @academic[formula_callout:Variance and Standard Deviation
-$$\\mathrm{Var}(X) = \\frac{2}{\\lambda^2} - \\left(\\frac{1}{\\lambda}\\right)^2 = \\frac{2}{\\lambda^2} - \\frac{1}{\\lambda^2} = \\frac{1}{\\lambda^2}$$]@
-
-The result $\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$ shows that variance decreases rapidly as the rate increases. When events occur frequently (large $\\lambda$), waiting times are consistently short with little variability. When events are rare (small $\\lambda$), waiting times become both long and highly variable. The quadratic relationship means doubling the rate reduces variance by a factor of four.
+$$\\mathrm{Var}(X) = \\frac{2}{\\lambda^2} - \\left(\\frac{1}{\\lambda}\\right)^2 = \\frac{2}{\\lambda^2} - \\frac{1}{\\lambda^2} = \\frac{1}{\\lambda^2}$$]@`,
+      afterProof: `The result $\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$ shows that variance decreases rapidly as the rate increases. When events occur frequently (large $\\lambda$), waiting times are consistently short with little variability. When events are rare (small $\\lambda$), waiting times become both long and highly variable. The quadratic relationship means doubling the rate reduces variance by a factor of four.
 
 @academic[rule_corollary_plain:Notably, for the exponential distribution, the standard deviation equals the mean—a property that doesn't hold for most distributions.]@
 
@@ -1617,9 +1617,8 @@ $$e^{-\\lambda m} = 0.5$$]@
 $$-\\lambda m = \\ln(0.5) = -\\ln(2)$$]@
 
 @academic[formula_callout:Mode and Median
-$$m = \\frac{\\ln(2)}{\\lambda}$$]@
-
-The median is:
+$$m = \\frac{\\ln(2)}{\\lambda}$$]@`,
+      afterProof: `The median is:
 
 @academic[formula_callout:Mode and Median
 $$\\text{Median} = \\frac{\\ln(2)}{\\lambda} \\approx \\frac{0.693}{\\lambda}$$]@
@@ -1677,9 +1676,8 @@ $$e^{-\\lambda x_p} = 1 - p$$]@
 $$-\\lambda x_p = \\ln(1 - p)$$]@
 
 @academic[formula_callout:Quantiles/Percentiles
-$$x_p = -\\frac{\\ln(1 - p)}{\\lambda} = \\frac{-\\ln(1 - p)}{\\lambda}$$]@
-
-This gives the general quantile formula:
+$$x_p = -\\frac{\\ln(1 - p)}{\\lambda} = \\frac{-\\ln(1 - p)}{\\lambda}$$]@`,
+      afterProof: `This gives the general quantile formula:
 
 @academic[formula_callout:Quantiles/Percentiles
 $$x_p = \\frac{-\\ln(1 - p)}{\\lambda}$$]@
@@ -1857,9 +1855,8 @@ As $\\lambda \\to \\infty$, events occur nearly instantaneously:
 • All probability concentrates near zero
 • The distribution degenerates toward a point mass at zero
 
-This represents the limit where waiting time becomes negligible.
-
-### Limiting Behavior and Connections
+This represents the limit where waiting time becomes negligible.`,
+      afterCases: `### Limiting Behavior and Connections
 
 **Relationship to Poisson:**
 The exponential distribution is intimately connected to the [Poisson distribution](!/probability/distributions/discrete/poisson). If events follow a Poisson process with rate $\\lambda$, then:
@@ -2397,8 +2394,84 @@ $$= \\frac{e^{-1.5}}{e^{-1}} = e^{-0.5} \\approx 0.607$$`, `This equals $P(X > 1
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the exponential mean" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$E[X] = \\frac{1}{\\lambda}$' },
+    steps: [
+      { action: 'Write the expected value', math: '$\\displaystyle E[X] = \\int_{0}^{\\infty} x \\cdot \\lambda e^{-\\lambda x} \\, dx$', why: 'The PDF is $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$.' },
+      { action: 'Integrate by parts', math: '$\\displaystyle E[X] = \\left[-x e^{-\\lambda x}\\right]_{0}^{\\infty} + \\int_{0}^{\\infty} e^{-\\lambda x} \\, dx$', why: 'With $u = x$ and $dv = \\lambda e^{-\\lambda x} dx$.' },
+      { action: 'Drop the boundary term', math: '$\\displaystyle E[X] = \\int_{0}^{\\infty} e^{-\\lambda x} \\, dx$', why: 'The first term vanishes at both limits.' },
+      { action: 'Integrate', math: '$\\displaystyle = \\left[-\\frac{1}{\\lambda} e^{-\\lambda x}\\right]_{0}^{\\infty}$' },
+      { action: 'Evaluate at the limits', math: '$\\displaystyle = 0 - \\left(-\\frac{1}{\\lambda}\\right) = \\frac{1}{\\lambda}$' },
+    ],
+    conclusion: { text: '$E[X] = \\frac{1}{\\lambda}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the exponential variance" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$' },
+    steps: [
+      { math: '$\\mathbb{E}[X^2] = \\int_{0}^{\\infty} x^2 \\cdot \\lambda e^{-\\lambda x} \\, dx$', tag: 'PDF', why: 'The PDF is $f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$' },
+      { math: '$= \\frac{2}{\\lambda^2}$', tag: 'integrate', why: 'Integration by parts twice, or the gamma function' },
+      { math: '$\\mathrm{Var}(X) = \\frac{2}{\\lambda^2} - \\left(\\frac{1}{\\lambda}\\right)^2$', tag: 'key step', key: true, why: 'The computational formula, with $\\mu = \\frac{1}{\\lambda}$ from the expected value section' },
+      { math: '$= \\frac{2}{\\lambda^2} - \\frac{1}{\\lambda^2}$', tag: 'square', why: 'Squaring the mean' },
+      { math: '$= \\frac{1}{\\lambda^2}$', tag: 'subtract', why: 'Same denominator' },
+    ],
+    conclusion: { text: '$\\mathrm{Var}(X) = \\frac{1}{\\lambda^2}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the exponential median" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Find', text: 'The median $m$, where $P(X \\leq m) = 0.5$' },
+    steps: [
+      { math: '$1 - e^{-\\lambda m} = 0.5$', tag: 'CDF', why: 'Setting the CDF $F(x) = 1 - e^{-\\lambda x}$ equal to $0.5$ at $x = m$' },
+      { math: '$e^{-\\lambda m} = 0.5$', tag: 'rearrange', why: 'Move the exponential to one side' },
+      { math: '$-\\lambda m = \\ln(0.5) = -\\ln(2)$', tag: 'key step', key: true, why: 'Take the natural logarithm of both sides' },
+      { math: '$m = \\frac{\\ln(2)}{\\lambda}$', tag: 'divide', why: 'Divide by $-\\lambda$' },
+    ],
+    conclusion: { text: '$\\text{Median} = \\frac{\\ln(2)}{\\lambda} \\approx \\frac{0.693}{\\lambda}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the exponential quantile formula" (chain), from the page's own formulas.
+  const proofStepsData4 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Find', text: 'The $p$-th quantile $x_p$, where $P(X \\leq x_p) = p$' },
+    steps: [
+      { math: '$1 - e^{-\\lambda x_p} = p$', tag: 'CDF', why: 'Solving $F(x_p) = p$ with the CDF $F(x) = 1 - e^{-\\lambda x}$' },
+      { math: '$e^{-\\lambda x_p} = 1 - p$', tag: 'rearrange', why: 'Move the exponential to one side' },
+      { math: '$-\\lambda x_p = \\ln(1 - p)$', tag: 'key step', key: true, why: 'Take the natural logarithm of both sides' },
+      { math: '$x_p = -\\frac{\\ln(1 - p)}{\\lambda} = \\frac{-\\ln(1 - p)}{\\lambda}$', tag: 'divide', why: 'Divide by $-\\lambda$' },
+    ],
+    conclusion: { text: '$x_p = \\frac{-\\ln(1 - p)}{\\lambda}$' },
+  };
+
+  // SpecialCases 2026-11-09: "Three special values of the rate" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$f(x) = \\begin{cases} \\lambda e^{-\\lambda x} & \\text{if } x \\geq 0 \\\\ 0 & \\text{if } x < 0 \\end{cases}$' },
+    cases: [
+      { when: '$\\lambda = 1$', tag: 'unit exponential', rule: '$f(x) = e^{-x} \\text{ for } x \\geq 0$', examples: '$\\text{Exp}(1)$',
+        why: 'This simplified form is often used in theoretical work.',
+        more: 'Any exponential random variable $X \\sim \\text{Exp}(\\lambda)$ can be transformed to unit exponential: $Y = \\lambda X \\sim \\text{Exp}(1)$.' },
+      { when: '$\\lambda \\to 0$', tag: 'rare events', rule: 'The mean $\\frac{1}{\\lambda} \\to \\infty$', examples: 'more spread out, mass shifts toward larger values',
+        why: 'Events become increasingly rare: the average wait grows without bound.',
+        more: 'The density near zero approaches zero. This represents the limit of extremely infrequent events.' },
+      { when: '$\\lambda \\to \\infty$', tag: 'point mass at 0', tone: 'warn', rule: 'The mean $\\frac{1}{\\lambda} \\to 0$', examples: 'all probability concentrates near zero',
+        why: 'Events occur nearly instantaneously: the average wait shrinks to zero.',
+        more: 'The distribution degenerates toward a point mass at zero. This represents the limit where waiting time becomes negligible.' },
+    ],
+  };
+
    return {
       props:{
+    specialCasesData,
+    proofStepsData4,
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2420,7 +2493,7 @@ $$= \\frac{e^{-1.5}}{e^{-1}} = e^{-0.5} \\approx 0.607$$`, `This equals $P(X > 1
     }
    }
 
-export default function ExponentialDistributionPage({ formulaSummaryData, pitfallData,
+export default function ExponentialDistributionPage({ specialCasesData, proofStepsData4, proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2582,6 +2655,18 @@ export default function ExponentialDistributionPage({ formulaSummaryData, pitfal
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-exponential-mean-steps'}
+            id="exponential-mean-steps"
+            title="Deriving the exponential mean"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+            before={"The integration by parts one step at a time. Use Next and Back to move through it."}
+            after={"Integration by parts turns the integral of $x \\cdot \\lambda e^{-\\lambda x}$ into the integral of $e^{-\\lambda x}$ alone, which gives $\\frac{1}{\\lambda}$ directly."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {
@@ -2590,6 +2675,18 @@ export default function ExponentialDistributionPage({ formulaSummaryData, pitfal
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'proof-steps-exponential-variance-steps'}
+            id="exponential-variance-steps"
+            title="Deriving the exponential variance"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+            before={"The variance computation above as a chain, from $\\mathbb{E}[X^2]$ to the computational formula."}
+            after={"With $\\mathbb{E}[X^2] = \\frac{2}{\\lambda^2}$, the gold step subtracts $\\frac{1}{\\lambda^2}$ and leaves exactly the square of the mean."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterProof,
         ]
     },
     {
@@ -2598,6 +2695,18 @@ export default function ExponentialDistributionPage({ formulaSummaryData, pitfal
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-exponential-median-steps'}
+            id="exponential-median-steps"
+            title="Deriving the exponential median"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+            before={"Solving $F(m) = 0.5$ as a chain of steps, each with what it does."}
+            after={"Taking logarithms is the gold step: it frees $m$ from the exponent, and the rate $\\lambda$ only rescales the answer."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProof,
           <div key={'unit-expCenters'} dangerouslySetInnerHTML={{ __html: demoUnits.expCenters }} />,
           `With λ = 3 per hour all three scale by 1/3: mode 0, median 13.9 minutes, mean 20 minutes.`,
         ]
@@ -2608,6 +2717,18 @@ export default function ExponentialDistributionPage({ formulaSummaryData, pitfal
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'proof-steps-exponential-quantile-steps'}
+            id="exponential-quantile-steps"
+            title="Deriving the exponential quantile formula"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+            before={"Solving $F(x_p) = p$ as a chain of steps, each with what it does."}
+            after={"These are the steps of the median with $0.5$ replaced by $p$; at $p = 0.5$ the formula gives $\\frac{\\ln(2)}{\\lambda}$ again."}
+          >
+            <ProofSteps data={proofStepsData4} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj10.afterProof,
         ]
     },
     {
@@ -2636,6 +2757,18 @@ export default function ExponentialDistributionPage({ formulaSummaryData, pitfal
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'special-cases-exponential-rate-special-cases'}
+            id="exponential-rate-special-cases"
+            title="Three special values of the rate"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+            before={"One row per special value of the rate $\\lambda$. Click a row for more on what happens there."}
+            after={"All three rows come from the one rate $\\lambda$: since $\\lambda X \\sim \\text{Exp}(1)$, changing it only rescales the wait."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj14.afterCases,
         ]
     },
     {

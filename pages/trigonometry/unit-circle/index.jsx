@@ -1296,6 +1296,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 
 
 export async function getStaticProps(){
@@ -2442,8 +2443,22 @@ The unit circle reveals structure that [right triangle trigonometry](!/trigonome
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the three Pythagorean identities" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: 'The three Pythagorean identities from $x^2 + y^2 = 1$' },
+    steps: [
+      { action: 'Start from the circle', math: '$x^2 + y^2 = 1$', why: 'Every point on the unit circle satisfies this equation.' },
+      { action: 'Substitute the coordinates', math: '$\\sin^2\\theta + \\cos^2\\theta = 1$', why: 'Since $x = \\cos\\theta$ and $y = \\sin\\theta$.' },
+      { action: 'Divide by $\\cos^2\\theta$', math: '$1 + \\tan^2\\theta = \\sec^2\\theta$', why: 'Where $\\cos\\theta \\neq 0$.' },
+      { action: 'Divide by $\\sin^2\\theta$', math: '$1 + \\cot^2\\theta = \\csc^2\\theta$', why: 'Where $\\sin\\theta \\neq 0$.' },
+    ],
+    conclusion: { text: 'The three Pythagorean identities', say: 'All consequences of a single circle equation.' },
+  };
+
    return {
       props:{
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -2480,7 +2495,7 @@ More than just a diagram, the unit circle acts as a **conceptual bridge** betwee
     }
    }
 
-export default function UnitCirclePage({ pitfallData,
+export default function UnitCirclePage({ proofStepsData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2663,6 +2678,17 @@ $$x^2 + y^2 = 1$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-pythagorean-identities-derivation-steps'}
+            id="pythagorean-identities-derivation-steps"
+            title="Deriving the three Pythagorean identities"
+            source="/trigonometry/unit-circle"
+            related={false}
+            before={"The derivation above one step at a time, from the circle equation to all three identities; use Next and Back to move through it."}
+            after={"One circle equation is the source: the other two identities are it divided by $\\cos^2\\theta$ or by $\\sin^2\\theta$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
                   <div key={'unit-pythagoreanCircle'} dangerouslySetInnerHTML={{ __html: demoUnits.pythagoreanCircle }} />,
           `In the other quadrants the legs carry signs, but their squares still add to 1.`,
           `@academic[punchline:Sine and cosine are never independent: either one fixes the other, up to its sign.]@`,

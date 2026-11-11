@@ -1301,6 +1301,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -2148,9 +2149,8 @@ Uniqueness requires a short argument. Suppose $w_1$ and $w_2$ are both additive 
 @academic[formula_callout:Uniqueness
 $$w_1 = w_1 + 0 = w_1 + (z + w_2) = (w_1 + z) + w_2 = 0 + w_2 = w_2$$]@
 
-The two supposed inverses must be the same. No complex number admits two different additive inverses.
-
-This uniqueness is not an accident but a consequence of the [field axioms](!/complex-numbers/properties) that govern complex arithmetic. In any field, additive inverses are unique. The argument above uses only associativity of addition and the properties of zero as the additive identity — both guaranteed by the field structure.
+The two supposed inverses must be the same. No complex number admits two different additive inverses.`,
+  afterProof: `This uniqueness is not an accident but a consequence of the [field axioms](!/complex-numbers/properties) that govern complex arithmetic. In any field, additive inverses are unique. The argument above uses only associativity of addition and the properties of zero as the additive identity — both guaranteed by the field structure.
 
 Uniqueness justifies the notation $-z$. If multiple inverses existed, writing $-z$ would be ambiguous — which inverse do we mean? Because exactly one inverse exists, the notation refers unambiguously to that single number.`,
   before: ``,
@@ -2435,8 +2435,23 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving the additive inverse is unique" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'If $z + w_1 = 0$ and $z + w_2 = 0$, then $w_1 = w_2$' },
+    steps: [
+      { math: '$w_1 = w_1 + 0$', tag: 'identity', why: 'Zero is the additive identity' },
+      { math: '$= w_1 + (z + w_2)$', tag: 'substitute', why: 'Since $z + w_2 = 0$' },
+      { math: '$= (w_1 + z) + w_2$', tag: 'key step', key: true, why: 'Associativity of addition' },
+      { math: '$= 0 + w_2$', tag: 'substitute', why: 'Since $w_1$ is an additive inverse of $z$' },
+      { math: '$= w_2$', tag: 'identity', why: 'Zero is the additive identity' },
+    ],
+    conclusion: { text: '$w_1 = w_2$', say: 'The two supposed inverses must be the same.' },
+  };
+
   return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2462,7 +2477,7 @@ const schemas = {
 
 
 
-export default function AdditiveInversePage({ formulaSummaryData, pitfallData,
+export default function AdditiveInversePage({ proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2667,6 +2682,18 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-complex-additive-inverse-uniqueness-proof'}
+            id="complex-additive-inverse-uniqueness-proof"
+            title="Proving the additive inverse is unique"
+            source="/complex-numbers/additive-inverse"
+            related={false}
+            before={"The uniqueness chain above, split at each equals sign, with the rule used at every step."}
+            after={"The gold line is associativity: regrouping $w_1 + (z + w_2)$ as $(w_1 + z) + w_2$ is what lets the two inverses meet."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProof,
         ]
     },
     {

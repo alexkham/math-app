@@ -23,6 +23,9 @@ export const REGISTRY = {
   apex: Point,
   foot: Point,
   intersection: Point,
+  angleCopy: Point,
+  rotateBy: Point,
+  rotateDeg: Point,
 
   polygon: Polygon,
   circle: Circle,

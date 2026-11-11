@@ -968,8 +968,28 @@ import varianceDiagrams from '@/app/components/probability/variance/varianceDiag
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
+
+// FeatureMatrix 2026-11-10: "Variance of six standard distributions", from the page's own text.
+const featureMatrixData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+    options: { orientToggle: true },
+    features: [
+      { id: 'params', name: 'Parameters', type: 'math' },
+      { id: 'var', name: 'Variance', type: 'math' },
+      { id: 'page', name: 'Details', type: 'text' },
+    ],
+    items: [
+      { id: 'bern', name: 'Bernoulli', values: { params: '$p$', var: '$p(1-p)$', page: null } },
+      { id: 'bin', name: 'Binomial', values: { params: '$n,\\ p$', var: '$np(1-p)$', page: '[binomial](!/probability/distributions/discrete#binomial)' } },
+      { id: 'poi', name: 'Poisson', values: { params: '$\\lambda$', var: '$\\lambda$', page: '[Poisson](!/probability/distributions/discrete#poisson)' } },
+      { id: 'unif', name: 'Uniform', sub: 'on $[a, b]$', values: { params: '$a,\\ b$', var: '$\\dfrac{(b-a)^2}{12}$', page: '[uniform](!/probability/distributions/continuous#uniform)' } },
+      { id: 'exp', name: 'Exponential', values: { params: '$\\lambda$', var: '$\\dfrac{1}{\\lambda^2}$', page: '[exponential](!/probability/distributions/continuous#exponential)' } },
+      { id: 'norm', name: 'Normal', values: { params: '$\\mu,\\ \\sigma^2$', var: '$\\sigma^2$', page: '[normal](!/probability/distributions/continuous#normal)' } },
+    ],
+  };
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
 
@@ -1832,9 +1852,8 @@ $$\\mathrm{Var}(X) = \\sigma^2$$
 
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
-See the [normal distribution](!/probability/distributions/continuous#normal) page.
-
-Each distribution's page contains derivations and detailed explanations of these variance formulas.`,
+See the [normal distribution](!/probability/distributions/continuous#normal) page.`,
+      afterMatrix: `Each distribution's page contains derivations and detailed explanations of these variance formulas.`,
       before:``,
       after:``,
   
@@ -2497,6 +2516,18 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
         link:'',
         content:[
             sectionsContent.distributions.content,
+            <DiagramFrameV2
+              key={'feature-matrix-standard-distribution-variances'}
+              id="standard-distribution-variances"
+              title="Variance of six standard distributions"
+              source="/probability/variance"
+              related={false}
+              before={"The six formulas above side by side: each distribution's parameters and its variance, with the page that derives it."}
+              after={"For the Poisson and the normal distribution the variance is one of the parameters itself; the other four build it from theirs."}
+            >
+              <FeatureMatrix data={featureMatrixData} />
+            </DiagramFrameV2>,
+            sectionsContent.distributions.afterMatrix,
         ]
     },
     {

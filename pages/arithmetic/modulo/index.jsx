@@ -811,6 +811,7 @@ import { renderMultiplesLine } from '@/app/utils/illustrations/arithmetic/divisi
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -1628,8 +1629,26 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-08: "Where the modulo rule changes" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$a = n \\cdot q + r, \\quad 0 \\leq r < n$', say: '$a \\bmod n = r$' },
+    cases: [
+      { when: '$0 \\leq a < n$', tag: 'no reduction', rule: '$a \\bmod n = a$', examples: '$3 \\bmod 10 = 3$, $0 \\bmod 5 = 0$, $6 \\bmod 7 = 6$',
+        why: 'The divisor fits zero times: $a = n \\cdot 0 + a$.',
+        more: 'The quotient says $n$ is too large to fit even once; the remainder says how much of $a$ is left over.' },
+      { when: '$n = 1$', tag: 'always 0', rule: '$a \\bmod 1 = 0$', examples: 'for any integer $a$',
+        why: 'Every integer is a multiple of $1$.',
+        more: 'The remainder set $\\{0, 1, \\ldots, n-1\\}$ collapses to $\\{0\\}$.' },
+      { when: '$n = 0$', tag: 'undefined', tone: 'stop', rule: '$a \\bmod 0$ is undefined', examples: 'in programming, $a \\% \\; 0$ has no valid result',
+        why: 'Division by zero has no meaning.',
+        more: 'Every $q$ satisfies $a = 0 \\cdot q + r$ with $r = a$, so the quotient is not unique, and no remainder can satisfy $0 \\leq r < 0$.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     moduloDivisibilityCases,
@@ -1659,7 +1678,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function ModuloPage({ formulaSummaryData, pitfallData,moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ModuloPage({ specialCasesData, formulaSummaryData, pitfallData,moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1813,6 +1832,17 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj61.link,
         content:[
           sectionsContent.obj61.content,
+          <DiagramFrame
+            key={'special-cases-modulo-edge-cases'}
+            id="modulo-edge-cases"
+            title="Where the modulo rule changes"
+            source="/arithmetic/modulo"
+            related={false}
+            before={"One row per edge case of $a \\bmod n$. Click a row for the reason behind it."}
+            after={"Each row is the division equation $a = n \\cdot q + r$ read at an extreme value of $a$ or $n$."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
         ]
     },
      {

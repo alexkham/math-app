@@ -16,6 +16,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -321,9 +322,8 @@ One derivation uses the telescoping identity $(k+1)^3 - k^3 = 3k^2 + 3k + 1$. Su
 @academic[formula_callout:Sum of Squares
 $$(n+1)^3 - 1 = 3\\sum k^2 + 3\\sum k + n$$]@
 
-Substituting $\\sum k = \\frac{n(n+1)}{2}$ and solving for $\\sum k^2$ gives the result.
-
-For example, the sum of the first $5$ squares is $1 + 4 + 9 + 16 + 25 = 55$, which matches $\\frac{5 \\cdot 6 \\cdot 11}{6} = 55$.
+Substituting $\\sum k = \\frac{n(n+1)}{2}$ and solving for $\\sum k^2$ gives the result.`,
+    afterProof: `For example, the sum of the first $5$ squares is $1 + 4 + 9 + 16 + 25 = 55$, which matches $\\frac{5 \\cdot 6 \\cdot 11}{6} = 55$.
 
 @academic[pitfall,aside:true,width:35%:Squaring the sum instead of summing the squares
 Writing $1^2 + 2^2 + \\cdots + 5^2$ as $(1 + 2 + \\cdots + 5)^2$ gives $15^2 = 225$. Each term is squared separately: $1 + 4 + 9 + 16 + 25 = 55$.
@@ -584,8 +584,21 @@ $$3^2 = 9 < 13 < 16 = 4^2$$`, `So neither $26$ nor $13$ is a perfect square. A n
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the sum of squares" (stepper), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\displaystyle \\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$' },
+    steps: [
+      { action: 'Start from the telescoping identity', math: '$(k+1)^3 - k^3 = 3k^2 + 3k + 1$' },
+      { action: 'Sum both sides from $k = 1$ to $n$', math: '$\\displaystyle (n+1)^3 - 1 = 3\\sum k^2 + 3\\sum k + n$' },
+      { action: 'Substitute the sum of the first $n$ integers', math: '$\\displaystyle \\sum k = \\frac{n(n+1)}{2}$', why: 'The triangular number sum.' },
+      { action: 'Solve for the sum of squares', math: '$\\displaystyle \\sum_{k=1}^{n} k^2 = \\frac{n(n+1)(2n+1)}{6}$' },
+    ],
+  };
+
    return {
       props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
          sectionsContent,
@@ -606,7 +619,7 @@ $$3^2 = 9 < 13 < 16 = 4^2$$`, `So neither $26$ nor $13$ is a perfect square. A n
     }
    }
 
-export default function SquareNumbersPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SquareNumbersPage({ proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciSvg = (key) => <div dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
@@ -742,6 +755,18 @@ $$1, 4, 9, 16, 25, 36, 49, 64, 81, 100, \\ldots$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'proof-steps-sum-of-squares-telescoping-steps'}
+            id="sum-of-squares-telescoping-steps"
+            title="Deriving the sum of squares"
+            source="/algebra/sequences/square-numbers"
+            related={false}
+            before={"The telescoping derivation above, one step per screen: press Next to go from the cube identity to the closed form."}
+            after={"Summing the identity leaves only $(n+1)^3 - 1$ on the left, which is why the sum of the first $n$ squares is a cubic in $n$."}
+          >
+            <ProofSteps data={proofStepsData} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterProof,
         ]
     },
     {

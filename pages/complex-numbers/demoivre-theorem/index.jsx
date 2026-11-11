@@ -1052,6 +1052,7 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
@@ -1390,9 +1391,8 @@ The right side is a product of two numbers in trigonometric form. By the multipl
 @academic[formula_callout:Proof of De Moivre's Theorem
 $$= \\cos(k\\theta + \\theta) + i\\sin(k\\theta + \\theta) = \\cos((k+1)\\theta) + i\\sin((k+1)\\theta)$$]@
 
-This completes the induction. The theorem holds for all positive integers.
-
-Extension to negative integers follows from the reciprocal. For $n > 0$:
+This completes the induction. The theorem holds for all positive integers.`,
+      afterProof: `Extension to negative integers follows from the reciprocal. For $n > 0$:
 
 @academic[formula_callout:Proof of De Moivre's Theorem
 $$z^{-n} = \\frac{1}{z^n} = \\frac{1}{r^n\\text{cis}(n\\theta)} = \\frac{1}{r^n} \\cdot \\text{cis}(-n\\theta) = r^{-n}\\text{cis}(-n\\theta)$$]@
@@ -2043,8 +2043,25 @@ const schemas = {
     ],
   };
 
+  // ProofSteps pilot 2026-11-08: the induction layout of the section "Proof of De Moivre's theorem by induction", from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$(\\cos\\theta + i\\sin\\theta)^n = \\cos(n\\theta) + i\\sin(n\\theta)$' },
+    induction: {
+      base: { at: '$n = 1$', math: '$(\\cos\\theta + i\\sin\\theta)^1 = \\cos(1 \\cdot \\theta) + i\\sin(1 \\cdot \\theta)$', say: 'Holds trivially.' },
+      hyp: { at: '$n = k$', math: '$(\\cos\\theta + i\\sin\\theta)^k = \\cos(k\\theta) + i\\sin(k\\theta)$' },
+      step: { at: '$n = k + 1$', steps: [
+        { why: 'Multiply both sides by $\\cos\\theta + i\\sin\\theta$', math: '$(\\cos\\theta + i\\sin\\theta)^{k+1} = (\\cos(k\\theta) + i\\sin(k\\theta))(\\cos\\theta + i\\sin\\theta)$' },
+        { why: 'By the multiplication rule, add arguments', math: '$= \\cos(k\\theta + \\theta) + i\\sin(k\\theta + \\theta)$' },
+        { why: 'Collect', math: '$= \\cos((k+1)\\theta) + i\\sin((k+1)\\theta)$' },
+      ] },
+    },
+    conclusion: { text: 'Holds for all positive integers $n$', say: 'This completes the induction.' },
+  };
+
   return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     nthRootsAnatomy,
@@ -2075,7 +2092,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeMoivreTheoremPage({ formulaSummaryData, pitfallData,nthRootsAnatomy, unityParityCases, demoivrePowerSteps,
+export default function DeMoivreTheoremPage({ proofStepsData, formulaSummaryData, pitfallData,nthRootsAnatomy, unityParityCases, demoivrePowerSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -2184,6 +2201,18 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps'}
+            id="de-moivre-induction-proof"
+            title="Proof of De Moivre's theorem by induction"
+            source="/complex-numbers/demoivre-theorem"
+            related={false}
+            before={"The induction above, laid out in its three parts: the base case, the assumption, and the step from $k$ to $k + 1$."}
+            after={"The multiplication rule does all the work in the inductive step: multiplying by one more factor adds one more $\\theta$ to the argument."}
+          >
+            <ProofSteps data={proofStepsData} variant="induction" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {

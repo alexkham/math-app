@@ -869,6 +869,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1135,9 +1136,8 @@ The event that the first success comes within $k$ trials can happen in $k$ diffe
 We can verify this by summing the PMF:
 
 @academic[formula_callout:Cumulative Distribution Function (CDF)
-$$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p = p\\sum_{i=0}^{k-1} (1-p)^i = p \\cdot \\frac{1-(1-p)^k}{1-(1-p)} = 1-(1-p)^k$$]@
-
-**Monotonic Property**: As $k$ increases, $(1-p)^k$ decreases toward 0, so $F_X(k)$ increases toward 1, which reflects the increasing certainty that success will eventually occur.
+$$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p = p\\sum_{i=0}^{k-1} (1-p)^i = p \\cdot \\frac{1-(1-p)^k}{1-(1-p)} = 1-(1-p)^k$$]@`,
+     afterProof: `**Monotonic Property**: As $k$ increases, $(1-p)^k$ decreases toward 0, so $F_X(k)$ increases toward 1, which reflects the increasing certainty that success will eventually occur.
 
 @academic[fact,aside:true,width:35%:Zero in 300 caps the rate near 1%
 If $n$ trials all fail, any $p$ above $\\frac{3}{n}$ would have made that run less than 5% likely, since $\\left(1 - \\frac{3}{n}\\right)^n < e^{-3} \\approx 0.05$. So no side effect in 300 patients makes a rate above 1% implausible.]@
@@ -1190,9 +1190,8 @@ $$\\sum_{k=1}^{\\infty} k \\cdot r^{k-1} = \\frac{1}{(1-r)^2}$$]@
 Substituting $r = 1-p$:
 
 @academic[formula_callout:Expected Value (Mean)
-$$E[X] = p \\cdot \\frac{1}{(1-(1-p))^2} = p \\cdot \\frac{1}{p^2} = \\frac{1}{p}$$]@
-
-The result $E[X] = \\frac{1}{p}$ captures an intuitive relationship: if the probability of success on each trial is $p$, then on average you need $\\frac{1}{p}$ trials to achieve the first success. The smaller the probability of success, the more trials you expect to need.
+$$E[X] = p \\cdot \\frac{1}{(1-(1-p))^2} = p \\cdot \\frac{1}{p^2} = \\frac{1}{p}$$]@`,
+    afterProof: `The result $E[X] = \\frac{1}{p}$ captures an intuitive relationship: if the probability of success on each trial is $p$, then on average you need $\\frac{1}{p}$ trials to achieve the first success. The smaller the probability of success, the more trials you expect to need.
 
 ### Example
 
@@ -1252,9 +1251,8 @@ $$\\mathbb{E}[X^2] = \\sum_{k=1}^{\\infty} k^2 (1-p)^{k-1} p = \\frac{2-p}{p^2}$
 Applying the shortcut formula:
 
 @academic[formula_callout:Variance and Standard Deviation
-$$\\mathrm{Var}(X) = \\frac{2-p}{p^2} - \\left(\\frac{1}{p}\\right)^2 = \\frac{2-p}{p^2} - \\frac{1}{p^2} = \\frac{1-p}{p^2}$$]@
-
-The result $\\mathrm{Var}(X) = \\frac{1-p}{p^2}$ shows that variance increases as $p$ decreases. When success is rare (small $p$), the waiting time becomes highly variable—sometimes you succeed quickly, sometimes you wait a very long time. The quadratic relationship with $p$ in the denominator means variance grows rapidly as $p$ approaches zero.
+$$\\mathrm{Var}(X) = \\frac{2-p}{p^2} - \\left(\\frac{1}{p}\\right)^2 = \\frac{2-p}{p^2} - \\frac{1}{p^2} = \\frac{1-p}{p^2}$$]@`,
+      afterProof: `The result $\\mathrm{Var}(X) = \\frac{1-p}{p^2}$ shows that variance increases as $p$ decreases. When success is rare (small $p$), the waiting time becomes highly variable—sometimes you succeed quickly, sometimes you wait a very long time. The quadratic relationship with $p$ in the denominator means variance grows rapidly as $p$ approaches zero.
 
 ### Standard Deviation
 
@@ -1758,8 +1756,52 @@ $$\\approx 0.096$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Checking the geometric CDF by summation" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$P(X \\leq k) = 1 - (1-p)^k$' },
+    steps: [
+      { math: '$P(X \\leq k) = \\sum_{i=1}^{k} (1-p)^{i-1}p$', tag: 'PMF', why: 'Summing the PMF over the first $k$ trials' },
+      { math: '$= p\\sum_{i=0}^{k-1} (1-p)^i$', tag: 'factor', why: 'Take out $p$ and start the index at $0$' },
+      { math: '$= p \\cdot \\frac{1-(1-p)^k}{1-(1-p)}$', tag: 'key step', key: true, why: 'The sum of a finite geometric series with ratio $1-p$' },
+      { math: '$= 1-(1-p)^k$', tag: 'cancel', why: 'The denominator is $p$' },
+    ],
+    conclusion: { text: '$P(X \\leq k) = 1 - (1-p)^k$', say: 'The same result as the complement approach.' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the geometric mean" (stepper), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$E[X] = \\frac{1}{p}$' },
+    steps: [
+      { action: 'Substitute the PMF', math: '$\\displaystyle E[X] = \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1} p$', why: 'The general definition with $P(X = k) = (1-p)^{k-1}p$ for $k = 1, 2, 3, \\ldots$' },
+      { action: 'Take out $p$', math: '$\\displaystyle = p \\sum_{k=1}^{\\infty} k \\cdot (1-p)^{k-1}$' },
+      { action: 'Recognize the series', math: '$\\displaystyle \\sum_{k=1}^{\\infty} k \\cdot r^{k-1} = \\frac{1}{(1-r)^2}$', why: 'The formula for the derivative of a geometric series.' },
+      { action: 'Substitute $r = 1-p$', math: '$\\displaystyle E[X] = p \\cdot \\frac{1}{(1-(1-p))^2}$' },
+      { action: 'Simplify', math: '$\\displaystyle = p \\cdot \\frac{1}{p^2} = \\frac{1}{p}$' },
+    ],
+    conclusion: { text: '$E[X] = \\frac{1}{p}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the geometric variance" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\mathrm{Var}(X) = \\frac{1-p}{p^2}$' },
+    steps: [
+      { math: '$\\mathbb{E}[X^2] = \\sum_{k=1}^{\\infty} k^2 (1-p)^{k-1} p$', tag: 'PMF', why: 'Using the PMF $P(X = k) = (1-p)^{k-1}p$' },
+      { math: '$= \\frac{2-p}{p^2}$', tag: 'series', why: 'Summation techniques involving derivatives of geometric series' },
+      { math: '$\\mathrm{Var}(X) = \\frac{2-p}{p^2} - \\left(\\frac{1}{p}\\right)^2$', tag: 'key step', key: true, why: 'The shortcut formula, with $\\mu = \\frac{1}{p}$ from the expected value section' },
+      { math: '$= \\frac{2-p}{p^2} - \\frac{1}{p^2}$', tag: 'square', why: 'Squaring the mean' },
+      { math: '$= \\frac{1-p}{p^2}$', tag: 'subtract', why: 'Same denominator' },
+    ],
+    conclusion: { text: '$\\mathrm{Var}(X) = \\frac{1-p}{p^2}$' },
+  };
+
    return {
       props:{
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1782,7 +1824,7 @@ $$\\approx 0.096$$`],
     }
    }
 
-export default function GeometricDistributionPage({ formulaSummaryData, pitfallData,
+export default function GeometricDistributionPage({ proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1946,6 +1988,18 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-geometric-cdf-sum-steps'}
+            id="geometric-cdf-sum-steps"
+            title="Checking the geometric CDF by summation"
+            source="/probability/distributions/discrete/geometric"
+            related={false}
+            before={"The summation check above, split into its four equalities."}
+            after={"The finite geometric series is the gold step; its denominator $1-(1-p)$ equals $p$ and cancels the factor in front."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
             <div key={'cdf-visualization-geometric'} style={{transform:'scale(0.8)'}}>
            
            <GeometricDistributionCDF/>
@@ -1962,6 +2016,18 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-geometric-mean-steps'}
+            id="geometric-mean-steps"
+            title="Deriving the geometric mean"
+            source="/probability/distributions/discrete/geometric"
+            related={false}
+            before={"The derivation of the mean one step at a time. Use Next and Back to move through it."}
+            after={"Everything rests on the series $\\sum k r^{k-1} = \\frac{1}{(1-r)^2}$: with $r = 1-p$ its denominator becomes $p^2$, and one factor $p$ cancels."}
+          >
+            <ProofSteps data={proofStepsData2} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {
@@ -1970,6 +2036,18 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-geometric-variance-steps'}
+            id="geometric-variance-steps"
+            title="Deriving the geometric variance"
+            source="/probability/distributions/discrete/geometric"
+            related={false}
+            before={"The variance computation above as a chain, from $\\mathbb{E}[X^2]$ to the shortcut formula."}
+            after={"Once $\\mathbb{E}[X^2]$ is known, the gold step reduces the variance to subtracting two fractions over the same denominator $p^2$."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
         ]
     },
     {

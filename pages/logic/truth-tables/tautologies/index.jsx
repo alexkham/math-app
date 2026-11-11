@@ -11,10 +11,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
-export default function TautologiesTruthTablesPage({ formulaSummaryData, pitfallData, seoData, keyWords, tautologyExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
+export default function TautologiesTruthTablesPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData, seoData, keyWords, tautologyExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
 
     const tautologyOperators = {
         'P ∨ ¬P': { 
@@ -140,7 +141,21 @@ export default function TautologiesTruthTablesPage({ formulaSummaryData, pitfall
         id: '6',
         title: sectionsContent.obj6.title,
         link: sectionsContent.obj6.link,
-        content: [sectionsContent.obj6.content]
+        content: [
+          sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-hypothetical-syllogism-tautology-proof'}
+            id="hypothetical-syllogism-tautology-proof"
+            title="Why hypothetical syllogism never fails"
+            source="/logic/truth-tables/tautologies"
+            related={false}
+            before={"The argument above, one forced value per line: assume the formula fails in some row and follow what that row would have to be."}
+            after={"The two links pass the truth of P along to R, so no row can have P true and R false."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
+        ]
       },
       {
         id: '7',
@@ -158,7 +173,21 @@ export default function TautologiesTruthTablesPage({ formulaSummaryData, pitfall
         id: '9',
         title: sectionsContent.obj9.title,
         link: sectionsContent.obj9.link,
-        content: [sectionsContent.obj9.content]
+        content: [
+          sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-implication-over-disjunction-tautology-proof'}
+            id="implication-over-disjunction-tautology-proof"
+            title="Proving implication over disjunction by cases"
+            source="/logic/truth-tables/tautologies"
+            related={false}
+            before={"The proof by cases above: first the rows where P is false, then the rows where P is true."}
+            after={"Each case settles the consequent on its own, so the formula is true whatever the value of P."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProof,
+        ]
       },
       {
         id: '10',
@@ -500,9 +529,8 @@ Conjunction elimination is one of the most basic inference rules in natural dedu
       title: `((P → Q) ∧ (Q → R)) → (P → R): Hypothetical Syllogism`,
       content: `This [tautology](!/logic/propositional-logic/semantics/tautology) expresses the transitivity of [implication](!/logic/propositional-logic/semantics/implication): if P implies Q and Q implies R, then P implies R. The implication chain can be extended to any length — if P → Q, Q → R, and R → S, then P → S.
 
-The truth table has eight rows (three variables). In every row, the formula evaluates to true. The only way the outer implication could be false is if the antecedent ((P → Q) ∧ (Q → R)) were true and the consequent (P → R) were false. But P → R is false only when P is true and R is false, and if P is true and P → Q holds then Q is true, and if Q is true and Q → R holds then R is true — contradicting R being false.
-
-Hypothetical syllogism is the logical basis for chain reasoning in mathematics: proving A → B → C → D by establishing each link separately.
+The truth table has eight rows (three variables). In every row, the formula evaluates to true. The only way the outer implication could be false is if the antecedent ((P → Q) ∧ (Q → R)) were true and the consequent (P → R) were false. But P → R is false only when P is true and R is false, and if P is true and P → Q holds then Q is true, and if Q is true and Q → R holds then R is true — contradicting R being false.`,
+      afterProof: `Hypothetical syllogism is the logical basis for chain reasoning in mathematics: proving A → B → C → D by establishing each link separately.
 
 @academic[pitfall,aside:true,width:35%:Chaining through a shared consequent
 From P → Q and R → Q, concluding P → R fails at P = T, Q = T, R = F: both premises are T, but P → R is F. Q must be the consequent of the first link and the antecedent of the second, as in P → Q and Q → R.
@@ -551,9 +579,8 @@ This principle reflects a property of material implication that can seem counter
       title: `(P → (Q ∨ R)) → ((P → Q) ∨ (P → R)): Implication Over Disjunction`,
       content: `This [tautology](!/logic/propositional-logic/semantics/tautology) states that if P implies a disjunction Q ∨ R, then P implies at least one of the disjuncts individually. The formula distributes implication over disjunction.
 
-The proof is straightforward: if P is false, both P → Q and P → R are vacuously true, so the consequent holds. If P is true, then Q ∨ R must be true (by the antecedent), meaning at least one of Q or R is true. Whichever is true makes the corresponding implication (P → Q or P → R) true.
-
-This principle is valid in classical logic. In intuitionistic logic, the result is more subtle because constructive disjunction requires knowing which disjunct holds, not merely that one does.`,
+The proof is straightforward: if P is false, both P → Q and P → R are vacuously true, so the consequent holds. If P is true, then Q ∨ R must be true (by the antecedent), meaning at least one of Q or R is true. Whichever is true makes the corresponding implication (P → Q or P → R) true.`,
+      afterProof: `This principle is valid in classical logic. In intuitionistic logic, the result is more subtle because constructive disjunction requires knowing which disjunct holds, not merely that one does.`,
       before: ``,
       after: ``,
       link: ``,
@@ -772,8 +799,37 @@ The cards open with the law of excluded middle and implication comparability, th
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why hypothetical syllogism never fails" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '((P → Q) ∧ (Q → R)) → (P → R) is true in every row' },
+    steps: [
+      { math: 'P → R is false', tag: 'suppose', why: 'The only way the outer implication could be false, with the antecedent true' },
+      { math: 'P = T,  R = F', why: 'P → R is false only when P is true and R is false' },
+      { math: 'Q = T', why: 'P is true and P → Q holds' },
+      { math: 'R = T', tag: 'forced', key: true, why: 'Q is true and Q → R holds' },
+      { math: 'R = T  and  R = F', why: 'This contradicts R being false' },
+    ],
+    conclusion: { text: 'No row makes the formula false: it is a tautology' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving implication over disjunction by cases" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '(P → (Q ∨ R)) → ((P → Q) ∨ (P → R)) is true in every row' },
+    steps: [
+      { math: 'P → Q = T,  P → R = T', tag: 'P false', why: 'If P is false, both implications are vacuously true' },
+      { math: 'Q ∨ R = T', tag: 'P true', why: 'If P is true, the antecedent forces Q ∨ R' },
+      { math: 'Q = T  or  R = T', why: 'At least one of Q or R is true' },
+      { math: '(P → Q) ∨ (P → R) = T', key: true, why: 'Whichever is true makes the matching implication true' },
+    ],
+    conclusion: { text: 'The consequent holds in both cases: the formula is a tautology' },
+  };
+
   return {
     props: {
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
       keyWords,

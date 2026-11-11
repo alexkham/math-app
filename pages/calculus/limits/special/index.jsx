@@ -14,6 +14,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -530,9 +531,8 @@ Taking reciprocals and applying the [Squeeze Theorem](!/calculus/limits/rules):
 @academic[formula_callout:The Fundamental Trigonometric Limit
 $$\\cos x < \\frac{\\sin x}{x} < 1$$]@
 
-As $x \\to 0$, $\\cos x \\to 1$, so $\\dfrac{\\sin x}{x}$ is squeezed to $1$.
-
-@academic[fact,aside:true,width:35%:Why a pendulum keeps time
+As $x \\to 0$, $\\cos x \\to 1$, so $\\dfrac{\\sin x}{x}$ is squeezed to $1$.`,
+    afterProof: `@academic[fact,aside:true,width:35%:Why a pendulum keeps time
 The pull that brings a pendulum back is proportional to $\\sin \\theta$. Replacing $\\sin \\theta$ by $\\theta$ gives the period $2\\pi\\sqrt{L/g}$, the same for every width of swing; the exact period at $10^\\circ$ is only $0.19\\%$ longer, at $30^\\circ$ about $1.7\\%$.]@
 
 Read as an approximation, the limit says that for a small angle measured in radians, $\\sin x$ and $x$ are nearly the same number: $\\sin 0.1 \\approx 0.09983$, less than $0.2\\%$ below $0.1$. The relative gap shrinks with the angle, roughly like $\\frac{x^2}{6}$. This is why physics and engineering often replace $\\sin x$ by $x$ as long as an angle stays small: $x$ is far easier to compute with, and the error stays under control.
@@ -663,9 +663,8 @@ $$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1$$
 This can be seen by substituting $u = \\ln(1 + x)$, so $e^u = 1 + x$ and $x = e^u - 1$. As $x \\to 0$, $u \\to 0$:
 
 @academic[formula_callout:Related Exponential Limits
-$$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = \\lim_{u \\to 0} \\frac{u}{e^u - 1} = 1$$]@
-
-@academic[fact,aside:true,width:35%:The rule of 72 comes from this limit
+$$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = \\lim_{u \\to 0} \\frac{u}{e^u - 1} = 1$$]@`,
+    afterProof: `@academic[fact,aside:true,width:35%:The rule of 72 comes from this limit
 Money growing at $r\\%$ a year doubles in about $\\frac{72}{r}$ years. Since $\\ln(1 + x) \\approx x$, the exact time $\\frac{\\ln 2}{\\ln(1 + r/100)}$ is close to $\\frac{69.3}{r}$; 72 makes up for $\\ln(1 + x)$ lying a little below $x$, and at $8\\%$ the exact time is $9.01$ years.]@
 
 Near $0$, then, $\\ln(1 + x)$ and $x$ are almost the same number: $\\ln 1.05 \\approx 0.0488$, against $0.05$. Growth problems use this constantly. An amount that grows by the fraction $x$ each year is multiplied by $(1 + x)^n$ after $n$ years, so it has doubled once $n \\ln(1 + x) = \\ln 2$, that is, after $\\frac{\\ln 2}{\\ln(1 + x)}$ years. At a rate of $5\\%$ a year that comes to about $14.2$ years.
@@ -1125,8 +1124,37 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving the fundamental trigonometric limit" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$' },
+    steps: [
+      { math: '$\\sin x < x < \\tan x$', tag: 'unit circle', why: 'For small positive $x$' },
+      { math: '$1 < \\frac{x}{\\sin x} < \\frac{1}{\\cos x}$', tag: 'divide', why: 'Divide by $\\sin x$' },
+      { math: '$\\cos x < \\frac{\\sin x}{x} < 1$', tag: 'reciprocals', why: 'Take reciprocals' },
+      { math: '$\\cos x \\to 1$', tag: 'squeeze', key: true, why: 'As $x \\to 0$, so by the Squeeze Theorem $\\frac{\\sin x}{x}$ is squeezed to $1$' },
+    ],
+    conclusion: { text: '$\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$', say: 'With $x$ measured in radians.' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the logarithm limit at zero" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1$' },
+    steps: [
+      { math: '$u = \\ln(1 + x)$', tag: 'substitute', why: 'A new variable for the logarithm' },
+      { math: '$e^u = 1 + x$', tag: 'invert', why: 'The same relation, written with the exponential' },
+      { math: '$x = e^u - 1$', tag: 'solve', why: 'Solve for $x$' },
+      { math: '$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = \\lim_{u \\to 0} \\frac{u}{e^u - 1}$', tag: 'rewrite', key: true, why: 'As $x \\to 0$, $u \\to 0$' },
+      { math: '$= 1$', tag: 'known limit', why: 'The reciprocal of $\\frac{e^u - 1}{u} \\to 1$' },
+    ],
+    conclusion: { text: '$\\lim_{x \\to 0} \\frac{\\ln(1 + x)}{x} = 1$' },
+  };
+
 return {
   props: {
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     specialLimitsOutline,
@@ -1152,7 +1180,7 @@ return {
 
 }
 
-export default function SpecialPage({ formulaSummaryData, pitfallData,specialLimitsOutline, oneMinusCosSteps, seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SpecialPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,specialLimitsOutline, oneMinusCosSteps, seoData, sectionsContent, introContent, obj3Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1232,6 +1260,18 @@ export default function SpecialPage({ formulaSummaryData, pitfallData,specialLim
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-sine-limit-squeeze-proof'}
+            id="sine-limit-squeeze-proof"
+            title="Proving the fundamental trigonometric limit"
+            source="/calculus/limits/special"
+            related={false}
+            before={"The unit-circle proof, one inequality per line."}
+            after={"Dividing and taking reciprocals only rearrange the first inequality; the Squeeze Theorem in the last step decides the limit."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterProof,
           <div key={'unit-sincSqueeze'} dangerouslySetInnerHTML={{ __html: demoUnits.sincSqueeze }} />,
           `In degrees the same quotient tends to π/180, which is why calculus uses radians.`,
         ]
@@ -1283,6 +1323,18 @@ export default function SpecialPage({ formulaSummaryData, pitfallData,specialLim
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-log-limit-substitution-proof'}
+            id="log-limit-substitution-proof"
+            title="Deriving the logarithm limit at zero"
+            source="/calculus/limits/special"
+            related={false}
+            before={"The substitution above, one line at a time."}
+            after={"The substitution turns the logarithm limit into the natural exponential limit turned upside down."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {

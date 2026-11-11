@@ -914,6 +914,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
@@ -1419,9 +1420,8 @@ For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\la
 @academic[formula_callout:eigenvalue_of_inverse|Eigenvalue of Inverse|$$A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow A^{-1}\\mathbf{v} = \\frac{1}{\\lambda}\\mathbf{v}$$]@
 @academic[formulas_link:/linear-algebra/formulas#eigenvalue_of_inverse]@
 
-The proof is one line: $A\\mathbf{v} = \\lambda\\mathbf{v}$ implies $\\mathbf{v} = \\lambda A^{-1}\\mathbf{v}$, so $A^{-1}\\mathbf{v} = (1/\\lambda)\\mathbf{v}$.
-
-The eigenvalues of $A^{-1}$ are the reciprocals of the eigenvalues of $A$, and the eigenvectors are unchanged. This requires $\\lambda \\neq 0$, which is guaranteed by the invertibility of $A$.
+The proof is one line: $A\\mathbf{v} = \\lambda\\mathbf{v}$ implies $\\mathbf{v} = \\lambda A^{-1}\\mathbf{v}$, so $A^{-1}\\mathbf{v} = (1/\\lambda)\\mathbf{v}$.`,
+    afterProof: `The eigenvalues of $A^{-1}$ are the reciprocals of the eigenvalues of $A$, and the eigenvectors are unchanged. This requires $\\lambda \\neq 0$, which is guaranteed by the invertibility of $A$.
 
 @academic[example:Example
 If $A$ has eigenvalues $2, -3, 5$, then $A^{-1}$ has eigenvalues $1/2, -1/3, 1/5$. The [trace](!/linear-algebra/matrix/trace) of $A^{-1}$ is $1/2 - 1/3 + 1/5 = 11/30$, and $\\det(A^{-1}) = 1/(2 \\cdot (-3) \\cdot 5) = -1/30$.]@`,
@@ -1436,9 +1436,8 @@ If $A$ has eigenvalues $2, -3, 5$, then $A^{-1}$ has eigenvalues $1/2, -1/3, 1/5
 @academic[formula_callout:eigenvalue_of_power|Eigenvalue of Power|$$A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow A^k\\mathbf{v} = \\lambda^k\\mathbf{v}$$]@
 @academic[formulas_link:/linear-algebra/formulas#eigenvalue_of_power]@
 
-The proof is induction: $A^{k+1}\\mathbf{v} = A(A^k\\mathbf{v}) = A(\\lambda^k\\mathbf{v}) = \\lambda^k A\\mathbf{v} = \\lambda^{k+1}\\mathbf{v}$.
-
-The eigenvectors are preserved; only the eigenvalues change by raising to the $k$-th power.
+The proof is induction: $A^{k+1}\\mathbf{v} = A(A^k\\mathbf{v}) = A(\\lambda^k\\mathbf{v}) = \\lambda^k A\\mathbf{v} = \\lambda^{k+1}\\mathbf{v}$.`,
+    afterProof: `The eigenvectors are preserved; only the eigenvalues change by raising to the $k$-th power.
 
 More generally, if $q(\\lambda) = c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m$ is any polynomial, then $q(A)$ has eigenvalues $q(\\lambda_i)$ with the same eigenvectors:
 
@@ -1463,9 +1462,8 @@ If $A$ has eigenvalue $3$, then $2A^2 - A + 4I$ has eigenvalue $2(9) - 3 + 4 = 1
 @academic[formula_callout:eigenvalue_shift|Eigenvalue Shift|$$A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow (A + cI)\\mathbf{v} = (\\lambda + c)\\mathbf{v}$$]@
 @academic[formulas_link:/linear-algebra/formulas#eigenvalue_shift]@
 
-The proof: $(A + cI)\\mathbf{v} = A\\mathbf{v} + c\\mathbf{v} = \\lambda\\mathbf{v} + c\\mathbf{v} = (\\lambda + c)\\mathbf{v}$.
-
-The eigenvalues of $A + cI$ are $\\lambda_1 + c, \\lambda_2 + c, \\dots, \\lambda_n + c$. Scaling works similarly: $cA$ has eigenvalues $c\\lambda_1, c\\lambda_2, \\dots, c\\lambda_n$ with the same eigenvectors.
+The proof: $(A + cI)\\mathbf{v} = A\\mathbf{v} + c\\mathbf{v} = \\lambda\\mathbf{v} + c\\mathbf{v} = (\\lambda + c)\\mathbf{v}$.`,
+    afterProof: `The eigenvalues of $A + cI$ are $\\lambda_1 + c, \\lambda_2 + c, \\dots, \\lambda_n + c$. Scaling works similarly: $cA$ has eigenvalues $c\\lambda_1, c\\lambda_2, \\dots, c\\lambda_n$ with the same eigenvectors.
 
 @academic[pitfall,aside:true,width:35%:Adding the eigenvalues of a sum
 Adding eigenvalues the way the shift rule does predicts $0, 0$ for $A + B$ when $A = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$ and $B = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$, each with eigenvalues $0, 0$. But $A + B = \\begin{pmatrix} 0 & 1 \\\\ 1 & 0 \\end{pmatrix}$ has eigenvalues $1$ and $-1$.
@@ -1533,9 +1531,8 @@ Positive definite [symmetric](!/linear-algebra/matrix/types) matrices [have all 
 @academic[formula_callout:independence_of_distinct_eigenvectors|Independence of Distinct Eigenvectors|$$\\lambda_1, \\ldots, \\lambda_k \\text{ distinct} \\Rightarrow \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\} \\text{ linearly independent}$$]@
 @academic[formulas_link:/linear-algebra/formulas#independence_of_distinct_eigenvectors]@
 
-[The proof proceeds by induction](https://linearalgebranotes.com/eigen/diagonalization#rule-distinct-independent). For a single eigenvector, independence is trivial (one nonzero vector is independent). Suppose $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{k-1}\\}$ are independent eigenvectors with distinct eigenvalues. If $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$, multiply both sides by $A$ to get $c_1\\lambda_1\\mathbf{v}_1 + \\cdots + c_k\\lambda_k\\mathbf{v}_k = \\mathbf{0}$. Subtract $\\lambda_k$ times the original equation: $c_1(\\lambda_1 - \\lambda_k)\\mathbf{v}_1 + \\cdots + c_{k-1}(\\lambda_{k-1} - \\lambda_k)\\mathbf{v}_{k-1} = \\mathbf{0}$. By the induction hypothesis, all coefficients $c_i(\\lambda_i - \\lambda_k) = 0$. Since the eigenvalues are distinct, $\\lambda_i - \\lambda_k \\neq 0$, forcing $c_i = 0$ for all $i < k$. Then the original equation gives $c_k\\mathbf{v}_k = \\mathbf{0}$, so $c_k = 0$.
-
-The immediate consequence: a matrix with $n$ distinct eigenvalues has $n$ independent eigenvectors and is automatically [diagonalizable](!/linear-algebra/eigen/diagonalization). Distinctness of eigenvalues is a sufficient condition for diagonalizability, though not a necessary one.`,
+[The proof proceeds by induction](https://linearalgebranotes.com/eigen/diagonalization#rule-distinct-independent). For a single eigenvector, independence is trivial (one nonzero vector is independent). Suppose $\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{k-1}\\}$ are independent eigenvectors with distinct eigenvalues. If $c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$, multiply both sides by $A$ to get $c_1\\lambda_1\\mathbf{v}_1 + \\cdots + c_k\\lambda_k\\mathbf{v}_k = \\mathbf{0}$. Subtract $\\lambda_k$ times the original equation: $c_1(\\lambda_1 - \\lambda_k)\\mathbf{v}_1 + \\cdots + c_{k-1}(\\lambda_{k-1} - \\lambda_k)\\mathbf{v}_{k-1} = \\mathbf{0}$. By the induction hypothesis, all coefficients $c_i(\\lambda_i - \\lambda_k) = 0$. Since the eigenvalues are distinct, $\\lambda_i - \\lambda_k \\neq 0$, forcing $c_i = 0$ for all $i < k$. Then the original equation gives $c_k\\mathbf{v}_k = \\mathbf{0}$, so $c_k = 0$.`,
+    afterProof: `The immediate consequence: a matrix with $n$ distinct eigenvalues has $n$ independent eigenvectors and is automatically [diagonalizable](!/linear-algebra/eigen/diagonalization). Distinctness of eigenvalues is a sufficient condition for diagonalizability, though not a necessary one.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1544,9 +1541,8 @@ The immediate consequence: a matrix with $n$ distinct eigenvalues has $n$ indepe
     title: `Similar Matrices and Spectral Invariants`,
     content: `@academic[rule_theorem_plain:[Similar](!/linear-algebra/transformations/basis-change) matrices share every spectral property: eigenvalues, algebraic multiplicities, geometric multiplicities, and the characteristic polynomial are all identical.]@
 
-If $B = P^{-1}AP$ and $\\mathbf{v}$ is an eigenvector of $A$ with eigenvalue $\\lambda$, then $P^{-1}\\mathbf{v}$ is an eigenvector of $B$ with the same eigenvalue: $B(P^{-1}\\mathbf{v}) = P^{-1}AP(P^{-1}\\mathbf{v}) = P^{-1}A\\mathbf{v} = P^{-1}\\lambda\\mathbf{v} = \\lambda(P^{-1}\\mathbf{v})$.
-
-@academic[pitfall,aside:true,width:35%:Reading the theorem backwards
+If $B = P^{-1}AP$ and $\\mathbf{v}$ is an eigenvector of $A$ with eigenvalue $\\lambda$, then $P^{-1}\\mathbf{v}$ is an eigenvector of $B$ with the same eigenvalue: $B(P^{-1}\\mathbf{v}) = P^{-1}AP(P^{-1}\\mathbf{v}) = P^{-1}A\\mathbf{v} = P^{-1}\\lambda\\mathbf{v} = \\lambda(P^{-1}\\mathbf{v})$.`,
+    afterProof: `@academic[pitfall,aside:true,width:35%:Reading the theorem backwards
 Concluding similarity from equal eigenvalues fails for $\\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$ and $2I$. Both have characteristic polynomial $(\\lambda - 2)^2$, but $P^{-1}(2I)P = 2I$ for every invertible $P$, so they are not similar; their geometric multiplicities are $1$ and $2$.
 [Read more](!#pitfall-reading-the-theorem-backwards)]@
 
@@ -1806,8 +1802,99 @@ $$P^{-1}(2I)P = 2P^{-1}P = 2I$$`, `So the only matrix similar to $2I$ is $2I$ it
     ],
   };
 
+  // ProofSteps 2026-11-08: "Eigenvalues of the inverse" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow A^{-1}\\mathbf{v} = \\frac{1}{\\lambda}\\mathbf{v}$' },
+    steps: [
+      { math: '$A\\mathbf{v} = \\lambda\\mathbf{v}$', tag: 'given', why: '$\\lambda$ is an eigenvalue of $A$ with eigenvector $\\mathbf{v}$' },
+      { math: '$\\mathbf{v} = \\lambda A^{-1}\\mathbf{v}$', tag: 'key step', key: true, why: 'Apply $A^{-1}$ to both sides' },
+      { math: '$A^{-1}\\mathbf{v} = (1/\\lambda)\\mathbf{v}$', tag: 'divide', why: 'Divide by $\\lambda$, which is not $0$ because $A$ is invertible' },
+    ],
+    conclusion: { text: '$A^{-1}$ has the eigenvalue $1/\\lambda$, with the same eigenvector $\\mathbf{v}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Eigenvalues of powers by induction" (induction), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow A^k\\mathbf{v} = \\lambda^k\\mathbf{v}$' },
+    induction: {
+      base: { at: '$k = 1$', math: '$A\\mathbf{v} = \\lambda\\mathbf{v}$', say: 'The eigenvalue equation itself.' },
+      hyp:  { at: '$k$', math: '$A^k\\mathbf{v} = \\lambda^k\\mathbf{v}$' },
+      step: { at: '$k + 1$', steps: [
+        { why: 'Split off one factor of $A$', math: '$A^{k+1}\\mathbf{v} = A(A^k\\mathbf{v})$' },
+        { why: 'Use the assumption', math: '$= A(\\lambda^k\\mathbf{v})$' },
+        { why: 'The scalar $\\lambda^k$ moves in front', math: '$= \\lambda^k A\\mathbf{v}$' },
+        { why: 'Use $A\\mathbf{v} = \\lambda\\mathbf{v}$', math: '$= \\lambda^{k+1}\\mathbf{v}$' },
+      ] },
+    },
+    conclusion: { text: '$A^k\\mathbf{v} = \\lambda^k\\mathbf{v}$ for every positive integer $k$' },
+  };
+
+  // ProofSteps 2026-11-08: "Eigenvalues of a polynomial in a matrix" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$q(A)\\mathbf{v} = q(\\lambda)\\mathbf{v}$' },
+    steps: [
+      { math: '$q(A)\\mathbf{v} = (c_0 I + c_1 A + \\cdots + c_m A^m)\\mathbf{v}$', tag: 'expand', why: 'Write out the polynomial $q(A)$' },
+      { math: '$= (c_0 + c_1\\lambda + \\cdots + c_m\\lambda^m)\\mathbf{v}$', tag: 'key step', key: true, why: 'Each power acts on $\\mathbf{v}$ as $A^k\\mathbf{v} = \\lambda^k\\mathbf{v}$' },
+      { math: '$= q(\\lambda)\\mathbf{v}$', tag: 'collect', why: 'The bracket is $q(\\lambda)$' },
+    ],
+  };
+
+  // ProofSteps 2026-11-08: "Proving the eigenvalue shift" (chain), from the page's own formulas.
+  const proofStepsData4 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow (A + cI)\\mathbf{v} = (\\lambda + c)\\mathbf{v}$' },
+    steps: [
+      { math: '$(A + cI)\\mathbf{v} = A\\mathbf{v} + c\\mathbf{v}$', tag: 'distribute', why: 'Multiply out, with $I\\mathbf{v} = \\mathbf{v}$' },
+      { math: '$= \\lambda\\mathbf{v} + c\\mathbf{v}$', tag: 'key step', key: true, why: 'Use $A\\mathbf{v} = \\lambda\\mathbf{v}$' },
+      { math: '$= (\\lambda + c)\\mathbf{v}$', tag: 'factor', why: 'Take out the common vector $\\mathbf{v}$' },
+    ],
+    conclusion: { text: '$\\mathbf{v}$ is an eigenvector of $A + cI$ with eigenvalue $\\lambda + c$' },
+  };
+
+  // ProofSteps 2026-11-08: "Independence of eigenvectors by induction" (induction), from the page's own formulas.
+  const proofStepsData5 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    labels: { loop: ['base', 'k − 1', 'k', 'all k'] },
+    goal: { label: 'Prove', text: '$\\lambda_1, \\ldots, \\lambda_k$ distinct $\\Rightarrow \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ linearly independent' },
+    induction: {
+      base: { at: '$k = 1$', math: '$\\{\\mathbf{v}_1\\}$ is independent', say: 'One nonzero vector is independent.' },
+      hyp:  { at: '$k - 1$', math: '$\\{\\mathbf{v}_1, \\dots, \\mathbf{v}_{k-1}\\}$ is independent' },
+      step: { at: '$k$', steps: [
+        { why: 'Suppose a combination of all $k$ eigenvectors is zero', math: '$c_1\\mathbf{v}_1 + \\cdots + c_k\\mathbf{v}_k = \\mathbf{0}$' },
+        { why: 'Multiply both sides by $A$', math: '$c_1\\lambda_1\\mathbf{v}_1 + \\cdots + c_k\\lambda_k\\mathbf{v}_k = \\mathbf{0}$' },
+        { why: 'Subtract $\\lambda_k$ times the original equation', math: '$c_1(\\lambda_1 - \\lambda_k)\\mathbf{v}_1 + \\cdots + c_{k-1}(\\lambda_{k-1} - \\lambda_k)\\mathbf{v}_{k-1} = \\mathbf{0}$' },
+        { why: 'By the induction hypothesis', math: '$c_i(\\lambda_i - \\lambda_k) = 0$' },
+        { why: 'The eigenvalues are distinct, so $\\lambda_i - \\lambda_k \\neq 0$', math: '$c_i = 0$ for all $i < k$' },
+        { why: 'The original equation then gives $c_k\\mathbf{v}_k = \\mathbf{0}$', math: '$c_k = 0$' },
+      ] },
+    },
+    conclusion: { text: 'All coefficients are zero, so $\\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_k\\}$ is linearly independent' },
+  };
+
+  // ProofSteps 2026-11-08: "Similar matrices share eigenvalues" (chain), from the page's own formulas.
+  const proofStepsData6 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$B = P^{-1}AP$ and $A\\mathbf{v} = \\lambda\\mathbf{v} \\Rightarrow B(P^{-1}\\mathbf{v}) = \\lambda(P^{-1}\\mathbf{v})$' },
+    steps: [
+      { math: '$B(P^{-1}\\mathbf{v}) = P^{-1}AP(P^{-1}\\mathbf{v})$', tag: 'substitute', why: 'Replace $B$ by $P^{-1}AP$' },
+      { math: '$= P^{-1}A\\mathbf{v}$', tag: 'key step', key: true, why: '$P$ and $P^{-1}$ cancel in the middle' },
+      { math: '$= P^{-1}\\lambda\\mathbf{v}$', tag: 'eigenvalue', why: 'Use $A\\mathbf{v} = \\lambda\\mathbf{v}$' },
+      { math: '$= \\lambda(P^{-1}\\mathbf{v})$', tag: 'scalar', why: 'The scalar $\\lambda$ moves in front' },
+    ],
+    conclusion: { text: '$P^{-1}\\mathbf{v}$ is an eigenvector of $B$ with the same eigenvalue $\\lambda$' },
+  };
+
    return {
   props: {
+    proofStepsData6,
+    proofStepsData5,
+    proofStepsData4,
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1830,7 +1917,7 @@ $$P^{-1}(2I)P = 2P^{-1}P = 2I$$`, `So the only matrix similar to $2I$ is $2I$ it
    }
 
 
-export default function EigenvaluePropertiesPage({ pitfallData,
+export default function EigenvaluePropertiesPage({ proofStepsData6, proofStepsData5, proofStepsData4, proofStepsData3, proofStepsData2, proofStepsData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1968,6 +2055,18 @@ export default function EigenvaluePropertiesPage({ pitfallData,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'proof-steps-eigenvalue-of-inverse-proof'}
+            id="eigenvalue-of-inverse-proof"
+            title="Eigenvalues of the inverse"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+            before={"The one-line proof above, written out one step at a time from the eigenvalue equation."}
+            after={"Applying $A^{-1}$ is the whole move; dividing by $\\lambda$ is safe because an invertible matrix never has the eigenvalue $0$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterProof,
         ]
     },
     {
@@ -1976,6 +2075,29 @@ export default function EigenvaluePropertiesPage({ pitfallData,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-eigenvalue-of-power-induction-proof'}
+            id="eigenvalue-of-power-induction-proof"
+            title="Eigenvalues of powers by induction"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+            before={"The induction above in its three parts: the eigenvalue equation itself, the assumption for $k$, and the step to $k + 1$."}
+            after={"The inductive step uses the eigenvalue equation twice: once through the assumption for $A^k$, and once more for the last factor $A$."}
+          >
+            <ProofSteps data={proofStepsData2} variant="induction" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
+          <DiagramFrame
+            key={'proof-steps-eigenvalue-of-polynomial-proof'}
+            id="eigenvalue-of-polynomial-proof"
+            title="Eigenvalues of a polynomial in a matrix"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+            before={"The expansion above as a chain, one equality per line."}
+            after={"Once each power $A^k$ acting on $\\mathbf{v}$ is replaced by $\\lambda^k$, the polynomial in $A$ becomes the same polynomial in $\\lambda$."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
           `@academic[punchline:Any polynomial applied to a matrix is applied to each of its eigenvalues, while the eigenvectors stay where they are.]@`,
         ]
     },
@@ -1985,6 +2107,18 @@ export default function EigenvaluePropertiesPage({ pitfallData,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-eigenvalue-shift-proof'}
+            id="eigenvalue-shift-proof"
+            title="Proving the eigenvalue shift"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+            before={"The proof above as a chain of three equalities."}
+            after={"The identity matrix adds $c\\mathbf{v}$ to any vector, so the shift passes straight through to the eigenvalue and leaves $\\mathbf{v}$ alone."}
+          >
+            <ProofSteps data={proofStepsData4} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {
@@ -2014,6 +2148,18 @@ export default function EigenvaluePropertiesPage({ pitfallData,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-distinct-eigenvectors-independence-proof'}
+            id="distinct-eigenvectors-independence-proof"
+            title="Independence of eigenvectors by induction"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+            before={"The induction above in its three parts, with the inductive step broken into its six moves."}
+            after={"The decisive move is subtracting $\\lambda_k$ times the original equation: it removes $\\mathbf{v}_k$ and leaves a relation among the first $k - 1$ vectors, where the hypothesis applies."}
+          >
+            <ProofSteps data={proofStepsData5} variant="induction" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProof,
                   <div key={'unit-independence'} dangerouslySetInnerHTML={{ __html: demoUnits.independence }} />,
           `Distinct eigenvalues are therefore a sufficient condition for diagonalisability, though not a necessary one.`,
         ]
@@ -2024,6 +2170,18 @@ export default function EigenvaluePropertiesPage({ pitfallData,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'proof-steps-similar-matrices-eigenvector-proof'}
+            id="similar-matrices-eigenvector-proof"
+            title="Similar matrices share eigenvalues"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+            before={"The chain above, one equality per line."}
+            after={"The cancellation of $P$ against $P^{-1}$ in the second line is the whole proof; the rest is the eigenvalue equation of $A$."}
+          >
+            <ProofSteps data={proofStepsData6} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj10.afterProof,
         ]
     },
     {

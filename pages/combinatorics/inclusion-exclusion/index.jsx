@@ -992,6 +992,7 @@ import renderVennCount from '@/app/utils/illustrations/combinatorics/counting/ve
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1475,9 +1476,8 @@ times by the right-hand side. By the [binomial theorem](!/combinatorics/binomial
 @academic[formula_callout:The General Formula
 $$\\sum_{k=0}^{m} (-1)^k \\binom{m}{k} = 0,$$]@
 
-so $\\binom{m}{0} = 1$ minus the alternating sum from $k=1$ to $m$ gives $1$. Every element in the union is counted exactly once, as required.
-
-@academic[fact,aside:true,width:35%:Every cut-off point is a bound
+so $\\binom{m}{0} = 1$ minus the alternating sum from $k=1$ to $m$ gives $1$. Every element in the union is counted exactly once, as required.`,
+    afterProof: `@academic[fact,aside:true,width:35%:Every cut-off point is a bound
 Stopping after an odd level always overcounts the union, and stopping after an even level always undercounts it. After level $k$, an element in $m$ sets has been counted $1 + \\binom{m-1}{k}$ times if $k$ is odd and $1 - \\binom{m-1}{k}$ times if $k$ is even.]@
 
 With many sets the full formula is long: ten sets already give $2^{10} - 1 = 1023$ terms. In practice the sum is often cut off after the first few levels, keeping only the singles, or the singles and the pairs, and dropping the rest. For the integers from 1 to 100 and the primes 2, 3 and 5, the singles alone give $50 + 33 + 20 = 103$, the singles and the pairs give $103 - 32 = 71$, and only the full sum gives the true count $74$.
@@ -1858,8 +1858,35 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why the alternating signs work" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: 'Every element in the union is counted exactly once' },
+    steps: [
+      { math: '$\\binom{m}{1} - \\binom{m}{2} + \\binom{m}{3} - \\cdots + (-1)^{m+1} \\binom{m}{m}$', tag: 'count', why: 'The number of times the right-hand side counts an element belonging to exactly $m$ of the $n$ sets' },
+      { math: '$\\sum_{k=0}^{m} (-1)^k \\binom{m}{k} = 0$', tag: 'key step', key: true, why: 'The binomial theorem with $a = 1$ and $b = -1$' },
+      { math: '$\\binom{m}{0} = 1$', tag: 'rearrange', why: 'Split off the $k = 0$ term: $\\binom{m}{0} = 1$ minus the alternating sum from $k = 1$ to $m$ gives $1$' },
+    ],
+    conclusion: { text: 'Every element in the union is counted exactly once' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the derangement formula" (stepper), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Derive', text: '$!n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!}$' },
+    steps: [
+      { action: 'Name the sets to avoid', math: '$A_1, A_2, \\ldots, A_n$', why: 'For each $i$, $A_i$ is the set of permutations in which position $i$ is fixed. The derangements are the permutations belonging to none of $A_1, A_2, \\ldots, A_n$.' },
+      { action: 'Count each intersection', math: '$\\displaystyle |A_{i_1} \\cap A_{i_2} \\cap \\cdots \\cap A_{i_k}| = (n-k)!$', why: 'Fixing $k$ specific positions leaves the remaining $n-k$ positions to be permuted freely. The size depends only on $k$, not on which $k$ positions are chosen.' },
+      { action: 'Apply the complementary form', math: '$\\displaystyle !n = n! - \\binom{n}{1}(n-1)! + \\binom{n}{2}(n-2)! - \\cdots + (-1)^n \\binom{n}{n} \\cdot 0!$', why: 'The total number of permutations is $n!$.' },
+      { action: 'Simplify each term', math: '$\\displaystyle \\binom{n}{k}(n-k)! = \\frac{n!}{k!}$' },
+      { action: 'Collect the sum', math: '$\\displaystyle !n = n! \\sum_{k=0}^{n} \\frac{(-1)^k}{k!}$', why: 'The explicit derangement formula.' },
+    ],
+  };
+
    return {
       props:{
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
          sectionsContent,
@@ -1882,7 +1909,7 @@ const schemas = {
     }
    }
 
-export default function InclusionExclusionPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function InclusionExclusionPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1997,6 +2024,18 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-inclusion-exclusion-signs-proof'}
+            id="inclusion-exclusion-signs-proof"
+            title="Why the alternating signs work"
+            source="/combinatorics/inclusion-exclusion"
+            related={false}
+            before={"The counting argument above as a chain: how often the formula counts one element, and why that number is always $1$."}
+            after={"The binomial theorem with $a = 1$ and $b = -1$ is the key step: it turns the alternating count of a single element into exactly $1$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {
@@ -2015,6 +2054,17 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-derangement-formula-steps'}
+            id="derangement-formula-steps"
+            title="Deriving the derangement formula"
+            source="/combinatorics/inclusion-exclusion"
+            related={false}
+            before={"The derivation above in five steps, one at a time; use Next and Back to move through it."}
+            after={"The intersection count in the second step does the work: multiplied by $\\binom{n}{k}$, it simplifies to $\\frac{n!}{k!}$ in every term."}
+          >
+            <ProofSteps data={proofStepsData2} variant="stepper" />
+          </DiagramFrame>,
           <div key={'unit-derangeSets'} dangerouslySetInnerHTML={{ __html: demoUnits.derangeSets }} />,
           `Each k-fold intersection has (3 − k)! permutations, which is why the terms are 3!, 3·2!, 3·1! and 0!.`,
           `@academic[punchline:When every k-fold intersection has the same size, inclusion–exclusion shrinks to a single sum over k.]@`,

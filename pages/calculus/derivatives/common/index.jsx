@@ -16,6 +16,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -500,9 +501,8 @@ The sine derivative is proved from the limit definition. Expanding $\\sin(x + h)
 @academic[formula_callout:Trigonometric Functions — Sine and Cosine
 $$\\frac{\\sin x(\\cos h - 1) + \\cos x \\sin h}{h} = \\sin x \\cdot \\frac{\\cos h - 1}{h} + \\cos x \\cdot \\frac{\\sin h}{h}$$]@
 
-The [special limits](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{\\sin h}{h} = 1$ and $\\lim_{h \\to 0} \\frac{\\cos h - 1}{h} = 0$ yield the result: $\\cos x$.
-
-@academic[fact,aside:true,width:35%:Degrees would spoil the formula
+The [special limits](!/calculus/limits/special) $\\lim_{h \\to 0} \\frac{\\sin h}{h} = 1$ and $\\lim_{h \\to 0} \\frac{\\cos h - 1}{h} = 0$ yield the result: $\\cos x$.`,
+    afterProof: `@academic[fact,aside:true,width:35%:Degrees would spoil the formula
 Measured in degrees, $\\frac{d}{dx}[\\sin x^\\circ] = \\frac{\\pi}{180}\\cos x^\\circ \\approx 0.01745\\cos x^\\circ$, because $\\frac{\\sin h}{h}$ tends to $1$ only when $h$ is in radians. Radians are the one unit that makes the extra factor exactly $1$.]@
 
 All the trigonometric formulas on this page measure $x$ in radians. On the unit circle, an angle of $h$ radians cuts off an arc of length exactly $h$, and for small $h$ the height $\\sin h$ of the arc's endpoint is almost the arc itself. That is the geometric content of $\\frac{\\sin h}{h} \\to 1$.
@@ -539,9 +539,8 @@ $$\\frac{d}{dx}[\\csc x] = -\\csc x \\cot x$$
 @academic[formulas_link:Browse all derivative formulas
 /calculus/formulas]@
 
-For $\\tan x = \\frac{\\sin x}{\\cos x}$, the quotient rule gives $\\frac{\\cos x \\cdot \\cos x - \\sin x \\cdot (-\\sin x)}{\\cos^2 x} = \\frac{\\cos^2 x + \\sin^2 x}{\\cos^2 x} = \\frac{1}{\\cos^2 x} = \\sec^2 x$.
-
-A pattern runs through the six derivatives: the cofunctions—$\\cos$, $\\cot$, $\\csc$—each carry a negative sign in their derivatives, while $\\sin$, $\\tan$, $\\sec$ do not. This sign pattern is not a coincidence, and it makes a useful memory aid.
+For $\\tan x = \\frac{\\sin x}{\\cos x}$, the quotient rule gives $\\frac{\\cos x \\cdot \\cos x - \\sin x \\cdot (-\\sin x)}{\\cos^2 x} = \\frac{\\cos^2 x + \\sin^2 x}{\\cos^2 x} = \\frac{1}{\\cos^2 x} = \\sec^2 x$.`,
+    afterProof: `A pattern runs through the six derivatives: the cofunctions—$\\cos$, $\\cot$, $\\csc$—each carry a negative sign in their derivatives, while $\\sin$, $\\tan$, $\\sec$ do not. This sign pattern is not a coincidence, and it makes a useful memory aid.
 
 Each derivative is valid on the domain of the original function. The derivatives of $\\tan x$ and $\\sec x$ are undefined at $x = \\pi/2 + k\\pi$ (where $\\cos x = 0$). The derivatives of $\\cot x$ and $\\csc x$ are undefined at $x = k\\pi$ (where $\\sin x = 0$).
 `,
@@ -592,9 +591,8 @@ The natural logarithm has derivative:
 $$\\frac{d}{dx}[\\ln x] = \\frac{1}{x}$$
 /calculus/formulas#derivative_of_natural_logarithm]@
 
-This can be derived by [implicit differentiation](!/calculus/derivatives/techniques). If $y = \\ln x$, then $e^y = x$. Differentiating both sides: $e^y \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{e^y} = \\frac{1}{x}$.
-
-Alternatively, the limit definition gives $\\lim_{h \\to 0} \\frac{\\ln(x+h) - \\ln x}{h} = \\lim_{h \\to 0} \\frac{1}{h}\\ln\\left(\\frac{x+h}{x}\\right) = \\lim_{h \\to 0} \\frac{1}{h}\\ln\\left(1 + \\frac{h}{x}\\right)$, which evaluates to $\\frac{1}{x}$ using the limit definition of $e$.
+This can be derived by [implicit differentiation](!/calculus/derivatives/techniques). If $y = \\ln x$, then $e^y = x$. Differentiating both sides: $e^y \\frac{dy}{dx} = 1$, so $\\frac{dy}{dx} = \\frac{1}{e^y} = \\frac{1}{x}$.`,
+    afterProof: `Alternatively, the limit definition gives $\\lim_{h \\to 0} \\frac{\\ln(x+h) - \\ln x}{h} = \\lim_{h \\to 0} \\frac{1}{h}\\ln\\left(\\frac{x+h}{x}\\right) = \\lim_{h \\to 0} \\frac{1}{h}\\ln\\left(1 + \\frac{h}{x}\\right)$, which evaluates to $\\frac{1}{x}$ using the limit definition of $e$.
 
 For a general base $a > 0$, $a \\neq 1$:
 
@@ -930,8 +928,66 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "The power rule for any real exponent" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\frac{d}{dx}[x^n] = nx^{n-1}$ for any real exponent $n$' },
+    steps: [
+      { math: '$x^n = e^{n \\ln x}$', tag: 'rewrite', why: 'Write the power as an exponential' },
+      { math: '$\\frac{d}{dx}[x^n] = e^{n \\ln x} \\cdot \\frac{n}{x}$', tag: 'chain rule', key: true, why: 'Apply the chain rule' },
+      { math: '$= x^n \\cdot \\frac{n}{x}$', tag: 'rewrite', why: '$e^{n \\ln x}$ is $x^n$ again' },
+      { math: '$= nx^{n-1}$', tag: 'simplify', why: 'Divide $x^n$ by $x$' },
+    ],
+    conclusion: { text: '$\\frac{d}{dx}[x^n] = nx^{n-1}$' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving the derivative of sine" (stepper), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\frac{d}{dx}[\\sin x] = \\cos x$' },
+    steps: [
+      { action: 'Expand the sine of a sum', math: '$\\sin(x + h) = \\sin x \\cos h + \\cos x \\sin h$', why: 'The angle addition formula.' },
+      { action: 'Form the difference quotient', math: '$\\displaystyle\\frac{\\sin x(\\cos h - 1) + \\cos x \\sin h}{h}$', why: 'The quotient from the limit definition, with $\\sin(x + h)$ expanded.' },
+      { action: 'Split into two terms', math: '$\\displaystyle= \\sin x \\cdot \\frac{\\cos h - 1}{h} + \\cos x \\cdot \\frac{\\sin h}{h}$' },
+      { action: 'Let $h \\to 0$', math: '$\\displaystyle\\lim_{h \\to 0} \\frac{\\sin h}{h} = 1 \\qquad \\lim_{h \\to 0} \\frac{\\cos h - 1}{h} = 0$', why: 'These two special limits yield the result: $\\cos x$.' },
+    ],
+    conclusion: { text: '$\\frac{d}{dx}[\\sin x] = \\cos x$' },
+  };
+
+  // ProofSteps 2026-11-08: "Differentiating tangent with the quotient rule" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\frac{d}{dx}[\\tan x] = \\sec^2 x$' },
+    steps: [
+      { math: '$\\tan x = \\frac{\\sin x}{\\cos x}$', tag: 'rewrite', why: 'Write tangent as a quotient' },
+      { math: '$\\frac{\\cos x \\cdot \\cos x - \\sin x \\cdot (-\\sin x)}{\\cos^2 x}$', tag: 'quotient rule', why: 'The quotient rule gives this derivative' },
+      { math: '$= \\dfrac{\\cos^2 x + \\sin^2 x}{\\cos^2 x}$', tag: 'simplify', why: 'Simplify the numerator' },
+      { math: '$= \\dfrac{1}{\\cos^2 x}$', tag: 'identity', key: true, why: '$\\cos^2 x + \\sin^2 x = 1$' },
+      { math: '$= \\sec^2 x$', tag: 'rewrite', why: '$\\sec x = \\frac{1}{\\cos x}$' },
+    ],
+    conclusion: { text: '$\\frac{d}{dx}[\\tan x] = \\sec^2 x$' },
+  };
+
+  // ProofSteps 2026-11-08: "Deriving the derivative of ln x" (chain), from the page's own formulas.
+  const proofStepsData4 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '$\\frac{d}{dx}[\\ln x] = \\frac{1}{x}$' },
+    steps: [
+      { math: '$y = \\ln x$', tag: 'let', why: 'Name the function' },
+      { math: '$e^y = x$', tag: 'invert', why: 'The same relation, written with the exponential' },
+      { math: '$e^y \\frac{dy}{dx} = 1$', tag: 'differentiate', key: true, why: 'Differentiate both sides (implicit differentiation)' },
+      { math: '$\\frac{dy}{dx} = \\frac{1}{e^y}$', tag: 'solve', why: 'Divide by $e^y$' },
+      { math: '$= \\frac{1}{x}$', tag: 'substitute', why: 'Replace $e^y$ by $x$' },
+    ],
+    conclusion: { text: '$\\frac{d}{dx}[\\ln x] = \\frac{1}{x}$' },
+  };
+
   return {
   props: {
+    proofStepsData4,
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     commonDerivativesOutline,
@@ -955,7 +1011,7 @@ const schemas = {
 }
    }
 
-export default function PageTemplate({ formulaSummaryData, pitfallData,commonDerivativesOutline, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PageTemplate({ proofStepsData4, proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,commonDerivativesOutline, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1040,6 +1096,17 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'proof-steps-power-rule-real-exponent-proof'}
+            id="power-rule-real-exponent-proof"
+            title="The power rule for any real exponent"
+            source="/calculus/derivatives/common"
+            related={false}
+            before={"The logarithmic route to the power rule, one line at a time, with the reason for each step beside it."}
+            after={"The chain rule does the work: once $x^n$ is written as $e^{n \\ln x}$, the exponent $n$ is only a constant factor in $n \\ln x$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
           <div key={'obj2-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj2Table }} />,
                   <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
@@ -1060,6 +1127,18 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'proof-steps-sine-derivative-proof'}
+            id="sine-derivative-proof"
+            title="Proving the derivative of sine"
+            source="/calculus/derivatives/common"
+            related={false}
+            before={"The proof from the limit definition, one step per screen: use Next and Back to move through it."}
+            after={"Everything rests on the two special limits; the rest is the angle addition formula and a regrouping of terms."}
+          >
+            <ProofSteps data={proofStepsData2} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterProof,
                   <div key={'unit-trig'} dangerouslySetInnerHTML={{ __html: demoUnits.trig }} />,
           `The quarter-period shift between a function and its derivative is the whole content of these two formulas.`,
         ]
@@ -1070,6 +1149,18 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-tangent-derivative-proof'}
+            id="tangent-derivative-proof"
+            title="Differentiating tangent with the quotient rule"
+            source="/calculus/derivatives/common"
+            related={false}
+            before={"The quotient rule applied to $\\tan x = \\frac{\\sin x}{\\cos x}$, one equality per line."}
+            after={"The identity $\\cos^2 x + \\sin^2 x = 1$ is the decisive step: it collapses the numerator to $1$."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
           `@academic[punchline:Every trigonometric derivative comes from those of sine and cosine, through the quotient rule.]@`,
@@ -1091,6 +1182,18 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'proof-steps-natural-log-derivative-proof'}
+            id="natural-log-derivative-proof"
+            title="Deriving the derivative of ln x"
+            source="/calculus/derivatives/common"
+            related={false}
+            before={"The implicit differentiation above, one line at a time."}
+            after={"The logarithm is never differentiated directly: the work is done by $e^y$, whose derivative is known, and $e^y = x$ turns the answer back into $x$."}
+          >
+            <ProofSteps data={proofStepsData4} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj7.afterProof,
                   <div key={'unit-log'} dangerouslySetInnerHTML={{ __html: demoUnits.log }} />,
           `The reciprocal derivative is what makes the logarithm the antiderivative of 1/x.`,
         ]

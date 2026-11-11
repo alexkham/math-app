@@ -13,6 +13,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -219,9 +220,8 @@ $$|a + b| \\leq |a| + |b|$$]@
 
 When $a$ and $b$ have the same sign, nothing cancels and the two sides are equal: $|2 + 5| = 7 = |2| + |5|$. When the signs differ, part of one number cancels part of the other, and the left side is smaller: $|2 + (-5)| = 3$, while $|2| + |-5| = 7$.
 
-@academic[rule_plain:$|a + b| = |a| + |b|$ exactly when $ab \\geq 0$, that is, when $a$ and $b$ do not have opposite signs.]@
-
-On the number line: start at $0$, take a step of $a$, then a step of $b$. The walk covers $|a| + |b|$ in total, but if the second step turns back, the end point $a + b$ is closer to the start than that.
+@academic[rule_plain:$|a + b| = |a| + |b|$ exactly when $ab \\geq 0$, that is, when $a$ and $b$ do not have opposite signs.]@`,
+  afterCases: `On the number line: start at $0$, take a step of $a$, then a step of $b$. The walk covers $|a| + |b|$ in total, but if the second step turns back, the end point $a + b$ is closer to the start than that.
 
 Replacing $b$ by $b - a$ and rearranging gives the reverse form, $\\big||a| - |b|\\big| \\leq |a - b|$: two numbers are at least as far apart as their distances from zero differ.
 
@@ -588,8 +588,23 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-09: "When the two sides are equal" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$|a + b| \\leq |a| + |b|$' },
+    cases: [
+      { when: '$ab \\geq 0$', tag: 'equal', rule: '$|a + b| = |a| + |b|$', examples: '$|2 + 5| = 7 = |2| + |5|$',
+        why: 'With the same sign, nothing cancels and the two sides are equal.',
+        more: 'This holds exactly when $ab \\geq 0$, that is, when $a$ and $b$ do not have opposite signs.' },
+      { when: '$ab < 0$', tag: 'smaller', tone: 'warn', rule: '$|a + b| < |a| + |b|$', examples: '$|2 + (-5)| = 3$, while $|2| + |-5| = 7$',
+        why: 'When the signs differ, part of one number cancels part of the other.',
+        more: 'On the number line the second step turns back, so the end point $a + b$ is closer to $0$ than the $|a| + |b|$ walked.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     figures,
@@ -612,7 +627,7 @@ return {
    }
 
 
-export default function AbsoluteValuePage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, propertiesTable, formsTable, summaryTable, faqQuestions, schemas, figures}) {
+export default function AbsoluteValuePage({ specialCasesData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, propertiesTable, formsTable, summaryTable, faqQuestions, schemas, figures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -676,6 +691,18 @@ export default function AbsoluteValuePage({ formulaSummaryData, pitfallData,seoD
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'special-cases-absolute-value-triangle-inequality-edge-cases'}
+            id="absolute-value-triangle-inequality-edge-cases"
+            title="When the two sides are equal"
+            source="/algebra/absolute-value"
+            related={false}
+            before={"One row for each sign pattern of $a$ and $b$. Click a row for the reason behind it."}
+            after={"Only the signs of $a$ and $b$ matter: the two sides are equal exactly when nothing cancels."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterCases,
         ]
     },
     {

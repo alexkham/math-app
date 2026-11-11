@@ -775,6 +775,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1626,8 +1627,20 @@ $$= |-2| \\cdot 5$$`, `The minus sign does not shrink anything; it turns $\\math
     ],
   };
 
+  // SpecialCases 2026-11-09: "Two special scalars" (substitute), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    cases: [
+      { when: '$c = 0$', result: '$0\\mathbf{a} = \\mathbf{0}$', name: 'Zero vector',
+        text: 'Scaling any vector by zero produces the zero vector.' },
+      { when: '$c = -1$', result: '$(-1)\\mathbf{a} = -\\mathbf{a}$', name: 'Additive inverse',
+        text: 'Scaling by $-1$ produces the additive inverse.' },
+    ],
+  };
+
    return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1651,7 +1664,7 @@ $$= |-2| \\cdot 5$$`, `The minus sign does not shrink anything; it turns $\\math
   }
 }
    }
-export default function BasicVectorOperationsPage({ formulaSummaryData, pitfallData,
+export default function BasicVectorOperationsPage({ specialCasesData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1806,6 +1819,17 @@ Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'special-cases-scalar-multiplication-special-cases'}
+            id="scalar-multiplication-special-cases"
+            title="Two special scalars"
+            source="/linear-algebra/vectors/basic-operations"
+            related={false}
+            before={"Each card sets the scalar $c$ to one special value and shows what scaling any vector $\\mathbf{a}$ by it gives."}
+            after={"Both results hold for every vector $\\mathbf{a}$ and come from the four scaling rules alone."}
+          >
+            <SpecialCases data={specialCasesData} variant="substitute" />
+          </DiagramFrame>,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
         ]

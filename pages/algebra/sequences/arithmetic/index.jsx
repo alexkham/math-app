@@ -17,6 +17,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -495,7 +496,8 @@ Adding these two expressions term by term, every pair sums to $a_1 + a_n$, and t
 @academic[formula_callout:Arithmetic Series
 $$2S_n = n(a_1 + a_n)$$]@
 
-Dividing by $2$ gives the result. An equivalent form replaces $a_n$ with $a_1 + (n-1)d$:
+Dividing by $2$ gives the result.`,
+    afterProof: `An equivalent form replaces $a_n$ with $a_1 + (n-1)d$:
 
 @academic[formula_callout:Arithmetic Series
 $$S_n = \\frac{n}{2}(2a_1 + (n-1)d)$$]@
@@ -773,8 +775,27 @@ $$\\implies d = -3$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Pairing the terms of an arithmetic series" (align), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    align: {
+      rows: [
+        { label: '$S_n$ =', cells: ['$a_1$', '$a_1 + d$', '$\\cdots$', '$a_n$'] },
+        { label: '$S_n$ =', cells: ['$a_n$', '$a_n - d$', '$\\cdots$', '$a_1$'] },
+      ],
+      sum: { label: '$2S_n$ =', cells: ['$a_1 + a_n$', '$a_1 + a_n$', '$\\cdots$', '$a_1 + a_n$'] },
+      result: [
+        { text: 'Every pair sums to $a_1 + a_n$, and there are $n$ such pairs:' },
+        { math: '$2S_n = n(a_1 + a_n)$' },
+        { text: '→' },
+        { math: '$S_n = \\frac{n}{2}(a_1 + a_n)$' },
+      ],
+    },
+  };
+
    return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
      sectionsContent,
@@ -796,7 +817,7 @@ $$\\implies d = -3$$`],
 }
    }
 
-export default function ArithmeticSequencesPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ArithmeticSequencesPage({ proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -947,6 +968,18 @@ $$a_n = a_1 + (n - 1)d$$
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-arithmetic-series-pairing-proof'}
+            id="arithmetic-series-pairing-proof"
+            title="Pairing the terms of an arithmetic series"
+            source="/algebra/sequences/arithmetic"
+            related={false}
+            before={"The sum written forwards and backwards, lined up term by term. Every column adds to $a_1 + a_n$, which is the whole argument."}
+            after={"One row climbs by $d$ exactly as fast as the other falls by $d$, so every column keeps the same total."}
+          >
+            <ProofSteps data={proofStepsData} variant="align" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
           <div key={'unit-gaussPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.gaussPairs }} />,
           `Gauss's 1 + 2 + … + 100 is the same picture with 100 columns of 101.`,
           `@academic[punchline:Any arithmetic sum equals the number of terms times the average of the first and last terms.]@`,

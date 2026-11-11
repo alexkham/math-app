@@ -939,6 +939,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import traceDiagrams from '@/app/components/linear-algebra copy/matrix/traceDiagrams'
@@ -1468,9 +1469,8 @@ Every linear function $f$ on $n \\times n$ matrices with $f(AB) = f(BA)$ is a mu
 
 Note that $AB$ and $BA$ need not even have the same dimensions — if $A$ is $m \\times n$ and $B$ is $n \\times m$, then $AB$ is $m \\times m$ and $BA$ is $n \\times n$. The traces of these differently-sized matrices are nevertheless equal.
 
-[The proof is a direct computation](https://linearalgebranotes.com/matrices/trace#rule-cyclic). The $(i,i)$ entry of $AB$ is $\\sum_k a_{ik} b_{ki}$, so $\\text{tr}(AB) = \\sum_i \\sum_k a_{ik} b_{ki}$. The $(k,k)$ entry of $BA$ is $\\sum_i b_{ki} a_{ik}$, so $\\text{tr}(BA) = \\sum_k \\sum_i b_{ki} a_{ik}$. Both double sums range over the same index pairs and contain the same terms.
-
-For three matrices, [the cyclic property extends](https://linearalgebranotes.com/matrices/trace#rule-cyclic-three) to
+[The proof is a direct computation](https://linearalgebranotes.com/matrices/trace#rule-cyclic). The $(i,i)$ entry of $AB$ is $\\sum_k a_{ik} b_{ki}$, so $\\text{tr}(AB) = \\sum_i \\sum_k a_{ik} b_{ki}$. The $(k,k)$ entry of $BA$ is $\\sum_i b_{ki} a_{ik}$, so $\\text{tr}(BA) = \\sum_k \\sum_i b_{ki} a_{ik}$. Both double sums range over the same index pairs and contain the same terms.`,
+    afterProof: `For three matrices, [the cyclic property extends](https://linearalgebranotes.com/matrices/trace#rule-cyclic-three) to
 
 @academic[formula_callout:The Cyclic Property
 $$\\text{tr}(ABC) = \\text{tr}(BCA) = \\text{tr}(CAB)$$]@
@@ -1489,9 +1489,8 @@ Only cyclic reorderings are permitted. The rearrangement $\\text{tr}(ABC) = \\te
 
 [This identity](https://linearalgebranotes.com/eigen/trace-and-determinant-from-eigenvalues#rule-trace-sum) connects a trivially computable quantity (add the diagonal entries) to [eigenvalue information that ordinarily requires solving](https://calculatematrix.com/matrix-calculators/eigenvalues#algorithm) a degree-$n$ polynomial.
 
-[The proof comes from the characteristic polynomial](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-trace-coefficient) $p(\\lambda) = \\det(A - \\lambda I)$. Expanding this determinant produces a polynomial of degree $n$ whose leading term is $(-\\lambda)^n$ and whose $\\lambda^{n-1}$ coefficient is $(-1)^{n-1} \\text{tr}(A)$. By Vieta's formulas, the sum of the roots of $p$ equals $\\text{tr}(A)$.
-
-A companion identity links the determinant to the product of eigenvalues: $\\det(A) = \\lambda_1 \\lambda_2 \\cdots \\lambda_n$. Together, the trace and the determinant capture the two simplest symmetric functions of the eigenvalue spectrum — their sum and their product.
+[The proof comes from the characteristic polynomial](https://linearalgebranotes.com/eigen/characteristic-polynomial#rule-trace-coefficient) $p(\\lambda) = \\det(A - \\lambda I)$. Expanding this determinant produces a polynomial of degree $n$ whose leading term is $(-\\lambda)^n$ and whose $\\lambda^{n-1}$ coefficient is $(-1)^{n-1} \\text{tr}(A)$. By Vieta's formulas, the sum of the roots of $p$ equals $\\text{tr}(A)$.`,
+    afterProof: `A companion identity links the determinant to the product of eigenvalues: $\\det(A) = \\lambda_1 \\lambda_2 \\cdots \\lambda_n$. Together, the trace and the determinant capture the two simplest symmetric functions of the eigenvalue spectrum — their sum and their product.
 
 @academic[pitfall,aside:true,width:35%:Taking diagonal entries as eigenvalues
 Reading the eigenvalues of $\\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$ off its diagonal gives $1$ and $1$. Only the sums agree: the eigenvalues are $3$ and $-1$, and $3 + (-1) = 2 = 1 + 1$.
@@ -1584,9 +1583,8 @@ If $S$ is [symmetric](!/linear-algebra/matrix/types) and $K$ is [skew-symmetric]
 @academic[formula_callout:trace_symmetric_skew_zero|Trace Symmetric Skew Zero|$$S = S^T,\\ K = -K^T \\implies \\text{tr}(SK) = 0$$]@
 @academic[formulas_link:/linear-algebra/formulas#trace_symmetric_skew_product]@
 
-The proof: $\\text{tr}(SK) = \\text{tr}((SK)^T) = \\text{tr}(K^T S^T) = \\text{tr}(-KS) = -\\text{tr}(KS) = -\\text{tr}(SK)$, where the last step uses the cyclic property. The only number equal to its own negative is zero.
-
-The trace can be written as a sum of quadratic forms against the standard basis: $\\text{tr}(A) = \\sum_{i=1}^{n} \\mathbf{e}_i^T A \\mathbf{e}_i$. Each term $\\mathbf{e}_i^T A \\mathbf{e}_i = a_{ii}$ extracts one diagonal entry. This formula generalizes to any [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$:
+The proof: $\\text{tr}(SK) = \\text{tr}((SK)^T) = \\text{tr}(K^T S^T) = \\text{tr}(-KS) = -\\text{tr}(KS) = -\\text{tr}(SK)$, where the last step uses the cyclic property. The only number equal to its own negative is zero.`,
+    afterProof: `The trace can be written as a sum of quadratic forms against the standard basis: $\\text{tr}(A) = \\sum_{i=1}^{n} \\mathbf{e}_i^T A \\mathbf{e}_i$. Each term $\\mathbf{e}_i^T A \\mathbf{e}_i = a_{ii}$ extracts one diagonal entry. This formula generalizes to any [orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) basis $\\{\\mathbf{q}_1, \\dots, \\mathbf{q}_n\\}$:
 
 @academic[formula_callout:trace_orthonormal_basis|Trace Orthonormal Basis|$$\\text{tr}(A) = \\sum_{i=1}^{n} \\mathbf{q}_i^T A \\mathbf{q}_i$$]@
 @academic[formulas_link:/linear-algebra/formulas#trace_orthonormal_basis]@
@@ -1842,8 +1840,50 @@ $$= A^T$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving the cyclic property" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\text{tr}(AB) = \\text{tr}(BA)$' },
+    steps: [
+      { math: '$\\sum_k a_{ik} b_{ki}$', tag: 'entry', why: 'The $(i,i)$ entry of $AB$' },
+      { math: '$\\text{tr}(AB) = \\sum_i \\sum_k a_{ik} b_{ki}$', tag: 'add', why: 'Add the diagonal entries of $AB$' },
+      { math: '$\\sum_i b_{ki} a_{ik}$', tag: 'entry', why: 'The $(k,k)$ entry of $BA$' },
+      { math: '$\\text{tr}(BA) = \\sum_k \\sum_i b_{ki} a_{ik}$', tag: 'key step', key: true, why: 'Add the diagonal entries of $BA$: the same index pairs as in $\\text{tr}(AB)$' },
+    ],
+    conclusion: { text: '$\\text{tr}(AB) = \\text{tr}(BA)$', say: 'Both double sums range over the same index pairs and contain the same terms.' },
+  };
+
+  // ProofSteps 2026-11-08: "Trace as the sum of the eigenvalues" (stepper), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$' },
+    steps: [
+      { action: 'Start from the characteristic polynomial', math: '$p(\\lambda) = \\det(A - \\lambda I)$', why: 'Expanding this determinant produces a polynomial of degree $n$.' },
+      { action: 'Read off the top two coefficients', math: '$p(\\lambda) = (-\\lambda)^n + (-1)^{n-1} \\text{tr}(A)\\,\\lambda^{n-1} + \\cdots$', why: 'The leading term is $(-\\lambda)^n$ and the $\\lambda^{n-1}$ coefficient is $(-1)^{n-1} \\text{tr}(A)$.' },
+      { action: "Apply Vieta's formulas", math: '$\\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n = \\text{tr}(A)$', why: 'The sum of the roots of $p$ equals $\\text{tr}(A)$.' },
+    ],
+    conclusion: { text: '$\\text{tr}(A) = \\lambda_1 + \\lambda_2 + \\cdots + \\lambda_n$', say: 'The eigenvalues are counted with algebraic multiplicity.' },
+  };
+
+  // ProofSteps 2026-11-08: "Trace of a symmetric times a skew-symmetric matrix" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$S = S^T,\\ K = -K^T \\implies \\text{tr}(SK) = 0$' },
+    steps: [
+      { math: '$\\text{tr}(SK) = \\text{tr}((SK)^T)$', tag: 'transpose', why: 'Transposing does not change the trace' },
+      { math: '$= \\text{tr}(K^T S^T)$', tag: 'reverse', why: 'The transpose of a product reverses the order' },
+      { math: '$= \\text{tr}(-KS)$', tag: 'substitute', why: '$S^T = S$ and $K^T = -K$' },
+      { math: '$= -\\text{tr}(KS)$', tag: 'linearity', why: 'The minus sign comes out of the trace' },
+      { math: '$= -\\text{tr}(SK)$', tag: 'key step', key: true, why: 'The cyclic property' },
+    ],
+    conclusion: { text: '$\\text{tr}(SK) = 0$', say: 'The only number equal to its own negative is zero.' },
+  };
+
    return {
   props: {
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1866,7 +1906,7 @@ $$= A^T$$`],
    }
 
 
-export default function MatrixTracePage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MatrixTracePage({ proofStepsData3, proofStepsData2, proofStepsData, pitfallData,seoData, sectionsContent, introContent, obj2Table, obj3Table, traceProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1992,6 +2032,18 @@ export default function MatrixTracePage({ pitfallData,seoData, sectionsContent, 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'proof-steps-trace-cyclic-property-proof'}
+            id="trace-cyclic-property-proof"
+            title="Proving the cyclic property"
+            source="/linear-algebra/matrix/trace"
+            related={false}
+            before={"The direct computation above, one line at a time for each of the two traces."}
+            after={"Nothing about $AB$ and $BA$ as matrices is needed; the proof only reorders one finite double sum."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterProof,
           <div key={'unit-cyclicTrace'} dangerouslySetInnerHTML={{ __html: demoUnits.cyclicTrace }} />,
           `The same numbers are being added in both traces; only the grouping into diagonal entries differs.`,
         ]
@@ -2002,6 +2054,18 @@ export default function MatrixTracePage({ pitfallData,seoData, sectionsContent, 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-trace-sum-of-eigenvalues-steps'}
+            id="trace-sum-of-eigenvalues-steps"
+            title="Trace as the sum of the eigenvalues"
+            source="/linear-algebra/matrix/trace"
+            related={false}
+            before={"The proof above in three steps; use Next and Back to move through them."}
+            after={"The trace sits in the $\\lambda^{n-1}$ coefficient of $\\det(A - \\lambda I)$, and Vieta's formulas turn that coefficient into the sum of the roots."}
+          >
+            <ProofSteps data={proofStepsData2} variant="stepper" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
         ]
     },
     {
@@ -2034,6 +2098,18 @@ export default function MatrixTracePage({ pitfallData,seoData, sectionsContent, 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'proof-steps-trace-symmetric-skew-product-proof'}
+            id="trace-symmetric-skew-product-proof"
+            title="Trace of a symmetric times a skew-symmetric matrix"
+            source="/linear-algebra/matrix/trace"
+            related={false}
+            before={"The chain above, one equality per line with the rule each one uses."}
+            after={"The chain comes back to $\\text{tr}(SK)$ with a minus sign, and the cyclic property in the last line is what closes the loop."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterProof,
         ]
     },
     {

@@ -1659,6 +1659,7 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -2899,9 +2900,8 @@ Let $f(x) = 2x + 3$ and $f^{-1}(x) = \\dfrac{x - 3}{2}$. Verify:
 $$f(f^{-1}(x)) = f\\left(\\frac{x - 3}{2}\\right) = 2 \\cdot \\frac{x - 3}{2} + 3 = (x - 3) + 3 = x \\checkmark$$]@
 
 @academic[formula_callout:Composition and Inverse Functions
-$$f^{-1}(f(x)) = f^{-1}(2x + 3) = \\frac{(2x + 3) - 3}{2} = \\frac{2x}{2} = x \\checkmark$$]@
-
-@academic[pitfall,aside:true,width:35%:Taking the inverse as a reciprocal
+$$f^{-1}(f(x)) = f^{-1}(2x + 3) = \\frac{(2x + 3) - 3}{2} = \\frac{2x}{2} = x \\checkmark$$]@`,
+    afterProof: `@academic[pitfall,aside:true,width:35%:Taking the inverse as a reciprocal
 Using $\\frac{1}{2x + 3}$ for $f^{-1}(x)$ fails the check: at $x = 0$ it gives $\\frac{1}{3}$, and $f\\left(\\frac{1}{3}\\right) = \\frac{2}{3} + 3 = \\frac{11}{3}$, not $0$. The $-1$ marks the inverse function, $f^{-1}(x) = \\frac{x - 3}{2}$.
 [Read more](!#pitfall-taking-the-inverse-as-a-reciprocal)]@
 
@@ -3226,8 +3226,25 @@ const faqQuestions = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Checking an inverse pair by composition" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$f(x) = 2x + 3$ and $f^{-1}(x) = \\dfrac{x - 3}{2}$ are inverses' },
+    steps: [
+      { math: '$f(f^{-1}(x)) = f\\left(\\frac{x - 3}{2}\\right)$', tag: 'substitute', why: 'Put $f^{-1}(x)$ into $f$' },
+      { math: '$= 2 \\cdot \\frac{x - 3}{2} + 3$', tag: 'apply f', why: '$f$ doubles and adds $3$' },
+      { math: '$= (x - 3) + 3$', tag: 'cancel', why: 'The $2$s cancel' },
+      { math: '$= x$', tag: 'first check', key: true, why: 'The first composition yields the identity' },
+      { math: '$f^{-1}(f(x)) = f^{-1}(2x + 3)$', tag: 'substitute', why: 'Put $f(x)$ into $f^{-1}$' },
+      { math: '$= \\frac{(2x + 3) - 3}{2}$', tag: 'apply inverse', why: '$f^{-1}$ subtracts $3$ and halves' },
+      { math: '$= \\frac{2x}{2} = x$', tag: 'second check', why: 'The second composition yields the identity as well' },
+    ],
+    conclusion: { text: '$f \\circ f^{-1} = f^{-1} \\circ f = I$', say: 'Each composition yields the identity function, the function that returns its input unchanged.' },
+  };
+
    return {
       props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -3251,7 +3268,7 @@ const faqQuestions = {
     }
    }
 
-export default function CompositionPage({ formulaSummaryData, pitfallData,
+export default function CompositionPage({ proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -3449,6 +3466,18 @@ $$(f \\circ g)(x) = f(g(x))$$
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'proof-steps-composition-inverse-pair-proof'}
+            id="composition-inverse-pair-proof"
+            title="Checking an inverse pair by composition"
+            source="/functions/composition"
+            related={false}
+            before={"The two compositions above, split at each equals sign, with the reason for every step."}
+            after={"Each composition undoes the other function's operations in reverse order, which is why both chains collapse to $x$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj10.afterProof,
                   <div key={'unit-inversePair'} dangerouslySetInnerHTML={{ __html: demoUnits.inversePair }} />,
           `A pair that composes to the identity in both orders is inverse; one order alone is not enough.`,
         ]

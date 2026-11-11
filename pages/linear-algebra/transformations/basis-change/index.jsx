@@ -821,6 +821,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1268,9 +1269,8 @@ $$A' = P^{-1}AP$$
 
 where $P = P_{\\mathcal{B} \\leftarrow \\mathcal{C}}$ is the change-of-basis matrix from $\\mathcal{C}$ to $\\mathcal{B}$: $[\\mathbf{v}]_\\mathcal{B} = P[\\mathbf{v}]_\\mathcal{C}$, and its columns are the $\\mathcal{C}$ basis vectors written in $\\mathcal{B}$-coordinates.
 
-[The derivation is direct](https://linearalgebranotes.com/spaces/change-of-basis#rule-map-change). For any vector $\\mathbf{v}$, the transformation in $\\mathcal{B}$-coordinates reads $[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$. Converting to $\\mathcal{C}$-coordinates with $P^{-1} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$: $[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B} = P^{-1}A[\\mathbf{v}]_\\mathcal{B} = P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$. Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.
-
-@academic[fact,aside:true,width:35%:Every matrix is similar to its transpose
+[The derivation is direct](https://linearalgebranotes.com/spaces/change-of-basis#rule-map-change). For any vector $\\mathbf{v}$, the transformation in $\\mathcal{B}$-coordinates reads $[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$. Converting to $\\mathcal{C}$-coordinates with $P^{-1} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$: $[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B} = P^{-1}A[\\mathbf{v}]_\\mathcal{B} = P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$. Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.`,
+    afterProof: `@academic[fact,aside:true,width:35%:Every matrix is similar to its transpose
 For every square $A$ there is an invertible $P$ with $A^T = P^{-1}AP$, even though rows and columns trade places. Transposing does not change the rank of $A - \\lambda I$ or of any of its powers, and those ranks are exactly what decides similarity.]@
 
 Two matrices related by $A' = P^{-1}AP$ for some invertible $P$ are called similar. Similarity is an equivalence relation: every matrix is similar to itself ($P = I$), similarity is symmetric ($A' = P^{-1}AP$ implies $A = PA'P^{-1}$), and it is transitive.
@@ -1648,8 +1648,22 @@ $$= \\begin{pmatrix} 4 & -1 \\\\ -2 & 3 \\end{pmatrix}$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "Deriving the similarity relation" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: "The matrix of $T$ in basis $\\mathcal{C}$ is $A' = P^{-1}AP$" },
+    steps: [
+      { math: '$[T(\\mathbf{v})]_\\mathcal{B} = A[\\mathbf{v}]_\\mathcal{B}$', tag: 'start', why: 'The transformation in $\\mathcal{B}$-coordinates' },
+      { math: '$[T(\\mathbf{v})]_\\mathcal{C} = P^{-1}[T(\\mathbf{v})]_\\mathcal{B}$', tag: 'convert', why: 'Convert to $\\mathcal{C}$-coordinates with $P^{-1} = P_{\\mathcal{C} \\leftarrow \\mathcal{B}}$' },
+      { math: '$= P^{-1}A[\\mathbf{v}]_\\mathcal{B}$', tag: 'apply A', why: 'Use the first line' },
+      { math: '$= P^{-1}AP[\\mathbf{v}]_\\mathcal{C}$', tag: 'key step', key: true, why: 'Replace $[\\mathbf{v}]_\\mathcal{B}$ by $P[\\mathbf{v}]_\\mathcal{C}$' },
+    ],
+    conclusion: { text: "$A' = P^{-1}AP$", say: 'Since this holds for every $\\mathbf{v}$, the matrix of $T$ in basis $\\mathcal{C}$ is $P^{-1}AP$.' },
+  };
+
 return {
   props:{
+    proofStepsData,
     pitfallData,
     diagonalBeforeAfter,
     demoUnits,
@@ -1672,7 +1686,7 @@ return {
 }
    }
 
-export default function BasisChangePage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, obj9Table, canonicalForms, faqQuestions, schemas, demoUnits, diagonalBeforeAfter, conceptIntroFigures}) {
+export default function BasisChangePage({ proofStepsData, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj9Table, canonicalForms, faqQuestions, schemas, demoUnits, diagonalBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1794,6 +1808,18 @@ Multiplying $P$ by the standard coordinates of $(3, 1)$ gives $(4, 2)$, but $4(1
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-similarity-relation-proof'}
+            id="similarity-relation-proof"
+            title="Deriving the similarity relation"
+            source="/linear-algebra/transformations/basis-change"
+            related={false}
+            before={"The derivation above, one equality per line."}
+            after={"The last line is where $P$ enters: the input arrives in $\\mathcal{C}$-coordinates and has to be converted before $A$ can act on it."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {

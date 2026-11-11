@@ -15,10 +15,11 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
-export default function BiconditionalsTruthTablesPage({ formulaSummaryData, pitfallData,demoUnits, conceptIntroFigures, keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
+export default function BiconditionalsTruthTablesPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,demoUnits, conceptIntroFigures, keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
 
     const biconditionalOperators = {
         'P ↔ Q': { 
@@ -197,7 +198,21 @@ Taking P ↔ Q to mean "P and Q are both true" marks the FF row F, which is the 
         id: '4',
         title: sectionsContent.obj4.title,
         link: sectionsContent.obj4.link,
-        content: [sectionsContent.obj4.content]
+        content: [
+          sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'proof-steps-biconditional-negation-preservation-proof'}
+            id="biconditional-negation-preservation-proof"
+            title="Why negating both sides keeps the equivalence"
+            source="/logic/truth-tables/biconditionals"
+            related={false}
+            before={"The direct proof above, split into its two cases: P and Q both true, or both false."}
+            after={"Negation flips both values together, so values that matched before still match after."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterProof,
+        ]
       },
       {
         id: '5',
@@ -209,7 +224,21 @@ Taking P ↔ Q to mean "P and Q are both true" marks the FF row F, which is the 
         id: '6',
         title: sectionsContent.obj6.title,
         link: sectionsContent.obj6.link,
-        content: [sectionsContent.obj6.content]
+        content: [
+          sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-biconditional-transitivity-proof'}
+            id="biconditional-transitivity-proof"
+            title="Why equivalence is transitive"
+            source="/logic/truth-tables/biconditionals"
+            related={false}
+            before={"The reasoning above in three lines: each biconditional says two letters share a truth value."}
+            after={"Q is the shared middle letter: it ties the value of P to the value of R."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
+        ]
       },
       {
         id: '7',
@@ -537,9 +566,8 @@ The biconditional can also be expressed using other connectives: P ↔ Q ≡ (P 
 Taking ¬P ↔ ¬Q as the negation of P ↔ Q fails at P = Q = T: there ¬(P ↔ Q) is F but ¬P ↔ ¬Q is T. Negating one side gives the negation: ¬(P ↔ Q) ≡ P ↔ ¬Q.
 [Read more](!#pitfall-negating-both-sides-of-a-biconditional)]@
 
-The proof is direct: P ↔ Q means P and Q have the same truth value. If both are true, then ¬P and ¬Q are both false — still matching. If both are false, then ¬P and ¬Q are both true — still matching. In either case ¬P ↔ ¬Q holds.
-
-This symmetry under negation is a distinctive feature of the biconditional. It does not hold for the conditional: P → Q is not equivalent to ¬P → ¬Q (that would be the inverse, which is a common logical fallacy).`,
+The proof is direct: P ↔ Q means P and Q have the same truth value. If both are true, then ¬P and ¬Q are both false — still matching. If both are false, then ¬P and ¬Q are both true — still matching. In either case ¬P ↔ ¬Q holds.`,
+      afterProof: `This symmetry under negation is a distinctive feature of the biconditional. It does not hold for the conditional: P → Q is not equivalent to ¬P → ¬Q (that would be the inverse, which is a common logical fallacy).`,
       before: ``,
       after: ``,
       link: ``,
@@ -570,9 +598,8 @@ The truth table confirms that both sides agree in all four rows. When P and Q ma
 @academic[fact,aside:true,width:35%:A ↔ chain counts its false letters
 Grouping does not matter, since (P ↔ Q) ↔ R ≡ P ↔ (Q ↔ R), yet at P = T, Q = R = F the chain P ↔ Q ↔ R is T. Because X ↔ T is X and X ↔ F is ¬X, each false letter flips the result: a chain of ↔ is true exactly when an even number of its letters are false.]@
 
-The reasoning is straightforward. P ↔ Q means P and Q share a truth value. Q ↔ R means Q and R share a truth value. Therefore P and R share a truth value, giving P ↔ R.
-
-Transitivity allows chaining equivalences in proofs: if you show A ↔ B, then B ↔ C, then C ↔ D, you can conclude A ↔ D. This is one of the most common proof patterns in mathematics — simplifying a complex statement step by step through a chain of equivalent forms.
+The reasoning is straightforward. P ↔ Q means P and Q share a truth value. Q ↔ R means Q and R share a truth value. Therefore P and R share a truth value, giving P ↔ R.`,
+      afterProof: `Transitivity allows chaining equivalences in proofs: if you show A ↔ B, then B ↔ C, then C ↔ D, you can conclude A ↔ D. This is one of the most common proof patterns in mathematics — simplifying a complex statement step by step through a chain of equivalent forms.
 
 Such a chain is a list of separate claims, A ↔ B, B ↔ C and C ↔ D, joined by "and". Writing the letters in one line with the connective repeated, as in P ↔ Q ↔ R, makes a single formula instead, and that formula has to be read from its own truth table, not as a list.`,
       before: ``,
@@ -836,8 +863,34 @@ The first two rows rewrite the biconditional: its two sides can change places, a
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why negating both sides keeps the equivalence" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '(P ↔ Q) ↔ (¬P ↔ ¬Q)' },
+    steps: [
+      { math: 'P ↔ Q', tag: 'given', why: 'P and Q have the same truth value' },
+      { math: 'P = Q = T:  ¬P = ¬Q = F', tag: 'case 1', why: 'If both are true, ¬P and ¬Q are both false — still matching' },
+      { math: 'P = Q = F:  ¬P = ¬Q = T', tag: 'case 2', key: true, why: 'If both are false, ¬P and ¬Q are both true — still matching' },
+    ],
+    conclusion: { text: '¬P ↔ ¬Q holds in either case' },
+  };
+
+  // ProofSteps 2026-11-08: "Why equivalence is transitive" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '((P ↔ Q) ∧ (Q ↔ R)) → (P ↔ R)' },
+    steps: [
+      { math: 'P ↔ Q', tag: 'given', why: 'P and Q share a truth value' },
+      { math: 'Q ↔ R', tag: 'given', why: 'Q and R share a truth value' },
+      { math: 'P ↔ R', key: true, why: 'Therefore P and R share a truth value' },
+    ],
+    conclusion: { text: 'Logical equivalence is transitive' },
+  };
+
   return {
     props: {
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
       demoUnits,

@@ -1907,6 +1907,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import EquivalenceRing from '@/app/components/infographics/linear-algebra/EquivalenceRing'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import determinantDiagrams from '@/app/components/linear-algebra copy/determinants/determinantDiagrams'
@@ -2475,9 +2476,8 @@ For any positive integer $k$:
 And since multiplication of determinants is commutative even when matrix multiplication is not:
 
 @academic[formula_callout:The Multiplicative Property
-$$\\det(AB) = \\det(A)\\det(B) = \\det(B)\\det(A) = \\det(BA)$$]@
-
-Note that $AB$ and $BA$ generally differ as matrices, yet their determinants always agree.
+$$\\det(AB) = \\det(A)\\det(B) = \\det(B)\\det(A) = \\det(BA)$$]@`,
+    afterProof: `Note that $AB$ and $BA$ generally differ as matrices, yet their determinants always agree.
 
 ## A Non-Property
 
@@ -2754,8 +2754,20 @@ $$2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{2}\\right) = 464$$`],
     ],
   };
 
+  // ProofSteps 2026-11-08: "The two products have the same determinant" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\det(AB) = \\det(BA)$' },
+    steps: [
+      { math: '$\\det(AB) = \\det(A)\\det(B)$', tag: 'product rule', why: 'The multiplicative property' },
+      { math: '$= \\det(B)\\det(A)$', tag: 'key step', key: true, why: 'Multiplication of determinants is commutative even when matrix multiplication is not' },
+      { math: '$= \\det(BA)$', tag: 'product rule', why: 'The multiplicative property, read backwards' },
+    ],
+  };
+
    return {
   props: {
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -2777,7 +2789,7 @@ $$2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{2}\\right) = 464$$`],
 }
    }
 
-   export default function DeterminantPropertiesPage({ pitfallData,
+   export default function DeterminantPropertiesPage({ proofStepsData, pitfallData,
      seoData,
      sectionsContent,
      introContent,
@@ -2918,6 +2930,18 @@ Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-determinant-product-order-proof'}
+            id="determinant-product-order-proof"
+            title="The two products have the same determinant"
+            source="/linear-algebra/determinants/properties"
+            related={false}
+            before={"The chain above, one equality per line."}
+            after={"The swap happens between two numbers in the middle line, where order never matters."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
           <div
             key={'obj5-table'}
             style={tableWrapStyle}

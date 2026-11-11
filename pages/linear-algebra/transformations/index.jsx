@@ -746,6 +746,7 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 
 
 export async function getStaticProps(){
@@ -1034,9 +1035,8 @@ The space $V$ is the domain and $W$ is the codomain, both vector spaces over the
     title: `Examples in Rⁿ`,
     content: `The prototypical example is [matrix](!/linear-algebra/matrix) multiplication: $T(\\mathbf{x}) = A\\mathbf{x}$ for a fixed $m \\times n$ matrix $A$. Linearity follows from the distributive properties of matrix-vector multiplication: $A(c\\mathbf{u} + d\\mathbf{v}) = cA\\mathbf{u} + dA\\mathbf{v}$.
 
-Several familiar operations are special cases. The zero transformation $T(\\mathbf{v}) = \\mathbf{0}$ sends every vector to the origin — it corresponds to the zero matrix. The identity transformation $T(\\mathbf{v}) = \\mathbf{v}$ leaves every vector unchanged — it corresponds to the [identity matrix](!/linear-algebra/matrix/types). The projection $T(x, y) = (x, 0)$ drops the second coordinate — it corresponds to $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$. [Rotation by a fixed angle](https://calculatematrix.com/matrix-calculators/rotation-matrix#about) $\\theta$ in $\\mathbb{R}^2$ is linear, with matrix $\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$.
-
-In each case, linearity can be verified directly from the definition. The matrix formulation makes the verification automatic — every matrix-vector product is linear by construction.`,
+Several familiar operations are special cases. The zero transformation $T(\\mathbf{v}) = \\mathbf{0}$ sends every vector to the origin — it corresponds to the zero matrix. The identity transformation $T(\\mathbf{v}) = \\mathbf{v}$ leaves every vector unchanged — it corresponds to the [identity matrix](!/linear-algebra/matrix/types). The projection $T(x, y) = (x, 0)$ drops the second coordinate — it corresponds to $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$. [Rotation by a fixed angle](https://calculatematrix.com/matrix-calculators/rotation-matrix#about) $\\theta$ in $\\mathbb{R}^2$ is linear, with matrix $\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$.`,
+    afterCases: `In each case, linearity can be verified directly from the definition. The matrix formulation makes the verification automatic — every matrix-vector product is linear by construction.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1335,8 +1335,25 @@ $$A\\begin{pmatrix} x \\\\ y \\end{pmatrix} = \\begin{pmatrix} 2x + y \\\\ 3y \\
     ],
   };
 
+  // SpecialCases 2026-11-09: "Four familiar maps from one formula" (substitute), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$T(\\mathbf{x}) = A\\mathbf{x}$' },
+    cases: [
+      { when: '$A$ = zero matrix', result: '$T(\\mathbf{v}) = \\mathbf{0}$', name: 'Zero transformation',
+        text: 'Sends every vector to the origin.' },
+      { when: '$A$ = identity matrix', result: '$T(\\mathbf{v}) = \\mathbf{v}$', name: 'Identity transformation',
+        text: 'Leaves every vector unchanged.' },
+      { when: '$A = \\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$', result: '$T(x, y) = (x, 0)$', name: 'Projection',
+        text: 'Drops the second coordinate.' },
+      { when: '$A = \\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}$', result: 'rotation by $\\theta$', name: 'Rotation',
+        text: 'Rotation by a fixed angle $\\theta$ in $\\mathbb{R}^2$ is linear.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
     pitfallData,
     faqQuestions,
     demoUnits,
@@ -1359,7 +1376,7 @@ return {
 }
    }
 
-export default function LinearTransformationsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
+export default function LinearTransformationsPage({ specialCasesData, pitfallData,seoData, sectionsContent, introContent, obj3Table, obj4Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1442,6 +1459,18 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'special-cases-matrix-transformation-special-cases'}
+            id="matrix-transformation-special-cases"
+            title="Four familiar maps from one formula"
+            source="/linear-algebra/transformations"
+            related={false}
+            before={"Each card sets the matrix $A$ in $T(\\mathbf{x}) = A\\mathbf{x}$ to a familiar choice and names the transformation it gives."}
+            after={"All four maps are linear for the same reason: each one is a matrix-vector product."}
+          >
+            <SpecialCases data={specialCasesData} variant="substitute" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterCases,
         ]
     },
     {

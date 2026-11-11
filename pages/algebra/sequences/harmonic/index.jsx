@@ -11,6 +11,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
@@ -283,9 +284,8 @@ The proof by grouping (attributed to Oresme, 14th century) is among the most ele
 @academic[formula_callout:The Harmonic Series
 $$1 + \\frac{1}{2} + \\left(\\frac{1}{3} + \\frac{1}{4}\\right) + \\left(\\frac{1}{5} + \\frac{1}{6} + \\frac{1}{7} + \\frac{1}{8}\\right) + \\cdots$$]@
 
-The first group contains $1$ term summing to at least $\\frac{1}{2}$. The next group contains $2$ terms, each at least $\\frac{1}{4}$, summing to at least $\\frac{1}{2}$. The next contains $4$ terms, each at least $\\frac{1}{8}$, again summing to at least $\\frac{1}{2}$. Each doubling block contributes at least $\\frac{1}{2}$, and there are infinitely many blocks.
-
-@academic[fact,aside:true,width:35%:Drop every 9 and it converges
+The first group contains $1$ term summing to at least $\\frac{1}{2}$. The next group contains $2$ terms, each at least $\\frac{1}{4}$, summing to at least $\\frac{1}{2}$. The next contains $4$ terms, each at least $\\frac{1}{8}$, again summing to at least $\\frac{1}{2}$. Each doubling block contributes at least $\\frac{1}{2}$, and there are infinitely many blocks.`,
+    afterProof: `@academic[fact,aside:true,width:35%:Drop every 9 and it converges
 Remove each term whose denominator contains the digit $9$, and the sum stays below $80$ (it is about $22.92$). There are $8 \\cdot 9^{d-1}$ such numbers with $d$ digits, each term at most $\\frac{1}{10^{d-1}}$, so the $d$-digit block adds at most $8 \\cdot 0.9^{d-1}$, a geometric series with total $80$.]@
 
 The harmonic series grows slowly — its partial sums approximate $\\ln n + \\gamma$, where $\\gamma \\approx 0.5772$ is the Euler–Mascheroni constant. To reach a partial sum exceeding $10$, you need over $12{,}000$ terms. But slowly is not the same as bounded: the sum eventually surpasses any finite threshold.
@@ -618,8 +618,22 @@ $$\\frac{240}{5} = 48 = \\frac{2 \\cdot 60 \\cdot 40}{60 + 40}$$`, `The average 
     ],
   };
 
+  // ProofSteps 2026-11-08: "Oresme's proof that the harmonic series diverges" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'The series $1 + \\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4} + \\cdots$ diverges' },
+    steps: [
+      { math: '$1 + \\frac{1}{2}$', tag: '1 term', why: 'After the first term, the first group holds $1$ term, summing to at least $\\frac{1}{2}$' },
+      { math: '$+ \\left(\\frac{1}{3} + \\frac{1}{4}\\right)$', tag: '2 terms', why: 'Each term is at least $\\frac{1}{4}$, so the group sums to at least $\\frac{1}{2}$' },
+      { math: '$+ \\left(\\frac{1}{5} + \\frac{1}{6} + \\frac{1}{7} + \\frac{1}{8}\\right)$', tag: '4 terms', why: 'Each term is at least $\\frac{1}{8}$, so again at least $\\frac{1}{2}$' },
+      { math: '$+ \\cdots$', tag: 'key step', key: true, why: 'Each doubling block contributes at least $\\frac{1}{2}$, and there are infinitely many blocks' },
+    ],
+    conclusion: { text: 'The harmonic series diverges', say: 'Its partial sums grow without bound, even though the individual terms shrink to zero.' },
+  };
+
   return {
   props:{
+    proofStepsData,
     formulaSummaryData,
       termsToZeroScope,
     pitfallData,
@@ -645,7 +659,7 @@ const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function HarmonicSequencesPage({ formulaSummaryData,termsToZeroScope,  pitfallData,meanOrderLevels, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function HarmonicSequencesPage({ proofStepsData, formulaSummaryData,termsToZeroScope,  pitfallData,meanOrderLevels, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -769,6 +783,18 @@ Treating $\\frac{1}{3}, \\frac{1}{5}, \\frac{1}{7}, \\ldots$ as arithmetic with 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-harmonic-series-divergence-proof'}
+            id="harmonic-series-divergence-proof"
+            title="Oresme's proof that the harmonic series diverges"
+            source="/algebra/sequences/harmonic"
+            related={false}
+            before={"The grouping argument above, one block of terms per line, each with the bound it contributes."}
+            after={"Each block has twice as many terms as the one before, each term at least half as large, so every block is worth at least $\\frac{1}{2}$."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
           <div key={'unit-harmonicGrowth'} dangerouslySetInnerHTML={{ __html: demoUnits.harmonicGrowth }} />,
           `The climb is slow: Hₙ grows like ln n, so passing 10 takes over 12,000 terms.`,
           <DiagramFrame

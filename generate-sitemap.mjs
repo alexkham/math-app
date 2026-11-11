@@ -9,6 +9,23 @@ const SITE_URL = 'https://www.learnmathclass.com';
 
 const excludedPages = process.argv.slice(2).map(arg => arg.replace('--', ''));
 
+// True when the built HTML carries a robots meta tag whose content includes
+// "noindex" (any attribute order, any quote style). Such pages stay out of
+// the sitemap: Google may still crawl and follow them, but we do not list them.
+function hasNoindexMeta(htmlPath) {
+  let html;
+  try {
+    html = fs.readFileSync(htmlPath, 'utf8');
+  } catch {
+    return false;
+  }
+  const metaTags = html.match(/<meta\b[^>]*>/gi) || [];
+  return metaTags.some(tag =>
+    /\bname\s*=\s*["']?robots["']?/i.test(tag) &&
+    /\bcontent\s*=\s*["']?[^"'>]*noindex/i.test(tag)
+  );
+}
+
 function getSourceFileDate(route) {
   const pagesDir = path.join(__dirname, 'pages');
   const appDir = path.join(__dirname, 'app');
@@ -78,11 +95,20 @@ function getSourceFileDate(route) {
       return;
     }
 
+    // Skip every built page whose HTML carries a noindex robots tag.
+    const noindexPages = pages.filter(page => hasNoindexMeta(page));
+    const noindexRoutes = noindexPages.map(page =>
+      page.replace('.next/server/pages', '').replace('.html', '').replace(/\/index$/, '') || '/'
+    );
+    console.log(`Skipped ${noindexRoutes.length} noindex page(s):`);
+    noindexRoutes.forEach(route => console.log('  ', route));
+    const indexablePages = pages.filter(page => !noindexPages.includes(page));
+
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  ${pages
-    .filter(page => !excludedPages.some(excludedPage => 
-      page.endsWith(`/${excludedPage}.html`) || 
+  ${indexablePages
+    .filter(page => !excludedPages.some(excludedPage =>
+      page.endsWith(`/${excludedPage}.html`) ||
       page.includes(`/${excludedPage}/`)
     ))
     .map((page) => {

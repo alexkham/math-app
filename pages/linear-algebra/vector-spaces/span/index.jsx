@@ -966,6 +966,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
@@ -1783,8 +1784,24 @@ $$\\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0
     ],
   };
 
+  // SpecialCases 2026-11-09: "Spanning sets by size" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: 'In $\\mathbb{R}^n$, a spanning set must contain at least $n$ vectors.' },
+    cases: [
+      { when: 'fewer than $n$', tag: 'cannot span', tone: 'warn', rule: 'a proper subspace',
+        why: 'Their span has dimension less than $n$.',
+        more: 'Fewer than $n$ vectors cannot reach every direction.' },
+      { when: 'exactly $n$', tag: 'if independent', rule: 'a basis',
+        why: 'A spanning set with exactly $n$ independent vectors is a basis.' },
+      { when: 'more than $n$', tag: 'redundant', rule: 'redundancies that can be removed',
+        why: 'Some vectors lie in the span of the others.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1808,7 +1825,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function SpanPage({ pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SpanPage({ specialCasesData, pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1936,6 +1953,17 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'special-cases-spanning-set-size-edge-cases'}
+            id="spanning-set-size-edge-cases"
+            title="Spanning sets by size"
+            source="/linear-algebra/vector-spaces/span"
+            related={false}
+            before={"One row per count of vectors compared with $n$. Click the first row for why it falls short."}
+            after={"The count $n$ is the dividing line: below it a set cannot span, above it a spanning set always has vectors to spare."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1280,6 +1280,8 @@ import complexDivisionDiagrams from '@/app/components/calculators/complex-number
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
@@ -1868,9 +1870,8 @@ Picture the real axis as a horizontal mirror. Every point above the axis has a m
 
 Points lying directly on the mirror remain stationary. These are precisely the real numbers — they have no vertical displacement to reverse, so conjugation leaves them unchanged. The number $5$ sits at $(5, 0)$ on the real axis, and its reflection lands at the same spot. This geometric fact corresponds to the algebraic observation that $\\bar{a} = a$ for any real $a$.
 
-Points on the imaginary axis exhibit different behavior. They lie perpendicular to the mirror, equidistant above and below the real axis. Reflection sends each to the opposite side of the origin. The number $4i$ at $(0, 4)$ reflects to $-4i$ at $(0, -4)$. For pure imaginary numbers, conjugation equals negation: $\\bar{z} = -z$.
-
-The reflection interpretation explains why conjugating twice returns the original number. Reflect a point across a line, then reflect again across the same line — the point returns home. Two mirror operations cancel completely, regardless of where the point started.`,
+Points on the imaginary axis exhibit different behavior. They lie perpendicular to the mirror, equidistant above and below the real axis. Reflection sends each to the opposite side of the origin. The number $4i$ at $(0, 4)$ reflects to $-4i$ at $(0, -4)$. For pure imaginary numbers, conjugation equals negation: $\\bar{z} = -z$.`,
+    afterCases: `The reflection interpretation explains why conjugating twice returns the original number. Reflect a point across a line, then reflect again across the same line — the point returns home. Two mirror operations cancel completely, regardless of where the point started.`,
   after: ``,
   link: '',
 },
@@ -1902,9 +1903,8 @@ $$\\overline{z_1 + z_2} = \\overline{z_1} + \\overline{z_2}$$
 @academic[formulas_link:Browse all complex numbers formulas
 /complex-numbers/formulas]@
 
-The conjugate of a sum equals the sum of the conjugates. Proof: let $z_1 = a + bi$ and $z_2 = c + di$. Then $z_1 + z_2 = (a + c) + (b + d)i$, so $\\overline{z_1 + z_2} = (a + c) - (b + d)i = (a - bi) + (c - di) = \\bar{z_1} + \\bar{z_2}$. The same property extends to subtraction: $\\overline{z_1 - z_2} = \\bar{z_1} - \\bar{z_2}$.
-
-Multiplicativity states that conjugation distributes over products:
+The conjugate of a sum equals the sum of the conjugates. Proof: let $z_1 = a + bi$ and $z_2 = c + di$. Then $z_1 + z_2 = (a + c) + (b + d)i$, so $\\overline{z_1 + z_2} = (a + c) - (b + d)i = (a - bi) + (c - di) = \\bar{z_1} + \\bar{z_2}$. The same property extends to subtraction: $\\overline{z_1 - z_2} = \\bar{z_1} - \\bar{z_2}$.`,
+      afterProof: `Multiplicativity states that conjugation distributes over products:
 
 @academic[formula_callout:Conjugate of a Product
 $$\\overline{z_1 \\cdot z_2} = \\overline{z_1} \\cdot \\overline{z_2}$$
@@ -1964,9 +1964,8 @@ $$z \\cdot \\bar{z} = (a + bi)(a - bi) = a^2 - abi + abi - b^2i^2 = a^2 - b^2(-1
 Expanding $(3 + 4i)(3 - 4i)$ to $9 - 16 = -7$ takes $(4i)^2$ to be $16$. In fact $(4i)^2 = 16i^2 = -16$, so the product is $9 - (-16) = 25 = |3 + 4i|^2$.
 [Read more](!#pitfall-forgetting-that-i-squared-is-1)]@
 
-The middle terms cancel, and $i^2 = -1$ converts the final term to positive. The result $a^2 + b^2$ matches the definition $|z|^2 = a^2 + b^2$ exactly.
-
-This identity explains why $z \\cdot \\bar{z}$ always produces a real number. The imaginary parts eliminate each other through the cancellation of $-abi$ and $+abi$. No matter how complicated $z$ appears, multiplying by its conjugate guarantees a real outcome.
+The middle terms cancel, and $i^2 = -1$ converts the final term to positive. The result $a^2 + b^2$ matches the definition $|z|^2 = a^2 + b^2$ exactly.`,
+      afterProof: `This identity explains why $z \\cdot \\bar{z}$ always produces a real number. The imaginary parts eliminate each other through the cancellation of $-abi$ and $+abi$. No matter how complicated $z$ appears, multiplying by its conjugate guarantees a real outcome.
 
 A related fact: conjugation preserves modulus. The numbers $z$ and $\\bar{z}$ lie at equal distances from the origin, as reflection across a line through the origin does not change radial distance. Algebraically, $|\\bar{z}| = |a - bi| = \\sqrt{a^2 + (-b)^2} = \\sqrt{a^2 + b^2} = |z|$. The identity $|\\bar{z}| = |z|$ holds universally.
 
@@ -1995,9 +1994,8 @@ For real samples $x_n$, the Fourier transform satisfies $X_{N-k} = \\overline{X_
 
 For the forward direction, suppose $z$ is real, meaning $z = a + 0i = a$ for some $a \\in \\mathbb{R}$. Then $\\bar{z} = a - 0i = a = z$. The conjugate equals the original.
 
-For the reverse direction, suppose $z = \\bar{z}$. Writing $z = a + bi$, the equation becomes $a + bi = a - bi$. Comparing imaginary parts: $b = -b$, which forces $2b = 0$ and thus $b = 0$. With zero imaginary part, $z = a$ is real.
-
-Geometrically, real numbers sit on the real axis — the mirror line for conjugation. Points on a mirror remain fixed under reflection, so $z = \\bar{z}$ characterizes exactly those points.
+For the reverse direction, suppose $z = \\bar{z}$. Writing $z = a + bi$, the equation becomes $a + bi = a - bi$. Comparing imaginary parts: $b = -b$, which forces $2b = 0$ and thus $b = 0$. With zero imaginary part, $z = a$ is real.`,
+      afterProof: `Geometrically, real numbers sit on the real axis — the mirror line for conjugation. Points on a mirror remain fixed under reflection, so $z = \\bar{z}$ characterizes exactly those points.
 
 The second theorem characterizes pure imaginary numbers:
 
@@ -2110,9 +2108,8 @@ $$\\overline{p(z_0)} = \\overline{a_nz_0^n + \\cdots + a_0} = a_n\\overline{z_0^
 Taking $-i$ as a root of $z^2 - 2iz - 1$ because $i$ is one ignores the coefficient $-2i$, which is not real. Substituting gives $(-i)^2 - 2i(-i) - 1 = -1 - 2 - 1 = -4$; the polynomial is $(z - i)^2$, and $i$ is its only root.
 [Read more](!#pitfall-pairing-roots-without-real-coefficients)]@
 
-The key step uses $\\overline{a_k} = a_k$ because each coefficient is real. If $p(z_0) = 0$, then $\\overline{p(z_0)} = \\bar{0} = 0$, so $p(\\bar{z_0}) = 0$.
-
-Consequences flow immediately. A real quadratic with no real roots must have two complex conjugate roots — if $2 + 3i$ solves it, so does $2 - 3i$. A real cubic always has at least one real root, since complex roots pair off and an odd number of roots cannot all be paired. A real polynomial of degree 4 might have four real roots, two real and two complex conjugates, or two pairs of complex conjugates — but never three real and one complex.
+The key step uses $\\overline{a_k} = a_k$ because each coefficient is real. If $p(z_0) = 0$, then $\\overline{p(z_0)} = \\bar{0} = 0$, so $p(\\bar{z_0}) = 0$.`,
+      afterProof: `Consequences flow immediately. A real quadratic with no real roots must have two complex conjugate roots — if $2 + 3i$ solves it, so does $2 - 3i$. A real cubic always has at least one real root, since complex roots pair off and an odd number of roots cannot all be paired. A real polynomial of degree 4 might have four real roots, two real and two complex conjugates, or two pairs of complex conjugates — but never three real and one complex.
 
 Conjugate pairs multiply to give real quadratic factors. If $z_0 = a + bi$ is a root, then $(z - z_0)(z - \\bar{z_0}) = z^2 - 2az + (a^2 + b^2)$, a quadratic with real coefficients. This factorization explains why every real polynomial factors completely into real linear and real quadratic terms — the [Fundamental Theorem of Algebra](!/complex-numbers/equations-polynomials) guarantees complex roots exist, and conjugate pairing ensures they combine into real factors.`,
   after: ``,
@@ -2489,8 +2486,104 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving the conjugate of a sum" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$\\overline{z_1 + z_2} = \\overline{z_1} + \\overline{z_2}$' },
+    steps: [
+      { math: '$z_1 + z_2 = (a + c) + (b + d)i$', tag: 'add', why: 'Let $z_1 = a + bi$ and $z_2 = c + di$' },
+      { math: '$\\overline{z_1 + z_2} = (a + c) - (b + d)i$', tag: 'key step', key: true, why: 'Conjugating flips the sign of the imaginary part' },
+      { math: '$= (a - bi) + (c - di)$', tag: 'regroup', why: 'Splitting into the parts that came from $z_1$ and from $z_2$' },
+      { math: '$= \\bar{z_1} + \\bar{z_2}$', tag: 'conjugates', why: 'Each bracket is a conjugate' },
+    ],
+    conclusion: { text: '$\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$', say: 'The conjugate of a sum equals the sum of the conjugates.' },
+  };
+
+  // ProofSteps 2026-11-08: "Multiplying a number by its conjugate" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$z \\cdot \\bar{z} = |z|^2$' },
+    steps: [
+      { math: '$z \\cdot \\bar{z} = (a + bi)(a - bi)$', tag: 'substitute', why: 'Let $z = a + bi$, so $\\bar{z} = a - bi$' },
+      { math: '$= a^2 - abi + abi - b^2i^2$', tag: 'expand', why: 'Direct expansion' },
+      { math: '$= a^2 - b^2(-1)$', tag: 'key step', key: true, why: 'The middle terms cancel, and $i^2 = -1$' },
+      { math: '$= a^2 + b^2$', tag: 'sign', why: 'The final term becomes positive' },
+    ],
+    conclusion: { text: '$z \\cdot \\bar{z} = |z|^2$', say: 'The result $a^2 + b^2$ matches the definition $|z|^2 = a^2 + b^2$ exactly.' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving the real number test" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$z \\in \\mathbb{R} \\iff z = \\overline{z}$' },
+    steps: [
+      { math: '$z = a + 0i = a$', tag: 'forward', why: 'Suppose $z$ is real' },
+      { math: '$\\bar{z} = a - 0i = a = z$', tag: 'forward', why: 'The conjugate equals the original' },
+      { math: '$a + bi = a - bi$', tag: 'reverse', why: 'Suppose $z = \\bar{z}$ and write $z = a + bi$' },
+      { math: '$b = -b$', tag: 'key step', key: true, why: 'Comparing imaginary parts' },
+      { math: '$2b = 0$', tag: 'solve', why: 'This forces $2b = 0$' },
+      { math: '$b = 0$', tag: 'solve', why: 'And thus $b = 0$' },
+    ],
+    conclusion: { text: '$z = a$ is real', say: 'With zero imaginary part, $z = a$ is real.' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving the pure imaginary test" (chain), from the page's own formulas.
+  const proofStepsData4 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$z$ is pure imaginary $\\iff \\overline{z} = -z$' },
+    steps: [
+      { math: '$z = bi$', tag: 'forward', why: 'Suppose $z = bi$ for real $b$' },
+      { math: '$\\bar{z} = -bi = -(bi) = -z$', tag: 'forward', why: 'Conjugating flips the sign of $bi$' },
+      { math: '$a - bi = -a - bi$', tag: 'reverse', why: 'Suppose $\\bar{z} = -z$ and write $z = a + bi$' },
+      { math: '$a = -a$', tag: 'key step', key: true, why: 'Comparing real parts' },
+      { math: '$2a = 0$', tag: 'solve', why: 'So $2a = 0$' },
+      { math: '$a = 0$', tag: 'solve', why: 'And $a = 0$' },
+    ],
+    conclusion: { text: '$z = bi$ is pure imaginary', say: 'The number has no real part and is pure imaginary.' },
+  };
+
+  // ProofSteps 2026-11-08: "Proving that roots come in conjugate pairs" (chain), from the page's own formulas.
+  const proofStepsData5 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'If every $a_k$ is real and $p(z_0) = 0$, then $p(\\bar{z_0}) = 0$' },
+    steps: [
+      { math: '$\\overline{p(z_0)} = \\overline{a_nz_0^n + \\cdots + a_0}$', tag: 'write out', why: 'Write out the polynomial' },
+      { math: '$= a_n\\overline{z_0^n} + \\cdots + a_0$', tag: 'key step', key: true, why: 'Conjugation distributes over sums and products, and $\\overline{a_k} = a_k$ because each coefficient is real' },
+      { math: '$= a_n(\\bar{z_0})^n + \\cdots + a_0$', tag: 'powers', why: 'Conjugation distributes over products, so the conjugate of a power is the power of the conjugate' },
+      { math: '$= p(\\bar{z_0})$', tag: 'collect', why: 'The same polynomial, evaluated at $\\bar{z_0}$' },
+      { math: '$\\overline{p(z_0)} = \\bar{0} = 0$', tag: 'root', why: 'If $p(z_0) = 0$' },
+    ],
+    conclusion: { text: '$p(\\bar{z_0}) = 0$', say: 'If $z_0$ solves the equation, so does $\\bar{z_0}$.' },
+  };
+
+  // SpecialCases 2026-11-09: "How each point reflects" (map), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309',
+      caseColors: ['#2563EB', '#06357A', '#B45309', '#475569'], caseInks: ['#2563EB', '#06357A', '#B45309', '#475569'] },
+    general: { label: 'Reflection', text: '$\\bar{z} = a - bi$ corresponds to $(a, -b)$' },
+    figure: {
+      kind: 'plane', xLabel: 'Re', yLabel: 'Im', xAxisCase: 0, yAxisCase: 1,
+      points: [
+        { x: 5, y: 0, label: '5', case: 0 },
+        { x: 0, y: 4, label: '4i', case: 1 }, { x: 0, y: -4, label: '−4i', case: 1 },
+        { x: 2, y: 3, label: '2 + 3i', case: 2 }, { x: 2, y: -3, label: '2 − 3i', case: 2 },
+      ],
+    },
+    cases: [
+      { name: 'Real axis', when: 'real numbers', rule: '$\\bar{a} = a$', text: 'Points on the mirror remain stationary: $5$ at $(5, 0)$ reflects to the same spot.' },
+      { name: 'Imaginary axis', when: 'pure imaginary', rule: '$\\bar{z} = -z$', text: 'Reflection sends each point to the opposite side of the origin: $4i$ at $(0, 4)$ goes to $-4i$ at $(0, -4)$.' },
+      { name: 'Off the axes', when: 'above or below', text: 'Every point above the axis has a mirror image below: $2 + 3i$ at $(2, 3)$ reflects to $2 - 3i$ at $(2, -3)$.' },
+    ],
+  };
+
   return {
   props:{
+    specialCasesData,
+    proofStepsData5,
+    proofStepsData4,
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
       conjugateVsNegation,
@@ -2520,7 +2613,7 @@ const schemas = {
 
 const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function ComplexConjugatePage({ formulaSummaryData, pitfallData,conjugateVsNegation, 
+export default function ComplexConjugatePage({ specialCasesData, proofStepsData5, proofStepsData4, proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,conjugateVsNegation, 
   seoData,
   sectionsContent,
   introContent,
@@ -2664,6 +2757,18 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'special-cases-conjugate-reflection-special-cases'}
+            id="conjugate-reflection-special-cases"
+            title="How each point reflects"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+            before={"The reflection cases described above, on the plane. Hover a case to find its points, or a point to find its case."}
+            after={"Only points on the mirror, the real numbers, stay fixed; on the imaginary axis the reflection is the same as negation."}
+          >
+            <SpecialCases data={specialCasesData} variant="map" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterCases,
         ]
     },
     {
@@ -2672,6 +2777,18 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-conjugate-of-a-sum-proof'}
+            id="conjugate-of-a-sum-proof"
+            title="Proving the conjugate of a sum"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+            before={"The proof of additivity above, one step per row, with the reason for each."}
+            after={"Conjugation only flips the sign of the imaginary part, so it makes no difference whether it happens before or after the addition."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
           <div
             key={'obj3-table'}
             style={tableWrapStyle}
@@ -2686,6 +2803,18 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'proof-steps-conjugate-modulus-identity-proof'}
+            id="conjugate-modulus-identity-proof"
+            title="Multiplying a number by its conjugate"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+            before={"The expansion above, split at each equals sign, with the reason for every step."}
+            after={"The cancelling middle terms make the product real, and $i^2 = -1$ makes it non-negative."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj4.afterProof,
                   <div key={'unit-product'} dangerouslySetInnerHTML={{ __html: demoUnits.product }} />,
           `The identity gives the modulus without a square root, which is why it appears in every division.`,
         ]
@@ -2696,6 +2825,29 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-real-number-conjugate-test-proof'}
+            id="real-number-conjugate-test-proof"
+            title="Proving the real number test"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+            before={"Both directions of the proof above: first from a real $z$ to $z = \\bar{z}$, then back from $z = \\bar{z}$ to a real $z$."}
+            after={"The reverse direction turns on one comparison: an imaginary part equal to its own negative can only be $0$."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
+          <DiagramFrame
+            key={'proof-steps-pure-imaginary-conjugate-test-proof'}
+            id="pure-imaginary-conjugate-test-proof"
+            title="Proving the pure imaginary test"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+            before={"The same two directions for the second theorem, this time comparing real parts."}
+            after={"Comparing real parts instead of imaginary parts is the only change from the real number test."}
+          >
+            <ProofSteps data={proofStepsData4} variant="chain" />
+          </DiagramFrame>,
           <div
             key={'obj5-table'}
             style={tableWrapStyle}
@@ -2743,6 +2895,18 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'proof-steps-conjugate-root-theorem-proof'}
+            id="conjugate-root-theorem-proof"
+            title="Proving that roots come in conjugate pairs"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+            before={"The conjugation chain above, split at each equals sign, then the step from $p(z_0) = 0$ to $p(\\bar{z_0}) = 0$."}
+            after={"Real coefficients are what make it work: since $\\overline{a_k} = a_k$, conjugating the value of $p$ only conjugates its input."}
+          >
+            <ProofSteps data={proofStepsData5} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterProof,
           `@academic[punchline:Real coefficients force non-real roots into mirror pairs, and each pair multiplies into a real quadratic factor.]@`,
         ]
     },

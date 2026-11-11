@@ -13,6 +13,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -1062,8 +1063,22 @@ $$= \\sqrt{9} = 3$$`],
     ],
   };
 
+  // SpecialCases 2026-11-09: "Two special exponents" (substitute), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    labels: { set: 'For' },
+    general: { label: 'Rule', text: '$a^{m/n} = \\sqrt[n]{a^m} = \\left(\\sqrt[n]{a}\\right)^m$' },
+    cases: [
+      { when: '$m = 1$', result: '$a^{1/n} = \\sqrt[n]{a}$', name: 'Pure root',
+        text: 'The special case $m = 1$ gives the pure root.' },
+      { when: 'a negative exponent $-\\frac{m}{n}$', result: '$a^{-m/n} = \\frac{1}{a^{m/n}}$', name: 'Reciprocal',
+        text: 'The [negative exponent](!/algebra/powers/negative-exponents) rule applies first.' },
+    ],
+  };
+
   return {
   props: {
+    specialCasesData,
     formulaSummaryData,
     pitfallData,
     exponentLawCards,
@@ -1091,7 +1106,7 @@ $$= \\sqrt{9} = 3$$`],
 // export default function RulesPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RulesPage({ formulaSummaryData, pitfallData,exponentLawCards, expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RulesPage({ specialCasesData, formulaSummaryData, pitfallData,exponentLawCards, expQuotientCases, seoData, sectionsContent, introContent, obj9Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1243,6 +1258,17 @@ Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'special-cases-rational-exponent-rule-special-cases'}
+            id="rational-exponent-rule-special-cases"
+            title="Two special exponents"
+            source="/algebra/powers/exponent-rules"
+            related={false}
+            before={"Each card puts one special exponent into the rational exponent rule and shows what it becomes."}
+            after={"Both come from the same rule: $m = 1$ leaves only the root, and a negative exponent adds a reciprocal."}
+          >
+            <SpecialCases data={specialCasesData} variant="substitute" />
+          </DiagramFrame>,
         ]
     },
 

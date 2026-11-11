@@ -858,6 +858,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearSystemDiagrams from '@/app/components/linear-algebra copy/matrix/linearSystemDiagrams'
@@ -1334,9 +1336,8 @@ Kirchhoff's current law is $A\\mathbf{x} = \\mathbf{0}$ with one equation per ju
 
 where $\\mathbf{v}_1, \\dots, \\mathbf{v}_k$ are the basis vectors found by the algorithm above and $t_1, \\dots, t_k$ are free parameters ranging over all real numbers. The number of parameters $k = n - \\text{rank}(A)$ is the nullity.
 
-When $k = 0$, the only solution is $\\mathbf{x} = \\mathbf{0}$. When $k = 1$, the solutions form a line through the origin in $\\mathbb{R}^n$. When $k = 2$, a plane through the origin. In general, the solution set is a $k$-dimensional subspace passing through the origin.
-
-There is no particular solution $\\mathbf{x}_p$ to add because the right-hand side is $\\mathbf{0}$ — the zero vector is itself the particular solution. The entire solution set is the null space, unshifted.`,
+When $k = 0$, the only solution is $\\mathbf{x} = \\mathbf{0}$. When $k = 1$, the solutions form a line through the origin in $\\mathbb{R}^n$. When $k = 2$, a plane through the origin. In general, the solution set is a $k$-dimensional subspace passing through the origin.`,
+    afterCases: `There is no particular solution $\\mathbf{x}_p$ to add because the right-hand side is $\\mathbf{0}$ — the zero vector is itself the particular solution. The entire solution set is the null space, unshifted.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1346,9 +1347,8 @@ There is no particular solution $\\mathbf{x}_p$ to add because the right-hand si
     content: `If $\\mathbf{x}_1$ and $\\mathbf{x}_2$ are solutions to $A\\mathbf{x} = \\mathbf{0}$, then any linear combination $c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2$ is also a solution:
 
 @academic[formula_callout:The Superposition Principle
-$$A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = c_1 A\\mathbf{x}_1 + c_2 A\\mathbf{x}_2 = c_1\\mathbf{0} + c_2\\mathbf{0} = \\mathbf{0}$$]@
-
-This is precisely the statement that the solution set is a [subspace](!/linear-algebra/vector-spaces/subspaces) — it is closed under addition and scalar multiplication. [The superposition principle](https://linearalgebranotes.com/systems/system-of-linear-equations#rule-superposition) is the reason the general solution is a linear combination of basis vectors, and it is the reason the null space has the clean structure of a [vector space](!/linear-algebra/vector-spaces) rather than an arbitrary collection of points.
+$$A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = c_1 A\\mathbf{x}_1 + c_2 A\\mathbf{x}_2 = c_1\\mathbf{0} + c_2\\mathbf{0} = \\mathbf{0}$$]@`,
+    afterProof: `This is precisely the statement that the solution set is a [subspace](!/linear-algebra/vector-spaces/subspaces) — it is closed under addition and scalar multiplication. [The superposition principle](https://linearalgebranotes.com/systems/system-of-linear-equations#rule-superposition) is the reason the general solution is a linear combination of basis vectors, and it is the reason the null space has the clean structure of a [vector space](!/linear-algebra/vector-spaces) rather than an arbitrary collection of points.
 
 @academic[rule:Superposition principle
 Superposition holds only for homogeneous systems.]@
@@ -1642,8 +1642,39 @@ $$= (\\lambda - 1)(\\lambda - 3) = 0$$`, `So $\\lambda = 1$ and $\\lambda = 3$. 
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving the superposition principle" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'If $A\\mathbf{x}_1 = \\mathbf{0}$ and $A\\mathbf{x}_2 = \\mathbf{0}$, then $A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = \\mathbf{0}$' },
+    steps: [
+      { math: '$A(c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2) = c_1 A\\mathbf{x}_1 + c_2 A\\mathbf{x}_2$', tag: 'linearity', why: 'Matrix multiplication distributes over sums and lets scalars through' },
+      { math: '$= c_1\\mathbf{0} + c_2\\mathbf{0}$', tag: 'key step', key: true, why: '$\\mathbf{x}_1$ and $\\mathbf{x}_2$ are solutions' },
+      { math: '$= \\mathbf{0}$', tag: 'zero', why: 'Multiples of $\\mathbf{0}$ are $\\mathbf{0}$' },
+    ],
+    conclusion: { text: '$c_1\\mathbf{x}_1 + c_2\\mathbf{x}_2$ is also a solution' },
+  };
+
+  // SpecialCases 2026-11-09: "Solution sets by number of parameters" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$\\mathbf{x} = t_1\\mathbf{v}_1 + t_2\\mathbf{v}_2 + \\cdots + t_k\\mathbf{v}_k$', say: '$k = n - \\text{rank}(A)$, the nullity' },
+    cases: [
+      { when: '$k = 0$', tag: 'a point', rule: 'only $\\mathbf{x} = \\mathbf{0}$',
+        why: 'With no parameters, the only solution is the zero vector.',
+        more: 'The number of parameters is $k = n - \\text{rank}(A)$, so $k = 0$ means $\\text{rank}(A) = n$.' },
+      { when: '$k = 1$', tag: 'a line', rule: '$\\mathbf{x} = t_1\\mathbf{v}_1$',
+        why: 'The solutions form a line through the origin in $\\mathbb{R}^n$.',
+        more: 'The parameter $t_1$ ranges over all real numbers.' },
+      { when: '$k = 2$', tag: 'a plane', rule: '$\\mathbf{x} = t_1\\mathbf{v}_1 + t_2\\mathbf{v}_2$',
+        why: 'The solutions form a plane through the origin.',
+        more: 'In general, the solution set is a $k$-dimensional subspace passing through the origin.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
+    proofStepsData,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1667,7 +1698,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function HomogeneousSystemsPage({ pitfallData,
+export default function HomogeneousSystemsPage({ specialCasesData, proofStepsData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1811,6 +1842,18 @@ $$A\\mathbf{x} = \\mathbf{0}$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'special-cases-homogeneous-solution-set-edge-cases'}
+            id="homogeneous-solution-set-edge-cases"
+            title="Solution sets by number of parameters"
+            source="/linear-algebra/linear-systems/homogeneous"
+            related={false}
+            before={"One row for each small value of $k$, the number of free parameters. Click a row for more on it."}
+            after={"Each value of $k$ gives a flat of that dimension through the origin; $k = 0$ leaves only the origin itself."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterCases,
         ]
     },
     {
@@ -1819,6 +1862,18 @@ $$A\\mathbf{x} = \\mathbf{0}$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-superposition-principle-proof'}
+            id="superposition-principle-proof"
+            title="Proving the superposition principle"
+            source="/linear-algebra/linear-systems/homogeneous"
+            related={false}
+            before={"The callout above as a chain, one equality per line."}
+            after={"The second line is where the right side $\\mathbf{0}$ matters: scaling and adding zeros can only give zero."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
         ]
     },
     {

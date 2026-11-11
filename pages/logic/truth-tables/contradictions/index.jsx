@@ -11,10 +11,11 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
-export default function ContradictionsTruthTablesPage({ pitfallData, keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent, deniedDisjunctionBeforeAfter, negatedImplicationSteps }) {
+export default function ContradictionsTruthTablesPage({ proofStepsData, pitfallData, keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent, deniedDisjunctionBeforeAfter, negatedImplicationSteps }) {
 
     const contradictionOperators = {
         'P ∧ ¬P': { 
@@ -182,7 +183,21 @@ export default function ContradictionsTruthTablesPage({ pitfallData, keyWords, c
         id: '8',
         title: sectionsContent.obj8.title,
         link: sectionsContent.obj8.link,
-        content: [sectionsContent.obj8.content]
+        content: [
+          sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'proof-steps-broken-implication-chain-contradiction-proof'}
+            id="broken-implication-chain-contradiction-proof"
+            title="Following the cascade to a clash"
+            source="/logic/truth-tables/contradictions"
+            related={false}
+            before={"The cascade above, one forced value per line, starting from the letter the formula asserts."}
+            after={"Each arrow pushes the truth one link further, until it reaches the letter the formula denies."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterProof,
+        ]
       },
       {
         id: '9',
@@ -556,9 +571,8 @@ The truth table has four rows, and the result is false in all of them. In the on
 @academic[fact,aside:true,width:35%:Arrow chains skip the truth table
 Formulas built only from arrows like P → Q, bare letters like P and denials like ¬R, a kind of Horn formula, need no 2ⁿ rows. Mark true whatever the arrows force from the bare letters: if a denied letter gets marked, the formula is a contradiction; if not, the marking itself is a satisfying row.]@
 
-The chain forces a cascade: P is true, so Q must be true (by P → Q). Q is true, so R must be true (by Q → R). But the formula also asserts ¬R — R is false. This is irreconcilable.
-
-The truth table has eight rows (three variables), and all evaluate to false. This pattern generalizes: any implication chain P → Q₁ → Q₂ → ··· → Qₙ combined with P ∧ ¬Qₙ is a contradiction, because the chain forces Qₙ to be true while ¬Qₙ asserts it is false.`,
+The chain forces a cascade: P is true, so Q must be true (by P → Q). Q is true, so R must be true (by Q → R). But the formula also asserts ¬R — R is false. This is irreconcilable.`,
+      afterProof: `The truth table has eight rows (three variables), and all evaluate to false. This pattern generalizes: any implication chain P → Q₁ → Q₂ → ··· → Qₙ combined with P ∧ ¬Qₙ is a contradiction, because the chain forces Qₙ to be true while ¬Qₙ asserts it is false.`,
       before: ``,
       after: ``,
       link: ``,
@@ -817,8 +831,22 @@ The formula reduces to (P ∧ ¬Q) ∧ (P ∧ Q) = P ∧ (¬Q ∧ Q) = P ∧ ⊥
     ],
   };
 
+  // ProofSteps 2026-11-08: "Following the cascade to a clash" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Show', text: '(P → Q) ∧ (Q → R) ∧ P ∧ ¬R is false in every row' },
+    steps: [
+      { math: 'P = T', tag: 'asserted', why: 'The formula asserts the start of the chain' },
+      { math: 'Q = T', why: 'P is true, so Q must be true by P → Q' },
+      { math: 'R = T', tag: 'forced', why: 'Q is true, so R must be true by Q → R' },
+      { math: 'R = F', key: true, why: 'The formula also asserts ¬R: R is false' },
+    ],
+    conclusion: { text: 'R cannot be both: the formula is a contradiction' },
+  };
+
   return {
     props: {
+    proofStepsData,
     pitfallData,
       keyWords,
       contradictionExplanations,

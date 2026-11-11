@@ -663,6 +663,7 @@ import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gau
 import matrixProductDiagrams from '@/app/components/linear-algebra/multiplication/matrixProductDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -990,9 +991,8 @@ A system with a nonzero right-hand side, $A\\mathbf{x} = \\mathbf{b}$, is tied t
 
 Existence: a solution exists if and only if $\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}])$. This means $\\mathbf{b}$ lies in the column space of $A$ — appending it as an extra column does not introduce a new independent direction.
 
-Uniqueness: if a solution exists, it is unique if and only if $\\text{rank}(A) = n$. Full column rank means no free variables and a trivial null space, so the particular solution stands alone with no homogeneous component to add freedom.
-
-When $A$ is square ($m = n$) and $\\det(A) \\neq 0$, both conditions hold for every $\\mathbf{b}$: the system always has a unique solution, given by $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires comparing ranks and identifying free variables. The full treatment, including overdetermined and underdetermined systems, is on the [solvability](!/linear-algebra/linear-systems/solvability) page.
+Uniqueness: if a solution exists, it is unique if and only if $\\text{rank}(A) = n$. Full column rank means no free variables and a trivial null space, so the particular solution stands alone with no homogeneous component to add freedom.`,
+    afterCases: `When $A$ is square ($m = n$) and $\\det(A) \\neq 0$, both conditions hold for every $\\mathbf{b}$: the system always has a unique solution, given by $\\mathbf{x} = A^{-1}\\mathbf{b}$. When $A$ is rectangular or singular, the analysis requires comparing ranks and identifying free variables. The full treatment, including overdetermined and underdetermined systems, is on the [solvability](!/linear-algebra/linear-systems/solvability) page.
 
 @academic[pitfall,aside:true,width:35%:Reading a zero determinant as no solution
 Concluding no solution from $\\det(A) = 0$ fails for $x + y = 2$, $2x + 2y = 4$. The determinant is $1 \\cdot 2 - 1 \\cdot 2 = 0$, yet the second equation is twice the first, so every point $(t, 2 - t)$ is a solution.
@@ -1297,8 +1297,23 @@ $$(x, y) = (2, 0) + t(-1, 1) = (2 - t, \\; t)$$`],
     ],
   };
 
+  // SpecialCases 2026-11-08: "Three outcomes from two rank tests" (outcomes), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    path: { label: 'Testing', steps: ['Compare $\\text{rank}(A)$ with $\\text{rank}([A \\mid \\mathbf{b}])$', 'If they are equal, compare $\\text{rank}(A)$ with $n$', 'Which comparison fails?'] },
+    cases: [
+      { tone: 'normal', when: 'Neither', name: 'Unique solution', chain: ['$\\text{rank}(A) = n$', 'no free variables', 'trivial null space'],
+        text: 'The particular solution stands alone, with no homogeneous component to add freedom.', set: '$1$' },
+      { tone: 'good', when: '$\\text{rank}(A) < n$', name: 'Infinitely many solutions', chain: ['ranks equal', 'free variables', 'homogeneous component'],
+        text: 'The system is consistent, but the constraints do not pin down a single point.', set: '$\\infty$' },
+      { tone: 'bad', when: '$\\text{rank}(A) < \\text{rank}([A \\mid \\mathbf{b}])$', name: 'No solution', chain: ['$\\mathbf{b}$ adds a new independent direction', '$\\mathbf{b}$ is not in the column space'],
+        text: 'The existence condition fails: the system is inconsistent.', set: '$0$' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
     pitfallData,
     faqQuestions,
     solutionMethodTree,
@@ -1325,7 +1340,7 @@ return {
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LinearSystemsPage({ pitfallData,faqQuestions, solutionMethodTree, linesGeometryCases,
+export default function LinearSystemsPage({ specialCasesData, pitfallData,faqQuestions, solutionMethodTree, linesGeometryCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1496,6 +1511,18 @@ $$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'special-cases-linear-system-solution-outcomes'}
+            id="linear-system-solution-outcomes"
+            title="Three outcomes from two rank tests"
+            source="/linear-algebra/linear-systems"
+            related={false}
+            before={"The two rank comparisons above, run in order: each answer leads to one of the three outcomes."}
+            after={"Existence is decided by $\\mathbf{b}$ against the columns of $A$; uniqueness by $A$ alone, through its free variables."}
+          >
+            <SpecialCases data={specialCasesData} variant="outcomes" />
+          </DiagramFrame>,
+          sectionsContent.obj9.afterCases,
           `@academic[punchline:Whether a solution exists depends on $\\mathbf{b}$ and the column space; whether it is unique depends on $A$ alone.]@`,
         ]
     },

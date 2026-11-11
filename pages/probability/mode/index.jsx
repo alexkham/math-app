@@ -20,6 +20,7 @@ import continuousPdfDiagrams from '@/app/components/visualizations/probability/c
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
@@ -1072,9 +1073,8 @@ $n = 5, p = 0.5$ gives $(n+1)p = 3$, producing modes at $k = 2$ and $k = 3$.]@
 @academic[example:Example
 $\\lambda = 4$ creates modes at $k = 3$ and $k = 4$.]@
 
-These bimodal situations arise from the discrete nature of the distributions combined with specific parameter values creating exact probability ties.
-
-## Distributions Where Mode ≠ Mean
+These bimodal situations arise from the discrete nature of the distributions combined with specific parameter values creating exact probability ties.`,
+    afterCases: `## Distributions Where Mode ≠ Mean
 
 **Skewed distributions** always separate mode from [mean](!/probability/expected-value).
 
@@ -1613,8 +1613,28 @@ const schemas = {
     ],
   };
 
+  // SpecialCases 2026-11-09: "When the peak is not a single point" (boundary), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$\\operatorname{mode}(X) = \\arg\\max_x f(x)$' },
+    cases: [
+      { when: 'All values equally likely', tag: 'no unique mode', rule: 'Every value is a mode', examples: 'discrete uniform on $\\{1, 2, 3, 4, 5\\}$: all five; continuous uniform on $[0, 10]$: every point',
+        why: 'No single peak exists: probability spreads completely flat.' },
+      { when: '$X = c$ with probability $1$', tag: 'degenerate', rule: 'Mode $= c$', examples: 'a constant distribution',
+        why: 'Trivially, though this hardly constitutes a meaningful peak.' },
+      { when: 'Peak at the edge of the support', tag: 'boundary mode', tone: 'warn', rule: 'Exponential: mode $= 0$', examples: 'Beta with $\\alpha < 1$ or $\\beta < 1$: modes at $0$ or $1$; Weibull with $k < 1$: mode $= 0$',
+        why: 'The PDF decreases monotonically from this boundary maximum.',
+        more: 'When both Beta parameters fall below $1$, the distribution becomes U-shaped with modes at both boundaries (bimodal). Boundary modes indicate strong concentration near the support edge: probability piles up against the constraint.' },
+      { when: 'Binomial, $(n+1)p$ an integer', tag: 'two modes', tone: 'warn', rule: 'Two adjacent values share the maximum probability', examples: '$n = 5, p = 0.5$: modes at $k = 2$ and $k = 3$',
+        why: 'The discrete nature of the distribution, combined with this parameter value, creates an exact probability tie.' },
+      { when: 'Poisson, $\\lambda$ an integer', tag: 'two modes', tone: 'warn', rule: 'Both $\\lambda - 1$ and $\\lambda$ are modes', examples: '$\\lambda = 4$: modes at $k = 3$ and $k = 4$',
+        why: 'The discrete nature of the distribution, combined with this parameter value, creates an exact probability tie.' },
+    ],
+  };
+
    return {
       props:{
+    specialCasesData,
     formulaSummaryData,
     demoUnits,
     conceptIntroFigures,
@@ -1640,7 +1660,7 @@ const schemas = {
     }
    }
 
-export default function ModePage({ formulaSummaryData,
+export default function ModePage({ specialCasesData, formulaSummaryData,
   seoData,
   sectionsContent,
   introContent,
@@ -1844,6 +1864,18 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'special-cases-mode-peak-edge-cases'}
+            id="mode-peak-edge-cases"
+            title="When the peak is not a single point"
+            source="/probability/mode"
+            related={false}
+            before={"One row per kind of distribution where the mode is not one peak inside the support; click the boundary row for more."}
+            after={"In every row the mode is still the value where the probability peaks; what changes is how many values reach the peak and where they sit."}
+          >
+            <SpecialCases data={specialCasesData} variant="boundary" />
+          </DiagramFrame>,
+          sectionsContent.obj10.afterCases,
         ]
     },
     {

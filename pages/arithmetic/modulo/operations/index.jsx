@@ -843,6 +843,7 @@ import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieW
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
@@ -1303,9 +1304,8 @@ obj12: {
 @academic[fact,aside:true,width:35%:One test for 7, 11 and 13
 Because $1001 = 7 \\cdot 11 \\cdot 13$, $1000 \\equiv -1$ modulo all three, so the alternating sum of three-digit blocks tests $7$, $11$ and $13$ at once. For $1{,}234{,}567$ it is $567 - 234 + 1 = 334$, which none of them divides, so neither does the number.]@
 
-The digit-sum rule for $9$ works because $10 \\equiv 1 \\pmod{9}$. Every [power](!/algebra/powers) of $10$ is congruent to $1$: $10^0 = 1$, $10^1 \\equiv 1$, $10^2 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{9}$. The place value drops away, and only the digit itself matters. So the entire number is congruent to the sum of its digits modulo $9$.
-
-The rule for $3$ follows identically: $10 \\equiv 1 \\pmod{3}$, so the digit sum also determines divisibility by $3$.
+The digit-sum rule for $9$ works because $10 \\equiv 1 \\pmod{9}$. Every [power](!/algebra/powers) of $10$ is congruent to $1$: $10^0 = 1$, $10^1 \\equiv 1$, $10^2 \\equiv 1$, and so on. A digit $d$ in the $k$th place contributes $d \\cdot 10^k \\equiv d \\cdot 1 = d \\pmod{9}$. The place value drops away, and only the digit itself matters. So the entire number is congruent to the sum of its digits modulo $9$.`,
+  afterProof: `The rule for $3$ follows identically: $10 \\equiv 1 \\pmod{3}$, so the digit sum also determines divisibility by $3$.
 
 The alternating-sum rule for $11$ works because $10 \\equiv -1 \\pmod{11}$. Powers of $10$ alternate: $10^0 = 1$, $10^1 \\equiv -1$, $10^2 \\equiv 1$, $10^3 \\equiv -1$. Each digit's contribution alternates in sign depending on its position, producing the alternating sum.
 
@@ -1583,8 +1583,22 @@ const schemas = {
     ],
   };
 
+  // ProofSteps 2026-11-08: "Why the digit-sum rule for 9 works" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: 'A number is congruent to the sum of its digits modulo $9$' },
+    steps: [
+      { math: '$10 \\equiv 1 \\pmod{9}$', tag: 'base', why: 'The fact the digit-sum rule for $9$ rests on' },
+      { math: '$10^0 = 1$, $10^1 \\equiv 1$, $10^2 \\equiv 1$, and so on', tag: 'powers', why: 'Every power of $10$ is congruent to $1$' },
+      { math: '$d \\cdot 10^k \\equiv d \\cdot 1$', tag: 'one digit', why: 'A digit $d$ in the $k$th place, with its place value' },
+      { math: '$= d \\pmod{9}$', tag: 'key step', key: true, why: 'The place value drops away, and only the digit itself matters' },
+    ],
+    conclusion: { text: 'The entire number is congruent to the sum of its digits modulo $9$' },
+  };
+
 return {
   props:{
+    proofStepsData,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1609,7 +1623,7 @@ return {
 
 
 
-export default function OperationsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function OperationsPage({ proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1784,6 +1798,18 @@ export default function OperationsPage({ formulaSummaryData, pitfallData,seoData
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'proof-steps-digit-sum-rule-9-proof'}
+            id="digit-sum-rule-9-proof"
+            title="Why the digit-sum rule for 9 works"
+            source="/arithmetic/modulo/operations"
+            related={false}
+            before={"The argument for $9$ as a chain of congruences, each with its reason."}
+            after={"The last line is the decisive one: once every power of $10$ counts as $1$, the place value of each digit drops away."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj12.afterProof,
         ]
     },
     {

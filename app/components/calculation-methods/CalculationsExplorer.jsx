@@ -2,6 +2,7 @@
 
 import React, { useState, useMemo, useEffect } from "react";
 import CalculationCard from "./CalculationsCard";
+import CalculationsExplorerClean from "./CalculationsExplorerClean";
 
 const ACCENT = "#4a6cf7";
 const ACCENT_LIGHT = "#eef1fd";
@@ -304,7 +305,7 @@ function EmptyState() {
 // MAIN
 // ═══════════════════════════════════════════════════════════════════
 
-export default function CalculationsExplorer({ data = {} }) {
+function ClassicExplorer({ data = {} }) {
   const {
     methods = [],
     categories,
@@ -527,4 +528,16 @@ export default function CalculationsExplorer({ data = {} }) {
       </div>
     </>
   );
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// VARIANT SWITCH
+// data.variant: "classic" (default) | "clean"
+// ═══════════════════════════════════════════════════════════════════
+
+export default function CalculationsExplorer(props) {
+  const { data = {} } = props;
+  const { variant = "classic" } = data;
+  if (variant === "clean") return <CalculationsExplorerClean data={data} />;
+  return <ClassicExplorer data={data} />;
 }

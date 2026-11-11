@@ -815,6 +815,8 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/matrix-composition/matrixCompositionDiagrams'
@@ -1253,9 +1255,8 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-for all vectors $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c, d \\in \\mathbb{R}$. Setting $c = d = 1$ recovers additivity. Setting $c = d = 0$ gives $T(\\mathbf{0}) = \\mathbf{0}$, and then setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity. So the combined condition implies both individual conditions, and the converse is straightforward.
-
-The one-step test extends to arbitrary linear combinations: if $T$ is linear, then
+for all vectors $\\mathbf{u}, \\mathbf{v} \\in V$ and all scalars $c, d \\in \\mathbb{R}$. Setting $c = d = 1$ recovers additivity. Setting $c = d = 0$ gives $T(\\mathbf{0}) = \\mathbf{0}$, and then setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity. So the combined condition implies both individual conditions, and the converse is straightforward.`,
+    afterCases: `The one-step test extends to arbitrary linear combinations: if $T$ is linear, then
 
 @academic[formula_callout:The One-Step Test
 $$T(c_1\\mathbf{v}_1 + c_2\\mathbf{v}_2 + \\cdots + c_k\\mathbf{v}_k) = c_1T(\\mathbf{v}_1) + c_2T(\\mathbf{v}_2) + \\cdots + c_kT(\\mathbf{v}_k)$$]@
@@ -1287,9 +1288,8 @@ $$= c(2u_1 - u_2, \\; u_1 + 3u_3) + d(2v_1 - v_2, \\; v_1 + 3v_3) = cT(\\mathbf{
 
 @academic[pitfall,aside:true,width:35%:Proving linearity with numbers
 Testing $T(x, y) = xy$ on the pair $(1, 0)$, $(2, 0)$ gives $T(3, 0) = 0 = T(1, 0) + T(2, 0)$, which looks like additivity. The pair $(1, 0)$, $(0, 1)$ gives $T(1, 1) = 1 \\neq 0$, so $T$ is not linear.
-[Read more](!#9)]@
-
-Linearity holds. The key observation is that every component of $T$ is a linear expression in the input coordinates — no products, powers, or constant terms appear.
+[Read more](!#9)]@`,
+    afterProof: `Linearity holds. The key observation is that every component of $T$ is a linear expression in the input coordinates — no products, powers, or constant terms appear.
 
 Every line of the computation holds for all choices of $\\mathbf{u}$, $\\mathbf{v}$, $c$ and $d$ at once, because the letters stand for arbitrary values and nothing was assumed about them. That generality is what turns the calculation into a proof: one chain of equalities covers infinitely many cases.`,
     before: ``,
@@ -1331,9 +1331,8 @@ $$T(\\mathbf{0}_V) = \\mathbf{0}_W$$
 @academic[formulas_link:Browse all linear algebra formulas
 /linear-algebra/formulas]@
 
-Proof: $T(\\mathbf{0}) = T(0 \\cdot \\mathbf{v}) = 0 \\cdot T(\\mathbf{v}) = \\mathbf{0}$.
-
-$T(-\\mathbf{v}) = -T(\\mathbf{v})$: negation is preserved. Proof: $T(-\\mathbf{v}) = T((-1)\\mathbf{v}) = (-1)T(\\mathbf{v}) = -T(\\mathbf{v})$.
+Proof: $T(\\mathbf{0}) = T(0 \\cdot \\mathbf{v}) = 0 \\cdot T(\\mathbf{v}) = \\mathbf{0}$.`,
+    afterProof: `$T(-\\mathbf{v}) = -T(\\mathbf{v})$: negation is preserved. Proof: $T(-\\mathbf{v}) = T((-1)\\mathbf{v}) = (-1)T(\\mathbf{v}) = -T(\\mathbf{v})$.
 
 $T(\\mathbf{u} - \\mathbf{v}) = T(\\mathbf{u}) - T(\\mathbf{v})$: subtraction is preserved. Follows from combining additivity with the negation result.
 
@@ -1360,9 +1359,8 @@ The linearity check:
 @academic[formula_callout:Composition
 $$(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = S(T(c\\mathbf{u} + d\\mathbf{v})) = S(cT(\\mathbf{u}) + dT(\\mathbf{v})) = cS(T(\\mathbf{u})) + dS(T(\\mathbf{v}))$$]@
 
-The first equality applies $T$'s linearity inside $S$; the second applies $S$'s linearity.
-
-[Composition is associative](https://linearalgebranotes.com/maps/composition-of-linear-maps#rule-associative): $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. It is not commutative: $S \\circ T$ and $T \\circ S$ are generally different (and may not even have compatible domains).
+The first equality applies $T$'s linearity inside $S$; the second applies $S$'s linearity.`,
+    afterProof: `[Composition is associative](https://linearalgebranotes.com/maps/composition-of-linear-maps#rule-associative): $(R \\circ S) \\circ T = R \\circ (S \\circ T)$. It is not commutative: $S \\circ T$ and $T \\circ S$ are generally different (and may not even have compatible domains).
 
 @academic[pitfall,aside:true,width:35%:Multiplying in the order of application
 Writing $[T][S]$ because $T$ acts first fails for $T$ the projection $\\begin{pmatrix} 1 & 0 \\\\ 0 & 0 \\end{pmatrix}$ and $S$ the quarter-turn $\\begin{pmatrix} 0 & -1 \\\\ 1 & 0 \\end{pmatrix}$: $[T][S]\\mathbf{e}_1 = (0, 0)$, but $S(T(\\mathbf{e}_1)) = S(1, 0) = (0, 1)$. The matrix is $[S][T] = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$.
@@ -1403,9 +1401,8 @@ Counting of this kind needs the dimensions to be finite numbers. The space of al
     title: `Sums and Scalar Multiples of Transformations`,
     content: `If $S, T: V \\to W$ are both linear, new transformations can be built from them.
 
-The sum $(S + T)(\\mathbf{v}) = S(\\mathbf{v}) + T(\\mathbf{v})$ is linear: $(S + T)(c\\mathbf{u} + d\\mathbf{v}) = S(c\\mathbf{u} + d\\mathbf{v}) + T(c\\mathbf{u} + d\\mathbf{v}) = cS(\\mathbf{u}) + dS(\\mathbf{v}) + cT(\\mathbf{u}) + dT(\\mathbf{v}) = c(S + T)(\\mathbf{u}) + d(S + T)(\\mathbf{v})$.
-
-The scalar multiple $(cT)(\\mathbf{v}) = cT(\\mathbf{v})$ is linear by a similar argument.
+The sum $(S + T)(\\mathbf{v}) = S(\\mathbf{v}) + T(\\mathbf{v})$ is linear: $(S + T)(c\\mathbf{u} + d\\mathbf{v}) = S(c\\mathbf{u} + d\\mathbf{v}) + T(c\\mathbf{u} + d\\mathbf{v}) = cS(\\mathbf{u}) + dS(\\mathbf{v}) + cT(\\mathbf{u}) + dT(\\mathbf{v}) = c(S + T)(\\mathbf{u}) + d(S + T)(\\mathbf{v})$.`,
+    afterProof: `The scalar multiple $(cT)(\\mathbf{v}) = cT(\\mathbf{v})$ is linear by a similar argument.
 
 These operations give the set of all linear transformations from $V$ to $W$ the structure of a [vector space](!/linear-algebra/vector-spaces), denoted $\\mathcal{L}(V, W)$. The zero element is the zero transformation, and the additive inverse of $T$ is $(-1)T$. When $V$ and $W$ are finite-dimensional, [this space has dimension](https://linearalgebranotes.com/maps/linear-transformation#rule-space-of-maps) $\\dim(V) \\cdot \\dim(W)$, matching the number of entries in the representing matrix.`,
     before: ``,
@@ -1622,8 +1619,76 @@ $$[T][S] = \\begin{pmatrix} 0 & -1 \\\\ 0 & 0 \\end{pmatrix}$$`, `Which sends $\
     ],
   };
 
+  // ProofSteps 2026-11-08: "Proving a map is linear" (chain), from the page's own formulas.
+  const proofStepsData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$T(x, y, z) = (2x - y, x + 3z)$ satisfies $T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$' },
+    steps: [
+      { math: '$T(c\\mathbf{u} + d\\mathbf{v}) = T(cu_1 + dv_1, \\; cu_2 + dv_2, \\; cu_3 + dv_3)$', tag: 'coordinates', why: 'Write $c\\mathbf{u} + d\\mathbf{v}$ in coordinates' },
+      { math: '$= (2(cu_1 + dv_1) - (cu_2 + dv_2), \\; (cu_1 + dv_1) + 3(cu_3 + dv_3))$', tag: 'apply T', why: 'Use the formula that defines $T$' },
+      { math: '$= (c(2u_1 - u_2) + d(2v_1 - v_2), \\; c(u_1 + 3u_3) + d(v_1 + 3v_3))$', tag: 'key step', key: true, why: 'Collect the $c$ terms and the $d$ terms' },
+      { math: '$= c(2u_1 - u_2, \\; u_1 + 3u_3) + d(2v_1 - v_2, \\; v_1 + 3v_3)$', tag: 'split', why: 'Split into two vectors' },
+      { math: '$= cT(\\mathbf{u}) + dT(\\mathbf{v})$', tag: 'recognise', why: 'Each vector is $T$ applied to $\\mathbf{u}$ or to $\\mathbf{v}$' },
+    ],
+    conclusion: { text: '$T$ is linear' },
+  };
+
+  // ProofSteps 2026-11-08: "Linear maps send zero to zero" (chain), from the page's own formulas.
+  const proofStepsData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$T(\\mathbf{0}_V) = \\mathbf{0}_W$' },
+    steps: [
+      { math: '$T(\\mathbf{0}) = T(0 \\cdot \\mathbf{v})$', tag: 'rewrite', why: 'The zero vector is $0$ times any vector' },
+      { math: '$= 0 \\cdot T(\\mathbf{v})$', tag: 'key step', key: true, why: 'Homogeneity: the scalar comes out of $T$' },
+      { math: '$= \\mathbf{0}$', tag: 'zero', why: '$0$ times any vector is the zero vector' },
+    ],
+  };
+
+  // ProofSteps 2026-11-08: "Composition of linear maps is linear" (chain), from the page's own formulas.
+  const proofStepsData3 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = cS(T(\\mathbf{u})) + dS(T(\\mathbf{v}))$' },
+    steps: [
+      { math: '$(S \\circ T)(c\\mathbf{u} + d\\mathbf{v}) = S(T(c\\mathbf{u} + d\\mathbf{v}))$', tag: 'definition', why: 'Apply $T$ first, then $S$' },
+      { math: '$= S(cT(\\mathbf{u}) + dT(\\mathbf{v}))$', tag: 'T linear', why: "Apply $T$'s linearity inside $S$" },
+      { math: '$= cS(T(\\mathbf{u})) + dS(T(\\mathbf{v}))$', tag: 'key step', key: true, why: "Apply $S$'s linearity" },
+    ],
+    conclusion: { text: '$S \\circ T$ is linear' },
+  };
+
+  // ProofSteps 2026-11-08: "The sum of two linear maps is linear" (chain), from the page's own formulas.
+  const proofStepsData4 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    goal: { label: 'Prove', text: '$(S + T)(c\\mathbf{u} + d\\mathbf{v}) = c(S + T)(\\mathbf{u}) + d(S + T)(\\mathbf{v})$' },
+    steps: [
+      { math: '$(S + T)(c\\mathbf{u} + d\\mathbf{v}) = S(c\\mathbf{u} + d\\mathbf{v}) + T(c\\mathbf{u} + d\\mathbf{v})$', tag: 'definition', why: 'The sum is defined by $(S + T)(\\mathbf{v}) = S(\\mathbf{v}) + T(\\mathbf{v})$' },
+      { math: '$= cS(\\mathbf{u}) + dS(\\mathbf{v}) + cT(\\mathbf{u}) + dT(\\mathbf{v})$', tag: 'key step', key: true, why: 'Both $S$ and $T$ are linear' },
+      { math: '$= c(S + T)(\\mathbf{u}) + d(S + T)(\\mathbf{v})$', tag: 'regroup', why: 'Collect the $c$ terms and the $d$ terms' },
+    ],
+    conclusion: { text: '$S + T$ is linear' },
+  };
+
+  // SpecialCases 2026-11-09: "Both conditions from one check" (substitute), from the page's own text.
+  const specialCasesData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    general: { label: 'General', text: '$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$' },
+    cases: [
+      { when: '$c = d = 1$', result: '$T(\\mathbf{u} + \\mathbf{v}) = T(\\mathbf{u}) + T(\\mathbf{v})$', name: 'Additivity',
+        text: 'Setting $c = d = 1$ recovers additivity.' },
+      { when: '$c = d = 0$', result: '$T(\\mathbf{0}) = \\mathbf{0}$', name: 'Zero to zero',
+        text: 'Setting $c = d = 0$ gives $T(\\mathbf{0}) = \\mathbf{0}$, the step needed before homogeneity.' },
+      { when: '$\\mathbf{v} = \\mathbf{0}$', result: '$T(c\\mathbf{u}) = cT(\\mathbf{u})$', name: 'Homogeneity',
+        text: 'With $T(\\mathbf{0}) = \\mathbf{0}$ known, setting $\\mathbf{v} = \\mathbf{0}$ recovers homogeneity.' },
+    ],
+  };
+
 return {
   props:{
+    specialCasesData,
+    proofStepsData4,
+    proofStepsData3,
+    proofStepsData2,
+    proofStepsData,
     pitfallData,
       linearityScope,
     demoUnits,
@@ -1648,7 +1713,7 @@ return {
 
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function TransformationPropertiesPage({ pitfallData,linearityScope, seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function TransformationPropertiesPage({ specialCasesData, proofStepsData4, proofStepsData3, proofStepsData2, proofStepsData, pitfallData,linearityScope, seoData, sectionsContent, introContent, obj4Table, obj5Table, combinationProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1765,6 +1830,18 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'special-cases-one-step-test-special-cases'}
+            id="one-step-test-special-cases"
+            title="Both conditions from one check"
+            source="/linear-algebra/transformations/properties"
+            related={false}
+            before={"Each card makes one substitution into the combined condition and shows which part of linearity it recovers."}
+            after={"Additivity and homogeneity are both special cases of the single condition, so checking it checks both."}
+          >
+            <SpecialCases data={specialCasesData} variant="substitute" />
+          </DiagramFrame>,
+          sectionsContent.obj2.afterCases,
         ]
     },
     {
@@ -1773,6 +1850,18 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'proof-steps-linearity-worked-example-proof'}
+            id="linearity-worked-example-proof"
+            title="Proving a map is linear"
+            source="/linear-algebra/transformations/properties"
+            related={false}
+            before={"The computation above, one equality per line, with what each line does."}
+            after={"The third line is the turning point: once the $c$ terms and the $d$ terms are separated, the two images can be read off."}
+          >
+            <ProofSteps data={proofStepsData} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj3.afterProof,
         ]
     },
     {
@@ -1792,6 +1881,18 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'proof-steps-linear-map-zero-vector-proof'}
+            id="linear-map-zero-vector-proof"
+            title="Linear maps send zero to zero"
+            source="/linear-algebra/transformations/properties"
+            related={false}
+            before={"The one-line proof above, split at each equals sign."}
+            after={"Only homogeneity is used, so a map with $T(\\mathbf{0}) \\neq \\mathbf{0}$ is ruled out as linear at once."}
+          >
+            <ProofSteps data={proofStepsData2} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj5.afterProof,
           <div key={'obj5-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: obj5Table }} />,
         ]
@@ -1802,6 +1903,18 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'proof-steps-linear-map-composition-proof'}
+            id="linear-map-composition-proof"
+            title="Composition of linear maps is linear"
+            source="/linear-algebra/transformations/properties"
+            related={false}
+            before={"The linearity check above, one equality per line."}
+            after={"The order of the steps follows the order of the maps: $T$ acts first, so its linearity is used first."}
+          >
+            <ProofSteps data={proofStepsData3} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj6.afterProof,
                   <div key={'unit-composition'} dangerouslySetInnerHTML={{ __html: demoUnits.composition }} />,
           `Linearity survives composition, which is what allows complicated maps to be assembled from simple ones without leaving the category.`,
         ]
@@ -1820,6 +1933,18 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'proof-steps-linear-map-sum-proof'}
+            id="linear-map-sum-proof"
+            title="The sum of two linear maps is linear"
+            source="/linear-algebra/transformations/properties"
+            related={false}
+            before={"The chain above, one equality per line."}
+            after={"The definition of the sum is used twice, once to split $S + T$ apart and once to put it back together."}
+          >
+            <ProofSteps data={proofStepsData4} variant="chain" />
+          </DiagramFrame>,
+          sectionsContent.obj8.afterProof,
           `@academic[punchline:Linear maps between two spaces are themselves vectors, so the whole theory of vector spaces applies to them too.]@`,
         ]
     },
