@@ -842,6 +842,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj16 summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -868,8 +869,55 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_poissonRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+    built: { label: 'built from', color: '#2563EB', dash: '6 4' },
+    link: { label: 'same process', color: '#64748b', dash: '' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 150,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    bands: [{ from: 0, to: 2, label: 'Discrete', color: '#f1f5f9' }, { from: 2, to: 3, label: 'Continuous', color: '#eff6ff' }],
+    nodes: [
+      { id: 'bin', name: 'Binomial', x: 0, y: 0.3, href: '/probability/distributions/discrete/binomial', text: 'The number of successes in $n$ independent trials.' },
+      { id: 'nb', name: 'Negative binomial', x: 0, y: 1.7, href: '/probability/distributions/discrete/negative-binomial', text: 'A count whose variance is larger than its mean.' },
+      { id: 'poi', name: 'Poisson', x: 1, y: 1, text: 'The number of events in a window, at an average rate $\\lambda$. Independent Poisson counts add up to another Poisson count.' },
+      { id: 'exp', name: 'Exponential', x: 2, y: 0.2, href: '/probability/distributions/continuous/exponential', text: 'The wait for the first event, and the gap between one event and the next.' },
+      { id: 'gam', name: 'Gamma', x: 2, y: 1, text: 'The wait for the $k$-th event.' },
+      { id: 'norm', name: 'Normal', x: 2, y: 1.8, href: '/probability/distributions/continuous/normal', text: 'The bell curve with mean $\\lambda$ and variance $\\lambda$.' },
+    ],
+    edges: [
+      { from: 'bin', to: 'poi', kind: 'limit', label: '$np = \\lambda$', text: 'as $n$ grows and $p$ shrinks with $np = \\lambda$ fixed, the binomial approaches the Poisson' },
+      { from: 'poi', to: 'nb', kind: 'built', label: 'rate varies', text: 'a Poisson count whose rate itself follows a gamma distribution is negative binomial' },
+      { from: 'poi', to: 'exp', kind: 'link', label: 'first event', text: 'the first event comes after time $t$ exactly when the window $[0, t]$ holds no event' },
+      { from: 'poi', to: 'gam', kind: 'link', label: '$k$-th event', text: 'the $k$-th event comes after time $t$ exactly when the window $[0, t]$ holds fewer than $k$ events' },
+      { from: 'poi', to: 'norm', kind: 'limit', label: '$\\lambda$ large', text: '$\\operatorname{Pois}(\\lambda)$ is close to $N(\\lambda,\\ \\lambda)$ when $\\lambda$ is about $20$ or more' },
+    ],
+  },
+};
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a Poisson probability", href: "/probability/distributions/methods/poisson-probability", desc: "Events at an average rate: scale $\\lambda$ to the interval asked about, then use $e^{-\\lambda}\\lambda^k / k!$ or its complement.", level: "composite", here: "#4" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Find an exponential probability", href: "/probability/distributions/methods/exponential-probability", desc: "Waiting times at a constant rate: get $\\lambda$ from the mean, then use $1 - e^{-\\lambda x}$ or the tail $e^{-\\lambda x}$.", level: "composite" },
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1406,7 +1454,45 @@ $$X \\sim \\text{Poisson}(\\lambda_X),\\; Y \\sim \\text{Poisson}(\\lambda_Y) \\
     },
     obj14:{
       title:`Related Distributions`,
-      content:``,
+      content:`
+The Poisson distribution counts events that arrive at a steady average rate. Its relatives are the binomial it comes from, the waiting times between its events, the normal it approaches, and the distributions made by adding, splitting or mixing Poisson counts.
+
+### Binomial: the limit for rare events
+
+Take a [binomial](!/probability/distributions/discrete/binomial) count, let the number of trials $n$ grow and the chance $p$ shrink so that the mean $np$ stays at $\\lambda$. The probabilities approach the Poisson ones:
+
+@academic[formula_callout:Related Distributions
+$$\\binom{n}{k} p^k (1-p)^{n-k} \\to \\frac{\\lambda^k e^{-\\lambda}}{k!} \\quad \\text{as } n \\to \\infty \\text{ with } np = \\lambda$$]@
+
+A text of $2000$ characters, each mistyped with probability $0.001$, has no typo with probability $0.999^{2000} \\approx 0.1352$. The Poisson value with $\\lambda = 2$ is $e^{-2} \\approx 0.1353$.
+
+### Exponential and gamma: the waits between events
+
+Let the events arrive at rate $\\lambda$ per unit of time, so the number $N_t$ of events in a window of length $t$ is Poisson with mean $\\lambda t$. The $k$-th event comes after time $t$ exactly when the window holds fewer than $k$ events, so the waiting time $T_k$ satisfies
+
+@academic[formula_callout:Related Distributions
+$$P(T_k > t) = P(N_t \\leq k - 1) = \\sum_{i=0}^{k-1} \\frac{(\\lambda t)^i e^{-\\lambda t}}{i!}$$]@
+
+For $k = 1$ this is $P(T_1 > t) = e^{-\\lambda t}$, the [exponential](!/probability/distributions/continuous/exponential) distribution: the wait for the first event, and the gap between any two events in a row. For larger $k$ the wait follows the gamma distribution with shape $k$ and rate $\\lambda$.
+
+### Normal: a large rate
+
+As $\\lambda$ grows the Poisson bar chart becomes a bell, close to the [normal](!/probability/distributions/continuous/normal) distribution with the same mean and variance:
+
+@academic[formula_callout:Related Distributions
+$$\\operatorname{Pois}(\\lambda) \\approx N(\\lambda,\\ \\lambda)$$]@
+
+The fit is good when $\\lambda$ is about $20$ or more. With $\\lambda = 100$ the standard deviation is $10$, so the count lands between $80$ and $120$ about $95\\%$ of the time.
+
+### Adding, splitting and mixing counts
+
+• **Adding:** if $X \\sim \\operatorname{Pois}(\\lambda_1)$ and $Y \\sim \\operatorname{Pois}(\\lambda_2)$ are independent, then $X + Y \\sim \\operatorname{Pois}(\\lambda_1 + \\lambda_2)$.
+• **Splitting:** keep each event with probability $p$, independently of the others, and the kept events are Poisson with mean $p\\lambda$.
+• **Fixing the total:** given that $X + Y = n$, the share that came from $X$ is binomial with $n$ trials and $p = \\frac{\\lambda_1}{\\lambda_1 + \\lambda_2}$.
+• **A rate that varies:** if the rate is not fixed but follows a gamma distribution, the count is [negative binomial](!/probability/distributions/discrete/negative-binomial), with a variance larger than its mean.
+
+Of these, the binomial and exponential links matter most in practice: the first says when a Poisson model is justified, the second ties the count of events to the time between them.
+`,
       before:``,
       after:``,
       link:'',
@@ -1993,6 +2079,7 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `The CDF adds these bars from the left.`,
           `@academic[punchline:Each Poisson probability is a term of the series for $e^{\\lambda}$, scaled by $e^{-\\lambda}$ so all terms sum to one.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a Poisson probability](!/probability/distributions/methods/poisson-probability) →@`,
         ]
     },
     {
@@ -2082,6 +2169,23 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
         ]
     },
     {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'concept-map-poisson-related-distributions'}
+            id="poisson-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/discrete/poisson"
+            related={false}
+          >
+            <ConceptMap data={cm_poissonRelated} variant="graph" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'16',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
@@ -2114,6 +2218,14 @@ In 1898 Ladislaus Bortkiewicz counted Prussian soldiers killed by horse kicks: 1
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -558,6 +558,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (outcomes aggregation, mistakes aggregation, summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -576,11 +577,49 @@ import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/di
 import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/coinSampleSpaceDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_sampleSpaceRequirements = {
+  center: { name: 'Sample space $\\Omega$', sub: 'the basic requirements' },
+  options: { bullets: false },
+  quadrants: [
+    { title: 'Includes every outcome', items: [ 'Every outcome that can occur in the scenario is in the set.' ] },
+    { title: 'Excludes impossible outcomes', items: [ 'Outcomes that cannot occur are left out.' ] },
+    { title: 'Mutually exclusive', items: [ 'Only one outcome happens in a single trial.' ] },
+    { title: 'Collectively exhaustive', items: [ 'Something from the set must occur.' ] }
+  ],
+  note: { label: 'Checked together', text: 'Every result of the experiment must match exactly one listed outcome. Events are then formed by selecting subsets of the sample space: $A \\subseteq \\Omega$.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Sample Spaces at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Scenario","features":[{"id":"c1","name":"Sample space &Omega;","type":"text"},{"id":"c2","name":"Example outcome &omega;","type":"text"},{"id":"c3","name":"Example event (subset of &Omega;)","type":"text"}],"items":[{"id":"r1","name":"Roll a fair die","values":{"c1":"{1, 2, 3, 4, 5, 6}","c2":"4","c3":"{2, 4, 6} — &ldquo;even result&rdquo;"}},{"id":"r2","name":"Toss two coins","values":{"c1":"{HH, HT, TH, TT}","c2":"HT","c3":"{HH, HT, TH} — &ldquo;at least one head&rdquo;"}},{"id":"r3","name":"Draw a card from a deck","values":{"c1":"52 individual cards","c2":"&ldquo;Ace of Spades&rdquo;","c3":"the 13 hearts — &ldquo;draw a heart&rdquo;"}},{"id":"r4","name":"Trials until first success","values":{"c1":"{1, 2, 3, …}","c2":"4","c3":"{1, 2, 3} — &ldquo;succeed within 3 trials&rdquo;"}},{"id":"r5","name":"Measure a person's height","values":{"c1":"[0, 3] meters","c2":"1.75","c3":"[1.6, 1.8] — &ldquo;between 1.6 and 1.8 m&rdquo;"}},{"id":"r6","name":"Time until an event","values":{"c1":"[0, ∞)","c2":"t = 3.7","c3":"[0, 5] — &ldquo;within 5 minutes&rdquo;"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table outcomesTable ("Listing and Representing Outcomes"); converted from the table's own cells.
+const fm_outcomesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Format","features":[{"id":"c1","name":"When to use","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Explicit list","values":{"c1":"small finite sample spaces","c2":"&Omega; = {1, 2, 3, 4, 5, 6}"}},{"id":"r2","name":"Ordered pairs","values":{"c1":"two-step experiments where order matters","c2":"&Omega; = {(H, H), (H, T), (T, H), (T, T)}"}},{"id":"r3","name":"Sequences / tuples","values":{"c1":"three or more components per outcome","c2":"&Omega; = {(x₁, x₂, x₃) : xᵢ ∈ {1, …, 6}}"}},{"id":"r4","name":"Intervals","values":{"c1":"continuous outcomes on the real line","c2":"&Omega; = [0, 1]"}},{"id":"r5","name":"Set-builder notation","values":{"c1":"outcomes defined by a rule or condition","c2":"&Omega; = {x : 0 ≤ x ≤ 10}"}},{"id":"r6","name":"Cartesian product","values":{"c1":"combining two or more simpler sample spaces","c2":"&Omega; = A × B"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "List a sample space", href: "/probability/methods/sample-space", desc: "Write down every possible outcome of an experiment with a list, a grid or a tree, then count it.", level: "composite", here: "#outcomes" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Solve a probability problem with a tree diagram", href: "/probability/methods/tree-diagrams", desc: "One level per stage: label the branches, multiply along each path, add the paths you want.", level: "composite" },
+      { skill: "Find a probability by counting outcomes", href: "/probability/methods/classical-probability", desc: "Equally likely outcomes: count the favorable ones, count all of them, divide.", level: "composite" },
+      { skill: "Solve dice probability problems", href: "/probability/methods/dice-problems", desc: "Sums, doubles and \"at least one six\": list the ordered outcomes and count.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1413,8 +1452,16 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
         link:'',
         content:[
           sectionsContent.outcomes.content,
-          <div key={'outcomes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: outcomesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-sample-space-listing-representing-outcomes-matrix'}
+            id="sample-space-listing-representing-outcomes-matrix"
+            title="Listing and Representing Outcomes"
+            source="/probability/sample-space"
+            related={false}
+          >
+            <FeatureMatrix data={fm_outcomesTable} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to list a sample space](!/probability/methods/sample-space) →@`,
         ]
     },
     {
@@ -1423,6 +1470,15 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
         link:'',
         content:[
           sectionsContent.properties.content,
+          <DiagramFrame
+            key={'four-sides-sample-space-requirements'}
+            id="sample-space-requirements"
+            title="Properties of a Sample Space"
+            source="/probability/sample-space"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_sampleSpaceRequirements} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1480,8 +1536,23 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
         link:'',
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-sample-space-sample-spaces-at-matrix'}
+            id="sample-space-sample-spaces-at-matrix"
+            title="Sample Spaces at a Glance"
+            source="/probability/sample-space"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

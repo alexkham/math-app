@@ -686,6 +686,8 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 2 tables (obj3 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -702,8 +704,29 @@ import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fr
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Simplifying — Method 2: LCD"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Procedure","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Best when","type":"text"}],"items":[{"id":"r1","name":"Division","values":{"c1":"rewrite the main fraction bar as ÷, then multiply the top by the reciprocal of the bottom","c2":"(3⁄4) ⁄ (5⁄6) = (3⁄4)(6⁄5) = 9⁄10","c3":"numerator and denominator are each a single fraction"}},{"id":"r2","name":"LCD","values":{"c1":"multiply both the overall numerator and overall denominator by the LCD of every internal denominator","c2":"(1⁄2) ⁄ (3⁄4) × (4⁄4) = 2 ⁄ 3","c3":"numerator or denominator contains sums or differences of fractions"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Simplify complex fractions", href: "/arithmetic/methods/complex-fractions", desc: "Simplify a fraction whose top or bottom contains fractions: multiply both by the LCD of the inner denominators, or divide the top by the bottom.", level: "composite", here: "#3" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Divide fractions", href: "/arithmetic/methods/divide-fractions", desc: "Keep the first fraction, change $\\div$ to $\\times$, flip the second fraction, then multiply: $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$.", level: "composite" },
+      { skill: "Find the least common multiple", href: "/arithmetic/methods/lcm", desc: "Find the smallest number that two or more numbers divide: take every prime with its larger exponent, or use $\\operatorname{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$.", level: "composite" },
+      { skill: "Add and subtract fractions", href: "/arithmetic/methods/add-subtract-fractions", desc: "Rewrite the fractions over the least common denominator, add or subtract the numerators, keep the denominator, and simplify.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1317,8 +1340,23 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Simplifying by division, step by step (obj2).
+  const complexDivisionSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\dfrac{\\frac{3}{4}}{\\frac{5}{6}}$',
+      rows: [
+        { step: 'Read the main fraction bar as division', example: '$\\frac{3}{4} \\div \\frac{5}{6}$' },
+        { step: 'Multiply by the reciprocal of the divisor', example: '$\\frac{3}{4} \\times \\frac{6}{5}$' },
+        { step: 'Multiply the numerators and the denominators', example: '$\\frac{18}{20}$' },
+        { step: 'Simplify the result', example: '$\\frac{9}{10}$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    complexDivisionSteps,
     formulaSummaryData,
     pitfallData,
     sectionsContent,
@@ -1341,7 +1379,7 @@ return {
    }
 
 
-export default function ComplexFractionsPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ComplexFractionsPage({ complexDivisionSteps, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1433,6 +1471,15 @@ Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\fr
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="complex-fraction-division-steps"
+            title="Simplifying by division, step by step"
+            source="/arithmetic/fractions/complex"
+            before={"The example of this section, one move at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={complexDivisionSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1441,11 +1488,19 @@ Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\fr
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-complex-simplifying-method-2-lcd-matrix'}
+            id="complex-simplifying-method-2-lcd-matrix"
+            title="Simplifying — Method 2: LCD"
+            source="/arithmetic/fractions/complex"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
                   <div key={'unit-halfOverThreeQuarters'} dangerouslySetInnerHTML={{ __html: demoUnits.halfOverThreeQuarters }} />,
             `Method 1 agrees: 1/2 ÷ 3/4 = 1/2 × 4/3 = 4/6 = 2/3.`,
           `@academic[punchline:Multiplying top and bottom by the same number never changes a fraction, so one well-chosen multiplier clears every inner denominator at once.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to simplify complex fractions](!/arithmetic/methods/complex-fractions) →@`,
         ]
     },
     {
@@ -1505,6 +1560,14 @@ Reading $\\frac{\\frac{1}{2}}{3}$ as $1$ over $\\frac{2}{3}$ gives $1 \\div \\fr
           >
             <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

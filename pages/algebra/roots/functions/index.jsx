@@ -1,4 +1,5 @@
 
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,10 +15,46 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Transformations"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Effect on graph","type":"text"},{"id":"c3","name":"Effect on domain / range","type":"text"}],"items":[{"id":"r1","name":"Vertical shift","values":{"c1":"√x + k","c2":"shifts up (k > 0) or down (k < 0)","c3":"range becomes [k, ∞)"}},{"id":"r2","name":"Horizontal shift","values":{"c1":"√(x − h)","c2":"shifts right (h > 0) or left (h < 0)","c3":"domain becomes [h, ∞)"}},{"id":"r3","name":"Vertical stretch / compression","values":{"c1":"a √x","c2":"stretches (|a| > 1) or compresses (|a| < 1)","c3":"no change"}},{"id":"r4","name":"Reflection over x-axis","values":{"c1":"− √x","c2":"flips upside down","c3":"range becomes (−∞, 0]"}},{"id":"r5","name":"Reflection over y-axis","values":{"c1":"√(−x)","c2":"flips horizontally","c3":"domain becomes (−∞, 0]"}}]};
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Parent Functions at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Square root f(x) = √x","type":"text"},{"id":"c2","name":"Cube root f(x) = ∛x","type":"text"}],"items":[{"id":"r1","name":"Domain","values":{"c1":"[0, ∞)","c2":"(−∞, ∞)"}},{"id":"r2","name":"Range","values":{"c1":"[0, ∞)","c2":"(−∞, ∞)"}},{"id":"r3","name":"Key points","values":{"c1":"(0, 0), (1, 1), (4, 2), (9, 3)","c2":"(−8, −2), (0, 0), (1, 1), (8, 2)"}},{"id":"r4","name":"Graph shape & symmetry","values":{"c1":"starts at origin, rises and bends, concave down; no symmetry","c2":"S-curve through origin; odd symmetry, f(−x) = −f(x)"}},{"id":"r5","name":"Inverse function","values":{"c1":"x² (restricted to x ≥ 0)","c2":"x³ (no restriction)"}},{"id":"r6","name":"Generalizes to","values":{"c1":"even-index ⁿ√x — flatter for higher n","c2":"odd-index ⁿ√x — flatter for higher n"}}]};
+
+
+// ProcedureV2 (stages) 2026-11-15: replaces the table obj10Table (graphing strategy: step, action, what it gives you); actions and results taken from the table, run on the section's own example.
+const radicalGraphingStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { exprNow: 'Found so far' },
+  run: {
+    label: 'Graph $f(x) = -\\sqrt{x + 2} + 4$',
+    start: '$f(x) = -\\sqrt{x + 2} + 4$',
+  },
+  groups: [
+    { label: 'Before plotting', sub: 'steps 1 and 2', kind: 'must', stages: [
+      { n: 1, name: 'Parent', what: 'Identify the parent function based on the index', cond: 'Gives: square root family (even) or cube root family (odd)',
+        example: 'Parent: $\\sqrt{x}$', exampleNote: 'index $2$ is even, so the square root family' },
+      { n: 2, name: 'Domain', what: 'Determine the domain by setting the radicand appropriately', cond: 'Gives: valid input range',
+        example: '$x + 2 \\geq 0$, so $x \\geq -2$', exampleNote: 'even index: the radicand must be non-negative' },
+    ] },
+    { label: 'The points', sub: 'steps 3 and 4', kind: 'must', stages: [
+      { n: 3, name: 'Anchor', what: 'Find the starting point (even index) or center point (odd index) after applying shifts', cond: 'Gives: anchor for the graph',
+        example: 'Starting point: $(-2, 4)$', exampleNote: 'shifted $2$ left and $4$ up' },
+      { n: 4, name: 'More points', what: 'Plot additional points using the transformed function', cond: 'Gives: shape verification',
+        example: '$f(2) = -\\sqrt{4} + 4 = 2$', exampleNote: 'the point $(2, 2)$' },
+    ] },
+    { label: 'The curve', sub: 'step 5', kind: 'out', stages: [
+      { n: 5, name: 'Sketch', what: 'Sketch the curve, respecting concavity', cond: 'Gives: finished graph',
+        example: 'From $(-2, 4)$ through $(2, 2)$', exampleNote: 'reflected over the $x$-axis, so the curve descends to the right',
+        result: 'starts at $(-2, 4)$ and curves downward to the right' },
+    ] },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -954,8 +991,23 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: The inverse of a radical function, step by step (obj9).
+  const radicalInverseSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$f(x) = \\sqrt{x - 5}$, $x \\geq 5$',
+      rows: [
+        { step: 'Write $y = f(x)$', example: '$y = \\sqrt{x - 5}$' },
+        { step: 'Swap $x$ and $y$', example: '$x = \\sqrt{y - 5}$' },
+        { step: 'Raise both sides to the index and solve for $y$', example: '$x^2 = y - 5$, so $y = x^2 + 5$' },
+        { step: 'State the inverse with its domain', stepSub: 'The domain matches the range of the original', example: '$f^{-1}(x) = x^2 + 5$, $x \\geq 0$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    radicalInverseSteps,
     pitfallData,
     radicalStrategyProfile,
     cbrtProfile,
@@ -981,7 +1033,7 @@ return {
    }
 
 // export default function FunctionsPage({seoData,sectionsContent , introContent}) {
-export default function FunctionsPage({ pitfallData,radicalStrategyProfile, cbrtProfile, sqrtProfile, seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FunctionsPage({ radicalInverseSteps, pitfallData,radicalStrategyProfile, cbrtProfile, sqrtProfile, seoData, sectionsContent, introContent, obj7Table, obj10Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1137,11 +1189,15 @@ $$(0, 0), \\quad (1, 1), \\quad (4, 2), \\quad (9, 3), \\quad (16, 4)$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-functions-transformations-matrix'}
+            id="functions-transformations-matrix"
+            title="Transformations"
+            source="/algebra/roots/functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:A number added inside the radical shifts the graph against its sign; a number added outside shifts it with its sign.]@`,
         ]
     },
@@ -1159,6 +1215,15 @@ $$(0, 0), \\quad (1, 1), \\quad (4, 2), \\quad (9, 3), \\quad (16, 4)$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-procedure'}
+            id="radical-inverse-steps"
+            title="The inverse of a radical function, step by step"
+            source="/algebra/roots/functions"
+            before={"The first function of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={radicalInverseSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-radInverse'} dangerouslySetInnerHTML={{ __html: demoUnits.radInverse }} />,
           `Without the restriction x ≥ 0, x² + 5 would not be one-to-one and could not be the inverse.`,
         ]
@@ -1169,11 +1234,15 @@ $$(0, 0), \\quad (1, 1), \\quad (4, 2), \\quad (9, 3), \\quad (16, 4)$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'procedure-radical-graphing-stages'}
+            id="radical-graphing-strategy-steps"
+            title="Graphing a Radical Function in Five Steps"
+            source="/algebra/roots/functions"
+            related={false}
+          >
+            <ProcedureV2 data={radicalGraphingStages} variant="stages" />
+          </DiagramFrame>,
           `The example, carried one step further. The graph of $f(x) = -\\sqrt{x + 2} + 4$ starts at $(-2, 4)$, passes through $(2, 2)$, and crosses the $x$-axis where $\\sqrt{x + 2} = 4$, that is at $x = 14$. Its domain is $x \\geq -2$ and, since it only falls from its start, its range is $(-\\infty, 4]$.`,
           <DiagramFrameV2
             key={'obj10-profile'}
@@ -1192,11 +1261,15 @@ $$(0, 0), \\quad (1, 1), \\quad (4, 2), \\quad (9, 3), \\quad (16, 4)$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-functions-parent-functions-at-glance-matrix'}
+            id="functions-parent-functions-at-glance-matrix"
+            title="Parent Functions at a Glance"
+            source="/algebra/roots/functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
         ]
     },
     {

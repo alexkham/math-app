@@ -1957,7 +1957,7 @@ $$P = \\begin{pmatrix} 0 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 1 & 0 & 0 \\end{pmatrix}$$`
     name: 'Conformability',
     category: 'Matrices',
     formula: `The shape condition under which a matrix operation is defined`,
-    link: { url: '/linear-algebra/matrix/operations#5', label: 'Matrix Multiplication — Definition' },
+    link: { url: '/linear-algebra/matrix/operations#which-sizes-fit', label: 'Matrix Multiplication — Which Sizes Fit' },
     fields: {
       intuition: `[Addition and subtraction need identical shapes](https://calculatematrix.com/matrix-calculators/matrix-addition#how-to-use). The product $AB$ [needs the inner dimensions to agree](https://linearalgebranotes.com/matrices/matrix-multiplication#definition) — $A$ is $m \\times n$ and $B$ is $n \\times p$ — and the result takes the outer dimensions, $m \\times p$. Where the requirement fails the operation simply does not exist.`,
       'related concepts': `• [Matrix](!/linear-algebra/definitions#matrix)

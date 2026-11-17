@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Head from 'next/head'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -14,6 +15,23 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Check whether a formula is a contradiction", href: "/logic/methods/contradiction-check", desc: "Show a formula is false in every row with a truth table, or reduce it with the laws to a clash of the form $A \\land \\neg A$.", level: "composite", here: "#1" },
+    ] },
+    { title: "More logic methods", items: [
+      { skill: "Check whether a formula is a tautology", href: "/logic/methods/tautology-check", desc: "Show a formula is true in every row: build its truth table, or assume one row makes it false and reach a clash.", level: "composite" },
+      { skill: "Build a truth table", href: "/logic/methods/truth-table", desc: "List all $2^n$ rows, add one column per subformula from the inside out, and fill each column with the rule of its connective.", level: "composite" },
+      { skill: "Simplify a logical expression", href: "/logic/methods/simplify-propositions", desc: "Remove arrows, push negations onto letters, then factor and collapse with the complement, identity and absorption laws.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
 
 export default function ContradictionsTruthTablesPage({ proofStepsData, pitfallData, keyWords, contradictionExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent, deniedDisjunctionBeforeAfter, negatedImplicationSteps }) {
 
@@ -126,7 +144,8 @@ export default function ContradictionsTruthTablesPage({ proofStepsData, pitfallD
         id: '1',
         title: sectionsContent.obj1.title,
         link: sectionsContent.obj1.link,
-        content: [sectionsContent.obj1.content]
+        content: [sectionsContent.obj1.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to check whether a formula is a contradiction](!/logic/methods/contradiction-check) →@`]
       },
       {
         id: '2',
@@ -255,6 +274,14 @@ export default function ContradictionsTruthTablesPage({ proofStepsData, pitfallD
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
         ]
+      },
+      {
+          id:'skills',
+          title:'Skills You Should Learn',
+          link:``,
+          content:[
+            <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+          ]
       },
       // faq: rendered component — must be built here, not in getStaticProps
       {

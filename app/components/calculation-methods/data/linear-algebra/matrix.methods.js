@@ -103,7 +103,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Multiply Matrices (Row Times Column) | Learn Math Class',
         description: 'Multiply two matrices step by step: check that the inner sizes match, find the size of the product, and compute each entry as a row times a column. Examples.',
@@ -200,8 +200,10 @@ const matrixMethods = {
         ],
         examplesAfter: 'Multiply your own matrices in the [matrix calculator](!/linear-algebra/calculators/matrix).',
         visual: {
+          component: 'MatrixMultiplicationOrderVisualizer',
+          props: { showHeader: false },
           caption:
-            'Each entry of $AB$ comes from one row of $A$ meeting one column of $B$: lay the row along the column, multiply the pairs, add. The [rows and columns visualizer](!/linear-algebra/visual-tools/matrix-multiplication-rows-columns) highlights the row and column behind every entry, and the [AB versus BA tool](!/linear-algebra/visual-tools/matrix-composition-2d) shows why the order matters: $AB$ means "do $B$ first, then $A$".',
+            'Step 1 in action: set the two sizes and see whether the inner numbers match and what size the product will be. Each entry of $AB$ comes from one row of $A$ meeting one column of $B$: lay the row along the column, multiply the pairs, add. The [rows and columns visualizer](!/linear-algebra/visual-tools/matrix-multiplication-rows-columns) highlights the row and column behind every entry, and the [AB versus BA tool](!/linear-algebra/visual-tools/matrix-composition-2d) shows why the order matters: $AB$ means "do $B$ first, then $A$".',
         },
         pitfalls: [
           {
@@ -244,7 +246,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Inverse of a 2×2 Matrix (Formula) | Learn Math Class',
         description: 'Find the inverse of a 2×2 matrix: compute ad − bc, swap the diagonal entries, change the signs of the other two, divide by the determinant. Examples, mistakes.',
@@ -360,7 +362,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find an Inverse by Gauss-Jordan Elimination | Learn Math Class',
         description: 'Find a matrix inverse by Gauss-Jordan elimination: write [A | I], row reduce until the left half is I, read the inverse on the right, spot singular cases.',
@@ -479,7 +481,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find an Inverse with the Adjugate (Cofactor Method) | Learn Math Class',
         description: 'Find a matrix inverse with the adjugate: compute the determinant and all cofactors, transpose them, divide by the determinant. 2×2 and 3×3 examples, mistakes.',
@@ -593,7 +595,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Rank of a Matrix (Row Reduction) | Learn Math Class',
         description: 'Find the rank of a matrix: row reduce to echelon form, count the pivots, check the bound, read off the nullity. With the determinant test, examples, mistakes.',
@@ -725,7 +727,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Trace of a Matrix (with Properties) | Learn Math Class',
         description: 'Find the trace of a square matrix by adding its diagonal entries, and use linearity, tr(AB) = tr(BA) and the eigenvalue sum to skip work. Examples and mistakes.',
@@ -856,7 +858,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compute Powers of a Matrix (A², A³, Aⁿ) | Learn Math Class',
         description: 'Compute powers of a square matrix: multiply it by itself, square repeatedly for high powers, use diagonal and repeating patterns, check with the determinant.',
@@ -988,7 +990,7 @@ const matrixMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Identify the Type of a Matrix (Tests for Each) | Learn Math Class',
         description: 'Identify a matrix type: check the shape and the zero pattern, compare with the transpose, test products such as QᵀQ = I and A² = A, then the determinant.',

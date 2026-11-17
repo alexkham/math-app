@@ -493,6 +493,7 @@
 // tables-optimized: v4 | 2026-05-22 | 3 tables (operations aggregation, mistakes aggregation, summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -513,7 +514,45 @@ import probEventsNotationSheet from '@/app/components/infographics/NotationCheat
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
 
+const tx_probabilitySetTypes = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { branchIf: 'for' },
+  tree: {
+    root: { name: 'Sets used in probability', sub: 'each kind matches a type of random experiment' },
+    branches: [
+      { condition: 'discrete outcomes', leaves: [
+        { name: 'Finite', condition: 'Small sets with a limited number of elements.', example: 'the possible results of flipping a coin or rolling a die' },
+        { name: 'Countably infinite', condition: 'Infinitely many elements that can still be listed one by one.', example: 'the non-negative integers, when modeling counts' }
+      ] },
+      { condition: 'continuous scales', leaves: [
+        { name: 'Intervals', condition: 'Intervals on the real line.', example: 'measurements that can take any value in a range' }
+      ] }
+    ]
+  }
+};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table operationsTable ("Core Set Operations in Probability"); converted from the table's own cells.
+const fm_operationsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Symbol","type":"text"},{"id":"c2","name":"Set meaning","type":"text"},{"id":"c3","name":"Probability meaning","type":"text"}],"items":[{"id":"r1","name":"Union","values":{"c1":"A ∪ B","c2":"elements in A, in B, or in both","c3":"at least one of the events occurs"}},{"id":"r2","name":"Intersection","values":{"c1":"A ∩ B","c2":"elements in both A and B","c3":"both events occur simultaneously"}},{"id":"r3","name":"Complement","values":{"c1":"A$^{c}$ or A&prime;","c2":"elements of &Omega; that are not in A","c3":"event A does not occur"}},{"id":"r4","name":"Difference","values":{"c1":"A \\ B","c2":"elements in A but not in B","c3":"A occurs and B does not"}},{"id":"r5","name":"Disjoint","values":{"c1":"A ∩ B = ∅","c2":"A and B share no elements","c3":"the two events cannot both occur"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Probability methods", items: [
+      { skill: "Find the probability of A or B", href: "/probability/methods#addition-rule", desc: "The question says \"or\": a heart or a king, an even number or a number above $4$, rain or wind.", level: "atomic" },
+      { skill: "Find probabilities from a two-way table", href: "/probability/methods/contingency-tables", desc: "Joint, marginal and conditional probabilities: pick the right cell and the right total.", level: "composite" },
+    ] },
+    { title: "Set theory methods", items: [
+      { skill: "Fill a two-set Venn diagram", href: "/set-theory/methods/venn-two-sets", desc: "Place elements or counts in the four regions of a two-set Venn diagram: the overlap first, then each set alone, then the outside.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1178,6 +1217,15 @@ export default function SetsInProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.types.content,
+          <DiagramFrame
+            key={'taxonomy-probability-set-types'}
+            id="probability-set-types"
+            title="Types of Sets Used in Probability"
+            source="/probability/sets"
+            related={false}
+          >
+            <Taxonomy data={tx_probabilitySetTypes} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1186,8 +1234,15 @@ export default function SetsInProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.operations.content,
-          <div key={'operations-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: operationsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-sets-core-set-operations-probability-matrix'}
+            id="sets-core-set-operations-probability-matrix"
+            title="Core Set Operations in Probability"
+            source="/probability/sets"
+            related={false}
+          >
+            <FeatureMatrix data={fm_operationsTable} />
+          </DiagramFrame>,
                   <div key={'unit-u_operations_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_operations_0 }} />,
           `These regions are what turn sets into events.`,
           `@academic[punchline:In probability, "or", "and" and "not" are union, intersection and complement, applied to sets of outcomes.]@`,
@@ -1246,6 +1301,14 @@ export default function SetsInProbabilityPage({ pitfallData,
           sectionsContent.summary.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

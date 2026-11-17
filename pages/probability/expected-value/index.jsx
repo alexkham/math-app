@@ -780,6 +780,7 @@ const hubMeta = {
 
 // tables-optimized: v4 | 2026-05-23 | 3 tables (properties aggregation, examples aggregation, capstone summary)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -798,14 +799,38 @@ import weightedExpectedValueDiagrams from '@/app/components/probability/expected
 import discreteExpectedValueDiagrams from '@/app/components/probability/expected-value/discreteExpectedValueDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
+
+// FeatureMatrix 2026-11-14: replaces the table propertiesTable ("**Properties of Expected Value**"); converted from the table's own cells.
+const fm_propertiesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Linearity (sum)","values":{"c1":"E(X + Y) = E(X) + E(Y); extends to any number of variables","c2":"holds even when X and Y are dependent"}},{"id":"r2","name":"Scaling and shifting","values":{"c1":"E(aX + b) = a · E(X) + b","c2":"predicts the response of E to rescaling and unit changes"}},{"id":"r3","name":"Constants","values":{"c1":"E(c) = c","c2":"a constant random variable is its own expectation"}},{"id":"r4","name":"Product under [independence](!/probability/independence)","values":{"c1":"E(XY) = E(X) · E(Y) when X, Y are independent","c2":"not generally true under dependence"}},{"id":"r5","name":"Monotonicity","values":{"c1":"if X ≤ Y always, then E(X) ≤ E(Y)","c2":"order-preserving"}},{"id":"r6","name":"Existence","values":{"c1":"the sum or integral defining E(X) may diverge","c2":"e.g., Cauchy distribution has no finite expected value"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table examplesTable ("**Examples of Expected Value**"); converted from the table's own cells.
+const fm_examplesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Setup","features":[{"id":"c1","name":"Calculation","type":"text"},{"id":"c2","name":"E[X]","type":"text"}],"items":[{"id":"r1","name":"Fair six-sided die","values":{"c1":"(1 + 2 + 3 + 4 + 5 + 6) / 6","c2":"3.5 (not a face of the die)"}},{"id":"r2","name":"Bernoulli(p)","values":{"c1":"1 · p + 0 · (1 − p)","c2":"p (long-run success rate)"}},{"id":"r3","name":"Exponential(λ)","values":{"c1":"∫₀$^{∞}$ x · λ e$^{-λx}$ dx","c2":"1 / λ (average waiting time)"}},{"id":"r4","name":"Game: +10 with prob 0.2, −4 with prob 0.8","values":{"c1":"10 · 0.2 + (−4) · 0.8","c2":"−1.2 (average loss per play)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite", here: "#calculate" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the expected value of a sum", href: "/probability/random-variables/methods#linearity-of-expectation", desc: "The variable is a sum or a linear combination of variables whose means you know: $X + Y$, $3X - 2Y + 5$, the total of $n$ dice. It holds whether or not the variables are independent.", level: "atomic" },
+      { skill: "Find the variance of a random variable", href: "/probability/random-variables/methods/variance", desc: "Find the mean, then the mean of the square, and subtract: $E[X^2] - (E[X])^2$.", level: "composite" },
+      { skill: "Find an expected count with indicator variables", href: "/probability/random-variables/methods/indicator-variables", desc: "Write the count as a sum of 0-1 indicators, use $E[I] = P(A)$, and add by linearity.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1993,6 +2018,7 @@ value reflects the balance point of that curve.`,
             >
               <CaseSplit data={expectedValueCases} variant="poster" proseStyle="cards" theme={figureTheme} />
             </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the expected value of a random variable](!/probability/random-variables/methods/expected-value) →@`,
         ]
     },
      {
@@ -2048,8 +2074,15 @@ value reflects the balance point of that curve.`,
         link:'',
         content:[
             sectionsContent.properties.content,
-            <div key={'properties-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: propertiesTable }} />,
+            <DiagramFrame
+              key={'feature-matrix-expected-value-properties-expected-value-matrix'}
+              id="expected-value-properties-expected-value-matrix"
+              title="**Properties of Expected Value**"
+              source="/probability/expected-value"
+              related={false}
+            >
+              <FeatureMatrix data={fm_propertiesTable} />
+            </DiagramFrame>,
             `The properties above as cards, each marked by what it asks of the random variables.`,
             <DiagramFrame
               key={'properties-propsheet'}
@@ -2085,8 +2118,15 @@ value reflects the balance point of that curve.`,
         link:'',
         content:[
             sectionsContent.examples.content,
-            <div key={'examples-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: examplesTable }} />,
+            <DiagramFrame
+              key={'feature-matrix-expected-value-examples-expected-value-matrix'}
+              id="expected-value-examples-expected-value-matrix"
+              title="**Examples of Expected Value**"
+              source="/probability/expected-value"
+              related={false}
+            >
+              <FeatureMatrix data={fm_examplesTable} />
+            </DiagramFrame>,
                   <div key={'unit-evProfit'} dangerouslySetInnerHTML={{ __html: demoUnits.evProfit }} />,
             `A negative expected value means the game loses money in the long run, however often single plays win.`,
         ]
@@ -2132,6 +2172,14 @@ value reflects the balance point of that curve.`,
             >
               <MistakeFix data={pitfallData} variant="trace" />
             </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -33,7 +33,7 @@ const orthogonalityMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compute an Inner Product (Length and Angle) | Learn Math Class',
         description: 'Compute an inner product: pick the rule, multiply matching entries, add, then find length, distance and angle. Dot, weighted and function examples.',
@@ -174,7 +174,7 @@ const orthogonalityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Check If a Set Is Orthogonal or Orthonormal | Learn Math Class',
         description: 'Check if vectors are orthogonal or orthonormal: dot every pair, test the lengths, normalize, or test QᵀQ = I for a matrix. Steps, examples and mistakes.',
@@ -304,7 +304,7 @@ const orthogonalityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find an Orthogonal Projection (Line, Plane, Subspace) | Learn Math Class',
         description: 'Find the orthogonal projection of a vector onto a line, plane or subspace: orthogonal basis sum or normal equations, plus the residual check. Examples.',
@@ -434,7 +434,7 @@ const orthogonalityMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Apply the Gram-Schmidt Process (Orthonormal Basis) | Learn Math Class',
         description: 'Apply the Gram-Schmidt process: keep the first vector, subtract projections from each next one, check, then normalize. Examples in R², R³ and polynomials.',
@@ -548,7 +548,7 @@ const orthogonalityMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a Least-Squares Problem (Normal Equations) | Learn Math Class',
         description: 'Solve a least-squares problem: form the normal equations AᵀAx = Aᵀb, solve them, find the error and check it is orthogonal to the columns. QR and examples.',
@@ -685,7 +685,7 @@ const orthogonalityMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Fit a Line or Curve to Data (Least Squares) | Learn Math Class',
         description: 'Fit a line or parabola to data with least squares: write one equation per point, build the matrix, solve the normal equations, interpret. Word problems.',

@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj3 aggregation, obj9 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,12 +15,32 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Growth Rate Comparisons"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pair","features":[{"id":"c1","name":"Slower grower","type":"text"},{"id":"c2","name":"Faster grower","type":"text"},{"id":"c3","name":"Limit (x → ∞)","type":"text"}],"items":[{"id":"r1","name":"Logarithmic vs polynomial","values":{"c1":"ln x","c2":"xⁿ, any n > 0","c3":"ln x / xⁿ → 0"}},{"id":"r2","name":"Polynomial vs natural exponential","values":{"c1":"xⁿ, any n","c2":"eˣ","c3":"xⁿ / eˣ → 0"}},{"id":"r3","name":"Polynomial vs general exponential","values":{"c1":"xⁿ, any n","c2":"aˣ, any a > 1","c3":"xⁿ / aˣ → 0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Related Trigonometric Limits"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Limit (x → 0)","features":[{"id":"c1","name":"Value","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"sin x / x","values":{"c1":"1","c2":"the fundamental trig limit; x in radians"}},{"id":"r2","name":"(1 − cos x) / x","values":{"c1":"0","c2":"derived via conjugate trick (see section 4 below)"}},{"id":"r3","name":"(1 − cos x) / x²","values":{"c1":"1/2","c2":"sharper version with higher-order denominator"}},{"id":"r4","name":"tan x / x","values":{"c1":"1","c2":"factor as (sin x / x) · (1 / cos x), each → 1"}},{"id":"r5","name":"x / sin x","values":{"c1":"1","c2":"reciprocal of the fundamental trig limit"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Limit methods", items: [
+      { skill: "Use the limit of sin x over x", href: "/calculus/limits/methods#sin-x-over-x-limit", desc: "Sine of something divided by that same something, as it goes to $0$: $\\frac{\\sin 3x}{x}$, $\\frac{\\sin x}{5x}$, $\\frac{\\tan x}{x}$, $\\frac{1 - \\cos x}{x}$.", level: "atomic" },
+      { skill: "Use the limits that define e", href: "/calculus/limits/methods#e-limit", desc: "$\\left(1 + \\frac{1}{n}\\right)^n$ as $n \\to \\infty$, $(1 + x)^{1/x}$ as $x \\to 0$, or $\\frac{e^x - 1}{x}$ as $x \\to 0$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1282,8 +1303,15 @@ export default function SpecialPage({ proofStepsData2, proofStepsData, formulaSu
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-special-related-trigonometric-limits-matrix'}
+            id="special-related-trigonometric-limits-matrix"
+            title="Related Trigonometric Limits"
+            source="/calculus/limits/special"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every trigonometric limit in this table comes from $\\frac{\\sin x}{x} \\to 1$ by algebra alone, with no new geometry.]@`,
         ]
     },
@@ -1361,8 +1389,15 @@ export default function SpecialPage({ proofStepsData2, proofStepsData, formulaSu
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-special-growth-rate-comparisons-matrix'}
+            id="special-growth-rate-comparisons-matrix"
+            title="Growth Rate Comparisons"
+            source="/calculus/limits/special"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1414,6 +1449,14 @@ export default function SpecialPage({ proofStepsData2, proofStepsData, formulaSu
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

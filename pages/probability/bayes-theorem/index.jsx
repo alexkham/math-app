@@ -619,6 +619,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 3 tables (formula aggregation, mistakes aggregation, overview summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -637,11 +638,39 @@ import conditionalTreeDiagrams from '@/app/components/probability/conditional-pr
 import totalProbabilityDiagrams from '@/app/components/probability/total-probability/totalProbabilityDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_bayesRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Bayes' theorem","sub":"a bridge rather than an endpoint"},"groups":[{"name":"What it is built on","items":[{"name":"Conditional probability","href":"/probability/conditional-probability","why":"the basic mechanism Bayes' theorem reorganizes"},{"name":"Total probability","href":"/probability/total-probability","why":"supplies the normalization"},{"name":"Chain rule","href":"/probability/bayes-theorem#chain","why":"Bayes' theorem as a rearrangement of joint probability"},{"name":"Probability axioms","href":"/probability/axioms","why":"guarantee that the update follows consistent rules"}]},{"name":"Special case","items":[{"name":"Independence","href":"/probability/independence","why":"where the update simplifies"}]},{"name":"Where it extends","items":[{"name":"Random variables","href":"/probability/random-variables","why":"beyond events to numerical outcomes"},{"name":"Distributions","href":"/probability/distributions","why":"beyond events to numerical outcomes"}]}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 
+// FeatureMatrix 2026-11-14: replaces the table overviewTable ("Where Bayes' Theorem Fits — At a Glance"); converted from the table's own cells.
+const fm_overviewTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Concept","features":[{"id":"c1","name":"What Bayes' theorem draws from it","type":"text"},{"id":"c2","name":"What Bayes' theorem adds in return","type":"text"}],"items":[{"id":"r1","name":"[Conditional probability](!/probability/conditional-probability)","values":{"c1":"the basic mechanism of conditioning on an event","c2":"a way to reverse the direction of conditioning — from P(B|A) to P(A|B)"}},{"id":"r2","name":"[Total probability](!/probability/total-probability)","values":{"c1":"a way to express P(B) as a sum across mutually exclusive hypotheses","c2":"the denominator that keeps the posterior coherent across all hypotheses"}},{"id":"r3","name":"Chain rule","values":{"c1":"a decomposition of the joint probability of A and B","c2":"a re-factoring of that decomposition that exposes the inverse conditional"}},{"id":"r4","name":"[Independence](!/probability/independence)","values":{"c1":"cases where P(B|A) equals P(B)","c2":"a structural simplification: the formula collapses and the update becomes trivial"}},{"id":"r5","name":"Prior knowledge","values":{"c1":"an initial assessment of how likely each hypothesis is","c2":"a principled rule for revising that prior in light of evidence"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table formulaTable ("Bayes' Theorem (The Formula)"); converted from the table's own cells.
+const fm_formulaTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Symbol","features":[{"id":"c1","name":"Name","type":"text"},{"id":"c2","name":"Role in the formula","type":"text"}],"items":[{"id":"r1","name":"P(A)","values":{"c1":"Prior","c2":"the starting probability of A before any evidence is taken into account"}},{"id":"r2","name":"P(B|A)","values":{"c1":"Likelihood","c2":"how compatible the observation B is with the situation A"}},{"id":"r3","name":"P(B)","values":{"c1":"Normalization ([total probability](!/probability/total-probability))","c2":"the overall probability of B across all hypotheses; keeps the updated probabilities summing to 1"}},{"id":"r4","name":"P(A|B)","values":{"c1":"Posterior","c2":"the updated probability of A after B is observed — the output of the formula"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use Bayes' theorem", href: "/probability/methods/bayes-theorem", desc: "Reverse a conditional probability: from P(evidence given cause) to P(cause given evidence).", level: "composite", here: "#formula" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Use the law of total probability", href: "/probability/methods/total-probability", desc: "Split into cases, find the chance of the event in each case, weight by the case and add.", level: "composite" },
+      { skill: "Solve a probability problem with a tree diagram", href: "/probability/methods/tree-diagrams", desc: "One level per stage: label the branches, multiply along each path, add the paths you want.", level: "composite" },
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1473,7 +1502,15 @@ Both quantities are built from the same joint probability $P(A \\cap B)$, but ea
         link:'',
         content:[
           sectionsContent.formula.content,
-          <div key={'formula-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: formulaTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-bayes-theorem-bayes-theorem-formula-matrix'}
+            id="bayes-theorem-bayes-theorem-formula-matrix"
+            title="Bayes' Theorem (The Formula)"
+            source="/probability/bayes-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_formulaTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'formula-diagram'}
             id="bayes-theorem-anatomy"
@@ -1484,6 +1521,7 @@ Both quantities are built from the same joint probability $P(A \\cap B)$, but ea
           >
             <FormulaAnatomy data={bayesAnatomy} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use Bayes' theorem](!/probability/methods/bayes-theorem) →@`,
         ]
     },
     {
@@ -1568,6 +1606,15 @@ The numerator of Bayes' theorem is one of these contributions, and the denominat
         link:'',
         content:[
           sectionsContent.connections.content,
+          <DiagramFrame
+            key={'concept-map-bayes-theorem-connections'}
+            id="bayes-theorem-connections"
+            title="Connections to Other Probability Concepts"
+            source="/probability/bayes-theorem"
+            related={false}
+          >
+            <ConceptMap data={cm_bayesRelated} variant="hub" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1576,7 +1623,23 @@ The numerator of Bayes' theorem is one of these contributions, and the denominat
         link:'',
         content:[
           sectionsContent.overview.content,
-          <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-bayes-theorem-where-bayes-theorem-matrix'}
+            id="bayes-theorem-where-bayes-theorem-matrix"
+            title="Where Bayes' Theorem Fits — At a Glance"
+            source="/probability/bayes-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_overviewTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

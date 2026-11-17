@@ -1,4 +1,6 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,7 +17,94 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Inequalities Requiring Simplification"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Inequality","features":[{"id":"c1","name":"Common-base rewrite","type":"text"},{"id":"c2","name":"Exponent inequality (base > 1: preserved)","type":"text"},{"id":"c3","name":"Solution","type":"text"}],"items":[{"id":"r1","name":"4ˣ < 32","values":{"c1":"2²ˣ < 2⁵","c2":"2x < 5","c3":"x < 5⁄2"}},{"id":"r2","name":"9ˣ⁺¹ ≥ 27ˣ","values":{"c1":"3$^{2x + 2}$ ≥ 3³ˣ","c2":"2x + 2 ≥ 3x","c3":"x ≤ 2"}},{"id":"r3","name":"(1/4)ˣ > (1/8)²","values":{"c1":"2⁻²ˣ > 2⁻⁶","c2":"−2x > −6","c3":"x < 3"}}]};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Cases"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"How to recognize","type":"text"},{"id":"c2","name":"Solving move","type":"text"},{"id":"c3","name":"Example","type":"text"},{"id":"c4","name":"Solution","type":"text"}],"items":[{"id":"r1","name":"Basic","values":{"c1":"one or both sides already a power of a common base","c2":"match bases, then apply the base-direction rule","c3":"2ˣ > 8 → 2ˣ > 2³","c4":"x > 3"}},{"id":"r2","name":"Requires simplification","values":{"c1":"bases differ but share a common prime","c2":"use exponent laws to rewrite each side over a common base, then apply direction","c3":"4ˣ < 32 → 2²ˣ < 2⁵","c4":"x < 5⁄2"}},{"id":"r3","name":"Sign shortcut","values":{"c1":"aˣ compared to 0 or a negative number (a > 0)","c2":"recognize aˣ > 0 always; no computation needed","c3":"2ˣ > −5 / 2ˣ < −1","c4":"all real x / no solution"}},{"id":"r4","name":"Compound","values":{"c1":"exponential sandwiched between two bounds","c2":"rewrite both bounds in the common base, solve both halves with the direction rule","c3":"1⁄4 < 2ˣ < 16","c4":"−2 < x < 4"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve an exponential inequality", href: "/algebra/methods/exponential-inequalities", desc: "Match bases and compare exponents; flip the sign when the base is between 0 and 1.", level: "composite", here: "#2" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Solve an exponential equation by matching bases", href: "/algebra/methods/exponential-equations-same-base", desc: "Write both sides as powers of one base, then set the exponents equal.", level: "composite" },
+      { skill: "Solve a logarithmic inequality", href: "/algebra/methods/logarithmic-inequalities", desc: "Remove the logs keeping or flipping the direction by the base, then intersect with the domain.", level: "composite" },
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite" },
+    ] },
+    { title: "Inequality methods", items: [
+      { skill: "Solve a linear inequality", href: "/algebra/inequalities/methods/linear-inequalities", desc: "Solve like an equation, but flip the sign when multiplying or dividing by a negative.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// CaseSplit (poster) 2026-11-15: replaces the table obj1Table (base condition, behaviour of a^x, what a^x > a^y means, example); the three cases come from the table.
+const baseCasesTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+const baseCases = {
+  parent: {
+    kicker: 'Exponential inequality',
+    formula: '$a^x > a^y$',
+    splitBy: 'the size of the base $a$',
+  },
+  cases: [
+    {
+      id: 'above', condition: '$a > 1$',
+      count: { n: '↗' },
+      headline: '$a^x$ is increasing',
+      formula: '$x > y$ (direction preserved)',
+      example: '$2^x > 8$',
+      picture: '$x > 3$',
+    },
+    {
+      id: 'between', condition: '$0 < a < 1$',
+      count: { n: '↘' },
+      headline: '$a^x$ is decreasing',
+      formula: '$x < y$ (direction reversed)',
+      example: '$\\left(\\frac{1}{3}\\right)^x > 9$',
+      picture: '$x < -2$',
+    },
+    {
+      id: 'one', condition: '$a = 1$',
+      count: { n: '→' },
+      headline: 'Constant: $1^x = 1$ for all $x$',
+      formula: 'no inequality between distinct powers',
+      picture: 'excluded from the framework',
+    },
+  ],
+}
+
+// IntervalLine: the three compound examples of obj5
+const il_expCompound = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  compound: {
+    range: [-4, 6],
+    wrongNote: { label: 'AND, not OR', text: 'A chain needs both bounds at once. With OR every real number would qualify.' },
+    cases: [
+      { name: '$\\frac{1}{4} < 2^x < 16$', connective: 'and', source: '$\\frac{1}{4} < 2^x < 16$',
+        rewrite: '$2^{-2} < 2^x < 2^4$ $\\Rightarrow$ $-2 < x < 4$',
+        conditions: [{ label: '$x > -2$', op: '>', value: -2 }, { label: '$x < 4$', op: '<', value: 4 }],
+        note: { label: 'Both bounds at once', text: 'Base $2 > 1$ keeps both directions, and the solution is the overlap of the two rays.' } },
+      { name: '$\\frac{1}{27} \\leq 3^{x-1} \\leq 81$', connective: 'and', source: '$\\frac{1}{27} \\leq 3^{x-1} \\leq 81$',
+        rewrite: '$-3 \\leq x - 1 \\leq 4$ $\\Rightarrow$ $-2 \\leq x \\leq 5$',
+        conditions: [{ label: '$x \\geq -2$', op: '>=', value: -2 }, { label: '$x \\leq 5$', op: '<=', value: 5 }],
+        note: { label: 'Non-strict bounds', text: 'Both signs allow equality, so both endpoints belong to the solution.' } },
+      { name: '$\\frac{1}{9} < \\left(\\frac{1}{3}\\right)^x < 3$', connective: 'and', source: '$\\frac{1}{9} < \\left(\\frac{1}{3}\\right)^x < 3$',
+        rewrite: '$2 > x > -1$: both directions reverse',
+        conditions: [{ label: '$x < 2$', op: '<', value: 2 }, { label: '$x > -1$', op: '>', value: -1 }],
+        note: { label: 'Base below 1', text: 'Both comparisons reverse, so the bounds change places: read left to right the answer is $-1 < x < 2$.' } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -623,8 +712,22 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Solving a basic exponential inequality (obj2).
+  const expInequalitySteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\left(\\frac{1}{3}\\right)^x > 9$',
+      rows: [
+        { step: 'Rewrite both sides with a common base', stepSub: '$9 = 3^2 = \\left(\\frac{1}{3}\\right)^{-2}$', example: '$\\left(\\frac{1}{3}\\right)^x > \\left(\\frac{1}{3}\\right)^{-2}$' },
+        { step: 'Look at the base', stepSub: 'Above $1$ the direction is kept; between $0$ and $1$ it is reversed', example: '$\\frac{1}{3}$ is between $0$ and $1$: reverse' },
+        { step: 'Read off the inequality between the exponents', example: '$x < -2$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    expInequalitySteps,
     pitfallData,
     sectionsContent,
     introContent,
@@ -647,7 +750,7 @@ return {
    }
 
 // export default function InequalitiesPage({seoData,sectionsContent , introContent}) {
-export default function InequalitiesPage({ pitfallData,seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function InequalitiesPage({ expInequalitySteps, pitfallData,seoData, sectionsContent, introContent, obj1Table, obj3Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -696,7 +799,16 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
         lead: `Its answer is a range of exponents, and the base alone decides which side of the boundary it lies on.`,
         content: [
           `This directional rule sits alongside the familiar "multiply or divide by a negative flips the inequality" from linear inequalities, which still applies once the exponents are compared. At the step that drops the exponentials, it is not the sign of a multiplier but the size of the base that governs whether the inequality reverses.`,
-          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'case-split-exponential-base-cases'}
+            id="exponential-inequality-base-cases"
+            title="The Base Decides the Direction"
+            source="/algebra/powers/exponential-inequalities"
+            related={false}
+            layout="top"
+          >
+            <CaseSplit data={baseCases} variant="poster" proseStyle="cards" theme={baseCasesTheme} />
+          </DiagramFrame>,
         ],
       },
       {
@@ -740,9 +852,19 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="exponential-inequality-steps"
+            title="Solving a basic exponential inequality"
+            source="/algebra/powers/exponential-inequalities"
+            before={"The procedure on the example with a base below 1. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={expInequalitySteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-expFlip'} dangerouslySetInnerHTML={{ __html: demoUnits.expFlip }} />,
           `With 2ˣ > 8 the curve rises and the direction is kept: x > 3.`,
           `@academic[punchline:Once both sides are powers of one base, the inequality passes to the exponents, and the base decides its direction.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve an exponential inequality](!/algebra/methods/exponential-inequalities) →@`,
         ]
     },
 
@@ -753,11 +875,15 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-inequalities-inequalities-requiring-simplification-matrix'}
+            id="exponential-inequalities-inequalities-requiring-simplification-matrix"
+            title="Inequalities Requiring Simplification"
+            source="/algebra/powers/exponential-inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -778,6 +904,16 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
           sectionsContent.obj5.content,
           <div key={'unit-expBand'} dangerouslySetInnerHTML={{ __html: demoUnits.expBand }} />,
           `With a base between 0 and 1, both bounds would flip and change places.`,
+          <DiagramFrame
+            key={'expBand-interval-line'}
+            id="exponential-compound-number-line"
+            title="The compound examples on the number line"
+            source="/algebra/powers/exponential-inequalities"
+            related={false}
+            before={"The three examples of this section, each as two conditions on $x$ and the interval they share."}
+          >
+            <IntervalLine data={il_expCompound} variant="compound" />
+          </DiagramFrame>,
         ]
     },
 
@@ -788,11 +924,15 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-inequalities-summary-cases-matrix'}
+            id="exponential-inequalities-summary-cases-matrix"
+            title="Summary of Cases"
+            source="/algebra/powers/exponential-inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -810,6 +950,14 @@ When $0 < a < 1$, the function $a^x$ is decreasing — larger exponents produce 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

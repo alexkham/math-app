@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,6 +15,8 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
 // CaseGraph 2026-11-09: "Where the reversed direction comes from" (graph), from the page's own text. Holds functions, so it lives here, not in getStaticProps.
 const caseGraphData = {
@@ -38,6 +41,93 @@ const caseGraphData = {
   };
 import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Techniques"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Situation","features":[{"id":"c1","name":"Technique","type":"text"},{"id":"c2","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Single log vs constant, base > 1","values":{"c1":"convert with direction preserved","c2":"log₂(x) > 3 → x > 8"}},{"id":"r2","name":"Single log vs constant, 0 < base < 1","values":{"c1":"convert with direction reversed","c2":"log₍₁⁄₂₎(x) > 3 → 0 < x < 1⁄8"}},{"id":"r3","name":"Logs on both sides, same base","values":{"c1":"drop the logs; reverse the comparison if base < 1","c2":"log₃(2x+1) > log₃(x+4) → x > 3"}},{"id":"r4","name":"Composite argument","values":{"c1":"solve algebraically, then intersect with the domain (every argument > 0)","c2":"log₂(x−3) > 1 → x > 5"}},{"id":"r5","name":"Compound (bounded)","values":{"c1":"split into two inequalities, solve each, intersect","c2":"1 < log₂(x) < 4 → 2 < x < 16"}},{"id":"r6","name":"Multiple logs, same base","values":{"c1":"condense with logarithm rules first, then convert","c2":"log₂(x) + log₂(x−2) > 3 → x > 4"}},{"id":"r7","name":"Visual check","values":{"c1":"read \"curve above the line y = k\" on the [graph](!/algebra/logarithms/graphs) — direction follows whether the curve rises or falls","c2":"a > 1: solution to the right; 0 < a < 1: solution to the left"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table directionTable ("Logarithms on Both Sides"); converted from the table's own cells.
+const fm_directionTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Inequality form","features":[{"id":"c1","name":"Base a > 1 (direction preserved)","type":"text"},{"id":"c2","name":"Base 0 < a < 1 (direction reversed)","type":"text"}],"items":[{"id":"r1","name":"logₐ(x) > k","values":{"c1":"x > aᵏ","c2":"x < aᵏ"}},{"id":"r2","name":"logₐ(x) < k","values":{"c1":"x < aᵏ","c2":"x > aᵏ"}},{"id":"r3","name":"logₐ(M) > logₐ(N)","values":{"c1":"M > N","c2":"M < N"}},{"id":"r4","name":"logₐ(M) < logₐ(N)","values":{"c1":"M < N","c2":"M > N"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a logarithmic inequality", href: "/algebra/methods/logarithmic-inequalities", desc: "Remove the logs keeping or flipping the direction by the base, then intersect with the domain.", level: "composite", here: "#8" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Solve a logarithmic equation", href: "/algebra/methods/logarithmic-equations", desc: "Condense to one log, convert to exponential form or equate arguments, then check the domain.", level: "composite" },
+      { skill: "Solve an exponential inequality", href: "/algebra/methods/exponential-inequalities", desc: "Match bases and compare exponents; flip the sign when the base is between 0 and 1.", level: "composite" },
+      { skill: "Evaluate a logarithm", href: "/algebra/methods/evaluate-logarithms", desc: "Ask \"which exponent?\", use the key values, or change the base for a calculator.", level: "composite" },
+    ] },
+    { title: "Inequality methods", items: [
+      { skill: "Solve a linear inequality", href: "/algebra/inequalities/methods/linear-inequalities", desc: "Solve like an equation, but flip the sign when multiplying or dividing by a negative.", level: "composite" },
+      { skill: "Solve a quadratic inequality", href: "/algebra/inequalities/methods/quadratic-inequalities", desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// IntervalLine: the example of obj6, quadratic result cut by the domain
+const il_combinedLogs = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  compound: {
+    range: [-5, 8],
+    cases: [
+      { name: '$\\log_2(x) + \\log_2(x - 2) > 3$', connective: 'and', source: '$\\log_2(x) + \\log_2(x - 2) > 3$',
+        rewrite: '$(x - 4)(x + 2) > 0$, with the domain $x > 0$ and $x > 2$',
+        conditions: [
+          { label: '$x < -2$ or $x > 4$', pieces: [{ from: -Infinity, to: -2, fromIn: false, toIn: false }, { from: 4, to: Infinity, fromIn: false, toIn: false }] },
+          { label: '$x > 2$', op: '>', value: 2 }
+        ],
+        note: { label: 'The domain decides', text: 'The quadratic allows two intervals, but only $x > 4$ also satisfies the domain $x > 2$.' },
+        wrongNote: { label: 'The domain is not optional', text: 'OR would keep every $x < -2$, where $\\log_2(x)$ is not defined, and $2 < x \\leq 4$, where the inequality fails.' } }
+    ]
+  }
+};
+
+// IntervalLine: the two examples of obj4, algebraic answer against the domain
+const il_logDomain = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  compound: {
+    range: [-4, 8],
+    wrongNote: { label: 'The domain is not optional', text: 'OR would admit values of $x$ where the logarithm is not defined, or where the inequality fails.' },
+    cases: [
+      { name: '$\\log_2(x - 3) > 1$', connective: 'and', source: '$\\log_2(x - 3) > 1$',
+        rewrite: '$x - 3 > 2$, with the domain $x - 3 > 0$',
+        conditions: [{ label: '$x > 5$', op: '>', value: 5 }, { label: '$x > 3$', op: '>', value: 3 }],
+        note: { label: 'The domain changes nothing', text: 'Every $x > 5$ already satisfies $x > 3$, so the overlap is the algebraic answer itself.' } },
+      { name: '$\\log_4(x + 2) < 0$', connective: 'and', source: '$\\log_4(x + 2) < 0$',
+        rewrite: '$x + 2 < 1$, with the domain $x + 2 > 0$',
+        conditions: [{ label: '$x < -1$', op: '<', value: -1 }, { label: '$x > -2$', op: '>', value: -2 }],
+        note: { label: 'The domain cuts the answer', text: 'The ray $x < -1$ is cut off at $-2$, leaving the bounded interval $(-2, -1)$.' } }
+    ]
+  }
+};
+
+// IntervalLine: the two compound examples of obj5
+const il_logCompound = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  labels: { intersection: 'intersection: where all hold' },
+  compound: {
+    wrongNote: { label: 'AND, not OR', text: 'A chain needs both bounds at once. With OR almost every $x$ would qualify.' },
+    cases: [
+      { name: '$1 < \\log_2(x) < 4$', connective: 'and', source: '$1 < \\log_2(x) < 4$', range: [0, 18],
+        rewrite: '$\\log_2(x) > 1$ and $\\log_2(x) < 4$',
+        conditions: [{ label: '$x > 2$', op: '>', value: 2 }, { label: '$x < 16$', op: '<', value: 16 }],
+        note: { label: 'Two bounds, one interval', text: 'Base $2 > 1$ keeps both directions, and the two rays overlap on $(2, 16)$.' } },
+      { name: '$-1 \\leq \\log_3(x + 1) \\leq 2$', connective: 'and', source: '$-1 \\leq \\log_3(x + 1) \\leq 2$', range: [-2, 10],
+        rewrite: '$x + 1 \\geq \\frac{1}{3}$ and $x + 1 \\leq 9$, with the domain $x > -1$',
+        conditions: [
+          { label: '$x \\geq -\\frac{2}{3}$', op: '>=', value: -2 / 3, tex: '-\\frac{2}{3}' },
+          { label: '$x \\leq 8$', op: '<=', value: 8 },
+          { label: '$x > -1$', op: '>', value: -1 }
+        ],
+        note: { label: 'The domain is already satisfied', text: 'Every $x \\geq -\\frac{2}{3}$ is greater than $-1$, so the domain condition removes nothing.' } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -784,11 +874,15 @@ With domain: $0 < x \\leq 25$.]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'direction-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: directionTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-logarithms-both-sides-matrix'}
+            id="inequalities-logarithms-both-sides-matrix"
+            title="Logarithms on Both Sides"
+            source="/algebra/logarithms/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_directionTable} />
+          </DiagramFrame>,
           `@academic[punchline:Logarithms can be dropped from both sides because they are monotonic; the conditions on their arguments cannot.]@`,
         ]
     },
@@ -800,6 +894,16 @@ With domain: $0 < x \\leq 25$.]@`,
           sectionsContent.obj4.content,
           <div key={'unit-domainEdge'} dangerouslySetInnerHTML={{ __html: demoUnits.domainEdge }} />,
           `State the domain first; the algebraic answer is then cut to fit it.`,
+          <DiagramFrame
+            key={'domainEdge-interval-line'}
+            id="log-domain-number-line"
+            title="The algebraic answer and the domain"
+            source="/algebra/logarithms/inequalities"
+            related={false}
+            before={"Both examples as two conditions on the number line: the algebraic answer, the domain, and the part they share."}
+          >
+            <IntervalLine data={il_logDomain} variant="compound" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -810,6 +914,16 @@ With domain: $0 < x \\leq 25$.]@`,
           sectionsContent.obj5.content,
           <div key={'unit-band'} dangerouslySetInnerHTML={{ __html: demoUnits.band }} />,
           `With a base between 0 and 1, both bounds would flip and swap ends.`,
+          <DiagramFrame
+            key={'band-interval-line'}
+            id="log-compound-number-line"
+            title="The two bounds on the number line"
+            source="/algebra/logarithms/inequalities"
+            related={false}
+            before={"Both examples with each bound as its own condition on $x$, and the interval where all of them hold."}
+          >
+            <IntervalLine data={il_logCompound} variant="compound" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -818,6 +932,16 @@ With domain: $0 < x \\leq 25$.]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-interval-line'}
+            id="combined-logs-number-line"
+            title="The quadratic result cut by the domain"
+            source="/algebra/logarithms/inequalities"
+            related={false}
+            before={"The example on the number line: what the quadratic inequality allows, what the domain allows, and the part they share."}
+          >
+            <IntervalLine data={il_combinedLogs} variant="compound" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -836,11 +960,16 @@ With domain: $0 < x \\leq 25$.]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-summary-techniques-matrix'}
+            id="inequalities-summary-techniques-matrix"
+            title="Summary of Techniques"
+            source="/algebra/logarithms/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a logarithmic inequality](!/algebra/methods/logarithmic-inequalities) →@`,
         ]
     },
     {
@@ -858,6 +987,14 @@ With domain: $0 < x \\leq 25$.]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

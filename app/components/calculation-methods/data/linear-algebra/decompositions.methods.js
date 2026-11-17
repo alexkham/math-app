@@ -33,7 +33,7 @@ const decompositionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the LU Decomposition (A = LU and PA = LU) | Learn Math Class',
         description: 'Find the LU decomposition of a matrix: eliminate, store the multipliers in L, read off U, check LU = A. Pivoting with PA = LU and solving systems, examples.',
@@ -167,7 +167,7 @@ const decompositionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 2 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the QR Decomposition (Gram-Schmidt) | Learn Math Class',
         description: 'Find the QR decomposition with Gram-Schmidt: normalize the columns into Q, collect dot products and lengths in R, check QR = A. Least squares by QR, examples.',
@@ -287,7 +287,7 @@ const decompositionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Cholesky Decomposition (A = LLᵀ) | Learn Math Class',
         description: 'Find the Cholesky decomposition A = LLᵀ of a symmetric positive definite matrix column by column, test positive definiteness, solve systems. Examples.',
@@ -406,7 +406,7 @@ const decompositionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Spectral Decomposition (A = QDQᵀ) | Learn Math Class',
         description: 'Find the spectral decomposition A = QDQᵀ of a symmetric matrix: eigenvalues, orthonormal eigenvectors, Gram-Schmidt for repeats, outer products. Examples.',
@@ -523,7 +523,7 @@ const decompositionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Singular Value Decomposition (SVD) | Learn Math Class',
         description: 'Find the singular value decomposition A = UΣVᵀ: eigenvalues of AᵀA, singular values, V, then each u = Av/σ. Wide matrices, low-rank approximation.',
@@ -660,7 +660,7 @@ const decompositionsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Matrix Decomposition to Use? Decision Tree | Learn Math Class',
         description: 'Choose a matrix decomposition: LU or Cholesky for square systems, QR for least squares, spectral for symmetric eigenproblems, SVD for rank and approximation.',

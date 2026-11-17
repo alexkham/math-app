@@ -3166,6 +3166,7 @@
 
 // tables-optimized: v4 | 2026-05-20 | 4 tables (obj6 aggregation, obj7 comparison, obj11 aggregation, obj12 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -3179,6 +3180,24 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_elementaryMatrixTypes = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'Elementary matrices', sub: 'one row operation performed on the identity matrix' },
+    branches: [
+      { leaves: [
+        { name: 'Swapping two rows', condition: 'Its inverse is the same row swap.', example: 'if $E$ swaps rows $2$ and $3$ of the identity, $EA$ swaps rows $2$ and $3$ of $A$' },
+        { name: 'Multiplying a row by a nonzero scalar', condition: 'Its inverse is scaling by $1/k$.', example: 'if $E$ scales row $1$ of the identity by $5$, $EA$ scales row $1$ of $A$ by $5$' },
+        { name: 'Adding a multiple of one row to another', condition: 'Its inverse is subtracting $c$ times row $i$ from row $j$.' }
+      ] }
+    ]
+  },
+  note: { label: 'Why they matter', text: 'Every invertible matrix can be written as a product of elementary matrices.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -3190,12 +3209,43 @@ import matrixScalarDiagrams from '@/app/components/linear-algebra copy/matrix/ma
 import matrixLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/matrixLinCombDiagrams'
 import powerDiagrams from '@/app/components/linear-algebra copy/matrix/powerDiagrams'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
+import MatrixMultiplicationOrderVisualizer from '@/app/components/matrix-multiplication/order-visualiser/MatrixMultiplicationVisualizer'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Dimension Summary"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Input requirement","type":"text"},{"id":"c2","name":"Result size","type":"text"},{"id":"c3","name":"Key property","type":"text"}],"items":[{"id":"r1","name":"Addition / subtraction","values":{"c1":"A and B both m × n","c2":"m × n","c3":"commutative; additive identity O"}},{"id":"r2","name":"Scalar multiplication","values":{"c1":"A is m × n; c any scalar","c2":"m × n","c3":"distributes over both matrix and scalar sum"}},{"id":"r3","name":"Linear combination","values":{"c1":"all Aᵢ same m × n shape","c2":"m × n","c3":"turns m × n matrices into a [vector space](!/linear-algebra/vector-spaces) of dimension mn"}},{"id":"r4","name":"Matrix multiplication","values":{"c1":"A is m × n, B is n × p (inner dims match)","c2":"m × p","c3":"associative, NOT commutative; inner dim consumed"}},{"id":"r5","name":"Transpose","values":{"c1":"A is m × n (no other restriction)","c2":"n × m","c3":"(Aᵀ)ᵀ = A; (AB)ᵀ = BᵀAᵀ (order reverses)"}},{"id":"r6","name":"Power Aᵏ","values":{"c1":"A square (n × n), k ≥ 0 (or k ∈ ℤ if invertible)","c2":"n × n","c3":"Aʲ Aᵏ = Aʲ⁺ᵏ; (AB)ᵏ ≠ Aᵏ Bᵏ in general"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Matrix Decompositions"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Decomposition","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Requires","type":"text"},{"id":"c3","name":"Primary use","type":"text"}],"items":[{"id":"r1","name":"LU","values":{"c1":"A = LU (L lower, U upper triangular)","c2":"any square matrix (with pivoting)","c3":"solving Ax = b for many right-hand sides"}},{"id":"r2","name":"QR","values":{"c1":"A = QR (Q orthogonal, R upper triangular)","c2":"any matrix","c3":"least squares, eigenvalue algorithms"}},{"id":"r3","name":"Cholesky","values":{"c1":"A = LLᵀ","c2":"[symmetric](!/linear-algebra/matrix/types) positive definite","c3":"half-cost LU for SPD systems"}},{"id":"r4","name":"Eigendecomposition","values":{"c1":"A = PDP⁻¹ (D diagonal)","c2":"diagonalizable square matrix","c3":"matrix powers, spectral analysis"}},{"id":"r5","name":"SVD","values":{"c1":"A = UΣVᵀ (U, V orthogonal; Σ diagonal ≥ 0)","c2":"any matrix of any shape","c3":"rank, fundamental subspaces, best low-rank approximation"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Multiply matrices", href: "/linear-algebra/matrix/methods/matrix-multiplication", desc: "Check the inner sizes, then fill each entry with a row of the first times a column of the second.", level: "composite", here: "#5" },
+      { skill: "Compute powers of a matrix", href: "/linear-algebra/matrix/methods/matrix-powers", desc: "Multiply the matrix by itself, square repeatedly for high powers, or use a diagonal or repeating pattern.", level: "composite", here: "#9" },
+    ] },
+    { title: "More matrix methods", items: [
+      { skill: "Add or subtract matrices", href: "/linear-algebra/matrix/methods#matrix-addition", desc: "Two matrices of the same size joined by $+$ or $-$: $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix} + \\begin{pmatrix} 5 & -1 \\\\ 0 & 2 \\end{pmatrix}$, or $A - B$ for two $2 \\times 3$ matrices.", level: "atomic" },
+      { skill: "Multiply a matrix by a scalar", href: "/linear-algebra/matrix/methods#matrix-scalar-multiplication", desc: "A number in front of a matrix: $3A$, $-\\tfrac{1}{2}B$, $\\frac{1}{\\det(A)}\\operatorname{adj}(A)$.", level: "atomic" },
+      { skill: "Transpose a matrix", href: "/linear-algebra/matrix/methods#transpose", desc: "A matrix with a superscript $T$: $A^T$, $(AB)^T$, or a step that turns rows into columns (the adjugate, a symmetry test, $A^TA$).", level: "atomic" },
+      { skill: "Find the trace of a matrix", href: "/linear-algebra/matrix/methods/trace", desc: "Add the diagonal entries; use linearity and $\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$ to skip products.", level: "composite" },
+      { skill: "Find the inverse of a 2×2 matrix", href: "/linear-algebra/matrix/methods/inverse-2x2", desc: "Swap the diagonal, negate the other two entries, divide by the determinant $ad - bc$.", level: "composite" },
+      { skill: "Identify the type of a matrix", href: "/linear-algebra/matrix/methods/identify-matrix-type", desc: "Check the shape, the zero pattern, the transpose and a few products to name the type.", level: "composite" },
+    ] },
+    { title: "Eigenvalue methods", items: [
+      { skill: "Compute matrix powers by diagonalization", href: "/linear-algebra/eigen/methods/matrix-powers-diagonalization", desc: "Write $A = PDP^{-1}$, raise only the diagonal entries of $D$ to the power and multiply back.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/matrix/methods", label: "All matrix methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3819,7 +3869,7 @@ is a linear combination of matrices.
 @academic[formula_callout:matrix_multiplication|Matrix Multiplication|$$(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$$]@
 @academic[formulas_link:/linear-algebra/formulas#matrix_multiplication]@
 
-The number of columns of $A$ must equal the number of rows of $B$. If this compatibility condition fails, the product is undefined.
+The number of columns of $A$ must equal the number of rows of $B$. If this [compatibility condition](!#which-sizes-fit) fails, the product is undefined.
 
 ## Worked Example
 
@@ -3851,6 +3901,19 @@ Multiplying matching positions turns $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pm
 Every entry of the product draws on a whole row of the left factor and a whole column of the right factor. The entry $29$, in row $2$ and column $2$, combines the second row $(2, -1, 4)$ of the left matrix with the second column $(1, -3, 6)$ of the right one: three products, added together. The same pattern produces the other three entries, and it works the same way whatever the sizes of the two factors.`,
     before: ``,
     after: ``,
+    link: ``,
+  },
+  objSizes: {
+    title: `Matrix Multiplication — Which Sizes Fit`,
+    content: `Before any entry is computed, the two sizes decide whether the product exists at all. Write them side by side: an $m \\times n$ matrix times a $p \\times q$ matrix. The two inner numbers, $n$ and $p$, must be equal. Every entry of the product pairs a row of $A$ with a column of $B$, entry by entry. A row of $A$ has $n$ entries and a column of $B$ has $p$, so if the two counts differ, some entry is left without a partner and the product is undefined.
+
+Set the sizes below and watch the rule decide.`,
+    before: ``,
+    after: `When the inner numbers match, the two outer numbers give the size of the result: $m$ rows from $A$ and $q$ columns from $B$. A $3 \\times 2$ matrix times a $2 \\times 6$ matrix is $3 \\times 6$. The shared inner size, $2$, does not appear in the answer.
+
+The rule is checked separately for each order. With $A$ of size $3 \\times 2$ and $B$ of size $2 \\times 6$, the product $AB$ exists, but $BA$ would have to pair the $6$ columns of $B$ with the $3$ rows of $A$, so it does not. Both orders exist only when $A$ is $m \\times n$ and $B$ is $n \\times m$, and even then $AB$ is $m \\times m$ while $BA$ is $n \\times n$.
+
+Once the sizes fit, the [matrix multiplication visualizer](!/visual-tools/matrix-multiplication) shows how each entry is built, step by step.`,
     link: ``,
   },
   obj6: {
@@ -4025,7 +4088,7 @@ A common source of confusion is the product rule. The product of two $n \\times 
 
 The [Hadamard product](!/linear-algebra/definitions#hadamard_product) $A \\circ B$, also written $A \\odot B$, multiplies entry by entry: $(A \\circ B)_{ij} = a_{ij}\\,b_{ij}$. Both matrices must share the same $m \\times n$ shape, and the result has that shape too. Because positions never mix, it inherits the arithmetic of ordinary numbers: it is commutative, associative, and distributes over addition. It has nothing to do with $AB$. For a $2 \\times 2$ matrix, $A \\circ I$ keeps only the diagonal of $A$, while $AI = A$.
 
-The [outer product](!/linear-algebra/definitions#outer_product) $\\mathbf{u}\\mathbf{v}^T$ is ordinary matrix multiplication applied to a column with $m$ entries and a row with $n$ entries. The inner dimensions are both $1$, so the product exists for any two lengths and gives an $m \\times n$ matrix with entries $u_i v_j$:
+The [outer product](!/linear-algebra/definitions#outer_product) $\\mathbf{u}\\mathbf{v}^T$ is ordinary matrix multiplication applied to a column with $m$ entries and a row with $n$ entries. The [inner dimensions](!#which-sizes-fit) are both $1$, so the product exists for any two lengths and gives an $m \\times n$ matrix with entries $u_i v_j$:
 
 @academic[formula_callout:Two More Products: Hadamard and Outer
 $$\\mathbf{u}\\mathbf{v}^T = \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} \\begin{pmatrix} 3 & 4 & 5 \\end{pmatrix} = \\begin{pmatrix} 3 & 4 & 5 \\\\ 6 & 8 & 10 \\end{pmatrix}$$]@
@@ -4371,8 +4434,20 @@ $$AE = \\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$$`, `The two columns of 
     ],
   };
 
+  // MatrixOperation 2026-11-14: The outer product as a matrix product (obj13).
+  const outerProductStrip = {
+    operation: 'multiply',
+    A: [[1], [2]],
+    B: [[3, 4, 5]],
+    nameA: 'u',
+    nameB: 'vᵀ',
+    nameC: 'uvᵀ',
+    intro: 'A $2 \\times 1$ column times a $1 \\times 3$ row gives a $2 \\times 3$ matrix. Every entry is a single product, one entry of $\\mathbf{u}$ times one entry of $\\mathbf{v}$.',
+  };
+
    return {
   props: {
+    outerProductStrip,
     formulaSummaryData,
     pitfallData,
     transposeStrip,
@@ -4402,7 +4477,7 @@ $$AE = \\begin{pmatrix} 2 & 1 \\\\ 4 & 3 \\end{pmatrix}$$`, `The two columns of 
    }
 
 
-   export default function MatrixOperationsPage({ formulaSummaryData, pitfallData,transposeStrip, matrixProductOrder, matrixProductAnatomy, scalarMultipleStrip, matrixAdditionStrip, seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+   export default function MatrixOperationsPage({ outerProductStrip, formulaSummaryData, pitfallData,transposeStrip, matrixProductOrder, matrixProductAnatomy, scalarMultipleStrip, matrixAdditionStrip, seoData, sectionsContent, introContent, multiplicationLaws, productInterpretations, obj11Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4564,6 +4639,19 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
           >
             <MatrixOperation data={matrixProductAnatomy} theme="navy" variant="anatomy" />
           </DiagramFrameV2>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to multiply matrices](!/linear-algebra/matrix/methods/matrix-multiplication) →@`,
+        ]
+    },
+    {
+        id:'which-sizes-fit',
+        title:sectionsContent.objSizes.title,
+        link:sectionsContent.objSizes.link,
+        content:[
+          sectionsContent.objSizes.content,
+          <div key={'sizes-tool'} style={{ margin: '18px 0' }}>
+            <MatrixMultiplicationOrderVisualizer showHeader={false} />
+          </div>,
+          sectionsContent.objSizes.after,
         ]
     },
     {
@@ -4635,6 +4723,7 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
           sectionsContent.obj9.content,
           <div key={'unit-powerSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.powerSquare }} />,
           `Associativity is what lets the chain be collapsed in any grouping and still give the same A⁴.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compute powers of a matrix](!/linear-algebra/matrix/methods/matrix-powers) →@`,
         ]
     },
     {
@@ -4643,6 +4732,15 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'taxonomy-elementary-matrix-types'}
+            id="elementary-matrix-types"
+            title="Elementary Matrices"
+            source="/linear-algebra/matrix/operations"
+            related={false}
+          >
+            <Taxonomy data={tx_elementaryMatrixTypes} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -4651,8 +4749,15 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'obj11-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-operations-matrix-decompositions-matrix'}
+            id="operations-matrix-decompositions-matrix"
+            title="Matrix Decompositions"
+            source="/linear-algebra/matrix/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -4661,6 +4766,17 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'obj13-matrix-operation'}
+            id="outer-product-strip"
+            title="The outer product as a matrix product"
+            source="/linear-algebra/matrix/operations"
+            before={"The example of this section: a column times a row."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <MatrixOperation data={outerProductStrip} theme="navy" variant="strip" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -4669,8 +4785,15 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-operations-dimension-summary-matrix'}
+            id="operations-dimension-summary-matrix"
+            title="Dimension Summary"
+            source="/linear-algebra/matrix/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -4706,6 +4829,14 @@ $$\\begin{pmatrix} 1 & 4 \\\\ -2 & 3 \\\\ 0 & 5 \\end{pmatrix} + \\begin{pmatrix
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

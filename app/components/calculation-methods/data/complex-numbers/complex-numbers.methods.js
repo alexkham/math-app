@@ -125,7 +125,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '3 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Multiply Complex Numbers | Learn Math Class',
         description: 'Multiply complex numbers in a + bi form: expand all four products, replace i squared with -1, collect real and imaginary parts. Worked examples and mistakes.',
@@ -251,7 +251,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Divide Complex Numbers | Learn Math Class',
         description: 'Divide complex numbers: multiply the top and bottom by the conjugate of the denominator, expand, and split into a + bi. Worked examples and common mistakes.',
@@ -379,7 +379,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Convert a Complex Number to Polar Form | Learn Math Class',
         description: 'Convert a + bi to polar form: find the modulus, take the reference angle from b/a, fix the quadrant, and write r(cos θ + i sin θ). Worked examples and mistakes.',
@@ -513,7 +513,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '3 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Convert a Complex Number from Polar to Rectangular Form | Learn Math Class',
         description: 'Convert r(cos θ + i sin θ) or r cis θ to a + bi: evaluate cosine and sine at θ, multiply both by r, and simplify. Examples with exact values and mistakes.',
@@ -615,7 +615,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Write a Complex Number in Exponential Form | Learn Math Class',
         description: "Write a complex number as re^(iθ): find the modulus and the argument in radians, then use Euler's formula to go back to a + bi. Worked examples and mistakes.",
@@ -743,7 +743,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Multiply and Divide Complex Numbers in Polar Form | Learn Math Class',
         description: 'Multiply and divide complex numbers in polar form: multiply or divide the moduli, add or subtract the angles, then reduce the angle. Examples and mistakes.',
@@ -876,7 +876,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: "How to Raise a Complex Number to a Power (De Moivre's Theorem) | Learn Math Class",
         description: "Raise a complex number to a power with De Moivre's theorem: write it in polar form, raise r to n, multiply the angle by n, reduce, convert back. With examples.",
@@ -1004,7 +1004,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the nth Roots of a Complex Number | Learn Math Class',
         description: 'Find all n roots of a complex number: write it in polar form, take the nth root of the modulus, add 2πk to the angle before dividing by n. Examples, mistakes.',
@@ -1122,7 +1122,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Square Roots of a Complex Number | Learn Math Class',
         description: 'Find both square roots of a + bi: set (x + yi)² = a + bi, compare parts, use the modulus to get x² and y², and pick the signs. Worked examples and mistakes.',
@@ -1256,7 +1256,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a Quadratic Equation with Complex Roots | Learn Math Class',
         description: 'Solve quadratics with complex roots: compute the discriminant, write the square root of a negative with i, apply the quadratic formula, and check with Vieta.',
@@ -1378,7 +1378,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find All Complex Roots of a Polynomial | Learn Math Class',
         description: 'Find all complex roots of a polynomial: count n roots, find a real root or use a conjugate pair, divide it out, and solve the last quadratic. Worked examples.',
@@ -1513,7 +1513,7 @@ const complexNumbersMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Plot Complex Numbers on the Argand Plane | Learn Math Class',
         description: 'Plot complex numbers on the Argand plane: real part on the horizontal axis, imaginary part on the vertical axis, then read the modulus, conjugate and sums.',
@@ -1644,7 +1644,7 @@ const complexNumbersMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Form of a Complex Number to Use (Decision Tree) | Learn Math Class',
         description: 'Choose rectangular, polar or exponential form for each task: sums, products, quotients, powers, roots and conversions. With a decision tree and method links.',

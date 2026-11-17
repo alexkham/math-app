@@ -87,6 +87,26 @@ export async function getStaticPaths() {
     { params: { view: 'cyclic-exterior-angle' } },
     { params: { view: 'angles-in-same-segment' } },
     { params: { view: 'isosceles-converse' } },
+    { params: { view: 'bisector-arc-midpoint' } },
+    { params: { view: 'incentre-excentre-lemma' } },
+    { params: { view: 'cointerior-bisectors' } },
+    { params: { view: 'pentagon-diagonals' } },
+    { params: { view: 'pentagon-golden-ratio' } },
+    { params: { view: 'pentagram-angles' } },
+    { params: { view: 'parallelogram-bisectors' } },
+    { params: { view: 'angle-between-chords' } },
+    { params: { view: 'angle-between-secants' } },
+    { params: { view: 'tangent-secant-angle' } },
+    { params: { view: 'vertical-angle-bisectors' } },
+    { params: { view: 'viviani-theorem' } },
+    { params: { view: 'pitot-theorem' } },
+    { params: { view: 'alternate-angle-bisectors' } },
+    { params: { view: 'median-halves-area' } },
+    { params: { view: 'concentric-circles-chord' } },
+    { params: { view: 'regular-polygon-area' } },
+    { params: { view: 'diagonals-bisect-converse' } },
+    { params: { view: 'angle-at-a-bend' } },
+    { params: { view: 'cyclic-hexagon-angles' } },
   ];
 
   return { paths, fallback: false };
@@ -8649,7 +8669,7 @@ The number six is what makes it work: only for six sides is the central angle $6
           title: 'Dragging the Figure',
           content: `Drag $A$: the whole hexagon turns with it and grows or shrinks, since $B$ to $F$ are always $A$ turned about $O$ by $60°$ steps, and in the readout the side stays equal to the radius while the angle at the centre stays at $60°$. Drag $O$ to move the circle; $A$ stays where it is, so the hexagon turns and resizes about the new centre.
 
-The player keeps the radius between about one and a half and two and a half readout units, so that the six angle marks at the centre stay readable and the hexagon stays in the frame; a drag outside that range is refused.`,
+The player keeps the radius between about 1.8 and 2.5 readout units, so that the six angle marks at the centre stay readable and the hexagon stays in the frame; a drag outside that range is refused.`,
           before: '',
           after: '',
           link: ''
@@ -10548,6 +10568,2951 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
         }
       }
     },
+    'bisector-arc-midpoint': {
+      proofKey: 'arcMidpoint',
+      title: 'Angle Bisector Meets the Circumcircle at the Arc Midpoint | Proof Step by Step',
+      description: 'Watch the proof that the bisector of an angle of an inscribed triangle meets the circumcircle at the midpoint of the opposite arc, by inscribed and central angles and SAS, step by step. Then drag the triangle round the circle.',
+      h1Title: 'Angle Bisector and the Arc Midpoint',
+      url: '/geometry/visual-tools/bisector-arc-midpoint',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="38" r="30" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><polygon points="36,8 14,52 66,52" fill="#85B7EB" fill-opacity="0.3" stroke="#E6F1FB" stroke-width="1.4"/><line x1="36" y1="8" x2="40" y2="68" stroke="#FAC775" stroke-width="1.6"/><circle cx="40" cy="68" r="2.4" fill="#FAC775"/><line x1="40" y1="68" x2="14" y2="52" stroke="#E6F1FB" stroke-width="1"/><line x1="40" y1="68" x2="66" y2="52" stroke="#E6F1FB" stroke-width="1"/><text x="40" y="79" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">MB = MC</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Circle',
+      name: 'Bisector Arc Midpoint Proof',
+      keywords: [
+        'angle bisector circumcircle',
+        'angle bisector meets circumcircle at arc midpoint',
+        'midpoint of arc',
+        'inscribed triangle angle bisector',
+        'incenter excenter lemma',
+        'inscribed angle theorem',
+        'circle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $B$ or $C$ round the circle and watch $MB$ and $MC$ in the readout stay equal. Drag $A$ along its arc too: the point $M$ does not move at all. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $ABC$ be a triangle inscribed in a circle with centre $O$. Extend the bisector of the angle at $A$ until it meets the circle again at a point $M$; it lands on the arc $BC$ that does not contain $A$. The theorem says
+
+$$MB = MC$$
+
+so $M$ is the midpoint of that arc. A surprising part of it: $M$ depends only on $B$ and $C$. Wherever $A$ sits on the other arc, its angle bisector passes through the same point $M$.
+
+The proof uses the [inscribed angle theorem](!/geometry/visual-tools/inscribed-angle) and SAS. In the player the three vertices slide round the circle and $M$ is found as the second point where the bisector from $A$ meets it, so nothing about $M$ is assumed; the readout shows $MB$, $MC$ and the two halves of the angle at $A$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'The Two Halves',
+          content: `The line $AM$ bisects the angle at $A$, so
+
+$$\\angle BAM = \\angle MAC = \\varphi$$
+
+Each half is an inscribed angle: $\\angle BAM$ stands on the arc $BM$ and $\\angle MAC$ on the arc $MC$, the two arcs into which $M$ divides the arc $BC$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Central Angles',
+          content: `Join the centre $O$ to $B$, $M$ and $C$. By the [inscribed angle theorem](!/geometry/visual-tools/inscribed-angle) the central angle on an arc is twice the inscribed angle on the same arc:
+
+$$\\angle BOM = 2\\varphi = \\angle MOC$$
+
+So the arcs $BM$ and $MC$ subtend equal angles at the centre.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'Side, Angle, Side',
+          content: `The triangles $BOM$ and $MOC$ have $OB = OM$ and $OM = OC$, all radii, and the equal angles $2\\varphi$ at $O$ between those sides. By SAS they are congruent.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `The third sides of the congruent triangles are equal:
+
+$$MB = MC$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the angle bisector, the inscribed angle theorem, SAS and corresponding parts.
+
+Equal chords $MB$ and $MC$ cut off equal arcs, so $M$ is the midpoint of the arc $BC$, and being equally far from $B$ and $C$ it lies on the [perpendicular bisector](!/geometry/visual-tools/perpendicular-bisector) of $BC$, which also passes through $O$. Since the arc $BC$ depends only on $B$ and $C$, so does $M$: every position of $A$ on the other arc gives a bisector through the same point.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $B$ or $C$ round the circle: the arc $BC$ changes, its midpoint $M$ moves, and the readout keeps $MB = MC$ with the two halves at $A$ equal. Drag $A$ along its arc: the bisector swings about $M$ but always passes through it, and $MB$, $MC$ do not change.
+
+The player keeps $A$ on the larger arc, on the same side of $BC$ as the centre, keeps the sides long enough for the marks and the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **The incentre and the excentre.** The point $M$ is also equally far from the [incentre](!/geometry/visual-tools/incentre) $I$, which lies on $AM$: $MB = MC = MI$. The circle about $M$ through $B$ and $C$ passes through $I$ and the excentre opposite $A$ (the incentre-excentre lemma).
+• **The perpendicular bisector meets the bisector on the circle.** The bisector of the angle at $A$ and the perpendicular bisector of $BC$ are different lines that meet on the circumcircle, at $M$; this is a quick way to find the incentre with ruler and compass on a drawn circumcircle.
+• **Constructing the arc midpoint.** The midpoint of an arc $BC$ can be found without measuring: draw any inscribed angle on the other arc and its bisector.
+• **Equal chords, equal arcs.** The proof shows that equal inscribed angles stand on equal chords, as on the [equal chords](!/geometry/visual-tools/equal-chords) page.
+• **The angle bisector theorem.** The foot $D$ of the bisector on $BC$ divides it in the ratio $AB : AC$ ([angle bisector theorem](!/geometry/visual-tools/angle-bisector)); $M$ is where the same line meets the circle.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'Where does the angle bisector of a triangle meet the circumcircle?',
+          answer: 'At the midpoint of the arc opposite the vertex, the arc between the other two vertices that does not contain the first. That point is equally far from those two vertices.'
+        },
+        obj2: {
+          question: 'How is the arc midpoint theorem proved?',
+          answer: 'The two halves of the bisected angle are inscribed angles on the arcs into which the bisector divides the opposite arc. The central angles on those arcs are twice the halves, so they are equal, and SAS on the radii makes the two chords from the midpoint equal.'
+        },
+        obj3: {
+          question: 'Does the arc midpoint depend on the third vertex?',
+          answer: 'No. It is the midpoint of the arc between the other two vertices, so every position of the third vertex on the other arc gives an angle bisector through the same point.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Bisector Arc Midpoint Proof Visualizer",
+          "description": "Step-by-step interactive proof that the angle bisector from a vertex of an inscribed triangle meets the circumcircle at the midpoint of the opposite arc, with draggable vertices on the circle.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/bisector-arc-midpoint",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Angle Bisector and the Arc Midpoint", "item": "https://www.learnmathclass.com/geometry/visual-tools/bisector-arc-midpoint" }
+          ]
+        }
+      }
+    },
+    'incentre-excentre-lemma': {
+      proofKey: 'incentreExcentre',
+      title: 'Incentre-Excentre Lemma Proof | The Arc Midpoint Is Equidistant from the Incentre Step by Step',
+      description: 'Watch the proof of the incentre-excentre lemma: the point where the angle bisector meets the circumcircle again is equally far from the two other vertices and the incentre, by angles in the same segment and the exterior angle theorem, step by step. Then drag the triangle.',
+      h1Title: 'The Incentre-Excentre Lemma',
+      url: '/geometry/visual-tools/incentre-excentre-lemma',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="36" r="28" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><polygon points="36,8 16,50 64,50" fill="#85B7EB" fill-opacity="0.3" stroke="#E6F1FB" stroke-width="1.4"/><line x1="36" y1="8" x2="40" y2="64" stroke="#E6F1FB" stroke-width="1.1"/><circle cx="38" cy="38" r="2.2" fill="#FAC775"/><circle cx="40" cy="64" r="2.2" fill="#FAC775"/><line x1="40" y1="64" x2="16" y2="50" stroke="#FAC775" stroke-width="1.2"/><line x1="40" y1="64" x2="64" y2="50" stroke="#FAC775" stroke-width="1.2"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">MB = MI = MC</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Circle',
+      name: 'Incentre-Excentre Lemma Proof',
+      keywords: [
+        'incentre excentre lemma',
+        'incenter excenter lemma',
+        'trillium theorem',
+        'arc midpoint equidistant from incenter',
+        'angle bisector circumcircle',
+        'incentre',
+        'circle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$, $B$ or $C$ round the circle and watch the readout: the three distances $MB$, $MC$ and $MI$ stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $I$ be the [incentre](!/geometry/visual-tools/incentre) of a triangle $ABC$, the point where its angle bisectors meet. The bisector $AI$ meets the circumcircle again at $M$, the [midpoint of the arc](!/geometry/visual-tools/bisector-arc-midpoint) $BC$, so $MB = MC$. The incentre-excentre lemma (also called the trillium theorem) adds a third equal length:
+
+$$MB = MC = MI$$
+
+The circle about $M$ through $B$ and $C$ passes through the incentre; it also passes through the excentre opposite $A$, which gives the lemma its name. It is one of the most used facts in olympiad geometry.
+
+Write $\\alpha$, $\\beta$ for the angles at $A$ and $B$. In the player the vertices slide round the circle, $I$ is computed as the incentre and $M$ as the second point of $AI$ on the circle; the readout shows the three distances.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Angles in the Same Segment',
+          content: `The angles $MBC$ and $MAC$ both stand on the arc $MC$, from the same side of the chord, so by [angles in the same segment](!/geometry/visual-tools/angles-in-same-segment) they are equal:
+
+$$\\angle MBC = \\angle MAC = \\frac{\\alpha}{2}$$
+
+the second because $AM$ bisects the angle at $A$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Bisector at B',
+          content: `The incentre lies on the bisector of the angle at $B$ as well, so $BI$ cuts $\\beta$ into two halves:
+
+$$\\angle ABI = \\angle IBC = \\frac{\\beta}{2}$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Angle at B',
+          content: `The angle between $BI$ and $BM$ is made of two parts, $\\angle IBC$ and $\\angle CBM$:
+
+$$\\angle MBI = \\frac{\\beta}{2} + \\frac{\\alpha}{2} = \\theta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'The Angle at I',
+          content: `Now look at the triangle $ABI$. The ray $IM$ continues $AI$ beyond $I$, so the angle $MIB$ is an exterior angle of $ABI$ at $I$. By the [exterior angle theorem](!/geometry/visual-tools/exterior-angle) it equals the sum of the two remote interior angles:
+
+$$\\angle MIB = \\angle IAB + \\angle IBA = \\frac{\\alpha}{2} + \\frac{\\beta}{2} = \\theta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Why It Holds',
+          content: `In the triangle $MBI$ the angles at $B$ and $I$ are both $\\theta$, so by the [isosceles converse](!/geometry/visual-tools/isosceles-converse) the sides opposite them are equal:
+
+$$MI = MB$$
+
+and $MB = MC$ because $M$ is the arc midpoint. So $MB = MC = MI$. The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, angles in the same segment, the angle bisector, adding, the exterior angle theorem and the isosceles converse.
+
+The same chase with the external bisector at $B$ shows that the excentre $I_A$ opposite $A$, which also lies on the line $AM$, satisfies $MI_A = MB$ as well: $M$ is the midpoint of $II_A$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$, $B$ or $C$ round the circle: the incentre moves, the arc midpoint $M$ moves with $B$ and $C$, and the three distances in the readout stay equal. Dragging $A$ alone moves $I$ along the fixed line towards $M$ but keeps $MI$ equal to $MB$, so $I$ slides along a circle about $M$.
+
+The player keeps $A$ on the larger arc, the sides, $AI$ and $BI$ long enough, the angles at $A$ and $B$ above $45°$ and the angle at $C$ above $40°$, so the angle marks stay readable; a drag that would break one of these is refused. The circle about $M$ through $B$, $I$ and $C$ is not drawn, because most of it would fall outside the canvas.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj8: {
+          title: 'Consequences',
+          content: `• **Locating the incentre.** If the circumcircle and the vertices $B$, $C$ are known, the incentre of any triangle $ABC$ with $A$ on the arc lies on the circle about $M$ through $B$ and $C$; its position on that circle is where $AM$ meets it.
+• **The excentre.** The excentre $I_A$ is the other end of the diameter of that circle through $I$: $M$ is the midpoint of $II_A$.
+• **Euler distance formula.** The lemma is the key step in proving $OI^2 = R^2 - 2Rr$ for the distance between the [circumcentre](!/geometry/visual-tools/circumcentre) and the incentre.
+• **Equal chords from the arc midpoint.** The equal lengths $MB$, $MC$ come from the [arc midpoint](!/geometry/visual-tools/bisector-arc-midpoint) theorem; the lemma adds the third point $I$ on the same circle.
+• **Olympiad problems.** Any problem with an incentre and a circumcircle usually reaches for this lemma within a few lines.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the incentre-excentre lemma?',
+          answer: 'If the bisector of the angle at A of triangle ABC meets the circumcircle again at M, then M is equally far from B, from C and from the incentre I: MB = MC = MI. The circle about M through these points also passes through the excentre opposite A.'
+        },
+        obj2: {
+          question: 'How is the incentre-excentre lemma proved?',
+          answer: 'Angles in the same segment give angle MBC = MAC = α/2, and the bisector at B gives angle IBC = β/2, so angle MBI = α/2 + β/2. The angle MIB is an exterior angle of triangle ABI, so it also equals α/2 + β/2. The triangle MBI has two equal angles, so MI = MB.'
+        },
+        obj3: {
+          question: 'Why is it also called the trillium theorem?',
+          answer: 'The three equal segments from M to B, I and C, together with the circle through them, look like the petals of a trillium flower; the name is used in Russian geometry texts.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Incentre-Excentre Lemma Proof Visualizer",
+          "description": "Step-by-step interactive proof of the incentre-excentre lemma (trillium theorem): MB = MC = MI for the arc midpoint M and the incentre I, by angle chasing, with draggable vertices on the circle.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/incentre-excentre-lemma",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "The Incentre-Excentre Lemma", "item": "https://www.learnmathclass.com/geometry/visual-tools/incentre-excentre-lemma" }
+          ]
+        }
+      }
+    },
+    'cointerior-bisectors': {
+      proofKey: 'cointeriorBisectors',
+      title: 'Bisectors of Co-interior Angles Are Perpendicular | Proof Step by Step',
+      description: 'Watch the proof that the bisectors of the two co-interior angles made by a transversal with two parallel lines meet at a right angle, by co-interior angles and the angle sum of a triangle, step by step. Then drag the transversal.',
+      h1Title: 'Bisectors of Co-interior Angles',
+      url: '/geometry/visual-tools/cointerior-bisectors',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="6" y1="22" x2="74" y2="22" stroke="#E6F1FB" stroke-width="1.4"/><line x1="6" y1="58" x2="74" y2="58" stroke="#E6F1FB" stroke-width="1.4"/><line x1="24" y1="12" x2="34" y2="68" stroke="#E6F1FB" stroke-width="1.2"/><polygon points="26,22 32,58 52,38" fill="#85B7EB" fill-opacity="0.3" stroke="#FAC775" stroke-width="1.4"/><polyline points="47,35 44,38 47,41" fill="none" stroke="#FAC775" stroke-width="1.2"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">β/2 + δ/2 = 90°</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Lines and Angles',
+      name: 'Co-interior Bisectors Proof',
+      keywords: [
+        'bisectors of co-interior angles',
+        'co-interior angles bisectors perpendicular',
+        'same side interior angles bisectors',
+        'parallel lines transversal angle bisectors',
+        'co-interior angles',
+        'angle bisector',
+        'parallel lines',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $P$ or $Q$ along its line to tilt the transversal, or drag $A$, $B$ or $C$ to move the lines, and watch the angle at $R$ in the readout stay at $90°$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Two parallel lines $AB$ and $CD$ are cut by a transversal at $P$ and $Q$. Between the parallels, on the same side of the transversal, lie the co-interior angles
+
+$$\\beta = \\angle QPB, \\qquad \\delta = \\angle PQD$$
+
+Bisect both of them; the bisectors meet at a point $R$. The theorem says
+
+$$\\angle PRQ = 90°$$
+
+the two bisectors are perpendicular, whatever the angle at which the transversal crosses. It is the twin of the [bisectors of a linear pair](!/geometry/visual-tools/linear-pair-bisectors) page, with two parallel lines in place of one straight line.
+
+In the player $P$ and $Q$ slide along the two lines, the second line keeps the direction of the first, and $R$ is found where the bisectors cross; the readout shows $\\beta$, $\\delta$ and the angle at $R$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Co-interior Angles',
+          content: `The angles $\\beta$ and $\\delta$ lie between the parallels and on the same side of the transversal. By the [parallel lines](!/geometry/visual-tools/parallel-lines) theorem co-interior angles are supplementary:
+
+$$\\beta + \\delta = 180°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Two Halves',
+          content: `The line $PR$ bisects $\\beta$ and the line $QR$ bisects $\\delta$, so the triangle $PQR$ has the angles
+
+$$\\angle QPR = \\frac{\\beta}{2}, \\qquad \\angle PQR = \\frac{\\delta}{2}$$
+
+at $P$ and at $Q$. The other halves, between the bisectors and the lines, are equal to these and are drawn too.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'Adding the Halves',
+          content: `Add the two angles of the triangle at $P$ and $Q$:
+
+$$\\frac{\\beta}{2} + \\frac{\\delta}{2} = \\frac{\\beta + \\delta}{2} = \\frac{180°}{2} = 90°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `The [angles of a triangle](!/geometry/visual-tools/triangle-angle-sum) add up to $180°$. Two of the angles of $PQR$ make $90°$, so the third is
+
+$$\\angle PRQ = 180° - 90° = 90°$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, co-interior angles, the angle bisector, adding and the angle sum of a triangle.
+
+So $R$ sees $PQ$ at a right angle, and by the converse of [Thales](!/geometry/visual-tools/thales-theorem) theorem it lies on the circle with diameter $PQ$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $P$ or $Q$ along its line: the transversal tilts, $\\beta$ and $\\delta$ change, one growing as the other shrinks, and the readout keeps the angle at $R$ at $90°$. Drag $A$, $B$ or $C$ to move or tilt the lines; the second line always keeps the direction of the first, so they stay parallel.
+
+The player keeps the co-interior angles between $60°$ and $120°$, the lines nearly level and far enough apart, and every point inside the frame, so the marks stay readable; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **A rectangle of bisectors.** Bisect all four interior angles at $P$ and $Q$, on both sides of the transversal. The four bisectors meet at right angles in pairs and make a rectangle.
+• **The circle on PQ.** Since the angle at $R$ is right, $R$ lies on the circle with diameter $PQ$; the midpoint of $PQ$ is equally far from $P$, $Q$ and $R$, as on the [midpoint of the hypotenuse](!/geometry/visual-tools/midpoint-of-hypotenuse) page.
+• **Parallelograms and trapezoids.** In a parallelogram, or in a trapezoid between its parallel sides, the bisectors of two angles on the same leg meet at a right angle; this follows from the [parallelogram angles](!/geometry/visual-tools/parallelogram-angles) page in the same way.
+• **The converse.** If the bisectors of two angles on the same side of a transversal are perpendicular, those angles add up to $180°$, and the lines are parallel.
+• **A linear pair.** Folding the two parallels onto one line turns the statement into the bisectors of a linear pair being perpendicular.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'Are the bisectors of co-interior angles perpendicular?',
+          answer: 'Yes. When two parallel lines are cut by a transversal, the bisectors of the two angles between the parallels on the same side of the transversal meet at a right angle.'
+        },
+        obj2: {
+          question: 'How is it proved?',
+          answer: 'Co-interior angles add up to 180°, so their halves add up to 90°. The halves are two angles of the triangle formed by the transversal and the two bisectors, so its third angle is 180° − 90° = 90°.'
+        },
+        obj3: {
+          question: 'Does it need the lines to be parallel?',
+          answer: 'Yes. If the lines are not parallel the two angles do not add up to 180°, and the angle between the bisectors is half their sum subtracted from 180°, which is not a right angle.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Co-interior Bisectors Proof Visualizer",
+          "description": "Step-by-step interactive proof that the bisectors of co-interior angles between two parallel lines are perpendicular, with a draggable transversal and draggable lines.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/cointerior-bisectors",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Bisectors of Co-interior Angles", "item": "https://www.learnmathclass.com/geometry/visual-tools/cointerior-bisectors" }
+          ]
+        }
+      }
+    },
+    'pentagon-diagonals': {
+      proofKey: 'pentagonDiagonals',
+      title: 'Diagonals of a Regular Pentagon Trisect Its Angle | Proof Step by Step',
+      description: 'Watch the proof that the two diagonals from a vertex of a regular pentagon cut its 108° angle into three angles of 36°, by the polygon angle sum and isosceles triangles, step by step. Then turn and resize the pentagon.',
+      h1Title: 'Diagonals of a Regular Pentagon',
+      url: '/geometry/visual-tools/pentagon-diagonals',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 70,30 59,64 21,64 10,30" fill="#85B7EB" fill-opacity="0.3" stroke="#E6F1FB" stroke-width="1.4"/><line x1="40" y1="8" x2="59" y2="64" stroke="#FAC775" stroke-width="1.4"/><line x1="40" y1="8" x2="21" y2="64" stroke="#FAC775" stroke-width="1.4"/><path d="M33,28 A21,21 0 0 0 47,28" fill="none" stroke="#FAC775" stroke-width="1.2"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">36° + 36° + 36°</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Polygon',
+      name: 'Pentagon Diagonals Proof',
+      keywords: [
+        'regular pentagon diagonals',
+        'pentagon diagonals trisect angle',
+        'regular pentagon angles 36 degrees',
+        'interior angle of a regular pentagon',
+        'pentagon 108 degrees',
+        'golden triangle',
+        'isosceles triangle',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$ to turn and resize the pentagon and watch the three angles at $A$ in the readout stay at $36°$ each. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $ABCDE$ be a regular pentagon: all five sides are equal and all five angles are equal. From the vertex $A$ two diagonals can be drawn, $AC$ and $AD$. The theorem says they cut the angle at $A$ into three equal parts:
+
+$$\\angle BAC = \\angle CAD = \\angle DAE = 36°$$
+
+so the diagonals trisect the angle. By symmetry the same happens at every vertex.
+
+The proof needs only the [polygon angle sum](!/geometry/visual-tools/polygon-angle-sum), the [isosceles base angles](!/geometry/visual-tools/isosceles-base-angles) theorem and the [angle sum of a triangle](!/geometry/visual-tools/triangle-angle-sum). In the player $B$, $C$, $D$, $E$ are $A$ turned about the centre by $72°$ at a time, so the pentagon stays regular whatever you drag; the readout shows the three angles at $A$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Each Angle Is 108°',
+          content: `The angles of any pentagon add up to $(5 - 2) \\cdot 180° = 540°$. In a regular pentagon they are equal, so each one is
+
+$$\\beta = \\frac{540°}{5} = 108°$$
+
+as on the [regular polygon angles](!/geometry/visual-tools/regular-polygon-angles) page. This holds at $B$ and at $E$, and also at $A$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Triangle ABC',
+          content: `The triangle $ABC$ has the two equal sides $AB$ and $BC$, sides of the pentagon, so it is isosceles and its base angles at $A$ and $C$ are equal; call them $\\varphi$. The angle between the equal sides is $108°$, so the angle sum gives
+
+$$108° + 2\\varphi = 180°, \\qquad \\varphi = 36°$$
+
+So the diagonal $AC$ makes $\\angle BAC = 36°$ with the side $AB$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Triangle AED',
+          content: `In the same way the triangle $AED$ has $AE = ED$ and the angle $108°$ at $E$, so its base angles at $A$ and $D$ are $36°$ too:
+
+$$\\angle DAE = 36°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'The Middle Angle',
+          content: `The whole angle at $A$ is $108°$, made of $\\angle BAC$, the middle angle $\\psi = \\angle CAD$ and $\\angle DAE$:
+
+$$\\psi = 108° - 36° - 36° = 36°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Why It Holds',
+          content: `All three parts of the angle at $A$ are $36°$:
+
+$$\\angle BAC = \\angle CAD = \\angle DAE = 36°$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the polygon angle sum, the isosceles base angles theorem (twice), subtracting and combining.
+
+The same three steps work at every vertex, so each diagonal of a regular pentagon makes $36°$ with the sides at its ends.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$: the whole pentagon turns about its centre and grows or shrinks with it, because the other vertices are $A$ turned by $72°$, $144°$, $216°$ and $288°$. The readout keeps the three angles at $A$ at $36°$.
+
+The player keeps $A$ within $30°$ of the top, the pentagon within a small range of sizes so the angle marks stay readable, and every vertex inside the frame; a drag that would break this is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj8: {
+          title: 'Consequences',
+          content: `• **The golden triangle.** The triangle $ACD$ has $36°$ at $A$ and $108° - 36° = 72°$ at $C$ and at $D$: an isosceles triangle with angles $36°$, $72°$, $72°$, called the golden triangle. In it the ratio of a long side to the short side, here diagonal to side of the pentagon, is the golden ratio $(1 + \\sqrt{5})/2 \\approx 1.618$.
+• **The pentagram.** Drawing all five diagonals gives a five-pointed star; each of its points has an angle of $36°$, the angle between two diagonals from one vertex.
+• **Diagonals parallel to sides.** With the transversal $AD$, the angles $\\angle CAD = 36°$ and $\\angle ADE = 36°$ are alternate angles and equal, so $AC \\parallel ED$: each diagonal is parallel to the side it does not meet, the converse direction of the [parallel lines](!/geometry/visual-tools/parallel-lines) page.
+• **Other regular polygons.** In a regular $n$-gon the diagonals from one vertex cut its angle into $n - 2$ equal parts of $180°/n$ each; for the pentagon that is three parts of $36°$, for the [regular hexagon](!/geometry/visual-tools/regular-hexagon) four parts of $30°$.
+• **Isosceles triangles everywhere.** Every triangle made of two sides and a diagonal of a regular pentagon is isosceles with angles $108°$, $36°$, $36°$.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'Do the diagonals of a regular pentagon trisect its angles?',
+          answer: 'Yes. The two diagonals from a vertex cut its 108° angle into three equal angles of 36° each.'
+        },
+        obj2: {
+          question: 'Why is the angle between a side and a diagonal 36°?',
+          answer: 'A side, the next side and the diagonal joining their ends make an isosceles triangle with the angle 108° between the equal sides, so each base angle is (180° − 108°)/2 = 36°.'
+        },
+        obj3: {
+          question: 'What is the interior angle of a regular pentagon?',
+          answer: 'The angles of a pentagon add up to 540°, and in a regular pentagon they are equal, so each one is 108°.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Pentagon Diagonals Proof Visualizer",
+          "description": "Step-by-step interactive proof that the diagonals from one vertex of a regular pentagon trisect its angle into three angles of 36°, with a draggable vertex that turns and resizes the pentagon.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/pentagon-diagonals",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Diagonals of a Regular Pentagon", "item": "https://www.learnmathclass.com/geometry/visual-tools/pentagon-diagonals" }
+          ]
+        }
+      }
+    },
+    'pentagon-golden-ratio': {
+      proofKey: 'pentagonGoldenRatio',
+      title: 'Regular Pentagon and the Golden Ratio | Diagonal over Side Proof Step by Step',
+      description: 'Watch the proof that the diagonal of a regular pentagon is the golden ratio times its side, (1 + √5)/2, by isosceles triangles and AA similarity, step by step. Then turn and resize the pentagon.',
+      h1Title: 'The Regular Pentagon and the Golden Ratio',
+      url: '/geometry/visual-tools/pentagon-golden-ratio',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,8 70,30 59,64 21,64 10,30" fill="#85B7EB" fill-opacity="0.3" stroke="#E6F1FB" stroke-width="1.4"/><line x1="40" y1="8" x2="59" y2="64" stroke="#FAC775" stroke-width="1.4"/><line x1="70" y1="30" x2="10" y2="30" stroke="#FAC775" stroke-width="1.4"/><circle cx="47.4" cy="30" r="2.2" fill="#FAC775"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">d/s = (1 + √5)/2</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Polygon',
+      name: 'Pentagon Golden Ratio Proof',
+      keywords: [
+        'regular pentagon golden ratio',
+        'pentagon diagonal to side ratio',
+        'golden ratio proof',
+        'diagonal of a regular pentagon',
+        'golden triangle',
+        'phi 1.618 pentagon',
+        'aa similarity',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$ to turn and resize the pentagon and watch the readout: the diagonal over the side stays $1.618$ and the two smaller ratios stay $0.618$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `In a regular pentagon $ABCDE$ all five sides have the same length $s$ and all five diagonals have the same length $d$. The theorem says their ratio is the golden ratio:
+
+$$\\frac{d}{s} = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$$
+
+The proof draws two diagonals, $AC$ and $BE$, crossing at a point $P$, and compares two triangles. It needs the $36°$ angles from the [diagonals of a regular pentagon](!/geometry/visual-tools/pentagon-diagonals) page, the [isosceles converse](!/geometry/visual-tools/isosceles-converse) and [AA similarity](!/geometry/visual-tools/aa-similarity).
+
+In the player $B$, $C$, $D$, $E$ are $A$ turned about the centre by $72°$ at a time, so the pentagon stays regular whatever you drag, and $P$ is found where the two diagonals cross; the readout shows $AC/AB$, $AP/AB$ and $AB/AC$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'The 36° Angles',
+          content: `Each angle of the pentagon is $108°$, and a diagonal cuts off an isosceles triangle with two sides of the pentagon, whose base angles are $(180° - 108°)/2 = 36°$. So every diagonal makes
+
+$$\\varphi = 36°$$
+
+with the sides at its two ends: at $A$ and $C$ for the diagonal $AC$, at $B$ and $E$ for the diagonal $BE$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Triangle APE',
+          content: `In the triangle $APE$ the angle at $A$ is what is left of $108°$ after the $36°$ between $AB$ and $AC$:
+
+$$\\angle EAP = 108° - 36° = 72°$$
+
+The angle at $E$ is $\\angle AEB = 36°$, so the angle at $P$ is $180° - 72° - 36° = 72°$. The angles at $A$ and $P$ are equal, so the sides opposite them are equal:
+
+$$EP = EA = s$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Triangle ABP',
+          content: `The triangle $ABP$ has the angle $36°$ at $A$ and the angle $36°$ at $B$, so it is isosceles too:
+
+$$AP = BP$$
+
+And $BP$ is what is left of the diagonal $BE$ after $EP$: $BP = BE - EP = d - s$. So $AP = d - s$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Two Similar Triangles',
+          content: `The triangles $ABP$ and $ACB$ share the angle $36°$ at $A$, and each has a second angle of $36°$, at $B$ in $ABP$ and at $C$ in $ACB$. By [AA similarity](!/geometry/visual-tools/aa-similarity) they are similar, with $A \\to A$, $B \\to C$, $P \\to B$, so their sides are in proportion:
+
+$$\\frac{AP}{AB} = \\frac{AB}{AC}, \\qquad \\frac{d - s}{s} = \\frac{s}{d}$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Solving for the Ratio',
+          content: `Multiply out the proportion: $d(d - s) = s^2$, that is
+
+$$d^2 - ds - s^2 = 0$$
+
+Divide by $s^2$ and write $x = d/s$: $x^2 - x - 1 = 0$. The two roots are $(1 \\pm \\sqrt{5})/2$; a ratio of lengths is positive, so
+
+$$x = \\frac{1 + \\sqrt{5}}{2} \\approx 1.618$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Why It Holds',
+          content: `The diagonal of a regular pentagon is the golden ratio times its side:
+
+$$\\frac{d}{s} = \\frac{1 + \\sqrt{5}}{2}$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the pentagon diagonals page, the isosceles converse (twice), AA similarity, algebra and combining.
+
+The same proportion says that $P$ divides the diagonal $BE$ in the golden ratio: $BE/EP = d/s$ and $EP/BP = s/(d - s) = d/s$, the whole is to the larger part as the larger part is to the smaller.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj8: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$: the whole pentagon turns about its centre and grows or shrinks with it, because the other vertices are $A$ turned by $72°$, $144°$, $216°$ and $288°$. The ratios in the readout do not change, because the shape does not change, only its size and position.
+
+The player keeps $A$ within $20°$ of the top, the pentagon within a small range of sizes so the angle marks stay readable, and every vertex inside the frame; a drag that would break this is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj9: {
+          title: 'Consequences',
+          content: `• **The golden ratio itself.** The number $(1 + \\sqrt{5})/2$ satisfies $x^2 = x + 1$ and $1/x = x - 1 \\approx 0.618$, which is why the readout shows $1.618$ and $0.618$ together.
+• **The golden triangle.** The triangle $ACD$ has angles $36°$, $72°$, $72°$, and its long side over its short side is $d/s$, the golden ratio; the triangle $ABP$, with $108°$, $36°$, $36°$, is the golden gnomon.
+• **The pentagram.** The five diagonals make a star whose crossing points cut every diagonal into three pieces in the golden ratio, and the inner pentagon is again regular, smaller by the factor $(1 + \\sqrt{5})/2$ squared.
+• **cos 36°.** Dropping a perpendicular in the golden triangle gives $\\cos 36° = (1 + \\sqrt{5})/4$, half the golden ratio.
+• **Constructing a pentagon.** Because $d/s$ is built from $\\sqrt{5}$, a regular pentagon can be constructed with ruler and compass, unlike a regular heptagon; see the [regular polygon angles](!/geometry/visual-tools/regular-polygon-angles) page for its angles.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the ratio of the diagonal to the side of a regular pentagon?',
+          answer: 'The golden ratio, (1 + √5)/2, about 1.618. The diagonal is about 1.618 times as long as the side.'
+        },
+        obj2: {
+          question: 'How is the golden ratio in a pentagon proved?',
+          answer: 'Two diagonals cross at a point P. Angle chasing with the 36° angles shows that two triangles are isosceles, which gives AP = d − s, and that the triangles ABP and ACB are similar, which gives (d − s)/s = s/d. That equation becomes x² − x − 1 = 0 for x = d/s.'
+        },
+        obj3: {
+          question: 'Where do the diagonals of a regular pentagon cross?',
+          answer: 'Each crossing point divides a diagonal in the golden ratio: the longer piece equals the side of the pentagon and the whole diagonal over the longer piece is (1 + √5)/2.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Pentagon Golden Ratio Proof Visualizer",
+          "description": "Step-by-step interactive proof that the diagonal and side of a regular pentagon are in the golden ratio (1 + √5)/2, by angle chasing, isosceles triangles and AA similarity, with a draggable vertex.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/pentagon-golden-ratio",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "The Regular Pentagon and the Golden Ratio", "item": "https://www.learnmathclass.com/geometry/visual-tools/pentagon-golden-ratio" }
+          ]
+        }
+      }
+    },
+    'pentagram-angles': {
+      proofKey: 'pentagramAngles',
+      title: 'Angles of a Pentagram Add Up to 180° | Star Angle Sum Proof Step by Step',
+      description: 'Watch the proof that the five point angles of any five-pointed star add up to 180°, by the exterior angle theorem twice and the angle sum of a triangle, step by step. Then drag the points of the star.',
+      h1Title: 'The Angles of a Pentagram',
+      url: '/geometry/visual-tools/pentagram-angles',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="40,6 61,66 8,28 72,28 19,66" fill="#85B7EB" fill-opacity="0.25" stroke="#E6F1FB" stroke-width="1.4" stroke-linejoin="round"/><path d="M36,17 A12,12 0 0 0 44,17" fill="none" stroke="#FAC775" stroke-width="1.4"/><text x="40" y="78" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">α + β + γ + δ + ε = 180°</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Polygon',
+      name: 'Pentagram Angles Proof',
+      keywords: [
+        'pentagram angle sum',
+        'sum of angles of a star',
+        'five pointed star angles 180',
+        'star polygon angles',
+        'pentagram angles proof',
+        'exterior angle theorem',
+        'triangle angle sum',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag any of the five points of the star and watch the readout: the five angles change, but their sum stays $180°$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Take five points $A$, $B$, $C$, $D$, $E$ round a convex pentagon and join every second one: $A \\to C \\to E \\to B \\to D \\to A$. The five segments make a five-pointed star, a pentagram. Call its point angles $\\alpha$, $\\beta$, $\\gamma$, $\\delta$, $\\varepsilon$. The theorem says
+
+$$\\alpha + \\beta + \\gamma + \\delta + \\varepsilon = 180°$$
+
+for every such star, regular or not. In a regular star each point is $36°$, as on the [diagonals of a regular pentagon](!/geometry/visual-tools/pentagon-diagonals) page, and five times $36°$ is $180°$; the theorem says the total stays the same however the star is bent.
+
+The proof uses the [exterior angle theorem](!/geometry/visual-tools/exterior-angle) twice and the [angle sum of a triangle](!/geometry/visual-tools/triangle-angle-sum) once. In the player all five points can be dragged, and the two crossings $X$ and $Y$ are computed; the readout shows the five angles and their sum.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'The First Exterior Angle',
+          content: `The segment $EB$ crosses $AC$ at $X$. Look at the triangle $CEX$: its angles at $C$ and $E$ are the star angles $\\gamma$ and $\\varepsilon$. At $X$ the ray $XA$ continues the side $CX$, so the angle $\\theta = \\angle AXY$ between $XA$ and the side $XE$ is an exterior angle of $CEX$, and it equals the sum of the two remote interior angles:
+
+$$\\theta = \\angle AXY = \\gamma + \\varepsilon$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Second Exterior Angle',
+          content: `In the same way $EB$ crosses $AD$ at $Y$, and the triangle $BDY$ has the star angles $\\beta$ and $\\delta$ at $B$ and $D$. The ray $YA$ continues $DY$, so $\\psi = \\angle AYX$ is an exterior angle of $BDY$:
+
+$$\\psi = \\angle AYX = \\beta + \\delta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Triangle at the Top',
+          content: `The triangle $AXY$, the top point of the star, has the angles $\\alpha$ at $A$, $\\theta$ at $X$ and $\\psi$ at $Y$. Its angles add up to $180°$:
+
+$$\\alpha + \\theta + \\psi = 180°, \\qquad \\alpha + (\\gamma + \\varepsilon) + (\\beta + \\delta) = 180°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Rearranging the last line:
+
+$$\\alpha + \\beta + \\gamma + \\delta + \\varepsilon = 180°$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the exterior angle theorem (twice), the angle sum of a triangle and combining.
+
+The two exterior angles move four of the five star angles into one triangle, next to the fifth; the triangle then forces the total. Nothing depends on the star being regular, only on the order in which its points are joined.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag any of the five points: the star bends, the five angles in the readout change, one growing as others shrink, and their sum stays $180°$. The crossings $X$ and $Y$ follow.
+
+The player keeps the five points in order round a convex pentagon, so that the segments really make a star, keeps every point angle above $22°$ and the top point large enough for its marks, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **The regular star.** In a regular pentagram the five angles are equal, so each is $180°/5 = 36°$.
+• **Stars with more points.** For a star made by joining every second vertex of a convex $n$-gon ($n \\ge 5$), the point angles add up to $(n - 4) \\cdot 180°$: $180°$ for five points, $540°$ for seven.
+• **The inner pentagon.** The five crossings of the star make a small pentagon inside. Its angle at $X$ is the angle of the triangle $CEX$ there, $180° - (\\gamma + \\varepsilon)$, and the same holds at the other four crossings. Each star angle is used twice, so the five inner angles add up to $5 \\cdot 180° - 2 \\cdot 180° = 540°$, as the [polygon angle sum](!/geometry/visual-tools/polygon-angle-sum) says.
+• **Turning along the star.** Walking round the star $A \\to C \\to E \\to B \\to D \\to A$ turns through $180° - \\alpha$ at each point, $900° - 180° = 720°$ in all: two full turns, compared with one full turn round a convex polygon on the [sum of exterior angles](!/geometry/visual-tools/exterior-angle-sum) page.
+• **A quick check.** Any proof with a star drawn on a pentagon can use the $180°$ total to find a missing point angle from the other four.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What do the angles of a five-pointed star add up to?',
+          answer: 'The five point angles of any five-pointed star add up to 180°, whether or not the star is regular.'
+        },
+        obj2: {
+          question: 'How is the pentagram angle sum proved?',
+          answer: 'Two of the crossing points of the star are vertices of the top triangle. The angle at each of them is an exterior angle of a triangle containing two of the other star points, so it equals the sum of those two angles. The top triangle then has the angles α, γ + ε and β + δ, which add up to 180°.'
+        },
+        obj3: {
+          question: 'What is each angle of a regular pentagram?',
+          answer: 'In a regular pentagram the five point angles are equal, so each is 180°/5 = 36°.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Pentagram Angles Proof Visualizer",
+          "description": "Step-by-step interactive proof that the point angles of any five-pointed star (pentagram) add up to 180°, with all five points draggable.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/pentagram-angles",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "The Angles of a Pentagram", "item": "https://www.learnmathclass.com/geometry/visual-tools/pentagram-angles" }
+          ]
+        }
+      }
+    },
+    'parallelogram-bisectors': {
+      proofKey: 'parallelogramBisectors',
+      title: 'Angle Bisectors of a Parallelogram Form a Rectangle | Proof Step by Step',
+      description: 'Watch the proof that the four angle bisectors of a parallelogram enclose a rectangle, by co-interior angles and the angle sum of a triangle, step by step. Then drag the parallelogram.',
+      h1Title: 'Angle Bisectors of a Parallelogram',
+      url: '/geometry/visual-tools/parallelogram-bisectors',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="6,60 54,60 74,24 26,24" fill="#85B7EB" fill-opacity="0.25" stroke="#E6F1FB" stroke-width="1.4"/><polygon points="44,30 50,40 36,50 30,40" fill="#FAC775" fill-opacity="0.5" stroke="#FAC775" stroke-width="1.2"/><line x1="6" y1="60" x2="44" y2="30" stroke="#E6F1FB" stroke-width="1"/><line x1="54" y1="60" x2="44" y2="30" stroke="#E6F1FB" stroke-width="1"/><line x1="74" y1="24" x2="36" y2="50" stroke="#E6F1FB" stroke-width="1"/><line x1="26" y1="24" x2="36" y2="50" stroke="#E6F1FB" stroke-width="1"/><text x="40" y="76" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">four right angles</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Quadrilateral',
+      name: 'Parallelogram Bisectors Proof',
+      keywords: [
+        'angle bisectors of a parallelogram',
+        'parallelogram angle bisectors form a rectangle',
+        'bisectors of parallelogram rectangle proof',
+        'co-interior angles',
+        'parallelogram angles',
+        'rectangle',
+        'quadrilateral',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$, $B$ or $D$ to change the parallelogram and watch the four angles of $PQRS$ in the readout stay at $90°$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $ABCD$ be a parallelogram, with $AB \\parallel DC$ and $AD \\parallel BC$. Draw the bisectors of its four angles. Neighbouring bisectors cross at four points: $P$ (from $A$ and $B$), $Q$ (from $B$ and $C$), $R$ (from $C$ and $D$) and $S$ (from $D$ and $A$). The theorem says
+
+$$PQRS \\text{ is a rectangle}$$
+
+It is the [bisectors of co-interior angles](!/geometry/visual-tools/cointerior-bisectors) theorem used four times, once for each pair of neighbouring angles.
+
+In the player $A$, $B$ and $D$ are free and $C$ is placed so that $ABCD$ stays a parallelogram; the four crossings are computed, and the readout shows the four angles of $PQRS$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Neighbouring Angles',
+          content: `The sides $AD$ and $BC$ are parallel and $AB$ crosses both, so the angles $\\alpha$ at $A$ and $\\beta$ at $B$ lie between the parallels on the same side of $AB$. By the [parallel lines](!/geometry/visual-tools/parallel-lines) theorem they are co-interior angles:
+
+$$\\alpha + \\beta = 180°$$
+
+the same fact as on the [angles of a parallelogram](!/geometry/visual-tools/parallelogram-angles) page.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Two Halves',
+          content: `The bisector $AP$ halves $\\alpha$ and $BP$ halves $\\beta$, so the triangle $ABP$ has the angles
+
+$$\\angle PAB = \\frac{\\alpha}{2}, \\qquad \\angle PBA = \\frac{\\beta}{2}, \\qquad \\frac{\\alpha}{2} + \\frac{\\beta}{2} = 90°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Right Angle at P',
+          content: `The [angles of a triangle](!/geometry/visual-tools/triangle-angle-sum) add up to $180°$, so the third angle of $ABP$ is
+
+$$\\angle APB = 180° - 90° = 90°$$
+
+At $P$ the sides of $PQRS$ run along $PA$ (through $S$) and $PB$ (through $Q$), so this is the angle of $PQRS$ at $P$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'The Other Three Corners',
+          content: `Every two neighbouring angles of a parallelogram are co-interior: $B$ and $C$ along $BC$, $C$ and $D$ along $CD$, $D$ and $A$ along $DA$. The same argument gives a right angle where each pair of neighbouring bisectors cross:
+
+$$\\angle BQC = \\angle CRD = \\angle DSA = 90°$$
+
+At $R$ this is the angle of $PQRS$ directly. At $Q$ and $S$ the sides of $PQRS$ run the other way along the bisectors, so the angle of $PQRS$ there is the [vertical angle](!/geometry/visual-tools/vertical-angles), also $90°$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Why It Holds',
+          content: `The quadrilateral $PQRS$ has four right angles, so it is a rectangle:
+
+$$\\angle P = \\angle Q = \\angle R = \\angle S = 90°$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, co-interior angles, the angle bisector, the angle sum of a triangle, the same argument at the other corners and the definition of a rectangle.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$, $B$ or $D$: the parallelogram changes and $C$ follows, keeping the opposite sides parallel. The bisectors move with it and the readout keeps all four angles of $PQRS$ at $90°$; the rectangle changes its size and shape.
+
+The player keeps the long side at least $1.45$ times the short side, $P$ and $R$ far enough from the sides $DC$ and $AB$ for their names, the angle at $A$ between $55°$ and $115°$ and the figure in the frame. Closer to a rhombus the rectangle shrinks towards a point; with the long side more than twice the short one its corners leave the parallelogram. A drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj8: {
+          title: 'Consequences',
+          content: `• **The diagonals of PQRS.** The diagonal $QS$ is parallel to $AB$ and $PR$ is parallel to $AD$, and both have the length $AB - AD$, the difference of two neighbouring sides.
+• **A rhombus.** When $AB = AD$ the four bisectors are the two diagonals and meet in one point, so the rectangle shrinks to the centre, as on the [rhombus diagonals](!/geometry/visual-tools/rhombus-diagonals) page.
+• **A rectangle.** For a rectangle $ABCD$ the bisectors make $45°$ with the sides, and $PQRS$ is a square.
+• **Any quadrilateral.** In any convex quadrilateral the four angle bisectors enclose a quadrilateral whose opposite angles add up to $180°$, a [cyclic quadrilateral](!/geometry/visual-tools/cyclic-quadrilateral); the parallelogram is the case where every angle of it is $90°$.
+• **Equal distances.** Every point of the bisector from $A$ is equally far from $AB$ and $AD$, by the [angle bisector locus](!/geometry/visual-tools/angle-bisector-locus); so $P$ is equally far from $AD$, $AB$ and $BC$.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What shape do the angle bisectors of a parallelogram form?',
+          answer: 'A rectangle. The four bisectors cross in four points, and the quadrilateral with those corners has four right angles.'
+        },
+        obj2: {
+          question: 'Why do the bisectors of two neighbouring angles of a parallelogram meet at a right angle?',
+          answer: 'Neighbouring angles of a parallelogram add up to 180°, so their halves add up to 90°. The halves are two angles of the triangle formed by the side and the two bisectors, so its third angle is 90°.'
+        },
+        obj3: {
+          question: 'When do the bisectors of a parallelogram form a square or a single point?',
+          answer: 'For a rectangle the bisectors enclose a square; for a rhombus they all pass through the centre, so the rectangle shrinks to a point.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Parallelogram Bisectors Proof Visualizer",
+          "description": "Step-by-step interactive proof that the angle bisectors of a parallelogram meet in four right angles and enclose a rectangle, with draggable vertices.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/parallelogram-bisectors",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Angle Bisectors of a Parallelogram", "item": "https://www.learnmathclass.com/geometry/visual-tools/parallelogram-bisectors" }
+          ]
+        }
+      }
+    },
+    'angle-between-chords': {
+      proofKey: 'chordsAngle',
+      title: 'Angle Between Two Chords Theorem | Half the Sum of the Arcs Proof Step by Step',
+      description: 'Watch the proof that the angle between two chords crossing inside a circle is half the sum of the central angles of the arcs it cuts off, by the exterior angle theorem and the inscribed angle theorem, step by step. Then drag the points round the circle.',
+      h1Title: 'The Angle Between Two Chords',
+      url: '/geometry/visual-tools/angle-between-chords',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="38" r="30" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><line x1="14" y1="24" x2="62" y2="58" stroke="#E6F1FB" stroke-width="1.4"/><line x1="66" y1="26" x2="28" y2="65" stroke="#E6F1FB" stroke-width="1.4"/><path d="M41,40 A8,8 0 0 1 52,38" fill="none" stroke="#FAC775" stroke-width="1.6"/><path d="M14,24 A30,30 0 0 1 66,26" fill="none" stroke="#FAC775" stroke-width="2"/><path d="M62,58 A30,30 0 0 1 28,65" fill="none" stroke="#FAC775" stroke-width="2"/><text x="40" y="78" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">θ = ½(arc + arc)</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Circle',
+      name: 'Angle Between Chords Proof',
+      keywords: [
+        'angle between two chords',
+        'intersecting chords angle theorem',
+        'angle formed by two chords half the sum of arcs',
+        'chord chord angle',
+        'intercepted arcs',
+        'inscribed angle theorem',
+        'circle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$, $B$, $C$ or $D$ round the circle and watch the readout: the angle at $E$ and half the sum of the two central angles stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $A$, $B$, $C$, $D$ lie on a circle with centre $O$, in that order, and let the chords $AC$ and $BD$ cross at a point $E$ inside the circle. The angle $\\theta = \\angle AEB$ and its vertical angle $\\angle CED$ cut off the arcs $AB$ and $CD$. The theorem says
+
+$$\\theta = \\frac{1}{2}\\left(\\angle AOB + \\angle COD\\right)$$
+
+the angle between the chords is half the sum of the central angles of the two arcs; in the language of arcs, half the sum of the intercepted arcs.
+
+The proof uses the [exterior angle theorem](!/geometry/visual-tools/exterior-angle) once and the [inscribed angle theorem](!/geometry/visual-tools/inscribed-angle) twice. In the player the four points slide round the circle and $E$ is computed as the crossing; the readout shows $\\angle AEB$ and half the sum of the central angles.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'An Exterior Angle',
+          content: `Join $A$ to $D$. In the triangle $AED$ the ray $EB$ continues the side $DE$ beyond $E$, so $\\theta = \\angle AEB$ is an exterior angle of $AED$. It equals the sum of the two remote interior angles:
+
+$$\\theta = \\varphi + \\psi, \\qquad \\varphi = \\angle CAD, \\quad \\psi = \\angle BDA$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Arc AB',
+          content: `The angle $\\psi = \\angle BDA$ has its vertex $D$ on the circle and its arms through $A$ and $B$: it is an inscribed angle standing on the arc $AB$. The central angle on the same arc is twice as large:
+
+$$\\angle AOB = 2\\psi$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Arc CD',
+          content: `In the same way $\\varphi = \\angle CAD$ is an inscribed angle standing on the arc $CD$, so
+
+$$\\angle COD = 2\\varphi$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Substituting the two halves:
+
+$$\\theta = \\varphi + \\psi = \\frac{1}{2}\\angle COD + \\frac{1}{2}\\angle AOB = \\frac{1}{2}\\left(\\angle AOB + \\angle COD\\right)$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the exterior angle theorem, the inscribed angle theorem (twice) and combining.
+
+The other angle at $E$, $\\angle BEC$, is $180° - \\theta$; by the same argument with the arcs $BC$ and $DA$ it is half the sum of their central angles, and the four arcs together make $360°$, which checks.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag any of the four points round the circle: the chords move, $E$ moves with them, and the readout keeps the angle at $E$ equal to half the sum of the two central angles.
+
+The player keeps the four points in the order $A$, $B$, $C$, $D$ so that the chords cross inside, keeps every arc above $40°$ and the arcs $AB$ and $CD$ under $170°$, keeps $E$ away from the centre so the marks stay readable, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **Through the centre.** If both chords are diameters, $E = O$ and the theorem says $\\angle AOB = \\frac{1}{2}(\\angle AOB + \\angle COD)$, true because vertical angles at $O$ are equal.
+• **One arc shrinks to nothing.** When $C$ and $D$ come together, $E$ moves onto the circle and the formula becomes the inscribed angle theorem, $\\theta = \\frac{1}{2}\\angle AOB$.
+• **Outside the circle.** For two secants meeting outside the circle the angle is half the difference of the two arcs instead of half the sum; the same exterior-angle argument proves it.
+• **The lengths.** The same two chords also satisfy $AE \\cdot EC = BE \\cdot ED$, the [intersecting chords](!/geometry/visual-tools/intersecting-chords) theorem about lengths rather than angles.
+• **Equal arcs.** If the arcs $AB$ and $CD$ are equal, the angle at $E$ equals the central angle of either of them.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the angle between two intersecting chords?',
+          answer: 'It is half the sum of the two arcs it cuts off, that is, half the sum of the central angles of the arc between the arms of the angle and the arc between the arms of its vertical angle.'
+        },
+        obj2: {
+          question: 'How is the angle between two chords proved?',
+          answer: 'Join two ends of the chords to make a triangle in which the angle between the chords is an exterior angle. It equals the two remote angles, and each of those is an inscribed angle, half the central angle of its arc.'
+        },
+        obj3: {
+          question: 'What happens when the chords meet outside the circle?',
+          answer: 'Then the lines are secants and the angle between them is half the difference of the two arcs, not half the sum.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Angle Between Chords Proof Visualizer",
+          "description": "Step-by-step interactive proof that the angle formed by two intersecting chords equals half the sum of the intercepted arcs, with four draggable points on the circle.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/angle-between-chords",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "The Angle Between Two Chords", "item": "https://www.learnmathclass.com/geometry/visual-tools/angle-between-chords" }
+          ]
+        }
+      }
+    },
+    'angle-between-secants': {
+      proofKey: 'secantsAngle',
+      title: 'Angle Between Two Secants Theorem | Half the Difference of the Arcs Proof Step by Step',
+      description: 'Watch the proof that the angle between two secants drawn from a point outside a circle is half the difference of the central angles of the arcs they cut off, by the exterior angle theorem and the inscribed angle theorem, step by step. Then drag the point and the secants.',
+      h1Title: 'The Angle Between Two Secants',
+      url: '/geometry/visual-tools/angle-between-secants',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="40" r="24" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><line x1="6" y1="42" x2="62" y2="19" stroke="#E6F1FB" stroke-width="1.4"/><line x1="6" y1="42" x2="60" y2="62" stroke="#E6F1FB" stroke-width="1.4"/><path d="M18,37 A12,12 0 0 1 18,46" fill="none" stroke="#FAC775" stroke-width="1.6"/><path d="M62,19 A24,24 0 0 1 60,62" fill="none" stroke="#FAC775" stroke-width="2"/><path d="M30,32 A24,24 0 0 0 31,51" fill="none" stroke="#FAC775" stroke-width="1.2" stroke-dasharray="2 2"/><text x="40" y="78" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">θ = ½(arc − arc)</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Circle',
+      name: 'Angle Between Secants Proof',
+      keywords: [
+        'angle between two secants',
+        'secant secant angle theorem',
+        'angle outside a circle half the difference of arcs',
+        'external angle of a circle',
+        'intercepted arcs',
+        'inscribed angle theorem',
+        'circle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $P$, or $B$ or $D$ round the circle, and watch the readout: the angle at $P$ and half the difference of the two central angles stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $P$ be a point outside a circle with centre $O$. Two lines from $P$ cut the circle: the first meets it at $A$ and then $B$, the second at $C$ and then $D$. The angle $\\theta = \\angle BPD$ between the secants cuts off two arcs, the far arc $BD$ and the near arc $AC$. The theorem says
+
+$$\\theta = \\frac{1}{2}\\left(\\angle BOD - \\angle AOC\\right)$$
+
+half the difference of the central angles of the two arcs. It is the outside version of the [angle between two chords](!/geometry/visual-tools/angle-between-chords), where the chords cross inside and the angle is half the sum.
+
+The proof uses the [exterior angle theorem](!/geometry/visual-tools/exterior-angle) once and the [inscribed angle theorem](!/geometry/visual-tools/inscribed-angle) twice. In the player $P$ moves freely outside the circle, $B$ and $D$ slide round it, and $A$, $C$ are found where the lines meet the circle again; the readout shows $\\angle BPD$ and half the difference.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'An Exterior Angle',
+          content: `Join $A$ to $D$. In the triangle $PAD$ the ray $AB$ continues the side $PA$ beyond $A$, so $\\beta = \\angle BAD$ is an exterior angle of $PAD$. It equals the sum of the two remote interior angles, $\\theta$ at $P$ and $\\delta = \\angle ADC$ at $D$:
+
+$$\\beta = \\theta + \\delta, \\qquad \\theta = \\beta - \\delta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Far Arc',
+          content: `The angle $\\beta = \\angle BAD$ has its vertex on the circle and stands on the far arc $BD$. The central angle on the same arc is twice as large:
+
+$$\\angle BOD = 2\\beta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Near Arc',
+          content: `The angle $\\delta = \\angle ADC$ stands on the near arc $AC$, so
+
+$$\\angle AOC = 2\\delta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Substituting the two central angles:
+
+$$\\theta = \\beta - \\delta = \\frac{1}{2}\\angle BOD - \\frac{1}{2}\\angle AOC = \\frac{1}{2}\\left(\\angle BOD - \\angle AOC\\right)$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the exterior angle theorem, the inscribed angle theorem (twice) and combining.
+
+The only change from the chords theorem is where the crossing lies: inside the circle the second arc adds to the first, outside it is taken away.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $P$: the secants swing, $A$ and $C$ move along the circle, and the readout keeps the angle at $P$ equal to half the difference. Drag $B$ or $D$ round the circle to change one secant at a time.
+
+The player keeps $P$ well outside the circle, both lines crossing it at two points far enough apart, the far arc under $170°$ so that the central angle is the one drawn, the angles large enough for their marks and the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **A tangent and a secant.** When $C$ and $D$ come together the second line becomes a tangent, and the angle is half the difference of the arcs between the tangent point and $A$, $B$; the [tangent-chord angle](!/geometry/visual-tools/tangent-chord-angle) is the limiting case at the circle.
+• **Two tangents.** With both lines tangent, the angle at $P$ is half the difference of the two arcs between the points of contact, so it is $180°$ minus the central angle between them, as on the [two tangents](!/geometry/visual-tools/two-tangents) page.
+• **P on the circle.** When $P$ reaches the circle the near arc shrinks to nothing and the formula becomes the inscribed angle theorem.
+• **The lengths.** The same two secants satisfy $PA \\cdot PB = PC \\cdot PD$, the [two secants](!/geometry/visual-tools/two-secants) theorem about lengths rather than angles.
+• **Inside, on and outside.** The three cases fit one rule: the angle is half the sum of the arcs when the lines cross inside, the inscribed angle when they cross on the circle, and half the difference when they cross outside.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the angle between two secants from an outside point?',
+          answer: 'It is half the difference of the two arcs it cuts off: half the central angle of the far arc minus half the central angle of the near arc.'
+        },
+        obj2: {
+          question: 'How is the secant angle theorem proved?',
+          answer: 'Join the near point of one secant to the far point of the other. The angle at the near point is an exterior angle of the triangle with the outside point, so the angle between the secants is the difference of two inscribed angles, each half the central angle of its arc.'
+        },
+        obj3: {
+          question: 'How does it differ from the angle between two chords?',
+          answer: 'For chords crossing inside a circle the angle is half the sum of the arcs; for secants meeting outside it is half the difference.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Angle Between Secants Proof Visualizer",
+          "description": "Step-by-step interactive proof that the angle formed by two secants from an external point equals half the difference of the intercepted arcs, with a draggable external point and draggable secants.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/angle-between-secants",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "The Angle Between Two Secants", "item": "https://www.learnmathclass.com/geometry/visual-tools/angle-between-secants" }
+          ]
+        }
+      }
+    },
+    'tangent-secant-angle': {
+      proofKey: 'tangentSecantAngle',
+      title: 'Angle Between a Tangent and a Secant | Half the Difference of the Arcs Proof Step by Step',
+      description: 'Watch the proof that the angle between a tangent and a secant drawn from a point outside a circle is half the difference of the central angles of the arcs they cut off, by the exterior angle theorem, the inscribed angle theorem and the tangent-chord angle, step by step. Then drag the point and the secant.',
+      h1Title: 'The Angle Between a Tangent and a Secant',
+      url: '/geometry/visual-tools/tangent-secant-angle',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="42" r="22" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><line x1="6" y1="38" x2="44" y2="21" stroke="#E6F1FB" stroke-width="1.4"/><line x1="6" y1="38" x2="62" y2="61" stroke="#E6F1FB" stroke-width="1.4"/><path d="M18,33 A12,12 0 0 1 18,43" fill="none" stroke="#FAC775" stroke-width="1.6"/><path d="M44,21 A22,22 0 0 1 62,61" fill="none" stroke="#FAC775" stroke-width="2"/><circle cx="44" cy="21" r="2" fill="#FAC775"/><text x="40" y="78" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">θ = ½(arc − arc)</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Circle',
+      name: 'Tangent-Secant Angle Proof',
+      keywords: [
+        'angle between tangent and secant',
+        'tangent secant angle theorem',
+        'angle outside a circle half the difference',
+        'tangent and secant from external point',
+        'intercepted arcs',
+        'tangent chord angle',
+        'circle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $P$, or $B$ round the circle, and watch the readout: the angle at $P$ and half the difference of the two central angles stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $P$ be a point outside a circle with centre $O$. The tangent from $P$ touches the circle at $T$, and a secant from $P$ meets it at $A$ and then $B$. The angle $\\theta = \\angle TPB$ cuts off two arcs, the far arc $TB$ and the near arc $TA$. The theorem says
+
+$$\\theta = \\frac{1}{2}\\left(\\angle TOB - \\angle TOA\\right)$$
+
+half the difference of the central angles of the two arcs. It is the [angle between two secants](!/geometry/visual-tools/angle-between-secants) with one secant turned until it touches the circle.
+
+The proof uses the [exterior angle theorem](!/geometry/visual-tools/exterior-angle), the [inscribed angle theorem](!/geometry/visual-tools/inscribed-angle) and the [tangent-chord angle](!/geometry/visual-tools/tangent-chord-angle) theorem. In the player $P$ moves freely outside the circle, $T$ is computed as the point where the tangent from $P$ touches, $B$ slides round the circle and $A$ is where the line $BP$ meets the circle again.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'An Exterior Angle',
+          content: `Join $T$ to $A$. In the triangle $PTA$ the ray $AB$ continues the side $PA$ beyond $A$, so $\\beta = \\angle TAB$ is an exterior angle of $PTA$. It equals the sum of the two remote interior angles, $\\theta$ at $P$ and $\\delta = \\angle PTA$ at $T$:
+
+$$\\beta = \\theta + \\delta, \\qquad \\theta = \\beta - \\delta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Far Arc',
+          content: `The angle $\\beta = \\angle TAB$ has its vertex on the circle and stands on the far arc $TB$, so the central angle on that arc is twice as large:
+
+$$\\angle TOB = 2\\beta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Near Arc',
+          content: `The angle $\\delta = \\angle PTA$ lies between the tangent $PT$ and the chord $TA$. By the [tangent-chord angle](!/geometry/visual-tools/tangent-chord-angle) theorem it is half the central angle on the arc $TA$ inside it:
+
+$$\\angle TOA = 2\\delta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Substituting the two central angles:
+
+$$\\theta = \\beta - \\delta = \\frac{1}{2}\\angle TOB - \\frac{1}{2}\\angle TOA = \\frac{1}{2}\\left(\\angle TOB - \\angle TOA\\right)$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the exterior angle theorem, the inscribed angle theorem, the tangent-chord angle and combining.
+
+The proof is the two-secant proof with the inscribed angle at the near end replaced by the tangent-chord angle, which is what an inscribed angle becomes when one of its arms touches the circle.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $P$: the tangent point $T$ moves round the circle, the secant swings, and the readout keeps the angle at $P$ equal to half the difference. Drag $B$ round the circle to turn the secant about $P$.
+
+The player keeps $P$ well outside the circle, the secant crossing it at two points far apart, the far arc under $170°$ so that the central angle is the one drawn, the angles large enough for their marks and the figure in the frame; a drag that would break one of these is refused. Moving $P$ down soon makes the far arc too large, so most of the room is upwards.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **Two tangents.** Turning the secant until it also touches the circle gives two tangents from $P$; the angle between them is $180°$ minus the central angle between the points of contact, as on the [two tangents](!/geometry/visual-tools/two-tangents) page.
+• **The lengths.** The same tangent and secant satisfy $PT^2 = PA \\cdot PB$, the [secant and tangent](!/geometry/visual-tools/secant-tangent) theorem about lengths rather than angles.
+• **P on the circle.** When $P$ comes down onto the circle at $T$, the near arc shrinks to nothing and the formula becomes the tangent-chord angle itself.
+• **One rule for all three cases.** Two secants, a tangent and a secant, and two tangents from an outside point all give half the difference of the two arcs between their points on the circle.
+• **Inside the circle.** For two chords crossing inside, the angle is half the sum instead, as on the [angle between two chords](!/geometry/visual-tools/angle-between-chords) page.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the angle between a tangent and a secant from an outside point?',
+          answer: 'It is half the difference of the two arcs it cuts off: half the central angle of the far arc minus half the central angle of the near arc between the point of contact and the near end of the secant.'
+        },
+        obj2: {
+          question: 'How is the tangent-secant angle theorem proved?',
+          answer: 'Join the point of contact to the near end of the secant. The angle at that end is an exterior angle of the triangle with the outside point, so the angle at the outside point is the difference of an inscribed angle and a tangent-chord angle, each half the central angle of its arc.'
+        },
+        obj3: {
+          question: 'How is it related to the angle between two secants?',
+          answer: 'It is the same rule: half the difference of the arcs. A tangent is a secant whose two points on the circle have come together, and the inscribed angle at the near end becomes a tangent-chord angle.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Tangent-Secant Angle Proof Visualizer",
+          "description": "Step-by-step interactive proof that the angle formed by a tangent and a secant from an external point equals half the difference of the intercepted arcs, with a draggable external point and secant.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/tangent-secant-angle",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "The Angle Between a Tangent and a Secant", "item": "https://www.learnmathclass.com/geometry/visual-tools/tangent-secant-angle" }
+          ]
+        }
+      }
+    },
+    'vertical-angle-bisectors': {
+      proofKey: 'verticalBisectors',
+      title: 'Bisectors of Vertical Angles Lie on One Line | Proof Step by Step',
+      description: 'Watch the proof that the bisectors of two vertical angles form a single straight line, by vertical angles and the straight angle, step by step. Then drag the two crossing lines.',
+      h1Title: 'Bisectors of Vertical Angles',
+      url: '/geometry/visual-tools/vertical-angle-bisectors',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="8" y1="54" x2="72" y2="26" stroke="#E6F1FB" stroke-width="1.4"/><line x1="16" y1="14" x2="64" y2="66" stroke="#E6F1FB" stroke-width="1.4"/><line x1="6" y1="36" x2="74" y2="44" stroke="#FAC775" stroke-width="1.6" stroke-dasharray="4 2"/><circle cx="40" cy="40" r="2.2" fill="#FAC775"/><text x="40" y="76" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">α/2 + β + α/2 = 180°</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Lines and Angles',
+      name: 'Vertical Angle Bisectors Proof',
+      keywords: [
+        'bisectors of vertical angles',
+        'vertical angle bisectors collinear',
+        'bisectors of vertically opposite angles form a straight line',
+        'vertical angles',
+        'angle bisector',
+        'straight angle',
+        'lines and angles',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$ or $C$ to turn a line, or $O$ to move the crossing, and watch the readout: the three angles from $OP$ round to $OQ$ always add up to $180°$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Two lines $AB$ and $CD$ cross at $O$. The angles $\\angle AOC$ and $\\angle BOD$ lie opposite each other: they are [vertical angles](!/geometry/visual-tools/vertical-angles). Draw the bisector $OP$ of $\\angle AOC$ and the bisector $OQ$ of $\\angle BOD$. The theorem says
+
+$$P,\\ O,\\ Q \\text{ lie on one straight line}$$
+
+so the two bisectors are the two halves of a single line through $O$. It is the opposite of the [bisectors of a linear pair](!/geometry/visual-tools/linear-pair-bisectors), which are perpendicular.
+
+In the player $A$, $C$ and $O$ can be dragged, $B$ and $D$ are their mirror images in $O$ so that $AB$ and $CD$ stay straight lines, and the bisectors are computed; the readout shows $\\alpha$, $\\beta$ and the sum of the three angles from $OP$ to $OQ$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Vertical Angles',
+          content: `The angles $\\angle AOC$ and $\\angle BOD$ are vertical angles, so they are equal:
+
+$$\\angle AOC = \\angle BOD = \\alpha$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Two Halves',
+          content: `$OP$ halves $\\angle AOC$ and $OQ$ halves $\\angle BOD$. The half of $\\angle AOC$ next to $OC$ and the half of $\\angle BOD$ next to $OB$ are
+
+$$\\angle POC = \\angle BOQ = \\frac{\\alpha}{2}$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Straight Angle',
+          content: `Between those two halves lies the angle $\\beta = \\angle COB$. The angles $\\angle AOC$ and $\\angle COB$ together fill the straight angle $AOB$ along the line $AB$:
+
+$$\\alpha + \\beta = 180°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Go from $OP$ round to $OQ$ through $OC$ and $OB$:
+
+$$\\angle POQ = \\frac{\\alpha}{2} + \\beta + \\frac{\\alpha}{2} = \\alpha + \\beta = 180°$$
+
+A $180°$ angle at $O$ is a straight angle, so $OP$ and $OQ$ point in opposite directions along one line. The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, vertical angles, the angle bisector, the straight angle and adding.
+
+The same holds for the other pair of vertical angles, $\\angle COB$ and $\\angle DOA$: their bisectors make a second line through $O$, perpendicular to the first.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$ or $C$ to turn one of the lines, or $O$ to move the crossing: the angles $\\alpha$ and $\\beta$ change, one growing as the other shrinks, and the readout keeps the sum from $OP$ to $OQ$ at $180°$.
+
+The player keeps $\\alpha$ between $50°$ and $130°$ so that every mark stays readable, keeps both lines long and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **The two bisector lines are perpendicular.** The bisectors of $\\angle AOC$ and $\\angle COB$ make $\\frac{\\alpha}{2} + \\frac{\\beta}{2} = 90°$, as on the [bisectors of a linear pair](!/geometry/visual-tools/linear-pair-bisectors) page; so the four bisectors at a crossing form two perpendicular lines.
+• **Angle bisectors of two lines.** Those two perpendicular lines are the set of points equally far from the two given lines, as on the [angle bisector locus](!/geometry/visual-tools/angle-bisector-locus) page.
+• **A check on a drawing.** If the bisectors of two opposite angles at a crossing do not line up, the drawing is not of two straight lines.
+• **Mirror symmetry.** Reflecting in the bisector line swaps the two given lines, which is another way to see that it bisects both vertical angles at once.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'Do the bisectors of vertical angles form a straight line?',
+          answer: 'Yes. The bisectors of two vertical angles point in opposite directions from the crossing, so together they make one straight line.'
+        },
+        obj2: {
+          question: 'How is it proved?',
+          answer: 'Vertical angles are equal, say α each, and the angle between them on either side is β with α + β = 180°. From one bisector round to the other the angle is α/2 + β + α/2 = α + β = 180°, a straight angle.'
+        },
+        obj3: {
+          question: 'What about the bisectors of the other pair of vertical angles?',
+          answer: 'They form a second straight line through the crossing, perpendicular to the first one.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Vertical Angle Bisectors Proof Visualizer",
+          "description": "Step-by-step interactive proof that the angle bisectors of a pair of vertical angles are collinear, with draggable crossing lines.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/vertical-angle-bisectors",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Bisectors of Vertical Angles", "item": "https://www.learnmathclass.com/geometry/visual-tools/vertical-angle-bisectors" }
+          ]
+        }
+      }
+    },
+    'viviani-theorem': {
+      proofKey: 'viviani',
+      title: 'Viviani\'s Theorem | Distances to the Sides of an Equilateral Triangle Proof Step by Step',
+      description: 'Watch the proof of Viviani\'s theorem: from any point inside an equilateral triangle the three perpendicular distances to the sides add up to the height, by splitting the area into three triangles, step by step. Then drag the point and the triangle.',
+      h1Title: 'Viviani\'s Theorem',
+      url: '/geometry/visual-tools/viviani-theorem',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="10,62 62,62 36,17" fill="none" stroke="#E6F1FB" stroke-width="1.4"/><line x1="32" y1="46" x2="32" y2="62" stroke="#FAC775" stroke-width="1.6"/><line x1="32" y1="46" x2="44" y2="39" stroke="#FAC775" stroke-width="1.6"/><line x1="32" y1="46" x2="24" y2="35" stroke="#FAC775" stroke-width="1.6"/><circle cx="32" cy="46" r="2" fill="#FAC775"/><line x1="70" y1="62" x2="70" y2="17" stroke="#E6F1FB" stroke-width="1.2" stroke-dasharray="3 2"/><text x="40" y="76" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">PD + PE + PF = h</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Triangle',
+      name: 'Viviani Theorem Proof',
+      keywords: [
+        'viviani theorem',
+        'vivianis theorem',
+        'sum of distances to the sides of an equilateral triangle',
+        'point inside equilateral triangle',
+        'distance from a point to the sides',
+        'height of an equilateral triangle',
+        'area proof',
+        'triangle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $P$ around inside the triangle, or $A$ or $B$ to turn and resize it, and watch the readout: the three distances change but their sum always equals the height $h$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Let $ABC$ be an [equilateral triangle](!/geometry/visual-tools/equilateral-triangle) with side $a$ and height $h$, and let $P$ be any point inside it. Drop the perpendiculars $PD$, $PE$ and $PF$ from $P$ to the sides $BC$, $CA$ and $AB$; each is the shortest way from $P$ to that side, as on the [perpendicular is shortest](!/geometry/visual-tools/perpendicular-shortest) page. Viviani's theorem says
+
+$$PD + PE + PF = h$$
+
+so the sum of the three distances is the same for every point inside the triangle.
+
+In the player $P$, $A$ and $B$ can be dragged, $C$ is computed so that the triangle stays equilateral, and the feet $D$, $E$, $F$ are computed. The height is drawn as a bar beside the triangle, from the line $AB$ up to the level of $C$. The readout shows the sum of the three distances and the height, in units of $60$ pixels.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Three Triangles',
+          content: `Join $P$ to the three vertices. The triangles $PBC$, $PCA$ and $PAB$ meet at $P$ and together fill the triangle $ABC$ without overlapping, so their areas add up to its area. Writing $[XYZ]$ for the area of a triangle $XYZ$:
+
+$$[ABC] = [PBC] + [PCA] + [PAB]$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Small Triangles',
+          content: `Each small triangle has a side of $ABC$ as its base and the perpendicular from $P$ to that side as its height. All three sides have the same length $a$, so
+
+$$[PBC] = \\frac{1}{2}a \\cdot PD, \\qquad [PCA] = \\frac{1}{2}a \\cdot PE, \\qquad [PAB] = \\frac{1}{2}a \\cdot PF$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Whole Triangle',
+          content: `The whole triangle has the base $AB = a$ and the height $h$:
+
+$$[ABC] = \\frac{1}{2}a \\cdot h$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Put the four areas together:
+
+$$\\frac{1}{2}a \\cdot PD + \\frac{1}{2}a \\cdot PE + \\frac{1}{2}a \\cdot PF = \\frac{1}{2}a \\cdot h$$
+
+and divide both sides by $\\frac{1}{2}a$:
+
+$$PD + PE + PF = h$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, area addition, the area of a triangle (twice) and combining.
+
+The equal sides are what make it work: they let the common factor $\\frac{1}{2}a$ come out of all three areas. Nothing in the proof depends on where $P$ is, as long as it is inside.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $P$: the perpendiculars change length, one growing as others shrink, and the readout keeps their sum equal to $h$. Drag $A$ or $B$ to turn or resize the triangle; the height changes and the sum follows it.
+
+The player keeps $P$ inside the triangle with some room to each side so that every mark stays readable, keeps $AB$ close to level and of a fair size, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **The centre.** At the centre of the triangle the three distances are equal, so each is $\\frac{h}{3}$: the radius of the inscribed circle is one third of the height, as the [incentre](!/geometry/visual-tools/incentre) and [centroid](!/geometry/visual-tools/centroid) pages agree, since in an equilateral triangle these centres coincide.
+• **The height itself.** Moving $P$ to the vertex $C$ makes $PD$ and $PE$ zero and $PF$ the height, the extreme case of the formula.
+• **Other triangles.** For a triangle with sides $a$, $b$, $c$ the same area argument gives $a \\cdot PD + b \\cdot PE + c \\cdot PF = 2[ABC]$; only when the sides are equal does this become a fixed plain sum.
+• **Regular polygons.** The proof works for any polygon with equal sides, such as a square or a [regular hexagon](!/geometry/visual-tools/regular-hexagon): splitting it into triangles from $P$ shows that the distances to the sides always have the same sum.
+• **Equidistant points.** The points equally far from two sides lie on the [angle bisector](!/geometry/visual-tools/angle-bisector-locus) between them, which is another way to find the centre where all three distances agree.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What does Viviani\'s theorem say?',
+          answer: 'From any point inside an equilateral triangle, the three perpendicular distances to the sides add up to the height of the triangle.'
+        },
+        obj2: {
+          question: 'How is Viviani\'s theorem proved?',
+          answer: 'Join the point to the three vertices. The three small triangles fill the whole one; each has a side of length a as its base and one of the distances as its height. Adding their areas and comparing with half of a times the height gives the result.'
+        },
+        obj3: {
+          question: 'Does it work for other triangles?',
+          answer: 'Not as a plain sum. For any triangle the sides times the distances add up to twice the area, which is a fixed plain sum only when the three sides are equal.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Viviani Theorem Proof Visualizer",
+          "description": "Step-by-step interactive proof that the sum of the distances from an interior point to the sides of an equilateral triangle equals its height, with a draggable point and triangle.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/viviani-theorem",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Viviani's Theorem", "item": "https://www.learnmathclass.com/geometry/visual-tools/viviani-theorem" }
+          ]
+        }
+      }
+    },
+    'pitot-theorem': {
+      proofKey: 'pitot',
+      title: 'Pitot\'s Theorem | Tangential Quadrilateral Opposite Sides Proof Step by Step',
+      description: 'Watch the proof of Pitot\'s theorem: in a quadrilateral drawn round a circle the two pairs of opposite sides have equal sums, by the equal tangents from each vertex, step by step. Then drag the points of contact round the circle.',
+      h1Title: 'Pitot\'s Theorem',
+      url: '/geometry/visual-tools/pitot-theorem',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="38" r="17" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><polygon points="15,22 59,16 63,50 30,64" fill="none" stroke="#E6F1FB" stroke-width="1.4"/><line x1="15" y1="22" x2="38" y2="19" stroke="#FAC775" stroke-width="2"/><line x1="15" y1="22" x2="23" y2="43" stroke="#FAC775" stroke-width="2"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">AB + CD = BC + DA</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Quadrilateral',
+      name: 'Pitot Theorem Proof',
+      keywords: [
+        'pitot theorem',
+        'pitots theorem',
+        'tangential quadrilateral',
+        'quadrilateral circumscribed about a circle',
+        'sum of opposite sides equal',
+        'incircle of a quadrilateral',
+        'equal tangents',
+        'quadrilateral theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag any of the points of contact $P$, $Q$, $R$, $S$ round the circle and watch the readout: the sides change, but $AB + CD$ and $BC + DA$ stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `A quadrilateral $ABCD$ is drawn round a circle with centre $O$: each of its four sides touches the circle, $AB$ at $P$, $BC$ at $Q$, $CD$ at $R$ and $DA$ at $S$. Such a quadrilateral is called tangential. Pitot's theorem says
+
+$$AB + CD = BC + DA$$
+
+so the two pairs of opposite sides have the same sum.
+
+In the player the circle is fixed and $P$, $Q$, $R$, $S$ slide round it. The side through each point of contact is the tangent there, square to the radius as on the [tangent and radius](!/geometry/visual-tools/tangent-radius) page, and each vertex is where two neighbouring tangents meet. The readout shows both sums, in units of $60$ pixels.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Equal Tangents',
+          content: `From each vertex two tangents touch the circle, and by the [two tangents](!/geometry/visual-tools/two-tangents) theorem they have the same length. In the player the two tangents from a vertex share a colour:
+
+$$AP = AS, \\qquad BP = BQ, \\qquad CQ = CR, \\qquad DR = DS$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The First Pair of Sides',
+          content: `$P$ lies on $AB$ and $R$ on $CD$, so each of these sides is the sum of its two pieces:
+
+$$AB + CD = AP + PB + CR + RD$$
+
+There is one piece from each of the four vertices.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Second Pair of Sides',
+          content: `In the same way $Q$ splits $BC$ and $S$ splits $DA$:
+
+$$BC + DA = BQ + QC + DS + SA$$
+
+Again there is one piece from each vertex.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Replace each piece in the second sum by the equal piece from the same vertex, $BQ = BP$, $QC = CR$, $DS = DR$ and $SA = AP$:
+
+$$BC + DA = BP + CR + DR + AP = AB + CD$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the two tangents theorem, segment addition (twice) and combining.
+
+Each vertex gives one tangent length to each sum, which is why the two sums must agree whatever the shape of the quadrilateral.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $P$, $Q$, $R$ or $S$ round the circle: the two sides through that point turn, the vertices at their ends move, and the readout keeps $AB + CD$ equal to $BC + DA$.
+
+The player keeps the points of contact in order round the circle, keeps each arc between neighbours between $55°$ and $120°$ so that no vertex runs far away or becomes too sharp, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **The converse.** A convex quadrilateral with $AB + CD = BC + DA$ always has a circle touching all four sides, so the equal sums are exactly the test for a tangential quadrilateral.
+• **The centre.** $O$ is equally far from all four sides, so it lies on the bisector of every angle of $ABCD$, as on the [angle bisector locus](!/geometry/visual-tools/angle-bisector-locus) page; for a triangle the same point is the [incentre](!/geometry/visual-tools/incentre).
+• **Kites and rhombuses.** A kite has $AB = AD$ and $CB = CD$, so its opposite sums agree and it always has an inscribed circle, as does every rhombus; see the [kite diagonals](!/geometry/visual-tools/kite-diagonals) and [rhombus diagonals](!/geometry/visual-tools/rhombus-diagonals) pages.
+• **Rectangles.** A rectangle that is not a square has $AB + CD = 2 \\cdot AB$ and $BC + DA = 2 \\cdot BC$, which differ, so no circle can touch all four of its sides.
+• **Area.** Joining $O$ to the vertices splits the quadrilateral into four triangles of height $r$, so its area is $r$ times half its perimeter, $r \\cdot (AB + CD)$.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What does Pitot\'s theorem say?',
+          answer: 'In a quadrilateral whose four sides all touch one circle, the sums of the two pairs of opposite sides are equal: AB + CD = BC + DA.'
+        },
+        obj2: {
+          question: 'How is Pitot\'s theorem proved?',
+          answer: 'The two tangents from each vertex to the circle are equal. Each side is made of two tangent pieces from its two ends, and each sum of opposite sides uses exactly one piece from every vertex, so the two sums are equal.'
+        },
+        obj3: {
+          question: 'Does every quadrilateral have an inscribed circle?',
+          answer: 'No. A convex quadrilateral has one exactly when its opposite sides have equal sums, which is true for every kite and rhombus but not, for example, for a rectangle that is not a square.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Pitot Theorem Proof Visualizer",
+          "description": "Step-by-step interactive proof that in a tangential quadrilateral the sums of opposite sides are equal, with draggable points of contact.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/pitot-theorem",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Pitot's Theorem", "item": "https://www.learnmathclass.com/geometry/visual-tools/pitot-theorem" }
+          ]
+        }
+      }
+    },
+    'alternate-angle-bisectors': {
+      proofKey: 'alternateBisectors',
+      title: 'Bisectors of Alternate Angles Are Parallel | Proof Step by Step',
+      description: 'Watch the proof that the bisectors of two alternate angles formed by parallel lines and a transversal are parallel, by alternate angles and their converse, step by step. Then drag the transversal and the lines.',
+      h1Title: 'Bisectors of Alternate Angles',
+      url: '/geometry/visual-tools/alternate-angle-bisectors',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="6" y1="18" x2="74" y2="18" stroke="#E6F1FB" stroke-width="1.4"/><line x1="6" y1="56" x2="74" y2="56" stroke="#E6F1FB" stroke-width="1.4"/><line x1="34" y1="18" x2="44" y2="56" stroke="#E6F1FB" stroke-width="1.4"/><line x1="34" y1="18" x2="60" y2="40" stroke="#FAC775" stroke-width="1.8"/><line x1="44" y1="56" x2="18" y2="34" stroke="#FAC775" stroke-width="1.8"/><text x="40" y="74" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">PX ∥ QY</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Lines and Angles',
+      name: 'Alternate Angle Bisectors Proof',
+      keywords: [
+        'bisectors of alternate angles',
+        'bisectors of alternate interior angles are parallel',
+        'alternate angles',
+        'alternate angles converse',
+        'parallel lines and a transversal',
+        'angle bisector',
+        'lines and angles',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $P$ or $Q$ along its line to tilt the transversal, or $A$, $B$ or $C$ to move the parallels, and watch the readout: the two halves stay equal and the angle between the bisectors stays $0°$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Two parallel lines $AB$ and $CD$ are cut by a transversal at $P$ and $Q$. The angles $\\angle QPB$ and $\\angle PQC$ lie between the parallels on opposite sides of the transversal: they are alternate angles. Draw the bisector $PX$ of $\\angle QPB$ and the bisector $QY$ of $\\angle PQC$. The theorem says
+
+$$PX \\parallel QY$$
+
+It is the partner of the [bisectors of co-interior angles](!/geometry/visual-tools/cointerior-bisectors) page, where the two bisectors meet at a right angle instead.
+
+The proof uses the [parallel lines and a transversal](!/geometry/visual-tools/parallel-lines) theorem twice: once forwards, to get equal alternate angles from parallel lines, and once backwards, to get parallel lines from equal alternate angles. In the player $P$ and $Q$ slide along their lines, $A$, $B$ and $C$ move the lines, and the bisectors are computed; the readout shows the two halves next to $PQ$ and the angle between $PX$ and $QY$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Alternate Angles',
+          content: `The lines $AB$ and $CD$ are parallel and $PQ$ crosses them, so the alternate angles are equal:
+
+$$\\angle QPB = \\angle PQC = \\beta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Two Halves',
+          content: `$PX$ halves $\\angle QPB$ and $QY$ halves $\\angle PQC$. The halves next to the transversal are
+
+$$\\angle QPX = \\angle PQY = \\frac{\\beta}{2}$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'Why It Holds',
+          content: `Now forget $AB$ and $CD$ and look at the lines $PX$ and $QY$, cut by the transversal $PQ$. The angles $\\angle QPX$ and $\\angle PQY$ lie on opposite sides of $PQ$, between the two lines, so they are alternate angles for $PX$ and $QY$. They are equal, and equal alternate angles make two lines parallel:
+
+$$PX \\parallel QY$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, alternate angles, the angle bisector and the alternate angles converse.
+
+The converse holds because two lines that met would form a triangle with $PQ$, and the exterior angle of that triangle would have to be larger than the interior angle opposite it, as on the [exterior angle](!/geometry/visual-tools/exterior-angle) page; equal alternate angles leave no room for such a triangle.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Dragging the Figure',
+          content: `Drag $P$ or $Q$ along its line: the transversal tilts, $\\beta$ changes, and the bisectors turn with it, but the readout keeps the two halves equal and the angle between $PX$ and $QY$ at $0°$. Drag $A$, $B$ or $C$ to move or turn the parallels; $D$ follows so that $CD$ stays parallel to $AB$.
+
+The player keeps $\\beta$ between $70°$ and $110°$ so that every mark stays readable, keeps the lines long, nearly level and apart, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Consequences',
+          content: `• **Co-interior bisectors.** The bisectors of the two co-interior angles $\\angle QPB$ and $\\angle PQD$ meet at a right angle instead, as on the [bisectors of co-interior angles](!/geometry/visual-tools/cointerior-bisectors) page.
+• **A rectangle of bisectors.** At $P$ the bisectors of $\\angle QPB$ and $\\angle APQ$ are perpendicular, as for any [linear pair](!/geometry/visual-tools/linear-pair-bisectors); the same holds at $Q$. With $PX \\parallel QY$ and the other two bisectors parallel as well, the four bisectors make a rectangle.
+• **Corresponding angles.** The same argument with corresponding angles shows that the bisectors of two corresponding angles are parallel too.
+• **Vertical angles.** At a single crossing the bisectors of two vertical angles lie on one line, as on the [bisectors of vertical angles](!/geometry/visual-tools/vertical-angle-bisectors) page; here the two angles sit at different crossings, and the bisectors are parallel instead.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'Are the bisectors of alternate angles parallel?',
+          answer: 'Yes. When two parallel lines are cut by a transversal, the bisectors of a pair of alternate interior angles are parallel to each other.'
+        },
+        obj2: {
+          question: 'How is it proved?',
+          answer: 'The alternate angles are equal, so their halves next to the transversal are equal too. Those halves are alternate angles for the two bisectors, and equal alternate angles make two lines parallel.'
+        },
+        obj3: {
+          question: 'What about the bisectors of co-interior angles?',
+          answer: 'The bisectors of two co-interior angles meet at a right angle, because the two angles add up to 180° and their halves add up to 90°.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Alternate Angle Bisectors Proof Visualizer",
+          "description": "Step-by-step interactive proof that the angle bisectors of a pair of alternate interior angles are parallel, with a draggable transversal and parallel lines.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/alternate-angle-bisectors",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Bisectors of Alternate Angles", "item": "https://www.learnmathclass.com/geometry/visual-tools/alternate-angle-bisectors" }
+          ]
+        }
+      }
+    },
+    'median-halves-area': {
+      proofKey: 'medianArea',
+      title: 'A Median Divides a Triangle Into Two Equal Areas | Proof Step by Step',
+      description: 'Watch the proof that a median of a triangle splits it into two triangles of equal area, by equal bases and a common height, step by step. Then drag the vertices.',
+      h1Title: 'A Median Halves the Area',
+      url: '/geometry/visual-tools/median-halves-area',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="28,14 8,60 40,60" fill="#FAC775" fill-opacity="0.35"/><polygon points="28,14 40,60 72,60" fill="#E6F1FB" fill-opacity="0.25"/><polygon points="28,14 8,60 72,60" fill="none" stroke="#E6F1FB" stroke-width="1.4"/><line x1="28" y1="14" x2="40" y2="60" stroke="#FAC775" stroke-width="1.6"/><line x1="24" y1="57" x2="24" y2="63" stroke="#E6F1FB" stroke-width="1.2"/><line x1="56" y1="57" x2="56" y2="63" stroke="#E6F1FB" stroke-width="1.2"/><text x="40" y="76" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">[ABM] = [AMC]</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Triangle',
+      name: 'Median Halves the Area Proof',
+      keywords: [
+        'median divides triangle into two equal areas',
+        'median of a triangle area',
+        'median halves the area',
+        'triangles with equal bases and the same height',
+        'area of a triangle',
+        'median of a triangle',
+        'triangle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$, $B$ or $C$ and watch the readout: the two shaded triangles change shape, but their areas stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `In a triangle $ABC$ let $M$ be the midpoint of $BC$. The segment $AM$ is the median from $A$, and it cuts the triangle into two smaller triangles, $ABM$ and $AMC$. Writing $[XYZ]$ for the area of a triangle $XYZ$, the theorem says
+
+$$[ABM] = [AMC]$$
+
+so each median cuts the triangle into two halves of equal area, even though the two halves usually have different shapes.
+
+In the player $A$, $B$ and $C$ can be dragged; $M$ is computed as the midpoint and $H$ as the foot of the perpendicular from $A$. The readout shows both areas, in square units of $60$ pixels.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'One Height for Both',
+          content: `Drop the perpendicular $AH$ from $A$ to the line $BC$. The triangles $ABM$ and $AMC$ both have their base on the line $BC$ and their third vertex at $A$, so the distance from that vertex to the base line is the same for both:
+
+$$\\text{height of } ABM = \\text{height of } AMC = AH$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Two Areas',
+          content: `The area of a triangle is half its base times its height:
+
+$$[ABM] = \\frac{1}{2} \\cdot BM \\cdot AH, \\qquad [AMC] = \\frac{1}{2} \\cdot MC \\cdot AH$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'Why It Holds',
+          content: `$M$ is the midpoint of $BC$, so $BM = MC$, and the two products are equal:
+
+$$[ABM] = \\frac{1}{2} \\cdot BM \\cdot AH = \\frac{1}{2} \\cdot MC \\cdot AH = [AMC]$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the altitude, the area of a triangle and the midpoint.
+
+Only the bases and the shared height matter. The shapes of the two triangles, and where the foot $H$ falls, play no part.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$ to slide the apex: the foot $H$ moves along $BC$, passing from one side of $M$ to the other, and the readout keeps the two areas equal. Drag $B$ or $C$ to stretch or tilt the base; $M$ stays in the middle.
+
+The player keeps $BC$ long and close to level, keeps $A$ well above it with the foot $H$ between $B$ and $C$ and away from $M$ so that their names stay apart, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Consequences',
+          content: `• **Six equal pieces.** The three medians meet at the [centroid](!/geometry/visual-tools/centroid) and cut the triangle into six small triangles, all of the same area; each median halves both the whole triangle and the smaller triangles along it.
+• **Any ratio.** With the same height, the areas are in the ratio of the bases: if a point divides $BC$ as $BD : DC = 2 : 1$, then $[ABD] : [ADC] = 2 : 1$. This is the idea behind the area proof of the [intercept theorem](!/geometry/visual-tools/intercept-theorem).
+• **Parallelograms.** A diagonal cuts a parallelogram into two triangles of equal area, and joining a vertex to the midpoint of a far side cuts off a quarter of the area.
+• **Adding areas.** Splitting a figure into triangles with known bases and heights is also how [Viviani's theorem](!/geometry/visual-tools/viviani-theorem) is proved.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'Does a median divide a triangle into two equal areas?',
+          answer: 'Yes. The median from a vertex to the midpoint of the opposite side cuts the triangle into two triangles of equal area.'
+        },
+        obj2: {
+          question: 'Why are the two areas equal?',
+          answer: 'The two triangles have equal bases, the two halves of the side, and the same height, the distance from the vertex to that side. Half the base times the height is the same for both.'
+        },
+        obj3: {
+          question: 'Are the two triangles congruent?',
+          answer: 'Usually not. They have the same area but different shapes, unless the triangle is isosceles with the median drawn from its apex.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Median Halves the Area Proof Visualizer",
+          "description": "Step-by-step interactive proof that the median of a triangle divides it into two triangles of equal area, with draggable vertices.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/median-halves-area",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "A Median Halves the Area", "item": "https://www.learnmathclass.com/geometry/visual-tools/median-halves-area" }
+          ]
+        }
+      }
+    },
+    'concentric-circles-chord': {
+      proofKey: 'concentricChord',
+      title: 'Chord of Two Concentric Circles Touching the Inner Circle | Proof Step by Step',
+      description: 'Watch the proof that in two concentric circles a chord of the larger circle that touches the smaller one is bisected at the point of contact, by the tangent and radius and HL congruence, step by step. Then drag the chord and resize the circle.',
+      h1Title: 'A Chord of Two Concentric Circles',
+      url: '/geometry/visual-tools/concentric-circles-chord',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="36" r="27" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><circle cx="40" cy="36" r="14" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><line x1="17" y1="50" x2="63" y2="50" stroke="#FAC775" stroke-width="1.8"/><line x1="40" y1="36" x2="40" y2="50" stroke="#E6F1FB" stroke-width="1.2"/><circle cx="40" cy="50" r="2" fill="#FAC775"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">AT = TB</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Circle',
+      name: 'Concentric Circles Chord Proof',
+      keywords: [
+        'concentric circles chord',
+        'chord of outer circle tangent to inner circle',
+        'chord bisected at point of contact',
+        'concentric circles theorem',
+        'tangent and radius',
+        'HL congruence',
+        'circle theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$ round the larger circle, or $E$ to resize it, and watch the readout: the chord moves and changes length, but $AT$ and $TB$ stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Two circles are concentric: they have the same centre $O$. A chord $AB$ of the larger circle touches the smaller circle at a single point $T$. The theorem says
+
+$$AT = TB$$
+
+so the point of contact is the midpoint of the chord.
+
+In the player $O$ and the smaller circle are fixed. $A$ slides round the larger circle and $E$ sets its size; $T$ is computed as the point where the tangent from $A$ touches the smaller circle, and $B$ as the point where the line $AT$ meets the larger circle again. The readout shows $AT$ and $TB$, in units of $60$ pixels.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'The Tangent and the Radius',
+          content: `$AB$ touches the smaller circle at $T$, and $OT$ is the radius of the smaller circle to that point. By the [tangent and radius](!/geometry/visual-tools/tangent-radius) theorem a tangent is perpendicular to the radius at the point of contact:
+
+$$OT \\perp AB$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'Equal Radii',
+          content: `$A$ and $B$ both lie on the larger circle, so $OA$ and $OB$ are radii of it:
+
+$$OA = OB$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'Two Congruent Triangles',
+          content: `The triangles $OTA$ and $OTB$ have right angles at $T$, equal hypotenuses $OA = OB$ and the shared leg $OT$. By [HL congruence](!/geometry/visual-tools/hl-congruence):
+
+$$\\triangle OTA \\cong \\triangle OTB$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `In the congruent triangles the remaining legs match:
+
+$$AT = TB$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the tangent and radius theorem, radii, HL congruence and matching sides.
+
+The last two steps are the [perpendicular bisects a chord](!/geometry/visual-tools/chord-bisector) theorem for the larger circle: the line from the centre square to a chord cuts it in half. What the smaller circle adds is that this line meets the chord exactly at the point of contact.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$ round the larger circle: the chord turns about the centre, always touching the smaller circle, and the readout keeps $AT = TB$. Drag $E$ to make the larger circle bigger or smaller: the chord grows or shrinks, and the two halves stay equal.
+
+The player keeps the larger circle between about $1.6$ and $2$ times the size of the smaller one so that the figure stays clear and in the frame, and keeps $E$ away from $A$ and $B$ so that their names do not meet; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **All such chords are equal.** By Pythagoras in the triangle $OTA$, $AT^2 = OA^2 - OT^2 = R^2 - r^2$ for the two radii $R$ and $r$, so every chord of the larger circle that touches the smaller one has the length $2\\sqrt{R^2 - r^2}$. This fits the [equal chords](!/geometry/visual-tools/equal-chords) page: chords at the same distance $r$ from the centre are equal.
+• **The area of the ring.** The ring between the circles has the area $\\pi R^2 - \\pi r^2 = \\pi \\cdot AT^2$, the area of a circle with the chord $AB$ as its diameter. The ring can be measured with a single chord, without knowing either radius.
+• **Two tangents.** From $A$ the two tangents to the smaller circle are equal, as on the [two tangents](!/geometry/visual-tools/two-tangents) page; the chord $AB$ uses one of them.
+• **The product of the pieces.** For any chord through $T$ of the larger circle, $AT \\cdot TB = R^2 - r^2$, an instance of the [intersecting chords](!/geometry/visual-tools/intersecting-chords) theorem; for the chord square to $OT$ the two pieces are equal.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'Is a chord of the outer circle that touches the inner circle bisected?',
+          answer: 'Yes. In two concentric circles, a chord of the larger circle that touches the smaller circle is cut in half at the point of contact.'
+        },
+        obj2: {
+          question: 'How is it proved?',
+          answer: 'The radius to the point of contact is perpendicular to the chord. With the two radii of the larger circle equal and that radius shared, the two right triangles are congruent by HL, so the two halves of the chord are equal.'
+        },
+        obj3: {
+          question: 'How long is such a chord?',
+          answer: 'Twice the square root of R squared minus r squared, where R and r are the radii of the larger and smaller circle. Every such chord has the same length.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Concentric Circles Chord Proof Visualizer",
+          "description": "Step-by-step interactive proof that a chord of the outer of two concentric circles tangent to the inner circle is bisected at the point of tangency, with a draggable chord and outer circle.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/concentric-circles-chord",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "A Chord of Two Concentric Circles", "item": "https://www.learnmathclass.com/geometry/visual-tools/concentric-circles-chord" }
+          ]
+        }
+      }
+    },
+    'regular-polygon-area': {
+      proofKey: 'regularPolygonArea',
+      title: 'Area of a Regular Polygon | Half the Perimeter Times the Apothem Proof Step by Step',
+      description: 'Watch the proof that the area of a regular polygon is half its perimeter times its apothem, by cutting it into congruent triangles from the centre, step by step, on a regular hexagon. Then drag the centre and a vertex.',
+      h1Title: 'Area of a Regular Polygon',
+      url: '/geometry/visual-tools/regular-polygon-area',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="26,12 54,12 68,36 54,60 26,60 12,36" fill="none" stroke="#E6F1FB" stroke-width="1.4"/><polygon points="40,36 26,12 54,12" fill="#FAC775" fill-opacity="0.35"/><polygon points="40,36 54,60 26,60" fill="#FAC775" fill-opacity="0.35"/><polygon points="40,36 12,36 26,12" fill="#E6F1FB" fill-opacity="0.2"/><line x1="40" y1="36" x2="40" y2="12" stroke="#FAC775" stroke-width="1.6"/><text x="40" y="76" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">area = ½ · P · a</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Polygon',
+      name: 'Regular Polygon Area Proof',
+      keywords: [
+        'area of a regular polygon',
+        'regular polygon area formula',
+        'half perimeter times apothem',
+        'apothem',
+        'area of a regular hexagon',
+        'regular polygon',
+        'polygon theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $O$ to move the hexagon, or $A$ to turn and resize it, and watch the readout: the measured area and half the perimeter times the apothem stay equal. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `A regular polygon has all its sides equal and all its angles equal, and a centre $O$ equally far from all its vertices. Its apothem $a$ is the perpendicular distance from $O$ to a side, the segment $OM$ in the player. For a regular polygon with perimeter $P$ the theorem says
+
+$$\\text{area} = \\frac{1}{2} \\cdot P \\cdot a$$
+
+The player shows a regular hexagon $ABCDEF$ with side $s$, so $P = 6s$; the proof is the same for any number of sides.
+
+In the player $O$ and $A$ can be dragged; the other vertices are $A$ turned about $O$ by $60°$ at a time, as on the [regular hexagon](!/geometry/visual-tools/regular-hexagon) page. The readout shows the area measured from the corner positions and the value of $\\frac{1}{2} \\cdot P \\cdot a$, in square units of $60$ pixels.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Six Triangles',
+          content: `Join $O$ to the six vertices. The triangles $OAB$, $OBC$, $OCD$, $ODE$, $OEF$ and $OFA$, shaded in turn, fill the hexagon without overlapping, so
+
+$$\\text{area} = [OAB] + [OBC] + [OCD] + [ODE] + [OEF] + [OFA]$$
+
+where $[XYZ]$ is the area of the triangle $XYZ$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'Congruent Triangles',
+          content: `Each triangle has two sides from $O$ to neighbouring vertices, all equal because $O$ is equally far from every vertex, and a third side $s$. By [SSS congruence](!/geometry/visual-tools/sss-congruence) the six triangles are congruent, so they have the same area and the same height from $O$ to their base, the apothem $a$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'One Triangle',
+          content: `The triangle $OAB$ has the base $AB = s$ and the height $OM = a$:
+
+$$[OAB] = \\frac{1}{2} \\cdot s \\cdot a$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Six triangles of the same area give
+
+$$\\text{area} = 6 \\cdot \\frac{1}{2} \\cdot s \\cdot a = \\frac{1}{2} \\cdot (6s) \\cdot a = \\frac{1}{2} \\cdot P \\cdot a$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, area addition, SSS congruence, the area of a triangle and combining.
+
+With $n$ sides the same steps give $n$ triangles and $\\frac{1}{2} \\cdot (ns) \\cdot a$, and $ns$ is again the perimeter.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $O$ to move the whole hexagon, or $A$ to turn it about $O$ and change its size: the side and the apothem change together, and the readout keeps the two values equal.
+
+The player keeps the hexagon between two sizes and every vertex far enough inside the frame for its name; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **The hexagon in numbers.** In a regular hexagon the side equals the radius and the apothem is $\\frac{\\sqrt{3}}{2}s$, so its area is $\\frac{3\\sqrt{3}}{2}s^2$, six equilateral triangles.
+• **The circle.** As the number of sides grows, the perimeter approaches the circumference $2\\pi r$ and the apothem approaches the radius $r$, and $\\frac{1}{2} \\cdot 2\\pi r \\cdot r = \\pi r^2$, the area of the circle.
+• **Polygons with an inscribed circle.** The apothem is the radius of the circle touching every side. Any polygon with such a circle, regular or not, has area $\\frac{1}{2} \\cdot P \\cdot r$ by the same splitting; for a triangle this is $r$ times half the perimeter, with $r$ the radius of the circle about the [incentre](!/geometry/visual-tools/incentre), and the [Pitot theorem](!/geometry/visual-tools/pitot-theorem) page shows such a quadrilateral.
+• **Distances from any point.** From any point inside a regular polygon, the distances to the sides add up to $n$ times the apothem; for the equilateral triangle this is [Viviani's theorem](!/geometry/visual-tools/viviani-theorem).`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the area formula for a regular polygon?',
+          answer: 'The area is half the perimeter times the apothem, where the apothem is the distance from the centre to a side.'
+        },
+        obj2: {
+          question: 'Why does the formula work?',
+          answer: 'Lines from the centre to the vertices cut the polygon into congruent triangles. Each has a side as its base and the apothem as its height, so together they give half the apothem times the total length of the sides.'
+        },
+        obj3: {
+          question: 'What is the apothem?',
+          answer: 'The apothem of a regular polygon is the perpendicular segment from its centre to a side, and its length is the radius of the circle that touches every side.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Regular Polygon Area Proof Visualizer",
+          "description": "Step-by-step interactive proof that the area of a regular polygon equals one half of the perimeter times the apothem, with a draggable regular hexagon.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/regular-polygon-area",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Area of a Regular Polygon", "item": "https://www.learnmathclass.com/geometry/visual-tools/regular-polygon-area" }
+          ]
+        }
+      }
+    },
+    'diagonals-bisect-converse': {
+      proofKey: 'diagonalsBisectConverse',
+      title: 'Diagonals That Bisect Each Other Make a Parallelogram | Proof Step by Step',
+      description: 'Watch the proof that a quadrilateral whose diagonals bisect each other is a parallelogram, by vertical angles, SAS congruence and alternate angles, step by step. Then drag the diagonals.',
+      h1Title: 'Diagonals That Bisect Each Other',
+      url: '/geometry/visual-tools/diagonals-bisect-converse',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><polygon points="10,56 22,16 70,24 58,64" fill="none" stroke="#E6F1FB" stroke-width="1.4"/><line x1="10" y1="56" x2="70" y2="24" stroke="#FAC775" stroke-width="1.6"/><line x1="22" y1="16" x2="58" y2="64" stroke="#FAC775" stroke-width="1.6"/><circle cx="40" cy="40" r="2" fill="#FAC775"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">AO = OC, BO = OD</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Quadrilateral',
+      name: 'Diagonals Bisect Converse Proof',
+      keywords: [
+        'diagonals bisect each other parallelogram',
+        'converse of parallelogram diagonals theorem',
+        'quadrilateral with bisecting diagonals',
+        'parallelogram test',
+        'prove a quadrilateral is a parallelogram',
+        'SAS congruence',
+        'alternate angles',
+        'quadrilateral theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $A$ or $B$ to change the diagonals, or $O$ to move the point where they cross, and watch the readout: the angles between opposite sides stay at $0°$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `In a quadrilateral $ABCD$ the diagonals $AC$ and $BD$ cross at $O$. Suppose each diagonal is cut in half at that point:
+
+$$AO = OC, \\qquad BO = OD$$
+
+The theorem says that $ABCD$ is then a parallelogram: $AB \\parallel CD$ and $AD \\parallel BC$. It is the converse of the [parallelogram diagonals](!/geometry/visual-tools/parallelogram-diagonals) theorem, which says that the diagonals of a parallelogram bisect each other.
+
+In the player $A$, $B$ and $O$ can be dragged; $C$ and $D$ are $A$ and $B$ mirrored in $O$, so the diagonals always bisect each other and nothing about the sides is built in. The readout shows the angle between $AB$ and $CD$ and between $AD$ and $BC$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'Vertical Angles',
+          content: `The angles $\\angle AOB$ and $\\angle COD$ lie opposite each other where the diagonals cross. They are [vertical angles](!/geometry/visual-tools/vertical-angles), so
+
+$$\\angle AOB = \\angle COD = \\theta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'Two Congruent Triangles',
+          content: `The triangles $AOB$ and $COD$ have two pairs of equal sides, $AO = OC$ and $BO = OD$, and the equal angles $\\theta$ between them. By SAS congruence:
+
+$$\\triangle AOB \\cong \\triangle COD$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'Alternate Angles',
+          content: `In the congruent triangles the angles at $A$ and $C$ match:
+
+$$\\angle OAB = \\angle OCD = \\alpha$$
+
+These two angles lie on opposite sides of the diagonal $AC$, between the lines $AB$ and $CD$, so they are alternate angles for those lines. Equal alternate angles make the lines parallel, the converse part of the [parallel lines and a transversal](!/geometry/visual-tools/parallel-lines) theorem:
+
+$$AB \\parallel CD$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `The same three steps work for the other two triangles, $AOD$ and $COB$: the vertical angles at $O$ are equal, the triangles are congruent by SAS, and the matching angles at $A$ and $C$ are alternate angles for $AD$ and $BC$. So
+
+$$AD \\parallel BC$$
+
+With both pairs of opposite sides parallel, $ABCD$ is a parallelogram. The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, vertical angles, SAS congruence, the alternate angles converse and combining.
+
+The congruent triangles also give $AB = CD$ and $AD = BC$, the [opposite sides](!/geometry/visual-tools/parallelogram-sides) of a parallelogram.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $A$ or $B$ to lengthen, shorten or turn a diagonal, or $O$ to move the crossing: the quadrilateral changes shape, but the readout keeps both angles between opposite sides at $0°$.
+
+The player keeps the diagonals long and crossing at an angle between $60°$ and $110°$, keeps the angles at the corners large enough for their marks, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **A test for parallelograms.** To show a quadrilateral is a parallelogram it is enough to show that its diagonals bisect each other; the [equal opposite sides](!/geometry/visual-tools/parallelogram-from-sides) page gives a second test.
+• **Rectangles.** If the diagonals also have equal length, the parallelogram is a rectangle, the converse of the [rectangle diagonals](!/geometry/visual-tools/rectangle-diagonals) theorem.
+• **Rhombuses.** If the diagonals bisect each other at right angles, the parallelogram is a rhombus, as on the [rhombus diagonals](!/geometry/visual-tools/rhombus-diagonals) page.
+• **Completing a parallelogram.** Given three corners $A$, $B$, $C$, mirror $B$ in the midpoint of $AC$ to get the fourth corner: the diagonals then bisect each other, so the figure is a parallelogram. Doubling the median of a triangle in this way is a common construction.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'If the diagonals of a quadrilateral bisect each other, is it a parallelogram?',
+          answer: 'Yes. A quadrilateral whose diagonals cut each other in half is always a parallelogram.'
+        },
+        obj2: {
+          question: 'How is it proved?',
+          answer: 'The vertical angles where the diagonals cross are equal, so the two opposite triangles are congruent by SAS. Their matching angles are alternate angles for a pair of opposite sides, which are therefore parallel; the other pair of triangles gives the other pair of sides.'
+        },
+        obj3: {
+          question: 'What extra condition makes it a rectangle or a rhombus?',
+          answer: 'Equal diagonals make it a rectangle, and perpendicular diagonals make it a rhombus.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Diagonals Bisect Converse Proof Visualizer",
+          "description": "Step-by-step interactive proof that if the diagonals of a quadrilateral bisect each other, the quadrilateral is a parallelogram, with draggable diagonals.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/diagonals-bisect-converse",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Diagonals That Bisect Each Other", "item": "https://www.learnmathclass.com/geometry/visual-tools/diagonals-bisect-converse" }
+          ]
+        }
+      }
+    },
+    'angle-at-a-bend': {
+      proofKey: 'parallelBend',
+      title: 'Angle at a Bend Between Parallel Lines | Proof Step by Step',
+      description: 'Watch the proof that the angle at a bend between two parallel lines equals the sum of the angles the two arms make with the parallels, by drawing a third parallel and using alternate angles, step by step. Then drag the bend and the lines.',
+      h1Title: 'The Angle at a Bend Between Parallels',
+      url: '/geometry/visual-tools/angle-at-a-bend',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="16" x2="72" y2="16" stroke="#E6F1FB" stroke-width="1.4"/><line x1="10" y1="60" x2="72" y2="60" stroke="#E6F1FB" stroke-width="1.4"/><polyline points="14,16 40,38 16,60" fill="none" stroke="#FAC775" stroke-width="1.8"/><line x1="40" y1="38" x2="18" y2="38" stroke="#E6F1FB" stroke-width="1" stroke-dasharray="3 2"/><circle cx="40" cy="38" r="2" fill="#FAC775"/><text x="40" y="76" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">∠E = α + β</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Lines and Angles',
+      name: 'Angle at a Bend Proof',
+      keywords: [
+        'angle between parallel lines point between',
+        'angle at a bend between parallel lines',
+        'zigzag angle parallel lines',
+        'parallel lines angle sum',
+        'alternate angles',
+        'auxiliary parallel line',
+        'lines and angles',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag $E$ to change the bend, or $B$, $A$ or $D$ to move the lines, and watch the readout: the angle at $E$ always equals the sum of the two angles at $B$ and $D$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `Two parallel rays $BA$ and $DC$ point the same way, and a point $E$ lies between them, on the same side as $A$ and $C$. The path from $B$ to $E$ to $D$ bends at $E$. Call the angles the two arms make with the parallels $\\alpha = \\angle ABE$ and $\\beta = \\angle CDE$. The theorem says
+
+$$\\angle BED = \\alpha + \\beta$$
+
+In the player $B$, $A$, $D$ and $E$ can be dragged; $C$ is computed so that $DC$ stays parallel to $BA$, and the readout shows $\\angle ABE + \\angle CDE$ and $\\angle BED$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'A Third Parallel',
+          content: `Draw the line $EF$ through $E$ parallel to $AB$, with $F$ on the side away from $A$ and $C$. Two lines parallel to the same line are parallel to each other, so
+
+$$EF \\parallel AB \\parallel CD$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The Upper Angle',
+          content: `$BE$ crosses the parallels $AB$ and $EF$. The angles $\\angle ABE$ and $\\angle BEF$ lie on opposite sides of $BE$, between those parallels, so they are alternate angles, equal by the [parallel lines and a transversal](!/geometry/visual-tools/parallel-lines) theorem:
+
+$$\\angle BEF = \\alpha$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Lower Angle',
+          content: `In the same way $ED$ crosses the parallels $EF$ and $CD$, and the alternate angles are equal:
+
+$$\\angle FED = \\beta$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `The ray $EF$ lies inside the angle $BED$ and splits it into two parts:
+
+$$\\angle BED = \\angle BEF + \\angle FED = \\alpha + \\beta$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the parallel through a point, alternate angles (twice) and adding angles.
+
+The helper line $EF$ is the whole idea: it carries each angle from the parallels to the bend.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag $E$ up, down, left or right between the lines: $\\alpha$ and $\\beta$ change, and the readout keeps the angle at $E$ equal to their sum. Drag $B$ or $A$ to turn the upper line, or $D$ to move the lower one; $C$ follows so that the lines stay parallel.
+
+The player keeps the lines long, nearly level and apart, keeps $E$ well between them and to the side of $A$ and $C$, keeps $\\alpha$ and $\\beta$ between $25°$ and $75°$ so that their marks stay readable, and keeps the figure in the frame; a drag that would break one of these is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **A second proof.** Extend $BE$ until it meets the line $CD$ at $G$. The angle at $E$ is an exterior angle of the triangle $EGD$, so it equals the angle at $G$, which is $\\alpha$ by alternate angles, plus the angle at $D$, which is $\\beta$, as on the [exterior angle](!/geometry/visual-tools/exterior-angle) page.
+• **Bending the other way.** If $E$ lies on the side away from $A$ and $C$, the three angles at $B$, $E$ and $D$ add up to $360°$ instead, because the same helper line now meets co-interior angles.
+• **A right-angled bend.** The bend is a right angle exactly when $\\alpha + \\beta = 90°$; the [bisectors of co-interior angles](!/geometry/visual-tools/cointerior-bisectors) are an example, with $\\alpha$ and $\\beta$ the halves of two angles that add up to $180°$.
+• **Zigzags.** For a path with several bends between two parallels, the angles at the bends pointing one way add up to the angles pointing the other way, by drawing a parallel through every bend.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the angle at a bend between two parallel lines?',
+          answer: 'If a point lies between two parallel lines and is joined to a point on each, the angle at the point equals the sum of the two angles the joining segments make with the parallels, measured on the same side.'
+        },
+        obj2: {
+          question: 'How is it proved?',
+          answer: 'Draw a line through the bend parallel to the two lines. It splits the angle at the bend into two parts, and each part equals one of the angles at the parallels, because they are alternate angles.'
+        },
+        obj3: {
+          question: 'What if the point is on the other side?',
+          answer: 'Then the angle at the point and the two angles at the parallels add up to 360°, because the helper line meets co-interior angles instead of alternate ones.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Angle at a Bend Proof Visualizer",
+          "description": "Step-by-step interactive proof that for a point between two parallel lines the angle at the point equals the sum of the two alternate angles, with a draggable bend point and parallel lines.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/angle-at-a-bend",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "The Angle at a Bend Between Parallels", "item": "https://www.learnmathclass.com/geometry/visual-tools/angle-at-a-bend" }
+          ]
+        }
+      }
+    },
+    'cyclic-hexagon-angles': {
+      proofKey: 'cyclicHexagon',
+      title: 'Angles of a Cyclic Hexagon | Alternate Angles Add Up to 360° Proof Step by Step',
+      description: 'Watch the proof that in a hexagon drawn in a circle the alternate angles add up to 360°, by a triangle of diagonals and three cyclic quadrilaterals, step by step. Then drag the vertices round the circle.',
+      h1Title: 'Angles of a Cyclic Hexagon',
+      url: '/geometry/visual-tools/cyclic-hexagon-angles',
+      svg: `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><circle cx="40" cy="36" r="27" fill="none" stroke="#E6F1FB" stroke-width="1.2"/><polygon points="14,30 28,12 58,15 66,40 46,62 20,52" fill="none" stroke="#E6F1FB" stroke-width="1.4"/><polygon points="14,30 58,15 46,62" fill="#FAC775" fill-opacity="0.3" stroke="#FAC775" stroke-width="1.2"/><text x="40" y="77" font-family="Georgia,serif" font-size="8" fill="#E6F1FB" text-anchor="middle" font-style="italic">B + D + F = 360°</text></svg>`,
+      category: 'Proofs',
+      subCategory: 'Polygon',
+      name: 'Cyclic Hexagon Angles Proof',
+      keywords: [
+        'cyclic hexagon angles',
+        'alternate angles of a cyclic hexagon sum to 360',
+        'hexagon inscribed in a circle',
+        'cyclic polygon angle sum',
+        'cyclic quadrilateral',
+        'inscribed hexagon',
+        'polygon theorems',
+        'geometry proof visualizer',
+        'interactive geometry proof'
+      ],
+      sectionsContent: {
+        obj0: {
+          title: 'Getting Started with the Visualizer',
+          content: `Step through the proof, then drag any vertex round the circle and watch the readout: the angles at $B$, $D$ and $F$ change, but they always add up to $360°$, and so do the angles at $A$, $C$ and $E$. The picture below is the player with its parts numbered; the other tabs list what can be dragged, what each control does and what the step log shows.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj1: {
+          title: 'The Statement',
+          content: `A hexagon $ABCDEF$ is cyclic when its six vertices lie on one circle. Call its angles at $B$, $D$ and $F$ $\\beta$, $\\delta$ and $\\varphi$. The theorem says that every other angle adds up to a full turn:
+
+$$\\beta + \\delta + \\varphi = 360°$$
+
+and in the same way $\\angle A + \\angle C + \\angle E = 360°$. It extends the [cyclic quadrilateral](!/geometry/visual-tools/cyclic-quadrilateral) theorem, where opposite angles add up to $180°$.
+
+In the player the circle is fixed and the six vertices slide round it; the readout shows both sums of alternate angles.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj2: {
+          title: 'The Triangle of Diagonals',
+          content: `Draw the diagonals $AC$, $CE$ and $EA$. They make the triangle $ACE$, with angles $p$ at $E$, $q$ at $A$ and $r$ at $C$. By the [triangle angle sum](!/geometry/visual-tools/triangle-angle-sum):
+
+$$p + q + r = 180°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj3: {
+          title: 'The First Quadrilateral',
+          content: `$A$, $B$, $C$ and $E$ all lie on the circle, so $ABCE$ is a cyclic quadrilateral. Its angles at $B$ and $E$ are opposite, and opposite angles of a cyclic quadrilateral add up to $180°$:
+
+$$\\beta + p = 180°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj4: {
+          title: 'The Other Two',
+          content: `In the same way $CDEA$ is cyclic with $D$ opposite $A$, and $EFAC$ is cyclic with $F$ opposite $C$:
+
+$$\\delta + q = 180°, \\qquad \\varphi + r = 180°$$`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj5: {
+          title: 'Why It Holds',
+          content: `Add the three equations:
+
+$$\\beta + \\delta + \\varphi + (p + q + r) = 540°$$
+
+and put in $p + q + r = 180°$:
+
+$$\\beta + \\delta + \\varphi = 360°$$
+
+The end-of-proof mark ∎ in the log closes the argument. The tags name the facts used: the given figure, the angle sum of a triangle, the cyclic quadrilateral theorem (twice) and combining. Starting from the triangle $BDF$ instead gives $\\angle A + \\angle C + \\angle E = 360°$.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj6: {
+          title: 'Dragging the Figure',
+          content: `Drag any vertex round the circle: the hexagon changes shape, the three marked angles change, and the readout keeps both sums at $360°$.
+
+The player keeps the vertices in order round the circle and each arc between neighbours between $45°$ and $100°$, so that every mark stays readable; a drag that would break this is refused.`,
+          before: '',
+          after: '',
+          link: ''
+        },
+        obj7: {
+          title: 'Consequences',
+          content: `• **All six angles.** The two sums together give $720°$, the angle sum of any hexagon from the [polygon angle sum](!/geometry/visual-tools/polygon-angle-sum); being cyclic splits that total evenly between the two sets of alternate angles.
+• **Any even number of sides.** For a cyclic polygon with $2n$ sides, the alternate angles add up to $(n - 1) \\cdot 180°$: $180°$ for a quadrilateral, $360°$ for a hexagon, $540°$ for an octagon.
+• **Through inscribed angles.** Each angle of the hexagon is an [inscribed angle](!/geometry/visual-tools/inscribed-angle) standing on the arc opposite it; in the three alternate angles every arc between neighbours is used exactly twice, which is another way to see the $360°$.
+• **No converse.** For a quadrilateral, opposite angles adding up to $180°$ make it cyclic. For a hexagon, alternate angles adding up to $360°$ is not enough: many hexagons that are not cyclic have this property too.
+• **The regular hexagon.** Its angles are all $120°$, and $3 \\cdot 120° = 360°$, as on the [regular hexagon](!/geometry/visual-tools/regular-hexagon) page.`,
+          before: '',
+          after: '',
+          link: ''
+        }
+      },
+      faqQuestions: {
+        obj1: {
+          question: 'What is the sum of alternate angles of a cyclic hexagon?',
+          answer: 'In a hexagon whose vertices lie on a circle, every other angle adds up to 360 degrees: the angles at B, D and F, and also the angles at A, C and E.'
+        },
+        obj2: {
+          question: 'How is it proved?',
+          answer: 'The diagonals AC, CE and EA make a triangle and three cyclic quadrilaterals. Each quadrilateral pairs one hexagon angle with an angle of the triangle to make 180 degrees; the three pairs give 540 degrees, and the triangle takes 180 of them.'
+        },
+        obj3: {
+          question: 'Does a hexagon with alternate angles summing to 360 degrees have to be cyclic?',
+          answer: 'No. Unlike the cyclic quadrilateral test, this condition does not force the six vertices onto one circle.'
+        }
+      },
+      schemas: {
+        webApplication: {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Cyclic Hexagon Angles Proof Visualizer",
+          "description": "Step-by-step interactive proof that the alternate interior angles of a cyclic hexagon sum to 360 degrees, with vertices draggable round the circle.",
+          "url": "https://www.learnmathclass.com/geometry/visual-tools/cyclic-hexagon-angles",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+          "author": { "@type": "Organization", "name": "Learn Math Class" },
+          "inLanguage": "en-US",
+          "isAccessibleForFree": true,
+          "learningResourceType": "Interactive Tool"
+        },
+        breadcrumb: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.learnmathclass.com" },
+            { "@type": "ListItem", "position": 2, "name": "Geometry", "item": "https://www.learnmathclass.com/geometry" },
+            { "@type": "ListItem", "position": 3, "name": "Visual Tools", "item": "https://www.learnmathclass.com/geometry/visual-tools" },
+            { "@type": "ListItem", "position": 4, "name": "Angles of a Cyclic Hexagon", "item": "https://www.learnmathclass.com/geometry/visual-tools/cyclic-hexagon-angles" }
+          ]
+        }
+      }
+    },
   };
 
   const config = viewConfig[view];
@@ -10674,7 +13639,7 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
   // B slid down its leg: a flatter triangle, M still equally far from all three vertices
   const draggedMidHyp = { ...PROOFS.midpointHypotenuse.model, params: { ...PROOFS.midpointHypotenuse.model.params, t: 0.5 } }
   // A moved: the pentagon turned and grew, every angle still 108°
-  const draggedRegularPolygon = { ...PROOFS.regularPolygonAngles.model, points: { ...PROOFS.regularPolygonAngles.model.points, A: { x: 305, y: 82 } } }
+  const draggedRegularPolygon = { ...PROOFS.regularPolygonAngles.model, points: { ...PROOFS.regularPolygonAngles.model.points, A: { x: 303, y: 86 } } }
   // P moved up the bisector: both distances longer, still equal
   const draggedPerpBisector = { ...PROOFS.perpendicularBisector.model, params: { ...PROOFS.perpendicularBisector.model.params, t: 0.88 } }
   // P moved out along the bisector: both distances longer, still equal
@@ -10691,6 +13656,46 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
   const draggedSameSegment = { ...PROOFS.anglesSameSegment.model, params: { ...PROOFS.anglesSameSegment.model.params, td: -1.3 } }
   // A lowered: smaller base angles, still equal, and the two sides still equal
   const draggedIsoConverse = { ...PROOFS.isoscelesConverse.model, params: { ...PROOFS.isoscelesConverse.model.params, t: 0.55 } }
+  // C slid round the circle: a new arc BC and a new midpoint M, still MB = MC
+  const draggedArcMidpoint = { ...PROOFS.arcMidpoint.model, params: { ...PROOFS.arcMidpoint.model.params, tc: 0.9 } }
+  // C slid round the circle: a new incentre and a new M, still MB = MC = MI
+  const draggedIncentreExcentre = { ...PROOFS.incentreExcentre.model, params: { ...PROOFS.incentreExcentre.model.params, tc: 0.3 } }
+  // P slid to the right: the transversal leans the other way, still a right angle at R
+  const draggedCointeriorBisectors = { ...PROOFS.cointeriorBisectors.model, params: { ...PROOFS.cointeriorBisectors.model.params, tp: 0.45 } }
+  // A turned to the left: the pentagon turns with it, still three angles of 36° at A
+  const draggedPentagonDiagonals = { ...PROOFS.pentagonDiagonals.model, points: { ...PROOFS.pentagonDiagonals.model.points, A: { x: 250, y: 92 } } }
+  // A turned to the left: the pentagon turns with it, still d/s = 1.618
+  const draggedPentagonGoldenRatio = { ...PROOFS.pentagonGoldenRatio.model, points: { ...PROOFS.pentagonGoldenRatio.model.points, A: { x: 255, y: 94 } } }
+  // A moved to the left: the five angles change, their sum is still 180°
+  const draggedPentagramAngles = { ...PROOFS.pentagramAngles.model, points: { ...PROOFS.pentagramAngles.model.points, A: { x: 230, y: 90 } } }
+  // D moved to the left: a new parallelogram, still four right angles in PQRS
+  const draggedParallelogramBisectors = { ...PROOFS.parallelogramBisectors.model, points: { ...PROOFS.parallelogramBisectors.model.points, D: { x: 175, y: 172 } } }
+  // C slid down the circle: a new arc CD and a new angle at E, still half the sum
+  const draggedChordsAngle = { ...PROOFS.chordsAngle.model, params: { ...PROOFS.chordsAngle.model.params, tc: -0.15 } }
+  // P moved up and to the right: a wider angle, still half the difference
+  const draggedSecantsAngle = { ...PROOFS.secantsAngle.model, points: { ...PROOFS.secantsAngle.model.points, P: { x: 110, y: 206 } } }
+  // P moved up: a new tangent point and a narrower angle, still half the difference
+  const draggedTangentSecantAngle = { ...PROOFS.tangentSecantAngle.model, points: { ...PROOFS.tangentSecantAngle.model.points, P: { x: 112, y: 150 } } }
+  // C moved to the right: a wider pair of vertical angles, the bisectors still in line
+  const draggedVerticalBisectors = { ...PROOFS.verticalBisectors.model, points: { ...PROOFS.verticalBisectors.model.points, C: { x: 200, y: 115 } } }
+  // P moved right and down: three new distances, the same sum
+  const draggedViviani = { ...PROOFS.viviani.model, points: { ...PROOFS.viviani.model.points, P: { x: 310, y: 270 } } }
+  // R moved round the circle: new sides, the two sums still equal
+  const draggedPitot = { ...PROOFS.pitot.model, params: { ...PROOFS.pitot.model.params, tr: 90 * Math.PI / 180 } }
+  // Q moved left: the transversal leans the other way, the bisectors still parallel
+  const draggedAlternateBisectors = { ...PROOFS.alternateBisectors.model, params: { ...PROOFS.alternateBisectors.model.params, tq: 0.29 } }
+  // A moved to the right: the foot of the altitude passes M, the two areas still equal
+  const draggedMedianArea = { ...PROOFS.medianArea.model, points: { ...PROOFS.medianArea.model.points, A: { x: 330, y: 150 } } }
+  // A moved round the larger circle: a new chord, still bisected at T
+  const draggedConcentricChord = { ...PROOFS.concentricChord.model, params: { ...PROOFS.concentricChord.model.params, ta: 100 * Math.PI / 180 } }
+  // A moved: the hexagon turned and shrank, the two values still equal
+  const draggedRegularPolygonArea = { ...PROOFS.regularPolygonArea.model, points: { ...PROOFS.regularPolygonArea.model.points, A: { x: 185, y: 175 } } }
+  // A moved: a new quadrilateral, still a parallelogram
+  const draggedDiagonalsBisectConverse = { ...PROOFS.diagonalsBisectConverse.model, points: { ...PROOFS.diagonalsBisectConverse.model.points, A: { x: 165, y: 270 } } }
+  // E moved to the right: a sharper bend, still the sum of the two angles
+  const draggedParallelBend = { ...PROOFS.parallelBend.model, points: { ...PROOFS.parallelBend.model.points, E: { x: 280, y: 230 } } }
+  // B moved round the circle: new angles, the alternate sum still 360 degrees
+  const draggedCyclicHexagon = { ...PROOFS.cyclicHexagon.model, params: { ...PROOFS.cyclicHexagon.model.params, tb: 265 * Math.PI / 180 } }
 
   const unitsByView = {
     'triangle-angle-sum': {
@@ -11739,6 +14744,292 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
       dragged: unit(proofStill('isoscelesConverse', 4, { model: draggedIsoConverse }), 'After dragging A, frozen',
         'A lowered: smaller base angles, still equal, and the two sides still equal.'),
     },
+    'bisector-arc-midpoint': {
+      given: unit(D['arcMidpoint-given'], 'Opening scene, frozen',
+        'The inscribed triangle and the bisector from A meeting the circle again at M.'),
+      halves: unit(D['arcMidpoint-halves'], 'The two halves, frozen',
+        'φ and φ at A: inscribed angles on the arcs BM and MC.'),
+      central: unit(D['arcMidpoint-central'], 'The central angles, frozen',
+        'OB, OM, OC drawn: 2φ and 2φ at O.'),
+      sas: unit(D['arcMidpoint-sas'], 'Side, angle, side, frozen',
+        'BOM and MOC shaded: two radii and equal angles, congruent by SAS.'),
+      conclude: unit(D['arcMidpoint-conclude'], 'The conclusion, frozen',
+        'MB = MC: M is the midpoint of the arc BC.'),
+      dragged: unit(proofStill('arcMidpoint', 4, { model: draggedArcMidpoint }), 'After dragging C, frozen',
+        'C slid round the circle: a new arc BC and a new midpoint M, still MB = MC.'),
+    },
+    'incentre-excentre-lemma': {
+      given: unit(D['incentreExcentre-given'], 'Opening scene, frozen',
+        'The incentre I on the bisector AM, M on the circumcircle.'),
+      segment: unit(D['incentreExcentre-segment'], 'Angles in the same segment, frozen',
+        '∠MBC = ∠MAC = α/2.'),
+      bisector: unit(D['incentreExcentre-bisector'], 'The bisector at B, frozen',
+        'BI halves the angle at B: β/2 and β/2.'),
+      sum: unit(D['incentreExcentre-sum'], 'The angle at B, frozen',
+        'MBI shaded: ∠MBI = α/2 + β/2 = θ.'),
+      exterior: unit(D['incentreExcentre-exterior'], 'The angle at I, frozen',
+        'ABI shaded: the exterior angle at I is α/2 + β/2 = θ.'),
+      conclude: unit(D['incentreExcentre-conclude'], 'The conclusion, frozen',
+        'Two equal angles θ: MI = MB = MC.'),
+      dragged: unit(proofStill('incentreExcentre', 5, { model: draggedIncentreExcentre }), 'After dragging C, frozen',
+        'C slid round the circle: a new incentre and a new M, still MB = MC = MI.'),
+    },
+    'cointerior-bisectors': {
+      given: unit(D['cointeriorBisectors-given'], 'Opening scene, frozen',
+        'Two parallels, the transversal PQ and the two bisectors meeting at R.'),
+      cointerior: unit(D['cointeriorBisectors-cointerior'], 'Co-interior angles, frozen',
+        'β at P and δ at Q, adding up to 180°.'),
+      halves: unit(D['cointeriorBisectors-halves'], 'The two halves, frozen',
+        'β/2 at P and δ/2 at Q in the triangle PQR.'),
+      add: unit(D['cointeriorBisectors-add'], 'Adding the halves, frozen',
+        'PQR shaded: β/2 + δ/2 = 90°.'),
+      conclude: unit(D['cointeriorBisectors-conclude'], 'The conclusion, frozen',
+        'The right angle at R.'),
+      dragged: unit(proofStill('cointeriorBisectors', 4, { model: draggedCointeriorBisectors }), 'After dragging P, frozen',
+        'P slid to the right: the transversal leans the other way, still a right angle at R.'),
+    },
+    'pentagon-diagonals': {
+      given: unit(D['pentagonDiagonals-given'], 'Opening scene, frozen',
+        'The regular pentagon with the diagonals AC and AD.'),
+      interior: unit(D['pentagonDiagonals-interior'], 'Each angle is 108°, frozen',
+        'β = 108° at B and at E.'),
+      first: unit(D['pentagonDiagonals-first'], 'The triangle ABC, frozen',
+        'ABC shaded: base angles φ = 36° at A and C.'),
+      second: unit(D['pentagonDiagonals-second'], 'The triangle AED, frozen',
+        'AED shaded: base angles φ = 36° at A and D.'),
+      middle: unit(D['pentagonDiagonals-middle'], 'The middle angle, frozen',
+        'ψ = 108° − 36° − 36° = 36°.'),
+      conclude: unit(D['pentagonDiagonals-conclude'], 'The conclusion, frozen',
+        'Three angles of 36° at A.'),
+      dragged: unit(proofStill('pentagonDiagonals', 5, { model: draggedPentagonDiagonals }), 'After dragging A, frozen',
+        'A turned to the left: the pentagon turns with it, still three angles of 36° at A.'),
+    },
+    'pentagon-golden-ratio': {
+      given: unit(D['pentagonGoldenRatio-given'], 'Opening scene, frozen',
+        'The regular pentagon with the diagonals AC and BE crossing at P.'),
+      angles: unit(D['pentagonGoldenRatio-angles'], 'The 36° angles, frozen',
+        'φ = 36° at A, C, B and E.'),
+      apex: unit(D['pentagonGoldenRatio-apex'], 'The triangle APE, frozen',
+        'APE shaded: 2φ at A and P, so EP = EA = s.'),
+      isosceles: unit(D['pentagonGoldenRatio-isosceles'], 'The triangle ABP, frozen',
+        'ABP shaded: AP = BP = d − s.'),
+      similar: unit(D['pentagonGoldenRatio-similar'], 'Two similar triangles, frozen',
+        'ABP and ACB with the same angles.'),
+      solve: unit(D['pentagonGoldenRatio-solve'], 'Solving for the ratio, frozen',
+        'd² − ds − s² = 0.'),
+      conclude: unit(D['pentagonGoldenRatio-conclude'], 'The conclusion, frozen',
+        'd/s = (1 + √5)/2.'),
+      dragged: unit(proofStill('pentagonGoldenRatio', 6, { model: draggedPentagonGoldenRatio }), 'After dragging A, frozen',
+        'A turned to the left: the pentagon turns with it, still d/s = 1.618.'),
+    },
+    'pentagram-angles': {
+      given: unit(D['pentagramAngles-given'], 'Opening scene, frozen',
+        'The star A → C → E → B → D with its five point angles.'),
+      first: unit(D['pentagramAngles-first'], 'The first exterior angle, frozen',
+        'CEX shaded: θ = γ + ε at X.'),
+      second: unit(D['pentagramAngles-second'], 'The second exterior angle, frozen',
+        'BDY shaded: ψ = β + δ at Y.'),
+      sum: unit(D['pentagramAngles-sum'], 'The triangle at the top, frozen',
+        'AXY shaded: α + θ + ψ = 180°.'),
+      conclude: unit(D['pentagramAngles-conclude'], 'The conclusion, frozen',
+        'α + β + γ + δ + ε = 180°.'),
+      dragged: unit(proofStill('pentagramAngles', 4, { model: draggedPentagramAngles }), 'After dragging A, frozen',
+        'A moved to the left: the five angles change, their sum is still 180°.'),
+    },
+    'parallelogram-bisectors': {
+      given: unit(D['parallelogramBisectors-given'], 'Opening scene, frozen',
+        'The parallelogram ABCD with its four angle bisectors.'),
+      cointerior: unit(D['parallelogramBisectors-cointerior'], 'Neighbouring angles, frozen',
+        'α at A and β at B, adding up to 180°.'),
+      halves: unit(D['parallelogramBisectors-halves'], 'The two halves, frozen',
+        'α/2 at A and β/2 at B in the triangle ABP.'),
+      right: unit(D['parallelogramBisectors-right'], 'The right angle at P, frozen',
+        'ABP shaded: the right angle at P.'),
+      others: unit(D['parallelogramBisectors-others'], 'The other three corners, frozen',
+        'Right angles at Q, R and S.'),
+      conclude: unit(D['parallelogramBisectors-conclude'], 'The conclusion, frozen',
+        'PQRS shaded: a rectangle.'),
+      dragged: unit(proofStill('parallelogramBisectors', 5, { model: draggedParallelogramBisectors }), 'After dragging D, frozen',
+        'D moved to the left: a new parallelogram, still four right angles in PQRS.'),
+    },
+    'angle-between-chords': {
+      given: unit(D['chordsAngle-given'], 'Opening scene, frozen',
+        'Two chords AC and BD crossing at E, with θ at E.'),
+      exterior: unit(D['chordsAngle-exterior'], 'An exterior angle, frozen',
+        'AED shaded: θ = φ + ψ.'),
+      first: unit(D['chordsAngle-first'], 'The arc AB, frozen',
+        'OA and OB drawn: ∠AOB = 2ψ.'),
+      second: unit(D['chordsAngle-second'], 'The arc CD, frozen',
+        'OC and OD drawn: ∠COD = 2φ.'),
+      conclude: unit(D['chordsAngle-conclude'], 'The conclusion, frozen',
+        'θ = ½(∠AOB + ∠COD).'),
+      dragged: unit(proofStill('chordsAngle', 4, { model: draggedChordsAngle }), 'After dragging C, frozen',
+        'C slid down the circle: a new arc CD and a new angle at E, still half the sum.'),
+    },
+    'angle-between-secants': {
+      given: unit(D['secantsAngle-given'], 'Opening scene, frozen',
+        'Two secants from P meeting the circle at A, B and C, D.'),
+      exterior: unit(D['secantsAngle-exterior'], 'An exterior angle, frozen',
+        'PAD shaded: β = θ + δ.'),
+      first: unit(D['secantsAngle-first'], 'The far arc, frozen',
+        'OB and OD drawn: ∠BOD = 2β.'),
+      second: unit(D['secantsAngle-second'], 'The near arc, frozen',
+        'OA and OC drawn: ∠AOC = 2δ.'),
+      conclude: unit(D['secantsAngle-conclude'], 'The conclusion, frozen',
+        'θ = ½(∠BOD − ∠AOC).'),
+      dragged: unit(proofStill('secantsAngle', 4, { model: draggedSecantsAngle }), 'After dragging P, frozen',
+        'P moved up and to the right: a wider angle, still half the difference.'),
+    },
+    'tangent-secant-angle': {
+      given: unit(D['tangentSecantAngle-given'], 'Opening scene, frozen',
+        'The tangent PT and the secant PAB from P.'),
+      exterior: unit(D['tangentSecantAngle-exterior'], 'An exterior angle, frozen',
+        'PTA shaded: β = θ + δ.'),
+      first: unit(D['tangentSecantAngle-first'], 'The far arc, frozen',
+        'OT and OB drawn: ∠TOB = 2β.'),
+      second: unit(D['tangentSecantAngle-second'], 'The near arc, frozen',
+        'OA drawn: ∠TOA = 2δ.'),
+      conclude: unit(D['tangentSecantAngle-conclude'], 'The conclusion, frozen',
+        'θ = ½(∠TOB − ∠TOA).'),
+      dragged: unit(proofStill('tangentSecantAngle', 4, { model: draggedTangentSecantAngle }), 'After dragging P, frozen',
+        'P moved up: a new tangent point and a narrower angle, still half the difference.'),
+    },
+    'vertical-angle-bisectors': {
+      given: unit(D['verticalBisectors-given'], 'Opening scene, frozen',
+        'Two crossing lines and the bisectors OP and OQ.'),
+      vertical: unit(D['verticalBisectors-vertical'], 'Vertical angles, frozen',
+        'α at both vertical angles.'),
+      halves: unit(D['verticalBisectors-halves'], 'The two halves, frozen',
+        'α/2 next to OC and next to OB.'),
+      straight: unit(D['verticalBisectors-straight'], 'The straight angle, frozen',
+        'β between the halves, α + β = 180°.'),
+      conclude: unit(D['verticalBisectors-conclude'], 'The conclusion, frozen',
+        'α/2 + β + α/2 = 180°: OP and OQ in line.'),
+      dragged: unit(proofStill('verticalBisectors', 4, { model: draggedVerticalBisectors }), 'After dragging C, frozen',
+        'C moved to the right: a wider pair of vertical angles, the bisectors still in line.'),
+    },
+    'viviani-theorem': {
+      given: unit(D['viviani-given'], 'Opening scene, frozen',
+        'P inside the triangle with the perpendiculars PD, PE, PF and the height h.'),
+      split: unit(D['viviani-split'], 'Three triangles, frozen',
+        'PBC, PCA and PAB shaded: they fill ABC.'),
+      parts: unit(D['viviani-parts'], 'The small triangles, frozen',
+        'Base a, heights PD, PE and PF.'),
+      whole: unit(D['viviani-whole'], 'The whole triangle, frozen',
+        'Base a, height h.'),
+      conclude: unit(D['viviani-conclude'], 'The conclusion, frozen',
+        'PD + PE + PF = h.'),
+      dragged: unit(proofStill('viviani', 4, { model: draggedViviani }), 'After dragging P, frozen',
+        'P moved right and down: three new distances, the same sum.'),
+    },
+    'pitot-theorem': {
+      given: unit(D['pitot-given'], 'Opening scene, frozen',
+        'ABCD drawn round the circle, touching it at P, Q, R, S.'),
+      tangents: unit(D['pitot-tangents'], 'Equal tangents, frozen',
+        'One colour per vertex: AP = AS, BP = BQ, CQ = CR, DR = DS.'),
+      first: unit(D['pitot-first'], 'The first pair of sides, frozen',
+        'AB + CD = AP + PB + CR + RD.'),
+      second: unit(D['pitot-second'], 'The second pair of sides, frozen',
+        'BC + DA = BQ + QC + DS + SA.'),
+      conclude: unit(D['pitot-conclude'], 'The conclusion, frozen',
+        'AB + CD = BC + DA.'),
+      dragged: unit(proofStill('pitot', 4, { model: draggedPitot }), 'After dragging R, frozen',
+        'R moved round the circle: new sides, the two sums still equal.'),
+    },
+    'alternate-angle-bisectors': {
+      given: unit(D['alternateBisectors-given'], 'Opening scene, frozen',
+        'Two parallels, the transversal PQ and the bisectors PX and QY.'),
+      alternate: unit(D['alternateBisectors-alternate'], 'Alternate angles, frozen',
+        'β at P and β at Q.'),
+      halves: unit(D['alternateBisectors-halves'], 'The two halves, frozen',
+        'β/2 next to PQ at P and at Q.'),
+      conclude: unit(D['alternateBisectors-conclude'], 'The conclusion, frozen',
+        'PX ∥ QY, with double arrow marks.'),
+      dragged: unit(proofStill('alternateBisectors', 3, { model: draggedAlternateBisectors }), 'After dragging Q, frozen',
+        'Q moved left: the transversal leans the other way, the bisectors still parallel.'),
+    },
+    'median-halves-area': {
+      given: unit(D['medianArea-given'], 'Opening scene, frozen',
+        'The triangle ABC and the median AM, with BM = MC.'),
+      height: unit(D['medianArea-height'], 'One height for both, frozen',
+        'The perpendicular AH to BC.'),
+      areas: unit(D['medianArea-areas'], 'The two areas, frozen',
+        'ABM and AMC shaded.'),
+      conclude: unit(D['medianArea-conclude'], 'The conclusion, frozen',
+        '[ABM] = [AMC].'),
+      dragged: unit(proofStill('medianArea', 3, { model: draggedMedianArea }), 'After dragging A, frozen',
+        'A moved to the right: the foot of the altitude passes M, the two areas still equal.'),
+    },
+    'concentric-circles-chord': {
+      given: unit(D['concentricChord-given'], 'Opening scene, frozen',
+        'Two circles with centre O and the chord AB touching the smaller one at T.'),
+      tangent: unit(D['concentricChord-tangent'], 'The tangent and the radius, frozen',
+        'OT drawn, square to AB.'),
+      radii: unit(D['concentricChord-radii'], 'Equal radii, frozen',
+        'OA and OB with two ticks each.'),
+      congruent: unit(D['concentricChord-congruent'], 'Two congruent triangles, frozen',
+        'OTA and OTB shaded.'),
+      conclude: unit(D['concentricChord-conclude'], 'The conclusion, frozen',
+        'AT = TB, one tick each.'),
+      dragged: unit(proofStill('concentricChord', 4, { model: draggedConcentricChord }), 'After dragging A, frozen',
+        'A moved round the larger circle: a new chord, still bisected at T.'),
+    },
+    'regular-polygon-area': {
+      given: unit(D['regularPolygonArea-given'], 'Opening scene, frozen',
+        'The regular hexagon with its apothem OM.'),
+      split: unit(D['regularPolygonArea-split'], 'Six triangles, frozen',
+        'The six triangles from O, shaded in turn.'),
+      congruent: unit(D['regularPolygonArea-congruent'], 'Congruent triangles, frozen',
+        'Six congruent triangles with the same height a.'),
+      one: unit(D['regularPolygonArea-one'], 'One triangle, frozen',
+        '[OAB] = ½ · s · a.'),
+      conclude: unit(D['regularPolygonArea-conclude'], 'The conclusion, frozen',
+        'Area = ½ · P · a.'),
+      dragged: unit(proofStill('regularPolygonArea', 4, { model: draggedRegularPolygonArea }), 'After dragging A, frozen',
+        'A moved: the hexagon turned and shrank, the two values still equal.'),
+    },
+    'diagonals-bisect-converse': {
+      given: unit(D['diagonalsBisectConverse-given'], 'Opening scene, frozen',
+        'The diagonals cut each other in half at O.'),
+      vertical: unit(D['diagonalsBisectConverse-vertical'], 'Vertical angles, frozen',
+        'θ at O, twice.'),
+      sas: unit(D['diagonalsBisectConverse-sas'], 'Two congruent triangles, frozen',
+        'AOB and COD shaded.'),
+      alternate: unit(D['diagonalsBisectConverse-alternate'], 'Alternate angles, frozen',
+        'α at A and C: AB ∥ CD.'),
+      conclude: unit(D['diagonalsBisectConverse-conclude'], 'The conclusion, frozen',
+        'Both pairs of sides parallel.'),
+      dragged: unit(proofStill('diagonalsBisectConverse', 4, { model: draggedDiagonalsBisectConverse }), 'After dragging A, frozen',
+        'A moved: a new quadrilateral, still a parallelogram.'),
+    },
+    'angle-at-a-bend': {
+      given: unit(D['parallelBend-given'], 'Opening scene, frozen',
+        'The parallels AB and CD and the bend at E, with α and β.'),
+      parallel: unit(D['parallelBend-parallel'], 'A third parallel, frozen',
+        'EF through E, parallel to both.'),
+      top: unit(D['parallelBend-top'], 'The upper angle, frozen',
+        '∠BEF = α.'),
+      bottom: unit(D['parallelBend-bottom'], 'The lower angle, frozen',
+        '∠FED = β.'),
+      conclude: unit(D['parallelBend-conclude'], 'The conclusion, frozen',
+        '∠BED = α + β.'),
+      dragged: unit(proofStill('parallelBend', 4, { model: draggedParallelBend }), 'After dragging E, frozen',
+        'E moved to the right: a sharper bend, still the sum of the two angles.'),
+    },
+    'cyclic-hexagon-angles': {
+      given: unit(D['cyclicHexagon-given'], 'Opening scene, frozen',
+        'The hexagon in its circle with β, δ and φ.'),
+      triangle: unit(D['cyclicHexagon-triangle'], 'The triangle of diagonals, frozen',
+        'ACE shaded with p, q and r.'),
+      first: unit(D['cyclicHexagon-first'], 'The first quadrilateral, frozen',
+        'ABCE shaded: β + p = 180°.'),
+      others: unit(D['cyclicHexagon-others'], 'The other two, frozen',
+        'δ + q = 180° and φ + r = 180°.'),
+      conclude: unit(D['cyclicHexagon-conclude'], 'The conclusion, frozen',
+        'β + δ + φ = 360°.'),
+      dragged: unit(proofStill('cyclicHexagon', 4, { model: draggedCyclicHexagon }), 'After dragging B, frozen',
+        'B moved round the circle: new angles, the alternate sum still 360°.'),
+    },
   }
 
   // [sectionsKey, anchorId, unitKey?] — unitKey = key in unitsByView
@@ -12469,6 +15760,209 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
       ['obj6', 'dragging-the-figure', 'dragged'],
       ['obj7', 'consequences'],
     ],
+    'bisector-arc-midpoint': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'the-two-halves', 'halves'],
+      ['obj3', 'the-central-angles', 'central'],
+      ['obj4', 'side-angle-side', 'sas'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'incentre-excentre-lemma': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'angles-in-the-same-segment', 'segment'],
+      ['obj3', 'the-bisector-at-b', 'bisector'],
+      ['obj4', 'the-angle-at-b', 'sum'],
+      ['obj5', 'the-angle-at-i', 'exterior'],
+      ['obj6', 'why-it-holds', 'conclude'],
+      ['obj7', 'dragging-the-figure', 'dragged'],
+      ['obj8', 'consequences'],
+    ],
+    'cointerior-bisectors': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'co-interior-angles', 'cointerior'],
+      ['obj3', 'the-two-halves', 'halves'],
+      ['obj4', 'adding-the-halves', 'add'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'pentagon-diagonals': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'each-angle-is-108', 'interior'],
+      ['obj3', 'the-triangle-abc', 'first'],
+      ['obj4', 'the-triangle-aed', 'second'],
+      ['obj5', 'the-middle-angle', 'middle'],
+      ['obj6', 'why-it-holds', 'conclude'],
+      ['obj7', 'dragging-the-figure', 'dragged'],
+      ['obj8', 'consequences'],
+    ],
+    'pentagon-golden-ratio': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'the-36-angles', 'angles'],
+      ['obj3', 'the-triangle-ape', 'apex'],
+      ['obj4', 'the-triangle-abp', 'isosceles'],
+      ['obj5', 'two-similar-triangles', 'similar'],
+      ['obj6', 'solving-for-the-ratio', 'solve'],
+      ['obj7', 'why-it-holds', 'conclude'],
+      ['obj8', 'dragging-the-figure', 'dragged'],
+      ['obj9', 'consequences'],
+    ],
+    'pentagram-angles': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'the-first-exterior-angle', 'first'],
+      ['obj3', 'the-second-exterior-angle', 'second'],
+      ['obj4', 'the-triangle-at-the-top', 'sum'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'parallelogram-bisectors': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'neighbouring-angles', 'cointerior'],
+      ['obj3', 'the-two-halves', 'halves'],
+      ['obj4', 'the-right-angle-at-p', 'right'],
+      ['obj5', 'the-other-three-corners', 'others'],
+      ['obj6', 'why-it-holds', 'conclude'],
+      ['obj7', 'dragging-the-figure', 'dragged'],
+      ['obj8', 'consequences'],
+    ],
+    'angle-between-chords': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'an-exterior-angle', 'exterior'],
+      ['obj3', 'the-arc-ab', 'first'],
+      ['obj4', 'the-arc-cd', 'second'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'angle-between-secants': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'an-exterior-angle', 'exterior'],
+      ['obj3', 'the-far-arc', 'first'],
+      ['obj4', 'the-near-arc', 'second'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'tangent-secant-angle': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'an-exterior-angle', 'exterior'],
+      ['obj3', 'the-far-arc', 'first'],
+      ['obj4', 'the-near-arc', 'second'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'vertical-angle-bisectors': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'vertical-angles', 'vertical'],
+      ['obj3', 'the-two-halves', 'halves'],
+      ['obj4', 'the-straight-angle', 'straight'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'viviani-theorem': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'three-triangles', 'split'],
+      ['obj3', 'the-small-triangles', 'parts'],
+      ['obj4', 'the-whole-triangle', 'whole'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'pitot-theorem': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'equal-tangents', 'tangents'],
+      ['obj3', 'the-first-pair-of-sides', 'first'],
+      ['obj4', 'the-second-pair-of-sides', 'second'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'alternate-angle-bisectors': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'alternate-angles', 'alternate'],
+      ['obj3', 'the-two-halves', 'halves'],
+      ['obj4', 'why-it-holds', 'conclude'],
+      ['obj5', 'dragging-the-figure', 'dragged'],
+      ['obj6', 'consequences'],
+    ],
+    'median-halves-area': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'one-height-for-both', 'height'],
+      ['obj3', 'the-two-areas', 'areas'],
+      ['obj4', 'why-it-holds', 'conclude'],
+      ['obj5', 'dragging-the-figure', 'dragged'],
+      ['obj6', 'consequences'],
+    ],
+    'concentric-circles-chord': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'the-tangent-and-the-radius', 'tangent'],
+      ['obj3', 'equal-radii', 'radii'],
+      ['obj4', 'two-congruent-triangles', 'congruent'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'regular-polygon-area': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'six-triangles', 'split'],
+      ['obj3', 'congruent-triangles', 'congruent'],
+      ['obj4', 'one-triangle', 'one'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'diagonals-bisect-converse': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'vertical-angles', 'vertical'],
+      ['obj3', 'two-congruent-triangles', 'sas'],
+      ['obj4', 'alternate-angles', 'alternate'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'angle-at-a-bend': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'a-third-parallel', 'parallel'],
+      ['obj3', 'the-upper-angle', 'top'],
+      ['obj4', 'the-lower-angle', 'bottom'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
+    'cyclic-hexagon-angles': [
+      ['obj0', 'getting-started'],
+      ['obj1', 'the-statement', 'given'],
+      ['obj2', 'the-triangle-of-diagonals', 'triangle'],
+      ['obj3', 'the-first-quadrilateral', 'first'],
+      ['obj4', 'the-other-two', 'others'],
+      ['obj5', 'why-it-holds', 'conclude'],
+      ['obj6', 'dragging-the-figure', 'dragged'],
+      ['obj7', 'consequences'],
+    ],
   }
 
   /* ---- per-phase scene notes (Line 1) ----
@@ -13002,6 +16496,149 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
       equal: note('The sides opposite the angle at D.', 'equal-sides', 'Learn more about the equal sides'),
       conclude: note('Drag A: the readout keeps AB = AC.', 'why-it-holds', 'Learn more about why it holds'),
     },
+    'bisector-arc-midpoint': {
+      given: note('Drag A: M does not move.', 'the-statement', 'Learn more about the statement'),
+      halves: note('Two inscribed angles on two arcs.', 'the-two-halves', 'Learn more about the halves'),
+      central: note('Twice the inscribed angle at the centre.', 'the-central-angles', 'Learn more about the central angles'),
+      sas: note('Two radii and the angle between them.', 'side-angle-side', 'Learn more about SAS'),
+      conclude: note('Drag B or C: the readout keeps MB = MC.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'incentre-excentre-lemma': {
+      given: note('Drag a vertex: the three distances stay equal.', 'the-statement', 'Learn more about the statement'),
+      segment: note('Two angles on the arc MC.', 'angles-in-the-same-segment', 'Learn more about the same segment'),
+      bisector: note('I is on the bisector at B too.', 'the-bisector-at-b', 'Learn more about the bisector at B'),
+      sum: note('Two parts make the angle at B.', 'the-angle-at-b', 'Learn more about the angle at B'),
+      exterior: note('An exterior angle of ABI.', 'the-angle-at-i', 'Learn more about the angle at I'),
+      conclude: note('Drag a vertex: the readout keeps MB = MC = MI.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'cointerior-bisectors': {
+      given: note('Drag P or Q: the angle at R stays right.', 'the-statement', 'Learn more about the statement'),
+      cointerior: note('Two angles on the same side, between the parallels.', 'co-interior-angles', 'Learn more about co-interior angles'),
+      halves: note('Each bisector halves its angle.', 'the-two-halves', 'Learn more about the halves'),
+      add: note('Half of 180° is 90°.', 'adding-the-halves', 'Learn more about adding the halves'),
+      conclude: note('Drag P or Q: the readout keeps ∠PRQ = 90°.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'pentagon-diagonals': {
+      given: note('Drag A: the pentagon turns and stays regular.', 'the-statement', 'Learn more about the statement'),
+      interior: note('540° shared by five equal angles.', 'each-angle-is-108', 'Learn more about the 108°'),
+      first: note('Two equal sides and 108° between them.', 'the-triangle-abc', 'Learn more about ABC'),
+      second: note('The same triangle at the other side.', 'the-triangle-aed', 'Learn more about AED'),
+      middle: note('What is left of 108°.', 'the-middle-angle', 'Learn more about the middle angle'),
+      conclude: note('Drag A: the readout keeps three angles of 36°.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'pentagon-golden-ratio': {
+      given: note('Drag A: the ratios stay the same.', 'the-statement', 'Learn more about the statement'),
+      angles: note('Each diagonal makes 36° with the sides.', 'the-36-angles', 'Learn more about the 36° angles'),
+      apex: note('Two angles of 72°.', 'the-triangle-ape', 'Learn more about APE'),
+      isosceles: note('Two angles of 36°.', 'the-triangle-abp', 'Learn more about ABP'),
+      similar: note('Same angles, sides in proportion.', 'two-similar-triangles', 'Learn more about the similar triangles'),
+      solve: note('A quadratic in d/s.', 'solving-for-the-ratio', 'Learn more about solving'),
+      conclude: note('Drag A: the readout keeps 1.618.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'pentagram-angles': {
+      given: note('Drag any point: the sum stays 180°.', 'the-statement', 'Learn more about the statement'),
+      first: note('An exterior angle of CEX.', 'the-first-exterior-angle', 'Learn more about the first exterior angle'),
+      second: note('An exterior angle of BDY.', 'the-second-exterior-angle', 'Learn more about the second exterior angle'),
+      sum: note('Three angles of one triangle.', 'the-triangle-at-the-top', 'Learn more about the top triangle'),
+      conclude: note('Drag any point: the readout keeps 180°.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'parallelogram-bisectors': {
+      given: note('Drag A, B or D: PQRS keeps its right angles.', 'the-statement', 'Learn more about the statement'),
+      cointerior: note('Two angles on the same side between parallels.', 'neighbouring-angles', 'Learn more about neighbouring angles'),
+      halves: note('Half of 180° is 90°.', 'the-two-halves', 'Learn more about the halves'),
+      right: note('The third angle of ABP.', 'the-right-angle-at-p', 'Learn more about the right angle at P'),
+      others: note('The same at every pair of neighbours.', 'the-other-three-corners', 'Learn more about the other corners'),
+      conclude: note('Drag A, B or D: the readout keeps four 90° angles.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'angle-between-chords': {
+      given: note('Drag a point: the readout keeps the two sides equal.', 'the-statement', 'Learn more about the statement'),
+      exterior: note('An exterior angle of AED.', 'an-exterior-angle', 'Learn more about the exterior angle'),
+      first: note('The central angle is twice the inscribed one.', 'the-arc-ab', 'Learn more about the arc AB'),
+      second: note('The same for the arc CD.', 'the-arc-cd', 'Learn more about the arc CD'),
+      conclude: note('Drag a point: θ stays half the sum.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'angle-between-secants': {
+      given: note('Drag P: the readout keeps the two sides equal.', 'the-statement', 'Learn more about the statement'),
+      exterior: note('An exterior angle of PAD.', 'an-exterior-angle', 'Learn more about the exterior angle'),
+      first: note('Twice the inscribed angle on the far arc.', 'the-far-arc', 'Learn more about the far arc'),
+      second: note('Twice the inscribed angle on the near arc.', 'the-near-arc', 'Learn more about the near arc'),
+      conclude: note('Drag P: θ stays half the difference.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'tangent-secant-angle': {
+      given: note('Drag P: the readout keeps the two sides equal.', 'the-statement', 'Learn more about the statement'),
+      exterior: note('An exterior angle of PTA.', 'an-exterior-angle', 'Learn more about the exterior angle'),
+      first: note('Twice the inscribed angle on the far arc.', 'the-far-arc', 'Learn more about the far arc'),
+      second: note('The tangent-chord angle on the near arc.', 'the-near-arc', 'Learn more about the near arc'),
+      conclude: note('Drag P: θ stays half the difference.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'vertical-angle-bisectors': {
+      given: note('Drag a line: OP and OQ stay in line.', 'the-statement', 'Learn more about the statement'),
+      vertical: note('Opposite angles at a crossing.', 'vertical-angles', 'Learn more about vertical angles'),
+      halves: note('Each bisector halves its angle.', 'the-two-halves', 'Learn more about the halves'),
+      straight: note('Two angles along one line.', 'the-straight-angle', 'Learn more about the straight angle'),
+      conclude: note('Drag a line: the readout keeps 180°.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'viviani-theorem': {
+      given: note('Drag P: the sum stays equal to h.', 'the-statement', 'Learn more about the statement'),
+      split: note('Three triangles fill the whole.', 'three-triangles', 'Learn more about the three triangles'),
+      parts: note('Each part: half a times its distance.', 'the-small-triangles', 'Learn more about the small triangles'),
+      whole: note('The whole: half a times h.', 'the-whole-triangle', 'Learn more about the whole triangle'),
+      conclude: note('Drag P: the readout keeps the sum at h.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'pitot-theorem': {
+      given: note('Drag a point of contact: the sums stay equal.', 'the-statement', 'Learn more about the statement'),
+      tangents: note('Two equal tangents from each vertex.', 'equal-tangents', 'Learn more about the equal tangents'),
+      first: note('One piece from each vertex.', 'the-first-pair-of-sides', 'Learn more about the first pair'),
+      second: note('Again one piece from each vertex.', 'the-second-pair-of-sides', 'Learn more about the second pair'),
+      conclude: note('Drag a point of contact: the readout keeps the sums equal.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'alternate-angle-bisectors': {
+      given: note('Drag P or Q: PX and QY stay parallel.', 'the-statement', 'Learn more about the statement'),
+      alternate: note('Alternate angles between parallels.', 'alternate-angles', 'Learn more about alternate angles'),
+      halves: note('Each bisector halves its angle.', 'the-two-halves', 'Learn more about the halves'),
+      conclude: note('Drag P or Q: the angle between the bisectors stays 0°.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'median-halves-area': {
+      given: note('Drag a vertex: the areas stay equal.', 'the-statement', 'Learn more about the statement'),
+      height: note('The same height for both triangles.', 'one-height-for-both', 'Learn more about the height'),
+      areas: note('Half the base times the height.', 'the-two-areas', 'Learn more about the two areas'),
+      conclude: note('Drag a vertex: the readout keeps the areas equal.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'concentric-circles-chord': {
+      given: note('Drag A: the chord moves, T stays in the middle.', 'the-statement', 'Learn more about the statement'),
+      tangent: note('A tangent is square to the radius.', 'the-tangent-and-the-radius', 'Learn more about the tangent and radius'),
+      radii: note('Two radii of the larger circle.', 'equal-radii', 'Learn more about the radii'),
+      congruent: note('Right angle, hypotenuse and a leg.', 'two-congruent-triangles', 'Learn more about the congruent triangles'),
+      conclude: note('Drag A or E: the readout keeps AT = TB.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'regular-polygon-area': {
+      given: note('Drag A: the readout keeps the two values equal.', 'the-statement', 'Learn more about the statement'),
+      split: note('Six triangles fill the hexagon.', 'six-triangles', 'Learn more about the six triangles'),
+      congruent: note('SSS: all six are congruent.', 'congruent-triangles', 'Learn more about the congruent triangles'),
+      one: note('Half the base times the height.', 'one-triangle', 'Learn more about one triangle'),
+      conclude: note('Drag O or A: the two values stay equal.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'diagonals-bisect-converse': {
+      given: note('Drag a diagonal: the sides stay parallel.', 'the-statement', 'Learn more about the statement'),
+      vertical: note('Opposite angles at the crossing.', 'vertical-angles', 'Learn more about vertical angles'),
+      sas: note('Two sides and the angle between them.', 'two-congruent-triangles', 'Learn more about the congruent triangles'),
+      alternate: note('Equal alternate angles: parallel lines.', 'alternate-angles', 'Learn more about alternate angles'),
+      conclude: note('Drag A, B or O: the readout stays at 0°.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'angle-at-a-bend': {
+      given: note('Drag E: the angle at E stays α + β.', 'the-statement', 'Learn more about the statement'),
+      parallel: note('A helper line through the bend.', 'a-third-parallel', 'Learn more about the third parallel'),
+      top: note('Alternate angles at the upper line.', 'the-upper-angle', 'Learn more about the upper angle'),
+      bottom: note('Alternate angles at the lower line.', 'the-lower-angle', 'Learn more about the lower angle'),
+      conclude: note('Drag E: the readout keeps the two sides equal.', 'why-it-holds', 'Learn more about why it holds'),
+    },
+    'cyclic-hexagon-angles': {
+      given: note('Drag a vertex: the sum stays 360°.', 'the-statement', 'Learn more about the statement'),
+      triangle: note('A triangle of three diagonals.', 'the-triangle-of-diagonals', 'Learn more about the triangle'),
+      first: note('Opposite angles of a cyclic quadrilateral.', 'the-first-quadrilateral', 'Learn more about the first quadrilateral'),
+      others: note('The same for the other two.', 'the-other-two', 'Learn more about the other two'),
+      conclude: note('Drag a vertex: the readout keeps both sums at 360°.', 'why-it-holds', 'Learn more about why it holds'),
+    },
   }
 
   const stateUnits = unitsByView[view] || {}
@@ -13364,6 +17001,106 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
     'isosceles-converse': [
       '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
       'Drag $A$ up or down to change the base angles, or $B$ or $C$; the readout under the canvas shows both base angles and both sides. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'bisector-arc-midpoint': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $B$ or $C$ round the circle, or $A$ along its arc; the readout under the canvas shows $MB$, $MC$ and the two halves of the angle at $A$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'incentre-excentre-lemma': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$, $B$ or $C$ round the circle; the readout under the canvas shows $MB$, $MC$ and $MI$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'cointerior-bisectors': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $P$ or $Q$ along its line, or $A$, $B$ or $C$ to move the lines; the readout under the canvas shows $\\beta$, $\\delta$ and the angle at $R$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'pentagon-diagonals': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$ to turn and resize the pentagon; the readout under the canvas shows the three angles at $A$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'pentagon-golden-ratio': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$ to turn and resize the pentagon; the readout under the canvas shows $AC/AB$, $AP/AB$ and $AB/AC$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'pentagram-angles': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag any of the five points; the readout under the canvas shows the five point angles and their sum. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'parallelogram-bisectors': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$, $B$ or $D$ to change the parallelogram; the readout under the canvas shows the four angles of $PQRS$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'angle-between-chords': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$, $B$, $C$ or $D$ round the circle; the readout under the canvas shows $\\angle AEB$ and half the sum of the central angles. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'angle-between-secants': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $P$, or $B$ or $D$ round the circle; the readout under the canvas shows $\\angle BPD$ and half the difference of the central angles. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'tangent-secant-angle': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $P$, or $B$ round the circle; the readout under the canvas shows $\\angle TPB$ and half the difference of the central angles. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'vertical-angle-bisectors': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$ or $C$ to turn a line, or $O$ to move the crossing; the readout under the canvas shows $\\alpha$, $\\beta$ and the sum from $OP$ to $OQ$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'viviani-theorem': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $P$ inside the triangle, or $A$ or $B$ to turn and resize it; the readout under the canvas shows the sum of the distances and the height. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'pitot-theorem': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $P$, $Q$, $R$ or $S$ round the circle; the readout under the canvas shows $AB + CD$ and $BC + DA$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'alternate-angle-bisectors': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $P$ or $Q$ along its line, or $A$, $B$ or $C$ to move the lines; the readout under the canvas shows the two halves and the angle between $PX$ and $QY$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'median-halves-area': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$, $B$ or $C$; the readout under the canvas shows the areas of $ABM$ and $AMC$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'concentric-circles-chord': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$ round the larger circle, or $E$ to resize it; the readout under the canvas shows $AT$ and $TB$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'regular-polygon-area': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $O$ to move the hexagon, or $A$ to turn and resize it; the readout under the canvas shows the area and half the perimeter times the apothem. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'diagonals-bisect-converse': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $A$ or $B$ to change the diagonals, or $O$ to move the crossing; the readout under the canvas shows the angles between opposite sides. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'angle-at-a-bend': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag $E$ to change the bend, or $B$, $A$ or $D$ to move the lines; the readout under the canvas shows $\\angle ABE + \\angle CDE$ and $\\angle BED$. [Learn more about why it holds](!#why-it-holds)',
+      '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
+    ],
+    'cyclic-hexagon-angles': [
+      '**▶ Play** runs the proof, **Next →** and **← Back** step one scene at a time, **Reset** restores the opening scene and the original figure. [Learn more about the controls](!#getting-started)',
+      'Drag any vertex round the circle; the readout under the canvas shows the sums of alternate angles. [Learn more about why it holds](!#why-it-holds)',
       '**Labels** toggles the point names, **Measures** writes each marked angle\'s size beside its arc. The **Step explanations** log keeps every step so far. [Learn more about reading a scene](!#getting-started)',
     ],
   }
@@ -15203,6 +18940,515 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
           { wait: 2000 },
           { say: 'DRAG A\nLower the apex: the angles stay equal, so do the sides.' },
           { drag: '[data-handle="A"]', dx: 0, dy: 16, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'bisector-arc-midpoint': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'HALVES\nNext → : the bisector cuts the angle at A into two halves φ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CENTRE\nThe central angles on the arcs BM and MC are both 2φ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'SAS\nTwo radii and equal angles: BOM and MOC are congruent.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nMB = MC: M is the midpoint of the arc BC.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG C\nMove C: the arc changes, M stays its midpoint.' },
+          { drag: '[data-handle="C"]', dx: -12, dy: 10, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'incentre-excentre-lemma': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'SAME SEGMENT\nNext → : ∠MBC = ∠MAC = α/2.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'BISECTOR\nBI halves the angle at B: β/2 each.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'AT B\n∠MBI = α/2 + β/2.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'AT I\nThe exterior angle of ABI at I is α/2 + β/2 too.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ISOSCELES\nEqual angles in MBI: MI = MB = MC.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG C\nMove C: I and M move, the three distances stay equal.' },
+          { drag: '[data-handle="C"]', dx: -12, dy: 10, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'cointerior-bisectors': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'CO-INTERIOR\nNext → : β + δ = 180°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'HALVES\nThe bisectors cut β and δ in half.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ADD\nβ/2 + δ/2 = 90°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'RIGHT ANGLE\nThe third angle of PQR is 90°.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG P\nSlide P: the transversal tilts, the angle at R stays right.' },
+          { drag: '[data-handle="P"]', dx: 14, dy: 0, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'pentagon-diagonals': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: '108°\nNext → : each angle of the pentagon is 540°/5 = 108°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'TRIANGLE ABC\nIsosceles with 108° at B: φ = 36°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'TRIANGLE AED\nThe same at the other side: 36°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'MIDDLE\n108° − 36° − 36° = 36°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nThe diagonals trisect the angle at A.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG A\nTurn the pentagon: the three angles stay 36°.' },
+          { drag: '[data-handle="A"]', dx: -12, dy: 2, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'pentagon-golden-ratio': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: '36°\nNext → : every diagonal makes 36° with the sides.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'APE\nTwo angles of 72°: EP = EA = s.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ABP\nTwo angles of 36°: AP = BP = d − s.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'SIMILAR\nABP and ACB: (d − s)/s = s/d.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'SOLVE\nd² − ds − s² = 0.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nd/s = (1 + √5)/2.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG A\nTurn the pentagon: the ratio stays 1.618.' },
+          { drag: '[data-handle="A"]', dx: -10, dy: 2, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'pentagram-angles': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'FIRST\nNext → : θ at X is an exterior angle of CEX, θ = γ + ε.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'SECOND\nψ at Y is an exterior angle of BDY, ψ = β + δ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'TOP\nα + θ + ψ = 180° in the triangle AXY.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nα + β + γ + δ + ε = 180°.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG A\nBend the star: the angles change, the sum stays 180°.' },
+          { drag: '[data-handle="A"]', dx: -10, dy: 2, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'parallelogram-bisectors': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'NEIGHBOURS\nNext → : α + β = 180°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'HALVES\nThe bisectors halve α and β: α/2 + β/2 = 90°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'RIGHT ANGLE\nThe third angle of ABP is 90°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ALL FOUR\nThe same at Q, R and S.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nPQRS is a rectangle.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG D\nChange the parallelogram: PQRS stays a rectangle.' },
+          { drag: '[data-handle="D"]', dx: -8, dy: 0, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'angle-between-chords': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'EXTERIOR\nNext → : θ is an exterior angle of AED, θ = φ + ψ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ARC AB\n∠AOB = 2ψ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ARC CD\n∠COD = 2φ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nθ = ½(∠AOB + ∠COD).' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG C\nSlide C: θ changes, still half the sum.' },
+          { drag: '[data-handle="C"]', dx: -6, dy: 8, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'angle-between-secants': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'EXTERIOR\nNext → : β at A is an exterior angle of PAD, θ = β − δ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'FAR ARC\n∠BOD = 2β.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'NEAR ARC\n∠AOC = 2δ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nθ = ½(∠BOD − ∠AOC).' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG P\nMove P: θ changes, still half the difference.' },
+          { drag: '[data-handle="P"]', dx: 8, dy: -8, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'tangent-secant-angle': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'EXTERIOR\nNext → : β at A is an exterior angle of PTA, θ = β − δ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'FAR ARC\n∠TOB = 2β.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'NEAR ARC\nThe tangent-chord angle: ∠TOA = 2δ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nθ = ½(∠TOB − ∠TOA).' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG P\nMove P: T follows, θ stays half the difference.' },
+          { drag: '[data-handle="P"]', dx: 6, dy: -10, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'vertical-angle-bisectors': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'VERTICAL\nNext → : the vertical angles are equal, α and α.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'HALVES\nThe bisectors make α/2 next to OC and OB.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'STRAIGHT\nα + β = 180° along AB.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nα/2 + β + α/2 = 180°: one line.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG C\nTurn the line CD: OP and OQ stay in line.' },
+          { drag: '[data-handle="C"]', dx: 8, dy: 0, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'viviani-theorem': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'SPLIT\nNext → : three triangles fill ABC.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'PARTS\nEach part is ½a times its distance.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'WHOLE\nThe whole triangle is ½a·h.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nPD + PE + PF = h.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG P\nMove P: the distances change, the sum stays h.' },
+          { drag: '[data-handle="P"]', dx: 10, dy: 8, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'pitot-theorem': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'TANGENTS\nNext → : two equal tangents from each vertex.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'FIRST PAIR\nAB + CD takes one piece from each vertex.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'SECOND PAIR\nSo does BC + DA.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nAB + CD = BC + DA.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG R\nMove R round the circle: the sums stay equal.' },
+          { drag: '[data-handle="R"]', dx: -10, dy: 4, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'alternate-angle-bisectors': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'ALTERNATE\nNext → : the alternate angles are equal, β and β.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'HALVES\nThe bisectors make β/2 next to PQ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nEqual alternate angles: PX ∥ QY.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG Q\nTilt the transversal: PX and QY stay parallel.' },
+          { drag: '[data-handle="Q"]', dx: -20, dy: 0, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'median-halves-area': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'HEIGHT\nNext → : both triangles have the height AH.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'AREAS\nHalf the base times the height.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nBM = MC, so [ABM] = [AMC].' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG A\nMove A: the shapes change, the areas stay equal.' },
+          { drag: '[data-handle="A"]', dx: 14, dy: 4, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'concentric-circles-chord': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'TANGENT\nNext → : OT is square to the chord.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'RADII\nOA = OB, radii of the larger circle.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONGRUENT\nHL: OTA ≅ OTB.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nAT = TB.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG A\nMove the chord: T stays its midpoint.' },
+          { drag: '[data-handle="A"]', dx: 6, dy: 12, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'regular-polygon-area': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'SPLIT\nNext → : six triangles from the centre.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONGRUENT\nSSS: the six are congruent, height a each.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ONE\n[OAB] = ½ · s · a.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nArea = ½ · P · a.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG A\nTurn and resize: the two values stay equal.' },
+          { drag: '[data-handle="A"]', dx: -12, dy: 10, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'diagonals-bisect-converse': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'VERTICAL\nNext → : the angles at O are equal, θ and θ.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'SAS\nAOB ≅ COD.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'ALTERNATE\nα at A and C: AB ∥ CD.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nThe same for AD and BC.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG A\nChange a diagonal: the sides stay parallel.' },
+          { drag: '[data-handle="A"]', dx: -10, dy: 10, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'angle-at-a-bend': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'PARALLEL\nNext → : a helper line EF through E, parallel to both.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'UPPER\nAlternate angles: ∠BEF = α.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'LOWER\nAlternate angles: ∠FED = β.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\n∠BED = α + β.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG E\nMove the bend: the angle at E stays α + β.' },
+          { drag: '[data-handle="E"]', dx: 12, dy: -8, ms: 1400 },
+          { wait: 1200 },
+          { say: 'RESET\nBack to step 1 and the original figure.' },
+          { click: { button: 'Reset', exact: true } },
+          { wait: 1200 },
+        ]
+      }
+    },
+    'cyclic-hexagon-angles': {
+      'getting-started': {
+        title: 'A run through the proof player',
+        script: [
+          { say: 'TRIANGLE\nNext → : the diagonals make ACE, p + q + r = 180°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'FIRST\nABCE is cyclic: β + p = 180°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'OTHERS\nδ + q = 180°, φ + r = 180°.' },
+          { click: { button: 'Next' } },
+          { wait: 1800 },
+          { say: 'CONCLUDE\nβ + δ + φ = 360°.' },
+          { click: { button: 'Next' } },
+          { wait: 2000 },
+          { say: 'DRAG B\nMove a vertex: the sum stays 360°.' },
+          { drag: '[data-handle="B"]', dx: 10, dy: -2, ms: 1400 },
           { wait: 1200 },
           { say: 'RESET\nBack to step 1 and the original figure.' },
           { click: { button: 'Reset', exact: true } },
@@ -18222,7 +22468,7 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
           ] },
           { title: 'Proof complete: step 6 of 6', mockupProps: { step: 5 }, callouts: [
             { n: 1, label: 'The six radii', desc: 'equal, one tick each, cutting the hexagon into six triangles', pos: { top: '250px', left: 'calc(25% - 70px)' } },
-            { n: 2, label: 'The angles at the centre', desc: 'six angles θ round O, 60° each', pos: { top: '120px', left: 'calc(25% + 60px)' } },
+            { n: 2, label: 'The angles at the centre', desc: 'six angles θ round O, 60° each', pos: { top: '140px', left: 'calc(25% + 37px)' } },
             { n: 3, label: 'The triangle OAB', desc: 'shaded, with base angles φ at A and B: all three angles 60°', pos: { top: '96px', left: 'calc(25% - 110px)' } },
             { n: 4, label: 'Justification tags', desc: 'Given, SSS, Angles around a point, Isosceles base angles, Equal angles equal sides, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
             { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
@@ -18433,7 +22679,7 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
           { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
             { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
             { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
-            { n: 3, label: 'Draggable points', desc: 'A turns and resizes the pentagon, O moves the circle; the hollow points B to E follow, 72° apart', pos: { top: '170px', left: 'calc(25% - 40px)' } },
+            { n: 3, label: 'Draggable points', desc: 'A turns and resizes the pentagon, O moves the circle; the hollow points B to E follow, 72° apart', pos: { top: '112px', left: 'calc(25% + 19px)' } },
             { n: 4, label: 'Readout', desc: 'the line under the figure: the angle at the centre, a base angle and an interior angle, live while you drag', pos: { top: '310px', left: '26px' } },
             { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
             { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 6 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
@@ -18441,7 +22687,7 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
           ] },
           { title: 'Proof complete: step 6 of 6', mockupProps: { step: 5 }, callouts: [
             { n: 1, label: 'The five radii', desc: 'equal, one tick each, cutting the pentagon into five triangles', pos: { top: '225px', left: 'calc(25% - 67px)' } },
-            { n: 2, label: 'The angles at the centre', desc: 'five angles θ round O, 72° each', pos: { top: '200px', left: 'calc(25% + 60px)' } },
+            { n: 2, label: 'The angles at the centre', desc: 'five angles θ round O, 72° each', pos: { top: '238px', left: 'calc(25% - 4px)' } },
             { n: 3, label: 'The angle at B', desc: 'β = φ + φ, made of the base angles of OAB and OBC', pos: { top: '96px', left: 'calc(25% + 140px)' } },
             { n: 4, label: 'Justification tags', desc: 'Given, SSS, Angles around a point, Isosceles base angles, Adding, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
             { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
@@ -18913,6 +23159,1099 @@ The player keeps the base angles between $20°$ and $80°$ so the marks stay rea
       behavior: [
         { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the bisector and AAS, never the numbers, which is why the two sides agree for every triangle you drag.' },
         { title: 'The equal angles are built in', content: 'A is kept on the perpendicular to BC at its midpoint, which makes the base angles equal whatever you drag; that is the hypothesis, built into the figure.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'bisector-arc-midpoint': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A, B and C slide round the circle (A on the larger arc); the hollow point M follows on the bisector from A', pos: { top: '96px', left: 'calc(25% + 60px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: MB, MC and the two halves at A, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The bisector AM', desc: 'from A to the second point M where it meets the circle', pos: { top: '150px', left: 'calc(25% - 10px)' } },
+            { n: 2, label: 'The central angles', desc: '2φ and 2φ at O, on the arcs BM and MC', pos: { top: '210px', left: 'calc(25% + 60px)' } },
+            { n: 3, label: 'The equal chords', desc: 'MB and MC, two ticks each', pos: { top: '290px', left: 'calc(25% - 110px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Angle bisector, Inscribed angle theorem, SAS, Corresponding parts', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the triangle is shaped by dragging its vertices round the circle and M follows.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$B$, $C$', 'solid dot', 'slide round the circle; the arc $BC$ and its midpoint $M$ move'],
+          ['$A$', 'solid dot', 'slides along the larger arc; its bisector swings about $M$, which stays put'],
+          ['$M$', 'hollow dot', 'cannot be dragged: where the bisector from $A$ meets the circle again'],
+          ['$A$ on the smaller arc, a side too short, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $M$, $O$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: φ twice and 2φ twice' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives MB, MC and the two halves at A. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Angle bisector**, **Inscribed angle theorem**, **SAS**, **Corresponding parts**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the inscribed angle theorem and SAS, never the numbers, which is why MB = MC for every triangle you drag.' },
+        { title: 'M is found, not placed', content: 'M is computed as the second point where the line from A through the foot of the bisector meets the circle; the player never places it at the arc midpoint, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'incentre-excentre-lemma': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A, B and C slide round the circle (A on the larger arc); the hollow points I and M follow', pos: { top: '96px', left: 'calc(25% + 60px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: MB, MC and MI, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 6 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 6 of 6', mockupProps: { step: 5 }, callouts: [
+            { n: 1, label: 'The incentre I', desc: 'where the bisectors from A and B meet, on the line AM', pos: { top: '163px', left: 'calc(25% + 42px)' } },
+            { n: 2, label: 'The isosceles triangle MBI', desc: 'shaded, with equal angles θ at B and I', pos: { top: '282px', left: 'calc(25% - 45px)' } },
+            { n: 3, label: 'The three equal lengths', desc: 'MB, MI and MC, one tick each', pos: { top: '248px', left: 'calc(25% + 75px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Same segment, Angle bisector, Adding, Exterior angle theorem, Isosceles converse', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the triangle is shaped by dragging its vertices round the circle and I and M follow.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$, $B$, $C$', 'solid dot', 'slide round the circle ($A$ on the larger arc); the incentre and $M$ follow'],
+          ['$I$, $M$', 'hollow dot', 'cannot be dragged: the incentre, and the second point of $AI$ on the circle'],
+          ['$A$ on the smaller arc, a side, $AI$ or $BI$ too short, an angle of the triangle too small, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $I$, $M$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: the halves at A and B, α/2 at B, and θ' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives MB, MC and MI. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Angles in the same segment**, **Angle bisector**, **Adding**, **Exterior angle theorem**, **Isosceles converse**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument is an angle chase, never the numbers, which is why the three distances agree for every triangle you drag.' },
+        { title: 'I and M are computed', content: 'I is the incentre of the triangle and M is the second point where AI meets the circle; neither is placed by hand, so the equal distances in the readout are a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'cointerior-bisectors': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'P and Q slide along their lines, A, B and C move the lines; the hollow point R follows', pos: { top: '120px', left: 'calc(25% + 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: β, δ and the angle at R, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The bisectors PR and QR', desc: 'meeting at R between the parallels', pos: { top: '163px', left: 'calc(25% + 65px)' } },
+            { n: 2, label: 'The triangle PQR', desc: 'shaded, with β/2 at P and δ/2 at Q', pos: { top: '183px', left: 'calc(25% - 95px)' } },
+            { n: 3, label: 'The right angle', desc: 'the square mark at R', pos: { top: '200px', left: 'calc(25% + 58px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Co-interior angles, Angle bisector, Adding, Angle sum', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the transversal and the lines are moved by dragging and R follows.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$P$, $Q$', 'solid dot', 'slide along their lines; the transversal tilts'],
+          ['$A$, $B$, $C$', 'solid dot', 'move or tilt the lines; $D$ keeps the second line parallel to the first'],
+          ['$R$', 'hollow dot', 'cannot be dragged: where the two bisectors cross'],
+          ['a co-interior angle under $60°$ or over $120°$, the lines too steep or too close, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $P$, $Q$, $R$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: β, δ and the four halves' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives β, δ and the angle at R. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Co-interior angles**, **Angle bisector**, **Adding**, **Angle sum**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses co-interior angles and the angle sum, never the numbers, which is why the angle at R is right for every position you drag.' },
+        { title: 'R is found, not placed', content: 'R is computed as the crossing of the two bisectors; the player never makes the angle there right, so the 90° in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'pentagon-diagonals': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A turns and resizes the pentagon; B, C, D and E follow as A turned by 72° at a time', pos: { top: '84px', left: 'calc(25% + 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: the three angles at A, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 6 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 6 of 6', mockupProps: { step: 5 }, callouts: [
+            { n: 1, label: 'The diagonals AC and AD', desc: 'from A to the two far vertices', pos: { top: '200px', left: 'calc(25% + 10px)' } },
+            { n: 2, label: 'The triangle AED', desc: 'shaded, with base angles φ at A and D', pos: { top: '196px', left: 'calc(25% - 62px)' } },
+            { n: 3, label: 'The three angles at A', desc: 'φ, ψ and φ, 36° each', pos: { top: '110px', left: 'calc(25% + 60px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Polygon angle sum, Isosceles base angles, Subtracting, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the pentagon is turned and resized by dragging one vertex and stays regular.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$', 'solid dot', 'turns and resizes the pentagon about its centre'],
+          ['$B$, $C$, $D$, $E$', 'hollow dot', 'cannot be dragged: $A$ turned by $72°$ at a time'],
+          ['$A$ turned more than $30°$ from the top, a pentagon too small or too large, or a vertex out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $E$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: β twice, φ four times and ψ' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the three angles at A. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Polygon angle sum**, **Isosceles base angles**, **Subtracting**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the angle sums and isosceles triangles, never the numbers, which is why the three angles agree for every pentagon you drag.' },
+        { title: 'The pentagon is regular by construction', content: 'B, C, D and E are A turned about the centre by 72° each, which makes all sides and angles equal whatever you drag; that is the hypothesis, built into the figure.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'pentagon-golden-ratio': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A turns and resizes the pentagon; B, C, D and E follow as A turned by 72° at a time, and P follows', pos: { top: '84px', left: 'calc(25% + 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: AC/AB, AP/AB and AB/AC, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 7 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 7 of 7', mockupProps: { step: 6 }, callouts: [
+            { n: 1, label: 'The crossing point P', desc: 'where the diagonals AC and BE meet', pos: { top: '186px', left: 'calc(25% + 12px)' } },
+            { n: 2, label: 'The triangle APE', desc: 'shaded, with 2φ at A and P', pos: { top: '144px', left: 'calc(25% - 50px)' } },
+            { n: 3, label: 'The equal pieces', desc: 'AP and BP, two ticks each', pos: { top: '180px', left: 'calc(25% + 52px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Pentagon diagonals, Isosceles converse, AA similarity, Algebra, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the pentagon is turned and resized by dragging one vertex and stays regular.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$', 'solid dot', 'turns and resizes the pentagon about its centre'],
+          ['$B$, $C$, $D$, $E$', 'hollow dot', 'cannot be dragged: $A$ turned by $72°$ at a time'],
+          ['$P$', 'hollow dot', 'cannot be dragged: where the diagonals $AC$ and $BE$ cross'],
+          ['$A$ turned more than $20°$ from the top, a pentagon too small or too large, or a vertex out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $E$, $P$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: φ four times and 2φ twice' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives AC/AB, AP/AB and AB/AC. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Pentagon diagonals**, **Isosceles converse**, **AA similarity**, **Algebra**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses angles, isosceles triangles and similarity, never the numbers, which is why the ratio is the same for every pentagon you drag.' },
+        { title: 'P is found, not placed', content: 'P is computed as the crossing of the diagonals AC and BE, and the pentagon is regular by construction; nothing about the golden ratio is built in, so the 1.618 in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'pentagram-angles': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'all five points A, B, C, D, E can be dragged; the hollow crossings X and Y follow', pos: { top: '90px', left: 'calc(25% + 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: the five point angles and their sum, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The crossing X', desc: 'where EB meets AC, with the angle θ', pos: { top: '196px', left: 'calc(25% + 52px)' } },
+            { n: 2, label: 'The triangle CEX', desc: 'shaded, with γ at C and ε at E', pos: { top: '218px', left: 'calc(25% + 15px)' } },
+            { n: 3, label: 'The top triangle AXY', desc: 'shaded, with α, θ and ψ', pos: { top: '156px', left: 'calc(25% - 12px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Exterior angle theorem, Angle sum, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the star is shaped by dragging its five points.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$, $B$, $C$, $D$, $E$', 'solid dot', 'move freely; the star bends'],
+          ['$X$, $Y$', 'hollow dot', 'cannot be dragged: where $EB$ crosses $AC$ and $AD$'],
+          ['points out of convex order, a point angle under $22°$, the top point too small, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $E$, $X$, $Y$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: the five point angles, θ and ψ' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the five point angles and their sum. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Exterior angle theorem**, **Angle sum**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the exterior angle theorem and the angle sum, never the numbers, which is why the total is 180° for every star you drag.' },
+        { title: 'The points are free', content: 'All five points move independently and X and Y are computed crossings; nothing about the angle sum is built into the figure, so the 180° in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'parallelogram-bisectors': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A, B and D move the parallelogram; C follows so that the opposite sides stay parallel, and the hollow points P, Q, R, S follow', pos: { top: '110px', left: 'calc(25% - 80px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: the four angles of PQRS, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 6 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 6 of 6', mockupProps: { step: 5 }, callouts: [
+            { n: 1, label: 'The crossing P', desc: 'where the bisectors from A and B meet', pos: { top: '152px', left: 'calc(25% + 24px)' } },
+            { n: 2, label: 'The triangle ABP', desc: 'shaded, with α/2 at A and β/2 at B', pos: { top: '218px', left: 'calc(25% - 5px)' } },
+            { n: 3, label: 'The rectangle PQRS', desc: 'with a right-angle mark at each corner', pos: { top: '178px', left: 'calc(25% - 20px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Co-interior angles, Angle bisector, Angle sum, Same argument, Definition of a rectangle', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the parallelogram is shaped by dragging three of its vertices.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$, $B$, $D$', 'solid dot', 'move the parallelogram'],
+          ['$C$', 'hollow dot', 'cannot be dragged: $D$ moved by $AB$, so $ABCD$ stays a parallelogram'],
+          ['$P$, $Q$, $R$, $S$', 'hollow dot', 'cannot be dragged: where neighbouring bisectors cross'],
+          ['sides too close to equal, $P$ or $R$ too close to a side, the angle at $A$ outside $55°$ to $115°$, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $P$, $Q$, $R$, $S$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: α, β, α/2 and β/2' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the four angles of PQRS. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Co-interior angles**, **Angle bisector**, **Angle sum**, **Same argument**, **Definition of a rectangle**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses co-interior angles and the angle sum, never the numbers, which is why the four angles are right for every parallelogram you drag.' },
+        { title: 'The crossings are computed', content: 'P, Q, R and S are found where the computed bisectors cross; the player never makes their angles right, so the four 90° in the readout are a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'angle-between-chords': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A, B, C and D slide round the circle; the hollow crossing E follows', pos: { top: '96px', left: 'calc(25% + 60px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: ∠AEB and half the sum of the central angles, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The crossing E', desc: 'where the chords AC and BD meet, with θ', pos: { top: '140px', left: 'calc(25% + 58px)' } },
+            { n: 2, label: 'The triangle AED', desc: 'shaded, with φ at A and ψ at D', pos: { top: '218px', left: 'calc(25% + 5px)' } },
+            { n: 3, label: 'The central angles', desc: '2ψ on the arc AB and 2φ on the arc CD', pos: { top: '160px', left: 'calc(25% + 10px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Exterior angle theorem, Inscribed angle theorem, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the chords are moved by dragging their ends round the circle.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$, $B$, $C$, $D$', 'solid dot', 'slide round the circle, keeping their order'],
+          ['$E$, $O$', 'hollow dot', 'cannot be dragged: the crossing of the chords, and the centre'],
+          ['points out of order, an arc under $40°$, the arc $AB$ or $CD$ over $170°$, $E$ too close to $O$, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $E$, $O$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: θ, φ, ψ, 2ψ and 2φ' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives ∠AEB and half the sum of the central angles. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Exterior angle theorem**, **Inscribed angle theorem**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the exterior angle and inscribed angle theorems, never the numbers, which is why the two values agree for every position you drag.' },
+        { title: 'E is found, not placed', content: 'E is computed as the crossing of the chords AC and BD; nothing about the angle there is built into the figure, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'angle-between-secants': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'P moves freely outside the circle, B and D slide round it; the hollow points A and C follow', pos: { top: '150px', left: 'calc(25% - 150px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: ∠BPD and half the difference of the central angles, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The angle at P', desc: 'θ between the two secants', pos: { top: '170px', left: 'calc(25% - 120px)' } },
+            { n: 2, label: 'The triangle PAD', desc: 'shaded, with β at A and δ at D', pos: { top: '196px', left: 'calc(25% - 45px)' } },
+            { n: 3, label: 'The central angles', desc: '2β on the far arc and 2δ on the near arc', pos: { top: '160px', left: 'calc(25% + 60px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Exterior angle theorem, Inscribed angle theorem, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the secants are moved by dragging the outside point and their far ends.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$P$', 'solid dot', 'moves freely outside the circle; both secants swing'],
+          ['$B$, $D$', 'solid dot', 'slide round the circle; one secant turns about $P$'],
+          ['$A$, $C$, $O$', 'hollow dot', 'cannot be dragged: where the secants meet the circle again, and the centre'],
+          ['$P$ too close to the circle, a secant that only grazes it, the far arc over $170°$, an angle too small, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $O$, $P$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: θ, β, δ, 2β and 2δ' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives ∠BPD and half the difference of the central angles. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Exterior angle theorem**, **Inscribed angle theorem**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the exterior angle and inscribed angle theorems, never the numbers, which is why the two values agree for every position you drag.' },
+        { title: 'A and C are found, not placed', content: 'A and C are computed as the second points where the lines from B and D towards P meet the circle; nothing about the angle at P is built in, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'tangent-secant-angle': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'P moves freely outside the circle and B slides round it; the hollow points T and A follow', pos: { top: '130px', left: 'calc(25% - 150px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: ∠TPB and half the difference of the central angles, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The angle at P', desc: 'θ between the tangent and the secant', pos: { top: '160px', left: 'calc(25% - 120px)' } },
+            { n: 2, label: 'The triangle PTA', desc: 'shaded, with β at A and δ at T', pos: { top: '156px', left: 'calc(25% - 60px)' } },
+            { n: 3, label: 'The central angles', desc: '2β on the far arc and 2δ on the near arc', pos: { top: '150px', left: 'calc(25% + 70px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Exterior angle theorem, Inscribed angle theorem, Tangent-chord angle, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the tangent and the secant are moved by dragging the outside point and the far end of the secant.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$P$', 'solid dot', 'moves freely outside the circle; the tangent point and the secant follow'],
+          ['$B$', 'solid dot', 'slides round the circle; the secant turns about $P$'],
+          ['$T$, $A$, $O$', 'hollow dot', 'cannot be dragged: the point of contact, the near end of the secant, and the centre'],
+          ['$P$ too close to the circle, a secant that only grazes it, the far arc over $170°$, an angle too small, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $O$, $P$, $T$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: θ, β, δ, 2β and 2δ' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives ∠TPB and half the difference of the central angles. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Exterior angle theorem**, **Inscribed angle theorem**, **Tangent-chord angle**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the exterior angle, inscribed angle and tangent-chord theorems, never the numbers, which is why the two values agree for every position you drag.' },
+        { title: 'T and A are found, not placed', content: 'T is computed as the point where the tangent from P touches the circle and A as the second point of the line BP on the circle; nothing about the angle at P is built in, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'vertical-angle-bisectors': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A and C turn the lines and O moves the crossing; B and D follow as mirror images, and the hollow points P and Q follow', pos: { top: '98px', left: 'calc(25% - 75px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: α, β and the sum from OP to OQ, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The bisector OP', desc: 'halving the angle AOC', pos: { top: '190px', left: 'calc(25% - 90px)' } },
+            { n: 2, label: 'The angle β', desc: 'between OC and OB, above O', pos: { top: '110px', left: 'calc(25% + 10px)' } },
+            { n: 3, label: 'The bisector OQ', desc: 'halving the vertical angle BOD', pos: { top: '178px', left: 'calc(25% + 90px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Vertical angles, Angle bisector, Straight angle, Adding', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the lines are turned and moved by dragging.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$, $C$', 'solid dot', 'turn the lines $AB$ and $CD$ about $O$'],
+          ['$O$', 'solid dot', 'moves the crossing; both lines move with it'],
+          ['$B$, $D$, $P$, $Q$', 'hollow dot', 'cannot be dragged: $A$ and $C$ mirrored in $O$, and the ends of the bisectors'],
+          ['$\\alpha$ under $50°$ or over $130°$, a line too short, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $O$, $P$, $Q$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: α twice, α/2 twice and β' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives α, β and the sum from OP to OQ. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Vertical angles**, **Angle bisector**, **Straight angle**, **Adding**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses vertical angles and the straight angle, never the numbers, which is why the sum is 180° for every position you drag.' },
+        { title: 'The bisectors are computed', content: 'P and Q are found along the computed bisectors of the two vertical angles; nothing makes them line up, so the 180° in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'viviani-theorem': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'P moves freely inside the triangle; A and B turn and resize it, and the hollow points C, D, E and F follow', pos: { top: '232px', left: 'calc(25% - 68px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: PD + PE + PF and the height h, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The perpendiculars', desc: 'PD, PE and PF from P to the sides', pos: { top: '170px', left: 'calc(25% - 20px)' } },
+            { n: 2, label: 'The three triangles', desc: 'shaded, filling ABC', pos: { top: '242px', left: 'calc(25% - 81px)' } },
+            { n: 3, label: 'The height h', desc: 'a bar beside the triangle, up to the level of C', pos: { top: '192px', left: 'calc(25% + 82px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Area addition, Triangle area, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the point and the triangle are moved by dragging.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$P$', 'solid dot', 'moves freely inside the triangle'],
+          ['$A$, $B$', 'solid dot', 'turn and resize the triangle; it stays equilateral'],
+          ['$C$, $D$, $E$, $F$', 'hollow dot', 'cannot be dragged: the third vertex and the feet of the perpendiculars'],
+          ['$P$ too close to a side or outside, $AB$ tilted too far, too short or too long, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $E$, $F$, $P$' },
+          { control: '**Measures**', description: 'this figure has no marked angles, so Measures changes nothing' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives PD + PE + PF and the height h. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Area addition**, **Triangle area**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses areas, never the numbers, which is why the sum equals the height for every position you drag.' },
+        { title: 'The feet are computed', content: 'D, E and F are found as the feet of the perpendiculars from P, and the height from C to AB; nothing makes the distances add up, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'pitot-theorem': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'P, Q, R and S slide round the circle; the hollow vertices A, B, C and D follow', pos: { top: '174px', left: 'calc(25% + 19px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: AB + CD and BC + DA, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'Equal tangents', desc: 'one colour for the two tangents from each vertex', pos: { top: '129px', left: 'calc(25% - 65px)' } },
+            { n: 2, label: 'The circle', desc: 'touching AB, BC, CD and DA at P, Q, R and S', pos: { top: '204px', left: 'calc(25% + 21px)' } },
+            { n: 3, label: 'The readout', desc: 'AB + CD and BC + DA, always equal', pos: { top: '320px', left: 'calc(25% + 122px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Two tangents, Segment addition, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the quadrilateral is changed by dragging the points where it touches the circle.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$P$, $Q$, $R$, $S$', 'solid dot', 'slide round the circle; the two sides through the point turn'],
+          ['$A$, $B$, $C$, $D$, $O$', 'hollow dot', 'cannot be dragged: where neighbouring tangents meet, and the centre'],
+          ['points of contact out of order, an arc between neighbours under $55°$ or over $120°$, or a vertex out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $O$, $P$, $Q$, $R$, $S$' },
+          { control: '**Measures**', description: 'this figure has no marked angles, so Measures changes nothing' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives AB + CD and BC + DA. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Two tangents**, **Segment addition**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses equal tangents, never the numbers, which is why the two sums agree for every position you drag.' },
+        { title: 'The vertices are computed', content: 'A, B, C and D are found where the tangents at neighbouring points of contact meet; nothing makes the opposite sides add up, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'alternate-angle-bisectors': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'P and Q slide along their lines, A, B and C move the lines; D follows to keep CD parallel, and the hollow points X and Y follow', pos: { top: '120px', left: 'calc(25% + 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: the two halves and the angle between PX and QY, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 4 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 4 of 4', mockupProps: { step: 3 }, callouts: [
+            { n: 1, label: 'The bisector PX', desc: 'halving the angle QPB', pos: { top: '163px', left: 'calc(25% + 65px)' } },
+            { n: 2, label: 'The bisector QY', desc: 'halving the alternate angle PQC', pos: { top: '154px', left: 'calc(25% - 124px)' } },
+            { n: 3, label: 'The parallel marks', desc: 'double arrows on PX and QY', pos: { top: '200px', left: 'calc(25% + 58px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Alternate angles, Angle bisector, Alternate angles converse', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the lines and the transversal are moved by dragging.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$P$, $Q$', 'solid dot', 'slide along their lines; the transversal tilts'],
+          ['$A$, $B$, $C$', 'solid dot', 'move and turn the parallel lines'],
+          ['$D$, $X$, $Y$', 'hollow dot', 'cannot be dragged: $D$ keeps $CD$ parallel to $AB$, $X$ and $Y$ are the ends of the bisectors'],
+          ['$\\beta$ under $70°$ or over $110°$, lines too short, too steep or too close, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $P$, $Q$, $X$, $Y$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: β twice and β/2 twice' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the two halves and the angle between PX and QY. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Alternate angles**, **Angle bisector**, **Alternate angles converse**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses alternate angles and their converse, never the numbers, which is why the angle between the bisectors is 0° for every position you drag.' },
+        { title: 'The bisectors are computed', content: 'X and Y are found along the computed bisectors of the two alternate angles; nothing makes PX and QY parallel, so the 0° in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'median-halves-area': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A, B and C move freely; the hollow points M and H follow', pos: { top: '150px', left: 'calc(25% - 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: the areas of ABM and AMC, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 4 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 4 of 4', mockupProps: { step: 3 }, callouts: [
+            { n: 1, label: 'The median AM', desc: 'from A to the midpoint of BC', pos: { top: '178px', left: 'calc(25% - 18px)' } },
+            { n: 2, label: 'The height AH', desc: 'dashed, square to BC', pos: { top: '183px', left: 'calc(25% - 60px)' } },
+            { n: 3, label: 'The equal halves', desc: 'BM and MC, one tick each', pos: { top: '240px', left: 'calc(25% + 60px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Altitude, Triangle area, Midpoint', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the triangle is changed by dragging its vertices.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$, $B$, $C$', 'solid dot', 'move freely; the triangle changes'],
+          ['$M$, $H$', 'hollow dot', 'cannot be dragged: the midpoint of $BC$ and the foot of the perpendicular from $A$'],
+          ['$BC$ too short or tilted too far, $A$ too low, $H$ outside $BC$ or too close to $M$, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $H$, $M$' },
+          { control: '**Measures**', description: 'this figure has no marked angles, so Measures changes nothing' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the areas of ABM and AMC. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Altitude**, **Triangle area**, **Midpoint**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses equal bases and a shared height, never the numbers, which is why the two areas agree for every position you drag.' },
+        { title: 'The areas are measured', content: 'Each area in the readout is computed from the corner positions of its own triangle; nothing makes them agree, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'concentric-circles-chord': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A slides round the larger circle and E resizes it; the hollow points T and B follow', pos: { top: '150px', left: 'calc(25% - 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: AT and TB, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The radius OT', desc: 'square to the chord AB', pos: { top: '210px', left: 'calc(25% + 13px)' } },
+            { n: 2, label: 'The triangles OTA and OTB', desc: 'shaded, congruent by HL', pos: { top: '216px', left: 'calc(25% - 30px)' } },
+            { n: 3, label: 'The equal halves', desc: 'AT and TB, one tick each', pos: { top: '254px', left: 'calc(25% + 28px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Tangent and radius, Radii, HL congruence, Matching sides', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the chord and the larger circle are changed by dragging.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$', 'solid dot', 'slides round the larger circle; the chord turns'],
+          ['$E$', 'solid dot', 'resizes the larger circle'],
+          ['$T$, $B$, $O$', 'hollow dot', 'cannot be dragged: the point of contact, the other end of the chord, and the centre'],
+          ['a larger circle too small or too big, or $E$ too close to $A$ or $B$', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $E$, $O$, $T$' },
+          { control: '**Measures**', description: 'this figure has no marked angles, so Measures changes nothing' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives AT and TB. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Tangent and radius**, **Radii**, **HL congruence**, **Matching sides**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the tangent and radius theorem and HL congruence, never the numbers, which is why the two halves agree for every position you drag.' },
+        { title: 'T and B are found, not placed', content: 'T is computed as the point where the tangent from A touches the smaller circle and B as the second point of the line AT on the larger circle; nothing makes T the midpoint, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'regular-polygon-area': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'O moves the hexagon and A turns and resizes it; the hollow vertices B to F and the point M follow', pos: { top: '150px', left: 'calc(25% - 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: the measured area and half the perimeter times the apothem, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The apothem a', desc: 'from O square to the side AB', pos: { top: '144px', left: 'calc(25% - 16px)' } },
+            { n: 2, label: 'The six triangles', desc: 'shaded in turn, all congruent', pos: { top: '183px', left: 'calc(25% - 60px)' } },
+            { n: 3, label: 'The side s', desc: 'one of six equal sides', pos: { top: '204px', left: 'calc(25% + 52px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Area addition, SSS congruence, Triangle area, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the hexagon is moved, turned and resized by dragging.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$O$', 'solid dot', 'moves the whole hexagon'],
+          ['$A$', 'solid dot', 'turns the hexagon about $O$ and changes its size'],
+          ['$B$ to $F$, $M$', 'hollow dot', 'cannot be dragged: $A$ turned about $O$ by $60°$ at a time, and the midpoint of $AB$'],
+          ['a hexagon too small or too big, or a vertex out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$ to $F$, $M$ and $O$' },
+          { control: '**Measures**', description: 'this figure has no marked angles, so Measures changes nothing' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the area and half the perimeter times the apothem. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Area addition**, **SSS congruence**, **Triangle area**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses congruent triangles and the triangle area, never the numbers, which is why the two values agree for every position you drag.' },
+        { title: 'The area is measured', content: 'The area in the readout is computed from the six corner positions, separately from the side and the apothem; nothing makes the two values agree, so the equality in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'diagonals-bisect-converse': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'A and B change the diagonals and O moves the crossing; the hollow points C and D follow as mirror images', pos: { top: '150px', left: 'calc(25% - 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: the angle between AB and CD and between AD and BC, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The halves of the diagonals', desc: 'one tick on AO and OC, two on BO and OD', pos: { top: '163px', left: 'calc(25% + 20px)' } },
+            { n: 2, label: 'The triangles AOB and COD', desc: 'shaded, congruent by SAS', pos: { top: '196px', left: 'calc(25% - 96px)' } },
+            { n: 3, label: 'The parallel marks', desc: 'one arrow on AB and CD, two on AD and BC', pos: { top: '216px', left: 'calc(25% + 104px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Vertical angles, SAS congruence, Alternate angles converse, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the diagonals are changed by dragging.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$, $B$', 'solid dot', 'change the diagonals; the quadrilateral changes shape'],
+          ['$O$', 'solid dot', 'moves the point where the diagonals cross'],
+          ['$C$, $D$', 'hollow dot', 'cannot be dragged: $A$ and $B$ mirrored in $O$'],
+          ['diagonals too short, crossing at under $60°$ or over $110°$, a corner angle too small, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$, $B$, $C$, $D$, $O$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: θ twice and α twice' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the angles between opposite sides. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Vertical angles**, **SAS congruence**, **Alternate angles converse**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses vertical angles, SAS and alternate angles, never the numbers, which is why both angles stay at 0° for every position you drag.' },
+        { title: 'Only the diagonals are built', content: 'C and D are made by mirroring A and B in O, which fixes only the diagonals; nothing makes the sides parallel, so the 0° in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'angle-at-a-bend': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'E moves the bend, B and A turn the upper line and D moves the lower one; the hollow points C and F follow', pos: { top: '150px', left: 'calc(25% - 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: ∠ABE + ∠CDE and ∠BED, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The helper line EF', desc: 'dashed, parallel to AB and CD', pos: { top: '177px', left: 'calc(25% - 96px)' } },
+            { n: 2, label: 'The angles α', desc: 'at B and at E, alternate angles', pos: { top: '122px', left: 'calc(25% - 46px)' } },
+            { n: 3, label: 'The angles β', desc: 'at D and at E, alternate angles', pos: { top: '242px', left: 'calc(25% - 36px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Parallel through a point, Alternate angles, Adding angles', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the bend and the lines are moved by dragging.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$E$', 'solid dot', 'moves the bend between the lines'],
+          ['$B$, $A$', 'solid dot', 'move and turn the upper line'],
+          ['$D$', 'solid dot', 'moves the lower line, which stays parallel'],
+          ['$C$, $F$', 'hollow dot', 'cannot be dragged: $C$ keeps $DC$ parallel to $BA$, $F$ is on the helper line'],
+          ['$E$ too close to a line or to the ends, $\\alpha$ or $\\beta$ under $25°$ or over $75°$, lines too short, steep or close, or a point out of the frame', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$ to $F$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: α twice and β twice' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives ∠ABE + ∠CDE and ∠BED. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Parallel through a point**, **Alternate angles**, **Adding angles**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses alternate angles, never the numbers, which is why the two values agree for every position you drag.' },
+        { title: 'The angles are measured', content: 'The three angles in the readout are measured from the positions of the points; nothing makes the angle at E equal the sum, so the agreement in the readout is a real check.' },
+        { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
+        { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
+      ]
+    },
+    'cyclic-hexagon-angles': {
+      labels: { inputs: 'Figure', output: 'Log' },
+      overview: {
+        frames: [
+          { title: 'Opening scene: the controls', mockupProps: { step: 0 }, callouts: [
+            { n: 1, label: 'Proof', desc: 'the theorem loaded in the player; the ? gives its idea in one line', pos: { top: '4px', left: '6px' } },
+            { n: 2, label: 'Display', desc: 'Labels shows the point names, Measures writes each marked angle\'s size beside its arc', pos: { top: '4px', left: '216px' } },
+            { n: 3, label: 'Draggable points', desc: 'all six vertices slide round the circle', pos: { top: '150px', left: 'calc(25% - 40px)' } },
+            { n: 4, label: 'Readout', desc: 'the line under the figure: ∠B + ∠D + ∠F and ∠A + ∠C + ∠E, live while you drag', pos: { top: '310px', left: '26px' } },
+            { n: 5, label: 'Back, Play, Next, Reset', desc: 'step through the proof or run it; Reset returns to step 1 and restores the original figure', pos: { top: '344px', left: 'calc(25% - 226px)' } },
+            { n: 6, label: 'Speed and step counter', desc: 'how fast Play advances, and which of the 5 steps is on screen', pos: { top: '336px', left: 'calc(25% + 108px)' } },
+            { n: 7, label: 'Step explanations', desc: 'every step reached so far, with its justification tag and a link to the section that explains it; click an entry to jump back to it', pos: { top: '54px', left: 'calc(50% - 10px)' } },
+          ] },
+          { title: 'Proof complete: step 5 of 5', mockupProps: { step: 4 }, callouts: [
+            { n: 1, label: 'The triangle ACE', desc: 'shaded, with p, q and r', pos: { top: '163px', left: 'calc(25% + 20px)' } },
+            { n: 2, label: 'The quadrilateral ABCE', desc: 'shaded, cyclic', pos: { top: '132px', left: 'calc(25% + 9px)' } },
+            { n: 3, label: 'The angles β, δ, φ', desc: 'every other angle of the hexagon', pos: { top: '250px', left: 'calc(25% + 60px)' } },
+            { n: 4, label: 'Justification tags', desc: 'Given, Angle sum, Cyclic quadrilateral, Combining', pos: { top: '126px', left: 'calc(50% + 40px)' } },
+            { n: 5, label: 'Replay', desc: 'at the last step Play becomes Replay and Next is off', pos: { top: '340px', left: 'calc(25% - 150px)' } },
+          ] },
+        ],
+      },
+      inputs: {
+        intro: 'The figure is the only input. Nothing is typed; the hexagon is changed by dragging its vertices round the circle.',
+        columns: ['Point', 'Drawn as', 'What a drag does'],
+        rows: [
+          ['$A$ to $F$', 'solid dot', 'slide round the circle'],
+          ['vertices out of order, or an arc between neighbours under $45°$ or over $100°$', '—', 'refused'],
+        ],
+        note: 'Dragging never changes the current step. The proof stays where it was; only the figure changes.'
+      },
+      controls: {
+        rows: [
+          { control: '**▶ Play** / **⏸ Pause**', description: 'runs the proof one step at a time at the chosen speed; at the last step the button becomes **↻ Replay**' },
+          { control: '**Next →** / **← Back**', description: 'one step forward or back; both stop Play' },
+          { control: '**Reset**', description: 'back to step 1 and the original figure' },
+          { control: 'Speed', description: 'Slow, Normal, Fast, Very Fast: the pause between steps while playing' },
+          { control: '**Labels**', description: 'show or hide the point names $A$ to $F$' },
+          { control: '**Measures**', description: 'write each marked angle\'s size in degrees beside its arc: β, δ, φ, p, q and r' },
+          { control: 'Click a log entry', description: 'moves the canvas back to that step' },
+        ]
+      },
+      output: {
+        where: 'Under the canvas, the readout gives the two sums of alternate angles. On the right, the **Step explanations** log keeps every step reached so far; the current one is framed in blue.',
+        what: 'Each entry has a number, a title, a justification tag (**Given**, **Angle sum**, **Cyclic quadrilateral**, **Combining**) naming the rule that allows the step, and a note with a link to the section that explains it.'
+      },
+      behavior: [
+        { title: 'No measurement is used', content: 'The readout is a check, not a step of the proof. The argument uses the triangle angle sum and cyclic quadrilaterals, never the numbers, which is why both sums stay at 360° for every position you drag.' },
+        { title: 'The angles are measured', content: 'The six angles in the readout are measured from the positions of the vertices; nothing makes them add up, so the 360° in the readout is a real check.' },
         { title: 'Reset restores the figure', content: 'Reset returns both the step and the figure to their starting state. Back only changes the step.' },
         { title: 'On a phone', content: 'Touch and drag a point to move it without scrolling the page; a touch anywhere else on the canvas scrolls as usual.' },
       ]

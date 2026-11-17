@@ -967,6 +967,8 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -986,10 +988,43 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Continuity of Piecewise Functions"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function and boundary","features":[{"id":"c1","name":"Left limit (x → c⁻)","type":"text"},{"id":"c2","name":"Right limit (x → c⁺)","type":"text"},{"id":"c3","name":"f(c)","type":"text"},{"id":"c4","name":"Continuous at c?","type":"verdict"}],"items":[{"id":"r1","name":"x² (x ≤ 2), 4x − 4 (x > 2); at c = 2","values":{"c1":"4","c2":"4","c3":"4","c4":"yes"}},{"id":"r2","name":"x + 1 (x < 3), 2x − 3 (x ≥ 3); at c = 3","values":{"c1":"4","c2":"3","c3":"3","c4":"no"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Workflow Summary"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Task","features":[{"id":"c1","name":"What to do","type":"text"},{"id":"c2","name":"Watch out for","type":"text"}],"items":[{"id":"r1","name":"Evaluate at a specific input","values":{"c1":"identify which condition the input satisfies; apply that formula only","c2":"boundary points — the inequality symbols decide which piece owns the boundary"}},{"id":"r2","name":"Graph the function","values":{"c1":"graph each piece on its interval and combine","c2":"use solid dots for included endpoints, open dots for excluded"}},{"id":"r3","name":"Find the domain","values":{"c1":"take the union of the intervals stated by the conditions","c2":"also check each formula's natural restrictions (denominators, square roots, logs)"}},{"id":"r4","name":"Find the range","values":{"c1":"find the outputs of each piece on its interval, then take the union","c2":"gaps in the range can appear if no piece covers some y-values"}},{"id":"r5","name":"Check continuity at a boundary c","values":{"c1":"compute left limit, right limit, and f(c)","c2":"all three must agree — any mismatch is a discontinuity"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"What goes wrong","type":"text"},{"id":"c2","name":"How to avoid it","type":"text"}],"items":[{"id":"r1","name":"Using the wrong piece at a boundary","values":{"c1":"wrong output at boundary inputs","c2":"check inequality symbols — the piece with ≤ or ≥ owns the boundary"}},{"id":"r2","name":"Overlapping conditions","values":{"c1":"function is ambiguous where conditions overlap","c2":"pair ≤ with >, or < with ≥, so each boundary lives in exactly one piece"}},{"id":"r3","name":"Gaps in conditions","values":{"c1":"function undefined on some intervals","c2":"verify conditions cover the entire intended domain"}},{"id":"r4","name":"Assuming continuity","values":{"c1":"misreading behavior at boundaries","c2":"always check that adjacent pieces produce the same value at the boundary"}},{"id":"r5","name":"Forgetting endpoint markers","values":{"c1":"graph is incomplete or misleading","c2":"solid dot for included endpoint, open dot for excluded — for every piece transition"}},{"id":"r6","name":"Evaluating all pieces at one input","values":{"c1":"wrong answer or confusion about which output applies","c2":"only the piece whose condition the input satisfies should be used"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Real-World Applications"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Situation","features":[{"id":"c1","name":"Threshold(s)","type":"text"},{"id":"c2","name":"Piecewise structure","type":"text"}],"items":[{"id":"r1","name":"Tax brackets","values":{"c1":"income levels (e.g., $10,000, $40,000)","c2":"tax rate increases at each bracket boundary; pieces are continuous (rates align at thresholds)"}},{"id":"r2","name":"Shipping costs","values":{"c1":"weight bands (under 1 lb, 1–5 lb, over 5 lb)","c2":"flat fee for first band, then per-unit surcharge added above"}},{"id":"r3","name":"Utility rates","values":{"c1":"usage tier (e.g., 500 kWh)","c2":"one rate up to the tier, a higher rate beyond"}},{"id":"r4","name":"Parking fees","values":{"c1":"time periods (first hour, next two, beyond)","c2":"different rate per time period; often a free or fixed first piece"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Step Functions"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Definition","type":"text"},{"id":"c2","name":"Segment shape","type":"text"},{"id":"c3","name":"Examples","type":"text"}],"items":[{"id":"r1","name":"Floor ⌊x⌋","values":{"c1":"greatest integer ≤ x","c2":"horizontal segment on [n, n+1) at height n — closed left, open right","c3":"⌊2.7⌋ = 2, ⌊−1.3⌋ = −2, ⌊5⌋ = 5"}},{"id":"r2","name":"Ceiling ⌈x⌉","values":{"c1":"least integer ≥ x","c2":"horizontal segment on (n−1, n] at height n — open left, closed right","c3":"⌈2.7⌉ = 3, ⌈−1.3⌉ = −1, ⌈5⌉ = 5"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Evaluate and graph a piecewise function", href: "/functions/methods/piecewise-functions", desc: "Let the input pick the piece, find both values at each boundary, and draw each piece only on its interval.", level: "composite", here: "#4" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Find the range of a function", href: "/functions/methods/find-range", desc: "Find the lowest and highest outputs from the vertex, the endpoints and the end behavior, or solve $y = f(x)$ for $x$.", level: "composite" },
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+      { skill: "Identify the family of a function", href: "/functions/methods/identify-function-family", desc: "A decision tree from what you see in the formula to the family and the method that handles it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1877,8 +1912,37 @@ const faqQuestions = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Graphing a piecewise function, step by step (obj4).
+  const graphPiecewiseSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$x + 3$ if $x < 1$, and $2x - 1$ if $x \\geq 1$',
+      rows: [
+        { step: 'Identify each piece and its interval', example: '$x + 3$ on $x < 1$; $2x - 1$ on $x \\geq 1$' },
+        { step: 'Draw each piece only within its interval', example: 'a line of slope $1$ left of $x = 1$; a line of slope $2$ from $x = 1$ on' },
+        { step: 'Mark the endpoints', stepSub: 'Solid dot if included, open dot if excluded', example: 'open dot at $(1, 4)$, solid dot at $(1, 1)$' },
+      ],
+    },
+  };
+
+  // Procedure rollout 2026-11-14: From a description to a piecewise function (obj11).
+  const writePiecewiseSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '50 dollars for the first hour, 30 for each additional hour',
+      rows: [
+        { step: 'Identify the thresholds where the rule changes', example: '$t = 1$' },
+        { step: 'Write the formula for each region', example: '$50$ and $50 + 30(t - 1)$' },
+        { step: 'Specify the conditions with inequalities', example: '$0 < t \\leq 1$ and $t > 1$' },
+        { step: 'Simplify and write the function', example: '$C(t) = 50$ if $0 < t \\leq 1$, and $30t + 20$ if $t > 1$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    writePiecewiseSteps,
+    graphPiecewiseSteps,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1903,7 +1967,7 @@ const faqQuestions = {
     }
    }
 
-export default function PiecewisePage({ pitfallData,
+export default function PiecewisePage({ writePiecewiseSteps, graphPiecewiseSteps, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2037,8 +2101,18 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="graph-piecewise-steps"
+            title="Graphing a piecewise function, step by step"
+            source="/functions/piecewise"
+            before={"The three steps on the function of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={graphPiecewiseSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-drawJump'} dangerouslySetInnerHTML={{ __html: demoUnits.drawJump }} />,
           `Open and closed dots are part of the graph, not decoration: they say which piece owns each boundary.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate and graph a piecewise function](!/functions/methods/piecewise-functions) →@`,
         ]
     },
     {
@@ -2067,11 +2141,15 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-piecewise-continuity-piecewise-functions-matrix'}
+            id="piecewise-continuity-piecewise-functions-matrix"
+            title="Continuity of Piecewise Functions"
+            source="/functions/piecewise"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
                   <div key={'unit-jump'} dangerouslySetInnerHTML={{ __html: demoUnits.jump }} />,
           `Checking continuity at a boundary is therefore a matter of comparing two limits with one value.`,
         ]
@@ -2106,11 +2184,15 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-piecewise-step-functions-matrix'}
+            id="piecewise-step-functions-matrix"
+            title="Step Functions"
+            source="/functions/piecewise"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
                   <div key={'unit-step'} dangerouslySetInnerHTML={{ __html: demoUnits.step }} />,
           `Step functions model anything that changes only at thresholds.`,
         ]
@@ -2121,11 +2203,15 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-piecewise-real-world-applications-matrix'}
+            id="piecewise-real-world-applications-matrix"
+            title="Real-World Applications"
+            source="/functions/piecewise"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
           `@academic[punchline:Wherever a charge or a rate changes at a threshold, a piecewise function describes it exactly.]@`,
         ]
     },
@@ -2135,6 +2221,15 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-procedure'}
+            id="write-piecewise-steps"
+            title="From a description to a piecewise function"
+            source="/functions/piecewise"
+            before={"The plumber example of this section, one step at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={writePiecewiseSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-plumber'} dangerouslySetInnerHTML={{ __html: demoUnits.plumber }} />,
           `Drawing the function is a quick check that the written pieces match the description.`,
         ]
@@ -2145,11 +2240,15 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-piecewise-common-mistakes-matrix'}
+            id="piecewise-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/functions/piecewise"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           sectionsContent.obj12b.content,
           <DiagramFrame
             key={'obj12b-mistakes'}
@@ -2168,14 +2267,26 @@ $$f(x) = \\begin{cases} x + 1 & \\text{if } x < 0 \\\\ x^2 & \\text{if } x \\geq
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-piecewise-workflow-summary-matrix'}
+            id="piecewise-workflow-summary-matrix"
+            title="Workflow Summary"
+            source="/functions/piecewise"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

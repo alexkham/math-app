@@ -1088,6 +1088,7 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 3 tables (obj2 aggregation, obj3 aggregation, obj6 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1107,8 +1108,31 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Pascal's Triangle"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Diagonal","features":[{"id":"c1","name":"Sequence name","type":"text"},{"id":"c2","name":"First few values","type":"text"},{"id":"c3","name":"Closed form (n-th)","type":"text"}],"items":[{"id":"r1","name":"1st (k = 0)","values":{"c1":"constants","c2":"1, 1, 1, 1, …","c3":"1"}},{"id":"r2","name":"2nd (k = 1)","values":{"c1":"natural numbers","c2":"1, 2, 3, 4, …","c3":"n"}},{"id":"r3","name":"3rd (k = 2)","values":{"c1":"triangular numbers","c2":"1, 3, 6, 10, 15, …","c3":"n(n+1) ⁄ 2"}},{"id":"r4","name":"4th (k = 3)","values":{"c1":"tetrahedral numbers","c2":"1, 4, 10, 20, 35, …","c3":"n(n+1)(n+2) ⁄ 6"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Identities"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Identity","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Combinatorial meaning","type":"text"}],"items":[{"id":"r1","name":"Symmetry","values":{"c1":"C(n, k) = C(n, n − k)","c2":"choosing the k included items ↔ choosing the n − k excluded items"}},{"id":"r2","name":"Pascal's rule","values":{"c1":"C(n, k) = C(n−1, k−1) + C(n−1, k)","c2":"a fixed element is either in the subset or out of it"}},{"id":"r3","name":"Absorption","values":{"c1":"k · C(n, k) = n · C(n−1, k−1)","c2":"choose a k-subset, then distinguish one of its members"}},{"id":"r4","name":"Row sum","values":{"c1":"Σₖ₌₀ⁿ C(n, k) = 2ⁿ","c2":"total number of subsets of an n-set"}},{"id":"r5","name":"Alternating row sum","values":{"c1":"Σₖ₌₀ⁿ (−1)ᵏ C(n, k) = 0 for n ≥ 1","c2":"even-sized subsets and odd-sized subsets are equally numerous"}},{"id":"r6","name":"Vandermonde's identity","values":{"c1":"C(m+n, r) = Σₖ₌₀ʳ C(m, k) C(n, r−k)","c2":"partition the chosen items between the two source sets"}},{"id":"r7","name":"Hockey stick","values":{"c1":"Σᵢ₌ₖⁿ C(i, k) = C(n+1, k+1)","c2":"a diagonal sum in Pascal's triangle equals a single entry one row below"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Compute binomial coefficients", href: "/combinatorics/methods/binomial-coefficients", desc: "Evaluate $\\binom{n}{k}$ by hand: switch to the smaller $k$ by symmetry, write $k$ falling factors over $k!$, and cancel before you multiply.", level: "composite", here: "#1" },
+    ] },
+    { title: "More combinatorics methods", items: [
+      { skill: "Expand a binomial power", href: "/combinatorics/methods/binomial-expansion", desc: "Expand $(a + b)^n$ with the binomial theorem: coefficients from row $n$ of Pascal's triangle, powers of $a$ falling and powers of $b$ rising.", level: "composite" },
+      { skill: "Find a specific term in a binomial expansion", href: "/combinatorics/methods/specific-binomial-term", desc: "Find one term or coefficient of $(a + b)^n$ without expanding: write the general term $\\binom{n}{k}a^{n-k}b^k$ and solve for $k$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/combinatorics/methods", label: "All combinatorics methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2183,6 +2207,7 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compute binomial coefficients](!/combinatorics/methods/binomial-coefficients) →@`,
         ]
     },
     {
@@ -2215,8 +2240,15 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-binomial-coefficient-identities-matrix'}
+            id="binomial-coefficient-identities-matrix"
+            title="Identities"
+            source="/combinatorics/binomial-coefficient"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           `@academic[punchline:A binomial identity is usually a statement about subsets, and counting those subsets two ways is the shortest proof.]@`,
         ]
     },
@@ -2226,8 +2258,15 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-binomial-coefficient-pascal-s-triangle-matrix'}
+            id="binomial-coefficient-pascal-s-triangle-matrix"
+            title="Pascal's Triangle"
+            source="/combinatorics/binomial-coefficient"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
                   <div key={'unit-symmetry'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetry }} />,
           `The diagonals and the shallow-diagonal sums above are read off the same array, so each one is another identity that the arrangement makes obvious.`,
         ]
@@ -2380,6 +2419,14 @@ Computing $\\binom{50}{2}$ as $50 \\cdot 49 = 2450$ counts ordered picks, so eve
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

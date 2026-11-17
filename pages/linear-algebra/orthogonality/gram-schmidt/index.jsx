@@ -1828,6 +1828,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj7 aggregation, obj9 comparison, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1842,6 +1844,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gramSchmidtDiagrams from '@/app/components/linear-algebra copy/matrix/gramSchmidtDiagrams'
@@ -1849,8 +1852,31 @@ import qrDiagrams from '@/app/components/linear-algebra copy/matrix/qrDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Numerical Stability"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"How it computes the orthogonal set / QR","type":"text"},{"id":"c2","name":"Numerical stability","type":"text"},{"id":"c3","name":"Typical use","type":"text"}],"items":[{"id":"r1","name":"Classical Gram–Schmidt","values":{"c1":"at step j, all projections of the original vⱼ onto u₁, …, uⱼ₋₁ are computed and subtracted at once","c2":"poor — orthogonality can be lost when input vectors are nearly dependent; errors accumulate","c3":"textbook / illustrative use; abstract inner product spaces where exact arithmetic is available"}},{"id":"r2","name":"Modified Gram–Schmidt","values":{"c1":"vⱼ is updated in place after each individual projection is subtracted","c2":"significantly better than classical; identical result in exact arithmetic","c3":"educational software, moderate-precision floating-point work"}},{"id":"r3","name":"Householder reflections","values":{"c1":"a sequence of orthogonal reflections is applied to A to zero out below-diagonal entries column by column","c2":"backward stable — the gold standard in numerical linear algebra","c3":"default QR routine in LAPACK, NumPy, MATLAB, and most numerical libraries"}},{"id":"r4","name":"Givens rotations","values":{"c1":"a sequence of 2 × 2 plane rotations zeros out individual entries one at a time","c2":"backward stable; lets the algorithm target nonzero entries only","c3":"sparse matrices with structured zeros; updating an existing QR factorization"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite", here: "#3" },
+    ] },
+    { title: "More orthogonality methods", items: [
+      { skill: "Find an orthogonal projection", href: "/linear-algebra/orthogonality/methods/orthogonal-projection", desc: "Project a vector onto a line, a plane or a subspace; split it into a part inside and a part perpendicular.", level: "composite" },
+      { skill: "Check if a set is orthogonal or orthonormal", href: "/linear-algebra/orthogonality/methods/orthogonal-set-check", desc: "Dot every pair: all zero means orthogonal; unit lengths as well means orthonormal.", level: "composite" },
+      { skill: "Solve a least-squares problem", href: "/linear-algebra/orthogonality/methods/least-squares", desc: "When $A\\mathbf{x} = \\mathbf{b}$ has no solution, solve the normal equations for the closest fit.", level: "composite" },
+    ] },
+    { title: "Decomposition methods", items: [
+      { skill: "Find the QR decomposition", href: "/linear-algebra/decompositions/methods/qr-decomposition", desc: "Run Gram-Schmidt on the columns: the orthonormal vectors form Q, the coefficients form R.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/orthogonality/methods", label: "All orthogonality methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2668,8 +2694,23 @@ $$x^2 - \\frac{2/3}{2} \\cdot 1 - 0 \\cdot x = x^2 - \\frac{1}{3}$$`, `Which is 
     ],
   };
 
+  // Procedure rollout 2026-11-14: Gram-Schmidt on two vectors, step by step (obj2).
+  const gramSchmidtTwoSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\mathbf{v}_1 = (1, 1, 0)$, $\\mathbf{v}_2 = (1, 0, 1)$',
+      rows: [
+        { step: 'Set $\\mathbf{u}_1 = \\mathbf{v}_1$', example: '$\\mathbf{u}_1 = (1, 1, 0)$' },
+        { step: 'Compute the coefficient $\\dfrac{\\mathbf{u}_1 \\cdot \\mathbf{v}_2}{\\mathbf{u}_1 \\cdot \\mathbf{u}_1}$', example: '$\\dfrac{1}{2}$' },
+        { step: 'Subtract the projection of $\\mathbf{v}_2$ onto $\\mathbf{u}_1$', example: '$\\mathbf{u}_2 = (1, 0, 1) - \\frac{1}{2}(1, 1, 0) = (\\frac{1}{2}, -\\frac{1}{2}, 1)$' },
+        { check: true, step: 'Check that $\\mathbf{u}_1 \\cdot \\mathbf{u}_2 = 0$', example: '$\\frac{1}{2} - \\frac{1}{2} + 0 = 0$' },
+      ],
+    },
+  };
+
   return {
   props:{
+    gramSchmidtTwoSteps,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -2692,7 +2733,7 @@ $$x^2 - \\frac{2/3}{2} \\cdot 1 - 0 \\cdot x = x^2 - \\frac{1}{3}$$`, `Which is 
    }
 
 // export default function GramSchmidtPage({seoData,sectionsContent , introContent}) {
-export default function GramSchmidtsPage({ pitfallData,
+export default function GramSchmidtsPage({ gramSchmidtTwoSteps, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2779,6 +2820,15 @@ export default function GramSchmidtsPage({ pitfallData,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="gram-schmidt-two-vectors-steps"
+            title="Gram-Schmidt on two vectors, step by step"
+            source="/linear-algebra/orthogonality/gram-schmidt"
+            before={"The worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={gramSchmidtTwoSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-subtract'} dangerouslySetInnerHTML={{ __html: demoUnits.subtract }} />,
           `The general case below repeats this step once per vector already fixed, which is the only way the algorithm grows.`,
         ]
@@ -2789,6 +2839,7 @@ export default function GramSchmidtsPage({ pitfallData,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to apply the Gram-Schmidt process](!/linear-algebra/orthogonality/methods/gram-schmidt) →@`,
         ]
     },
     {
@@ -2874,11 +2925,15 @@ export default function GramSchmidtsPage({ pitfallData,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-gram-schmidt-numerical-stability-matrix'}
+            id="gram-schmidt-numerical-stability-matrix"
+            title="Numerical Stability"
+            source="/linear-algebra/orthogonality/gram-schmidt"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:Formulas that agree in exact arithmetic can behave very differently on a computer: the order of the subtractions matters.]@`,
         ]
     },
@@ -2926,6 +2981,14 @@ Under $\\langle p, q \\rangle = \\int_{-1}^{1} p(x)q(x)\\,dx$, the cosine of the
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

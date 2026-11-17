@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../../../pages.css'
@@ -40,6 +41,21 @@ const pitfallClosing = `Both slips change a conditional into a different one. Th
 
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Logic methods", items: [
+      { skill: "Negate a conditional statement", href: "/logic/methods/negate-implication", desc: "The negation of $P \\to Q$ is $P \\land \\neg Q$: keep the condition, deny the conclusion, and join them with and.", level: "composite" },
+      { skill: "Write the converse, inverse and contrapositive", href: "/logic/methods/converse-inverse-contrapositive", desc: "Swap the parts for the converse, negate both for the inverse, do both for the contrapositive; only the contrapositive keeps the meaning.", level: "composite" },
+      { skill: "Rewrite an implication without the arrow", href: "/logic/methods#implication-equivalence", desc: "An arrow has to go before you can use De Morgan, distribute, or reach a normal form: $P \\to Q$, $(P \\land Q) \\to R$, $\\neg P \\to Q$.", level: "atomic" },
+      { skill: "Build a truth table", href: "/logic/methods/truth-table", desc: "List all $2^n$ rows, add one column per subformula from the inside out, and fill each column with the rule of its connective.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -496,6 +512,14 @@ Rows 1 and 3 of the table compare an implication with its rearrangements: the co
               `These rules are particularly useful for transforming, simplifying, or interpreting logical statements involving conditional relationships.`,
               `Read more about [laws of propositional logic](!/logic/propositional-logic/laws) on dedicated page.`
             ]
+          },
+          {
+              id:'skills',
+              title:'Skills You Should Learn',
+              link:``,
+              content:[
+                <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+              ]
           },
           // faq: rendered component — must be built here, not in getStaticProps
           {

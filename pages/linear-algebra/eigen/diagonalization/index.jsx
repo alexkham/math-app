@@ -2793,6 +2793,9 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import FactorizationAnatomy from '@/app/components/infographics/linear-algebra/FactorizationAnatomy'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -2807,6 +2810,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -2819,7 +2823,41 @@ import laEigenNotationSheet from '@/app/components/infographics/NotationCheatShe
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Matrix Exponential"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Problem","features":[{"id":"c1","name":"Diagonalized form","type":"text"},{"id":"c2","name":"Closed-form solution","type":"text"}],"items":[{"id":"r1","name":"Matrix power Aᵏ","values":{"c1":"P · diag(λ₁ᵏ, …, λₙᵏ) · P⁻¹","c2":"one inversion + two multiplications, independent of k"}},{"id":"r2","name":"System x′ = Ax","values":{"c1":"decouples into n scalar equations yᵢ′ = λᵢ yᵢ","c2":"x(t) = c₁ e$^{λ₁t}$ v₁ + ⋯ + cₙ e$^{λₙt}$ vₙ"}},{"id":"r3","name":"Recurrence xₙ₊₁ = A xₙ","values":{"c1":"xₙ = P Dⁿ P⁻¹ x₀","c2":"xₙ = c₁ λ₁ⁿ v₁ + ⋯ + cₙ λₙⁿ vₙ; dominant |λ| drives long-term growth"}},{"id":"r4","name":"Matrix exponential e$^{At}$","values":{"c1":"P · diag(e$^{λ₁t}$, …, e$^{λₙt}$) · P⁻¹","c2":"x(t) = e$^{At}$ x₀ for x′ = Ax with x(0) = x₀"}}]};
 
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Diagonalize a matrix", href: "/linear-algebra/eigen/methods/diagonalization", desc: "Put eigenvectors in the columns of $P$ and eigenvalues on the diagonal of $D$, then check $AP = PD$.", level: "composite", here: "#2" },
+      { skill: "Check if a matrix is diagonalizable", href: "/linear-algebra/eigen/methods/diagonalizability-check", desc: "Compare algebraic and geometric multiplicity for every eigenvalue; $n$ distinct eigenvalues settle it at once.", level: "composite", here: "#3" },
+      { skill: "Compute matrix powers by diagonalization", href: "/linear-algebra/eigen/methods/matrix-powers-diagonalization", desc: "Write $A = PDP^{-1}$, raise only the diagonal entries of $D$ to the power and multiply back.", level: "composite", here: "#4" },
+    ] },
+    { title: "More eigenvalue methods", items: [
+      { skill: "Find eigenvalues", href: "/linear-algebra/eigen/methods/eigenvalues", desc: "Solve the characteristic equation $\\det(A - \\lambda I) = 0$ and check the roots against the trace and determinant.", level: "composite" },
+      { skill: "Find eigenvectors", href: "/linear-algebra/eigen/methods/eigenvectors", desc: "For each eigenvalue, row reduce $A - \\lambda I$ and solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$.", level: "composite" },
+      { skill: "Find complex eigenvalues and eigenvectors", href: "/linear-algebra/eigen/methods/complex-eigenvalues", desc: "A negative discriminant gives $\\lambda = a \\pm bi$; one complex eigenvector gives the real rotation-scaling form.", level: "composite" },
+      { skill: "Find a basis for an eigenspace", href: "/linear-algebra/eigen/methods/eigenspace-basis", desc: "Row reduce $A - \\lambda I$, write the null space in parametric form and take one vector per free variable.", level: "composite" },
+    ] },
+    { title: "Matrix methods", items: [
+      { skill: "Find the inverse of a 2×2 matrix", href: "/linear-algebra/matrix/methods/inverse-2x2", desc: "Swap the diagonal, negate the other two entries, divide by the determinant $ad - bc$.", level: "composite" },
+      { skill: "Find an inverse by Gauss-Jordan elimination", href: "/linear-algebra/matrix/methods/inverse-gauss-jordan", desc: "Row reduce $[A \\mid I]$ until the left half is $I$; the right half is then $A^{-1}$.", level: "composite" },
+      { skill: "Find the rank of a matrix", href: "/linear-algebra/matrix/methods/rank", desc: "Row reduce to echelon form and count the pivots.", level: "composite" },
+    ] },
+    { title: "Decomposition methods", items: [
+      { skill: "Find the spectral decomposition", href: "/linear-algebra/decompositions/methods/spectral-decomposition", desc: "Symmetric matrix: orthonormal eigenvectors and eigenvalues give $A = QDQ^T$, a sum of projections.", level: "composite" },
+    ] },
+    { title: "Linear transformation methods", items: [
+      { skill: "Change basis", href: "/linear-algebra/transformations/methods/change-of-basis", desc: "Coordinates in a new basis are $P^{-1}\\mathbf{v}$; the matrix of a map in the new basis is $P^{-1}AP$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/eigen/methods", label: "All eigenvalue methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3640,8 +3678,42 @@ $$3\\,\\mathbf{q}_1\\mathbf{q}_1^T + 1\\,\\mathbf{q}_2\\mathbf{q}_2^T = \\begin{
     ],
   };
 
+  // Procedure rollout 2026-11-14: Constructing the diagonalization, step by step (obj2).
+  const diagonalizationSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$',
+      rows: [
+        { step: 'Find all eigenvalues from $\\det(A - \\lambda I) = 0$', stepSub: '$\\lambda^2 - 4\\lambda - 5 = (\\lambda - 5)(\\lambda + 1)$', example: '$\\lambda_1 = 5$, $\\lambda_2 = -1$' },
+        { step: 'Find an eigenvector for each eigenvalue', stepSub: 'Solve $(A - \\lambda_i I)\\mathbf{v} = \\mathbf{0}$', example: '$\\mathbf{v}_1 = (1, 2)^T$, $\\mathbf{v}_2 = (-1, 1)^T$' },
+        { step: 'Assemble $P$ and $D$ in matching order', example: '$P = \\begin{pmatrix} 1 & -1 \\\\ 2 & 1 \\end{pmatrix}$, $D = \\begin{pmatrix} 5 & 0 \\\\ 0 & -1 \\end{pmatrix}$' },
+        { check: true, step: 'Check that $AP = PD$', example: 'both equal $\\begin{pmatrix} 5 & 1 \\\\ 10 & -1 \\end{pmatrix}$' },
+      ],
+    },
+  };
+
+  // FactorizationAnatomy 2026-11-14: What each factor of a diagonalization holds (obj3).
+  const diagonalizationAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Square matrix', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        requires: 'Enough independent eigenvectors' },
+      { symbol: 'P', name: 'Invertible', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        contains: '$n$ independent eigenvectors as columns' },
+      { symbol: 'D', name: 'Diagonal', dim: 'n × n', fill: 'diag', width: 110, height: 110,
+        contains: 'The eigenvalues, in the same order as the columns of $P$' },
+      { symbol: 'P⁻¹', name: 'Inverse of P', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        property: 'Exists because the columns of $P$ form a basis' },
+    ],
+    existsWhen: '$m_g(\\lambda) = m_a(\\lambda)$ for every eigenvalue. Having $n$ distinct eigenvalues is enough.',
+    uniqueWhen: 'Never fully: the eigenvectors can be rescaled and reordered, with $D$ reordered to match.',
+    cost: 'one eigenvalue problem, one null space per eigenvalue',
+    preferredWhen: 'Matrix powers, systems of differential equations, recurrence relations.',
+  };
+
    return {
   props: {
+    diagonalizationAnatomy,
+    diagonalizationSteps,
     pitfallData,
       diagonalizationScope,
     odeEigenCases,
@@ -3671,7 +3743,7 @@ $$3\\,\\mathbf{q}_1\\mathbf{q}_1^T + 1\\,\\mathbf{q}_2\\mathbf{q}_2^T = \\begin{
 
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function DiagonalizationPage({ pitfallData,diagonalizationScope, odeEigenCases, 
+export default function DiagonalizationPage({ diagonalizationAnatomy, diagonalizationSteps, pitfallData,diagonalizationScope, odeEigenCases, 
      seoData,
      sectionsContent,
      introContent,
@@ -3784,8 +3856,18 @@ $$A = PDP^{-1}$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="diagonalization-steps"
+            title="Constructing the diagonalization, step by step"
+            source="/linear-algebra/eigen/diagonalization"
+            before={"The three steps on the worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={diagonalizationSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-assemble'} dangerouslySetInnerHTML={{ __html: demoUnits.assemble }} />,
           `Mismatching the order is the most common error here, and it produces a factorisation that silently fails to reconstruct the original.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to diagonalize a matrix](!/linear-algebra/eigen/methods/diagonalization) →@`,
         ]
     },
     {
@@ -3794,6 +3876,18 @@ $$A = PDP^{-1}$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-factor-anatomy'}
+            id="diagonalization-factor-anatomy"
+            title="What each factor of a diagonalization holds"
+            source="/linear-algebra/eigen/diagonalization"
+            before={"The factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={diagonalizationAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to check if a matrix is diagonalizable](!/linear-algebra/eigen/methods/diagonalizability-check) →@`,
         ]
     },
     {
@@ -3814,6 +3908,7 @@ $$A = PDP^{-1}$$]@`,
           `The invariant columns are the sharper point. The determinant runs $-5, 25, -125, 625$ and the trace runs $4, 26, 124, 626$ \u2014 these are $(-5)^k$ and $5^k + (-1)^k$, computed from the eigenvalues alone. The entries of $A^k$ grow unpredictably; the two numbers that describe the matrix do not. Diagonalization is what moves that regularity out of the invariants and into the matrix itself.`,
                   <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
           `This is the reason diagonalisation is worth the trouble: it turns repeated matrix multiplication into arithmetic on a diagonal.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compute matrix powers by diagonalization](!/linear-algebra/eigen/methods/matrix-powers-diagonalization) →@`,
         ]
     },
     {
@@ -3865,11 +3960,15 @@ $$A = PDP^{-1}$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-diagonalization-matrix-exponential-matrix'}
+            id="diagonalization-matrix-exponential-matrix"
+            title="Matrix Exponential"
+            source="/linear-algebra/eigen/diagonalization"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3926,6 +4025,14 @@ $$A = PDP^{-1}$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

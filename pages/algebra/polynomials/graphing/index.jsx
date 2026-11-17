@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,9 +18,86 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_behaviorAtRoots = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  labels: { branchIf: 'for' },
+  tree: {
+    root: { name: 'A root of a polynomial', sub: 'how the graph meets the x-axis depends on its multiplicity' },
+    branches: [
+      { condition: 'odd multiplicity: the graph crosses', leaves: [
+        { name: 'Multiplicity $1$', condition: 'A clean crossing: the curve passes through at an angle, much like a line.',
+          sketch: { x0: -1.5, x1: 1.5, y0: -1.5, y1: 1.5, pieces: [{ f: (x) => x, from: -1.5, to: 1.5 }], dots: [[0, 0]] } },
+        { name: 'Multiplicity $3$', condition: 'Still crosses, but flattens near the axis in an S-shaped inflection.',
+          sketch: { x0: -1.5, x1: 1.5, y0: -1.5, y1: 1.5, pieces: [{ f: (x) => 0.7 * x * x * x, from: -1.5, to: 1.5 }], dots: [[0, 0]] } }
+      ] },
+      { condition: 'even multiplicity: the graph touches', leaves: [
+        { name: 'Multiplicity $2$', condition: 'Reaches the axis and turns back, like a parabola tangent to the x-axis.',
+          sketch: { x0: -1.5, x1: 1.5, y0: -0.6, y1: 2.4, pieces: [{ f: (x) => x * x, from: -1.5, to: 1.5 }], dots: [[0, 0]] } },
+        { name: 'Multiplicity $4$', condition: 'The same touch-and-turn, with a flatter approach.',
+          sketch: { x0: -1.5, x1: 1.5, y0: -0.6, y1: 2.4, pieces: [{ f: (x) => 0.6 * x * x * x * x, from: -1.5, to: 1.5 }], dots: [[0, 0]] } }
+      ] }
+    ]
+  },
+  note: { label: 'All in one polynomial', text: '$(x - 1)(x + 2)^2(x - 3)^3$ crosses at an angle at $x = 1$, touches and bounces back at $x = -2$, and crosses with a flattened inflection at $x = 3$.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Symmetry"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Symmetry type","features":[{"id":"c1","name":"Algebraic condition","type":"text"},{"id":"c2","name":"Symmetric about","type":"text"},{"id":"c3","name":"Telltale in the polynomial","type":"text"},{"id":"c4","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Even function","values":{"c1":"P(−x) = P(x)","c2":"the y-axis","c3":"only even powers of x (constant term allowed)","c4":"x⁴ − 3x² + 2"}},{"id":"r2","name":"Odd function","values":{"c1":"P(−x) = −P(x)","c2":"the origin","c3":"only odd powers of x (no constant term)","c4":"x³ − 5x"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Sketching Reference Card"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Feature","features":[{"id":"c1","name":"Where it comes from","type":"text"},{"id":"c2","name":"What it determines on the graph","type":"text"}],"items":[{"id":"r1","name":"End behavior","values":{"c1":"degree parity + sign of leading coefficient","c2":"direction of each end as x → ±∞"}},{"id":"r2","name":"y-intercept","values":{"c1":"constant term (= P(0))","c2":"one anchor point on the y-axis"}},{"id":"r3","name":"x-intercepts","values":{"c1":"real [roots](!/algebra/polynomials/roots) of P(x) = 0","c2":"where the graph meets the x-axis (at most n points)"}},{"id":"r4","name":"Behavior at each x-intercept","values":{"c1":"multiplicity of the root in the [factored form](!/algebra/polynomials/factoring)","c2":"crossing (odd) vs touching and turning (even)"}},{"id":"r5","name":"Turning points","values":{"c1":"calculus or test values between roots; bounded by n − 1","c2":"local maxima/minima — the bends of the curve"}},{"id":"r6","name":"Symmetry","values":{"c1":"parity of the exponents present","c2":"y-axis mirror (even) or 180° rotation about the origin (odd)"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Result of the error","type":"text"},{"id":"c2","name":"Correct rule","type":"text"}],"items":[{"id":"r1","name":"Even/odd degree end behavior","values":{"c1":"inverted shape of the entire graph","c2":"even degree → ends agree; odd degree → ends oppose"}},{"id":"r2","name":"Ignoring multiplicity","values":{"c1":"crossing drawn where it should touch (or vice versa)","c2":"odd multiplicity → cross; even multiplicity → touch and turn"}},{"id":"r3","name":"Sharp corners","values":{"c1":"angle or cusp drawn on the curve","c2":"every polynomial graph is smooth — no corners, ever"}},{"id":"r4","name":"Too many turning points","values":{"c1":"impossible shape for the degree","c2":"a degree-n polynomial has at most n − 1 turning points"}},{"id":"r5","name":"Ignoring leading-coefficient sign","values":{"c1":"graph flipped vertically from the correct shape","c2":"sign of aₙ determines direction; magnitude affects steepness"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Graph a polynomial", href: "/algebra/polynomials/methods/graph-polynomials", desc: "End behaviour from the leading term, intercepts, cross or touch at each root, then sketch.", level: "composite", here: "#11" },
+    ] },
+    { title: "More polynomial methods", items: [
+      { skill: "Find all roots of a polynomial", href: "/algebra/polynomials/methods/find-all-roots", desc: "Rational roots first, divide them out, finish with the quadratic formula; count multiplicities.", level: "composite" },
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite" },
+      { skill: "Choose the right factoring method", href: "/algebra/polynomials/methods/which-factoring-method", desc: "A decision tree: GCF first, then count the terms and look for the pattern.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/algebra/polynomials/methods", label: "All polynomial methods" },
+};
+
+// CaseGraph (grid) 2026-11-15: replaces the table obj3Table (end behavior: degree parity x sign of the leading coefficient); the four cases and their words come from the table. Holds functions, so it lives here, not in getStaticProps.
+const endBehaviorGrid = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Leading term', text: '$a_n x^n$ alone decides both ends' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -2.4, y1: 2.4,
+      axes: [
+        { id: 'deg', name: 'Degree', options: [
+          { id: 'even', label: 'Even degree', sub: 'both ends go the same way' },
+          { id: 'odd', label: 'Odd degree', sub: 'the ends go opposite ways' } ] },
+        { id: 'lead', name: 'Leading coefficient', options: [
+          { id: 'pos', label: '$a_n > 0$' },
+          { id: 'neg', label: '$a_n < 0$' } ] },
+      ],
+      layout: { rows: 'deg', cols: 'lead' },
+      cells: {
+        'even|pos': { f: (x) => 0.75 * x * x - 0.9, pattern: '↑  …  ↑', solution: 'left end rises, right end rises' },
+        'even|neg': { f: (x) => -0.75 * x * x + 0.9, pattern: '↓  …  ↓', solution: 'left end falls, right end falls' },
+        'odd|pos':  { f: (x) => 0.9 * x * x * x - 1.3 * x, pattern: '↓  …  ↑', solution: 'left end falls, right end rises' },
+        'odd|neg':  { f: (x) => -0.9 * x * x * x + 1.3 * x, pattern: '↑  …  ↓', solution: 'left end rises, right end falls' },
+      },
+    },
+  };
 
 export async function getStaticProps(){
 const keyWords = [
@@ -795,8 +874,24 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: The sketching strategy on one polynomial (obj11).
+  const sketchingSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$P(x) = x(x - 2)^2$',
+      rows: [
+        { step: 'Start with end behavior', stepSub: 'From the degree and the leading coefficient', example: 'degree $3$, positive leading coefficient: falls on the left, rises on the right' },
+        { step: 'Find the y-intercept', example: '$P(0) = 0$' },
+        { step: 'Find the x-intercepts and their multiplicities', example: '$x = 0$ (single), $x = 2$ (double)' },
+        { step: 'Mark crossing or touching at each x-intercept', example: 'crosses at $0$, touches and turns at $2$' },
+        { step: 'Connect the points with a smooth curve', example: 'up through $(0, 0)$, down to touch $(2, 0)$, then up again' },
+      ],
+    },
+  };
+
 return {
   props:{
+    sketchingSteps,
     pitfallData,
     linearPolyCases,
     demoUnits,
@@ -824,7 +919,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function GraphingPage({ sketchingSteps, pitfallData,linearPolyCases, seoData, sectionsContent, introContent, obj3Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -875,11 +970,16 @@ export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sec
           `In either case, the two ends move in the same direction because an even power of $x$ is positive regardless of the sign of $x$.`,
           `@academic[rule_plain:When the degree is odd and $a_n > 0$, the left end falls while the right end rises. When the degree is odd and $a_n < 0$, the left end rises and the right end falls.]@`,
           `Odd powers preserve the sign of $x$, so the two ends always move in opposite directions.`,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-end-behavior-grid'}
+            id="polynomial-graph-end-behavior-grid"
+            title="End Behavior: The Four Cases"
+            source="/algebra/polynomials/graphing"
+            related={false}
+            layout="top"
+          >
+            <CaseGraph data={endBehaviorGrid} variant="grid" />
+          </DiagramFrame>,
           `@academic[punchline:Far from the origin a polynomial behaves like its leading term, so the parity of the degree and one sign fix both ends.]@`,
         ],
       },
@@ -952,6 +1052,15 @@ export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sec
           sectionsContent.obj5.content,
                   <div key={'unit-roots'} dangerouslySetInnerHTML={{ __html: demoUnits.roots }} />,
           `Multiplicity decides whether a root is a crossing or a touch, and the sketch depends on it.`,
+          <DiagramFrame
+            key={'taxonomy-polynomial-graph-behavior-at-roots'}
+            id="polynomial-graph-behavior-at-roots"
+            title="Behavior at Roots"
+            source="/algebra/polynomials/graphing"
+            related={false}
+          >
+            <Taxonomy data={tx_behaviorAtRoots} variant="tree" />
+          </DiagramFrame>,
         ]
     },
 
@@ -962,11 +1071,15 @@ export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sec
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphing-symmetry-matrix'}
+            id="graphing-symmetry-matrix"
+            title="Symmetry"
+            source="/algebra/polynomials/graphing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:Symmetry is read from every exponent, not from the degree: all even powers mirror, all odd powers rotate, a mix gives neither.]@`,
         ]
     },
@@ -1022,6 +1135,16 @@ export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sec
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-procedure'}
+            id="sketching-strategy-steps"
+            title="The sketching strategy on one polynomial"
+            source="/algebra/polynomials/graphing"
+            before={"The steps of this section, run on the polynomial from the note beside the text. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={sketchingSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to graph a polynomial](!/algebra/polynomials/methods/graph-polynomials) →@`,
         ]
     },
 
@@ -1032,11 +1155,15 @@ export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sec
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphing-common-mistakes-matrix'}
+            id="graphing-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/algebra/polynomials/graphing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj12-mistakes'}
             id="polynomial-graph-pitfalls"
@@ -1056,11 +1183,23 @@ export default function GraphingPage({ pitfallData,linearPolyCases, seoData, sec
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphing-summary-sketching-reference-card-matrix'}
+            id="graphing-summary-sketching-reference-card-matrix"
+            title="Summary: A Sketching Reference Card"
+            source="/algebra/polynomials/graphing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

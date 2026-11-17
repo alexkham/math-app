@@ -832,6 +832,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj5 aggregation, obj10 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -845,6 +847,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
@@ -854,7 +857,38 @@ import laEigenNotationSheet from '@/app/components/infographics/NotationCheatShe
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Computing the Characteristic Polynomial: 2×2"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Discriminant Δ = tr(A)² − 4·det(A)","features":[{"id":"c1","name":"Eigenvalue type","type":"text"},{"id":"c2","name":"Independent real eigenvectors","type":"text"}],"items":[{"id":"r1","name":"Δ > 0","values":{"c1":"two distinct real eigenvalues","c2":"2 — always [diagonalizable](!/linear-algebra/eigen/diagonalization)"}},{"id":"r2","name":"Δ = 0","values":{"c1":"one repeated real eigenvalue","c2":"1 or 2 — diagonalizable only when A = λ · I (otherwise defective)"}},{"id":"r3","name":"Δ < 0","values":{"c1":"[complex](!/linear-algebra/eigen/complex) conjugate pair a ± bi","c2":"0 real (one conjugate pair of complex eigenvectors over ℂ)"}}]};
 
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the characteristic polynomial", href: "/linear-algebra/eigen/methods/characteristic-polynomial", desc: "Subtract $\\lambda$ down the diagonal, take $\\det(A - \\lambda I)$ and expand it into a polynomial in $\\lambda$.", level: "composite", here: "#3" },
+      { skill: "Find eigenvectors", href: "/linear-algebra/eigen/methods/eigenvectors", desc: "For each eigenvalue, row reduce $A - \\lambda I$ and solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$.", level: "composite", here: "#7" },
+    ] },
+    { title: "More eigenvalue methods", items: [
+      { skill: "Find eigenvalues", href: "/linear-algebra/eigen/methods/eigenvalues", desc: "Solve the characteristic equation $\\det(A - \\lambda I) = 0$ and check the roots against the trace and determinant.", level: "composite" },
+      { skill: "Find complex eigenvalues and eigenvectors", href: "/linear-algebra/eigen/methods/complex-eigenvalues", desc: "A negative discriminant gives $\\lambda = a \\pm bi$; one complex eigenvector gives the real rotation-scaling form.", level: "composite" },
+      { skill: "Find a basis for an eigenspace", href: "/linear-algebra/eigen/methods/eigenspace-basis", desc: "Row reduce $A - \\lambda I$, write the null space in parametric form and take one vector per free variable.", level: "composite" },
+      { skill: "Diagonalize a matrix", href: "/linear-algebra/eigen/methods/diagonalization", desc: "Put eigenvectors in the columns of $P$ and eigenvalues on the diagonal of $D$, then check $AP = PD$.", level: "composite" },
+    ] },
+    { title: "Determinant methods", items: [
+      { skill: "Find a determinant by cofactor expansion", href: "/linear-algebra/determinants/methods/cofactor-expansion", desc: "Expand along the row or column with the most zeros: entry times sign times minor, added up.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+    ] },
+    { title: "Vector methods", items: [
+      { skill: "Compute the cross product", href: "/linear-algebra/vectors/methods/cross-product", desc: "Expand a 3×3 determinant with i, j, k in the top row; mind the minus sign on the middle term.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/eigen/methods", label: "All eigenvalue methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1665,8 +1699,24 @@ $$A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{p
     ],
   };
 
+  // Procedure rollout 2026-11-14: Finding an eigenvector, step by step (obj7).
+  const findEigenvectorSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$A = \\begin{pmatrix} 1 & 2 \\\\ 4 & 3 \\end{pmatrix}$, $\\lambda_1 = 5$',
+      rows: [
+        { step: 'Form $A - \\lambda_i I$', example: '$\\begin{pmatrix} -4 & 2 \\\\ 4 & -2 \\end{pmatrix}$' },
+        { step: 'Row reduce it', example: '$\\begin{pmatrix} 1 & -1/2 \\\\ 0 & 0 \\end{pmatrix}$' },
+        { step: 'Express the solution with the free variable', example: '$v_2 = t$, so $v_1 = t/2$' },
+        { step: 'Choose a basis vector for the eigenspace', example: '$\\mathbf{v}_1 = (1, 2)^T$' },
+        { check: true, step: 'Check that $A\\mathbf{v} = \\lambda\\mathbf{v}$', example: '$A\\mathbf{v}_1 = (5, 10)^T = 5\\mathbf{v}_1$' },
+      ],
+    },
+  };
+
    return {
   props: {
+    findEigenvectorSteps,
     pitfallData,
       cayleyHamiltonApply,
     demoUnits,
@@ -1690,7 +1740,7 @@ $$A\\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 10 \\end{p
    }
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function CharacteristicEquationPage({ pitfallData,cayleyHamiltonApply, 
+export default function CharacteristicEquationPage({ findEigenvectorSteps, pitfallData,cayleyHamiltonApply, 
   seoData,
   sectionsContent,
   introContent,
@@ -1815,13 +1865,18 @@ export default function CharacteristicEquationPage({ pitfallData,cayleyHamiltonA
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-characteristic-equation-computing-characteristic-polynomial-matrix'}
+            id="characteristic-equation-computing-characteristic-polynomial-matrix"
+            title="Computing the Characteristic Polynomial: 2×2"
+            source="/linear-algebra/eigen/characteristic-equation"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
                   <div key={'unit-roots'} dangerouslySetInnerHTML={{ __html: demoUnits.roots }} />,
           `Beyond 4×4 no formula exists for these roots, which is why large eigenvalue problems are solved iteratively rather than algebraically.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the characteristic polynomial](!/linear-algebra/eigen/methods/characteristic-polynomial) →@`,
         ]
     },
     {
@@ -1862,8 +1917,18 @@ export default function CharacteristicEquationPage({ pitfallData,cayleyHamiltonA
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="find-eigenvector-steps"
+            title="Finding an eigenvector, step by step"
+            source="/linear-algebra/eigen/characteristic-equation"
+            before={"The first eigenvalue of the worked example. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={findEigenvectorSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-eigvec'} dangerouslySetInnerHTML={{ __html: demoUnits.eigvec }} />,
           `Finding the eigenvalues is therefore only half the work; each one still has its own null space to compute.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find eigenvectors](!/linear-algebra/eigen/methods/eigenvectors) →@`,
         ]
     },
     {
@@ -1926,6 +1991,14 @@ export default function CharacteristicEquationPage({ pitfallData,cayleyHamiltonA
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

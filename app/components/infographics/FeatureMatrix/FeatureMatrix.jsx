@@ -102,7 +102,7 @@ const CSS = `
 .fm-t th, .fm-t td { padding: 8px 12px; border-top: 1px solid var(--fm-line); vertical-align: middle; transition: background .15s, opacity .15s; }
 .fm-t th + th, .fm-t td + td, .fm-t th + td, .fm-t td + th { border-left: 1px solid var(--fm-line); }
 .fm-t thead th { border-top: 0; background: var(--fm-head); border-bottom: 1.5px solid var(--fm-box); text-align: center; font-weight: 700; color: var(--fm-title); font-size: 12.5px; white-space: nowrap; }
-.fm-t thead th.fm-corner { background: var(--fm-soft); }
+.fm-t thead th.fm-corner { background: var(--fm-soft); text-align: left; }
 .fm-t tbody th { background: var(--fm-soft); text-align: left; font-weight: 700; color: var(--fm-title); font-size: 13px; border-right: 1.5px solid var(--fm-box); }
 .fm-t tbody tr:first-child > * { border-top: 0; }
 .fm-t th small { display: block; font: 500 10.5px 'Inter', sans-serif; color: var(--fm-muted); margin-top: 1px; white-space: normal; }
@@ -269,7 +269,7 @@ export default function FeatureMatrix({ data, orient: orientProp, labels, theme,
               <table className="fm-t">
                 {orient === 'rows' ? (
                   <>
-                    <thead><tr><th className="fm-corner" />{feats.map((f) => <th key={f.id} className={hl.feat === f.id ? 'fm-hl' : ''} {...hov(null, f.id)}>{featHead(f)}</th>)}</tr></thead>
+                    <thead><tr><th className="fm-corner">{data.corner ? <R t={data.corner} /> : null}</th>{feats.map((f) => <th key={f.id} className={hl.feat === f.id ? 'fm-hl' : ''} {...hov(null, f.id)}>{featHead(f)}</th>)}</tr></thead>
                     <tbody>
                       {items.map((it) => (
                         <tr key={it.id}>

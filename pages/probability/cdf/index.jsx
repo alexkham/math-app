@@ -651,6 +651,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 4 tables (properties aggregation, vs comparison, mistakes aggregation, overview summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -672,8 +673,46 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_cdfPath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"before":[{"name":"Events","href":"/probability/events","why":"appear as statements of the form $X \\le x$"},{"name":"Random variables","href":"/probability/random-variables","why":"the numerical structure the CDF describes"},{"name":"Probability axioms","href":"/probability/axioms","why":"guarantee the basic properties of the CDF"}],"target":{"kicker":"This page","name":"CDF","text":"Links foundational probability concepts with practical calculations."},"after":[{"name":"PMF","href":"/probability/probability-function#pmf","why":"derived from the CDF, discrete case"},{"name":"PDF","href":"/probability/probability-function#pdf","why":"derived from the CDF, continuous case"},{"name":"Quantiles and percentiles","href":"/probability/median#8","why":"defined by inverting the CDF"},{"name":"Expectation","href":"/probability/expected-value","why":"can be expressed using the CDF"},{"name":"Variance","href":"/probability/variance","why":"can be expressed using the CDF"}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table overviewTable ("CDF Across the Three Cases"); converted from the table's own cells.
+const fm_overviewTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Variable type","features":[{"id":"c1","name":"CDF shape","type":"text"},{"id":"c2","name":"How it changes","type":"text"},{"id":"c3","name":"Companion function","type":"text"}],"items":[{"id":"r1","name":"[Discrete](!/probability/distributions/discrete)","values":{"c1":"step function — flat between values, jumps at possible values","c2":"increases only at the possible values of X","c3":"PMF — jump size at x equals p$_{X}$(x)"}},{"id":"r2","name":"[Continuous](!/probability/distributions/continuous)","values":{"c1":"smooth, continuously increasing curve, no jumps","c2":"increases continuously across the real line","c3":"PDF — slope of the CDF equals f$_{X}$(x)"}},{"id":"r3","name":"Mixed","values":{"c1":"combines flat regions, smooth segments, and isolated jumps","c2":"jumps at discrete masses and smooth growth over continuous parts","c3":"partial PMF (at the masses) and partial PDF (over the continuous parts)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table vsTable ("CDF vs PMF vs PDF"); converted from the table's own cells.
+const fm_vsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Applies to","type":"text"},{"id":"c2","name":"What it represents","type":"text"},{"id":"c3","name":"Relation to CDF","type":"text"}],"items":[{"id":"r1","name":"CDF — F$_{X}$(x)","values":{"c1":"any random variable","c2":"accumulated probability up to x","c3":"the function itself"}},{"id":"r2","name":"[PMF](!/probability/probability-function#pmf) — p$_{X}$(x)","values":{"c1":"discrete variables only","c2":"probability at each individual value","c3":"CDF is the cumulative sum of PMF values"}},{"id":"r3","name":"[PDF](!/probability/probability-function#pdf) — f$_{X}$(x)","values":{"c1":"continuous variables only","c2":"probability density at each point","c3":"CDF is the integral of PDF from −∞ to x"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table propertiesTable ("Key Properties of the CDF"); converted from the table's own cells.
+const fm_propertiesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"What it ensures","type":"text"}],"items":[{"id":"r1","name":"Bounded","values":{"c1":"0 ≤ F$_{X}$(x) ≤ 1 for every x","c2":"every value is a valid probability"}},{"id":"r2","name":"Non-decreasing","values":{"c1":"F$_{X}$(x) stays the same or increases as x grows","c2":"accumulated probability never decreases"}},{"id":"r3","name":"Right-continuous","values":{"c1":"the value at x includes the probability at x","c2":"jumps in discrete and mixed cases behave consistently"}},{"id":"r4","name":"Limits at infinity","values":{"c1":"F$_{X}$(x) → 0 as x → −∞; F$_{X}$(x) → 1 as x → +∞","c2":"the function spans the full probability scale"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the CDF from a PMF", href: "/probability/random-variables/methods/pmf-to-cdf", desc: "Sort the values, keep a running total of the probabilities, and write the step function.", level: "composite", here: "#discrete" },
+      { skill: "Find the CDF from a PDF", href: "/probability/random-variables/methods/pdf-to-cdf", desc: "Integrate the density from the left end of the support up to $x$, and add the flat pieces outside.", level: "composite", here: "#continuous" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the median and mode of a distribution", href: "/probability/random-variables/methods/median-mode", desc: "The median is where the CDF reaches one half; the mode is the peak of the pmf or pdf.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+    ] },
+    { title: "Distribution methods", items: [
+      { skill: "Find a geometric probability", href: "/probability/distributions/methods/geometric-probability", desc: "Repeat a trial until the first success: $k - 1$ failures then one success, and a short tail formula for \"more than $k$ trials\".", level: "composite" },
+      { skill: "Find an exponential probability", href: "/probability/distributions/methods/exponential-probability", desc: "Waiting times at a constant rate: get $\\lambda$ from the mean, then use $1 - e^{-\\lambda x}$ or the tail $e^{-\\lambda x}$.", level: "composite" },
+    ] },
+    { title: "Integration techniques", items: [
+      { skill: "Evaluate a definite integral with the Fundamental Theorem", href: "/calculus/integrals/techniques/definite-integrals-ftc", desc: "Find an antiderivative $F$ and compute $F(b) - F(a)$; Part 1 for accumulation functions.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1647,7 +1686,15 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,
         link:'',
         content:[
             sectionsContent.properties.content,
-            <div key={'properties-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: propertiesTable}}/>,
+            <DiagramFrame
+              key={'feature-matrix-cdf-key-properties-cdf-matrix'}
+              id="cdf-key-properties-cdf-matrix"
+              title="Key Properties of the CDF"
+              source="/probability/cdf"
+              related={false}
+            >
+              <FeatureMatrix data={fm_propertiesTable} />
+            </DiagramFrame>,
             `@academic[punchline:These four properties are the whole test: every function that passes them is the CDF of some random variable.]@`,
         ]
     },
@@ -1659,6 +1706,7 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,
             sectionsContent.discrete.content,
                   <div key={'unit-u_discrete_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_discrete_0 }} />,
           `Continuous variables give a very different picture.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the CDF from a PMF](!/probability/random-variables/methods/pmf-to-cdf) →@`,
         ]
     },
     {
@@ -1669,6 +1717,7 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,
             sectionsContent.continuous.content,
                   <div key={'unit-u_continuous_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_continuous_1 }} />,
           `Mixed distributions combine both behaviours.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the CDF from a PDF](!/probability/random-variables/methods/pdf-to-cdf) →@`,
         ]
     },
     {
@@ -1697,7 +1746,15 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,
         link:'',
         content:[
             sectionsContent.vs.content,
-            <div key={'vs-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: vsTable}}/>,
+            <DiagramFrame
+              key={'feature-matrix-cdf-cdf-vs-pmf-vs-matrix'}
+              id="cdf-cdf-vs-pmf-vs-matrix"
+              title="CDF vs PMF vs PDF"
+              source="/probability/cdf"
+              related={false}
+            >
+              <FeatureMatrix data={fm_vsTable} />
+            </DiagramFrame>,
         ]
     },
     {
@@ -1759,6 +1816,15 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,
         link:'',
         content:[
             sectionsContent.connections.content,
+            <DiagramFrame
+              key={'concept-map-cdf-connections'}
+              id="cdf-connections"
+              title="Connections to Other Probability Concepts"
+              source="/probability/cdf"
+              related={false}
+            >
+              <ConceptMap data={cm_cdfPath} variant="path" />
+            </DiagramFrame>,
         ]
     },
     {
@@ -1767,7 +1833,23 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,
         link:'',
         content:[
             sectionsContent.overview.content,
-            <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+            <DiagramFrame
+              key={'feature-matrix-cdf-cdf-across-three-cases-matrix'}
+              id="cdf-cdf-across-three-cases-matrix"
+              title="CDF Across the Three Cases"
+              source="/probability/cdf"
+              related={false}
+            >
+              <FeatureMatrix data={fm_overviewTable} />
+            </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

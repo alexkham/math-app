@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -12,10 +13,113 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
+import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// CaseGraph 2026-11-12: "Real roots by discriminant" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Discriminant', text: '$\\Delta = b^2 - 4ac$' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -1.6, y1: 2.4,
+      axes: [
+        { id: 'd', name: '$\\Delta$', options: [
+          { id: 'pos', label: '$\\Delta > 0$' },
+          { id: 'zero', label: '$\\Delta = 0$' },
+          { id: 'neg', label: '$\\Delta < 0$' } ] },
+        { id: 'r', name: 'Real roots', options: [
+          { id: 'r', label: 'Real roots' } ] },
+      ],
+      layout: { rows: 'd', cols: 'r' },
+      cells: {
+        'pos|r':  { f: (x) => x * x - 1, roots: [{ x: -1, label: '' }, { x: 1, label: '' }], intervals: [{ from: -Infinity, to: -1 }, { from: -1, to: 1 }, { from: 1, to: Infinity }], solution: 'two distinct real roots' },
+        'zero|r': { f: (x) => x * x, roots: [{ x: 0, label: '' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: 'one repeated real root' },
+        'neg|r':  { f: (x) => x * x + 1, solution: 'no real roots; two complex conjugate roots' },
+      },
+    },
+  };
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Algebraic Equation Types"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Class","features":[{"id":"c1","name":"General form","type":"text"},{"id":"c2","name":"Max real solutions","type":"text"},{"id":"c3","name":"Primary technique","type":"text"}],"items":[{"id":"r1","name":"[Linear](!/algebra/equations/linear)","values":{"c1":"ax + b = 0","c2":"1","c3":"isolate the variable"}},{"id":"r2","name":"[Quadratic](!/algebra/equations/quadratic)","values":{"c1":"ax² + bx + c = 0","c2":"2","c3":"quadratic formula / discriminant"}},{"id":"r3","name":"[Polynomial (degree n)](!/algebra/equations/polynomial)","values":{"c1":"aₙxⁿ + ⋯ + a₀ = 0","c2":"n","c3":"rational roots + division"}},{"id":"r4","name":"[Rational](!/algebra/equations/rational)","values":{"c1":"fractions with variable denominators","c2":"degree-dependent","c3":"clear denominators, verify"}},{"id":"r5","name":"[Absolute value](!/algebra/equations/absolute-value)","values":{"c1":"|f(x)| = k","c2":"case-dependent","c3":"split into cases"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Equations Beyond Algebra"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Key technique","type":"text"}],"items":[{"id":"r1","name":"[Exponential](!/algebra/powers/exponential-equations)","values":{"c1":"unknown in exponent (e.g. 2ˣ = 16)","c2":"match bases or apply logarithms"}},{"id":"r2","name":"[Logarithmic](!/algebra/logarithms/equations)","values":{"c1":"unknown inside log (e.g. log₂(x+3) = 5)","c2":"convert to exponential form"}},{"id":"r3","name":"[Radical](!/algebra/roots/equations)","values":{"c1":"unknown under root (e.g. √(x+5) = x−1)","c2":"isolate, raise to power, verify"}},{"id":"r4","name":"[Systems (linear)](!/linear-algebra/linear-systems)","values":{"c1":"multiple equations, multiple unknowns","c2":"Gaussian elimination, matrix methods"}},{"id":"r5","name":"Trigonometric","values":{"c1":"unknown inside sin, cos, tan, …","c2":"periodicity → infinitely many solutions"}},{"id":"r6","name":"Differential","values":{"c1":"function and its derivatives","c2":"calculus methods"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Types of Equations by Solution Behavior"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"True for","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"[Conditional](!/algebra/definitions#conditional_equation)","values":{"c1":"specific values only","c2":"5x − 3 = 12 → x = 3"}},{"id":"r2","name":"[Identity](!/algebra/definitions#identity)","values":{"c1":"all permissible values","c2":"2(x + 1) = 2x + 2"}},{"id":"r3","name":"[Contradiction](!/algebra/definitions#contradiction)","values":{"c1":"no value","c2":"x + 1 = x + 3"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Equivalent Equations"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Reversible?","type":"verdict"},{"id":"c2","name":"Risk","type":"text"}],"items":[{"id":"r1","name":"Add or subtract same quantity on both sides","values":{"c1":"yes","c2":"none"}},{"id":"r2","name":"Multiply or divide both sides by nonzero constant","values":{"c1":"yes","c2":"none"}},{"id":"r3","name":"Multiply both sides by an expression containing the variable","values":{"c1":"no","c2":"may introduce [extraneous solutions](!/algebra/definitions#extraneous_solution)"}},{"id":"r4","name":"Square both sides","values":{"c1":"no","c2":"may introduce extraneous solutions"}}]};
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Equation methods", items: [
+      { skill: "Move a term to the other side", href: "/algebra/equations/methods#addition-property", desc: "A number or term is added to or subtracted from the unknown: $x - 7 = 12$, $x + 3 = -5$, $2x + 5 = x + 9$.", level: "atomic" },
+      { skill: "Solve an absolute value equation", href: "/algebra/equations/methods/absolute-value-equations", desc: "Isolate the bars, split into two cases, solve each, check.", level: "composite" },
+      { skill: "Solve a linear equation", href: "/algebra/equations/methods/linear-equations", desc: "Simplify each side, collect the unknown on one side, then isolate it.", level: "composite" },
+      { skill: "Solve a linear equation with fractions", href: "/algebra/equations/methods/linear-equations-with-fractions", desc: "Multiply every term by the least common denominator, then solve the whole-number equation.", level: "composite" },
+      { skill: "Solve a literal equation for a variable", href: "/algebra/equations/methods/literal-equations", desc: "Rearrange a formula for one letter, treating every other letter as a number.", level: "composite" },
+      { skill: "Solve a polynomial equation", href: "/algebra/equations/methods/polynomial-equations", desc: "Factor out what you can, find a rational root, divide it out, repeat until quadratic.", level: "composite" },
+      { skill: "Solve a rational equation", href: "/algebra/equations/methods/rational-equations", desc: "Note the excluded values, multiply by the LCD, solve, then reject excluded answers.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/equations/methods", label: "All equation methods" },
+};
+
+// Hierarchy 2026-11-15: replaces the table obj5Table ("Algebraic Equations": degree → name); degrees, names and links taken from the table.
+const degreeNamesTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
+const equationDegreeNames = {
+  levels: [
+    { id: 'd1', rank: 'degree 1', name: '[Linear](!/algebra/equations/linear)', symbol: '$x$' },
+    { id: 'd2', rank: 'degree 2', name: '[Quadratic](!/algebra/equations/quadratic)', symbol: '$x^2$' },
+    { id: 'd3', rank: 'degree 3', name: 'Cubic', symbol: '$x^3$' },
+    { id: 'd4', rank: 'degree 4', name: 'Quartic', symbol: '$x^4$' },
+    { id: 'd5', rank: 'degree 5', name: 'Quintic', symbol: '$x^5$' },
+    { id: 'd6', rank: 'degree 6', name: 'Sextic', symbol: '$x^6$' },
+  ],
+  base: { start: 'lowest degree', middle: 'highest power of the unknown', end: 'higher degree' },
+}
+
+// CaseSplit 2026-11-15: replaces the table obj10Table ("Absolute Value Equations": cases of |f(x)| = k); cases and results taken from the table, the example from the section text.
+const absValueEquationCasesTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+const absValueEquationCases = {
+  parent: {
+    kicker: 'Absolute value equation',
+    formula: '$|f(x)| = k$',
+    splitBy: 'the sign of $k$',
+  },
+  cases: [
+    {
+      id: 'positive', condition: '$k > 0$',
+      count: { n: '2' },
+      headline: 'Two cases',
+      formula: '$f(x) = k$ or $f(x) = -k$',
+      example: '$|x - 2| = 5$',
+      picture: '$x = 7$ or $x = -3$',
+    },
+    {
+      id: 'zero', condition: '$k = 0$',
+      count: { n: '1' },
+      headline: 'One equation',
+      formula: '$f(x) = 0$',
+    },
+    {
+      id: 'negative', condition: '$k < 0$',
+      count: { n: '0' },
+      headline: 'No solution',
+      desc: 'distance is never negative',
+    },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1023,11 +1127,15 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-equations-types-equations-solution-behavior-matrix'}
+            id="equations-types-equations-solution-behavior-matrix"
+            title="Types of Equations by Solution Behavior"
+            source="/algebra/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1036,11 +1144,15 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-equations-equivalent-equations-matrix'}
+            id="equations-equivalent-equations-matrix"
+            title="Equivalent Equations"
+            source="/algebra/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[punchline:Reversible steps preserve the solution set; after any step that cannot be undone, check every candidate in the original equation.]@`,
         ]
     },
@@ -1050,11 +1162,15 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'hierarchy-equations-degree-names'}
+            id="equation-degree-names"
+            title="Names of Equations by Degree"
+            source="/algebra/equations"
+            related={false}
+          >
+            <Hierarchy data={equationDegreeNames} variant="staircase" exportable={false} theme={degreeNamesTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1073,11 +1189,17 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-disc-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7DiscriminantTable }}
-          />,
+          <DiagramFrame
+            key={'case-graph-equations-quadratic-discriminant-grid'}
+            id="equations-quadratic-discriminant-grid"
+            title="Real roots by discriminant"
+            source="/algebra/equations"
+            related={false}
+            before={"One row per case of the discriminant: the parabola $y = ax^2 + bx + c$ (drawn with $a > 0$) and where it meets the $x$-axis."}
+            after={"The real roots are where the parabola meets the axis, so the discriminant counts crossings before anything is solved."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
                   <div key={'unit-quadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.quadratic }} />,
           `The discriminant is the algebraic name for how the level line sits relative to the vertex.`,
         ]
@@ -1118,11 +1240,15 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'case-split-equations-absolute-value-cases'}
+            id="equations-absolute-value-cases"
+            title="Cases of an Absolute Value Equation"
+            source="/algebra/equations"
+            related={false}
+          >
+            <CaseSplit data={absValueEquationCases} variant="poster" proseStyle="cards" theme={absValueEquationCasesTheme} />
+          </DiagramFrame>,
                   <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
           `Each arm of the V is one of the two linear equations the case split produces.`,
         ]
@@ -1133,11 +1259,15 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'obj11-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj11Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-equations-equations-beyond-algebra-matrix'}
+            id="equations-equations-beyond-algebra-matrix"
+            title="Equations Beyond Algebra"
+            source="/algebra/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj11-diagram'}
             id="equations-beyond-algebra-tree"
@@ -1154,11 +1284,15 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-equations-summary-algebraic-equation-types-matrix'}
+            id="equations-summary-algebraic-equation-types-matrix"
+            title="Summary of Algebraic Equation Types"
+            source="/algebra/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj12-diagram'}
             id="equation-families-tree"
@@ -1184,6 +1318,14 @@ export default function EquationsPage({abelRuffiniConverse,  pitfallData,faqQues
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

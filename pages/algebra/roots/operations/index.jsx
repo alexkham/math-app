@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -12,11 +13,55 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import { tableHeaders } from '@/app/styles/theme'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Conjugates"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pattern","features":[{"id":"c1","name":"Conjugate","type":"text"},{"id":"c2","name":"Product (radical eliminated)","type":"text"},{"id":"c3","name":"Numerical example","type":"text"}],"items":[{"id":"r1","name":"a + √b","values":{"c1":"a − √b","c2":"a² − b","c3":"(3 + √2)(3 − √2) = 7"}},{"id":"r2","name":"√a + √b","values":{"c1":"√a − √b","c2":"a − b","c3":"(√7 + √3)(√7 − √3) = 4"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Operations Strategy"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Requirement","type":"text"},{"id":"c2","name":"Rule","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Add / subtract","values":{"c1":"like radicals (same index AND same radicand)","c2":"combine coefficients, keep the radical unchanged","c3":"3√5 + 7√5 = 10√5"}},{"id":"r2","name":"Multiply","values":{"c1":"same index — else convert to [rational exponents](!/algebra/roots/rational-exponents)","c2":"product rule; multiply coefficients separately","c3":"√3 · √12 = 6"}},{"id":"r3","name":"Divide","values":{"c1":"same index — else convert to rational exponents","c2":"quotient rule; rationalize if a radical remains","c3":"√50 ⁄ √2 = 5"}},{"id":"r4","name":"Expand binomial product","values":{"c1":"none","c2":"distributive (FOIL); combine like radicals at the end","c3":"(2 + √3)(4 − √3) = 5 + 2√3"}},{"id":"r5","name":"Square a binomial","values":{"c1":"none","c2":"(a + b)² formula — keep the middle term 2ab","c3":"(√5 + √2)² = 7 + 2√10"}},{"id":"r6","name":"Multiply conjugates","values":{"c1":"binomial × its conjugate","c2":"difference of squares — the radicals eliminate","c3":"(a + √b)(a − √b) = a² − b"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Add, subtract, multiply and divide radicals", href: "/algebra/methods/radical-operations", desc: "Simplify first, then combine like radicals; multiply and divide roots with the same index.", level: "composite", here: "#2" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Rationalize a denominator", href: "/algebra/methods/rationalize-denominator", desc: "Remove roots from the bottom of a fraction: multiply by a root, a conjugate, or a missing power.", level: "composite" },
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite" },
+      { skill: "Solve a radical equation", href: "/algebra/methods/radical-equations", desc: "Isolate the root, raise both sides to the index, solve, then check for extraneous solutions.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// FeatureMatrix 2026-11-15: replaces the table obj1Table (like radicals checklist: pair, same index, same radicand, like radicals); rows and marks taken from the table.
+const fm_likeRadicals = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  verdicts: {
+    yes: { label: 'Yes', mark: '✓', color: '#2563EB', bg: '#dbeafe' },
+    no: { label: 'No', mark: '✕', color: '#475569', bg: '#f1f5f9' },
+  },
+  corner: 'Pair',
+  features: [
+    { id: 'c1', name: 'Same index?', type: 'verdict' },
+    { id: 'c2', name: 'Same radicand?', type: 'verdict' },
+    { id: 'c3', name: 'Like radicals?', type: 'verdict' },
+  ],
+  items: [
+    { id: 'r1', name: '$3\\sqrt{5}$, $7\\sqrt{5}$', values: { c1: 'yes', c2: 'yes', c3: 'yes' } },
+    { id: 'r2', name: '$\\sqrt{3}$, $\\sqrt{5}$', values: { c1: 'yes', c2: 'no', c3: 'no' } },
+    { id: 'r3', name: '$\\sqrt{2}$, $\\sqrt[3]{2}$', values: { c1: 'no', c2: 'yes', c3: 'no' } },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -847,11 +892,15 @@ $$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different 
         id: 'kind',
         lead: `Two checks decide it: the same index and the same radicand.`,
         content: [
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-like-radicals'}
+            id="like-radicals-checklist"
+            title="Like Radicals: The Two Checks"
+            source="/algebra/roots/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_likeRadicals} />
+          </DiagramFrame>,
         ],
       },
       {
@@ -906,6 +955,7 @@ $$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different 
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to add, subtract, multiply and divide radicals](!/algebra/methods/radical-operations) →@`,
         ]
     },
     {
@@ -938,11 +988,15 @@ $$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-operations-conjugates-matrix'}
+            id="operations-conjugates-matrix"
+            title="Conjugates"
+            source="/algebra/roots/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:Multiplying a radical binomial by its conjugate always clears the square roots, because the cross terms cancel.]@`,
         ]
     },
@@ -970,11 +1024,15 @@ $$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-operations-operations-strategy-matrix'}
+            id="operations-operations-strategy-matrix"
+            title="Operations Strategy"
+            source="/algebra/roots/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           `The strategy above, as a map. The operation decides the first check: like radicals for adding, a matching index for multiplying and dividing.`,
           <DiagramFrame
             key={'obj9-decision'}
@@ -1002,6 +1060,14 @@ $$\\sqrt{2} \\text{ and } \\sqrt[3]{2} \\quad \\text{are not like — different 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

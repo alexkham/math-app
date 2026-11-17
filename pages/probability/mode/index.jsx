@@ -1,5 +1,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 5 tables (obj4 comparison, obj6 aggregation, obj9 aggregation, obj12 aggregation, summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -20,10 +22,44 @@ import continuousPdfDiagrams from '@/app/components/visualizations/probability/c
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_modeRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Mode","sub":"the most probable value"},"groups":[{"name":"Other measures of central tendency","items":[{"name":"Mean (Expected Value)","href":"/probability/expected-value","why":"the probability-weighted average of all values"},{"name":"Median","href":"/probability/median","why":"the 50th percentile, robust to outliers"}],"say":"These three measures together show where a distribution centers and how it is shaped."},{"name":"Measures of dispersion","items":[{"name":"Variance","href":"/probability/variance","why":"spread around the mean"},{"name":"Standard Deviation","href":"/probability/variance","why":"square root of variance, in original units"}],"say":"The mode shows concentration points, variance shows spread."},{"name":"Skewness","items":[{"name":"Right skew","why":"mode $<$ median $<$ mean"},{"name":"Left skew","why":"mean $<$ median $<$ mode"},{"name":"Symmetric unimodal","why":"mode $=$ median $=$ mean"}]},{"name":"Distribution shape","items":[{"name":"Unimodal, bimodal, multimodal","href":"/probability/mode#4","why":"classes by the number of modes"},{"name":"Kurtosis","why":"tail heaviness and peak sharpness"}]},{"name":"Probability functions","items":[{"name":"PMF","href":"/probability/probability-function/pmf","why":"discrete case: the mode is where it is largest"},{"name":"PDF","href":"/probability/probability-function/pdf","why":"continuous case: the mode is where it is largest"},{"name":"CDF","href":"/probability/cdf","why":"does not directly reveal the mode"}]},{"name":"Distribution families","items":[{"name":"Discrete Distributions","href":"/probability/distributions/discrete","why":"binomial, geometric, Poisson and others"},{"name":"Continuous Distributions","href":"/probability/distributions/continuous","why":"normal, exponential, beta and others"}]},{"name":"Percentiles and quantiles","items":[{"name":"Median","why":"the 50th percentile"},{"name":"Mode","why":"the maximum probability point"}],"say":"Percentiles divide probability by cumulative area; the mode identifies peak density."},{"name":"Maximum likelihood estimation","items":[{"name":"Maximum likelihood estimate (MLE)","why":"the mode of the likelihood function"}]},{"name":"Mixture models","items":[{"name":"Mixture distributions","href":"/probability/distributions","why":"each component contributes a potential mode"}]},{"name":"Visual representations","items":[{"name":"Histograms and bar charts","why":"modes are the tallest bars"},{"name":"Density curves","why":"modes are the peaks"},{"name":"Box plots","why":"show median and quartiles, not modes"}]},{"name":"Optimization theory","items":[{"name":"Finding the mode","why":"a maximization problem: $\\arg\\max f(x)$"},{"name":"Calculus","href":"/calculus","why":"derivatives and critical points for continuous cases"},{"name":"Numerical optimization","why":"for cases without closed forms"}]}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Mode at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example or formula","type":"text"}],"items":[{"id":"r1","name":"What the mode is","values":{"c1":"the value where a probability distribution's mass or density reaches its maximum","c2":"mode = argmaxₓ p$_{X}$(x) or argmaxₓ f(x)"}},{"id":"r2","name":"Discrete case","values":{"c1":"the value k with the largest PMF; found by direct comparison","c2":"Binomial(10, 0.3): mode = 3"}},{"id":"r3","name":"Continuous case","values":{"c1":"the value x where the PDF peaks; found via calculus (and boundary check)","c2":"Normal(μ, σ): mode = μ; Exponential(λ): mode = 0"}},{"id":"r4","name":"Modality classification","values":{"c1":"unimodal, bimodal, multimodal, or no unique mode","c2":"normal = unimodal; mixture of two normals = bimodal; uniform = no unique mode"}},{"id":"r5","name":"Compared with mean & median","values":{"c1":"peak vs balance point vs 50th percentile — same for symmetric unimodal, separate for skewed","c2":"right skew: mode < median < mean"}},{"id":"r6","name":"Key properties","values":{"c1":"linear under aX + b; invariant under monotonic g for discrete X; robust to outliers; not additive","c2":"mode(aX + b) = a · mode(X) + b"}},{"id":"r7","name":"When the mode shines","values":{"c1":"categorical data; detecting mixtures and subpopulations; outlier-heavy data","c2":"most-common color, most-frequent product category, MLE peak"}},{"id":"r8","name":"When the mode is weak","values":{"c1":"sums and convolutions (no additivity); flat distributions; small or sparse samples","c2":"mode(X + Y) ≠ mode(X) + mode(Y); uniform has no unique mode"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table mistakesTable ("Common Mistakes"); converted from the table's own cells.
+const fm_mistakesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Wrong thinking","type":"text"},{"id":"c2","name":"Correct view","type":"text"}],"items":[{"id":"r1","name":"Confusing mode with mean or median","values":{"c1":"treating &ldquo;mode&rdquo; as the average","c2":"mode = peak; mean = balance point; median = 50th percentile"}},{"id":"r2","name":"Assuming a unique mode always exists","values":{"c1":"expecting exactly one mode","c2":"uniform distributions have no unique mode; binomial/Poisson can be bimodal"}},{"id":"r3","name":"Thinking the mode must be central","values":{"c1":"placing the mode near the mean by default","c2":"the mode can sit at boundaries (e.g. exponential at 0) or far from the mean"}},{"id":"r4","name":"Forgetting boundary values","values":{"c1":"only solving f&prime;(x) = 0 for interior critical points","c2":"also evaluate f(x) at support boundaries (exponential, Beta, Weibull)"}},{"id":"r5","name":"Confusing density with probability","values":{"c1":"reading f(x) as a probability for continuous variables","c2":"f(x) is density — can exceed 1; the mode is still argmax f(x)"}},{"id":"r6","name":"Fixed mode/median/mean ordering","values":{"c1":"always applying mode < median < mean","c2":"that ordering typically holds for right-skewed (not guaranteed); usually reverses for left-skewed; ties for symmetric unimodal"}},{"id":"r7","name":"Sample mode as population mode","values":{"c1":"treating the observed mode as the true mode","c2":"sample modes are noisy, especially for small samples or continuous data"}},{"id":"r8","name":"Ignoring mode when it's the right tool","values":{"c1":"reporting a mean for categorical data","c2":"for categories (colors, brands), mode is often the only meaningful central tendency"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table distributionsTable ("Mode for Common Distributions"); converted from the table's own cells.
+const fm_distributionsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Distribution","features":[{"id":"c1","name":"Mode","type":"text"},{"id":"c2","name":"Notes","type":"text"}],"items":[{"id":"r1","name":"[Discrete Uniform](!/probability/distributions/discrete/uniform) on {a, …, b}","values":{"c1":"every value in the support","c2":"no single mode — all probabilities equal 1/(b−a+1)"}},{"id":"r2","name":"[Binomial](!/probability/distributions/discrete/binomial)(n, p)","values":{"c1":"&lfloor;(n+1)p&rfloor;","c2":"bimodal at (n+1)p and (n+1)p−1 when (n+1)p is an integer"}},{"id":"r3","name":"[Geometric](!/probability/distributions/discrete/geometric)(p)","values":{"c1":"1","c2":"PMF decreases monotonically; first trial is always most likely"}},{"id":"r4","name":"[Negative Binomial](!/probability/distributions/discrete/negative-binomial)(r, p)","values":{"c1":"r + &lfloor;(r−1)(1−p)/p&rfloor; for r > 1","c2":"reduces to geometric when r = 1"}},{"id":"r5","name":"[Hypergeometric](!/probability/distributions/discrete/hypergeometric)(N, K, n)","values":{"c1":"&lfloor;(n+1)(K+1)/(N+2)&rfloor;","c2":"exact; bimodal at x and x−1 when x = (n+1)(K+1)/(N+2) is an integer"}},{"id":"r6","name":"[Poisson](!/probability/distributions/discrete/poisson)(λ)","values":{"c1":"&lfloor;λ&rfloor;","c2":"bimodal at λ−1 and λ when λ is an integer"}},{"id":"r7","name":"[Continuous Uniform](!/probability/distributions/continuous/uniform) on [a, b]","values":{"c1":"every point in [a, b]","c2":"density is constant at 1/(b−a) — no unique peak"}},{"id":"r8","name":"[Normal](!/probability/distributions/continuous/normal)(μ, σ)","values":{"c1":"μ","c2":"bell curve peaks at the mean; mode = median = mean by symmetry"}},{"id":"r9","name":"[Exponential](!/probability/distributions/continuous/exponential)(λ)","values":{"c1":"0","c2":"boundary mode — PDF decreases monotonically from x = 0"}},{"id":"r10","name":"Beta(α, β)","values":{"c1":"(α−1)/(α+β−2) for α, β > 1","c2":"bimodal at {0, 1} when α, β < 1; uniform when α = β = 1"}},{"id":"r11","name":"Gamma(k, θ)","values":{"c1":"(k−1)/θ for k ≥ 1","c2":"mode = 0 (boundary) when k < 1"}},{"id":"r12","name":"Weibull(k, λ)","values":{"c1":"λ(1 − 1/k)$^{1/k}$ for k > 1","c2":"mode = 0 (boundary) when k ≤ 1"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table modalityTable ("Multiple Modes (Modality)"); converted from the table's own cells.
+const fm_modalityTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Modality","features":[{"id":"c1","name":"Number of peaks","type":"text"},{"id":"c2","name":"Examples","type":"text"}],"items":[{"id":"r1","name":"Unimodal","values":{"c1":"one","c2":"normal, binomial (typical), Poisson (typical), exponential"}},{"id":"r2","name":"Bimodal","values":{"c1":"two","c2":"binomial with (n+1)p integer; Poisson with integer λ; mixture of two normals"}},{"id":"r3","name":"Multimodal","values":{"c1":"three or more","c2":"complex mixtures; data from multiple subpopulations or cyclical patterns"}},{"id":"r4","name":"No unique mode","values":{"c1":"none (or all values tied)","c2":"discrete uniform, continuous uniform"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the median and mode of a distribution", href: "/probability/random-variables/methods/median-mode", desc: "The median is where the CDF reaches one half; the mode is the peak of the pmf or pdf.", level: "composite", here: "#7" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the CDF from a PMF", href: "/probability/random-variables/methods/pmf-to-cdf", desc: "Sort the values, keep a running total of the probabilities, and write the step function.", level: "composite" },
+      { skill: "Find the CDF from a PDF", href: "/probability/random-variables/methods/pdf-to-cdf", desc: "Integrate the density from the left end of the support up to $x$, and add the flat pieces outside.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1632,8 +1668,22 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Finding the mode of a discrete distribution (obj7).
+  const findModeSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'Binomial with $n = 10$, $p = 0.3$',
+      rows: [
+        { step: 'List all values in the support', example: '$k = 0, 1, 2, \\ldots, 10$' },
+        { step: 'Evaluate the PMF at each value', example: '$P(X = k)$ for every $k$' },
+        { step: 'Identify the maximum', stepSub: 'The mode is the value, not the probability', example: 'largest at $k = 3$, about $0.267$: mode $= 3$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    findModeSteps,
     specialCasesData,
     formulaSummaryData,
     demoUnits,
@@ -1660,7 +1710,7 @@ const schemas = {
     }
    }
 
-export default function ModePage({ specialCasesData, formulaSummaryData,
+export default function ModePage({ findModeSteps, specialCasesData, formulaSummaryData,
   seoData,
   sectionsContent,
   introContent,
@@ -1810,8 +1860,15 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'modality-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: modalityTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-mode-multiple-modes-modality-matrix'}
+            id="mode-multiple-modes-modality-matrix"
+            title="Multiple Modes (Modality)"
+            source="/probability/mode"
+            related={false}
+          >
+            <FeatureMatrix data={fm_modalityTable} />
+          </DiagramFrame>,
                   <div key={'unit-modeMixture'} dangerouslySetInnerHTML={{ __html: demoUnits.modeMixture }} />,
             `Move the two centres closer than 2 standard deviations apart and the dip disappears: one mode.`,
         ]
@@ -1846,6 +1903,16 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="find-mode-discrete-steps"
+            title="Finding the mode of a discrete distribution"
+            source="/probability/mode"
+            before={"The three steps on the binomial example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={findModeSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the median and mode of a distribution](!/probability/random-variables/methods/median-mode) →@`,
         ]
     },
     {
@@ -1854,8 +1921,15 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'distributions-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: distributionsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-mode-mode-common-distributions-matrix'}
+            id="mode-mode-common-distributions-matrix"
+            title="Mode for Common Distributions"
+            source="/probability/mode"
+            related={false}
+          >
+            <FeatureMatrix data={fm_distributionsTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1926,8 +2000,15 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'mistakes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-mode-common-mistakes-matrix'}
+            id="mode-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/probability/mode"
+            related={false}
+          >
+            <FeatureMatrix data={fm_mistakesTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1936,6 +2017,15 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'concept-map-mode-related-concepts'}
+            id="mode-related-concepts"
+            title="Related Concepts"
+            source="/probability/mode"
+            related={false}
+          >
+            <ConceptMap data={cm_modeRelated} variant="hub" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1944,8 +2034,23 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.summary.link,
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-mode-mode-at-glance-matrix'}
+            id="mode-mode-at-glance-matrix"
+            title="Mode at a Glance"
+            source="/probability/mode"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

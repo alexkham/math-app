@@ -507,6 +507,7 @@ import ExplanationDetails from '@/app/components/ExplanationDetails'
 import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import MatrixMultiplicationOrderVisualizer from '@/app/components/matrix-multiplication/order-visualiser/MatrixMultiplicationVisualizer'
 
 
 export async function getStaticProps(){
@@ -612,7 +613,7 @@ For comprehensive theory, see **matrix operations**.`,
       content: `These two operations share the word "multiplication" but are fundamentally different.
 
 • **Notation**: $A \\odot B$ (Hadamard) vs $A B$ or $A \\times B$ (standard)
-• **Shape requirement**: identical shapes (Hadamard) vs inner dimensions match (standard, $m \\times k$ times $k \\times n$)
+• **Shape requirement**: identical shapes (Hadamard) vs [inner dimensions match](!/linear-algebra/matrix/operations#which-sizes-fit) (standard, $m \\times k$ times $k \\times n$)
 • **Result shape**: same as operands (Hadamard) vs $m \\times n$ (standard)
 • **Computation**: pairwise product per cell (Hadamard) vs sum of row-column products (standard)
 • **Commutativity**: commutative (Hadamard) vs generally non-commutative (standard)
@@ -663,7 +664,9 @@ Then $C = A \\odot B$ is computed cell by cell:
 
 $$C = \\begin{pmatrix} 1 \\cdot 7 & 2 \\cdot 8 & 3 \\cdot 9 \\\\ 4 \\cdot 0 & 5 \\cdot 1 & 6 \\cdot 2 \\end{pmatrix} = \\begin{pmatrix} 7 & 16 & 27 \\\\ 0 & 5 & 12 \\end{pmatrix}$$
 
-Compare with the standard product $A \\times B$: it is undefined here because $A$ is $2 \\times 3$ and $B$ is also $2 \\times 3$ — the inner dimensions ($3$ and $2$) do not match. The Hadamard product has no such restriction beyond matching shapes.`,
+Compare with the standard product $A \\times B$: it is undefined here because $A$ is $2 \\times 3$ and $B$ is also $2 \\times 3$ — the inner dimensions ($3$ and $2$) do not match. The Hadamard product has no such restriction beyond matching shapes.
+
+The tool below opens on these two sizes and shows the standard product failing. Change the sizes to see what would make it work.`,
       before: ``,
       after: ``,
       link: '',
@@ -1055,6 +1058,18 @@ export default function HadamardProductVisualizer({ instructions, demos, seoData
     content: [ sectionsContent[obj].content ],
   })
 
+  const sizesRow = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key="sizes-tool" style={{ margin: '18px 0' }}>
+        <MatrixMultiplicationOrderVisualizer showHeader={false} initialSizes={[2, 3, 2, 3]} />
+      </div>,
+    ],
+  })
+
   const stateRow = (obj, id, unitKey) => ({
     id,
     title: sectionsContent[obj].title,
@@ -1078,7 +1093,7 @@ export default function HadamardProductVisualizer({ instructions, demos, seoData
     plain('obj5', 'hadamard-vs-standard-multiplication'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'where-it-appears'),
-    plain('obj8', 'worked-example'),
+    sizesRow('obj8', 'worked-example'),
     plain('obj9', 'common-mistakes'),
     plain('obj10', 'related-concepts'),
   ]

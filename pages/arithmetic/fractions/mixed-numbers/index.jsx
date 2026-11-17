@@ -672,6 +672,8 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 3 tables (obj4 aggregation, obj6 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -689,11 +691,38 @@ import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fr
 import { tableHeaders } from '@/app/styles/theme'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table capstoneTable ("Mixed Numbers at a Glance"); converted from the table's own cells.
+const fm_capstoneTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Concept","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Mixed number form","values":{"c1":"a whole number combined with a proper fraction","c2":"5 2⁄3 = 5 + 2⁄3"}},{"id":"r2","name":"Fractional part must be proper","values":{"c1":"if not, absorb the extra whole unit","c2":"3 5⁄4 → 4 1⁄4"}},{"id":"r3","name":"Improper fraction","values":{"c1":"numerator ≥ denominator; value ≥ 1","c2":"7⁄4, 11⁄3, 8⁄8"}},{"id":"r4","name":"Boundary case","values":{"c1":"when numerator = denominator, value = 1 exactly","c2":"8⁄8 = 1"}},{"id":"r5","name":"Exact divisibility","values":{"c1":"if denominator divides numerator evenly, the result is a whole number, not a mixed number","c2":"18⁄6 = 3"}},{"id":"r6","name":"Two forms, same value","values":{"c1":"mixed and improper are equivalent representations marking the same point on the number line","c2":"2 2⁄5 = 12⁄5"}},{"id":"r7","name":"Whole part dominates comparison","values":{"c1":"a larger whole always wins, regardless of the fractional parts","c2":"5 1⁄8 > 4 7⁄8"}},{"id":"r8","name":"Fractions break ties","values":{"c1":"when whole parts match, the fraction comparison determines order","c2":"3 2⁄5 < 3 4⁄5"}},{"id":"r9","name":"Position between integers","values":{"c1":"a mixed number a b⁄c lies b⁄c of the way from a to a+1","c2":"3 1⁄4 is a quarter past 3"}},{"id":"r10","name":"Estimation by proximity","values":{"c1":"mixed numbers near a whole boundary are useful estimates for mental math","c2":"6 7⁄8 ≈ 7"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Operations with Mixed Numbers"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Preferred approach","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"[Add / subtract](!/arithmetic/fractions/adding-subtracting)","values":{"c1":"work by parts (wholes with wholes, fractions with fractions) or convert to improper","c2":"2 1⁄3 + 4 1⁄2 = 6 + 5⁄6 = 6 5⁄6"}},{"id":"r2","name":"[Multiply](!/arithmetic/fractions/multiplying)","values":{"c1":"convert to improper first, then multiply across; never multiply parts separately","c2":"2 1⁄2 × 3 1⁄3 = (5⁄2)(10⁄3) = 50⁄6 = 8 1⁄3"}},{"id":"r3","name":"[Divide](!/arithmetic/fractions/dividing)","values":{"c1":"convert to improper, then multiply by the reciprocal","c2":"4 1⁄2 ÷ 1 1⁄2 = 9⁄2 × 2⁄3 = 3"}},{"id":"r4","name":"[Compare](!/arithmetic/fractions/comparing)","values":{"c1":"compare wholes first; if equal, compare fractional parts with a common denominator","c2":"7 3⁄4 vs 7 5⁄6 → 9⁄12 vs 10⁄12 → 7 5⁄6 wins"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Converting Mixed Numbers to Improper Fractions"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Direction","features":[{"id":"c1","name":"Step 1","type":"text"},{"id":"c2","name":"Step 2","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Improper → mixed","values":{"c1":"divide numerator by denominator","c2":"quotient = whole part; remainder = new numerator; denominator unchanged","c3":"17⁄5: 17 ÷ 5 = 3 R 2 → 3 2⁄5"}},{"id":"r2","name":"Mixed → improper","values":{"c1":"multiply whole × denominator, add the numerator","c2":"place result over the original denominator","c3":"4 2⁄7: (4×7)+2 = 30 → 30⁄7"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Work with mixed numbers", href: "/arithmetic/methods/mixed-numbers", desc: "Convert between mixed numbers and improper fractions, $w\\tfrac{a}{b} = \\frac{wb + a}{b}$, and use the conversion to multiply and divide them.", level: "composite", here: "#6" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Multiply fractions", href: "/arithmetic/methods/multiply-fractions", desc: "Multiply numerators together and denominators together, $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$, cancelling common factors first.", level: "composite" },
+      { skill: "Add and subtract fractions", href: "/arithmetic/methods/add-subtract-fractions", desc: "Rewrite the fractions over the least common denominator, add or subtract the numerators, keep the denominator, and simplify.", level: "composite" },
+      { skill: "Divide fractions", href: "/arithmetic/methods/divide-fractions", desc: "Keep the first fraction, change $\\div$ to $\\times$, flip the second fraction, then multiply: $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1392,8 +1421,23 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Improper fraction to mixed number (obj3).
+  const improperToMixedSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\frac{17}{5}$',
+      rows: [
+        { step: 'Divide the numerator by the denominator', example: '$17 \\div 5$: quotient $3$, remainder $2$' },
+        { step: 'The quotient becomes the whole number', example: '$3$' },
+        { step: 'The remainder becomes the new numerator', stepSub: 'The denominator stays unchanged', example: '$\\frac{2}{5}$' },
+        { step: 'Write the mixed number', example: '$3\\frac{2}{5}$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    improperToMixedSteps,
     pitfallData,
     borrowingBeforeAfter,
     sectionsContent,
@@ -1420,7 +1464,7 @@ return {
 
 
 
-export default function MixedNumbersPage({ pitfallData,seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, borrowingBeforeAfter, conceptIntroFigures}) {
+export default function MixedNumbersPage({ improperToMixedSteps, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, borrowingBeforeAfter, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1539,6 +1583,15 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-procedure'}
+            id="improper-to-mixed-steps"
+            title="Improper fraction to mixed number"
+            source="/arithmetic/fractions/mixed-numbers"
+            before={"The first example of this section, one step at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={improperToMixedSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-seventeenFifths'} dangerouslySetInnerHTML={{ __html: demoUnits.seventeenFifths }} />,
           `Going back, 3 · 5 + 2 = 17 counts the fifths again: 3 2/5 = 17/5.`,
           `@academic[punchline:Converting to a mixed number is division with remainder: the quotient counts whole units, the remainder the parts left over.]@`,
@@ -1550,8 +1603,15 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-mixed-numbers-converting-mixed-numbers-matrix'}
+            id="mixed-numbers-converting-mixed-numbers-matrix"
+            title="Converting Mixed Numbers to Improper Fractions"
+            source="/arithmetic/fractions/mixed-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1568,8 +1628,15 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-mixed-numbers-operations-mixed-numbers-matrix'}
+            id="mixed-numbers-operations-mixed-numbers-matrix"
+            title="Operations with Mixed Numbers"
+            source="/arithmetic/fractions/mixed-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj6-diagram'}
             id="borrowing-before-after"
@@ -1584,6 +1651,7 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
             />
           </DiagramFrame>,
           `@academic[punchline:Mixed numbers can be added and subtracted part by part; for multiplying and dividing, convert them to improper fractions first.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to work with mixed numbers](!/arithmetic/methods/mixed-numbers) →@`,
         ]
     },
     {
@@ -1602,8 +1670,15 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-mixed-numbers-mixed-numbers-at-matrix'}
+            id="mixed-numbers-mixed-numbers-at-matrix"
+            title="Mixed Numbers at a Glance"
+            source="/arithmetic/fractions/mixed-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_capstoneTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1621,6 +1696,14 @@ Until 2001, US stock prices were quoted as mixed numbers of dollars, such as $25
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

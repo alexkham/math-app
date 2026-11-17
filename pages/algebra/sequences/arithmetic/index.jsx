@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-06-03 | 2 tables (obj3 aggregation, obj7 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,9 +18,31 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Finding Terms"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Given","features":[{"id":"c1","name":"Find","type":"text"},{"id":"c2","name":"Equation / approach","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"a₁, d","values":{"c1":"aₙ","c2":"aₙ = a₁ + (n − 1)d — substitute directly","c3":"a₁ = 4, d = 6 → a₂₀ = 4 + 19·6 = 118"}},{"id":"r2","name":"a₁, aₙ, n","values":{"c1":"d","c2":"d = (aₙ − a₁) ⁄ (n − 1)","c3":"a₁ = 3, a₈ = 24 → d = 21 ⁄ 7 = 3"}},{"id":"r3","name":"aₙ, d, n","values":{"c1":"a₁","c2":"a₁ = aₙ − (n − 1)d","c3":"a₁₂ = 50, d = 4 → a₁ = 50 − 44 = 6"}},{"id":"r4","name":"a₁, d, a value v","values":{"c1":"n (position of v)","c2":"n = (v − a₁) ⁄ d + 1; if non-integer, v is not in the sequence","c3":"a₁ = 7, d = 5, v = 52 → n = 45⁄5 + 1 = 10"}},{"id":"r5","name":"Two non-consecutive terms","values":{"c1":"a₁ and d","c2":"solve the 2-equation linear system in a₁, d","c3":"a₃ = 11, a₉ = 35 → 6d = 24 → d = 4, a₁ = 3"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the nth term of an arithmetic sequence", href: "/algebra/methods/arithmetic-sequence-nth-term", desc: "Find the common difference, then $a_n = a_1 + (n - 1)d$; also from two given terms.", level: "composite", here: "#3" },
+      { skill: "Sum an arithmetic series", href: "/algebra/methods/arithmetic-series-sum", desc: "Count the terms, then $S_n = \\frac{n}{2}(a_1 + a_n)$, or the version with $d$.", level: "composite", here: "#5" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Convert a recursive formula to an explicit one", href: "/algebra/methods/recursive-to-explicit", desc: "Read the step rule, decide arithmetic or geometric, write the closed form, check it.", level: "composite" },
+      { skill: "Sum a finite geometric series", href: "/algebra/methods/geometric-series-sum", desc: "Count the terms, then $S_n = a_1\\frac{1 - r^n}{1 - r}$.", level: "composite" },
+      { skill: "Find the nth term of a geometric sequence", href: "/algebra/methods/geometric-sequence-nth-term", desc: "Find the common ratio, then $a_n = a_1 r^{\\,n-1}$; also from two given terms.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -949,9 +972,17 @@ $$a_n = a_1 + (n - 1)d$$
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-arithmetic-finding-terms-matrix'}
+            id="arithmetic-finding-terms-matrix"
+            title="Finding Terms"
+            source="/algebra/sequences/arithmetic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every term-finding problem comes down to the general term $a_n = a_1 + (n - 1)d$, solved for whatever is missing.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the nth term of an arithmetic sequence](!/algebra/methods/arithmetic-sequence-nth-term) →@`,
         ]
     },
     {
@@ -983,6 +1014,7 @@ $$a_n = a_1 + (n - 1)d$$
           <div key={'unit-gaussPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.gaussPairs }} />,
           `Gauss's 1 + 2 + … + 100 is the same picture with 100 columns of 101.`,
           `@academic[punchline:Any arithmetic sum equals the number of terms times the average of the first and last terms.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to sum an arithmetic series](!/algebra/methods/arithmetic-series-sum) →@`,
         ]
     },
     {
@@ -1026,6 +1058,14 @@ $$a_n = a_1 + (n - 1)d$$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

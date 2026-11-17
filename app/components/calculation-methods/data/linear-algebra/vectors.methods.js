@@ -125,7 +125,7 @@ const vectorsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compute the Dot Product (Two Formulas) | Learn Math Class',
         description: 'Compute the dot product of two vectors: multiply matching components and add, or use the lengths and the angle. Steps, worked examples and common mistakes.',
@@ -252,7 +252,7 @@ const vectorsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Angle Between Two Vectors | Learn Math Class',
         description: 'Find the angle between two vectors: compute the dot product and both lengths, divide, then take the inverse cosine. Step-by-step method, examples, mistakes.',
@@ -365,7 +365,7 @@ const vectorsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compute the Cross Product (Determinant Method) | Learn Math Class',
         description: 'Compute the cross product of two 3D vectors with the determinant method: set it up, expand, mind the minus on j, check orthogonality. Examples and pitfalls.',
@@ -505,7 +505,7 @@ const vectorsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Project One Vector onto Another | Learn Math Class',
         description: 'Project a vector onto another: dot product over the squared length, times the target vector. Scalar and vector projection, steps, examples and common errors.',
@@ -633,7 +633,7 @@ const vectorsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Write a Vector as a Linear Combination | Learn Math Class',
         description: 'Write a vector as a linear combination: set up the vector equation, turn it into a system, row reduce, read the weights, check. Worked examples and mistakes.',

@@ -584,10 +584,20 @@ export default function MathAnimation(props) {
   const visibleRef = useRef(true);
   const sizeRef = useRef({ w: 0, h: 0, dpr: 1 });
   const [status, setStatus] = useState(autoPlay ? 'playing' : 'paused');
+  const [statusScene, setStatusScene] = useState(scene);
 
-  sceneRef.current = scene;
-  themeRef.current = resolvedTheme;
-  loopRef.current = loop;
+  // A new scene starts over: the button label is reset here, the clock in the effect below.
+  if (statusScene !== scene) {
+    setStatusScene(scene);
+    setStatus(autoPlay ? 'playing' : 'paused');
+  }
+
+  // Kept first among the effects, so the ones below always read the current values.
+  useEffect(() => {
+    sceneRef.current = scene;
+    themeRef.current = resolvedTheme;
+    loopRef.current = loop;
+  });
 
   const draw = () => {
     const canvas = canvasRef.current;
@@ -665,7 +675,8 @@ export default function MathAnimation(props) {
   useEffect(() => {
     clockRef.current = 0;
     if (sliderRef.current) sliderRef.current.value = 0;
-    setPlaying(autoPlay);
+    playingRef.current = autoPlay;
+    lastRef.current = null;
     draw();
   }, [scene]);
 

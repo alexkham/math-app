@@ -1109,6 +1109,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 1 table (capstone summary)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1134,10 +1135,65 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+const sw_exponentialDensity = {
+  center: { name: 'Exponential density', sub: '$f(x) = \\lambda e^{-\\lambda x}$ for $x \\geq 0$' },
+  quadrants: [
+    { title: 'Decreasing density', items: [
+      'Highest density at $x = 0$, decreasing exponentially as $x$ increases.',
+      'Shorter waiting times are more likely than longer ones.' ] },
+    { title: 'Parameters', items: [
+      '$\\lambda$: the rate parameter controls how quickly the density decreases.',
+      'Higher $\\lambda$: steeper decline, events happen more frequently.',
+      'Lower $\\lambda$: gentler decline, events happen less frequently.' ] },
+    { title: 'Support', items: [
+      '$X$ can take any non-negative value: $[0, \\infty)$.',
+      'Time cannot be negative, so the support starts at zero.',
+      'Unbounded above, though very large values have low probability.' ] },
+    { title: 'Logic behind the formula', items: [
+      '$\\lambda$ also serves as the initial density at $x = 0$.',
+      '$e^{-\\lambda x}$: exponential decay, faster for larger $\\lambda$.',
+      { text: 'The total area under the curve equals $1$.', note: '$\\int_{0}^{\\infty} \\lambda e^{-\\lambda x}\\,dx = 1$' } ] }
+  ]
+};
+
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_exponentialUses = {
+  center: { name: 'Exponential distribution', sub: 'waiting times and lifetimes at a constant rate' },
+  quadrants: [
+    { title: 'Reliability Engineering and Survival Analysis', items: [ 'Component failure times (electronics, mechanical parts)', 'System reliability modeling', 'Time until equipment breakdown', 'Light bulb lifetimes' ] },
+    { title: 'Queueing Theory and Service Systems', items: [ 'Time between customer arrivals', 'Call center inter-arrival times', 'Web server request intervals', 'Traffic flow patterns' ] },
+    { title: 'Physics and Natural Sciences', items: [ 'Radioactive decay intervals', 'Time between cosmic ray detections', 'Molecular collision intervals', 'Photon emission times' ] },
+    { title: 'Insurance and Actuarial Science', items: [ 'Time until next insurance claim', 'Inter-occurrence times for accidents', 'Time between policy cancellations' ] }
+  ]
+};
+
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_exponentialRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"kinds":{"special":{"label":"special case","color":"#06357A","dash":""},"limit":{"label":"limit","color":"#B45309","dash":"2 4"},"built":{"label":"built from","color":"#2563EB","dash":"6 4"},"link":{"label":"same process","color":"#64748b","dash":""}},"graph":{"cols":3,"rows":3,"height":560,"minWidth":560,"nodeWidth":130,"hint":"Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.","bands":[{"from":0,"to":1,"label":"Discrete","color":"#f1f5f9"},{"from":1,"to":3,"label":"Continuous","color":"#eff6ff"}],"nodes":[{"id":"poi","name":"Poisson","x":0,"y":0.3,"href":"/probability/distributions/discrete/poisson","text":"Counts the events in a window of length $t$."},{"id":"geo","name":"Geometric","x":0,"y":1.7,"href":"/probability/distributions/discrete/geometric","text":"Counts trials until the first success; the only discrete distribution with no memory."},{"id":"exp","name":"Exponential","x":1,"y":1,"text":"The gap from one event to the next. The first of several independent exponential waits is again exponential, with the rates added."},{"id":"chi","name":"Chi-squared","x":1,"y":0},{"id":"uni","name":"Uniform","x":1,"y":2,"href":"/probability/distributions/continuous/uniform"},{"id":"gam","name":"Gamma","x":2,"y":0.3,"text":"The time until the $n$-th event, also called the Erlang distribution."},{"id":"wei","name":"Weibull","x":2,"y":1,"text":"Lets the event rate rise or fall with age."},{"id":"lap","name":"Laplace","x":2,"y":1.7,"text":"Two-sided density $\\frac{\\lambda}{2} e^{-\\lambda |x|}$."}],"edges":[{"from":"poi","to":"exp","kind":"link","label":"same rate $\\lambda$","text":"count the events and the count is Poisson; time the gap between events and the gap is $\\text{Exp}(\\lambda)$"},{"from":"geo","to":"exp","kind":"limit","label":"steps shrink","text":"the geometric wait turns into the exponential wait as the steps shrink"},{"from":"exp","to":"gam","kind":"special","label":"$n = 1$","text":"the sum of $n$ independent $\\text{Exp}(\\lambda)$ waits is gamma; the exponential is the case $n = 1$"},{"from":"exp","to":"wei","kind":"special","label":"shape $1$","text":"the Weibull distribution with shape $1$ is the exponential"},{"from":"chi","to":"exp","kind":"special","label":"$2$ d.f.","text":"chi-squared with $2$ degrees of freedom is exactly $\\text{Exp}\\left(\\frac{1}{2}\\right)$"},{"from":"exp","to":"lap","kind":"built","label":"difference of two","text":"the difference of two independent $\\text{Exp}(\\lambda)$ variables is Laplace"},{"from":"uni","to":"exp","kind":"built","label":"$-\\ln U / \\lambda$","text":"if $U$ is uniform on $(0, 1)$, then $-\\frac{\\ln U}{\\lambda}$ is $\\text{Exp}(\\lambda)$"}]}};
+
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find an exponential probability", href: "/probability/distributions/methods/exponential-probability", desc: "Waiting times at a constant rate: get $\\lambda$ from the mean, then use $1 - e^{-\\lambda x}$ or the tail $e^{-\\lambda x}$.", level: "composite", here: "#6" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Find a Poisson probability", href: "/probability/distributions/methods/poisson-probability", desc: "Events at an average rate: scale $\\lambda$ to the interval asked about, then use $e^{-\\lambda}\\lambda^k / k!$ or its complement.", level: "composite" },
+      { skill: "Find a geometric probability", href: "/probability/distributions/methods/geometric-probability", desc: "Repeat a trial until the first success: $k - 1$ failures then one success, and a short tail formula for \"more than $k$ trials\".", level: "composite" },
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2633,6 +2689,15 @@ export default function ExponentialDistributionPage({ specialCasesData, proofSte
                     </div>,
                   <div key={'unit-u_5_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_0 }} />,
           `Accumulating this density gives the CDF below.`,
+          <DiagramFrame
+            key={'four-sides-exponential-pdf-intuition'}
+            id="exponential-pdf-intuition"
+            title="Intuition Behind the Formula"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_exponentialDensity} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2647,6 +2712,7 @@ export default function ExponentialDistributionPage({ specialCasesData, proofSte
                     </div>,
                   <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
           `The expected value follows from integrating this same density.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find an exponential probability](!/probability/distributions/methods/exponential-probability) →@`,
         ]
     },
     {
@@ -2737,6 +2803,15 @@ export default function ExponentialDistributionPage({ specialCasesData, proofSte
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'four-sides-exponential-common-applications'}
+            id="exponential-common-applications"
+            title="Common Applications"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_exponentialUses} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2787,6 +2862,15 @@ export default function ExponentialDistributionPage({ specialCasesData, proofSte
         link:sectionsContent.obj16.link,
         content:[
           sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'concept-map-exponential-related-distributions'}
+            id="exponential-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/continuous/exponential"
+            related={false}
+          >
+            <ConceptMap data={cm_exponentialRelated} variant="graph" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2822,6 +2906,14 @@ export default function ExponentialDistributionPage({ specialCasesData, proofSte
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

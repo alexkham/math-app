@@ -1164,6 +1164,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1182,10 +1183,57 @@ import negativeAngleDiagrams from '@/app/components/trigonometry/identities/nega
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_trigBoundedness = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  tree: {
+    root: { name: 'The six trigonometric functions', sub: 'sorted by their range' },
+    branches: [
+      { leaves: [
+        { name: 'Bounded', condition: 'Sine and cosine: no rotation ever produces a value outside $[-1, 1]$.', example: '$-1 \\leq \\sin(\\theta) \\leq 1$',
+          sketch: { x0: -6.4, x1: 6.4, y0: -3, y1: 3, pieces: [{ f: (x) => Math.sin(x), from: -6.4, to: 6.4, n: 160 }] } },
+        { name: 'Bounded away from zero', condition: 'Cosecant and secant: arbitrarily large in magnitude, but never between $-1$ and $1$.', example: 'range $(-\\infty, -1] \\cup [1, \\infty)$',
+          sketch: { x0: -6.4, x1: 6.4, y0: -3, y1: 3, pieces: [
+            { f: (x) => 1 / Math.sin(x), from: -6.2, to: -3.24, n: 120 }, { f: (x) => 1 / Math.sin(x), from: -3.04, to: -0.1, n: 120 },
+            { f: (x) => 1 / Math.sin(x), from: 0.1, to: 3.04, n: 120 }, { f: (x) => 1 / Math.sin(x), from: 3.24, to: 6.2, n: 120 }] } },
+        { name: 'Entirely unbounded', condition: 'Tangent and cotangent: they take every real value on every interval between consecutive asymptotes.', example: 'range $(-\\infty, \\infty)$',
+          sketch: { x0: -4.9, x1: 4.9, y0: -3, y1: 3, pieces: [
+            { f: (x) => Math.tan(x), from: -4.6, to: -1.68, n: 120 }, { f: (x) => Math.tan(x), from: -1.46, to: 1.46, n: 120 }, { f: (x) => Math.tan(x), from: 1.68, to: 4.6, n: 120 }] } }
+      ] }
+    ]
+  },
+  note: { label: 'Check the range before solving', text: '$\\sin(x) = 1.5$ and $\\csc(x) = 0.3$ have no solution; $\\tan(x) = 1000$ has solutions.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Identity of the Six Functions: Period, Parity, Range"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Period","type":"text"},{"id":"c2","name":"Parity","type":"text"},{"id":"c3","name":"Range","type":"text"}],"items":[{"id":"r1","name":"sin","values":{"c1":"2π","c2":"odd","c3":"[−1, 1]"}},{"id":"r2","name":"cos","values":{"c1":"2π","c2":"even","c3":"[−1, 1]"}},{"id":"r3","name":"tan","values":{"c1":"π","c2":"odd","c3":"(−∞, ∞)"}},{"id":"r4","name":"csc","values":{"c1":"2π","c2":"odd","c3":"(−∞, −1] ∪ [1, ∞)"}},{"id":"r5","name":"sec","values":{"c1":"2π","c2":"even","c3":"(−∞, −1] ∪ [1, ∞)"}},{"id":"r6","name":"cot","values":{"c1":"π","c2":"odd","c3":"(−∞, ∞)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Critical-Point Landscape: Where Each Function Vanishes, Explodes, and Turns Around"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Zeros","type":"text"},{"id":"c2","name":"Asymptotes","type":"text"},{"id":"c3","name":"Principal monotonic interval","type":"text"},{"id":"c4","name":"Extrema","type":"text"}],"items":[{"id":"r1","name":"sin","values":{"c1":"nπ","c2":"none","c3":"[−π/2, π/2] (increasing)","c4":"max 1 at π/2 + 2nπ; min −1 at 3π/2 + 2nπ"}},{"id":"r2","name":"cos","values":{"c1":"π/2 + nπ","c2":"none","c3":"[0, π] (decreasing)","c4":"max 1 at 2nπ; min −1 at π + 2nπ"}},{"id":"r3","name":"tan","values":{"c1":"nπ","c2":"π/2 + nπ","c3":"(−π/2, π/2) (increasing)","c4":"none (unbounded)"}},{"id":"r4","name":"csc","values":{"c1":"none","c2":"nπ","c3":"[−π/2, 0) ∪ (0, π/2] (decreasing on each piece)","c4":"local min 1 at π/2 + 2nπ; local max −1 at 3π/2 + 2nπ"}},{"id":"r5","name":"sec","values":{"c1":"none","c2":"π/2 + nπ","c3":"[0, π/2) ∪ (π/2, π] (increasing on each piece)","c4":"local min 1 at 2nπ; local max −1 at π + 2nπ"}},{"id":"r6","name":"cot","values":{"c1":"π/2 + nπ","c2":"nπ","c3":"(0, π) (decreasing)","c4":"none (unbounded)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Trigonometry methods", items: [
+      { skill: "Find a coterminal angle", href: "/trigonometry/methods#coterminal-angles", desc: "An angle larger than one turn or negative, to be brought into $[0^\\circ, 360^\\circ)$ or $[0, 2\\pi)$: $765^\\circ$, $-\\frac{5\\pi}{3}$.", level: "atomic" },
+      { skill: "Find a reference angle", href: "/trigonometry/methods#reference-angle", desc: "An angle outside the first quadrant whose trig values you want from a first-quadrant angle: $225^\\circ$, $\\frac{5\\pi}{6}$, $300^\\circ$.", level: "atomic" },
+      { skill: "Graph a sine or cosine function", href: "/trigonometry/methods/graph-sine-cosine", desc: "Read amplitude, period, phase shift and midline from $y = A\\sin(B(x - C)) + D$, then plot five key points.", level: "composite" },
+    ] },
+    { title: "Identity methods", items: [
+      { skill: "Handle a negative angle", href: "/trigonometry/identities/methods#negative-angle", desc: "A trig function of $-x$: $\\sin(-\\frac{\\pi}{6})$, $\\cos(-x)$, $\\tan(-\\theta)$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2459,6 +2507,15 @@ Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses 
           sectionsContent.obj3.content,
           <div key={'unit-boundedness'} dangerouslySetInnerHTML={{ __html: demoUnits.boundedness }} />,
           `Checking the range before solving rules out these impossible equations immediately.`,
+          <DiagramFrame
+            key={'taxonomy-trig-functions-boundedness'}
+            id="trig-functions-boundedness"
+            title="Boundedness"
+            source="/trigonometry/properties"
+            related={false}
+          >
+            <Taxonomy data={tx_trigBoundedness} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2542,8 +2599,15 @@ Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-properties-identity-six-functions-period-matrix'}
+            id="properties-identity-six-functions-period-matrix"
+            title="Identity of the Six Functions: Period, Parity, Range"
+            source="/trigonometry/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     // NEW capstone summary section: obj9
@@ -2553,8 +2617,15 @@ Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-properties-critical-point-landscape-where-matrix'}
+            id="properties-critical-point-landscape-where-matrix"
+            title="Critical-Point Landscape: Where Each Function Vanishes, Explodes, and Turns Around"
+            source="/trigonometry/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -2630,6 +2701,14 @@ Writing the solutions of $\\tan x = 1$ as $x = \\frac{\\pi}{4} + 2n\\pi$ misses 
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

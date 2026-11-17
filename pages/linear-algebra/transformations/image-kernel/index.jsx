@@ -818,6 +818,10 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj4 comparison, obj7 comparison, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import DimensionLedger from '@/app/components/infographics/linear-algebra/DimensionLedger'
+import FourSubspaceMap from '@/app/components/infographics/linear-algebra/FourSubspaceMap'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -831,6 +835,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -840,6 +845,32 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Dimension Constraints"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Dimension relation","features":[{"id":"c1","name":"Injective possible?","type":"verdict"},{"id":"c2","name":"Surjective possible?","type":"verdict"},{"id":"c3","name":"Bijective possible?","type":"verdict"},{"id":"c4","name":"Forced consequence","type":"text"}],"items":[{"id":"r1","name":"dim(V) < dim(W)","values":{"c1":"yes","c2":"no","c3":"no","c4":"image is a proper subspace of W"}},{"id":"r2","name":"dim(V) = dim(W)","values":{"c1":"yes","c2":"yes","c3":"yes","c4":"injective ⇔ surjective ⇔ bijective (one check establishes all three)"}},{"id":"r3","name":"dim(V) > dim(W)","values":{"c1":"no","c2":"yes","c3":"no","c4":"kernel forced to have dim ≥ dim(V) − dim(W)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Surjectivity"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equivalent condition","features":[{"id":"c1","name":"Injectivity (one-to-one)","type":"text"},{"id":"c2","name":"Surjectivity (onto)","type":"text"}],"items":[{"id":"r1","name":"Map-level definition","values":{"c1":"T(u) = T(v) ⇒ u = v","c2":"every w ∈ W is the image of some v"}},{"id":"r2","name":"Kernel / image","values":{"c1":"ker(T) = {0}","c2":"Im(T) = W"}},{"id":"r3","name":"Rank condition","values":{"c1":"rank(A) = n (full column rank)","c2":"rank(A) = m (full row rank)"}},{"id":"r4","name":"Columns / rows of A","values":{"c1":"columns are [linearly independent](!/linear-algebra/vector-spaces/linear-independence)","c2":"columns span ℝᵐ (column space = ℝᵐ)"}},{"id":"r5","name":"System Ax = b behavior","values":{"c1":"at most one solution for every b","c2":"at least one solution for every b"}},{"id":"r6","name":"Echelon-form trait","values":{"c1":"no free variables in Ax = 0","c2":"every row contains a pivot"}},{"id":"r7","name":"Determinant (square A only)","values":{"c1":"det(A) ≠ 0","c2":"det(A) ≠ 0 (collapses to the same test)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the kernel and image of a linear transformation", href: "/linear-algebra/transformations/methods/kernel-and-image", desc: "Row reduce the matrix once: the kernel comes from the free variables, the image from the pivot columns of $A$.", level: "composite", here: "#8" },
+    ] },
+    { title: "More linear transformation methods", items: [
+      { skill: "Find the matrix of a linear transformation", href: "/linear-algebra/transformations/methods/transformation-matrix", desc: "Apply $T$ to each standard basis vector and use the results as the columns of $A$.", level: "composite" },
+      { skill: "Check if a transformation is linear", href: "/linear-algebra/transformations/methods/linearity-check", desc: "Test $T(c\\mathbf{u} + \\mathbf{v}) = cT(\\mathbf{u}) + T(\\mathbf{v})$ with general vectors; one failing example disproves it.", level: "composite" },
+      { skill: "Change basis", href: "/linear-algebra/transformations/methods/change-of-basis", desc: "Coordinates in a new basis are $P^{-1}\\mathbf{v}$; the matrix of a map in the new basis is $P^{-1}AP$.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/transformations/methods", label: "All linear transformation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1634,8 +1665,58 @@ $$(-1, 0, -1, 1, 0), \\qquad (0, -1, -1, 0, 1)$$`],
     conclusion: { text: '$\\mathbf{u} = \\mathbf{v}$' },
   };
 
+  // Procedure rollout 2026-11-14: Image and kernel from one reduction (obj8).
+  const imageKernelSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The $3 \\times 3$ matrix $A$ of the worked example',
+      rows: [
+        { step: 'Row reduce $A$ and find the pivot columns', example: 'pivots in columns $1$ and $2$' },
+        { step: 'Image: take those columns of the original $A$', example: '$\\{(1, 0, 1), (2, 1, 3)\\}$' },
+        { step: 'Kernel: solve with the free variables', stepSub: 'One basis vector for each free variable', example: '$x_3 = t$: $\\text{Span}\\{(-1, -1, 1)\\}$' },
+        { check: true, step: 'Check that the two dimensions add up to $n$', example: '$2 + 1 = 3$' },
+      ],
+    },
+  };
+
+  // FourSubspaceMap 2026-11-14: The decomposition for the worked example (obj9).
+  const imageKernelSubspaces = {
+    intro: 'For the $3 \\times 3$ matrix $A$ of the worked example, which has rank $2$.',
+    mapName: 'T',
+    domainLabel: 'R³',
+    codomainLabel: 'R³',
+    facts: [
+      { label: 'Shape', value: '3 × 3' },
+      { label: 'Rank', value: '2' },
+    ],
+    spaces: {
+      row: { name: 'Row space (the complement)', dim: 2, basis: ['(1, 2, 3)', '(0, 1, 1)'] },
+      null: { name: 'Kernel', dim: 1, basis: ['(−1, −1, 1)'] },
+      column: { name: 'Image', dim: 2, basis: ['(1, 0, 1)', '(2, 1, 3)'] },
+      leftNull: { name: 'Left null space', dim: 1, basis: ['(1, 1, −1)'] },
+    },
+    readingLabel: 'How to read it',
+    reading: 'The kernel component of a vector is destroyed. The row-space component survives and is carried one-to-one onto the image.',
+  };
+
+  // DimensionLedger 2026-11-14: The domain split for a three by five matrix (obj6).
+  const rankNullityMapBar = {
+    intro: 'A $3 \\times 5$ matrix of rank $3$. The count runs over the $n = 5$ columns.',
+    identity: '$\\dim\\text{Im}(T) + \\dim\\ker(T) = \\dim V$',
+    bars: [
+      { label: 'Domain', space: 'R⁵', total: 5,
+        segments: [
+          { label: 'Image', size: 3, hot: true },
+          { label: 'Kernel', size: 2 },
+        ] },
+    ],
+  };
+
 return {
   props:{
+    rankNullityMapBar,
+    imageKernelSubspaces,
+    imageKernelSteps,
     proofStepsData,
     pitfallData,
     demoUnits,
@@ -1658,7 +1739,7 @@ return {
 }
    }
 
-export default function ImageKernelPage({ proofStepsData, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ImageKernelPage({ rankNullityMapBar, imageKernelSubspaces, imageKernelSteps, proofStepsData, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj7Table, imageKernelPairs, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1798,8 +1879,15 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-image-kernel-surjectivity-matrix'}
+            id="image-kernel-surjectivity-matrix"
+            title="Surjectivity"
+            source="/linear-algebra/transformations/image-kernel"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1817,6 +1905,17 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-dimension-ledger'}
+            id="rank-nullity-map-bar"
+            title="The domain split for a three by five matrix"
+            source="/linear-algebra/transformations/image-kernel"
+            before={"The matrix from the note beside the text: the five dimensions of the domain, split between what survives and what is destroyed."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <DimensionLedger data={rankNullityMapBar} theme="navy" variant="bars" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -1825,8 +1924,15 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-image-kernel-dimension-constraints-matrix'}
+            id="image-kernel-dimension-constraints-matrix"
+            title="Dimension Constraints"
+            source="/linear-algebra/transformations/image-kernel"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Comparing dimensions can rule out injectivity or surjectivity, but it can never guarantee either.]@`,
         ]
     },
@@ -1836,6 +1942,16 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-procedure'}
+            id="image-and-kernel-steps"
+            title="Image and kernel from one reduction"
+            source="/linear-algebra/transformations/image-kernel"
+            before={"The worked example of this section, one step at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={imageKernelSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the kernel and image of a linear transformation](!/linear-algebra/transformations/methods/kernel-and-image) →@`,
         ]
     },
     {
@@ -1844,6 +1960,17 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-subspace-map'}
+            id="image-kernel-subspace-map"
+            title="The decomposition for the worked example"
+            source="/linear-algebra/transformations/image-kernel"
+            before={"The same split drawn for the matrix of the worked example: kernel and row space in the domain, image and what stays unreachable in the codomain."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FourSubspaceMap data={imageKernelSubspaces} theme="navy" variant="strang" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -1880,6 +2007,14 @@ $$\\text{Im}(T) = \\{T(\\mathbf{v}) : \\mathbf{v} \\in V\\} \\subseteq W$$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

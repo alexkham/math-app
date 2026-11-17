@@ -921,6 +921,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -937,10 +938,128 @@ import functionTypesDiagrams from '@/app/components/functions/types/functionType
 import renderFunctionPlotV3 from '@/app/utils/illustrations/functions/graphs/functionPlot.v3'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_graphingTechnology = {
+  center: { name: 'Graphing technology', sub: 'calculators and software' },
+  quadrants: [
+    { title: 'Viewing window', items: [
+      'Determines what portion of the graph is visible.',
+      { text: 'The default window may miss important features.', note: 'zeros at $x = 100$ and $x = -100$ do not show on $-10 \\leq x \\leq 10$' } ] },
+    { title: 'Trace', items: [
+      'Reads the coordinates of points on the graph.',
+      { text: 'Moving along the curve displays $x$ and $y$ at each position.', note: 'answers "what is $f(2.5)$?" directly' } ] },
+    { title: 'Built-in tools', items: [
+      'Find intercepts, maxima, minima, and intersections.',
+      'Results may be numerical approximations rather than exact answers.' ] },
+    { title: 'Limitations', tone: 'c', items: [
+      'No true asymptotic behavior, only increasingly steep curves within the finite window.',
+      'No holes, unless the software is designed to indicate them.',
+      'Rapid oscillations may appear as solid bands.' ] }
+  ],
+  note: { label: 'A tool, not a replacement', text: 'Knowing what a graph should look like allows checking whether the technology is showing something meaningful or misleading.' }
+};
+
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_quadrants = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'A point $(x, y)$ off the axes', sub: 'the axes divide the plane into four quadrants' },
+    branches: [
+      { leaves: [
+        { name: 'Quadrant I', condition: 'Both coordinates are positive.', example: 'right of the origin, above it' },
+        { name: 'Quadrant II', condition: 'Negative $x$ and positive $y$.', example: 'left of the origin, above it' },
+        { name: 'Quadrant III', condition: 'Both coordinates are negative.', example: 'left of the origin, below it' },
+        { name: 'Quadrant IV', condition: 'Positive $x$ and negative $y$.', example: '$(3, -2)$: $3$ units right, then $2$ units down' }
+      ] }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Intercepts"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Intercept","features":[{"id":"c1","name":"Algebraic method","type":"text"},{"id":"c2","name":"On the graph","type":"text"},{"id":"c3","name":"How many possible","type":"text"}],"items":[{"id":"r1","name":"y-intercept (0, f(0))","values":{"c1":"evaluate f(0)","c2":"point where the curve crosses the y-axis","c3":"at most 1 (none if 0 ∉ domain)"}},{"id":"r2","name":"x-intercepts (c, 0)","values":{"c1":"solve f(x) = 0","c2":"point(s) where the curve crosses the x-axis","c3":"0, 1, or many"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FunctionAnalysis 2026-11-15: replaces the table summaryTable ("What to Look For on a Graph"); every row keeps the table's own wording as its second line.
+const whatToLookForTheme = { title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }
+const whatToLookForOnGraph = {
+  header: { kicker: 'Reading a graph', title: 'What to look for', formula: '$f(x) = x^3 - 3x + 1$' },
+  graph: {
+    xRange: [-2.4, 2.4],
+    yRange: [-3.6, 5],
+    fn: (x) => x ** 3 - 3 * x + 1,
+    xTicks: [-2, -1, 0, 1, 2],
+    yTicks: [-1, 1, 3],
+  },
+  features: [
+    { id: 'val', points: [{ x: 2, y: 3, dx: 16, dy: 4 }] },
+    { id: 'yint', points: [{ x: 0, y: 1, dx: 16, dy: -10 }] },
+    { id: 'zeros', dropLine: true, points: [{ x: -1.8794, y: 0, dx: -16, dy: -12 }, { x: 0.3473, y: 0, dx: 14, dy: 14 }, { x: 1.5321, y: 0, dx: 16, dy: 12 }] },
+    { id: 'ext', kind: 'warm', dropLine: true, points: [{ x: -1, y: 3, dx: 0, dy: -16 }, { x: 1, y: -1, dx: 0, dy: 16 }] },
+  ],
+  intervals: [
+    { label: 'Trend', spans: [
+      { from: null, to: -1, kind: 'pos', text: '↗ increasing' },
+      { from: -1, to: 1, kind: 'neg', text: '↘ decreasing' },
+      { from: 1, to: null, kind: 'pos', text: '↗ increasing' },
+    ] },
+  ],
+  properties: [
+    { letter: 'A', name: 'Values', note: 'one point at a time', rows: [
+      { featureId: 'val', label: 'What is f(a)?', value: 'f(2) = 3', sub: 'go up from x = a on the x-axis until you meet the curve; read the y-coordinate' },
+      { label: 'What x satisfies f(x) = b?', value: 'f(x) = 3 at x = −1 and x = 2', sub: 'go across from y = b on the y-axis; read the x-coordinate of every intersection' },
+    ] },
+    { letter: 'B', name: 'Key points', note: 'marked on the graph', rows: [
+      { featureId: 'yint', label: 'y-intercept', value: '(0, 1)', sub: 'point where the curve crosses the y-axis' },
+      { featureId: 'zeros', label: 'x-intercepts (zeros)', value: 'x ≈ −1.88, 0.35, 1.53', sub: 'points where the curve crosses or touches the x-axis' },
+      { featureId: 'ext', label: 'Local extrema', value: 'max (−1, 3), min (1, −1)', tone: 'warm', sub: 'peaks (local max) and valleys (local min) — the turning points' },
+      { label: 'Absolute extrema', value: 'none here', tone: 'na', sub: 'the single highest and lowest points on the entire curve' },
+    ] },
+    { letter: 'C', name: 'Extent and direction', note: 'the whole curve', rows: [
+      { label: 'Domain', value: 'all real x', sub: 'horizontal extent — every x-value the graph covers' },
+      { label: 'Range', value: 'all real y', sub: 'vertical extent — every y-value the curve reaches' },
+      { label: 'Increasing / decreasing intervals', value: 'rises for x < −1 and x > 1, falls between', sub: 'portions of the domain where the curve rises (increasing) or falls (decreasing) from left to right' },
+      { label: 'End behavior', value: 'down to −∞ on the left, up to +∞ on the right', sub: 'where the curve heads as x → ∞ and x → −∞ — to a finite limit (horizontal asymptote) or to ±∞' },
+    ] },
+    { letter: 'D', name: 'Shape', note: 'the whole curve', rows: [
+      { label: 'Symmetry', value: 'none here', tone: 'na', sub: 'mirror across the y-axis (even function) or point symmetry about the origin (odd function)' },
+      { label: 'Asymptotes', value: 'none here', tone: 'na', sub: 'vertical lines near which the curve diverges; horizontal or slanted lines the curve approaches at the extremes' },
+      { label: 'Continuity / discontinuities', value: 'continuous', sub: 'connected curve (continuous); breaks, jumps, or open-circle holes (discontinuous)' },
+    ] },
+  ],
+}
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Types of Curves"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Curve","features":[{"id":"c1","name":"Function family","type":"text"},{"id":"c2","name":"Signature features","type":"text"}],"items":[{"id":"r1","name":"Line","values":{"c1":"linear: f(x) = mx + b","c2":"constant slope, no curvature, extends to infinity in both directions"}},{"id":"r2","name":"Parabola","values":{"c1":"quadratic: f(x) = ax² + bx + c","c2":"single vertex; opens up if a > 0, down if a < 0"}},{"id":"r3","name":"S-curve","values":{"c1":"cubic: f(x) = ax³ + …","c2":"one inflection point; ends extend to opposite infinities"}},{"id":"r4","name":"Hyperbola","values":{"c1":"rational, e.g. 1 ⁄ x","c2":"two branches separated by vertical and horizontal asymptotes"}},{"id":"r5","name":"Half-curve","values":{"c1":"radical, e.g. √x","c2":"begins at a fixed starting point, extends in one direction with gentle curvature"}},{"id":"r6","name":"V-shape","values":{"c1":"absolute value: |x|","c2":"two linear pieces meeting at a vertex; reflects below x-axis back up"}},{"id":"r7","name":"Wave","values":{"c1":"trigonometric: sin, cos","c2":"periodic oscillation; bounded amplitude; cycles repeat indefinitely"}},{"id":"r8","name":"Growth / decay curve","values":{"c1":"exponential: aˣ","c2":"rises rapidly or decays; stays strictly on one side of the x-axis"}},{"id":"r9","name":"Staircase","values":{"c1":"step / piecewise constant","c2":"horizontal segments connected by jumps at boundaries"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Identifying Key Features Visually"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Feature","features":[{"id":"c1","name":"What it looks like","type":"text"},{"id":"c2","name":"What it reveals about the function","type":"text"}],"items":[{"id":"r1","name":"Local maximum","values":{"c1":"a peak — the curve rises and then falls","c2":"local high value; turning point from increasing to decreasing"}},{"id":"r2","name":"Local minimum","values":{"c1":"a valley — the curve falls and then rises","c2":"local low value; turning point from decreasing to increasing"}},{"id":"r3","name":"Absolute maximum / minimum","values":{"c1":"the highest / lowest point on the entire curve","c2":"the largest / smallest value the function ever takes"}},{"id":"r4","name":"Vertical asymptote","values":{"c1":"curve rises or falls steeply near a vertical line, never reaching it","c2":"function is undefined or unbounded at that x-value"}},{"id":"r5","name":"Horizontal asymptote","values":{"c1":"curve levels off toward a horizontal line at the far left or far right","c2":"end behavior approaches that y-value"}},{"id":"r6","name":"Hole","values":{"c1":"a single missing point shown as an open circle","c2":"removable discontinuity at that x-value"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the intercepts of a function", href: "/functions/methods/find-intercepts", desc: "Evaluate $f(0)$ for the $y$-intercept; solve $f(x) = 0$ for the $x$-intercepts and keep the solutions in the domain.", level: "composite", here: "#6" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Analyze a function", href: "/functions/methods/analyze-function", desc: "Work through domain, intercepts, symmetry, rise and fall, turning points, end behavior and range in a fixed order.", level: "composite" },
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+      { skill: "Identify the family of a function", href: "/functions/methods/identify-function-family", desc: "A decision tree from what you see in the formula to the family and the method that handles it.", level: "strategy" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Use the quadratic formula", href: "/algebra/equations/methods/quadratic-formula", desc: "Read off a, b, c and substitute; works for every quadratic, factorable or not.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1917,6 +2036,15 @@ Because a function assigns exactly one output to each input, the graph has a def
           sectionsContent.obj1.content,
           <div key={'unit-planeQuadrants'} dangerouslySetInnerHTML={{ __html: demoUnits.planeQuadrants }} />,
           `Every graph on this page is drawn on this grid: inputs along the x-axis, outputs measured up or down.`,
+          <DiagramFrame
+            key={'taxonomy-coordinate-plane-quadrants'}
+            id="coordinate-plane-quadrants"
+            title="The Coordinate Plane"
+            source="/functions/graphs"
+            related={false}
+          >
+            <Taxonomy data={tx_quadrants} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1993,12 +2121,17 @@ Because a function assigns exactly one output to each input, the graph has a def
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphs-intercepts-matrix'}
+            id="graphs-intercepts-matrix"
+            title="Intercepts"
+            source="/functions/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:Each intercept sets one coordinate to zero: the input for the $y$-intercept, the output for the $x$-intercepts.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the intercepts of a function](!/functions/methods/find-intercepts) →@`,
         ]
     },
     {
@@ -2007,11 +2140,15 @@ Because a function assigns exactly one output to each input, the graph has a def
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphs-identifying-key-features-visually-matrix'}
+            id="graphs-identifying-key-features-visually-matrix"
+            title="Identifying Key Features Visually"
+            source="/functions/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2020,11 +2157,15 @@ Because a function assigns exactly one output to each input, the graph has a def
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphs-types-curves-matrix'}
+            id="graphs-types-curves-matrix"
+            title="Types of Curves"
+            source="/functions/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-curves'} dangerouslySetInnerHTML={{ __html: demoUnits.curves }} />,
           `Each family leaves a shape you can name at a glance, which is the point of learning them.`,
           <DiagramFrame
@@ -2043,6 +2184,15 @@ Because a function assigns exactly one output to each input, the graph has a def
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'four-sides-graphing-technology-four-sides'}
+            id="graphing-technology-four-sides"
+            title="Graphing Technology"
+            source="/functions/graphs"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_graphingTechnology} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2076,14 +2226,27 @@ Because a function assigns exactly one output to each input, the graph has a def
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'function-analysis-graphs-what-to-look-for'}
+            id="graphs-what-to-look-for"
+            title="What to Look For on a Graph"
+            source="/functions/graphs"
+            related={false}
+          >
+            <FunctionAnalysis data={whatToLookForOnGraph} variant="plot" theme={whatToLookForTheme} />
+            <FunctionAnalysis data={{ ...whatToLookForOnGraph, header: undefined }} variant="table" theme={whatToLookForTheme} />
+          </DiagramFrame>,
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

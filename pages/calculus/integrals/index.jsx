@@ -1,5 +1,6 @@
 
 // tables-optimized: v4 | 2026-05-24 | 4 tables (obj2 comparison, obj7 aggregation, obj8 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,12 +17,50 @@ import functionRiemannDiagrams from '@/app/components/functions/riemann/function
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Two Types of Integrals"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Definite integral ∫ₐ$^{b}$ f(x) dx","type":"text"},{"id":"c2","name":"Indefinite integral ∫ f(x) dx","type":"text"}],"items":[{"id":"r1","name":"Bounds of integration","values":{"c1":"present (a and b)","c2":"absent"}},{"id":"r2","name":"Result type","values":{"c1":"a number","c2":"a family of functions F(x) + C"}},{"id":"r3","name":"Geometric meaning","values":{"c1":"signed area between f and the x-axis on [a, b]","c2":"no fixed geometry — represents all antiderivatives"}},{"id":"r4","name":"Constant of integration","values":{"c1":"cancels in F(b) − F(a)","c2":"essential — the \"+ C\""}},{"id":"r5","name":"Typical use","values":{"c1":"accumulated quantity (distance, work, mass, probability)","c2":"finding the function whose derivative is f"}},{"id":"r6","name":"Connection","values":{"c1":"evaluated via FTC: F(b) − F(a)","c2":"supplies the F used by FTC"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Map of the Integrals Subtree"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Subtopic","features":[{"id":"c1","name":"Key idea","type":"text"},{"id":"c2","name":"When you need it","type":"text"},{"id":"c3","name":"Subpage","type":"text"}],"items":[{"id":"r1","name":"Definite integrals","values":{"c1":"signed area under a curve via limit of Riemann sums","c2":"computing an accumulated total over an interval","c3":"[definite](!/calculus/integrals/definite)"}},{"id":"r2","name":"Indefinite integrals","values":{"c1":"the family F(x) + C of antiderivatives of f","c2":"recovering a function from its derivative","c3":"[indefinite](!/calculus/integrals/indefinite)"}},{"id":"r3","name":"Integration rules","values":{"c1":"linearity and the Fundamental Theorem of Calculus","c2":"splitting integrals and evaluating with antiderivatives","c3":"[rules](!/calculus/integrals/rules)"}},{"id":"r4","name":"Techniques","values":{"c1":"substitution, parts, partial fractions, trig substitution","c2":"the integrand does not match a known form directly","c3":"[techniques](!/calculus/integrals/techniques)"}},{"id":"r5","name":"Special integrals","values":{"c1":"standard formulas worth memorizing","c2":"recognizing common building-block patterns","c3":"[special](!/calculus/integrals/special)"}},{"id":"r6","name":"Improper integrals","values":{"c1":"integrals over infinite intervals or with unbounded integrands","c2":"interval is unbounded or integrand blows up","c3":"[improper](!/calculus/integrals/improper)"}},{"id":"r7","name":"Evaluating integrals","values":{"c1":"recognize, apply, verify by differentiating the result","c2":"working a concrete integral from start to finish","c3":"[evaluating](!/calculus/integrals/evaluating)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Special Integrals"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Integrand","features":[{"id":"c1","name":"Antiderivative","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"xⁿ (n ≠ −1)","values":{"c1":"xⁿ⁺¹ / (n+1) + C","c2":"power rule for integrals"}},{"id":"r2","name":"1 / x","values":{"c1":"ln|x| + C","c2":"handles the n = −1 case excluded above"}},{"id":"r3","name":"eˣ","values":{"c1":"eˣ + C","c2":"its own antiderivative"}},{"id":"r4","name":"sin x","values":{"c1":"−cos x + C","c2":"sign flips relative to the derivative"}},{"id":"r5","name":"cos x","values":{"c1":"sin x + C","c2":"no sign change"}},{"id":"r6","name":"1 / (1 + x²)","values":{"c1":"arctan x + C","c2":"reverses the derivative of arctan"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Integration Techniques"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Technique","features":[{"id":"c1","name":"What it reverses","type":"text"},{"id":"c2","name":"Typical setup","type":"text"},{"id":"c3","name":"Best when","type":"text"}],"items":[{"id":"r1","name":"Substitution","values":{"c1":"chain rule","c2":"let u = g(x); du = g'(x) dx","c3":"an inner function and its derivative both appear in the integrand"}},{"id":"r2","name":"Integration by parts","values":{"c1":"product rule","c2":"∫ u dv = uv − ∫ v du","c3":"integrand is a product of unrelated factors (e.g., x · eˣ, x · ln x)"}},{"id":"r3","name":"Partial fractions","values":{"c1":"addition of fractions","c2":"decompose P(x)/Q(x) into simpler rational pieces","c3":"integrand is a rational function with factorable denominator"}},{"id":"r4","name":"Trigonometric substitution","values":{"c1":"Pythagorean identities","c2":"x = a sin θ, a tan θ, or a sec θ depending on the radical","c3":"integrand contains √(a² − x²), √(a² + x²), or √(x² − a²)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve accumulation problems", href: "/calculus/integrals/techniques/accumulation-problems", desc: "A rate integrated over time gives the total change: water in a tank, distance from velocity.", level: "applied", here: "#1" },
+      { skill: "Integrate by parts", href: "/calculus/integrals/techniques/integration-by-parts", desc: "Undo the product rule: products like $x e^x$, $x\\sin x$, $\\ln x$, $e^x\\cos x$.", level: "composite", here: "#7" },
+      { skill: "Integrate by u-substitution", href: "/calculus/integrals/techniques/u-substitution", desc: "Undo the chain rule: an inner function whose derivative is also in the integrand.", level: "composite", here: "#7" },
+      { skill: "Use substitution in a definite integral", href: "/calculus/integrals/techniques/definite-substitution", desc: "Convert the limits to $u$-values, or substitute back before evaluating; never mix the two.", level: "composite", here: "#7" },
+      { skill: "Use tabular integration", href: "/calculus/integrals/techniques/tabular-integration", desc: "Repeated parts in a table: a polynomial times $e^{kx}$, $\\sin kx$ or $\\cos kx$.", level: "composite", here: "#7" },
+      { skill: "Use trigonometric substitution", href: "/calculus/integrals/techniques/trig-substitution", desc: "Remove $\\sqrt{a^2 - x^2}$, $\\sqrt{a^2 + x^2}$ or $\\sqrt{x^2 - a^2}$ with $x = a\\sin\\theta$, $a\\tan\\theta$ or $a\\sec\\theta$.", level: "composite", here: "#7" },
+      { skill: "Choose the right integration technique", href: "/calculus/integrals/techniques/which-integration-technique", desc: "A decision tree from the shape of the integrand to the right technique.", level: "strategy", here: "#7" },
+      { skill: "Evaluate improper integrals", href: "/calculus/integrals/techniques/improper-integrals", desc: "An infinite limit or a blow-up inside the interval: replace it by $t$, integrate, take the limit.", level: "composite", here: "#9" },
+    ] },
+    { title: "More integration techniques", items: [
+      { skill: "Integrate powers of sine and cosine", href: "/calculus/integrals/techniques/trig-powers-integrals", desc: "Odd power: save one factor and substitute. Even powers: reduce the power with half angles.", level: "composite" },
+      { skill: "Evaluate a definite integral with the Fundamental Theorem", href: "/calculus/integrals/techniques/definite-integrals-ftc", desc: "Find an antiderivative $F$ and compute $F(b) - F(a)$; Part 1 for accumulation functions.", level: "composite" },
+      { skill: "Compute a Riemann sum", href: "/calculus/integrals/techniques/riemann-sums", desc: "Left, right and midpoint rectangle sums, and how a limit of sums becomes an integral.", level: "composite" },
+      { skill: "Find the average value of a function", href: "/calculus/integrals/techniques/average-value", desc: "Integrate over $[a, b]$ and divide by $b - a$; then find where $f$ equals its average.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/integrals/techniques", label: "All integration techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -939,6 +978,7 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve accumulation problems](!/calculus/integrals/techniques/accumulation-problems) →@`,
         ]
     },
     {
@@ -947,8 +987,15 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-integrals-two-types-integrals-matrix'}
+            id="integrals-two-types-integrals-matrix"
+            title="Two Types of Integrals"
+            source="/calculus/integrals"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
                   <div key={'unit-twoTypes'} dangerouslySetInnerHTML={{ __html: demoUnits.twoTypes }} />,
           `The Fundamental Theorem is the statement that these two meanings agree.`,
           <DiagramFrame
@@ -1018,9 +1065,22 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-integrals-integration-techniques-matrix'}
+            id="integrals-integration-techniques-matrix"
+            title="Integration Techniques"
+            source="/calculus/integrals"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Each technique undoes a familiar rule, rewriting an unfamiliar integrand as one with a known antiderivative.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to integrate by parts](!/calculus/integrals/techniques/integration-by-parts) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to integrate by u-substitution](!/calculus/integrals/techniques/u-substitution) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use substitution in a definite integral](!/calculus/integrals/techniques/definite-substitution) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use tabular integration](!/calculus/integrals/techniques/tabular-integration) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use trigonometric substitution](!/calculus/integrals/techniques/trig-substitution) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which integration technique should I use?](!/calculus/integrals/techniques/which-integration-technique) →@`,
         ]
     },
     {
@@ -1029,8 +1089,15 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-integrals-special-integrals-matrix'}
+            id="integrals-special-integrals-matrix"
+            title="Special Integrals"
+            source="/calculus/integrals"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1039,6 +1106,7 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate improper integrals](!/calculus/integrals/techniques/improper-integrals) →@`,
         ]
     },
     {
@@ -1055,8 +1123,15 @@ $$\\int_a^b v(t)\\, dt$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-integrals-summary-map-integrals-subtree-matrix'}
+            id="integrals-summary-map-integrals-subtree-matrix"
+            title="Summary: A Map of the Integrals Subtree"
+            source="/calculus/integrals"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1092,6 +1167,14 @@ $$\\int_a^b v(t)\\, dt$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

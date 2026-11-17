@@ -663,6 +663,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -677,6 +678,8 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -684,8 +687,50 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Exponential Functions"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function type","features":[{"id":"c1","name":"General form","type":"text"},{"id":"c2","name":"Base","type":"text"},{"id":"c3","name":"Exponent","type":"text"},{"id":"c4","name":"Example","type":"text"},{"id":"c5","name":"Growth signature","type":"text"}],"items":[{"id":"r1","name":"[Polynomial](!/algebra/polynomials)","values":{"c1":"xⁿ (n fixed)","c2":"variable","c3":"fixed constant","c4":"x³","c5":"polynomial growth (∼ xⁿ)"}},{"id":"r2","name":"[Exponential](!/algebra/powers/exponential-functions)","values":{"c1":"aˣ (a > 0 fixed)","c2":"fixed constant","c3":"variable","c4":"3ˣ","c5":"exponential growth (a > 1) or decay (0 < a < 1)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// CaseGraph 2026-11-12: "How the base sets the direction" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Examples', text: '$2^x > 8$ and $\\left(\\frac{1}{3}\\right)^x \\leq 9$' },
+    grid: {
+      x0: -4, x1: 5, y0: -10, y1: 16,
+      axes: [
+        { id: 'base', name: 'Base', options: [
+          { id: 'big', label: '$a > 1$: $2^x - 8$', sub: 'increasing: ×$a$ each unit; direction preserved' },
+          { id: 'small', label: '$0 < a < 1$: $\\left(\\frac{1}{3}\\right)^x - 9$', sub: 'decreasing: ÷$\\frac{1}{a}$ each unit; direction reversed' } ] },
+        { id: 'ineq', name: 'Inequality', select: true, options: [
+          { id: 'gt', label: '$> 0$', sign: 1 },
+          { id: 'le', label: '$\\leq 0$', sign: -1, closed: true } ] },
+      ],
+      layout: { rows: 'base', cols: 'ineq' },
+      cells: {
+        big:   { f: (x) => Math.pow(2, x) - 8, roots: [{ x: 3, label: '3' }], intervals: [{ from: -Infinity, to: 3 }, { from: 3, to: Infinity }], pattern: '−  +', solution: { gt: '$2^x > 8$: $x > 3$', le: '$2^x \\leq 8$: $x \\leq 3$' } },
+        small: { f: (x) => Math.pow(1 / 3, x) - 9, roots: [{ x: -2, label: '−2' }], intervals: [{ from: -Infinity, to: -2 }, { from: -2, to: Infinity }], pattern: '+  −', solution: { gt: '$\\left(\\frac{1}{3}\\right)^x > 9$: $x < -2$', le: '$\\left(\\frac{1}{3}\\right)^x \\leq 9$: $x \\geq -2$' } },
+      },
+    },
+  };
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Simplify expressions with exponents", href: "/algebra/methods/simplify-exponent-expressions", desc: "Combine several exponent rules into one clean answer with positive exponents.", level: "composite" },
+      { skill: "Solve an exponential equation by matching bases", href: "/algebra/methods/exponential-equations-same-base", desc: "Write both sides as powers of one base, then set the exponents equal.", level: "composite" },
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite" },
+      { skill: "Solve compound interest problems", href: "/algebra/methods/compound-interest-problems", desc: "A = P(1 + r/n)^(nt) and A = Pe^(rt): find the amount, the principal, the time or the rate.", level: "applied" },
+      { skill: "Solve exponential growth and decay problems", href: "/algebra/methods/exponential-growth-decay-problems", desc: "Populations, half-lives, depreciation: build the model, find the rate, solve for the time.", level: "applied" },
+      { skill: "Solve an exponential inequality", href: "/algebra/methods/exponential-inequalities", desc: "Match bases and compare exponents; flip the sign when the base is between 0 and 1.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1635,11 +1680,17 @@ Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-exponential-inequality-base-grid'}
+            id="exponential-inequality-base-grid"
+            title="How the base sets the direction"
+            source="/algebra/powers"
+            related={false}
+            before={"The section's two examples, one per kind of base, each moved to one side as a graph. Switch the inequality to see which side of the boundary solves it."}
+            after={"An increasing exponential keeps the direction of the comparison of exponents; a decreasing one reverses it."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
         ]
     },
 
@@ -1650,11 +1701,15 @@ Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'obj11-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj11Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-powers-exponential-functions-matrix'}
+            id="powers-exponential-functions-matrix"
+            title="Exponential Functions"
+            source="/algebra/powers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1692,6 +1747,14 @@ Reading $4^3$ as $4 \\cdot 3 = 12$ treats the exponent as a factor. The exponent
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

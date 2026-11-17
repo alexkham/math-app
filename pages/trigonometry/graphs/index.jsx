@@ -1026,6 +1026,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1043,6 +1044,22 @@ import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFuncti
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_sinusoidParameters = {
+  center: { name: '$y = A\\sin(Bx - C) + D$', sub: 'four operations, one parameter each' },
+  axes: { cols: ['stretching', 'shifting'], rows: ['acts on output', 'acts on input'] },
+  options: { bullets: false },
+  quadrants: [
+    { label: '$A$', title: 'Vertical stretching', items: [ 'Outside the function: affects the vertical axis.', 'Sets the amplitude.' ] },
+    { label: '$D$', title: 'Vertical shifting', items: [ 'Outside the function: affects the vertical axis.', 'Sets the midline.' ] },
+    { label: '$B$', title: 'Horizontal stretching', items: [ 'Inside the function: affects the horizontal axis.', 'Sets the period.' ] },
+    { label: '$C$', title: 'Horizontal shifting', items: [ 'Inside the function: affects the horizontal axis.', 'Sets the phase shift.' ] }
+  ],
+  note: { label: 'Tangent and cotangent', text: 'The form is the same, but amplitude has no geometric meaning, since these functions are unbounded. $B$, $C$ and $D$ still control period, phase shift and vertical shift in exactly the same way.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
@@ -1051,6 +1068,32 @@ import trigonometryNotationSheet from '@/app/components/infographics/NotationChe
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Vertical Shift and Midline"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Parameter","features":[{"id":"c1","name":"Controls","type":"text"},{"id":"c2","name":"Read from graph / formula","type":"text"},{"id":"c3","name":"Effect on the graph","type":"text"}],"items":[{"id":"r1","name":"A","values":{"c1":"amplitude","c2":"|A| = (max − min) ⁄ 2","c3":"vertical stretch by |A|; reflects across midline if A < 0"}},{"id":"r2","name":"B","values":{"c1":"period","c2":"period = 2π ⁄ |B| (π ⁄ |B| for tan, cot); B = 2π ⁄ period","c3":"horizontal compression if |B| > 1; stretch if |B| < 1"}},{"id":"r3","name":"C","values":{"c1":"phase shift","c2":"phase shift = C ⁄ B (set Bx − C = 0)","c3":"horizontal shift to the right if C ⁄ B > 0; to the left if < 0"}},{"id":"r4","name":"D","values":{"c1":"midline / vertical shift","c2":"D = (max + min) ⁄ 2 = midline value","c3":"moves the whole graph up by D; midline becomes y = D"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Graphs of Cosecant, Secant, and Cotangent"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Period","type":"text"},{"id":"c2","name":"Key points in one cycle","type":"text"},{"id":"c3","name":"Vertical asymptotes","type":"text"}],"items":[{"id":"r1","name":"y = sin x","values":{"c1":"2π","c2":"(0, 0), (π ⁄ 2, 1), (π, 0), (3π ⁄ 2, −1), (2π, 0)","c3":"none"}},{"id":"r2","name":"y = cos x","values":{"c1":"2π","c2":"(0, 1), (π ⁄ 2, 0), (π, −1), (3π ⁄ 2, 0), (2π, 1)","c3":"none"}},{"id":"r3","name":"y = tan x","values":{"c1":"π","c2":"(−π ⁄ 4, −1), (0, 0), (π ⁄ 4, 1) within (−π ⁄ 2, π ⁄ 2)","c3":"x = π ⁄ 2 + nπ"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Graphing by Hand: The Key-Point Method"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function form","features":[{"id":"c1","name":"Point 1 (start)","type":"text"},{"id":"c2","name":"Point 2 (¼)","type":"text"},{"id":"c3","name":"Point 3 (½)","type":"text"},{"id":"c4","name":"Point 4 (¾)","type":"text"},{"id":"c5","name":"Point 5 (end)","type":"text"}],"items":[{"id":"r1","name":"A sin( ⋯ ) + D (A > 0)","values":{"c1":"midline","c2":"max","c3":"midline","c4":"min","c5":"midline"}},{"id":"r2","name":"A sin( ⋯ ) + D (A < 0)","values":{"c1":"midline","c2":"min","c3":"midline","c4":"max","c5":"midline"}},{"id":"r3","name":"A cos( ⋯ ) + D (A > 0)","values":{"c1":"max","c2":"midline","c3":"min","c4":"midline","c5":"max"}},{"id":"r4","name":"A cos( ⋯ ) + D (A < 0)","values":{"c1":"min","c2":"midline","c3":"max","c4":"midline","c5":"min"}},{"id":"r5","name":"A tan( ⋯ ) + D (A > 0)","values":{"c1":"asymptote (→ −∞)","c2":"D − |A|","c3":"midline (D)","c4":"D + |A|","c5":"asymptote (→ +∞)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Graph a tangent function", href: "/trigonometry/methods/graph-tangent", desc: "Find the period and the asymptotes, mark the zero and the two quarter points, draw each branch.", level: "composite", here: "#3" },
+      { skill: "Graph a sine or cosine function", href: "/trigonometry/methods/graph-sine-cosine", desc: "Read amplitude, period, phase shift and midline from $y = A\\sin(B(x - C)) + D$, then plot five key points.", level: "composite", here: "#11" },
+    ] },
+    { title: "More trigonometry methods", items: [
+      { skill: "Evaluate inverse trig functions", href: "/trigonometry/methods/inverse-trig-values", desc: "Find the one angle in the restricted range; compositions with a right triangle.", level: "composite" },
+      { skill: "Find trig values with the unit circle", href: "/trigonometry/methods/unit-circle-values", desc: "Any standard angle: reduce it, find the quadrant and reference angle, attach the sign.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2432,6 +2475,7 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
             <FunctionAnalysis data={tangentProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
           </DiagramFrame>,
           `The direction strip reads "increasing" on every branch, yet the function as a whole is not increasing: each asymptote resets it from $+\\infty$ to $-\\infty$. That is what a period of $\\pi$ looks like on a function with no bound.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to graph a tangent function](!/trigonometry/methods/graph-tangent) →@`,
         ]
     },
 
@@ -2442,11 +2486,15 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphs-graphs-cosecant-secant-cotangent-matrix'}
+            id="graphs-graphs-cosecant-secant-cotangent-matrix"
+            title="Graphs of Cosecant, Secant, and Cotangent"
+            source="/trigonometry/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-reciprocalGraphs'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocalGraphs }} />,
           `Inverting a function swaps its zeros for asymptotes and its extremes for turning points, and nothing else changes.`,
           <DiagramFrame
@@ -2468,6 +2516,15 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
           <div key={'unit-generalForm'} dangerouslySetInnerHTML={{ __html: demoUnits.generalForm }} />,
           `The rest of this page takes the four parameters one at a time, in the order the form presents them.`,
           `@academic[punchline:Numbers inside the function reshape the graph sideways; numbers outside reshape it up and down.]@`,
+          <DiagramFrame
+            key={'four-sides-general-sinusoidal-form-parameters'}
+            id="general-sinusoidal-form-parameters"
+            title="The General Sinusoidal Form"
+            source="/trigonometry/graphs"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_sinusoidParameters} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2523,11 +2580,15 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
           sectionsContent.obj9.content,
           <div key={'unit-verticalShift'} dangerouslySetInnerHTML={{ __html: demoUnits.verticalShift }} />,
           `With the midline located, the maximum and minimum follow immediately as $D + |A|$ and $D - |A|$.`,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphs-vertical-shift-midline-matrix'}
+            id="graphs-vertical-shift-midline-matrix"
+            title="Vertical Shift and Midline"
+            source="/trigonometry/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -2581,11 +2642,15 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
           sectionsContent.obj11.content,
           <div key={'unit-keyPoints'} dangerouslySetInnerHTML={{ __html: demoUnits.keyPoints }} />,
           `The same five-point skeleton works for cosine and tangent; only the pattern of heights changes.`,
-          <div
-            key={'obj11-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj11Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-graphs-graphing-hand-key-point-matrix'}
+            id="graphs-graphing-hand-key-point-matrix"
+            title="Graphing by Hand: The Key-Point Method"
+            source="/trigonometry/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
           `The five key points of the example, plotted and joined: one period of $y = -2\\sin\\left(\\frac{\\pi}{3}x - \\frac{\\pi}{6}\\right) + 1$ from $x = \\frac{1}{2}$ to $x = \\frac{13}{2}$, with the midline crossings, the minimum at $(2, -1)$ and the maximum at $(5, 3)$.`,
           <DiagramFrame
             key={'obj11-profile'}
@@ -2596,6 +2661,7 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
             <FunctionAnalysis data={sineKeyPointProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
           </DiagramFrame>,
           `Because $A$ is negative, the curve dips below the midline first and rises above it second, the reverse of a plain sine. The two strips show that order at a glance, and the rows hold the four numbers that fixed every point: amplitude, period, phase shift and midline.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to graph a sine or cosine function](!/trigonometry/methods/graph-sine-cosine) →@`,
         ]
     },
     {
@@ -2691,6 +2757,14 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

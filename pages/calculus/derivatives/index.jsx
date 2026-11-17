@@ -1,6 +1,8 @@
 
 // tables-optimized: v4 | 2026-05-24 | 2 tables (obj2 notation aggregation, roadmap summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import TestSelector from '@/app/components/infographics/linear-algebra/TestSelector'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -19,6 +21,7 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
@@ -26,6 +29,37 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table roadmapTable ("Roadmap of the Derivatives Subtree"); converted from the table's own cells.
+const fm_roadmapTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Sub-topic","features":[{"id":"c1","name":"Category","type":"text"},{"id":"c2","name":"Focus","type":"text"},{"id":"c3","name":"What it gives the reader","type":"text"}],"items":[{"id":"r1","name":"[Graph analysis](!/calculus/derivatives/graph-analysis)","values":{"c1":"Concept","c2":"signs of f' and f'' control function shape","c3":"direction, critical points, concavity, inflection"}},{"id":"r2","name":"[The derivative as a function](!/calculus/derivatives/function)","values":{"c1":"Concept","c2":"f'(x) as its own function with its own graph","c3":"reading f's behavior from f' and vice versa"}},{"id":"r3","name":"[Differentiability](!/calculus/derivatives/differentiability)","values":{"c1":"Concept","c2":"when the derivative exists and when it fails","c3":"failure modes (corner, cusp, vertical tangent), continuity vs differentiability"}},{"id":"r4","name":"[Differentiation rules](!/calculus/derivatives/rules)","values":{"c1":"Computation","c2":"algebraic procedures replacing the limit definition","c3":"power, product, quotient, chain rules; MVT, Rolle, L'Hôpital"}},{"id":"r5","name":"[Differentiation techniques](!/calculus/derivatives/techniques)","values":{"c1":"Computation","c2":"methods for non-explicit forms","c3":"implicit, logarithmic, parametric differentiation; inverse-function formula"}},{"id":"r6","name":"[Derivatives of common functions](!/calculus/derivatives/common)","values":{"c1":"Catalog","c2":"standard function derivatives as a reference set","c3":"power, trigonometric, exponential, and logarithmic formulas"}},{"id":"r7","name":"[Derivatives of special functions](!/calculus/derivatives/special)","values":{"c1":"Catalog","c2":"families beyond the standard set","c3":"inverse trigonometric, hyperbolic, piecewise, and parametric derivatives"}},{"id":"r8","name":"[Higher-order derivatives](!/calculus/derivatives/higher-order)","values":{"c1":"Extension","c2":"repeated differentiation","c3":"concavity, derivative patterns, smoothness classes, connection to Taylor series"}},{"id":"r9","name":"[Differentials](!/calculus/derivatives/differentials)","values":{"c1":"Extension","c2":"dy = f'(x) · dx as a standalone quantity","c3":"linear approximation and error estimation"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Derivative Notation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Notation","features":[{"id":"c1","name":"First derivative","type":"text"},{"id":"c2","name":"Higher derivatives","type":"text"},{"id":"c3","name":"Typical context","type":"text"}],"items":[{"id":"r1","name":"Lagrange","values":{"c1":"f'(x)","c2":"f''(x), f'''(x), f⁽ⁿ⁾(x)","c3":"compact, function-centric; standard in textbook calculus"}},{"id":"r2","name":"Leibniz","values":{"c1":"dy ⁄ dx","c2":"d²y ⁄ dx², dⁿy ⁄ dxⁿ","c3":"behaves like a ratio; natural for chain rule and differentials"}},{"id":"r3","name":"Euler","values":{"c1":"Df(x) or Dₓf","c2":"D²f, Dⁿf","c3":"differential equations and operator theory"}},{"id":"r4","name":"Newton","values":{"c1":"ẏ","c2":"ÿ, ⃛y","c3":"used almost exclusively when the independent variable is time"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Differentiate an inverse function", href: "/calculus/derivatives/techniques/inverse-functions", desc: "Get $(f^{-1})'$ from $f'$ without finding $f^{-1}$ explicitly.", level: "composite", here: "#7" },
+      { skill: "Differentiate parametric curves", href: "/calculus/derivatives/techniques/parametric-differentiation", desc: "$dy/dx$ for $x = x(t)$, $y = y(t)$.", level: "composite", here: "#7" },
+      { skill: "Use implicit differentiation", href: "/calculus/derivatives/techniques/implicit-differentiation", desc: "Find $dy/dx$ when $y$ is not isolated, e.g. $x^2 + y^2 = 25$.", level: "composite", here: "#7" },
+      { skill: "Use logarithmic differentiation", href: "/calculus/derivatives/techniques/logarithmic-differentiation", desc: "Variable exponents like $x^x$, or long products and quotients.", level: "composite", here: "#7" },
+      { skill: "Find higher-order derivatives", href: "/calculus/derivatives/techniques/higher-order-derivatives", desc: "Second, third and $n$th derivatives, and the patterns that give $f^{(n)}$ directly.", level: "composite", here: "#10" },
+    ] },
+    { title: "More derivative techniques", items: [
+      { skill: "Solve optimization problems", href: "/calculus/derivatives/techniques/optimization-problems", desc: "Maximize or minimize a quantity under a constraint.", level: "applied" },
+      { skill: "Differentiate composite functions", href: "/calculus/derivatives/techniques/composite-functions", desc: "Nested functions such as $\\sin(x^2)$ or $e^{3x+1}$, peeled layer by layer.", level: "composite" },
+      { skill: "Choose the right differentiation technique", href: "/calculus/derivatives/techniques/which-technique", desc: "A decision tree from the shape of the function to the right technique.", level: "strategy" },
+      { skill: "Find concavity and inflection points", href: "/calculus/derivatives/techniques/concavity-inflection-points", desc: "Sign chart of $f''$: which way the graph bends, and where the bending switches.", level: "composite" },
+      { skill: "Find tangent and normal lines", href: "/calculus/derivatives/techniques/tangent-normal-lines", desc: "The line through a point of the curve with slope $f'(a)$, and the perpendicular line.", level: "composite" },
+      { skill: "Solve related rates problems", href: "/calculus/derivatives/techniques/related-rates-problems", desc: "Rates of change of connected quantities.", level: "applied" },
+      { skill: "Find critical points and extrema", href: "/calculus/derivatives/techniques/critical-points", desc: "Solve $f'(x) = 0$, then classify each point as a maximum, minimum or neither.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -816,8 +850,45 @@ const schemas = {
     ],
   };
 
+  // TestSelector 2026-11-14: Which differentiation technique to use (obj7).
+  const techniqueSelector = {
+    question: 'Which differentiation technique fits?',
+    intro: 'What decides is the form in which the relationship between $x$ and $y$ is given.',
+    shortcutsLabel: 'Check first',
+    shortcuts: [
+      { when: '$y$ is given explicitly as a function of $x$', then: 'The standard rules apply directly.' },
+    ],
+    branches: [
+      { condition: '$x$ and $y$ are tied by an equation, such as $x^2 + y^2 = 25$',
+        test: {
+          name: 'Implicit differentiation',
+          doThis: 'Differentiate both sides, then solve for $dy/dx$.',
+          limit: 'The result usually contains both $x$ and $y$.',
+        } },
+      { condition: 'A product with many factors, or a variable exponent such as $x^x$',
+        test: {
+          name: 'Logarithmic differentiation',
+          doThis: 'Take the logarithm of both sides before differentiating.',
+          limit: 'The expression has to be positive for its logarithm to exist.',
+        } },
+      { condition: 'A curve given as $x = x(t)$, $y = y(t)$',
+        test: {
+          name: 'Parametric differentiation',
+          doThis: 'Compute the slope from the two derivatives with respect to $t$.',
+          limit: 'No slope where $dx/dt = 0$.',
+        } },
+      { condition: 'The derivative of an inverse function is wanted',
+        test: {
+          name: 'Inverse function formula',
+          doThis: 'Recover the derivative of $f^{-1}$ from the derivative of $f$.',
+          limit: 'Fails where the derivative of $f$ is $0$.',
+        } },
+    ],
+  };
+
    return {
   props: {
+    techniqueSelector,
     formulaSummaryData,
     pitfallData,
     derivativeShapeProfile,
@@ -842,7 +913,7 @@ const schemas = {
    }
 
 
-   export default function DerivativesPage({ formulaSummaryData, pitfallData,derivativeShapeProfile, derivRoadmapOutline, 
+   export default function DerivativesPage({ techniqueSelector, formulaSummaryData, pitfallData,derivativeShapeProfile, derivRoadmapOutline, 
      seoData,
      sectionsContent,
      introContent,
@@ -965,7 +1036,15 @@ Working from the definition always takes the same three steps: write out $f(a + 
             current={'/calculus/derivatives'}
           />,
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj2Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-derivatives-derivative-notation-matrix'}
+            id="derivatives-derivative-notation-matrix"
+            title="Derivative Notation"
+            source="/calculus/derivatives"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1018,6 +1097,21 @@ Working from the definition always takes the same three steps: write out $f(a + 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-test-selector'}
+            id="differentiation-technique-selector"
+            title="Which differentiation technique to use"
+            source="/calculus/derivatives"
+            before={"The four techniques of this section in one place: read how the relationship is given, then follow that branch."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <TestSelector data={techniqueSelector} theme="navy" variant="tree" />
+            </div>
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to differentiate an inverse function](!/calculus/derivatives/techniques/inverse-functions) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to differentiate parametric curves](!/calculus/derivatives/techniques/parametric-differentiation) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use implicit differentiation](!/calculus/derivatives/techniques/implicit-differentiation) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use logarithmic differentiation](!/calculus/derivatives/techniques/logarithmic-differentiation) →@`,
         ]
     },
     {
@@ -1044,6 +1138,7 @@ Working from the definition always takes the same three steps: write out $f(a + 
           sectionsContent.obj10.content,
                   <div key={'unit-concavity'} dangerouslySetInnerHTML={{ __html: demoUnits.concavity }} />,
           `Each further derivative describes a finer feature of the graph, but the second is the last one with a shape of its own.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find higher-order derivatives](!/calculus/derivatives/techniques/higher-order-derivatives) →@`,
         ]
     },
     {
@@ -1095,7 +1190,15 @@ Working from the definition always takes the same three steps: write out $f(a + 
         link:sectionsContent.roadmap.link,
         content:[
           sectionsContent.roadmap.content,
-          <div key={'roadmap-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: roadmapTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-derivatives-roadmap-derivatives-subtree-matrix'}
+            id="derivatives-roadmap-derivatives-subtree-matrix"
+            title="Roadmap of the Derivatives Subtree"
+            source="/calculus/derivatives"
+            related={false}
+          >
+            <FeatureMatrix data={fm_roadmapTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'roadmap-diagram'}
             id="derivatives-roadmap-outline"
@@ -1104,6 +1207,14 @@ Working from the definition always takes the same three steps: write out $f(a + 
           >
             <TaxonomyOutline data={derivRoadmapOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

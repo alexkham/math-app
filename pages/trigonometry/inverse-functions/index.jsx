@@ -9,6 +9,7 @@
 // import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 // import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 // import { tableHeaders } from '@/app/styles/theme'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderCurveFeatureV2 from '@/app/utils/illustrations/trigonometry/curves/curveFeature.v2'
 
@@ -1029,6 +1030,7 @@ import FAQSection from '../../../app/components/page-components/faq-component/FA
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import { renderState as renderInverseState } from '@/app/components/trigonometry/inverseFunctionDiagrams'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -1038,6 +1040,38 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of the Six Inverse Trigonometric Functions"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Domain","type":"text"},{"id":"c2","name":"Range","type":"text"},{"id":"c3","name":"Monotonicity","type":"text"},{"id":"c4","name":"Key identity / relationship","type":"text"},{"id":"c5","name":"Distinctive feature","type":"text"}],"items":[{"id":"r1","name":"arcsin","values":{"c1":"[−1, 1]","c2":"[−π/2, π/2]","c3":"increasing","c4":"arcsin x + arccos x = π/2","c5":"odd function; passes through origin with slope 1"}},{"id":"r2","name":"arccos","values":{"c1":"[−1, 1]","c2":"[0, π]","c3":"decreasing","c4":"arcsin x + arccos x = π/2","c5":"neither even nor odd; passes through (0, π/2)"}},{"id":"r3","name":"arctan","values":{"c1":"(−∞, ∞)","c2":"(−π/2, π/2)","c3":"increasing","c4":"arctan x + arccot x = π/2","c5":"odd; horizontal asymptotes y = ±π/2"}},{"id":"r4","name":"arccsc","values":{"c1":"(−∞, −1] ∪ [1, ∞)","c2":"[−π/2, 0) ∪ (0, π/2]","c3":"decreasing on each piece","c4":"arccsc x = arcsin(1/x)","c5":"undefined for |x| < 1; gap in graph on (−1, 1)"}},{"id":"r5","name":"arcsec","values":{"c1":"(−∞, −1] ∪ [1, ∞)","c2":"[0, π/2) ∪ (π/2, π]","c3":"increasing on each piece","c4":"arcsec x = arccos(1/x)","c5":"undefined for |x| < 1; horizontal asymptote y = π/2"}},{"id":"r6","name":"arccot","values":{"c1":"(−∞, ∞)","c2":"(0, π)","c3":"decreasing","c4":"arctan x + arccot x = π/2","c5":"horizontal asymptotes y = 0 and y = π"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Compositions of Trigonometric and Inverse Trigonometric Functions"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Composition","features":[{"id":"c1","name":"Algebraic form","type":"text"},{"id":"c2","name":"Valid for","type":"text"}],"items":[{"id":"r1","name":"sin(arccos x)","values":{"c1":"√(1 − x²)","c2":"x ∈ [−1, 1]"}},{"id":"r2","name":"cos(arcsin x)","values":{"c1":"√(1 − x²)","c2":"x ∈ [−1, 1]"}},{"id":"r3","name":"sin(arctan x)","values":{"c1":"x / √(1 + x²)","c2":"x ∈ ℝ"}},{"id":"r4","name":"cos(arctan x)","values":{"c1":"1 / √(1 + x²)","c2":"x ∈ ℝ"}},{"id":"r5","name":"tan(arcsin x)","values":{"c1":"x / √(1 − x²)","c2":"x ∈ (−1, 1)"}},{"id":"r6","name":"tan(arccos x)","values":{"c1":"√(1 − x²) / x","c2":"x ∈ [−1, 1], x ≠ 0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Evaluating Inverse Trigonometric Functions"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Input x","features":[{"id":"c1","name":"arcsin(x)","type":"text"},{"id":"c2","name":"arccos(x)","type":"text"}],"items":[{"id":"r1","name":"−1","values":{"c1":"−π/2","c2":"π"}},{"id":"r2","name":"−√3/2","values":{"c1":"−π/3","c2":"5π/6"}},{"id":"r3","name":"−√2/2","values":{"c1":"−π/4","c2":"3π/4"}},{"id":"r4","name":"−1/2","values":{"c1":"−π/6","c2":"2π/3"}},{"id":"r5","name":"0","values":{"c1":"0","c2":"π/2"}},{"id":"r6","name":"1/2","values":{"c1":"π/6","c2":"π/3"}},{"id":"r7","name":"√2/2","values":{"c1":"π/4","c2":"π/4"}},{"id":"r8","name":"√3/2","values":{"c1":"π/3","c2":"π/6"}},{"id":"r9","name":"1","values":{"c1":"π/2","c2":"0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Inverse Function Notation"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Expression","features":[{"id":"c1","name":"What it means","type":"text"},{"id":"c2","name":"What it returns","type":"text"},{"id":"c3","name":"Unambiguous form","type":"text"}],"items":[{"id":"r1","name":"sin⁻¹(x)","values":{"c1":"inverse sine — the angle whose sine is x","c2":"an angle in [−π/2, π/2]","c3":"arcsin(x)"}},{"id":"r2","name":"(sin x)⁻¹, 1/sin(x)","values":{"c1":"reciprocal of sin(x)","c2":"a number (the cosecant value)","c3":"csc(x)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Evaluate inverse trig functions", href: "/trigonometry/methods/inverse-trig-values", desc: "Find the one angle in the restricted range; compositions with a right triangle.", level: "composite", here: "#7" },
+    ] },
+    { title: "More trigonometry methods", items: [
+      { skill: "Find trig values with the unit circle", href: "/trigonometry/methods/unit-circle-values", desc: "Any standard angle: reduce it, find the quadrant and reference angle, attach the sign.", level: "composite" },
+      { skill: "Find all trig values from one given value", href: "/trigonometry/methods/exact-values", desc: "Given $\\sin\\theta$ (or any one value) and the quadrant, find the other five.", level: "composite" },
+      { skill: "Solve a trigonometric inequality", href: "/trigonometry/methods/trig-inequalities", desc: "Solve the matching equation, then read the intervals off the unit circle or the graph.", level: "composite" },
+    ] },
+    { title: "Integration techniques", items: [
+      { skill: "Use trigonometric substitution", href: "/calculus/integrals/techniques/trig-substitution", desc: "Remove $\\sqrt{a^2 - x^2}$, $\\sqrt{a^2 + x^2}$ or $\\sqrt{x^2 - a^2}$ with $x = a\\sin\\theta$, $a\\tan\\theta$ or $a\\sec\\theta$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2367,8 +2401,15 @@ export default function InverseFunctionsPage({ formulaSummaryData, pitfallData,t
             sheet={trigonometryNotationSheet}
             current={'/trigonometry/inverse-functions'}
           />,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-functions-inverse-function-notation-matrix'}
+            id="inverse-functions-inverse-function-notation-matrix"
+            title="Inverse Function Notation"
+            source="/trigonometry/inverse-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2377,9 +2418,17 @@ export default function InverseFunctionsPage({ formulaSummaryData, pitfallData,t
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-functions-evaluating-inverse-trigonometric-matrix'}
+            id="inverse-functions-evaluating-inverse-trigonometric-matrix"
+            title="Evaluating Inverse Trigonometric Functions"
+            source="/trigonometry/inverse-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:An inverse trigonometric function returns the one angle in its restricted range, not every angle with that value.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate inverse trig functions](!/trigonometry/methods/inverse-trig-values) →@`,
         ]
     },
     {
@@ -2390,8 +2439,15 @@ export default function InverseFunctionsPage({ formulaSummaryData, pitfallData,t
           sectionsContent.obj8.content,
           <div key={'unit-compositionFold'} dangerouslySetInnerHTML={{ __html: demoUnits.compositionFold }} />,
           `The same caution applies to $\\arccos(\\cos x)$ and $\\arctan(\\tan x)$ on their own intervals.`,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-functions-compositions-trigonometric-inverse-matrix'}
+            id="inverse-functions-compositions-trigonometric-inverse-matrix"
+            title="Compositions of Trigonometric and Inverse Trigonometric Functions"
+            source="/trigonometry/inverse-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="triangle-method-steps"
@@ -2461,8 +2517,15 @@ export default function InverseFunctionsPage({ formulaSummaryData, pitfallData,t
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-functions-summary-six-inverse-matrix'}
+            id="inverse-functions-summary-six-inverse-matrix"
+            title="Summary of the Six Inverse Trigonometric Functions"
+            source="/trigonometry/inverse-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -2530,6 +2593,14 @@ export default function InverseFunctionsPage({ formulaSummaryData, pitfallData,t
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

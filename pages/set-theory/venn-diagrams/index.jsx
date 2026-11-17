@@ -766,6 +766,8 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -783,7 +785,33 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Three-Set Venn Diagrams"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Region (formal)","features":[{"id":"c1","name":"In A? In B? In C?","type":"text"},{"id":"c2","name":"Description","type":"text"}],"items":[{"id":"r1","name":"A ∩ B ∩ C","values":{"c1":"✓ ✓ ✓","c2":"central region — in all three sets"}},{"id":"r2","name":"A ∩ B ∩ C$^{c}$","values":{"c1":"✓ ✓ ✗","c2":"in A and B but not C"}},{"id":"r3","name":"A ∩ C ∩ B$^{c}$","values":{"c1":"✓ ✗ ✓","c2":"in A and C but not B"}},{"id":"r4","name":"B ∩ C ∩ A$^{c}$","values":{"c1":"✗ ✓ ✓","c2":"in B and C but not A"}},{"id":"r5","name":"A ∩ B$^{c}$ ∩ C$^{c}$","values":{"c1":"✓ ✗ ✗","c2":"in A only"}},{"id":"r6","name":"B ∩ A$^{c}$ ∩ C$^{c}$","values":{"c1":"✗ ✓ ✗","c2":"in B only"}},{"id":"r7","name":"C ∩ A$^{c}$ ∩ B$^{c}$","values":{"c1":"✗ ✗ ✓","c2":"in C only"}},{"id":"r8","name":"A$^{c}$ ∩ B$^{c}$ ∩ C$^{c}$","values":{"c1":"✗ ✗ ✗","c2":"outside all three circles"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Two-Set Venn Diagrams"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Notation","type":"text"},{"id":"c2","name":"What to shade on the 2-set Venn (circles A and B)","type":"text"}],"items":[{"id":"r1","name":"Union","values":{"c1":"A ∪ B","c2":"both circles entirely (including the overlap)"}},{"id":"r2","name":"Intersection","values":{"c1":"A ∩ B","c2":"only the lens-shaped overlap"}},{"id":"r3","name":"Complement","values":{"c1":"A$^{c}$","c2":"everything inside the rectangle but outside circle A"}},{"id":"r4","name":"Set difference","values":{"c1":"A \\ B","c2":"circle A with the overlap excluded"}},{"id":"r5","name":"Symmetric difference","values":{"c1":"A △ B","c2":"both circles with the overlap excluded"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Fill a two-set Venn diagram", href: "/set-theory/methods/venn-two-sets", desc: "Place elements or counts in the four regions of a two-set Venn diagram: the overlap first, then each set alone, then the outside.", level: "composite", here: "#2" },
+      { skill: "Fill a three-set Venn diagram", href: "/set-theory/methods/venn-three-sets", desc: "Fill the eight regions of a three-set Venn diagram from the center out: all three, the pair-only regions, each set alone, then the outside.", level: "composite", here: "#3" },
+      { skill: "Solve Venn diagram survey problems", href: "/set-theory/methods/survey-problems", desc: "Turn survey wording such as \"both\", \"only A\", \"exactly one\" and \"neither\" into Venn regions, fill them center out, and add the regions asked for.", level: "applied", here: "#3" },
+      { skill: "Prove a set identity", href: "/set-theory/methods/prove-set-identities", desc: "Prove that two set expressions are equal: show each side is a subset of the other, or rewrite one side with the laws of set algebra.", level: "composite", here: "#5" },
+    ] },
+    { title: "More set theory methods", items: [
+      { skill: "Find the size of a union of sets", href: "/set-theory/methods/union-cardinality", desc: "Find $|A \\cup B|$ or $|A \\cup B \\cup C|$ from the set sizes and their overlaps with inclusion-exclusion; add directly when the sets are disjoint.", level: "composite" },
+      { skill: "Check whether one set is a subset of another", href: "/set-theory/methods/subset-check", desc: "Test $A \\subseteq B$ element by element: every element of $A$ must be in $B$; for a proper subset, $B$ also needs an element outside $A$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/set-theory/methods", label: "All set theory methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1373,8 +1401,36 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Shading from the inside out (obj4).
+  const shadingSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$A \\cup (B \\cap C)$',
+      rows: [
+        { step: 'Identify the innermost operation', example: '$B \\cap C$' },
+        { step: 'Shade the region for each subexpression', example: 'the overlap of circles $B$ and $C$; all of circle $A$' },
+        { step: 'Combine according to the outer operation', example: 'the union: both shaded areas together' },
+      ],
+    },
+  };
+
+  // Procedure rollout 2026-11-14: Checking an identity with two diagrams (obj5).
+  const verifyIdentitySteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(A \\cup B)^c = A^c \\cap B^c$',
+      rows: [
+        { step: 'Shade the left side on one diagram', stepSub: 'Shade $A \\cup B$, then take the complement', example: 'everything outside both circles' },
+        { step: 'Shade the right side on another diagram', stepSub: 'Outside $A$ and also outside $B$', example: 'the region outside both circles' },
+        { step: 'Compare the shaded regions', example: 'the same region: the identity holds' },
+      ],
+    },
+  };
+
   return {
   props: {
+    verifyIdentitySteps,
+    shadingSteps,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1396,7 +1452,7 @@ const schemas = {
    }
 
 
-export default function VennDiagramsPage({ pitfallData,demoUnits, seoData, sectionsContent, introContent, obj2Table, obj3Table, faqQuestions, schemas, conceptIntroFigures}) {
+export default function VennDiagramsPage({ verifyIdentitySteps, shadingSteps, pitfallData,demoUnits, seoData, sectionsContent, introContent, obj2Table, obj3Table, faqQuestions, schemas, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1492,13 +1548,18 @@ export default function VennDiagramsPage({ pitfallData,demoUnits, seoData, secti
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-venn-diagrams-two-set-venn-matrix'}
+            id="venn-diagrams-two-set-venn-matrix"
+            title="Two-Set Venn Diagrams"
+            source="/set-theory/venn-diagrams"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           <div key={'unit-regions'} dangerouslySetInnerHTML={{ __html: demoUnits.regions }} />,
           `Four regions, four membership patterns — once you can name each one, reading any two-set shading becomes mechanical.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to fill a two-set Venn diagram](!/set-theory/methods/venn-two-sets) →@`,
         ]
     },
 
@@ -1509,17 +1570,23 @@ export default function VennDiagramsPage({ pitfallData,demoUnits, seoData, secti
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-venn-diagrams-three-set-venn-matrix'}
+            id="venn-diagrams-three-set-venn-matrix"
+            title="Three-Set Venn Diagrams"
+            source="/set-theory/venn-diagrams"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           <div key={'unit-three-sets'} dangerouslySetInnerHTML={{ __html: demoUnits.threeSets }} />,
           `@academic[fact,aside:true,width:35%:Symmetric only for a prime number of sets
 A Venn diagram for $n$ sets that lands on itself after a $\\frac{1}{n}$ turn exists exactly when $n$ is prime. Turning moves the regions inside exactly $k$ curves around in groups of $n$, and $n$ divides $\\binom{n}{k}$ for every $0 < k < n$ only when $n$ is prime.]@
 
 Ellipses and other closed curves do give Venn diagrams for four, five and more sets. The three-circle picture has a property worth noticing: turned through a third of a full turn about its centre, it lands on itself, with each circle moving into the place of the next. A diagram with this kind of turning symmetry treats all of its sets alike, and finding such diagrams for larger numbers of sets became a research question of its own.`,
           `Eight regions for three sets, sixteen for four: the doubling is exactly why circles run out of room beyond three, and why the three-set diagram is the workhorse of the genre.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to fill a three-set Venn diagram](!/set-theory/methods/venn-three-sets) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve Venn diagram survey problems](!/set-theory/methods/survey-problems) →@`,
         ]
     },
     {
@@ -1528,6 +1595,15 @@ Ellipses and other closed curves do give Venn diagrams for four, five and more s
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="shading-steps"
+            title="Shading from the inside out"
+            source="/set-theory/venn-diagrams"
+            before={"The three steps on the first example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={shadingSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-shading'} dangerouslySetInnerHTML={{ __html: demoUnits.shading }} />,
           `Inside-out shading is an algorithm, not an art — master it on one compound expression and every other expression follows the same three steps.`,
         ]
@@ -1538,8 +1614,18 @@ Ellipses and other closed curves do give Venn diagrams for four, five and more s
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-procedure'}
+            id="verify-identity-steps"
+            title="Checking an identity with two diagrams"
+            source="/set-theory/venn-diagrams"
+            before={"The three steps on the first example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={verifyIdentitySteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-de-morgan'} dangerouslySetInnerHTML={{ __html: demoUnits.deMorgan }} />,
           `A matching pair of shaded diagrams is persuasive evidence, not a proof — but it is the fastest way to see why an identity deserves one.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to prove a set identity](!/set-theory/methods/prove-set-identities) →@`,
         ]
     },
     // {
@@ -1662,6 +1748,14 @@ Ellipses and other closed curves do give Venn diagrams for four, five and more s
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

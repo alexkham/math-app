@@ -998,6 +998,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1015,6 +1016,7 @@ import unitCircleDiagrams from '@/app/components/trigo-calculator/unitCircleDiag
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -1022,7 +1024,40 @@ import trigonometryNotationSheet from '@/app/components/infographics/NotationChe
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Approach by Equation Form"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation form","features":[{"id":"c1","name":"First move","type":"text"},{"id":"c2","name":"Result","type":"text"},{"id":"c3","name":"Then solve as","type":"text"}],"items":[{"id":"r1","name":"Basic: sin/cos/tan x = a","values":{"c1":"check |a| against the function's range; find reference angle","c2":"principal angle α","c3":"apply the quadrant rule, then write the general solution"}},{"id":"r2","name":"Product equals 0 (factored)","values":{"c1":"set each factor to 0 separately","c2":"several basic equations","c3":"solve each, then union the solution sets"}},{"id":"r3","name":"Quadratic in a single function","values":{"c1":"substitute u = sin x (or cos x, tan x); factor or apply the quadratic formula","c2":"values of u","c3":"reject u values outside the function's range, then solve each basic equation"}},{"id":"r4","name":"Two or more functions mixed","values":{"c1":"apply a Pythagorean, double-angle, or other [identity](!/trigonometry/identities)","c2":"single-function equation","c3":"basic or quadratic in that function"}},{"id":"r5","name":"Multiple angle: sin/cos/tan(nx) = a","values":{"c1":"let u = nx and solve sin/cos/tan u = a first","c2":"general solution in u","c3":"divide by n, generate every x in the target interval (up to 2n solutions on [0, 2π))"}},{"id":"r6","name":"Equation requiring squaring","values":{"c1":"square (only when needed), reduce to a basic or quadratic form","c2":"candidate solutions","c3":"substitute each candidate into the original to discard extraneous values"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Extraneous Solutions"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Why it can introduce extraneous solutions","type":"text"},{"id":"c2","name":"How to handle","type":"text"}],"items":[{"id":"r1","name":"Squaring both sides","values":{"c1":"cannot distinguish a from −a (both square to a²)","c2":"substitute every candidate back into the original equation"}},{"id":"r2","name":"Multiplying by a variable expression","values":{"c1":"adds solutions where that expression equals 0","c2":"discard any candidate that makes the multiplier 0"}},{"id":"r3","name":"Certain identity substitutions","values":{"c1":"may broaden the domain or change the equation's effective form","c2":"verify candidates in the original equation, not the transformed one"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Solving Basic Tangent Equations"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation","features":[{"id":"c1","name":"Range constraint on a","type":"text"},{"id":"c2","name":"Reference / principal angle","type":"text"},{"id":"c3","name":"Solutions on [0, 2π)","type":"text"},{"id":"c4","name":"General solution","type":"text"}],"items":[{"id":"r1","name":"sin x = a","values":{"c1":"|a| ≤ 1","c2":"α = arcsin|a|","c3":"a > 0: Q I, II → α, π − α a < 0: Q III, IV → π + α, 2π − α","c4":"x = α + 2nπ or x = π − α + 2nπ"}},{"id":"r2","name":"cos x = a","values":{"c1":"|a| ≤ 1","c2":"α = arccos|a|","c3":"a > 0: Q I, IV → α, 2π − α a < 0: Q II, III → π − α, π + α","c4":"x = ±α + 2nπ"}},{"id":"r3","name":"tan x = a","values":{"c1":"any real a","c2":"α = arctan a (∈ (−π ⁄ 2, π ⁄ 2))","c3":"α (mod π in [0, 2π)) and α + π — one per period","c4":"x = α + nπ"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the solutions of a trig equation in an interval", href: "/trigonometry/equations/methods/equations-on-interval", desc: "Write the general solution, then substitute integers k until you leave the interval.", level: "composite", here: "#1" },
+      { skill: "Write the general solution of a trig equation", href: "/trigonometry/equations/methods/general-solution", desc: "Every solution at once: add $2k\\pi$ to the sine and cosine solutions, $k\\pi$ to the tangent ones.", level: "composite", here: "#1" },
+      { skill: "Solve a basic trig equation", href: "/trigonometry/equations/methods/basic-trig-equations", desc: "$\\sin x = a$, $\\cos x = a$, $\\tan x = a$ on one turn: reference angle, then the two quadrants.", level: "composite", here: "#2" },
+      { skill: "Solve a trig equation by factoring", href: "/trigonometry/equations/methods/factoring-trig-equations", desc: "Bring everything to one side, factor out the common function, set each factor to zero.", level: "composite", here: "#5" },
+      { skill: "Solve a trig equation using identities", href: "/trigonometry/equations/methods/equations-with-identities", desc: "Rewrite everything in one function of one angle with an identity, then solve.", level: "composite", here: "#6" },
+      { skill: "Solve a quadratic trig equation", href: "/trigonometry/equations/methods/quadratic-trig-equations", desc: "Substitute $u = \\sin x$ (or $\\cos x$), solve the quadratic, then solve each basic equation.", level: "composite", here: "#7" },
+      { skill: "Solve a trig equation with a multiple angle", href: "/trigonometry/equations/methods/multiple-angle-equations", desc: "Solve for $kx$ over the stretched interval, then divide every solution by $k$.", level: "composite", here: "#8" },
+      { skill: "Choose the right method for a trig equation", href: "/trigonometry/equations/methods/which-trig-equation-method", desc: "A decision tree from the shape of the equation to the method that solves it.", level: "strategy", here: "#10" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+      { skill: "Use the quadratic formula", href: "/algebra/equations/methods/quadratic-formula", desc: "Read off a, b, c and substitute; works for every quadratic, factorable or not.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/equations/methods", label: "All trig equation methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1988,8 +2023,36 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     ],
   };
 
+  const cosineEquationSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\cos(x) = -\\frac{1}{2}$',
+      rows: [
+        { step: 'Find the reference angle $\\alpha = \\arccos(|a|)$', example: '$\\alpha = \\arccos\\left(\\frac{1}{2}\\right) = \\frac{\\pi}{3}$' },
+        { step: 'Choose the quadrants from the sign of $a$', stepSub: 'Cosine is positive in Quadrants I and IV, negative in Quadrants II and III', example: 'Negative: Quadrants II and III' },
+        { step: 'Write the solutions within one period', example: '$x = \\pi - \\frac{\\pi}{3} = \\frac{2\\pi}{3}$ or $x = \\pi + \\frac{\\pi}{3} = \\frac{4\\pi}{3}$' },
+        { step: 'For the general solution, add $2n\\pi$ to each', example: '$x = \\frac{2\\pi}{3} + 2n\\pi$ or $x = \\frac{4\\pi}{3} + 2n\\pi$' },
+      ],
+    },
+  };
+
+  const sineEquationSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\sin(x) = -\\frac{\\sqrt{3}}{2}$',
+      rows: [
+        { step: 'Find the reference angle $\\alpha = \\arcsin(|a|)$', example: '$\\alpha = \\arcsin\\left(\\frac{\\sqrt{3}}{2}\\right) = \\frac{\\pi}{3}$' },
+        { step: 'Determine the quadrants', stepSub: 'Sine is positive in Quadrants I and II, negative in Quadrants III and IV', example: 'Negative: Quadrants III and IV' },
+        { step: 'Write the solutions within one period', example: '$x = \\pi + \\frac{\\pi}{3} = \\frac{4\\pi}{3}$ or $x = 2\\pi - \\frac{\\pi}{3} = \\frac{5\\pi}{3}$' },
+        { step: 'Write the general solution', stepSub: 'Add $2n\\pi$ to each', example: '$x = \\frac{4\\pi}{3} + 2n\\pi$ or $x = \\frac{5\\pi}{3} + 2n\\pi$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    sineEquationSteps,
+    cosineEquationSteps,
     formulaSummaryData,
     pitfallData,
     generalRestrictedComparison,
@@ -2015,7 +2078,7 @@ Managing this infinity is what distinguishes trigonometric equation solving from
     }
    }
 
-export default function EquationsPage({ formulaSummaryData, pitfallData,generalRestrictedComparison, trigEquationDecision, seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function EquationsPage({ sineEquationSteps, cosineEquationSteps, formulaSummaryData, pitfallData,generalRestrictedComparison, trigEquationDecision, seoData,sectionsContent , introContent, obj4Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2114,6 +2177,8 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the solutions of a trig equation in an interval](!/trigonometry/equations/methods/equations-on-interval) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to write the general solution of a trig equation](!/trigonometry/equations/methods/general-solution) →@`,
         ]
     },
     {
@@ -2124,6 +2189,12 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
           sectionsContent.obj2.content,
                   <div key={'unit-twoSolutions'} dangerouslySetInnerHTML={{ __html: demoUnits.twoSolutions }} />,
           `The sign of a only decides which pair of quadrants hosts the two points; the mirror relationship is the same.`,
+          <DiagramFrame key={'obj2-procedure'} id="sine-equation-steps" title="The four steps on one equation"
+            source="/trigonometry/equations" related={false}
+            before={"The four steps on the equation from this section's example. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={sineEquationSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a basic trig equation](!/trigonometry/equations/methods/basic-trig-equations) →@`,
         ]
     },
     {
@@ -2132,6 +2203,11 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame key={'obj3-procedure'} id="cosine-equation-steps" title="The four steps on one equation"
+            source="/trigonometry/equations" related={false}
+            before={"The four steps on the equation from this section's example. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={cosineEquationSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
 
@@ -2142,11 +2218,15 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-solving-basic-tangent-equations-matrix'}
+            id="equations-solving-basic-tangent-equations-matrix"
+            title="Solving Basic Tangent Equations"
+            source="/trigonometry/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrameV2>,
                   <div key={'unit-tanPeriod'} dangerouslySetInnerHTML={{ __html: demoUnits.tanPeriod }} />,
           `The shorter period is why the general solution for tangent adds n&#960; rather than 2n&#960;.`,
         ]
@@ -2181,6 +2261,7 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a trig equation by factoring](!/trigonometry/equations/methods/factoring-trig-equations) →@`,
         ]
     },
     {
@@ -2189,6 +2270,7 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a trig equation using identities](!/trigonometry/equations/methods/equations-with-identities) →@`,
         ]
     },
     {
@@ -2197,6 +2279,7 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a quadratic trig equation](!/trigonometry/equations/methods/quadratic-trig-equations) →@`,
         ]
     },
     {
@@ -2207,6 +2290,7 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
           sectionsContent.obj8.content,
           <div key={'unit-multipleAngles'} dangerouslySetInnerHTML={{ __html: demoUnits.multipleAngles }} />,
           `Widening the interval for $u$ to $[0, 4\\pi)$ before solving is what guarantees none are missed.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a trig equation with a multiple angle](!/trigonometry/equations/methods/multiple-angle-equations) →@`,
         ]
     },
 
@@ -2217,11 +2301,15 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-extraneous-solutions-matrix'}
+            id="equations-extraneous-solutions-matrix"
+            title="Extraneous Solutions"
+            source="/trigonometry/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -2267,11 +2355,15 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-summary-approach-equation-form-matrix'}
+            id="equations-summary-approach-equation-form-matrix"
+            title="Summary: Approach by Equation Form"
+            source="/trigonometry/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
           `The table reads by form. The map below asks about the forms one at a time, in the order worth checking, so the first yes gives the first move.`,
           <DiagramFrameV2
             key={'obj10-decision'}
@@ -2282,6 +2374,7 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
             <DecisionBox data={trigEquationDecision} />
           </DiagramFrameV2>,
           `Only the squaring route can add answers that are not there: after squaring, $\\sin(x) + \\cos(x) = 1$ and $\\sin(x) + \\cos(x) = -1$ become the same equation. That route therefore ends with a check of every candidate in the original equation, as in [extraneous solutions](!#9).`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which method should I use for a trig equation?](!/trigonometry/equations/methods/which-trig-equation-method) →@`,
         ]
     },
     // {
@@ -2349,6 +2442,14 @@ With a multiple that is not whole, the sum is no longer periodic: $\\sin x + \\s
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

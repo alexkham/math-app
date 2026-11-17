@@ -657,6 +657,8 @@
 
 // tables-optimized: v4 | 2026-05-20 | 4 tables (obj5 aggregation, obj6 aggregation, obj8 comparison, obj11 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -673,9 +675,44 @@ import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplicatio
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Four Views of a Matrix"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"View","features":[{"id":"c1","name":"What A is","type":"text"},{"id":"c2","name":"Question it best answers","type":"text"},{"id":"c3","name":"Concepts that flow from it","type":"text"}],"items":[{"id":"r1","name":"Rectangular array","values":{"c1":"a table of entries aᵢⱼ with m rows and n columns","c2":"how do entries relate by position?","c3":"dimensions, equality, zero matrix, transpose"}},{"id":"r2","name":"Collection of vectors","values":{"c1":"n column vectors in ℝᵐ (or m row vectors in ℝⁿ)","c2":"how do the columns combine?","c3":"[span](!/linear-algebra/vector-spaces/span), [linear independence](!/linear-algebra/vector-spaces/linear-independence), column/row space"}},{"id":"r3","name":"Encoded linear system","values":{"c1":"the coefficient block of Ax = b","c2":"when does the system have solutions, and how many?","c3":"augmented matrix, [rank](!/linear-algebra/matrix/rank), [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination)"}},{"id":"r4","name":"[Linear transformation](!/linear-algebra/transformations)","values":{"c1":"a map x ↦ Ax from ℝⁿ to ℝᵐ","c2":"what does A do geometrically?","c3":"image, null space, rotation, projection, inverse"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Rank and Trace"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Attribute","features":[{"id":"c1","name":"Rank","type":"text"},{"id":"c2","name":"Trace","type":"text"}],"items":[{"id":"r1","name":"Defined for","values":{"c1":"any m × n matrix","c2":"square matrices only"}},{"id":"r2","name":"Definition","values":{"c1":"number of linearly independent rows (= columns)","c2":"sum of diagonal entries: a₁₁ + a₂₂ + ⋯ + aₙₙ"}},{"id":"r3","name":"Range / values","values":{"c1":"integer, 0 ≤ rank(A) ≤ min(m, n)","c2":"any real (or complex) scalar"}},{"id":"r4","name":"Eigenvalue link","values":{"c1":"square A: at least the number of nonzero eigenvalues (with multiplicity); equal if A is diagonalizable","c2":"equals the sum of all eigenvalues"}},{"id":"r5","name":"Key identity","values":{"c1":"rank(A) = rank(Aᵀ)","c2":"tr(AB) = tr(BA); invariant under change of basis"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Special Matrix Shapes"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Defining condition","type":"text"},{"id":"c2","name":"Signature property","type":"text"}],"items":[{"id":"r1","name":"Diagonal","values":{"c1":"nonzero entries only on the main diagonal","c2":"products, powers, and inverses act on the diagonal alone"}},{"id":"r2","name":"Identity (I)","values":{"c1":"diagonal with every diagonal entry equal to 1","c2":"AI = IA = A (multiplicative identity)"}},{"id":"r3","name":"Symmetric","values":{"c1":"A = Aᵀ","c2":"all eigenvalues real; eigenvectors can be chosen orthogonal"}},{"id":"r4","name":"Triangular","values":{"c1":"all entries above or below the diagonal are zero","c2":"determinant and eigenvalues read directly from the diagonal"}},{"id":"r5","name":"Orthogonal","values":{"c1":"QᵀQ = I (columns orthonormal)","c2":"preserves lengths and angles; Q⁻¹ = Qᵀ"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Matrix Arithmetic at a Glance"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Definition","type":"text"},{"id":"c2","name":"Dimension requirement","type":"text"},{"id":"c3","name":"Result size","type":"text"}],"items":[{"id":"r1","name":"Addition","values":{"c1":"(A + B)ᵢⱼ = aᵢⱼ + bᵢⱼ","c2":"A and B both m × n","c3":"m × n"}},{"id":"r2","name":"Scalar multiplication","values":{"c1":"(cA)ᵢⱼ = c · aᵢⱼ","c2":"none","c3":"same as A"}},{"id":"r3","name":"Matrix multiplication","values":{"c1":"(AB)ᵢⱼ = Σₖ aᵢₖ bₖⱼ (not commutative)","c2":"cols(A) = rows(B); A is m × n, B is n × p","c3":"m × p"}},{"id":"r4","name":"Transpose","values":{"c1":"(Aᵀ)ᵢⱼ = aⱼᵢ","c2":"none","c3":"n × m"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Matrix methods", items: [
+      { skill: "Find the inverse of a 2×2 matrix", href: "/linear-algebra/matrix/methods/inverse-2x2", desc: "Swap the diagonal, negate the other two entries, divide by the determinant $ad - bc$.", level: "composite" },
+      { skill: "Find an inverse by Gauss-Jordan elimination", href: "/linear-algebra/matrix/methods/inverse-gauss-jordan", desc: "Row reduce $[A \\mid I]$ until the left half is $I$; the right half is then $A^{-1}$.", level: "composite" },
+      { skill: "Find an inverse with the adjugate", href: "/linear-algebra/matrix/methods/inverse-adjugate", desc: "Compute every cofactor, transpose them into $\\operatorname{adj}(A)$, divide by $\\det(A)$.", level: "composite" },
+      { skill: "Multiply matrices", href: "/linear-algebra/matrix/methods/matrix-multiplication", desc: "Check the inner sizes, then fill each entry with a row of the first times a column of the second.", level: "composite" },
+      { skill: "Compute powers of a matrix", href: "/linear-algebra/matrix/methods/matrix-powers", desc: "Multiply the matrix by itself, square repeatedly for high powers, or use a diagonal or repeating pattern.", level: "composite" },
+      { skill: "Find the rank of a matrix", href: "/linear-algebra/matrix/methods/rank", desc: "Row reduce to echelon form and count the pivots.", level: "composite" },
+      { skill: "Find the trace of a matrix", href: "/linear-algebra/matrix/methods/trace", desc: "Add the diagonal entries; use linearity and $\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$ to skip products.", level: "composite" },
+      { skill: "Identify the type of a matrix", href: "/linear-algebra/matrix/methods/identify-matrix-type", desc: "Check the shape, the zero pattern, the transpose and a few products to name the type.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system with the inverse matrix", href: "/linear-algebra/linear-systems/methods/inverse-matrix-method", desc: "Write the system as Ax = b, find the inverse of A, and multiply: x is the inverse times b.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/matrix/methods", label: "All matrix methods" },
+};
 
 export async function getStaticProps(){
 
@@ -963,7 +1000,7 @@ The product $A\\mathbf{x}$ is a [linear combination](!/linear-algebra/vectors/li
 
 Addition is entry-by-entry: $(A + B)_{ij} = a_{ij} + b_{ij}$. Both matrices must have the same dimensions. Scalar multiplication scales every entry: $(cA)_{ij} = c \\cdot a_{ij}$. These two operations together give the set of all $m \\times n$ matrices the structure of a vector space of dimension $mn$.
 
-Matrix multiplication is more involved. For $A$ of size $m \\times n$ and $B$ of size $n \\times p$, the product $AB$ has size $m \\times p$, with each entry [computed as the dot product of a row](https://calculatematrix.com/matrix-calculators/matrix-multiplication#algorithm) of $A$ with a column of $B$: $(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$. The number of columns of $A$ must equal the number of rows of $B$; otherwise the product is undefined.
+Matrix multiplication is more involved. For $A$ of size $m \\times n$ and $B$ of size $n \\times p$, the product $AB$ has size $m \\times p$, with each entry [computed as the dot product of a row](https://calculatematrix.com/matrix-calculators/matrix-multiplication#algorithm) of $A$ with a column of $B$: $(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$. The number of columns of $A$ must equal the number of rows of $B$; otherwise the product is undefined. [See which sizes fit](!/linear-algebra/matrix/operations#which-sizes-fit).
 
 @academic[pitfall,aside:true,width:35%:Multiplying entry by entry
 Multiplying matching positions turns $\\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}\\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$ into $\\begin{pmatrix} 5 & 12 \\\\ 21 & 32 \\end{pmatrix}$. Each entry of $AB$ needs a row times a column, which gives $\\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$.
@@ -1294,8 +1331,16 @@ $$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$`],
     ],
   };
 
+  // MatrixOperation 2026-11-14: A two by two inverse, entry by entry (obj7).
+  const inverseOverviewStrip = {
+    operation: 'inverse',
+    A: [[2, 1], [5, 3]],
+    intro: 'Swap the diagonal entries $2$ and $3$, negate $1$ and $5$, and divide by $ad - bc = 1$.',
+  };
+
   return {
   props: {
+    inverseOverviewStrip,
     pitfallData,
     faqQuestions,
     matrixShapesOutline,
@@ -1321,7 +1366,7 @@ $$\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$$`],
 
 
 
-   export default function MatricesPage({ pitfallData,matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
+   export default function MatricesPage({ inverseOverviewStrip, pitfallData,matrixShapesOutline, seoData, sectionsContent, introContent, obj5Table, obj6Table, obj8Table, summaryTable, schemas, demoUnits, conceptIntroFigures, faqQuestions}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1432,8 +1477,15 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-matrix-matrix-arithmetic-at-glance-matrix'}
+            id="matrix-matrix-arithmetic-at-glance-matrix"
+            title="Matrix Arithmetic at a Glance"
+            source="/linear-algebra/matrix"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1442,8 +1494,15 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-matrix-special-matrix-shapes-matrix'}
+            id="matrix-special-matrix-shapes-matrix"
+            title="Special Matrix Shapes"
+            source="/linear-algebra/matrix"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj6-diagram'}
             id="matrix-shapes-outline"
@@ -1460,6 +1519,17 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-matrix-operation'}
+            id="inverse-2x2-strip"
+            title="A two by two inverse, entry by entry"
+            source="/linear-algebra/matrix"
+            before={"The formula applied to the matrix from the note beside the text."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <MatrixOperation data={inverseOverviewStrip} theme="navy" variant="strip" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -1468,8 +1538,15 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-matrix-rank-trace-matrix'}
+            id="matrix-rank-trace-matrix"
+            title="Rank and Trace"
+            source="/linear-algebra/matrix"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1496,8 +1573,15 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-matrix-four-views-matrix-matrix'}
+            id="matrix-four-views-matrix-matrix"
+            title="Four Views of a Matrix"
+            source="/linear-algebra/matrix"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1515,6 +1599,14 @@ J. J. Sylvester introduced the word matrix in 1850, the Latin for womb. He saw t
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

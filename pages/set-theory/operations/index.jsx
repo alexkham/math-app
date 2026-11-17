@@ -2774,6 +2774,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -2794,7 +2795,49 @@ import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatS
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
 
+// SetDiagram (operations) 2026-11-15: the summary's shared example, A = {1, 2, 3}, B = {3, 4, 5}, U = {1, ..., 5}.
+// Definitions and results are the ones in formulaSummaryData.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const fiveOperationsDiagram = {
+  sets: [{ id: 'A' }, { id: 'B' }],
+  universe: 'U',
+  regionNames: { A: 'only $A$', AB: 'both $A$ and $B$', B: 'only $B$', '': 'outside both' },
+  elements: [
+    { label: '1', in: ['A'] }, { label: '2', in: ['A'] }, { label: '3', in: ['A', 'B'] }, { label: '4', in: ['B'] }, { label: '5', in: ['B'] },
+  ],
+  given: '$A = \\{1, 2, 3\\}$, $B = \\{3, 4, 5\\}$, $U = \\{1, 2, 3, 4, 5\\}$',
+  operations: [
+    { id: 'union', name: 'Union', notation: '$A \\cup B$', regions: ['A', 'AB', 'B'], rule: 'belong to $A$ or $B$, the inclusive or',
+      formula: '$A \\cup B = \\{x : x \\in A \\text{ or } x \\in B\\}$', result: '$A \\cup B = \\{1, 2, 3, 4, 5\\}$', props: 'commutative and associative; identity element $\\emptyset$' },
+    { id: 'intersection', name: 'Intersection', notation: '$A \\cap B$', regions: ['AB'], rule: 'belong to both $A$ and $B$',
+      formula: '$A \\cap B = \\{x : x \\in A \\text{ and } x \\in B\\}$', result: '$A \\cap B = \\{3\\}$', props: 'commutative and associative; identity element $U$' },
+    { id: 'complement', name: 'Complement', notation: '$A^c$', regions: ['B', ''], rule: 'are in $U$ but not in $A$',
+      formula: '$A^c = \\{x \\in U : x \\notin A\\}$', result: '$A^c = \\{4, 5\\}$', props: '$(A^c)^c = A$; $A \\cup A^c = U$; $A \\cap A^c = \\emptyset$' },
+    { id: 'difference', name: 'Set difference', notation: '$A \\setminus B$', regions: ['A'], rule: 'are in $A$ but not in $B$',
+      formula: '$A \\setminus B = \\{x : x \\in A \\text{ and } x \\notin B\\}$', result: '$A \\setminus B = \\{1, 2\\}$', props: 'not commutative: $B \\setminus A = \\{4, 5\\}$; $A \\setminus B = A \\cap B^c$' },
+    { id: 'symmetric', name: 'Symmetric difference', notation: '$A \\triangle B$', regions: ['A', 'B'], rule: 'are in exactly one of $A$ and $B$',
+      formula: '$A \\triangle B = (A \\setminus B) \\cup (B \\setminus A)$', result: '$A \\triangle B = \\{1, 2, 4, 5\\}$', props: 'commutative and associative; identity element $\\emptyset$; $A \\triangle A = \\emptyset$' },
+  ],
+};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Set theory methods", items: [
+      { skill: "Find the union of two sets", href: "/set-theory/methods#union", desc: "The question asks for the elements in one set **or** the other, or both: $A \\cup B$, \"in at least one of the sets\", \"everyone on either team\".", level: "atomic" },
+      { skill: "Find the intersection of two sets", href: "/set-theory/methods#intersection", desc: "The question asks for the elements in **both** sets: $A \\cap B$, \"common to\", \"in $A$ and in $B$\". If nothing is shared, the answer is $\\emptyset$.", level: "atomic" },
+      { skill: "Find the difference of two sets", href: "/set-theory/methods#difference", desc: "The question asks for the elements of one set that are **not** in another: $A \\setminus B$ (also written $A - B$), \"in $A$ but not in $B$\". Order matters.", level: "atomic" },
+      { skill: "Find the complement of a set", href: "/set-theory/methods#complement", desc: "The question asks for everything **not** in a set, relative to a universal set $U$: $A^c$, \"not in $A$\", \"outside the circle\". Without a stated $U$ the complement is not defined.", level: "atomic" },
+      { skill: "Find the symmetric difference of two sets", href: "/set-theory/methods#symmetric-difference", desc: "The question asks for the elements in **exactly one** of two sets: $A \\triangle B$, \"in $A$ or in $B$ but not in both\".", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/set-theory/methods", label: "All set theory methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3655,9 +3698,26 @@ $$\\bigcup_{i=1}^{n} A_i = A_1 \\cup A_2 \\cup \\cdots \\cup A_n$$]@`,
           >
             <FormulaSheet data={formulaSummaryData} variant="grouped" />
           </DiagramFrame>,
+          <DiagramFrame
+            key={'set-diagram-five-operations'}
+            id="five-set-operations-venn"
+            title="The five operations on one Venn diagram"
+            source="/set-theory/operations"
+            before="The same shared example as a picture: pick an operation to shade the regions it keeps, or click regions to build a set of your own."
+          >
+            <SetDiagram data={fiveOperationsDiagram} variant="operations" theme={setDiagramTheme} />
+          </DiagramFrame>,
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

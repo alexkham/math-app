@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import React from 'react'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -15,12 +16,57 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (operations + probability + condition) 2026-11-15: the page's die example, A = even and B = greater than 3.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const dependentEventsDiagram = {
+  labels: { elementsThat: 'Outcomes that', elements: 'Outcomes' },
+  sets: [{ id: 'A' }, { id: 'B' }],
+  regionNames: { A: 'only $A$', AB: 'both $A$ and $B$', B: 'only $B$', '': 'neither' },
+  elements: [
+    { label: '2', in: ['A'] }, { label: '4', in: ['A', 'B'] }, { label: '6', in: ['A', 'B'] }, { label: '5', in: ['B'] }, { label: '1', in: [] }, { label: '3', in: [] },
+  ],
+  given: 'One die roll: $A$ = even, $B$ = greater than $3$',
+  initial: 'a',
+  operations: [
+    { id: 'a', name: 'Even', notation: '$A$', regions: ['A', 'AB'], rule: 'are even', result: '$\\{2, 4, 6\\}$',
+      prob: { calc: '$\\frac{3}{6} = \\frac{1}{2}$' } },
+    { id: 'b', name: 'Greater than 3', notation: '$B$', regions: ['AB', 'B'], rule: 'are greater than $3$', result: '$\\{4, 5, 6\\}$',
+      prob: { calc: '$\\frac{3}{6} = \\frac{1}{2}$' } },
+    { id: 'both', name: 'Both', notation: '$A \\cap B$', regions: ['AB'], rule: 'are even and greater than $3$', result: '$\\{4, 6\\}$',
+      prob: { calc: '$\\frac{2}{6} = \\frac{1}{3}$', note: 'Not $P(A)\\,P(B) = \\frac{1}{2} \\cdot \\frac{1}{2} = \\frac{1}{4}$: the events are dependent.' } },
+  ],
+  probability: {
+    conditions: [
+      { id: 'b', label: 'given $B$', notation: '$B$', regions: ['AB', 'B'], sets: ['B'],
+        note: 'With $A$ selected: $P(A \\mid B) = \\frac{2/6}{3/6} = \\frac{2}{3}$, while $P(A) = \\frac{1}{2}$. Knowing $B$ changes the chance of $A$.' },
+    ],
+  },
+};
 
 // Surfaced on the /probability hub via buildSectionData extraction.
 const hubMeta = {
   name: 'Probability Basics',
   hubDescription: 'The complete conceptual tour of probability on one page: sample spaces and events, the Kolmogorov axioms, the full tree of probability rules, combinatorial counting, random variables and their distributions, conditional probability and independence, and the probability function that underlies it all — illustrated with diagrams and a comprehensive key-terms map into the definitions glossary.',
 }
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Probability methods", items: [
+      { skill: "List a sample space", href: "/probability/methods/sample-space", desc: "Write down every possible outcome of an experiment with a list, a grid or a tree, then count it.", level: "composite" },
+      { skill: "Find a probability by counting outcomes", href: "/probability/methods/classical-probability", desc: "Equally likely outcomes: count the favorable ones, count all of them, divide.", level: "composite" },
+      { skill: "Find a probability with the complement rule", href: "/probability/methods#complement-rule", desc: "The event is easier to describe by what does not happen: \"at least one\", \"not all\", \"no six\".", level: "atomic" },
+      { skill: "Find the probability of A or B", href: "/probability/methods#addition-rule", desc: "The question says \"or\": a heart or a king, an even number or a number above $4$, rain or wind.", level: "atomic" },
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite" },
+      { skill: "Solve a probability problem with a tree diagram", href: "/probability/methods/tree-diagrams", desc: "One level per stage: label the branches, multiply along each path, add the paths you want.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps() {
   
@@ -838,6 +884,16 @@ export default function ProbabilityBasicsPage({ pitfallData,
       content:[
         sectionContent.conditional.before,
         sectionContent.conditional.description,
+        <DiagramFrame
+          key={'set-diagram-dependent-events'}
+          id="dependent-events-die"
+          title="How knowing B changes the chance of A"
+          source="/probability/basics"
+          related={false}
+          before={'The die example as a picture. Select $A$, then switch the condition to "given $B$": only the outcomes inside $B$ stay in play, and the chance of $A$ changes.'}
+        >
+          <SetDiagram data={dependentEventsDiagram} variant="operations" theme={setDiagramTheme} />
+        </DiagramFrame>,
 
       ]
 
@@ -891,6 +947,14 @@ export default function ProbabilityBasicsPage({ pitfallData,
           width: 8 // full width
         }
       ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
     },
     // faq: rendered component — must be built here, not in getStaticProps
     {

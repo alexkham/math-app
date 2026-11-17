@@ -1947,6 +1947,7 @@
 
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj5 aggregation, obj8 comparison, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1960,6 +1961,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1970,6 +1972,29 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Cross Product Uses"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Result","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"What it captures","type":"text"}],"items":[{"id":"r1","name":"Area of a parallelogram","values":{"c1":"&Vert;a × b&Vert; = &Vert;a&Vert; &Vert;b&Vert; sin θ","c2":"size of the region spanned by a and b"}},{"id":"r2","name":"Perpendicular direction","values":{"c1":"a × b &perp; a and a × b &perp; b","c2":"a vector normal to the plane of a and b"}},{"id":"r3","name":"[Test for parallelism](!/linear-algebra/vectors/properties)","values":{"c1":"a × b = 0 ⇔ a &parallel; b","c2":"detects when two vectors are collinear"}},{"id":"r4","name":"Right-handed orientation","values":{"c1":"i × j = k (by convention)","c2":"resolves the two-normal ambiguity"}},{"id":"r5","name":"Volume of a parallelepiped","values":{"c1":"|a · (b × c)|","c2":"volume of the box with edges a, b, c (without the absolute value, the signed volume)"}},{"id":"r6","name":"Test for coplanarity","values":{"c1":"a · (b × c) = 0","c2":"detects when three vectors lie in one plane"}},{"id":"r7","name":"Vector triple product","values":{"c1":"a × (b × c) = (a · c)b − (a · b)c","c2":"reduces a nested cross product to a sum of scaled vectors"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Standard Basis Cross Products"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"a × b","features":[{"id":"c1","name":"b = i","type":"text"},{"id":"c2","name":"b = j","type":"text"},{"id":"c3","name":"b = k","type":"text"}],"items":[{"id":"r1","name":"a = i","values":{"c1":"0","c2":"k","c3":"−j"}},{"id":"r2","name":"a = j","values":{"c1":"−k","c2":"0","c3":"i"}},{"id":"r3","name":"a = k","values":{"c1":"j","c2":"−i","c3":"0"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Compute the cross product", href: "/linear-algebra/vectors/methods/cross-product", desc: "Expand a 3×3 determinant with i, j, k in the top row; mind the minus sign on the middle term.", level: "composite", here: "#1" },
+    ] },
+    { title: "More vector methods", items: [
+      { skill: "Compute the dot product", href: "/linear-algebra/vectors/methods/dot-product", desc: "Multiply matching components and add; or use the two lengths and the angle between them.", level: "composite" },
+      { skill: "Find the angle between two vectors", href: "/linear-algebra/vectors/methods/angle-between-vectors", desc: "Divide the dot product by the product of the lengths, then take the inverse cosine.", level: "composite" },
+      { skill: "Project one vector onto another", href: "/linear-algebra/vectors/methods/vector-projection", desc: "Scale the target vector by the dot product over its squared length; the rest is perpendicular.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vectors/methods", label: "All vector methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3070,6 +3095,7 @@ Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) 
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compute the cross product](!/linear-algebra/vectors/methods/cross-product) →@`,
         ]
     },
     {
@@ -3102,8 +3128,15 @@ Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-cross-product-standard-basis-cross-matrix'}
+            id="cross-product-standard-basis-cross-matrix"
+            title="Standard Basis Cross Products"
+            source="/linear-algebra/vectors/cross-product"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3181,8 +3214,15 @@ Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-cross-product-summary-cross-product-matrix'}
+            id="cross-product-summary-cross-product-matrix"
+            title="Summary of Cross Product Uses"
+            source="/linear-algebra/vectors/cross-product"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3218,6 +3258,14 @@ Expanding with $+$ on the $\\mathbf{j}$ term gives $(1, 2, 3) \\times (4, 5, 6) 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

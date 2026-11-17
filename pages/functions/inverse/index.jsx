@@ -1351,6 +1351,8 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1371,6 +1373,7 @@ import renderCompositionSteps from '@/app/utils/illustrations/functions/composit
 import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTest.v2'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -1378,7 +1381,82 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
 
+// ConceptCompare 2026-11-15: replaces the table summaryTable ("How Features Swap Under Inversion"); rows taken from the table's own cells.
+const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+const featuresUnderInversion = {
+  concepts: [
+    { id: 'f', name: 'The function', symbol: '$f$', values: {
+      point: '$(a, b)$',
+      domain: '$D$',
+      range: '$R$',
+      yint: '$y$-intercept $(0, c)$',
+      xint: '$x$-intercept $(c, 0)$',
+      hasym: 'horizontal, $y = L$',
+      vasym: 'vertical, $x = a$',
+      inc: 'increasing',
+      dec: 'decreasing',
+      fixed: '$f(a) = a$, a point on $y = x$',
+    } },
+    { id: 'inv', name: 'Its inverse', symbol: '$f^{-1}$', values: {
+      point: '$(b, a)$',
+      domain: '$R$',
+      range: '$D$',
+      yint: '$x$-intercept $(c, 0)$',
+      xint: '$y$-intercept $(0, c)$',
+      hasym: 'vertical, $x = L$',
+      vasym: 'horizontal, $y = a$',
+      inc: 'increasing (direction preserved)',
+      dec: 'decreasing (direction preserved)',
+      fixed: 'the same fixed point, $f^{-1}(a) = a$',
+    } },
+  ],
+  aspects: [
+    { id: 'point', label: 'Point on the graph' },
+    { id: 'domain', label: 'Domain' },
+    { id: 'range', label: 'Range' },
+    { id: 'yint', label: 'Intercept' },
+    { id: 'xint', label: 'Intercept' },
+    { id: 'hasym', label: 'Asymptote' },
+    { id: 'vasym', label: 'Asymptote' },
+    { id: 'inc', label: 'Increasing' },
+    { id: 'dec', label: 'Decreasing' },
+    { id: 'fixed', label: 'Fixed point' },
+  ],
+  together: { label: 'Composition', text: '$f \\circ f^{-1}$ is the identity: $f(f^{-1}(x)) = x$, and likewise $f^{-1}(f(x)) = x$.' },
+}
+
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Common Inverse Pairs"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function f","features":[{"id":"c1","name":"Inverse f⁻¹","type":"text"},{"id":"c2","name":"Notes","type":"text"}],"items":[{"id":"r1","name":"Linear: f(x) = mx + b","values":{"c1":"(x − b) ⁄ m","c2":"requires m ≠ 0"}},{"id":"r2","name":"Quadratic: x² on [0, ∞)","values":{"c1":"√x","c2":"requires domain restriction"}},{"id":"r3","name":"Cubic: x³","values":{"c1":"∛x","c2":"no restriction needed — already one-to-one"}},{"id":"r4","name":"Power: xⁿ on appropriate domain","values":{"c1":"x^(1⁄n)","c2":"even n requires restriction; odd n does not"}},{"id":"r5","name":"Exponential: aˣ (a > 0, a ≠ 1)","values":{"c1":"logₐ(x)","c2":"special case: eˣ ↔ ln(x)"}},{"id":"r6","name":"Reciprocal: 1 ⁄ x","values":{"c1":"1 ⁄ x","c2":"self-inverse — applying twice returns the input"}},{"id":"r7","name":"Sine on [−π⁄2, π⁄2]","values":{"c1":"arcsin(x)","c2":"requires restriction; domain of arcsin is [−1, 1]"}},{"id":"r8","name":"Cosine on [0, π]","values":{"c1":"arccos(x)","c2":"requires restriction; domain of arccos is [−1, 1]"}},{"id":"r9","name":"Tangent on (−π⁄2, π⁄2)","values":{"c1":"arctan(x)","c2":"requires restriction; domain of arctan is ℝ"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Restricting Domain to Create Inverse"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Original function","features":[{"id":"c1","name":"Why it fails on its natural domain","type":"text"},{"id":"c2","name":"Standard restriction","type":"text"},{"id":"c3","name":"Resulting inverse","type":"text"}],"items":[{"id":"r1","name":"f(x) = x²","values":{"c1":"both x and −x give the same output","c2":"[0, ∞)","c3":"f⁻¹(x) = √x"}},{"id":"r2","name":"f(x) = x² (alternative)","values":{"c1":"same reason — different valid choice","c2":"(−∞, 0]","c3":"f⁻¹(x) = −√x"}},{"id":"r3","name":"f(x) = sin(x)","values":{"c1":"oscillates — every value repeats infinitely often","c2":"[−π⁄2, π⁄2]","c3":"f⁻¹(x) = arcsin(x)"}},{"id":"r4","name":"f(x) = cos(x)","values":{"c1":"oscillates","c2":"[0, π]","c3":"f⁻¹(x) = arccos(x)"}},{"id":"r5","name":"f(x) = tan(x)","values":{"c1":"oscillates between asymptotes","c2":"(−π⁄2, π⁄2)","c3":"f⁻¹(x) = arctan(x)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Inverse Function Notation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Notation","features":[{"id":"c1","name":"What it represents","type":"text"},{"id":"c2","name":"For f(x) = 2x + 3","type":"text"}],"items":[{"id":"r1","name":"f⁻¹(x)","values":{"c1":"the inverse function — undoes f","c2":"(x − 3) ⁄ 2"}},{"id":"r2","name":"1 ⁄ f(x), or (f(x))⁻¹","values":{"c1":"the reciprocal — multiplicative inverse of the output value","c2":"1 ⁄ (2x + 3)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the inverse of a function", href: "/functions/methods/find-inverse", desc: "Check that the function is one-to-one, write $y = f(x)$, swap $x$ and $y$, and solve for $y$.", level: "composite", here: "#4" },
+      { skill: "Verify that two functions are inverses", href: "/functions/methods/verify-inverse", desc: "Compose them in both orders; they are inverses exactly when both compositions simplify to $x$.", level: "composite", here: "#6" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Find the range of a function", href: "/functions/methods/find-range", desc: "Find the lowest and highest outputs from the vertex, the endpoints and the end behavior, or solve $y = f(x)$ for $x$.", level: "composite" },
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+      { skill: "Compose two functions", href: "/functions/methods/compose-functions", desc: "Feed the inner function into the outer one: substitute the whole formula, simplify, then check the domain.", level: "composite" },
+    ] },
+    { title: "Derivative techniques", items: [
+      { skill: "Differentiate an inverse function", href: "/calculus/derivatives/techniques/inverse-functions", desc: "Get $(f^{-1})'$ from $f'$ without finding $f^{-1}$ explicitly.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2731,8 +2809,23 @@ const faqQuestions = {
     conclusion: { text: '$g = f^{-1}$', say: 'Both compositions return $x$.' },
   };
 
+  // Procedure rollout 2026-11-14: Finding an inverse, step by step (obj4).
+  const findInverseSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$f(x) = 3x - 7$',
+      rows: [
+        { step: 'Write $y = f(x)$', example: '$y = 3x - 7$' },
+        { step: 'Swap $x$ and $y$', example: '$x = 3y - 7$' },
+        { step: 'Solve for $y$', stepSub: 'Undo the operations in reverse order', example: '$x + 7 = 3y$, so $y = \\dfrac{x + 7}{3}$' },
+        { step: 'Write the result as $f^{-1}(x)$', example: '$f^{-1}(x) = \\dfrac{x + 7}{3}$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    findInverseSteps,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -2763,7 +2856,7 @@ const faqQuestions = {
 
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function InversePage({ proofStepsData, formulaSummaryData, pitfallData,oneToOneScope, inversePairOutline, 
+export default function InversePage({ findInverseSteps, proofStepsData, formulaSummaryData, pitfallData,oneToOneScope, inversePairOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -2884,11 +2977,15 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
             sheet={functionsNotationSheet}
             current={'/functions/inverse'}
           />,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-inverse-function-notation-matrix'}
+            id="inverse-inverse-function-notation-matrix"
+            title="Inverse Function Notation"
+            source="/functions/inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
                   <div key={'unit-reflection'} dangerouslySetInnerHTML={{ __html: demoUnits.reflection }} />,
           `Every algebraic fact about inverses has a mirror-image counterpart in this picture.`,
         ]
@@ -2909,6 +3006,16 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="find-inverse-steps"
+            title="Finding an inverse, step by step"
+            source="/functions/inverse"
+            before={"The four steps on the first example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={findInverseSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the inverse of a function](!/functions/methods/find-inverse) →@`,
         ]
     },
     {
@@ -2940,6 +3047,7 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
           </DiagramFrame>,
           <div key={'unit-roundTrip'} dangerouslySetInnerHTML={{ __html: demoUnits.roundTrip }} />,
           `One input is only a check; the algebra above proves the round trip for every x.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to verify that two functions are inverses](!/functions/methods/verify-inverse) →@`,
         ]
     },
     {
@@ -2976,11 +3084,15 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-restricting-domain-create-inverse-matrix'}
+            id="inverse-restricting-domain-create-inverse-matrix"
+            title="Restricting Domain to Create Inverse"
+            source="/functions/inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
                   <div key={'unit-restrict'} dangerouslySetInnerHTML={{ __html: demoUnits.restrict }} />,
           `The restriction is a choice, and the conventional choice is the one that keeps the principal branch.`,
         ]
@@ -3024,11 +3136,15 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-common-inverse-pairs-matrix'}
+            id="inverse-common-inverse-pairs-matrix"
+            title="Common Inverse Pairs"
+            source="/functions/inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
                   <div key={'unit-expLog'} dangerouslySetInnerHTML={{ __html: demoUnits.expLog }} />,
           `Each pair in the list is a reflection in the same line.`,
           <DiagramFrame
@@ -3090,14 +3206,26 @@ $$f(a) = b \\iff f^{-1}(b) = a$$
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'concept-compare-inverse-features-under-inversion'}
+            id="inverse-features-under-inversion"
+            title="Features of f and of Its Inverse"
+            source="/functions/inverse"
+            related={false}
+          >
+            <ConceptCompare data={featuresUnderInversion} variant="versus" theme={compareTheme} />
+          </DiagramFrame>,
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

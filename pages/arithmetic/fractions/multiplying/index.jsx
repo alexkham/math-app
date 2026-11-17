@@ -671,6 +671,7 @@
 // }
 
 // tables-optimized: v4 | 2026-05-26 | 1 table (obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -690,6 +691,22 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Multiply fractions", href: "/arithmetic/methods/multiply-fractions", desc: "Multiply numerators together and denominators together, $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$, cancelling common factors first.", level: "composite", here: "#1" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Simplify fractions", href: "/arithmetic/methods/simplify-fractions", desc: "Reduce a fraction to lowest terms: divide the numerator and the denominator by their GCD, as in $\\frac{84}{126} = \\frac{2}{3}$.", level: "composite" },
+      { skill: "Divide fractions", href: "/arithmetic/methods/divide-fractions", desc: "Keep the first fraction, change $\\div$ to $\\times$, flip the second fraction, then multiply: $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1401,6 +1418,7 @@ Keeping the shared denominator, as in addition, turns $\\frac{2}{5} \\times \\fr
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to multiply fractions](!/arithmetic/methods/multiply-fractions) →@`,
         ]
     },
     {
@@ -1497,6 +1515,14 @@ Keeping the shared denominator, as in addition, turns $\\frac{2}{5} \\times \\fr
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

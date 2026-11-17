@@ -33,7 +33,7 @@ const vectorSpacesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Test Whether a Set Is a Subspace | Learn Math Class',
         description: 'Test whether a set is a subspace: check the zero vector, closure under addition and under scalar multiplication, or find a counterexample. Examples, pitfalls.',
@@ -172,7 +172,7 @@ const vectorSpacesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Test Vectors for Linear Independence | Learn Math Class',
         description: 'Test vectors for linear independence: put them in the columns of a matrix, row reduce and count pivots, or use the determinant. Shortcuts, examples, mistakes.',
@@ -305,7 +305,7 @@ const vectorSpacesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Test Whether a Vector Is in a Span | Learn Math Class',
         description: 'Test whether a vector is in a span by row reducing the augmented matrix, and whether a set spans all of Rⁿ by counting pivots. Steps, examples, common errors.',
@@ -431,7 +431,7 @@ const vectorSpacesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Basis (Span, Equations, Row Space) | Learn Math Class',
         description: 'Find a basis for a subspace: take the pivot columns of the original matrix, or one vector per free variable when the subspace is given by equations. Examples.',
@@ -565,7 +565,7 @@ const vectorSpacesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Dimension of a Subspace | Learn Math Class',
         description: 'Find the dimension of a subspace: count basis vectors, use the rank for a span, n minus the rank for a solution set. Step by step, with examples and pitfalls.',
@@ -695,7 +695,7 @@ const vectorSpacesMethods = {
       tag: 'Composite',
       meta: '6 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Four Fundamental Subspaces | Learn Math Class',
         description: 'Find the four fundamental subspaces of a matrix: column space, row space, null space and left null space from one row reduction. Dimension checks, examples.',

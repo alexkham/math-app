@@ -1295,6 +1295,7 @@
 
 
 // tables-optimized: v4 | 2026-05-22 | 7 tables (obj4 comparison, obj5 process, obj6 aggregation, obj7/8 aggregation, obj11 comparison, obj12 aggregation, summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1316,13 +1317,49 @@ import discreteCdfDiagrams from '@/app/components/visualizations/probability/dis
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table representationsTable ("Representations: The Three Views"); converted from the table's own cells.
+const fm_representationsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Representation","features":[{"id":"c1","name":"Best for","type":"text"},{"id":"c2","name":"Form","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Graphical","values":{"c1":"intuition; seeing shape, peaks, and tails","c2":"vertical bars (lollipops) or impulses at each value","c3":"six bars of height 1/6 for a fair die"}},{"id":"r2","name":"Functional","values":{"c1":"calculation; deriving properties analytically","c2":"explicit mathematical formula p$_{X}$(k)","c3":"p$_{X}$(k) = (1−p)ᵏ⁻¹·p (geometric)"}},{"id":"r3","name":"Tabular","values":{"c1":"lookup; concrete cases and empirical data","c2":"value-probability listing","c3":"the dice-sum table shown above"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("PMF at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example or formula","type":"text"}],"items":[{"id":"r1","name":"What a PMF is","values":{"c1":"a function p$_{X}$(x) = P(X = x) for a discrete random variable","c2":"fair die: p$_{X}$(k) = 1/6 for k ∈ {1, …, 6}"}},{"id":"r2","name":"Support","values":{"c1":"the set of values where p$_{X}$(x) > 0","c2":"finite ({1, …, 6}) or infinite countable ({1, 2, 3, …})"}},{"id":"r3","name":"Two axioms","values":{"c1":"non-negative everywhere; total over the support equals 1","c2":"p$_{X}$(k) ≥ 0 for all k; &Sigma; p$_{X}$(k) = 1"}},{"id":"r4","name":"Three representations","values":{"c1":"graphical, functional, tabular — the same PMF viewed three ways","c2":"bars at each value; a formula; a value-probability table"}},{"id":"r5","name":"Computing event probabilities","values":{"c1":"sum the PMF over the values that make up the event","c2":"P(X ≤ 3) for a die = p$_{X}$(1) + p$_{X}$(2) + p$_{X}$(3) = 1/2"}},{"id":"r6","name":"Summary measures","values":{"c1":"location (mean, median, mode) and spread (variance, SD, range) — all computed from the PMF","c2":"E[X] = &Sigma; k · p$_{X}$(k); Var(X) = &Sigma; (k − E[X])² · p$_{X}$(k)"}},{"id":"r7","name":"Connection to the [CDF](!/probability/cdf)","values":{"c1":"accumulate the PMF to get the CDF; differ to recover the PMF","c2":"F$_{X}$(x) = &Sigma;$_{k ≤ x}$ p$_{X}$(k); p$_{X}$(k) = F$_{X}$(k) − F$_{X}$(k⁻)"}},{"id":"r8","name":"Common forms","values":{"c1":"named discrete distributions, each with a characteristic PMF shape","c2":"binomial, geometric, Poisson, negative binomial, hypergeometric, discrete uniform"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table mistakesTable ("Common Mistakes"); converted from the table's own cells.
+const fm_mistakesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Wrong thinking","type":"text"},{"id":"c2","name":"Correct view","type":"text"}],"items":[{"id":"r1","name":"Confusing PMF with PDF","values":{"c1":"applying PMF formulas to continuous data","c2":"the PMF is discrete-only; for continuous variables use a PDF, and P(X = x) = 0 for any single point"}},{"id":"r2","name":"Skipping axiom verification","values":{"c1":"assuming any function is a valid PMF","c2":"check p$_{X}$(k) ≥ 0 everywhere and &Sigma; p$_{X}$(k) = 1 before using"}},{"id":"r3","name":"Summing over the wrong set","values":{"c1":"including non-support values, or skipping support values that belong to A","c2":"sum only over values in both A and the support — outside the support contributes zero"}},{"id":"r4","name":"Treating probabilities as fixed","values":{"c1":"assuming a distribution has one &ldquo;standard&rdquo; PMF","c2":"parameters change the PMF entirely — binomial with p = 0.3 looks nothing like p = 0.7"}},{"id":"r5","name":"Confusing support with domain","values":{"c1":"summing over the whole real line, or over values where p$_{X}$ is zero","c2":"only the support matters; outside it the PMF is zero and contributes nothing"}},{"id":"r6","name":"Ignoring discrete structure","values":{"c1":"treating discrete variables as smooth or continuous","c2":"discrete values are isolated; P(2 < X < 3) may be exactly 0 if no value sits between 2 and 3"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table distributionsTable ("PMFs of Common Discrete Distributions"); converted from the table's own cells.
+const fm_distributionsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Distribution","features":[{"id":"c1","name":"PMF","type":"text"},{"id":"c2","name":"Support","type":"text"},{"id":"c3","name":"Shape & key behavior","type":"text"}],"items":[{"id":"r1","name":"[Binomial(n, p)](!/probability/distributions/discrete/binomial)","values":{"c1":"C(n, k) · pᵏ(1−p)ⁿ⁻ᵏ","c2":"{0, 1, …, n}","c3":"bell-shaped at p = 0.5; peak near np; skewed when p ≠ 0.5"}},{"id":"r2","name":"[Geometric(p)](!/probability/distributions/discrete/geometric)","values":{"c1":"(1−p)ᵏ⁻¹ · p","c2":"{1, 2, 3, …}","c3":"monotonically decreasing; peak at k = 1; exponential decay"}},{"id":"r3","name":"[Poisson(λ)](!/probability/distributions/discrete/poisson)","values":{"c1":"λᵏ · e$^{-λ}$ / k!","c2":"{0, 1, 2, …}","c3":"rises to a peak near λ then decays; approximately normal for large λ"}},{"id":"r4","name":"[Negative Binomial(r, p)](!/probability/distributions/discrete/negative-binomial)","values":{"c1":"C(k−1, r−1) · pʳ(1−p)ᵏ⁻ʳ","c2":"{r, r+1, r+2, …}","c3":"sum of r geometrics; heavier tail than Poisson; reduces to geometric for r = 1"}},{"id":"r5","name":"[Hypergeometric(N, K, n)](!/probability/distributions/discrete/hypergeometric)","values":{"c1":"C(K, k) · C(N−K, n−k) / C(N, n)","c2":"bounded by N, K, n (max(0, n−N+K) to min(n, K))","c3":"unimodal; peak near n · K/N; more concentrated than binomial (finite population)"}},{"id":"r6","name":"[Discrete Uniform(a, b)](!/probability/distributions/discrete/uniform)","values":{"c1":"1 / (b − a + 1)","c2":"{a, a+1, …, b}","c3":"flat — every value equally likely; no peak"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table measuresTable ("Derived Properties: Spread Measures"); converted from the table's own cells.
+const fm_measuresTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Measure","features":[{"id":"c1","name":"Category","type":"text"},{"id":"c2","name":"What it captures","type":"text"},{"id":"c3","name":"Formula from the PMF","type":"text"}],"items":[{"id":"r1","name":"[Expected value](!/probability/expected-value) (mean)","values":{"c1":"Location","c2":"center of mass — the probability-weighted average outcome","c3":"E[X] = &Sigma;ₖ k · p$_{X}$(k)"}},{"id":"r2","name":"Median","values":{"c1":"Location","c2":"value that splits the probability into halves","c3":"smallest m with P(X ≤ m) ≥ 0.5"}},{"id":"r3","name":"Mode","values":{"c1":"Location","c2":"the most likely value (highest PMF)","c3":"argmaxₖ p$_{X}$(k)"}},{"id":"r4","name":"[Variance](!/probability/variance)","values":{"c1":"Spread","c2":"average squared deviation from the mean","c3":"Var(X) = &Sigma;ₖ (k − E[X])² · p$_{X}$(k)"}},{"id":"r5","name":"Standard deviation","values":{"c1":"Spread","c2":"spread expressed in the same units as X","c3":"√Var(X)"}},{"id":"r6","name":"Range","values":{"c1":"Spread","c2":"span of the support (ignores probability)","c3":"max(support) − min(support)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table calculationsTable ("Calculations Using the PMF"); converted from the table's own cells.
+const fm_calculationsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Probability type","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Fair-die example","type":"text"}],"items":[{"id":"r1","name":"Single point","values":{"c1":"P(X = k) = p$_{X}$(k)","c2":"P(X = 4) = 1/6"}},{"id":"r2","name":"Range / event","values":{"c1":"P(X ∈ A) = &Sigma;$_{k ∈ A}$ p$_{X}$(k)","c2":"P(X ≤ 3) = 1/6 + 1/6 + 1/6 = 1/2"}},{"id":"r3","name":"Complement","values":{"c1":"P(X ∉ A) = 1 − P(X ∈ A)","c2":"P(X > 3) = 1 − 1/2 = 1/2"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Random variable methods", items: [
+      { skill: "Find the CDF from a PMF", href: "/probability/random-variables/methods/pmf-to-cdf", desc: "Sort the values, keep a running total of the probabilities, and write the step function.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+    ] },
+    { title: "Distribution methods", items: [
+      { skill: "Find a binomial probability", href: "/probability/distributions/methods/binomial-probability", desc: "Count successes in $n$ independent trials: name $n$, $p$ and the values of $k$, then add PMF terms or use the complement.", level: "composite" },
+      { skill: "Find a Poisson probability", href: "/probability/distributions/methods/poisson-probability", desc: "Events at an average rate: scale $\\lambda$ to the interval asked about, then use $e^{-\\lambda}\\lambda^k / k!$ or its complement.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3092,8 +3129,15 @@ export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, v
           sectionsContent.obj4.content,
           <div style={{transform:'scale(1.15)'}} dangerouslySetInnerHTML={{ __html: generalTable }} key="table" />,
           sectionsContent.obj4.after,
-          <div key={'representations-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: representationsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-pmf-representations-three-views-matrix'}
+            id="pmf-representations-three-views-matrix"
+            title="Representations: The Three Views"
+            source="/probability/probability-function/pmf"
+            related={false}
+          >
+            <FeatureMatrix data={fm_representationsTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj4-diagram'}
             id="pmf-representations-tree"
@@ -3120,8 +3164,15 @@ export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, v
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'calculations-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: calculationsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-pmf-calculations-using-pmf-matrix'}
+            id="pmf-calculations-using-pmf-matrix"
+            title="Calculations Using the PMF"
+            source="/probability/probability-function/pmf"
+            related={false}
+          >
+            <FeatureMatrix data={fm_calculationsTable} />
+          </DiagramFrame>,
                   <div key={'unit-dieRange'} dangerouslySetInnerHTML={{ __html: demoUnits.dieRange }} />,
             `P(2 < X < 5) would drop both end bars: 2/6.`,
         ]
@@ -3153,8 +3204,15 @@ export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, v
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
-          <div key={'measures-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: measuresTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-pmf-derived-properties-spread-measures-matrix'}
+            id="pmf-derived-properties-spread-measures-matrix"
+            title="Derived Properties: Spread Measures"
+            source="/probability/probability-function/pmf"
+            related={false}
+          >
+            <FeatureMatrix data={fm_measuresTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3183,8 +3241,15 @@ export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, v
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'distributions-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: distributionsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-pmf-pmfs-common-discrete-distributions-matrix'}
+            id="pmf-pmfs-common-discrete-distributions-matrix"
+            title="PMFs of Common Discrete Distributions"
+            source="/probability/probability-function/pmf"
+            related={false}
+          >
+            <FeatureMatrix data={fm_distributionsTable} />
+          </DiagramFrame>,
            <div key={'discrete'} style={{transform:'scale(0.8)'}}>
                     <DiscreteProbabilityDistributions/>
                   </div>,
@@ -3216,8 +3281,15 @@ export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, v
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'mistakes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-pmf-common-mistakes-matrix'}
+            id="pmf-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/probability/probability-function/pmf"
+            related={false}
+          >
+            <FeatureMatrix data={fm_mistakesTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj12-mistakes'}
             id="pmf-pitfalls"
@@ -3235,8 +3307,23 @@ export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, v
         link:sectionsContent.summary.link,
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-pmf-pmf-at-glance-matrix'}
+            id="pmf-pmf-at-glance-matrix"
+            title="PMF at a Glance"
+            source="/probability/probability-function/pmf"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -525,7 +525,7 @@ The number of genuinely independent directions among the columns is the **rank**
 
 Columns of $A$ have as many entries as $A$ has rows. Two rows means each column is a pair of numbers, which is a point in the plane and can be drawn. A matrix with three rows would have columns living in three [dimensions](!/linear-algebra/vector-spaces/dimension#1), and the plane picture would be gone.
 
-The three columns are deliberate too. A [square matrix](!/linear-algebra/matrix/types#1) would let the eye slip into reading the picture as a grid of cells; a non-square one keeps the dimension argument visible. The vector must have one entry per column of $A$, because it supplies one weight per column — which is the real content of the rule that the inner dimensions must match. Hand the tool a vector of the wrong length and there is no weight for one of the columns, so the sum cannot be formed at all.
+The three columns are deliberate too. A [square matrix](!/linear-algebra/matrix/types#1) would let the eye slip into reading the picture as a grid of cells; a non-square one keeps the dimension argument visible. The vector must have one entry per column of $A$, because it supplies one weight per column — which is the real content of the rule that the [inner dimensions must match](!/linear-algebra/matrix/operations#which-sizes-fit). Hand the tool a vector of the wrong length and there is no weight for one of the columns, so the sum cannot be formed at all.
 
 The answer has two entries, one per row of $A$. **Weights count columns; the answer counts rows.** That single sentence is the dimension rule stated without reference to any procedure.`,
       after: ``,

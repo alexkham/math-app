@@ -798,6 +798,8 @@
 
 // tables-optimized: v4 | 2026-05-22 | 2 tables (obj3 aggregation, obj7 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -821,6 +823,19 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Vector methods", items: [
+      { skill: "Find the magnitude of a vector", href: "/linear-algebra/vectors/methods#magnitude", desc: "The length of a vector is asked for: $\\|(2, -3, 6)\\|$, $\\|(3, 4)\\|$, the distance $\\|\\mathbf{u} - \\mathbf{v}\\|$.", level: "atomic" },
+      { skill: "Find a unit vector in a given direction", href: "/linear-algebra/vectors/methods#unit-vector", desc: "A vector of length $1$ pointing the same way as $\\mathbf{v}$: normalize $(3, 4)$, the direction of $(1, -2, 2)$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vectors/methods", label: "All vector methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1606,8 +1621,22 @@ $$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{3} = \\left(\\frac{1}{3}, \\frac{2}{3
     ],
   };
 
+  // Procedure rollout 2026-11-14: Normalizing a vector, step by step (obj6).
+  const normalizationSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\mathbf{v} = (1, 2, 2)$',
+      rows: [
+        { step: 'Find the length from the components', example: '$\\|\\mathbf{v}\\| = \\sqrt{1 + 4 + 4} = 3$' },
+        { step: 'Divide every component by that number', example: '$\\hat{\\mathbf{v}} = \\left(\\frac{1}{3}, \\frac{2}{3}, \\frac{2}{3}\\right)$' },
+        { check: true, step: 'Check that the squares of the new components add up to $1$', example: '$\\frac{1}{9} + \\frac{4}{9} + \\frac{4}{9} = 1$' },
+      ],
+    },
+  };
+
    return {
   props: {
+    normalizationSteps,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1628,7 +1657,7 @@ $$\\hat{\\mathbf{v}} = \\frac{\\mathbf{v}}{3} = \\left(\\frac{1}{3}, \\frac{2}{3
   }
 }
    }
-export default function VectorMagnitudePage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function VectorMagnitudePage({ normalizationSteps, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, normProperties, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1786,6 +1815,15 @@ Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-procedure'}
+            id="normalization-steps"
+            title="Normalizing a vector, step by step"
+            source="/linear-algebra/vectors/magnitude"
+            before={"The two steps and the check, on the vector from the note beside the text. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={normalizationSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-normalize'} dangerouslySetInnerHTML={{ __html: demoUnits.normalize }} />,
           `A normalised vector is therefore a pure direction, which is what makes it the natural building block for bases and projections later on.`,
         ]
@@ -1823,6 +1861,14 @@ Taking the root of each square separately, $\\sqrt{3^2} + \\sqrt{(-4)^2} = 3 + 4
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

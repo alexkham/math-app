@@ -1270,6 +1270,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1296,8 +1297,64 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
+
+// CaseGraph 2026-11-12: "Signs around the circle" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'ASTC', text: 'I ($0°$–$90°$): all six · II ($90°$–$180°$): sin, csc · III ($180°$–$270°$): tan, cot · IV ($270°$–$360°$): cos, sec' },
+    grid: {
+      x0: 0, x1: 2 * Math.PI, y0: -1.6, y1: 1.6,
+      axes: [
+        { id: 'fn', name: 'Function', options: [
+          { id: 'cos', label: '$\\cos\\theta$', sub: 'sign of $x$' },
+          { id: 'sin', label: '$\\sin\\theta$', sub: 'sign of $y$' },
+          { id: 'tan', label: '$\\tan\\theta$', sub: 'positive when $x$ and $y$ agree' } ] },
+        { id: 'sign', name: 'Sign', select: true, options: [
+          { id: 'pos', label: 'positive', sign: 1 },
+          { id: 'neg', label: 'negative', sign: -1 } ] },
+      ],
+      layout: { rows: 'fn', cols: 'sign' },
+      cells: {
+        cos: { f: (x) => Math.cos(x), intervals: [{ from: 0, to: Math.PI / 2 }, { from: Math.PI / 2, to: Math.PI }, { from: Math.PI, to: 3 * Math.PI / 2 }, { from: 3 * Math.PI / 2, to: 2 * Math.PI }], pattern: 'I+  II−  III−  IV+', solution: { pos: 'I, IV', neg: 'II, III' } },
+        sin: { f: (x) => Math.sin(x), intervals: [{ from: 0, to: Math.PI / 2 }, { from: Math.PI / 2, to: Math.PI }, { from: Math.PI, to: 3 * Math.PI / 2 }, { from: 3 * Math.PI / 2, to: 2 * Math.PI }], pattern: 'I+  II+  III−  IV−', solution: { pos: 'I, II', neg: 'III, IV' } },
+        tan: { f: (x) => Math.tan(x), intervals: [{ from: 0, to: Math.PI / 2 }, { from: Math.PI / 2, to: Math.PI }, { from: Math.PI, to: 3 * Math.PI / 2 }, { from: 3 * Math.PI / 2, to: 2 * Math.PI }], pattern: 'I+  II−  III+  IV−', solution: { pos: 'I, III', neg: 'II, IV' } },
+      },
+    },
+  };
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: The Sixteen Standard Angles"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Angle (degrees)","features":[{"id":"c1","name":"Angle (radians)","type":"text"},{"id":"c2","name":"(cos θ, sin θ)","type":"text"},{"id":"c3","name":"Quadrant","type":"text"}],"items":[{"id":"r1","name":"0°","values":{"c1":"0","c2":"(1, 0)","c3":"axis (+x)"}},{"id":"r2","name":"30°","values":{"c1":"π/6","c2":"(√3/2, 1/2)","c3":"I"}},{"id":"r3","name":"45°","values":{"c1":"π/4","c2":"(√2/2, √2/2)","c3":"I"}},{"id":"r4","name":"60°","values":{"c1":"π/3","c2":"(1/2, √3/2)","c3":"I"}},{"id":"r5","name":"90°","values":{"c1":"π/2","c2":"(0, 1)","c3":"axis (+y)"}},{"id":"r6","name":"120°","values":{"c1":"2π/3","c2":"(−1/2, √3/2)","c3":"II"}},{"id":"r7","name":"135°","values":{"c1":"3π/4","c2":"(−√2/2, √2/2)","c3":"II"}},{"id":"r8","name":"150°","values":{"c1":"5π/6","c2":"(−√3/2, 1/2)","c3":"II"}},{"id":"r9","name":"180°","values":{"c1":"π","c2":"(−1, 0)","c3":"axis (−x)"}},{"id":"r10","name":"210°","values":{"c1":"7π/6","c2":"(−√3/2, −1/2)","c3":"III"}},{"id":"r11","name":"225°","values":{"c1":"5π/4","c2":"(−√2/2, −√2/2)","c3":"III"}},{"id":"r12","name":"240°","values":{"c1":"4π/3","c2":"(−1/2, −√3/2)","c3":"III"}},{"id":"r13","name":"270°","values":{"c1":"3π/2","c2":"(0, −1)","c3":"axis (−y)"}},{"id":"r14","name":"300°","values":{"c1":"5π/3","c2":"(1/2, −√3/2)","c3":"IV"}},{"id":"r15","name":"315°","values":{"c1":"7π/4","c2":"(√2/2, −√2/2)","c3":"IV"}},{"id":"r16","name":"330°","values":{"c1":"11π/6","c2":"(√3/2, −1/2)","c3":"IV"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Reference Angles"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Quadrant of θ","features":[{"id":"c1","name":"Reference angle (degrees)","type":"text"},{"id":"c2","name":"Reference angle (radians)","type":"text"}],"items":[{"id":"r1","name":"I","values":{"c1":"θ","c2":"θ"}},{"id":"r2","name":"II","values":{"c1":"180° − θ","c2":"π − θ"}},{"id":"r3","name":"III","values":{"c1":"θ − 180°","c2":"θ − π"}},{"id":"r4","name":"IV","values":{"c1":"360° − θ","c2":"2π − θ"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find trig values with the unit circle", href: "/trigonometry/methods/unit-circle-values", desc: "Any standard angle: reduce it, find the quadrant and reference angle, attach the sign.", level: "composite", here: "#6" },
+    ] },
+    { title: "More trigonometry methods", items: [
+      { skill: "Find a reference angle", href: "/trigonometry/methods#reference-angle", desc: "An angle outside the first quadrant whose trig values you want from a first-quadrant angle: $225^\\circ$, $\\frac{5\\pi}{6}$, $300^\\circ$.", level: "atomic" },
+      { skill: "Find all trig values from one given value", href: "/trigonometry/methods/exact-values", desc: "Given $\\sin\\theta$ (or any one value) and the quadrant, find the other five.", level: "composite" },
+      { skill: "Evaluate inverse trig functions", href: "/trigonometry/methods/inverse-trig-values", desc: "Find the one angle in the restricted range; compositions with a right triangle.", level: "composite" },
+      { skill: "Graph a sine or cosine function", href: "/trigonometry/methods/graph-sine-cosine", desc: "Read amplitude, period, phase shift and midline from $y = A\\sin(B(x - C)) + D$, then plot five key points.", level: "composite" },
+    ] },
+    { title: "Trig equation methods", items: [
+      { skill: "Solve a basic trig equation", href: "/trigonometry/equations/methods/basic-trig-equations", desc: "$\\sin x = a$, $\\cos x = a$, $\\tan x = a$ on one turn: reference angle, then the two quadrants.", level: "composite" },
+    ] },
+    { title: "Complex number methods", items: [
+      { skill: "Convert a complex number from polar to rectangular form", href: "/complex-numbers/methods/polar-to-rectangular", desc: "Evaluate $\\cos\\theta$ and $\\sin\\theta$, multiply both by $r$, and write $a + bi$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2620,8 +2677,17 @@ $$x^2 + y^2 = 1$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'case-graph-unit-circle-quadrant-sign-grid'}
+            id="unit-circle-quadrant-sign-grid"
+            title="Signs around the circle"
+            source="/trigonometry/unit-circle"
+            related={false}
+            before={"Each function over one turn, $0°$ to $360°$, split at the four quadrants. Pick a column to see the quadrants where it is positive or negative."}
+            after={"Cosine carries the sign of $x$, sine the sign of $y$, and tangent is positive where the two signs agree."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
                   <div key={'unit-quadrantSigns'} dangerouslySetInnerHTML={{ __html: demoUnits.quadrantSigns }} />,
           `The mnemonic is a convenience; the coordinate signs are the reason.`,
         ]
@@ -2656,8 +2722,15 @@ $$x^2 + y^2 = 1$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-unit-circle-reference-angles-matrix'}
+            id="unit-circle-reference-angles-matrix"
+            title="Reference Angles"
+            source="/trigonometry/unit-circle"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-referenceAngle'} dangerouslySetInnerHTML={{ __html: demoUnits.referenceAngle }} />,
           `Reference angles reduce every evaluation to a first-quadrant angle plus a sign, which is the whole strategy of the next section.`,
         ]
@@ -2670,6 +2743,7 @@ $$x^2 + y^2 = 1$$]@`,
           sectionsContent.obj6.content,
                   <div key={'unit-specialAngles'} dangerouslySetInnerHTML={{ __html: demoUnits.specialAngles }} />,
           `Only five magnitudes appear: 0, 1/2, √2/2, √3/2 and 1.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find trig values with the unit circle](!/trigonometry/methods/unit-circle-values) →@`,
         ]
     },
     {
@@ -2739,8 +2813,15 @@ $$x^2 + y^2 = 1$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-unit-circle-summary-sixteen-standard-matrix'}
+            id="unit-circle-summary-sixteen-standard-matrix"
+            title="Summary: The Sixteen Standard Angles"
+            source="/trigonometry/unit-circle"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -2808,6 +2889,14 @@ $$x^2 + y^2 = 1$$]@`,
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

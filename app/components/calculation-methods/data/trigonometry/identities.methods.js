@@ -153,7 +153,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Prove Trigonometric Identities (Step by Step) | Learn Math Class',
         description: 'Prove trig identities: start from the harder side, rewrite in sin and cos, combine fractions, use the Pythagorean identity or a conjugate, reach the other side.',
@@ -257,7 +257,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Simplify Trigonometric Expressions | Learn Math Class',
         description: 'Simplify trig expressions: rewrite secant, cosecant, tangent and cotangent in sine and cosine, combine fractions, use the Pythagorean identity, cancel.',
@@ -360,7 +360,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Exact Values with Sum and Difference Formulas (sin 75°, cos 15°) | Learn Math Class',
         description: 'Find exact values like sin 75°, cos 15° or tan 105°: write the angle as a sum or difference of standard angles, expand with the formula, simplify the radicals.',
@@ -464,7 +464,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Double-Angle Formulas to Find sin 2θ and cos 2θ | Learn Math Class',
         description: 'Find sin 2θ, cos 2θ and tan 2θ from one value of θ: get sin θ and cos θ with their quadrant signs, apply the double-angle formulas, simplify. Worked examples.',
@@ -568,7 +568,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Half-Angle Formulas (sin 15°, cos π/8) | Learn Math Class',
         description: 'Find exact values like sin 15° or cos π/8 with the half-angle formulas: write the angle as half a known one, substitute its cosine, pick the sign by quadrant.',
@@ -672,7 +672,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Power-Reducing Formulas (sin²x, cos⁴x) | Learn Math Class',
         description: 'Rewrite sin²x, cos²x and higher powers without exponents: apply the power-reducing formulas, expand, reduce again, collect into cosines of multiple angles.',
@@ -776,7 +776,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Product-to-Sum Formulas | Learn Math Class',
         description: 'Rewrite sin A cos B, cos A cos B or sin A sin B as a sum: pick the formula, compute A + B and A − B, substitute, simplify. Exact values and integrals.',
@@ -890,7 +890,7 @@ const trigIdentitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Sum-to-Product Formulas | Learn Math Class',
         description: 'Rewrite sin A ± sin B or cos A ± cos B as a product: compute the half-sum and half-difference, apply the formula, then use the product to solve or simplify.',
@@ -1006,7 +1006,7 @@ const trigIdentitiesMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Trig Identity to Use? Decision Tree | Learn Math Class',
         description: 'Choose a trig identity from the task: prove or simplify, the exact value of a non-standard angle, a product or a sum to rewrite, or a power to reduce.',

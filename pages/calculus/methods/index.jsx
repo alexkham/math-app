@@ -21,7 +21,7 @@ const SITE = 'https://www.learnmathclass.com'
 const URL_PATH = '/calculus/methods'
 
 // Hub is released separately from its leaves; flip to true once it meets the release criteria.
-const HUB_INDEXED = false
+const HUB_INDEXED = true
 
 // Sub-hubs in the order of the URL tree. `key` is the category id and the id prefix.
 const SUB_HUBS = [

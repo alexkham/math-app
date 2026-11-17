@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -12,11 +13,56 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import identityDiagrams from '@/app/components/algebra/identities/identityDiagrams'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
-import Procedure from '@/app/components/infographics/Procedure'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Factoring Out Perfect Powers"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Index","features":[{"id":"c1","name":"Perfect powers to look for","type":"text"},{"id":"c2","name":"Worked extraction","type":"text"}],"items":[{"id":"r1","name":"Square root (n = 2)","values":{"c1":"4, 9, 16, 25, 36, 49, 64, 81, 100, …","c2":"√72 = √(36 · 2) = 6√2"}},{"id":"r2","name":"Cube root (n = 3)","values":{"c1":"8, 27, 64, 125, 216, …","c2":"∛54 = ∛(27 · 2) = 3∛2"}},{"id":"r3","name":"nth root (general)","values":{"c1":"any aⁿ for that specific n (e.g., for n = 4: 16, 81, 256, …)","c2":"⁴√48 = ⁴√(16 · 3) = 2⁴√3"}}]};
+import Procedure from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Simplification Techniques at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Technique","features":[{"id":"c1","name":"When to use","type":"text"},{"id":"c2","name":"Procedure","type":"text"},{"id":"c3","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Extract perfect powers","values":{"c1":"the radicand has a factor that is a perfect nth power","c2":"apply the product rule and pull out the perfect power","c3":"√72 = 6√2"}},{"id":"r2","name":"Simplify variable powers","values":{"c1":"a variable's exponent is at least the index","c2":"divide exponent by index; the quotient extracts, the remainder stays","c3":"√(x⁷) = x³√x"}},{"id":"r3","name":"Combined numerical + variable","values":{"c1":"the radicand mixes a coefficient and variable powers","c2":"factor the coefficient and each variable separately, then extract","c3":"√(50x⁵) = 5x²√(2x)"}},{"id":"r4","name":"Rationalize a monomial denominator","values":{"c1":"a single radical sits in the denominator","c2":"multiply num and denom by what completes a perfect nth power under the radical","c3":"5 ⁄ √3 = 5√3 ⁄ 3"}},{"id":"r5","name":"Rationalize a binomial denominator (square roots)","values":{"c1":"the denominator is a sum or difference involving √b","c2":"multiply by the conjugate; difference-of-squares clears the radical","c3":"3 ⁄ (2 + √5) = −3(2 − √5)"}},{"id":"r6","name":"Rationalize a binomial denominator (cube roots)","values":{"c1":"the denominator is ∛a + ∛b or similar with cube roots","c2":"multiply by the sum or difference-of-cubes companion factor","c3":"1 ⁄ (∛2 + 1) = (∛4 − ∛2 + 1) ⁄ 3"}},{"id":"r7","name":"Reduce the index","values":{"c1":"the index and the radicand's exponent share a common factor","c2":"convert to rational-exponent form, reduce the fraction, convert back if desired","c3":"⁶√(x⁴) = ∛(x²)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Rationalizing Higher-Index Denominators"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Denominator type","features":[{"id":"c1","name":"Multiply numerator and denominator by","type":"text"},{"id":"c2","name":"Why it works","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Single square root: √b","values":{"c1":"√b","c2":"√b · √b = b — a perfect square","c3":"5 ⁄ √3 = 5√3 ⁄ 3"}},{"id":"r2","name":"Single higher root: ⁿ√(bᵏ)","values":{"c1":"ⁿ√(bⁿ⁻ᵏ) — whatever completes a perfect nth power","c2":"creates ⁿ√(bⁿ) = b in the denominator","c3":"2 ⁄ ∛5 = 2∛25 ⁄ 5"}},{"id":"r3","name":"Binomial, square roots: a + √b or √a + √b","values":{"c1":"the conjugate (sign flipped on the radical term)","c2":"(a + √b)(a − √b) = a² − b — difference of squares","c3":"3 ⁄ (2 + √5) = −3(2 − √5)"}},{"id":"r4","name":"Binomial, cube roots: ∛a + ∛b (or with 1)","values":{"c1":"the sum/difference-of-cubes companion: a² − ab + b² (adapted to the cube-root terms)","c2":"(a + b)(a² − ab + b²) = a³ + b³","c3":"1 ⁄ (∛2 + 1) = (∛4 − ∛2 + 1) ⁄ 3"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite", here: "#2" },
+      { skill: "Rationalize a denominator", href: "/algebra/methods/rationalize-denominator", desc: "Remove roots from the bottom of a fraction: multiply by a root, a conjugate, or a missing power.", level: "composite", here: "#5" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Add, subtract, multiply and divide radicals", href: "/algebra/methods/radical-operations", desc: "Simplify first, then combine like radicals; multiply and divide roots with the same index.", level: "composite" },
+      { skill: "Solve a radical equation", href: "/algebra/methods/radical-equations", desc: "Isolate the root, raise both sides to the index, solve, then check for extraneous solutions.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// PropertySheet (cards) 2026-11-15: replaces the table obj1Table (three criteria for simplest form: criterion, what it prohibits, example of a violation); one card per row, wording from the table.
+const simplestFormCriteria = {
+  header: {
+    kicker: 'simplest form',
+    title: 'Three criteria for simplest form',
+    lede: 'A radical is in simplest form only when none of the three violations is present.',
+  },
+  verdicts: {
+    bad: { label: 'Violation', color: '#B45309', bg: '#fef3c7', mark: 'cross' },
+  },
+  groups: [{ properties: [
+    { id: 'power', name: 'No perfect power factors', verdict: 'bad', statement: '$\\sqrt{72}$', note: 'Prohibits a factor of the radicand that is itself a perfect $n$th power. Here the factor $36 = 6^2$ could be extracted.' },
+    { id: 'fraction', name: 'No fractions under the radical', verdict: 'bad', statement: '$\\sqrt{\\frac{3}{4}}$', note: 'Prohibits a radicand that is itself a fraction. Split into $\\frac{\\sqrt{3}}{\\sqrt{4}}$ and continue.' },
+    { id: 'denominator', name: 'No radicals in denominators', verdict: 'bad', statement: '$\\frac{5}{\\sqrt{3}}$', note: 'Prohibits a denominator that contains any radical. Rationalize to $\\frac{5\\sqrt{3}}{3}$.' },
+  ] }],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -797,23 +843,49 @@ $$= \\sqrt{25x^4} \\cdot \\sqrt{2x} = 5x^2\\sqrt{2x}$$`],
   // Procedure pilot 2026-11-05: the five steps of obj9 (Simplification Strategy) as stages.
   const simplifyProcedure = {
     theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+    // 2026-11-12: the five steps run on one example (ProcedureV2), with step 4 split into its two cases.
+    run: {
+      label: 'Simplify $\\dfrac{\\sqrt{50x^3}}{\\sqrt{3}}$, with $x \\geq 0$',
+      start: '$\\dfrac{\\sqrt{50x^3}}{\\sqrt{3}}$',
+      showBefore: true,
+    },
     groups: [
       { label: 'Inside the radical', sub: 'steps 1 to 3', kind: 'must', stages: [
-        { n: 1, name: 'Factor the radicand', what: 'completely, both numbers and variables', cond: 'identify all perfect power factors relative to the index' },
-        { n: 2, name: 'Extract perfect powers', what: 'using the product rule', cond: 'from [radical rules](!/algebra/roots/radical-rules)' },
-        { n: 3, name: 'Reduce the index', what: "when the radicand's exponents share a common factor with the index" },
+        { n: 1, name: 'Factor the radicand', what: 'completely, both numbers and variables', cond: 'identify all perfect power factors relative to the index',
+          example: '$\\dfrac{\\sqrt{25 \\cdot 2 \\cdot x^2 \\cdot x}}{\\sqrt{3}}$', exampleNote: '$25$ and $x^2$ are perfect squares' },
+        { n: 2, name: 'Extract perfect powers', what: 'using the product rule', cond: 'from [radical rules](!/algebra/roots/radical-rules)',
+          example: '$\\dfrac{5x\\sqrt{2x}}{\\sqrt{3}}$', exampleNote: '$\\sqrt{25} = 5$ and $\\sqrt{x^2} = x$ come out' },
+        { n: 3, name: 'Reduce the index', what: "when the radicand's exponents share a common factor with the index",
+          skip: 'The index is $2$ and the exponents left inside are $1$, so there is no common factor.' },
       ] },
-      { label: 'The denominator', sub: 'step 4', kind: 'must', stages: [
-        { n: 4, name: 'Rationalize', what: 'monomial or binomial denominators', cond: 'to eliminate radicals from the bottom' },
+      { label: 'The denominator', sub: 'step 4', kind: 'must', fork: true, take: 0, stages: [
+        { n: 4, name: 'Rationalize a monomial denominator', what: 'multiply top and bottom by the radical', cond: 'to eliminate radicals from the bottom',
+          example: '$\\dfrac{5x\\sqrt{2x} \\cdot \\sqrt{3}}{\\sqrt{3} \\cdot \\sqrt{3}} = \\dfrac{5x\\sqrt{6x}}{3}$', result: '$\\dfrac{5x\\sqrt{6x}}{3}$' },
+        { n: 4, name: 'Rationalize a binomial denominator', what: 'multiply top and bottom by the conjugate', cond: 'for a bottom such as $\\sqrt{a} + \\sqrt{b}$' },
       ] },
       { label: 'The result', sub: 'step 5', kind: 'out', stages: [
-        { n: 5, name: 'Verify all three criteria', what: 'no perfect power factors, no fractions under radicals, no radicals in denominators' },
+        { n: 5, name: 'Verify all three criteria', what: 'no perfect power factors, no fractions under radicals, no radicals in denominators',
+          example: '$\\dfrac{5x\\sqrt{6x}}{3}$', exampleNote: '$6x$ has no square factor, nothing under the radical is a fraction, and the bottom is $3$' },
       ] },
     ],
   };
 
+  const combinedSimplifySteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\sqrt{50x^5}$',
+      rows: [
+        { step: 'Factor the coefficient', example: '$50 = 25 \\cdot 2$' },
+        { step: "Factor each variable's power", example: '$x^5 = x^4 \\cdot x$' },
+        { step: 'Extract what divides evenly', example: '$\\sqrt{25 \\cdot x^4} = 5x^2$' },
+        { step: 'Leave the remainders under the radical', example: '$5x^2\\sqrt{2x}$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    combinedSimplifySteps,
     pitfallData,
     simplifyProcedure,
     rationalizeMonomial,
@@ -841,7 +913,7 @@ return {
    }
 
 // export default function SimplifyingPage({seoData,sectionsContent , introContent}) {
-export default function SimplifyingPage({ pitfallData, simplifyProcedure,
+export default function SimplifyingPage({ combinedSimplifySteps, pitfallData, simplifyProcedure,
   seoData,
   sectionsContent,
   introContent,
@@ -910,9 +982,17 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
         lead: `Simplest form is an agreed spelling, not a different value.`,
         content: [
           `These criteria define the target. The techniques that follow show how to reach it.`,
-          `The table below collects the three criteria as a checklist for verifying simplest form.`,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          `The cards below collect the three criteria as a checklist for verifying simplest form.`,
+          <DiagramFrame
+            key={'property-sheet-simplest-form-criteria'}
+            id="simplest-form-three-criteria"
+            title="Three Criteria for Simplest Form"
+            source="/algebra/roots/simplifying"
+            related={false}
+            layout="top"
+          >
+            <PropertySheet data={simplestFormCriteria} variant="cards" />
+          </DiagramFrame>,
         ],
       },
       {
@@ -950,8 +1030,16 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-simplifying-factoring-out-perfect-powers-matrix'}
+            id="simplifying-factoring-out-perfect-powers-matrix"
+            title="Factoring Out Perfect Powers"
+            source="/algebra/roots/simplifying"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to simplify a radical](!/algebra/methods/simplify-radicals) →@`,
         ]
     },
     {
@@ -968,6 +1056,11 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame key={'obj4-procedure'} id="combined-simplification-steps" title="The four moves on one radical"
+            source="/algebra/roots/simplifying" related={false}
+            before={"The first example of this section, one move at a time. Press Next to carry out each move."}>
+            <Procedure data={combinedSimplifySteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -989,6 +1082,7 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to rationalize a denominator](!/algebra/methods/rationalize-denominator) →@`,
         ]
     },
     {
@@ -1022,8 +1116,15 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-simplifying-rationalizing-higher-index-denominators-matrix'}
+            id="simplifying-rationalizing-higher-index-denominators-matrix"
+            title="Rationalizing Higher-Index Denominators"
+            source="/algebra/roots/simplifying"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Each index needs its own identity: squares clear square roots, cubes clear cube roots, $n$th powers clear $n$th roots.]@`,
         ]
     },
@@ -1060,7 +1161,7 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
             id="simplification-strategy-stages"
             title="Simplifying a radical, stage by stage"
             source="/algebra/roots/simplifying"
-            before={"The five steps as a pipeline: three work inside the radical, one clears the denominator, and the last checks the result."}
+            before={"The five steps as a pipeline: three work inside the radical, one clears the denominator, and the last checks the result. Press Next to run them on one example."}
           >
             <Procedure data={simplifyProcedure} variant="stages" />
           </DiagramFrame>,
@@ -1073,8 +1174,15 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-simplifying-simplification-techniques-at-glance-matrix'}
+            id="simplifying-simplification-techniques-at-glance-matrix"
+            title="Simplification Techniques at a Glance"
+            source="/algebra/roots/simplifying"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1092,6 +1200,14 @@ $$\\frac{5}{\\sqrt{3}} \\quad \\text{is not simplified — radical in denominato
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

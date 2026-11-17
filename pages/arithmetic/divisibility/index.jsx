@@ -1,5 +1,6 @@
 
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj2 aggregation, obj3 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -25,7 +26,35 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_divisibilityRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Divisibility","sub":"does $n$ divide $a$?"},"groups":[{"name":"Remainders","items":[{"name":"Modulo","href":"/arithmetic/modulo","why":"computes the remainder: $a \\bmod n = 0$ means $n \\mid a$"},{"name":"Modular arithmetic","href":"/arithmetic/modulo/operations","why":"numbers classified by their remainders"}]},{"name":"Where divisibility is used","items":[{"name":"Fractions","href":"/arithmetic/fractions","why":"lowest terms means dividing out the GCD"},{"name":"Divisibility rules","href":"/arithmetic/divisibility/rules","why":"shortcuts from how $10$ behaves under modular arithmetic"}]}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Divisibility Notation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Phrasing","features":[{"id":"c1","name":"Example (with 3 ∣ 12)","type":"text"},{"id":"c2","name":"What it foregrounds","type":"text"}],"items":[{"id":"r1","name":"\"a divides b\"","values":{"c1":"3 divides 12","c2":"the divisor a — the one doing the dividing"}},{"id":"r2","name":"\"b is divisible by a\"","values":{"c1":"12 is divisible by 3","c2":"the dividend b — the perspective of the number being divided"}},{"id":"r3","name":"\"a is a divisor of b\"","values":{"c1":"3 is a divisor of 12","c2":"a's role as one of b's divisors"}},{"id":"r4","name":"\"a is a factor of b\"","values":{"c1":"3 is a factor of 12","c2":"a as a multiplicative building block of b"}},{"id":"r5","name":"\"b is a multiple of a\"","values":{"c1":"12 is a multiple of 3","c2":"b as a product of a and some integer"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Map of the Divisibility Subtree"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Topic","features":[{"id":"c1","name":"What you'll find there","type":"text"},{"id":"c2","name":"Page","type":"text"}],"items":[{"id":"r1","name":"Divisibility rules","values":{"c1":"digit-based shortcuts for testing divisibility by 2, 3, 4, 5, 6, 8, 9, 10, and 11 without performing the full division","c2":"[/divisibility/rules](!/arithmetic/divisibility/rules)"}},{"id":"r2","name":"Factors and multiples","values":{"c1":"listing all factors of a number using pair-search up to √n; counting formulas via prime factorization","c2":"[/divisibility/factors](!/arithmetic/divisibility/factors)"}},{"id":"r3","name":"Greatest common divisor (GCD)","values":{"c1":"three methods — listing factors, prime factorization, and the Euclidean algorithm","c2":"[/divisibility/gcd](!/arithmetic/divisibility/gcd)"}},{"id":"r4","name":"Least common multiple (LCM)","values":{"c1":"the smallest shared multiple; the identity a · b = gcd(a, b) · lcm(a, b)","c2":"[/divisibility/lcm](!/arithmetic/divisibility/lcm)"}},{"id":"r5","name":"Modulo (computational counterpart)","values":{"c1":"the remainder operation that computes the answer to every divisibility question — and powers the Euclidean algorithm and divisibility rules","c2":"[/arithmetic/modulo](!/arithmetic/modulo)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Basic Properties"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Reflexivity","values":{"c1":"every nonzero integer divides itself: a ∣ a","c2":"7 ∣ 7, since 7 = 7 · 1"}},{"id":"r2","name":"Universal divisor","values":{"c1":"1 divides everything: 1 ∣ a for any integer a","c2":"1 ∣ 100, since 100 = 1 · 100"}},{"id":"r3","name":"Zero as multiple","values":{"c1":"every nonzero integer divides 0: a ∣ 0","c2":"7 ∣ 0, since 0 = 7 · 0"}},{"id":"r4","name":"Transitivity","values":{"c1":"if a ∣ b and b ∣ c, then a ∣ c","c2":"3 ∣ 12 and 12 ∣ 60 ⇒ 3 ∣ 60"}},{"id":"r5","name":"Distribution","values":{"c1":"if a ∣ b and a ∣ c, then a ∣ (b + c) and a ∣ (b − c)","c2":"4 ∣ 20 and 4 ∣ 12 ⇒ 4 ∣ 32 and 4 ∣ 8"}},{"id":"r6","name":"Scaling","values":{"c1":"if a ∣ b, then a ∣ (b · k) for any integer k","c2":"3 ∣ 12 ⇒ 3 ∣ 36, 3 ∣ 60, 3 ∣ 120, …"}}]};
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Arithmetic methods", items: [
+      { skill: "Find the GCD by prime factorization", href: "/arithmetic/methods/gcd-prime-factorization", desc: "Factor both numbers into primes and keep the shared primes with the smaller exponent: $\\gcd(72, 120) = 2^3 \\cdot 3 = 24$.", level: "composite" },
+      { skill: "Find the GCD with the Euclidean algorithm", href: "/arithmetic/methods/gcd-euclidean-algorithm", desc: "Replace the pair $(a, b)$ by $(b, a \\bmod b)$ until the remainder is $0$; the last nonzero remainder is the GCD. No factoring needed.", level: "composite" },
+      { skill: "Find the least common multiple", href: "/arithmetic/methods/lcm", desc: "Find the smallest number that two or more numbers divide: take every prime with its larger exponent, or use $\\operatorname{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1006,8 +1035,15 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
             sheet={arithmeticNotationSheet}
             current={'/arithmetic/divisibility'}
           />,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-divisibility-divisibility-notation-matrix'}
+            id="divisibility-divisibility-notation-matrix"
+            title="Divisibility Notation"
+            source="/arithmetic/divisibility"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -1035,8 +1071,15 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
     link:sectionsContent.obj3.link,
     content:[
       sectionsContent.obj3.content,
-      <div key={'obj3-table'} style={tableWrapStyle}
-           dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+      <DiagramFrame
+        key={'feature-matrix-divisibility-basic-properties-matrix'}
+        id="divisibility-basic-properties-matrix"
+        title="Basic Properties"
+        source="/arithmetic/divisibility"
+        related={false}
+      >
+        <FeatureMatrix data={fm_obj3Table} />
+      </DiagramFrame>,
       <div key={'obj3-svg-scale'} style={tableWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj3SvgScale }} />,
     ]
@@ -1121,6 +1164,15 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'concept-map-divisibility-related-concepts'}
+            id="divisibility-related-concepts"
+            title="Related Concepts"
+            source="/arithmetic/divisibility"
+            related={false}
+          >
+            <ConceptMap data={cm_divisibilityRelated} variant="hub" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1129,8 +1181,15 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-divisibility-summary-map-divisibility-subtree-matrix'}
+            id="divisibility-summary-map-divisibility-subtree-matrix"
+            title="Summary: A Map of the Divisibility Subtree"
+            source="/arithmetic/divisibility"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1166,6 +1225,14 @@ Reading $3 \\mid 12$ as $3 \\div 12 = 0.25$ makes a true statement look false. T
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

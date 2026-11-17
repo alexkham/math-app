@@ -684,6 +684,7 @@
 
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj5 aggregation, obj8 aggregation, summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -702,7 +703,34 @@ import discretePmfDiagrams from '@/app/components/visualizations/probability/dis
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Dice Roll Model at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"What it represents","values":{"c1":"a single random trial with a fixed, finite set of mutually exclusive outcomes","c2":"a standard six-sided die"}},{"id":"r2","name":"Outcome space","values":{"c1":"a finite set of labels distinguishing outcomes; no arithmetic meaning at this stage","c2":"&Omega; = {1, 2, 3, 4, 5, 6}"}},{"id":"r3","name":"Events","values":{"c1":"subsets of the outcome space — single outcomes, groupings, or category-based selections","c2":"&ldquo;even result&rdquo; = {2, 4, 6}"}},{"id":"r4","name":"Probability assignment","values":{"c1":"non-negative weights on each outcome that sum to 1","c2":"fair die: P(k) = 1/6 for every face"}},{"id":"r5","name":"Modeling assumptions","values":{"c1":"one outcome per roll, mutually exclusive & exhaustive, fixed probabilities, independent rolls","c2":"&ldquo;a fair die rolled repeatedly under identical conditions&rdquo;"}},{"id":"r6","name":"[Random variables](!/probability/random-variables)","values":{"c1":"numerical mappings on outcomes; different choices yield different measurements","c2":"X = face value; Y = 1$_{{even}}$; Z = face mod 3"}},{"id":"r7","name":"Distribution from one roll","values":{"c1":"finite-support discrete law; uniform when the model is symmetric","c2":"[discrete uniform](!/probability/distributions/discrete/uniform) on {1, …, 6}"}},{"id":"r8","name":"Distributions from repeated rolls","values":{"c1":"sums, counts, extrema, averages — aggregation produces richer shapes","c2":"sum of 2 dice → triangular on {2, 3, …, 12}"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table constructionsTable ("Distributions Built from Repeated Dice Rolls"); converted from the table's own cells.
+const fm_constructionsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Construction","features":[{"id":"c1","name":"What it produces","type":"text"},{"id":"c2","name":"Resulting shape or distribution","type":"text"}],"items":[{"id":"r1","name":"Sum of n rolls","values":{"c1":"total points obtained across n rolls","c2":"triangular for n = 2; bell-shaped as n grows (route to the normal limit)"}},{"id":"r2","name":"Count of a target face","values":{"c1":"how many times a specific face (or face group) appears","c2":"[binomial](!/probability/distributions/discrete/binomial)(n, p) with p equal to that face's probability"}},{"id":"r3","name":"Maximum or minimum of n rolls","values":{"c1":"extreme value across a sequence of rolls","c2":"an order-statistic distribution skewed toward the upper (or lower) faces"}},{"id":"r4","name":"Average of n rolls","values":{"c1":"mean points per roll","c2":"concentrates around the expected value as n grows (law of large numbers)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table assumptionsTable ("Assumptions"); converted from the table's own cells.
+const fm_assumptionsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Assumption","features":[{"id":"c1","name":"What it states","type":"text"},{"id":"c2","name":"What violating it produces","type":"text"}],"items":[{"id":"r1","name":"Single outcome per roll","values":{"c1":"each roll produces exactly one outcome","c2":"a fundamentally different model (e.g. multi-result mechanisms)"}},{"id":"r2","name":"Mutually exclusive & exhaustive","values":{"c1":"outcomes don't overlap and cover every possibility","c2":"overlapping outcomes or unmodeled cases"}},{"id":"r3","name":"Fixed probabilities","values":{"c1":"each outcome has a probability set in advance, unchanging between rolls","c2":"time-varying or adaptive probability models"}},{"id":"r4","name":"Independence across rolls","values":{"c1":"outcomes of separate rolls don't influence each other","c2":"Markov-chain-like models with memory between trials"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve dice probability problems", href: "/probability/methods/dice-problems", desc: "Sums, doubles and \"at least one six\": list the ordered outcomes and count.", level: "applied", here: "#4" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Find a probability by counting outcomes", href: "/probability/methods/classical-probability", desc: "Equally likely outcomes: count the favorable ones, count all of them, divide.", level: "composite" },
+      { skill: "List a sample space", href: "/probability/methods/sample-space", desc: "Write down every possible outcome of an experiment with a list, a grid or a tree, then count it.", level: "composite" },
+      { skill: "Solve coin toss probability problems", href: "/probability/methods/coin-problems", desc: "Heads and tails over several tosses: count the sequences, or use the binomial formula for a biased coin.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1522,6 +1550,7 @@ With two dice, an outcome records the face of the first die and the face of the 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve dice probability problems](!/probability/methods/dice-problems) →@`,
         ]
     },
     {
@@ -1530,8 +1559,15 @@ With two dice, an outcome records the face of the first die and the face of the 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'assumptions-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: assumptionsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-dice-roll-assumptions-matrix'}
+            id="dice-roll-assumptions-matrix"
+            title="Assumptions"
+            source="/probability/models/dice-roll"
+            related={false}
+          >
+            <FeatureMatrix data={fm_assumptionsTable} />
+          </DiagramFrame>,
           `@academic[pitfall,aside:true,width:35%:Expecting a missing face to be due
 After ten rolls without a six, a six seems due, so the next roll is given $P(6) > \\frac{1}{6}$. Rolls are independent: the next roll still has $P(6) = \\frac{1}{6}$, whatever the earlier rolls showed.
 [Read more](!#pitfall-expecting-a-missing-face-to-be-due)]@
@@ -1567,8 +1603,15 @@ The faces of a die need not carry the numbers 1 to 6: any six numbers can be wri
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'constructions-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: constructionsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-dice-roll-distributions-built-repeated-matrix'}
+            id="dice-roll-distributions-built-repeated-matrix"
+            title="Distributions Built from Repeated Dice Rolls"
+            source="/probability/models/dice-roll"
+            related={false}
+          >
+            <FeatureMatrix data={fm_constructionsTable} />
+          </DiagramFrame>,
                   <div key={'unit-maxL'} dangerouslySetInnerHTML={{ __html: demoUnits.maxL }} />,
             `Larger faces are more likely as the maximum: P(max = 6) = 11/36, P(max = 1) = 1/36.`,
           `@academic[pitfall,aside:true,width:35%:Adding the chances for at least one six
@@ -1616,8 +1659,15 @@ The maximum also answers questions about a single face. The larger of the two fa
         link:sectionsContent.summary.link,
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-dice-roll-dice-roll-model-matrix'}
+            id="dice-roll-dice-roll-model-matrix"
+            title="Dice Roll Model at a Glance"
+            source="/probability/models/dice-roll"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1635,6 +1685,14 @@ The maximum also answers questions about a single face. The larger of the two fa
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

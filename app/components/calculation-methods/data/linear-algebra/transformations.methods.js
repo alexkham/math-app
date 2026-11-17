@@ -33,7 +33,7 @@ const transformationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Check If a Transformation Is Linear | Learn Math Class',
         description: 'Check if a transformation is linear: test T(0) = 0, apply the one-step test T(cu + v) = cT(u) + T(v), or find a counterexample. Examples and common mistakes.',
@@ -164,7 +164,7 @@ const transformationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Matrix of a Linear Transformation (Standard Matrix) | Learn Math Class',
         description: 'Find the standard matrix of a linear transformation: apply T to each basis vector and use the images as columns. Examples: formulas, other bases, polynomials.',
@@ -299,7 +299,7 @@ const transformationsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Kernel and Image of a Linear Transformation | Learn Math Class',
         description: 'Find the kernel and image of a linear transformation: row reduce once, read the kernel from free variables and the image from pivot columns. Worked examples.',
@@ -437,7 +437,7 @@ const transformationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Change Basis (Coordinates and P⁻¹AP) | Learn Math Class',
         description: 'Change basis step by step: build P from the new basis, find coordinates with P⁻¹v, write a matrix in the new basis as P⁻¹AP, then check. Worked examples.',
@@ -571,7 +571,7 @@ const transformationsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Matrix of a Geometric Transformation (2D) | Learn Math Class',
         description: 'Find the matrix of a rotation, reflection, projection or shear in 2D: track where e1 and e2 go, use the formulas, multiply right to left to combine. Examples.',

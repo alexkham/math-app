@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,9 +18,40 @@ import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheat
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Upper and Lower Bounds"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Bound type","features":[{"id":"c1","name":"Condition on the synthetic-division row","type":"text"},{"id":"c2","name":"Example (P(x) = x³ − 4x² + x + 6)","type":"text"}],"items":[{"id":"r1","name":"Upper bound (c > 0)","values":{"c1":"every entry in the bottom row is non-negative","c2":"c = 5 → row 1, 1, 6, 36 (all ≥ 0) ⇒ 5 is an upper bound"}},{"id":"r2","name":"Lower bound (c < 0)","values":{"c1":"entries alternate in sign (zeros count as either sign)","c2":"c = −2 → row 1, −6, 13, −20 (alternating) ⇒ −2 is a lower bound"}}]};
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Master Toolkit of Polynomial Theorems"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Theorem","features":[{"id":"c1","name":"What it does","type":"text"},{"id":"c2","name":"When to use","type":"text"},{"id":"c3","name":"Output","type":"text"}],"items":[{"id":"r1","name":"Remainder Theorem","values":{"c1":"replaces division by (x − c) with a single evaluation","c2":"find a remainder without long division","c3":"remainder = P(c)"}},{"id":"r2","name":"Factor Theorem","values":{"c1":"links roots to linear factors","c2":"verify a factor, or build polynomials from known roots","c3":"(x − c) is a factor ⟺ P(c) = 0"}},{"id":"r3","name":"Rational Root Theorem","values":{"c1":"restricts rational roots to ± p ⁄ q with p | a₀, q | aₙ","c2":"polynomial has integer coefficients; search for rational roots","c3":"finite candidate list"}},{"id":"r4","name":"Integer Root Theorem","values":{"c1":"RRT simplified: all rational roots are integers","c2":"monic polynomial (aₙ = 1)","c3":"candidates are divisors of a₀ only"}},{"id":"r5","name":"Descartes' Rule of Signs","values":{"c1":"counts sign changes in P(x) and P(−x)","c2":"estimate count of positive and negative real roots before solving","c3":"upper bound on positive / negative roots (or less by an even number)"}},{"id":"r6","name":"Upper / Lower Bound Test","values":{"c1":"brackets the interval containing all real roots via synthetic division","c2":"combine with RRT to eliminate candidates outside the bracket","c3":"interval [c$_{low}$, c$_{high}$] containing every real root"}},{"id":"r7","name":"Fundamental Theorem of Algebra","values":{"c1":"guarantees every degree-n polynomial has exactly n roots over ℂ (with multiplicity)","c2":"confirm the total number of roots to look for","c3":"existence guarantee; complex roots of real polynomials come in conjugate pairs"}},{"id":"r8","name":"Vieta's Formulas","values":{"c1":"express symmetric functions of roots from coefficients alone","c2":"verify a factorization, or work with sums/products of roots without finding them","c3":"root–coefficient identities (sum, pairwise products, full product)"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj13Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj13Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Theorem","features":[{"id":"c1","name":"Common mistake","type":"text"},{"id":"c2","name":"Correct version","type":"text"}],"items":[{"id":"r1","name":"Remainder vs Factor","values":{"c1":"treating (x − c) as a \"partial factor\" when P(c) ≠ 0","c2":"Factor Theorem requires P(c) = 0 exactly; otherwise P(c) is just the remainder"}},{"id":"r2","name":"Rational Root Theorem","values":{"c1":"forgetting negative candidates, or skipping fractional candidates when aₙ ≠ 1","c2":"include ± p ⁄ q for every p | a₀ and every q | aₙ"}},{"id":"r3","name":"Descartes' Rule","values":{"c1":"computing P(−x) incorrectly (changing wrong terms)","c2":"only odd-powered terms flip sign; even-powered terms stay the same"}},{"id":"r4","name":"Vieta's formulas","values":{"c1":"sign errors — writing sum as +b or product as +d","c2":"k-th symmetric polynomial = (−1)ᵏ · (coefficient of xⁿ⁻ᵏ); alternating signs"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Vieta's Formulas"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Monic polynomial","features":[{"id":"c1","name":"Sum of roots","type":"text"},{"id":"c2","name":"Sum of pairwise products","type":"text"},{"id":"c3","name":"Product of all roots","type":"text"}],"items":[{"id":"r1","name":"x² + bx + c (roots r₁, r₂)","values":{"c1":"r₁ + r₂ = −b","c2":null,"c3":"r₁ · r₂ = c"}},{"id":"r2","name":"x³ + bx² + cx + d (roots r₁, r₂, r₃)","values":{"c1":"r₁ + r₂ + r₃ = −b","c2":"r₁r₂ + r₁r₃ + r₂r₃ = c","c3":"r₁ · r₂ · r₃ = −d"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use the remainder and factor theorems", href: "/algebra/polynomials/methods/remainder-theorem", desc: "The remainder of $f(x) \\div (x - r)$ is $f(r)$; remainder 0 means $(x - r)$ is a factor.", level: "composite", here: "#4" },
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite", here: "#6" },
+    ] },
+    { title: "More polynomial methods", items: [
+      { skill: "Find all roots of a polynomial", href: "/algebra/polynomials/methods/find-all-roots", desc: "Rational roots first, divide them out, finish with the quadratic formula; count multiplicities.", level: "composite" },
+      { skill: "Use synthetic division", href: "/algebra/polynomials/methods/synthetic-division", desc: "Divide by $x - r$ with coefficients only: bring down, multiply by $r$, add, repeat.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/polynomials/methods", label: "All polynomial methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1201,8 +1233,24 @@ $$x^3 - x^2 + x - 1 = (x - 1)(x^2 + 1)$$`, `The factor $x^2 + 1$ has roots $\\pm
   };
 
 
+  const descartesSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$P(x) = x^3 - 2x^2 - x + 2$',
+      rows: [
+        { step: 'List the coefficient signs of $P(x)$ in standard form', example: '$+, -, -, +$' },
+        { step: 'Count the sign changes', example: '$2$ changes' },
+        { step: 'Positive real roots: that count, or less by an even number', example: '$2$ or $0$' },
+        { step: 'Substitute $-x$ and list the signs of $P(-x)$', example: '$-x^3 - 2x^2 + x + 2$: $-, -, +, +$' },
+        { step: 'Negative real roots: count the sign changes of $P(-x)$', example: '$1$ change, so exactly $1$' },
+        { check: true, step: 'Compare with the actual roots', example: '$1$, $2$, $-1$: two positive, one negative' },
+      ],
+    },
+  };
+
   return {
   props:{
+    descartesSteps,
       remainderChain, factorIff, rationalRootApply, rationalRootConverse, integerRootChain, ftaConverse, vietaApply,
     pitfallData,
     sectionsContent,
@@ -1228,7 +1276,7 @@ $$x^3 - x^2 + x - 1 = (x - 1)(x^2 + 1)$$`, `The factor $x^2 + 1$ has roots $\\pm
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function RulesPage({remainderChain, factorIff, rationalRootApply, rationalRootConverse, integerRootChain, ftaConverse, vietaApply,  pitfallData,seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RulesPage({ descartesSteps, remainderChain, factorIff, rationalRootApply, rationalRootConverse, integerRootChain, ftaConverse, vietaApply,  pitfallData,seoData, sectionsContent, introContent, obj10Table, obj12Table, obj13Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1389,6 +1437,7 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the remainder and factor theorems](!/algebra/polynomials/methods/remainder-theorem) →@`,
         ]
     },
     {
@@ -1415,6 +1464,7 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
           >
             <TheoremCard data={rationalRootApply} variant="apply" theme={theoremTheme} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the rational root test](!/algebra/polynomials/methods/rational-root-test) →@`,
         ]
     },
     {
@@ -1463,6 +1513,11 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
           sectionsContent.obj9.content,
           <div key={'unit-descartes'} dangerouslySetInnerHTML={{ __html: demoUnits.descartes }} />,
           `The rule gives possible counts; finding the roots still takes the other tools on this page.`,
+          <DiagramFrame key={'obj9-procedure'} id="descartes-rule-steps" title="The rule on one polynomial"
+            source="/algebra/polynomials/rules" related={false}
+            before={"The polynomial of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={descartesSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
 
@@ -1473,11 +1528,15 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rules-upper-lower-bounds-matrix'}
+            id="rules-upper-lower-bounds-matrix"
+            title="Upper and Lower Bounds"
+            source="/algebra/polynomials/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
           `@academic[punchline:Two synthetic divisions can fence in every real root, so candidates outside the fence never need testing.]@`,
         ]
     },
@@ -1507,11 +1566,15 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rules-vieta-s-formulas-matrix'}
+            id="rules-vieta-s-formulas-matrix"
+            title="Vieta's Formulas"
+            source="/algebra/polynomials/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           `@academic[punchline:Any symmetric expression in the roots can be computed from the coefficients, without solving for a single root.]@`,
           <DiagramFrame
             key={'obj12-theorem'}
@@ -1533,11 +1596,15 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div
-            key={'obj13-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj13Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rules-common-mistakes-matrix'}
+            id="rules-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/algebra/polynomials/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj13Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj13-mistakes'}
             id="polynomial-theorem-pitfalls"
@@ -1557,11 +1624,23 @@ Evaluating at the number shown in the divisor: for $x^3 - 4x + 2$ divided by $(x
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rules-master-toolkit-polynomial-theorems-matrix'}
+            id="rules-master-toolkit-polynomial-theorems-matrix"
+            title="Master Toolkit of Polynomial Theorems"
+            source="/algebra/polynomials/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -953,6 +953,9 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj2 aggregation, obj8 aggregation, obj9 summary capstone)
 
+import TestSelector from '@/app/components/infographics/linear-algebra/TestSelector'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import RowOperationTrace from '@/app/components/infographics/linear-algebra/RowOperationTrace'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -966,6 +969,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -976,7 +980,33 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Span in Abstract Vector Spaces"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Vector space","features":[{"id":"c1","name":"Spanning set","type":"text"},{"id":"c2","name":"Result","type":"text"},{"id":"c3","name":"Reason","type":"text"}],"items":[{"id":"r1","name":"𝒫₂ (polynomials of degree ≤ 2)","values":{"c1":"{1, x, x²}","c2":"spans all of 𝒫₂; dimension 3","c3":"three independent vectors — no relations among them; standard basis"}},{"id":"r2","name":"C(ℝ) (continuous real-valued functions)","values":{"c1":"{1, sin²x, cos²x}","c2":"spans a 2-dimensional subspace","c3":"the identity sin²x + cos²x = 1 forces 1 to be a combination of the others"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Geometric Interpretation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Set in ℝⁿ","features":[{"id":"c1","name":"Span dimension","type":"text"},{"id":"c2","name":"Geometric shape","type":"text"},{"id":"c3","name":"Note","type":"text"}],"items":[{"id":"r1","name":"1 nonzero vector","values":{"c1":"1","c2":"line through the origin","c3":"basis for the line"}},{"id":"r2","name":"2 parallel vectors","values":{"c1":"1","c2":"line through the origin","c3":"one is a scalar multiple of the other — the pair is redundant"}},{"id":"r3","name":"2 non-parallel vectors","values":{"c1":"2","c2":"plane through the origin","c3":"basis for the plane"}},{"id":"r4","name":"3 coplanar vectors in ℝ³","values":{"c1":"2","c2":"plane through the origin","c3":"the third vector lies in the span of two — redundant"}},{"id":"r5","name":"3 non-coplanar vectors in ℝ³","values":{"c1":"3","c2":"all of ℝ³","c3":"basis for ℝ³"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Test whether a vector is in a span", href: "/linear-algebra/vector-spaces/methods/span-test", desc: "Row reduce the augmented matrix: consistent means yes. A pivot in every row means the set spans Rⁿ.", level: "composite", here: "#4" },
+    ] },
+    { title: "More vector space methods", items: [
+      { skill: "Test vectors for linear independence", href: "/linear-algebra/vector-spaces/methods/linear-independence-test", desc: "Put the vectors in the columns of a matrix and count pivots, or use the determinant.", level: "composite" },
+      { skill: "Test whether a set is a subspace", href: "/linear-algebra/vector-spaces/methods/subspace-test", desc: "Check the zero vector, closure under addition and closure under scalar multiplication.", level: "composite" },
+      { skill: "Find a basis", href: "/linear-algebra/vector-spaces/methods/find-basis", desc: "Row reduce once: the pivot columns of the original matrix, or one vector per free variable.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1799,8 +1829,56 @@ $$\\xrightarrow{R_3 - 2R_2} \\begin{pmatrix} 1 & 0 & 1 \\\\ 0 & 1 & 1 \\\\ 0 & 0
     ],
   };
 
+  // RowOperationTrace 2026-11-14: The span test, row operation by row operation (obj4).
+  const spanTrace = {
+    goal: 'Is $\\mathbf{b} = (5, 3, 7)$ in $\\text{Span}\\{(1, 0, 1), (0, 1, 2)\\}$? Row reduce the augmented matrix $[A \\mid \\mathbf{b}]$.',
+    reading: 'The last row reads $0 = -4$, a contradiction, so $\\mathbf{b}$ is not in the span.',
+    steps: [
+      { id: 's0', label: 'Start', matrix: [[1, 0, 5], [0, 1, 3], [1, 2, 7]], pivots: [[0, 0], [1, 1]], augmentedAfterCol: 1,
+        why: 'The two vectors as columns, with $\\mathbf{b}$ attached.', note: 'Augmented matrix' },
+      { id: 's1', label: 'Column 1', matrix: [[1, 0, 5], [0, 1, 3], [0, 2, 2]], pivots: [[0, 0], [1, 1]],
+        changed: [[2, 0], [2, 2]], augmentedAfterCol: 1,
+        operation: 'R3 − R1', why: 'Clears the entry below the first pivot.', note: 'Column 1 cleared' },
+      { id: 's2', label: 'Column 2', matrix: [[1, 0, 5], [0, 1, 3], [0, 0, -4]], pivots: [[0, 0], [1, 1]],
+        changed: [[2, 1], [2, 2]], augmentedAfterCol: 1,
+        operation: 'R3 − 2·R2', why: 'Clears the entry below the second pivot. The last row is all zeros left of the bar and $-4$ right of it.', note: 'A row 0 = −4', final: true },
+    ],
+  };
+
+  // TestSelector 2026-11-14: Which spanning test to use (obj5).
+  const spanningTestSelector = {
+    question: 'Which test shows that a set of vectors spans $\\mathbb{R}^n$?',
+    intro: 'Count the vectors first. If that settles nothing, follow the branch that matches the set.',
+    shortcutsLabel: 'Check first',
+    shortcuts: [
+      { when: 'Fewer than $n$ vectors', then: 'They cannot span $\\mathbb{R}^n$. Stop.' },
+    ],
+    branches: [
+      { condition: 'Exactly $n$ vectors',
+        test: {
+          name: 'Determinant',
+          doThis: 'Put the vectors in the columns of a square matrix $A$ and compute $\\det(A)$.',
+          why: 'With exactly $n$ vectors in $\\mathbb{R}^n$, spanning and independence are the same condition.',
+          needs: 'A square matrix',
+          verdict: 'Spans $\\mathbb{R}^n$ exactly when $\\det(A) \\neq 0$.',
+          limit: 'Applies only to the square case.',
+        } },
+      { condition: 'More than $n$ vectors',
+        test: {
+          name: 'Row reduction',
+          doThis: 'Put the vectors in the columns of a matrix and row reduce it.',
+          why: 'A zero row leaves some right-hand sides $\\mathbf{b}$ unreachable.',
+          needs: 'The echelon form',
+          verdict: 'Spans $\\mathbb{R}^n$ exactly when every row holds a pivot.',
+          limit: 'The pivots are counted by rows here. A column without a pivot only marks a redundant vector.',
+        } },
+    ],
+  };
+
 return {
   props:{
+    spanningTestSelector,
+    spanTrace,
     specialCasesData,
     pitfallData,
     demoUnits,
@@ -1825,7 +1903,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function SpanPage({ specialCasesData, pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SpanPage({ spanningTestSelector, spanTrace, specialCasesData, pitfallData,seoData, sectionsContent, introContent, obj2Table, obj8Table, spanDiagnostics, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1938,11 +2016,15 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-span-geometric-interpretation-matrix'}
+            id="span-geometric-interpretation-matrix"
+            title="Geometric Interpretation"
+            source="/linear-algebra/vector-spaces/span"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
                   <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
           `Line, plane or the whole space — the span is always one of these, and it always contains the origin.`,
         ]
@@ -1972,8 +2054,20 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-row-trace'}
+            id="span-membership-row-trace"
+            title="The span test, row operation by row operation"
+            source="/linear-algebra/vector-spaces/span"
+            before={"The first example, with each row operation beside the matrix it produces. Pivots are filled in, and the entries changed at each step are underlined."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <RowOperationTrace data={spanTrace} theme="navy" variant="ledger" />
+            </div>
+          </DiagramFrame>,
                   <div key={'unit-membership'} dangerouslySetInnerHTML={{ __html: demoUnits.membership }} />,
           `Every later question about spanning sets reduces to running this same test on a different right-hand side.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to test whether a vector is in a span](!/linear-algebra/vector-spaces/methods/span-test) →@`,
         ]
     },
     {
@@ -1982,6 +2076,17 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-test-selector'}
+            id="spanning-test-selector"
+            title="Which spanning test to use"
+            source="/linear-algebra/vector-spaces/span"
+            before={"The tests of this section in one place: a check by counting first, then the test that fits the set."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <TestSelector data={spanningTestSelector} theme="navy" variant="tree" />
+            </div>
+          </DiagramFrame>,
           <div key={'unit-spansPlaneOnly'} dangerouslySetInnerHTML={{ __html: demoUnits.spansPlaneOnly }} />,
           `Spanning Rⁿ needs a pivot in every row, and that needs at least n vectors.`,
         ]
@@ -2008,11 +2113,15 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-span-span-abstract-vector-spaces-matrix'}
+            id="span-span-abstract-vector-spaces-matrix"
+            title="Span in Abstract Vector Spaces"
+            source="/linear-algebra/vector-spaces/span"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:Span means the same in every vector space; outside $\\mathbb{R}^n$, redundancy hides in identities rather than in pivot columns.]@`,
         ]
     },
@@ -2050,6 +2159,14 @@ $$\\text{Span}(K) = \\bigcap_{\\substack{W \\text{ subspace} \\\\ K \\subseteq W
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

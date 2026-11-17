@@ -300,7 +300,7 @@ See [Matrix subtraction](!/linear-algebra/matrix/operations#2) in the operations
 
   obj9: {
     title: `Matrix Multiplication`,
-    content: `Matrix multiplication combines an $m \\times n$ matrix $A$ with an $n \\times p$ matrix $B$ to produce an $m \\times p$ result. The number of columns in $A$ must equal the number of rows in $B$.
+    content: `Matrix multiplication combines an $m \\times n$ matrix $A$ with an $n \\times p$ matrix $B$ to produce an $m \\times p$ result. The number of columns in $A$ must equal the number of rows in $B$. [Try which sizes fit](!/linear-algebra/matrix/operations#which-sizes-fit).
 
 $$(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} b_{kj}$$
 

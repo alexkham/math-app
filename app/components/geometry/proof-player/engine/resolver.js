@@ -218,6 +218,19 @@ export const POINT_TYPES = {
     }
   },
 
+  // the second point where the line from `from` (a point of the circle with
+  // centre `center` through `through`) towards `toward` meets that circle again
+  secondIntersection: {
+    resolve: (o, P) => {
+      const c = P[o.center];
+      const a = P[o.from];
+      const u = unit(a, P[o.toward]);
+      const t = -2 * ((a.x - c.x) * u.x + (a.y - c.y) * u.y);
+      if (!(Math.abs(t) > 1e-9)) return null;
+      return { x: a.x + t * u.x, y: a.y + t * u.y };
+    }
+  },
+
   // `of` turned about `about` by a fixed number of degrees (clockwise on screen)
   rotateDeg: {
     resolve: (o, P) => {

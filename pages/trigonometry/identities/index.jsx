@@ -1517,6 +1517,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../pages.css'
@@ -1542,8 +1543,37 @@ import negativeAngleDiagrams from '@/app/components/trigonometry/identities/nega
 import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExplorerDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Trigonometric Identity Families"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Family","features":[{"id":"c1","name":"Category","type":"text"},{"id":"c2","name":"Core relationship","type":"text"},{"id":"c3","name":"Derives from","type":"text"}],"items":[{"id":"r1","name":"Definition-based","values":{"c1":"Foundational","c2":"Functions defined in terms of triangle sides","c3":"Right-triangle geometry"}},{"id":"r2","name":"Reciprocal","values":{"c1":"Foundational","c2":"Each function paired with its multiplicative inverse","c3":"Definitions"}},{"id":"r3","name":"Pythagorean","values":{"c1":"Foundational","c2":"sin²θ + cos²θ = 1 and dividing variants","c3":"Unit circle (x² + y² = 1)"}},{"id":"r4","name":"Triangle Geometry","values":{"c1":"Foundational","c2":"Sides and angles related in any triangle","c3":"Generalization beyond right triangles"}},{"id":"r5","name":"Even-Odd","values":{"c1":"Symmetry","c2":"f(−θ) compared with f(θ)","c3":"Unit-circle reflection across the x-axis"}},{"id":"r6","name":"Co-Function","values":{"c1":"Symmetry","c2":"f(π/2 − θ) equals the co-function of θ","c3":"Complementary angles in a right triangle"}},{"id":"r7","name":"Periodicity","values":{"c1":"Symmetry","c2":"f(θ + period) = f(θ)","c3":"Cyclic nature of circular motion"}},{"id":"r8","name":"Shift","values":{"c1":"Symmetry","c2":"f(θ + π) or f(θ + π/2) re-expressed","c3":"Unit-circle rotation by π or π/2"}},{"id":"r9","name":"Angle Sum","values":{"c1":"Angle arithmetic","c2":"f(a + b) in terms of f(a), f(b)","c3":"Geometric / rotation proof"}},{"id":"r10","name":"Angle Difference","values":{"c1":"Angle arithmetic","c2":"f(a − b) in terms of f(a), f(b)","c3":"Sum identity with even-odd substitution (b → −b)"}},{"id":"r11","name":"Double Angle","values":{"c1":"Angle arithmetic","c2":"f(2θ) in terms of f(θ)","c3":"Sum identity with a = b = θ"}},{"id":"r12","name":"Triple Angle","values":{"c1":"Angle arithmetic","c2":"f(3θ) in terms of f(θ)","c3":"Sum identity applied to 2θ + θ"}},{"id":"r13","name":"Half Angle","values":{"c1":"Angle arithmetic","c2":"f(θ/2) in terms of f(θ)","c3":"Double-angle identity rearranged and rooted"}},{"id":"r14","name":"Power-Reducing","values":{"c1":"Algebraic transform","c2":"f²(θ) in terms of f(2θ)","c3":"Double angle solved for sin²θ / cos²θ"}},{"id":"r15","name":"Product-to-Sum","values":{"c1":"Algebraic transform","c2":"f(a)·f(b) rewritten as a sum or difference","c3":"Sum and difference identities combined"}},{"id":"r16","name":"Sum-to-Product","values":{"c1":"Algebraic transform","c2":"f(a) ± f(b) rewritten as a product","c3":"Product-to-sum inverted with variable substitution"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find exact values with the sum and difference formulas", href: "/trigonometry/identities/methods/exact-values-sum-difference", desc: "Split angles like $75^\\circ$ or $\\frac{7\\pi}{12}$ into two standard angles and expand.", level: "composite", here: "#sum" },
+      { skill: "Evaluate with the half-angle formulas", href: "/trigonometry/identities/methods/half-angle-evaluation", desc: "Write the angle as half of a known one, apply the formula, take the sign from the half angle's quadrant.", level: "composite", here: "#half" },
+      { skill: "Evaluate with the double-angle formulas", href: "/trigonometry/identities/methods/double-angle-evaluation", desc: "From one value of $\\theta$ and its quadrant, find $\\sin 2\\theta$, $\\cos 2\\theta$ and $\\tan 2\\theta$.", level: "composite", here: "#double" },
+      { skill: "Reduce powers of sine and cosine", href: "/trigonometry/identities/methods/power-reduction", desc: "Trade $\\sin^2$ and $\\cos^2$ for first powers of $\\cos 2x$; repeat for higher powers.", level: "composite", here: "#power-reducing" },
+      { skill: "Rewrite a product of sines and cosines as a sum", href: "/trigonometry/identities/methods/product-to-sum", desc: "Turn $\\sin A\\cos B$, $\\cos A\\cos B$ or $\\sin A\\sin B$ into a half-sum of two functions.", level: "composite", here: "#product-sum" },
+      { skill: "Rewrite a sum of sines or cosines as a product", href: "/trigonometry/identities/methods/sum-to-product", desc: "Turn $\\sin A \\pm \\sin B$ or $\\cos A \\pm \\cos B$ into a product, often to solve an equation.", level: "composite", here: "#sum-product" },
+      { skill: "Prove a trigonometric identity", href: "/trigonometry/identities/methods/prove-identities", desc: "Work on one side only: rewrite in sine and cosine, combine fractions, use the Pythagorean identity.", level: "composite", here: "#summary" },
+      { skill: "Simplify a trigonometric expression", href: "/trigonometry/identities/methods/simplify-trig-expressions", desc: "Rewrite in sine and cosine, cancel, and recognise a Pythagorean pattern.", level: "composite", here: "#summary" },
+      { skill: "Choose the right identity", href: "/trigonometry/identities/methods/which-identity", desc: "A decision tree from the task and the shape of the expression to the identity that fits.", level: "strategy", here: "#summary" },
+    ] },
+    { title: "More identity methods", items: [
+      { skill: "Use the Pythagorean identities", href: "/trigonometry/identities/methods#pythagorean-identities", desc: "A squared sine or cosine to trade for the other, or $1 + \\tan^2$, $1 + \\cot^2$: $1 - \\cos^2 x$, $\\sec^2 x - 1$.", level: "atomic" },
+      { skill: "Handle a negative angle", href: "/trigonometry/identities/methods#negative-angle", desc: "A trig function of $-x$: $\\sin(-\\frac{\\pi}{6})$, $\\cos(-x)$, $\\tan(-\\theta)$.", level: "atomic" },
+      { skill: "Simplify a shift by π/2 or π", href: "/trigonometry/identities/methods#shift-identities", desc: "An angle shifted by a quarter or a half turn: $\\sin(x + \\frac{\\pi}{2})$, $\\cos(\\pi - x)$, $\\sin(\\frac{\\pi}{2} - x)$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/identities/methods", label: "All identity methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3119,6 +3149,7 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
          </div> ,
          sectionsContent.sum.after,
          sectionsContent.pitfallBoxes.sum,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find exact values with the sum and difference formulas](!/trigonometry/identities/methods/exact-values-sum-difference) →@`,
         
       ]
     },
@@ -3137,6 +3168,7 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
          </div> ,
          sectionsContent.difference.after,
          sectionsContent.pitfallBoxes.difference,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find exact values with the sum and difference formulas](!/trigonometry/identities/methods/exact-values-sum-difference) →@`,
         
         
       ]
@@ -3159,6 +3191,7 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
          <div key={'unit-half'} dangerouslySetInnerHTML={{ __html: demoUnits.half }} />,
          `With halves as with doubles, the lesson is the same: every fractional angle is reachable from whole ones — at the price of a square root and a careful sign check.`,
          sectionsContent.pitfallBoxes.half,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate with the half-angle formulas](!/trigonometry/identities/methods/half-angle-evaluation) →@`,
 
       ]
     },
@@ -3181,6 +3214,7 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
           <div key={'unit-double'} dangerouslySetInnerHTML={{ __html: demoUnits.double }} />,
           `Compact as they look, these doubled forms are the hinge between single-angle values and the power-reducing, half-angle, and integration techniques that follow.`,
           sectionsContent.pitfallBoxes.double,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate with the double-angle formulas](!/trigonometry/identities/methods/double-angle-evaluation) →@`,
 
 
        
@@ -3225,6 +3259,7 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
          </div> ,
          sectionsContent.power_reducing.after,
          `@academic[punchline:Squaring trades a power for a doubled angle: $\\sin^2\\theta$ and $\\cos^2\\theta$ are waves in $2\\theta$ around the level one half.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to reduce powers of sine and cosine](!/trigonometry/identities/methods/power-reduction) →@`,
        
         
       ]
@@ -3245,6 +3280,7 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
          </div> ,
          sectionsContent.product_sum.after,
          `@academic[punchline:A product of two waves is always a sum of two waves, at the sum and the difference of the angles.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to rewrite a product of sines and cosines as a sum](!/trigonometry/identities/methods/product-to-sum) →@`,
 
         
         
@@ -3266,6 +3302,7 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
          includedFields={ ["law", "formula", "explanation"]} />
          </div> ,
          sectionsContent.sum_product.after,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to rewrite a sum of sines or cosines as a product](!/trigonometry/identities/methods/sum-to-product) →@`,
 
         
         
@@ -3297,8 +3334,15 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
       link: '',
       content:[
         sectionsContent.summary.before,
-        <div key={'summary-table'} style={tableWrapStyle}
-             dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        <DiagramFrame
+          key={'feature-matrix-identities-summary-trigonometric-identity-families-matrix'}
+          id="identities-summary-trigonometric-identity-families-matrix"
+          title="Summary of Trigonometric Identity Families"
+          source="/trigonometry/identities"
+          related={false}
+        >
+          <FeatureMatrix data={fm_summaryTable} />
+        </DiagramFrame>,
         sectionsContent.summary.after,
         <DiagramFrame
           key={'summary-diagram'}
@@ -3308,6 +3352,9 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
         >
           <TaxonomyOutline data={trigIdentityOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
         </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to prove a trigonometric identity](!/trigonometry/identities/methods/prove-identities) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to simplify a trigonometric expression](!/trigonometry/identities/methods/simplify-trig-expressions) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which identity should I use?](!/trigonometry/identities/methods/which-identity) →@`,
       ]
     },
 
@@ -3339,6 +3386,14 @@ export default function TrigoIdentitiesPage({ pitfallData,trigIdentityOutline, t
     //   ]
     // }
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
       id:'faq',

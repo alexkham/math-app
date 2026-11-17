@@ -1894,6 +1894,9 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj5 aggregation, obj9 aggregation, obj10 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import RowOperationTrace from '@/app/components/infographics/linear-algebra/RowOperationTrace'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1907,6 +1910,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import EquivalenceRing from '@/app/components/infographics/linear-algebra/EquivalenceRing'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1916,6 +1920,28 @@ import laDeterminantsNotationSheet from '@/app/components/infographics/NotationC
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("The Multiplicative Property"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Identity","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Product","values":{"c1":"det(AB) = det(A) · det(B)","c2":"the central multiplicative rule"}},{"id":"r2","name":"Inverse","values":{"c1":"det(A⁻¹) = 1 / det(A)","c2":"requires A invertible (det(A) ≠ 0)"}},{"id":"r3","name":"Power","values":{"c1":"det(Aᵏ) = (det A)ᵏ","c2":"k a positive integer; extends to all integers if A invertible"}},{"id":"r4","name":"AB vs BA","values":{"c1":"det(AB) = det(BA)","c2":"holds even when AB ≠ BA as matrices"}},{"id":"r5","name":"Sum (NOT additive)","values":{"c1":"det(A + B) ≠ det(A) + det(B) in general","c2":"e.g., A = B = I₂ gives det(2I₂) = 4, not 1 + 1 = 2"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a determinant by row reduction", href: "/linear-algebra/determinants/methods/determinant-row-reduction", desc: "Reduce to triangular form, multiply the diagonal, and correct for row swaps and scalings.", level: "composite", here: "#4" },
+      { skill: "Use determinant properties", href: "/linear-algebra/determinants/methods/determinant-properties", desc: "Evaluate $\\det(2AB^TA^{-1})$ or the effect of row changes from known determinants, without entries.", level: "composite", here: "#5" },
+      { skill: "Find the determinant of a triangular matrix", href: "/linear-algebra/determinants/methods/triangular-determinant", desc: "Multiply the diagonal entries; for block triangular matrices, multiply the block determinants.", level: "composite", here: "#7" },
+    ] },
+    { title: "More determinant methods", items: [
+      { skill: "Choose the right determinant method", href: "/linear-algebra/determinants/methods/which-determinant-method", desc: "A decision tree: what you are given, whether the matrix is triangular, then its size and zeros.", level: "strategy" },
+      { skill: "Find a determinant by cofactor expansion", href: "/linear-algebra/determinants/methods/cofactor-expansion", desc: "Expand along the row or column with the most zeros: entry times sign times minor, added up.", level: "composite" },
+      { skill: "Find area and volume with determinants", href: "/linear-algebra/determinants/methods/area-volume-determinant", desc: "Put edge vectors into a matrix; the absolute value of its determinant is the area or volume.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/determinants/methods", label: "All determinant methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2765,8 +2791,43 @@ $$2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{2}\\right) = 464$$`],
     ],
   };
 
+  // Procedure rollout 2026-11-14: The determinant by row reduction, step by step (obj4).
+  const detRowReductionSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The $4 \\times 4$ matrix $A$ of the worked example',
+      rows: [
+        { step: 'Reduce $A$ to upper triangular form', example: 'three rounds of row additions' },
+        { step: 'Record every row swap and every row scaling', example: 'none were used' },
+        { step: 'Multiply the diagonal entries of the triangular result', example: '$2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 232$' },
+        { step: 'Adjust by the recorded sign flips and scale factors', example: 'nothing to adjust: $\\det(A) = 232$' },
+      ],
+    },
+  };
+
+  // RowOperationTrace 2026-11-14: The reduction, row operation by row operation (obj4).
+  const detRowReductionTrace = {
+    goal: 'Reduce $A$ to upper triangular form, keeping track of swaps and scalings.',
+    reading: 'Only row additions were used, so nothing has to be adjusted: $\\det(A) = 2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{4}\\right) = 232$.',
+    steps: [
+      { id: 's0', label: 'Start', matrix: [[2, 1, -1, 3], [4, 0, 2, 1], [-2, 3, 1, 5], [6, 2, 0, -1]], pivots: [[0, 0]],
+        why: 'The matrix $A$.' },
+      { id: 's1', label: 'Column 1', matrix: [[2, 1, -1, 3], [0, -2, 4, -5], [0, 4, 0, 8], [0, -1, 3, -10]], pivots: [[0, 0], [1, 1]],
+        changed: [[1, 0], [1, 1], [1, 2], [1, 3], [2, 0], [2, 1], [2, 2], [2, 3], [3, 0], [3, 1], [3, 2], [3, 3]],
+        operation: ['R2 − 2·R1', 'R3 + R1', 'R4 − 3·R1'], why: 'Three row additions clear column $1$. The determinant is unchanged.' },
+      { id: 's2', label: 'Column 2', matrix: [[2, 1, -1, 3], [0, -2, 4, -5], [0, 0, 8, -2], [0, 0, 1, '−15/2']], pivots: [[0, 0], [1, 1], [2, 2]],
+        changed: [[2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]],
+        operation: ['R3 + 2·R2', 'R4 − ½·R2'], why: 'Two more row additions clear column $2$.' },
+      { id: 's3', label: 'Column 3', matrix: [[2, 1, -1, 3], [0, -2, 4, -5], [0, 0, 8, -2], [0, 0, 0, '−29/4']], pivots: [[0, 0], [1, 1], [2, 2], [3, 3]],
+        changed: [[3, 2], [3, 3]],
+        operation: 'R4 − ⅛·R3', why: 'The matrix is now upper triangular, with the determinant on its diagonal.', final: true },
+    ],
+  };
+
    return {
   props: {
+    detRowReductionTrace,
+    detRowReductionSteps,
     proofStepsData,
     pitfallData,
     demoUnits,
@@ -2789,7 +2850,7 @@ $$2 \\cdot (-2) \\cdot 8 \\cdot \\left(-\\frac{29}{2}\\right) = 464$$`],
 }
    }
 
-   export default function DeterminantPropertiesPage({ proofStepsData, pitfallData,
+   export default function DeterminantPropertiesPage({ detRowReductionTrace, detRowReductionSteps, proofStepsData, pitfallData,
      seoData,
      sectionsContent,
      introContent,
@@ -2922,6 +2983,27 @@ Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-row-trace'}
+            id="determinant-row-reduction-trace"
+            title="The reduction, row operation by row operation"
+            source="/linear-algebra/determinants/properties"
+            before={"The worked example with each row operation beside the matrix it produces. Pivots are filled in, and the entries changed at each step are underlined."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <RowOperationTrace data={detRowReductionTrace} theme="navy" variant="ledger" />
+            </div>
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="determinant-row-reduction-steps"
+            title="The determinant by row reduction, step by step"
+            source="/linear-algebra/determinants/properties"
+            before={"The procedure on the worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={detRowReductionSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a determinant by row reduction](!/linear-algebra/determinants/methods/determinant-row-reduction) →@`,
         ]
     },
     {
@@ -2942,12 +3024,17 @@ Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach
             <ProofSteps data={proofStepsData} variant="chain" />
           </DiagramFrame>,
           sectionsContent.obj5.afterProof,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-multiplicative-property-matrix'}
+            id="properties-multiplicative-property-matrix"
+            title="The Multiplicative Property"
+            source="/linear-algebra/determinants/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:The determinant of a product is the product of the determinants, a rule with no counterpart for sums.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use determinant properties](!/linear-algebra/determinants/methods/determinant-properties) →@`,
         ]
     },
     {
@@ -2966,6 +3053,7 @@ Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach
           sectionsContent.obj7.content,
                   <div key={'unit-triangular'} dangerouslySetInnerHTML={{ __html: demoUnits.triangular }} />,
           `Row reduction and the determinant therefore work together rather than against each other, provided the swaps and scalings are tracked.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the determinant of a triangular matrix](!/linear-algebra/determinants/methods/triangular-determinant) →@`,
         ]
     },
     {
@@ -3024,6 +3112,14 @@ Swapping the rows of $\\begin{pmatrix} 0 & 1 \\\\ 2 & 3 \\end{pmatrix}$ to reach
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

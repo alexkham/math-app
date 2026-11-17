@@ -1096,6 +1096,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 5 tables (obj2 comparison, obj3 aggregation, obj6 comparison, obj9 aggregation, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1108,6 +1109,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1121,6 +1123,40 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Every Use of the Dot Product"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Question","features":[{"id":"c1","name":"Use of the dot product","type":"text"},{"id":"c2","name":"Result","type":"text"}],"items":[{"id":"r1","name":"What is the length of **v**?","values":{"c1":"√(**v** · **v**)","c2":"the norm ‖**v**‖"}},{"id":"r2","name":"What angle do **a** and **b** make?","values":{"c1":"cos θ = (**a** · **b**) / (‖**a**‖ ‖**b**‖), then arccos","c2":"an angle θ in [0, π]"}},{"id":"r3","name":"Are **a** and **b** orthogonal?","values":{"c1":"check whether **a** · **b** = 0","c2":"yes / no"}},{"id":"r4","name":"Is the angle acute, right, or obtuse?","values":{"c1":"read off the sign of **a** · **b**","c2":"positive / zero / negative → acute / right / obtuse"}},{"id":"r5","name":"How big can **a** · **b** be given the lengths?","values":{"c1":"|**a** · **b**| ≤ ‖**a**‖ ‖**b**‖ (Cauchy–Schwarz)","c2":"a bound; equality only for parallel vectors"}},{"id":"r6","name":"What is the signed length of **a**'s shadow on **b**?","values":{"c1":"(**a** · **b**) / ‖**b**‖","c2":"scalar projection comp$_{\\mathbf{b}}$ **a**"}},{"id":"r7","name":"What is **a**'s shadow on **b** as a vector?","values":{"c1":"((**a** · **b**) / ‖**b**‖²) **b**","c2":"vector projection proj$_{\\mathbf{b}}$ **a**, parallel to **b**"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Orthogonal Projection"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Quantity","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"What it represents","type":"text"}],"items":[{"id":"r1","name":"Scalar projection comp$_{\\mathbf{b}}$ **a**","values":{"c1":"(**a** · **b**) / ‖**b**‖","c2":"signed length of **a**'s shadow on **b**; positive when **a** tilts toward **b**, negative when away"}},{"id":"r2","name":"Vector projection proj$_{\\mathbf{b}}$ **a**","values":{"c1":"((**a** · **b**) / (**b** · **b**)) **b** = ((**a** · **b**) / ‖**b**‖²) **b**","c2":"the shadow as an actual vector, parallel to **b**, with length equal to |comp$_{\\mathbf{b}}$ **a**|"}},{"id":"r3","name":"Perpendicular component **a**$_{⊥}$","values":{"c1":"**a** − proj$_{\\mathbf{b}}$ **a**","c2":"the part of **a** orthogonal to **b**; satisfies **a**$_{⊥}$ · **b** = 0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Sign of the Dot Product"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Sign of **a** · **b**","features":[{"id":"c1","name":"Cosine","type":"text"},{"id":"c2","name":"Angle θ","type":"text"},{"id":"c3","name":"Geometric meaning","type":"text"}],"items":[{"id":"r1","name":"Positive (> 0)","values":{"c1":"cos θ > 0","c2":"θ ∈ [0, π/2)","c3":"acute (or zero) angle — vectors point in broadly the same direction"}},{"id":"r2","name":"Zero (= 0)","values":{"c1":"cos θ = 0","c2":"θ = π/2","c3":"orthogonal — neither vector has a component along the other"}},{"id":"r3","name":"Negative (< 0)","values":{"c1":"cos θ < 0","c2":"θ ∈ (π/2, π]","c3":"obtuse (or straight) angle — vectors point in broadly opposite directions"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Geometric Definition"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Definition","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Most useful when","type":"text"}],"items":[{"id":"r1","name":"Algebraic","values":{"c1":"**a** · **b** = a₁b₁ + a₂b₂ + ⋯ + aₙbₙ","c2":"components are known and a numerical answer is wanted; works mechanically in any dimension"}},{"id":"r2","name":"Geometric","values":{"c1":"**a** · **b** = ‖**a**‖ ‖**b**‖ cos θ","c2":"magnitudes and the angle are known; reveals what the dot product means (alignment) rather than how to compute it"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Compute the dot product", href: "/linear-algebra/vectors/methods/dot-product", desc: "Multiply matching components and add; or use the two lengths and the angle between them.", level: "composite", here: "#1" },
+      { skill: "Find the angle between two vectors", href: "/linear-algebra/vectors/methods/angle-between-vectors", desc: "Divide the dot product by the product of the lengths, then take the inverse cosine.", level: "composite", here: "#5" },
+      { skill: "Project one vector onto another", href: "/linear-algebra/vectors/methods/vector-projection", desc: "Scale the target vector by the dot product over its squared length; the rest is perpendicular.", level: "composite", here: "#9" },
+    ] },
+    { title: "More vector methods", items: [
+      { skill: "Compute the cross product", href: "/linear-algebra/vectors/methods/cross-product", desc: "Expand a 3×3 determinant with i, j, k in the top row; mind the minus sign on the middle term.", level: "composite" },
+      { skill: "Find the magnitude of a vector", href: "/linear-algebra/vectors/methods#magnitude", desc: "The length of a vector is asked for: $\\|(2, -3, 6)\\|$, $\\|(3, 4)\\|$, the distance $\\|\\mathbf{u} - \\mathbf{v}\\|$.", level: "atomic" },
+      { skill: "Find a unit vector in a given direction", href: "/linear-algebra/vectors/methods#unit-vector", desc: "A vector of length $1$ pointing the same way as $\\mathbf{v}$: normalize $(3, 4)$, the direction of $(1, -2, 2)$.", level: "atomic" },
+    ] },
+    { title: "Orthogonality methods", items: [
+      { skill: "Find an orthogonal projection", href: "/linear-algebra/orthogonality/methods/orthogonal-projection", desc: "Project a vector onto a line, a plane or a subspace; split it into a part inside and a part perpendicular.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vectors/methods", label: "All vector methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1652,7 +1688,7 @@ To compute the dot product of two specific vectors, use the [vector calculator](
         id: 'transpose-spelling',
         tex: `$\\mathbf{a}^{T}\\mathbf{b}$`,
         read: `a transpose b`,
-        means: `The [matrix](!/linear-algebra/matrix/operations) spelling of the same number: a row ($1 \\times n$) times a column ($n \\times 1$) is a $1 \\times 1$ matrix — the dot product wearing matrix clothes.`,
+        means: `The [matrix](!/linear-algebra/matrix/operations#which-sizes-fit) spelling of the same number: a row ($1 \\times n$) times a column ($n \\times 1$) is a $1 \\times 1$ matrix — the dot product wearing matrix clothes.`,
         cases: `Standard wherever vectors are columns by default — advanced texts, statistics, machine learning. The reversed order $\\mathbf{a}\\mathbf{b}^{T}$ is a different object entirely: an $n \\times n$ matrix, the outer product.`,
         alsoWritten: `$\\mathbf{a}^{\\top}\\mathbf{b}$, with the sans-serif top glyph; $\\mathbf{a}'\\mathbf{b}$ in econometrics, where the prime means transpose — colliding with every other job the [prime](!/calculus/derivatives/function#notation) holds.`,
         confusedWith: `A power. The $T$ is a label — transpose — not an exponent; nothing is being raised.`,
@@ -2328,6 +2364,7 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
           >
             <MatrixOperation data={dotProductAnatomy} theme="navy" variant="anatomy" />
           </DiagramFrameV2>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compute the dot product](!/linear-algebra/vectors/methods/dot-product) →@`,
         ]
     },
     {
@@ -2362,11 +2399,15 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
           sectionsContent.obj2.content,
           <div key={'unit-angleTriangle'} dangerouslySetInnerHTML={{ __html: demoUnits.angleTriangle }} />,
           `The component formula is easy to compute; the geometric one says what the number means.`,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-dot-product-geometric-definition-matrix'}
+            id="dot-product-geometric-definition-matrix"
+            title="Geometric Definition"
+            source="/linear-algebra/vectors/dot-product"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2399,6 +2440,7 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the angle between two vectors](!/linear-algebra/vectors/methods/angle-between-vectors) →@`,
         ]
     },
     {
@@ -2409,11 +2451,15 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
           sectionsContent.obj6.content,
           <div key={'unit-signPanels'} dangerouslySetInnerHTML={{ __html: demoUnits.signPanels }} />,
           `Reading only the sign is often enough: no square roots and no inverse cosine are needed to tell acute from obtuse.`,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-dot-product-sign-dot-product-matrix'}
+            id="dot-product-sign-dot-product-matrix"
+            title="Sign of the Dot Product"
+            source="/linear-algebra/vectors/dot-product"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2438,13 +2484,18 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-dot-product-orthogonal-projection-matrix'}
+            id="dot-product-orthogonal-projection-matrix"
+            title="Orthogonal Projection"
+            source="/linear-algebra/vectors/dot-product"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
                   <div key={'unit-projection'} dangerouslySetInnerHTML={{ __html: demoUnits.projection }} />,
           `Splitting a vector into a part along another and a part perpendicular to it is the move that least squares and Gram–Schmidt both rest on.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to project one vector onto another](!/linear-algebra/vectors/methods/vector-projection) →@`,
         ]
     },
     {
@@ -2453,11 +2504,15 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-dot-product-summary-every-use-matrix'}
+            id="dot-product-summary-every-use-matrix"
+            title="Summary: Every Use of the Dot Product"
+            source="/linear-algebra/vectors/dot-product"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2493,6 +2548,14 @@ Multiplying the components of $(3, 4)$ and $(1, -2)$ and writing the answer as $
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

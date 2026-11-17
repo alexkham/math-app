@@ -784,6 +784,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 2 tables (obj6 comparison, obj8 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -796,6 +797,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
@@ -804,8 +806,26 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Orthogonality"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Relation","features":[{"id":"c1","name":"Algebraic condition","type":"text"},{"id":"c2","name":"Geometric meaning","type":"text"},{"id":"c3","name":"Computational test","type":"text"}],"items":[{"id":"r1","name":"Parallel **a** ∥ **b**","values":{"c1":"**a** = c**b** for some scalar c","c2":"same direction (c > 0) or opposite direction (c < 0); both lie on the same line through the origin","c3":"check component ratios; in ℝ³, [cross product](!/linear-algebra/vectors/cross-product) **a** × **b** = **0**"}},{"id":"r2","name":"Orthogonal **a** ⊥ **b**","values":{"c1":"**a** · **b** = 0","c2":"meet at a right angle (90°); zero alignment between the vectors","c3":"compute the [dot product](!/linear-algebra/vectors/dot-product) directly; works in any ℝⁿ"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Vector methods", items: [
+      { skill: "Add or subtract vectors", href: "/linear-algebra/vectors/methods#vector-addition", desc: "Two vectors of the same dimension joined by $+$ or $-$: $(3, -1, 2) + (1, 4, -5)$, $\\mathbf{u} - \\mathbf{v}$.", level: "atomic" },
+      { skill: "Multiply a vector by a scalar", href: "/linear-algebra/vectors/methods#scalar-multiplication", desc: "A number in front of a vector: $-3(2, -1, 4)$, $\\tfrac{1}{2}\\mathbf{v}$, $5\\mathbf{u}$.", level: "atomic" },
+      { skill: "Find the magnitude of a vector", href: "/linear-algebra/vectors/methods#magnitude", desc: "The length of a vector is asked for: $\\|(2, -3, 6)\\|$, $\\|(3, 4)\\|$, the distance $\\|\\mathbf{u} - \\mathbf{v}\\|$.", level: "atomic" },
+      { skill: "Compute the dot product", href: "/linear-algebra/vectors/methods/dot-product", desc: "Multiply matching components and add; or use the two lengths and the angle between them.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vectors/methods", label: "All vector methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1692,11 +1712,15 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-orthogonality-matrix'}
+            id="properties-orthogonality-matrix"
+            title="Orthogonality"
+            source="/linear-algebra/vectors/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:Orthogonality turns a right angle into one equation, a dot product of zero, that works in every dimension.]@`,
         ]
     },
@@ -1739,6 +1763,14 @@ $$\\|\\mathbf{v}\\| = \\sqrt{v_1^2 + v_2^2 + \\cdots + v_n^2}$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

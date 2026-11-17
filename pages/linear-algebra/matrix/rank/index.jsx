@@ -1983,6 +1983,8 @@
 
 // tables-optimized: v4 | 2026-05-20 | 4 tables (obj5 comparison, obj8 aggregation, obj9 aggregation, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import RowOperationTrace from '@/app/components/infographics/linear-algebra/RowOperationTrace'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1996,6 +1998,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -2009,8 +2012,39 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Rank and Linear Systems"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Outcome","features":[{"id":"c1","name":"Rank condition","type":"text"},{"id":"c2","name":"Number of solutions","type":"text"}],"items":[{"id":"r1","name":"Inconsistent","values":{"c1":"rank(A) < rank([A | b])","c2":"0 (no solution)"}},{"id":"r2","name":"Unique solution","values":{"c1":"rank(A) = rank([A | b]) = n","c2":"exactly 1"}},{"id":"r3","name":"Infinite solutions","values":{"c1":"rank(A) = rank([A | b]) < n; n − rank(A) free variables","c2":"∞ (parametrized family)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("What Rank Governs"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect of A","features":[{"id":"c1","name":"What rank(A) = r determines","type":"text"},{"id":"c2","name":"Reference","type":"text"}],"items":[{"id":"r1","name":"Effective dimensionality","values":{"c1":"r truly independent rows (= r independent columns); min(m, n) − r redundant directions","c2":"column rank = row rank"}},{"id":"r2","name":"Column & row space dimension","values":{"c1":"dim(col(A)) = dim(row(A)) = r","c2":"four fundamental subspaces"}},{"id":"r3","name":"Null space dimension","values":{"c1":"nullity(A) = n − r","c2":"rank-nullity theorem"}},{"id":"r4","name":"Solvability of Ax = b","values":{"c1":"consistent iff rank(A) = rank([A | b]); unique iff r = n; infinite iff r < n","c2":"three outcomes"}},{"id":"r5","name":"[Invertibility](!/linear-algebra/matrix/inverse) (square A)","values":{"c1":"A invertible iff r = n; equivalently [det](!/linear-algebra/determinants)(A) ≠ 0","c2":"full rank condition"}},{"id":"r6","name":"[Linear transformation](!/linear-algebra/transformations) T(x) = Ax","values":{"c1":"dim(image(T)) = r; dim(kernel(T)) = n − r","c2":"dimension theorem"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Rank and the Four Fundamental Subspaces"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Subspace","features":[{"id":"c1","name":"Lives in","type":"text"},{"id":"c2","name":"Description","type":"text"},{"id":"c3","name":"Dimension","type":"text"}],"items":[{"id":"r1","name":"Column space of A","values":{"c1":"ℝᵐ","c2":"span of the columns of A","c3":"rank(A)"}},{"id":"r2","name":"Row space of A","values":{"c1":"ℝⁿ","c2":"span of the rows of A","c3":"rank(A)"}},{"id":"r3","name":"Null space of A","values":{"c1":"ℝⁿ","c2":"{x : Ax = 0}; [orthogonal](!/linear-algebra/orthogonality) complement of the row space","c3":"n − rank(A)"}},{"id":"r4","name":"Left null space of A","values":{"c1":"ℝᵐ","c2":"{y : Aᵀy = 0}; orthogonal complement of the column space","c3":"m − rank(A)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the rank of a matrix", href: "/linear-algebra/matrix/methods/rank", desc: "Row reduce to echelon form and count the pivots.", level: "composite", here: "#3" },
+    ] },
+    { title: "More matrix methods", items: [
+      { skill: "Find an inverse by Gauss-Jordan elimination", href: "/linear-algebra/matrix/methods/inverse-gauss-jordan", desc: "Row reduce $[A \\mid I]$ until the left half is $I$; the right half is then $A^{-1}$.", level: "composite" },
+      { skill: "Find the trace of a matrix", href: "/linear-algebra/matrix/methods/trace", desc: "Add the diagonal entries; use linearity and $\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$ to skip products.", level: "composite" },
+      { skill: "Identify the type of a matrix", href: "/linear-algebra/matrix/methods/identify-matrix-type", desc: "Check the shape, the zero pattern, the transpose and a few products to name the type.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Reduce a matrix to row echelon form", href: "/linear-algebra/linear-systems/methods/row-echelon-form", desc: "Build the staircase: find each pivot, clear below it, move down and right, zero rows last.", level: "composite" },
+      { skill: "Tell how many solutions a system has", href: "/linear-algebra/linear-systems/methods/solvability-check", desc: "One, none or infinitely many: reduce, look for a contradictory row, count the pivots.", level: "composite" },
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/matrix/methods", label: "All matrix methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3104,8 +3138,31 @@ $$\\begin{pmatrix} 1 & 2 & 1 \\\\ 0 & 1 & 3 \\\\ 0 & 0 & 0 \\end{pmatrix}$$`, `W
     ],
   };
 
+  // RowOperationTrace 2026-11-14: The reduction, row operation by row operation (obj3).
+  const rankTrace = {
+    goal: 'Reduce $A$ to row echelon form and count the pivots.',
+    reading: 'There are four pivots, in columns $1$, $3$, $4$ and $5$, so $\\text{rank}(A) = 4$.',
+    steps: [
+      { id: 's0', label: 'Start', matrix: [[1, 2, 0, -1, 3], [2, 4, 1, 0, 5], [-1, -2, 3, 4, 1], [0, 0, 2, 3, -1]], pivots: [[0, 0]],
+        why: 'The matrix $A$.', note: 'The matrix A' },
+      { id: 's1', label: 'Column 1', matrix: [[1, 2, 0, -1, 3], [0, 0, 1, 2, -1], [0, 0, 3, 3, 4], [0, 0, 2, 3, -1]], pivots: [[0, 0], [1, 2]],
+        changed: [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 4]],
+        operation: ['R2 − 2·R1', 'R3 + R1'], why: 'Clears the entries below the first pivot. Column $2$ empties too, so the next pivot is in column $3$.', note: 'Column 1 cleared' },
+      { id: 's2', label: 'Column 3', matrix: [[1, 2, 0, -1, 3], [0, 0, 1, 2, -1], [0, 0, 0, -3, 7], [0, 0, 0, -1, 1]], pivots: [[0, 0], [1, 2]],
+        changed: [[2, 2], [2, 3], [2, 4], [3, 2], [3, 3], [3, 4]],
+        operation: ['R3 − 3·R2', 'R4 − 2·R2'], why: 'Clears the entries below the second pivot.', note: 'Column 3 cleared' },
+      { id: 's3', label: 'Column 4', matrix: [[1, 2, 0, -1, 3], [0, 0, 1, 2, -1], [0, 0, 0, 0, 4], [0, 0, 0, -1, 1]], pivots: [[0, 0], [1, 2]],
+        changed: [[2, 3], [2, 4]],
+        operation: 'R3 − 3·R4', why: 'Clears the entry in column $4$ of row $3$, using row $4$.', note: 'Row 3 cleared in column 4' },
+      { id: 's4', label: 'Swap', matrix: [[1, 2, 0, -1, 3], [0, 0, 1, 2, -1], [0, 0, 0, -1, 1], [0, 0, 0, 0, 4]], pivots: [[0, 0], [1, 2], [2, 3], [3, 4]],
+        changed: [[2, 3], [2, 4], [3, 3], [3, 4]],
+        operation: 'R3 ↔ R4', why: 'Puts the pivots in staircase order. The matrix is now in echelon form.', note: 'Echelon form', final: true },
+    ],
+  };
+
    return {
   props: {
+    rankTrace,
     specialCasesData,
     formulaSummaryData,
     pitfallData,
@@ -3137,7 +3194,7 @@ const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', 
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function MatrixRankPage({ specialCasesData, formulaSummaryData, pitfallData,rankNullityApply, rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MatrixRankPage({ rankTrace, specialCasesData, formulaSummaryData, pitfallData,rankNullityApply, rankCases, seoData, sectionsContent, introContent, obj5Table, specialRanks, obj9Table, summaryTable, rankProperties, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3254,8 +3311,20 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-row-trace'}
+            id="rank-row-reduction-trace"
+            title="The reduction, row operation by row operation"
+            source="/linear-algebra/matrix/rank"
+            before={"The same reduction with each row operation beside the matrix it produces. Pivots are filled in, and the entries changed at each step are underlined."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <RowOperationTrace data={rankTrace} theme="navy" variant="ledger" />
+            </div>
+          </DiagramFrame>,
                   <div key={'unit-reduction'} dangerouslySetInnerHTML={{ __html: demoUnits.reduction }} />,
           `Counting pivots is therefore not an approximation to the rank but a direct measurement of it.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the rank of a matrix](!/linear-algebra/matrix/methods/rank) →@`,
         ]
     },
     {
@@ -3284,8 +3353,15 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-rank-rank-linear-systems-matrix'}
+            id="rank-rank-linear-systems-matrix"
+            title="Rank and Linear Systems"
+            source="/linear-algebra/matrix/rank"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3347,8 +3423,15 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-rank-rank-four-fundamental-subspaces-matrix'}
+            id="rank-rank-four-fundamental-subspaces-matrix"
+            title="Rank and the Four Fundamental Subspaces"
+            source="/linear-algebra/matrix/rank"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
                   <div key={'unit-foursubspaces'} dangerouslySetInnerHTML={{ __html: demoUnits.foursubspaces }} />,
           `Rank is best thought of as the single number the four spaces are all sized against.`,
         ]
@@ -3359,8 +3442,15 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-rank-what-rank-governs-matrix'}
+            id="rank-what-rank-governs-matrix"
+            title="What Rank Governs"
+            source="/linear-algebra/matrix/rank"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3396,6 +3486,14 @@ Concluding rank $3$ because no row of $\\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

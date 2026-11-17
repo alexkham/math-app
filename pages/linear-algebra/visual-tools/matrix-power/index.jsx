@@ -192,7 +192,7 @@ Check one entry of $A^4$ against the path formula: $(A^4)_{1,1}$ is the sum over
 
 • **Raising each entry to the power** — $A^2$ is $A \\cdot A$, not the matrix of squared entries; those agree only for diagonal matrices
 • **Applying $(AB)^n = A^n B^n$** — false unless $A$ and $B$ commute, because the factors cannot be reordered
-• **Powers of non-square matrices** — undefined; the inner dimensions of $A \\cdot A$ must match, which forces $A$ to be square
+• **Powers of non-square matrices** — undefined; the [inner dimensions](!/linear-algebra/matrix/operations#which-sizes-fit) of $A \\cdot A$ must match, which forces $A$ to be square
 • **Expanding the formula by hand** — the term count is $s^{n-1}$ per cell; multiply repeatedly or diagonalize instead
 • **Forgetting $A^0 = I$** — the empty product is the identity, which is what makes $A^m A^0 = A^m$ work
 • **Expecting powers to shrink or grow uniformly** — the behaviour of $A^n$ is governed by the eigenvalues, and different directions can grow, shrink or rotate at the same time`,

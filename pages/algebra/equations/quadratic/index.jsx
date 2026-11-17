@@ -1,3 +1,4 @@
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,6 +17,8 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -23,6 +26,101 @@ import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/Formula
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Solving Methods"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"When to use","type":"text"},{"id":"c2","name":"Universal?","type":"verdict"},{"id":"c3","name":"Notes","type":"text"}],"items":[{"id":"r1","name":"Factoring","values":{"c1":"when the quadratic factors over the rationals","c2":"no","c3":"fastest when applicable; uses the zero-product property"}},{"id":"r2","name":"Completing the square","values":{"c1":"always","c2":"yes","c3":"conceptual root; produces the quadratic formula in the general case"}},{"id":"r3","name":"[Quadratic formula](!/algebra/formulas#quadratic_formula)","values":{"c1":"always","c2":"yes","c3":"direct substitution; surfaces the discriminant explicitly"}},{"id":"r4","name":"Vieta's / inspection","values":{"c1":"when integer roots are visible from sum and product","c2":"no","c3":"guess two numbers with sum −b ⁄ a and product c ⁄ a; only practical when roots are simple"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Reducible Equations"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Original form","features":[{"id":"c1","name":"Substitute","type":"text"},{"id":"c2","name":"Becomes","type":"text"},{"id":"c3","name":"Recover x by","type":"text"}],"items":[{"id":"r1","name":"ax⁴ + bx² + c = 0 (bi-quadratic)","values":{"c1":"u = x²","c2":"au² + bu + c = 0","c3":"x = ±√u for each u ≥ 0"}},{"id":"r2","name":"a[f(x)]² + b·f(x) + c = 0 (general)","values":{"c1":"u = f(x)","c2":"au² + bu + c = 0","c3":"solve f(x) = u₁ and f(x) = u₂; verify all candidates"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Vieta's Formulas"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Quantity","features":[{"id":"c1","name":"In terms of roots","type":"text"},{"id":"c2","name":"In terms of coefficients","type":"text"},{"id":"c3","name":"Use","type":"text"}],"items":[{"id":"r1","name":"Sum","values":{"c1":"x₁ + x₂","c2":"−b ⁄ a","c3":"solve by inspection, verify, construct from roots"}},{"id":"r2","name":"Product","values":{"c1":"x₁ · x₂","c2":"c ⁄ a","c3":"solve by inspection, verify, construct from roots"}}]};
+
+// CaseGraph 2026-11-12: "Where the parabola meets the axis" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -2.4, y1: 2.4,
+      axes: [
+        { id: 'd', name: '$\\Delta$', options: [
+          { id: 'pos', label: '$\\Delta > 0$', sub: 'crosses the axis; gap $\\frac{\\sqrt{\\Delta}}{|a|}$' },
+          { id: 'zero', label: '$\\Delta = 0$', sub: 'tangent; vertex on the axis at $x = -\\frac{b}{2a}$' },
+          { id: 'neg', label: '$\\Delta < 0$', sub: 'never reaches the axis' } ] },
+        { id: 'a', name: '$a$', options: [
+          { id: 'up', label: '$a > 0$', sub: 'opens upward' },
+          { id: 'down', label: '$a < 0$', sub: 'opens downward' } ] },
+      ],
+      layout: { rows: 'd', cols: 'a' },
+      cells: {
+        'pos|up':   { f: (x) => x * x - 1, roots: [{ x: -1, label: '' }, { x: 1, label: '' }], intervals: [{ from: -Infinity, to: -1 }, { from: -1, to: 1 }, { from: 1, to: Infinity }], solution: 'two distinct points' },
+        'pos|down': { f: (x) => 1 - x * x, roots: [{ x: -1, label: '' }, { x: 1, label: '' }], intervals: [{ from: -Infinity, to: -1 }, { from: -1, to: 1 }, { from: 1, to: Infinity }], solution: 'two distinct points' },
+        'zero|up':   { f: (x) => x * x, roots: [{ x: 0, label: '' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: 'one point (tangent)' },
+        'zero|down': { f: (x) => -x * x, roots: [{ x: 0, label: '' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: 'one point (tangent)' },
+        'neg|up':   { f: (x) => x * x + 1, solution: 'none: entirely above' },
+        'neg|down': { f: (x) => -x * x - 1, solution: 'none: entirely below' },
+      },
+    },
+  };
+
+// CaseGraph 2026-11-12: "The three cases of the discriminant" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Discriminant', text: '$\\Delta = b^2 - 4ac$' },
+    grid: {
+      x0: -1.5, x1: 5.5, y0: -4, y1: 7,
+      axes: [
+        { id: 'd', name: '$\\Delta$', options: [
+          { id: 'pos', label: '$\\Delta > 0$', sub: '2 real roots: two distinct' },
+          { id: 'zero', label: '$\\Delta = 0$', sub: '1 real root: repeated (double)' },
+          { id: 'neg', label: '$\\Delta < 0$', sub: '0 real roots: two complex conjugate' } ] },
+        { id: 'ex', name: 'Example', options: [
+          { id: 'ex', label: 'Example' } ] },
+      ],
+      layout: { rows: 'd', cols: 'ex' },
+      cells: {
+        'pos|ex':  { f: (x) => x * x - 5 * x + 3, roots: [{ x: (5 - 3.605551275463989) / 2, label: '' }, { x: (5 + 3.605551275463989) / 2, label: '' }], intervals: [{ from: -Infinity, to: (5 - 3.605551275463989) / 2 }, { from: (5 - 3.605551275463989) / 2, to: (5 + 3.605551275463989) / 2 }, { from: (5 + 3.605551275463989) / 2, to: Infinity }], solution: '$x^2 - 5x + 3 = 0$, $\\Delta = 13$' },
+        'zero|ex': { f: (x) => x * x - 6 * x + 9, roots: [{ x: 3, label: '3' }], intervals: [{ from: -Infinity, to: 3 }, { from: 3, to: Infinity }], solution: '$x^2 - 6x + 9 = 0$, $\\Delta = 0$' },
+        'neg|ex':  { f: (x) => x * x + x + 1, solution: '$x^2 + x + 1 = 0$, $\\Delta = -3$' },
+      },
+    },
+  };
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: 'Each skill opens its step-by-step method page. Skills marked "On this page" are taught above.',
+  groups: [
+    {
+      title: 'Solving a quadratic equation',
+      items: [
+        { skill: 'Solve a quadratic equation by factoring', href: '/algebra/equations/methods/quadratic-factoring', desc: "Set it to zero, factor, set each factor to zero.", level: 'composite', here: '#2' },
+        { skill: 'Complete the square', href: '/algebra/equations/methods/completing-the-square', desc: "Turn $x^2 + bx$ into a perfect square to solve a quadratic or find its vertex.", level: 'composite', here: '#3' },
+        { skill: 'Use the quadratic formula', href: '/algebra/equations/methods/quadratic-formula', desc: "Read off a, b, c and substitute; works for every quadratic, factorable or not.", level: 'composite', here: '#4' },
+        { skill: 'Use the discriminant to count the roots', href: '/algebra/equations/methods/discriminant', desc: "Compute $b^2 - 4ac$ to count and classify the roots without solving.", level: 'composite', here: '#5' },
+        { skill: 'Solve an equation that reduces to a quadratic', href: '/algebra/equations/methods/polynomial-equations', desc: "Factor out what you can, find a rational root, divide it out, repeat until quadratic.", level: 'composite', here: '#7' },
+        { skill: 'Choose a method for a quadratic', href: '/algebra/equations/methods/which-quadratic-method', desc: "A decision tree: factoring, completing the square, the formula, or just the discriminant.", level: 'strategy', here: '#9' },
+      ],
+    },
+    {
+      title: 'Factoring skills these methods rely on',
+      items: [
+        { skill: 'Factor out the greatest common factor', href: '/algebra/polynomials/methods/factor-gcf', desc: "Pull the largest common number and the lowest common powers out of every term.", level: 'composite', from: 'polynomial methods' },
+        { skill: 'Factor a trinomial', href: '/algebra/polynomials/methods/factor-trinomials', desc: "Find two numbers by product and sum; the ac method when the leading coefficient is not 1.", level: 'composite', from: 'polynomial methods' },
+        { skill: 'Factor a difference of squares', href: '/algebra/polynomials/methods/difference-of-squares', desc: "Spot $a^2 - b^2$ and write $(a - b)(a + b)$; repeat while squares remain.", level: 'composite', from: 'polynomial methods' },
+        { skill: 'Expand a special product', href: '/algebra/polynomials/methods#special-products', desc: "A binomial squared, or a sum times the matching difference: $(2x + 3)^2$, $(x - 5)^2$, $(3x + 2)(3x - 2)$.", level: 'atomic', from: 'polynomial methods' },
+      ],
+    },
+    {
+      title: 'Where quadratics lead next',
+      items: [
+        { skill: 'Solve a quadratic inequality', href: '/algebra/inequalities/methods/quadratic-inequalities', desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: 'composite', from: 'inequality methods' },
+        { skill: 'Solve a quadratic equation with complex roots', href: '/complex-numbers/methods/quadratic-complex-roots', desc: "Use the quadratic formula; a negative discriminant gives $\\sqrt{-k} = i\\sqrt{k}$, a complex one needs a complex square root.", level: 'composite', from: 'complex number methods' },
+      ],
+    },
+  ],
+  hub: { href: '/algebra/equations/methods', label: 'All equation methods' },
+};
 
 
 export async function getStaticProps(){
@@ -1061,8 +1159,23 @@ $$\\Delta = 2^2 - 4(1)(-3) = 4 + 12 = 16 > 0$$`, `So there are two real roots, $
     conclusion: { text: '$x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$', say: 'Taking the square root of both sides and isolating $x$ gives the two solutions: the quadratic formula.' },
   };
 
+  // Procedure rollout 2026-11-14: Solving by factoring, step by step (obj2).
+  const factoringSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$x^2 - 5x + 6 = 0$',
+      rows: [
+        { step: 'Make sure the right side is zero', example: 'already $0$' },
+        { step: 'Factor the left side', example: '$(x - 2)(x - 3) = 0$' },
+        { step: 'Set each factor equal to zero', stepSub: 'The zero-product property', example: '$x - 2 = 0$ or $x - 3 = 0$' },
+        { step: 'Solve each linear equation', example: '$x = 2$ or $x = 3$' },
+      ],
+    },
+  };
+
    return {
   props: {
+    factoringSteps,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -1091,7 +1204,7 @@ $$\\Delta = 2^2 - 4(1)(-3) = 4 + 12 = 16 > 0$$`, `So there are two real roots, $
    }
 
 
-export default function QuadraticEquationsPage({ proofStepsData, formulaSummaryData, pitfallData,quadraticFormulaAnatomy, quadMethodTree, 
+export default function QuadraticEquationsPage({ factoringSteps, proofStepsData, formulaSummaryData, pitfallData,quadraticFormulaAnatomy, quadMethodTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1218,8 +1331,18 @@ $$ax^2 + bx + c = 0$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="solve-by-factoring-steps"
+            title="Solving by factoring, step by step"
+            source="/algebra/equations/quadratic"
+            before={"The example of this section, one move at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={factoringSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-zeroProduct'} dangerouslySetInnerHTML={{ __html: demoUnits.zeroProduct }} />,
           `The zero-product property is why the right side must be 0 before factoring.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a quadratic equation by factoring](!/algebra/equations/methods/quadratic-factoring) →@`,
         ]
     },
     {
@@ -1242,6 +1365,7 @@ $$ax^2 + bx + c = 0$$]@`,
           sectionsContent.obj3.afterProof,
                   <div key={'unit-complete'} dangerouslySetInnerHTML={{ __html: demoUnits.complete }} />,
           `The quadratic formula in the next section is this construction carried out once with letters.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to complete the square](!/algebra/equations/methods/completing-the-square) →@`,
         ]
     },
     {
@@ -1262,6 +1386,7 @@ $$ax^2 + bx + c = 0$$]@`,
           >
             <FormulaAnatomy data={quadraticFormulaAnatomy} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the quadratic formula](!/algebra/equations/methods/quadratic-formula) →@`,
         ]
     },
     {
@@ -1270,13 +1395,20 @@ $$ax^2 + bx + c = 0$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-quadratic-equation-discriminant-grid'}
+            id="quadratic-equation-discriminant-grid"
+            title="The three cases of the discriminant"
+            source="/algebra/equations/quadratic"
+            related={false}
+            before={"The three examples from the section, one per case, each drawn as its parabola: the dots are its real roots."}
+            after={"Each case is the number of times the parabola meets the $x$-axis: twice, once, or not at all."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
                   <div key={'unit-discriminant'} dangerouslySetInnerHTML={{ __html: demoUnits.discriminant }} />,
           `Positive, zero, negative: two crossings, one, none.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the discriminant](!/algebra/equations/methods/discriminant) →@`,
         ]
     },
     {
@@ -1285,11 +1417,15 @@ $$ax^2 + bx + c = 0$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-quadratic-vieta-s-formulas-matrix'}
+            id="quadratic-vieta-s-formulas-matrix"
+            title="Vieta's Formulas"
+            source="/algebra/equations/quadratic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:The coefficients already hold the sum and product of the roots, so roots can be checked, built or guessed without solving.]@`,
         ]
     },
@@ -1299,11 +1435,15 @@ $$ax^2 + bx + c = 0$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-quadratic-reducible-equations-matrix'}
+            id="quadratic-reducible-equations-matrix"
+            title="Reducible Equations"
+            source="/algebra/equations/quadratic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:An equation that is quadratic in some expression is solved for that expression first, then each value is turned back into $x$.]@`,
         ]
     },
@@ -1313,11 +1453,17 @@ $$ax^2 + bx + c = 0$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-quadratic-equation-axis-meeting-grid'}
+            id="quadratic-equation-axis-meeting-grid"
+            title="Where the parabola meets the axis"
+            source="/algebra/equations/quadratic"
+            related={false}
+            before={"One row per case of the discriminant, one column per way the parabola opens. Click a heading to focus a row or column."}
+            after={"The discriminant alone fixes how many times the curve meets the axis; the sign of $a$ only turns the picture over."}
+          >
+            <CaseGraph data={caseGraphData2} variant="grid" />
+          </DiagramFrame>,
                   <div key={'unit-graph'} dangerouslySetInnerHTML={{ __html: demoUnits.graph }} />,
           `Every algebraic method on this page locates these two points without drawing the curve.`,
         ]
@@ -1328,11 +1474,15 @@ $$ax^2 + bx + c = 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-quadratic-summary-solving-methods-matrix'}
+            id="quadratic-summary-solving-methods-matrix"
+            title="Summary of Solving Methods"
+            source="/algebra/equations/quadratic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj9-diagram'}
             id="quadratic-methods-tree"
@@ -1341,6 +1491,7 @@ $$ax^2 + bx + c = 0$$]@`,
           >
             <TopDownTree data={quadMethodTree} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which method should I use to solve a quadratic?](!/algebra/equations/methods/which-quadratic-method) →@`,
         ]
     },
     {
@@ -1376,6 +1527,14 @@ $$ax^2 + bx + c = 0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

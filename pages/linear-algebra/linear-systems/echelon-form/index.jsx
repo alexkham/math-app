@@ -948,6 +948,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj9 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -961,6 +962,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -971,6 +973,33 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Echelon Form of Special Matrices"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Matrix type","features":[{"id":"c1","name":"Echelon status","type":"text"},{"id":"c2","name":"Pivot structure","type":"text"},{"id":"c3","name":"Rank","type":"text"}],"items":[{"id":"r1","name":"Identity Iₙ","values":{"c1":"already in RREF","c2":"n pivots, each equal to 1, each alone in its column","c3":"n"}},{"id":"r2","name":"Diagonal — all entries nonzero","values":{"c1":"in REF; reaches RREF after scaling each row","c2":"one pivot per row, equal to the diagonal entry","c3":"n"}},{"id":"r3","name":"Diagonal — some entries zero","values":{"c1":"in REF once zero rows are moved to the bottom","c2":"a pivot only where the diagonal entry is nonzero","c3":"number of nonzero diagonal entries"}},{"id":"r4","name":"Upper triangular, no zero on the diagonal","values":{"c1":"already in REF","c2":"nonzero diagonal entries serve as pivots","c3":"number of nonzero diagonal entries"}},{"id":"r5","name":"Lower triangular","values":{"c1":"NOT in REF — the staircase goes the wrong direction","c2":"forward elimination converts it quickly; with a nonzero diagonal, each elimination changes only the entry it clears","c3":"depends on the matrix"}},{"id":"r6","name":"Zero matrix O","values":{"c1":"already in both REF and RREF","c2":"no pivots; every column is free","c3":"0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Uniqueness of RREF"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Row Echelon Form (REF)","type":"text"},{"id":"c2","name":"Reduced Row Echelon Form (RREF)","type":"text"}],"items":[{"id":"r1","name":"Defining conditions","values":{"c1":"zero rows at the bottom; pivots staircase strictly right; entries below each pivot are 0","c2":"all REF conditions + each pivot equals 1 + each pivot is the only nonzero entry in its column"}},{"id":"r2","name":"Pivot values","values":{"c1":"any nonzero number","c2":"always 1"}},{"id":"r3","name":"Entries above pivots","values":{"c1":"anything (not constrained)","c2":"always 0"}},{"id":"r4","name":"Uniqueness","values":{"c1":"not unique — different row-operation paths give different REFs (pivot positions stay the same)","c2":"unique — every matrix has exactly one RREF, regardless of reduction path"}},{"id":"r5","name":"Reached by","values":{"c1":"forward elimination only","c2":"[Gauss-Jordan](!/linear-algebra/linear-systems/gaussian-elimination) (forward + backward, plus pivot scaling)"}},{"id":"r6","name":"Reading the solution","values":{"c1":"by back substitution from the bottom row upward","c2":"by direct inspection — each pivot variable is already isolated"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Reduce a matrix to row echelon form", href: "/linear-algebra/linear-systems/methods/row-echelon-form", desc: "Build the staircase: find each pivot, clear below it, move down and right, zero rows last.", level: "composite", here: "#1" },
+      { skill: "Find the reduced row echelon form of a matrix", href: "/linear-algebra/linear-systems/methods/reduced-row-echelon-form", desc: "From echelon form, scale every pivot to 1 and clear above it; the result is unique.", level: "composite", here: "#2" },
+      { skill: "Write the general solution in parametric vector form", href: "/linear-algebra/linear-systems/methods/parametric-solutions", desc: "Infinitely many solutions: a particular solution plus one direction vector per free variable.", level: "composite", here: "#7" },
+    ] },
+    { title: "More linear system methods", items: [
+      { skill: "Solve a system by Gauss-Jordan elimination", href: "/linear-algebra/linear-systems/methods/gauss-jordan-elimination", desc: "Row-reduce all the way to reduced form, so each unknown can be read off its own row.", level: "composite" },
+      { skill: "Solve a triangular system by back substitution", href: "/linear-algebra/linear-systems/methods/back-substitution", desc: "Solve the last equation first, then substitute upward one row at a time.", level: "composite" },
+      { skill: "Tell how many solutions a system has", href: "/linear-algebra/linear-systems/methods/solvability-check", desc: "One, none or infinitely many: reduce, look for a contradictory row, count the pivots.", level: "composite" },
+      { skill: "Solve a homogeneous system", href: "/linear-algebra/linear-systems/methods/homogeneous-systems", desc: "Ax = 0 always has the zero solution; reduce A and write the null space with one vector per free variable.", level: "composite" },
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/linear-systems/methods", label: "All linear system methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2014,6 +2043,7 @@ Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to reduce a matrix to row echelon form](!/linear-algebra/linear-systems/methods/row-echelon-form) →@`,
         ]
     },
     {
@@ -2048,6 +2078,7 @@ Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for
           sectionsContent.obj2.content,
                   <div key={'unit-rref'} dangerouslySetInnerHTML={{ __html: demoUnits.rref }} />,
           `Uniqueness is what lets the reduced form be used as a canonical description of the matrix rather than merely a convenient one.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the reduced row echelon form of a matrix](!/linear-algebra/linear-systems/methods/reduced-row-echelon-form) →@`,
         ]
     },
     {
@@ -2056,11 +2087,15 @@ Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-echelon-form-uniqueness-rref-matrix'}
+            id="echelon-form-uniqueness-rref-matrix"
+            title="Uniqueness of RREF"
+            source="/linear-algebra/linear-systems/echelon-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:However a matrix is reduced, its RREF comes out the same, so whatever it shows belongs to the matrix itself.]@`,
         ]
     },
@@ -2109,6 +2144,7 @@ Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to write the general solution in parametric vector form](!/linear-algebra/linear-systems/methods/parametric-solutions) →@`,
         ]
     },
     {
@@ -2127,11 +2163,15 @@ Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-echelon-form-echelon-form-special-matrix'}
+            id="echelon-form-echelon-form-special-matrix"
+            title="Echelon Form of Special Matrices"
+            source="/linear-algebra/linear-systems/echelon-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2176,6 +2216,14 @@ Echelon is the French échelon, a rung of a ladder (échelle). Armies use it for
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1,4 +1,5 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -18,9 +19,31 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Worked Examples"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Expression","features":[{"id":"c1","name":"Approach (laws used)","type":"text"},{"id":"c2","name":"Result","type":"text"}],"items":[{"id":"r1","name":"3² · 3⁵","values":{"c1":"product: 3²⁺⁵","c2":"3⁷ = 2187"}},{"id":"r2","name":"x⁸ ⁄ x³","values":{"c1":"quotient: x$^{8 - 3}$","c2":"x⁵"}},{"id":"r3","name":"(2x³)⁴","values":{"c1":"power of a product + power of a power: 2⁴ · (x³)⁴","c2":"16 x¹²"}},{"id":"r4","name":"(a²b)³ ⁄ (a⁴b²)","values":{"c1":"power of a product to numerator, then quotient per variable","c2":"a² b"}},{"id":"r5","name":"(3x² ⁄ y)³ · y⁴","values":{"c1":"power of a quotient, then quotient with y⁴","c2":"27 x⁶ y"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Sign Behavior"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Base sign","features":[{"id":"c1","name":"Exponent parity","type":"text"},{"id":"c2","name":"Sign of aⁿ","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"a > 0","values":{"c1":"even n","c2":"+","c3":"3⁴ = 81"}},{"id":"r2","name":"a > 0","values":{"c1":"odd n","c2":"+","c3":"3⁵ = 243"}},{"id":"r3","name":"a < 0","values":{"c1":"even n","c2":"+","c3":"(−2)⁴ = 16"}},{"id":"r4","name":"a < 0","values":{"c1":"odd n","c2":"−","c3":"(−2)⁵ = −32"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Multiply powers with the same base", href: "/algebra/methods#product-of-powers", desc: "Two powers of the **same** base multiplied: $x^3\\cdot x^5$, $2^4\\cdot 2$, $a^{1/2}a^{3/2}$.", level: "atomic" },
+      { skill: "Divide powers with the same base", href: "/algebra/methods#quotient-of-powers", desc: "A power of a base divided by another power of the same base: $\\frac{x^7}{x^2}$, $\\frac{5^3}{5^5}$.", level: "atomic" },
+      { skill: "Raise a power to a power", href: "/algebra/methods#power-of-power", desc: "A bracket with a power on it: $(x^3)^4$, $(2x)^5$, $\\left(\\frac{a}{b}\\right)^3$.", level: "atomic" },
+      { skill: "Simplify expressions with exponents", href: "/algebra/methods/simplify-exponent-expressions", desc: "Combine several exponent rules into one clean answer with positive exponents.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -966,11 +989,15 @@ For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-natural-exponents-sign-behavior-matrix'}
+            id="natural-exponents-sign-behavior-matrix"
+            title="Sign Behavior"
+            source="/algebra/powers/natural-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1024,11 +1051,15 @@ For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-natural-exponents-worked-examples-matrix'}
+            id="natural-exponents-worked-examples-matrix"
+            title="Worked Examples"
+            source="/algebra/powers/natural-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1066,6 +1097,14 @@ For every whole number $n$, the power $n^5$ ends in the same digit as $n$: $2^5 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1194,6 +1194,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1211,13 +1212,39 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import complexExplorerDiagrams from '@/app/components/calculators/complex-numbers/complexExplorerDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Equality of Complex Numbers"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Complex equation (with z = x + yi)","features":[{"id":"c1","name":"Real-part equation","type":"text"},{"id":"c2","name":"Imaginary-part equation","type":"text"}],"items":[{"id":"r1","name":"a + bi = c + di (general rule)","values":{"c1":"a = c","c2":"b = d"}},{"id":"r2","name":"(x + yi)² = 3 + 4i","values":{"c1":"x² − y² = 3","c2":"2xy = 4"}},{"id":"r3","name":"(x + yi) + i = 2","values":{"c1":"x = 2","c2":"y + 1 = 0"}},{"id":"r4","name":"(x + yi)(1 + i) = 5","values":{"c1":"x − y = 5","c2":"x + y = 0"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Real and Imaginary Part Notation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"Strict standard form a + bi","type":"text"},{"id":"c2","name":"Re(z)","type":"text"},{"id":"c3","name":"Im(z)","type":"text"},{"id":"c4","name":"Common mistake to avoid","type":"text"}],"items":[{"id":"r1","name":"7 + 4i","values":{"c1":"7 + 4i","c2":"7","c3":"4","c4":null}},{"id":"r2","name":"5 − 3i","values":{"c1":"5 + (−3)i","c2":"5","c3":"−3","c4":"reporting Im(z) = 3 (the negative sign belongs to Im, not to i)"}},{"id":"r3","name":"4i","values":{"c1":"0 + 4i","c2":"0","c3":"4","c4":"reporting Im(z) = 4i (the i is a marker; the part is just the coefficient)"}},{"id":"r4","name":"−2","values":{"c1":"−2 + 0i","c2":"−2","c3":"0","c4":null}},{"id":"r5","name":"0","values":{"c1":"0 + 0i","c2":"0","c3":"0","c4":null}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Summary: Complete Standard-Form Reference Across Categories"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Condition on a, b","features":[{"id":"c1","name":"Form reduces to","type":"text"},{"id":"c2","name":"Category","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"b = 0","values":{"c1":"a + 0i = a","c2":"real number","c3":"5 = 5 + 0i"}},{"id":"r2","name":"a = 0, b ≠ 0","values":{"c1":"0 + bi = bi","c2":"pure imaginary","c3":"7i = 0 + 7i"}},{"id":"r3","name":"a = 0 and b = 0","values":{"c1":"0 + 0i = 0","c2":"zero — the only number both real and pure imaginary","c3":"0"}},{"id":"r4","name":"a ≠ 0 and b ≠ 0","values":{"c1":"a + bi","c2":"general complex number","c3":"3 + 2i"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Complete Standard-Form Reference Across Categories"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"Re(z)","type":"text"},{"id":"c2","name":"Im(z)","type":"text"},{"id":"c3","name":"z̄","type":"text"},{"id":"c4","name":"Category","type":"text"},{"id":"c5","name":"Plane location","type":"text"}],"items":[{"id":"r1","name":"3 + 2i","values":{"c1":"3","c2":"2","c3":"3 − 2i","c4":"general complex","c5":"(3, 2) — Q1"}},{"id":"r2","name":"−1 − 4i","values":{"c1":"−1","c2":"−4","c3":"−1 + 4i","c4":"general complex","c5":"(−1, −4) — Q3"}},{"id":"r3","name":"5 − 3i","values":{"c1":"5","c2":"−3","c3":"5 + 3i","c4":"general complex","c5":"(5, −3) — Q4"}},{"id":"r4","name":"5","values":{"c1":"5","c2":"0","c3":"5","c4":"real (b = 0)","c5":"(5, 0) — on real axis"}},{"id":"r5","name":"7i","values":{"c1":"0","c2":"7","c3":"−7i","c4":"pure imaginary (a = 0)","c5":"(0, 7) — on imaginary axis"}},{"id":"r6","name":"0","values":{"c1":"0","c2":"0","c3":"0","c4":"zero — both real and pure imaginary","c5":"origin (0, 0)"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Complex number methods", items: [
+      { skill: "Find the square roots of a complex number", href: "/complex-numbers/methods/complex-square-roots", desc: "Set $(x + yi)^2 = a + bi$, use $x^2 - y^2 = a$ and $x^2 + y^2 = |w|$, and pick the signs from $2xy = b$.", level: "composite" },
+      { skill: "Choose the right form of a complex number", href: "/complex-numbers/methods/which-form", desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2438,7 +2465,15 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
 [Read more](!#pitfall-combining-the-two-terms)]@`,
           `The imaginary unit $i$ serves a structural role: it separates and distinguishes the two components. Without $i$, we could not tell where the real part ends and the imaginary part begins. The expression $a + bi$ packages two independent real values into one object, with $i$ acting as the marker that identifies which piece is which. This packaging allows complex numbers to encode two-dimensional information — a feature that becomes central when we explore the [geometric representation](!/complex-numbers/geometric-representation).`,
           `Special cases deserve mention. When $b = 0$, the imaginary term vanishes and $z = a + 0i = a$ reduces to a pure real number. When $a = 0$, the real term vanishes and $z = 0 + bi = bi$ becomes a [pure imaginary number](!/complex-numbers/imaginary-numbers). When both $a = 0$ and $b = 0$, we obtain $z = 0$, the complex number zero. Every real number and every pure imaginary number fits within the algebraic form as a special case — the complex numbers contain all previous number systems as subsets.`,
-          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-algebraic-form-summary-complete-standard-matrix-2'}
+            id="algebraic-form-summary-complete-standard-matrix-2"
+            title="Summary: Complete Standard-Form Reference Across Categories"
+            source="/complex-numbers/algebraic-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
         ],
       },
       {
@@ -2493,11 +2528,15 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
             sheet={complexNotationSheet}
             current={'/complex-numbers/algebraic-form'}
           />,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-algebraic-form-real-imaginary-part-matrix'}
+            id="algebraic-form-real-imaginary-part-matrix"
+            title="Real and Imaginary Part Notation"
+            source="/complex-numbers/algebraic-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2526,11 +2565,15 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-algebraic-form-equality-complex-numbers-matrix'}
+            id="algebraic-form-equality-complex-numbers-matrix"
+            title="Equality of Complex Numbers"
+            source="/complex-numbers/algebraic-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every complex equation is two real equations in disguise: one for the real parts, one for the imaginary parts.]@`,
         ]
     },
@@ -2582,11 +2625,15 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-algebraic-form-summary-complete-standard-matrix'}
+            id="algebraic-form-summary-complete-standard-matrix"
+            title="Summary: Complete Standard-Form Reference Across Categories"
+            source="/complex-numbers/algebraic-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2622,6 +2669,14 @@ Writing $3 + 2i$ as $5i$ adds a real number to an imaginary one and gives the po
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

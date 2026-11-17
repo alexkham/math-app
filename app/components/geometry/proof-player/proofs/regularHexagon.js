@@ -24,12 +24,14 @@ const regularHexagon = {
     '60° as well. All three angles equal: all three sides equal, AB = OA. Drag A to turn and ' +
     'resize the hexagon, or O to move it.',
   hint: 'Drag A to turn and resize the hexagon, or O to move it',
-  labelCenter: ['O'],
+  // names point away from a spot between O and the side AB, so O is named in the gap
+  // between the radii OD and OE, away from the triangle OAB the proof works on
+  labelCenter: ['O', 'O', 'O', 'A', 'B'],
   // Frame for the circle (radius about 140 about O) and its labels.
   viewBox: [60, 50, 440, 360],
 
   model: {
-    points: { O: { x: 280, y: 230 }, A: { x: 155, y: 165 } },
+    points: { O: { x: 280, y: 230, labelDist: 27 }, A: { x: 155, y: 165 } },
     params: {},
     composites: [],
     objects: [
@@ -102,8 +104,8 @@ const regularHexagon = {
   // a radius that fits the frame and leaves room for the labels
   isValid: (P) => {
     const r = dist(P.O, P.A);
-    const inFrame = (p) => p && p.x > 75 && p.x < 485 && p.y > 62 && p.y < 398;
-    return r > 90 && r < 152 && ['O', ...V].every((k) => inFrame(P[k]));
+    const inFrame = (p) => p && p.x > 90 && p.x < 470 && p.y > 84 && p.y < 376;
+    return r > 110 && r < 152 && ['O', ...V].every((k) => inFrame(P[k]));
   }
 };
 

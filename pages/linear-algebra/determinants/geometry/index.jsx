@@ -796,6 +796,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj7 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -808,6 +809,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
@@ -819,6 +821,30 @@ import laDeterminantsNotationSheet from '@/app/components/infographics/NotationC
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Area and Volume Formulas from Determinants"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Shape","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Matrix columns","type":"text"}],"items":[{"id":"r1","name":"Parallelogram (2D)","values":{"c1":"|det(A)|","c2":"the two spanning vectors u, v"}},{"id":"r2","name":"Triangle (2D)","values":{"c1":"½ · |det(A)|","c2":"edge vectors from one vertex to the other two"}},{"id":"r3","name":"Parallelepiped (3D)","values":{"c1":"|det(A)|","c2":"the three spanning vectors a, b, c"}},{"id":"r4","name":"Tetrahedron (3D)","values":{"c1":"⅙ · |det(A)|","c2":"edge vectors from one vertex to the other three"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Orientation"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"det(A)","type":"text"},{"id":"c2","name":"Volume effect","type":"text"},{"id":"c3","name":"Orientation effect","type":"text"}],"items":[{"id":"r1","name":"Rotation","values":{"c1":"+1","c2":"preserved","c3":"preserved"}},{"id":"r2","name":"Reflection (across line in ℝ², plane in ℝ³)","values":{"c1":"−1","c2":"preserved","c3":"reversed"}},{"id":"r3","name":"Improper rotation (rotation ∘ reflection)","values":{"c1":"−1","c2":"preserved","c3":"reversed"}},{"id":"r4","name":"Singular (e.g., projection)","values":{"c1":"0","c2":"collapsed to lower dimension","c3":"undefined"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find area and volume with determinants", href: "/linear-algebra/determinants/methods/area-volume-determinant", desc: "Put edge vectors into a matrix; the absolute value of its determinant is the area or volume.", level: "composite", here: "#1" },
+    ] },
+    { title: "More determinant methods", items: [
+      { skill: "Find a 2×2 determinant", href: "/linear-algebra/determinants/methods#determinant-2x2", desc: "A $2 \\times 2$ matrix inside $\\det$ or between vertical bars: $\\det\\begin{pmatrix} 4 & 3 \\\\ 2 & 5 \\end{pmatrix}$, $\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}$, or each minor inside a larger expansion.", level: "atomic" },
+      { skill: "Use determinant properties", href: "/linear-algebra/determinants/methods/determinant-properties", desc: "Evaluate $\\det(2AB^TA^{-1})$ or the effect of row changes from known determinants, without entries.", level: "composite" },
+      { skill: "Find a 3×3 determinant with the rule of Sarrus", href: "/linear-algebra/determinants/methods/sarrus-rule", desc: "Copy the first two columns, add the three downward diagonal products, subtract the three upward ones.", level: "composite" },
+      { skill: "Choose the right determinant method", href: "/linear-algebra/determinants/methods/which-determinant-method", desc: "A decision tree: what you are given, whether the matrix is triangular, then its size and zeros.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/determinants/methods", label: "All determinant methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1815,6 +1841,7 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find area and volume with determinants](!/linear-algebra/determinants/methods/area-volume-determinant) →@`,
         ]
     },
     {
@@ -1882,11 +1909,15 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
           sectionsContent.obj4.content,
           <div key={'unit-orientationFlip'} dangerouslySetInnerHTML={{ __html: demoUnits.orientationFlip }} />,
           `No rotation or stretch can undo a reflection's flip; only another orientation-reversing map can.`,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-geometry-orientation-matrix'}
+            id="geometry-orientation-matrix"
+            title="Orientation"
+            source="/linear-algebra/determinants/geometry"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1914,11 +1945,15 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-geometry-area-volume-formulas-determinants-matrix'}
+            id="geometry-area-volume-formulas-determinants-matrix"
+            title="Area and Volume Formulas from Determinants"
+            source="/linear-algebra/determinants/geometry"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1955,6 +1990,14 @@ For $A = \\begin{pmatrix} 1 & 3 \\\\ 4 & 0 \\end{pmatrix}$, the determinant is $
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

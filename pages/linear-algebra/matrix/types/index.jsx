@@ -873,6 +873,7 @@
 //   repositories keep resolving. New section uses anchor #12 but renders 5th in the TOC,
 //   since SectionTableOfContents numbers by array index, not by id.
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -886,6 +887,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import matrixTypesDiagrams from '@/app/components/matrices/matrixTypesDiagrams'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
@@ -894,6 +896,32 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Nilpotent and Idempotent Matrices"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Attribute","features":[{"id":"c1","name":"Nilpotent","type":"text"},{"id":"c2","name":"Idempotent","type":"text"}],"items":[{"id":"r1","name":"Defining condition","values":{"c1":"Aᵏ = O for some integer k ≥ 1","c2":"A² = A"}},{"id":"r2","name":"Eigenvalues","values":{"c1":"all equal to 0","c2":"only 0 or 1"}},{"id":"r3","name":"Determinant","values":{"c1":"always 0 (singular)","c2":"0 or 1"}},{"id":"r4","name":"Trace","values":{"c1":"0","c2":"equals [rank](!/linear-algebra/matrix/rank)(A)"}},{"id":"r5","name":"Key identity","values":{"c1":"(I − A)⁻¹ = I + A + A² + ⋯ + A^(k−1)","c2":"rank(A) = tr(A)"}},{"id":"r6","name":"Geometric meaning","values":{"c1":"iterative collapse to the zero vector","c2":"[projection](!/linear-algebra/orthogonality/projections) onto column space along null space"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Permutation Matrices"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Permutation of (1,2,3)","features":[{"id":"c1","name":"Cycle structure","type":"text"},{"id":"c2","name":"Transpositions","type":"text"},{"id":"c3","name":"det","type":"text"},{"id":"c4","name":"trace","type":"text"}],"items":[{"id":"r1","name":"(1,2,3) → (1,2,3)","values":{"c1":"identity, three fixed points","c2":"0","c3":"+1","c4":"3"}},{"id":"r2","name":"(1,2,3) → (2,1,3)","values":{"c1":"one swap, one fixed point","c2":"1","c3":"−1","c4":"1"}},{"id":"r3","name":"(1,2,3) → (1,3,2)","values":{"c1":"one swap, one fixed point","c2":"1","c3":"−1","c4":"1"}},{"id":"r4","name":"(1,2,3) → (3,2,1)","values":{"c1":"one swap, one fixed point","c2":"1","c3":"−1","c4":"1"}},{"id":"r5","name":"(1,2,3) → (2,3,1)","values":{"c1":"3-cycle, no fixed point","c2":"2","c3":"+1","c4":"0"}},{"id":"r6","name":"(1,2,3) → (3,1,2)","values":{"c1":"3-cycle, no fixed point","c2":"2","c3":"+1","c4":"0"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Identify the type of a matrix", href: "/linear-algebra/matrix/methods/identify-matrix-type", desc: "Check the shape, the zero pattern, the transpose and a few products to name the type.", level: "composite", here: "#11" },
+    ] },
+    { title: "More matrix methods", items: [
+      { skill: "Find the trace of a matrix", href: "/linear-algebra/matrix/methods/trace", desc: "Add the diagonal entries; use linearity and $\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$ to skip products.", level: "composite" },
+      { skill: "Find the rank of a matrix", href: "/linear-algebra/matrix/methods/rank", desc: "Row reduce to echelon form and count the pivots.", level: "composite" },
+      { skill: "Compute powers of a matrix", href: "/linear-algebra/matrix/methods/matrix-powers", desc: "Multiply the matrix by itself, square repeatedly for high powers, or use a diagonal or repeating pattern.", level: "composite" },
+    ] },
+    { title: "Determinant methods", items: [
+      { skill: "Find the determinant of a triangular matrix", href: "/linear-algebra/determinants/methods/triangular-determinant", desc: "Multiply the diagonal entries; for block triangular matrices, multiply the block determinants.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/matrix/methods", label: "All matrix methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1980,8 +2008,15 @@ export default function MatrixTypesPage({ specialCasesData, proofStepsData2, pro
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'obj12-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj12Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-types-permutation-matrices-matrix'}
+            id="types-permutation-matrices-matrix"
+            title="Permutation Matrices"
+            source="/linear-algebra/matrix/types"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           `Reading the table downward shows why the determinant is called the sign of the permutation rather than a separate quantity to compute. Each transposition is one row swap, one row swap flips the sign, and the parity of the swap count is the same however the permutation is decomposed.`,
           <DiagramFrameV2
             key={'obj12-diagram'}
@@ -2052,8 +2087,15 @@ export default function MatrixTypesPage({ specialCasesData, proofStepsData2, pro
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-types-nilpotent-idempotent-matrices-matrix'}
+            id="types-nilpotent-idempotent-matrices-matrix"
+            title="Nilpotent and Idempotent Matrices"
+            source="/linear-algebra/matrix/types"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2103,6 +2145,7 @@ export default function MatrixTypesPage({ specialCasesData, proofStepsData2, pro
           </DiagramFrame>,
           `The power conditions are worth reading as polynomial equations. $A^2 = A$ says every eigenvalue satisfies $\\lambda^2 = \\lambda$, so $\\lambda \\in \\{0, 1\\}$; $A^2 = I$ says $\\lambda^2 = 1$, so $\\lambda = \\pm 1$; $A^k = O$ says $\\lambda^k = 0$, so every eigenvalue is zero. Three types, three constraints, and all of them fall out of substituting an eigenvector into the defining equation.`,
           `Two entries are worth contrasting directly. A nilpotent matrix has every eigenvalue zero and is never diagonalizable unless it is the zero matrix — the eigenvalues say nothing is happening while the matrix plainly does something, which is precisely what a defective matrix looks like. An idempotent matrix also has a constrained spectrum, but it is diagonalizable, and its rank equals its trace. Same kind of condition, opposite structural outcome.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to identify the type of a matrix](!/linear-algebra/matrix/methods/identify-matrix-type) →@`,
         ]
     },
     {
@@ -2120,6 +2163,14 @@ export default function MatrixTypesPage({ specialCasesData, proofStepsData2, pro
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -993,6 +993,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj1 aggregation, obj6 aggregation, obj7 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1005,6 +1006,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1016,6 +1018,33 @@ import laDeterminantsNotationSheet from '@/app/components/infographics/NotationC
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Vandermonde and Structured Determinants"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Family","features":[{"id":"c1","name":"Structure","type":"text"},{"id":"c2","name":"Determinant formula","type":"text"},{"id":"c3","name":"Key property / use","type":"text"}],"items":[{"id":"r1","name":"Vandermonde","values":{"c1":"entry Vᵢⱼ = xᵢ$^{j-1}$; columns are 1, x, x², …, xⁿ⁻¹","c2":"∏$_{i < j}$ (xⱼ − xᵢ)","c3":"nonzero iff nodes are distinct → unique polynomial interpolation"}},{"id":"r2","name":"Circulant","values":{"c1":"each row is a cyclic shift of the first row (c₀, c₁, …, cₙ₋₁)","c2":"∏ₖ₌₀ⁿ⁻¹ p(ωᵏ), where p(x) = Σ cⱼ x$^{j}$ and ω = e$^{2πi/n}$","c3":"diagonalized by the discrete Fourier transform"}},{"id":"r3","name":"Hilbert","values":{"c1":"entry Hᵢⱼ = 1 / (i + j − 1)","c2":"closed form involving products of factorials; shrinks rapidly with n","c3":"notoriously ill-conditioned; benchmark for numerical sensitivity"}},{"id":"r4","name":"Tridiagonal","values":{"c1":"nonzero entries only on the main diagonal and the two adjacent diagonals","c2":"three-term recurrence Dₙ = aₙ Dₙ₋₁ − bₙ cₙ Dₙ₋₂","c3":"O(n) computation — much faster than general methods"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Summary: Determinant Applications at a Glance"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Component","features":[{"id":"c1","name":"Column replaced by b in A","type":"text"},{"id":"c2","name":"det(Aᵢ)","type":"text"},{"id":"c3","name":"xᵢ = det(Aᵢ) / det(A)","type":"text"}],"items":[{"id":"r1","name":"x₁","values":{"c1":"column 1 → b = (5, 0, 3)","c2":"−23","c3":"23 / 15"}},{"id":"r2","name":"x₂","values":{"c1":"column 2 → b = (5, 0, 3)","c2":"1","c3":"−1 / 15"}},{"id":"r3","name":"x₃","values":{"c1":"column 3 → b = (5, 0, 3)","c2":"−26","c3":"26 / 15"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a system with Cramer's rule", href: "/linear-algebra/linear-systems/methods/cramers-rule", desc: "A square system with nonzero determinant: each unknown is a ratio of two determinants.", level: "composite", here: "#1" },
+    ] },
+    { title: "More determinant methods", items: [
+      { skill: "Find a determinant by cofactor expansion", href: "/linear-algebra/determinants/methods/cofactor-expansion", desc: "Expand along the row or column with the most zeros: entry times sign times minor, added up.", level: "composite" },
+      { skill: "Find a 3×3 determinant with the rule of Sarrus", href: "/linear-algebra/determinants/methods/sarrus-rule", desc: "Copy the first two columns, add the three downward diagonal products, subtract the three upward ones.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+      { skill: "Solve a system with the inverse matrix", href: "/linear-algebra/linear-systems/methods/inverse-matrix-method", desc: "Write the system as Ax = b, find the inverse of A, and multiply: x is the inverse times b.", level: "composite" },
+      { skill: "Choose the right method to solve a linear system", href: "/linear-algebra/linear-systems/methods/which-system-method", desc: "A decision tree: what the question asks, a zero right-hand side, then the shape of the system.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/determinants/methods", label: "All determinant methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2190,11 +2219,15 @@ Colin Maclaurin's Treatise of Algebra, printed in 1748, two years after his deat
 This has consequences in pure algebra and in sensitivity analysis, where it shows how solutions respond to perturbations in the data. As a computational method, however, it requires $n + 1$ determinant evaluations, making it far more expensive than [Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination) for large systems.
 
 The ratios in the rule were written down before determinants had a name or a notation. Early statements spelled out each numerator and each denominator as a sum of signed products of coefficients, six products for three unknowns, and left the reader to follow the pattern of signs to larger systems. The theory of determinants later grew out of exactly these sums.`,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-applications-summary-determinant-applications-at-matrix'}
+            id="applications-summary-determinant-applications-at-matrix"
+            title="Summary: Determinant Applications at a Glance"
+            source="/linear-algebra/determinants/applications"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
           <div key={'unit-cramer'} dangerouslySetInnerHTML={{ __html: demoUnits.cramer }} />,
           `The rule is a statement about structure rather than a practical method; elimination beats it for anything you would actually solve.`,
         ],
@@ -2220,6 +2253,7 @@ The ratios in the rule were written down before determinants had a name or a not
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a system with Cramer's rule](!/linear-algebra/linear-systems/methods/cramers-rule) →@`,
         ]
     },
     {
@@ -2303,11 +2337,15 @@ The ratios in the rule were written down before determinants had a name or a not
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-applications-vandermonde-structured-determinants-matrix'}
+            id="applications-vandermonde-structured-determinants-matrix"
+            title="Vandermonde and Structured Determinants"
+            source="/linear-algebra/determinants/applications"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2344,6 +2382,14 @@ The ratios in the rule were written down before determinants had a name or a not
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

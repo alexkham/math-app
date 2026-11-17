@@ -1089,6 +1089,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj8 comparison, obj9 aggregation, obj11 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1102,6 +1103,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -1110,6 +1112,28 @@ import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSh
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: How the Axioms Instantiate"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Vector space","features":[{"id":"c1","name":"What \"vectors\" are","type":"text"},{"id":"c2","name":"Operations","type":"text"},{"id":"c3","name":"Zero vector","type":"text"},{"id":"c4","name":"Additive inverse of **v**","type":"text"}],"items":[{"id":"r1","name":"ℝⁿ","values":{"c1":"ordered n-tuples (v₁, …, vₙ)","c2":"entry-by-entry addition and scaling","c3":"(0, 0, …, 0)","c4":"(−v₁, …, −vₙ)"}},{"id":"r2","name":"𝒫ₙ (polynomials of degree ≤ n)","values":{"c1":"a₀ + a₁x + ⋯ + aₙxⁿ","c2":"combine like terms; scale every coefficient","c3":"the zero polynomial (all coefficients 0)","c4":"negate every coefficient"}},{"id":"r3","name":"ℝᵐˣⁿ (real m × n matrices)","values":{"c1":"m × n grids of real entries","c2":"entry-by-entry addition and scaling","c3":"the zero matrix O (every entry 0)","c4":"negate every entry"}},{"id":"r4","name":"C[a, b] (continuous functions on [a, b])","values":{"c1":"continuous functions f : [a, b] → ℝ","c2":"pointwise: (f + g)(x) = f(x) + g(x), (cf)(x) = c · f(x)","c3":"the function z(x) = 0 for all x","c4":"(−f)(x) = −f(x)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Immediate Consequences of the Axioms"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Consequence","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Proof sketch","type":"text"}],"items":[{"id":"r1","name":"Zero scalar annihilates","values":{"c1":"0**v** = **0**","c2":"0**v** = (0 + 0)**v** = 0**v** + 0**v**; add −(0**v**) to both sides"}},{"id":"r2","name":"Zero vector annihilates","values":{"c1":"c**0** = **0**","c2":"c**0** = c(**0** + **0**) = c**0** + c**0**; cancel one copy"}},{"id":"r3","name":"Negation by −1","values":{"c1":"(−1)**v** = −**v**","c2":"**v** + (−1)**v** = 1**v** + (−1)**v** = (1 + (−1))**v** = 0**v** = **0**"}},{"id":"r4","name":"No zero divisors","values":{"c1":"c**v** = **0** ⟹ c = 0 or **v** = **0**","c2":"if c ≠ 0, multiply both sides by 1/c to get **v** = **0**"}},{"id":"r5","name":"Uniqueness","values":{"c1":"the zero vector and each additive inverse are unique","c2":"assume two candidates exist; the axioms force them to coincide"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Non-Examples"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Candidate set & operations","features":[{"id":"c1","name":"Axiom(s) that fail","type":"text"},{"id":"c2","name":"Why","type":"text"}],"items":[{"id":"r1","name":"Polynomials of degree exactly n; usual addition and scaling","values":{"c1":"closure under addition (axiom 1)","c2":"leading terms can cancel: (x² + x) + (−x² + 3) = x + 3, which has degree 1"}},{"id":"r2","name":"Positive real numbers; ordinary addition","values":{"c1":"zero vector (axiom 4)","c2":"no positive z satisfies x + z = x for all positive x"}},{"id":"r3","name":"ℝ² with (u₁, u₂) ⊕ (v₁, v₂) = (u₁ + v₁, 0)","values":{"c1":"zero vector (axiom 4) and distributivity over scalar addition (axiom 9)","c2":"the second component is always destroyed, so no zero vector exists, and (c + d)**v** ≠ c**v** ⊕ d**v** whenever v₂ ≠ 0"}},{"id":"r4","name":"A line in ℝ² that does not pass through the origin; usual operations","values":{"c1":"zero vector (axiom 4) and closure under addition (axiom 1)","c2":"the line excludes **0**, and the sum of two points on the line generally falls off the line"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Vector space methods", items: [
+      { skill: "Test whether a set is a subspace", href: "/linear-algebra/vector-spaces/methods/subspace-test", desc: "Check the zero vector, closure under addition and closure under scalar multiplication.", level: "composite" },
+      { skill: "Test whether a vector is in a span", href: "/linear-algebra/vector-spaces/methods/span-test", desc: "Row reduce the augmented matrix: consistent means yes. A pivot in every row means the set spans Rⁿ.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2272,11 +2296,15 @@ export default function VectorSpaceAxiomsPage({ proofStepsData, formulaSummaryDa
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-axioms-non-examples-matrix'}
+            id="axioms-non-examples-matrix"
+            title="Non-Examples"
+            source="/linear-algebra/vector-spaces/axioms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:A single failed axiom rules a set out, and closure and the zero vector are where natural candidates usually fail.]@`,
         ]
     },
@@ -2298,11 +2326,15 @@ export default function VectorSpaceAxiomsPage({ proofStepsData, formulaSummaryDa
             <ProofSteps data={proofStepsData} variant="chain" />
           </DiagramFrame>,
           sectionsContent.obj9.afterProof,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-axioms-immediate-consequences-axioms-matrix'}
+            id="axioms-immediate-consequences-axioms-matrix"
+            title="Immediate Consequences of the Axioms"
+            source="/linear-algebra/vector-spaces/axioms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:Rules such as $0\\mathbf{v} = \\mathbf{0}$ and $(-1)\\mathbf{v} = -\\mathbf{v}$ are not extra assumptions: the ten axioms already force them.]@`,
         ]
     },
@@ -2320,11 +2352,15 @@ export default function VectorSpaceAxiomsPage({ proofStepsData, formulaSummaryDa
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-axioms-summary-how-axioms-instantiate-matrix'}
+            id="axioms-summary-how-axioms-instantiate-matrix"
+            title="Summary: How the Axioms Instantiate"
+            source="/linear-algebra/vector-spaces/axioms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2360,6 +2396,14 @@ export default function VectorSpaceAxiomsPage({ proofStepsData, formulaSummaryDa
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj6 aggregation, obj7 aggregation, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,11 +15,55 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
-import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Symmetry Shortcuts"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Structure in integrand","features":[{"id":"c1","name":"Recognize when…","type":"text"},{"id":"c2","name":"Strategy","type":"text"}],"items":[{"id":"r1","name":"Absolute value","values":{"c1":"|g(x)| appears in the integrand","c2":"split the interval where g(x) = 0; use the sign of g on each piece to drop the bars"}},{"id":"r2","name":"Piecewise function","values":{"c1":"different formulas govern different subintervals","c2":"split at the piece boundaries, integrate each subinterval, add via [additivity](!/calculus/integrals/rules)"}},{"id":"r3","name":"Even function on [−a, a]","values":{"c1":"f(−x) = f(x), symmetric interval","c2":"∫₋ₐ$^{a}$ f(x) dx = 2 ∫₀$^{a}$ f(x) dx — half the work"}},{"id":"r4","name":"Odd function on [−a, a]","values":{"c1":"f(−x) = −f(x), symmetric interval","c2":"∫₋ₐ$^{a}$ f(x) dx = 0 — answer is immediate"}}]};
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// ProcedureV2 (stages) 2026-11-16: replaces the table summaryTable (evaluation strategy ladder: step, what to do, why this step, where to look); wording and links taken from the table.
+const evaluationLadderStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  groups: [
+    { label: 'Light moves', sub: 'steps 1 to 4', kind: 'must', stages: [
+      { n: 1, name: 'Simplify the integrand', what: 'Expand, split fractions, separate terms', cond: 'Why: algebraic cleanup often reveals matches to known formulas. Where to look: section 1 above' },
+      { n: 2, name: 'Apply direct antidifferentiation', what: 'Match the integrand to a standard form', cond: 'Why: fastest path when it works. Where to look: [special integrals](!/calculus/integrals/special)' },
+      { n: 3, name: 'Look for disguised standard forms', what: 'Complete the square, rewrite constants', cond: 'Why: catches near-misses before reaching for heavier tools. Where to look: section 2 above' },
+      { n: 4, name: 'Check for special structure', what: 'Absolute value, piecewise, symmetry', cond: 'Why: dedicated shortcuts avoid heavy machinery (and the odd-function rule answers in one step). Where to look: sections 4–6 above' },
+    ] },
+    { label: 'Heavy tools', sub: 'step 5', kind: 'must', stages: [
+      { n: 5, name: 'Reach for a technique', what: 'Substitution, parts, partial fractions, trig sub', cond: 'Why: when none of the above moves close the gap. Where to look: [techniques](!/calculus/integrals/techniques)' },
+    ] },
+    { label: 'The check', sub: 'step 6', kind: 'out', stages: [
+      { n: 6, name: 'Verify', what: 'Differentiate the antiderivative; check sign and reasonableness for definite results', cond: 'Why: catches algebra and sign errors before they propagate. Where to look: sections 7 & 8 above' },
+    ] },
+  ],
+}
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Common Pitfalls"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pitfall","features":[{"id":"c1","name":"Why it's wrong","type":"text"},{"id":"c2","name":"Correct form","type":"text"}],"items":[{"id":"r1","name":"Forgetting + C","values":{"c1":"an indefinite integral represents a family of antiderivatives, not just one","c2":"always finish indefinite results with + C"}},{"id":"r2","name":"Dropping the absolute value in ln","values":{"c1":"∫ 1/x dx = ln x is invalid for x < 0","c2":"∫ 1/x dx = ln|x| + C"}},{"id":"r3","name":"Sign error in u-substitution","values":{"c1":"if u = −x then du has its own sign","c2":"du = −dx, not dx"}},{"id":"r4","name":"Forgetting to convert limits","values":{"c1":"x-limits are wrong once the integrand is in u","c2":"convert the limits to u-values, or substitute back to x before evaluating"}},{"id":"r5","name":"Missing a discontinuity","values":{"c1":"integral looks proper but the integrand blows up on the interval","c2":"recognize as [improper](!/calculus/integrals/improper) and split at the singularity (e.g. ∫₋₁¹ 1/x² dx at x = 0)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Integration techniques", items: [
+      { skill: "Choose the right integration technique", href: "/calculus/integrals/techniques/which-integration-technique", desc: "A decision tree from the shape of the integrand to the right technique.", level: "strategy" },
+      { skill: "Integrate by u-substitution", href: "/calculus/integrals/techniques/u-substitution", desc: "Undo the chain rule: an inner function whose derivative is also in the integrand.", level: "composite" },
+      { skill: "Integrate by parts", href: "/calculus/integrals/techniques/integration-by-parts", desc: "Undo the product rule: products like $x e^x$, $x\\sin x$, $\\ln x$, $e^x\\cos x$.", level: "composite" },
+      { skill: "Use trigonometric substitution", href: "/calculus/integrals/techniques/trig-substitution", desc: "Remove $\\sqrt{a^2 - x^2}$, $\\sqrt{a^2 + x^2}$ or $\\sqrt{x^2 - a^2}$ with $x = a\\sin\\theta$, $a\\tan\\theta$ or $a\\sec\\theta$.", level: "composite" },
+      { skill: "Evaluate a definite integral with the Fundamental Theorem", href: "/calculus/integrals/techniques/definite-integrals-ftc", desc: "Find an antiderivative $F$ and compute $F(b) - F(a)$; Part 1 for accumulation functions.", level: "composite" },
+      { skill: "Use substitution in a definite integral", href: "/calculus/integrals/techniques/definite-substitution", desc: "Convert the limits to $u$-values, or substitute back before evaluating; never mix the two.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/integrals/techniques", label: "All integration techniques" },
+};
 
 export async function getStaticProps(){
 
@@ -428,7 +473,7 @@ A numerical check can be done by hand with only three values of the integrand. S
   obj9: {
     title: `Summary: The Evaluation Strategy Ladder`,
     content: `
-The sections above lay out a natural order of attack for any integral: start simple, escalate only as needed, and verify at the end. The table below collects this six-step ladder with a pointer to the right section or sibling page for each step. Used as a checklist, it prevents the most common failure mode of integration — reaching for heavy techniques before trying the lighter moves that would have worked.
+The sections above lay out a natural order of attack for any integral: start simple, escalate only as needed, and verify at the end. The list below collects this six-step ladder with a pointer to the right section or sibling page for each step. Used as a checklist, it prevents the most common failure mode of integration — reaching for heavy techniques before trying the lighter moves that would have worked.
 `,
     before: ``,
     after: ``,
@@ -932,8 +977,15 @@ Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\f
           <div key={'unit-oddCancel'} dangerouslySetInnerHTML={{ __html: demoUnits.oddCancel }} />,
           `The shortcut needs a symmetric interval: over [−3, 2] the halves no longer match.`,
           `@academic[punchline:Check symmetry before integrating: on $[-a, a]$ odd parts cancel to zero and even parts need only half the interval.]@`,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-evaluating-symmetry-shortcuts-matrix'}
+            id="evaluating-symmetry-shortcuts-matrix"
+            title="Symmetry Shortcuts"
+            source="/calculus/integrals/evaluating"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -962,8 +1014,15 @@ Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\f
           sectionsContent.obj7.content,
           <div key={'unit-improperTrap'} dangerouslySetInnerHTML={{ __html: demoUnits.improperTrap }} />,
           `Before evaluating, check that the integrand is continuous on the whole closed interval.`,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-evaluating-common-pitfalls-matrix'}
+            id="evaluating-common-pitfalls-matrix"
+            title="Common Pitfalls"
+            source="/calculus/integrals/evaluating"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj7-mistakes'}
             id="evaluating-integral-pitfalls"
@@ -989,8 +1048,15 @@ Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\f
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'procedure-evaluation-ladder'}
+            id="integral-evaluation-ladder-steps"
+            title="The Six-Step Evaluation Ladder"
+            source="/calculus/integrals/evaluating"
+            related={false}
+          >
+            <ProcedureV2 data={evaluationLadderStages} variant="stages" />
+          </DiagramFrame>,
           `The six-step ladder as a checklist. Each question asks whether the current move already finishes the integral; only a no sends the work one step up.`,
           <DiagramFrame
             key={'obj9-decision'}
@@ -1001,6 +1067,14 @@ Integrating $x^3 + 1$ and $x$ on their own gives $\\frac{x^4/4 + x}{x^2/2} = \\f
             <DecisionBox data={integralLadderDecision} />
           </DiagramFrame>,
           `The bottom exit is meant to be reached last: going for a heavy technique before the lighter moves is the most common way an integral goes wrong. Whichever exit is taken, the verification step below the map still applies: differentiating the answer is the [check](!#8) that catches algebra and sign errors.`,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

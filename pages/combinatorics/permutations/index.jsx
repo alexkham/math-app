@@ -1400,6 +1400,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../pages.css'
@@ -1421,9 +1422,48 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-17: replaces the five-line property table under each permutation type (use all items, order matters, identical items, repetitions, linear arrangement); marks taken from each table.
+const permutationProfileBase = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  verdicts: {
+    yes: { label: 'Yes', mark: '✓', color: '#2563EB', bg: '#dbeafe' },
+    no: { label: 'No', mark: '✕', color: '#475569', bg: '#f1f5f9' },
+  },
+  orient: 'columns',
+  options: { orientToggle: false },
+  corner: 'Type',
+  features: [
+    { id: 'all', name: 'Use all items', type: 'verdict' },
+    { id: 'order', name: 'Order matters', type: 'verdict' },
+    { id: 'identical', name: 'Identical items', type: 'verdict' },
+    { id: 'repeat', name: 'Repetitions', type: 'verdict' },
+    { id: 'linear', name: 'Linear arrangement', type: 'verdict' },
+  ],
+}
+const fm_fullPermutationProfile = { ...permutationProfileBase, items: [ { id: 'fullPermutation', name: 'Full Permutation', values: { all: 'yes', order: 'yes', identical: 'no', repeat: 'no', linear: 'yes' } } ] }
+const fm_identicalItemsProfile = { ...permutationProfileBase, items: [ { id: 'identicalItems', name: 'Permutation with Identical Items', values: { all: 'yes', order: 'yes', identical: 'yes', repeat: 'no', linear: 'yes' } } ] }
+const fm_partialWithoutProfile = { ...permutationProfileBase, items: [ { id: 'partialWithout', name: 'Partial Permutation without Repetition', values: { all: 'no', order: 'yes', identical: 'no', repeat: 'no', linear: 'yes' } } ] }
+const fm_withRepetitionProfile = { ...permutationProfileBase, items: [ { id: 'withRepetition', name: 'Permutation with Repetition', values: { all: 'no', order: 'yes', identical: 'no', repeat: 'yes', linear: 'yes' } } ] }
+const fm_circularProfile = { ...permutationProfileBase, items: [ { id: 'circular', name: 'Circular Permutation', values: { all: 'yes', order: 'yes', identical: 'no', repeat: 'no', linear: 'no' } } ] }
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Combinatorics methods", items: [
+      { skill: "Compute a factorial", href: "/combinatorics/methods#factorial", desc: "A product of all whole numbers from $n$ down to $1$ appears, or a ratio of factorials must be simplified: $6!$, $\\frac{8!}{6!}$, $0!$.", level: "atomic" },
+      { skill: "Count choices made in stages", href: "/combinatorics/methods#multiplication-principle", desc: "One outcome is built from several steps, and the number of options at each step does not depend on the earlier choices: an outfit of a shirt and pants and shoes, a code digit by digit, a meal of $3 \\times 2 \\times 4$ dishes.", level: "atomic" },
+      { skill: "Solve counting word problems", href: "/combinatorics/methods/counting-word-problems", desc: "Committees, license plates, seating plans and \"at least one\" questions: translate the story, pick the formula, count each stage.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/combinatorics/methods", label: "All combinatorics methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2885,7 +2925,16 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
         content:[
           // <div style={{margin:'auto',width:'80%'}} dangerouslySetInnerHTML={{ __html: permutationsTable }} key="table" />
           sectionsContent.full.before,
-        <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: fullPermutationTable }} key="table" />,
+        <DiagramFrame
+          key={'feature-matrix-full-permutation-profile'}
+          id="full-permutation-profile"
+          title="Full Permutation at a Glance"
+          source="/combinatorics/permutations"
+          related={false}
+          maxWidth={560}
+        >
+          <FeatureMatrix data={fm_fullPermutationProfile} />
+        </DiagramFrame>,
       sectionsContent.full.between,
       <div key={'unit-fullN3'} dangerouslySetInnerHTML={{ __html: demoUnits.fullN3 }} />,
       `Every extra item multiplies the count again: 4 items give 24 arrangements, 5 give 120.`,
@@ -2902,7 +2951,16 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
         link:'',
         content:[
           sectionsContent.identical.before,
-          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: identicalTable }} key="table" />,
+          <DiagramFrame
+            key={'feature-matrix-permutation-identical-items-profile'}
+            id="permutation-identical-items-profile"
+            title="Permutation with Identical Items at a Glance"
+            source="/combinatorics/permutations"
+            related={false}
+            maxWidth={560}
+          >
+            <FeatureMatrix data={fm_identicalItemsProfile} />
+          </DiagramFrame>,
           sectionsContent.identical.between,
           sectionsContent.identical.after,
            <div key={12} style={{
@@ -2932,7 +2990,16 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
         link:'',
         content:[
           sectionsContent.without.before,
-          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: partialWithoutTable }} key="table" />,
+          <DiagramFrame
+            key={'feature-matrix-partial-permutation-profile'}
+            id="partial-permutation-profile"
+            title="Partial Permutation without Repetition at a Glance"
+            source="/combinatorics/permutations"
+            related={false}
+            maxWidth={560}
+          >
+            <FeatureMatrix data={fm_partialWithoutProfile} />
+          </DiagramFrame>,
           sectionsContent.without.between,
           sectionsContent.without.after,
           scenariosData["Partial Permutations without Repetition"].svg,
@@ -2971,7 +3038,16 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
     link:'',
     content:[
       sectionsContent.with.before,
-      <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html:permutationWithRepetitionTable }} key="table" />,
+      <DiagramFrame
+        key={'feature-matrix-permutation-with-repetition-profile'}
+        id="permutation-with-repetition-profile"
+        title="Permutation with Repetition at a Glance"
+        source="/combinatorics/permutations"
+        related={false}
+        maxWidth={560}
+      >
+        <FeatureMatrix data={fm_withRepetitionProfile} />
+      </DiagramFrame>,
       sectionsContent.with.between,
       sectionsContent.with.after,
       scenariosData["Permutations with Repetition"].svg,
@@ -2986,7 +3062,16 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
       link:'',
       content:[
         sectionsContent.circular.before,
-        <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: circularTable }} key="table" />,
+        <DiagramFrame
+          key={'feature-matrix-circular-permutation-profile'}
+          id="circular-permutation-profile"
+          title="Circular Permutation at a Glance"
+          source="/combinatorics/permutations"
+          related={false}
+          maxWidth={560}
+        >
+          <FeatureMatrix data={fm_circularProfile} />
+        </DiagramFrame>,
         sectionsContent.circular.between,
         sectionsContent.circular.after,
         scenariosData["Circular Permutation"].svg,
@@ -3042,6 +3127,14 @@ $$n! = n \\times (n−1) \\times (n−2) \\times \\dots \\times 2 \\times 1.$$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
 //   {

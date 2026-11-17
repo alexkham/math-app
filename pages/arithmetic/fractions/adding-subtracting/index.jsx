@@ -680,6 +680,8 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 2 tables (obj6 aggregation, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -696,8 +698,28 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Subtracting Mixed Numbers"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Case","features":[{"id":"c1","name":"Procedure","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Add — no carry","values":{"c1":"add wholes; add fractions; fractional sum stays proper","c2":"2 1⁄3 + 4 1⁄4 → 6 + 7⁄12 = 6 7⁄12"}},{"id":"r2","name":"Add — with carry","values":{"c1":"add wholes; add fractions; if fractional sum ≥ 1, carry the extra whole","c2":"3 3⁄4 + 2 1⁄2 → 5 + 5⁄4 = 5 + 1 1⁄4 = 6 1⁄4"}},{"id":"r3","name":"Subtract — no borrow","values":{"c1":"subtract wholes; subtract fractions; first fractional part ≥ second","c2":"5 3⁄4 − 2 1⁄4 → 3 + 2⁄4 = 3 1⁄2"}},{"id":"r4","name":"Subtract — with borrow","values":{"c1":"first fractional part < second; borrow 1 from the whole as denom⁄denom, then subtract","c2":"5 1⁄4 − 2 3⁄4 → 4 5⁄4 − 2 3⁄4 = 2 2⁄4 = 2 1⁄2"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Add and subtract fractions", href: "/arithmetic/methods/add-subtract-fractions", desc: "Rewrite the fractions over the least common denominator, add or subtract the numerators, keep the denominator, and simplify.", level: "composite", here: "#4" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Find the least common multiple", href: "/arithmetic/methods/lcm", desc: "Find the smallest number that two or more numbers divide: take every prime with its larger exponent, or use $\\operatorname{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$.", level: "composite" },
+      { skill: "Work with mixed numbers", href: "/arithmetic/methods/mixed-numbers", desc: "Convert between mixed numbers and improper fractions, $w\\tfrac{a}{b} = \\frac{wb + a}{b}$, and use the conversion to multiply and divide them.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1331,8 +1353,23 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Converting and adding, step by step (obj4).
+  const commonDenominatorSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\frac{2}{3} + \\frac{1}{4}$, LCD $12$',
+      rows: [
+        { step: 'Find the factor for each fraction', stepSub: 'The LCD divided by the original denominator', example: '$12 \\div 3 = 4$ and $12 \\div 4 = 3$' },
+        { step: 'Multiply the top and bottom of the first fraction by its factor', example: '$\\frac{2 \\times 4}{3 \\times 4} = \\frac{8}{12}$' },
+        { step: 'Multiply the top and bottom of the second fraction by its factor', example: '$\\frac{1 \\times 3}{4 \\times 3} = \\frac{3}{12}$' },
+        { step: 'Add the numerators over the common denominator', example: '$\\frac{8}{12} + \\frac{3}{12} = \\frac{11}{12}$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    commonDenominatorSteps,
     formulaSummaryData,
     pitfallData,
     sectionsContent,
@@ -1355,7 +1392,7 @@ return {
    }
 
 
-export default function AddingSubtractingPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function AddingSubtractingPage({ commonDenominatorSteps, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1457,9 +1494,19 @@ export default function AddingSubtractingPage({ formulaSummaryData, pitfallData,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="common-denominator-steps"
+            title="Converting and adding, step by step"
+            source="/arithmetic/fractions/adding-subtracting"
+            before={"The conversion of this section, one fraction at a time. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={commonDenominatorSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-unlikeAdd'} dangerouslySetInnerHTML={{ __html: demoUnits.unlikeAdd }} />,
           `11/12 is already in simplest form, since 11 and 12 share no factor.`,
           `@academic[punchline:Rewriting a fraction over a new denominator changes the size of its pieces, never its value.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to add and subtract fractions](!/arithmetic/methods/add-subtract-fractions) →@`,
         ]
     },
     {
@@ -1476,8 +1523,15 @@ export default function AddingSubtractingPage({ formulaSummaryData, pitfallData,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-adding-subtracting-subtracting-mixed-numbers-matrix'}
+            id="adding-subtracting-subtracting-mixed-numbers-matrix"
+            title="Subtracting Mixed Numbers"
+            source="/arithmetic/fractions/adding-subtracting"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:Borrowing trades one whole for a full set of pieces, just as column subtraction trades a ten for ten ones.]@`,
         ]
     },
@@ -1524,6 +1578,14 @@ export default function AddingSubtractingPage({ formulaSummaryData, pitfallData,
           >
             <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

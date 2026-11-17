@@ -866,6 +866,7 @@
 // }
 
 
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -883,9 +884,43 @@ import complexMultiplicationDiagrams from '@/app/components/calculators/complex-
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Common Pitfalls and Tips"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pitfall","features":[{"id":"c1","name":"Wrong","type":"text"},{"id":"c2","name":"Correct","type":"text"},{"id":"c3","name":"Why","type":"text"}],"items":[{"id":"r1","name":"Forgetting i² = −1","values":{"c1":"(2i)(3i) = 6i² = 6","c2":"(2i)(3i) = 6i² = −6","c3":"every i² must be replaced with −1"}},{"id":"r2","name":"Sign error in subtraction","values":{"c1":"(5 + 3i) − (2 − 4i) = 3 − i","c2":"(5 + 3i) − (2 − 4i) = 3 + 7i","c3":"distribute the minus across both real and imaginary parts"}},{"id":"r3","name":"Leaving a complex denominator","values":{"c1":"(3 + 2i) ⁄ (1 + i) as final answer","c2":"multiply by conjugate → 5⁄2 − (1⁄2)i","c3":"standard form a + bi requires a real denominator"}},{"id":"r4","name":"Confusing conjugate with negative","values":{"c1":"conjugate of 3 + 2i is −3 − 2i","c2":"conjugate of 3 + 2i is 3 − 2i","c3":"conjugation flips the imaginary sign only; negation flips both"}},{"id":"r5","name":"Dividing by zero","values":{"c1":"z ⁄ 0 treated as some value","c2":"z ⁄ 0 is undefined","c3":"0 has no multiplicative inverse in ℂ (or ℝ)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: 'Each skill opens its step-by-step method page. Skills marked "On this page" are taught above.',
+  groups: [
+    {
+      title: 'Operations in the form a + bi',
+      items: [
+        { skill: 'Add or subtract complex numbers', href: '/complex-numbers/methods#add-subtract-complex', desc: "Two complex numbers in the form $a + bi$ are joined by a plus or minus sign: $(2 + 3i) + (5 - i)$, $(4 - 3i) - (1 - 5i)$.", level: 'atomic', here: '#1' },
+        { skill: 'Multiply complex numbers', href: '/complex-numbers/methods/multiply-complex', desc: "Expand the brackets term by term, replace $i^2$ with $-1$, and collect the real and imaginary parts.", level: 'composite', here: '#3' },
+        { skill: 'Divide complex numbers', href: '/complex-numbers/methods/divide-complex', desc: "Multiply the top and bottom by the conjugate of the denominator, so the denominator becomes the real number $c^2 + d^2$.", level: 'composite', here: '#4' },
+        { skill: 'Find the complex conjugate', href: '/complex-numbers/methods#complex-conjugate', desc: "You need $\\overline{z}$ to divide, to make a product real, or to pair a root: $\\overline{3 - 4i}$, $\\overline{-2 + i}$, $\\overline{5i}$.", level: 'atomic' },
+        { skill: 'Simplify a power of $i$', href: '/complex-numbers/methods#powers-of-i', desc: "A power of the imaginary unit appears in an expression or a product: $i^2$ after multiplying out, $i^{3}$, $i^{47}$, $i^{100}$.", level: 'atomic' },
+        { skill: 'Find the modulus of a complex number', href: '/complex-numbers/methods#modulus', desc: "You need the distance of $z = a + bi$ from the origin, for example as the $r$ of the polar form: $|3 + 4i|$, $|-5 + 12i|$, $|-4i|$.", level: 'atomic' },
+      ],
+    },
+    {
+      title: 'The same operations in polar form',
+      items: [
+        { skill: 'Convert a complex number to polar form', href: '/complex-numbers/methods/rectangular-to-polar', desc: "Find the modulus $r$, find the argument from $\\tan\\theta = \\frac{b}{a}$ with a quadrant check, and write $r(\\cos\\theta + i\\sin\\theta)$.", level: 'composite' },
+        { skill: 'Multiply and divide in polar form', href: '/complex-numbers/methods/multiply-divide-polar', desc: "Multiply or divide the moduli, add or subtract the arguments, and bring the angle back into $(-\\pi, \\pi]$.", level: 'composite' },
+        { skill: "Raise a complex number to a power with De Moivre's theorem", href: '/complex-numbers/methods/de-moivre-powers', desc: "Write the number in polar form, raise the modulus to the power, multiply the angle by it, and convert back.", level: 'composite' },
+        { skill: 'Choose the right form for a calculation', href: '/complex-numbers/methods/which-form', desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: 'strategy' },
+      ],
+    },
+  ],
+  hub: { href: '/complex-numbers/methods', label: 'All complex number methods' },
+};
 
 
 export async function getStaticProps(){
@@ -1216,7 +1251,7 @@ Multiplying by a pure real number scales both components proportionally. The pro
 For whole numbers $a > b > 0$, the parts of $(a + bi)^2$ are the legs of a right triangle with hypotenuse $a^2 + b^2$, since $|z^2| = |z|^2$: hence $3, 4, 5$ and $5, 12, 13$. Every primitive Pythagorean triple arises from such a square.]@
 
 Squaring is the special case $z_1 = z_2$. For $z = a + bi$ the formula gives $z^2 = (a^2 - b^2) + 2abi$: the real part is a difference of two squares, and the imaginary part is twice the product of the two parts. With whole numbers this gives $(2 + i)^2 = 3 + 4i$, $(3 + 2i)^2 = 5 + 12i$ and $(4 + i)^2 = 15 + 8i$, and the [modulus](!/complex-numbers/absolute-value) of each square is the square of the original modulus: $5$, $13$ and $17$.`,
-  after: ``,
+  after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to multiply complex numbers](!/complex-numbers/methods/multiply-complex) →@`,
   link: '',
 },
    
@@ -1256,7 +1291,9 @@ Compute the numerator: $(3 + 2i)(1 + 4i) = 3 + 12i + 2i + 8i^2 = 3 + 14i - 8 = -
 
 Divide: $\\frac{-5 + 14i}{17} = -\\frac{5}{17} + \\frac{14}{17}i$.
 
-The result sits in standard form with real denominator eliminated.`,
+The result sits in standard form with real denominator eliminated.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to divide complex numbers](!/complex-numbers/methods/divide-complex) →@`,
   after: ``,
   link: '',
 },
@@ -1658,8 +1695,24 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Dividing complex numbers, step by step (obj4).
+  const complexQuotientSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\dfrac{3 + 2i}{1 - 4i}$',
+      rows: [
+        { step: 'Identify the conjugate of the denominator', example: '$1 + 4i$' },
+        { step: 'Multiply numerator and denominator by it', example: '$\\dfrac{(3 + 2i)(1 + 4i)}{(1 - 4i)(1 + 4i)}$' },
+        { step: 'Compute the denominator', stepSub: 'It becomes a real number', example: '$1 - 16i^2 = 17$' },
+        { step: 'Compute the numerator', example: '$3 + 14i + 8i^2 = -5 + 14i$' },
+        { step: 'Divide each part by the real denominator', example: '$-\\frac{5}{17} + \\frac{14}{17}i$' },
+      ],
+    },
+  };
+
   return {
   props:{
+    complexQuotientSteps,
     formulaSummaryData,
     pitfallData,
     complexOpTree,
@@ -1686,7 +1739,7 @@ const schemas = {
 
 
 
-export default function OperationsPage({ formulaSummaryData, pitfallData,complexOpTree, 
+export default function OperationsPage({ complexQuotientSteps, formulaSummaryData, pitfallData,complexOpTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1827,6 +1880,7 @@ Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12
         link:sectionsContent.obj3.link,
         content:[
           <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
+          sectionsContent.obj3.after,
         ]
     },
     {
@@ -1835,6 +1889,15 @@ Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="complex-division-steps"
+            title="Dividing complex numbers, step by step"
+            source="/complex-numbers/operations"
+            before={"The step-by-step example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={complexQuotientSteps} variant="worked" />
+          </DiagramFrame>,
           <div
             key={'obj4-table'}
             style={tableWrapStyle}
@@ -1866,11 +1929,15 @@ Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-operations-common-pitfalls-tips-matrix'}
+            id="operations-common-pitfalls-tips-matrix"
+            title="Common Pitfalls and Tips"
+            source="/complex-numbers/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj7-mistakes'}
             id="complex-operation-pitfalls"
@@ -1906,6 +1973,14 @@ Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12
           >
             <TopDownTree data={complexOpTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

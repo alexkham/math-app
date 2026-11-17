@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,11 +15,50 @@ import renderLineTestV2 from '@/app/utils/illustrations/functions/graphs/lineTes
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_logEnds = {
+  center: { name: '$\\log_a(x)$', sub: 'at the two ends of its domain' },
+  axes: { cols: ['$a > 1$', '$0 < a < 1$'], rows: ['$x \\to 0^+$', '$x \\to \\infty$'] },
+  options: { bullets: false },
+  quadrants: [
+    { label: 'Plunges downward', title: '$-\\infty$', items: [ '$\\lim_{x \\to 0^+} \\log_a(x) = -\\infty$', 'The graph approaches the $y$-axis without touching it.' ] },
+    { label: 'Rises upward', title: '$+\\infty$', tone: 'b', items: [ '$\\lim_{x \\to 0^+} \\log_a(x) = +\\infty$', 'The graph approaches the $y$-axis without touching it.' ] },
+    { label: 'Increases without bound', title: '$+\\infty$', tone: 'b', items: [ '$\\lim_{x \\to \\infty} \\log_a(x) = +\\infty$', { text: 'Growth is slow, at a decelerating rate.', note: 'doubling the input adds only a fixed constant to the output' } ] },
+    { label: 'Decreases without bound', title: '$-\\infty$', tone: 'a', items: [ '$\\lim_{x \\to \\infty} \\log_a(x) = -\\infty$' ] }
+  ],
+  note: { label: 'Vertical asymptote', text: 'The line $x = 0$ (the $y$-axis) is a vertical asymptote for every logarithmic function.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Inverse Relationship with Exponential Functions"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Feature","features":[{"id":"c1","name":"logₐ(x)","type":"text"},{"id":"c2","name":"aˣ","type":"text"}],"items":[{"id":"r1","name":"Domain","values":{"c1":"(0, ∞)","c2":"(−∞, ∞)"}},{"id":"r2","name":"Range","values":{"c1":"(−∞, ∞)","c2":"(0, ∞)"}},{"id":"r3","name":"Asymptote","values":{"c1":"vertical, x = 0","c2":"horizontal, y = 0"}},{"id":"r4","name":"Anchor point","values":{"c1":"(1, 0)","c2":"(0, 1)"}},{"id":"r5","name":"Composition with the other","values":{"c1":"logₐ(aˣ) = x","c2":"a^(logₐ(x)) = x"}}]};
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Properties"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Practical consequence","type":"text"}],"items":[{"id":"r1","name":"Domain","values":{"c1":"(0, ∞) — the argument must be strictly positive","c2":"verify the argument is positive before accepting any solution"}},{"id":"r2","name":"Range","values":{"c1":"(−∞, ∞) — every real value is attained","c2":"logarithms can equal any real number, positive or negative"}},{"id":"r3","name":"Monotonicity","values":{"c1":"strictly increasing for a > 1; strictly decreasing for 0 < a < 1","c2":"inequality direction is set by the base"}},{"id":"r4","name":"One-to-one","values":{"c1":"logₐ(M) = logₐ(N) implies M = N","c2":"drop matching logs to reduce a logarithmic equation to an algebraic one"}},{"id":"r5","name":"Continuity","values":{"c1":"continuous on (0, ∞) — no jumps, breaks, or holes","c2":"small changes in input produce small changes in output"}},{"id":"r6","name":"Vertical asymptote","values":{"c1":"x = 0; logₐ(x) → ∓∞ as x → 0⁺ (sign depends on base)","c2":"graph hugs the y-axis but never touches it"}},{"id":"r7","name":"Inverse of aˣ","values":{"c1":"logₐ(aˣ) = x and a^(logₐ(x)) = x","c2":"switch between exponential and logarithmic form to solve equations"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Expand and condense logarithms", href: "/algebra/methods/expand-condense-logarithms", desc: "Break one log into a sum of simple logs, or fold a sum back into one log.", level: "composite" },
+      { skill: "Split the log of a product", href: "/algebra/methods#log-product-rule", desc: "A logarithm of a product, or two logs with the same base added: $\\log(xy)$, $\\ln 2 + \\ln 5$.", level: "atomic" },
+      { skill: "Split the log of a quotient", href: "/algebra/methods#log-quotient-rule", desc: "A logarithm of a fraction, or two logs with the same base subtracted: $\\log\\frac{x}{y}$, $\\log_2 40 - \\log_2 5$.", level: "atomic" },
+      { skill: "Bring an exponent out of a log", href: "/algebra/methods#log-power-rule", desc: "A power inside a logarithm, or a number multiplying a log: $\\log x^3$, $\\ln\\sqrt{x}$, $2\\log 5$.", level: "atomic" },
+      { skill: "Change the base of a logarithm", href: "/algebra/methods#change-of-base", desc: "A log whose base your calculator does not have, or two logs with different bases in one problem: $\\log_2 10$, $\\log_5 x$.", level: "atomic" },
+      { skill: "Evaluate a logarithm", href: "/algebra/methods/evaluate-logarithms", desc: "Ask \"which exponent?\", use the key values, or change the base for a calculator.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -778,6 +818,15 @@ Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'four-sides-logarithm-asymptotic-behavior'}
+            id="logarithm-asymptotic-behavior"
+            title="Asymptotic Behavior"
+            source="/algebra/logarithms/properties"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_logEnds} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -786,11 +835,15 @@ Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-inverse-relationship-exponential-functions-matrix'}
+            id="properties-inverse-relationship-exponential-functions-matrix"
+            title="Inverse Relationship with Exponential Functions"
+            source="/algebra/logarithms/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Knowing $a^x$ means knowing $\\log_a(x)$: each graph is the other's mirror image in the line $y = x$.]@`,
         ]
     },
@@ -800,11 +853,15 @@ Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-summary-properties-matrix'}
+            id="properties-summary-properties-matrix"
+            title="Summary of Properties"
+            source="/algebra/logarithms/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           `The seven properties as cards, each marked by whether it holds for every base or depends on it.`,
           <DiagramFrame
             key={'obj8-propsheet'}
@@ -832,6 +889,14 @@ Writing the domain of $\\log_2(x - 3)$ as $x \\geq 3$ lets in $x = 3$, where the
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

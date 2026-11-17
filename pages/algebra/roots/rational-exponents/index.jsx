@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -13,11 +14,32 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("When to Use Which Form"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Task","features":[{"id":"c1","name":"Preferred form","type":"text"},{"id":"c2","name":"Reason","type":"text"}],"items":[{"id":"r1","name":"Numerical evaluation","values":{"c1":"Radical","c2":"direct, intuitive: √16 reads as &ldquo;the square root of 16&rdquo;"}},{"id":"r2","name":"Expressing final answers","values":{"c1":"Radical","c2":"conventional notation in most contexts; the index is visually prominent"}},{"id":"r3","name":"Algebraic manipulation","values":{"c1":"Exponent","c2":"standard fraction arithmetic on the exponents"}},{"id":"r4","name":"Combining different indices","values":{"c1":"Exponent","c2":"a common denominator unifies them in one step"}},{"id":"r5","name":"[Solving radical equations](!/algebra/roots/equations)","values":{"c1":"Exponent","c2":"the same exponent laws apply; isolating the base is mechanical"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Converting Between Forms"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Radical form","features":[{"id":"c1","name":"Exponent form","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"ⁿ√a","values":{"c1":"a$^{1/n}$","c2":"√x = x$^{1/2}$"}},{"id":"r2","name":"ⁿ√(aᵐ)","values":{"c1":"a$^{m/n}$","c2":"∛(y²) = y$^{2/3}$"}},{"id":"r3","name":"(ⁿ√a)ᵐ","values":{"c1":"a$^{m/n}$","c2":"(∛8)² = 8$^{2/3}$ = 4"}},{"id":"r4","name":"1 ⁄ ⁿ√a","values":{"c1":"a$^{-1/n}$","c2":"1 ⁄ √x = x$^{-1/2}$"}},{"id":"r5","name":"1 ⁄ ⁿ√(aᵐ)","values":{"c1":"a$^{-m/n}$","c2":"1 ⁄ ∛(a²) = a$^{-2/3}$"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Convert between rational exponents and roots", href: "/algebra/methods#rational-exponents", desc: "A fraction in the exponent, or a root that would be easier as a power: $8^{2/3}$, $\\sqrt[5]{x^2}$, $x^{1/2}$.", level: "atomic" },
+      { skill: "Simplify expressions with exponents", href: "/algebra/methods/simplify-exponent-expressions", desc: "Combine several exponent rules into one clean answer with positive exponents.", level: "composite" },
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1277,11 +1299,15 @@ Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-exponents-converting-between-forms-matrix'}
+            id="rational-exponents-converting-between-forms-matrix"
+            title="Converting Between Forms"
+            source="/algebra/roots/rational-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1345,11 +1371,15 @@ Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-exponents-when-use-which-matrix'}
+            id="rational-exponents-when-use-which-matrix"
+            title="When to Use Which Form"
+            source="/algebra/roots/rational-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1385,6 +1415,14 @@ Reading $8^{1/3}$ as $8 \\cdot \\frac{1}{3} = \\frac{8}{3}$ treats the exponent 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

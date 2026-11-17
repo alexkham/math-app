@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Head from 'next/head'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -18,6 +19,25 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Build a truth table", href: "/logic/methods/truth-table", desc: "List all $2^n$ rows, add one column per subformula from the inside out, and fill each column with the rule of its connective.", level: "composite", here: "#3" },
+      { skill: "Write the converse, inverse and contrapositive", href: "/logic/methods/converse-inverse-contrapositive", desc: "Swap the parts for the converse, negate both for the inverse, do both for the contrapositive; only the contrapositive keeps the meaning.", level: "composite", here: "#8" },
+    ] },
+    { title: "More logic methods", items: [
+      { skill: "Push a negation into a bracket", href: "/logic/methods#de-morgan", desc: "A negation stands in front of a bracket joined by $\\land$ or $\\lor$: $\\neg(P \\land Q)$, $\\neg(P \\lor \\neg Q)$, $\\neg(\\neg P \\lor Q)$.", level: "atomic" },
+      { skill: "Remove a double negation", href: "/logic/methods#double-negation", desc: "Two negations act on the same formula, often after De Morgan's law or a contrapositive: $\\neg\\neg P$, $\\neg\\neg(P \\land \\neg Q)$, $\\neg Q \\to \\neg\\neg P$.", level: "atomic" },
+      { skill: "Check whether a formula is a tautology", href: "/logic/methods/tautology-check", desc: "Show a formula is true in every row: build its truth table, or assume one row makes it false and reach a clash.", level: "composite" },
+      { skill: "Negate a conditional statement", href: "/logic/methods/negate-implication", desc: "The negation of $P \\to Q$ is $P \\land \\neg Q$: keep the condition, deny the conclusion, and join them with and.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
 
 export default function BiconditionalsTruthTablesPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,demoUnits, conceptIntroFigures, keyWords, biconditionalExplanations, menuItems, seoData, faqQuestions, schemas, sectionsContent }) {
 
@@ -192,6 +212,7 @@ Taking P ↔ Q to mean "P and Q are both true" marks the FF row F, which is the 
           <div key={'unit-biconditionalRegions'} dangerouslySetInnerHTML={{ __html: demoUnits.biconditionalRegions }} />,
           `Shading the two crescents instead gives ¬(P ↔ Q), exclusive or.`,
           `@academic[punchline:A biconditional asks only whether two statements agree, never whether either of them is true.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to build a truth table](!/logic/methods/truth-table) →@`,
         ]
       },
       {
@@ -250,7 +271,8 @@ Taking P ↔ Q to mean "P and Q are both true" marks the FF row F, which is the 
         id: '8',
         title: sectionsContent.obj8.title,
         link: sectionsContent.obj8.link,
-        content: [sectionsContent.obj8.content]
+        content: [sectionsContent.obj8.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to write the converse, inverse and contrapositive](!/logic/methods/converse-inverse-contrapositive) →@`]
       },
       {
         id: '9',
@@ -298,6 +320,14 @@ Taking P ↔ Q to mean "P and Q are both true" marks the FF row F, which is the 
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
         ]
+      },
+      {
+          id:'skills',
+          title:'Skills You Should Learn',
+          link:``,
+          content:[
+            <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+          ]
       },
       // faq: rendered component — must be built here, not in getStaticProps
       {

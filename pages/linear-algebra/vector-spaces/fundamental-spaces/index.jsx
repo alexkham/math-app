@@ -3010,6 +3010,9 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj7 comparison, obj9 aggregation, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import DimensionLedger from '@/app/components/infographics/linear-algebra/DimensionLedger'
+import FourSubspaceMap from '@/app/components/infographics/linear-algebra/FourSubspaceMap'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -3024,6 +3027,8 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
@@ -3032,9 +3037,33 @@ import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Orthogonal Complements"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Ambient space","features":[{"id":"c1","name":"Complementary pair","type":"text"},{"id":"c2","name":"Dimensions sum","type":"text"},{"id":"c3","name":"Orthogonality","type":"text"},{"id":"c4","name":"Running 3×4 example (r = 2)","type":"text"}],"items":[{"id":"r1","name":"ℝⁿ (domain)","values":{"c1":"Row(A) & Null(A)","c2":"r + (n − r) = n (rank-nullity theorem)","c3":"Row(A) ⊥ Null(A)","c4":"2 + 2 = 4"}},{"id":"r2","name":"ℝᵐ (codomain)","values":{"c1":"Col(A) & Null(Aᵀ)","c2":"r + (m − r) = m (transpose analogue)","c3":"Col(A) ⊥ Null(Aᵀ)","c4":"2 + 1 = 3"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the four fundamental subspaces", href: "/linear-algebra/vector-spaces/methods/fundamental-subspaces", desc: "One row reduction gives bases for the column space, row space, null space and left null space.", level: "composite", here: "#1" },
+    ] },
+    { title: "More vector space methods", items: [
+      { skill: "Find a basis", href: "/linear-algebra/vector-spaces/methods/find-basis", desc: "Row reduce once: the pivot columns of the original matrix, or one vector per free variable.", level: "composite" },
+      { skill: "Find the dimension of a subspace", href: "/linear-algebra/vector-spaces/methods/dimension", desc: "Count the vectors in a basis: the rank for a span, n minus the rank for a solution set.", level: "composite" },
+      { skill: "Test whether a vector is in a span", href: "/linear-algebra/vector-spaces/methods/span-test", desc: "Row reduce the augmented matrix: consistent means yes. A pivot in every row means the set spans Rⁿ.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Find the reduced row echelon form of a matrix", href: "/linear-algebra/linear-systems/methods/reduced-row-echelon-form", desc: "From echelon form, scale every pivot to 1 and clear above it; the result is unique.", level: "composite" },
+      { skill: "Solve a homogeneous system", href: "/linear-algebra/linear-systems/methods/homogeneous-systems", desc: "Ax = 0 always has the zero solution; reduce A and write the null space with one vector per free variable.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3983,8 +4012,63 @@ $$A = \\begin{pmatrix} 1 & 0 & 1 & 2 & 0 \\\\ 0 & 1 & 1 & 0 & 3 \\end{pmatrix}$$
     ],
   };
 
+  // FourSubspaceMap 2026-11-14: The four subspaces of the running example (obj8).
+  const runningExampleSubspaces = {
+    intro: 'For the $3 \\times 4$ matrix of rank $2$ used in the worked examples of this page.',
+    mapName: 'A',
+    domainLabel: 'R⁴',
+    codomainLabel: 'R³',
+    facts: [
+      { label: 'Shape', value: '3 × 4' },
+      { label: 'Rank', value: '2' },
+    ],
+    spaces: {
+      row: { name: 'Row space', dim: 2, basis: ['(1, 3, 2, −1)', '(0, 0, 1, 1)'] },
+      null: { name: 'Null space', dim: 2, basis: ['(−3, 1, 0, 0)', '(3, 0, −1, 1)'] },
+      column: { name: 'Column space', dim: 2, basis: ['(1, 2, −1)', '(2, 5, 0)'] },
+      leftNull: { name: 'Left null space', dim: 1, basis: ['(5, −2, 1)'] },
+    },
+    readingLabel: 'How to read it',
+    reading: 'Every $\\mathbf{x}$ in the domain splits into a row-space part, which $A$ carries onto the column space, and a null-space part, which $A$ sends to $\\mathbf{0}$. A right-hand side $\\mathbf{b}$ can be reached only if it has no left-null-space part.',
+  };
+
+  // DimensionLedger 2026-11-14: Where the dimensions go in the running example (obj6).
+  const dimensionAccountingBars = {
+    intro: 'The $3 \\times 4$ matrix of rank $2$: four dimensions in the domain, three in the codomain.',
+    identity: '$r + (n - r) = n$ and $r + (m - r) = m$',
+    bars: [
+      { label: 'Domain', space: 'R⁴', total: 4,
+        segments: [
+          { label: 'Row space', size: 2, hot: true },
+          { label: 'Null space', size: 2 },
+        ] },
+      { label: 'Codomain', space: 'R³', total: 3,
+        segments: [
+          { label: 'Column space', size: 2, hot: true },
+          { label: 'Left null space', size: 1 },
+        ] },
+    ],
+  };
+
+  const nullBasisSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The $3 \\times 4$ example, rank $2$',
+      rows: [
+        { step: 'Reduce $A$ to RREF', example: 'Nonzero rows $(1, 3, 0, -3)$ and $(0, 0, 1, 1)$' },
+        { step: 'Identify the free variables', stepSub: 'The pivots are in columns $1$ and $3$', example: '$x_2$ and $x_4$' },
+        { step: 'Solve each row for its pivot variable', example: '$x_1 = -3x_2 + 3x_4$ and $x_3 = -x_4$' },
+        { step: 'Set $x_2 = 1$, $x_4 = 0$', example: '$(-3, 1, 0, 0)$' },
+        { step: 'Set $x_2 = 0$, $x_4 = 1$', example: '$(3, 0, -1, 1)$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    nullBasisSteps,
+    dimensionAccountingBars,
+    runningExampleSubspaces,
     pitfallData,
     fundamentalSpacesTree,
     demoUnits,
@@ -4007,7 +4091,7 @@ return {
 }
    }
 
-export default function FundamentalSubspacesPage({ pitfallData,fundamentalSpacesTree, seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FundamentalSubspacesPage({ nullBasisSteps, dimensionAccountingBars, runningExampleSubspaces, pitfallData,fundamentalSpacesTree, seoData, sectionsContent, introContent, obj7Table, subspacesByType, fourSubspaceCard, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4092,6 +4176,7 @@ $$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the four fundamental subspaces](!/linear-algebra/vector-spaces/methods/fundamental-subspaces) →@`,
         ]
     },
     {
@@ -4146,6 +4231,11 @@ $$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
           sectionsContent.obj4.content,
                   <div key={'unit-nullspace'} dangerouslySetInnerHTML={{ __html: demoUnits.nullspace }} />,
           `A matrix with no free columns has only the zero vector in its null space, which for a square matrix is the invertible case seen from this side.`,
+          <DiagramFrame key={'obj4-procedure'} id="null-space-basis-steps" title="A null space basis, step by step"
+            source="/linear-algebra/vector-spaces/fundamental-spaces" related={false}
+            before={"The running example of this page, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={nullBasisSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -4164,6 +4254,17 @@ $$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-dimension-ledger'}
+            id="dimension-accounting-bars"
+            title="Where the dimensions go in the running example"
+            source="/linear-algebra/vector-spaces/fundamental-spaces"
+            before={"Both counts for the running example: each bar is one side of the map, cut into its two subspaces."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <DimensionLedger data={dimensionAccountingBars} theme="navy" variant="pair" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -4172,11 +4273,15 @@ $$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-fundamental-spaces-orthogonal-complements-matrix'}
+            id="fundamental-spaces-orthogonal-complements-matrix"
+            title="Orthogonal Complements"
+            source="/linear-algebra/vector-spaces/fundamental-spaces"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
                   <div key={'unit-orth'} dangerouslySetInnerHTML={{ __html: demoUnits.orth }} />,
           `These two right angles are what later let any vector be decomposed into a solvable part and an unreachable one.`,
         ]
@@ -4187,6 +4292,17 @@ $$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-subspace-map'}
+            id="four-subspace-map"
+            title="The four subspaces of the running example"
+            source="/linear-algebra/vector-spaces/fundamental-spaces"
+            before={"The picture described above, drawn for the running example: the domain on the left, the codomain on the right, each split into its two subspaces."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FourSubspaceMap data={runningExampleSubspaces} theme="navy" variant="strang" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -4237,6 +4353,14 @@ $$\\dim(\\text{Row}\\,A) = \\dim(\\text{Col}\\,A) = \\text{rank}(A)$$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

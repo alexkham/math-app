@@ -1533,6 +1533,8 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1553,9 +1555,39 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Special Angles on the Axes"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Position","features":[{"id":"c1","name":"Example","type":"text"},{"id":"c2","name":"Argument (radians)","type":"text"},{"id":"c3","name":"Argument (degrees)","type":"text"}],"items":[{"id":"r1","name":"Positive real axis","values":{"c1":"z = a, a > 0","c2":"0","c3":"0°"}},{"id":"r2","name":"Positive imaginary axis","values":{"c1":"z = bi, b > 0","c2":"π ⁄ 2","c3":"90°"}},{"id":"r3","name":"Negative real axis","values":{"c1":"z = a, a < 0","c2":"π","c3":"180°"}},{"id":"r4","name":"Negative imaginary axis","values":{"c1":"z = bi, b < 0","c2":"−π ⁄ 2 (or 3π ⁄ 2)","c3":"−90° (or 270°)"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Quadrant Considerations"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Quadrant","features":[{"id":"c1","name":"Signs of (a, b)","type":"text"},{"id":"c2","name":"Argument formula (principal arg in (−π, π])","type":"text"}],"items":[{"id":"r1","name":"I","values":{"c1":"a > 0, b > 0","c2":"θ = arctan(b ⁄ a)"}},{"id":"r2","name":"II","values":{"c1":"a < 0, b > 0","c2":"θ = arctan(b ⁄ a) + π"}},{"id":"r3","name":"III","values":{"c1":"a < 0, b < 0","c2":"θ = arctan(b ⁄ a) − π"}},{"id":"r4","name":"IV","values":{"c1":"a > 0, b < 0","c2":"θ = arctan(b ⁄ a) (result is negative)"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Convert a complex number to polar form", href: "/complex-numbers/methods/rectangular-to-polar", desc: "Find the modulus $r$, find the argument from $\\tan\\theta = \\frac{b}{a}$ with a quadrant check, and write $r(\\cos\\theta + i\\sin\\theta)$.", level: "composite", here: "#8" },
+      { skill: "Convert a complex number from polar to rectangular form", href: "/complex-numbers/methods/polar-to-rectangular", desc: "Evaluate $\\cos\\theta$ and $\\sin\\theta$, multiply both by $r$, and write $a + bi$.", level: "composite", here: "#9" },
+      { skill: "Multiply and divide complex numbers in polar form", href: "/complex-numbers/methods/multiply-divide-polar", desc: "Multiply or divide the moduli, add or subtract the arguments, and bring the angle back into $(-\\pi, \\pi]$.", level: "composite", here: "#10" },
+    ] },
+    { title: "More complex number methods", items: [
+      { skill: "Choose the right form of a complex number", href: "/complex-numbers/methods/which-form", desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: "strategy" },
+      { skill: "Write a complex number in exponential form", href: "/complex-numbers/methods/exponential-form", desc: "Find $r$ and $\\theta$ in radians and write $re^{i\\theta}$; go back with Euler's formula $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$.", level: "composite" },
+      { skill: "Raise a complex number to a power with De Moivre's theorem", href: "/complex-numbers/methods/de-moivre-powers", desc: "Write the number in polar form, raise the modulus to the power, multiply the angle by it, and convert back.", level: "composite" },
+      { skill: "Multiply complex numbers", href: "/complex-numbers/methods/multiply-complex", desc: "Expand the brackets term by term, replace $i^2$ with $-1$, and collect the real and imaginary parts.", level: "composite" },
+    ] },
+    { title: "Trigonometry methods", items: [
+      { skill: "Find trig values with the unit circle", href: "/trigonometry/methods/unit-circle-values", desc: "Any standard angle: reduce it, find the quadrant and reference angle, attach the sign.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2543,7 +2575,9 @@ Step 3: $z = 3\\sqrt{2}\\,\\text{cis}\\left(-\\frac{3\\pi}{4}\\right)$]@
 For $z = -1 + \\sqrt{3}i$, taking $\\theta = \\arctan(-\\sqrt{3}) = -\\frac{\\pi}{3}$ gives $2\\,\\text{cis}\\left(-\\frac{\\pi}{3}\\right) = 1 - \\sqrt{3}i$, a different point. Here $a < 0$ and $b > 0$, so $\\theta = -\\frac{\\pi}{3} + \\pi = \\frac{2\\pi}{3}$ and $z = 2\\,\\text{cis}\\,\\frac{2\\pi}{3}$.
 [Read more](!#pitfall-skipping-the-quadrant-check)]@
 
-In both examples the modulus comes straight from the formula, and the real work is in Step 2. The ratio $\\frac{b}{a}$ fixes the tangent of the angle, while the signs of $a$ and $b$ fix the quadrant the angle lies in. Example 1 sits in the first quadrant, Example 2 in the third.`,
+In both examples the modulus comes straight from the formula, and the real work is in Step 2. The ratio $\\frac{b}{a}$ fixes the tangent of the angle, while the signs of $a$ and $b$ fix the quadrant the angle lies in. Example 1 sits in the first quadrant, Example 2 in the third.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to convert a complex number to polar form](!/complex-numbers/methods/rectangular-to-polar) →@`,
   before: ``,
   after: ``,
   link: '',
@@ -2595,7 +2629,9 @@ The three examples use both angle units: the first angle is given in degrees, th
 
 This direction needs no quadrant check. Cosine and sine already carry the right signs: in Example 3 the negative real part $-\\sqrt{3}$ comes out of $\\cos\\frac{5\\pi}{6}$ by itself and places the point in the second quadrant.
 
-@academic[punchline:From angle to coordinates is plain evaluation; only the trip from coordinates back to an angle needs care with quadrants.]@`,
+@academic[punchline:From angle to coordinates is plain evaluation; only the trip from coordinates back to an angle needs care with quadrants.]@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to convert from polar to rectangular form](!/complex-numbers/methods/polar-to-rectangular) →@`,
   before: ``,
   after: ``,
   link: '',
@@ -2648,7 +2684,9 @@ Let $z_1 = 10\\,\\text{cis}\\,\\frac{2\\pi}{3}$ and $z_2 = 2\\,\\text{cis}\\,\\f
 
 $$\\frac{z_1}{z_2} = \\frac{10}{2}\\,\\text{cis}\\left(\\frac{2\\pi}{3} - \\frac{\\pi}{6}\\right) = 5\\,\\text{cis}\\,\\frac{\\pi}{2}$$
 
-These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.]@`,
+These formulas extend naturally to [De Moivre's theorem](!/complex-numbers/demoivre-theorem), which handles powers and roots with equal elegance.]@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to multiply and divide in polar form](!/complex-numbers/methods/multiply-divide-polar) →@`,
   before: ``,
   after: `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[De Moivre's Theorem](!/complex-numbers/demoivre-theorem) →@`,
   link: '',
@@ -2939,8 +2977,36 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Algebraic to trigonometric, step by step (obj8).
+  const toTrigonometricSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$z = 1 + \\sqrt{3}i$',
+      rows: [
+        { step: 'Calculate the modulus', stepSub: '$r = \\sqrt{a^2 + b^2}$', example: '$r = \\sqrt{1 + 3} = 2$' },
+        { step: 'Determine the argument', stepSub: '$\\tan\\theta = \\frac{b}{a}$, adjusted for the quadrant', example: '$\\tan\\theta = \\sqrt{3}$, first quadrant: $\\theta = \\frac{\\pi}{3}$' },
+        { step: 'Write the result', example: '$z = 2\\,\\text{cis}\\,\\frac{\\pi}{3}$' },
+      ],
+    },
+  };
+
+  // Procedure rollout 2026-11-14: Trigonometric to algebraic, step by step (obj9).
+  const toAlgebraicSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$z = 4\\,\\text{cis}\\,60°$',
+      rows: [
+        { step: 'Calculate the real part', stepSub: '$a = r\\cos\\theta$', example: '$a = 4 \\cdot \\frac{1}{2} = 2$' },
+        { step: 'Calculate the imaginary part', stepSub: '$b = r\\sin\\theta$', example: '$b = 4 \\cdot \\frac{\\sqrt{3}}{2} = 2\\sqrt{3}$' },
+        { step: 'Write the result as $a + bi$', example: '$z = 2 + 2\\sqrt{3}i$' },
+      ],
+    },
+  };
+
   return {
   props:{
+    toAlgebraicSteps,
+    toTrigonometricSteps,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2963,7 +3029,7 @@ const schemas = {
 }
    }
 
-export default function TrigoFormPage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function TrigoFormPage({ toAlgebraicSteps, toTrigonometricSteps, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj5Table, obj6Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3109,11 +3175,15 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-trigonometric-form-quadrant-considerations-matrix'}
+            id="trigonometric-form-quadrant-considerations-matrix"
+            title="Quadrant Considerations"
+            source="/complex-numbers/trigonometric-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-quadrant'} dangerouslySetInnerHTML={{ __html: demoUnits.quadrant }} />,
           `The rule is simple: compute the reference angle, then place it in the quadrant the signs of a and b dictate.`,
         ]
@@ -3124,11 +3194,15 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-trigonometric-form-special-angles-axes-matrix'}
+            id="trigonometric-form-special-angles-axes-matrix"
+            title="Special Angles on the Axes"
+            source="/complex-numbers/trigonometric-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3169,6 +3243,15 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-procedure'}
+            id="algebraic-to-trigonometric-steps"
+            title="Algebraic to trigonometric, step by step"
+            source="/complex-numbers/trigonometric-form"
+            before={"The three steps on Example 1. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={toTrigonometricSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3177,6 +3260,15 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-procedure'}
+            id="trigonometric-to-algebraic-steps"
+            title="Trigonometric to algebraic, step by step"
+            source="/complex-numbers/trigonometric-form"
+            before={"The three steps on Example 1. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={toAlgebraicSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3281,6 +3373,14 @@ Reading $2\\left(\\cos\\frac{\\pi}{3} - i\\sin\\frac{\\pi}{3}\\right)$ as argume
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

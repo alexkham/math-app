@@ -695,6 +695,9 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 2 tables (obj6 aggregation, obj10 summary capstone)
+import TestSelector from '@/app/components/infographics/linear-algebra/TestSelector'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -712,7 +715,31 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table capstoneTable ("Comparing Fractions at a Glance"); converted from the table's own cells.
+const fm_capstoneTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Concept","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Same-denominator rule","values":{"c1":"larger numerator wins when denominators match","c2":"5⁄8 > 3⁄8"}},{"id":"r2","name":"Same-numerator rule (inverse)","values":{"c1":"smaller denominator wins when numerators match","c2":"3⁄4 > 3⁄7"}},{"id":"r3","name":"Why bigger denom = smaller piece","values":{"c1":"more divisions of the whole produce smaller pieces","c2":"1⁄100 < 1⁄2"}},{"id":"r4","name":"Default reliable method","values":{"c1":"rewrite with a common denominator, then compare numerators — works in every case","c2":"3⁄4 vs 5⁄6 → 9⁄12 vs 10⁄12"}},{"id":"r5","name":"Cross-mult shortcut","values":{"c1":"for a⁄b vs c⁄d (b, d > 0), the larger of a×d and b×c stays with its own fraction","c2":"3⁄7 vs 4⁄9 → 27 < 28 → 4⁄9 > 3⁄7"}},{"id":"r6","name":"Equality from cross-mult","values":{"c1":"equal cross products mean equivalent fractions","c2":"3⁄4 = 9⁄12 since 36 = 36"}},{"id":"r7","name":"Benchmark sandwich","values":{"c1":"straddling 0, ½, or 1 settles the comparison with no arithmetic","c2":"3⁄8 < ½ < 5⁄9"}},{"id":"r8","name":"[Mixed numbers](!/arithmetic/fractions/mixed-numbers) — wholes first","values":{"c1":"larger whole part wins; ties are broken by the fractional part","c2":"5 1⁄8 > 4 7⁄8"}},{"id":"r9","name":"Ordering many fractions","values":{"c1":"rewrite all with the LCD, then sort by numerators","c2":"2⁄3, 3⁄4, 5⁄6 → 8⁄12, 9⁄12, 10⁄12"}},{"id":"r10","name":"Number line","values":{"c1":"further right means larger; equivalent fractions occupy the same point","c2":"1⁄4 < 1⁄3 < 1⁄2"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Decimal Conversion Method"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"When to use","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Same denominator","values":{"c1":"denominators already match — compare numerators directly","c2":"5⁄8 vs 3⁄8 → 5⁄8 wins"}},{"id":"r2","name":"Same numerator","values":{"c1":"numerators match — smaller denominator wins (larger pieces)","c2":"3⁄4 vs 3⁄7 → 3⁄4 wins"}},{"id":"r3","name":"[Common denominator](!/arithmetic/fractions/equivalent)","values":{"c1":"default reliable method when denominators differ","c2":"3⁄4 vs 5⁄6 → 9⁄12 vs 10⁄12 → 5⁄6 wins"}},{"id":"r4","name":"Cross-multiplication","values":{"c1":"quick shortcut for two fractions; skips finding a common denominator","c2":"3⁄7 vs 4⁄9 → 27 < 28 → 4⁄9 wins"}},{"id":"r5","name":"Benchmark fractions","values":{"c1":"one fraction is clearly below a benchmark such as ½ or 1 while the other is clearly above it","c2":"3⁄8 < ½ < 5⁄9 → 5⁄9 wins"}},{"id":"r6","name":"Decimal conversion","values":{"c1":"calculator available, or fractions convert to clean decimals","c2":"5⁄8 = 0.625 vs 7⁄11 ≈ 0.636 → 7⁄11 wins"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Compare fractions", href: "/arithmetic/methods/compare-fractions", desc: "Decide which fraction is larger: compare numerators over a common denominator, or cross-multiply, $\\frac{a}{b} > \\frac{c}{d}$ when $ad > bc$.", level: "composite", here: "#3" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Add and subtract fractions", href: "/arithmetic/methods/add-subtract-fractions", desc: "Rewrite the fractions over the least common denominator, add or subtract the numerators, keep the denominator, and simplify.", level: "composite" },
+      { skill: "Find the least common multiple", href: "/arithmetic/methods/lcm", desc: "Find the smallest number that two or more numbers divide: take every prime with its larger exponent, or use $\\operatorname{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$.", level: "composite" },
+      { skill: "Work with mixed numbers", href: "/arithmetic/methods/mixed-numbers", desc: "Convert between mixed numbers and improper fractions, $w\\tfrac{a}{b} = \\frac{wb + a}{b}$, and use the conversion to multiply and divide them.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1357,8 +1384,70 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Comparing with a common denominator (obj3).
+  const compareCommonSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\frac{3}{4}$ and $\\frac{5}{6}$',
+      rows: [
+        { step: 'Find a common denominator', example: 'the LCM of $4$ and $6$ is $12$' },
+        { step: 'Convert both fractions to it', example: '$\\frac{3}{4} = \\frac{9}{12}$ and $\\frac{5}{6} = \\frac{10}{12}$' },
+        { step: 'Compare the numerators', example: '$10 > 9$' },
+        { step: 'State the result for the original fractions', example: '$\\frac{5}{6} > \\frac{3}{4}$' },
+      ],
+    },
+  };
+
+  // TestSelector 2026-11-14: Which comparison method to use (obj4).
+  const comparingMethodSelector = {
+    question: 'Which method compares two fractions?',
+    intro: 'Look at the two fractions first. If nothing matches, follow the branch that fits them.',
+    shortcutsLabel: 'Check first',
+    shortcuts: [
+      { when: 'The denominators are the same', then: 'The larger numerator gives the larger fraction.' },
+      { when: 'The numerators are the same', then: 'The smaller denominator gives the larger fraction.' },
+    ],
+    branches: [
+      { condition: 'The fractions fall on opposite sides of a benchmark such as $\\frac{1}{2}$',
+        test: {
+          name: 'Benchmark fractions',
+          doThis: 'Place each fraction against $0$, $\\frac{1}{2}$ or $1$.',
+          needs: 'No calculation',
+          verdict: 'The fraction above the benchmark is the larger one.',
+          limit: 'Settles nothing when both fractions lie on the same side of the benchmark.',
+        } },
+      { condition: 'A reliable method for any pair',
+        test: {
+          name: 'Common denominator',
+          doThis: 'Convert both fractions to a common denominator and compare the numerators.',
+          why: 'Equal denominators make every piece the same size, so the count alone decides.',
+          needs: 'A common multiple of the denominators',
+          verdict: 'The larger new numerator gives the larger fraction.',
+          limit: 'The numerators have to be scaled together with the denominators.',
+        } },
+      { condition: 'A quick check without a common denominator',
+        test: {
+          name: 'Cross-multiplication',
+          doThis: 'Compute $a \\times d$ and $b \\times c$ for $\\frac{a}{b}$ and $\\frac{c}{d}$.',
+          why: 'The two cross products are the numerators over the denominator $b \\times d$.',
+          needs: 'Positive denominators',
+          verdict: 'The larger cross product marks the larger fraction.',
+          limit: 'Each product stays with the fraction whose numerator it uses.',
+        } },
+      { condition: 'A calculator is at hand, or the decimals are simple',
+        test: {
+          name: 'Decimal conversion',
+          doThis: 'Divide each numerator by its denominator and compare the decimals.',
+          verdict: 'The larger decimal gives the larger fraction.',
+          limit: 'Cumbersome for long repeating decimals, and decimals are compared place by place: $0.625 < 0.64$.',
+        } },
+    ],
+  };
+
 return {
   props: {
+    comparingMethodSelector,
+    compareCommonSteps,
     pitfallData,
     sectionsContent,
     introContent,
@@ -1380,7 +1469,7 @@ return {
    }
 
 
-export default function ComparingPage({ pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ComparingPage({ comparingMethodSelector, compareCommonSteps, pitfallData,seoData, sectionsContent, introContent, obj6Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1479,8 +1568,18 @@ $$\\frac{5}{8} > \\frac{3}{8}$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-procedure'}
+            id="compare-common-denominator-steps"
+            title="Comparing with a common denominator"
+            source="/arithmetic/fractions/comparing"
+            before={"The example of this section, one step at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={compareCommonSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-cmpCommonDen'} dangerouslySetInnerHTML={{ __html: demoUnits.cmpCommonDen }} />,
           `Any common multiple works; 24 would give 18/24 and 20/24, the same order.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compare fractions](!/arithmetic/methods/compare-fractions) →@`,
         ]
     },
     {
@@ -1489,6 +1588,17 @@ $$\\frac{5}{8} > \\frac{3}{8}$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-test-selector'}
+            id="comparing-method-selector"
+            title="Which comparison method to use"
+            source="/arithmetic/fractions/comparing"
+            before={"The methods of this page in one place: two checks by inspection first, then the method that fits the pair."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <TestSelector data={comparingMethodSelector} theme="navy" variant="tree" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -1507,8 +1617,15 @@ $$\\frac{5}{8} > \\frac{3}{8}$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-comparing-decimal-conversion-method-matrix'}
+            id="comparing-decimal-conversion-method-matrix"
+            title="Decimal Conversion Method"
+            source="/arithmetic/fractions/comparing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1541,8 +1658,15 @@ $$\\frac{5}{8} > \\frac{3}{8}$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-comparing-comparing-fractions-at-glance-matrix'}
+            id="comparing-comparing-fractions-at-glance-matrix"
+            title="Comparing Fractions at a Glance"
+            source="/arithmetic/fractions/comparing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_capstoneTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1560,6 +1684,14 @@ $$\\frac{5}{8} > \\frac{3}{8}$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

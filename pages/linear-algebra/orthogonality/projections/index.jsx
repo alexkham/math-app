@@ -1840,6 +1840,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj5 aggregation, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1854,6 +1856,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -1865,6 +1868,32 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Where Projections Appear"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Where projection appears","features":[{"id":"c1","name":"What is being projected","type":"text"},{"id":"c2","name":"What the projection gives","type":"text"}],"items":[{"id":"r1","name":"Component along an axis","values":{"c1":"vector b onto a single direction q","c2":"(q · b) q — the part of b along q"}},{"id":"r2","name":"Best approximation in a subspace","values":{"c1":"vector b onto subspace W","c2":"the w ∈ W minimizing ‖b − w‖"}},{"id":"r3","name":"Orthogonal decomposition of ℝⁿ","values":{"c1":"every b onto W and onto W$^{⊥}$","c2":"unique b = Pb + (I − P) b"}},{"id":"r4","name":"[Least squares](!/linear-algebra/orthogonality/least-squares)","values":{"c1":"b onto Col(A) when A x = b is inconsistent","c2":"A x̂ = Pb; residual ⊥ Col(A); normal equations AᵀA x̂ = Aᵀ b"}},{"id":"r5","name":"[Gram–Schmidt](!/linear-algebra/orthogonality/gram-schmidt) orthogonalization","values":{"c1":"each new basis vector onto the span of previous ones","c2":"perpendicular remainder becomes the next orthogonal basis vector"}},{"id":"r6","name":"[QR decomposition](!/linear-algebra/decompositions/qr)","values":{"c1":"columns of A successively onto previous orthonormal q's","c2":"A = QR with Q orthonormal columns and R upper triangular"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("The Projection Matrix"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property of P","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Why it holds / what it means","type":"text"}],"items":[{"id":"r1","name":"Idempotent","values":{"c1":"P² = P","c2":"projecting a second time changes nothing; vectors already in W are fixed"}},{"id":"r2","name":"Symmetric","values":{"c1":"Pᵀ = P","c2":"makes the projection orthogonal (residual ⊥ W); distinguishes from oblique projections, which satisfy P² = P but Pᵀ ≠ P"}},{"id":"r3","name":"Complementary projection","values":{"c1":"I − P projects onto W$^{⊥}$","c2":"I − P is also symmetric and idempotent"}},{"id":"r4","name":"Decomposition of every b","values":{"c1":"b = Pb + (I − P) b","c2":"unique split into a W-component and a W$^{⊥}$-component"}},{"id":"r5","name":"[Eigenvalues](!/linear-algebra/eigen)","values":{"c1":"only 0 and 1","c2":"vectors in W are eigenvectors for λ = 1; vectors in W$^{⊥}$ for λ = 0"}},{"id":"r6","name":"Rank","values":{"c1":"rank(P) = dim(W)","c2":"number of independent directions preserved"}},{"id":"r7","name":"[Trace](!/linear-algebra/matrix/trace)","values":{"c1":"tr(P) = dim(W)","c2":"trace = sum of eigenvalues = number of eigenvalues equal to 1"}},{"id":"r8","name":"Orthonormal basis simplification","values":{"c1":"P = QQᵀ when A = Q has Qᵀ Q = I","c2":"the (AᵀA)⁻¹ factor disappears because QᵀQ = I"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find an orthogonal projection", href: "/linear-algebra/orthogonality/methods/orthogonal-projection", desc: "Project a vector onto a line, a plane or a subspace; split it into a part inside and a part perpendicular.", level: "composite", here: "#3" },
+    ] },
+    { title: "More orthogonality methods", items: [
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite" },
+      { skill: "Solve a least-squares problem", href: "/linear-algebra/orthogonality/methods/least-squares", desc: "When $A\\mathbf{x} = \\mathbf{b}$ has no solution, solve the normal equations for the closest fit.", level: "composite" },
+      { skill: "Check if a set is orthogonal or orthonormal", href: "/linear-algebra/orthogonality/methods/orthogonal-set-check", desc: "Dot every pair: all zero means orthogonal; unit lengths as well means orthonormal.", level: "composite" },
+    ] },
+    { title: "Vector methods", items: [
+      { skill: "Project one vector onto another", href: "/linear-algebra/vectors/methods/vector-projection", desc: "Scale the target vector by the dot product over its squared length; the rest is perpendicular.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/orthogonality/methods", label: "All orthogonality methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2650,8 +2679,20 @@ $$\\frac{4}{2}(1, 0, 1) + \\frac{5}{2}(0, 1, 1) = \\left(2, \\frac{5}{2}, \\frac
     conclusion: { text: '$\\hat{\\mathbf{b}} = A(A^TA)^{-1}A^T\\mathbf{b}$' },
   };
 
+  // MatrixOperation 2026-11-14: The product of A transpose and A (obj8).
+  const projectionGramStrip = {
+    operation: 'multiply',
+    A: [[1, 0, 1], [0, 1, 1]],
+    B: [[1, 0], [0, 1], [1, 1]],
+    nameA: 'Aᵀ',
+    nameB: 'A',
+    nameC: 'AᵀA',
+    intro: 'A $2 \\times 3$ matrix times a $3 \\times 2$ matrix gives the $2 \\times 2$ matrix $A^TA$. Each entry is the dot product of two columns of $A$.',
+  };
+
 return {
   props:{
+    projectionGramStrip,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -2677,7 +2718,7 @@ return {
    }
 
 // export default function ProjectionsPage({seoData,sectionsContent , introContent}) {
-export default function ProjectionsPage({ proofStepsData, formulaSummaryData, pitfallData,
+export default function ProjectionsPage({ projectionGramStrip, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -2813,6 +2854,7 @@ Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find an orthogonal projection](!/linear-algebra/orthogonality/methods/orthogonal-projection) →@`,
         ]
     },
     {
@@ -2850,11 +2892,15 @@ Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-projections-projection-matrix-matrix'}
+            id="projections-projection-matrix-matrix"
+            title="The Projection Matrix"
+            source="/linear-algebra/orthogonality/projections"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-matrix'} dangerouslySetInnerHTML={{ __html: demoUnits.matrix }} />,
           `A projection matrix is therefore recognisable by squaring to itself, without any need to know which subspace it projects onto.`,
         ]
@@ -2890,6 +2936,17 @@ Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-matrix-operation'}
+            id="projection-ata-strip"
+            title="The product of A transpose and A"
+            source="/linear-algebra/orthogonality/projections"
+            before={"The first product of the worked example, written out."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <MatrixOperation data={projectionGramStrip} theme="navy" variant="strip" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -2898,11 +2955,15 @@ Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-projections-summary-where-projections-appear-matrix'}
+            id="projections-summary-where-projections-appear-matrix"
+            title="Summary: Where Projections Appear"
+            source="/linear-algebra/orthogonality/projections"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2938,6 +2999,14 @@ Dividing $\\mathbf{a} \\cdot \\mathbf{b} = 7$ by $\\|\\mathbf{a}\\| = \\sqrt{3}$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

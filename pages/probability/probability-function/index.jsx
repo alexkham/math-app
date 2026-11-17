@@ -708,6 +708,7 @@
 
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (ways aggregation, pdf_pmf comparison, use aggregation, summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -727,10 +728,50 @@ import discretePmfDiagrams from '@/app/components/visualizations/probability/dis
 import continuousPdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/continuousPdfDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_pfQuestions = {
+  center: { name: 'Probability function', sub: 'a diagnostic tool' },
+  options: { bullets: false },
+  quadrants: [
+    { title: 'Likelihood', items: [ 'Which specific outcomes are most frequent?' ] },
+    { title: 'Range', items: [ 'What is the exact probability that the result falls between $a$ and $b$?' ] },
+    { title: 'Shape', items: [ 'Is the randomness symmetric, or does it lean heavily in one direction (skewed)?' ] },
+    { title: 'Extremes', items: [ 'How likely are rare, extreme events (the "tails" of the distribution)?' ] }
+  ]
+};
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_probabilityFunctionPath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"beforeLabel":"Describes","before":[{"name":"Random Variables","href":"/probability/random-variables","why":"the PF describes how a random variable behaves"}],"target":{"kicker":"This page","name":"Probability function","text":"The link that connects random variables, distributions, cumulative functions and probability models."},"after":[{"name":"Distributions","href":"/probability/distributions","why":"every distribution is built from its probability function"},{"name":"CDF","href":"/probability/cdf","why":"sums the PMF or integrates the PDF"},{"name":"Probability Models","href":"/probability/models","why":"sample space, events and the probability function together"},{"name":"Real-world problems","why":"simulations, decisions and inference start from the PF"}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table useTable ("How We Use a Probability Function"); converted from the table's own cells.
+const fm_useTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Use","features":[{"id":"c1","name":"What it does","type":"text"},{"id":"c2","name":"How it works","type":"text"}],"items":[{"id":"r1","name":"Finding the probability of an event","values":{"c1":"gives a numerical chance to a specific outcome or range","c2":"sum p(x) over event values (discrete) or integrate f(x) over an interval (continuous)"}},{"id":"r2","name":"Understanding distribution shape","values":{"c1":"reveals where probability is concentrated, spread, or skewed","c2":"inspect peaks, clusters, and tails of the function"}},{"id":"r3","name":"Computing summary measures","values":{"c1":"quantifies long-run average and spread","c2":"[expected value](!/probability/expected-value) and [variance](!/probability/variance) are computed using p(x) or f(x)"}},{"id":"r4","name":"Predictions and decisions","values":{"c1":"models real processes; estimates risks and rare-event probabilities","c2":"use the PF in simulations, forecasting, and probability-based decisions"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table pdfPmfTable ("The Two Forms of a Probability Function"); converted from the table's own cells.
+const fm_pdfPmfTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Attribute","features":[{"id":"c1","name":"PMF (discrete)","type":"text"},{"id":"c2","name":"PDF (continuous)","type":"text"}],"items":[{"id":"r1","name":"Notation","values":{"c1":"p(x) or P(X = x)","c2":"f(x)"}},{"id":"r2","name":"What it gives","values":{"c1":"the probability that X equals x","c2":"the density of probability around x (not a probability)"}},{"id":"r3","name":"Probability that X = x exactly","values":{"c1":"positive whenever x is a possible value","c2":"always zero"}},{"id":"r4","name":"Probability over an interval [a, b]","values":{"c1":"&Sigma; p(x) for x in [a, b]","c2":"∫ₐ$^{b}$ f(x) dx — the area under the curve"}},{"id":"r5","name":"Typical visual","values":{"c1":"impulse plot — bars or spikes at each value","c2":"smooth curve over the real line"}},{"id":"r6","name":"Example random variables","values":{"c1":"dice rolls, coin tosses, counts, number of arrivals","c2":"waiting time, height, weight, temperature"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table waysTable ("Ways to Figure Out the Probability Function"); converted from the table's own cells.
+const fm_waysTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"When it applies","type":"text"},{"id":"c2","name":"What it produces","type":"text"}],"items":[{"id":"r1","name":"Symmetry","values":{"c1":"fair models — all outcomes equally likely (coin, die, deck)","c2":"equal probability assigned to each outcome"}},{"id":"r2","name":"Counting ([combinatorics](!/probability/combinatorics))","values":{"c1":"structured equally-likely outcomes (draws, selections, arrangements)","c2":"favorable outcomes ÷ total outcomes"}},{"id":"r3","name":"Standard distribution model","values":{"c1":"situation fits a known pattern (binomial, Poisson, normal, exponential, …)","c2":"a named PMF or PDF with parameters fit to the problem"}},{"id":"r4","name":"Empirical estimation","values":{"c1":"observations or data available; no theoretical model assumed","c2":"empirical PMF from frequencies, or histogram / density estimate from samples"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Random variable methods", items: [
+      { skill: "Find the CDF from a PMF", href: "/probability/random-variables/methods/pmf-to-cdf", desc: "Sort the values, keep a running total of the probabilities, and write the step function.", level: "composite" },
+      { skill: "Find the CDF from a PDF", href: "/probability/random-variables/methods/pdf-to-cdf", desc: "Integrate the density from the left end of the support up to $x$, and add the flat pieces outside.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1519,8 +1560,15 @@ export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree,
         link:'',
         content:[
           sectionsContent.ways.content,
-          <div key={'ways-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: waysTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-probability-function-ways-figure-out-matrix'}
+            id="probability-function-ways-figure-out-matrix"
+            title="Ways to Figure Out the Probability Function"
+            source="/probability/probability-function"
+            related={false}
+          >
+            <FeatureMatrix data={fm_waysTable} />
+          </DiagramFrame>,
           `@academic[punchline:A probability function is never handed to us: symmetry, counting, a standard model or data has to supply it.]@`,
         ]
     },
@@ -1531,8 +1579,15 @@ export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree,
         link:'',
         content:[
           sectionsContent.pdf_pmf.content,
-          <div key={'pdf-pmf-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: pdfPmfTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-probability-function-two-forms-probability-matrix'}
+            id="probability-function-two-forms-probability-matrix"
+            title="The Two Forms of a Probability Function"
+            source="/probability/probability-function"
+            related={false}
+          >
+            <FeatureMatrix data={fm_pdfPmfTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'pdf_pmf-diagram'}
             id="pmf-pdf-tree"
@@ -1609,8 +1664,15 @@ export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree,
         link:'',
         content:[
           sectionsContent.use.content,
-          <div key={'use-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: useTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-probability-function-how-we-use-matrix'}
+            id="probability-function-how-we-use-matrix"
+            title="How We Use a Probability Function"
+            source="/probability/probability-function"
+            related={false}
+          >
+            <FeatureMatrix data={fm_useTable} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1619,7 +1681,18 @@ export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree,
         id: 'questions',
         title: sectionsContent.questions.title,
         link: '',
-        content: [ sectionsContent.questions.content ]
+        content: [
+          sectionsContent.questions.content,
+          <DiagramFrame
+            key={'four-sides-probability-function-questions'}
+            id="probability-function-questions"
+            title="What Questions It Answers"
+            source="/probability/probability-function"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_pfQuestions} />
+          </DiagramFrame>,
+        ]
     },
     {
         id: 'why',
@@ -1633,6 +1706,15 @@ export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree,
   link:'',
   content:[ 
     sectionsContent.connections.content,
+    <DiagramFrame
+      key={'concept-map-probability-function-connections'}
+      id="probability-function-connections"
+      title="Connection to Other Probability Concepts"
+      source="/probability/probability-function"
+      related={false}
+    >
+      <ConceptMap data={cm_probabilityFunctionPath} variant="path" />
+    </DiagramFrame>,
    ]
 },
     {
@@ -1660,6 +1742,14 @@ export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

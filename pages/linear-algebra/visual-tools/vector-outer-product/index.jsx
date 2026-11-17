@@ -12,6 +12,7 @@ import ExplanationDetails from '@/app/components/ExplanationDetails'
 import ToolDemoPlayer from '@/app/components/demo-player/ToolDemoPlayer'
 import { processContent } from '@/app/utils/contentProcessor'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
+import MatrixMultiplicationOrderVisualizer from '@/app/components/matrix-multiplication/order-visualiser/MatrixMultiplicationVisualizer'
 
 
 export async function getStaticProps(){
@@ -50,7 +51,7 @@ export async function getStaticProps(){
 
 [Tensor product](!/linear-algebra/definitions#outer_product) — the general construction of which the outer product of two vectors is the simplest case, written $\\mathbf{u} \\otimes \\mathbf{v}$.
 
-[Column times row](!/linear-algebra/matrix/operations#7) — the matrix-multiplication reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner [dimension](!/linear-algebra/definitions#dimension) $1$.`,
+[Column times row](!/linear-algebra/matrix/operations#7) — the [matrix-multiplication](!/linear-algebra/matrix/operations#which-sizes-fit) reading: an $m \\times 1$ matrix times a $1 \\times n$ matrix is $m \\times n$, with inner [dimension](!/linear-algebra/definitions#dimension) $1$.`,
       before: ``,
       after: ``,
       link: '',
@@ -116,9 +117,9 @@ It is ordinary [matrix multiplication](!/linear-algebra/formulas#matrix_multipli
 
 The inner product is the same two vectors multiplied in the other order: $\\mathbf{v}^T\\mathbf{u}$ is $1 \\times n$ times $n \\times 1$, a $1 \\times 1$ matrix, a number. Outer and inner are the two ways a column and a row can meet.
 
-Because every column of $\\mathbf{u}\\mathbf{v}^T$ is a multiple of $\\mathbf{u}$, the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) is the line through $\\mathbf{u}$ and the rank is $1$ whenever both vectors are non-zero. For the general theory of rank, see the [matrix rank theory page](!/linear-algebra/matrix/rank).`,
+Set the sizes below to see both cases: a column times a row, and a row times a column.`,
       before: ``,
-      after: ``,
+      after: `Because every column of $\\mathbf{u}\\mathbf{v}^T$ is a multiple of $\\mathbf{u}$, the [column space](!/linear-algebra/vector-spaces/fundamental-spaces#2) is the line through $\\mathbf{u}$ and the rank is $1$ whenever both vectors are non-zero. For the general theory of rank, see the [matrix rank theory page](!/linear-algebra/matrix/rank).`,
       link: '',
     },
     obj6: {
@@ -609,6 +610,19 @@ export default function OuterProductVisualizer({ instructions, demos,seoData, se
   const withDemo = (row) => ({ ...row, content: [demo(row.id), ...row.content] })
 
 
+  const sizesRow = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key="sizes-tool" style={{ margin: '18px 0' }}>
+        <MatrixMultiplicationOrderVisualizer showHeader={false} initialSizes={[3, 1, 1, 3]} />
+      </div>,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const plain = (obj, id) => ({
     id,
     title: sectionsContent[obj].title,
@@ -638,7 +652,7 @@ export default function OuterProductVisualizer({ instructions, demos,seoData, se
     stateRow('obj15', 'the-completed-product', 'done'),
     withDemo(plain('obj3', 'the-scene-player')),
     withDemo(plain('obj4', 'choosing-the-two-lengths')),
-    plain('obj5', 'what-the-outer-product-is'),
+    sizesRow('obj5', 'what-the-outer-product-is'),
     plain('obj6', 'key-properties'),
     plain('obj7', 'why-it-matters'),
     plain('obj8', 'worked-example'),

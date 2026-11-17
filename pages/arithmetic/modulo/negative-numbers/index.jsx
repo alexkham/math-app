@@ -763,6 +763,7 @@
 
 
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj4 comparison, obj11 aggregation, obj12 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -779,8 +780,35 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Floored Division (Round Toward -\infty)"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Truncated division","type":"text"},{"id":"c2","name":"Floored division","type":"text"}],"items":[{"id":"r1","name":"Quotient rounded toward…","values":{"c1":"zero (discard fractional part)","c2":"negative infinity (floor function ⌊·⌋)"}},{"id":"r2","name":"Sign of remainder for a < 0","values":{"c1":"shares the sign of a (r ≤ 0)","c2":"always non-negative (r ≥ 0)"}},{"id":"r3","name":"Remainder range","values":{"c1":"depends on sign of a: r ∈ (−n, n)","c2":"always r ∈ {0, 1, …, n − 1}"}},{"id":"r4","name":"Worked example: (−7) ÷ 3","values":{"c1":"q = −2, r = −1","c2":"q = −3, r = 2"}},{"id":"r5","name":"Typical context","values":{"c1":"computing — matches hardware DIV instructions, faster, no sign adjustment needed","c2":"mathematics — canonical representative of every congruence class"}}]};
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Decision Guide for Negative Modulo"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Situation","features":[{"id":"c1","name":"What to do","type":"text"},{"id":"c2","name":"Example or note","type":"text"}],"items":[{"id":"r1","name":"Need the canonical mathematical remainder (in {0, …, n − 1})","values":{"c1":"apply ((a % n) + n) % n — works in any language regardless of the native convention","c2":"JavaScript: (−7) % 3 = −1 → ((−1) + 3) % 3 = 2"}},{"id":"r2","name":"Working with congruence relations only","values":{"c1":"either convention is fine — the two results differ by a multiple of n and represent the same class","c2":"−7 ≡ −1 ≡ 2 (mod 3)"}},{"id":"r3","name":"Code may run in multiple languages","values":{"c1":"apply ((a % n) + n) % n uniformly — the universal idiom is convention-agnostic","c2":"avoids Python-vs-JavaScript divergence on negative inputs"}},{"id":"r4","name":"Indexing into an array with wrap-around","values":{"c1":"force non-negative with ((i % n) + n) % n — never trust raw % for this","c2":"(−1) % n returns n − 1 in Python (OK) but −1 in JavaScript (invalid index)"}},{"id":"r5","name":"Negative divisor (n < 0)","values":{"c1":"avoid — replace n with |n| and handle any sign logic explicitly","c2":"behavior is unpredictable across languages and conventions"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Worked Examples"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Expression","features":[{"id":"c1","name":"Truncated result","type":"text"},{"id":"c2","name":"Floored result","type":"text"}],"items":[{"id":"r1","name":"(−7) mod 3","values":{"c1":"−1","c2":"2"}},{"id":"r2","name":"(−10) mod 4","values":{"c1":"−2","c2":"2"}},{"id":"r3","name":"(−1) mod 7","values":{"c1":"−1","c2":"6"}},{"id":"r4","name":"(−15) mod 6","values":{"c1":"−3","c2":"3"}},{"id":"r5","name":"(−23) mod 5","values":{"c1":"−3","c2":"2"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the modulo of a negative number", href: "/arithmetic/methods/modulo-negative-numbers", desc: "Round the quotient down, not toward zero, so the remainder lands in $0, \\ldots, n - 1$: $(-38) \\bmod 7 = 4$ because $-38 = 7 \\cdot (-6) + 4$.", level: "composite", here: "#12" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Do modular arithmetic", href: "/arithmetic/methods/modular-arithmetic", desc: "Find the remainder of a sum, product or power: reduce each number mod $n$ first, operate on the remainders, reduce again; use cycles for powers.", level: "composite" },
+      { skill: "Find the GCD with the Euclidean algorithm", href: "/arithmetic/methods/gcd-euclidean-algorithm", desc: "Replace the pair $(a, b)$ by $(b, a \\bmod b)$ until the remainder is $0$; the last nonzero remainder is the GCD. No factoring needed.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1361,8 +1389,21 @@ const schemas = {
     ],
   };
 
+  const truncatedSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(-7) \\bmod 3$',
+      rows: [
+        { step: 'Divide', example: '$-7 \\div 3 = -2.33\\ldots$' },
+        { step: 'Discard the fractional part to get the quotient', stepSub: 'Rounding toward zero', example: '$q = -2$' },
+        { step: 'Compute the remainder $r = a - n \\cdot q$', example: '$r = -7 - (3 \\times -2) = -7 + 6 = -1$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    truncatedSteps,
     specialCasesData,
     pitfallData,
     demoUnits,
@@ -1385,7 +1426,7 @@ return {
    }
 
 
-export default function NegativeNumbersPage({ specialCasesData, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
+export default function NegativeNumbersPage({ truncatedSteps, specialCasesData, pitfallData,seoData, sectionsContent, introContent, obj4Table, obj11Table, summaryTable, faqQuestions, schemas, demoUnits}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1423,6 +1464,11 @@ export default function NegativeNumbersPage({ specialCasesData, pitfallData,seoD
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame key={'obj3-procedure'} id="truncated-division-steps" title="Truncated division on one number"
+            source="/arithmetic/modulo/negative-numbers" related={false}
+            before={"The first example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={truncatedSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1431,8 +1477,15 @@ export default function NegativeNumbersPage({ specialCasesData, pitfallData,seoD
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-negative-numbers-floored-division-round-matrix'}
+            id="negative-numbers-floored-division-round-matrix"
+            title="Floored Division (Round Toward -\\infty)"
+            source="/arithmetic/modulo/negative-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1512,8 +1565,15 @@ export default function NegativeNumbersPage({ specialCasesData, pitfallData,seoD
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'obj11-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-negative-numbers-worked-examples-matrix'}
+            id="negative-numbers-worked-examples-matrix"
+            title="Worked Examples"
+            source="/arithmetic/modulo/negative-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1522,8 +1582,24 @@ export default function NegativeNumbersPage({ specialCasesData, pitfallData,seoD
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-negative-numbers-summary-decision-guide-matrix'}
+            id="negative-numbers-summary-decision-guide-matrix"
+            title="Summary: A Decision Guide for Negative Modulo"
+            source="/arithmetic/modulo/negative-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the modulo of a negative number](!/arithmetic/methods/modulo-negative-numbers) →@`,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

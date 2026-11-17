@@ -11,6 +11,7 @@
 // // // import { tableHeaders } from '@/app/styles/theme'
 // // // import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 // // // import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationships/setElements.v2'
 
 
@@ -2575,6 +2576,31 @@ import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagr
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (count) 2026-11-15: the Finite Sets example, A = {1, 2, 3, 4}, B = {2, 4, 5}, C = {4, 5, 6}.
+// Term values are the page's; region sizes follow from the three sets (only A: 1, 3; A and B: 2; B and C: 5; only C: 6; all three: 4).
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const threeSetCountDiagram = {
+  sets: [{ id: 'A' }, { id: 'B' }, { id: 'C' }],
+  regions: { A: 2, B: 0, C: 1, AB: 1, AC: 0, BC: 1, ABC: 1 },
+  regionNames: { A: 'only $A$', B: 'only $B$', C: 'only $C$', AB: '$A$ and $B$ only', AC: '$A$ and $C$ only', BC: '$B$ and $C$ only', ABC: '$A \\cap B \\cap C$' },
+  terms: [
+    { label: '$|A|$', sign: 1, sets: ['A'], value: 4 },
+    { label: '$|B|$', sign: 1, sets: ['B'], value: 3 },
+    { label: '$|C|$', sign: 1, sets: ['C'], value: 3 },
+    { label: '$|A \\cap B|$', sign: -1, sets: ['A', 'B'], value: 2 },
+    { label: '$|A \\cap C|$', sign: -1, sets: ['A', 'C'], value: 1 },
+    { label: '$|B \\cap C|$', sign: -1, sets: ['B', 'C'], value: 2 },
+    { label: '$|A \\cap B \\cap C|$', sign: 1, sets: ['A', 'B', 'C'], value: 1 },
+  ],
+  notes: {
+    3: { label: 'After the singles', text: 'The singles give $4 + 3 + 3 = 10$ for a union of six elements: every element in an overlap has been counted more than once.' },
+    6: { label: 'Forgetting the triple intersection', warn: true, text: 'Stopping after the pairs gives $4 + 3 + 3 - 2 - 1 - 2 = 5$: the element $4$ is added three times and subtracted three times, so it is not counted.' },
+    7: { label: 'Every element counted once', text: 'Adding $|A \\cap B \\cap C| = 1$ back gives $6$, the size of the union $\\{1, 2, 3, 4, 5, 6\\}$.' },
+  },
+};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -2582,6 +2608,36 @@ import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatS
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Hierarchy of Cardinalities"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Cardinality","features":[{"id":"c1","name":"Description","type":"text"},{"id":"c2","name":"Representative set(s)","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"empty","c2":"∅ (the only set with this cardinality)"}},{"id":"r2","name":"finite n (n ∈ ℕ)","values":{"c1":"bounded element count","c2":"{1, 2, ..., n}; the English alphabet (n = 26)"}},{"id":"r3","name":"ℵ₀ (aleph-null)","values":{"c1":"countably infinite — the smallest infinite cardinality","c2":"ℕ, ℤ, ℚ; the even integers"}},{"id":"r4","name":"𝔠 = 2$^{ℵ₀}$ (continuum)","values":{"c1":"uncountable; the size of the real line","c2":"ℝ; any interval (a, b); 𝒫(ℕ)"}},{"id":"r5","name":"2$^{𝔠}$, 2$^{(2^{𝔠})}$, ...","values":{"c1":"strictly larger uncountable cardinalities (by Cantor's theorem)","c2":"𝒫(ℝ); 𝒫(𝒫(ℝ)); the hierarchy continues without end"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Comparing Cardinalities"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Relation","features":[{"id":"c1","name":"Meaning","type":"text"},{"id":"c2","name":"Witnessed by","type":"text"}],"items":[{"id":"r1","name":"|A| = |B|","values":{"c1":"A and B have the same cardinality","c2":"a bijection A → B"}},{"id":"r2","name":"|A| ≤ |B|","values":{"c1":"A is no larger than B","c2":"an injection A → B"}},{"id":"r3","name":"|A| < |B|","values":{"c1":"A is strictly smaller than B","c2":"an injection exists, but no bijection does"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Uncountable Sets"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Category","features":[{"id":"c1","name":"Defining condition","type":"text"},{"id":"c2","name":"Example sets","type":"text"},{"id":"c3","name":"Standard proof technique","type":"text"}],"items":[{"id":"r1","name":"Countably infinite","values":{"c1":"a bijection with ℕ exists","c2":"ℕ, ℤ, ℚ; even integers","c3":"construct an explicit listing (sequence) of all elements"}},{"id":"r2","name":"Uncountable","values":{"c1":"infinite, and no bijection with ℕ is possible","c2":"ℝ; any interval (a, b); 𝒫(ℕ)","c3":"Cantor's diagonal argument (or Cantor's theorem)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the size of a union of sets", href: "/set-theory/methods/union-cardinality", desc: "Find $|A \\cup B|$ or $|A \\cup B \\cup C|$ from the set sizes and their overlaps with inclusion-exclusion; add directly when the sets are disjoint.", level: "composite", here: "#2" },
+    ] },
+    { title: "More set theory methods", items: [
+      { skill: "Fill a two-set Venn diagram", href: "/set-theory/methods/venn-two-sets", desc: "Place elements or counts in the four regions of a two-set Venn diagram: the overlap first, then each set alone, then the outside.", level: "composite" },
+      { skill: "Fill a three-set Venn diagram", href: "/set-theory/methods/venn-three-sets", desc: "Fill the eight regions of a three-set Venn diagram from the center out: all three, the pair-only regions, each set alone, then the outside.", level: "composite" },
+      { skill: "Count subsets", href: "/set-theory/methods/count-subsets", desc: "Count the subsets of a finite set: $2^n$ in all, $2^n - 1$ proper, $\\binom{n}{k}$ of size $k$, and fewer choices when elements are forced in or out.", level: "composite" },
+    ] },
+    { title: "Combinatorics methods", items: [
+      { skill: "Use inclusion-exclusion for two sets", href: "/combinatorics/methods/inclusion-exclusion-two-sets", desc: "Count the items in A or B: add the two sizes and subtract the overlap once, $|A \\cup B| = |A| + |B| - |A \\cap B|$.", level: "composite" },
+      { skill: "Use inclusion-exclusion for three sets", href: "/combinatorics/methods/inclusion-exclusion-three-sets", desc: "Count the items in at least one of three sets: add the three sizes, subtract the three pairwise overlaps, add back the triple overlap.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/set-theory/methods", label: "All set theory methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3444,7 +3500,17 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
         content:[
           sectionsContent.obj2.content,
           <div key={'unit-inclusion-exclusion'} dangerouslySetInnerHTML={{ __html: demoUnits.inclusionExclusion }} />,
+          <DiagramFrame
+            key={'set-diagram-three-set-count'}
+            id="inclusion-exclusion-three-sets-count"
+            title="Inclusion-exclusion for three sets, one term at a time"
+            source="/set-theory/cardinality"
+            before={'The three-set example above, $A = \\{1, 2, 3, 4\\}$, $B = \\{2, 4, 5\\}$ and $C = \\{4, 5, 6\\}$, one term at a time. Each region shows how many elements it holds and how many times they have been counted so far.'}
+          >
+            <SetDiagram data={threeSetCountDiagram} variant="count" theme={setDiagramTheme} options={{ startAt: 'start' }} />
+          </DiagramFrame>,
           `Counting without double-counting is the entire craft of finite cardinality — inclusion-exclusion just states it as a formula, and it scales to any number of sets.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the size of a union of sets](!/set-theory/methods/union-cardinality) →@`,
         ]
     },
     {
@@ -3479,11 +3545,15 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
           <div key={'unit-cantorDiagonal'} dangerouslySetInnerHTML={{ __html: demoUnits.cantorDiagonal }} />,
           `Whatever list is proposed, the diagonal construction produces a real number it leaves out.`,
           `@academic[punchline:No list can hold every real number: some infinities are strictly larger than others.]@`,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-cardinality-uncountable-sets-matrix'}
+            id="cardinality-uncountable-sets-matrix"
+            title="Uncountable Sets"
+            source="/set-theory/cardinality"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -3518,11 +3588,15 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-cardinality-comparing-cardinalities-matrix'}
+            id="cardinality-comparing-cardinalities-matrix"
+            title="Comparing Cardinalities"
+            source="/set-theory/cardinality"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:Infinite sizes are settled by pairings, not by appearances, and there is always a bigger one.]@`,
           <DiagramFrame
             key={'obj6-theorem'}
@@ -3579,11 +3653,15 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-cardinality-summary-hierarchy-cardinalities-matrix'}
+            id="cardinality-summary-hierarchy-cardinalities-matrix"
+            title="Summary: A Hierarchy of Cardinalities"
+            source="/set-theory/cardinality"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj7-diagram'}
             id="cardinality-hierarchy-pyramid"
@@ -3595,6 +3673,14 @@ Reading $|\\{\\emptyset\\}|$ as $0$, or $|\\{\\{1, 2\\}, 3\\}|$ as $3$, counts w
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

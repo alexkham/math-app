@@ -1102,6 +1102,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 1 table (capstone summary)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1127,10 +1128,92 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_uniformRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+    built: { label: 'built from', color: '#2563EB', dash: '6 4' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 150,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    bands: [{ from: 0, to: 1, label: 'Discrete', color: '#f1f5f9' }, { from: 1, to: 3, label: 'Continuous', color: '#eff6ff' }],
+    nodes: [
+      { id: 'du', name: 'Discrete uniform', x: 0, y: 1, href: '/probability/distributions/discrete/uniform', text: 'Finitely many equally likely values.' },
+      { id: 'any', name: 'Any distribution', x: 1, y: 0, text: 'Any continuous distribution with CDF $F$ can be drawn from one uniform value.' },
+      { id: 'cu', name: 'Continuous uniform', x: 1, y: 1, text: 'All values in an interval equally likely. On $(0, 1)$ it is what a random-number generator produces.' },
+      { id: 'norm', name: 'Normal', x: 1, y: 2, href: '/probability/distributions/continuous/normal', text: 'The bell curve that sums of many independent values approach.' },
+      { id: 'exp', name: 'Exponential', x: 2, y: 0.2, href: '/probability/distributions/continuous/exponential', text: 'The waiting time between events at a constant rate $\\lambda$.' },
+      { id: 'beta', name: 'Beta', x: 2.2, y: 1, text: 'The $k$-th smallest of $n$ uniform values on $(0, 1)$ follows $\\text{Beta}(k, n - k + 1)$.' },
+      { id: 'tri', name: 'Triangular', x: 2, y: 1.8, text: 'A density on $[0, 2]$ that rises to a peak at $1$ and falls back.' },
+    ],
+    edges: [
+      { from: 'du', to: 'cu', kind: 'limit', label: 'finer grid', text: 'the discrete uniform turns into the continuous uniform as its values get closer together' },
+      { from: 'cu', to: 'any', kind: 'built', label: '$F^{-1}(U)$', text: 'if $U$ is uniform on $(0, 1)$, then $F^{-1}(U)$ has CDF $F$' },
+      { from: 'cu', to: 'exp', kind: 'built', label: '$-\\ln U / \\lambda$', text: 'if $U$ is uniform on $(0, 1)$, then $-\\frac{\\ln U}{\\lambda}$ is $\\text{Exp}(\\lambda)$' },
+      { from: 'cu', to: 'beta', kind: 'special', label: '$\\text{Beta}(1, 1)$', text: 'the uniform on $(0, 1)$ is the beta distribution with both parameters equal to $1$' },
+      { from: 'cu', to: 'tri', kind: 'built', label: 'sum of two', text: 'the sum of two independent uniform values on $(0, 1)$ is triangular on $[0, 2]$' },
+      { from: 'cu', to: 'norm', kind: 'limit', label: 'sum of many', text: 'the sum of $n$ independent uniform values on $(0, 1)$ approaches the normal with mean $\\frac{n}{2}$ and variance $\\frac{n}{12}$' },
+    ],
+  },
+};
+
+const sw_uniformDensity = {
+  center: { name: 'Uniform density', sub: '$f(x) = \\frac{1}{b-a}$ on $[a, b]$' },
+  quadrants: [
+    { title: 'Constant density', items: [
+      'A flat, rectangular shape.',
+      'The density is the same at every point within the interval $[a, b]$.' ] },
+    { title: 'Parameters', items: [
+      '$a$: the minimum value the random variable can take.',
+      '$b$: the maximum value the random variable can take.',
+      'The width of the interval is $b - a$.' ] },
+    { title: 'Support', items: [
+      '$X$ can take any value in the closed interval $[a, b]$.',
+      'Outside this interval, the probability density is zero.' ] },
+    { title: 'Logic behind the formula', items: [
+      'The height of the rectangle is $\\frac{1}{b-a}$ and the width is $b-a$, so the area is $1$.',
+      'All subintervals of the same length have equal probability.' ] }
+  ]
+};
+
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_uniformUses = {
+  center: { name: 'Continuous uniform distribution', sub: 'any value in an interval equally likely' },
+  quadrants: [
+    { title: 'Random Number Generation', items: [ 'Computational random number generators produce uniform $[0,1]$ values', 'Simulations and Monte Carlo methods', 'Cryptographic applications', 'Statistical sampling algorithms' ] },
+    { title: 'Scheduling and Timing', items: [ 'Random arrival times within a window', 'Bus or train arrival when the schedule is unknown', 'Meeting start times with imprecise information', 'Random delays or offsets' ] },
+    { title: 'Physical and Geometric Problems', items: [ 'Random point selection on a line segment or interval', 'Angle measurements in certain contexts', 'Rounding errors in numerical computations', 'Random coordinates within bounded regions' ] },
+    { title: 'Decision Making Under Ignorance', items: [ 'Modeling complete uncertainty about a parameter', 'Bayesian prior distributions (non-informative priors)', 'Initial estimates before data collection' ] }
+  ]
+};
+
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a continuous uniform probability", href: "/probability/distributions/methods/continuous-uniform-probability", desc: "Equally likely anywhere on $[a, b]$: the probability of an interval is its length over $b - a$, after clipping to the support.", level: "composite", here: "#5" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Find a discrete uniform probability", href: "/probability/distributions/methods/discrete-uniform-probability", desc: "Equally likely whole numbers from $a$ to $b$: count the values in the event and divide by $b - a + 1$.", level: "composite" },
+      { skill: "Find an exponential probability", href: "/probability/distributions/methods/exponential-probability", desc: "Waiting times at a constant rate: get $\\lambda$ from the mean, then use $1 - e^{-\\lambda x}$ or the tail $e^{-\\lambda x}$.", level: "composite" },
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2033,7 +2116,46 @@ Unlike the normal distribution, sums of independent uniform variables do **not**
     obj16:{
   
       title:`Related Distributions`,
-      content:``,
+      content:`
+The uniform distribution is the raw material of the others. A computer's random numbers are uniform on $(0, 1)$, and every other distribution it draws from is a uniform value passed through a formula.
+
+### Any continuous distribution: the inverse CDF
+
+Let $U$ be uniform on $(0, 1)$ and let $F$ be the [CDF](!/probability/cdf) of the distribution that is wanted. Then $X = F^{-1}(U)$ has that distribution:
+
+@academic[formula_callout:Related Distributions
+$$P(X \\leq x) = P(F^{-1}(U) \\leq x) = P(U \\leq F(x)) = F(x)$$]@
+
+The last step uses the uniform's own rule, $P(U \\leq u) = u$. Read the other way, the same line says that $F(X)$ is uniform on $(0, 1)$ for any continuous variable $X$, so the percentile ranks of data are spread evenly.
+
+### Exponential: the logarithm of a uniform
+
+The [exponential](!/probability/distributions/continuous/exponential) CDF $F(x) = 1 - e^{-\\lambda x}$ can be inverted by hand, which gives the best-known case of the method. Since $1 - U$ is uniform as well, $U$ can stand in for it:
+
+@academic[formula_callout:Related Distributions
+$$X = -\\frac{\\ln U}{\\lambda} \\sim \\text{Exp}(\\lambda)$$]@
+
+With $\\lambda = 2$ and a drawn value $U = 0.3$, the wait is $-\\frac{\\ln 0.3}{2} \\approx 0.60$.
+
+### Discrete uniform: the same idea on a grid
+
+The [discrete uniform](!/probability/distributions/discrete/uniform) distribution spreads probability evenly over finitely many values, and it turns into the continuous one as the grid gets finer, as [Special Cases](!#14) shows. The link also runs back: cut $(0, 1)$ into $n$ equal pieces and record which piece $U$ lands in, and the result $\\lfloor nU \\rfloor + 1$ is uniform on $1, 2, \\ldots, n$. A die roll is $\\lfloor 6U \\rfloor + 1$.
+
+### Beta: uniform values put in order
+
+The uniform on $(0, 1)$ is the beta distribution with both parameters equal to $1$. Draw $n$ independent uniform values and sort them: the $k$-th smallest follows $\\text{Beta}(k, n - k + 1)$, with mean $\\frac{k}{n + 1}$. The largest of the $n$ is the simplest case:
+
+@academic[formula_callout:Related Distributions
+$$P(\\max(U_1, \\ldots, U_n) \\leq x) = x^n$$]@
+
+since all $n$ values must fall at or below $x$.
+
+### Sums: triangular, then normal
+
+The sum of two independent uniform values on $(0, 1)$ has a triangular density on $[0, 2]$ with its peak at $1$. The sum of $n$ of them follows the Irwin-Hall distribution, which looks like a bell from about $n = 3$ on and approaches the [normal](!/probability/distributions/continuous/normal) distribution with mean $\\frac{n}{2}$ and variance $\\frac{n}{12}$ as $n$ grows.
+
+Of these, the inverse CDF link matters most in practice: it is how a simulation turns one source of uniform numbers into any distribution it needs.
+`,
       before:``,
       after:``,
       link:'',
@@ -2564,6 +2686,16 @@ export default function ContinuousUniformDistributionPage({ specialCasesData, pr
           </div>,
                   <div key={'unit-u_5_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_0 }} />,
           `Accumulating this flat density gives a ramp.`,
+          <DiagramFrame
+            key={'four-sides-uniform-pdf-intuition'}
+            id="uniform-pdf-intuition"
+            title="Intuition Behind the Formula"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_uniformDensity} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a continuous uniform probability](!/probability/distributions/methods/continuous-uniform-probability) →@`,
         ]
     },
     {
@@ -2667,6 +2799,15 @@ export default function ContinuousUniformDistributionPage({ specialCasesData, pr
         content:[
           sectionsContent.obj12.content,
           `@academic[punchline:Knowing only a value's bounds leads to the uniform, and uniform numbers in turn can generate any other continuous distribution.]@`,
+          <DiagramFrame
+            key={'four-sides-uniform-common-applications'}
+            id="uniform-common-applications"
+            title="Common Applications"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_uniformUses} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2711,6 +2852,23 @@ export default function ContinuousUniformDistributionPage({ specialCasesData, pr
         ]
     },
     {
+        id:'16',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'concept-map-uniform-related-distributions'}
+            id="continuous-uniform-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/continuous/uniform"
+            related={false}
+          >
+            <ConceptMap data={cm_uniformRelated} variant="graph" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'capstone',
         title:sectionsContent.capstone.title,
         link:sectionsContent.capstone.link,
@@ -2743,6 +2901,14 @@ export default function ContinuousUniformDistributionPage({ specialCasesData, pr
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

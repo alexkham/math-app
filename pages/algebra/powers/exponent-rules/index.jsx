@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -13,12 +14,37 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/powersTableDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Domain Restrictions"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Exponent type","features":[{"id":"c1","name":"Restriction on base a","type":"text"},{"id":"c2","name":"Why this restriction","type":"text"}],"items":[{"id":"r1","name":"[Natural](!/algebra/powers/natural-exponents) (n ≥ 1)","values":{"c1":"any real number","c2":"repeated multiplication is defined for every real a"}},{"id":"r2","name":"Zero & [negative integer](!/algebra/powers/negative-exponents)","values":{"c1":"a ≠ 0","c2":"0⁻ⁿ involves division by zero; 0⁰ has no single agreed value"}},{"id":"r3","name":"[Rational](!/algebra/powers/rational-exponents) with even root","values":{"c1":"a ≥ 0","c2":"even roots of negatives are not real"}},{"id":"r4","name":"[Irrational](!/algebra/powers/irrational-exponents) / general real","values":{"c1":"a > 0","c2":"continuous extension to aˣ requires a strictly positive base"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Edge Cases and Common Mistakes"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Expression","features":[{"id":"c1","name":"Interpretation","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"0⁰","values":{"c1":"undefined in analysis; equal to 1 by convention in discrete math","c2":"not covered by a⁰ = 1 (which requires a ≠ 0); see [zero powers](!/algebra/powers/zero-powers)"}},{"id":"r2","name":"0⁻ⁿ (n > 0)","values":{"c1":"undefined","c2":"would require dividing by zero"}},{"id":"r3","name":"(−a)ⁿ vs −aⁿ","values":{"c1":"(−3)² = 9 vs −3² = −9","c2":"parentheses change which operation comes first"}},{"id":"r4","name":"(a + b)ⁿ ≠ aⁿ + bⁿ","values":{"c1":"(2 + 3)² = 25 vs 2² + 3² = 13","c2":"exponent distributes over products, not sums"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Simplify expressions with exponents", href: "/algebra/methods/simplify-exponent-expressions", desc: "Combine several exponent rules into one clean answer with positive exponents.", level: "composite", here: "#11" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Multiply powers with the same base", href: "/algebra/methods#product-of-powers", desc: "Two powers of the **same** base multiplied: $x^3\\cdot x^5$, $2^4\\cdot 2$, $a^{1/2}a^{3/2}$.", level: "atomic" },
+      { skill: "Solve an exponential equation by matching bases", href: "/algebra/methods/exponential-equations-same-base", desc: "Write both sides as powers of one base, then set the exponents equal.", level: "composite" },
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite" },
+      { skill: "Expand and condense logarithms", href: "/algebra/methods/expand-condense-logarithms", desc: "Break one log into a sum of simple logs, or fold a sum back into one log.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1279,11 +1305,15 @@ Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponent-rules-domain-restrictions-matrix'}
+            id="exponent-rules-domain-restrictions-matrix"
+            title="Domain Restrictions"
+            source="/algebra/powers/exponent-rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1294,11 +1324,15 @@ Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponent-rules-edge-cases-common-matrix'}
+            id="exponent-rules-edge-cases-common-matrix"
+            title="Edge Cases and Common Mistakes"
+            source="/algebra/powers/exponent-rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj10-mistakes'}
             id="exponent-rule-pitfalls"
@@ -1338,6 +1372,15 @@ Writing $2^3 \\cdot 2^2$ as $2^6$ gives $64$. The product is $8 \\cdot 4 = 32 = 
             <PropertySheet data={exponentLawCards} />
           </DiagramFrame>,
           `Every restriction keeps a division by zero or an even root of a negative number out of the law. That is why $a \\neq 0$ appears whenever $a$ ends up in a denominator, as in the [negative exponent rule](!#6), and why the [rational exponent rule](!#8) asks for $a \\geq 0$ when the root is even.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to simplify expressions with exponents](!/algebra/methods/simplify-exponent-expressions) →@`,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

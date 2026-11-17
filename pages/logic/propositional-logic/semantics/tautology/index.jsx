@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../../../pages.css'
@@ -22,6 +23,20 @@ import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaShee
 
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Logic methods", items: [
+      { skill: "Check whether a formula is a tautology", href: "/logic/methods/tautology-check", desc: "Show a formula is true in every row: build its truth table, or assume one row makes it false and reach a clash.", level: "composite" },
+      { skill: "Build a truth table", href: "/logic/methods/truth-table", desc: "List all $2^n$ rows, add one column per subformula from the inside out, and fill each column with the rule of its connective.", level: "composite" },
+      { skill: "Check whether a formula is a contradiction", href: "/logic/methods/contradiction-check", desc: "Show a formula is false in every row with a truth table, or reduce it with the laws to a clash of the form $A \\land \\neg A$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -768,6 +783,14 @@ Calling $P \\to (P \\land Q)$ a tautology after the rows $P = T$, $Q = T$ and $P
                 <MistakeFix data={pitfallData} variant="trace" />
               </DiagramFrame>,
             ],
+          },
+          {
+              id:'skills',
+              title:'Skills You Should Learn',
+              link:``,
+              content:[
+                <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+              ]
           },
           // faq: rendered component — must be built here, not in getStaticProps
           {

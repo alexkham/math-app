@@ -647,6 +647,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj10 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -663,6 +664,24 @@ import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gau
 import matrixProductDiagrams from '@/app/components/linear-algebra/multiplication/matrixProductDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_rowOperations = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'Elementary row operations', sub: 'legal moves that leave the solution set unchanged' },
+    branches: [
+      { leaves: [
+        { name: 'Swapping two rows', condition: 'Reorders the equations.', example: '$R_i \\leftrightarrow R_j$' },
+        { name: 'Multiplying a row by a nonzero scalar', condition: 'Rescales an equation.', example: '$kR_i \\to R_i$' },
+        { name: 'Adding a multiple of one row to another', condition: 'Replaces one equation with a combination of two equations.', example: '$R_i + cR_j \\to R_i$' }
+      ] }
+    ]
+  },
+  note: { label: 'Each operation is reversible', text: 'A swap undoes itself, scaling by $k$ is reversed by scaling by $1/k$, and adding $c$ times row $j$ to row $i$ is reversed by subtracting $c$ times row $j$ from row $i$.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
@@ -670,7 +689,61 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// MethodComparison 2026-11-14: replaces the FeatureMatrix of obj10Table ("Solution Methods Beyond Row Reduction"); from the section text and that table.
+const methodComparisonData = {
+  intro: 'Gaussian elimination is the default; the other four earn their place in special cases.',
+  methods: [
+    { name: 'Gaussian elimination', subtitle: 'the most general method', cost: '≈ ⅔ n³ operations', exponent: 3, scaleLeft: '', scaleRight: 'the default workhorse',
+      failsWhen: '—', preferredWhen: 'any system' },
+    { name: 'LU decomposition', subtitle: 'A = LU, then two triangular solves', cost: 'one factorization, then cheap solves per b', exponent: 3, scaleLeft: 'factor once', scaleRight: 'each new b: cheap',
+      failsWhen: '—', preferredWhen: 'several systems share the same coefficient matrix $A$ but have different right-hand sides' },
+    { name: 'Inverse formula', subtitle: 'x = A⁻¹b', cost: '≈ 3 × elimination', exponent: 3, scaleLeft: '', scaleRight: 'computing A⁻¹ first',
+      failsWhen: 'efficiency matters: it is rarely the most efficient approach', preferredWhen: '$A$ is square and invertible' },
+    { name: "Cramer's rule", subtitle: 'each unknown as a ratio of determinants', cost: 'n + 1 determinants', exponent: 4, prohibitive: true, scaleLeft: 'small n: fine', scaleRight: 'large n: impractical',
+      failsWhen: '$n$ is large: computationally impractical', preferredWhen: 'a square $n \\times n$ system with $\\det(A) \\neq 0$, small $n$, or symbolic work where a closed form is wanted' },
+    { name: 'Iterative methods', subtitle: 'Jacobi, Gauss–Seidel, conjugate gradient', cost: 'a sequence of approximations', exponent: 0, scaleLeft: 'no fixed operation count', scaleRight: 'depends on convergence',
+      failsWhen: 'the iteration does not converge: convergence depends on the matrix structure', preferredWhen: 'very large sparse systems, where direct methods would need too much memory or time' },
+  ],
+  flipLabel: 'Where the choice flips',
+  flip: 'One system: elimination. Several right-hand sides with the same $A$: LU. Very large and sparse: an iterative method.',
+};
+import MethodComparison from '@/app/components/infographics/linear-algebra/MethodComparison'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Rank Conditions and Solution Sets"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Rank pattern","features":[{"id":"c1","name":"Outcome","type":"text"},{"id":"c2","name":"Solution set structure","type":"text"},{"id":"c3","name":"Geometric picture","type":"text"}],"items":[{"id":"r1","name":"rank(A) < rank([A | b])","values":{"c1":"inconsistent","c2":"empty","c3":"hyperplanes with no common point (e.g., parallel lines in ℝ²)"}},{"id":"r2","name":"rank(A) = rank([A | b]) = n","values":{"c1":"consistent and determined","c2":"a single point in ℝⁿ","c3":"n independent hyperplanes meet at one point"}},{"id":"r3","name":"rank(A) = rank([A | b]) = r < n","values":{"c1":"consistent and underdetermined","c2":"affine flat: particular solution + null space of A; dimension n − r","c3":"hyperplanes intersect along a line, plane, or higher flat"}},{"id":"r4","name":"rank(A) < n with b = 0 ([homogeneous](!/linear-algebra/linear-systems/homogeneous))","values":{"c1":"nontrivial solutions exist","c2":"null space of A; subspace of dimension n − rank(A)","c3":"a subspace through the origin"}}]};
+
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("The Three Possible Outcomes"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Outcome","features":[{"id":"c1","name":"How it appears in the reduced augmented matrix","type":"text"},{"id":"c2","name":"Rank condition","type":"text"}],"items":[{"id":"r1","name":"No solution (inconsistent)","values":{"c1":"a row of the form [0 0 ⋯ 0 | d] with d ≠ 0 — the impossible equation 0 = d","c2":"rank(A) < rank([A | b])"}},{"id":"r2","name":"Exactly one solution","values":{"c1":"every column of A has a pivot; no free variables; every xᵢ is determined","c2":"rank(A) = rank([A | b]) = n"}},{"id":"r3","name":"Infinitely many solutions","values":{"c1":"at least one column of A has no pivot; the corresponding variable is free","c2":"rank(A) = rank([A | b]) < n"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Choose the right method to solve a linear system", href: "/linear-algebra/linear-systems/methods/which-system-method", desc: "A decision tree: what the question asks, a zero right-hand side, then the shape of the system.", level: "strategy", here: "#10" },
+    ] },
+    { title: "More linear system methods", items: [
+      { skill: "Tell how many solutions a system has", href: "/linear-algebra/linear-systems/methods/solvability-check", desc: "One, none or infinitely many: reduce, look for a contradictory row, count the pivots.", level: "composite" },
+      { skill: "Solve a system with Cramer's rule", href: "/linear-algebra/linear-systems/methods/cramers-rule", desc: "A square system with nonzero determinant: each unknown is a ratio of two determinants.", level: "composite" },
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+      { skill: "Solve a homogeneous system", href: "/linear-algebra/linear-systems/methods/homogeneous-systems", desc: "Ax = 0 always has the zero solution; reduce A and write the null space with one vector per free variable.", level: "composite" },
+      { skill: "Solve a triangular system by back substitution", href: "/linear-algebra/linear-systems/methods/back-substitution", desc: "Solve the last equation first, then substitute upward one row at a time.", level: "composite" },
+      { skill: "Solve a system with the inverse matrix", href: "/linear-algebra/linear-systems/methods/inverse-matrix-method", desc: "Write the system as Ax = b, find the inverse of A, and multiply: x is the inverse times b.", level: "composite" },
+      { skill: "Write the general solution in parametric vector form", href: "/linear-algebra/linear-systems/methods/parametric-solutions", desc: "Infinitely many solutions: a particular solution plus one direction vector per free variable.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a system of equations by substitution", href: "/algebra/equations/methods/systems-substitution", desc: "Solve one equation for one variable and substitute it into the other.", level: "composite" },
+      { skill: "Solve a system of equations by elimination", href: "/algebra/equations/methods/systems-elimination", desc: "Scale the equations so one variable has opposite coefficients, then add.", level: "composite" },
+      { skill: "Solve mixture problems", href: "/algebra/equations/methods/mixture-problems", desc: "Solutions, blends and investments: one equation for the amount, one for the content.", level: "applied" },
+      { skill: "Solve distance, rate and time problems", href: "/algebra/equations/methods/distance-rate-time-problems", desc: "Trains, cars, boats in a current: one d = rt line per traveller, linked by the story.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/linear-systems/methods", label: "All linear system methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1454,11 +1527,15 @@ $$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-systems-three-possible-outcomes-matrix'}
+            id="linear-systems-three-possible-outcomes-matrix"
+            title="The Three Possible Outcomes"
+            source="/linear-algebra/linear-systems"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-outcomes'} dangerouslySetInnerHTML={{ __html: demoUnits.outcomes }} />,
           `Everything else on this page is machinery for finding out which of these three you are in.`,
         ]
@@ -1485,6 +1562,15 @@ $$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'taxonomy-linear-systems-row-operations'}
+            id="linear-systems-row-operations"
+            title="Elementary Row Operations"
+            source="/linear-algebra/linear-systems"
+            related={false}
+          >
+            <Taxonomy data={tx_rowOperations} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1532,11 +1618,18 @@ $$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'method-comparison-linear-systems'}
+            id="linear-systems-method-comparison"
+            title="Solution methods compared"
+            source="/linear-algebra/linear-systems"
+            related={false}
+            before={"The five methods above side by side: what each costs, when it breaks down, and when to reach for it."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <MethodComparison data={methodComparisonData} theme="navy" variant="cost" />
+            </div>
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj10-diagram'}
             id="solution-methods-tree"
@@ -1545,6 +1638,7 @@ $$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
           >
             <TopDownTree data={solutionMethodTree} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which method should I use to solve a linear system?](!/linear-algebra/linear-systems/methods/which-system-method) →@`,
         ]
     },
     {
@@ -1553,11 +1647,15 @@ $$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-systems-summary-rank-conditions-matrix'}
+            id="linear-systems-summary-rank-conditions-matrix"
+            title="Summary: Rank Conditions and Solution Sets"
+            source="/linear-algebra/linear-systems"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1575,6 +1673,14 @@ $$a_{m1}x_1 + a_{m2}x_2 + \\cdots + a_{mn}x_n = b_m$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

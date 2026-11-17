@@ -99,7 +99,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Factor Out the Greatest Common Factor (GCF) | Learn Math Class',
         description: 'Factor out the GCF: find the greatest common number and the lowest power of each shared variable, divide every term by it, check by expanding. Examples.',
@@ -202,7 +202,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Factor by Grouping (Four-Term Polynomials) | Learn Math Class',
         description: 'Factor by grouping: split four terms into two pairs, factor the GCF out of each pair, factor out the common bracket; regroup if the brackets differ.',
@@ -306,7 +306,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Factor a Trinomial (Including the ac Method) | Learn Math Class',
         description: 'Factor ax² + bx + c: take out the GCF, find two numbers with product ac and sum b, split the middle term, group. Simple and general case, with examples.',
@@ -432,7 +432,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Factor a Difference of Squares | Learn Math Class',
         description: 'Factor a² − b² as (a − b)(a + b): spot two perfect squares with a minus between them, take out a GCF first, keep factoring while squares remain.',
@@ -535,7 +535,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Factor a Sum or Difference of Cubes | Learn Math Class',
         description: 'Factor a³ + b³ and a³ − b³: write both terms as cubes, apply (a ± b)(a² ∓ ab + b²) with the SOAP sign rule, take out a GCF first. Examples including x⁶ − 1.',
@@ -639,7 +639,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Do Polynomial Long Division (Step by Step) | Learn Math Class',
         description: 'Divide polynomials by long division: descending order with zero placeholders, divide leading terms, multiply, subtract, repeat; read the remainder.',
@@ -748,7 +748,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Synthetic Division (Step by Step) | Learn Math Class',
         description: 'Divide by x − r with synthetic division: list the coefficients with zeros, bring down, multiply by r, add, repeat; the last number is the remainder.',
@@ -856,7 +856,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Remainder Theorem and the Factor Theorem | Learn Math Class',
         description: 'Use the remainder theorem: the remainder of f(x) ÷ (x − r) is f(r), so evaluate instead of dividing; f(r) = 0 means (x − r) is a factor. Find an unknown k too.',
@@ -959,7 +959,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Rational Root Test (Rational Zero Theorem) | Learn Math Class',
         description: 'Find rational roots: list p/q with p dividing the constant and q the leading coefficient, test candidates by synthetic division, divide out each root.',
@@ -1062,7 +1062,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find All Roots of a Polynomial (Real and Complex) | Learn Math Class',
         description: 'Find every root of a polynomial: count them by degree, find rational roots, divide each out, solve the last quadratic (complex roots too), note multiplicity.',
@@ -1170,7 +1170,7 @@ const polynomialsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Graph a Polynomial (End Behaviour, Roots, Multiplicity) | Learn Math Class',
         description: 'Sketch a polynomial: read the end behaviour from the leading term, find the intercepts, cross at odd and touch at even multiplicity, join the points.',
@@ -1280,7 +1280,7 @@ const polynomialsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Factoring Method to Use? Decision Tree | Learn Math Class',
         description: 'Choose a factoring method: take out the GCF, then count the terms: two (squares or cubes), three (trinomial), four (grouping), higher degree (rational roots).',

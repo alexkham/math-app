@@ -815,6 +815,9 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import DimensionLedger from '@/app/components/infographics/linear-algebra/DimensionLedger'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -838,6 +841,29 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a basis", href: "/linear-algebra/vector-spaces/methods/find-basis", desc: "Row reduce once: the pivot columns of the original matrix, or one vector per free variable.", level: "composite", here: "#7" },
+    ] },
+    { title: "More vector space methods", items: [
+      { skill: "Find the dimension of a subspace", href: "/linear-algebra/vector-spaces/methods/dimension", desc: "Count the vectors in a basis: the rank for a span, n minus the rank for a solution set.", level: "composite" },
+      { skill: "Test vectors for linear independence", href: "/linear-algebra/vector-spaces/methods/linear-independence-test", desc: "Put the vectors in the columns of a matrix and count pivots, or use the determinant.", level: "composite" },
+      { skill: "Find the four fundamental subspaces", href: "/linear-algebra/vector-spaces/methods/fundamental-subspaces", desc: "One row reduction gives bases for the column space, row space, null space and left null space.", level: "composite" },
+    ] },
+    { title: "Linear transformation methods", items: [
+      { skill: "Change basis", href: "/linear-algebra/transformations/methods/change-of-basis", desc: "Coordinates in a new basis are $P^{-1}\\mathbf{v}$; the matrix of a map in the new basis is $P^{-1}AP$.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Find the reduced row echelon form of a matrix", href: "/linear-algebra/linear-systems/methods/reduced-row-echelon-form", desc: "From echelon form, scale every pivot to 1 and clear above it; the result is unique.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1589,8 +1615,42 @@ $$= \\begin{pmatrix} 2 \\\\ 1 \\end{pmatrix}$$`],
     ],
   };
 
+  // Procedure rollout 2026-11-14: Three bases from one row reduction (obj7).
+  const subspaceBasesSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The $3 \\times 4$ matrix $A$ of the worked example',
+      rows: [
+        { step: 'Row reduce $A$ and find the pivot columns', example: 'pivots in columns $1$ and $3$' },
+        { step: 'Column space: the pivot columns of the original $A$', example: '$\\{(1, 2, 3), (0, 1, 1)\\}$' },
+        { step: 'Row space: the nonzero rows of the echelon form', example: '$\\{(1, 2, 0, 1), (0, 0, 1, 1)\\}$' },
+        { step: 'Null space: one basis vector for each free variable', example: 'free columns $2$ and $4$: two basis vectors' },
+      ],
+    },
+  };
+
+  // DimensionLedger 2026-11-14: Four subspaces, two counts (obj12).
+  const subspaceDimensionBars = {
+    intro: 'With $m = 3$, $n = 4$ and $r = 2$: the row space and null space fill $\\mathbb{R}^4$, the column space and left null space fill $\\mathbb{R}^3$.',
+    identity: '$r + (n - r) = n$ and $r + (m - r) = m$',
+    bars: [
+      { label: 'Domain', space: 'R⁴', total: 4,
+        segments: [
+          { label: 'Row space', size: 2, hot: true },
+          { label: 'Null space', size: 2 },
+        ] },
+      { label: 'Codomain', space: 'R³', total: 3,
+        segments: [
+          { label: 'Column space', size: 2, hot: true },
+          { label: 'Left null space', size: 1 },
+        ] },
+    ],
+  };
+
   return {
   props:{
+    subspaceDimensionBars,
+    subspaceBasesSteps,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -1666,7 +1726,7 @@ const standardBases = {
 }
 
 
-export default function BasisVectorSpacePage({ formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function BasisVectorSpacePage({ subspaceDimensionBars, subspaceBasesSteps, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -1833,6 +1893,16 @@ $$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="subspace-bases-steps"
+            title="Three bases from one row reduction"
+            source="/linear-algebra/vector-spaces/basis"
+            before={"The worked example of this section, one subspace at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={subspaceBasesSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a basis](!/linear-algebra/vector-spaces/methods/find-basis) →@`,
         ]
     },
     {
@@ -1873,6 +1943,17 @@ $$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis 
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'obj12-dimension-ledger'}
+            id="fundamental-subspace-dimension-bars"
+            title="Four subspaces, two counts"
+            source="/linear-algebra/vector-spaces/basis"
+            before={"The four dimensions for the matrix of the worked example above, which is 3 by 4 with rank 2."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <DimensionLedger data={subspaceDimensionBars} theme="navy" variant="pair" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -1908,6 +1989,14 @@ $$\\mathcal{B} = \\{\\mathbf{v}_1, \\ldots, \\mathbf{v}_n\\} \\text{ is a basis 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

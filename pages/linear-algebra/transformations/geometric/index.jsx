@@ -1867,6 +1867,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj4 aggregation, obj5 aggregation, obj10 comparison, obj11 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1881,6 +1882,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import reflectionDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/reflection/reflectionDiagrams'
@@ -1891,8 +1893,31 @@ import renderVectorArrowsV7 from '@/app/utils/illustrations/linear-algebra/vecto
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Rotations in R³"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Axis of rotation","features":[{"id":"c1","name":"Matrix","type":"text"},{"id":"c2","name":"Fixed direction","type":"text"},{"id":"c3","name":"Plane that rotates","type":"text"}],"items":[{"id":"r1","name":"x-axis: Rₓ(θ)","values":{"c1":"[1 0 0; 0 cosθ −sinθ; 0 sinθ cosθ]","c2":"x-coordinate unchanged","c3":"yz-plane"}},{"id":"r2","name":"y-axis: R_y(θ)","values":{"c1":"[cosθ 0 sinθ; 0 1 0; −sinθ 0 cosθ]","c2":"y-coordinate unchanged","c3":"xz-plane"}},{"id":"r3","name":"z-axis: R_z(θ)","values":{"c1":"[cosθ −sinθ 0; sinθ cosθ 0; 0 0 1]","c2":"z-coordinate unchanged","c3":"xy-plane"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Determinant as Geometric Signature"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"det(A)","features":[{"id":"c1","name":"Effect on area / volume","type":"text"},{"id":"c2","name":"Effect on orientation","type":"text"},{"id":"c3","name":"Typical transformations","type":"text"}],"items":[{"id":"r1","name":"|det(A)| > 1","values":{"c1":"expands by factor |det(A)|","c2":"preserves if det > 0, reverses if det < 0","c3":"uniform scaling with |c| > 1"}},{"id":"r2","name":"0 < |det(A)| < 1","values":{"c1":"shrinks by factor |det(A)|","c2":"preserves if det > 0, reverses if det < 0","c3":"uniform scaling with 0 < |c| < 1"}},{"id":"r3","name":"det(A) = +1","values":{"c1":"preserves area / volume","c2":"preserves orientation","c3":"rotation, shear"}},{"id":"r4","name":"det(A) = −1","values":{"c1":"preserves area / volume","c2":"reverses orientation (handedness flip)","c3":"reflection, improper rotation"}},{"id":"r5","name":"det(A) = 0","values":{"c1":"collapses at least one dimension (image is a proper subspace)","c2":"undefined / degenerate","c3":"projection onto a proper subspace, any singular matrix"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the matrix of a geometric transformation", href: "/linear-algebra/transformations/methods/geometric-transformations", desc: "Rotations, reflections, projections, shears: track where $\\mathbf{e}_1$ and $\\mathbf{e}_2$ go, and multiply right to left to combine.", level: "composite", here: "#9" },
+    ] },
+    { title: "More linear transformation methods", items: [
+      { skill: "Find the matrix of a linear transformation", href: "/linear-algebra/transformations/methods/transformation-matrix", desc: "Apply $T$ to each standard basis vector and use the results as the columns of $A$.", level: "composite" },
+      { skill: "Change basis", href: "/linear-algebra/transformations/methods/change-of-basis", desc: "Coordinates in a new basis are $P^{-1}\\mathbf{v}$; the matrix of a map in the new basis is $P^{-1}AP$.", level: "composite" },
+      { skill: "Check if a transformation is linear", href: "/linear-algebra/transformations/methods/linearity-check", desc: "Test $T(c\\mathbf{u} + \\mathbf{v}) = cT(\\mathbf{u}) + T(\\mathbf{v})$ with general vectors; one failing example disproves it.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/transformations/methods", label: "All linear transformation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3028,8 +3053,15 @@ Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix}
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-geometric-rotations-r-matrix'}
+            id="geometric-rotations-r-matrix"
+            title="Rotations in R³"
+            source="/linear-algebra/transformations/geometric"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[punchline:A rotation of space is a plane rotation around a fixed axis: the axis stays put while everything turns around it.]@`,
         ]
     },
@@ -3089,6 +3121,7 @@ Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix}
           sectionsContent.obj9.content,
           <div key={'unit-orderMatters'} dangerouslySetInnerHTML={{ __html: demoUnits.orderMatters }} />,
           `Because matrix products do not commute, the order in which transformations are applied is part of the transformation.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the matrix of a geometric transformation](!/linear-algebra/transformations/methods/geometric-transformations) →@`,
         ]
     },
     {
@@ -3097,8 +3130,15 @@ Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix}
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'obj10-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-geometric-determinant-as-geometric-signature-matrix'}
+            id="geometric-determinant-as-geometric-signature-matrix"
+            title="Determinant as Geometric Signature"
+            source="/linear-algebra/transformations/geometric"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
                   <div key={'unit-determinant'} dangerouslySetInnerHTML={{ __html: demoUnits.determinant }} />,
           `This is why the determinant can classify a transformation family before any of its entries are examined individually.`,
         ]
@@ -3136,6 +3176,14 @@ Treating $\\det = \\pm 1$ as proof of a rigid motion fails for $\\begin{pmatrix}
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

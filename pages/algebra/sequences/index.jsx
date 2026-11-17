@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -20,6 +21,23 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Convert a recursive formula to an explicit one", href: "/algebra/methods/recursive-to-explicit", desc: "Read the step rule, decide arithmetic or geometric, write the closed form, check it.", level: "composite", here: "#2" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Find the nth term of an arithmetic sequence", href: "/algebra/methods/arithmetic-sequence-nth-term", desc: "Find the common difference, then $a_n = a_1 + (n - 1)d$; also from two given terms.", level: "composite" },
+      { skill: "Find the nth term of a geometric sequence", href: "/algebra/methods/geometric-sequence-nth-term", desc: "Find the common ratio, then $a_n = a_1 r^{\\,n-1}$; also from two given terms.", level: "composite" },
+      { skill: "Sum a finite geometric series", href: "/algebra/methods/geometric-series-sum", desc: "Count the terms, then $S_n = a_1\\frac{1 - r^n}{1 - r}$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 
@@ -737,6 +755,7 @@ Mark $n$ points on a circle and join every pair by a chord, with no three chords
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to convert a recursive formula to an explicit one](!/algebra/methods/recursive-to-explicit) →@`,
         ]
     },
     {
@@ -841,6 +860,14 @@ Mark $n$ points on a circle and join every pair by a chord, with no three chords
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

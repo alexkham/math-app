@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,8 +18,33 @@ import powersRootsLogsNotationSheet from '@/app/components/infographics/Notation
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("The Number e"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Definition","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Where it comes from","type":"text"}],"items":[{"id":"r1","name":"Compound interest limit","values":{"c1":"e = lim (1 + 1⁄n)ⁿ as n → ∞","c2":"100% interest on $1 with infinitely many compounding periods"}},{"id":"r2","name":"Infinite series","values":{"c1":"e = Σ 1⁄n! = 1 + 1 + 1⁄2! + 1⁄3! + ...","c2":"Taylor series of eˣ evaluated at x = 1"}},{"id":"r3","name":"Calculus characterization","values":{"c1":"unique base a for which d⁄dx aˣ = aˣ","c2":"the exponential function that is its own derivative"}}]};
 import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Side-by-Side Summary"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Common log: log(x)","type":"text"},{"id":"c2","name":"Natural log: ln(x)","type":"text"}],"items":[{"id":"r1","name":"Base","values":{"c1":"10","c2":"e ≈ 2.71828"}},{"id":"r2","name":"Anchor (a, 1) on graph","values":{"c1":"(10, 1)","c2":"(e, 1) ≈ (2.718, 1)"}},{"id":"r3","name":"log(2) reference value","values":{"c1":"log(2) ≈ 0.301","c2":"ln(2) ≈ 0.693"}},{"id":"r4","name":"Steepness (for x > 1)","values":{"c1":"gentler — base 10 is larger","c2":"steeper — smaller base means faster initial rise"}},{"id":"r5","name":"Calculus property","values":{"c1":"d⁄dx log(x) = 1 ⁄ (x · ln(10))","c2":"d⁄dx ln(x) = 1⁄x — cleanest possible"}},{"id":"r6","name":"Where it shows up","values":{"c1":"Richter scale, decibels, pH, orders of magnitude","c2":"calculus, continuous growth/decay, theoretical derivations"}},{"id":"r7","name":"Conversion to the other","values":{"c1":"log(x) = ln(x) ⁄ ln(10) ≈ ln(x) ⁄ 2.303","c2":"ln(x) = log(x) · ln(10) ≈ 2.303 · log(x)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Calculator Conventions"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Tool","features":[{"id":"c1","name":"Common log (base 10)","type":"text"},{"id":"c2","name":"Natural log (base e)","type":"text"},{"id":"c3","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Scientific calculator","values":{"c1":"LOG key","c2":"LN key","c3":"matches standard mathematical notation"}},{"id":"r2","name":"Python (math module)","values":{"c1":"math.log10(x)","c2":"math.log(x)","c3":"trap: math.log defaults to natural log, not common"}},{"id":"r3","name":"Excel / Google Sheets","values":{"c1":"LOG(x) or LOG10(x)","c2":"LN(x)","c3":"LOG(x, base) handles arbitrary bases"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Evaluate a logarithm", href: "/algebra/methods/evaluate-logarithms", desc: "Ask \"which exponent?\", use the key values, or change the base for a calculator.", level: "composite" },
+      { skill: "Change the base of a logarithm", href: "/algebra/methods#change-of-base", desc: "A log whose base your calculator does not have, or two logs with different bases in one problem: $\\log_2 10$, $\\log_5 x$.", level: "atomic" },
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite" },
+      { skill: "Solve exponential growth and decay problems", href: "/algebra/methods/exponential-growth-decay-problems", desc: "Populations, half-lives, depreciation: build the model, find the rate, solve for the time.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -759,11 +785,15 @@ A whole number has one more digit than the integer part of its common logarithm.
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-common-natural-number-e-matrix'}
+            id="common-natural-number-e-matrix"
+            title="The Number e"
+            source="/algebra/logarithms/common-natural"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -772,11 +802,15 @@ A whole number has one more digit than the integer part of its common logarithm.
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-common-natural-calculator-conventions-matrix'}
+            id="common-natural-calculator-conventions-matrix"
+            title="Calculator Conventions"
+            source="/algebra/logarithms/common-natural"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -831,11 +865,15 @@ A whole number has one more digit than the integer part of its common logarithm.
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-common-natural-side-side-summary-matrix'}
+            id="common-natural-side-side-summary-matrix"
+            title="Side-by-Side Summary"
+            source="/algebra/logarithms/common-natural"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -853,6 +891,14 @@ A whole number has one more digit than the integer part of its common logarithm.
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

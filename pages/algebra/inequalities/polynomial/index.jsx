@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,11 +16,143 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+
+// CaseGraph 2026-11-12: "Crossing or touching at a root" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    grid: {
+      x0: -1.6, x1: 1.6, y0: -2.2, y1: 2.2,
+      axes: [
+        { id: 'm', name: 'Multiplicity', options: [
+          { id: 'odd', label: 'odd (1, 3, 5, …)', sub: 'sign flips: adjacent intervals have opposite signs; crosses the axis' },
+          { id: 'even', label: 'even (2, 4, 6, …)', sub: 'sign preserved: adjacent intervals have the same sign; touches without crossing' } ] },
+        { id: 'p', name: 'Example factor', options: [
+          { id: 'low', label: 'lower power' },
+          { id: 'high', label: 'higher power' } ] },
+      ],
+      layout: { rows: 'm', cols: 'p' },
+      cells: {
+        'odd|low':   { f: (x) => x, roots: [{ x: 0, label: 'r' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '−  +', solution: '$(x - r)$' },
+        'odd|high':  { f: (x) => x * x * x, roots: [{ x: 0, label: 'r' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '−  +', solution: '$(x - r)^3$' },
+        'even|low':  { f: (x) => x * x, roots: [{ x: 0, label: 'r' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '+  +', solution: '$(x - r)^2$' },
+        'even|high': { f: (x) => x * x * x * x, roots: [{ x: 0, label: 'r' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '+  +', solution: '$(x - r)^4$' },
+      },
+    },
+  };
+
+// CaseGraph 2026-11-12: "The signs at both ends" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Leading term', text: '$a_n x^n$ decides the sign for very large $|x|$' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -2.4, y1: 2.4,
+      axes: [
+        { id: 'deg', name: 'Degree', options: [
+          { id: 'even', label: 'even degree' },
+          { id: 'odd', label: 'odd degree' } ] },
+        { id: 'lead', name: 'Leading coefficient', options: [
+          { id: 'pos', label: '$a_n > 0$' },
+          { id: 'neg', label: '$a_n < 0$' } ] },
+      ],
+      layout: { rows: 'deg', cols: 'lead' },
+      cells: {
+        'even|pos': { f: (x) => 0.6 * x * x + 0.3, pattern: '+  …  +', solution: 'left $+$, right $+$' },
+        'even|neg': { f: (x) => -0.6 * x * x - 0.3, pattern: '−  …  −', solution: 'left $-$, right $-$' },
+        'odd|pos':  { f: (x) => 0.4 * x * x * x, intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '−  …  +', solution: 'left $-$, right $+$' },
+        'odd|neg':  { f: (x) => -0.4 * x * x * x, intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '+  …  −', solution: 'left $+$, right $-$' },
+      },
+    },
+  };
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a polynomial inequality", href: "/algebra/inequalities/methods/polynomial-inequalities", desc: "Factor, mark the roots, use a sign chart; even multiplicities do not change the sign.", level: "composite", here: "#2" },
+    ] },
+    { title: "More inequality methods", items: [
+      { skill: "Solve a quadratic inequality", href: "/algebra/inequalities/methods/quadratic-inequalities", desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: "composite" },
+      { skill: "Solve a rational inequality", href: "/algebra/inequalities/methods/rational-inequalities", desc: "Compare with zero, combine into one fraction, sign-chart the zeros of top and bottom.", level: "composite" },
+      { skill: "Choose the right method for an inequality", href: "/algebra/inequalities/methods/which-inequality-method", desc: "A decision tree from the shape of the inequality to the method that solves it.", level: "strategy" },
+    ] },
+    { title: "Polynomial methods", items: [
+      { skill: "Find all roots of a polynomial", href: "/algebra/polynomials/methods/find-all-roots", desc: "Rational roots first, divide them out, finish with the quadratic formula; count multiplicities.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/inequalities/methods", label: "All inequality methods" },
+};
+
+// ProcedureV2 (stages) 2026-11-15: replaces the table summaryTable ("Summary: Filling the Sign Chart Without Test Points"); steps, "what you determine" and "how" taken from the table, the run is the page's own quartic from Worked Examples.
+const noTestPointStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { exprNow: 'Found so far' },
+  run: {
+    label: 'Solve $(x + 2)^2(x - 1)(x - 4) > 0$',
+    start: '$(x + 2)^2(x - 1)(x - 4) > 0$',
+  },
+  groups: [
+    { label: 'The roots', sub: 'steps 1 and 2', kind: 'must', stages: [
+      { n: 1, name: 'Roots', what: 'All real roots, ordered on the number line', cond: 'How: factor; rational root theorem; quadratic formula; numerical methods if needed',
+        example: '$-2,\\ 1,\\ 4$', exampleNote: 'already factored, so the roots are read off the factors' },
+      { n: 2, name: 'Multiplicities', what: 'Multiplicity at each root', cond: 'How: read directly from the factored form (exponent of each factor)',
+        example: '$-2$: even $\\quad 1$: odd $\\quad 4$: odd', exampleNote: 'the factor $(x + 2)$ is squared; the other two appear once' },
+    ] },
+    { label: 'The signs', sub: 'steps 3 and 4', kind: 'must', stages: [
+      { n: 3, name: 'Rightmost sign', what: 'Sign in the rightmost interval', cond: 'How: end behavior — sign of $a_n$ for odd degree; sign of $a_n$ for even degree (both ends share it)',
+        example: '$(4, \\infty)$: $+$', exampleNote: 'the leading term is $x^4$, which is positive' },
+      { n: 4, name: 'Other signs', what: 'Sign in every other interval, working leftward', cond: 'How: flip the sign at each root of odd multiplicity; keep it the same at each root of even multiplicity',
+        example: '$(1, 4)$: $-$ $\\quad (-2, 1)$: $+$ $\\quad (-\\infty, -2)$: $+$', exampleNote: 'flips at $4$ and at $1$, stays at $-2$' },
+    ] },
+    { label: 'The answer', sub: 'step 5', kind: 'out', stages: [
+      { n: 5, name: 'Solution set', cond: 'How: select intervals matching the inequality; include roots for ≤ ⁄ ≥, exclude for < ⁄ >',
+        example: '$(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$', exampleNote: 'the positive intervals; the inequality is strict, so the roots stay out',
+        result: '$(-\\infty, -2) \\cup (-2, 1) \\cup (4, \\infty)$' },
+    ] },
+  ],
+}
+
+// ProcedureV2 (stages) 2026-11-15: replaces the table obj2Table (the sign chart method: step, action, tool / detail); steps, actions and details taken from the table.
+const signChartStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  groups: [
+    { label: 'The roots', sub: 'steps 1 and 2', kind: 'must', stages: [
+      { n: 1, name: 'Solve $P(x) = 0$ to find all real roots', cond: 'Tools: factoring; rational root theorem; quadratic formula after degree reduction; numerical methods if needed' },
+      { n: 2, name: 'Order the roots on the number line', cond: 'Smallest to largest; intervals form between consecutive roots' },
+    ] },
+    { label: 'The signs', sub: 'step 3', kind: 'must', stages: [
+      { n: 3, name: 'Determine the sign of $P(x)$ in each interval', cond: 'Tools: test points, factor signs from factored form, or end behavior + multiplicity' },
+    ] },
+    { label: 'The answer', sub: 'steps 4 and 5', kind: 'out', stages: [
+      { n: 4, name: 'Select intervals matching the inequality', cond: 'Positive intervals for $P(x) > 0$; negative intervals for $P(x) < 0$' },
+      { n: 5, name: 'Apply endpoint rules', cond: 'Include roots for ≤ ⁄ ≥; exclude for < ⁄ >' },
+    ] },
+  ],
+}
+
+// IntervalLine: the first two worked examples of obj7 as sign charts
+const il_polyExamples = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  signs: {
+    range: [-4, 6],
+    cases: [
+      { name: '$(x - 1)(x - 2)(x - 3)$', expression: '(x - 1)(x - 2)(x - 3)', op: '<=',
+        factors: [{ label: '$x - 1$', root: 1 }, { label: '$x - 2$', root: 2 }, { label: '$x - 3$', root: 3 }],
+        notes: { '*': { label: 'Three simple roots', text: 'Every root has odd multiplicity, so the sign alternates from one interval to the next.' } } },
+      { name: '$(x + 2)^2(x - 1)(x - 4)$', expression: '(x + 2)^2(x - 1)(x - 4)', op: '>',
+        factors: [{ label: '$(x + 2)^2$', root: -2, power: 2 }, { label: '$x - 1$', root: 1 }, { label: '$x - 4$', root: 4 }],
+        notes: { '*': { label: 'The double root', text: 'At $x = -2$ the sign does not change: the expression is positive on both sides and equals $0$ only at the point itself.' } } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -693,8 +827,24 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: The sign chart method on one inequality (obj2).
+  const signChartSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$x(x + 2)(x - 2) > 0$',
+      rows: [
+        { step: 'Solve $P(x) = 0$ to find all real roots', example: '$x = -2$, $x = 0$, $x = 2$' },
+        { step: 'Order the roots and list the intervals they create', example: '$(-\\infty, -2)$, $(-2, 0)$, $(0, 2)$, $(2, \\infty)$' },
+        { step: 'Find the sign of $P(x)$ in each interval', stepSub: 'A test point in each interval is enough', example: '$-$, $+$, $-$, $+$' },
+        { step: 'Select the intervals whose sign matches the inequality', stepSub: 'For $> 0$, the positive ones', example: '$(-2, 0)$ and $(2, \\infty)$' },
+        { step: 'Decide whether the roots are included', stepSub: 'A strict inequality leaves them out', example: '$(-2, 0) \\cup (2, \\infty)$' },
+      ],
+    },
+  };
+
    return {
   props: {
+    signChartSteps,
     pitfallData,
     faqQuestions,
     factorSignProfile,
@@ -720,7 +870,7 @@ const schemas = {
 
 
 
-   export default function PolynomialInequalitiesPage({ pitfallData,factorSignProfile, faqQuestions,
+   export default function PolynomialInequalitiesPage({ signChartSteps, pitfallData,factorSignProfile, faqQuestions,
   seoData,
   sectionsContent,
   introContent,
@@ -840,13 +990,29 @@ $$P(x) > 0$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="sign-chart-method-steps"
+            title="The sign chart method on one inequality"
+            source="/algebra/inequalities/polynomial"
+            before={"The five steps, run on the inequality from the note beside the text. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={signChartSteps} variant="worked" />
+          </DiagramFrame>,
+          `The walkthrough above runs the method on one inequality. Stated for any polynomial, the same five steps each come with a choice of tools or a rule to follow, grouped here by what they produce: the roots, the signs, the answer. Press Next to move through them in order.`,
+          <DiagramFrame
+            key={'procedure-sign-chart-stages'}
+            id="sign-chart-method-stages"
+            title="The Sign Chart Method, Stage by Stage"
+            source="/algebra/inequalities/polynomial"
+            related={false}
+          >
+            <ProcedureV2 data={signChartStages} variant="stages" />
+          </DiagramFrame>,
+          `The figure below is the finished chart for one cubic: three roots on the line, four intervals, and the sign written over each.`,
                   <div key={'unit-chart'} dangerouslySetInnerHTML={{ __html: demoUnits.chart }} />,
           `The method is the same for every degree; only the number of intervals grows.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a polynomial inequality](!/algebra/inequalities/methods/polynomial-inequalities) →@`,
         ]
     },
     {
@@ -875,11 +1041,17 @@ $$P(x) > 0$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrameV2
+            key={'case-graph-root-multiplicity-sign-grid'}
+            id="root-multiplicity-sign-grid"
+            title="Crossing or touching at a root"
+            source="/algebra/inequalities/polynomial"
+            related={false}
+            before={"The example factors of each multiplicity, each drawn near its root $r$. Click a heading to focus a row or column."}
+            after={"Only the parity of the exponent matters: odd powers cross the axis at $r$, even powers touch it and turn back."}
+          >
+            <CaseGraph data={caseGraphData2} variant="grid" />
+          </DiagramFrameV2>,
                   <div key={'unit-double'} dangerouslySetInnerHTML={{ __html: demoUnits.double }} />,
           `End behaviour, treated next, fixes the sign of the first interval; the rest follow by flipping at odd-multiplicity roots and keeping the sign at even ones.`,
         ]
@@ -892,11 +1064,17 @@ $$P(x) > 0$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrameV2
+            key={'case-graph-polynomial-end-behavior-grid'}
+            id="polynomial-end-behavior-grid"
+            title="The signs at both ends"
+            source="/algebra/inequalities/polynomial"
+            related={false}
+            before={"One row per parity of the degree, one column per sign of the leading coefficient. Each sketch shows only how the graph leaves the picture on the left and on the right."}
+            after={"Even degree sends both ends to the same side of the axis; odd degree sends them to opposite sides."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrameV2>,
           `@academic[punchline:Far from the origin a polynomial follows its leading term, so its signs at both ends are known before any root is found.]@`,
         ]
     },
@@ -918,6 +1096,16 @@ $$P(x) > 0$$]@`,
           sectionsContent.obj7.content,
           <div key={'unit-quartic'} dangerouslySetInnerHTML={{ __html: demoUnits.quartic }} />,
           `End behavior plus multiplicity fills the whole sign chart without a single test point.`,
+          <DiagramFrame
+            key={'quartic-interval-line'}
+            id="worked-examples-sign-chart"
+            title="The worked examples as sign charts"
+            source="/algebra/inequalities/polynomial"
+            related={false}
+            before={"The first two examples as sign charts. Switch the inequality sign to see which intervals and which roots enter the solution."}
+          >
+            <IntervalLine data={il_polyExamples} variant="signs" />
+          </DiagramFrame>,
         ]
     },
 
@@ -928,11 +1116,15 @@ $$P(x) > 0$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'procedure-no-test-point-stages'}
+            id="sign-chart-without-test-points"
+            title="Filling the Sign Chart Without Test Points"
+            source="/algebra/inequalities/polynomial"
+            related={false}
+          >
+            <ProcedureV2 data={noTestPointStages} variant="stages" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -950,6 +1142,14 @@ $$P(x) > 0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

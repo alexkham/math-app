@@ -755,6 +755,8 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj8 aggregation, obj9 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -768,6 +770,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -776,9 +779,32 @@ import matrixCompositionDiagrams from '@/app/components/linear-algebra copy/r2-v
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Reading the Matrix"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Shape of A (m × n)","features":[{"id":"c1","name":"Transformation type","type":"text"},{"id":"c2","name":"Geometric action","type":"text"}],"items":[{"id":"r1","name":"m > n (more rows than columns)","values":{"c1":"T: ℝⁿ → ℝᵐ, embedding","c2":"embeds a smaller-dimensional space into a larger one (e.g. 3 × 2 lifts ℝ² into ℝ³)"}},{"id":"r2","name":"m = n (square)","values":{"c1":"T: ℝⁿ → ℝⁿ, linear operator","c2":"maps a space to itself — only operators carry [determinant](!/linear-algebra/determinants), [eigenvalues](!/linear-algebra/eigen), and [trace](!/linear-algebra/matrix/trace)"}},{"id":"r3","name":"m < n (more columns than rows)","values":{"c1":"T: ℝⁿ → ℝᵐ, compression","c2":"compresses a larger-dimensional space into a smaller one (e.g. 2 × 3 flattens ℝ³ into ℝ²)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("The Matrix Encodes Everything"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Matrix invariant","features":[{"id":"c1","name":"What it reveals about T","type":"text"},{"id":"c2","name":"Requires","type":"text"}],"items":[{"id":"r1","name":"[rank](!/linear-algebra/matrix/rank)(A)","values":{"c1":"dim of the [image](!/linear-algebra/transformations/image-kernel) of T (how many output directions T can reach)","c2":"any A"}},{"id":"r2","name":"nullity(A)","values":{"c1":"dim of the kernel of T (how many input directions T collapses to zero)","c2":"any A"}},{"id":"r3","name":"det(A)","values":{"c1":"invertibility (det ≠ 0); volume scaling factor |det(A)|; orientation by sign","c2":"square A only"}},{"id":"r4","name":"eigenvalues","values":{"c1":"scaling factors along the invariant directions (eigenvectors)","c2":"square A only"}},{"id":"r5","name":"tr(A)","values":{"c1":"sum of the eigenvalues","c2":"square A only"}},{"id":"r6","name":"[singular values](!/linear-algebra/decompositions/svd)","values":{"c1":"maximum stretching along each orthogonal input direction","c2":"any A"}}]};
 
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the matrix of a linear transformation", href: "/linear-algebra/transformations/methods/transformation-matrix", desc: "Apply $T$ to each standard basis vector and use the results as the columns of $A$.", level: "composite", here: "#2" },
+    ] },
+    { title: "More linear transformation methods", items: [
+      { skill: "Check if a transformation is linear", href: "/linear-algebra/transformations/methods/linearity-check", desc: "Test $T(c\\mathbf{u} + \\mathbf{v}) = cT(\\mathbf{u}) + T(\\mathbf{v})$ with general vectors; one failing example disproves it.", level: "composite" },
+      { skill: "Find the kernel and image of a linear transformation", href: "/linear-algebra/transformations/methods/kernel-and-image", desc: "Row reduce the matrix once: the kernel comes from the free variables, the image from the pivot columns of $A$.", level: "composite" },
+      { skill: "Find the matrix of a geometric transformation", href: "/linear-algebra/transformations/methods/geometric-transformations", desc: "Rotations, reflections, projections, shears: track where $\\mathbf{e}_1$ and $\\mathbf{e}_2$ go, and multiply right to left to combine.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/transformations/methods", label: "All linear transformation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1521,7 +1547,7 @@ $$= T(1, 1, 1)$$`],
         check: `Multiply the matrix by $\\mathbf{e}_1$. The result is the first column, and it must equal $T(\\mathbf{e}_1) = (2, 4)$. For a map between spaces of different dimensions, the size check is even quicker: the matrix of $T: \\mathbb{R}^3 \\to \\mathbb{R}^2$ must have $3$ columns.` },
       { id: 'reading-the-size-backwards', name: `Reading the size backwards`, errorAt: 0,
         what: `The size $m \\times n$ is read in the order it is written, as if the first number were the domain and the second the codomain. The map then appears to run between the wrong two spaces.`,
-        wrong: [`The matrix $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$ is $2 \\times 3$, so it is taken to be a map $\\mathbb{R}^2 \\to \\mathbb{R}^3$, and one tries to compute $A\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$. That product is undefined: each row of $A$ has $3$ entries and the vector has $2$.`],
+        wrong: [`The matrix $A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$ is $2 \\times 3$, so it is taken to be a map $\\mathbb{R}^2 \\to \\mathbb{R}^3$, and one tries to compute $A\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix}$. That product is undefined: each row of $A$ has $3$ entries and the vector has $2$. [See which sizes fit](!/linear-algebra/matrix/operations#which-sizes-fit).`],
         right: [`The number of columns is the number of inputs, and the number of rows is the number of outputs. $A$ has $3$ columns and $2$ rows, so it maps $\\mathbb{R}^3 \\to \\mathbb{R}^2$:
 $$A\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 9 \\end{pmatrix}$$`],
         why: `The arrow $T: \\mathbb{R}^n \\to \\mathbb{R}^m$ names the domain first, while the size $m \\times n$ names the rows, that is the codomain, first. The two orders are opposite.`,
@@ -1536,8 +1562,24 @@ $$AB = \\begin{pmatrix} 0 & 0 \\\\ 1 & 0 \\end{pmatrix}$$`, `Which sends $\\math
     ],
   };
 
+  // Procedure rollout 2026-11-14: Building the standard matrix, column by column (obj2).
+  const standardMatrixSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$T(x, y, z) = (2x - y + 3z, \\; 4x + 5z)$',
+      rows: [
+        { step: 'Apply $T$ to $\\mathbf{e}_1$', example: '$T(1, 0, 0) = (2, 4)$' },
+        { step: 'Apply $T$ to $\\mathbf{e}_2$', example: '$T(0, 1, 0) = (-1, 0)$' },
+        { step: 'Apply $T$ to $\\mathbf{e}_3$', example: '$T(0, 0, 1) = (3, 5)$' },
+        { step: 'Arrange the results as columns', example: '$A = \\begin{pmatrix} 2 & -1 & 3 \\\\ 4 & 0 & 5 \\end{pmatrix}$' },
+        { check: true, step: 'Check that $A$ times $(x, y, z)$ gives back $T$', example: '$(2x - y + 3z, \\; 4x + 5z)$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    standardMatrixSteps,
     pitfallData,
     derivativeMatrixBeforeAfter,
     demoUnits,
@@ -1560,7 +1602,7 @@ return {
 }
    }
 
-export default function MatrixRepresentationPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas, demoUnits, conceptIntroFigures, derivativeMatrixBeforeAfter}) {
+export default function MatrixRepresentationPage({ standardMatrixSteps, pitfallData,seoData, sectionsContent, introContent, obj3Table, obj8Table, transformationDictionary, faqQuestions, schemas, demoUnits, conceptIntroFigures, derivativeMatrixBeforeAfter}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1670,8 +1712,18 @@ $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mat
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="standard-matrix-steps"
+            title="Building the standard matrix, column by column"
+            source="/linear-algebra/transformations/matrix-representation"
+            before={"The recipe on the worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={standardMatrixSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-standard'} dangerouslySetInnerHTML={{ __html: demoUnits.standard }} />,
           `This is why the standard matrix is built by feeding the basis vectors through the map rather than by solving anything.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the matrix of a linear transformation](!/linear-algebra/transformations/methods/transformation-matrix) →@`,
         ]
     },
     {
@@ -1680,8 +1732,15 @@ $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mat
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-matrix-representation-reading-matrix-matrix'}
+            id="matrix-representation-reading-matrix-matrix"
+            title="Reading the Matrix"
+            source="/linear-algebra/transformations/matrix-representation"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1739,8 +1798,15 @@ $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mat
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-matrix-representation-matrix-encodes-everything-matrix'}
+            id="matrix-representation-matrix-encodes-everything-matrix"
+            title="The Matrix Encodes Everything"
+            source="/linear-algebra/transformations/matrix-representation"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1777,6 +1843,14 @@ $$T(\\mathbf{x}) = A\\mathbf{x} \\quad \\text{for every } \\mathbf{x} \\in \\mat
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

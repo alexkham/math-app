@@ -730,6 +730,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj3 comparison, obj4 aggregation, obj8 aggregation, obj9 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -746,8 +747,37 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Non-Examples"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"Failed property","type":"text"},{"id":"c2","name":"Demonstration","type":"text"}],"items":[{"id":"r1","name":"Translation T(v) = v + b, b ≠ 0","values":{"c1":"T(0) = 0 test","c2":"T(0) = b ≠ 0"}},{"id":"r2","name":"Squaring T(x) = x²","values":{"c1":"additivity","c2":"T(1 + 1) = 4, but T(1) + T(1) = 2"}},{"id":"r3","name":"Absolute value T(x) = |x|","values":{"c1":"homogeneity (scalar mult.)","c2":"T(−1 · 2) = 2, but −1 · T(2) = −2"}},{"id":"r4","name":"Norm T(v) = ‖v‖","values":{"c1":"additivity (triangle inequality)","c2":"‖u + v‖ ≤ ‖u‖ + ‖v‖, with strict inequality generic"}},{"id":"r5","name":"Affine T(v) = Av + b, b ≠ 0","values":{"c1":"T(0) = 0 test","c2":"T(0) = b ≠ 0 (matrix part alone would be linear)"}}]};
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: When a Transformation Is Linear"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"Defined on","type":"text"},{"id":"c2","name":"Linear?","type":"verdict"},{"id":"c3","name":"Reason","type":"text"}],"items":[{"id":"r1","name":"Zero map T(v) = 0","values":{"c1":"any V → W","c2":"yes","c3":"corresponds to the zero matrix"}},{"id":"r2","name":"Identity T(v) = v","values":{"c1":"any V → V","c2":"yes","c3":"corresponds to the identity matrix"}},{"id":"r3","name":"Matrix multiplication T(x) = Ax","values":{"c1":"ℝⁿ → ℝᵐ","c2":"yes","c3":"A(cu + dv) = cAu + dAv"}},{"id":"r4","name":"Rotation by θ","values":{"c1":"ℝ² → ℝ²","c2":"yes","c3":"matrix transformation"}},{"id":"r5","name":"Projection onto a subspace","values":{"c1":"ℝⁿ → ℝⁿ","c2":"yes","c3":"matrix transformation"}},{"id":"r6","name":"Differentiation T(p) = p'","values":{"c1":"𝒫ₙ → 𝒫ₙ₋₁","c2":"yes","c3":"derivative respects + and scalar mult."}},{"id":"r7","name":"Integration T(f) = ∫ₐˣ f","values":{"c1":"C[a, b] → C[a, b]","c2":"yes","c3":"integral respects + and scalar mult."}},{"id":"r8","name":"Transpose T(A) = Aᵀ","values":{"c1":"ℝⁿˣⁿ → ℝⁿˣⁿ","c2":"yes","c3":"(A + B)ᵀ = Aᵀ + Bᵀ; (cA)ᵀ = cAᵀ"}},{"id":"r9","name":"Trace T(A) = tr(A)","values":{"c1":"ℝⁿˣⁿ → ℝ","c2":"yes","c3":"additive and scalar-homogeneous"}},{"id":"r10","name":"Translation T(v) = v + b, b ≠ 0","values":{"c1":"V → V","c2":"no","c3":"T(0) = b ≠ 0"}},{"id":"r11","name":"Squaring T(x) = x²","values":{"c1":"ℝ → ℝ","c2":"no","c3":"fails additivity"}},{"id":"r12","name":"Absolute value T(x) = |x|","values":{"c1":"ℝ → ℝ","c2":"no","c3":"fails homogeneity"}},{"id":"r13","name":"Norm T(v) = ‖v‖","values":{"c1":"V → ℝ","c2":"no","c3":"fails additivity (triangle inequality)"}},{"id":"r14","name":"Affine T(v) = Av + b, b ≠ 0","values":{"c1":"V → V","c2":"no","c3":"T(0) = b ≠ 0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Geometry"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"Geometric action","type":"text"},{"id":"c2","name":"Standard matrix (ℝ²)","type":"text"},{"id":"c3","name":"Determinant / preservation","type":"text"}],"items":[{"id":"r1","name":"Rotation by θ","values":{"c1":"spins every vector around the origin","c2":"[cosθ −sinθ; sinθ cosθ]","c3":"det = 1; preserves lengths and angles"}},{"id":"r2","name":"Reflection (across x-axis)","values":{"c1":"mirrors across a line through the origin","c2":"[1 0; 0 −1]","c3":"det = −1; reverses orientation"}},{"id":"r3","name":"Projection (onto x-axis)","values":{"c1":"flattens space onto a subspace","c2":"[1 0; 0 0]","c3":"det = 0; not invertible"}},{"id":"r4","name":"Shear (horizontal by k)","values":{"c1":"tilts one axis relative to another","c2":"[1 k; 0 1]","c3":"det = 1; preserves area"}},{"id":"r5","name":"Scaling (uniform by s)","values":{"c1":"stretches or compresses uniformly","c2":"[s 0; 0 s]","c3":"det = s²; scales area by s²"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Examples Beyond Rⁿ"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Domain → Codomain","type":"text"},{"id":"c2","name":"Why linear","type":"text"}],"items":[{"id":"r1","name":"Differentiation T(p) = p'","values":{"c1":"𝒫ₙ → 𝒫ₙ₋₁","c2":"(p + q)' = p' + q'; (cp)' = cp'"}},{"id":"r2","name":"Integration T(f) = ∫ₐˣ f(t) dt","values":{"c1":"C[a, b] → C[a, b]","c2":"linearity of the definite integral"}},{"id":"r3","name":"[Transpose](!/linear-algebra/matrix/operations) T(A) = Aᵀ","values":{"c1":"ℝⁿˣⁿ → ℝⁿˣⁿ","c2":"(A + B)ᵀ = Aᵀ + Bᵀ; (cA)ᵀ = cAᵀ"}},{"id":"r4","name":"[Trace](!/linear-algebra/matrix/trace) T(A) = tr(A)","values":{"c1":"ℝⁿˣⁿ → ℝ","c2":"tr(A + B) = tr(A) + tr(B); tr(cA) = c · tr(A)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Linear transformation methods", items: [
+      { skill: "Check if a transformation is linear", href: "/linear-algebra/transformations/methods/linearity-check", desc: "Test $T(c\\mathbf{u} + \\mathbf{v}) = cT(\\mathbf{u}) + T(\\mathbf{v})$ with general vectors; one failing example disproves it.", level: "composite" },
+      { skill: "Find the matrix of a linear transformation", href: "/linear-algebra/transformations/methods/transformation-matrix", desc: "Apply $T$ to each standard basis vector and use the results as the columns of $A$.", level: "composite" },
+      { skill: "Change basis", href: "/linear-algebra/transformations/methods/change-of-basis", desc: "Coordinates in a new basis are $P^{-1}\\mathbf{v}$; the matrix of a map in the new basis is $P^{-1}AP$.", level: "composite" },
+      { skill: "Find the matrix of a geometric transformation", href: "/linear-algebra/transformations/methods/geometric-transformations", desc: "Rotations, reflections, projections, shears: track where $\\mathbf{e}_1$ and $\\mathbf{e}_2$ go, and multiply right to left to combine.", level: "composite" },
+      { skill: "Find the kernel and image of a linear transformation", href: "/linear-algebra/transformations/methods/kernel-and-image", desc: "Row reduce the matrix once: the kernel comes from the free variables, the image from the pivot columns of $A$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/transformations/methods", label: "All linear transformation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1479,8 +1509,15 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-transformations-non-examples-matrix'}
+            id="transformations-non-examples-matrix"
+            title="Non-Examples"
+            source="/linear-algebra/transformations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1489,8 +1526,15 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-transformations-examples-beyond-r-matrix'}
+            id="transformations-examples-beyond-r-matrix"
+            title="Examples Beyond Rⁿ"
+            source="/linear-algebra/transformations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1525,8 +1569,15 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-transformations-geometry-matrix'}
+            id="transformations-geometry-matrix"
+            title="Geometry"
+            source="/linear-algebra/transformations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
           `The non-examples earlier on this page all fail one of these four in a way that is easier to see than to calculate.`,
         ]
@@ -1537,8 +1588,15 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-transformations-summary-when-transformation-is-matrix'}
+            id="transformations-summary-when-transformation-is-matrix"
+            title="Summary: When a Transformation Is Linear"
+            source="/linear-algebra/transformations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1556,6 +1614,14 @@ $$T(c\\mathbf{u} + d\\mathbf{v}) = cT(\\mathbf{u}) + dT(\\mathbf{v})$$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

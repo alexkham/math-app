@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-06-03 | 3 tables (obj1 aggregation, obj3 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,9 +18,57 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Finding Terms"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Given","features":[{"id":"c1","name":"Find","type":"text"},{"id":"c2","name":"Equation / approach","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"a₁, r, n","values":{"c1":"aₙ","c2":"aₙ = a₁ · rⁿ⁻¹ — substitute directly","c3":"a₁ = 3, r = 2 → a₁₀ = 3 · 2⁹ = 1536"}},{"id":"r2","name":"a₁, aₙ, n","values":{"c1":"r","c2":"r = (aₙ ⁄ a₁)$^{1 ⁄ (n-1)}$","c3":"a₁ = 5, a₄ = 40 → r³ = 8 → r = 2"}},{"id":"r3","name":"aₙ, r, n","values":{"c1":"a₁","c2":"a₁ = aₙ ⁄ rⁿ⁻¹","c3":"a₆ = 96, r = 2 → a₁ = 96 ⁄ 32 = 3"}},{"id":"r4","name":"a₁, r, a value v","values":{"c1":"n (position of v)","c2":"n = 1 + logᵣ(v ⁄ a₁); use [logarithms](!/algebra/logarithms) if powers aren't clean","c3":"a₁ = 4, r = 3, v = 2916 → 3ⁿ⁻¹ = 729 → n = 7"}},{"id":"r5","name":"Two non-consecutive terms","values":{"c1":"a₁ and r","c2":"divide the two equations to isolate a power of r","c3":"a₂ = 6, a₅ = 162 → r³ = 27 → r = 3, a₁ = 2"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the nth term of a geometric sequence", href: "/algebra/methods/geometric-sequence-nth-term", desc: "Find the common ratio, then $a_n = a_1 r^{\\,n-1}$; also from two given terms.", level: "composite", here: "#3" },
+      { skill: "Sum a finite geometric series", href: "/algebra/methods/geometric-series-sum", desc: "Count the terms, then $S_n = a_1\\frac{1 - r^n}{1 - r}$.", level: "composite", here: "#5" },
+      { skill: "Sum an infinite geometric series", href: "/algebra/methods/infinite-geometric-series", desc: "Check $|r| < 1$, then $S = \\frac{a_1}{1 - r}$; also turns repeating decimals into fractions.", level: "composite", here: "#6" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Find the nth term of an arithmetic sequence", href: "/algebra/methods/arithmetic-sequence-nth-term", desc: "Find the common difference, then $a_n = a_1 + (n - 1)d$; also from two given terms.", level: "composite" },
+      { skill: "Convert a recursive formula to an explicit one", href: "/algebra/methods/recursive-to-explicit", desc: "Read the step rule, decide arithmetic or geometric, write the closed form, check it.", level: "composite" },
+      { skill: "Sum an arithmetic series", href: "/algebra/methods/arithmetic-series-sum", desc: "Count the terms, then $S_n = \\frac{n}{2}(a_1 + a_n)$, or the version with $d$.", level: "composite" },
+      { skill: "Solve exponential growth and decay problems", href: "/algebra/methods/exponential-growth-decay-problems", desc: "Populations, half-lives, depreciation: build the model, find the rate, solve for the time.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// FeatureMatrix 2026-11-15: replaces the table obj1Table (how the sequence and the series behave for each range of r); cells and the link taken from the table.
+const fm_ratioRanges = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  verdicts: {
+    yes: { label: 'Series converges', mark: '✓', color: '#2563EB', bg: '#dbeafe' },
+    no: { label: 'Series diverges', mark: '✕', color: '#475569', bg: '#f1f5f9' },
+  },
+  corner: 'Range of $r$',
+  features: [
+    { id: 'c1', name: 'Term behavior', type: 'text' },
+    { id: 'c0', name: 'Series', type: 'verdict' },
+    { id: 'c2', name: 'Series behavior', type: 'text' },
+    { id: 'c3', name: 'Example', type: 'text' },
+  ],
+  items: [
+    { id: 'r1', name: '$r > 1$', values: { c1: 'same-sign terms grow without bound', c0: 'no', c2: 'diverges', c3: '$2, 6, 18, 54, \\ldots$ ($r = 3$)' } },
+    { id: 'r2', name: '$0 < r < 1$', values: { c1: 'same-sign terms decay toward $0$', c0: 'yes', c2: 'converges to $\\frac{a_1}{1 - r}$', c3: '$81, 27, 9, 3, 1, \\ldots$ ($r = \\frac{1}{3}$)' } },
+    { id: 'r3', name: '$-1 < r < 0$', values: { c1: 'signs alternate, magnitudes decay toward $0$', c0: 'yes', c2: 'converges to $\\frac{a_1}{1 - r}$', c3: '$8, -4, 2, -1, 0.5, \\ldots$ ($r = -\\frac{1}{2}$)' } },
+    { id: 'r4', name: '$r < -1$', values: { c1: 'signs alternate, magnitudes grow unbounded', c0: 'no', c2: 'diverges', c3: '$4, -8, 16, -32, \\ldots$ ($r = -2$)' } },
+    { id: 'r5', name: '$r = 1$', values: { c1: 'constant: every term equals $a_1$ (also [arithmetic](!/algebra/sequences/arithmetic) with $d = 0$)', c0: 'no', c2: 'diverges: $S_n = n \\cdot a_1$', c3: '$5, 5, 5, 5, \\ldots$' } },
+    { id: 'r6', name: '$r = -1$', values: { c1: 'oscillates between $\\pm a_1$ at constant magnitude', c0: 'no', c2: 'diverges: partial sums oscillate, never settle', c3: '$7, -7, 7, -7, \\ldots$' } },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1018,8 +1067,16 @@ $$a_n = a_1 \\cdot r^{n-1}$$
           `The ratio $r$ determines the sequence's character. When $r > 1$, the terms grow without bound: $2, 6, 18, 54, \\ldots$ with $r = 3$. When $0 < r < 1$, the terms decay toward zero: $81, 27, 9, 3, 1, \\ldots$ with $r = \\frac{1}{3}$. When $r < 0$, the terms alternate in sign: $4, -8, 16, -32, \\ldots$ with $r = -2$.`,
           <div key={'unit-ratioCases'} dangerouslySetInnerHTML={{ __html: demoUnits.ratioCases }} />,
           `With −1 < r < 0 the jumps shrink instead: the terms alternate and decay toward 0.`,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-geometric-ratio-ranges'}
+            id="geometric-ratio-ranges"
+            title="How the Ratio Shapes the Sequence and the Series"
+            source="/algebra/sequences/geometric"
+            related={false}
+            layout="top"
+          >
+            <FeatureMatrix data={fm_ratioRanges} />
+          </DiagramFrame>,
           `Where an [arithmetic sequence](!/algebra/sequences/arithmetic) is linear — its terms lie on a straight line when plotted against their indices — a geometric sequence is exponential. The general term $a_1 \\cdot r^{n-1}$ is an [exponential function](!/algebra/powers/exponential-functions) of $n$.`,
         ],
       },
@@ -1093,8 +1150,16 @@ $$a_n = a_1 \\cdot r^{n-1}$$
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-geometric-finding-terms-matrix'}
+            id="geometric-finding-terms-matrix"
+            title="Finding Terms"
+            source="/algebra/sequences/geometric"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the nth term of a geometric sequence](!/algebra/methods/geometric-sequence-nth-term) →@`,
         ]
     },
     {
@@ -1123,6 +1188,7 @@ $$a_n = a_1 \\cdot r^{n-1}$$
             <ProofSteps data={proofStepsData} variant="stepper" />
           </DiagramFrame>,
           sectionsContent.obj5.afterProof,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to sum a finite geometric series](!/algebra/methods/geometric-series-sum) →@`,
         ]
     },
     {
@@ -1134,6 +1200,7 @@ $$a_n = a_1 \\cdot r^{n-1}$$
           <div key={'unit-halvesFill'} dangerouslySetInnerHTML={{ __html: demoUnits.halvesFill }} />,
           `With r = 2 the gap would never close: each term would be larger than everything before it.`,
           `@academic[punchline:Infinitely many terms can have a finite sum, and for a geometric series that happens exactly when $|r| < 1$.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to sum an infinite geometric series](!/algebra/methods/infinite-geometric-series) →@`,
         ]
     },
     {
@@ -1177,6 +1244,14 @@ $$a_n = a_1 \\cdot r^{n-1}$$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

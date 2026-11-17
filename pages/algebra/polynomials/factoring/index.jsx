@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,13 +17,55 @@ import identityDiagrams from '@/app/components/algebra/identities/identityDiagra
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Factoring Decision Tree"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Situation","features":[{"id":"c1","name":"Technique to try","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Any polynomial (first move)","values":{"c1":"extract the GCF","c2":"6x³ + 9x² − 3x → 3x(2x² + 3x − 1)"}},{"id":"r2","name":"Two terms","values":{"c1":"difference of squares; sum or difference of cubes","c2":"9x² − 16 → (3x + 4)(3x − 4)"}},{"id":"r3","name":"Three terms, leading coeff 1","values":{"c1":"simple trinomial: find m, n with m·n = c, m + n = b","c2":"x² + 7x + 12 → (x + 3)(x + 4)"}},{"id":"r4","name":"Three terms, leading coeff ≠ 1","values":{"c1":"AC method: split middle term, then group","c2":"6x² + 11x + 4 → (3x + 4)(2x + 1)"}},{"id":"r5","name":"Four or more terms","values":{"c1":"factoring by grouping (rearrange if needed)","c2":"x³ + 2x² + 3x + 6 → (x² + 3)(x + 2)"}},{"id":"r6","name":"Higher degree, only even powers","values":{"c1":"substitute u = x²; factor in u; substitute back","c2":"x⁴ + 5x² + 6 → (x² + 2)(x² + 3)"}},{"id":"r7","name":"Higher degree, known root r","values":{"c1":"divide by (x − r); factor the quotient further","c2":"P(2) = 0 → P(x) = (x − 2) · Q(x)"}},{"id":"r8","name":"After any step","values":{"c1":"re-inspect every factor; verify by re-expansion","c2":"x⁴ − 16 = (x² + 4)(x² − 4) → (x² + 4)(x + 2)(x − 2)"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Why it goes wrong","type":"text"},{"id":"c2","name":"Correct approach","type":"text"}],"items":[{"id":"r1","name":"Skipping the GCF","values":{"c1":"factoring 3x³ − 12x without first pulling 3x; misses or mangles the rest","c2":"extract GCF first → 3x(x + 2)(x − 2)"}},{"id":"r2","name":"Wrong signs in trinomial","values":{"c1":"x² − 5x + 6 = (x + 2)(x − 3) gives middle term −x, not −5x","c2":"match sign rules (m·n = c, m + n = b); verify by expanding"}},{"id":"r3","name":"Factoring a sum of squares","values":{"c1":"writing a² + b² = (a + b)(a − b) gives a² − b²","c2":"a² + b² is irreducible over ℝ (factors only over ℂ)"}},{"id":"r4","name":"Wrong middle-term sign in cubes","values":{"c1":"writing a³ + b³ = (a + b)(a² + ab + b²) (should be −ab)","c2":"SOAP: Same / Opposite / Always Positive"}},{"id":"r5","name":"Stopping too early","values":{"c1":"x⁴ − 16 = (x² + 4)(x² − 4); leaves a hidden diff. of squares","c2":"re-inspect every factor for further decomposition"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Sum and Difference of Cubes"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pattern","features":[{"id":"c1","name":"Original form","type":"text"},{"id":"c2","name":"Factored form","type":"text"},{"id":"c3","name":"How to spot it","type":"text"}],"items":[{"id":"r1","name":"Difference of squares","values":{"c1":"a² − b²","c2":"(a + b)(a − b)","c3":"two terms, both perfect squares, joined by a minus sign"}},{"id":"r2","name":"Sum of squares","values":{"c1":"a² + b²","c2":"irreducible over ℝ; (a + bi)(a − bi) over ℂ","c3":"two terms, both perfect squares, joined by a plus sign"}},{"id":"r3","name":"Perfect square trinomial (+)","values":{"c1":"a² + 2ab + b²","c2":"(a + b)²","c3":"first & last terms are perfect squares; middle = +2 · √first · √last"}},{"id":"r4","name":"Perfect square trinomial (−)","values":{"c1":"a² − 2ab + b²","c2":"(a − b)²","c3":"same as above with middle = −2 · √first · √last"}},{"id":"r5","name":"Sum of cubes","values":{"c1":"a³ + b³","c2":"(a + b)(a² − ab + b²)","c3":"two terms, both perfect cubes, joined by a plus (SOAP signs)"}},{"id":"r6","name":"Difference of cubes","values":{"c1":"a³ − b³","c2":"(a − b)(a² + ab + b²)","c3":"two terms, both perfect cubes, joined by a minus (SOAP signs)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Factoring Trinomials — Simple Case"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Sign of c","features":[{"id":"c1","name":"Sign of b","type":"text"},{"id":"c2","name":"Signs of m and n","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"c > 0","values":{"c1":"b > 0","c2":"both positive","c3":"x² + 7x + 12 = (x + 3)(x + 4)"}},{"id":"r2","name":"c > 0","values":{"c1":"b < 0","c2":"both negative","c3":"x² − 9x + 20 = (x − 4)(x − 5)"}},{"id":"r3","name":"c < 0","values":{"c1":"b > 0","c2":"opposite signs; the positive one has the larger absolute value","c3":"x² + 2x − 15 = (x + 5)(x − 3)"}},{"id":"r4","name":"c < 0","values":{"c1":"b < 0","c2":"opposite signs; the negative one has the larger absolute value","c3":"x² − 2x − 15 = (x − 5)(x + 3)"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Factor out the greatest common factor", href: "/algebra/polynomials/methods/factor-gcf", desc: "Pull the largest common number and the lowest common powers out of every term.", level: "composite", here: "#2" },
+      { skill: "Factor by grouping", href: "/algebra/polynomials/methods/factor-by-grouping", desc: "Four terms: pair them, factor each pair, then factor out the common bracket.", level: "composite", here: "#3" },
+      { skill: "Factor a trinomial", href: "/algebra/polynomials/methods/factor-trinomials", desc: "Find two numbers by product and sum; the ac method when the leading coefficient is not 1.", level: "composite", here: "#4" },
+      { skill: "Factor a difference of squares", href: "/algebra/polynomials/methods/difference-of-squares", desc: "Spot $a^2 - b^2$ and write $(a - b)(a + b)$; repeat while squares remain.", level: "composite", here: "#6" },
+      { skill: "Factor a sum or difference of cubes", href: "/algebra/polynomials/methods/sum-difference-of-cubes", desc: "Spot $a^3 \\pm b^3$ and use the matching formula; the quadratic factor never factors further.", level: "composite", here: "#8" },
+      { skill: "Choose the right factoring method", href: "/algebra/polynomials/methods/which-factoring-method", desc: "A decision tree: GCF first, then count the terms and look for the pattern.", level: "strategy", here: "#10" },
+    ] },
+    { title: "More polynomial methods", items: [
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+      { skill: "Complete the square", href: "/algebra/equations/methods/completing-the-square", desc: "Turn $x^2 + bx$ into a perfect square to solve a quadratic or find its vertex.", level: "composite" },
+    ] },
+    { title: "Limit methods", items: [
+      { skill: "Evaluate a limit by factoring", href: "/calculus/limits/methods/factoring-limits", desc: "A $\\frac{0}{0}$ form with polynomials: factor, cancel the vanishing factor, substitute.", level: "composite" },
+      { skill: "Find and remove a removable discontinuity", href: "/calculus/limits/methods/removable-discontinuities", desc: "A hole: the limit exists but $f(a)$ is missing or wrong. Cancel, find the limit, redefine.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/polynomials/methods", label: "All polynomial methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1247,8 +1290,35 @@ $$= (3x + 4)(2x + 1)$$`],
     ],
   };
 
+  const groupingSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$x^3 + 2x^2 + 3x + 6$',
+      rows: [
+        { step: 'Split the polynomial into pairs of terms', example: '$(x^3 + 2x^2) + (3x + 6)$' },
+        { step: 'Factor each pair separately', example: '$x^2(x + 2) + 3(x + 2)$' },
+        { step: 'Factor out the common binomial', example: '$(x^2 + 3)(x + 2)$' },
+      ],
+    },
+  };
+
+  const acMethodSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$6x^2 + 11x + 4$',
+      rows: [
+        { step: 'Multiply $a$ and $c$', example: '$ac = 6 \\cdot 4 = 24$' },
+        { step: 'Find $m$ and $n$ with $m \\cdot n = ac$ and $m + n = b$', example: '$3 \\cdot 8 = 24$ and $3 + 8 = 11$' },
+        { step: 'Split the middle term', example: '$6x^2 + 3x + 8x + 4$' },
+        { step: 'Factor by grouping', example: '$3x(2x + 1) + 4(2x + 1) = (3x + 4)(2x + 1)$' },
+      ],
+    },
+  };
+
   return {
   props:{
+    acMethodSteps,
+    groupingSteps,
     formulaSummaryData,
     pitfallData,
     factoringDecision,
@@ -1275,7 +1345,7 @@ $$= (3x + 4)(2x + 1)$$`],
 }
    }
 
-export default function FactoringPage({ formulaSummaryData, pitfallData,factoringDecision, factorOutline,gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function FactoringPage({ acMethodSteps, groupingSteps, formulaSummaryData, pitfallData,factoringDecision, factorOutline,gcfFactoringSteps, seoData, sectionsContent, introContent, obj4Table, obj8Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1379,6 +1449,7 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to factor out the greatest common factor](!/algebra/polynomials/methods/factor-gcf) →@`,
         ]
     },
     {
@@ -1387,6 +1458,12 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame key={'obj3-procedure'} id="factoring-by-grouping-steps" title="Grouping on one polynomial"
+            source="/algebra/polynomials/factoring" related={false}
+            before={"The example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={groupingSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to factor by grouping](!/algebra/polynomials/methods/factor-by-grouping) →@`,
         ]
     },
 
@@ -1397,11 +1474,16 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-factoring-factoring-trinomials-simple-case-matrix'}
+            id="factoring-factoring-trinomials-simple-case-matrix"
+            title="Factoring Trinomials — Simple Case"
+            source="/algebra/polynomials/factoring"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to factor a trinomial](!/algebra/polynomials/methods/factor-trinomials) →@`,
         ]
     },
     {
@@ -1410,6 +1492,11 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame key={'obj5-procedure'} id="ac-method-steps" title="The AC method on one trinomial"
+            source="/algebra/polynomials/factoring" related={false}
+            before={"The example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={acMethodSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1420,6 +1507,7 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
           sectionsContent.obj6.content,
           <div key={'unit-squares'} dangerouslySetInnerHTML={{ __html: demoUnits.squares }} />,
           `The sum a² + b² has no such rearrangement, and over the reals it does not factor.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to factor a difference of squares](!/algebra/polynomials/methods/difference-of-squares) →@`,
         ]
     },
     {
@@ -1440,11 +1528,16 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-factoring-sum-difference-cubes-matrix'}
+            id="factoring-sum-difference-cubes-matrix"
+            title="Sum and Difference of Cubes"
+            source="/algebra/polynomials/factoring"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to factor a sum or difference of cubes](!/algebra/polynomials/methods/sum-difference-of-cubes) →@`,
         ]
     },
     {
@@ -1476,6 +1569,7 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
               direction="vertical"
             />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which factoring method should I use?](!/algebra/polynomials/methods/which-factoring-method) →@`,
         ]
     },
     {
@@ -1514,11 +1608,15 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-factoring-common-mistakes-matrix'}
+            id="factoring-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/algebra/polynomials/factoring"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj12-mistakes'}
             id="factoring-pitfalls"
@@ -1538,11 +1636,15 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-factoring-summary-factoring-decision-tree-matrix'}
+            id="factoring-summary-factoring-decision-tree-matrix"
+            title="Summary: A Factoring Decision Tree"
+            source="/algebra/polynomials/factoring"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj13-diagram'}
             id="factoring-decision-outline"
@@ -1551,6 +1653,14 @@ export default function FactoringPage({ formulaSummaryData, pitfallData,factorin
           >
             <TaxonomyOutline data={factorOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

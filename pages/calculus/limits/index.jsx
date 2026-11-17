@@ -5,6 +5,7 @@
 
 
 // tables-optimized: v4 | 2026-05-24 | 4 tables (obj2 aggregation, obj4 comparison, obj8 comparison, obj10 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -23,8 +24,44 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Limits That Fail to Exist"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Failure mode","features":[{"id":"c1","name":"What happens","type":"text"},{"id":"c2","name":"Canonical example","type":"text"}],"items":[{"id":"r1","name":"Oscillation","values":{"c1":"function bounces between values without settling on any single one","c2":"sin(1/x) as x → 0"}},{"id":"r2","name":"Unbounded behavior","values":{"c1":"function grows without bound rather than approaching a finite value","c2":"1/x² as x → 0 — described as an [infinite limit](!/calculus/limits/infinity), but no finite L"}},{"id":"r3","name":"Direction-dependent","values":{"c1":"left-hand and right-hand limits give different values","c2":"a step function at the jump point"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Navigating the Limits Subtree"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Topic","features":[{"id":"c1","name":"What it covers","type":"text"},{"id":"c2","name":"Key idea","type":"text"},{"id":"c3","name":"Page","type":"text"}],"items":[{"id":"r1","name":"[Two-sided limits](!/calculus/limits/two-sided)","values":{"c1":"the standard limit — x approaches a from both sides","c2":"exists iff both one-sided limits exist and agree","c3":"/calculus/limits/two-sided"}},{"id":"r2","name":"[One-sided limits](!/calculus/limits/one-sided)","values":{"c1":"direction-specific approach: left only or right only","c2":"essential for piecewise functions and domain endpoints","c3":"/calculus/limits/one-sided"}},{"id":"r3","name":"[Limit rules](!/calculus/limits/rules)","values":{"c1":"shortcuts for computing complex limits","c2":"sum, product, quotient, constant multiple, and Squeeze Theorem","c3":"/calculus/limits/rules"}},{"id":"r4","name":"[Evaluating limits](!/calculus/limits/evaluating)","values":{"c1":"handling indeterminate forms like 0/0","c2":"factor, cancel, rationalize, transform until substitution works","c3":"/calculus/limits/evaluating"}},{"id":"r5","name":"[Special limits](!/calculus/limits/special)","values":{"c1":"memorized building blocks for trig and exponential limits","c2":"sin(x)/x → 1, (eˣ−1)/x → 1, (1 + 1/x)ˣ → e","c3":"/calculus/limits/special"}},{"id":"r6","name":"[Limits and infinity](!/calculus/limits/infinity)","values":{"c1":"limits at infinity (end behavior) and infinite limits (blowups)","c2":"horizontal vs vertical asymptotes; dominant-term analysis","c3":"/calculus/limits/infinity"}},{"id":"r7","name":"[Continuity](!/calculus/limits/continuity)","values":{"c1":"when a limit equals the function value","c2":"three conditions; classification of discontinuities; IVT","c3":"/calculus/limits/continuity"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Limits and Infinity"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Concept","features":[{"id":"c1","name":"Notation","type":"text"},{"id":"c2","name":"What x does","type":"text"},{"id":"c3","name":"What f does","type":"text"},{"id":"c4","name":"Asymptote it signals","type":"text"}],"items":[{"id":"r1","name":"Limit at infinity","values":{"c1":"lim$_{x → ±∞}$ f(x) = L","c2":"grows without bound","c3":"approaches a finite value L","c4":"horizontal asymptote y = L"}},{"id":"r2","name":"Infinite limit","values":{"c1":"lim$_{x → a}$ f(x) = ±∞","c2":"approaches a finite value a","c3":"grows without bound","c4":"vertical asymptote x = a"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("One-Sided Limits"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Limit type","features":[{"id":"c1","name":"Notation","type":"text"},{"id":"c2","name":"Direction of approach","type":"text"},{"id":"c3","name":"Exists when…","type":"text"}],"items":[{"id":"r1","name":"[Left-hand limit](!/calculus/limits/one-sided)","values":{"c1":"lim$_{x → a⁻}$ f(x)","c2":"x approaches a through values less than a only","c3":"values from below settle on a single L"}},{"id":"r2","name":"[Right-hand limit](!/calculus/limits/one-sided)","values":{"c1":"lim$_{x → a⁺}$ f(x)","c2":"x approaches a through values greater than a only","c3":"values from above settle on a single L"}},{"id":"r3","name":"[Two-sided limit](!/calculus/limits/two-sided)","values":{"c1":"lim$_{x → a}$ f(x)","c2":"x approaches a from both sides at once","c3":"both one-sided limits exist AND are equal"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Limit methods", items: [
+      { skill: "Check whether a function is continuous at a point", href: "/calculus/limits/methods/continuity-check", desc: "Three conditions: $f(a)$ exists, the limit exists, they are equal; then classify any failure.", level: "composite" },
+      { skill: "Find and remove a removable discontinuity", href: "/calculus/limits/methods/removable-discontinuities", desc: "A hole: the limit exists but $f(a)$ is missing or wrong. Cancel, find the limit, redefine.", level: "composite" },
+      { skill: "Evaluate indeterminate powers", href: "/calculus/limits/methods/indeterminate-powers", desc: "$1^\\infty$, $0^0$ and $\\infty^0$: take the logarithm, find the limit of $g\\ln f$, exponentiate.", level: "composite" },
+      { skill: "Evaluate a limit by factoring", href: "/calculus/limits/methods/factoring-limits", desc: "A $\\frac{0}{0}$ form with polynomials: factor, cancel the vanishing factor, substitute.", level: "composite" },
+      { skill: "Evaluate a limit by rationalizing", href: "/calculus/limits/methods/rationalizing-limits", desc: "A root in a $\\frac{0}{0}$ (or $\\infty - \\infty$) form: multiply by the conjugate, cancel, substitute.", level: "composite" },
+      { skill: "Choose the right limit technique", href: "/calculus/limits/methods/which-limit-technique", desc: "A decision tree from what substitution gives you to the right technique.", level: "strategy" },
+      { skill: "Find horizontal asymptotes", href: "/calculus/limits/methods/horizontal-asymptotes", desc: "Take the limits as $x \\to \\infty$ and $x \\to -\\infty$ separately; each finite value gives $y = L$.", level: "composite" },
+      { skill: "Find limits at infinity of rational functions", href: "/calculus/limits/methods/limits-at-infinity-rational", desc: "Compare degrees, or divide every term by the highest power of $x$ in the denominator.", level: "composite" },
+      { skill: "Find limits at infinity with square roots", href: "/calculus/limits/methods/limits-at-infinity-radicals", desc: "Factor the highest power out of the root; $\\sqrt{x^2} = |x|$, which is $-x$ as $x \\to -\\infty$.", level: "composite" },
+      { skill: "Find vertical asymptotes", href: "/calculus/limits/methods/vertical-asymptotes", desc: "Cancel common factors, find the zeros of the denominator, then the sign of each one-sided limit.", level: "composite" },
+      { skill: "Find the limit of a piecewise function", href: "/calculus/limits/methods/piecewise-limits", desc: "At a break, the lower piece gives the left limit and the upper piece the right; compare.", level: "composite" },
+      { skill: "Evaluate one-sided limits", href: "/calculus/limits/methods/one-sided-limits", desc: "Left and right limits separately; the two-sided limit exists only when they agree.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -931,8 +968,15 @@ $$\\lim_{x \\to a} f(x) = L$$]@`,
           sectionsContent.obj2.content,
           <div key={'unit-oscillating'} dangerouslySetInnerHTML={{ __html: demoUnits.oscillating }} />,
           `The unbounded case is pictured in section 8; a jump, where left and right disagree, on the two-sided limits page.`,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-limits-limits-that-fail-exist-matrix'}
+            id="limits-limits-that-fail-exist-matrix"
+            title="Limits That Fail to Exist"
+            source="/calculus/limits"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -949,8 +993,15 @@ $$\\lim_{x \\to a} f(x) = L$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-limits-one-sided-limits-matrix'}
+            id="limits-one-sided-limits-matrix"
+            title="One-Sided Limits"
+            source="/calculus/limits"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-onesided'} dangerouslySetInnerHTML={{ __html: demoUnits.onesided }} />,
           `Two-sided limits are then the case where the two one-sided answers agree.`,
         ]
@@ -985,8 +1036,15 @@ $$\\lim_{x \\to a} f(x) = L$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-limits-limits-infinity-matrix'}
+            id="limits-limits-infinity-matrix"
+            title="Limits and Infinity"
+            source="/calculus/limits"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-infinity'} dangerouslySetInnerHTML={{ __html: demoUnits.infinity }} />,
           `Infinity is a description of behaviour here, never a value the function takes.`,
         ]
@@ -1007,8 +1065,15 @@ $$\\lim_{x \\to a} f(x) = L$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-limits-summary-navigating-limits-subtree-matrix'}
+            id="limits-summary-navigating-limits-subtree-matrix"
+            title="Summary: Navigating the Limits Subtree"
+            source="/calculus/limits"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1044,6 +1109,14 @@ $$\\lim_{x \\to a} f(x) = L$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

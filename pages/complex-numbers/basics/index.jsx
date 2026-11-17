@@ -876,6 +876,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -897,12 +898,49 @@ import eulerFormulaDiagrams from '@/app/components/calculators/complex-numbers/e
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("The Three Forms at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"[Algebraic](!/complex-numbers/algebraic-form)","type":"text"},{"id":"c2","name":"[Trigonometric](!/complex-numbers/trigonometric-form)","type":"text"},{"id":"c3","name":"[Exponential](!/complex-numbers/exponential-form)","type":"text"}],"items":[{"id":"r1","name":"Notation","values":{"c1":"z = a + bi","c2":"z = r(cos θ + i sin θ) = r cis θ","c3":"z = re$^{iθ}$"}},{"id":"r2","name":"Best for","values":{"c1":"addition, subtraction, equality, real/imaginary part extraction","c2":"multiplication, division, geometric reasoning","c3":"powers, roots, calculus, theoretical work"}},{"id":"r3","name":"Multiplication z₁·z₂","values":{"c1":"distribute and substitute i² = −1","c2":"r₁r₂ cis(θ₁ + θ₂)","c3":"r₁r₂ e$^{i(θ₁+θ₂)}$"}},{"id":"r4","name":"Powers zⁿ","values":{"c1":"binomial expansion — tedious for large n","c2":"rⁿ cis(nθ) ([De Moivre](!/complex-numbers/demoivre-theorem))","c3":"rⁿ e$^{inθ}$"}},{"id":"r5","name":"Conversion from algebraic","values":{"c1":"already standard form","c2":"r = √(a² + b²), θ = arg(z) (mind the quadrant)","c3":"same r and θ as trigonometric form"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("De Moivre's Theorem and n-th Order Roots"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n","features":[{"id":"c1","name":"n-th roots of unity","type":"text"},{"id":"c2","name":"Geometric figure on the unit circle","type":"text"},{"id":"c3","name":"Primitive root ω","type":"text"}],"items":[{"id":"r1","name":"2","values":{"c1":"1, −1","c2":"two opposite points on the real axis","c3":"−1"}},{"id":"r2","name":"3","values":{"c1":"1, cis(120°), cis(240°)","c2":"equilateral triangle","c3":"cis(120°)"}},{"id":"r3","name":"4","values":{"c1":"1, i, −1, −i","c2":"square","c3":"i"}},{"id":"r4","name":"6","values":{"c1":"1, cis(60°), cis(120°), −1, cis(240°), cis(300°)","c2":"regular hexagon","c3":"cis(60°)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Arithmetic Operations: Calculating in \mathbb{C}"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Rule","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Addition","values":{"c1":"add real parts, add imaginary parts separately","c2":"(3 + 2i) + (1 − 5i) = 4 − 3i"}},{"id":"r2","name":"Subtraction","values":{"c1":"subtract real parts, subtract imaginary parts separately","c2":"(3 + 2i) − (1 − 5i) = 2 + 7i"}},{"id":"r3","name":"Multiplication","values":{"c1":"distribute (FOIL), then replace i² with −1","c2":"(2 + 3i)(4 − i) = 11 + 10i"}},{"id":"r4","name":"Division","values":{"c1":"multiply numerator and denominator by the [conjugate](!/complex-numbers/complex-conjugate) of the denominator","c2":"(3 + 2i) ⁄ (1 − 4i) = (−5 + 14i) ⁄ 17"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("The Imaginary Unit (i) and Pure Imaginary Numbers"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n mod 4","features":[{"id":"c1","name":"iⁿ","type":"text"},{"id":"c2","name":"Examples","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"1","c2":"i⁰ = 1, i⁴ = 1, i⁸ = 1"}},{"id":"r2","name":"1","values":{"c1":"i","c2":"i¹ = i, i⁵ = i, i⁹ = i"}},{"id":"r3","name":"2","values":{"c1":"−1","c2":"i² = −1, i⁶ = −1, i¹⁰ = −1"}},{"id":"r4","name":"3","values":{"c1":"−i","c2":"i³ = −i, i⁷ = −i, i¹¹ = −i"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Choose the right form of a complex number", href: "/complex-numbers/methods/which-form", desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: "strategy", here: "#10" },
+    ] },
+    { title: "More complex number methods", items: [
+      { skill: "Multiply and divide complex numbers in polar form", href: "/complex-numbers/methods/multiply-divide-polar", desc: "Multiply or divide the moduli, add or subtract the arguments, and bring the angle back into $(-\\pi, \\pi]$.", level: "composite" },
+      { skill: "Raise a complex number to a power with De Moivre's theorem", href: "/complex-numbers/methods/de-moivre-powers", desc: "Write the number in polar form, raise the modulus to the power, multiply the angle by it, and convert back.", level: "composite" },
+      { skill: "Convert a complex number to polar form", href: "/complex-numbers/methods/rectangular-to-polar", desc: "Find the modulus $r$, find the argument from $\\tan\\theta = \\frac{b}{a}$ with a quadrant check, and write $r(\\cos\\theta + i\\sin\\theta)$.", level: "composite" },
+      { skill: "Add or subtract complex numbers", href: "/complex-numbers/methods#add-subtract-complex", desc: "Two complex numbers in the form $a + bi$ are joined by a plus or minus sign: $(2 + 3i) + (5 - i)$, $(4 - 3i) - (1 - 5i)$.", level: "atomic" },
+      { skill: "Multiply complex numbers", href: "/complex-numbers/methods/multiply-complex", desc: "Expand the brackets term by term, replace $i^2$ with $-1$, and collect the real and imaginary parts.", level: "composite" },
+      { skill: "Divide complex numbers", href: "/complex-numbers/methods/divide-complex", desc: "Multiply the top and bottom by the conjugate of the denominator, so the denominator becomes the real number $c^2 + d^2$.", level: "composite" },
+      { skill: "Find the square roots of a complex number", href: "/complex-numbers/methods/complex-square-roots", desc: "Set $(x + yi)^2 = a + bi$, use $x^2 - y^2 = a$ and $x^2 + y^2 = |w|$, and pick the signs from $2xy = b$.", level: "composite" },
+      { skill: "Find the nth roots of a complex number", href: "/complex-numbers/methods/nth-roots", desc: "Write $w$ in polar form, take the real $n$th root of its modulus, and spread $n$ angles $\\frac{\\varphi + 2\\pi k}{n}$ evenly around the circle.", level: "composite" },
+      { skill: "Convert a complex number from polar to rectangular form", href: "/complex-numbers/methods/polar-to-rectangular", desc: "Evaluate $\\cos\\theta$ and $\\sin\\theta$, multiply both by $r$, and write $a + bi$.", level: "composite" },
+      { skill: "Write a complex number in exponential form", href: "/complex-numbers/methods/exponential-form", desc: "Find $r$ and $\\theta$ in radians and write $re^{i\\theta}$; go back with Euler's formula $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1393,7 +1431,9 @@ Certain equations showcase the interplay between conjugation and powers. For $n 
 },
     obj10:{
       title:`The Three Forms at a Glance`,
-      content:`The sections above introduce three equivalent ways of writing a complex number — algebraic, trigonometric, and exponential. Each excels at a different kind of computation. The table below collects them side by side: how each form is written, what it is best for, how the major operations look, and how to convert from algebraic form. Use it to choose the right representation before starting a calculation, and to navigate to the dedicated page for each form.`,
+      content:`The sections above introduce three equivalent ways of writing a complex number — algebraic, trigonometric, and exponential. Each excels at a different kind of computation. The table below collects them side by side: how each form is written, what it is best for, how the major operations look, and how to convert from algebraic form. Use it to choose the right representation before starting a calculation, and to navigate to the dedicated page for each form.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which form of a complex number should I use?](!/complex-numbers/methods/which-form) →@`,
       before:``,
       after:``,
       link:'',
@@ -1850,11 +1890,15 @@ Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-imaginary-unit-i-pure-matrix'}
+            id="basics-imaginary-unit-i-pure-matrix"
+            title="The Imaginary Unit (i) and Pure Imaginary Numbers"
+            source="/complex-numbers/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
                   <div key={'unit-pureImag'} dangerouslySetInnerHTML={{ __html: demoUnits.pureImag }} />,
           `The pure imaginary numbers are the vertical axis of the plane introduced below, just as the reals are its horizontal axis.`,
         ]
@@ -1897,11 +1941,15 @@ Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-arithmetic-operations-calculating-mathbb-matrix'}
+            id="basics-arithmetic-operations-calculating-mathbb-matrix"
+            title="Arithmetic Operations: Calculating in \\mathbb{C}"
+            source="/complex-numbers/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Complex arithmetic is real arithmetic plus one rule, $i^2 = -1$, with the conjugate to clear denominators.]@`,
         ]
     },
@@ -1949,11 +1997,15 @@ Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-de-moivre-s-theorem-matrix'}
+            id="basics-de-moivre-s-theorem-matrix"
+            title="De Moivre's Theorem and n-th Order Roots"
+            source="/complex-numbers/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-demoivre'} dangerouslySetInnerHTML={{ __html: demoUnits.demoivre }} />,
           `The n-th roots run the same construction backwards, dividing the angle by n.`,
         ]
@@ -1974,11 +2026,15 @@ Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-three-forms-at-glance-matrix'}
+            id="basics-three-forms-at-glance-matrix"
+            title="The Three Forms at a Glance"
+            source="/complex-numbers/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj10-diagram'}
             id="complex-forms-tree"
@@ -2004,6 +2060,14 @@ Reading $Im(4 - 5i)$ as $5$ drops the minus sign and moves the point from $(4, -
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

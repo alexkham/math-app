@@ -430,6 +430,7 @@ const hubMeta = {
 
 
 // tables-optimized: v4 | 2026-05-22 | 1 table (summary capstone — decision matrix by use case)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
@@ -446,11 +447,57 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderOutcomeGrid from '@/app/utils/illustrations/probability/outcomes/outcomeGrid'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Quick Lookup: Which Rule to Use"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Goal","features":[{"id":"c1","name":"Rule","type":"text"},{"id":"c2","name":"Formula","type":"text"}],"items":[{"id":"r1","name":"Get P(A$^{c}$) from P(A)","values":{"c1":"Complement Rule","c2":"P(A$^{c}$) = 1 − P(A)"}},{"id":"r2","name":"Get P(A ∪ B) with general overlap","values":{"c1":"Addition Rule","c2":"P(A ∪ B) = P(A) + P(B) − P(A ∩ B)"}},{"id":"r3","name":"Get P(A ∪ B) when A, B are disjoint","values":{"c1":"Mutual Exclusivity","c2":"P(A ∪ B) = P(A) + P(B)"}},{"id":"r4","name":"Get P of a union of n events","values":{"c1":"Inclusion–Exclusion","c2":"alternating sums of pairwise, triple, … intersections"}},{"id":"r5","name":"Bound P(∪ Aᵢ) from above","values":{"c1":"Boole's Inequality","c2":"P(∪ Aᵢ) ≤ &Sigma; P(Aᵢ)"}},{"id":"r6","name":"Get P(A ∩ B) for general events","values":{"c1":"Multiplication Rule","c2":"P(A ∩ B) = P(B) · P(A | B)"}},{"id":"r7","name":"Get P(A) from a partition {Bᵢ}","values":{"c1":"Law of Total Probability","c2":"P(A) = &Sigma;ᵢ P(A | Bᵢ) · P(Bᵢ)"}},{"id":"r8","name":"Reverse a conditional probability","values":{"c1":"Bayes' Theorem","c2":"P(B | A) = P(A | B) · P(B) / P(A)"}},{"id":"r9","name":"Compare P(A) and P(B) when A ⊆ B","values":{"c1":"Monotonicity","c2":"A ⊆ B ⇒ P(A) ≤ P(B)"}}]};
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (count) 2026-11-15: the page's three-event example, a number from 1 to 30 with A, B, C = divisible by 2, 3, 5.
+// Term values are the page's (15, 10, 6, 5, 3, 2, 1); region sizes follow from them and add up to 30.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const threeEventCountDiagram = {
+  sets: [{ id: 'A' }, { id: 'B' }, { id: 'C' }],
+  regions: { A: 8, B: 4, C: 2, AB: 4, AC: 2, BC: 1, ABC: 1, '': 8 },
+  regionNames: { A: 'only $A$', B: 'only $B$', C: 'only $C$', AB: '$A$ and $B$ only', AC: '$A$ and $C$ only', BC: '$B$ and $C$ only', ABC: '$A \\cap B \\cap C$' },
+  terms: [
+    { label: '$|A|$', sign: 1, sets: ['A'], value: 15 },
+    { label: '$|B|$', sign: 1, sets: ['B'], value: 10 },
+    { label: '$|C|$', sign: 1, sets: ['C'], value: 6 },
+    { label: '$|A \\cap B|$', sign: -1, sets: ['A', 'B'], value: 5 },
+    { label: '$|A \\cap C|$', sign: -1, sets: ['A', 'C'], value: 3 },
+    { label: '$|B \\cap C|$', sign: -1, sets: ['B', 'C'], value: 2 },
+    { label: '$|A \\cap B \\cap C|$', sign: 1, sets: ['A', 'B', 'C'], value: 1 },
+  ],
+  notes: {
+    3: { label: 'After the single terms', text: 'The single terms give $15 + 10 + 6 = 31$ for only $30$ numbers: every number in an overlap has been counted more than once.' },
+    6: { label: 'Leaving out the triple intersection', warn: true, text: 'Stopping after the pairwise terms gives $\\frac{15 + 10 + 6 - 5 - 3 - 2}{30} = \\frac{7}{10}$. The number $30$ lies in all three events: it was added three times and subtracted three times, so it is not counted.' },
+    7: { label: 'Every outcome counted once', text: 'Adding back $P(A \\cap B \\cap C) = \\frac{1}{30}$ gives $\\frac{22}{30} = \\frac{11}{15}$.' },
+  },
+  probability: { title: 'Running total out of 30', total: 30, note: 'With all seven terms added this is $P(A \\cup B \\cup C) = \\frac{22}{30} = \\frac{11}{15}$.' },
+};
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Probability methods", items: [
+      { skill: "Find a probability with the complement rule", href: "/probability/methods#complement-rule", desc: "The event is easier to describe by what does not happen: \"at least one\", \"not all\", \"no six\".", level: "atomic" },
+      { skill: "Find the probability of A or B", href: "/probability/methods#addition-rule", desc: "The question says \"or\": a heart or a king, an even number or a number above $4$, rain or wind.", level: "atomic" },
+      { skill: "Find the probability of A and B for independent events", href: "/probability/methods#multiplication-rule-independent", desc: "The question says \"and\" and one event has no effect on the other: two dice, repeated coin tosses, draws with replacement.", level: "atomic" },
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite" },
+      { skill: "Find the probability of A and B for dependent events", href: "/probability/methods/multiplication-rule-dependent", desc: "Multiply the first probability by the second one, worked out after the first has happened.", level: "composite" },
+      { skill: "Use the law of total probability", href: "/probability/methods/total-probability", desc: "Split into cases, find the chance of the event in each case, weight by the case and add.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1041,6 +1088,16 @@ Boole's inequality bounds the probability of a union by the sum of the single pr
 @academic[formulas_link:Browse all probability formulas
 /probability/formulas]@
 `,
+            <DiagramFrame
+              key={'set-diagram-three-event-count'}
+              id="inclusion-exclusion-three-events-count"
+              title="Inclusion-exclusion for three events, one term at a time"
+              source="/probability/rules"
+              related={false}
+              before={'The three-event example above, a number drawn from $1$ to $30$ with $A$, $B$, $C$ = divisible by $2$, $3$, $5$, one term at a time. Each region shows how many numbers it holds and how many times they have been counted so far.'}
+            >
+              <SetDiagram data={threeEventCountDiagram} variant="count" theme={setDiagramTheme} options={{ startAt: 'start' }} />
+            </DiagramFrame>,
             `@academic[punchline:Probabilities add only over disjoint pieces; wherever events overlap, the shared part must be corrected for.]@`,
             ]
         },
@@ -1090,8 +1147,15 @@ Each factor in the chain rule is conditioned on everything that came before it. 
             link:'',
             content:[
                 sectionsContent.summary.content,
-                <div key={'summary-table'} style={tableWrapStyle}
-                     dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+                <DiagramFrameV2
+                  key={'feature-matrix-rules-quick-lookup-which-rule-matrix'}
+                  id="rules-quick-lookup-which-rule-matrix"
+                  title="Quick Lookup: Which Rule to Use"
+                  source="/probability/rules"
+                  related={false}
+                >
+                  <FeatureMatrix data={fm_summaryTable} />
+                </DiagramFrameV2>,
                 `The same nine rules, sorted by the question to ask about the problem rather than listed side by side.`,
                 <DiagramFrameV2
                   key={'summary-decision'}
@@ -1119,6 +1183,14 @@ Each factor in the chain rule is conditioned on everything that came before it. 
                 >
                   <MistakeFix data={pitfallData} variant="trace" />
                 </DiagramFrame>,
+            ]
+        },
+        {
+            id:'skills',
+            title:'Skills You Should Learn',
+            link:``,
+            content:[
+              <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
             ]
         },
         // faq: rendered component — must be built here, not in getStaticProps

@@ -855,7 +855,7 @@ const combinatoricsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compute Binomial Coefficients (n Choose k) | Learn Math Class',
         description: "Compute n choose k by hand: use symmetry for the smaller k, write falling factors over k!, cancel, multiply, or use Pascal's rule. Examples and common mistakes.",
@@ -978,7 +978,7 @@ const combinatoricsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Expand a Binomial Power (Binomial Theorem) | Learn Math Class',
         description: "Expand (a + b)^n step by step: name a, b and n, take row n of Pascal's triangle, pair falling and rising powers, simplify. Worked examples and common mistakes.",
@@ -1099,7 +1099,7 @@ const combinatoricsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Specific Term in a Binomial Expansion | Learn Math Class',
         description: 'Find one term of (a + b)^n without expanding: write the general term, collect the power of x, solve for k, evaluate. Constant term examples and common mistakes.',
@@ -1226,7 +1226,7 @@ const combinatoricsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Inclusion-Exclusion for Two Sets | Learn Math Class',
         description: 'Count items in A or B: define both sets, count each, count the overlap, add and subtract it once. Worked examples with surveys and divisibility, plus mistakes.',
@@ -1348,7 +1348,7 @@ const combinatoricsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Inclusion-Exclusion for Three Sets | Learn Math Class',
         description: 'Count items in A, B or C: add the singles, subtract the pairs, add back the triple, subtract from the total for none. Worked examples, surjections and mistakes.',
@@ -1471,7 +1471,7 @@ const combinatoricsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Complementary Counting (At Least One) | Learn Math Class',
         description: 'Solve at-least-one counting problems: count all outcomes, state the opposite, count it the same way and subtract. Examples with PINs, committees and line-ups.',
@@ -1837,7 +1837,7 @@ const combinatoricsMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 4 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Counting Word Problems (Combinatorics) | Learn Math Class',
         description: 'Solve counting word problems: write one outcome, decide order and repetition, handle restrictions, multiply the stages. Committees, plates, seats, at least one.',

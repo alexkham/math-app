@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -12,12 +13,69 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Expand and condense logarithms", href: "/algebra/methods/expand-condense-logarithms", desc: "Break one log into a sum of simple logs, or fold a sum back into one log.", level: "composite", here: "#5" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite" },
+      { skill: "Split the log of a product", href: "/algebra/methods#log-product-rule", desc: "A logarithm of a product, or two logs with the same base added: $\\log(xy)$, $\\ln 2 + \\ln 5$.", level: "atomic" },
+      { skill: "Split the log of a quotient", href: "/algebra/methods#log-quotient-rule", desc: "A logarithm of a fraction, or two logs with the same base subtracted: $\\log\\frac{x}{y}$, $\\log_2 40 - \\log_2 5$.", level: "atomic" },
+      { skill: "Bring an exponent out of a log", href: "/algebra/methods#log-power-rule", desc: "A power inside a logarithm, or a number multiplying a log: $\\log x^3$, $\\ln\\sqrt{x}$, $2\\log 5$.", level: "atomic" },
+      { skill: "Change the base of a logarithm", href: "/algebra/methods#change-of-base", desc: "A log whose base your calculator does not have, or two logs with different bases in one problem: $\\log_2 10$, $\\log_5 x$.", level: "atomic" },
+      { skill: "Solve a logarithmic equation", href: "/algebra/methods/logarithmic-equations", desc: "Condense to one log, convert to exponential form or equate arguments, then check the domain.", level: "composite" },
+      { skill: "Solve exponential growth and decay problems", href: "/algebra/methods/exponential-growth-decay-problems", desc: "Populations, half-lives, depreciation: build the model, find the rate, solve for the time.", level: "applied" },
+      { skill: "Solve compound interest problems", href: "/algebra/methods/compound-interest-problems", desc: "A = P(1 + r/n)^(nt) and A = Pe^(rt): find the amount, the principal, the time or the rate.", level: "applied" },
+      { skill: "Evaluate a logarithm", href: "/algebra/methods/evaluate-logarithms", desc: "Ask \"which exponent?\", use the key values, or change the base for a calculator.", level: "composite" },
+    ] },
+    { title: "Derivative techniques", items: [
+      { skill: "Use logarithmic differentiation", href: "/calculus/derivatives/techniques/logarithmic-differentiation", desc: "Variable exponents like $x^x$, or long products and quotients.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// FeatureMatrix 2026-11-15: replaces the table derivationsTable (the four derivations side by side: setup, exponent law applied, read off as a logarithm); cells taken from the table.
+const fm_derivationsTable = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  corner: 'Rule',
+  features: [
+    { id: 'c1', name: '1. Setup', type: 'text' },
+    { id: 'c2', name: '2. Exponent law applied', type: 'text' },
+    { id: 'c3', name: '3. Read off as a logarithm', type: 'text' },
+  ],
+  items: [
+    { id: 'r1', name: 'Product', values: {
+      c1: 'let $\\log_a(x) = m$, $\\log_a(y) = n$, so $x = a^m$, $y = a^n$',
+      c2: '$a^m \\cdot a^n = a^{m+n}$',
+      c3: '$\\log_a(xy) = m + n = \\log_a(x) + \\log_a(y)$' } },
+    { id: 'r2', name: 'Quotient', values: {
+      c1: 'same setup: $x = a^m$, $y = a^n$',
+      c2: '$\\frac{a^m}{a^n} = a^{m-n}$',
+      c3: '$\\log_a\\left(\\frac{x}{y}\\right) = m - n = \\log_a(x) - \\log_a(y)$' } },
+    { id: 'r3', name: 'Power', values: {
+      c1: 'let $\\log_a(x) = m$, so $x = a^m$',
+      c2: '$(a^m)^n = a^{mn}$',
+      c3: '$\\log_a(x^n) = mn = n \\cdot \\log_a(x)$' } },
+    { id: 'r4', name: 'Change of base', values: {
+      c1: 'let $\\log_a(x) = y$, so $a^y = x$',
+      c2: 'take $\\log_b$ of both sides; apply the power rule',
+      c3: '$y \\cdot \\log_b(a) = \\log_b(x)$, so $\\log_a(x) = \\frac{\\log_b(x)}{\\log_b(a)}$' } },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -862,8 +920,21 @@ $$= \\log(x^2 y)$$`,
     conclusion: { text: '$\\log_a(x^n) = n \\cdot \\log_a(x)$', say: 'Exponents inside the argument become coefficients outside.' },
   };
 
+  const condenseSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$2\\log(x) + \\log(y) - 3\\log(z)$',
+      rows: [
+        { step: 'Turn every coefficient into an exponent', stepSub: 'Power rule', example: '$\\log(x^2) + \\log(y) - \\log(z^3)$' },
+        { step: 'Merge the sums into a product', stepSub: 'Product rule', example: '$\\log(x^2 y) - \\log(z^3)$' },
+        { step: 'Merge the differences into a quotient', stepSub: 'Quotient rule', example: '$\\log\\left(\\dfrac{x^2 y}{z^3}\\right)$' },
+      ],
+    },
+  };
+
    return {
   props: {
+    condenseSteps,
     proofStepsData3,
     proofStepsData2,
     proofStepsData,
@@ -890,7 +961,7 @@ $$= \\log(x^2 y)$$`,
 }
    }
 
- export default function LogarithmRulesPage({ proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData,changeOfBaseAnatomy, logRuleTree, logErrors,
+ export default function LogarithmRulesPage({ condenseSteps, proofStepsData3, proofStepsData2, proofStepsData, formulaSummaryData,changeOfBaseAnatomy, logRuleTree, logErrors,
    seoData,
    sectionsContent,
    introContent,
@@ -959,11 +1030,16 @@ $$\\log_5(7) = \\frac{\\ln(7)}{\\ln(5)} = \\frac{1.946}{1.609} \\approx 1.209$$]
           `@academic[rule_corollary_plain:A useful special case: $\\log_a(b) = \\frac{1}{\\log_b(a)}$. The logarithms are reciprocals when arguments and bases swap.]@`,
           `Each application above follows the same pattern: two logarithms in a base the calculator knows, one divided by the other. A rough size check is always available. $\\log_2(10)$ must lie between $3$ and $4$, because $2^3 = 8$ and $2^4 = 16$, and $\\log_5(7)$ must lie between $1$ and $2$, because $5 < 7 < 25$.`,
           `The four rules above all follow the same shape: name the logarithms, convert to exponential form, apply the matching exponent law, then read the result back as a logarithm. The table below sets the four derivations side by side so the shared pattern is visible at a glance.`,
-          <div
-            key={'derivations-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: derivationsTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-log-rule-derivations'}
+            id="log-rule-derivations-compared"
+            title="The Four Derivations Side by Side"
+            source="/algebra/logarithms/rules"
+            related={false}
+            layout="top"
+          >
+            <FeatureMatrix data={fm_derivationsTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj4-diagram'}
             id="change-of-base-anatomy"
@@ -1081,6 +1157,7 @@ The graph also suggests a way to multiply without multiplying. Suppose a table l
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to expand and condense logarithms](!/algebra/methods/expand-condense-logarithms) →@`,
         ]
     },
     {
@@ -1089,6 +1166,12 @@ The graph also suggests a way to multiply without multiplying. Suppose a table l
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame key={'obj6-procedure'} id="condense-logarithms-steps" title="Condensing in three steps"
+            source="/algebra/logarithms/rules" related={false}
+            before={"The first example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={condenseSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to expand and condense logarithms](!/algebra/methods/expand-condense-logarithms) →@`,
         ]
     },
     {
@@ -1132,6 +1215,14 @@ The graph also suggests a way to multiply without multiplying. Suppose a table l
           >
             <TopDownTree data={logRuleTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

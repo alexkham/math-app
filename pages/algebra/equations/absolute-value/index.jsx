@@ -1,4 +1,6 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,9 +19,73 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 
+// CaseSplit 2026-11-15: replaces the table obj2Table (three cases of |A| = B by sign of B); cases, results and counts taken from the table, examples from the section text.
+const absEquationCasesTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
+const absEquationCases = {
+  parent: {
+    kicker: 'Absolute value equation',
+    formula: '$|A| = B$',
+    splitBy: 'the sign of $B$',
+  },
+  cases: [
+    {
+      id: 'positive', condition: '$B > 0$',
+      count: { n: '2' },
+      headline: 'Two solutions (typically)',
+      formula: '$A = B$ or $A = -B$',
+      example: '$|2x - 3| = 7$',
+      picture: '$x = 5$ or $x = -2$',
+    },
+    {
+      id: 'zero', condition: '$B = 0$',
+      count: { n: '1' },
+      headline: 'One solution',
+      formula: '$A = 0$',
+      example: '$|4x + 1| = 0$',
+      picture: '$x = -\\frac{1}{4}$',
+    },
+    {
+      id: 'negative', condition: '$B < 0$',
+      count: { n: '0' },
+      headline: 'None — empty set',
+      formula: 'impossible',
+      na: true,
+      desc: 'absolute value is never negative',
+    },
+  ],
+}
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Absolute Value Equation Forms"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation form","features":[{"id":"c1","name":"Method","type":"text"},{"id":"c2","name":"Number of solutions","type":"text"}],"items":[{"id":"r1","name":"|A| = k, k > 0","values":{"c1":"split into A = k and A = −k; solve each","c2":"two (typically)"}},{"id":"r2","name":"|A| = 0","values":{"c1":"solve A = 0","c2":"one"}},{"id":"r3","name":"|A| = k, k < 0","values":{"c1":"none — read off immediately","c2":"none (empty set)"}},{"id":"r4","name":"|f(x)| = k, k > 0","values":{"c1":"split into f(x) = k and f(x) = −k; solve each by appropriate method","c2":"depends on f"}},{"id":"r5","name":"|f(x)| = |g(x)|","values":{"c1":"f = g or f = −g (or square both sides; verify)","c2":"depends on f, g"}},{"id":"r6","name":"|f(x)| = g(x)","values":{"c1":"split into two cases; require g(x) ≥ 0 at each candidate","c2":"verify carefully — squaring risks [extraneous solutions](!/algebra/definitions#extraneous_solution)"}},{"id":"r7","name":"Multiple |…| terms (sum/difference)","values":{"c1":"interval method: find critical points, solve on each interval using piecewise definition","c2":"varies; verify each candidate lies in its interval"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Geometric Interpretation"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation form","features":[{"id":"c1","name":"Geometric question","type":"text"},{"id":"c2","name":"Solution","type":"text"}],"items":[{"id":"r1","name":"|x − a| = d","values":{"c1":"which points are exactly d units from a?","c2":"x = a + d and x = a − d"}},{"id":"r2","name":"|x − a| = |x − b|","values":{"c1":"which point is equidistant from a and b?","c2":"x = (a + b) ⁄ 2 (midpoint)"}},{"id":"r3","name":"|x − a| + |x − b| = d, d < |a − b|","values":{"c1":"total distance less than the gap?","c2":"none (impossible)"}},{"id":"r4","name":"|x − a| + |x − b| = d, d = |a − b|","values":{"c1":"total distance equals the gap?","c2":"every x in [a, b]"}},{"id":"r5","name":"|x − a| + |x − b| = d, d > |a − b|","values":{"c1":"total distance greater than the gap?","c2":"two points, one outside each endpoint"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Equations with Multiple Absolute Value Terms"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Interval","features":[{"id":"c1","name":"|x − 1|","type":"text"},{"id":"c2","name":"|x + 3|","type":"text"},{"id":"c3","name":"Equation becomes","type":"text"},{"id":"c4","name":"Result","type":"text"}],"items":[{"id":"r1","name":"x < −3","values":{"c1":"−(x − 1)","c2":"−(x + 3)","c3":"−2x − 2 = 8","c4":"x = −5 ✓"}},{"id":"r2","name":"−3 ≤ x ≤ 1","values":{"c1":"−(x − 1)","c2":"(x + 3)","c3":"4 = 8","c4":"no solution ✗"}},{"id":"r3","name":"x > 1","values":{"c1":"(x − 1)","c2":"(x + 3)","c3":"2x + 2 = 8","c4":"x = 3 ✓"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve an absolute value equation", href: "/algebra/equations/methods/absolute-value-equations", desc: "Isolate the bars, split into two cases, solve each, check.", level: "composite", here: "#3" },
+    ] },
+    { title: "More equation methods", items: [
+      { skill: "Solve a linear equation", href: "/algebra/equations/methods/linear-equations", desc: "Simplify each side, collect the unknown on one side, then isolate it.", level: "composite" },
+      { skill: "Solve a rational equation", href: "/algebra/equations/methods/rational-equations", desc: "Note the excluded values, multiply by the LCD, solve, then reject excluded answers.", level: "composite" },
+      { skill: "Choose the right method to solve a quadratic", href: "/algebra/equations/methods/which-quadratic-method", desc: "A decision tree: factoring, completing the square, the formula, or just the discriminant.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/algebra/equations/methods", label: "All equation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -875,8 +941,23 @@ $$2x - 1 = -(x + 4) = -x - 4$$`, `$$\\implies 3x = -3 \\implies x = -1$$`, `Toge
     ],
   };
 
+  // Procedure rollout 2026-11-14: Splitting into two cases, step by step (obj3).
+  const absCasesSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$|x^2 - 4| = 5$',
+      rows: [
+        { step: 'Write the two equations $f(x) = k$ and $f(x) = -k$', example: '$x^2 - 4 = 5$ and $x^2 - 4 = -5$' },
+        { step: 'Solve the first equation', example: '$x^2 = 9$, so $x = \\pm 3$' },
+        { step: 'Solve the second equation', example: '$x^2 = -1$: no real solutions' },
+        { step: 'Take the union of both solution sets', example: '$\\{-3, 3\\}$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    absCasesSteps,
     absEquationPitfalls,
     demoUnits,
     conceptIntroFigures,
@@ -900,7 +981,7 @@ return {
 
 }
 
-export default function AbsoluteValueEquationsPage({
+export default function AbsoluteValueEquationsPage({ absCasesSteps,
   absEquationPitfalls,
   seoData,
   sectionsContent,
@@ -967,7 +1048,15 @@ $$|p| = b \\implies p = b \\text{ or } p = -b \\quad (b > 0)$$
         content: [
           `Both must be solved, and both solutions (if they exist) belong to the solution set. The equation $|2x - 3| = 7$ becomes $2x - 3 = 7$ or $2x - 3 = -7$, giving $x = 5$ or $x = -2$.`,
           `When $B = 0$, the equation reduces to a single case: $A = 0$. There is no split because zero is its own opposite. The equation $|4x + 1| = 0$ gives $4x + 1 = 0$, so $x = -\\frac{1}{4}$.`,
-          <div key={'obj2-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'case-split-abs-equation-cases'}
+            id="absolute-value-equation-cases"
+            title="Cases of an Absolute Value Equation"
+            source="/algebra/equations/absolute-value"
+            related={false}
+          >
+            <CaseSplit data={absEquationCases} variant="poster" proseStyle="cards" theme={absEquationCasesTheme} />
+          </DiagramFrame>,
           `@academic[punchline:The sign of the right-hand side decides the split: two cases when positive, one when zero, none when negative.]@`,
         ],
       },
@@ -1051,8 +1140,18 @@ Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x =
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-procedure'}
+            id="absolute-value-cases-steps"
+            title="Splitting into two cases, step by step"
+            source="/algebra/equations/absolute-value"
+            before={"The case-splitting method on the example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={absCasesSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-absQuadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.absQuadratic }} />,
           `Each case is solved by its own method, and only real solutions join the set.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve an absolute value equation](!/algebra/equations/methods/absolute-value-equations) →@`,
         ]
     },
     {
@@ -1071,11 +1170,15 @@ Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x =
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-equations-multiple-absolute-matrix'}
+            id="absolute-value-equations-multiple-absolute-matrix"
+            title="Equations with Multiple Absolute Value Terms"
+            source="/algebra/equations/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:Cut the number line wherever an expression inside the bars is zero, and on each piece the bars simply disappear.]@`,
         ]
     },
@@ -1095,11 +1198,15 @@ Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x =
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-geometric-interpretation-matrix'}
+            id="absolute-value-geometric-interpretation-matrix"
+            title="Geometric Interpretation"
+            source="/algebra/equations/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:An absolute value equation is a question about distances, and the number line often answers it before any algebra.]@`,
         ]
     },
@@ -1109,11 +1216,15 @@ Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x =
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-summary-absolute-value-matrix'}
+            id="absolute-value-summary-absolute-value-matrix"
+            title="Summary of Absolute Value Equation Forms"
+            source="/algebra/equations/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1131,6 +1242,14 @@ Splitting $|x + 3| = -2$ into $x + 3 = -2$ or $x + 3 = 2$ gives $x = -5$ or $x =
           >
             <MistakeFix data={absEquationPitfalls} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

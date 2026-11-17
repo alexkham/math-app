@@ -513,6 +513,7 @@ import Head from 'next/head'
 import '@/pages/pages.css'
 import MultiplicationWrapper from '../../../app/components/linear-algebra copy/matrix/MultiplicationWrapper'
 import multiplicationDiagrams from '../../../app/components/linear-algebra copy/matrix/multiplicationDiagrams'
+import MatrixMultiplicationOrderVisualizer from '@/app/components/matrix-multiplication/order-visualiser/MatrixMultiplicationVisualizer'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import RelatedTools from '@/app/components/related-tools/RelatedTools'
 import { getRelatedTools } from '@/app/utils/getRelatedTools'
@@ -754,7 +755,8 @@ Every other property follows from that one fact. Associativity is the associativ
       title: `The Compatibility Rule`,
       content: `$A \\times B$ is defined exactly when the number of columns of $A$ equals the number of rows of $B$. Writing $A$ as $m \\times n$ and $B$ as $n \\times p$, the inner $n$s must agree and the product is $m \\times p$.
 
-Some pairs and their outcomes:
+Set any two sizes below to test the rule. Mismatched sizes are allowed here, so you can see a product fail.`,
+      after: `Some pairs and their outcomes:
 
 • $2 \\times 3$ times $3 \\times 2$: defined, result $2 \\times 2$
 • $3 \\times 2$ times $2 \\times 3$: defined, result $3 \\times 3$
@@ -765,8 +767,6 @@ Some pairs and their outcomes:
 The rule is not symmetric. $A \\times B$ and $B \\times A$ impose different conditions, and the tool's [order toggle](!#order-and-the-undefined-product) lets you see one hold while the other fails. In the tool the rows of $B$ are linked to the columns of $A$, so $A \\times B$ always exists; only $B \\times A$ can be undefined.
 
 A useful way to keep the rule straight: write the shapes side by side, $(m \\times n)(n \\times p)$, and check that the two middle numbers match. The two outer numbers are the answer.`,
-      before: ``,
-      after: ``,
       link: '',
     },
 
@@ -1084,6 +1084,19 @@ export default function MatrixMultiplicationVisualizer({ seoData, sectionsConten
     ],
   })
 
+  const sizesRow = (obj, id) => ({
+    id,
+    title: sectionsContent[obj].title,
+    link: sectionsContent[obj].link,
+    content: [
+      sectionsContent[obj].content,
+      <div key="sizes-tool" style={{ margin: '18px 0' }}>
+        <MatrixMultiplicationOrderVisualizer showHeader={false} />
+      </div>,
+      sectionsContent[obj].after,
+    ],
+  })
+
   const genericSections = [
     plain('obj0', 'key-terms'),
     plain('obj1', 'getting-started'),
@@ -1099,7 +1112,7 @@ export default function MatrixMultiplicationVisualizer({ seoData, sectionsConten
     stateRow('obj11', 'sum-of-outer-products', 'sum-of-outer-products'),
     plain('obj12', 'reading-the-scene-player'),
     plain('obj13', 'what-matrix-multiplication-is'),
-    plain('obj14', 'the-compatibility-rule'),
+    sizesRow('obj14', 'the-compatibility-rule'),
     plain('obj15', 'key-properties'),
     plain('obj16', 'worked-example'),
     plain('obj17', 'common-mistakes'),

@@ -826,6 +826,7 @@
 
 
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj7 aggregation, obj9 aggregation, obj14 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -843,9 +844,33 @@ import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieW
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Detecting Cycles in Powers"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Base a","features":[{"id":"c1","name":"Modulus n","type":"text"},{"id":"c2","name":"Cycle of aᵏ mod n (k = 1, 2, 3, …)","type":"text"},{"id":"c3","name":"Period","type":"text"}],"items":[{"id":"r1","name":"2","values":{"c1":"7","c2":"{2, 4, 1}","c3":"3"}},{"id":"r2","name":"3","values":{"c1":"7","c2":"{3, 2, 6, 4, 5, 1}","c3":"6"}},{"id":"r3","name":"2","values":{"c1":"5","c2":"{2, 4, 3, 1}","c3":"4"}},{"id":"r4","name":"3","values":{"c1":"5","c2":"{3, 4, 2, 1}","c3":"4"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Last Digit Problems"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Base last digit d","features":[{"id":"c1","name":"Cycle of dᵏ mod 10 (k = 1, 2, 3, …)","type":"text"},{"id":"c2","name":"Period","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"{0}","c2":"1"}},{"id":"r2","name":"1","values":{"c1":"{1}","c2":"1"}},{"id":"r3","name":"2","values":{"c1":"{2, 4, 8, 6}","c2":"4"}},{"id":"r4","name":"3","values":{"c1":"{3, 9, 7, 1}","c2":"4"}},{"id":"r5","name":"4","values":{"c1":"{4, 6}","c2":"2"}},{"id":"r6","name":"5","values":{"c1":"{5}","c2":"1"}},{"id":"r7","name":"6","values":{"c1":"{6}","c2":"1"}},{"id":"r8","name":"7","values":{"c1":"{7, 9, 3, 1}","c2":"4"}},{"id":"r9","name":"8","values":{"c1":"{8, 4, 2, 6}","c2":"4"}},{"id":"r10","name":"9","values":{"c1":"{9, 1}","c2":"2"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Do modular arithmetic", href: "/arithmetic/methods/modular-arithmetic", desc: "Find the remainder of a sum, product or power: reduce each number mod $n$ first, operate on the remainders, reduce again; use cycles for powers.", level: "composite", here: "#2" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Find the modulo of a negative number", href: "/arithmetic/methods/modulo-negative-numbers", desc: "Round the quotient down, not toward zero, so the remainder lands in $0, \\ldots, n - 1$: $(-38) \\bmod 7 = 4$ because $-38 = 7 \\cdot (-6) + 4$.", level: "composite" },
+      { skill: "Find the GCD with the Euclidean algorithm", href: "/arithmetic/methods/gcd-euclidean-algorithm", desc: "Replace the pair $(a, b)$ by $(b, a \\bmod b)$ until the remainder is $0$; the last nonzero remainder is the GCD. No factoring needed.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1596,8 +1621,103 @@ const schemas = {
     conclusion: { text: 'The entire number is congruent to the sum of its digits modulo $9$' },
   };
 
+  const modAddSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(47 + 38) \\bmod 10$',
+      rows: [
+        { step: 'Reduce each operand', example: '$47 \\to 7$ and $38 \\to 8$' },
+        { step: 'Add the results', example: '$7 + 8 = 15$' },
+        { step: 'Reduce once more if the sum reaches or exceeds $n$', example: '$15 \\bmod 10 = 5$' },
+      ],
+    },
+  };
+
+  const modSubtractSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(23 - 47) \\bmod 10$',
+      rows: [
+        { step: 'Reduce each operand', example: '$23 \\to 3$ and $47 \\to 7$' },
+        { step: 'Subtract the results', example: '$3 - 7 = -4$' },
+        { step: 'If the result is negative, add $n$', example: '$-4 + 10 = 6$' },
+      ],
+    },
+  };
+
+  const modMultiplySteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(89 \\cdot 76) \\bmod 9$',
+      rows: [
+        { step: 'Reduce each factor', example: '$89 \\to 8$ and $76 \\to 4$' },
+        { step: 'Multiply the remainders', example: '$8 \\cdot 4 = 32$' },
+        { step: 'Reduce the product', example: '$32 \\bmod 9 = 5$' },
+      ],
+    },
+  };
+
+  const modPowerSteps = {
+    loop: {
+      label: 'Power modulo $n$',
+      repeat: 'until the exponent is $k$',
+      steps: [
+        { text: 'Start with $a \\bmod n$' },
+        { text: 'Multiply the current remainder by $a$', repeat: true },
+        { text: 'Reduce the product modulo $n$', repeat: true },
+        { text: 'Repeat until the exponent reaches $k$', repeat: true, test: true },
+        { text: 'The last remainder is $a^k \\bmod n$', output: true },
+      ],
+    },
+    run: {
+      label: '$7^4 \\bmod 10$',
+      vars: [
+        { key: 'e', label: 'exponent' },
+        { key: 'p', label: 'product' },
+        { key: 'r', label: 'remainder' },
+      ],
+      start: { e: '$1$', r: '$7$' },
+      startNote: '$7^1 \\bmod 10 = 7$.',
+      passes: [
+        {
+          steps: [
+            { set: { e: '$2$', p: '$49$' }, note: '$7^2 = 7 \\cdot 7 = 49$.' },
+            { set: { r: '$9$' }, note: '$49 \\bmod 10 = 9$.' },
+            { note: 'The exponent is $2$, not $4$, so multiply again.' },
+          ],
+          row: ['$7^2$', '$7 \\cdot 7 = 49$', '$9$'],
+        },
+        {
+          steps: [
+            { set: { e: '$3$', p: '$63$' }, note: '$7^3$: multiply the remainder, $9 \\cdot 7 = 63$.' },
+            { set: { r: '$3$' }, note: '$63 \\bmod 10 = 3$.' },
+            { note: 'The exponent is $3$, not $4$, so multiply again.' },
+          ],
+          row: ['$7^3$', '$9 \\cdot 7 = 63$', '$3$'],
+        },
+        {
+          steps: [
+            { set: { e: '$4$', p: '$21$' }, note: '$7^4$: multiply the remainder, $3 \\cdot 7 = 21$.' },
+            { set: { r: '$1$' }, note: '$21 \\bmod 10 = 1$.' },
+            { note: 'The exponent has reached $4$, so stop.' },
+          ],
+          row: ['$7^4$', '$3 \\cdot 7 = 21$', '$1$'],
+        },
+      ],
+      tableLabel: 'One row per multiplication',
+      columns: ['Power', 'Multiply', 'Remainder'],
+      eqCol: 1,
+      result: '$7^4 \\bmod 10 = 1$',
+      resultNote: 'The largest number along the way was $63$, far smaller than $7^4 = 2{,}401$.',
+    },
+  };
+
 return {
   props:{
+    modPowerSteps,
+    modMultiplySteps,
+    modSubtractSteps,
+    modAddSteps,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -1623,7 +1743,7 @@ return {
 
 
 
-export default function OperationsPage({ proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function OperationsPage({ modPowerSteps, modMultiplySteps, modSubtractSteps, modAddSteps, proofStepsData, formulaSummaryData, pitfallData,seoData, sectionsContent, introContent, obj7Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1710,6 +1830,7 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to do modular arithmetic](!/arithmetic/methods/modular-arithmetic) →@`,
         ]
     },
     {
@@ -1718,6 +1839,11 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame key={'obj3-procedure'} id="modular-addition-steps" title="Reduce, add, reduce"
+            source="/arithmetic/modulo/operations" related={false}
+            before={"The first example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={modAddSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1726,6 +1852,11 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame key={'obj4-procedure'} id="modular-subtraction-steps" title="Reduce, subtract, add n"
+            source="/arithmetic/modulo/operations" related={false}
+            before={"The example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={modSubtractSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1734,6 +1865,11 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame key={'obj5-procedure'} id="modular-multiplication-steps" title="Reduce, multiply, reduce"
+            source="/arithmetic/modulo/operations" related={false}
+            before={"The second example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={modMultiplySteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1742,6 +1878,11 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame key={'obj6-procedure'} id="modular-power-steps" title="Reducing after every multiplication"
+            source="/arithmetic/modulo/operations" related={false}
+            before={"The first example of this section, one multiplication at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={modPowerSteps} variant="loop" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1750,8 +1891,15 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-operations-detecting-cycles-powers-matrix'}
+            id="operations-detecting-cycles-powers-matrix"
+            title="Detecting Cycles in Powers"
+            source="/arithmetic/modulo/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
                   <div key={'unit-powCycle'} dangerouslySetInnerHTML={{ __html: demoUnits.powCycle }} />,
             `A power of 2 is never a multiple of 7, so only 6 remainders are possible, and a repeat must come within the first 7 powers.`,
           `@academic[punchline:Powers modulo $n$ always fall into a cycle, so even a huge exponent matters only through its place in that cycle.]@`,
@@ -1772,8 +1920,15 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-operations-last-digit-problems-matrix'}
+            id="operations-last-digit-problems-matrix"
+            title="Last Digit Problems"
+            source="/arithmetic/modulo/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1853,6 +2008,14 @@ export default function OperationsPage({ proofStepsData, formulaSummaryData, pit
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

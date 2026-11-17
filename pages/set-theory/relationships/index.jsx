@@ -997,6 +997,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1016,7 +1017,42 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
 
+// SetDiagram (relations) 2026-11-15: the page's five relationships as pictures. Conditions, examples and facts are the ones in formulaSummaryData.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const howSetsRelateDiagram = {
+  relations: [
+    { kind: 'equal', name: 'Equal sets', condition: '$A = B$', definition: 'the same elements: $A = B \\iff \\forall x\\,(x \\in A \\iff x \\in B)$',
+      example: '$\\{1, 2, 3\\} = \\{3, 1, 2\\}$', fact: 'proved by mutual subset containment, $A \\subseteq B$ and $B \\subseteq A$' },
+    { kind: 'equivalent', name: 'Equivalent sets', condition: '$|A| = |B|$', definition: 'the same cardinality, $|A| = |B|$, written $A \\sim B$',
+      example: '$\\{a, b, c\\} \\sim \\{1, 2, 3\\}$; $\\mathbb{N} \\sim \\mathbb{Z}$', fact: 'equal sets are always equivalent, but not the other way around' },
+    { kind: 'disjoint', name: 'Disjoint sets', condition: '$A \\cap B = \\emptyset$', definition: 'no common elements: $A \\cap B = \\emptyset$',
+      example: '$\\{1, 2, 3\\}$ and $\\{4, 5, 6\\}$; the evens and the odds', fact: 'in probability such sets are called mutually exclusive' },
+    { kind: 'overlap', name: 'Overlapping sets', condition: '$A \\cap B \\neq \\emptyset$', definition: '$A \\cap B \\neq \\emptyset$, $A \\not\\subseteq B$ and $B \\not\\subseteq A$',
+      example: '$\\{1, 2, 3\\}$ and $\\{2, 3, 4\\}$', fact: 'both $A \\setminus B$ and $B \\setminus A$ are non-empty' },
+    { kind: 'partition', name: 'Partition of $S$', condition: 'the pieces cover $S$ once', definition: 'non-empty, pairwise disjoint subsets whose union is $S$',
+      example: 'the evens and the odds of $\\mathbb{Z}$; the residue classes mod $n$', fact: 'every element of $S$ belongs to exactly one piece' },
+  ],
+};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Prove a set identity", href: "/set-theory/methods/prove-set-identities", desc: "Prove that two set expressions are equal: show each side is a subset of the other, or rewrite one side with the laws of set algebra.", level: "composite", here: "#1" },
+    ] },
+    { title: "More set theory methods", items: [
+      { skill: "Check whether one set is a subset of another", href: "/set-theory/methods/subset-check", desc: "Test $A \\subseteq B$ element by element: every element of $A$ must be in $B$; for a proper subset, $B$ also needs an element outside $A$.", level: "composite" },
+      { skill: "Fill a two-set Venn diagram", href: "/set-theory/methods/venn-two-sets", desc: "Place elements or counts in the four regions of a two-set Venn diagram: the overlap first, then each set alone, then the outside.", level: "composite" },
+      { skill: "Fill a three-set Venn diagram", href: "/set-theory/methods/venn-three-sets", desc: "Fill the eight regions of a three-set Venn diagram from the center out: all three, the pair-only regions, each set alone, then the outside.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/set-theory/methods", label: "All set theory methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2017,6 +2053,7 @@ Showing $A \\subseteq B$ for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$ and stoppi
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to prove a set identity](!/set-theory/methods/prove-set-identities) →@`,
         ]
     },
     {
@@ -2093,6 +2130,15 @@ Showing $A \\subseteq B$ for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$ and stoppi
             after={sectionsContent.obj6.formulaSheetAfter}
           >
             <FormulaSheet data={formulaSummaryData} variant="tiles" />
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'set-diagram-how-sets-relate'}
+            id="how-sets-relate-pictures"
+            title="The five relationships as pictures"
+            source="/set-theory/relationships"
+            before="The same five relationships as pictures. Click a card to see its defining condition, an example and the fact that sets it apart."
+          >
+            <SetDiagram data={howSetsRelateDiagram} variant="relations" theme={setDiagramTheme} />
           </DiagramFrame>,
         ]
     },
@@ -2193,6 +2239,14 @@ Showing $A \\subseteq B$ for $A = \\{1, 2\\}$ and $B = \\{1, 2, 3\\}$ and stoppi
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

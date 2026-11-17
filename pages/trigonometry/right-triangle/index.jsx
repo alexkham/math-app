@@ -2576,6 +2576,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -2596,8 +2597,43 @@ import trigonometryNotationSheet from '@/app/components/infographics/NotationChe
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("The Reciprocal Functions: Cosecant, Secant, Cotangent"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Ratio of sides","type":"text"},{"id":"c2","name":"Mnemonic / reciprocal of","type":"text"}],"items":[{"id":"r1","name":"sin θ","values":{"c1":"opposite / hypotenuse","c2":"SOH"}},{"id":"r2","name":"cos θ","values":{"c1":"adjacent / hypotenuse","c2":"CAH"}},{"id":"r3","name":"tan θ","values":{"c1":"opposite / adjacent","c2":"TOA"}},{"id":"r4","name":"csc θ","values":{"c1":"hypotenuse / opposite","c2":"reciprocal of sin"}},{"id":"r5","name":"sec θ","values":{"c1":"hypotenuse / adjacent","c2":"reciprocal of cos"}},{"id":"r6","name":"cot θ","values":{"c1":"adjacent / opposite","c2":"reciprocal of tan"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Exact Values at the Standard Acute Angles"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"0°","type":"text"},{"id":"c2","name":"30°","type":"text"},{"id":"c3","name":"45°","type":"text"},{"id":"c4","name":"60°","type":"text"},{"id":"c5","name":"90°","type":"text"}],"items":[{"id":"r1","name":"sin θ","values":{"c1":"0","c2":"1/2","c3":"√2/2","c4":"√3/2","c5":"1"}},{"id":"r2","name":"cos θ","values":{"c1":"1","c2":"√3/2","c3":"√2/2","c4":"1/2","c5":"0"}},{"id":"r3","name":"tan θ","values":{"c1":"0","c2":"√3/3","c3":"1","c4":"√3","c5":"undefined"}},{"id":"r4","name":"csc θ","values":{"c1":"undefined","c2":"2","c3":"√2","c4":"2√3/3","c5":"1"}},{"id":"r5","name":"sec θ","values":{"c1":"1","c2":"2√3/3","c3":"√2","c4":"2","c5":"undefined"}},{"id":"r6","name":"cot θ","values":{"c1":"undefined","c2":"√3","c3":"1","c4":"√3/3","c5":"0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Cofunction Relationships"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Cofunction","type":"text"},{"id":"c2","name":"Identity","type":"text"}],"items":[{"id":"r1","name":"sine","values":{"c1":"cosine","c2":"sin θ = cos(90° − θ)"}},{"id":"r2","name":"tangent","values":{"c1":"cotangent","c2":"tan θ = cot(90° − θ)"}},{"id":"r3","name":"secant","values":{"c1":"cosecant","c2":"sec θ = csc(90° − θ)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Finding Missing Angles"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Given","features":[{"id":"c1","name":"Find","type":"text"},{"id":"c2","name":"Formula","type":"text"}],"items":[{"id":"r1","name":"angle θ + hypotenuse","values":{"c1":"opposite side","c2":"opposite = hypotenuse · sin θ"}},{"id":"r2","name":"angle θ + hypotenuse","values":{"c1":"adjacent side","c2":"adjacent = hypotenuse · cos θ"}},{"id":"r3","name":"angle θ + adjacent side","values":{"c1":"opposite side","c2":"opposite = adjacent · tan θ"}},{"id":"r4","name":"opposite + hypotenuse","values":{"c1":"angle θ","c2":"θ = arcsin(opposite / hypotenuse)"}},{"id":"r5","name":"adjacent + hypotenuse","values":{"c1":"angle θ","c2":"θ = arccos(adjacent / hypotenuse)"}},{"id":"r6","name":"opposite + adjacent","values":{"c1":"angle θ","c2":"θ = arctan(opposite / adjacent)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a right triangle", href: "/trigonometry/methods/solve-right-triangle", desc: "Find every missing side and angle from two pieces of information with SOH-CAH-TOA.", level: "composite", here: "#4" },
+      { skill: "Solve height and distance problems", href: "/trigonometry/methods/heights-distances-problems", desc: "Angles of elevation and depression: draw the right triangle, pick the ratio, solve.", level: "applied", here: "#9" },
+    ] },
+    { title: "More trigonometry methods", items: [
+      { skill: "Choose the right method to solve a triangle", href: "/trigonometry/methods/which-triangle-law", desc: "A decision tree from what you know about the triangle to the method that solves it.", level: "strategy" },
+      { skill: "Use the law of sines", href: "/trigonometry/methods/law-of-sines", desc: "Two angles and a side (AAS, ASA): each side over the sine of its opposite angle is the same.", level: "composite" },
+      { skill: "Use the law of cosines", href: "/trigonometry/methods/law-of-cosines", desc: "Two sides and the included angle (SAS), or three sides (SSS).", level: "composite" },
+      { skill: "Solve bearing problems", href: "/trigonometry/methods/bearings-problems", desc: "Navigation: turn bearings into angles of a triangle, then use the triangle laws.", level: "applied" },
+    ] },
+    { title: "Identity methods", items: [
+      { skill: "Find exact values with the sum and difference formulas", href: "/trigonometry/identities/methods/exact-values-sum-difference", desc: "Split angles like $75^\\circ$ or $\\frac{7\\pi}{12}$ into two standard angles and expand.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3980,8 +4016,15 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-right-triangle-reciprocal-functions-cosecant-matrix'}
+            id="right-triangle-reciprocal-functions-cosecant-matrix"
+            title="The Reciprocal Functions: Cosecant, Secant, Cotangent"
+            source="/trigonometry/right-triangle"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Cosecant, secant and cotangent add no new information: each is sine, cosine or tangent turned upside down.]@`,
         ]
     },
@@ -4017,6 +4060,7 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
           sectionsContent.obj4.content,
           <div key={'unit-findingSides'} dangerouslySetInnerHTML={{ __html: demoUnits.findingSides }} />,
           `In practice the known pair of sides chooses the ratio before you do.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a right triangle](!/trigonometry/methods/solve-right-triangle) →@`,
         ]
     },
     {
@@ -4025,8 +4069,15 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-right-triangle-finding-missing-angles-matrix'}
+            id="right-triangle-finding-missing-angles-matrix"
+            title="Finding Missing Angles"
+            source="/trigonometry/right-triangle"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-t51213'} dangerouslySetInnerHTML={{ __html: demoUnits.t51213 }} />,
           `Either acute angle can be recovered this way, and the two must always sum to 90&#176;.`,
         ]
@@ -4059,8 +4110,15 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
           sectionsContent.obj8.content,
           <div key={'unit-cofunction'} dangerouslySetInnerHTML={{ __html: demoUnits.cofunction }} />,
           `The same argument pairs tangent with cotangent, and secant with cosecant.`,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-right-triangle-cofunction-relationships-matrix'}
+            id="right-triangle-cofunction-relationships-matrix"
+            title="Cofunction Relationships"
+            source="/trigonometry/right-triangle"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:Each cofunction is the original function evaluated at the other acute angle, which is what the prefix co- records.]@`,
         ]
     },
@@ -4072,6 +4130,7 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
           sectionsContent.obj9.content,
           <div key={'unit-elevation'} dangerouslySetInnerHTML={{ __html: demoUnits.elevation }} />,
           `In either setup the tangent ratio is the one that relates the height to the distance.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve height and distance problems](!/trigonometry/methods/heights-distances-problems) →@`,
         ]
     },
     {
@@ -4126,8 +4185,15 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-right-triangle-exact-values-at-matrix'}
+            id="right-triangle-exact-values-at-matrix"
+            title="Exact Values at the Standard Acute Angles"
+            source="/trigonometry/right-triangle"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -4187,6 +4253,14 @@ Using the hypotenuse 5 of the 3-4-5 triangle as the side adjacent to $\\theta$ (
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

@@ -829,6 +829,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -849,8 +850,35 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Plotting Complex Numbers"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Region","features":[{"id":"c1","name":"Re(z)","type":"text"},{"id":"c2","name":"Im(z)","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Quadrant I (upper right)","values":{"c1":"> 0","c2":"> 0","c3":"3 + 2i at (3, 2)"}},{"id":"r2","name":"Quadrant II (upper left)","values":{"c1":"< 0","c2":"> 0","c3":"−1 + 4i at (−1, 4)"}},{"id":"r3","name":"Quadrant III (lower left)","values":{"c1":"< 0","c2":"< 0","c3":"−2 − 3i at (−2, −3)"}},{"id":"r4","name":"Quadrant IV (lower right)","values":{"c1":"> 0","c2":"< 0","c3":"2 − i at (2, −1)"}},{"id":"r5","name":"Real axis (excluding origin)","values":{"c1":"≠ 0","c2":"= 0","c3":"5 at (5, 0); −π at (−π, 0)"}},{"id":"r6","name":"Imaginary axis (excluding origin)","values":{"c1":"= 0","c2":"≠ 0","c3":"3i at (0, 3); −2i at (0, −2)"}},{"id":"r7","name":"Origin (on both axes)","values":{"c1":"= 0","c2":"= 0","c3":"0 at (0, 0) — the only such point"}}]};
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Visualizing Operations"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Multiply by","features":[{"id":"c1","name":"Geometric action","type":"text"},{"id":"c2","name":"Effect on 2 + i","type":"text"}],"items":[{"id":"r1","name":"k > 0 (positive real)","values":{"c1":"scale by k along the same ray; no rotation","c2":"3 · (2 + i) = 6 + 3i (3× longer, same direction)"}},{"id":"r2","name":"−1","values":{"c1":"rotate 180° (reflect through origin)","c2":"−(2 + i) = −2 − i"}},{"id":"r3","name":"i","values":{"c1":"rotate 90° counterclockwise","c2":"i · (2 + i) = 2i + i² = −1 + 2i"}},{"id":"r4","name":"−i","values":{"c1":"rotate 90° clockwise","c2":"−i · (2 + i) = 1 − 2i"}},{"id":"r5","name":"iⁿ (integer n)","values":{"c1":"rotate by n · 90° counterclockwise","c2":"cycles: 2 + i → −1 + 2i → −2 − i → 1 − 2i → 2 + i"}},{"id":"r6","name":"general z = r · cis(θ)","values":{"c1":"scale by r, rotate by θ","c2":"lengths multiply, arguments add"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Visualizing the Conjugate"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"Point (a, b)","type":"text"},{"id":"c2","name":"z̄","type":"text"},{"id":"c3","name":"Point of z̄","type":"text"},{"id":"c4","name":"Geometric note","type":"text"}],"items":[{"id":"r1","name":"2 + 3i","values":{"c1":"(2, 3)","c2":"2 − 3i","c3":"(2, −3)","c4":"upper half-plane → lower half-plane, same x"}},{"id":"r2","name":"−1 + 4i","values":{"c1":"(−1, 4)","c2":"−1 − 4i","c3":"(−1, −4)","c4":"Q2 reflects to Q3"}},{"id":"r3","name":"5 (real)","values":{"c1":"(5, 0)","c2":"5","c3":"(5, 0)","c4":"fixed — points on the mirror (real axis) don't move"}},{"id":"r4","name":"3i (pure imaginary)","values":{"c1":"(0, 3)","c2":"−3i","c3":"(0, −3)","c4":"reflects to its negative; z̄ = −z"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Plot complex numbers on the Argand plane", href: "/complex-numbers/methods/plot-on-argand-plane", desc: "Plot $a + bi$ as the point $(a, b)$: real part across, imaginary part up; read off the modulus, the conjugate and sums from the picture.", level: "composite", here: "#3" },
+    ] },
+    { title: "More complex number methods", items: [
+      { skill: "Convert a complex number to polar form", href: "/complex-numbers/methods/rectangular-to-polar", desc: "Find the modulus $r$, find the argument from $\\tan\\theta = \\frac{b}{a}$ with a quadrant check, and write $r(\\cos\\theta + i\\sin\\theta)$.", level: "composite" },
+      { skill: "Multiply complex numbers", href: "/complex-numbers/methods/multiply-complex", desc: "Expand the brackets term by term, replace $i^2$ with $-1$, and collect the real and imaginary parts.", level: "composite" },
+      { skill: "Choose the right form of a complex number", href: "/complex-numbers/methods/which-form", desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1183,7 +1211,9 @@ The four quadrants organize complex numbers by the signs of their components. Th
 
 Special cases occupy the axes rather than the quadrants. Real numbers like $5$ appear at $(5, 0)$ on the horizontal axis. Pure imaginary numbers like $-2i$ appear at $(0, -2)$ on the vertical axis. These numbers have one zero component, placing them precisely on the boundary between quadrants rather than inside any particular region.
 
-Complex numbers expressed differently may occupy the same point. The number $\\frac{6}{2} + \\frac{8}{4}i$ simplifies to $3 + 2i$ and plots at $(3, 2)$ regardless of how the components were originally written. The geometric location depends only on the final real values of $Re(z)$ and $Im(z)$ — the [extraction marks](!/complex-numbers/algebraic-form#2) — not on the form of the expression.`,
+Complex numbers expressed differently may occupy the same point. The number $\\frac{6}{2} + \\frac{8}{4}i$ simplifies to $3 + 2i$ and plots at $(3, 2)$ regardless of how the components were originally written. The geometric location depends only on the final real values of $Re(z)$ and $Im(z)$ — the [extraction marks](!/complex-numbers/algebraic-form#2) — not on the form of the expression.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to plot complex numbers on the Argand plane](!/complex-numbers/methods/plot-on-argand-plane) →@`,
   after: ``,
   link: '',
 },
@@ -1731,11 +1761,15 @@ export default function GeometricRepresentationPage({ specialCasesData, pitfallD
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-geometric-representation-plotting-complex-numbers-matrix'}
+            id="geometric-representation-plotting-complex-numbers-matrix"
+            title="Plotting Complex Numbers"
+            source="/complex-numbers/geometric-representation"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
                   <div key={'unit-plot'} dangerouslySetInnerHTML={{ __html: demoUnits.plot }} />,
           `The plane makes the two-part structure of a complex number visible at a glance.`,
         ]
@@ -1756,11 +1790,15 @@ export default function GeometricRepresentationPage({ specialCasesData, pitfallD
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-geometric-representation-visualizing-conjugate-matrix'}
+            id="geometric-representation-visualizing-conjugate-matrix"
+            title="Visualizing the Conjugate"
+            source="/complex-numbers/geometric-representation"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-conj'} dangerouslySetInnerHTML={{ __html: demoUnits.conj }} />,
           `The conjugate is the mirror image, and mirror images have equal moduli.`,
         ]
@@ -1779,11 +1817,15 @@ export default function GeometricRepresentationPage({ specialCasesData, pitfallD
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-geometric-representation-visualizing-operations-matrix'}
+            id="geometric-representation-visualizing-operations-matrix"
+            title="Visualizing Operations"
+            source="/complex-numbers/geometric-representation"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
                   <div key={'unit-ops'} dangerouslySetInnerHTML={{ __html: demoUnits.ops }} />,
           `Addition translates, multiplication rotates and scales: the two operations look nothing alike on the plane.`,
         ]
@@ -1816,6 +1858,14 @@ export default function GeometricRepresentationPage({ specialCasesData, pitfallD
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

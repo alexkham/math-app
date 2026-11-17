@@ -1,4 +1,5 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,12 +15,33 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Domain Considerations"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Root index n","features":[{"id":"c1","name":"Allowed base (real)","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Counterexample","type":"text"}],"items":[{"id":"r1","name":"n even","values":{"c1":"a ≥ 0","c2":"16$^{1/4}$ = 2","c3":"(−4)$^{1/2}$ undefined in reals (defined in [complex numbers](!/complex-numbers))"}},{"id":"r2","name":"n odd","values":{"c1":"any real a","c2":"(−8)$^{1/3}$ = −2","c3":"— none"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Fractional Exponents"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Expression","features":[{"id":"c1","name":"Root-first route","type":"text"},{"id":"c2","name":"Power-first route","type":"text"},{"id":"c3","name":"Easier route","type":"text"}],"items":[{"id":"r1","name":"8$^{2/3}$","values":{"c1":"8$^{1/3}$ = 2, then 2² = 4","c2":"8² = 64, then ³√64 = 4","c3":"root-first (smaller intermediates)"}},{"id":"r2","name":"27$^{4/3}$","values":{"c1":"27$^{1/3}$ = 3, then 3⁴ = 81","c2":"27⁴ = 531,441, then ³√531,441 = 81","c3":"root-first (decisively)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Solve compound interest problems", href: "/algebra/methods/compound-interest-problems", desc: "A = P(1 + r/n)^(nt) and A = Pe^(rt): find the amount, the principal, the time or the rate.", level: "applied" },
+      { skill: "Convert between rational exponents and roots", href: "/algebra/methods#rational-exponents", desc: "A fraction in the exponent, or a root that would be easier as a power: $8^{2/3}$, $\\sqrt[5]{x^2}$, $x^{1/2}$.", level: "atomic" },
+      { skill: "Evaluate a logarithm", href: "/algebra/methods/evaluate-logarithms", desc: "Ask \"which exponent?\", use the key values, or change the base for a calculator.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 
@@ -750,11 +772,15 @@ export default function RationalExponentsPage({ formulaSummaryData, pitfallData,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-exponents-fractional-exponents-matrix'}
+            id="rational-exponents-fractional-exponents-matrix"
+            title="Fractional Exponents"
+            source="/algebra/powers/rational-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Root first or power first, a fractional power has one value; the order only decides how big the numbers get along the way.]@`,
         ]
     },
@@ -798,11 +824,15 @@ export default function RationalExponentsPage({ formulaSummaryData, pitfallData,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-exponents-domain-considerations-matrix'}
+            id="rational-exponents-domain-considerations-matrix"
+            title="Domain Considerations"
+            source="/algebra/powers/rational-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -870,6 +900,14 @@ export default function RationalExponentsPage({ formulaSummaryData, pitfallData,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

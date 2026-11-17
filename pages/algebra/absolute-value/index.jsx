@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,7 +16,52 @@ import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// PropertySheet 2026-11-15: replaces the table propertiesTable ("Properties of Absolute Value"); names, rules and examples taken from the table's own cells.
+const absoluteValuePropertyCards = {
+  header: {
+    kicker: 'absolute value',
+    title: 'Properties of absolute value',
+    lede: 'For all real numbers $a$ and $b$; one rule needs a nonzero divisor.',
+  },
+  verdicts: {
+    always: { label: 'Always', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+    cond: { label: 'With a condition', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+  },
+  groups: [{ properties: [
+    { id: 'nonneg', name: 'Never negative', verdict: 'always', statement: '$|a| \\geq 0$', note: 'Example: $|{-5}| = 5$' },
+    { id: 'zero', name: 'Zero only at zero', verdict: 'always', statement: '$|a| = 0$ exactly when $a = 0$', note: 'Example: $|0| = 0$' },
+    { id: 'opp', name: 'Opposites', verdict: 'always', statement: '$|{-a}| = |a|$', note: 'Example: $|{-7}| = |7| = 7$' },
+    { id: 'prod', name: 'Product', verdict: 'always', statement: '$|ab| = |a| \\cdot |b|$', note: 'Example: $|(-3)(4)| = 12 = 3 \\cdot 4$' },
+    { id: 'quot', name: 'Quotient', verdict: 'cond', statement: '$\\left|\\dfrac{a}{b}\\right| = \\dfrac{|a|}{|b|}$', condition: '$b \\neq 0$', note: 'Example: $|{-8} / 2| = 4 = 8 / 2$' },
+    { id: 'pow', name: 'Powers', verdict: 'always', statement: '$|a^n| = |a|^n$', note: 'Example: $|(-2)^3| = 8 = 2^3$' },
+    { id: 'sq', name: 'Square', verdict: 'always', statement: '$|a|^2 = a^2$', note: 'Example: $|{-5}|^2 = 25 = (-5)^2$' },
+    { id: 'root', name: 'Square root', verdict: 'always', statement: '$\\sqrt{a^2} = |a|$', note: 'Example: $\\sqrt{(-5)^2} = 5$' },
+    { id: 'bounds', name: 'Bounds', verdict: 'always', statement: '$-|a| \\leq a \\leq |a|$', note: 'Example: $-5 \\leq -5 \\leq 5$' },
+    { id: 'tri', name: 'Triangle inequality', verdict: 'always', statement: '$|a + b| \\leq |a| + |b|$', note: 'Example: $|3 + (-5)| = 2 \\leq 8$' },
+    { id: 'revtri', name: 'Reverse triangle inequality', verdict: 'always', statement: '$\\big|\\,|a| - |b|\\,\\big| \\leq |a - b|$', note: 'Example: $|3 - 5| = 2 \\leq |3 - (-5)| = 8$' },
+  ] }],
+}
+
+// FeatureMatrix 2026-11-15: replaces the table formsTable ("Absolute Value in Equations and Inequalities"); converted from the table's own cells.
+const fm_formsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"Equivalent statement","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Solution","type":"text"}],"items":[{"id":"r1","name":"|A| = k,  k > 0","values":{"c1":"A = k  or  A = −k","c2":"|x − 3| = 2","c3":"x = 1 or x = 5"}},{"id":"r2","name":"|A| < k,  k > 0","values":{"c1":"−k < A < k","c2":"|x − 3| < 2","c3":"1 < x < 5"}},{"id":"r3","name":"|A| > k,  k > 0","values":{"c1":"A < −k  or  A > k","c2":"|x − 3| > 2","c3":"x < 1 or x > 5"}},{"id":"r4","name":"|A| = 0","values":{"c1":"A = 0","c2":"|x − 3| = 0","c3":"x = 3"}},{"id":"r5","name":"|A| = k  or  |A| < k,  k < 0","values":{"c1":"impossible","c2":"|x − 3| = −2","c3":"no solution"}},{"id":"r6","name":"|A| > k,  k < 0","values":{"c1":"always true","c2":"|x − 3| > −2","c3":"every real x"}}]};
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Equation methods", items: [
+      { skill: "Solve an absolute value equation", href: "/algebra/equations/methods/absolute-value-equations", desc: "Isolate the bars, split into two cases, solve each, check.", level: "composite" },
+    ] },
+    { title: "Inequality methods", items: [
+      { skill: "Solve an absolute value inequality", href: "/algebra/inequalities/methods/absolute-value-inequalities", desc: "Less than: one three-part inequality. Greater than: two pieces joined by or.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 
@@ -672,8 +718,15 @@ export default function AbsoluteValuePage({ specialCasesData, formulaSummaryData
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'properties-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: propertiesTable }} />,
+          <DiagramFrame
+            key={'property-sheet-absolute-value-properties'}
+            id="absolute-value-properties"
+            title="Properties of Absolute Value"
+            source="/algebra/absolute-value"
+            related={false}
+          >
+            <PropertySheet data={absoluteValuePropertyCards} />
+          </DiagramFrame>,
           `@academic[punchline:Absolute value splits over products and quotients, never over sums and differences.]@`,
         ]
     },
@@ -729,8 +782,15 @@ export default function AbsoluteValuePage({ specialCasesData, formulaSummaryData
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'forms-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: formsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-forms'}
+            id="absolute-value-standard-forms"
+            title="Standard Forms with Absolute Value"
+            source="/algebra/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_formsTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -782,6 +842,14 @@ export default function AbsoluteValuePage({ specialCasesData, formulaSummaryData
           >
             <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

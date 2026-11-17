@@ -1,5 +1,6 @@
 
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj11 aggregation, obj13 aggregation, obj14 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -18,8 +19,37 @@ import divisibilityTreeDiagrams from '@/app/components/divisibility/divisibility
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Combining Rules"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n","features":[{"id":"c1","name":"Coprime factorization","type":"text"},{"id":"c2","name":"Tests to apply","type":"text"}],"items":[{"id":"r1","name":"6","values":{"c1":"2 × 3","c2":"last digit even **and** digit sum divisible by 3"}},{"id":"r2","name":"12","values":{"c1":"4 × 3","c2":"last two digits divisible by 4 **and** digit sum divisible by 3"}},{"id":"r3","name":"15","values":{"c1":"5 × 3","c2":"last digit 0 or 5 **and** digit sum divisible by 3"}},{"id":"r4","name":"18","values":{"c1":"2 × 9","c2":"last digit even **and** digit sum divisible by 9"}},{"id":"r5","name":"24","values":{"c1":"8 × 3","c2":"last three digits divisible by 8 **and** digit sum divisible by 3"}},{"id":"r6","name":"36","values":{"c1":"4 × 9","c2":"last two digits divisible by 4 **and** digit sum divisible by 9"}}]};
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Master Rules Reference"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Divisor","features":[{"id":"c1","name":"Test","type":"text"},{"id":"c2","name":"Worked example","type":"text"},{"id":"c3","name":"Modular reason","type":"text"}],"items":[{"id":"r1","name":"2","values":{"c1":"last digit is 0, 2, 4, 6, or 8","c2":"1746 → ends in 6 (even) ✓","c3":"10 ≡ 0 (mod 2)"}},{"id":"r2","name":"3","values":{"c1":"digit sum is divisible by 3","c2":"729 → 7+2+9=18 → 18 ÷ 3 = 6 ✓","c3":"10 ≡ 1 (mod 3)"}},{"id":"r3","name":"4","values":{"c1":"last two digits form a number divisible by 4","c2":"3516 → 16, and 16 ÷ 4 = 4 ✓","c3":"10² ≡ 0 (mod 4)"}},{"id":"r4","name":"5","values":{"c1":"last digit is 0 or 5","c2":"4835 → ends in 5 ✓","c3":"10 ≡ 0 (mod 5)"}},{"id":"r5","name":"6","values":{"c1":"passes the test for 2 AND the test for 3","c2":"1254 → 4 (even) ✓ and 1+2+5+4=12, 12 ÷ 3 = 4 ✓","c3":"6 = 2 · 3 with gcd(2, 3) = 1"}},{"id":"r6","name":"8","values":{"c1":"last three digits form a number divisible by 8","c2":"53104 → 104, and 104 ÷ 8 = 13 ✓","c3":"10³ ≡ 0 (mod 8)"}},{"id":"r7","name":"9","values":{"c1":"digit sum is divisible by 9","c2":"8127 → 8+1+2+7=18, and 18 ÷ 9 = 2 ✓","c3":"10 ≡ 1 (mod 9)"}},{"id":"r8","name":"10","values":{"c1":"last digit is 0","c2":"5230 → ends in 0 ✓","c3":"10 ≡ 0 (mod 10)"}},{"id":"r9","name":"11","values":{"c1":"alternating sum of digits (right → left) is divisible by 11","c2":"9273 → 3 − 7 + 2 − 9 = −11, and 11 ∣ (−11) ✓","c3":"10 ≡ −1 (mod 11)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj13Table ("Why These Rules Work"); converted from the table's own cells.
+const fm_obj13Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Key modular fact","features":[{"id":"c1","name":"Resulting mechanism","type":"text"},{"id":"c2","name":"Rules covered","type":"text"}],"items":[{"id":"r1","name":"10 ≡ 0 (mod 2), (mod 5), (mod 10)","values":{"c1":"all digits except the last vanish — only the ones digit matters","c2":"rules for 2, 5, 10"}},{"id":"r2","name":"10² ≡ 0 (mod 4)","values":{"c1":"all digits beyond the tens place vanish — only the last two matter","c2":"rule for 4"}},{"id":"r3","name":"10³ ≡ 0 (mod 8)","values":{"c1":"all digits beyond the hundreds place vanish — only the last three matter","c2":"rule for 8"}},{"id":"r4","name":"10 ≡ 1 (mod 3), (mod 9)","values":{"c1":"every power of 10 is ≡ 1 — every digit contributes its face value → digit sum","c2":"rules for 3, 9"}},{"id":"r5","name":"10 ≡ −1 (mod 11)","values":{"c1":"powers of 10 alternate +1, −1, +1, … — digits contribute with alternating signs","c2":"rule for 11"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Arithmetic methods", items: [
+      { skill: "Test divisibility by 3", href: "/arithmetic/methods#divisibility-by-3", desc: "You want to know whether $3$ divides a number without dividing it: $729$, $1{,}234$, $5{,}832$.", level: "atomic" },
+      { skill: "Test divisibility by 6", href: "/arithmetic/methods#divisibility-by-6", desc: "You need to know whether $6$ divides a number: $1{,}254$, $1{,}234$, $4{,}512$. Since $6 = 2 \\cdot 3$ with $\\gcd(2, 3) = 1$, two quick tests decide it.", level: "atomic" },
+      { skill: "Test divisibility by 9", href: "/arithmetic/methods#divisibility-by-9", desc: "You want to know whether $9$ divides a number: $8{,}127$, $4{,}825$, $6{,}471$. The digit sum also gives the remainder after division by $9$.", level: "atomic" },
+      { skill: "Test divisibility by 11", href: "/arithmetic/methods#divisibility-by-11", desc: "You want to know whether $11$ divides a number, for example while factoring: $9{,}273$, $5{,}831$, $143$.", level: "atomic" },
+      { skill: "Test divisibility by 2", href: "/arithmetic/methods#divisibility-by-2", desc: "You need to know whether a whole number is even, for example before halving it or factoring out a $2$: $1{,}746$, $3{,}821$, $90{,}318$.", level: "atomic" },
+      { skill: "Test divisibility by 4", href: "/arithmetic/methods#divisibility-by-4", desc: "You need to know whether $4$ divides a number with three or more digits: $3{,}516$, $7{,}230$, $2{,}134$.", level: "atomic" },
+      { skill: "Test divisibility by 5", href: "/arithmetic/methods#divisibility-by-5", desc: "You want to know whether $5$ divides a number, for example while factoring or simplifying a fraction: $4{,}835$, $7{,}832$, $990$.", level: "atomic" },
+      { skill: "Test divisibility by 10", href: "/arithmetic/methods#divisibility-by-10", desc: "You need to know whether $10$ divides a number, or whether both $2$ and $5$ do: $5{,}230$, $5{,}235$, $7{,}250$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1247,8 +1277,15 @@ drObj10, demoUnits, conceptIntroFigures}) {
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'obj11-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-rules-combining-rules-matrix'}
+            id="rules-combining-rules-matrix"
+            title="Combining Rules"
+            source="/arithmetic/divisibility/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
           sectionsContent.obj11.after,
           `@academic[punchline:Test a composite divisor through coprime factors only: factors that share a divisor can both pass while the number fails.]@`,
         ]
@@ -1267,8 +1304,15 @@ drObj10, demoUnits, conceptIntroFigures}) {
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'obj13-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj13Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-rules-why-these-rules-work-matrix'}
+            id="rules-why-these-rules-work-matrix"
+            title="Why These Rules Work"
+            source="/arithmetic/divisibility/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj13Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1277,8 +1321,15 @@ drObj10, demoUnits, conceptIntroFigures}) {
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-rules-summary-master-rules-reference-matrix'}
+            id="rules-summary-master-rules-reference-matrix"
+            title="Summary: Master Rules Reference"
+            source="/arithmetic/divisibility/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1296,6 +1347,14 @@ drObj10, demoUnits, conceptIntroFigures}) {
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

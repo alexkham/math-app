@@ -349,6 +349,12 @@ export default function MathAnimationFrame(props) {
     stepTitle: { fontSize: 14, fontWeight: 500, lineHeight: 1.4 },
     stepText: { fontSize: 13, lineHeight: 1.5, color: ui.textSecondary, marginTop: 4 },
     textStack: { display: 'grid', padding: '6px 10px 0' },
+    sideWrap: { display: 'grid' },
+    sideLayer: { gridArea: '1 / 1', minWidth: 0 },
+    sizer: { gridArea: '1 / 1', minWidth: 0, visibility: 'hidden', pointerEvents: 'none', display: 'flex', flexDirection: 'column', gap: 4 },
+    sizerTitle: { padding: '8px 10px', fontSize: 14, fontWeight: 500, lineHeight: 1.4 },
+    sizerTexts: { display: 'grid', padding: '0 10px', marginTop: -4 },
+    sizerText: { gridArea: '1 / 1', fontSize: 13, lineHeight: 1.5 },
     caption: { padding: '4px 2px', minHeight: isSide ? 0 : 92 },
     captionStep: { fontSize: 12, color: ui.textMuted, marginBottom: 6 },
     captionTitle: { fontSize: 16, fontWeight: 500, color: ui.accent, marginBottom: 6 },
@@ -422,14 +428,34 @@ export default function MathAnimationFrame(props) {
         {hasSteps && (
           <div style={styles.panel} aria-live="polite">
             {explanationStyle === 'caption' ? (
-              <div style={styles.caption}>
-                <div style={styles.captionStep}>{labels.step(activeStep + 1, steps.length)}</div>
-                <div style={styles.captionTitle}>{current.title}</div>
-                <div style={styles.captionText}>{renderText(current.text)}</div>
+              <div style={{ ...styles.caption, display: 'grid' }}>
+                {steps.map((step, index) => (
+                  <div
+                    key={index}
+                    style={{ gridArea: '1 / 1', visibility: step === current ? 'visible' : 'hidden' }}
+                    aria-hidden={step !== current}
+                  >
+                    <div style={styles.captionStep}>{labels.step(index + 1, steps.length)}</div>
+                    <div style={styles.captionTitle}>{step.title}</div>
+                    <div style={styles.captionText}>{renderText(step.text)}</div>
+                  </div>
+                ))}
               </div>
             ) : (
-              <>
-                <div style={styles.list}>
+              <div style={isSide ? styles.sideWrap : undefined}>
+                {isSide && (
+                  <div style={styles.sizer} aria-hidden="true">
+                    {steps.map((step, index) => (
+                      <div key={index} style={styles.sizerTitle}>{index + 1}. {step.title}</div>
+                    ))}
+                    <div style={styles.sizerTexts}>
+                      {steps.map((step, index) => (
+                        <div key={index} style={styles.sizerText}>{renderText(step.text)}</div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                <div style={isSide ? { ...styles.list, ...styles.sideLayer } : styles.list}>
                   {steps.map((step, index) => (
                     <button key={index} type="button" onClick={() => handleStepClick(index)} style={stepButtonStyle(index)}>
                       <div style={styles.stepTitle}>{index + 1}. {step.title}</div>
@@ -446,7 +472,7 @@ export default function MathAnimationFrame(props) {
                     ))}
                   </div>
                 )}
-              </>
+              </div>
             )}
           </div>
         )}

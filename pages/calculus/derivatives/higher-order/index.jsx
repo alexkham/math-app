@@ -1213,6 +1213,7 @@
 
 // tables-optimized: v4 | 2026-05-24 | 4 tables (obj1 aggregation, obj3 aggregation, obj9 aggregation, overview summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1232,11 +1233,38 @@ import functionDerivativeDiagrams from '@/app/components/functions/derivative/fu
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Notation for Higher-Order Derivatives"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Order","features":[{"id":"c1","name":"Lagrange notation","type":"text"},{"id":"c2","name":"Leibniz notation","type":"text"},{"id":"c3","name":"Read aloud","type":"text"}],"items":[{"id":"r1","name":"1","values":{"c1":"f'(x)","c2":"dy ⁄ dx","c3":"\"f prime\" ; \"d y, d x\""}},{"id":"r2","name":"2","values":{"c1":"f''(x)","c2":"d²y ⁄ dx²","c3":"\"f double prime\" ; \"d two y, d x squared\""}},{"id":"r3","name":"3","values":{"c1":"f'''(x)","c2":"d³y ⁄ dx³","c3":"\"f triple prime\""}},{"id":"r4","name":"4 and beyond","values":{"c1":"f⁽⁴⁾(x), f⁽⁵⁾(x)","c2":"d⁴y ⁄ dx⁴, d⁵y ⁄ dx⁵","c3":"parentheses distinguish derivative order from an exponent"}},{"id":"r5","name":"n (general)","values":{"c1":"f⁽ⁿ⁾(x)","c2":"dⁿy ⁄ dxⁿ","c3":"the nth derivative — a single operator applied n times"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Existence and Smoothness Classes"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Class","features":[{"id":"c1","name":"What it requires","type":"text"},{"id":"c2","name":"Examples","type":"text"}],"items":[{"id":"r1","name":"C⁰","values":{"c1":"f is continuous (no derivatives required)","c2":"|x|; piecewise functions whose pieces match values at the boundary"}},{"id":"r2","name":"Cⁿ","values":{"c1":"f, f', f'', … , f⁽ⁿ⁾ all exist and are continuous","c2":"x|x| belongs to C¹ but not C²"}},{"id":"r3","name":"C$^{∞}$ (smooth)","values":{"c1":"derivatives of all orders exist and are continuous","c2":"polynomials, eˣ, sin x, cos x, and their compositions"}},{"id":"r4","name":"Analytic","values":{"c1":"C$^{∞}$, and the Taylor series at every point converges to f near that point","c2":"most elementary functions; counterexample f(x) = e$^{-1 ⁄ x²}$ (extended by f(0) = 0) is C$^{∞}$ but not analytic at 0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Physical Interpretation"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Order","features":[{"id":"c1","name":"Derivative of position","type":"text"},{"id":"c2","name":"Standard name","type":"text"},{"id":"c3","name":"What it measures","type":"text"}],"items":[{"id":"r1","name":"1","values":{"c1":"s'(t)","c2":"velocity","c3":"rate of change of position; speed and direction of motion"}},{"id":"r2","name":"2","values":{"c1":"s''(t)","c2":"acceleration","c3":"rate of change of velocity; force-related quantity in Newton's second law"}},{"id":"r3","name":"3","values":{"c1":"s'''(t)","c2":"jerk","c3":"rate of change of acceleration; felt physically as a sudden push or lurch"}},{"id":"r4","name":"4","values":{"c1":"s⁽⁴⁾(t)","c2":"snap (or jounce)","c3":"specialised engineering use; rarely appears in standard calculus"}},{"id":"r5","name":"5","values":{"c1":"s⁽⁵⁾(t)","c2":"crackle","c3":"named by analogy with snap; specialised engineering use"}},{"id":"r6","name":"6","values":{"c1":"s⁽⁶⁾(t)","c2":"pop","c3":"named by analogy with snap and crackle; specialised engineering use"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find higher-order derivatives", href: "/calculus/derivatives/techniques/higher-order-derivatives", desc: "Second, third and $n$th derivatives, and the patterns that give $f^{(n)}$ directly.", level: "composite", here: "#1" },
+    ] },
+    { title: "More derivative techniques", items: [
+      { skill: "Find concavity and inflection points", href: "/calculus/derivatives/techniques/concavity-inflection-points", desc: "Sign chart of $f''$: which way the graph bends, and where the bending switches.", level: "composite" },
+      { skill: "Find critical points and extrema", href: "/calculus/derivatives/techniques/critical-points", desc: "Solve $f'(x) = 0$, then classify each point as a maximum, minimum or neither.", level: "composite" },
+      { skill: "Differentiate composite functions", href: "/calculus/derivatives/techniques/composite-functions", desc: "Nested functions such as $\\sin(x^2)$ or $e^{3x+1}$, peeled layer by layer.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 // Concept introduction (section 1) — template I, naming. Running instance:
@@ -2493,6 +2521,7 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find higher-order derivatives](!/calculus/derivatives/techniques/higher-order-derivatives) →@`,
         ]
     },
     {
@@ -2517,7 +2546,15 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
             sheet={derivativesNotationSheet}
             current={'/calculus/derivatives/higher-order'}
           />,
-          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj1Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-higher-order-notation-higher-order-matrix'}
+            id="higher-order-notation-higher-order-matrix"
+            title="Notation for Higher-Order Derivatives"
+            source="/calculus/derivatives/higher-order"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
                   <div key={'unit-second'} dangerouslySetInnerHTML={{ __html: demoUnits.second }} />,
           `The second derivative is the first one whose sign has a shape of its own on the graph.`,
         ]
@@ -2536,7 +2573,15 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj3Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-higher-order-physical-interpretation-matrix'}
+            id="higher-order-physical-interpretation-matrix"
+            title="Physical Interpretation"
+            source="/calculus/derivatives/higher-order"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2592,7 +2637,15 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
           sectionsContent.obj9.content,
           <div key={'unit-xAbsX'} dangerouslySetInnerHTML={{ __html: demoUnits.xAbsX }} />,
           `Joining x² and −x² matches values and first derivatives at 0, but not second derivatives, 2 and −2.`,
-          <div key={'obj9-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj9Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-higher-order-existence-smoothness-classes-matrix'}
+            id="higher-order-existence-smoothness-classes-matrix"
+            title="Existence and Smoothness Classes"
+            source="/calculus/derivatives/higher-order"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj9-diagram'}
             id="smoothness-class-pyramid"
@@ -2636,6 +2689,14 @@ $$f''(x) = \\frac{d}{dx}[f'(x)]$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -763,6 +763,7 @@
 
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj2 aggregation, obj4 aggregation, obj5 aggregation, obj7 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -775,6 +776,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -785,8 +787,30 @@ import renderVectorArrowsV2 from '@/app/utils/illustrations/linear-algebra/vecto
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vectors'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Properties of Addition"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Commutativity","values":{"c1":"a + b = b + a","c2":"order does not affect the sum"}},{"id":"r2","name":"Associativity","values":{"c1":"(a + b) + c = a + (b + c)","c2":"grouping does not matter; parentheses become optional"}},{"id":"r3","name":"Additive identity","values":{"c1":"a + 0 = a","c2":"the zero vector leaves any vector unchanged"}},{"id":"r4","name":"Additive inverse","values":{"c1":"a + (−a) = 0","c2":"every vector has a unique negation, same length, opposite direction"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Properties of Scalar Multiplication"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Associativity with scalars","values":{"c1":"c(da) = (cd)a","c2":"repeated scalings collapse to a single multiplication"}},{"id":"r2","name":"Distributivity over vector addition","values":{"c1":"c(a + b) = ca + cb","c2":"a scalar spreads across each term of a vector sum"}},{"id":"r3","name":"Distributivity over scalar addition","values":{"c1":"(c + d)a = ca + da","c2":"a sum of scalars splits into two separate scalings of the same vector"}},{"id":"r4","name":"Multiplicative identity","values":{"c1":"1a = a","c2":"scaling by 1 leaves any vector unchanged"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Scalar Multiplication"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Case","features":[{"id":"c1","name":"Effect on length","type":"text"},{"id":"c2","name":"Effect on direction","type":"text"}],"items":[{"id":"r1","name":"c > 1","values":{"c1":"stretches by factor |c|","c2":"same as a"}},{"id":"r2","name":"0 < c < 1","values":{"c1":"compresses by factor |c|","c2":"same as a"}},{"id":"r3","name":"c < 0","values":{"c1":"scales by factor |c|","c2":"reversed (opposite to a)"}},{"id":"r4","name":"c = 0","values":{"c1":"collapses to zero","c2":"undefined — result is the zero vector"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Vector methods", items: [
+      { skill: "Add or subtract vectors", href: "/linear-algebra/vectors/methods#vector-addition", desc: "Two vectors of the same dimension joined by $+$ or $-$: $(3, -1, 2) + (1, 4, -5)$, $\\mathbf{u} - \\mathbf{v}$.", level: "atomic" },
+      { skill: "Multiply a vector by a scalar", href: "/linear-algebra/vectors/methods#scalar-multiplication", desc: "A number in front of a vector: $-3(2, -1, 4)$, $\\tfrac{1}{2}\\mathbf{v}$, $5\\mathbf{u}$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vectors/methods", label: "All vector methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1787,8 +1811,15 @@ Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (
           sectionsContent.obj2.content,
           <div key={'unit-sumRoutes'} dangerouslySetInnerHTML={{ __html: demoUnits.sumRoutes }} />,
           `Because the two routes always meet at the same corner, a sum of vectors can be taken in any order.`,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-basic-operations-properties-addition-matrix'}
+            id="basic-operations-properties-addition-matrix"
+            title="Properties of Addition"
+            source="/linear-algebra/vectors/basic-operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1807,8 +1838,15 @@ Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-basic-operations-scalar-multiplication-matrix'}
+            id="basic-operations-scalar-multiplication-matrix"
+            title="Scalar Multiplication"
+            source="/linear-algebra/vectors/basic-operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-scalar'} dangerouslySetInnerHTML={{ __html: demoUnits.scalar }} />,
           `Scaling and adding are the only two operations in play here, and the rest of this page is a catalogue of how they behave together.`,
         ]
@@ -1830,8 +1868,15 @@ Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (
           >
             <SpecialCases data={specialCasesData} variant="substitute" />
           </DiagramFrame>,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-basic-operations-properties-scalar-multiplication-matrix'}
+            id="basic-operations-properties-scalar-multiplication-matrix"
+            title="Properties of Scalar Multiplication"
+            source="/linear-algebra/vectors/basic-operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1884,6 +1929,14 @@ Reading the arrow that joins the two tips as the sum gives, for $\\mathbf{a} = (
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

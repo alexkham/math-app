@@ -20,8 +20,12 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import sequencesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-sequences'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Identities and Properties"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Identity","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Cassini's identity","values":{"c1":"Fₙ₋₁ · Fₙ₊₁ − Fₙ² = (−1)ⁿ","c2":"n = 6: 5·13 − 64 = 1"}},{"id":"r2","name":"Sum of first n terms","values":{"c1":"Σₖ₌₁ⁿ Fₖ = Fₙ₊₂ − 1","c2":"F₁+…+F₅ = 1+1+2+3+5 = 12 = F₇ − 1"}},{"id":"r3","name":"Sum of squares","values":{"c1":"Σₖ₌₁ⁿ Fₖ² = Fₙ · Fₙ₊₁","c2":"F₁²+…+F₅² = 1+1+4+9+25 = 40 = 5·8"}},{"id":"r4","name":"Divisibility ([GCD](!/arithmetic/divisibility/gcd))","values":{"c1":"gcd(Fₘ, Fₙ) = F$_{gcd(m, n)}$","c2":"gcd(F₆, F₉) = gcd(8, 34) = 2 = F₃"}},{"id":"r5","name":"Zeckendorf's theorem","values":{"c1":"every positive integer is uniquely a sum of non-consecutive Fibonacci numbers","c2":"30 = 21 + 8 + 1 = F₈ + F₆ + F₁"}}]};
 
 
 export async function getStaticProps(){
@@ -869,8 +873,15 @@ Taking the 10th entry of $0, 1, 1, 2, 3, 5, 8, 13, 21, 34, \\ldots$ as $F_{10}$ 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-fibonacci-identities-properties-matrix'}
+            id="fibonacci-identities-properties-matrix"
+            title="Identities and Properties"
+            source="/algebra/sequences/fibonacci"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {

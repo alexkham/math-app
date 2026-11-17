@@ -899,6 +899,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -916,6 +917,29 @@ import triangleDiagrams from '@/app/components/trigonometry/triangle/triangleDia
 import renderTriangleLabelV2 from '@/app/utils/illustrations/trigonometry/triangles/triangleLabel.v2'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_lawApplications = {
+  center: { name: 'The two laws', sub: 'distances and angles found indirectly' },
+  quadrants: [
+    { title: 'Surveying and land measurement', items: [
+      { text: 'Two distances and the angle between them give the third distance.', note: 'SAS: the width of a river, a boundary obscured by terrain' },
+      { text: 'Angles to a remote point from two known positions give the distance to it.', note: 'ASA' } ] },
+    { title: 'Navigation', items: [
+      'A ship or aircraft measures bearings to two known landmarks.',
+      { text: 'The Law of Sines yields the distance from the vessel to each landmark.', note: 'typically AAS or ASA' } ] },
+    { title: 'Physics and engineering', items: [
+      'Two forces of known magnitudes act at a known angle.',
+      'The Law of Cosines gives the magnitude of the resultant.',
+      'The Law of Sines gives the angle it makes with each force.' ] },
+    { title: 'Indirect measurement', items: [
+      'The height of a mountain, the distance to a star (via parallax), the span of a bridge.',
+      'Measure accessible distances and angles, then solve the resulting triangle.' ] }
+  ],
+  note: { label: 'The first step is geometric', text: 'Identify the triangle, label the known and unknown elements, and determine which law applies. The computation follows from there.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
@@ -924,6 +948,36 @@ import trigonometryNotationSheet from '@/app/components/infographics/NotationChe
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Configuration to Solving Strategy"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Configuration","features":[{"id":"c1","name":"What is given","type":"text"},{"id":"c2","name":"Start with","type":"text"},{"id":"c3","name":"Then use","type":"text"},{"id":"c4","name":"Number of solutions","type":"text"}],"items":[{"id":"r1","name":"AAS","values":{"c1":"two angles and a non-included side","c2":"A + B + C = 180° to get the third angle","c3":"Law of Sines for remaining sides","c4":"1 (unique)"}},{"id":"r2","name":"ASA","values":{"c1":"two angles and the included side","c2":"A + B + C = 180° to get the third angle","c3":"Law of Sines for remaining sides","c4":"1 (unique)"}},{"id":"r3","name":"SSA","values":{"c1":"two sides and an angle opposite one of them","c2":"Law of Sines for the unknown sine","c3":"check both supplementary angle solutions","c4":"0, 1, or 2 (ambiguous case)"}},{"id":"r4","name":"SAS","values":{"c1":"two sides and the included angle","c2":"Law of Cosines for the third side","c3":"Law of Sines for remaining angles","c4":"1 (unique)"}},{"id":"r5","name":"SSS","values":{"c1":"all three sides","c2":"Law of Cosines for the largest angle","c3":"Law of Sines for remaining angles","c4":"1 if triangle inequality holds; 0 otherwise"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Heron&apos;s Formula"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Formula","features":[{"id":"c1","name":"Required input","type":"text"},{"id":"c2","name":"Best for","type":"text"},{"id":"c3","name":"Limitations","type":"text"}],"items":[{"id":"r1","name":"A = ½ ab sin C","values":{"c1":"two sides + included angle","c2":"SAS configuration; max at C = 90°","c3":"requires a known angle"}},{"id":"r2","name":"Heron's: √(s(s−a)(s−b)(s−c))","values":{"c1":"three sides only (s = (a+b+c)/2)","c2":"SSS when only area is sought, no angle computation needed","c3":"yields no angle information"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("The Ambiguous Case (SSA)"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type of angle A","features":[{"id":"c1","name":"Condition (with h = b·sin A)","type":"text"},{"id":"c2","name":"Number of triangles","type":"text"}],"items":[{"id":"r1","name":"A acute","values":{"c1":"a < h","c2":"0 (a too short to reach)"}},{"id":"r2","name":"A acute","values":{"c1":"a = h","c2":"1 (right triangle)"}},{"id":"r3","name":"A acute","values":{"c1":"h < a < b","c2":"2 (both acute and obtuse B valid)"}},{"id":"r4","name":"A acute","values":{"c1":"a ≥ b","c2":"1 (only acute B valid)"}},{"id":"r5","name":"A obtuse","values":{"c1":"a ≤ b","c2":"0 (side opposite obtuse must be longest)"}},{"id":"r6","name":"A obtuse","values":{"c1":"a > b","c2":"1"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use the law of sines", href: "/trigonometry/methods/law-of-sines", desc: "Two angles and a side (AAS, ASA): each side over the sine of its opposite angle is the same.", level: "composite", here: "#3" },
+      { skill: "Handle the ambiguous case (SSA)", href: "/trigonometry/methods/ambiguous-case", desc: "Two sides and a non-included angle: zero, one or two triangles.", level: "composite", here: "#4" },
+      { skill: "Use the law of cosines", href: "/trigonometry/methods/law-of-cosines", desc: "Two sides and the included angle (SAS), or three sides (SSS).", level: "composite", here: "#6" },
+      { skill: "Choose the right method to solve a triangle", href: "/trigonometry/methods/which-triangle-law", desc: "A decision tree from what you know about the triangle to the method that solves it.", level: "strategy", here: "#7" },
+      { skill: "Find the area of a triangle with trigonometry", href: "/trigonometry/methods/triangle-area", desc: "Half the product of two sides and the sine of the included angle, or Heron with three sides.", level: "composite", here: "#8" },
+      { skill: "Solve bearing problems", href: "/trigonometry/methods/bearings-problems", desc: "Navigation: turn bearings into angles of a triangle, then use the triangle laws.", level: "applied", here: "#10" },
+    ] },
+    { title: "More trigonometry methods", items: [
+      { skill: "Solve a right triangle", href: "/trigonometry/methods/solve-right-triangle", desc: "Find every missing side and angle from two pieces of information with SOH-CAH-TOA.", level: "composite" },
+      { skill: "Solve height and distance problems", href: "/trigonometry/methods/heights-distances-problems", desc: "Angles of elevation and depression: draw the right triangle, pick the ratio, solve.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1958,6 +2012,7 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the law of sines](!/trigonometry/methods/law-of-sines) →@`,
         ]
     },
     {
@@ -1968,8 +2023,16 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
           sectionsContent.obj4.content,
           <div key={'unit-ambiguousCase'} dangerouslySetInnerHTML={{ __html: demoUnits.ambiguousCase }} />,
           `Computing $\\sin B$ with the Law of Sines and checking both candidate angles settles which panel a given problem is in.`,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-sines-cosines-law-ambiguous-case-matrix'}
+            id="sines-cosines-law-ambiguous-case-matrix"
+            title="The Ambiguous Case (SSA)"
+            source="/trigonometry/sines-cosines-law"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to handle the ambiguous case (SSA)](!/trigonometry/methods/ambiguous-case) →@`,
         ]
     },
     {
@@ -2000,6 +2063,7 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
         content:[
           sectionsContent.obj6.content,
           `@academic[punchline:The Law of Cosines opens any problem lacking a side-angle pair, and its sign exposes obtuse angles that arcsine misses.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the law of cosines](!/trigonometry/methods/law-of-cosines) →@`,
         ]
     },
     {
@@ -2016,6 +2080,7 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
           >
             <CaseSplit data={lawChoiceCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which method should I use to solve a triangle?](!/trigonometry/methods/which-triangle-law) →@`,
         ]
     },
     {
@@ -2026,6 +2091,7 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
           sectionsContent.obj8.content,
           <div key={'unit-areaSAS'} dangerouslySetInnerHTML={{ __html: demoUnits.areaSAS }} />,
           `Because $\\sin C$ peaks at $90°$, two fixed sides enclose the most area when they meet at a right angle.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the area of a triangle with trigonometry](!/trigonometry/methods/triangle-area) →@`,
         ]
     },
     {
@@ -2034,8 +2100,15 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-sines-cosines-law-heron-apos-matrix'}
+            id="sines-cosines-law-heron-apos-matrix"
+            title="Heron&apos;s Formula"
+            source="/trigonometry/sines-cosines-law"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj9-diagram'}
             id="herons-formula-anatomy"
@@ -2054,6 +2127,16 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'four-sides-sines-cosines-law-applications'}
+            id="sines-cosines-law-applications"
+            title="Applications"
+            source="/trigonometry/sines-cosines-law"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_lawApplications} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve bearing problems](!/trigonometry/methods/bearings-problems) →@`,
         ]
     },
     {
@@ -2098,8 +2181,15 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-sines-cosines-law-summary-configuration-matrix'}
+            id="sines-cosines-law-summary-configuration-matrix"
+            title="Summary: Configuration to Solving Strategy"
+            source="/trigonometry/sines-cosines-law"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -2159,6 +2249,14 @@ $$\\frac{\\sin A}{a} = \\frac{\\sin B}{b} = \\frac{\\sin C}{c}$$]@`,
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

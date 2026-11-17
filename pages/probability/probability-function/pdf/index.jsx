@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,6 +17,25 @@ import continuousCdfDiagrams from '@/app/components/visualizations/probability/c
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_supportTypes = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  tree: {
+    root: { name: 'Support of a PDF', sub: 'the set of values where the density is nonzero' },
+    branches: [
+      { leaves: [
+        { name: 'Bounded support', condition: 'The random variable is confined to a finite interval.', example: 'uniform on $[0, 1]$, beta on $[0, 1]$',
+          sketch: { x0: -0.6, x1: 1.6, y0: -0.15, y1: 1.2, pieces: [{ f: () => 0, from: -0.6, to: 0 }, { f: () => 0.8, from: 0, to: 1 }, { f: () => 0, from: 1, to: 1.6 }] } },
+        { name: 'Unbounded support', condition: 'The random variable can take values extending to infinity in both directions.', example: 'normal on $(-\\infty, \\infty)$',
+          sketch: { x0: -3.4, x1: 3.4, y0: -0.15, y1: 1.2, pieces: [{ f: (x) => Math.exp(-x * x / 2), from: -3.4, to: 3.4 }] } },
+        { name: 'Half-bounded support', condition: 'Bounded on one side, unbounded on the other.', example: 'exponential and gamma on $[0, \\infty)$',
+          sketch: { x0: -1.2, x1: 4.2, y0: -0.15, y1: 1.2, pieces: [{ f: () => 0, from: -1.2, to: 0 }, { f: (x) => Math.exp(-x), from: 0, to: 4.2 }] } }
+      ] }
+    ]
+  }
+};
+
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -24,6 +45,23 @@ import { tableHeaders } from '@/app/styles/theme'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Random variable methods", items: [
+      { skill: "Find the CDF from a PDF", href: "/probability/random-variables/methods/pdf-to-cdf", desc: "Integrate the density from the left end of the support up to $x$, and add the flat pieces outside.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+    ] },
+    { title: "Distribution methods", items: [
+      { skill: "Find a continuous uniform probability", href: "/probability/distributions/methods/continuous-uniform-probability", desc: "Equally likely anywhere on $[a, b]$: the probability of an interval is its length over $b - a$, after clipping to the support.", level: "composite" },
+      { skill: "Find a normal probability", href: "/probability/distributions/methods/normal-probability", desc: "Standardize with $z = (x - \\mu)/\\sigma$, then read the area from $\\Phi$: left tails, right tails and intervals.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1318,8 +1356,38 @@ $$= \\frac{1}{3} \\text{ for } y \\in [0, 3]$$`, `The area is $\\frac{1}{3} \\cd
     ],
   };
 
+  // Procedure rollout 2026-11-14: Building a PDF, step by step (obj7).
+  const buildPdfSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The time until a lightbulb fails',
+      rows: [
+        { step: 'Identify the random variable', example: '$T$ = time to failure, in hours' },
+        { step: 'Determine the support', example: '$[0, \\infty)$' },
+        { step: 'Construct the density function', stepSub: 'A constant failure rate $\\lambda$', example: '$f(t) = \\lambda e^{-\\lambda t}$ for $t \\geq 0$' },
+        { step: 'Verify the axioms', stepSub: 'Never negative, and the total area is $1$', example: '$\\int_0^{\\infty} \\lambda e^{-\\lambda t}\\,dt = 1$' },
+        { step: 'Write the PDF in standard form, with its support', example: '$f_T(t) = \\lambda e^{-\\lambda t}$ if $t \\geq 0$, and $0$ if $t < 0$' },
+      ],
+    },
+  };
+
+  const pdfCorePatternSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$P(1 \\leq X \\leq 3)$ for $f(x) = 2e^{-2x}$',
+      rows: [
+        { step: 'Identify the interval or region', example: '$1 \\leq X \\leq 3$' },
+        { step: 'Set up the integral with correct bounds', example: '$\\displaystyle\\int_1^3 2e^{-2x}\\,dx$' },
+        { step: 'Integrate the PDF over that region', example: '$\\left[-e^{-2x}\\right]_1^3$' },
+        { step: 'Evaluate', example: '$e^{-2} - e^{-6} \\approx 0.133$' },
+      ],
+    },
+  };
+
    return {
   props:{
+    pdfCorePatternSteps,
+    buildPdfSteps,
     formulaSummaryData,
     pitfallData,
       pdfCdfChain,
@@ -1343,7 +1411,7 @@ $$= \\frac{1}{3} \\text{ for } y \\in [0, 3]$$`, `The area is $\\frac{1}{3} \\cd
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PDFPage({ formulaSummaryData, pitfallData,pdfCdfChain, pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PDFPage({ pdfCorePatternSteps, buildPdfSteps, formulaSummaryData, pitfallData,pdfCdfChain, pdfViewTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -1481,6 +1549,15 @@ Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'taxonomy-pdf-types-of-support'}
+            id="pdf-types-of-support"
+            title="Types of Support"
+            source="/probability/probability-function/pdf"
+            related={false}
+          >
+            <Taxonomy data={tx_supportTypes} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1515,6 +1592,15 @@ Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="build-pdf-steps"
+            title="Building a PDF, step by step"
+            source="/probability/probability-function/pdf"
+            before={"The five steps on the lightbulb example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={buildPdfSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1523,6 +1609,11 @@ Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame key={'obj8-procedure'} id="pdf-core-pattern-steps" title="The core pattern on one question"
+            source="/probability/probability-function/pdf" related={false}
+            before={"The four steps on the exponential example from this section. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={pdfCorePatternSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1614,6 +1705,14 @@ Uniform [distribution](!/probability/distributions) on $[0, 0.5]$ has $f(x) = 2$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

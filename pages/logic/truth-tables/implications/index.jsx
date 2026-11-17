@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import TruthTable from '@/app/components/logic-calculator/truth-tables/TruthTable'
@@ -18,6 +19,24 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Build a truth table", href: "/logic/methods/truth-table", desc: "List all $2^n$ rows, add one column per subformula from the inside out, and fill each column with the rule of its connective.", level: "composite", here: "#1" },
+      { skill: "Write the converse, inverse and contrapositive", href: "/logic/methods/converse-inverse-contrapositive", desc: "Swap the parts for the converse, negate both for the inverse, do both for the contrapositive; only the contrapositive keeps the meaning.", level: "composite", here: "#2" },
+      { skill: "Negate a conditional statement", href: "/logic/methods/negate-implication", desc: "The negation of $P \\to Q$ is $P \\land \\neg Q$: keep the condition, deny the conclusion, and join them with and.", level: "composite", here: "#3" },
+    ] },
+    { title: "More logic methods", items: [
+      { skill: "Rewrite an implication without the arrow", href: "/logic/methods#implication-equivalence", desc: "An arrow has to go before you can use De Morgan, distribute, or reach a normal form: $P \\to Q$, $(P \\land Q) \\to R$, $\\neg P \\to Q$.", level: "atomic" },
+      { skill: "Check whether a formula is a tautology", href: "/logic/methods/tautology-check", desc: "Show a formula is true in every row: build its truth table, or assume one row makes it false and reach a clash.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
+
 export default function ImplicationsTruthTablesPage({ formulaSummaryData, pitfallData,conditionalFormTree, contrapositiveBeforeAfter, demoUnits,  seoData, keyWords, implicationExplanations, menuItems, sectionsContent, faqQuestions, schemas }) {
 
     const implicationOperators = {
@@ -34,7 +53,8 @@ export default function ImplicationsTruthTablesPage({ formulaSummaryData, pitfal
         id: '1',
         title: sectionsContent.obj1.title,
         link: sectionsContent.obj1.link,
-        content: [sectionsContent.obj1.content]
+        content: [sectionsContent.obj1.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to build a truth table](!/logic/methods/truth-table) →@`]
       },
       {
         id: '2',
@@ -51,13 +71,15 @@ export default function ImplicationsTruthTablesPage({ formulaSummaryData, pitfal
           >
             <TopDownTree data={conditionalFormTree} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to write the converse, inverse and contrapositive](!/logic/methods/converse-inverse-contrapositive) →@`,
         ]
       },
       {
         id: '3',
         title: sectionsContent.obj3.title,
         link: sectionsContent.obj3.link,
-        content: [sectionsContent.obj3.content]
+        content: [sectionsContent.obj3.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to negate a conditional statement](!/logic/methods/negate-implication) →@`]
       },
       {
         id: '4',
@@ -138,6 +160,14 @@ export default function ImplicationsTruthTablesPage({ formulaSummaryData, pitfal
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
         ]
+      },
+      {
+          id:'skills',
+          title:'Skills You Should Learn',
+          link:``,
+          content:[
+            <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+          ]
       },
       // faq: rendered component — must be built here, not in getStaticProps
       {

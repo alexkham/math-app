@@ -57,7 +57,7 @@ const determinantsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Rule of Sarrus (3×3 Determinant) | Learn Math Class',
         description: 'Find a 3×3 determinant with the rule of Sarrus: copy the first two columns, add the downward diagonal products, subtract the upward ones. Examples, mistakes.',
@@ -190,7 +190,7 @@ const determinantsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Determinant by Cofactor Expansion (Laplace) | Learn Math Class',
         description: 'Find a determinant by cofactor expansion: pick the row or column with the most zeros, attach checkerboard signs, multiply by minors, add. 3×3 and 4×4 examples.',
@@ -304,7 +304,7 @@ const determinantsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Determinant by Row Reduction | Learn Math Class',
         description: 'Find a determinant by row reduction: reduce to triangular form, track row swaps and scalings, multiply the diagonal, undo the record. 3×3 and 4×4 examples.',
@@ -418,7 +418,7 @@ const determinantsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Determinant of a Triangular Matrix | Learn Math Class',
         description: 'Find the determinant of a triangular or diagonal matrix by multiplying its diagonal entries, and of a block triangular matrix by its blocks. Examples, mistakes.',
@@ -523,7 +523,7 @@ const determinantsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Determinant Properties (det(AB), det(kA)) | Learn Math Class',
         description: 'Use determinant properties: det(AB) = det(A)det(B), det(kA) = kⁿdet(A), transpose, inverse and row operation rules, to evaluate expressions without entries.',
@@ -635,7 +635,7 @@ const determinantsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Area and Volume with Determinants | Learn Math Class',
         description: 'Find areas and volumes with determinants: form edge vectors, put them in a matrix, take the absolute determinant, halve for triangles, sixth for tetrahedra.',
@@ -749,7 +749,7 @@ const determinantsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Determinant Method to Use? Decision Tree | Learn Math Class',
         description: 'Choose a determinant method: properties for expressions, edges for area, the diagonal for triangular matrices, then ad − bc, Sarrus, cofactors or row reduction.',

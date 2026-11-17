@@ -926,6 +926,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj2 aggregation, obj10 aggregation, obj12 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import RowOperationTrace from '@/app/components/infographics/linear-algebra/RowOperationTrace'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -939,6 +941,8 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import gaussEliminationDiagrams from '@/app/components/matrix-multiplication/gaussEliminationDiagrams'
@@ -949,6 +953,40 @@ import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatS
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Computational Cost"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Phase or method (n × n system)","features":[{"id":"c1","name":"Approximate operation count","type":"text"},{"id":"c2","name":"Comment","type":"text"}],"items":[{"id":"r1","name":"Forward elimination (produces REF)","values":{"c1":"~ (2/3) n³","c2":"dominant cost of Gaussian elimination"}},{"id":"r2","name":"Back substitution after REF","values":{"c1":"~ n²","c2":"negligible compared to forward elimination"}},{"id":"r3","name":"Gauss-Jordan (forward + backward to RREF)","values":{"c1":"~ n³","c2":"backward pass adds up to roughly 50% to the forward pass"}},{"id":"r4","name":"Computing [A⁻¹](!/linear-algebra/matrix/inverse) explicitly, then x = A⁻¹b","values":{"c1":"~ 2 n³","c2":"roughly 3× the cost of direct elimination"}},{"id":"r5","name":"[Cramer's rule](!/linear-algebra/determinants/applications)","values":{"c1":"(n + 1) determinants, each O(n³) via row reduction","c2":"orders of magnitude slower than elimination for large n; cofactor-expansion routes are O(n!), astronomically slow"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("The Three Elementary Row Operations"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Notation","type":"text"},{"id":"c2","name":"Effect on the system","type":"text"},{"id":"c3","name":"Reverse operation","type":"text"}],"items":[{"id":"r1","name":"Row swap","values":{"c1":"Rᵢ ↔ Rⱼ","c2":"reorders two equations; used to place a nonzero entry into the pivot position","c3":"the same swap Rᵢ ↔ Rⱼ"}},{"id":"r2","name":"Row scaling","values":{"c1":"k · Rᵢ → Rᵢ (k ≠ 0)","c2":"rescales one equation; used to make pivots equal to 1 in RREF","c3":"scaling the same row by 1 / k"}},{"id":"r3","name":"Row addition","values":{"c1":"Rᵢ + c · Rⱼ → Rᵢ","c2":"replaces one equation by a combination; this is the operation that actually eliminates entries","c3":"Rᵢ − c · Rⱼ → Rᵢ"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite", here: "#3" },
+      { skill: "Solve a triangular system by back substitution", href: "/linear-algebra/linear-systems/methods/back-substitution", desc: "Solve the last equation first, then substitute upward one row at a time.", level: "composite", here: "#5" },
+      { skill: "Solve a system by Gauss-Jordan elimination", href: "/linear-algebra/linear-systems/methods/gauss-jordan-elimination", desc: "Row-reduce all the way to reduced form, so each unknown can be read off its own row.", level: "composite", here: "#6" },
+    ] },
+    { title: "More linear system methods", items: [
+      { skill: "Apply an elementary row operation", href: "/linear-algebra/linear-systems/methods#elementary-row-operations", desc: "One step of row reduction on an augmented matrix: swap two rows, scale a row by a nonzero number, or add a multiple of one row to another: $R_1 \\leftrightarrow R_2$, $\\frac{1}{2}R_1 \\to R_1$, $R_2 - 3R_1 \\to R_2$.", level: "atomic" },
+      { skill: "Write the general solution in parametric vector form", href: "/linear-algebra/linear-systems/methods/parametric-solutions", desc: "Infinitely many solutions: a particular solution plus one direction vector per free variable.", level: "composite" },
+      { skill: "Choose the right method to solve a linear system", href: "/linear-algebra/linear-systems/methods/which-system-method", desc: "A decision tree: what the question asks, a zero right-hand side, then the shape of the system.", level: "strategy" },
+      { skill: "Reduce a matrix to row echelon form", href: "/linear-algebra/linear-systems/methods/row-echelon-form", desc: "Build the staircase: find each pivot, clear below it, move down and right, zero rows last.", level: "composite" },
+      { skill: "Find the reduced row echelon form of a matrix", href: "/linear-algebra/linear-systems/methods/reduced-row-echelon-form", desc: "From echelon form, scale every pivot to 1 and clear above it; the result is unique.", level: "composite" },
+      { skill: "Solve a system with the inverse matrix", href: "/linear-algebra/linear-systems/methods/inverse-matrix-method", desc: "Write the system as Ax = b, find the inverse of A, and multiply: x is the inverse times b.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a system of equations by elimination", href: "/algebra/equations/methods/systems-elimination", desc: "Scale the equations so one variable has opposite coefficients, then add.", level: "composite" },
+    ] },
+    { title: "Matrix methods", items: [
+      { skill: "Find an inverse by Gauss-Jordan elimination", href: "/linear-algebra/matrix/methods/inverse-gauss-jordan", desc: "Row reduce $[A \\mid I]$ until the left half is $I$; the right half is then $A^{-1}$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/linear-systems/methods", label: "All linear system methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1811,8 +1849,81 @@ $$\\xrightarrow{R_2 - 2R_1} \\left(\\begin{array}{cc|c} 1 & 1 & 2 \\\\ 0 & 0 & 0
     ],
   };
 
+  // RowOperationTrace 2026-11-14: The elimination, row operation by row operation (obj7).
+  const uniqueSolutionTrace = {
+    goal: 'Reduce the augmented matrix of the system to echelon form.',
+    reading: 'Three pivots in three columns, so the solution is unique. Back substitution gives $x_3 = 0$, $x_2 = 2$, $x_1 = -1$.',
+    steps: [
+      { id: 's0', label: 'Start', matrix: [[1, 2, -1, 3], [2, 5, 1, 8], [3, 8, 2, 13]], pivots: [[0, 0]], augmentedAfterCol: 2,
+        why: 'The augmented matrix of the system.', note: 'Augmented matrix' },
+      { id: 's1', label: 'Column 1', matrix: [[1, 2, -1, 3], [0, 1, 3, 2], [0, 2, 5, 4]], pivots: [[0, 0], [1, 1]],
+        changed: [[1, 0], [1, 1], [1, 2], [1, 3], [2, 0], [2, 1], [2, 2], [2, 3]], augmentedAfterCol: 2,
+        operation: ['R2 − 2·R1', 'R3 − 3·R1'], why: 'Clears the two entries below the first pivot.', note: 'Column 1 cleared' },
+      { id: 's2', label: 'Column 2', matrix: [[1, 2, -1, 3], [0, 1, 3, 2], [0, 0, -1, 0]], pivots: [[0, 0], [1, 1], [2, 2]],
+        changed: [[2, 1], [2, 2], [2, 3]], augmentedAfterCol: 2,
+        operation: 'R3 − 2·R2', why: 'Clears the entry below the second pivot. The matrix is now in echelon form.', note: 'Echelon form', final: true },
+    ],
+  };
+
+  const backSubstitutionSteps = {
+    loop: {
+      label: 'Back substitution',
+      repeat: 'until the top row is solved',
+      steps: [
+        { text: 'Start at the last nonzero row' },
+        { text: 'Solve the row for its pivot variable', repeat: true },
+        { text: 'Substitute the result into the row above', repeat: true },
+        { text: 'Continue upward until every pivot variable is found', repeat: true, test: true },
+        { text: 'The pivot variables give the solution', output: true },
+      ],
+    },
+    run: {
+      label: 'The worked example',
+      vars: [
+        { key: 'x3', label: '$x_3$' },
+        { key: 'x2', label: '$x_2$' },
+        { key: 'x1', label: '$x_1$' },
+      ],
+      start: {},
+      startNote: 'The bottom row reads $5x_3 = 10$.',
+      passes: [
+        {
+          steps: [
+            { set: { x3: '$2$' }, note: '$5x_3 = 10$, so $x_3 = 2$.' },
+            { note: 'The middle row becomes $4x_2 - 2(2) = 6$.' },
+            { note: '$x_2$ and $x_1$ are not found yet, so move up a row.' },
+          ],
+          row: ['$5x_3 = 10$', '$x_3 = 2$'],
+        },
+        {
+          steps: [
+            { set: { x2: '$5/2$' }, note: '$4x_2 = 10$, so $x_2 = 5/2$.' },
+            { note: 'The top row becomes $2x_1 - 5/2 + 3(2) = 9$.' },
+            { note: '$x_1$ is not found yet, so move up a row.' },
+          ],
+          row: ['$4x_2 - 2(2) = 6$', '$x_2 = 5/2$'],
+        },
+        {
+          steps: [
+            { set: { x1: '$11/4$' }, note: '$2x_1 = 9 + 5/2 - 6 = 11/2$, so $x_1 = 11/4$.' },
+            { note: 'The top row has no row above it.' },
+            { note: 'Every pivot variable is found, so stop.' },
+          ],
+          row: ['$2x_1 - 5/2 + 3(2) = 9$', '$x_1 = 11/4$'],
+        },
+      ],
+      tableLabel: 'From the bottom row upward',
+      columns: ['Row after substitution', 'Solved'],
+      eqCol: 0,
+      result: '$x_1 = 11/4$, $x_2 = 5/2$, $x_3 = 2$',
+      resultNote: 'Each step needed only the variables already solved.',
+    },
+  };
+
 return {
   props:{
+    backSubstitutionSteps,
+    uniqueSolutionTrace,
     pitfallData,
     rowOperationTree,
     demoUnits,
@@ -1836,7 +1947,7 @@ return {
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function GaussianEliminationPage({ pitfallData,rowOperationTree, 
+export default function GaussianEliminationPage({ backSubstitutionSteps, uniqueSolutionTrace, pitfallData,rowOperationTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -1924,11 +2035,15 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-gaussian-elimination-three-elementary-row-matrix'}
+            id="gaussian-elimination-three-elementary-row-matrix"
+            title="The Three Elementary Row Operations"
+            source="/linear-algebra/linear-systems/gaussian-elimination"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           <DiagramFrameV2
             key={'obj2-diagram'}
             id="row-operations-tree"
@@ -1972,6 +2087,7 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
           sectionsContent.obj3.content,
                   <div key={'unit-forward'} dangerouslySetInnerHTML={{ __html: demoUnits.forward }} />,
           `Every step of forward elimination is one instance of this move, applied downward and then leftward across the matrix.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a system by Gaussian elimination](!/linear-algebra/linear-systems/methods/gaussian-elimination) →@`,
         ]
     },
     {
@@ -1988,6 +2104,12 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame key={'obj5-procedure'} id="back-substitution-steps" title="Back substitution, row by row"
+            source="/linear-algebra/linear-systems/gaussian-elimination" related={false}
+            before={"The worked example of this section, from the bottom row upward. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={backSubstitutionSteps} variant="loop" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a triangular system by back substitution](!/linear-algebra/linear-systems/methods/back-substitution) →@`,
         ]
     },
     {
@@ -1998,6 +2120,7 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
           sectionsContent.obj6.content,
                   <div key={'unit-jordan'} dangerouslySetInnerHTML={{ __html: demoUnits.jordan }} />,
           `Whether the extra clearing is worth it depends entirely on whether you want the answer or the structure.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a system by Gauss-Jordan elimination](!/linear-algebra/linear-systems/methods/gauss-jordan-elimination) →@`,
         ]
     },
     {
@@ -2006,6 +2129,17 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-row-trace'}
+            id="unique-solution-row-trace"
+            title="The elimination, row operation by row operation"
+            source="/linear-algebra/linear-systems/gaussian-elimination"
+            before={"The same reduction with each row operation beside the matrix it produces. Pivots are filled in, and the entries changed at each step are underlined."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <RowOperationTrace data={uniqueSolutionTrace} theme="navy" variant="ledger" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -2032,11 +2166,15 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-gaussian-elimination-computational-cost-matrix'}
+            id="gaussian-elimination-computational-cost-matrix"
+            title="Computational Cost"
+            source="/linear-algebra/linear-systems/gaussian-elimination"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
           `@academic[punchline:At about $\\frac{2}{3}n^3$ operations, elimination is cheaper than Cramer's rule or an explicit inverse, so direct solvers build on it.]@`,
         ]
     },
@@ -2082,6 +2220,14 @@ The Chinese Nine Chapters on the Mathematical Art, compiled by the 1st century A
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

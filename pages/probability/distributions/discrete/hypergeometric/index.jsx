@@ -861,6 +861,34 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_hypergeometricRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+    link: { label: 'same draws', color: '#64748b', dash: '' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 150,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    nodes: [
+      { id: 'bern', name: 'Bernoulli', x: 0, y: 1, href: '/probability/distributions/discrete#bernoulli', text: 'One draw, a success with probability $\\frac{K}{N}$.' },
+      { id: 'nhyp', name: 'Negative hypergeometric', x: 1, y: 0, text: 'The number of draws without replacement needed to collect $r$ successes.' },
+      { id: 'hyp', name: 'Hypergeometric', x: 1, y: 1, text: 'The number of successes in $n$ draws without replacement from a population of $N$ that holds $K$ successes.' },
+      { id: 'bin', name: 'Binomial', x: 2, y: 1, href: '/probability/distributions/discrete/binomial', text: 'The number of successes in $n$ draws when each item is put back, with $p = \\frac{K}{N}$.' },
+      { id: 'mhyp', name: 'Multivariate hypergeometric', x: 1, y: 2, text: 'The counts of each kind in the sample when the population holds more than two kinds of item.' },
+    ],
+    edges: [
+      { from: 'bern', to: 'hyp', kind: 'special', label: '$n = 1$', text: 'a sample of one item is a single Bernoulli trial with $p = \\frac{K}{N}$' },
+      { from: 'hyp', to: 'bin', kind: 'limit', label: '$N$ large', text: 'as the population grows with $\\frac{K}{N}$ held at $p$, the hypergeometric approaches $\\operatorname{Bin}(n, p)$' },
+      { from: 'hyp', to: 'mhyp', kind: 'special', label: 'two kinds', text: 'the hypergeometric is the multivariate hypergeometric with two kinds of item' },
+      { from: 'nhyp', to: 'hyp', kind: 'link', label: 'same draws', text: 'the hypergeometric fixes the number of draws and counts successes; the negative hypergeometric fixes the successes and counts draws' },
+    ],
+  },
+};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
 export async function getStaticProps(){
@@ -1392,7 +1420,37 @@ Note: When $N$ is very large relative to $n$, the hypergeometric distribution ap
     },
     obj14:{
       title:`Related Distributions`,
-      content:``,
+      content:`
+The hypergeometric distribution belongs to sampling without replacement. Its relatives come from putting the items back, from drawing a single item, from sorting the population into more than two kinds, or from drawing until a target is met.
+
+### Binomial: the same sample with replacement
+
+Put each item back before the next draw and the draws become independent, each a success with probability $p = \\frac{K}{N}$. The count of successes is then [binomial](!/probability/distributions/discrete/binomial). Both distributions have the mean $n \\cdot \\frac{K}{N}$; the hypergeometric variance is smaller by the factor $\\frac{N-n}{N-1}$. As the population grows with the share of successes held at $p$, that factor goes to $1$ and the probabilities agree:
+
+@academic[formula_callout:Related Distributions
+$$\\frac{\\binom{K}{k}\\binom{N-K}{n-k}}{\\binom{N}{n}} \\to \\binom{n}{k} p^k (1-p)^{n-k} \\quad \\text{as } N \\to \\infty \\text{ with } \\frac{K}{N} = p$$]@
+
+For $5$ cards from a deck of $52$ the two already differ only a little: two hearts have probability about $0.274$ without replacement and $0.264$ with it.
+
+### Bernoulli: a single draw
+
+With $n = 1$ the sample is one item, a success with probability $\\frac{K}{N}$, which is a [Bernoulli](!/probability/distributions/discrete#bernoulli) trial. The same holds for every single draw of a larger sample when it is looked at on its own: the third card dealt is a heart with probability $\\frac{13}{52}$, like the first. The draws depend on one another, but each has the same chance of success, and that is why the mean is $n \\cdot \\frac{K}{N}$.
+
+### Multivariate hypergeometric: more than two kinds
+
+Let the population hold $m$ kinds of item, $K_1, K_2, \\ldots, K_m$ of each, with $K_1 + \\cdots + K_m = N$. The chance that a sample of $n$ holds $k_1$ of the first kind, $k_2$ of the second, and so on, is
+
+@academic[formula_callout:Related Distributions
+$$P(X_1 = k_1, \\ldots, X_m = k_m) = \\frac{\\binom{K_1}{k_1}\\binom{K_2}{k_2} \\cdots \\binom{K_m}{k_m}}{\\binom{N}{n}}$$]@
+
+where $k_1 + \\cdots + k_m = n$. A $5$-card hand with exactly two hearts, two spades and one card of another suit has probability $\\frac{\\binom{13}{2}\\binom{13}{2}\\binom{26}{1}}{\\binom{52}{5}} = \\frac{158184}{2598960} \\approx 0.061$. The ordinary hypergeometric is the case $m = 2$: successes and everything else.
+
+### Negative hypergeometric: drawing until a target is met
+
+Fix the number of successes wanted, $r$, and draw without replacement until they have all appeared. The number of draws follows the negative hypergeometric distribution. It stands to the hypergeometric as the [negative binomial](!/probability/distributions/discrete/negative-binomial) stands to the binomial: the first of each pair fixes the successes and counts draws, the second fixes the draws and counts successes.
+
+Of these, the binomial link is used most: when the sample is a small part of the population, the simpler binomial formula can stand in for the hypergeometric one.
+`,
       before:``,
       after:``,
       link:'',
@@ -1961,6 +2019,23 @@ export default function HypergeometricDistributionPage({ formulaSummaryData, pit
                     <HypergeometricCalculator />,
                     </div>,
                     sectionsContent.links.calculators,
+        ]
+    },
+    {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'concept-map-hypergeometric-related-distributions'}
+            id="hypergeometric-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/discrete/hypergeometric"
+            related={false}
+          >
+            <ConceptMap data={cm_hypergeometricRelated} variant="graph" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -13,10 +15,69 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_exponentialForms = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  facets: [
+    { criterion: 'One exponential term', types: [
+      { id: 'constant', name: 'Equal to a constant', example: '$2^x = 16$', condition: 'The simplest case. If the constant is a power of the same base, [matching bases](!/algebra/powers/exponential-equations#5) resolves it immediately.' },
+      { id: 'coefficient', name: 'With a coefficient', example: '$3 \\cdot 2^x = 24$', condition: 'Isolate the exponential first: divide both sides by $3$ to get $2^x = 8$.' },
+      { id: 'linear', name: 'Linear expression in the exponent', example: '$2^{3x+1} = 32$', condition: 'One more algebraic step after the bases are matched: $3x + 1 = 5$, so $x = \\frac{4}{3}$.' },
+      { id: 'additive', name: 'With an additive constant', example: '$2^x + 5 = 13$', condition: 'Move the constant before anything else: subtract $5$ to isolate $2^x = 8$.' }
+    ] },
+    { criterion: 'An exponential on each side', types: [
+      { id: 'convertible', name: 'Convertible bases', example: '$4^x = 8$', condition: 'Rewrite to a common base using the [power of a power rule](!/algebra/powers/exponent-rules/).' },
+      { id: 'different', name: 'Different bases', example: '$2^x = 3^{x-1}$', condition: 'Cannot be solved by matching bases. These require [logarithms](!/algebra/powers/exponential-equations#7).' }
+    ] },
+    { criterion: 'Several exponential terms', types: [
+      { id: 'sum', name: 'Sum of same-base terms', example: '$2^x + 2^{x+1} = 12$', condition: 'Factor via the [product rule](!/algebra/powers/exponent-rules/) before the exponential can be isolated.' },
+      { id: 'quadratic', name: 'Quadratic in disguise', example: '$4^x - 3 \\cdot 2^x + 2 = 0$', condition: 'A [polynomial](!/algebra/polynomials) equation under the exponential notation, solved by [substitution](!/algebra/powers/exponential-equations#8).' }
+    ] }
+  ]
+};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Forms and Methods"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"Recommended method","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Solution","type":"text"}],"items":[{"id":"r1","name":"Single exponential = constant","values":{"c1":"matching bases","c2":"2ˣ = 16 → 2ˣ = 2⁴","c3":"x = 4"}},{"id":"r2","name":"Coefficient · exponential = constant","values":{"c1":"divide out coefficient, then match bases","c2":"3 · 2ˣ = 24 → 2ˣ = 2³","c3":"x = 3"}},{"id":"r3","name":"Linear expression in the exponent","values":{"c1":"match bases, then solve the linear exponent equation","c2":"2³ˣ⁺¹ = 32 → 3x + 1 = 5","c3":"x = 4 ⁄ 3"}},{"id":"r4","name":"Additive constant + exponential","values":{"c1":"subtract the constant first, then match bases","c2":"2ˣ + 5 = 13 → 2ˣ = 8","c3":"x = 3"}},{"id":"r5","name":"Convertible bases on both sides","values":{"c1":"rewrite both as powers of a common base, then match","c2":"4ˣ = 8 → 2²ˣ = 2³","c3":"x = 3 ⁄ 2"}},{"id":"r6","name":"Genuinely different bases","values":{"c1":"logarithms (no common base)","c2":"2ˣ = 3ˣ⁻¹","c3":"x ≈ 2.710"}},{"id":"r7","name":"Sum of same-base terms","values":{"c1":"factor via product rule, then match bases","c2":"2ˣ⁺¹ + 2ˣ = 12 → 3 · 2ˣ = 12","c3":"x = 2"}},{"id":"r8","name":"Quadratic structure in disguise","values":{"c1":"substitute t = aˣ; solve the resulting quadratic; reject t ≤ 0","c2":"4ˣ − 3 · 2ˣ + 2 = 0 → t² − 3t + 2 = 0","c3":"x = 0, x = 1"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Equations with Rational and Negative Exponents"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation","features":[{"id":"c1","name":"Technique","type":"text"},{"id":"c2","name":"Calculation","type":"text"},{"id":"c3","name":"Solution","type":"text"}],"items":[{"id":"r1","name":"x$^{2/3}$ = 4","values":{"c1":"raise both sides to 3 ⁄ 2","c2":"x = 4$^{3/2}$ = (√4)³ = 2³","c3":"x = ±8"}},{"id":"r2","name":"x⁻² = 9","values":{"c1":"rewrite as 1 ⁄ x² = 9, then take square root","c2":"x² = 1 ⁄ 9","c3":"x = ± 1 ⁄ 3"}},{"id":"r3","name":"x$^{3/4}$ = 27","values":{"c1":"raise both sides to 4 ⁄ 3","c2":"x = 27$^{4/3}$ = (∛27)⁴ = 3⁴","c3":"x = 81"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Method: Substitution (Quadratic in Disguise)"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation","features":[{"id":"c1","name":"Substitution","type":"text"},{"id":"c2","name":"Quadratic in t (factored)","type":"text"},{"id":"c3","name":"Roots of t","type":"text"},{"id":"c4","name":"Valid x","type":"text"}],"items":[{"id":"r1","name":"4ˣ − 3 · 2ˣ + 2 = 0","values":{"c1":"t = 2ˣ","c2":"(t − 1)(t − 2) = 0","c3":"t = 1, t = 2 (both > 0, kept)","c4":"x = 0, x = 1"}},{"id":"r2","name":"9ˣ + 2 · 3ˣ − 15 = 0","values":{"c1":"t = 3ˣ","c2":"(t + 5)(t − 3) = 0","c3":"t = 3 (kept); t = −5 rejected (t > 0 required)","c4":"x = 1"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Method: Using Logarithms"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation","features":[{"id":"c1","name":"Take log of both sides","type":"text"},{"id":"c2","name":"Algebraic isolation","type":"text"},{"id":"c3","name":"Decimal value","type":"text"}],"items":[{"id":"r1","name":"2ˣ = 5","values":{"c1":"x · log(2) = log(5)","c2":"x = log(5) ⁄ log(2)","c3":"x ≈ 2.322"}},{"id":"r2","name":"3ˣ⁺¹ = 7","values":{"c1":"(x + 1) · log(3) = log(7)","c2":"x = log(7) ⁄ log(3) − 1","c3":"x ≈ 0.771"}},{"id":"r3","name":"2ˣ = 3ˣ⁻¹","values":{"c1":"x · log(2) = (x − 1) · log(3)","c2":"x = log(3) ⁄ (log(3) − log(2))","c3":"x ≈ 2.710"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Solving Methods Overview"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"What it does","type":"text"},{"id":"c2","name":"When to use","type":"text"}],"items":[{"id":"r1","name":"Matching bases","values":{"c1":"rewrite both sides as powers of the same base, then equate exponents","c2":"bases are equal or convertible to a common base"}},{"id":"r2","name":"Using exponent laws","values":{"c1":"apply product/quotient rules to factor or combine same-base terms; then isolate a single exponential","c2":"multiple exponential terms with the same base"}},{"id":"r3","name":"Logarithms","values":{"c1":"take log of both sides; identity log(aˣ) = x · log(a) brings the exponent down to a multiplier","c2":"bases cannot be matched (universal fallback)"}},{"id":"r4","name":"Substitution","values":{"c1":"let t = aˣ; the equation becomes a polynomial (typically a quadratic) in t","c2":"equation contains both a²ˣ and aˣ"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve an exponential equation by matching bases", href: "/algebra/methods/exponential-equations-same-base", desc: "Write both sides as powers of one base, then set the exponents equal.", level: "composite", here: "#5" },
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite", here: "#7" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Solve exponential growth and decay problems", href: "/algebra/methods/exponential-growth-decay-problems", desc: "Populations, half-lives, depreciation: build the model, find the rate, solve for the time.", level: "applied" },
+      { skill: "Solve an exponential inequality", href: "/algebra/methods/exponential-inequalities", desc: "Match bases and compare exponents; flip the sign when the base is between 0 and 1.", level: "composite" },
+      { skill: "Simplify expressions with exponents", href: "/algebra/methods/simplify-exponent-expressions", desc: "Combine several exponent rules into one clean answer with positive exponents.", level: "composite" },
+      { skill: "Solve a logarithmic equation", href: "/algebra/methods/logarithmic-equations", desc: "Condense to one log, convert to exponential form or equate arguments, then check the domain.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a linear equation", href: "/algebra/equations/methods/linear-equations", desc: "Simplify each side, collect the unknown on one side, then isolate it.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 
@@ -818,8 +879,52 @@ $$\\approx \\frac{0.699}{0.301} \\approx 2.322$$`],
     ],
   };
 
+  // Procedure rollout 2026-11-14: Matching bases, step by step (obj5).
+  const matchingBasesSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$4^x = 8$',
+      rows: [
+        { step: 'Write both sides as powers of one base', stepSub: '$4 = 2^2$ and $8 = 2^3$', example: '$(2^2)^x = 2^3$' },
+        { step: 'Simplify with the power of a power rule', example: '$2^{2x} = 2^3$' },
+        { step: 'Set the exponents equal', example: '$2x = 3$' },
+        { step: 'Solve for $x$', example: '$x = \\frac{3}{2}$' },
+      ],
+    },
+  };
+
+  // Procedure rollout 2026-11-14: The substitution method, step by step (obj8).
+  const substitutionSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$4^x - 3 \\cdot 2^x + 2 = 0$',
+      rows: [
+        { step: 'Spot the doubled exponent and substitute', stepSub: '$4^x = (2^x)^2$, so let $t = 2^x$', example: '$t^2 - 3t + 2 = 0$' },
+        { step: 'Solve the quadratic in $t$', example: '$(t - 1)(t - 2) = 0$: $t = 1$ or $t = 2$' },
+        { step: 'Reject any value of $t$ that is not positive', example: 'both are positive' },
+        { step: 'Substitute back and solve for $x$', example: '$2^x = 1$ gives $x = 0$; $2^x = 2$ gives $x = 1$' },
+      ],
+    },
+  };
+
+  const exponentLawSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$2^{x+1} + 2^x = 12$',
+      rows: [
+        { step: 'Write every term as a product with one exponential expression', stepSub: '$2^{x+1} = 2 \\cdot 2^x$ by the product rule', example: '$2 \\cdot 2^x + 2^x = 12$' },
+        { step: 'Factor out the common piece', example: '$2^x(2 + 1) = 12$' },
+        { step: 'Reduce to a single exponential term equal to a constant', example: '$2^x = 4$' },
+        { step: 'Finish by matching bases', example: '$2^x = 2^2$, so $x = 2$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    exponentLawSteps,
+    substitutionSteps,
+    matchingBasesSteps,
     pitfallData,
     expEquationTree,
     commonBaseBeforeAfter,
@@ -846,7 +951,7 @@ return {
    }
 
 // export default function ExponentialEquationsPage({seoData,sectionsContent , introContent}) {
-export default function ExponentialEquationsPage({ pitfallData,expEquationTree, commonBaseBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ExponentialEquationsPage({ exponentLawSteps, substitutionSteps, matchingBasesSteps, pitfallData,expEquationTree, commonBaseBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj7Table, obj8Table, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -934,6 +1039,15 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'taxonomy-exponential-equation-forms'}
+            id="exponential-equation-forms"
+            title="Forms of Exponential Equations"
+            source="/algebra/powers/exponential-equations"
+            related={false}
+          >
+            <Taxonomy data={tx_exponentialForms} variant="facets" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -965,11 +1079,15 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-equations-solving-methods-overview-matrix'}
+            id="exponential-equations-solving-methods-overview-matrix"
+            title="Solving Methods Overview"
+            source="/algebra/powers/exponential-equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj4-diagram'}
             id="exponential-equation-methods-tree"
@@ -986,8 +1104,18 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-procedure'}
+            id="matching-bases-steps"
+            title="Matching bases, step by step"
+            source="/algebra/powers/exponential-equations"
+            before={"The second example of this section, where the bases differ at first. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={matchingBasesSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-matchBases'} dangerouslySetInnerHTML={{ __html: demoUnits.matchBases }} />,
           `With base 1 every exponent gives 1, which is why the method needs a ≠ 1.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve an exponential equation by matching bases](!/algebra/methods/exponential-equations-same-base) →@`,
         ]
     },
     {
@@ -996,6 +1124,11 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame key={'obj6-procedure'} id="exponent-laws-equation-steps" title="The strategy on one equation"
+            source="/algebra/powers/exponential-equations" related={false}
+            before={"The first example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={exponentLawSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
 
@@ -1006,11 +1139,16 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-equations-method-using-logarithms-matrix'}
+            id="exponential-equations-method-using-logarithms-matrix"
+            title="Method: Using Logarithms"
+            source="/algebra/powers/exponential-equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve an exponential equation with logarithms](!/algebra/methods/exponential-equations-logarithms) →@`,
         ]
     },
 
@@ -1021,11 +1159,24 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'obj8-procedure'}
+            id="substitution-method-steps"
+            title="The substitution method, step by step"
+            source="/algebra/powers/exponential-equations"
+            before={"The first equation of this section, turned into a quadratic and back. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={substitutionSteps} variant="worked" />
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'feature-matrix-exponential-equations-method-substitution-quadratic-matrix'}
+            id="exponential-equations-method-substitution-quadratic-matrix"
+            title="Method: Substitution (Quadratic in Disguise)"
+            source="/algebra/powers/exponential-equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:When one exponent is double another, the equation is a quadratic in $a^x$, and only its positive roots survive.]@`,
         ]
     },
@@ -1037,11 +1188,15 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-equations-equations-rational-negative-matrix'}
+            id="exponential-equations-equations-rational-negative-matrix"
+            title="Equations with Rational and Negative Exponents"
+            source="/algebra/powers/exponential-equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:When the variable is the base, the reciprocal exponent undoes the power, and an even power calls for both signs.]@`,
         ]
     },
@@ -1061,11 +1216,15 @@ With $x$ in the exponent on one side and in the base on the other, this equation
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-equations-summary-forms-methods-matrix'}
+            id="exponential-equations-summary-forms-methods-matrix"
+            title="Summary of Forms and Methods"
+            source="/algebra/powers/exponential-equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1083,6 +1242,14 @@ With $x$ in the exponent on one side and in the base on the other, this equation
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

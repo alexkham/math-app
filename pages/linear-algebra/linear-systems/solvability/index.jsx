@@ -1749,6 +1749,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj8 aggregation, obj10 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1763,6 +1764,26 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_threeCases = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'Linear system $A\\mathbf{x} = \\mathbf{b}$', sub: 'falls into exactly one of three cases' },
+    branches: [
+      { condition: 'the two ranks differ', leaves: [
+        { name: 'No solution', condition: '$\\text{rank}(A) < \\text{rank}([A \\mid \\mathbf{b}])$: the system is inconsistent.' }
+      ] },
+      { condition: 'the two ranks are equal', leaves: [
+        { name: 'Exactly one solution', condition: '$\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) = n$: consistent and fully determined.' },
+        { name: 'Infinitely many solutions', condition: '$\\text{rank}(A) = \\text{rank}([A \\mid \\mathbf{b}]) < n$: consistent but underdetermined.', example: '$n - \\text{rank}(A)$ free parameters' }
+      ] }
+    ]
+  },
+  note: { label: 'No fourth case', text: 'There is no case with a finite number of solutions greater than one.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1775,8 +1796,28 @@ import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatS
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Structure of the Solution Set"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Component","features":[{"id":"c1","name":"Symbol","type":"text"},{"id":"c2","name":"Where it comes from","type":"text"},{"id":"c3","name":"What it captures","type":"text"}],"items":[{"id":"r1","name":"Particular solution","values":{"c1":"xₚ","c2":"any one vector satisfying A xₚ = b","c3":"the \"forced\" part; the response to the right-hand side b"}},{"id":"r2","name":"Homogeneous part","values":{"c1":"xₕ","c2":"any vector in Null(A), i.e. A xₕ = 0","c3":"the \"free\" directions along which the solution can shift"}},{"id":"r3","name":"Complete solution","values":{"c1":"x = xₚ + xₕ","c2":"sum over all xₕ ∈ Null(A)","c3":"affine flat of dimension n − rank(A) through xₚ"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Tell how many solutions a system has", href: "/linear-algebra/linear-systems/methods/solvability-check", desc: "One, none or infinitely many: reduce, look for a contradictory row, count the pivots.", level: "composite", here: "#5" },
+    ] },
+    { title: "More linear system methods", items: [
+      { skill: "Choose the right method to solve a linear system", href: "/linear-algebra/linear-systems/methods/which-system-method", desc: "A decision tree: what the question asks, a zero right-hand side, then the shape of the system.", level: "strategy" },
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+      { skill: "Solve a homogeneous system", href: "/linear-algebra/linear-systems/methods/homogeneous-systems", desc: "Ax = 0 always has the zero solution; reduce A and write the null space with one vector per free variable.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/linear-systems/methods", label: "All linear system methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2900,6 +2941,15 @@ export default function SolvabilityPage({ specialCasesData, pitfallData,uniquene
           sectionsContent.obj4.content,
                   <div key={'unit-cases'} dangerouslySetInnerHTML={{ __html: demoUnits.cases }} />,
           `The rank conditions in the next section are these three pictures restated as arithmetic on two numbers.`,
+          <DiagramFrame
+            key={'taxonomy-solvability-three-cases'}
+            id="solvability-three-cases"
+            title="The Three Cases Combined"
+            source="/linear-algebra/linear-systems/solvability"
+            related={false}
+          >
+            <Taxonomy data={tx_threeCases} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2919,6 +2969,7 @@ export default function SolvabilityPage({ specialCasesData, pitfallData,uniquene
           >
             <TheoremCard data={roucheCapelliIff} variant="iff" theme={theoremTheme} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to tell how many solutions a system has](!/linear-algebra/linear-systems/methods/solvability-check) →@`,
 
         ]
     },
@@ -2989,11 +3040,15 @@ export default function SolvabilityPage({ specialCasesData, pitfallData,uniquene
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-solvability-structure-solution-set-matrix'}
+            id="solvability-structure-solution-set-matrix"
+            title="Structure of the Solution Set"
+            source="/linear-algebra/linear-systems/solvability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3030,6 +3085,14 @@ export default function SolvabilityPage({ specialCasesData, pitfallData,uniquene
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

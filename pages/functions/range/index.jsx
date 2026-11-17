@@ -858,6 +858,8 @@
 //   )
 // }
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -877,6 +879,7 @@ import functionInverseDiagrams from '@/app/components/functions/inverse/function
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
@@ -884,6 +887,35 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Methods for Finding Range"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"When to use it","type":"text"},{"id":"c2","name":"How it works","type":"text"},{"id":"c3","name":"Quick example","type":"text"}],"items":[{"id":"r1","name":"Algebraic inversion","values":{"c1":"rational, quadratic, or simple radical forms","c2":"solve y = f(x) for x; the y-values giving a real solution form the range","c3":"y = x² → x = ±√y, so y ≥ 0 → range [0, ∞)"}},{"id":"r2","name":"Behavior analysis","values":{"c1":"extrema, monotonicity, or end behavior is clear","c2":"find min/max; check end limits and asymptotes","c3":"continuous, strictly increasing on [a, b] → range [f(a), f(b)]"}},{"id":"r3","name":"Graphical reading","values":{"c1":"graph is given visually","c2":"trace the vertical extent; check solid vs open dots and asymptotes","c3":"curve reaches max y = 5 with a solid dot → 5 is included"}},{"id":"r4","name":"Family recognition","values":{"c1":"function matches a common parent","c2":"look up the family's typical range, then adjust for any transformations","c3":"aˣ has range (0, ∞); shifting up by k gives (k, ∞)"}},{"id":"r5","name":"Contextual constraint","values":{"c1":"applied or physical problems","c2":"constrain by physical meaning — height ≥ 0, probability in [0, 1], etc.","c3":"cost function with $500 startup → range begins at 500"}},{"id":"r6","name":"Inverse swap","values":{"c1":"the inverse is known or easy to identify","c2":"range of f equals domain of f⁻¹","c3":"f = eˣ has range = domain of ln = (0, ∞)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Effect of Transformations on Range"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"If f has range [a, b], then g has range","type":"text"}],"items":[{"id":"r1","name":"Vertical translation","values":{"c1":"g(x) = f(x) + k","c2":"[a + k, b + k] — shifted by k"}},{"id":"r2","name":"Vertical scale, c > 0","values":{"c1":"g(x) = c · f(x)","c2":"[ca, cb] — scaled by c"}},{"id":"r3","name":"Vertical scale, c < 0","values":{"c1":"g(x) = c · f(x)","c2":"[cb, ca] — scaled and reversed"}},{"id":"r4","name":"Vertical reflection","values":{"c1":"g(x) = −f(x)","c2":"[−b, −a] — flipped across 0"}},{"id":"r5","name":"Any horizontal transformation","values":{"c1":"f(x − h), f(bx), f(−x)","c2":"[a, b] — unchanged"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Range of Common Function Types"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function family","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Default range","type":"text"}],"items":[{"id":"r1","name":"Linear (non-constant)","values":{"c1":"f(x) = mx + b, m ≠ 0","c2":"(−∞, ∞)"}},{"id":"r2","name":"Constant","values":{"c1":"f(x) = c","c2":"{c}"}},{"id":"r3","name":"Quadratic, opens up","values":{"c1":"f(x) = ax² + bx + c, a > 0","c2":"[k, ∞), where k is the vertex y-coordinate"}},{"id":"r4","name":"Quadratic, opens down","values":{"c1":"f(x) = ax² + bx + c, a < 0","c2":"(−∞, k]"}},{"id":"r5","name":"Absolute value","values":{"c1":"f(x) = |x|","c2":"[0, ∞)"}},{"id":"r6","name":"Square root","values":{"c1":"f(x) = √x","c2":"[0, ∞)"}},{"id":"r7","name":"Cube root","values":{"c1":"f(x) = ∛x","c2":"(−∞, ∞)"}},{"id":"r8","name":"Exponential","values":{"c1":"f(x) = aˣ, a > 0, a ≠ 1","c2":"(0, ∞)"}},{"id":"r9","name":"Logarithmic","values":{"c1":"f(x) = logₐ(x)","c2":"(−∞, ∞)"}},{"id":"r10","name":"Sine / cosine","values":{"c1":"f(x) = sin(x) or cos(x)","c2":"[−1, 1]"}},{"id":"r11","name":"Tangent","values":{"c1":"f(x) = tan(x)","c2":"(−∞, ∞)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Range Notation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Notation","features":[{"id":"c1","name":"What it represents","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Interval","values":{"c1":"a continuous run of values — brackets include endpoints, parentheses exclude them","c2":"[0, ∞) — all non-negative reals"}},{"id":"r2","name":"Set-builder","values":{"c1":"a property that every y in the range must satisfy","c2":"{y | y ≥ 0} — equivalent to [0, ∞)"}},{"id":"r3","name":"Inequality","values":{"c1":"the bounding condition stated directly","c2":"y ≥ −3, or 0 < y ≤ 5"}},{"id":"r4","name":"Union","values":{"c1":"disconnected pieces joined with ∪","c2":"(−∞, −1] ∪ [1, ∞)"}},{"id":"r5","name":"Discrete set","values":{"c1":"a finite list of explicit values","c2":"{2, 5, 7}"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the range of a function", href: "/functions/methods/find-range", desc: "Find the lowest and highest outputs from the vertex, the endpoints and the end behavior, or solve $y = f(x)$ for $x$.", level: "composite", here: "#11" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+      { skill: "Find the inverse of a function", href: "/functions/methods/find-inverse", desc: "Check that the function is one-to-one, write $y = f(x)$, swap $x$ and $y$, and solve for $y$.", level: "composite" },
+      { skill: "Analyze a function", href: "/functions/methods/analyze-function", desc: "Work through domain, intercepts, symmetry, rise and fall, turning points, end behavior and range in a fixed order.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1740,8 +1772,23 @@ const faqQuestions = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Finding a range by solving for the input (obj4).
+  const rangeAlgebraicSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$f(x) = \\dfrac{1}{x - 3}$',
+      rows: [
+        { step: 'Write $y = f(x)$', example: '$y = \\dfrac{1}{x - 3}$' },
+        { step: 'Solve for $x$ in terms of $y$', example: '$x = 3 + \\dfrac{1}{y}$' },
+        { step: 'Find the values of $y$ that give a real $x$', example: '$y \\neq 0$' },
+        { step: 'Those values form the range', example: '$(-\\infty, 0) \\cup (0, \\infty)$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    rangeAlgebraicSteps,
     pitfallData,
     rangeCodomainComparison,
     rangeMethodDecision,
@@ -1767,7 +1814,7 @@ const faqQuestions = {
     }
    }
 
-export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMethodDecision, rangeByTypeOutline, 
+export default function RangePage({ rangeAlgebraicSteps, pitfallData,rangeCodomainComparison, rangeMethodDecision, rangeByTypeOutline, 
   seoData,
   sectionsContent,
   introContent,
@@ -1882,11 +1929,15 @@ export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMe
             sheet={functionsNotationSheet}
             current={'/functions/range'}
           />,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-range-range-notation-matrix'}
+            id="range-range-notation-matrix"
+            title="Range Notation"
+            source="/functions/range"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1915,6 +1966,15 @@ export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMe
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="range-algebraic-steps"
+            title="Finding a range by solving for the input"
+            source="/functions/range"
+            before={"The method on the third function of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={rangeAlgebraicSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-reciprocalGap'} dangerouslySetInnerHTML={{ __html: demoUnits.reciprocalGap }} />,
           `Whatever value of y makes the solved equation impossible is the value missing from the range.`,
         ]
@@ -1945,11 +2005,15 @@ export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMe
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-range-range-common-function-types-matrix'}
+            id="range-range-common-function-types-matrix"
+            title="Range of Common Function Types"
+            source="/functions/range"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
                   <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
           `Recognising the family is often the fastest route to the range.`,
           <DiagramFrame
@@ -1968,11 +2032,15 @@ export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMe
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-range-effect-transformations-range-matrix'}
+            id="range-effect-transformations-range-matrix"
+            title="Effect of Transformations on Range"
+            source="/functions/range"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-shift'} dangerouslySetInnerHTML={{ __html: demoUnits.shift }} />,
           `Reflection in the x-axis is the vertical transformation that turns the range upside down.`,
         ]
@@ -2019,11 +2087,15 @@ export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMe
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-range-summary-methods-finding-range-matrix'}
+            id="range-summary-methods-finding-range-matrix"
+            title="Summary of Methods for Finding Range"
+            source="/functions/range"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           `The six methods from the table, as a checklist: first how the function is given, then what is already known about it.`,
           <DiagramFrame
             key={'obj11-decision'}
@@ -2034,9 +2106,18 @@ export default function RangePage({ pitfallData,rangeCodomainComparison, rangeMe
             <DecisionBox data={rangeMethodDecision} />
           </DiagramFrame>,
           `The last exit is the general fallback: behavior analysis needs no inverse and no equation solved for $x$, only the extrema, the end behavior and any asymptotes. When one method gives no clean answer, a second one from the table often settles it.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the range of a function](!/functions/methods/find-range) →@`,
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

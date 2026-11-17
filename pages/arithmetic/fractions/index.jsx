@@ -683,6 +683,7 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 3 tables (obj3 aggregation, obj6 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -699,12 +700,40 @@ import renderFractionBar from '@/app/utils/illustrations/arithmetic/fractions/fr
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Types of Fractions"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Defining condition","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Value range","type":"text"}],"items":[{"id":"r1","name":"Proper","values":{"c1":"numerator < denominator","c2":"2⁄5","c3":"0 < value < 1"}},{"id":"r2","name":"Improper","values":{"c1":"numerator ≥ denominator","c2":"5⁄3","c3":"value ≥ 1"}},{"id":"r3","name":"Unit","values":{"c1":"numerator = 1","c2":"1⁄7","c3":"0 < value ≤ 1"}},{"id":"r4","name":"[Mixed number](!/arithmetic/fractions/mixed-numbers)","values":{"c1":"whole number + proper fraction","c2":"2 3⁄4","c3":"value > 1"}},{"id":"r5","name":"[Equivalent](!/arithmetic/fractions/equivalent)","values":{"c1":"same value, scaled numerator and denominator","c2":"1⁄2 = 2⁄4 = 3⁄6","c3":"any"}},{"id":"r6","name":"[Complex](!/arithmetic/fractions/complex)","values":{"c1":"fraction inside numerator or denominator","c2":"(1⁄2) ⁄ (3⁄4)","c3":"any"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table capstoneTable ("Fractions at a Glance"); converted from the table's own cells.
+const fm_capstoneTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Concept","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Fraction as division","values":{"c1":"the fraction a⁄b means a ÷ b","c2":"3⁄4 = 3 ÷ 4 = 0.75"}},{"id":"r2","name":"Numerator role","values":{"c1":"counts how many parts are taken","c2":"the 3 in 3⁄4"}},{"id":"r3","name":"Denominator role","values":{"c1":"names the size of each equal part","c2":"the 4 in 3⁄4 (fourths)"}},{"id":"r4","name":"Fraction = 1","values":{"c1":"when numerator = denominator","c2":"4⁄4 = 1"}},{"id":"r5","name":"Fraction = 0","values":{"c1":"when numerator = 0 (and denominator ≠ 0)","c2":"0⁄7 = 0"}},{"id":"r6","name":"Undefined fraction","values":{"c1":"when denominator = 0","c2":"5⁄0 is undefined"}},{"id":"r7","name":"Unit fraction decomposition","values":{"c1":"a⁄b equals a copies of the unit fraction 1⁄b","c2":"3⁄5 = 1⁄5 + 1⁄5 + 1⁄5"}},{"id":"r8","name":"Larger denom, smaller value","values":{"c1":"for unit fractions, a bigger denominator means smaller pieces","c2":"1⁄8 < 1⁄4"}},{"id":"r9","name":"Equivalence by scaling","values":{"c1":"multiplying numerator and denominator by the same nonzero number preserves value","c2":"1⁄2 = 2⁄4 = 5⁄10"}},{"id":"r10","name":"Reciprocal","values":{"c1":"obtained by swapping numerator and denominator","c2":"reciprocal of 2⁄3 is 3⁄2"}},{"id":"r11","name":"Improper ↔ mixed","values":{"c1":"divide numerator by denominator; the quotient is the whole part, the remainder over the denominator is the fractional part","c2":"7⁄3 = 2 1⁄3"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Operations with Fractions"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Rule","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Common denom needed?","type":"text"}],"items":[{"id":"r1","name":"[Add / subtract](!/arithmetic/fractions/adding-subtracting)","values":{"c1":"combine numerators over the shared denominator","c2":"2⁄7 + 3⁄7 = 5⁄7","c3":"✓"}},{"id":"r2","name":"[Multiply](!/arithmetic/fractions/multiplying)","values":{"c1":"multiply numerators, multiply denominators","c2":"(2⁄3)(4⁄5) = 8⁄15","c3":"✗"}},{"id":"r3","name":"[Divide](!/arithmetic/fractions/dividing)","values":{"c1":"multiply by the reciprocal of the second fraction","c2":"(2⁄3) ÷ (4⁄5) = (2⁄3)(5⁄4) = 5⁄6","c3":"✗"}},{"id":"r4","name":"[Compare](!/arithmetic/fractions/comparing)","values":{"c1":"use common denominator, cross-multiply, or convert to decimals","c2":"2⁄5 vs 3⁄7: cross-multiply 2·7=14, 3·5=15 → 3⁄7 > 2⁄5","c3":"optional"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Arithmetic methods", items: [
+      { skill: "Add and subtract fractions", href: "/arithmetic/methods/add-subtract-fractions", desc: "Rewrite the fractions over the least common denominator, add or subtract the numerators, keep the denominator, and simplify.", level: "composite" },
+      { skill: "Compare fractions", href: "/arithmetic/methods/compare-fractions", desc: "Decide which fraction is larger: compare numerators over a common denominator, or cross-multiply, $\\frac{a}{b} > \\frac{c}{d}$ when $ad > bc$.", level: "composite" },
+      { skill: "Simplify complex fractions", href: "/arithmetic/methods/complex-fractions", desc: "Simplify a fraction whose top or bottom contains fractions: multiply both by the LCD of the inner denominators, or divide the top by the bottom.", level: "composite" },
+      { skill: "Divide fractions", href: "/arithmetic/methods/divide-fractions", desc: "Keep the first fraction, change $\\div$ to $\\times$, flip the second fraction, then multiply: $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$.", level: "composite" },
+      { skill: "Simplify fractions", href: "/arithmetic/methods/simplify-fractions", desc: "Reduce a fraction to lowest terms: divide the numerator and the denominator by their GCD, as in $\\frac{84}{126} = \\frac{2}{3}$.", level: "composite" },
+      { skill: "Work with mixed numbers", href: "/arithmetic/methods/mixed-numbers", desc: "Convert between mixed numbers and improper fractions, $w\\tfrac{a}{b} = \\frac{wb + a}{b}$, and use the conversion to multiply and divide them.", level: "composite" },
+      { skill: "Multiply fractions", href: "/arithmetic/methods/multiply-fractions", desc: "Multiply numerators together and denominators together, $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$, cancelling common factors first.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1603,8 +1632,15 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-fractions-types-fractions-matrix'}
+            id="fractions-types-fractions-matrix"
+            title="Types of Fractions"
+            source="/arithmetic/fractions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj3-diagram'}
             id="fraction-types-outline"
@@ -1641,8 +1677,15 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-fractions-operations-fractions-matrix'}
+            id="fractions-operations-fractions-matrix"
+            title="Operations with Fractions"
+            source="/arithmetic/fractions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj6-diagram'}
             id="fraction-operations-tree"
@@ -1668,8 +1711,15 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-fractions-fractions-at-glance-matrix'}
+            id="fractions-fractions-at-glance-matrix"
+            title="Fractions at a Glance"
+            source="/arithmetic/fractions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_capstoneTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1687,6 +1737,14 @@ Computing $\\frac{2}{5}$ as $5 \\div 2 = 2.5$ gives more than one whole for a pr
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

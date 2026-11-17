@@ -39,6 +39,8 @@ const labelProps = (fill, size = 17) => ({
   fill
 });
 
+// the name sits 22 units from the point, away from the label centre; an optional `labelDist`
+// moves it further out (for a point crowded by lines on every side)
 export function Point({ o, ctx }) {
   const handle = ctx.draggable && (o.free || o.drag);
   const solid = o.free || o.drag;
@@ -53,7 +55,7 @@ export function Point({ o, ctx }) {
         ? <circle cx={o.x} cy={o.y} r={6} fill={PALETTE.ink} stroke="#fff" strokeWidth={2} />
         : <circle cx={o.x} cy={o.y} r={4} fill="#fff" stroke={PALETTE.soft} strokeWidth={1.6} />}
       {ctx.labels && (
-        <text x={o.x + (dx / n) * 22} y={o.y + (dy / n) * 22} {...labelProps(solid ? PALETTE.ink : PALETTE.soft)}>
+        <text x={o.x + (dx / n) * (o.labelDist || 22)} y={o.y + (dy / n) * (o.labelDist || 22)} {...labelProps(solid ? PALETTE.ink : PALETTE.soft)}>
           {o.label || o.id}
         </text>
       )}
@@ -114,6 +116,7 @@ export function Circle({ o, hl }) {
 
 // at / from / to — draws the smaller angle between the two rays; an optional
 // `radius` fixes the arc size (for nested angles at one vertex)
+// and an optional `labelAt` places the name off the bisector (when a line runs along it)
 export function Angle({ o, hl, ctx }) {
   const [v, p1, p2] = o.pts;
   const { a1, d } = angleGeom(v, p1, p2);
@@ -125,7 +128,8 @@ export function Angle({ o, hl, ctx }) {
   const x2 = q(v.x + r * Math.cos(a1 + d));
   const y2 = q(v.y + r * Math.sin(a1 + d));
   const sweep = d > 0 ? 1 : 0;
-  const m = a1 + d / 2;
+  // the name sits on the bisector of the angle unless `labelAt` (0..1, from `from` towards `to`) moves it
+  const m = a1 + d * (o.labelAt ?? 0.5);
   const lr = r + (ctx.measures ? 24 : 15);
   const color = colorOf(o.color, PALETTE.alpha);
   const arc = `M${x1} ${y1}A${r} ${r} 0 0 ${sweep} ${x2} ${y2}`;

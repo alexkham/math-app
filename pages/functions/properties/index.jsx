@@ -1545,6 +1545,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1566,12 +1567,118 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_increasingDecreasing = {
+  center: { name: 'On an interval', sub: 'for any $a < b$ in it' },
+  axes: { cols: ['strict: equal outputs not allowed', 'flat segments permitted'], rows: ['graph rises', 'graph falls'] },
+  options: { bullets: false },
+  quadrants: [
+    { label: 'Strictly increasing', title: '$f(a) < f(b)$', items: [ { text: 'Larger inputs produce larger outputs.', note: '$x^3$ on $(-\\infty, \\infty)$' } ] },
+    { label: 'Non-decreasing', title: '$f(a) \\leq f(b)$', items: [ 'Rises or stays level.' ] },
+    { label: 'Strictly decreasing', title: '$f(a) > f(b)$', items: [ { text: 'Larger inputs produce smaller outputs.', note: '$-x$ everywhere' } ] },
+    { label: 'Non-increasing', title: '$f(a) \\geq f(b)$', items: [ 'Falls or stays level.' ] }
+  ],
+  note: { label: 'One function, both directions', text: '$x^2$ is decreasing on $(-\\infty, 0]$ and increasing on $[0, \\infty)$; it switches direction at the vertex. Intervals are expressed using $x$-values.' }
+};
+
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_graphSymmetry = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  tree: {
+    root: { name: 'Symmetry of a graph', sub: 'one part determines another through reflection or rotation' },
+    branches: [
+      { leaves: [
+        { name: 'About the $y$-axis', condition: '$(x, y)$ lies on the graph if and only if $(-x, y)$ does.', example: 'the signature of even functions',
+          sketch: { x0: -2, x1: 2, y0: -0.6, y1: 2.4, vlines: [0], pieces: [{ f: (x) => 0.55 * x * x, from: -2, to: 2 }] } },
+        { name: 'About the origin', condition: '$(x, y)$ lies on the graph if and only if $(-x, -y)$ does.', example: 'the signature of odd functions',
+          sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, vlines: [0], pieces: [{ f: (x) => 0.18 * x * x * x, from: -2, to: 2 }] } },
+        { name: 'About the $x$-axis', condition: '$(x, y)$ is on the graph whenever $(x, -y)$ is.', example: 'fails the vertical line test: not a function',
+          sketch: { x0: -0.6, x1: 3.4, y0: -2, y1: 2, pieces: [{ f: (x) => Math.sqrt(x), from: 0, to: 3.4, n: 140 }, { f: (x) => -Math.sqrt(x), from: 0, to: 3.4, n: 140 }] } },
+        { name: 'About another vertical line', condition: 'The graph is a mirror image on either side of the line.', example: '$(x - 3)^2$ is symmetric about $x = 3$',
+          sketch: { x0: 0, x1: 6, y0: -0.6, y1: 2.4, vlines: [3], pieces: [{ f: (x) => 0.3 * (x - 3) * (x - 3), from: 0, to: 6 }] } }
+      ] }
+    ]
+  }
+};
+
+const tx_monotonicKinds = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { branchIf: 'always' },
+  tree: {
+    root: { name: 'Monotonic function', sub: 'moves in only one direction across its entire domain' },
+    branches: [
+      { condition: 'increasing', leaves: [
+        { name: 'Monotonically increasing', condition: '$a < b \\implies f(a) \\leq f(b)$' },
+        { name: 'Strictly monotonically increasing', condition: '$a < b \\implies f(a) < f(b)$', example: '$e^x$, and $\\ln(x)$ on its domain' }
+      ] },
+      { condition: 'decreasing', leaves: [
+        { name: 'Monotonically decreasing', condition: '$a < b \\implies f(a) \\geq f(b)$' },
+        { name: 'Strictly monotonically decreasing', condition: '$a < b \\implies f(a) > f(b)$', example: '$-x^3$' }
+      ] }
+    ]
+  },
+  note: { label: 'Strict means one-to-one', text: 'Strictly monotonic functions never produce the same output twice, so they have inverses. A constant function such as $f(x) = 3$ is both non-decreasing and non-increasing.' }
+};
+
+const tx_boundednessKinds = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'Boundedness of a function', sub: 'do the outputs stay below, above, or inside finite values?' },
+    branches: [
+      { leaves: [
+        { name: 'Bounded above', condition: 'There is a number $M$ such that $f(x) \\leq M$ for all $x$ in the domain.', example: 'the graph never rises above the line $y = M$' },
+        { name: 'Bounded below', condition: 'There is a number $m$ such that $f(x) \\geq m$ for all $x$ in the domain.', example: '$x^2$ is bounded below by $0$ but not above' },
+        { name: 'Bounded', condition: 'Bounded both above and below: the outputs stay within a finite strip.', example: '$\\sin(x)$, and $\\dfrac{1}{1 + x^2}$' },
+        { name: 'Unbounded in both directions', condition: 'No bound above and no bound below.', example: '$f(x) = x$' }
+      ] }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Properties at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"What it means","type":"text"},{"id":"c2","name":"Visual signature on the graph","type":"text"}],"items":[{"id":"r1","name":"Even","values":{"c1":"f(−x) = f(x) for every x in the domain","c2":"mirror symmetry about the y-axis"}},{"id":"r2","name":"Odd","values":{"c1":"f(−x) = −f(x) for every x in the domain","c2":"point symmetry about the origin"}},{"id":"r3","name":"One-to-one","values":{"c1":"distinct inputs always give distinct outputs","c2":"passes the horizontal line test"}},{"id":"r4","name":"Onto","values":{"c1":"range covers the entire codomain","c2":"every horizontal line at a codomain height meets the graph"}},{"id":"r5","name":"Bijective","values":{"c1":"both one-to-one and onto","c2":"every horizontal line at a codomain height meets the graph exactly once"}},{"id":"r6","name":"Increasing on (a, b)","values":{"c1":"larger inputs yield larger outputs on that interval","c2":"curve rises from left to right on (a, b)"}},{"id":"r7","name":"Decreasing on (a, b)","values":{"c1":"larger inputs yield smaller outputs on that interval","c2":"curve falls from left to right on (a, b)"}},{"id":"r8","name":"Monotonic","values":{"c1":"moves in only one direction over the whole domain","c2":"curve never reverses — always rising or always falling"}},{"id":"r9","name":"Bounded","values":{"c1":"outputs stay within a fixed interval [m, M]","c2":"graph confined between two horizontal lines"}},{"id":"r10","name":"Local extremum","values":{"c1":"a peak or valley relative to nearby points","c2":"turning point where curve switches direction"}},{"id":"r11","name":"Absolute extremum","values":{"c1":"the overall highest or lowest output on the entire domain","c2":"the highest peak or lowest valley anywhere on the curve"}},{"id":"r12","name":"Continuous","values":{"c1":"no breaks anywhere on the domain","c2":"curve can be drawn without lifting the pencil"}},{"id":"r13","name":"Has an asymptote","values":{"c1":"approaches a line at extremes or near a singular point","c2":"curve gets arbitrarily close to a vertical, horizontal, or slanted line"}},{"id":"r14","name":"Periodic","values":{"c1":"f(x + p) = f(x) for some p > 0","c2":"a single pattern repeats unchanged every p units"}},{"id":"r15","name":"Has a zero at c","values":{"c1":"f(c) = 0","c2":"curve crosses or touches the x-axis at x = c"}},{"id":"r16","name":"Concave up","values":{"c1":"rate of change is increasing on the interval","c2":"curve bends upward — bowl-shaped"}},{"id":"r17","name":"Concave down","values":{"c1":"rate of change is decreasing on the interval","c2":"curve bends downward — arch-shaped"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj13Table ("Asymptotes"); converted from the table's own cells.
+const fm_obj13Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Form of the line","type":"text"},{"id":"c2","name":"When it occurs","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Vertical","values":{"c1":"x = a","c2":"f(x) → ±∞ as x → a; met at most once, usually not at all","c3":"f(x) = 1 ⁄ (x − 2) at x = 2"}},{"id":"r2","name":"Horizontal","values":{"c1":"y = L","c2":"f(x) → L as x → ±∞; may be crossed","c3":"f(x) = 1 ⁄ x has y = 0"}},{"id":"r3","name":"Oblique (slant)","values":{"c1":"y = mx + b","c2":"rational with numerator degree exactly one above denominator","c3":"f(x) = (x² + 1) ⁄ x has y = x"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Types of Discontinuities"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"What happens at the point","type":"text"},{"id":"c2","name":"Recoverable?","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Removable (hole)","values":{"c1":"limit exists but the function is undefined or differently valued there","c2":"yes — redefine f at the point","c3":"(x² − 1) ⁄ (x − 1) at x = 1"}},{"id":"r2","name":"Jump","values":{"c1":"left and right limits both exist but differ","c2":"no — the gap is structural","c3":"step or piecewise functions at a boundary"}},{"id":"r3","name":"Infinite","values":{"c1":"function diverges to ±∞ near the point","c2":"no — produces a vertical asymptote","c3":"1 ⁄ x at x = 0"}},{"id":"r4","name":"Oscillating","values":{"c1":"function oscillates infinitely without settling to any limit","c2":"no — no limit exists","c3":"sin(1 ⁄ x) near x = 0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Absolute Extrema"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Definition","type":"text"},{"id":"c2","name":"Scope","type":"text"},{"id":"c3","name":"Existence guarantee","type":"text"}],"items":[{"id":"r1","name":"Local max / min","values":{"c1":"f(c) is the largest / smallest value among nearby points","c2":"a neighborhood of c","c3":"none in general — depends on the function"}},{"id":"r2","name":"Absolute (global) max / min","values":{"c1":"f(c) is the largest / smallest value the function ever takes","c2":"the entire domain","c3":"guaranteed for continuous f on a closed, bounded interval (Extreme Value Theorem)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Bijective Functions"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Definition","type":"text"},{"id":"c2","name":"Graphical test","type":"text"},{"id":"c3","name":"Example (from ℝ to ℝ)","type":"text"}],"items":[{"id":"r1","name":"One-to-one (injective)","values":{"c1":"distinct inputs always give distinct outputs","c2":"horizontal line test — every horizontal line meets the graph at most once","c3":"f(x) = 2x + 5"}},{"id":"r2","name":"Onto (surjective)","values":{"c1":"every element of the codomain is achieved as an output","c2":"every horizontal line at a codomain height meets the graph at least once","c3":"f(x) = x³"}},{"id":"r3","name":"Bijective","values":{"c1":"both injective and surjective — a perfect pairing","c2":"every horizontal line at a codomain height meets the graph exactly once","c3":"f(x) = 3x − 7"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Properties at a Glance"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Category","features":[{"id":"c1","name":"Algebraic test on f(−x)","type":"text"},{"id":"c2","name":"Graphical symmetry","type":"text"},{"id":"c3","name":"Examples","type":"text"}],"items":[{"id":"r1","name":"Even","values":{"c1":"f(−x) = f(x)","c2":"mirror symmetry about the y-axis","c3":"x², x⁴, |x|, cos(x)"}},{"id":"r2","name":"Odd","values":{"c1":"f(−x) = −f(x)","c2":"point symmetry about the origin","c3":"x, x³, x⁵, sin(x)"}},{"id":"r3","name":"Neither","values":{"c1":"result matches neither f(x) nor −f(x)","c2":"no symmetry of either type","c3":"x² + x, eˣ, ln(x)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Tell if a function is even, odd or neither", href: "/functions/methods/even-odd-test", desc: "Check that the domain is symmetric, simplify $f(-x)$, and compare it with $f(x)$ and $-f(x)$.", level: "composite", here: "#1" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Find the intercepts of a function", href: "/functions/methods/find-intercepts", desc: "Evaluate $f(0)$ for the $y$-intercept; solve $f(x) = 0$ for the $x$-intercepts and keep the solutions in the domain.", level: "composite" },
+      { skill: "Analyze a function", href: "/functions/methods/analyze-function", desc: "Work through domain, intercepts, symmetry, rise and fall, turning points, end behavior and range in a fixed order.", level: "composite" },
+      { skill: "Graph a transformed function", href: "/functions/methods/graph-transformations", desc: "Start from the parent graph, read $a$, $b$, $h$, $k$ from $a f(b(x - h)) + k$, and move key points.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3268,11 +3375,15 @@ $$f(-x) = -f(x) \\quad \\text{for all } x \\in \\text{Dom}(f)$$
           `The function $f(x) = x^3$ is odd: $f(-x) = (-x)^3 = -x^3 = -f(x)$. So are $f(x) = x$, $f(x) = x^5$, and $f(x) = \\sin(x)$.`,
           `For polynomials the substitution can be read term by term, since $(-x)^n = x^n$ when $n$ is even and $(-x)^n = -x^n$ when $n$ is odd. Each term either keeps its sign or flips it, and the function is even or odd only when all of its terms do the same.`,
           `The table below collects the three possible outcomes with the algebraic test, the graphical symmetry it implies, and a few examples for each.`,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-properties-at-glance-matrix'}
+            id="properties-properties-at-glance-matrix"
+            title="Properties at a Glance"
+            source="/functions/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
           <div key={'unit-odd'} dangerouslySetInnerHTML={{ __html: demoUnits.odd }} />,
           `Most functions are neither even nor odd; the two symmetries are special properties, not a dichotomy.`,
         ],
@@ -3309,6 +3420,7 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to tell if a function is even, odd or neither](!/functions/methods/even-odd-test) →@`,
         ]
     },
     {
@@ -3319,6 +3431,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
           sectionsContent.obj2.content,
                   <div key={'unit-even'} dangerouslySetInnerHTML={{ __html: demoUnits.even }} />,
           `Symmetry about a vertical line other than the y-axis is a shifted even function.`,
+          <DiagramFrame
+            key={'taxonomy-properties-graph-symmetry-kinds'}
+            id="properties-graph-symmetry-kinds"
+            title="Symmetry"
+            source="/functions/properties"
+            related={false}
+          >
+            <Taxonomy data={tx_graphSymmetry} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3347,11 +3468,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-bijective-functions-matrix'}
+            id="properties-bijective-functions-matrix"
+            title="Bijective Functions"
+            source="/functions/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:A bijection is a perfect pairing of two sets, so it can be read in either direction.]@`,
         ]
     },
@@ -3363,6 +3488,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
           sectionsContent.obj6.content,
           <div key={'unit-monotoneSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.monotoneSquare }} />,
           `Increasing and decreasing always describe stretches of the x-axis, never of the y-axis.`,
+          <DiagramFrame
+            key={'four-sides-increasing-decreasing-strict-or-not'}
+            id="increasing-decreasing-strict-or-not"
+            title="Increasing and Decreasing"
+            source="/functions/properties"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_increasingDecreasing} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3373,6 +3507,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
           sectionsContent.obj7.content,
           <div key={'unit-expLogMonotone'} dangerouslySetInnerHTML={{ __html: demoUnits.expLogMonotone }} />,
           `A strictly monotonic function never repeats an output, so it is always one-to-one.`,
+          <DiagramFrame
+            key={'taxonomy-properties-monotonic-kinds'}
+            id="properties-monotonic-kinds"
+            title="Monotonic Functions"
+            source="/functions/properties"
+            related={false}
+          >
+            <Taxonomy data={tx_monotonicKinds} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3383,6 +3526,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
           sectionsContent.obj8.content,
           <div key={'unit-boundedSine'} dangerouslySetInnerHTML={{ __html: demoUnits.boundedSine }} />,
           `A bounded function's whole graph fits inside one horizontal strip.`,
+          <DiagramFrame
+            key={'taxonomy-properties-boundedness-kinds'}
+            id="properties-boundedness-kinds"
+            title="Boundedness"
+            source="/functions/properties"
+            related={false}
+          >
+            <Taxonomy data={tx_boundednessKinds} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3411,11 +3563,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-absolute-extrema-matrix'}
+            id="properties-absolute-extrema-matrix"
+            title="Absolute Extrema"
+            source="/functions/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj10-theorem'}
             id="extreme-value-theorem-card"
@@ -3442,11 +3598,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-types-discontinuities-matrix'}
+            id="properties-types-discontinuities-matrix"
+            title="Types of Discontinuities"
+            source="/functions/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           `@academic[punchline:Only a hole can be repaired by changing a single value; jumps, infinite breaks and oscillation cannot.]@`,
         ]
     },
@@ -3456,11 +3616,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div
-            key={'obj13-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj13Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-asymptotes-matrix'}
+            id="properties-asymptotes-matrix"
+            title="Asymptotes"
+            source="/functions/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj13Table} />
+          </DiagramFrame>,
                   <div key={'unit-asymptotes'} dangerouslySetInnerHTML={{ __html: demoUnits.asymptotes }} />,
           `Asymptotes are statements about limits drawn as lines.`,
         ]
@@ -3556,11 +3720,15 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         link:sectionsContent.obj19.link,
         content:[
           sectionsContent.obj19.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-properties-at-glance-matrix-2'}
+            id="properties-properties-at-glance-matrix-2"
+            title="Properties at a Glance"
+            source="/functions/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj19-diagram'}
             id="function-properties-outline"
@@ -3572,6 +3740,14 @@ Calling $f(x) = x^3 + 1$ odd because its power is odd fails the test: $f(-x) = -
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

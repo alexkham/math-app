@@ -1565,6 +1565,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj7 comparison, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1579,6 +1580,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -1590,6 +1592,25 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Dynamical Systems Interpretation"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Regime","features":[{"id":"c1","name":"Discrete: xₙ₊₁ = A xₙ","type":"text"},{"id":"c2","name":"Continuous: x′ = A x","type":"text"}],"items":[{"id":"r1","name":"Stable (converging)","values":{"c1":"|λ| < 1 → trajectory spirals inward to the origin","c2":"Re(λ) < 0 → damped oscillation decaying to zero"}},{"id":"r2","name":"Marginally stable","values":{"c1":"|λ| = 1 → trajectory stays on a closed curve","c2":"Re(λ) = 0 → sustained oscillation at constant amplitude"}},{"id":"r3","name":"Unstable (diverging)","values":{"c1":"|λ| > 1 → trajectory spirals outward without bound","c2":"Re(λ) > 0 → oscillation with exponentially growing amplitude"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find complex eigenvalues and eigenvectors", href: "/linear-algebra/eigen/methods/complex-eigenvalues", desc: "A negative discriminant gives $\\lambda = a \\pm bi$; one complex eigenvector gives the real rotation-scaling form.", level: "composite", here: "#3" },
+    ] },
+    { title: "More eigenvalue methods", items: [
+      { skill: "Find eigenvalues", href: "/linear-algebra/eigen/methods/eigenvalues", desc: "Solve the characteristic equation $\\det(A - \\lambda I) = 0$ and check the roots against the trace and determinant.", level: "composite" },
+      { skill: "Check if a matrix is diagonalizable", href: "/linear-algebra/eigen/methods/diagonalizability-check", desc: "Compare algebraic and geometric multiplicity for every eigenvalue; $n$ distinct eigenvalues settle it at once.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/eigen/methods", label: "All eigenvalue methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2583,6 +2604,7 @@ const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold:
           `The three cases exhaust the possibilities because $r$ is a positive real and can only be less than, equal to, or greater than one. The argument $\\theta$ plays no part in the classification — it sets the speed of rotation and nothing else, which is why two systems can spiral at completely different rates and be equally stable.`,
                   <div key={'unit-rotation'} dangerouslySetInnerHTML={{ __html: demoUnits.rotation }} />,
           `The conjugate partner of this eigenvalue describes the same rotation turning the other way, which is why the pair always arrives together.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find complex eigenvalues and eigenvectors](!/linear-algebra/eigen/methods/complex-eigenvalues) →@`,
         ]
     },
     {
@@ -2629,11 +2651,15 @@ const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold:
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-complex-dynamical-systems-interpretation-matrix'}
+            id="complex-dynamical-systems-interpretation-matrix"
+            title="Dynamical Systems Interpretation"
+            source="/linear-algebra/eigen/complex"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
                   <div key={'unit-dynamics'} dangerouslySetInnerHTML={{ __html: demoUnits.dynamics }} />,
           `Whether a system settles, oscillates forever or blows up is therefore read off a single number: the modulus.`,
         ]
@@ -2690,6 +2716,14 @@ const compareTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold:
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

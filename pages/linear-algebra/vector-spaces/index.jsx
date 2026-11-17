@@ -980,6 +980,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 4 tables (obj7 aggregation, obj11 comparison, obj12 aggregation, obj13 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -995,10 +996,45 @@ import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-vi
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_fourSubspaces = {
+  center: { name: '$m \\times n$ matrix $A$', sub: 'rank $r$' },
+  axes: { cols: ['lives in $\\mathbb{R}^m$', 'lives in $\\mathbb{R}^n$'], rows: ['dimension $r$', 'the remainder'] },
+  quadrants: [
+    { title: 'Column space', items: [ 'Holds every output $A\\mathbf{x}$.', 'Dimension $r$.' ] },
+    { title: 'Row space', items: [ 'Dimension $r$.', 'Orthogonal to the null space.' ] },
+    { title: 'Left null space', items: [ 'Dimension $m - r$.', 'Orthogonal to the column space.' ] },
+    { title: 'Null space', items: [ 'Holds every input that $A$ sends to zero.', 'Dimension $n - r$.' ] }
+  ],
+  note: { label: 'Fixed by the rank', text: 'All four dimensions are fixed by the [rank](!/linear-algebra/matrix/rank) $r$, and the two subspaces in each column meet at right angles.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Catalog of Vector Spaces"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Vector space","features":[{"id":"c1","name":"Typical element","type":"text"},{"id":"c2","name":"Operations","type":"text"},{"id":"c3","name":"Dimension","type":"text"},{"id":"c4","name":"Standard basis","type":"text"},{"id":"c5","name":"Isomorphic to","type":"text"}],"items":[{"id":"r1","name":"ℝⁿ","values":{"c1":"(v₁, …, vₙ)","c2":"entry-by-entry","c3":"n","c4":"{e₁, e₂, …, eₙ}","c5":"itself (canonical model)"}},{"id":"r2","name":"𝒫ₙ (polynomials, deg ≤ n)","values":{"c1":"a₀ + a₁x + … + aₙxⁿ","c2":"ordinary polynomial + and scaling","c3":"n + 1","c4":"monomials {1, x, x², …, xⁿ}","c5":"ℝⁿ⁺¹"}},{"id":"r3","name":"𝒫 (all polynomials)","values":{"c1":"polynomial of any degree","c2":"ordinary polynomial + and scaling","c3":"∞","c4":"{1, x, x², …} (infinite)","c5":"not isomorphic to any ℝⁿ"}},{"id":"r4","name":"ℝᵐˣⁿ (real matrices)","values":{"c1":"m × n matrix","c2":"entry-by-entry","c3":"mn","c4":"matrix units {Eᵢⱼ}","c5":"ℝᵐⁿ"}},{"id":"r5","name":"C[a, b] (continuous functions on [a, b])","values":{"c1":"continuous f: [a, b] → ℝ","c2":"pointwise (f + g)(x) = f(x) + g(x)","c3":"∞","c4":"no finite basis","c5":"not isomorphic to any ℝⁿ"}},{"id":"r6","name":"Solutions of y″ + py′ + qy = 0","values":{"c1":"function y(x)","c2":"pointwise (sums of solutions are solutions)","c3":"2","c4":"any two independent solutions y₁, y₂","c5":"ℝ²"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Vector space methods", items: [
+      { skill: "Find a basis", href: "/linear-algebra/vector-spaces/methods/find-basis", desc: "Row reduce once: the pivot columns of the original matrix, or one vector per free variable.", level: "composite" },
+      { skill: "Find the dimension of a subspace", href: "/linear-algebra/vector-spaces/methods/dimension", desc: "Count the vectors in a basis: the rank for a span, n minus the rank for a solution set.", level: "composite" },
+      { skill: "Find the four fundamental subspaces", href: "/linear-algebra/vector-spaces/methods/fundamental-subspaces", desc: "One row reduction gives bases for the column space, row space, null space and left null space.", level: "composite" },
+      { skill: "Test vectors for linear independence", href: "/linear-algebra/vector-spaces/methods/linear-independence-test", desc: "Put the vectors in the columns of a matrix and count pivots, or use the determinant.", level: "composite" },
+      { skill: "Test whether a vector is in a span", href: "/linear-algebra/vector-spaces/methods/span-test", desc: "Row reduce the augmented matrix: consistent means yes. A pivot in every row means the set spans Rⁿ.", level: "composite" },
+      { skill: "Test whether a set is a subspace", href: "/linear-algebra/vector-spaces/methods/subspace-test", desc: "Check the zero vector, closure under addition and closure under scalar multiplication.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1767,6 +1803,15 @@ Peano gave the first axiomatic definition of a vector space in 1888 and already 
         content:[
           sectionsContent.obj8.content,
           `@academic[punchline:Once the size of a matrix is known, its rank alone fixes the dimensions of all four fundamental subspaces.]@`,
+          <DiagramFrame
+            key={'four-sides-four-fundamental-subspaces-grid'}
+            id="four-fundamental-subspaces-grid"
+            title="The Four Fundamental Subspaces"
+            source="/linear-algebra/vector-spaces"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_fourSubspaces} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1823,8 +1868,15 @@ Peano gave the first axiomatic definition of a vector space in 1888 and already 
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-vector-spaces-summary-catalog-vector-matrix'}
+            id="vector-spaces-summary-catalog-vector-matrix"
+            title="Summary: Catalog of Vector Spaces"
+            source="/linear-algebra/vector-spaces"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1842,6 +1894,14 @@ Peano gave the first axiomatic definition of a vector space in 1888 and already 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1083,6 +1083,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1100,6 +1101,7 @@ import complexExplorerDiagrams from '@/app/components/calculators/complex-number
 import iPowersDiagrams from '@/app/components/calculators/complex-numbers/iPowersDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import complexMultiplicationDiagrams from '@/app/components/calculators/complex-numbers/complexMultiplicationDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
@@ -1108,7 +1110,33 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Four Equivalent Ways to Recognize a Pure Imaginary Number"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Characterization","features":[{"id":"c1","name":"Form / test","type":"text"},{"id":"c2","name":"Pure imaginary example: 5i","type":"text"},{"id":"c3","name":"Non-example: 7","type":"text"}],"items":[{"id":"r1","name":"Algebraic (standard form)","values":{"c1":"Re(z) = 0; written as bi with b ∈ ℝ","c2":"Re(5i) = 0 ✓","c3":"Re(7) = 7 ≠ 0 ✗"}},{"id":"r2","name":"Conjugate test","values":{"c1":"z̄ = −z","c2":"conjugate of 5i is −5i = −(5i) ✓","c3":"conjugate of 7 is 7 ≠ −7 ✗"}},{"id":"r3","name":"Geometric","values":{"c1":"lies on vertical (imaginary) axis","c2":"point (0, 5) on imaginary axis ✓","c3":"point (7, 0) on real axis ✗"}},{"id":"r4","name":"Multiplicative","values":{"c1":"z = i · b for some real b","c2":"5i = i · 5 with b = 5 ✓","c3":"7 = i · b has no real solution ✗"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Mathematical Properties and Conjugates"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation on z","features":[{"id":"c1","name":"General z = a + bi","type":"text"},{"id":"c2","name":"Pure imaginary z = bi (a = 0)","type":"text"}],"items":[{"id":"r1","name":"Conjugate z̄","values":{"c1":"a − bi","c2":"−bi = −z"}},{"id":"r2","name":"z + z̄","values":{"c1":"2a (real)","c2":"0"}},{"id":"r3","name":"z − z̄","values":{"c1":"2bi (pure imaginary)","c2":"2bi = 2z"}},{"id":"r4","name":"Modulus |z|","values":{"c1":"√(a² + b²)","c2":"|b|"}},{"id":"r5","name":"Re(z), Im(z)","values":{"c1":"a, b","c2":"0, b"}},{"id":"r6","name":"Location in complex plane","values":{"c1":"point (a, b) anywhere in the plane","c2":"point (0, b) on the vertical (imaginary) axis"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("The Cyclic Nature of the Powers of i"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n mod 4","features":[{"id":"c1","name":"iⁿ","type":"text"},{"id":"c2","name":"Examples","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"1","c2":"i⁰ = 1, i⁴ = 1, i⁸ = 1, i⁵⁰⁰ = 1"}},{"id":"r2","name":"1","values":{"c1":"i","c2":"i¹ = i, i⁵ = i, i⁴⁰¹ = i"}},{"id":"r3","name":"2","values":{"c1":"−1","c2":"i² = −1, i⁶ = −1, i¹⁰² = −1"}},{"id":"r4","name":"3","values":{"c1":"−i","c2":"i³ = −i, i⁷ = −i, i³²³ = −i, i⁻¹ = −i"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Simplifying Square Roots of Negative Numbers"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Expression","features":[{"id":"c1","name":"Method","type":"text"},{"id":"c2","name":"Result","type":"text"}],"items":[{"id":"r1","name":"√(−4)","values":{"c1":"i · √4","c2":"2i"}},{"id":"r2","name":"√(−7)","values":{"c1":"i · √7 (radicand has no perfect square factor)","c2":"i√7"}},{"id":"r3","name":"√(−12)","values":{"c1":"i · √12 = i · 2√3","c2":"2i√3"}},{"id":"r4","name":"√(−1) · √(−1) (correct)","values":{"c1":"extract i first: i · i = i²","c2":"−1 ✓"}},{"id":"r5","name":"√(−1) · √(−1) (wrong)","values":{"c1":"apply product rule: √((−1)(−1)) = √1","c2":"1 ✗ — product rule fails for negative radicands"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Complex number methods", items: [
+      { skill: "Simplify a power of i", href: "/complex-numbers/methods#powers-of-i", desc: "A power of the imaginary unit appears in an expression or a product: $i^2$ after multiplying out, $i^{3}$, $i^{47}$, $i^{100}$.", level: "atomic" },
+      { skill: "Find the square roots of a complex number", href: "/complex-numbers/methods/complex-square-roots", desc: "Set $(x + yi)^2 = a + bi$, use $x^2 - y^2 = a$ and $x^2 + y^2 = |w|$, and pick the signs from $2xy = b$.", level: "composite" },
+      { skill: "Solve a quadratic equation with complex roots", href: "/complex-numbers/methods/quadratic-complex-roots", desc: "Use the quadratic formula; a negative discriminant gives $\\sqrt{-k} = i\\sqrt{k}$, a complex one needs a complex square root.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2273,11 +2301,15 @@ export default function ImaginaryNumbersPage({ specialCasesData, pitfallData,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-imaginary-numbers-simplifying-square-roots-matrix'}
+            id="imaginary-numbers-simplifying-square-roots-matrix"
+            title="Simplifying Square Roots of Negative Numbers"
+            source="/complex-numbers/imaginary-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2330,11 +2362,15 @@ export default function ImaginaryNumbersPage({ specialCasesData, pitfallData,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-imaginary-numbers-cyclic-nature-powers-matrix'}
+            id="imaginary-numbers-cyclic-nature-powers-matrix"
+            title="The Cyclic Nature of the Powers of i"
+            source="/complex-numbers/imaginary-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-cycle'} dangerouslySetInnerHTML={{ __html: demoUnits.cycle }} />,
           `Geometrically each multiplication by i is a quarter turn, which is why the cycle closes after four.`,
         ]
@@ -2365,11 +2401,15 @@ export default function ImaginaryNumbersPage({ specialCasesData, pitfallData,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-imaginary-numbers-mathematical-properties-conjugates-matrix'}
+            id="imaginary-numbers-mathematical-properties-conjugates-matrix"
+            title="Mathematical Properties and Conjugates"
+            source="/complex-numbers/imaginary-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2378,11 +2418,15 @@ export default function ImaginaryNumbersPage({ specialCasesData, pitfallData,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-imaginary-numbers-summary-four-equivalent-matrix'}
+            id="imaginary-numbers-summary-four-equivalent-matrix"
+            title="Summary: Four Equivalent Ways to Recognize a Pure Imaginary Number"
+            source="/complex-numbers/imaginary-numbers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2400,6 +2444,14 @@ export default function ImaginaryNumbersPage({ specialCasesData, pitfallData,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

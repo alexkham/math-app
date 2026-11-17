@@ -1,6 +1,7 @@
 
 
 // tables-optimized: v4 | 2026-05-24 | 2 tables (obj4 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -22,7 +23,64 @@ import integralsNotationSheet from '@/app/components/infographics/NotationCheatS
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 
+// ProcedureV2 (stages) 2026-11-16: replaces the table summaryTable (indefinite-integration workflow: step, action, where the detail lives); actions and links taken from the table, run on one integral built from the page's basic formulas.
+const integrationWorkflowStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { exprNow: 'Found so far' },
+  run: {
+    label: 'Find $\\int (3x^2 + 2\\cos x) \\, dx$',
+    start: '$\\int (3x^2 + 2\\cos x) \\, dx$',
+  },
+  groups: [
+    { label: 'Prepare', sub: 'steps 1 and 2', kind: 'must', stages: [
+      { n: 1, name: 'Recognize', what: 'Recognize the form: does the integrand match a known antiderivative formula?', cond: 'Where the detail lives: [special integrals](!/calculus/integrals/special)',
+        example: '$x^2$ and $\\cos x$', exampleNote: 'both pieces are on the list of basic antiderivatives' },
+      { n: 2, name: 'Linearity', what: 'Apply linearity: split sums and factor out constants to reduce to known pieces', cond: 'Where the detail lives: [integration rules](!/calculus/integrals/rules)',
+        example: '$3\\int x^2 \\, dx + 2\\int \\cos x \\, dx$', exampleNote: 'one integral per term, constants in front' },
+    ] },
+    { label: 'Integrate', sub: 'steps 3 and 4', kind: 'must', stages: [
+      { n: 3, name: 'Compute', what: 'Compute the antiderivative $F(x)$: apply a formula directly, or use a technique to transform the integrand first', cond: 'Where the detail lives: [techniques](!/calculus/integrals/techniques)',
+        example: '$3 \\cdot \\frac{x^3}{3} + 2\\sin x = x^3 + 2\\sin x$', exampleNote: 'the power rule and the cosine formula, applied directly' },
+      { n: 4, name: 'Add C', what: 'Add the constant of integration: the answer is $F(x) + C$, never just $F(x)$', cond: 'Where the detail lives: section 2 above (constant of integration)',
+        example: '$x^3 + 2\\sin x + C$', exampleNote: 'one constant covers the whole answer' },
+    ] },
+    { label: 'The check', sub: 'step 5', kind: 'out', stages: [
+      { n: 5, name: 'Verify', what: 'Verify by differentiating: $F\'(x)$ should return the original integrand $f(x)$', cond: 'Where the detail lives: section 6 above (verifying antiderivatives)',
+        example: '$\\frac{d}{dx}\\left(x^3 + 2\\sin x + C\\right) = 3x^2 + 2\\cos x$', exampleNote: 'the original integrand, so the answer $x^3 + 2\\sin x + C$ stands' },
+    ] },
+  ],
+}
+
+// FormulaSheet (card) 2026-11-16: replaces the table obj4Table (basic antiderivatives: integrand, its indefinite integral); the five rows come from the table.
+const basicAntiderivativesCard = {
+  columns: [
+    { key: 'name', label: 'Integrand', kind: 'name' },
+    { key: 'formula', label: 'Indefinite integral', kind: 'formula' },
+  ],
+  rows: [
+    { name: '$x^n$ ($n \\neq -1$)', formula: '$\\int x^n \\, dx = \\frac{x^{n+1}}{n + 1} + C$' },
+    { name: '$\\frac{1}{x}$', formula: '$\\int \\frac{1}{x} \\, dx = \\ln |x| + C$' },
+    { name: '$e^x$', formula: '$\\int e^x \\, dx = e^x + C$' },
+    { name: '$\\cos x$', formula: '$\\int \\cos x \\, dx = \\sin x + C$' },
+    { name: '$\\sin x$', formula: '$\\int \\sin x \\, dx = -\\cos x + C$' },
+  ],
+}
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Integration techniques", items: [
+      { skill: "Integrate by u-substitution", href: "/calculus/integrals/techniques/u-substitution", desc: "Undo the chain rule: an inner function whose derivative is also in the integrand.", level: "composite" },
+      { skill: "Choose the right integration technique", href: "/calculus/integrals/techniques/which-integration-technique", desc: "A decision tree from the shape of the integrand to the right technique.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/calculus/integrals/techniques", label: "All integration techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -548,7 +606,7 @@ This connection, detailed on the [rules](!/calculus/integrals/rules) page, is wh
   obj8: {
     title: `Summary: The Indefinite-Integration Workflow`,
     content: `
-Every indefinite integral on this page follows the same five-step procedure, whether the integrand is a single power function or a complicated composition that requires a technique. The table below collects the workflow with a pointer to the sibling page where each step&apos;s detail lives — special integrals for the formula library, rules for linearity and the FTC, techniques for transformations. Use this as a reminder while working a problem: every step matters, and skipping the final verification is the single most common source of errors.
+Every indefinite integral on this page follows the same five-step procedure, whether the integrand is a single power function or a complicated composition that requires a technique. The steps below collect the workflow, carried out on one integral, with a pointer to the sibling page where each step&apos;s detail lives — special integrals for the formula library, rules for linearity and the FTC, techniques for transformations. Use this as a reminder while working a problem: every step matters, and skipping the final verification is the single most common source of errors.
 `,
     before: ``,
     after: ``,
@@ -960,8 +1018,15 @@ As $n$ approaches $-1$, the antiderivative $\\frac{x^{n+1} - 1}{n+1}$ approaches
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'formula-sheet-basic-antiderivatives'}
+            id="basic-antiderivatives"
+            title="Basic Antiderivatives"
+            source="/calculus/integrals/indefinite"
+            related={false}
+          >
+            <FormulaSheet data={basicAntiderivativesCard} variant="card" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -996,8 +1061,15 @@ As $n$ approaches $-1$, the antiderivative $\\frac{x^{n+1} - 1}{n+1}$ approaches
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'procedure-integration-workflow'}
+            id="indefinite-integration-workflow-steps"
+            title="The Indefinite-Integration Workflow"
+            source="/calculus/integrals/indefinite"
+            related={false}
+          >
+            <ProcedureV2 data={integrationWorkflowStages} variant="stages" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1033,6 +1105,14 @@ As $n$ approaches $-1$, the antiderivative $\\frac{x^{n+1} - 1}{n+1}$ approaches
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

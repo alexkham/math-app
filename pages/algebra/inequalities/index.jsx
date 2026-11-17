@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,14 +15,117 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_inequalitiesBeyondAlgebra = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'Inequalities beyond algebra', sub: 'they involve transcendental functions' },
+    branches: [
+      { leaves: [
+        { name: '[Exponential inequalities](!/algebra/powers/exponential-inequalities)', condition: 'The variable is in the exponent. A base above $1$ preserves the direction; a base between $0$ and $1$ reverses it.', example: '$2^x > 8$ gives $x > 3$' },
+        { name: '[Logarithmic inequalities](!/algebra/logarithms/inequalities)', condition: 'The variable is inside a logarithm. The argument must be positive, which adds a domain restriction.', example: '$\\log_2(x - 1) < 3$ gives $x - 1 < 2^3$, with $x > 1$' },
+        { name: 'Trigonometric inequalities', condition: 'The variable is inside trigonometric functions. Periodicity typically produces infinitely many disjoint solution intervals, one per period.' }
+      ] }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+
+// CaseGraph 2026-11-12: "What happens at each kind of critical point" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -2.4, y1: 2.4,
+      axes: [
+        { id: 'cp', name: 'Critical point', options: [
+          { id: 'odd', label: 'numerator zero', sub: 'odd multiplicity: sign changes (crossing)' },
+          { id: 'even', label: 'numerator zero', sub: 'even multiplicity: sign stays (tangent / bounce)' },
+          { id: 'den', label: 'denominator zero', sub: 'discontinuity; expression undefined' } ] },
+        { id: 'kind', name: 'Inequality', select: true, options: [
+          { id: 'strict', label: 'Strict', sub: '$<$, $>$', sign: 1 },
+          { id: 'non', label: 'Non-strict', sub: '$\\leq$, $\\geq$', sign: 1, closed: true } ] },
+      ],
+      layout: { rows: 'cp', cols: 'kind' },
+      cells: {
+        odd:  { f: (x) => x, roots: [{ x: 0, label: '' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: { strict: 'point excluded', non: 'point included' } },
+        even: { f: (x) => x * x, roots: [{ x: 0, label: '' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: { strict: 'point excluded', non: 'point included' } },
+        den:  { f: (x) => 0.5 / x, intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: { strict: 'point excluded', non: 'point excluded' } },
+      },
+    },
+  };
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Algebraic Inequality Types"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Canonical form","type":"text"},{"id":"c2","name":"Solution shape","type":"text"},{"id":"c3","name":"Primary technique","type":"text"}],"items":[{"id":"r1","name":"[Linear](!/algebra/inequalities/linear)","values":{"c1":"ax + b < 0 (a ≠ 0)","c2":"single ray","c3":"isolate the variable; flip direction when dividing by a negative"}},{"id":"r2","name":"[Quadratic](!/algebra/inequalities/quadratic)","values":{"c1":"ax² + bx + c < 0","c2":"interval, two rays, all reals, or empty","c3":"discriminant Δ + sign chart, or read off the parabola"}},{"id":"r3","name":"[Polynomial](!/algebra/inequalities/polynomial)","values":{"c1":"P(x) < 0, deg ≥ 3","c2":"union of intervals","c3":"sign chart on the factored form, tracking root multiplicity"}},{"id":"r4","name":"[Rational](!/algebra/inequalities/rational)","values":{"c1":"P(x) ⁄ Q(x) < 0","c2":"union of intervals, excluding zeros of Q","c3":"sign chart on the factored form; never cross-multiply"}},{"id":"r5","name":"[Absolute value](!/algebra/inequalities/absolute-value)","values":{"c1":"|f(x)| < k or |f(x)| > k","c2":"bounded interval, or two rays","c3":"convert to a compound inequality (AND for <, OR for >)"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj13Table ("Absolute Value Inequalities"); converted from the table's own cells.
+const fm_obj13Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"Geometric meaning","type":"text"},{"id":"c2","name":"Converts to","type":"text"},{"id":"c3","name":"Solution shape","type":"text"},{"id":"c4","name":"Example","type":"text"}],"items":[{"id":"r1","name":"|f(x)| < k (k > 0)","values":{"c1":"f(x) within k of zero","c2":"−k < f(x) < k (AND)","c3":"bounded interval","c4":"|2x − 3| < 5 → (−1, 4)"}},{"id":"r2","name":"|f(x)| > k (k > 0)","values":{"c1":"f(x) more than k from zero","c2":"f(x) < −k or f(x) > k (OR)","c3":"two disjoint rays","c4":"|x + 1| ≥ 4 → (−∞, −5] ∪ [3, ∞)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Compound Inequalities"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Logical condition","type":"text"},{"id":"c2","name":"Set operation","type":"text"},{"id":"c3","name":"Solution shape","type":"text"},{"id":"c4","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Conjunction (AND)","values":{"c1":"both must hold","c2":"intersection","c3":"bounded interval","c4":"−3 < x < 5 → (−3, 5)"}},{"id":"r2","name":"Disjunction (OR)","values":{"c1":"at least one holds","c2":"union","c3":"two disjoint rays","c4":"x < −1 or x > 4 → (−∞, −1) ∪ (4, ∞)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Properties of Inequalities"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation on both sides","features":[{"id":"c1","name":"Direction","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"add or subtract any real number","values":{"c1":"preserved","c2":"always safe; behaves exactly like equations"}},{"id":"r2","name":"multiply or divide by a positive constant","values":{"c1":"preserved","c2":"behaves like equations"}},{"id":"r3","name":"multiply or divide by a negative constant","values":{"c1":"reversed","c2":"the defining rule: 3 < 5 becomes −3 > −5"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Number Line Representation"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Interval","features":[{"id":"c1","name":"Meaning","type":"text"},{"id":"c2","name":"Endpoints","type":"text"},{"id":"c3","name":"Number line","type":"text"}],"items":[{"id":"r1","name":"(a, b)","values":{"c1":"a < x < b","c2":"both excluded","c3":"open dots at a and b, shaded between"}},{"id":"r2","name":"[a, b]","values":{"c1":"a ≤ x ≤ b","c2":"both included","c3":"solid dots at a and b, shaded between"}},{"id":"r3","name":"[a, b)","values":{"c1":"a ≤ x < b","c2":"a included, b excluded","c3":"solid dot at a, open dot at b"}},{"id":"r4","name":"(a, b]","values":{"c1":"a < x ≤ b","c2":"a excluded, b included","c3":"open dot at a, solid dot at b"}},{"id":"r5","name":"(a, ∞)","values":{"c1":"x > a","c2":"a excluded; ∞ never bracketed","c3":"open dot at a, shading extends right"}},{"id":"r6","name":"(−∞, a]","values":{"c1":"x ≤ a","c2":"a included; −∞ never bracketed","c3":"solid dot at a, shading extends left"}},{"id":"r7","name":"(−∞, ∞)","values":{"c1":"all real numbers","c2":"no endpoints","c3":"entire line shaded"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a compound inequality", href: "/algebra/inequalities/methods/compound-inequalities", desc: "\"And\" keeps the overlap, \"or\" keeps both pieces; a three-part inequality is solved all at once.", level: "composite", here: "#6" },
+      { skill: "Solve a linear inequality", href: "/algebra/inequalities/methods/linear-inequalities", desc: "Solve like an equation, but flip the sign when multiplying or dividing by a negative.", level: "composite", here: "#9" },
+      { skill: "Solve a quadratic inequality", href: "/algebra/inequalities/methods/quadratic-inequalities", desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: "composite", here: "#10" },
+      { skill: "Solve a polynomial inequality", href: "/algebra/inequalities/methods/polynomial-inequalities", desc: "Factor, mark the roots, use a sign chart; even multiplicities do not change the sign.", level: "composite", here: "#11" },
+      { skill: "Solve a rational inequality", href: "/algebra/inequalities/methods/rational-inequalities", desc: "Compare with zero, combine into one fraction, sign-chart the zeros of top and bottom.", level: "composite", here: "#12" },
+      { skill: "Solve an absolute value inequality", href: "/algebra/inequalities/methods/absolute-value-inequalities", desc: "Less than: one three-part inequality. Greater than: two pieces joined by or.", level: "composite", here: "#13" },
+      { skill: "Choose the right method for an inequality", href: "/algebra/inequalities/methods/which-inequality-method", desc: "A decision tree from the shape of the inequality to the method that solves it.", level: "strategy", here: "#15" },
+    ] },
+    { title: "More inequality methods", items: [
+      { skill: "Write a solution in interval notation", href: "/algebra/inequalities/methods#interval-notation", desc: "An inequality solution to be written as a set: $x > 2$, $-1 \\le x < 4$, $x \\le 0$ or $x > 3$.", level: "atomic" },
+      { skill: "Multiply or divide an inequality by a negative number", href: "/algebra/inequalities/methods#flip-sign-rule", desc: "The unknown has a negative coefficient that must be divided away: $-2x \\le 6$, $-\\frac{x}{3} > 1$.", level: "atomic" },
+    ] },
+    { title: "Algebra methods", items: [
+      { skill: "Solve an exponential inequality", href: "/algebra/methods/exponential-inequalities", desc: "Match bases and compare exponents; flip the sign when the base is between 0 and 1.", level: "composite" },
+      { skill: "Solve a logarithmic inequality", href: "/algebra/methods/logarithmic-inequalities", desc: "Remove the logs keeping or flipping the direction by the base, then intersect with the domain.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/inequalities/methods", label: "All inequality methods" },
+};
+
+// ConceptCompare (table) 2026-11-15: replaces the table obj1Table (the four inequality symbols); every cell taken from the table.
+const inequalitySymbolsTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+const inequalitySymbolsCompare = {
+  concepts: [
+    { id: 'lt', name: '$<$', values: { meaning: 'strictly less than', strict: 'strict', end: 'excluded — open dot, parenthesis' } },
+    { id: 'gt', name: '$>$', values: { meaning: 'strictly greater than', strict: 'strict', end: 'excluded — open dot, parenthesis' } },
+    { id: 'le', name: '$\\leq$', values: { meaning: 'less than or equal to', strict: 'non-strict', end: 'included — solid dot, bracket' } },
+    { id: 'ge', name: '$\\geq$', values: { meaning: 'greater than or equal to', strict: 'non-strict', end: 'included — solid dot, bracket' } },
+  ],
+  aspects: [
+    { id: 'meaning', label: 'Meaning' },
+    { id: 'strict', label: 'Strictness' },
+    { id: 'end', label: 'Endpoint behavior' },
+  ],
+  aspectsLabel: 'Symbol',
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1094,7 +1198,15 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         lead: `Two things are new: the symbol decides whether a border belongs, and a negative multiplier flips the symbol.`,
         content: [
           `Change $<$ to $\\leq$ and the borders join the answer, because $0 \\leq 0$ is true: $(x + 2)(x - 3) \\leq 0$ gives $[-2, 3]$. Each of the four symbols makes that choice its own way.`,
-          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'concept-compare-inequality-symbols'}
+            id="inequality-symbols-compared"
+            title="The Four Inequality Symbols"
+            source="/algebra/inequalities"
+            related={false}
+          >
+            <ConceptCompare data={inequalitySymbolsCompare} variant="table" theme={inequalitySymbolsTheme} />
+          </DiagramFrame>,
           `And unlike an equation, an inequality reverses when both sides are multiplied or divided by a negative number: $-(x + 2)(x - 3) > 0$ describes the same stretch, with the symbol turned around.`,
         ],
         visual: ciSvg('ends'),
@@ -1172,11 +1284,15 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-number-line-representation-matrix'}
+            id="inequalities-number-line-representation-matrix"
+            title="Number Line Representation"
+            source="/algebra/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1187,11 +1303,15 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-properties-inequalities-matrix'}
+            id="inequalities-properties-inequalities-matrix"
+            title="Properties of Inequalities"
+            source="/algebra/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:Any step that keeps the order of numbers is safe; a step that reverses the order flips the symbol.]@`,
           `The moves above side by side, each marked by what it does to the direction of the inequality.`,
           <DiagramFrame
@@ -1213,11 +1333,16 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-compound-inequalities-matrix'}
+            id="inequalities-compound-inequalities-matrix"
+            title="Compound Inequalities"
+            source="/algebra/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a compound inequality](!/algebra/inequalities/methods/compound-inequalities) →@`,
         ]
     },
     {
@@ -1236,11 +1361,17 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-inequalities-critical-point-grid'}
+            id="inequalities-critical-point-grid"
+            title="What happens at each kind of critical point"
+            source="/algebra/inequalities"
+            related={false}
+            before={"One row per kind of critical point, one column per kind of inequality; the gold part of the axis is where the expression is $> 0$ or $\\geq 0$. A filled dot is included, a hollow one excluded."}
+            after={"Only the denominator zero is excluded from both kinds of inequality, because the expression has no value there."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
                   <div key={'unit-sign'} dangerouslySetInnerHTML={{ __html: demoUnits.sign }} />,
           `Sign analysis replaces algebra on the intervals with a single test point per interval, or none at all when the factors are known.`,
         ]
@@ -1253,6 +1384,7 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
           sectionsContent.obj9.content,
           <div key={'unit-flip'} dangerouslySetInnerHTML={{ __html: demoUnits.flip }} />,
           `Multiplying by a negative reverses order because it mirrors the number line.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a linear inequality](!/algebra/inequalities/methods/linear-inequalities) →@`,
         ]
     },
     {
@@ -1263,6 +1395,7 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
           sectionsContent.obj10.content,
                   <div key={'unit-quadratic'} dangerouslySetInnerHTML={{ __html: demoUnits.quadratic }} />,
           `The three discriminant cases are treated in full on the quadratic inequalities page.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a quadratic inequality](!/algebra/inequalities/methods/quadratic-inequalities) →@`,
         ]
     },
     {
@@ -1273,6 +1406,7 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
           sectionsContent.obj11.content,
                   <div key={'unit-polynomial'} dangerouslySetInnerHTML={{ __html: demoUnits.polynomial }} />,
           `Multiplicity is the one fact the sign chart cannot do without.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a polynomial inequality](!/algebra/inequalities/methods/polynomial-inequalities) →@`,
         ]
     },
     {
@@ -1283,6 +1417,7 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
           sectionsContent.obj12.content,
                   <div key={'unit-rational'} dangerouslySetInnerHTML={{ __html: demoUnits.rational }} />,
           `Rational inequalities differ from polynomial ones only at the poles, and the poles are always excluded.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a rational inequality](!/algebra/inequalities/methods/rational-inequalities) →@`,
         ]
     },
 
@@ -1293,13 +1428,18 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div
-            key={'obj13-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj13Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-absolute-value-inequalities-matrix'}
+            id="inequalities-absolute-value-inequalities-matrix"
+            title="Absolute Value Inequalities"
+            source="/algebra/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj13Table} />
+          </DiagramFrame>,
                   <div key={'unit-absolute'} dangerouslySetInnerHTML={{ __html: demoUnits.absolute }} />,
           `The two conversions are the two ways a level line can sit against a V.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve an absolute value inequality](!/algebra/inequalities/methods/absolute-value-inequalities) →@`,
         ]
     },
     {
@@ -1308,6 +1448,15 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'taxonomy-inequalities-beyond-algebra'}
+            id="inequalities-beyond-algebra"
+            title="Inequalities Beyond Algebra"
+            source="/algebra/inequalities"
+            related={false}
+          >
+            <Taxonomy data={tx_inequalitiesBeyondAlgebra} variant="tree" />
+          </DiagramFrame>,
         ]
     },
 
@@ -1318,11 +1467,15 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-summary-algebraic-inequality-types-matrix'}
+            id="inequalities-summary-algebraic-inequality-types-matrix"
+            title="Summary of Algebraic Inequality Types"
+            source="/algebra/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj15-diagram'}
             id="inequality-families-tree"
@@ -1331,6 +1484,7 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
           >
             <TopDownTree data={inequalityFamilyTree} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which method should I use for an inequality?](!/algebra/inequalities/methods/which-inequality-method) →@`,
         ]
     },
     {
@@ -1348,6 +1502,14 @@ export default function InequalitiesPage({ pitfallData,inequalityMoveProperties,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

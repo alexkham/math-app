@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,7 +18,40 @@ import distributionExplorerDiagrams from '@/app/components/probability/explorers
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FeatureMatrix from '@/app/components/infographics/FeatureMatrix'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_howContinuousDiffer = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  facets: [
+    { label: 'Support', criterion: 'Where values can exist', types: [
+      { id: 'sup-line', name: 'Entire real line', example: '$(-\\infty, +\\infty)$', condition: 'Normal: measurements that can be positive or negative.' },
+      { id: 'sup-nonneg', name: 'Non-negative values', example: '$[0, \\infty)$', condition: 'Exponential: waiting times that cannot be negative.' },
+      { id: 'sup-finite', name: 'Finite support', example: '$[a, b]$, $[0, 1]$', condition: 'Uniform and beta: bounded measurements like proportions or percentages.' }
+    ] },
+    { label: 'Shape', criterion: 'Symmetry and skewness', types: [
+      { id: 'sh-sym', name: 'Symmetric', condition: 'Normal and uniform: balanced phenomena.' },
+      { id: 'sh-right', name: 'Right-skewed', condition: 'Exponential: most probability near zero.' },
+      { id: 'sh-var', name: 'Depends on its parameters', condition: 'Beta: symmetric, left-skewed, right-skewed or U-shaped.' }
+    ] },
+    { label: 'Modeling intent', criterion: 'What they represent', types: [
+      { id: 'mi-add', name: 'Additive processes', condition: 'Normal: also measurement errors.' },
+      { id: 'mi-time', name: 'Time between random events', condition: 'Exponential.' },
+      { id: 'mi-mult', name: 'Multiplicative processes', condition: 'Lognormal: income or stock prices.' },
+      { id: 'mi-fail', name: 'Failure rates that change over time', condition: 'Weibull.' }
+    ] },
+    { label: 'Parameter roles', criterion: 'Control and flexibility', types: [
+      { id: 'pr-loc', name: 'Location', example: '$\\mu$', condition: 'Shifts the distribution horizontally.' },
+      { id: 'pr-scale', name: 'Scale', example: '$\\sigma$', condition: 'Controls spread.' },
+      { id: 'pr-shape', name: 'Shape', condition: 'Fundamentally alters the form of the curve, as in beta or Weibull.' }
+    ] }
+  ]
+};
+
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_continuousRelations = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"kinds":{"special":{"label":"special case","color":"#06357A","dash":""},"transform":{"label":"transformation","color":"#2563EB","dash":"6 4"},"limit":{"label":"limit","color":"#B45309","dash":"2 4"},"link":{"label":"connected","color":"#64748b","dash":""}},"graph":{"cols":4,"rows":4,"height":440,"nodeWidth":130,"hint":"Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.","bands":[{"from":0,"to":1,"label":"Discrete","color":"#f1f5f9"},{"from":1,"to":4,"label":"Continuous","color":"#eff6ff"}],"nodes":[{"id":"bin","name":"Binomial","x":0,"y":0.25,"href":"/probability/distributions/discrete/binomial"},{"id":"poi","name":"Poisson","x":0,"y":2,"href":"/probability/distributions/discrete/poisson"},{"id":"norm","name":"Normal","x":1,"y":0.25,"href":"/probability/distributions/continuous/normal"},{"id":"logn","name":"Lognormal","x":1,"y":1.35},{"id":"exp","name":"Exponential","x":1,"y":2,"href":"/probability/distributions/continuous/exponential"},{"id":"uni","name":"Uniform","x":1,"y":3,"href":"/probability/distributions/continuous/uniform"},{"id":"chi","name":"Chi-squared","x":2,"y":1.35},{"id":"gam","name":"Gamma","x":2,"y":2},{"id":"beta","name":"Beta","x":2,"y":3},{"id":"t","name":"Student's t","x":3,"y":0.25},{"id":"f","name":"F","x":3,"y":1.35}],"edges":[{"from":"exp","to":"gam","kind":"special","label":"shape $1$","text":"the gamma distribution generalizes the exponential: with shape parameter $1$ you get the exponential back"},{"from":"chi","to":"gam","kind":"special","text":"the chi-squared distribution is a special case of the gamma distribution"},{"from":"uni","to":"beta","kind":"special","label":"$(1, 1)$","text":"the beta distribution with parameters $(1, 1)$ becomes the uniform distribution on $[0, 1]$"},{"from":"norm","to":"logn","kind":"transform","label":"$e^X$","text":"if $X$ is normal, then $e^X$ is lognormal"},{"from":"norm","to":"chi","kind":"transform","label":"sum of squares","text":"the chi-squared distribution emerges when you sum squared standard normal variables"},{"from":"chi","to":"f","kind":"transform","label":"ratio of two","text":"the ratio of two chi-squared variables, each divided by its degrees of freedom, yields an F-distribution"},{"from":"chi","to":"t","kind":"transform","text":"a standard normal divided by the square root of a scaled chi-squared variable yields a Student's t-distribution"},{"from":"t","to":"norm","kind":"limit","label":"more degrees of freedom","text":"Student's t approaches the normal as degrees of freedom increase"},{"from":"bin","to":"norm","kind":"limit","text":"the binomial approaches the normal under certain conditions, bridging the discrete-continuous divide"},{"from":"poi","to":"exp","kind":"link","label":"waiting times","text":"the Poisson process generates exponential waiting times"}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
@@ -49,6 +83,29 @@ const featureMatrixData = {
   };
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy", here: "#decision" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Find a binomial probability", href: "/probability/distributions/methods/binomial-probability", desc: "Count successes in $n$ independent trials: name $n$, $p$ and the values of $k$, then add PMF terms or use the complement.", level: "composite" },
+      { skill: "Find a Poisson probability", href: "/probability/distributions/methods/poisson-probability", desc: "Events at an average rate: scale $\\lambda$ to the interval asked about, then use $e^{-\\lambda}\\lambda^k / k!$ or its complement.", level: "composite" },
+      { skill: "Find a normal probability", href: "/probability/distributions/methods/normal-probability", desc: "Standardize with $z = (x - \\mu)/\\sigma$, then read the area from $\\Phi$: left tails, right tails and intervals.", level: "composite" },
+      { skill: "Find a continuous uniform probability", href: "/probability/distributions/methods/continuous-uniform-probability", desc: "Equally likely anywhere on $[a, b]$: the probability of an interval is its length over $b - a$, after clipping to the support.", level: "composite" },
+      { skill: "Find a discrete uniform probability", href: "/probability/distributions/methods/discrete-uniform-probability", desc: "Equally likely whole numbers from $a$ to $b$: count the values in the event and divide by $b - a + 1$.", level: "composite" },
+      { skill: "Find a geometric probability", href: "/probability/distributions/methods/geometric-probability", desc: "Repeat a trial until the first success: $k - 1$ failures then one success, and a short tail formula for \"more than $k$ trials\".", level: "composite" },
+      { skill: "Find a negative binomial probability", href: "/probability/distributions/methods/negative-binomial-probability", desc: "The trial of the $r$th success: $r - 1$ successes somewhere in the first $k - 1$ trials, then a success on trial $k$.", level: "composite" },
+      { skill: "Find an exponential probability", href: "/probability/distributions/methods/exponential-probability", desc: "Waiting times at a constant rate: get $\\lambda$ from the mean, then use $1 - e^{-\\lambda x}$ or the tail $e^{-\\lambda x}$.", level: "composite" },
+      { skill: "Find a normal percentile", href: "/probability/distributions/methods/normal-percentiles", desc: "Go backwards from an area to a value: find $z$ with $\\Phi(z) = p$, then $x = \\mu + z\\sigma$; also solve for $\\mu$ or $\\sigma$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1458,6 +1515,7 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
             <FeatureMatrix data={featureMatrixData} />
           </DiagramFrame>,
           sectionsContent.decision.afterMatrix,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which probability distribution should I use?](!/probability/distributions/methods/which-distribution) →@`,
         ]
     },
     // {
@@ -1663,6 +1721,15 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
           sectionsContent.differ.content,
                   <div key={'unit-threeShapes'} dangerouslySetInnerHTML={{ __html: demoUnits.threeShapes }} />,
           `The exponential's density reaches 1 at 0, yet no single value has positive probability.`,
+          <DiagramFrame
+            key={'taxonomy-continuous-distributions-how-they-differ'}
+            id="continuous-distributions-how-they-differ"
+            title="How Continuous Distributions Differ"
+            source="/probability/distributions/continuous"
+            related={false}
+          >
+            <Taxonomy data={tx_howContinuousDiffer} variant="facets" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1671,6 +1738,15 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
         link:'',
         content:[
           sectionsContent.relations.content,
+          <DiagramFrame
+            key={'concept-map-continuous-distributions-relationships'}
+            id="continuous-distributions-relationships"
+            title="Relationships Between Distributions"
+            source="/probability/distributions/continuous"
+            related={false}
+          >
+            <ConceptMap data={cm_continuousRelations} variant="graph" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1725,6 +1801,14 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

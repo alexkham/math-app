@@ -1,6 +1,7 @@
 
 
 // tables-optimized: v4 | 2026-05-24 | 2 tables (obj1 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -22,8 +23,51 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 
+// PropertySheet (cards) 2026-11-15: replaces the table obj1Table (sample point choices for Riemann sums: choice, formula for the sample point, resulting sum); one card per row, wording from the table.
+const samplePointChoices = {
+  header: {
+    kicker: 'Riemann sums',
+    title: 'Three choices of sample point',
+    lede: 'Where $x_i^*$ is taken inside the $i$-th subinterval decides which Riemann sum results.',
+  },
+  verdicts: {
+    left: { label: 'Left sum', color: '#06357A', bg: '#e8eefc', mark: 'none' },
+    right: { label: 'Right sum', color: '#2563EB', bg: '#dbeafe', mark: 'none' },
+    mid: { label: 'Midpoint sum', color: '#B45309', bg: '#fef3c7', mark: 'none' },
+  },
+  groups: [{ properties: [
+    { id: 'left', name: 'Left endpoint', verdict: 'left', statement: '$x_i^* = x_{i-1}$', note: 'Left edge of the $i$-th subinterval. Left Riemann sum: rectangle heights $f(x_{i-1})$' },
+    { id: 'right', name: 'Right endpoint', verdict: 'right', statement: '$x_i^* = x_i$', note: 'Right edge of the $i$-th subinterval. Right Riemann sum: rectangle heights $f(x_i)$' },
+    { id: 'mid', name: 'Midpoint', verdict: 'mid', statement: '$x_i^* = \\frac{x_{i-1} + x_i}{2}$', note: 'Midpoint Riemann sum: rectangle heights at the center of each subinterval' },
+  ] }],
+}
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Three Lenses on the Definite Integral"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Lens","features":[{"id":"c1","name":"Defining expression","type":"text"},{"id":"c2","name":"What it gives","type":"text"},{"id":"c3","name":"Geometric picture","type":"text"}],"items":[{"id":"r1","name":"Riemann sum (limit definition)","values":{"c1":"lim$_{n → ∞}$ Σᵢ₌₁ⁿ f(xᵢ$^{*}$) Δx","c2":"the rigorous construction — what the integral fundamentally is","c3":"infinitely many rectangles becoming infinitesimally thin"}},{"id":"r2","name":"Signed area","values":{"c1":"∫ₐ$^{b}$ f(x) dx","c2":"a single number measuring net accumulation over [a, b]","c3":"area above the x-axis minus area below"}},{"id":"r3","name":"Average value","values":{"c1":"(1 / (b − a)) · ∫ₐ$^{b}$ f(x) dx","c2":"the mean output of f over [a, b]","c3":"height of a rectangle on [a, b] whose area equals the area under f"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Compute a Riemann sum", href: "/calculus/integrals/techniques/riemann-sums", desc: "Left, right and midpoint rectangle sums, and how a limit of sums becomes an integral.", level: "composite", here: "#1" },
+      { skill: "Evaluate a definite integral with the Fundamental Theorem", href: "/calculus/integrals/techniques/definite-integrals-ftc", desc: "Find an antiderivative $F$ and compute $F(b) - F(a)$; Part 1 for accumulation functions.", level: "composite", here: "#6" },
+      { skill: "Find the average value of a function", href: "/calculus/integrals/techniques/average-value", desc: "Integrate over $[a, b]$ and divide by $b - a$; then find where $f$ equals its average.", level: "composite", here: "#7" },
+    ] },
+    { title: "More integration techniques", items: [
+      { skill: "Evaluate improper integrals", href: "/calculus/integrals/techniques/improper-integrals", desc: "An infinite limit or a blow-up inside the interval: replace it by $t$, integrate, take the limit.", level: "composite" },
+      { skill: "Use substitution in a definite integral", href: "/calculus/integrals/techniques/definite-substitution", desc: "Convert the limits to $u$-values, or substitute back before evaluating; never mix the two.", level: "composite" },
+      { skill: "Solve accumulation problems", href: "/calculus/integrals/techniques/accumulation-problems", desc: "A rate integrated over time gives the total change: water in a tank, distance from velocity.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/calculus/integrals/techniques", label: "All integration techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -914,8 +958,17 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,seoData, 
           `Partition the interval $[a, b]$ into $n$ subintervals of width $\\Delta x = (b - a)/n$. In each subinterval, choose a sample point $x_i^*$ and form the rectangle with height $f(x_i^*)$ and width $\\Delta x$. The total area of these rectangles is the Riemann sum:`,
           `@academic[formula_callout:The Riemann Sum Construction
 $$S_n = \\sum_{i=1}^{n} f(x_i^*) \\Delta x$$]@`,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'property-sheet-sample-point-choices'}
+            id="riemann-sample-point-choices"
+            title="Three Choices of Sample Point"
+            source="/calculus/integrals/definite"
+            related={false}
+            layout="top"
+          >
+            <PropertySheet data={samplePointChoices} variant="cards" />
+          </DiagramFrame>,
+          `Whichever point is chosen, the rectangles are built the same way; only their heights change.`,
           <div key={'unit-construction'} dangerouslySetInnerHTML={{ __html: demoUnits.construction }} />,
           `The definite integral is the value all of these sums share once n grows without bound.`,
         ],
@@ -961,6 +1014,7 @@ In the third century BC Archimedes proved that a parabolic segment has $\\frac{4
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compute a Riemann sum](!/calculus/integrals/techniques/riemann-sums) →@`,
         ]
     },
     {
@@ -1024,6 +1078,7 @@ In the third century BC Archimedes proved that a parabolic segment has $\\frac{4
           sectionsContent.obj6.content,
                   <div key={'unit-ftc'} dangerouslySetInnerHTML={{ __html: demoUnits.ftc }} />,
           `This is why antiderivatives, not rectangles, do the computing in practice.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate a definite integral with the Fundamental Theorem](!/calculus/integrals/techniques/definite-integrals-ftc) →@`,
         ]
     },
     {
@@ -1035,6 +1090,7 @@ In the third century BC Archimedes proved that a parabolic segment has $\\frac{4
           <div key={'unit-avgValue'} dangerouslySetInnerHTML={{ __html: demoUnits.avgValue }} />,
           `Because x² curves upward, its average 3 lies above the midpoint value f(1.5) = 2.25.`,
           `@academic[punchline:The average value is the total divided by the interval's length, and a continuous function always attains it.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the average value of a function](!/calculus/integrals/techniques/average-value) →@`,
         ]
     },
     {
@@ -1043,8 +1099,15 @@ In the third century BC Archimedes proved that a parabolic segment has $\\frac{4
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-definite-summary-three-lenses-definite-matrix'}
+            id="definite-summary-three-lenses-definite-matrix"
+            title="Summary: Three Lenses on the Definite Integral"
+            source="/calculus/integrals/definite"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1080,6 +1143,14 @@ In the third century BC Archimedes proved that a parabolic segment has $\\frac{4
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

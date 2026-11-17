@@ -76,7 +76,7 @@ const inequalitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Linear Inequalities (Step by Step) | Learn Math Class',
         description: 'Solve linear inequalities: simplify, collect x on one side, divide by the coefficient and flip the sign if it is negative, write the interval. Examples.',
@@ -184,7 +184,7 @@ const inequalitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Compound Inequalities (And / Or) | Learn Math Class',
         description: 'Solve compound inequalities: solve each part, intersect for and, unite for or; solve a three-part inequality at once, flipping both signs for a negative.',
@@ -289,7 +289,7 @@ const inequalitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Quadratic Inequalities (Sign Chart and Parabola) | Learn Math Class',
         description: 'Solve quadratic inequalities: zero on one side, find the roots, read the sign from the parabola or a sign chart, write the intervals. No-root case too.',
@@ -411,7 +411,7 @@ const inequalitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Polynomial Inequalities with a Sign Chart | Learn Math Class',
         description: 'Solve polynomial inequalities: factor, mark the roots, fill a sign chart (an even multiplicity keeps the sign), read off the intervals. Three examples.',
@@ -518,7 +518,7 @@ const inequalitiesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Rational Inequalities (Never Cross-Multiply) | Learn Math Class',
         description: 'Solve rational inequalities: zero on one side, one fraction, mark the zeros of top and bottom, sign chart, always exclude denominator zeros. Examples.',
@@ -629,7 +629,7 @@ const inequalitiesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Absolute Value Inequalities (Less Than and Greater Than) | Learn Math Class',
         description: 'Solve absolute value inequalities: isolate the bars, turn |u| < k into −k < u < k and |u| > k into two pieces, solve, write intervals. Examples.',
@@ -751,7 +751,7 @@ const inequalitiesMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Method to Solve an Inequality? Decision Tree | Learn Math Class',
         description: 'Pick the method for an inequality from its shape: absolute value bars, x in a denominator, or the highest power. Linear, compound, quadratic, rational.',

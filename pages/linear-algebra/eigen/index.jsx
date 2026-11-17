@@ -575,6 +575,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj5 aggregation, obj6 aggregation, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -590,11 +591,44 @@ import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiag
 import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/eigen-vectors/eigenVectorsDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Geometric Meaning"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Eigenvalue λ","features":[{"id":"c1","name":"Geometric action along v","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"λ > 1","values":{"c1":"stretches the direction outward by a factor of λ","c2":"λ = 3: vectors along v triple in length"}},{"id":"r2","name":"λ = 1","values":{"c1":"leaves the vector completely fixed","c2":"vectors on the reflection axis of a 2D reflection"}},{"id":"r3","name":"0 < λ < 1","values":{"c1":"compresses the direction toward the origin","c2":"λ = 1/2: vectors along v are halved"}},{"id":"r4","name":"λ = 0","values":{"c1":"annihilates the direction; v lies in the null space","c2":"vectors perpendicular to the target subspace of a projection"}},{"id":"r5","name":"λ < 0","values":{"c1":"flips the vector through the origin and scales by |λ|","c2":"λ = −1: a reflection across the perpendicular hyperplane"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Examples"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Matrix structure","features":[{"id":"c1","name":"Eigenvalues","type":"text"},{"id":"c2","name":"Eigenvectors","type":"text"}],"items":[{"id":"r1","name":"Diagonal","values":{"c1":"the diagonal entries d₁, …, dₙ","c2":"standard basis vectors e₁, …, eₙ (visible by inspection)"}},{"id":"r2","name":"Triangular","values":{"c1":"still the diagonal entries","c2":"require null-space computation for each (A − λI)"}},{"id":"r3","name":"90° rotation in ℝ²","values":{"c1":"no real eigenvalues (±i over ℂ)","c2":"no real direction is preserved by a quarter-turn"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a basis for an eigenspace", href: "/linear-algebra/eigen/methods/eigenspace-basis", desc: "Row reduce $A - \\lambda I$, write the null space in parametric form and take one vector per free variable.", level: "composite", here: "#4" },
+      { skill: "Find eigenvalues", href: "/linear-algebra/eigen/methods/eigenvalues", desc: "Solve the characteristic equation $\\det(A - \\lambda I) = 0$ and check the roots against the trace and determinant.", level: "composite", here: "#9" },
+    ] },
+    { title: "More eigenvalue methods", items: [
+      { skill: "Find the characteristic polynomial", href: "/linear-algebra/eigen/methods/characteristic-polynomial", desc: "Subtract $\\lambda$ down the diagonal, take $\\det(A - \\lambda I)$ and expand it into a polynomial in $\\lambda$.", level: "composite" },
+      { skill: "Find eigenvectors", href: "/linear-algebra/eigen/methods/eigenvectors", desc: "For each eigenvalue, row reduce $A - \\lambda I$ and solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$.", level: "composite" },
+      { skill: "Find complex eigenvalues and eigenvectors", href: "/linear-algebra/eigen/methods/complex-eigenvalues", desc: "A negative discriminant gives $\\lambda = a \\pm bi$; one complex eigenvector gives the real rotation-scaling form.", level: "composite" },
+      { skill: "Check if a matrix is diagonalizable", href: "/linear-algebra/eigen/methods/diagonalizability-check", desc: "Compare algebraic and geometric multiplicity for every eigenvalue; $n$ distinct eigenvalues settle it at once.", level: "composite" },
+      { skill: "Diagonalize a matrix", href: "/linear-algebra/eigen/methods/diagonalization", desc: "Put eigenvectors in the columns of $P$ and eigenvalues on the diagonal of $D$, then check $AP = PD$.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Find the reduced row echelon form of a matrix", href: "/linear-algebra/linear-systems/methods/reduced-row-echelon-form", desc: "From echelon form, scale every pivot to 1 and clear above it; the result is unique.", level: "composite" },
+    ] },
+    { title: "Polynomial methods", items: [
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/eigen/methods", label: "All eigenvalue methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1286,6 +1320,7 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a basis for an eigenspace](!/linear-algebra/eigen/methods/eigenspace-basis) →@`,
         ]
     },
     {
@@ -1294,11 +1329,15 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-eigen-geometric-meaning-matrix'}
+            id="eigen-geometric-meaning-matrix"
+            title="Geometric Meaning"
+            source="/linear-algebra/eigen"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
           `A matrix with no real eigenvectors is one that rotates every direction, which is exactly the complex case dealt with later in the section.`,
         ]
@@ -1309,11 +1348,15 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-eigen-examples-matrix'}
+            id="eigen-examples-matrix"
+            title="Examples"
+            source="/linear-algebra/eigen"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1352,6 +1395,7 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: summaryTable }}
           />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find eigenvalues](!/linear-algebra/eigen/methods/eigenvalues) →@`,
         ]
     },
     {
@@ -1369,6 +1413,14 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

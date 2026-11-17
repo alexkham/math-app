@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,8 +16,91 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
 
+const sw_zeroZeroGrounds = {
+  center: { name: '$0^0 = 1$', sub: 'the standard convention, and why' },
+  quadrants: [
+    { title: 'Empty product', items: [
+      '$a^0$ is the product of zero copies of $a$, and this product equals $1$ regardless of $a$.',
+      'From this perspective, $0^0 = 1$ is no more controversial than $5^0 = 1$.' ] },
+    { title: 'Binomial theorem', items: [
+      { text: 'The expansion includes terms where $x = 0$ or $y = 0$.', note: '$(x + y)^n = \\sum_{k=0}^{n} \\binom{n}{k} x^k y^{n-k}$' },
+      'At $x = 0$ and $k = 0$, the term $\\binom{n}{0} \\cdot 0^0 \\cdot y^n$ must equal $y^n$.' ] },
+    { title: 'Power series', items: [
+      { text: 'The exponential series at $x = 0$ begins with the term $\\frac{0^0}{0!}$.', note: '$e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$' },
+      'The known value $e^0 = 1$ requires this term to equal $1$.' ] },
+    { title: 'Counting functions', items: [
+      '$0^0$ counts the functions from the empty set to the empty set.',
+      'There is exactly one such function, the empty function.' ] }
+  ]
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("0^0 in Analysis"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Context","features":[{"id":"c1","name":"Value of 0⁰","type":"text"},{"id":"c2","name":"Why this choice","type":"text"},{"id":"c3","name":"Where it shows up","type":"text"}],"items":[{"id":"r1","name":"Discrete mathematics (algebra, combinatorics, number theory)","values":{"c1":"1 (by convention)","c2":"empty product gives the multiplicative identity; required for foundational formulas to hold","c3":"binomial theorem, power series eˣ = Σ xⁿ/n! at x = 0, count of functions ∅ → ∅"}},{"id":"r2","name":"Analysis (calculus, real analysis)","values":{"c1":"indeterminate","c2":"value depends on the path of approach; no single limit exists","c3":"xˣ → 1 vs 0ˣ → 0 as x → 0⁺; catalog with 0/0, ∞ − ∞, 1$^{∞}$"}}]};
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Handle a zero exponent", href: "/algebra/methods#zero-exponent", desc: "Anything nonzero raised to the power $0$: $7^0$, $(3x)^0$, $x^0$ with $x \\neq 0$.", level: "atomic" },
+      { skill: "Divide powers with the same base", href: "/algebra/methods#quotient-of-powers", desc: "A power of a base divided by another power of the same base: $\\frac{x^7}{x^2}$, $\\frac{5^3}{5^5}$.", level: "atomic" },
+      { skill: "Simplify expressions with exponents", href: "/algebra/methods/simplify-exponent-expressions", desc: "Combine several exponent rules into one clean answer with positive exponents.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// PropertySheet (cards) 2026-11-15: replaces the table obj3Table (three arguments that a^0 = 1: argument, setup, conclusion); one card per row, wording from the table.
+const zeroExponentArguments = {
+  header: {
+    kicker: 'zero exponent',
+    title: 'Three arguments, one conclusion',
+    lede: 'Each argument starts somewhere different and ends at the same value.',
+  },
+  verdicts: {
+    one: { label: 'Gives 1', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+  },
+  groups: [{ properties: [
+    { id: 'quotient', name: '[Quotient rule](!/algebra/powers/exponent-rules)', verdict: 'one', statement: '$\\frac{a^n}{a^n} = a^{n-n} = a^0$', note: 'and $\\frac{a^n}{a^n} = 1$. Conclusion: $a^0 = 1$' },
+    { id: 'pattern', name: 'Descending pattern', verdict: 'one', statement: '$3^3 = 27,\\ \\ 3^2 = 9,\\ \\ 3^1 = 3$', note: 'Each step divides by $3$; next: $3 \\div 3 = 1$. Conclusion: $3^0 = 1$' },
+    { id: 'empty', name: 'Empty product', verdict: 'one', statement: '$a^n$ is the product of $n$ copies of $a$', note: '$n = 0$ gives the empty product, which equals the multiplicative identity. Conclusion: $a^0 = 1$' },
+  ] }],
+}
+
+// FeatureMatrix 2026-11-15: replaces the table obj7Table (where zero is excluded as a base: stage, does zero work, reason); rows, links and reasons taken from the table.
+const fm_zeroBaseStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  verdicts: {
+    yes: { label: 'Yes', mark: '✓', color: '#2563EB', bg: '#dbeafe' },
+    part: { label: 'Partly', mark: '◐', color: '#B45309', bg: '#fef3c7' },
+    no: { label: 'No', mark: '✕', color: '#475569', bg: '#f1f5f9' },
+  },
+  corner: 'Stage',
+  features: [
+    { id: 'c1', name: 'Does zero work as base?', type: 'verdict' },
+    { id: 'c2', name: 'Reason', type: 'text' },
+  ],
+  items: [
+    { id: 'r1', name: '[Natural exponents](!/algebra/powers/natural-exponents)', sub: '$n \\geq 1$', values: {
+      c1: 'yes', c2: 'gives $0$: $0^n = 0$; no rule is violated' } },
+    { id: 'r2', name: '[Negative exponents](!/algebra/powers/negative-exponents)', values: {
+      c1: 'no', c2: '$0^{-n} = \\frac{1}{0^n}$ requires division by zero' } },
+    { id: 'r3', name: '[Rational exponents](!/algebra/powers/rational-exponents)', sub: '$m/n$', values: {
+      c1: 'part', c2: 'works for positive $m/n$ only; fails for negative (same division-by-zero issue in fractional setting)' } },
+    { id: 'r4', name: '[Irrational exponents](!/algebra/powers/irrational-exponents)', values: {
+      c1: 'no', c2: 'continuous extension defining $a^x$ for all real $x$ requires $a > 0$' } },
+    { id: 'r5', name: '[Exponential functions](!/algebra/powers/exponential-functions)', sub: '$f(x) = a^x$', values: {
+      c1: 'no', c2: 'requires $a > 0$ globally; zero cannot anchor a smooth, complete exponential curve' } },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -896,7 +980,16 @@ export default function ZeroPowersPage({ formulaSummaryData, pitfallData,seoData
         content: [
           `The quotient rule provides the algebraic proof. Dividing equal powers gives $\\frac{a^n}{a^n} = a^{n-n} = a^0$. But $\\frac{a^n}{a^n} = 1$ for any nonzero $a$. So $a^0 = 1$.`,
           `A third argument frames it in terms of the empty product. The expression $a^n$ is the product of $n$ copies of $a$. When $n = 0$, there are no copies — an empty product. By convention, the product of no factors is the multiplicative identity, $1$, just as the sum of no terms is the additive identity, $0$.`,
-          <div key={'obj3-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'property-sheet-zero-exponent-arguments'}
+            id="zero-exponent-three-arguments"
+            title="Three Arguments for the Zero Exponent"
+            source="/algebra/powers/zero-powers"
+            related={false}
+            layout="top"
+          >
+            <PropertySheet data={zeroExponentArguments} variant="cards" />
+          </DiagramFrame>,
           `Three distinct arguments, one conclusion. The value $a^0 = 1$ is not arbitrary — it is the only value consistent with the [laws of exponents](!/algebra/powers/exponent-rules/).`,
         ],
       },
@@ -991,6 +1084,15 @@ Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exp
         content:[
           sectionsContent.obj5.content,
           `@academic[punchline:In algebra and counting, $0^0 = 1$ is not a free choice: the binomial theorem, power series and function counts all need it.]@`,
+          <DiagramFrame
+            key={'four-sides-zero-to-the-zero-discrete-grounds'}
+            id="zero-to-the-zero-discrete-grounds"
+            title="0⁰ in Discrete Mathematics"
+            source="/algebra/powers/zero-powers"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_zeroZeroGrounds} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1001,11 +1103,15 @@ Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exp
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-zero-powers-0-0-analysis-matrix'}
+            id="zero-powers-0-0-analysis-matrix"
+            title="0^0 in Analysis"
+            source="/algebra/powers/zero-powers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:In a limit, $0^0$ has no value of its own: how fast base and exponent reach zero decides it.]@`,
         ]
     },
@@ -1017,11 +1123,15 @@ Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exp
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-zero-base-stages'}
+            id="zero-as-base-by-stage"
+            title="Where Zero Stops Working as a Base"
+            source="/algebra/powers/zero-powers"
+            related={false}
+          >
+            <FeatureMatrix data={fm_zeroBaseStages} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1059,6 +1169,14 @@ Applying the exponent to the whole term gives $-3^0 = 1$ and $5x^0 = 1$. The exp
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
 

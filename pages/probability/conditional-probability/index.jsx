@@ -603,6 +603,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 4 tables (examples comparison, patterns aggregation, mistakes aggregation, overview summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -622,9 +623,54 @@ import partitionVennDiagrams from '@/app/components/probability/conditional-prob
 import contingencyTableDiagrams from '@/app/components/probability/conditional-probability-demo/contingencyTableDiagrams'
 import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/FormulaAnatomy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (operations + probability + conditions) 2026-11-15: the page's two-dice example, A = first die even (18 of 36), B = sum 8 (5 of 36), both = 3 of 36.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const bothDirectionsDiagram = {
+  labels: { elementsThat: 'Outcomes where' },
+  sets: [{ id: 'A' }, { id: 'B' }],
+  regionNames: { A: 'only $A$', AB: 'both $A$ and $B$', B: 'only $B$', '': 'neither' },
+  given: 'Two dice, 36 outcomes: $A$ = first die even, $B$ = sum $8$. Each region shows its probability.',
+  initial: 'a',
+  operations: [
+    { id: 'a', name: 'First die even', notation: '$A$', regions: ['A', 'AB'], rule: 'the first die is even',
+      prob: { calc: '$\\frac{18}{36} = \\frac{1}{2}$' } },
+    { id: 'b', name: 'Sum 8', notation: '$B$', regions: ['AB', 'B'], rule: 'the sum is $8$',
+      prob: { calc: '$\\frac{5}{36}$' } },
+    { id: 'both', name: 'Both', notation: '$A \\cap B$', regions: ['AB'], rule: 'the first die is even and the sum is $8$: (2,6), (4,4), (6,2)',
+      prob: { calc: '$\\frac{3}{36} = \\frac{1}{12}$' } },
+  ],
+  probability: {
+    regions: { A: 15 / 36, AB: 3 / 36, B: 2 / 36, '': 16 / 36 },
+    conditions: [
+      { id: 'b', label: 'given $B$', notation: '$B$', regions: ['AB', 'B'], sets: ['B'],
+        note: 'With $A$ selected: $P(A \\mid B) = \\frac{3/36}{5/36} = \\frac{3}{5}$, against $P(A) = \\frac{1}{2}$.' },
+      { id: 'a', label: 'given $A$', notation: '$A$', regions: ['A', 'AB'], sets: ['A'],
+        note: 'With $B$ selected: $P(B \\mid A) = \\frac{3/36}{18/36} = \\frac{1}{6}$, against $P(B) = \\frac{5}{36}$.' },
+    ],
+  },
+};
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_conditionalPath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"before":[{"name":"Events","href":"/probability/events#conditional","why":"the objects being conditioned on"}],"target":{"kicker":"This page","name":"Conditional probability","text":"Shows how these concepts fit together into a single framework."},"after":[{"name":"Independence","href":"/probability/independence#meaning","why":"when conditioning has no effect"},{"name":"Total probability","href":"/probability/total-probability#cases","why":"combines conditional probabilities across cases"},{"name":"Chain rule","href":"/probability/rules#multy","why":"builds joint probabilities from conditional ones"},{"name":"Bayes theorem","href":"/probability/bayes-theorem","why":"inverts conditional probabilities to update beliefs"},{"name":"Random variables","href":"/probability/random-variables","why":"conditioning extended to numerical outcomes"},{"name":"Distributions","href":"/probability/distributions","why":"conditioning extended to numerical outcomes"}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table overviewTable ("Overview of Conditional Probability"); converted from the table's own cells.
+const fm_overviewTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"What it captures","type":"text"},{"id":"c2","name":"Key point","type":"text"}],"items":[{"id":"r1","name":"Meaning","values":{"c1":"reassessment of uncertainty when a condition is known","c2":"the condition becomes the new frame of reference"}},{"id":"r2","name":"Formula","values":{"c1":"P(A|B) = P(A ∩ B) ⁄ P(B)","c2":"renormalize so probabilities sum to 1 inside B"}},{"id":"r3","name":"Numerator","values":{"c1":"the [intersection](!/probability/definitions#intersection_of_sets) A ∩ B","c2":"only the part of A compatible with B contributes"}},{"id":"r4","name":"Denominator","values":{"c1":"total probability mass of B","c2":"requires P(B) > 0 for the expression to be defined"}},{"id":"r5","name":"[Independence](!/probability/definitions#independent_events) test","values":{"c1":"P(A|B) = P(A)","c2":"conditioning produces no shift in probability"}},{"id":"r6","name":"Asymmetry","values":{"c1":"P(A|B) ≠ P(B|A) in general","c2":"which event is the condition matters for the meaning"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table mistakesTable ("Common Mistakes"); converted from the table's own cells.
+const fm_mistakesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"What goes wrong","type":"text"},{"id":"c2","name":"Correct approach","type":"text"}],"items":[{"id":"r1","name":"Not restricting the situation","values":{"c1":"reasoning continues as if all original outcomes were still possible","c2":"recompute everything inside B; outcomes outside B are discarded"}},{"id":"r2","name":"Dividing by the wrong probability","values":{"c1":"numerator is right but denominator uses P(A) or some other quantity","c2":"denominator is always P(B), the probability of the condition"}},{"id":"r3","name":"Confusing P(A|B) with P(B|A)","values":{"c1":"the statement is reversed and its meaning changes entirely","c2":"identify which event sits after the bar (the condition) vs before it (the target)"}},{"id":"r4","name":"Implicit [independence](!/probability/definitions#independent_events) assumption","values":{"c1":"conditioning is treated as irrelevant without checking","c2":"verify P(A|B) = P(A) before treating events as independent"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table patternsTable ("Common Patterns Where Conditioning Appears"); converted from the table's own cells.
+const fm_patternsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pattern","features":[{"id":"c1","name":"Recognition signal","type":"text"},{"id":"c2","name":"What gets restricted","type":"text"},{"id":"c3","name":"Example trigger","type":"text"}],"items":[{"id":"r1","name":"\"Given that\" reasoning","values":{"c1":"explicit words: \"given\", \"knowing\", \"assuming\"","c2":"reasoning takes place inside the stated condition","c3":"\"given that the test is positive…\""}},{"id":"r2","name":"Filtering","values":{"c1":"a subgroup is selected before any assessment","c2":"attention to cases meeting a criterion","c3":"\"among students who passed…\""}},{"id":"r3","name":"Sequential processes","values":{"c1":"step-by-step where earlier outcomes affect later ones","c2":"the state after step k affects step k+1","c3":"second card drawn after the first is removed"}},{"id":"r4","name":"Classification","values":{"c1":"probabilities evaluated within a group or category","c2":"the group of interest is the new sample space","c3":"\"among customers in segment X…\""}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table examplesTable ("Examples"); converted from the table's own cells.
+const fm_examplesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Setup (events A, B)","features":[{"id":"c1","name":"Effect of knowing B","type":"text"},{"id":"c2","name":"Why","type":"text"},{"id":"c3","name":"Behavior shown","type":"text"}],"items":[{"id":"r1","name":"A: has a degree; B: over 40","values":{"c1":"P(A|B) ≠ P(A)","c2":"condition selects a different group with different proportions","c3":"information changes the probability"}},{"id":"r2","name":"A: tomorrow is sunny; B: coin lands heads today","values":{"c1":"P(A|B) = P(A)","c2":"the events are unrelated; knowing B reveals nothing about A","c3":"[independence](!/probability/definitions#independent_events)"}},{"id":"r3","name":"A: second card is an ace; B: first card is an ace (no replacement)","values":{"c1":"P(A|B) ≠ P(A)","c2":"after B, the deck composition has changed","c3":"sequential dependence"}}]};
 
 // MistakeFix batch 19, 2026-11-04: the "Common Pitfalls" entries, moved word for word into the MistakeFix data (trace layout).
 const pitfallData = {
@@ -640,6 +686,26 @@ const pitfallData = {
 const pitfallClosing = `The complement rule works on the left of the bar only: $P(A^c \\mid B) = 1 - P(A \\mid B)$, while changing the condition changes the whole restricted situation. Probabilities under complementary conditions average back to the unconditional probability instead, which catches the slip.`;
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite", here: "#formula" },
+      { skill: "Find the probability of A and B for dependent events", href: "/probability/methods/multiplication-rule-dependent", desc: "Multiply the first probability by the second one, worked out after the first has happened.", level: "composite", here: "#patterns" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Use Bayes' theorem", href: "/probability/methods/bayes-theorem", desc: "Reverse a conditional probability: from P(evidence given cause) to P(cause given evidence).", level: "composite" },
+      { skill: "Find probabilities from a two-way table", href: "/probability/methods/contingency-tables", desc: "Joint, marginal and conditional probabilities: pick the right cell and the right total.", level: "composite" },
+      { skill: "Find a probability by counting outcomes", href: "/probability/methods/classical-probability", desc: "Equally likely outcomes: count the favorable ones, count all of them, divide.", level: "composite" },
+      { skill: "Solve a probability problem with a tree diagram", href: "/probability/methods/tree-diagrams", desc: "One level per stage: label the branches, multiply along each path, add the paths you want.", level: "composite" },
+      { skill: "Solve urn and ball-drawing problems", href: "/probability/methods/urn-problems", desc: "Colored balls drawn from a bag, with or without replacement: multiply step by step or count combinations.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1427,7 +1493,17 @@ The part most often misread is the bar. $P(A \\mid B)$ and $P(B \\mid A)$ share 
 In the dice example, $\\frac{3}{5} > \\frac{1}{2}$ and $\\frac{1}{6} > \\frac{5}{36}$: each condition makes the other event more likely. It always goes both ways, since each inequality, multiplied out, reads $P(A \\cap B) > P(A)\\,P(B)$.]@
 
 For the two dice, both directions can be read off the grid. Among the 5 outcomes with sum 8, an even first die appears 3 times, so $P(\\text{first even} \\mid \\text{sum } 8) = \\frac{3}{5}$. Among the 18 outcomes with an even first die, a sum of 8 appears 3 times, (2,6), (4,4) and (6,2), so $P(\\text{sum } 8 \\mid \\text{first even}) = \\frac{3}{18} = \\frac{1}{6}$. Each can be set against its own unconditional value, $\\frac{1}{2}$ and $\\frac{5}{36}$.`,
+          <DiagramFrame
+            key={'set-diagram-both-directions'}
+            id="conditional-probability-both-directions"
+            title="The same overlap, divided by two different events"
+            source="/probability/conditional-probability"
+            before={'The two-dice example as a picture. Select $A$ and condition on $B$, then select $B$ and condition on $A$: the shared region is the same, the event it is divided by is not.'}
+          >
+            <SetDiagram data={bothDirectionsDiagram} variant="operations" theme={setDiagramTheme} />
+          </DiagramFrame>,
           `@academic[punchline:Conditioning keeps only the part of A inside B and rescales it, so that B becomes the whole sample space.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a conditional probability](!/probability/methods/conditional-probability) →@`,
         ]
     },
     {
@@ -1446,7 +1522,15 @@ For the two dice, both directions can be read off the grid. Among the 5 outcomes
         link:'',
         content:[
           sectionsContent.examples.content,
-          <div key={'examples-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: examplesTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-conditional-probability-examples-matrix'}
+            id="conditional-probability-examples-matrix"
+            title="Examples"
+            source="/probability/conditional-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_examplesTable} />
+          </DiagramFrame>,
                   <div key={'unit-u_examples_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_examples_2 }} />,
           `Independence is the case where this restriction changes nothing.`,
         ]
@@ -1468,7 +1552,16 @@ For the two dice, both directions can be read off the grid. Among the 5 outcomes
         link:'',
         content:[
           sectionsContent.patterns.content,
-          <div key={'patterns-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: patternsTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-conditional-probability-common-patterns-where-matrix'}
+            id="conditional-probability-common-patterns-where-matrix"
+            title="Common Patterns Where Conditioning Appears"
+            source="/probability/conditional-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_patternsTable} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the probability of A and B for dependent events](!/probability/methods/multiplication-rule-dependent) →@`,
         ]
     },
     {
@@ -1477,7 +1570,15 @@ For the two dice, both directions can be read off the grid. Among the 5 outcomes
         link:'',
         content:[
           sectionsContent.mistakes.content,
-          <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-conditional-probability-common-mistakes-matrix'}
+            id="conditional-probability-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/probability/conditional-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_mistakesTable} />
+          </DiagramFrame>,
           `One more mistake is worked through here in full, with the wrong and the right working side by side.`,
           <DiagramFrame
             key={'mistakes-mistakes'}
@@ -1496,7 +1597,15 @@ For the two dice, both directions can be read off the grid. Among the 5 outcomes
         link:'',
         content:[
           sectionsContent.overview.content,
-          <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-conditional-probability-overview-conditional-probability-matrix'}
+            id="conditional-probability-overview-conditional-probability-matrix"
+            title="Overview of Conditional Probability"
+            source="/probability/conditional-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_overviewTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1513,6 +1622,23 @@ For the two dice, both directions can be read off the grid. Among the 5 outcomes
         link:'',
         content:[
           sectionsContent.connections.content,
+          <DiagramFrame
+            key={'concept-map-conditional-probability-connections'}
+            id="conditional-probability-connections"
+            title="Connections to Other Probability Concepts"
+            source="/probability/conditional-probability"
+            related={false}
+          >
+            <ConceptMap data={cm_conditionalPath} variant="path" />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

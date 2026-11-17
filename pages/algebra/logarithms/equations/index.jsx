@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,10 +16,42 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Extraneous Solutions"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation","features":[{"id":"c1","name":"Algebraic solutions","type":"text"},{"id":"c2","name":"Domain requirement","type":"text"},{"id":"c3","name":"Verdict after check","type":"text"}],"items":[{"id":"r1","name":"log₂(x) + log₂(x − 2) = 3","values":{"c1":"x = 4 or x = −2","c2":"x > 0 and x − 2 > 0 → x > 2","c3":"keep x = 4; reject x = −2 (extraneous)"}},{"id":"r2","name":"log(x) + log(x − 3) = 1","values":{"c1":"x = 5 or x = −2","c2":"x > 0 and x − 3 > 0 → x > 3","c3":"keep x = 5; reject x = −2"}},{"id":"r3","name":"log₃(x − 5) + log₃(x + 1) = 2","values":{"c1":"x = 2 ± 3√2 ≈ 6.24 or −2.24","c2":"x − 5 > 0 and x + 1 > 0 → x > 5","c3":"keep x = 2 + 3√2; reject the other"}},{"id":"r4","name":"ln(x²) = ln(9)","values":{"c1":"x = 3 or x = −3","c2":"x² > 0 → x ≠ 0 (both candidates fine)","c3":"keep both x = 3 and x = −3"}}]};
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Solving Methods"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation form","features":[{"id":"c1","name":"Method","type":"text"},{"id":"c2","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"logₐ(x) = k","values":{"c1":"convert to exponential form: x = aᵏ","c2":"log₂(x) = 5 → x = 32"}},{"id":"r2","name":"logₐ(M) = logₐ(N)","values":{"c1":"apply the one-to-one property: M = N","c2":"log₄(3x+2) = log₄(x+10) → x = 4"}},{"id":"r3","name":"Sum or difference of logs = k","values":{"c1":"condense with logarithm rules, then convert","c2":"log₂(x) + log₂(x−2) = 3 → x = 4"}},{"id":"r4","name":"Quadratic in logₐ(x)","values":{"c1":"substitute u = logₐ(x), solve, back-substitute","c2":"(log₂x)² − 5log₂x + 6 = 0 → x = 4 or 8"}},{"id":"r5","name":"aˣ = B (no matching bases)","values":{"c1":"take log or ln of both sides, then divide","c2":"3ˣ = 7 → x = log(7) ⁄ log(3) ≈ 1.771"}},{"id":"r6","name":"aᵐˣ⁺ⁿ = bᵖˣ⁺ʳ","values":{"c1":"take logs, expand, collect x terms, solve linear equation","c2":"2ˣ⁺³ = 5ˣ⁻¹ → x ≈ 4.026"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Choosing Common or Natural Logarithm"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Exponential form","features":[{"id":"c1","name":"Recommended logarithm","type":"text"},{"id":"c2","name":"Resulting expression for x","type":"text"}],"items":[{"id":"r1","name":"aˣ = B (any positive base a)","values":{"c1":"either log or ln","c2":"x = log(B) ⁄ log(a) = ln(B) ⁄ ln(a)"}},{"id":"r2","name":"eˣ = B (base e)","values":{"c1":"ln (cleaner — no division)","c2":"x = ln(B)"}},{"id":"r3","name":"10ˣ = B (base 10)","values":{"c1":"log (cleaner — no division)","c2":"x = log(B)"}},{"id":"r4","name":"aᵐˣ⁺ⁿ = bᵖˣ⁺ʳ (different bases)","values":{"c1":"either; ln conventional","c2":"expand (mx+n)·ln(a) = (px+r)·ln(b), then solve a linear equation in x"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite", here: "#7" },
+      { skill: "Solve a logarithmic equation", href: "/algebra/methods/logarithmic-equations", desc: "Condense to one log, convert to exponential form or equate arguments, then check the domain.", level: "composite", here: "#10" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Expand and condense logarithms", href: "/algebra/methods/expand-condense-logarithms", desc: "Break one log into a sum of simple logs, or fold a sum back into one log.", level: "composite" },
+      { skill: "Solve an exponential equation by matching bases", href: "/algebra/methods/exponential-equations-same-base", desc: "Write both sides as powers of one base, then set the exponents equal.", level: "composite" },
+      { skill: "Solve exponential growth and decay problems", href: "/algebra/methods/exponential-growth-decay-problems", desc: "Populations, half-lives, depreciation: build the model, find the rate, solve for the time.", level: "applied" },
+      { skill: "Solve a logarithmic inequality", href: "/algebra/methods/logarithmic-inequalities", desc: "Remove the logs keeping or flipping the direction by the base, then intersect with the domain.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -758,8 +792,37 @@ $$\\approx \\frac{0.845}{0.477} \\approx 1.771$$`],
   };
 
 
+  // Procedure rollout 2026-11-14: Bringing the exponent down, step by step (obj7).
+  const viaLogsSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$3^x = 7$',
+      rows: [
+        { step: 'Take the logarithm of both sides', example: '$\\log(3^x) = \\log(7)$' },
+        { step: 'Use the power rule to move the exponent in front', example: '$x \\cdot \\log(3) = \\log(7)$' },
+        { step: 'Divide by the logarithm of the base', example: '$x = \\dfrac{\\log(7)}{\\log(3)}$' },
+        { step: 'Evaluate the two logarithms and divide', example: '$x \\approx \\dfrac{0.845}{0.477} \\approx 1.771$' },
+      ],
+    },
+  };
+
+  const combineLogsSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\log_2(x) + \\log_2(x - 2) = 3$',
+      rows: [
+        { step: 'Condense into a single logarithm', stepSub: 'Product rule', example: '$\\log_2(x^2 - 2x) = 3$' },
+        { step: 'Convert to exponential form', example: '$x^2 - 2x = 2^3 = 8$' },
+        { step: 'Solve the resulting equation', example: '$(x - 4)(x + 2) = 0$, so $x = 4$ or $x = -2$' },
+        { check: true, step: 'Check each root against the domain', example: '$x = 4$ is valid; $x = -2$ gives $\\log_2(-2)$, so it is rejected' },
+      ],
+    },
+  };
+
 return {
   props: {
+    combineLogsSteps,
+    viaLogsSteps,
       logDomainScope,
     pitfallData,
     logEquationDecision,
@@ -786,7 +849,7 @@ return {
 // export default function EquationsPage({seoData,sectionsContent , introContent}) {
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function EquationsPage({logDomainScope,  pitfallData,logEquationDecision, 
+export default function EquationsPage({ combineLogsSteps, viaLogsSteps,logDomainScope,  pitfallData,logEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -914,6 +977,11 @@ $$x = 13$$]@`,
           sectionsContent.obj3.content,
           <div key={'unit-combined'} dangerouslySetInnerHTML={{ __html: demoUnits.combined }} />,
           `Checking each candidate against the domain is the step that cannot be skipped.`,
+          <DiagramFrame key={'obj3-procedure'} id="combining-logarithms-steps" title="Condense, convert, solve, check"
+            source="/algebra/logarithms/equations" related={false}
+            before={"The example of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={combineLogsSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -940,11 +1008,15 @@ $$x = 13$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-extraneous-solutions-matrix-2'}
+            id="equations-extraneous-solutions-matrix-2"
+            title="Extraneous Solutions"
+            source="/algebra/logarithms/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:Algebra solves the transformed equation; only the domain of the original equation decides which roots are answers.]@`,
         ]
     },
@@ -964,6 +1036,16 @@ $$x = 13$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="exponential-via-logs-steps"
+            title="Bringing the exponent down, step by step"
+            source="/algebra/logarithms/equations"
+            before={"The first example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={viaLogsSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve an exponential equation with logarithms](!/algebra/methods/exponential-equations-logarithms) →@`,
         ]
     },
     {
@@ -982,11 +1064,15 @@ $$x = 13$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-choosing-common-or-natural-matrix'}
+            id="equations-choosing-common-or-natural-matrix"
+            title="Choosing Common or Natural Logarithm"
+            source="/algebra/logarithms/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -995,11 +1081,15 @@ $$x = 13$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-summary-solving-methods-matrix'}
+            id="equations-summary-solving-methods-matrix"
+            title="Summary of Solving Methods"
+            source="/algebra/logarithms/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
           `The same six forms as a map. The first question splits the page in two, logarithmic equations on one side and exponential equations on the other.`,
           <DiagramFrameV2
             key={'obj10-decision'}
@@ -1010,6 +1100,7 @@ $$x = 13$$]@`,
             <DecisionBox data={logEquationDecision} />
           </DiagramFrameV2>,
           `On the logarithmic side the last step is always the same. Converting, condensing and substituting can all produce values that make a logarithm's argument zero or negative, so each answer goes back into the original equation; [extraneous solutions](!#5) shows how they arise.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a logarithmic equation](!/algebra/methods/logarithmic-equations) →@`,
         ]
     },
     {
@@ -1027,6 +1118,14 @@ $$x = 13$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -808,6 +808,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj4 comparison, obj9 aggregation, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -821,6 +822,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -831,6 +833,34 @@ import laTransformNotationSheet from '@/app/components/infographics/NotationChea
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Why Basis Choice Matters"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"New basis","features":[{"id":"c1","name":"Resulting matrix form","type":"text"},{"id":"c2","name":"What it simplifies","type":"text"}],"items":[{"id":"r1","name":"Eigenvector basis (when n indep. eigenvectors exist)","values":{"c1":"diagonal D = diag(λ₁, ..., λₙ)","c2":"matrix powers Aᵏ = PDᵏP⁻¹; exponentials e^(At); differential systems x' = Ax decouple into scalar ODEs"}},{"id":"r2","name":"[Orthonormal](!/linear-algebra/orthogonality/orthogonal-sets) eigenbasis (symmetric A)","values":{"c1":"diagonal D, with P orthogonal (P⁻¹ = Pᵀ)","c2":"[projections](!/linear-algebra/orthogonality/projections), [least-squares](!/linear-algebra/orthogonality/least-squares), numerical stability (condition number κ(P) = 1)"}},{"id":"r3","name":"Jordan basis (when diagonalization fails)","values":{"c1":"block-diagonal Jordan normal form","c2":"canonical representative for defective matrices; isolates each defective eigenvalue into a small block"}},{"id":"r4","name":"Standard basis (default)","values":{"c1":"the original matrix A","c2":"rarely the best choice — the natural starting point but the right basis can convert a hard problem into an easy one"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Properties Preserved by Similarity"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Quantity / property of A","features":[{"id":"c1","name":"Preserved under A ↦ P⁻¹AP?","type":"verdict"},{"id":"c2","name":"Reason","type":"text"}],"items":[{"id":"r1","name":"[Determinant](!/linear-algebra/determinants)","values":{"c1":"yes","c2":"det(P⁻¹AP) = det(P⁻¹) det(A) det(P) = det(A)"}},{"id":"r2","name":"[Trace](!/linear-algebra/matrix/trace)","values":{"c1":"yes","c2":"tr(P⁻¹AP) = tr(APP⁻¹) = tr(A) by cyclic property"}},{"id":"r3","name":"[Eigenvalues](!/linear-algebra/eigen) (with algebraic multiplicities)","values":{"c1":"yes","c2":"characteristic polynomial is preserved"}},{"id":"r4","name":"Characteristic polynomial","values":{"c1":"yes","c2":"det(P⁻¹AP − λI) = det(P⁻¹(A − λI)P) = det(A − λI)"}},{"id":"r5","name":"[Rank](!/linear-algebra/matrix/rank) and nullity","values":{"c1":"yes","c2":"multiplication by invertible matrices cannot change rank"}},{"id":"r6","name":"Individual entries","values":{"c1":"no","c2":"entries are basis-dependent coordinates; they change with P"}},{"id":"r7","name":"Symmetry (A = Aᵀ)","values":{"c1":"no","c2":"preserved only when P is [orthogonal](!/linear-algebra/matrix/types) (P⁻¹ = Pᵀ)"}},{"id":"r8","name":"Sparsity / triangular structure","values":{"c1":"no","c2":"generally destroyed unless P is itself sparse / triangular"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Change basis", href: "/linear-algebra/transformations/methods/change-of-basis", desc: "Coordinates in a new basis are $P^{-1}\\mathbf{v}$; the matrix of a map in the new basis is $P^{-1}AP$.", level: "composite", here: "#2" },
+    ] },
+    { title: "More linear transformation methods", items: [
+      { skill: "Find the matrix of a linear transformation", href: "/linear-algebra/transformations/methods/transformation-matrix", desc: "Apply $T$ to each standard basis vector and use the results as the columns of $A$.", level: "composite" },
+      { skill: "Find the matrix of a geometric transformation", href: "/linear-algebra/transformations/methods/geometric-transformations", desc: "Rotations, reflections, projections, shears: track where $\\mathbf{e}_1$ and $\\mathbf{e}_2$ go, and multiply right to left to combine.", level: "composite" },
+    ] },
+    { title: "Matrix methods", items: [
+      { skill: "Find the inverse of a 2×2 matrix", href: "/linear-algebra/matrix/methods/inverse-2x2", desc: "Swap the diagonal, negate the other two entries, divide by the determinant $ad - bc$.", level: "composite" },
+    ] },
+    { title: "Eigenvalue methods", items: [
+      { skill: "Diagonalize a matrix", href: "/linear-algebra/eigen/methods/diagonalization", desc: "Put eigenvectors in the columns of $P$ and eigenvalues on the diagonal of $D$, then check $AP = PD$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/transformations/methods", label: "All linear transformation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1776,6 +1806,7 @@ Multiplying $P$ by the standard coordinates of $(3, 1)$ gives $(4, 2)$, but $4(1
         link:sectionsContent.obj2.link,
         content:[
           <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to change basis](!/linear-algebra/transformations/methods/change-of-basis) →@`,
         ]
     },
     {
@@ -1828,8 +1859,15 @@ Multiplying $P$ by the standard coordinates of $(3, 1)$ gives $(4, 2)$, but $4(1
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-basis-change-properties-preserved-similarity-matrix'}
+            id="basis-change-properties-preserved-similarity-matrix"
+            title="Properties Preserved by Similarity"
+            source="/linear-algebra/transformations/basis-change"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1885,8 +1923,15 @@ Multiplying $P$ by the standard coordinates of $(3, 1)$ gives $(4, 2)$, but $4(1
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-basis-change-why-basis-choice-matrix'}
+            id="basis-change-why-basis-choice-matrix"
+            title="Why Basis Choice Matters"
+            source="/linear-algebra/transformations/basis-change"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1923,6 +1968,14 @@ Multiplying $P$ by the standard coordinates of $(3, 1)$ gives $(4, 2)$, but $4(1
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

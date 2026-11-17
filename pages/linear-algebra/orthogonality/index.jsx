@@ -756,6 +756,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj4 aggregation, obj6 aggregation, obj10 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -771,11 +772,57 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subspacesDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_whyOrthogonality = {
+  center: { name: 'Orthogonality', sub: 'turns hard problems into easy ones' },
+  quadrants: [
+    { title: '[Orthogonal bases](!/linear-algebra/orthogonality/orthogonal-sets)', items: [
+      'Each coordinate is a single dot product, not the solution of a system.',
+      { text: 'A general basis needs $n$ equations solved.', note: 'an orthonormal basis needs $n$ dot products' } ] },
+    { title: '[Projections](!/linear-algebra/orthogonality/projections)', items: [
+      'Explicit formulas when the basis is orthogonal.',
+      'The projection splits into independent projections onto each basis vector, with no cross-talk.' ] },
+    { title: '[Least squares](!/linear-algebra/orthogonality/least-squares)', items: [
+      'The best approximate solution when $A\\mathbf{x} = \\mathbf{b}$ has no exact one.',
+      'Reduces to projecting $\\mathbf{b}$ onto the column space.',
+      { text: 'The normal equations follow.', note: '$A^TA\\hat{\\mathbf{x}} = A^T\\mathbf{b}$' } ] },
+    { title: '[Orthogonal matrices](!/linear-algebra/matrix/types)', items: [
+      'Preserve lengths and angles.',
+      'Numerically stable in computation.' ] }
+  ],
+  note: { label: 'Always available', text: 'The [Gram-Schmidt process](!/linear-algebra/orthogonality/gram-schmidt) converts any basis into an orthogonal one.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("The Four Fundamental Subspaces Revisited"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Ambient space","features":[{"id":"c1","name":"Subspace","type":"text"},{"id":"c2","name":"Its orthogonal complement","type":"text"},{"id":"c3","name":"Dimension sum","type":"text"}],"items":[{"id":"r1","name":"ℝⁿ (the domain)","values":{"c1":"Row(A) — row space of A","c2":"Null(A) — null space of A","c3":"rank(A) + nullity(A) = n"}},{"id":"r2","name":"ℝᵐ (the codomain)","values":{"c1":"Col(A) — column space of A","c2":"Null(Aᵀ) — left null space of A","c3":"rank(A) + (m − rank(A)) = m"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Inner Products"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Inner product","features":[{"id":"c1","name":"Definition","type":"text"},{"id":"c2","name":"Setting","type":"text"},{"id":"c3","name":"What it enables","type":"text"}],"items":[{"id":"r1","name":"Standard dot product","values":{"c1":"u · v = Σ uᵢ vᵢ","c2":"ℝⁿ with Euclidean geometry","c3":"standard lengths, angles, and perpendicularity"}},{"id":"r2","name":"Weighted inner product","values":{"c1":"⟨u, v⟩ = uᵀ W v (W symmetric positive definite)","c2":"ℝⁿ with distorted metric","c3":"ellipsoidal geometry; statistics (e.g. Mahalanobis distance)"}},{"id":"r3","name":"Function-space integral","values":{"c1":"⟨f, g⟩ = ∫ₐ$^{b}$ f(x) g(x) dx","c2":"spaces of square-integrable functions","c3":"Fourier series, orthogonal polynomials, signal decomposition"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Orthogonality methods", items: [
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite" },
+      { skill: "Compute an inner product", href: "/linear-algebra/orthogonality/methods/inner-product", desc: "Dot product, weighted and function inner products, and the lengths and angles they give.", level: "composite" },
+      { skill: "Solve a least-squares problem", href: "/linear-algebra/orthogonality/methods/least-squares", desc: "When $A\\mathbf{x} = \\mathbf{b}$ has no solution, solve the normal equations for the closest fit.", level: "composite" },
+      { skill: "Fit a line or curve to data", href: "/linear-algebra/orthogonality/methods/least-squares-fitting", desc: "Turn data points into an overdetermined system, solve the normal equations, read off the best-fit model.", level: "applied" },
+      { skill: "Check if a set is orthogonal or orthonormal", href: "/linear-algebra/orthogonality/methods/orthogonal-set-check", desc: "Dot every pair: all zero means orthogonal; unit lengths as well means orthonormal.", level: "composite" },
+      { skill: "Find an orthogonal projection", href: "/linear-algebra/orthogonality/methods/orthogonal-projection", desc: "Project a vector onto a line, a plane or a subspace; split it into a part inside and a part perpendicular.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/orthogonality/methods", label: "All orthogonality methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1490,11 +1537,15 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-orthogonality-four-fundamental-subspaces-revisited-matrix'}
+            id="orthogonality-four-fundamental-subspaces-revisited-matrix"
+            title="The Four Fundamental Subspaces Revisited"
+            source="/linear-algebra/orthogonality"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-foursubspaces'} dangerouslySetInnerHTML={{ __html: demoUnits.foursubspaces }} />,
           `Projections, Gram-Schmidt and least squares in the sections below are all built on this decomposition.`,
         ]
@@ -1505,6 +1556,15 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'four-sides-why-orthogonality-matters'}
+            id="why-orthogonality-matters"
+            title="Why Orthogonality Matters"
+            source="/linear-algebra/orthogonality"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_whyOrthogonality} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1513,11 +1573,15 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-orthogonality-inner-products-matrix'}
+            id="orthogonality-inner-products-matrix"
+            title="Inner Products"
+            source="/linear-algebra/orthogonality"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1585,6 +1649,14 @@ $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = 0$$]@
           >
             <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

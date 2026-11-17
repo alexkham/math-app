@@ -1,5 +1,6 @@
 // tables-optimized: v4 | 2026-05-24 | 4 tables (obj6 comparison, obj7 comparison, obj10 aggregation, overview summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -19,6 +20,28 @@ import functionOptimizationDiagrams from '@/app/components/functions/optimizatio
 import functionConcavityDiagrams from '@/app/components/calculus/visualizers/functionConcavityDiagrams'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_firstDerivativeTest = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  tree: {
+    root: { name: 'Critical point $c$', sub: "classified by how $f'$ changes sign around it" },
+    branches: [
+      { leaves: [
+        { name: 'Local maximum', condition: "$f'$ changes from positive to negative at $c$.", example: 'the function rises then falls',
+          sketch: { x0: -2, x1: 2, y0: -1.2, y1: 1.4, axis: false, pieces: [{ f: (x) => 1 - 0.55 * x * x, from: -2, to: 2 }], dots: [[0, 1]] } },
+        { name: 'Local minimum', condition: "$f'$ changes from negative to positive at $c$.", example: 'the function falls then rises',
+          sketch: { x0: -2, x1: 2, y0: -1.4, y1: 1.2, axis: false, pieces: [{ f: (x) => 0.55 * x * x - 1, from: -2, to: 2 }], dots: [[0, -1]] } },
+        { name: 'Neither', condition: "$f'$ does not change sign at $c$.", example: 'positive on both sides or negative on both sides',
+          sketch: { x0: -2, x1: 2, y0: -1.3, y1: 1.3, axis: false, pieces: [{ f: (x) => 0.16 * x * x * x, from: -2, to: 2 }], dots: [[0, 0]] } }
+      ] }
+    ]
+  },
+  note: { label: 'When the test applies', text: "It works even when $f'(c)$ does not exist, as long as $f$ is continuous at $c$. No information about $f''$ is needed." }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -26,8 +49,93 @@ import derivativesNotationSheet from '@/app/components/infographics/NotationChea
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
-import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
+// CaseGraph 2026-11-12: "The two tests side by side" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    grid: {
+      x0: -1.6, x1: 1.6, y0: -2.2, y1: 2.2,
+      axes: [
+        { id: 'v', name: 'Verdict at $c$', options: [
+          { id: 'max', label: 'local maximum' },
+          { id: 'min', label: 'local minimum' },
+          { id: 'none', label: 'neither' } ] },
+        { id: 't', name: 'Test', options: [
+          { id: 'first', label: 'First derivative test', sub: "needs $f$ continuous at $c$; reads the sign of $f'$ left and right of $c$" },
+          { id: 'second', label: 'Second derivative test', sub: "needs $f'(c) = 0$ and $f''(c)$ to exist; reads the sign of $f''(c)$" } ] },
+      ],
+      layout: { rows: 'v', cols: 't' },
+      cells: {
+        'max|first':   { f: (x) => 1 - x * x, solution: "$f'$: $+$ to $-$" },
+        'max|second':  { f: (x) => 1 - x * x, solution: "$f''(c) < 0$" },
+        'min|first':   { f: (x) => x * x - 1, solution: "$f'$: $-$ to $+$" },
+        'min|second':  { f: (x) => x * x - 1, solution: "$f''(c) > 0$" },
+        'none|first':  { f: (x) => x * x * x, roots: [{ x: 0, label: 'c' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: 'no sign change' },
+        'none|second': { f: (x) => x * x * x, roots: [{ x: 0, label: 'c' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: "$f''(c) = 0$: inconclusive" },
+      },
+    },
+  };
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// ProcedureV2 (stages) 2026-11-15: replaces the table obj10Table (optimization workflow: step, action, why it matters); actions and reasons taken from the table, run on the function of the section's own figure.
+const optimizationStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { exprNow: 'Found so far' },
+  run: {
+    label: 'Absolute extremes of $x^4 - 4x^2$ on $[-3, 3]$',
+    start: '$x^4 - 4x^2$ on $[-3, 3]$',
+  },
+  groups: [
+    { label: 'Set up', sub: 'steps 1 to 3', kind: 'must', stages: [
+      { n: 1, name: 'Quantity', what: 'Identify the quantity to optimize', cond: 'Why: names the objective the derivative will be taken of',
+        example: 'the value of $x^4 - 4x^2$', exampleNote: 'both its largest and its smallest value are wanted' },
+      { n: 2, name: 'One variable', what: 'Express it as a function of a single variable', cond: 'Why: constraints are used here to eliminate extra variables',
+        example: '$f(x) = x^4 - 4x^2$', exampleNote: 'already in one variable, so there is nothing to eliminate' },
+      { n: 3, name: 'Domain', what: 'Determine the feasible domain', cond: 'Why: physical or geometric meaning restricts where the variable can live',
+        example: '$-3 \\leq x \\leq 3$', exampleNote: 'a closed interval, given with the problem' },
+    ] },
+    { label: 'Candidates', sub: 'step 4', kind: 'must', stages: [
+      { n: 4, name: 'Critical points', what: 'Find the critical points inside that domain', cond: 'Why: candidates for the extremum come from $f\'(x) = 0$ or $f\'(x)$ undefined',
+        example: '$f\'(x) = 4x^3 - 8x = 4x(x^2 - 2) = 0$', exampleNote: 'so $x = 0$ and $x = \\pm\\sqrt{2}$, all inside the interval' },
+    ] },
+    { label: 'The answer', sub: 'step 5', kind: 'out', stages: [
+      { n: 5, name: 'Compare', what: 'Compare values at critical points and at the endpoints', cond: 'Why: on a closed interval, the Extreme Value Theorem guarantees the maximum and minimum lie among these',
+        example: '$f(\\pm 3) = 45$, $f(0) = 0$, $f(\\pm\\sqrt{2}) = -4$', exampleNote: 'so the maximum is $45$, at $x = \\pm 3$, and the minimum is $-4$, at $x = \\pm\\sqrt{2}$',
+        result: 'maximum $45$ at $x = \\pm 3$, minimum $-4$ at $x = \\pm\\sqrt{2}$' },
+    ] },
+  ],
+}
+
+// FeatureMatrix 2026-11-14: replaces the table overviewTable ("The Full Derivative Toolkit at a Glance"); converted from the table's own cells.
+const fm_overviewTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Tool","features":[{"id":"c1","name":"What it reveals","type":"text"},{"id":"c2","name":"Derivative information needed","type":"text"}],"items":[{"id":"r1","name":"Value of f'(a)","values":{"c1":"slope and direction of f at the single point (a, f(a))","c2":"first derivative evaluated at a"}},{"id":"r2","name":"Tangent line","values":{"c1":"best linear approximation to f near x = a: y − f(a) = f'(a)(x − a)","c2":"first derivative evaluated at a"}},{"id":"r3","name":"Sign of f'","values":{"c1":"intervals where f is increasing or decreasing","c2":"first derivative across each interval"}},{"id":"r4","name":"Critical points","values":{"c1":"candidates for local extrema (must be tested further)","c2":"solutions of f'(x) = 0 plus points where f' is undefined"}},{"id":"r5","name":"First derivative test","values":{"c1":"classifies a critical point as max, min, or neither","c2":"sign of f' on each side of the critical point"}},{"id":"r6","name":"Second derivative test","values":{"c1":"faster classification when f'' is available and nonzero","c2":"value of f''(c) at a critical point with f'(c) = 0"}},{"id":"r7","name":"Sign of f''","values":{"c1":"intervals of concave up or concave down behavior","c2":"second derivative across each interval"}},{"id":"r8","name":"Inflection points","values":{"c1":"points where concavity reverses","c2":"f''(x) = 0 or undefined, plus a sign change of f'' across the point"}},{"id":"r9","name":"Curve sketching","values":{"c1":"a complete qualitative picture: monotonicity, extrema, concavity, asymptotes","c2":"f' and f'' combined with domain, intercepts, and end behavior"}},{"id":"r10","name":"Optimization","values":{"c1":"absolute maximum or minimum on a domain or under a constraint","c2":"critical points of the objective function, plus endpoint values"}},{"id":"r11","name":"Related rates","values":{"c1":"how an unknown rate of change depends on known rates of related quantities","c2":"implicit differentiation of a constraint equation with respect to time"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Concavity"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Sign of f'","features":[{"id":"c1","name":"Sign of f''","type":"text"},{"id":"c2","name":"What f does on the interval","type":"text"},{"id":"c3","name":"Visual picture","type":"text"}],"items":[{"id":"r1","name":"+","values":{"c1":"+","c2":"increasing and concave up","c3":"rising with slope getting steeper"}},{"id":"r2","name":"+","values":{"c1":"−","c2":"increasing and concave down","c3":"rising but flattening — like a thrown ball approaching its peak"}},{"id":"r3","name":"−","values":{"c1":"+","c2":"decreasing and concave up","c3":"falling but flattening — approaching a local minimum from the left"}},{"id":"r4","name":"−","values":{"c1":"−","c2":"decreasing and concave down","c3":"falling with slope getting more negative"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find tangent and normal lines", href: "/calculus/derivatives/techniques/tangent-normal-lines", desc: "The line through a point of the curve with slope $f'(a)$, and the perpendicular line.", level: "composite", here: "#2" },
+      { skill: "Find where a function is increasing or decreasing", href: "/calculus/derivatives/techniques/increasing-decreasing-intervals", desc: "Sign chart of $f'$: the intervals where the graph rises and where it falls.", level: "composite", here: "#3" },
+      { skill: "Find critical points and extrema", href: "/calculus/derivatives/techniques/critical-points", desc: "Solve $f'(x) = 0$, then classify each point as a maximum, minimum or neither.", level: "composite", here: "#4" },
+      { skill: "Find concavity and inflection points", href: "/calculus/derivatives/techniques/concavity-inflection-points", desc: "Sign chart of $f''$: which way the graph bends, and where the bending switches.", level: "composite", here: "#7" },
+      { skill: "Sketch a curve using derivatives", href: "/calculus/derivatives/techniques/curve-sketching", desc: "Domain, asymptotes, rise and fall, bending and key points, put together into one graph.", level: "composite", here: "#9" },
+      { skill: "Solve optimization problems", href: "/calculus/derivatives/techniques/optimization-problems", desc: "Maximize or minimize a quantity under a constraint.", level: "applied", here: "#10" },
+      { skill: "Solve related rates problems", href: "/calculus/derivatives/techniques/related-rates-problems", desc: "Rates of change of connected quantities.", level: "applied", here: "#11" },
+    ] },
+    { title: "More derivative techniques", items: [
+      { skill: "Use implicit differentiation", href: "/calculus/derivatives/techniques/implicit-differentiation", desc: "Find $dy/dx$ when $y$ is not isolated, e.g. $x^2 + y^2 = 25$.", level: "composite" },
+      { skill: "Use linear approximation", href: "/calculus/derivatives/techniques/linear-approximation", desc: "Estimate $f(x)$ near $a$ with the tangent line, and small changes with differentials.", level: "composite" },
+      { skill: "Differentiate parametric curves", href: "/calculus/derivatives/techniques/parametric-differentiation", desc: "$dy/dx$ for $x = x(t)$, $y = y(t)$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -783,7 +891,7 @@ Comparing only the critical values of $f(x) = x^3 - 3x$ on $[-3, 3]$, $f(-1) = 2
 
 Applied optimization problems translate a real scenario into a function of one variable. The steps are: identify the quantity to optimize, express it as a function of a single variable, determine the feasible domain, find critical points within that domain, and compare values at critical points and endpoints.
 
-The derivative identifies candidates; the context determines which candidate solves the problem. Checking that a critical point is actually a maximum (or minimum) rather than merely a critical point is an essential final step. The table below collects this procedure as a five-step recipe.
+The derivative identifies candidates; the context determines which candidate solves the problem. Checking that a critical point is actually a maximum (or minimum) rather than merely a critical point is an essential final step. The steps below collect this procedure as a five-step recipe, carried out on one function.
 `,
     before: ``,
     after: ``,
@@ -1204,8 +1312,27 @@ const schemas = {
     conclusion: { text: '$f$ is increasing on $(a, b)$', say: 'Larger inputs produce larger outputs.' },
   };
 
+  const curveSketchStages = {
+    groups: [
+      { label: 'Preliminary analysis', sub: 'before any derivative', kind: 'must', stages: [
+        { n: 1, name: 'Domain and intercepts', what: 'where $f$ is defined and where the graph meets the axes' },
+        { n: 2, name: 'Symmetry', what: 'even, odd or periodic' },
+        { n: 3, name: 'Asymptotes', what: 'vertical and horizontal', cond: 'vertical where $f$ is undefined, horizontal from limits at infinity' },
+      ] },
+      { label: 'Shape', sub: 'derivatives and end behavior', kind: 'must', stages: [
+        { n: 4, name: 'First derivative', what: 'where $f$ increases and decreases', cond: 'locates all local extrema' },
+        { n: 5, name: 'Second derivative', what: 'concavity intervals', cond: 'locates the inflection points' },
+        { n: 6, name: 'End behavior', what: 'direction of $f$ as $x \\to \\pm\\infty$', cond: 'frames the overall shape' },
+      ] },
+      { label: 'What comes out', sub: '', kind: 'out', stages: [
+        { name: 'The sketch', what: 'a qualitative graph', cond: 'drawn without plotting individual points' },
+      ] },
+    ],
+  };
+
   return {
   props: {
+    curveSketchStages,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -1233,7 +1360,7 @@ const schemas = {
    }
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PageTemplate({ proofStepsData, formulaSummaryData, pitfallData,fermatConverse, cubicDirectionProfile, 
+export default function PageTemplate({ curveSketchStages, proofStepsData, formulaSummaryData, pitfallData,fermatConverse, cubicDirectionProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -1335,6 +1462,7 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
           sectionsContent.obj2.content,
                   <div key={'unit-tangent'} dangerouslySetInnerHTML={{ __html: demoUnits.tangent }} />,
           `The tangent line is the local stand-in for the curve, and its slope is the derivative made visible.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find tangent and normal lines](!/calculus/derivatives/techniques/tangent-normal-lines) →@`,
         ]
     },
     {
@@ -1389,6 +1517,7 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
             <FunctionAnalysis data={cubicDirectionProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
           </DiagramFrameV2>,
           `Read the two strips together: wherever the sign of $f'$ is $+$, the curve directly above it climbs, and wherever it is $-$, the curve falls. The direction can change only at the critical points $x = \\pm 1$, which is why the graph turns there and nowhere else.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find where a function is increasing or decreasing](!/calculus/derivatives/techniques/increasing-decreasing-intervals) →@`,
         ]
     },
     {
@@ -1407,6 +1536,7 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
           >
             <TheoremCard data={fermatConverse} variant="converse" theme={theoremTheme} />
           </DiagramFrameV2>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find critical points and extrema](!/calculus/derivatives/techniques/critical-points) →@`,
         ]
     },
     {
@@ -1417,6 +1547,15 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
           sectionsContent.obj5.content,
           <div key={'unit-noSignChange'} dangerouslySetInnerHTML={{ __html: demoUnits.noSignChange }} />,
           `Compare section 4’s x³ − 3x: there f′ crosses zero at ±1 and the test finds a maximum and a minimum.`,
+          <DiagramFrameV2
+            key={'taxonomy-first-derivative-test-outcomes'}
+            id="first-derivative-test-outcomes"
+            title="The First Derivative Test"
+            source="/calculus/derivatives/graph-analysis"
+            related={false}
+          >
+            <Taxonomy data={tx_firstDerivativeTest} variant="tree" />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1425,7 +1564,17 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj6Table}}/>,
+          <DiagramFrameV2
+            key={'case-graph-derivative-tests-verdict-grid'}
+            id="derivative-tests-verdict-grid"
+            title="The two tests side by side"
+            source="/calculus/derivatives/graph-analysis"
+            related={false}
+            before={"One row per verdict at a critical point $c$ (drawn at the centre), one column per test, with what each test reads to reach it."}
+            after={"Both tests reach the same verdicts; only the second can come back inconclusive, and only the first works where $f'(c)$ does not exist."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrameV2>,
                   <div key={'unit-secondTest'} dangerouslySetInnerHTML={{ __html: demoUnits.secondTest }} />,
           `When f&#8243;(c) = 0 the test is silent, and the first derivative test must decide.`,
         ]
@@ -1436,9 +1585,18 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
+          <DiagramFrameV2
+            key={'feature-matrix-graph-analysis-concavity-matrix'}
+            id="graph-analysis-concavity-matrix"
+            title="Concavity"
+            source="/calculus/derivatives/graph-analysis"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrameV2>,
                   <div key={'unit-concavity'} dangerouslySetInnerHTML={{ __html: demoUnits.concavity }} />,
           `Concavity is the shape of the shape: not where the graph goes, but how it curves on the way.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find concavity and inflection points](!/calculus/derivatives/techniques/concavity-inflection-points) →@`,
         ]
     },
     {
@@ -1457,6 +1615,12 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame key={'obj9-procedure'} id="curve-sketching-stages" title="Curve sketching, stage by stage"
+            source="/calculus/derivatives/graph-analysis" related={false}
+            before={"The stages of this section in the order they are carried out."}>
+            <ProcedureV2 data={curveSketchStages} variant="stages" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to sketch a curve using derivatives](!/calculus/derivatives/techniques/curve-sketching) →@`,
         ]
     },
     {
@@ -1465,9 +1629,19 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'obj10-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj10Table}}/>,
+          <DiagramFrame
+            key={'procedure-optimization-stages'}
+            id="optimization-five-steps"
+            title="Optimization in Five Steps"
+            source="/calculus/derivatives/graph-analysis"
+            related={false}
+          >
+            <ProcedureV2 data={optimizationStages} variant="stages" />
+          </DiagramFrame>,
+          `The figure below draws the same function with its three critical points marked.`,
                   <div key={'unit-optimization'} dangerouslySetInnerHTML={{ __html: demoUnits.optimization }} />,
           `Constraints change the function to be optimized, never the procedure.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve optimization problems](!/calculus/derivatives/techniques/optimization-problems) →@`,
         ]
     },
     {
@@ -1476,6 +1650,7 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve related rates problems](!/calculus/derivatives/techniques/related-rates-problems) →@`,
         ]
     },
     {
@@ -1484,7 +1659,15 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
         link:sectionsContent.overview.link,
         content:[
           sectionsContent.overview.content,
-          <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+          <DiagramFrameV2
+            key={'feature-matrix-graph-analysis-full-derivative-toolkit-matrix'}
+            id="graph-analysis-full-derivative-toolkit-matrix"
+            title="The Full Derivative Toolkit at a Glance"
+            source="/calculus/derivatives/graph-analysis"
+            related={false}
+          >
+            <FeatureMatrix data={fm_overviewTable} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1520,6 +1703,14 @@ Solving only $f'(x) = 0$ for $f(x) = x^{2/3}$ finds nothing, since $f'(x) = \\fr
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

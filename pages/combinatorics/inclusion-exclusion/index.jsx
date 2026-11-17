@@ -974,6 +974,7 @@
 
 // tables-optimized: v4 | 2026-06-03 | 2 tables (obj6 aggregation, obj8 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -992,9 +993,53 @@ import renderVennCount from '@/app/utils/illustrations/combinatorics/counting/ve
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (count) 2026-11-15: the Three Sets example, integers 1 to 100 divisible by 2, 3, 5.
+// Term values are the page's (50, 33, 20, 16, 10, 6, 3); region sizes follow from them and add up to 100.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const threeSetCountDiagram = {
+  sets: [{ id: 'A' }, { id: 'B' }, { id: 'C' }],
+  regions: { A: 27, B: 14, C: 7, AB: 13, AC: 7, BC: 3, ABC: 3, '': 26 },
+  regionNames: { A: 'only $A$', B: 'only $B$', C: 'only $C$', AB: '$A$ and $B$ only', AC: '$A$ and $C$ only', BC: '$B$ and $C$ only', ABC: '$A \\cap B \\cap C$' },
+  terms: [
+    { label: '$|A|$', sign: 1, sets: ['A'], value: 50 },
+    { label: '$|B|$', sign: 1, sets: ['B'], value: 33 },
+    { label: '$|C|$', sign: 1, sets: ['C'], value: 20 },
+    { label: '$|A \\cap B|$', sign: -1, sets: ['A', 'B'], value: 16 },
+    { label: '$|A \\cap C|$', sign: -1, sets: ['A', 'C'], value: 10 },
+    { label: '$|B \\cap C|$', sign: -1, sets: ['B', 'C'], value: 6 },
+    { label: '$|A \\cap B \\cap C|$', sign: 1, sets: ['A', 'B', 'C'], value: 3 },
+  ],
+  notes: {
+    3: { label: 'After the singles', text: 'The singles give $50 + 33 + 20 = 103$ for only $100$ integers: every multiple of $6$, $10$ or $15$ has been counted more than once.' },
+    6: { label: 'Forgetting the triple intersection', warn: true, text: 'Stopping after the pairs gives $50 + 33 + 20 - 16 - 10 - 6 = 71$: the multiples of 30 are added three times and subtracted three times, so they are not counted at all.' },
+    7: { label: 'Every element counted once', text: 'Adding $|A \\cap B \\cap C| = 3$ back gives $74$.' },
+  },
+};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Worked Examples"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Problem type","features":[{"id":"c1","name":"What to count","type":"text"},{"id":"c2","name":"Define Aᵢ as","type":"text"},{"id":"c3","name":"Final formula","type":"text"}],"items":[{"id":"r1","name":"Divisibility / coprimality","values":{"c1":"integers in 1..N divisible by none of given primes","c2":"integers in 1..N divisible by the i-th prime","c3":"N − |A₁ ∪ A₂ ∪ … ∪ Aₙ|"}},{"id":"r2","name":"Surjective functions","values":{"c1":"surjections from an n-set to a k-set","c2":"functions missing codomain element i; |j-fold intersection| = (k − j)ⁿ","c3":"Σⱼ₌₀ᵏ (−1)$^{j}$ C(k, j) (k − j)ⁿ"}},{"id":"r3","name":"[Derangements](!/combinatorics/permutations#derangement)","values":{"c1":"permutations of 1..n with no fixed point","c2":"permutations fixing position i; |k-fold intersection| = (n − k)!","c3":"!n = n! · Σₖ₌₀ⁿ (−1)ᵏ ⁄ k!"}},{"id":"r4","name":"Forbidden positions","values":{"c1":"arrangements of n items avoiding specified forbidden positions","c2":"arrangements with item i in its forbidden position","c3":"n! − |A₁ ∪ … ∪ Aₙ| via inclusion–exclusion (derangements are the special case)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use inclusion-exclusion for two sets", href: "/combinatorics/methods/inclusion-exclusion-two-sets", desc: "Count the items in A or B: add the two sizes and subtract the overlap once, $|A \\cup B| = |A| + |B| - |A \\cap B|$.", level: "composite", here: "#1" },
+      { skill: "Use inclusion-exclusion for three sets", href: "/combinatorics/methods/inclusion-exclusion-three-sets", desc: "Count the items in at least one of three sets: add the three sizes, subtract the three pairwise overlaps, add back the triple overlap.", level: "composite", here: "#2" },
+    ] },
+    { title: "More combinatorics methods", items: [
+      { skill: "Use complementary counting", href: "/combinatorics/methods/complementary-counting", desc: "Count the outcomes you do not want and subtract them from the total; the standard route for \"at least one\" questions.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/combinatorics/methods", label: "All combinatorics methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2006,6 +2051,7 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use inclusion-exclusion for two sets](!/combinatorics/methods/inclusion-exclusion-two-sets) →@`,
         ]
     },
     {
@@ -2016,6 +2062,16 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
           sectionsContent.obj2.content,
           <div key={'unit-centreEmptied'} dangerouslySetInnerHTML={{ __html: demoUnits.centreEmptied }} />,
           `Add the triple intersection back and every region reads exactly 1: each element of the union is counted once.`,
+          <DiagramFrame
+            key={'set-diagram-three-set-count'}
+            id="inclusion-exclusion-three-sets-term-by-term"
+            title="Three sets, one term at a time"
+            source="/combinatorics/inclusion-exclusion"
+            before={'The same example, the integers from 1 to 100 with $A$, $B$, $C$ = multiples of $2$, $3$, $5$, one term at a time. Each region shows how many integers it holds and how many times they have been counted so far.'}
+          >
+            <SetDiagram data={threeSetCountDiagram} variant="count" theme={setDiagramTheme} options={{ startAt: 'start' }} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use inclusion-exclusion for three sets](!/combinatorics/methods/inclusion-exclusion-three-sets) →@`,
         ]
     },
     {
@@ -2076,8 +2132,15 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-inclusion-exclusion-worked-examples-matrix'}
+            id="inclusion-exclusion-worked-examples-matrix"
+            title="Worked Examples"
+            source="/combinatorics/inclusion-exclusion"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2204,6 +2267,14 @@ Writing $18 + 15 - 7 - 7 = 19$ drops the 7 students who take both languages alto
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

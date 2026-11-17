@@ -1,6 +1,7 @@
 // tables-optimized: v4 | 2026-05-24 | 2 tables (theorems comparison, overview summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -18,11 +19,42 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionMVTDiagrams from '@/app/components/functions/mvt/functionMVTDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table theoremsTable ("L'Hôpital's Rule"); converted from the table's own cells.
+const fm_theoremsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Theorem","features":[{"id":"c1","name":"Hypotheses","type":"text"},{"id":"c2","name":"Conclusion","type":"text"},{"id":"c3","name":"Primary use","type":"text"}],"items":[{"id":"r1","name":"Mean Value Theorem","values":{"c1":"f continuous on [a, b]; f differentiable on (a, b)","c2":"there is some c ∈ (a, b) with f'(c) = (f(b) − f(a)) ⁄ (b − a)","c3":"connecting instantaneous and average rates; foundation for many subsequent results"}},{"id":"r2","name":"Rolle's Theorem","values":{"c1":"f continuous on [a, b]; f differentiable on (a, b); f(a) = f(b)","c2":"there is some c ∈ (a, b) with f'(c) = 0","c3":"stepping stone in proofs (including MVT itself); counting roots via f'"}},{"id":"r3","name":"L'Hôpital's Rule","values":{"c1":"limit of f ⁄ g gives indeterminate form 0 ⁄ 0 or ∞ ⁄ ∞; limit of f' ⁄ g' exists (or is ±∞)","c2":"lim f ⁄ g = lim f' ⁄ g'","c3":"resolving indeterminate limits via differentiation"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Differentiate products and quotients of composites", href: "/calculus/derivatives/techniques/products-quotients-of-composites", desc: "When the product or quotient rule has nested pieces inside it.", level: "composite", here: "#5" },
+      { skill: "Differentiate composite functions", href: "/calculus/derivatives/techniques/composite-functions", desc: "Nested functions such as $\\sin(x^2)$ or $e^{3x+1}$, peeled layer by layer.", level: "composite", here: "#7" },
+      { skill: "Use L'Hôpital's rule", href: "/calculus/limits/methods/lhopitals-rule", desc: "For $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$: differentiate top and bottom separately and take the limit again.", level: "composite", here: "#10" },
+      { skill: "Choose the right differentiation technique", href: "/calculus/derivatives/techniques/which-technique", desc: "A decision tree from the shape of the function to the right technique.", level: "strategy", here: "#overview" },
+    ] },
+    { title: "More derivative techniques", items: [
+      { skill: "Use implicit differentiation", href: "/calculus/derivatives/techniques/implicit-differentiation", desc: "Find $dy/dx$ when $y$ is not isolated, e.g. $x^2 + y^2 = 25$.", level: "composite" },
+      { skill: "Use logarithmic differentiation", href: "/calculus/derivatives/techniques/logarithmic-differentiation", desc: "Variable exponents like $x^x$, or long products and quotients.", level: "composite" },
+      { skill: "Differentiate an inverse function", href: "/calculus/derivatives/techniques/inverse-functions", desc: "Get $(f^{-1})'$ from $f'$ without finding $f^{-1}$ explicitly.", level: "composite" },
+      { skill: "Differentiate parametric curves", href: "/calculus/derivatives/techniques/parametric-differentiation", desc: "$dy/dx$ for $x = x(t)$, $y = y(t)$.", level: "composite" },
+      { skill: "Find higher-order derivatives", href: "/calculus/derivatives/techniques/higher-order-derivatives", desc: "Second, third and $n$th derivatives, and the patterns that give $f^{(n)}$ directly.", level: "composite" },
+      { skill: "Find tangent and normal lines", href: "/calculus/derivatives/techniques/tangent-normal-lines", desc: "The line through a point of the curve with slope $f'(a)$, and the perpendicular line.", level: "composite" },
+      { skill: "Solve related rates problems", href: "/calculus/derivatives/techniques/related-rates-problems", desc: "Rates of change of connected quantities.", level: "applied" },
+    ] },
+    { title: "Integration techniques", items: [
+      { skill: "Integrate by u-substitution", href: "/calculus/integrals/techniques/u-substitution", desc: "Undo the chain rule: an inner function whose derivative is also in the integrand.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1234,6 +1266,7 @@ Lowering $-2$ to $-1$ gives $\\frac{d}{dx}[x^{-2}] = -2x^{-1}$, which is $-1$ at
           sectionsContent.obj5.content,
                   <div key={'unit-productRect'} dangerouslySetInnerHTML={{ __html: demoUnits.productRect }} />,
           `That is why the product rule has two terms and not f′g′: the corner is the only place both factors change.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to differentiate products and quotients of composites](!/calculus/derivatives/techniques/products-quotients-of-composites) →@`,
         ]
     },
     {
@@ -1250,6 +1283,7 @@ Lowering $-2$ to $-1$ gives $\\frac{d}{dx}[x^{-2}] = -2x^{-1}$, which is $-1$ at
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to differentiate composite functions](!/calculus/derivatives/techniques/composite-functions) →@`,
         ]
     },
     {
@@ -1300,7 +1334,16 @@ Lowering $-2$ to $-1$ gives $\\frac{d}{dx}[x^{-2}] = -2x^{-1}$, which is $-1$ at
           sectionsContent.obj10.content,
           <div key={'unit-lhopital'} dangerouslySetInnerHTML={{ __html: demoUnits.lhopital }} />,
           `L’Hôpital’s rule compares slopes: lim f/g = lim f′/g′ = 2 cos 0 / 1 = 2.`,
-          <div key={'theorems-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: theoremsTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-rules-l-h-pital-s-matrix'}
+            id="rules-l-h-pital-s-matrix"
+            title="L'Hôpital's Rule"
+            source="/calculus/derivatives/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_theoremsTable} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use L'Hôpital's rule](!/calculus/limits/methods/lhopitals-rule) →@`,
         ]
     },
     {
@@ -1327,6 +1370,7 @@ Lowering $-2$ to $-1$ gives $\\frac{d}{dx}[x^{-2}] = -2x^{-1}$, which is $-1$ at
           >
             <TaxonomyOutline data={derivRuleOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which differentiation technique should I use?](!/calculus/derivatives/techniques/which-technique) →@`,
         ]
     },
     {
@@ -1344,6 +1388,14 @@ Lowering $-2$ to $-1$ gives $\\frac{d}{dx}[x^{-2}] = -2x^{-1}$, which is $-1$ at
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,8 +16,39 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Degree Five and Beyond"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Tool","features":[{"id":"c1","name":"Purpose","type":"text"},{"id":"c2","name":"When applicable","type":"text"},{"id":"c3","name":"Limit","type":"text"}],"items":[{"id":"r1","name":"Rational Root Theorem","values":{"c1":"enumerate candidate rational roots","c2":"integer (or rational) coefficients","c3":"finds only rational roots"}},{"id":"r2","name":"Synthetic / polynomial division","values":{"c1":"factor out (x − r) and reduce degree by 1","c2":"a confirmed root r is known","c3":"requires a root in advance"}},{"id":"r3","name":"[Quadratic formula](!/algebra/equations/quadratic)","values":{"c1":"solve the quadratic quotient exactly","c2":"degree has been reduced to 2","c3":"degree-2 only"}},{"id":"r4","name":"Numerical methods (Newton, bisection)","values":{"c1":"approximate real roots to any precision","c2":"algebraic tools have run out","c3":"approximate, not exact"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary by Degree"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Degree","features":[{"id":"c1","name":"Name","type":"text"},{"id":"c2","name":"Closed-form formula?","type":"text"},{"id":"c3","name":"Max real roots","type":"text"},{"id":"c4","name":"Primary technique","type":"text"}],"items":[{"id":"r1","name":"1","values":{"c1":"[Linear](!/algebra/equations/linear)","c2":"✓","c3":"1","c4":"x = −b ⁄ a"}},{"id":"r2","name":"2","values":{"c1":"[Quadratic](!/algebra/equations/quadratic)","c2":"✓","c3":"2","c4":"quadratic formula / discriminant"}},{"id":"r3","name":"3","values":{"c1":"Cubic","c2":"✓ (Cardano)","c3":"3","c4":"RRT + division → quadratic in practice"}},{"id":"r4","name":"4","values":{"c1":"Quartic","c2":"✓ (Ferrari)","c3":"4","c4":"bi-quadratic substitution, RRT, or factoring into two quadratics"}},{"id":"r5","name":"≥ 5","values":{"c1":"Quintic and higher","c2":"✗ (Abel–Ruffini)","c3":"n","c4":"RRT + repeated division; numerical methods when no rational roots"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Relationships Between Roots and Coefficients"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Symmetric quantity","features":[{"id":"c1","name":"In terms of roots","type":"text"},{"id":"c2","name":"In terms of coefficients","type":"text"}],"items":[{"id":"r1","name":"Sum of roots","values":{"c1":"r₁ + r₂ + ⋯ + rₙ","c2":"−aₙ₋₁ ⁄ aₙ"}},{"id":"r2","name":"Sum of pairwise products","values":{"c1":"Σᵢ<ⱼ rᵢ rⱼ","c2":"aₙ₋₂ ⁄ aₙ"}},{"id":"r3","name":"Sum of triple products","values":{"c1":"Σᵢ<ⱼ<ₖ rᵢ rⱼ rₖ","c2":"−aₙ₋₃ ⁄ aₙ"}},{"id":"r4","name":"⋮ (alternating signs)","values":{"c1":"⋮","c2":"⋮"}},{"id":"r5","name":"Product of all roots","values":{"c1":"r₁ · r₂ ⋯ rₙ","c2":"(−1)ⁿ a₀ ⁄ aₙ"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Root Multiplicity"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Multiplicity","features":[{"id":"c1","name":"Name","type":"text"},{"id":"c2","name":"Graph behavior at the root","type":"text"}],"items":[{"id":"r1","name":"1","values":{"c1":"simple root","c2":"crosses the x-axis cleanly"}},{"id":"r2","name":"2","values":{"c1":"double root","c2":"touches the axis and turns back (local extremum)"}},{"id":"r3","name":"3","values":{"c1":"triple root","c2":"crosses with an inflection on the axis"}},{"id":"r4","name":"even k ≥ 2","values":{"c1":"(general)","c2":"touches and turns back; more flattening as k grows"}},{"id":"r5","name":"odd k ≥ 3","values":{"c1":"(general)","c2":"crosses with flattening; more flattening as k grows"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a polynomial equation", href: "/algebra/equations/methods/polynomial-equations", desc: "Factor out what you can, find a rational root, divide it out, repeat until quadratic.", level: "composite", here: "#10" },
+    ] },
+    { title: "More equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+      { skill: "Use the quadratic formula", href: "/algebra/equations/methods/quadratic-formula", desc: "Read off a, b, c and substitute; works for every quadratic, factorable or not.", level: "composite" },
+      { skill: "Solve a rational equation", href: "/algebra/equations/methods/rational-equations", desc: "Note the excluded values, multiply by the LCD, solve, then reject excluded answers.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/equations/methods", label: "All equation methods" },
+};
 
 export async function getStaticProps(){
 
@@ -951,8 +983,23 @@ $$r_1 r_2 r_3 = (-1)^3 \\cdot \\frac{12}{2} = -6$$`, `The roots $-2$, $\\frac{3}
     ],
   };
 
+  const rationalRootSearchSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$2x^3 - 3x^2 - 8x + 12 = 0$',
+      rows: [
+        { step: 'List the divisors of the constant term $a_0$', example: '$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12$' },
+        { step: 'List the divisors of the leading coefficient $a_n$', example: '$\\pm 1, \\pm 2$' },
+        { step: 'Form the candidates $\\frac{p}{q}$, each value once', example: '$\\pm 1, \\pm 2, \\pm 3, \\pm 4,$ $\\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$' },
+        { step: 'Test candidates by substitution until one gives zero', example: '$P(2) = 16 - 12 - 16 + 12 = 0$' },
+        { step: 'Divide by the factor to lower the degree', example: '$(x - 2)(2x^2 + x - 6) = 0$' },
+      ],
+    },
+  };
+
    return {
   props: {
+    rationalRootSearchSteps,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -975,7 +1022,7 @@ $$r_1 r_2 r_3 = (-1)^3 \\cdot \\frac{12}{2} = -6$$`, `The roots $-2$, $\\frac{3}
   }
 }
    }
-export default function PolynomialEquationsPage({ formulaSummaryData, pitfallData,
+export default function PolynomialEquationsPage({ rationalRootSearchSteps, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1097,6 +1144,11 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
           sectionsContent.obj4.content,
           <div key={'unit-rationalRoots'} dangerouslySetInnerHTML={{ __html: demoUnits.rationalRoots }} />,
           `The theorem shortens the search but never guarantees that any candidate is a root.`,
+          <DiagramFrame key={'obj4-procedure'} id="rational-root-search-steps" title="The search on one cubic"
+            source="/algebra/equations/polynomial" related={false}
+            before={"The cubic of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={rationalRootSearchSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1123,11 +1175,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-polynomial-degree-five-beyond-matrix'}
+            id="polynomial-degree-five-beyond-matrix"
+            title="Degree Five and Beyond"
+            source="/algebra/equations/polynomial"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:From degree five on, no formula in radicals covers every equation, yet every root exists and can be computed to any precision.]@`,
         ]
     },
@@ -1137,11 +1193,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-polynomial-root-multiplicity-matrix'}
+            id="polynomial-root-multiplicity-matrix"
+            title="Root Multiplicity"
+            source="/algebra/equations/polynomial"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-multiplicity'} dangerouslySetInnerHTML={{ __html: demoUnits.multiplicity }} />,
           `Counted with multiplicity, the roots always add up to the degree.`,
         ]
@@ -1152,11 +1212,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-polynomial-relationships-between-roots-coefficients-matrix'}
+            id="polynomial-relationships-between-roots-coefficients-matrix"
+            title="Relationships Between Roots and Coefficients"
+            source="/algebra/equations/polynomial"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:A polynomial's coefficients already hold the sum and the product of its roots, so both are known before any root is found.]@`,
         ]
     },
@@ -1166,11 +1230,16 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-polynomial-summary-degree-matrix'}
+            id="polynomial-summary-degree-matrix"
+            title="Summary by Degree"
+            source="/algebra/equations/polynomial"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a polynomial equation](!/algebra/equations/methods/polynomial-equations) →@`,
         ]
     },
     {
@@ -1206,6 +1275,14 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_1x + a_0 = 0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

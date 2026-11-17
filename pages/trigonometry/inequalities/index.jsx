@@ -862,6 +862,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -879,10 +880,44 @@ import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/cu
 import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Inequality Forms and Their Solution Approaches"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Inequality form","features":[{"id":"c1","name":"First step","type":"text"},{"id":"c2","name":"Solution structure","type":"text"},{"id":"c3","name":"Repeats with period","type":"text"}],"items":[{"id":"r1","name":"Basic: f(x) ⋛ a, |a| < 1","values":{"c1":"solve f(x) = a for the boundary angles","c2":"union of intervals; open or closed by strictness","c3":"2π (sin, cos, sec, csc); π (tan, cot)"}},{"id":"r2","name":"Range-edge: f(x) ⋛ ±1 for sin or cos","values":{"c1":"compare a to the function's range [−1, 1]","c2":"isolated points (at the extrema), all reals, or empty","c3":"2π if isolated; n/a if all reals or empty"}},{"id":"r3","name":"Out-of-range: |a| > 1 for sin or cos","values":{"c1":"check whether a lies outside [−1, 1] — no boundary equation needed","c2":"all reals or empty","c3":"n/a"}},{"id":"r4","name":"Compound: a ⋛ f(x) ⋛ b","values":{"c1":"solve each one-sided inequality separately","c2":"intersection of the two solution sets","c3":"period of f"}},{"id":"r5","name":"Transformed: A·f(Bx+C)+D ⋛ a","values":{"c1":"isolate f(·); substitute u = Bx+C and solve in u","c2":"basic-form solution in u, scaled by 1/|B| and shifted; |B| copies per outer period when B is an integer","c3":"period of f scaled by 1/|B|"}},{"id":"r6","name":"Reciprocal: 1/f(x) ⋛ a (sec, csc)","values":{"c1":"split by sign of f(x); take the reciprocal carefully on each branch","c2":"intersection of sign condition and reciprocal-form inequality; asymptotes always excluded","c3":"period of f"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Solving Sine Inequalities"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Range of a","features":[{"id":"c1","name":"sin(x) > a","type":"text"},{"id":"c2","name":"sin(x) ≥ a","type":"text"},{"id":"c3","name":"sin(x) < a","type":"text"},{"id":"c4","name":"sin(x) ≤ a","type":"text"}],"items":[{"id":"r1","name":"−1 < a < 1","values":{"c1":"standard intervals, open endpoints","c2":"standard intervals, closed endpoints","c3":"standard intervals, open endpoints","c4":"standard intervals, closed endpoints"}},{"id":"r2","name":"a = 1","values":{"c1":"no solution","c2":"x = π/2 + 2nπ only (isolated points)","c3":"all real x except π/2 + 2nπ","c4":"all real x"}},{"id":"r3","name":"a = −1","values":{"c1":"all real x except 3π/2 + 2nπ","c2":"all real x","c3":"no solution","c4":"x = 3π/2 + 2nπ only (isolated points)"}},{"id":"r4","name":"a > 1","values":{"c1":"no solution","c2":"no solution","c3":"all real x","c4":"all real x"}},{"id":"r5","name":"a < −1","values":{"c1":"all real x","c2":"all real x","c3":"no solution","c4":"no solution"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("The Unit Circle Method"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"What you draw","type":"text"},{"id":"c2","name":"How you read the solution","type":"text"},{"id":"c3","name":"Best applied to","type":"text"}],"items":[{"id":"r1","name":"Graphical","values":{"c1":"the function's curve plus the horizontal line y = a","c2":"intervals where the curve lies above (> a) or below (< a) the line","c3":"any inequality — especially transformed functions A·f(Bx+C)+D and tangent"}},{"id":"r2","name":"Unit circle","values":{"c1":"a horizontal line y = a (for sine) or vertical line x = a (for cosine) cutting the circle","c2":"the arc on the satisfying side; boundary angles read off at intersection points","c3":"basic sin / cos inequalities; geometric intuition for boundary angles"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Solutions as Intervals"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Trigonometric equation","type":"text"},{"id":"c2","name":"Trigonometric inequality","type":"text"}],"items":[{"id":"r1","name":"Solution form","values":{"c1":"isolated points","c2":"intervals (or unions of intervals)"}},{"id":"r2","name":"Boundary points","values":{"c1":"the solution itself","c2":"endpoints of solution intervals"}},{"id":"r3","name":"Endpoint inclusion","values":{"c1":"not a distinction (equality is the answer)","c2":"open if strict (>, <); closed if non-strict (≥, ≤)"}},{"id":"r4","name":"Asymptote handling","values":{"c1":"function defined at every solution","c2":"always excluded — function undefined there"}},{"id":"r5","name":"General-solution form","values":{"c1":"x = a + n·period","c2":"(a, b) + n·period (and unions)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a trigonometric inequality", href: "/trigonometry/methods/trig-inequalities", desc: "Solve the matching equation, then read the intervals off the unit circle or the graph.", level: "composite", here: "#9" },
+    ] },
+    { title: "More trigonometry methods", items: [
+      { skill: "Evaluate inverse trig functions", href: "/trigonometry/methods/inverse-trig-values", desc: "Find the one angle in the restricted range; compositions with a right triangle.", level: "composite" },
+      { skill: "Graph a sine or cosine function", href: "/trigonometry/methods/graph-sine-cosine", desc: "Read amplitude, period, phase shift and midline from $y = A\\sin(B(x - C)) + D$, then plot five key points.", level: "composite" },
+      { skill: "Find trig values with the unit circle", href: "/trigonometry/methods/unit-circle-values", desc: "Any standard angle: reduce it, find the quadrant and reference angle, attach the sign.", level: "composite" },
+    ] },
+    { title: "Trig equation methods", items: [
+      { skill: "Solve a basic trig equation", href: "/trigonometry/equations/methods/basic-trig-equations", desc: "$\\sin x = a$, $\\cos x = a$, $\\tan x = a$ on one turn: reference angle, then the two quadrants.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1694,8 +1729,36 @@ Two methods dominate. The graphical approach plots the function and a horizontal
     ],
   };
 
+  const transformedInequalitySteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$2\\sin(3x) - 1 > 0$ on $[0, 2\\pi)$',
+      rows: [
+        { step: 'Isolate the trigonometric expression', example: '$\\sin(3x) > \\frac{1}{2}$' },
+        { step: 'Solve for the inner argument', stepSub: 'Let $u = 3x$', example: '$u \\in \\left(\\frac{\\pi}{6} + 2n\\pi,\\ \\frac{5\\pi}{6} + 2n\\pi\\right)$' },
+        { step: 'Recover the variable', stepSub: 'Divide by $3$', example: '$x \\in \\left(\\frac{\\pi}{18} + \\frac{2n\\pi}{3},\\ \\frac{5\\pi}{18} + \\frac{2n\\pi}{3}\\right)$' },
+        { step: 'Restrict to the target interval', stepSub: 'Substitute $n = 0, 1, 2$', example: '$\\left(\\frac{\\pi}{18}, \\frac{5\\pi}{18}\\right)$, $\\left(\\frac{13\\pi}{18}, \\frac{17\\pi}{18}\\right)$, $\\left(\\frac{25\\pi}{18}, \\frac{29\\pi}{18}\\right)$' },
+      ],
+    },
+  };
+
+  const graphicalMethodSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\cos(x) > \\frac{1}{2}$ on $[0, 2\\pi)$',
+      rows: [
+        { step: 'Graph the function', example: '$y = \\cos(x)$ on $[0, 2\\pi)$' },
+        { step: 'Draw the boundary line', example: '$y = \\frac{1}{2}$' },
+        { step: 'Identify the intersection points', stepSub: 'The solutions of the corresponding equation', example: '$x = \\frac{\\pi}{3}$ and $x = \\frac{5\\pi}{3}$' },
+        { step: 'Read the solution intervals', stepSub: 'Where the curve lies above the line', example: '$\\left[0, \\frac{\\pi}{3}\\right) \\cup \\left(\\frac{5\\pi}{3}, 2\\pi\\right)$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    graphicalMethodSteps,
+    transformedInequalitySteps,
     pitfallData,
     trigInequalityDecision,
     demoUnits,
@@ -1720,7 +1783,7 @@ Two methods dominate. The graphical approach plots the function and a horizontal
     }
    }
 
-export default function InequalitiesPage({ pitfallData,trigInequalityDecision, 
+export default function InequalitiesPage({ graphicalMethodSteps, transformedInequalitySteps, pitfallData,trigInequalityDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -1781,8 +1844,15 @@ export default function InequalitiesPage({ pitfallData,trigInequalityDecision,
           <div key={'unit-solutionsAsIntervals'} dangerouslySetInnerHTML={{ __html: demoUnits.solutionsAsIntervals }} />,
           `Whether each endpoint belongs to the answer is then decided by whether the inequality is strict.`,
           `The two regimes — equation and inequality — contrast on every structural attribute that matters for how the solution is built and written, as the comparison below makes explicit.`,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-inequalities-solutions-as-intervals-matrix'}
+            id="inequalities-solutions-as-intervals-matrix"
+            title="Solutions as Intervals"
+            source="/trigonometry/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:An inequality is answered by whole stretches of angles, not by points, and the stretches repeat with the function's period.]@`,
         ],
       },
@@ -1828,6 +1898,11 @@ Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\p
           sectionsContent.obj2.content,
                   <div key={'unit-graphical'} dangerouslySetInnerHTML={{ __html: demoUnits.graphical }} />,
           `The method turns every inequality into a question about where a familiar curve lies relative to a line.`,
+          <DiagramFrame key={'obj2-procedure'} id="graphical-method-steps" title="The four steps on one inequality"
+            source="/trigonometry/inequalities" related={false}
+            before={"The four steps on the inequality from this section's example. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={graphicalMethodSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1838,8 +1913,15 @@ Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\p
           sectionsContent.obj3.content,
           <div key={'unit-unitCircleMethod'} dangerouslySetInnerHTML={{ __html: demoUnits.unitCircleMethod }} />,
           `For cosine the same reasoning applies to a vertical line, since cosine is the $x$-coordinate.`,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-inequalities-unit-circle-method-matrix'}
+            id="inequalities-unit-circle-method-matrix"
+            title="The Unit Circle Method"
+            source="/trigonometry/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1848,8 +1930,15 @@ Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\p
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-inequalities-solving-sine-inequalities-matrix'}
+            id="inequalities-solving-sine-inequalities-matrix"
+            title="Solving Sine Inequalities"
+            source="/trigonometry/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1877,6 +1966,11 @@ Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\p
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame key={'obj7-procedure'} id="transformed-trig-inequality-steps" title="The four steps in one view"
+            source="/trigonometry/inequalities" related={false}
+            before={"The four steps of this section side by side with their results. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={transformedInequalitySteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1913,8 +2007,15 @@ Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\p
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-inequalities-summary-inequality-forms-their-matrix'}
+            id="inequalities-summary-inequality-forms-their-matrix"
+            title="Summary of Inequality Forms and Their Solution Approaches"
+            source="/trigonometry/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
           `The six forms as a checklist. The first three checks peel off the structure around the function; what is left is a basic inequality, and the size of $a$ decides its shape.`,
           <DiagramFrameV2
             key={'obj9-decision'}
@@ -1925,6 +2026,7 @@ Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\p
             <DecisionBox data={trigInequalityDecision} />
           </DiagramFrameV2>,
           `Two of the exits need no solving at all. When $|a| > 1$ or $|a| = 1$ for sine or cosine, comparing $a$ with the range $[-1, 1]$ already gives the answer, and the [table of edge cases](!#4) lists every one of them.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a trigonometric inequality](!/trigonometry/methods/trig-inequalities) →@`,
         ]
     },
     // {
@@ -2000,6 +2102,14 @@ Applying arcsin to both sides of $\\sin(x) > \\frac{1}{2}$ gives $x > \\frac{\\p
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

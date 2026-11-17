@@ -21,12 +21,14 @@ const regularPolygonAngles = {
     'so each interior angle is 2 · 54° = 108° = 180° − 360°/5. For n sides: 180° − 360°/n. Drag A to ' +
     'turn and resize the pentagon, or O to move it.',
   hint: 'Drag A to turn and resize the pentagon, or O to move it',
-  labelCenter: ['O'],
+  // names point away from a spot between O and B, so O is named in the gap between the
+  // radii OD and OE, away from the triangles at B the proof works on
+  labelCenter: ['O', 'O', 'O', 'B'],
   // Frame for the circle (radius about 140 about O) and its labels.
   viewBox: [60, 50, 440, 360],
 
   model: {
-    points: { O: { x: 280, y: 225 }, A: { x: 280, y: 85 } },
+    points: { O: { x: 280, y: 225, labelDist: 26 }, A: { x: 280, y: 85 } },
     params: {},
     composites: [],
     objects: [
@@ -40,13 +42,14 @@ const regularPolygonAngles = {
       ...V.map((v, i) => ({ id: 'ts' + v, type: 'ticks', of: [v, V[(i + 1) % 5]], n: 2 })),
       ...V.map((v) => ({ id: 'r' + v, type: 'segment', of: ['O', v] })),
       ...V.map((v) => ({ id: 'tr' + v, type: 'ticks', of: ['O', v], n: 1 })),
-      ...V.map((v, i) => ({ id: 'c' + v, type: 'angle', at: 'O', from: v, to: V[(i + 1) % 5], color: 'alpha', label: 'θ' })),
+      ...V.map((v, i) => ({ id: 'c' + v, type: 'angle', at: 'O', from: v, to: V[(i + 1) % 5], color: 'alpha', label: 'θ', radius: 38 })),
       { id: 'pOAB', type: 'polygon', of: ['O', 'A', 'B'], color: 'beta' },
       { id: 'pOBC', type: 'polygon', of: ['O', 'B', 'C'], color: 'gamma' },
-      { id: 'fA', type: 'angle', at: 'A', from: 'O', to: 'B', color: 'beta', label: 'φ' },
-      { id: 'fB1', type: 'angle', at: 'B', from: 'A', to: 'O', color: 'beta', label: 'φ' },
-      { id: 'fB2', type: 'angle', at: 'B', from: 'O', to: 'C', color: 'gamma', label: 'φ' },
-      { id: 'iB', type: 'angle', at: 'B', from: 'A', to: 'C', color: 'delta', label: 'β', radius: 56 }
+      { id: 'fA', type: 'angle', at: 'A', from: 'O', to: 'B', color: 'beta', label: 'φ', radius: 18 },
+      { id: 'fB1', type: 'angle', at: 'B', from: 'A', to: 'O', color: 'beta', label: 'φ', radius: 18 },
+      { id: 'fB2', type: 'angle', at: 'B', from: 'O', to: 'C', color: 'gamma', label: 'φ', radius: 18 },
+      // β is named off the bisector BO, which is a drawn radius, so that its name is not on a line
+      { id: 'iB', type: 'angle', at: 'B', from: 'A', to: 'C', color: 'delta', label: 'β', radius: 80, labelAt: 0.82 }
     ]
   },
 
@@ -101,7 +104,7 @@ const regularPolygonAngles = {
   // a radius that fits the frame and leaves room for the labels
   isValid: (P) => {
     const r = dist(P.O, P.A);
-    const inFrame = (p) => p && p.x > 75 && p.x < 485 && p.y > 64 && p.y < 396;
+    const inFrame = (p) => p && p.x > 90 && p.x < 470 && p.y > 84 && p.y < 376;
     return r > 95 && r < 150 && ['O', ...V].every((k) => inFrame(P[k]));
   }
 };

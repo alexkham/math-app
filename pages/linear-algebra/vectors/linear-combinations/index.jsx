@@ -791,6 +791,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 2 tables (obj5 comparison, obj8 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -802,6 +803,25 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_combinationsFill = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  scale: {
+    axisLabel: 'vectors',
+    initial: 1,
+    steps: [
+      { key: '1', name: 'A line through the origin', form: '$c\\mathbf{v}$', short: 'one nonzero vector',
+        text: 'A single nonzero vector $\\mathbf{v}$ generates all its scalar multiples. Moving $c$ from $-\\infty$ to $\\infty$ sweeps the entire line, passing through the origin at $c = 0$.' },
+      { key: '2', name: 'A plane through the origin', form: '$c_1\\mathbf{u} + c_2\\mathbf{v}$', short: 'two vectors that are not parallel',
+        text: 'Varying both coefficients independently fills the plane that contains $\\mathbf{u}$ and $\\mathbf{v}$. In $\\mathbb{R}^2$ that is already the entire space; in $\\mathbb{R}^3$ it leaves one dimension unreached.' },
+      { key: '3', name: 'The full space $\\mathbb{R}^3$', form: '$c_1\\mathbf{u} + c_2\\mathbf{v} + c_3\\mathbf{w}$', short: 'three vectors not in the same plane',
+        text: 'Every point in $\\mathbb{R}^3$ is reachable. If the three vectors are coplanar, the third contributes nothing new and the span remains a plane.' }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import vectorLinCombDiagrams from '@/app/components/linear-algebra copy/matrix/vectorLinCombDiagrams'
@@ -809,8 +829,34 @@ import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-vi
 import vectorPictureDiagrams from '@/app/components/linear-algebra/multiplication/vectorPictureDiagrams'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Trivial and Non-Trivial Combinations"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Combination","features":[{"id":"c1","name":"Coefficient pattern","type":"text"},{"id":"c2","name":"What it produces","type":"text"},{"id":"c3","name":"What it tells you about the vectors","type":"text"}],"items":[{"id":"r1","name":"Trivial","values":{"c1":"every cᵢ = 0","c2":"always the zero vector **0**, regardless of the **v**ᵢ","c3":"nothing — it exists for every set and reveals no structure"}},{"id":"r2","name":"Non-trivial","values":{"c1":"at least one cᵢ ≠ 0","c2":"depends on the vectors and the specific coefficients chosen","c3":"if a non-trivial combination produces **0**, the vectors are linearly [dependent](!/linear-algebra/vector-spaces/linear-independence) — at least one is a combination of the others"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Write a vector as a linear combination", href: "/linear-algebra/vectors/methods/linear-combinations", desc: "Find the weights c₁, c₂, … by solving one linear equation per component.", level: "composite", here: "#1" },
+    ] },
+    { title: "More vector methods", items: [
+      { skill: "Multiply a vector by a scalar", href: "/linear-algebra/vectors/methods#scalar-multiplication", desc: "A number in front of a vector: $-3(2, -1, 4)$, $\\tfrac{1}{2}\\mathbf{v}$, $5\\mathbf{u}$.", level: "atomic" },
+      { skill: "Add or subtract vectors", href: "/linear-algebra/vectors/methods#vector-addition", desc: "Two vectors of the same dimension joined by $+$ or $-$: $(3, -1, 2) + (1, 4, -5)$, $\\mathbf{u} - \\mathbf{v}$.", level: "atomic" },
+      { skill: "Project one vector onto another", href: "/linear-algebra/vectors/methods/vector-projection", desc: "Scale the target vector by the dot product over its squared length; the rest is perpendicular.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+    ] },
+    { title: "Vector space methods", items: [
+      { skill: "Test whether a vector is in a span", href: "/linear-algebra/vector-spaces/methods/span-test", desc: "Row reduce the augmented matrix: consistent means yes. A pivot in every row means the set spans Rⁿ.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vectors/methods", label: "All vector methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1581,6 +1627,7 @@ In the colour-matching experiments of the late 1920s behind the 1931 CIE colour 
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to write a vector as a linear combination](!/linear-algebra/vectors/methods/linear-combinations) →@`,
         ]
     },
     {
@@ -1591,6 +1638,15 @@ In the colour-matching experiments of the late 1920s behind the 1931 CIE colour 
           sectionsContent.obj2.content,
           <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
           `Whether the coefficients sweep out a line or a plane is decided entirely by the directions of the vectors, not by how many of them there are — the idea the next section names as span.`,
+          <DiagramFrame
+            key={'taxonomy-linear-combinations-geometric-interpretation'}
+            id="linear-combinations-geometric-interpretation"
+            title="Geometric Interpretation"
+            source="/linear-algebra/vectors/linear-combinations"
+            related={false}
+          >
+            <Taxonomy data={tx_combinationsFill} variant="scale" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1616,11 +1672,15 @@ In the colour-matching experiments of the late 1920s behind the 1931 CIE colour 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-combinations-trivial-non-trivial-matrix'}
+            id="linear-combinations-trivial-non-trivial-matrix"
+            title="Trivial and Non-Trivial Combinations"
+            source="/linear-algebra/vectors/linear-combinations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:Any vectors reach zero with all-zero coefficients; only a second way of reaching it reveals a redundant vector.]@`,
         ]
     },
@@ -1676,6 +1736,14 @@ In the colour-matching experiments of the late 1920s behind the 1931 CIE colour 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

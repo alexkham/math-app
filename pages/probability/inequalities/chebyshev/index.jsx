@@ -648,6 +648,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -668,7 +669,28 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Chebyshev's Inequality at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Note / example","type":"text"}],"items":[{"id":"r1","name":"Applies to","values":{"c1":"any random variable with finite mean and finite variance","c2":"no symmetry, shape, or boundedness assumed; discrete or continuous"}},{"id":"r2","name":"Information used","values":{"c1":"[E[X]](!/probability/expected-value) and [Var(X)](!/probability/variance)","c2":"one extra moment beyond Markov"}},{"id":"r3","name":"Statement","values":{"c1":"P(|X − μ| ≥ kσ) ≤ 1 / k², for any k > 0","c2":"equivalently, P(|X − μ| ≥ ε) ≤ σ² / ε²"}},{"id":"r4","name":"What it bounds","values":{"c1":"two-sided deviation from the mean","c2":"covers both tails simultaneously, unlike Markov"}},{"id":"r5","name":"Plain reading","values":{"c1":"small variance ⟹ large deviations from μ must be rare","c2":"a guarantee, not a description of typical behaviour"}},{"id":"r6","name":"Why it improves on Markov","values":{"c1":"applies Markov to (X − μ)² and converts variance into a tail bound","c2":"tighter bound while still distribution-free"}},{"id":"r7","name":"Typical role","values":{"c1":"bound deviations, analyze averages and estimators","c2":"first meaningful bound when only mean and variance are known"}},{"id":"r8","name":"Key application","values":{"c1":"classical proof of the [Law of Large Numbers](!/probability/large-numbers-law)","c2":"Var(X̄ₙ) = σ² / n shrinks ⟹ concentration around μ"}},{"id":"r9","name":"Limitation","values":{"c1":"sees only variance, not shape, symmetry, or tail behaviour","c2":"two distributions with the same σ² receive the same bound"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Bound a probability with Chebyshev's inequality", href: "/probability/random-variables/methods/chebyshev-inequality", desc: "Measure the distance from the mean in standard deviations, then bound: $P(|X - \\mu| \\geq k\\sigma) \\leq 1/k^2$.", level: "composite", here: "#5" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the standard deviation of a random variable", href: "/probability/random-variables/methods/standard-deviation", desc: "Find the variance first, then take its square root; the result is in the units of $X$.", level: "composite" },
+      { skill: "Bound a probability with Markov's inequality", href: "/probability/random-variables/methods/markov-inequality", desc: "For a nonnegative variable, bound the upper tail by the mean: $P(X \\geq a) \\leq E[X]/a$.", level: "composite" },
+      { skill: "Approximate a probability with the central limit theorem", href: "/probability/random-variables/methods/clt-approximation", desc: "Scale the mean and SD to the sum or the average of $n$ terms, standardize, and read $\\Phi(z)$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1452,6 +1474,7 @@ With variance $4$ and a deviation of $3$, taking $\\sigma = 4$ gives $k = \\frac
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to bound a probability with Chebyshev's inequality](!/probability/random-variables/methods/chebyshev-inequality) →@`,
         ]
     },
     {
@@ -1501,8 +1524,15 @@ In the die example the quantity being controlled is the average of the rolls, an
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-chebyshev-chebyshev-s-inequality-at-matrix'}
+            id="chebyshev-chebyshev-s-inequality-at-matrix"
+            title="Chebyshev's Inequality at a Glance"
+            source="/probability/inequalities/chebyshev"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1520,6 +1550,14 @@ In the die example the quantity being controlled is the average of the rolls, an
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

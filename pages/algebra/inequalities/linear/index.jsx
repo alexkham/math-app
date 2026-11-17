@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,13 +15,57 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import equationVisualizerDiagrams from '@/app/components/algebra/equations/visualizer/equationVisualizerDiagrams'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Linear Inequality Forms"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"Example","type":"text"},{"id":"c2","name":"Preparation step","type":"text"},{"id":"c3","name":"Then solve as","type":"text"}],"items":[{"id":"r1","name":"Single-step","values":{"c1":"3x > 12","c2":"none","c3":"apply one property of inequality"}},{"id":"r2","name":"Multi-step","values":{"c1":"4x − 7 ≤ 2x + 11","c2":"none (already simplified)","c3":"gather, then isolate"}},{"id":"r3","name":"With parentheses","values":{"c1":"5 − 3(2x + 1) ≥ 4x − 8","c2":"distribute","c3":"multi-step"}},{"id":"r4","name":"With fractions","values":{"c1":"x/3 − (x + 2)/4 > 1","c2":"multiply every term by the LCD (positive — no flip)","c3":"multi-step"}},{"id":"r5","name":"With decimals","values":{"c1":"0.4x − 1.5 ≤ 0.1x + 3","c2":"multiply by 10ⁿ to clear decimals","c3":"multi-step"}},{"id":"r6","name":"Literal","values":{"c1":"ax + b > c, solve for x","c2":"divide by a; case-split on sign of a (preserve if a > 0, reverse if a < 0)","c3":"multi-step + cases"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Special Cases"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Outcome","features":[{"id":"c1","name":"When it occurs","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Solution set","type":"text"}],"items":[{"id":"r1","name":"Always true","values":{"c1":"variable terms cancel; remaining constant statement is true","c2":"2(x + 4) > 2x + 3 → 8 > 3","c3":"(−∞, ∞) — all real numbers"}},{"id":"r2","name":"Never true","values":{"c1":"variable terms cancel; remaining constant statement is false","c2":"5(x − 1) ≤ 5x − 9 → −5 ≤ −9","c3":"∅ — empty"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Solving with the Properties of Inequality"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation on both sides","features":[{"id":"c1","name":"Direction","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"add or subtract any real number","values":{"c1":"preserved","c2":"always safe; behaves exactly like equations"}},{"id":"r2","name":"multiply or divide by a positive constant","values":{"c1":"preserved","c2":"behaves like equations"}},{"id":"r3","name":"multiply or divide by a negative constant","values":{"c1":"reversed","c2":"the defining rule: 3 < 5 becomes −3 > −5"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a linear inequality", href: "/algebra/inequalities/methods/linear-inequalities", desc: "Solve like an equation, but flip the sign when multiplying or dividing by a negative.", level: "composite", here: "#2" },
+      { skill: "Solve a compound inequality", href: "/algebra/inequalities/methods/compound-inequalities", desc: "\"And\" keeps the overlap, \"or\" keeps both pieces; a three-part inequality is solved all at once.", level: "composite", here: "#5" },
+    ] },
+    { title: "More inequality methods", items: [
+      { skill: "Solve an absolute value inequality", href: "/algebra/inequalities/methods/absolute-value-inequalities", desc: "Less than: one three-part inequality. Greater than: two pieces joined by or.", level: "composite" },
+      { skill: "Choose the right method for an inequality", href: "/algebra/inequalities/methods/which-inequality-method", desc: "A decision tree from the shape of the inequality to the method that solves it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/algebra/inequalities/methods", label: "All inequality methods" },
+};
+
+// IntervalLine: the two examples of obj4, dot and bracket at the boundary point
+const il_boundaryForms = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  notation: {
+    points: { '4': 4, '9': 9 },
+    range: [0, 12],
+    ticks: true,
+    items: [
+      { from: '4', to: 'inf' },
+      { from: '-inf', to: '9', toIn: true }
+    ],
+    infinityNote: { label: '$\\infty$ is never bracketed', text: 'The shading runs on without end, so there is no endpoint to include: the infinite side always takes a round bracket.' },
+    note: { label: 'Dot and bracket', text: 'A strict sign leaves the boundary out: open dot, round bracket. A non-strict sign takes it in: solid dot, square bracket.' }
+  }
+};
 
 export async function getStaticProps(){
 
@@ -938,12 +983,17 @@ $$ax + b < 0$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-solving-properties-inequality-matrix'}
+            id="linear-solving-properties-inequality-matrix"
+            title="Solving with the Properties of Inequality"
+            source="/algebra/inequalities/linear"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           `@academic[punchline:An inequality is solved like an equation, except that multiplying or dividing by a negative number reverses its direction.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a linear inequality](!/algebra/inequalities/methods/linear-inequalities) →@`,
         ]
     },
 
@@ -969,6 +1019,16 @@ $$ax + b < 0$$]@`,
           sectionsContent.obj4.content,
           <div key={'unit-boundary'} dangerouslySetInnerHTML={{ __html: demoUnits.boundary }} />,
           `The equation finds the boundary; one test value or the inequality symbol finds the side.`,
+          <DiagramFrame
+            key={'boundary-interval-line'}
+            id="boundary-dot-and-bracket"
+            title="Dot and bracket at the boundary"
+            source="/algebra/inequalities/linear"
+            related={false}
+            before={"The two examples above. Click the dot to include or exclude the boundary point and watch the bracket follow."}
+          >
+            <IntervalLine data={il_boundaryForms} variant="notation" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -979,6 +1039,7 @@ $$ax + b < 0$$]@`,
           sectionsContent.obj5.content,
           <div key={'unit-compound'} dangerouslySetInnerHTML={{ __html: demoUnits.compound }} />,
           `An AND of two rays pointing the wrong way is empty; an OR of overlapping rays is the whole line.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a compound inequality](!/algebra/inequalities/methods/compound-inequalities) →@`,
         ]
     },
     {
@@ -997,11 +1058,15 @@ $$ax + b < 0$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-special-cases-matrix-2'}
+            id="linear-special-cases-matrix-2"
+            title="Special Cases"
+            source="/algebra/inequalities/linear"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Once the variable cancels, the inequality is a plain true-or-false statement: its solution set is every real number or none.]@`,
         ]
     },
@@ -1029,11 +1094,15 @@ $$ax + b < 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-summary-linear-inequality-forms-matrix'}
+            id="linear-summary-linear-inequality-forms-matrix"
+            title="Summary of Linear Inequality Forms"
+            source="/algebra/inequalities/linear"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1051,6 +1120,14 @@ $$ax + b < 0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

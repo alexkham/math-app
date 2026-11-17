@@ -126,7 +126,7 @@ const logicMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Build a Truth Table | Learn Math Class',
         description: 'Build a truth table step by step: count the 2^n rows, fill the letter columns, add one column per subformula and read the result. Worked examples and mistakes.',
@@ -258,7 +258,7 @@ const logicMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Check Whether a Formula Is a Tautology | Learn Math Class',
         description: 'Check whether a formula is a tautology: build its truth table or assume it is false and find a clash. Worked examples, a counterexample and common mistakes.',
@@ -389,7 +389,7 @@ const logicMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Check Whether a Formula Is a Contradiction | Learn Math Class',
         description: 'Check whether a formula is a contradiction: show every truth table row is F, or reduce it with the laws to P and not P. Worked examples and common mistakes.',
@@ -787,7 +787,7 @@ const logicMethods = {
       tag: 'Composite',
       meta: '6 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Simplify a Logical Expression | Learn Math Class',
         description: 'Simplify a logical expression in a fixed order: remove arrows, apply De Morgan, cancel double negations, factor and collapse. Worked examples and mistakes.',
@@ -1182,7 +1182,7 @@ const logicMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Negate a Conditional Statement | Learn Math Class',
         description: 'Negate a conditional statement: the negation of P → Q is P and not Q, not another if-then. A step-by-step law chain, examples in symbols and words, mistakes.',
@@ -1308,7 +1308,7 @@ const logicMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Write the Converse, Inverse and Contrapositive | Learn Math Class',
         description: 'Write the converse, inverse and contrapositive of an if-then statement, and see why only the contrapositive is equivalent. Worked examples and common mistakes.',

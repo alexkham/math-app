@@ -927,6 +927,7 @@
 
 // tables-optimized: v4 | 2026-05-20 | 3 tables (obj2 comparison, obj3 aggregation, obj11 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -939,6 +940,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -947,8 +949,31 @@ import renderMatrixGridV3 from '@/app/utils/illustrations/linear-algebra/matrix/
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Linearity"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Trace","type":"text"},{"id":"c2","name":"[Determinant](!/linear-algebra/determinants)","type":"text"}],"items":[{"id":"r1","name":"Additivity","values":{"c1":"tr(A + B) = tr(A) + tr(B)","c2":"det(A + B) ≠ det(A) + det(B) in general"}},{"id":"r2","name":"Multiplicativity","values":{"c1":"tr(AB) has no simple relation to tr(A)·tr(B)","c2":"det(AB) = det(A) · det(B)"}},{"id":"r3","name":"Transpose","values":{"c1":"tr(Aᵀ) = tr(A)","c2":"det(Aᵀ) = det(A)"}},{"id":"r4","name":"Eigenvalue link","values":{"c1":"sum: λ₁ + λ₂ + ⋯ + λₙ","c2":"product: λ₁ · λ₂ · ⋯ · λₙ"}},{"id":"r5","name":"Similarity invariance","values":{"c1":"tr(P⁻¹AP) = tr(A)","c2":"det(P⁻¹AP) = det(A)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Trace of Special Matrices"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Matrix type","features":[{"id":"c1","name":"Defining condition","type":"text"},{"id":"c2","name":"Trace","type":"text"}],"items":[{"id":"r1","name":"[Diagonal](!/linear-algebra/matrix/types) D = diag(d₁,…,dₙ)","values":{"c1":"nonzero entries only on the diagonal","c2":"d₁ + d₂ + ⋯ + dₙ"}},{"id":"r2","name":"Scalar cI","values":{"c1":"every diagonal entry equals c","c2":"cn"}},{"id":"r3","name":"Identity Iₙ","values":{"c1":"diagonal with every diagonal entry equal to 1","c2":"n"}},{"id":"r4","name":"Skew-symmetric","values":{"c1":"Aᵀ = −A (forces zero diagonal)","c2":"0"}},{"id":"r5","name":"Idempotent","values":{"c1":"A² = A","c2":"[rank](!/linear-algebra/matrix/rank)(A)"}},{"id":"r6","name":"Nilpotent","values":{"c1":"Aᵏ = O for some k ≥ 1","c2":"0"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the trace of a matrix", href: "/linear-algebra/matrix/methods/trace", desc: "Add the diagonal entries; use linearity and $\\operatorname{tr}(AB) = \\operatorname{tr}(BA)$ to skip products.", level: "composite", here: "#1" },
+    ] },
+    { title: "More matrix methods", items: [
+      { skill: "Multiply matrices", href: "/linear-algebra/matrix/methods/matrix-multiplication", desc: "Check the inner sizes, then fill each entry with a row of the first times a column of the second.", level: "composite" },
+      { skill: "Compute powers of a matrix", href: "/linear-algebra/matrix/methods/matrix-powers", desc: "Multiply the matrix by itself, square repeatedly for high powers, or use a diagonal or repeating pattern.", level: "composite" },
+      { skill: "Identify the type of a matrix", href: "/linear-algebra/matrix/methods/identify-matrix-type", desc: "Check the shape, the zero pattern, the transpose and a few products to name the type.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/matrix/methods", label: "All matrix methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1980,6 +2005,7 @@ export default function MatrixTracePage({ proofStepsData3, proofStepsData2, proo
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the trace of a matrix](!/linear-algebra/matrix/methods/trace) →@`,
         ]
     },
     {
@@ -2012,8 +2038,15 @@ export default function MatrixTracePage({ proofStepsData3, proofStepsData2, proo
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-trace-linearity-matrix'}
+            id="trace-linearity-matrix"
+            title="Linearity"
+            source="/linear-algebra/matrix/trace"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2022,8 +2055,15 @@ export default function MatrixTracePage({ proofStepsData3, proofStepsData2, proo
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-trace-trace-special-matrices-matrix'}
+            id="trace-trace-special-matrices-matrix"
+            title="Trace of Special Matrices"
+            source="/linear-algebra/matrix/trace"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2151,6 +2191,14 @@ export default function MatrixTracePage({ proofStepsData3, proofStepsData2, proo
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

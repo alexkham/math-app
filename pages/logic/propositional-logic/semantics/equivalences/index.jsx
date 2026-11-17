@@ -422,6 +422,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../../../pages.css'
@@ -443,6 +444,22 @@ import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import logicNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/logic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Logic methods", items: [
+      { skill: "Push a negation into a bracket", href: "/logic/methods#de-morgan", desc: "A negation stands in front of a bracket joined by $\\land$ or $\\lor$: $\\neg(P \\land Q)$, $\\neg(P \\lor \\neg Q)$, $\\neg(\\neg P \\lor Q)$.", level: "atomic" },
+      { skill: "Distribute and over or, or or over and", href: "/logic/methods#distributive-laws", desc: "A part is joined by $\\land$ to a bracket with $\\lor$, or by $\\lor$ to a bracket with $\\land$, or two terms share a part you want to factor out: $P \\land (Q \\lor R)$, $P \\lor (Q \\land \\neg R)$, $(P \\land Q) \\lor (P \\land \\neg Q)$.", level: "atomic" },
+      { skill: "Remove a double negation", href: "/logic/methods#double-negation", desc: "Two negations act on the same formula, often after De Morgan's law or a contrapositive: $\\neg\\neg P$, $\\neg\\neg(P \\land \\neg Q)$, $\\neg Q \\to \\neg\\neg P$.", level: "atomic" },
+      { skill: "Rewrite an implication without the arrow", href: "/logic/methods#implication-equivalence", desc: "An arrow has to go before you can use De Morgan, distribute, or reach a normal form: $P \\to Q$, $(P \\land Q) \\to R$, $\\neg P \\to Q$.", level: "atomic" },
+      { skill: "Simplify a logical expression", href: "/logic/methods/simplify-propositions", desc: "Remove arrows, push negations onto letters, then factor and collapse with the complement, identity and absorption laws.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1093,6 +1110,14 @@ Rows 1, 3 and 4 of the table translate between the arrow and the other connectiv
                 <MistakeFix data={pitfallData} variant="trace" />
               </DiagramFrame>,
             ]
+          },
+          {
+              id:'skills',
+              title:'Skills You Should Learn',
+              link:``,
+              content:[
+                <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+              ]
           },
           // faq: rendered component — must be built here, not in getStaticProps
           {

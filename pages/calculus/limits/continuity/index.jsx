@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj8 aggregation, obj9 aggregation, obj13 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,12 +18,41 @@ import functionContinuityDiagrams from '@/app/components/functions/continuity/fu
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Oscillating Discontinuity"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Discontinuity type","features":[{"id":"c1","name":"Which condition fails","type":"text"},{"id":"c2","name":"Graph signal","type":"text"},{"id":"c3","name":"Removable?","type":"verdict"}],"items":[{"id":"r1","name":"Removable","values":{"c1":"limit exists, but f(a) is undefined OR f(a) ≠ lim$_{x → a}$ f(x)","c2":"a single hole in the curve at (a, L)","c3":"yes"}},{"id":"r2","name":"Jump","values":{"c1":"both [one-sided limits](!/calculus/limits/one-sided) exist but differ — two-sided limit fails to exist","c2":"a step / gap between two finite levels","c3":"no"}},{"id":"r3","name":"Infinite","values":{"c1":"at least one one-sided limit is ±∞ — limit fails to exist (in the finite sense)","c2":"[vertical asymptote](!/calculus/limits/infinity) at x = a","c3":"no"}},{"id":"r4","name":"Oscillating","values":{"c1":"function oscillates without settling — limit fails to exist","c2":"infinitely many swings as x → a (e.g. sin(1/x))","c3":"no"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Where Continuity Is the Hypothesis"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Where continuity appears","features":[{"id":"c1","name":"Required form","type":"text"},{"id":"c2","name":"What it enables","type":"text"}],"items":[{"id":"r1","name":"[Evaluating limits by substitution](!/calculus/limits/evaluating)","values":{"c1":"f continuous at a","c2":"lim$_{x → a}$ f(x) = f(a) — the limit reduces to plugging in"}},{"id":"r2","name":"Algebraic [limit rules](!/calculus/limits/rules)","values":{"c1":"f and g continuous at a","c2":"f ± g, f · g, and f / g (where g(a) ≠ 0) inherit continuity at a"}},{"id":"r3","name":"Composition rule for limits","values":{"c1":"g continuous at a; f continuous at g(a)","c2":"f∘g continuous at a; limits pass through the outer function"}},{"id":"r4","name":"Analysis on a closed interval","values":{"c1":"continuous on [a, b] via [one-sided continuity](!/calculus/limits/one-sided) at endpoints","c2":"the function is well-behaved across the full closed interval — endpoints included"}},{"id":"r5","name":"Intermediate Value Theorem","values":{"c1":"continuous on [a, b]","c2":"f attains every value between f(a) and f(b) — guarantees roots when the sign changes"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Continuous Functions — The Standard Library"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function class","features":[{"id":"c1","name":"Continuous on","type":"text"},{"id":"c2","name":"Possible discontinuities","type":"text"}],"items":[{"id":"r1","name":"Polynomial","values":{"c1":"all of ℝ","c2":"none"}},{"id":"r2","name":"Rational p(x) / q(x)","values":{"c1":"{x : q(x) ≠ 0}","c2":"removable (if p and q share a root) or infinite (if only q vanishes)"}},{"id":"r3","name":"Exponential aˣ (a > 0)","values":{"c1":"all of ℝ","c2":"none"}},{"id":"r4","name":"Logarithm ln x (and log$_{b}$ x)","values":{"c1":"(0, ∞)","c2":"infinite at x = 0 (vertical asymptote; undefined for x ≤ 0)"}},{"id":"r5","name":"Trig sin x, cos x","values":{"c1":"all of ℝ","c2":"none"}},{"id":"r6","name":"Trig tan x, sec x, csc x, cot x","values":{"c1":"domain of the function (excludes its asymptotes)","c2":"infinite at each asymptote (periodic)"}},{"id":"r7","name":"Root ⁿ√x","values":{"c1":"odd n: all of ℝ. even n: [0, ∞)","c2":"none in the interior; for even n the function is undefined for x < 0"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Check whether a function is continuous at a point", href: "/calculus/limits/methods/continuity-check", desc: "Three conditions: $f(a)$ exists, the limit exists, they are equal; then classify any failure.", level: "composite", here: "#2" },
+      { skill: "Find and remove a removable discontinuity", href: "/calculus/limits/methods/removable-discontinuities", desc: "A hole: the limit exists but $f(a)$ is missing or wrong. Cancel, find the limit, redefine.", level: "composite", here: "#5" },
+    ] },
+    { title: "More limit methods", items: [
+      { skill: "Find the limit of a piecewise function", href: "/calculus/limits/methods/piecewise-limits", desc: "At a break, the lower piece gives the left limit and the upper piece the right; compare.", level: "composite" },
+      { skill: "Find vertical asymptotes", href: "/calculus/limits/methods/vertical-asymptotes", desc: "Cancel common factors, find the zeros of the denominator, then the sign of each one-sided limit.", level: "composite" },
+      { skill: "Evaluate a limit by factoring", href: "/calculus/limits/methods/factoring-limits", desc: "A $\\frac{0}{0}$ form with polynomials: factor, cancel the vanishing factor, substitute.", level: "composite" },
+      { skill: "Evaluate one-sided limits", href: "/calculus/limits/methods/one-sided-limits", desc: "Left and right limits separately; the two-sided limit exists only when they agree.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1201,6 +1231,7 @@ export default function ContinuityPage({ pitfallData,ivtConverse, seoData, secti
                   <div key={'unit-three'} dangerouslySetInnerHTML={{ __html: demoUnits.three }} />,
           `Each way the three conditions can fail has a name, and the next sections take them in turn.`,
           `@academic[punchline:Continuity at a point is one equation, limit equals value, and it fails when either side is missing or the two disagree.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to check whether a function is continuous at a point](!/calculus/limits/methods/continuity-check) →@`,
         ]
     },
     {
@@ -1261,6 +1292,7 @@ export default function ContinuityPage({ pitfallData,ivtConverse, seoData, secti
           sectionsContent.obj5.content,
                   <div key={'unit-removable'} dangerouslySetInnerHTML={{ __html: demoUnits.removable }} />,
           `Removable discontinuities are the mild case: the function is continuous except for a bookkeeping error at one point.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find and remove a removable discontinuity](!/calculus/limits/methods/removable-discontinuities) →@`,
         ]
     },
     {
@@ -1289,8 +1321,15 @@ export default function ContinuityPage({ pitfallData,ivtConverse, seoData, secti
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-continuity-oscillating-discontinuity-matrix'}
+            id="continuity-oscillating-discontinuity-matrix"
+            title="Oscillating Discontinuity"
+            source="/calculus/limits/continuity"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-oscillating'} dangerouslySetInnerHTML={{ __html: demoUnits.oscillating }} />,
           `Oscillating discontinuities are rare in practice but show that the limit can fail without any value being infinite.`,
         ]
@@ -1301,8 +1340,15 @@ export default function ContinuityPage({ pitfallData,ivtConverse, seoData, secti
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-continuity-continuous-functions-standard-library-matrix'}
+            id="continuity-continuous-functions-standard-library-matrix"
+            title="Continuous Functions — The Standard Library"
+            source="/calculus/limits/continuity"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1355,8 +1401,15 @@ The theorem is often applied to a function built for the purpose rather than to 
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-continuity-summary-where-continuity-is-matrix'}
+            id="continuity-summary-where-continuity-is-matrix"
+            title="Summary: Where Continuity Is the Hypothesis"
+            source="/calculus/limits/continuity"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1374,6 +1427,14 @@ The theorem is often applied to a function built for the purpose rather than to 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

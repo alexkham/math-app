@@ -1355,6 +1355,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1372,14 +1373,38 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import complexDivisionDiagrams from '@/app/components/calculators/complex-numbers/complexDivisionDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Properties of Multiplicative Inverse"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Meaning","type":"text"}],"items":[{"id":"r1","name":"Double inversion","values":{"c1":"(z⁻¹)⁻¹ = z","c2":"inverting twice returns the original number"}},{"id":"r2","name":"Inverse of a product","values":{"c1":"(z₁ · z₂)⁻¹ = z₁⁻¹ · z₂⁻¹","c2":"to invert a product, invert each factor"}},{"id":"r3","name":"Commute with conjugation","values":{"c1":"(z̄)⁻¹ = z⁻¹","c2":"conjugate-then-invert equals invert-then-conjugate"}},{"id":"r4","name":"Modulus inverts","values":{"c1":"|z⁻¹| = 1 ⁄ |z|","c2":"distance from origin flips reciprocally"}},{"id":"r5","name":"Argument negates","values":{"c1":"arg(z⁻¹) = −arg(z)","c2":"direction reflects across the real axis"}},{"id":"r6","name":"Powers and negative exponents","values":{"c1":"(zⁿ)⁻¹ = (z⁻¹)ⁿ = z⁻ⁿ","c2":"negative exponents behave consistently for complex bases"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Worked Examples of z⁻¹"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"z̄","type":"text"},{"id":"c2","name":"|z|²","type":"text"},{"id":"c3","name":"z⁻¹ = z̄ ⁄ |z|²","type":"text"},{"id":"c4","name":"Geometric note","type":"text"}],"items":[{"id":"r1","name":"5 (positive real)","values":{"c1":"5","c2":"25","c3":"1⁄5","c4":"on the positive real axis; inverse on the same ray, closer to origin"}},{"id":"r2","name":"2i (pure imaginary)","values":{"c1":"−2i","c2":"4","c3":"−(1⁄2)i","c4":"on positive imaginary axis; inverse on negative imaginary axis"}},{"id":"r3","name":"1 + i","values":{"c1":"1 − i","c2":"2","c3":"(1 − i) ⁄ 2 = 1⁄2 − (1⁄2)i","c4":"modulus √2; inverse on circle of radius 1⁄√2"}},{"id":"r4","name":"3 + 4i","values":{"c1":"3 − 4i","c2":"25","c3":"(3 − 4i) ⁄ 25 = 3⁄25 − (4⁄25)i","c4":"modulus 5; inverse on circle of radius 1⁄5"}},{"id":"r5","name":"(3⁄5) + (4⁄5)i (on unit circle)","values":{"c1":"3⁄5 − (4⁄5)i","c2":"1","c3":"3⁄5 − (4⁄5)i (= z̄)","c4":"|z| = 1, so inverse equals conjugate; both remain on the unit circle"}},{"id":"r6","name":"−1 + 2i","values":{"c1":"−1 − 2i","c2":"5","c3":"(−1 − 2i) ⁄ 5 = −1⁄5 − (2⁄5)i","c4":"second quadrant; inverse moves to third quadrant (reflection + rescale)"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Wrong","type":"text"},{"id":"c2","name":"Correct","type":"text"},{"id":"c3","name":"Why","type":"text"}],"items":[{"id":"r1","name":"Inverting componentwise","values":{"c1":"1 ⁄ (3 + 2i) = 1⁄3 + (1⁄2)i","c2":"1 ⁄ (3 + 2i) = (3 − 2i) ⁄ 13","c3":"the inverse of a sum is not the sum of inverses"}},{"id":"r2","name":"Sign error in |z|²","values":{"c1":"for 3 − 4i: 9 − 16 = −7","c2":"9 + 16 = 25","c3":"|z|² = a² + b² is always a sum; signs in z don't affect it"}},{"id":"r3","name":"Confusing z⁻¹ with −z","values":{"c1":"inverse of 2 + i is −2 − i","c2":"inverse of 2 + i is (2 − i) ⁄ 5","c3":"−z is the additive inverse; z⁻¹ is the multiplicative inverse"}},{"id":"r4","name":"Confusing z⁻¹ with z̄","values":{"c1":"for 3 + 4i: z⁻¹ = 3 − 4i","c2":"z⁻¹ = (3 − 4i) ⁄ 25","c3":"z⁻¹ = z̄ ⁄ |z|² — must divide by the modulus squared"}},{"id":"r5","name":"Leaving a complex denominator","values":{"c1":"(2 + 3i) ⁄ (1 − i) as final answer","c2":"multiply by (1 + i) ⁄ (1 + i) to rationalize","c3":"standard form a + bi requires a real denominator"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Complex number methods", items: [
+      { skill: "Divide complex numbers", href: "/complex-numbers/methods/divide-complex", desc: "Multiply the top and bottom by the conjugate of the denominator, so the denominator becomes the real number $c^2 + d^2$.", level: "composite" },
+      { skill: "Find the complex conjugate", href: "/complex-numbers/methods#complex-conjugate", desc: "You need $\\overline{z}$ to divide, to make a product real, or to pair a root: $\\overline{3 - 4i}$, $\\overline{-2 + i}$, $\\overline{5i}$.", level: "atomic" },
+      { skill: "Find the modulus of a complex number", href: "/complex-numbers/methods#modulus", desc: "You need the distance of $z = a + bi$ from the origin, for example as the $r$ of the polar form: $|3 + 4i|$, $|-5 + 12i|$, $|-4i|$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2910,11 +2935,15 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-multiplicative-inverse-properties-multiplicative-inverse-matrix'}
+            id="multiplicative-inverse-properties-multiplicative-inverse-matrix"
+            title="Properties of Multiplicative Inverse"
+            source="/complex-numbers/multiplicative-inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2995,11 +3024,15 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'obj11-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj11Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-multiplicative-inverse-common-mistakes-matrix'}
+            id="multiplicative-inverse-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/complex-numbers/multiplicative-inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj11-mistakes'}
             id="multiplicative-inverse-pitfalls"
@@ -3017,11 +3050,23 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-multiplicative-inverse-summary-worked-examples-matrix'}
+            id="multiplicative-inverse-summary-worked-examples-matrix"
+            title="Summary: Worked Examples of z⁻¹"
+            source="/complex-numbers/multiplicative-inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

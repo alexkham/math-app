@@ -1,5 +1,6 @@
 
 // tables-optimized: v4 | 2026-05-24 | 2 tables (obj7 comparison, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,9 +18,28 @@ import functionFTCDiagrams from '@/app/components/functions/ftc/functionFTCDiagr
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Why Differentiation and Integration Are Inverses"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"FTC — Part 1","type":"text"},{"id":"c2","name":"FTC — Part 2","type":"text"}],"items":[{"id":"r1","name":"Statement","values":{"c1":"F(x) = ∫ₐˣ f(t) dt ⇒ F'(x) = f(x)","c2":"∫ₐ$^{b}$ f(x) dx = F(b) − F(a)"}},{"id":"r2","name":"What it does","values":{"c1":"differentiating an integral recovers the integrand","c2":"integrating a derivative recovers the function (up to endpoints)"}},{"id":"r3","name":"Hypothesis","values":{"c1":"f is continuous on [a, b]","c2":"F is any antiderivative of f on [a, b]"}},{"id":"r4","name":"Main role","values":{"c1":"existence — guarantees every continuous function has an antiderivative","c2":"computation — turns area into endpoint evaluation"}},{"id":"r5","name":"Typical use","values":{"c1":"differentiate accumulation functions; theoretical arguments","c2":"evaluate definite integrals via F(b) − F(a)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Integration techniques", items: [
+      { skill: "Evaluate a definite integral with the Fundamental Theorem", href: "/calculus/integrals/techniques/definite-integrals-ftc", desc: "Find an antiderivative $F$ and compute $F(b) - F(a)$; Part 1 for accumulation functions.", level: "composite" },
+      { skill: "Integrate a power of x", href: "/calculus/integrals/techniques#power-rule-integration", desc: "A single term $x^n$ with $n \\neq -1$, including roots and reciprocals once rewritten: $\\sqrt{x} = x^{1/2}$, $\\frac{1}{x^3} = x^{-3}$.", level: "atomic" },
+      { skill: "Integrate a constant times a function", href: "/calculus/integrals/techniques#constant-multiple-integration", desc: "A number multiplies the integrand: $6x^2$, $-3\\cos x$, $\\frac{5}{x}$.", level: "atomic" },
+      { skill: "Integrate a sum or difference", href: "/calculus/integrals/techniques#sum-rule-integration", desc: "Terms joined by $+$ or $-$, such as a polynomial or $e^x - \\sin x$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/calculus/integrals/techniques", label: "All integration techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1065,8 +1085,15 @@ Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-rules-why-differentiation-integration-are-matrix'}
+            id="rules-why-differentiation-integration-are-matrix"
+            title="Why Differentiation and Integration Are Inverses"
+            source="/calculus/integrals/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Because differentiation and integration undo each other, every derivative formula read backwards is an integration formula.]@`,
         ]
     },
@@ -1114,6 +1141,14 @@ Integrating each factor of $\\int x \\cdot x\\, dx$ separately gives $\\frac{x^2
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

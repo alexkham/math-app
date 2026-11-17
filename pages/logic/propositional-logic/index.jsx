@@ -1,4 +1,5 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Head from 'next/head'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
@@ -49,6 +50,22 @@ const pitfallData = {
 const pitfallClosing = `Each slip stretches a definition past what it says. A set is consistent only if one row makes every member true at once, $P \\models P \\lor Q$ does not reverse, an invalid formula can still be true in most rows, the contrapositive of $A \\to B$ negates and swaps its parts, and modus ponens needs the part before the arrow, not the part after it. Building one truth table for the whole claim, or checking which line a rule cites, catches each slip.`;
 
 
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Logic methods", items: [
+      { skill: "Build a truth table", href: "/logic/methods/truth-table", desc: "List all $2^n$ rows, add one column per subformula from the inside out, and fill each column with the rule of its connective.", level: "composite" },
+      { skill: "Check whether a formula is a tautology", href: "/logic/methods/tautology-check", desc: "Show a formula is true in every row: build its truth table, or assume one row makes it false and reach a clash.", level: "composite" },
+      { skill: "Negate a conditional statement", href: "/logic/methods/negate-implication", desc: "The negation of $P \\to Q$ is $P \\land \\neg Q$: keep the condition, deny the conclusion, and join them with and.", level: "composite" },
+      { skill: "Simplify a logical expression", href: "/logic/methods/simplify-propositions", desc: "Remove arrows, push negations onto letters, then factor and collapse with the complement, identity and absorption laws.", level: "composite" },
+      { skill: "Push a negation into a bracket", href: "/logic/methods#de-morgan", desc: "A negation stands in front of a bracket joined by $\\land$ or $\\lor$: $\\neg(P \\land Q)$, $\\neg(P \\lor \\neg Q)$, $\\neg(\\neg P \\lor Q)$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
+
 export default function PropositionalLogicPage({ keyWords, introContent, propositionalLogicSections, faqQuestions }) {
 
   // faq: rendered component — must be built here, not in getStaticProps
@@ -68,6 +85,14 @@ export default function PropositionalLogicPage({ keyWords, introContent, proposi
         <MistakeFix data={pitfallData} variant="trace" />
       </DiagramFrame>,
     ] } : s),
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     {
       id: 'faq',
       title: `Propositional Logic FAQ`,

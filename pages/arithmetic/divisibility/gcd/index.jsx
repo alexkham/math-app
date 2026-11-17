@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj2 aggregation, obj8 aggregation, obj12 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -20,13 +21,40 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers/euclideanVisualizerDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
-import Procedure from '@/app/components/infographics/Procedure'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Three Methods for GCD"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Best for","type":"text"},{"id":"c2","name":"How it works","type":"text"},{"id":"c3","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Listing factors","values":{"c1":"small inputs; transparent for teaching","c2":"list all factors of each number, intersect the lists, take the largest","c3":"gcd(24, 36): factors of 24 = {1,2,3,4,6,8,12,24}, factors of 36 = {1,2,3,4,6,9,12,18,36} → common = {1,2,3,4,6,12} → 12"}},{"id":"r2","name":"Prime factorization","values":{"c1":"factorizations are easy to obtain or already known","c2":"factor both numbers; for each prime, take the minimum exponent appearing in either factorization","c3":"gcd(48, 180): 48 = 2⁴ · 3, 180 = 2² · 3² · 5 → 2² · 3 = 12"}},{"id":"r3","name":"Euclidean algorithm","values":{"c1":"large numbers; factorization difficult; most efficient overall","c2":"repeatedly replace (a, b) with (b, a mod b) — using the [modulo](!/arithmetic/modulo) operation — until b = 0; the final nonzero a is the gcd","c3":"gcd(252, 105): 252 = 105·2 + 42, 105 = 42·2 + 21, 42 = 21·2 + 0 → 21"}}]};
+import Procedure from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Properties of Coprime Numbers"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Euclid's lemma","values":{"c1":"if gcd(a, b) = 1 and a ∣ (b · c), then a ∣ c","c2":"gcd(7, 15) = 1 and 7 ∣ (15 · 21 = 315), so 7 ∣ 21 ✓"}},{"id":"r2","name":"Coprimality with a product","values":{"c1":"if gcd(a, b) = 1 and gcd(a, c) = 1, then gcd(a, b · c) = 1","c2":"gcd(5, 4) = 1 and gcd(5, 9) = 1, so gcd(5, 36) = 1 ✓"}},{"id":"r3","name":"Coprimality under powers","values":{"c1":"if gcd(a, b) = 1, then gcd(aⁿ, bⁿ) = 1 for every n ≥ 1","c2":"gcd(8, 15) = 1, so gcd(64, 225) = 1 ✓"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Basic Properties"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Reflexivity & identities","values":{"c1":"gcd(a, a) = a; gcd(a, 1) = 1; gcd(a, 0) = a","c2":"gcd(7, 7) = 7; gcd(15, 1) = 1; gcd(15, 0) = 15"}},{"id":"r2","name":"Commutativity","values":{"c1":"gcd(a, b) = gcd(b, a)","c2":"gcd(12, 18) = gcd(18, 12) = 6"}},{"id":"r3","name":"Upper bound","values":{"c1":"gcd(a, b) ≤ min(a, b)","c2":"gcd(12, 18) = 6 ≤ min(12, 18) = 12"}},{"id":"r4","name":"Universal divisibility","values":{"c1":"every common divisor of a and b also divides gcd(a, b)","c2":"common divisors of 12 and 18 are 1, 2, 3, 6 — and every one divides gcd = 6"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the GCD by prime factorization", href: "/arithmetic/methods/gcd-prime-factorization", desc: "Factor both numbers into primes and keep the shared primes with the smaller exponent: $\\gcd(72, 120) = 2^3 \\cdot 3 = 24$.", level: "composite", here: "#4" },
+      { skill: "Find the GCD with the Euclidean algorithm", href: "/arithmetic/methods/gcd-euclidean-algorithm", desc: "Replace the pair $(a, b)$ by $(b, a \\bmod b)$ until the remainder is $0$; the last nonzero remainder is the GCD. No factoring needed.", level: "composite", here: "#6" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Simplify fractions", href: "/arithmetic/methods/simplify-fractions", desc: "Reduce a fraction to lowest terms: divide the numerator and the denominator by their GCD, as in $\\frac{84}{126} = \\frac{2}{3}$.", level: "composite" },
+      { skill: "Find the least common multiple", href: "/arithmetic/methods/lcm", desc: "Find the smallest number that two or more numbers divide: take every prime with its larger exponent, or use $\\operatorname{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -927,6 +955,49 @@ const schemas = {
         { text: 'The value of $a$ at that point is the GCD', output: true },
       ],
     },
+    // step-by-step run for ProcedureV2 (2026-11-12)
+    run: {
+      label: '$\\gcd(1071, 462)$',
+      vars: [
+        { key: 'a', label: '$a$' },
+        { key: 'b', label: '$b$' },
+        { key: 'r', label: '$r$' },
+      ],
+      start: { a: '$1071$', b: '$462$' },
+      startNote: 'Take $a = 1071$ and $b = 462$. The larger number is $a$.',
+      passes: [
+        {
+          steps: [
+            { set: { r: '$147$' }, note: '$1071 = 462 \\cdot 2 + 147$, so the remainder is $r = 147$.' },
+            { set: { a: '$462$', b: '$147$' }, note: 'The old $b$ moves into $a$, and the remainder moves into $b$.' },
+            { note: '$b = 147$ is not $0$, so go back to step 2.' },
+          ],
+          row: ['$1071 = 462 \\cdot 2 + 147$', '$462$', '$147$'],
+        },
+        {
+          steps: [
+            { set: { r: '$21$' }, note: '$462 = 147 \\cdot 3 + 21$, so the remainder is $r = 21$.' },
+            { set: { a: '$147$', b: '$21$' }, note: 'The old $b$ moves into $a$, and the remainder moves into $b$.' },
+            { note: '$b = 21$ is not $0$, so go back to step 2.' },
+          ],
+          row: ['$462 = 147 \\cdot 3 + 21$', '$147$', '$21$'],
+        },
+        {
+          steps: [
+            { set: { r: '$0$' }, note: '$147 = 21 \\cdot 7 + 0$, so the remainder is $r = 0$.' },
+            { set: { a: '$21$', b: '$0$' }, note: 'The old $b$ moves into $a$, and the remainder moves into $b$.' },
+            { note: '$b = 0$, so the loop ends here.' },
+          ],
+          row: ['$147 = 21 \\cdot 7 + 0$', '$21$', '$0$'],
+        },
+      ],
+      tableLabel: 'Passes finished so far',
+      columns: ['$a = b \\cdot q + r$', 'new $a$', 'new $b$'],
+      eqCol: 0,
+      zeroCol: 2,
+      result: '$\\gcd(1071, 462) = 21$',
+      resultNote: '$b$ is $0$ and $a = 21$, so $\\gcd(1071, 462) = 21$.',
+    },
     trace: {
       label: '$\\gcd(1071, 462)$',
       columns: ['$a = b \\cdot q + r$', 'new $a$', 'new $b$'],
@@ -969,8 +1040,22 @@ const schemas = {
     ],
   };
 
+  const gcdFactorizationSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\gcd(48, 180)$',
+      rows: [
+        { step: 'Write the prime factorization of each number', example: '$48 = 2^4 \\cdot 3^1$ and $180 = 2^2 \\cdot 3^2 \\cdot 5^1$' },
+        { step: 'Keep the primes that appear in both', example: '$2$ and $3$' },
+        { step: 'Take the smaller exponent of each shared prime', example: '$\\min(4, 2) = 2$ and $\\min(1, 2) = 1$' },
+        { step: 'Multiply', example: '$2^2 \\cdot 3^1 = 4 \\cdot 3 = 12$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    gcdFactorizationSteps,
     formulaSummaryData,
     pitfallData,
     euclidProcedure,
@@ -1004,7 +1089,7 @@ rtGcdObj10Tiles,
    }
 
 
-export default function GCDPage({ formulaSummaryData, pitfallData,euclidProcedure,gcdMethodTree, seoData, sectionsContent, introContent, 
+export default function GCDPage({ gcdFactorizationSteps, formulaSummaryData, pitfallData,euclidProcedure,gcdMethodTree, seoData, sectionsContent, introContent, 
   obj2Table, obj8Table, summaryTable,
    faqQuestions, schemas,
   fsGcdObj1,
@@ -1137,8 +1222,15 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-gcd-basic-properties-matrix'}
+            id="gcd-basic-properties-matrix"
+            title="Basic Properties"
+            source="/arithmetic/divisibility/gcd"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -1181,6 +1273,12 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
       <div key={'obj4-svg'} style={{ maxWidth: '800px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: pfGcdObj4 }} />,
       sectionsContent.obj4.afterFigure,
+      <DiagramFrame key={'obj4-procedure'} id="gcd-prime-factorization-steps" title="The method on one pair"
+        source="/arithmetic/divisibility/gcd" related={false}
+        before={"The pair of this section, one step at a time. Press Next to carry out each step."}>
+        <Procedure data={gcdFactorizationSteps} variant="worked" />
+      </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the GCD by prime factorization](!/arithmetic/methods/gcd-prime-factorization) →@`,
     ]
 },
     // {
@@ -1235,11 +1333,12 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
         id="euclidean-algorithm-loop"
         title="The Euclidean algorithm as a loop"
         source="/arithmetic/divisibility/gcd"
-        before={"The same procedure with its loop marked. Use the arrows to run the trace one pass at a time and watch $b$ fall to $0$."}
+        before={"The same procedure with its loop marked. Press Next to carry out one step at a time and watch $b$ fall to $0$."}
       >
         <Procedure data={euclidProcedure} variant="loop" />
       </DiagramFrame>,
       sectionsContent.obj6.after,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the GCD with the Euclidean algorithm](!/arithmetic/methods/gcd-euclidean-algorithm) →@`,
     ]
 },
     {
@@ -1258,8 +1357,15 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-gcd-properties-coprime-numbers-matrix'}
+            id="gcd-properties-coprime-numbers-matrix"
+            title="Properties of Coprime Numbers"
+            source="/arithmetic/divisibility/gcd"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1309,8 +1415,15 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-gcd-summary-three-methods-gcd-matrix'}
+            id="gcd-summary-three-methods-gcd-matrix"
+            title="Summary: Three Methods for GCD"
+            source="/arithmetic/divisibility/gcd"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj12-diagram'}
             id="gcd-methods-tree"
@@ -1354,6 +1467,14 @@ Giving $36$ as $\\gcd(12, 18)$ answers a different question: $36$ is the least c
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

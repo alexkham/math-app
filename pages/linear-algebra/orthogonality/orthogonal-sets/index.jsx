@@ -843,6 +843,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj7 comparison, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -856,6 +857,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -865,8 +867,34 @@ import orthogonalDiagrams from '@/app/components/linear-algebra copy/matrix/orth
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Orthonormal Sets"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Orthogonal set","type":"text"},{"id":"c2","name":"Orthonormal set","type":"text"}],"items":[{"id":"r1","name":"Pairwise dot products","values":{"c1":"vᵢ · vⱼ = 0 for i ≠ j","c2":"vᵢ · vⱼ = 0 for i ≠ j"}},{"id":"r2","name":"Vector lengths","values":{"c1":"any nonzero value","c2":"each ‖vᵢ‖ = 1"}},{"id":"r3","name":"Compact condition","values":{"c1":"vᵢ · vⱼ = 0 (i ≠ j) plus each vᵢ ≠ 0","c2":"vᵢ · vⱼ = δᵢⱼ (the Kronecker delta)"}},{"id":"r4","name":"Coordinate of x along vᵢ","values":{"c1":"cᵢ = (vᵢ · x) / (vᵢ · vᵢ)","c2":"cᵢ = qᵢ · x"}},{"id":"r5","name":"Linear independence","values":{"c1":"automatic (nonzero vectors)","c2":"automatic (unit vectors are nonzero)"}},{"id":"r6","name":"Going between the two","values":{"c1":"divide each vᵢ by ‖vᵢ‖ → orthonormal","c2":"already orthogonal as a special case"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Matrices with Orthonormal Columns"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Square orthogonal matrix Q (n × n)","type":"text"},{"id":"c2","name":"Rectangular Q with orthonormal columns (m × n, m > n)","type":"text"}],"items":[{"id":"r1","name":"Qᵀ Q","values":{"c1":"Iₙ","c2":"Iₙ"}},{"id":"r2","name":"Q Qᵀ","values":{"c1":"Iₙ","c2":"NOT the identity; equals the [projection](!/linear-algebra/orthogonality/projections) matrix onto Col(Q)"}},{"id":"r3","name":"Inverse","values":{"c1":"Q⁻¹ = Qᵀ","c2":"no two-sided inverse (Q is not square)"}},{"id":"r4","name":"det(Q)","values":{"c1":"±1","c2":"undefined (Q is not square)"}},{"id":"r5","name":"Rows","values":{"c1":"also form an orthonormal set","c2":"rows are not orthonormal in general"}},{"id":"r6","name":"Preserves dot product?","values":{"c1":"yes for all u, v ∈ ℝⁿ — full isometry of ℝⁿ","c2":"yes from source to image: (Q u) · (Q v) = u · v for u, v ∈ ℝⁿ"}},{"id":"r7","name":"Geometric role","values":{"c1":"rotation (det +1) or rotation composed with reflection (det −1)","c2":"embedding ℝⁿ into ℝᵐ as an n-dimensional subspace"}},{"id":"r8","name":"Typical source","values":{"c1":"stored basis change, rotation matrix, Householder/Givens factor","c2":"output of [Gram–Schmidt](!/linear-algebra/orthogonality/gram-schmidt); the Q in thin [QR decomposition](!/linear-algebra/decompositions/qr) A = Q R"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Check if a set is orthogonal or orthonormal", href: "/linear-algebra/orthogonality/methods/orthogonal-set-check", desc: "Dot every pair: all zero means orthogonal; unit lengths as well means orthonormal.", level: "composite", here: "#5" },
+    ] },
+    { title: "More orthogonality methods", items: [
+      { skill: "Compute an inner product", href: "/linear-algebra/orthogonality/methods/inner-product", desc: "Dot product, weighted and function inner products, and the lengths and angles they give.", level: "composite" },
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite" },
+      { skill: "Find an orthogonal projection", href: "/linear-algebra/orthogonality/methods/orthogonal-projection", desc: "Project a vector onto a line, a plane or a subspace; split it into a part inside and a part perpendicular.", level: "composite" },
+    ] },
+    { title: "Vector methods", items: [
+      { skill: "Compute the dot product", href: "/linear-algebra/vectors/methods/dot-product", desc: "Multiply matching components and add; or use the two lengths and the angle between them.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/orthogonality/methods", label: "All orthogonality methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1876,11 +1904,15 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-orthogonal-sets-orthonormal-sets-matrix'}
+            id="orthogonal-sets-orthonormal-sets-matrix"
+            title="Orthonormal Sets"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1897,6 +1929,7 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to check if a set is orthogonal or orthonormal](!/linear-algebra/orthogonality/methods/orthogonal-set-check) →@`,
         ]
     },
     {
@@ -1938,11 +1971,15 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-orthogonal-sets-matrices-orthonormal-columns-matrix'}
+            id="orthogonal-sets-matrices-orthonormal-columns-matrix"
+            title="Matrices with Orthonormal Columns"
+            source="/linear-algebra/orthogonality/orthogonal-sets"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:A tall matrix with orthonormal columns inverts on one side only: $Q^TQ = I$, while $QQ^T$ merely projects.]@`,
         ]
     },
@@ -2009,6 +2046,14 @@ $n$ mutually orthogonal vectors in $\\mathbb{R}^n$ with every entry $\\pm 1$ exi
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

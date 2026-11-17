@@ -33,7 +33,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Characteristic Polynomial (2×2 and 3×3) | Learn Math Class',
         description: 'Find the characteristic polynomial det(A − λI): subtract λ on the diagonal, expand the determinant, check with trace and determinant. 2×2 and 3×3 examples.',
@@ -168,7 +168,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Eigenvalues of a Matrix (2×2 and 3×3) | Learn Math Class',
         description: 'Find the eigenvalues of a matrix: solve det(A − λI) = 0, use the 2×2 trace shortcut or a triangular diagonal, and check the sum and product. Worked examples.',
@@ -305,7 +305,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Eigenvectors of a Matrix (Step by Step) | Learn Math Class',
         description: 'Find eigenvectors for each eigenvalue: row reduce A − λI, solve with the free variable, check Av = λv. 2×2 and 3×3 examples, shortcuts and common mistakes.',
@@ -445,7 +445,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Basis for an Eigenspace | Learn Math Class',
         description: 'Find a basis for an eigenspace: row reduce A − λI, write the null space in parametric form, take one vector per free variable. Repeated and defective examples.',
@@ -564,7 +564,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Check If a Matrix Is Diagonalizable | Learn Math Class',
         description: 'Check if a matrix is diagonalizable: find eigenvalues, compare algebraic and geometric multiplicity, use the distinct and symmetric shortcuts. Worked examples.',
@@ -702,7 +702,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Diagonalize a Matrix (A = PDP⁻¹) | Learn Math Class',
         description: 'Diagonalize a matrix step by step: eigenvalues, eigenvectors, build P and D in matching order, find P⁻¹ and check AP = PD. 2×2 and 3×3 worked examples.',
@@ -831,7 +831,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compute Matrix Powers by Diagonalization (Aᵏ = PDᵏP⁻¹) | Learn Math Class',
         description: 'Compute matrix powers with Aᵏ = PDᵏP⁻¹: diagonalize, raise the eigenvalues to the power, multiply back. Examples: A⁵, a formula for every k and a recurrence.',
@@ -967,7 +967,7 @@ const eigenMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Complex Eigenvalues and Eigenvectors (2×2) | Learn Math Class',
         description: 'Find complex eigenvalues and eigenvectors of a real 2×2 matrix: negative discriminant, conjugate pairs, rotation angle and scale, real canonical form. Examples.',

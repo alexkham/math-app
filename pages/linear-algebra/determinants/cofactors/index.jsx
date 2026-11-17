@@ -922,6 +922,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj2 aggregation, obj7 comparison, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -934,6 +935,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -943,7 +945,33 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laDeterminantsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-determinants'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Computational Cost"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Matrix size n","features":[{"id":"c1","name":"Cofactor expansion ≈ n!","type":"text"},{"id":"c2","name":"Row reduction ≈ (2/3)n³","type":"text"},{"id":"c3","name":"Ratio","type":"text"}],"items":[{"id":"r1","name":"4","values":{"c1":"24","c2":"≈ 43","c3":"cofactor faster"}},{"id":"r2","name":"5","values":{"c1":"120","c2":"≈ 83","c3":"≈ 1.4×"}},{"id":"r3","name":"10","values":{"c1":"≈ 3.6 million","c2":"≈ 670","c3":"≈ 5400×"}},{"id":"r4","name":"20","values":{"c1":"≈ 2.4 × 10¹⁸","c2":"≈ 5,300","c3":"≈ 5 × 10¹⁴×"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Summary: The Cofactor Construction Chain"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Position (i, j)","features":[{"id":"c1","name":"Minor Mᵢⱼ","type":"text"},{"id":"c2","name":"Sign (−1)$^{i+j}$","type":"text"},{"id":"c3","name":"Cofactor Cᵢⱼ","type":"text"}],"items":[{"id":"r1","name":"(1, 1)","values":{"c1":"20","c2":"+","c3":"20"}},{"id":"r2","name":"(1, 2)","values":{"c1":"8","c2":"−","c3":"−8"}},{"id":"r3","name":"(1, 3)","values":{"c1":"−12","c2":"+","c3":"−12"}},{"id":"r4","name":"(2, 1)","values":{"c1":"29","c2":"−","c3":"−29"}},{"id":"r5","name":"(2, 2)","values":{"c1":"8","c2":"+","c3":"8"}},{"id":"r6","name":"(2, 3)","values":{"c1":"−18","c2":"−","c3":"18"}},{"id":"r7","name":"(3, 1)","values":{"c1":"−13","c2":"+","c3":"−13"}},{"id":"r8","name":"(3, 2)","values":{"c1":"−4","c2":"−","c3":"4"}},{"id":"r9","name":"(3, 3)","values":{"c1":"6","c2":"+","c3":"6"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a determinant by cofactor expansion", href: "/linear-algebra/determinants/methods/cofactor-expansion", desc: "Expand along the row or column with the most zeros: entry times sign times minor, added up.", level: "composite", here: "#3" },
+    ] },
+    { title: "More determinant methods", items: [
+      { skill: "Find a 3×3 determinant with the rule of Sarrus", href: "/linear-algebra/determinants/methods/sarrus-rule", desc: "Copy the first two columns, add the three downward diagonal products, subtract the three upward ones.", level: "composite" },
+      { skill: "Find a determinant by row reduction", href: "/linear-algebra/determinants/methods/determinant-row-reduction", desc: "Reduce to triangular form, multiply the diagonal, and correct for row swaps and scalings.", level: "composite" },
+      { skill: "Choose the right determinant method", href: "/linear-algebra/determinants/methods/which-determinant-method", desc: "A decision tree: what you are given, whether the matrix is triangular, then its size and zeros.", level: "strategy" },
+    ] },
+    { title: "Matrix methods", items: [
+      { skill: "Find an inverse with the adjugate", href: "/linear-algebra/matrix/methods/inverse-adjugate", desc: "Compute every cofactor, transpose them into $\\operatorname{adj}(A)$, divide by $\\det(A)$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/determinants/methods", label: "All determinant methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1935,7 +1963,15 @@ $$C_{21} = (-1)(29) = -29, \\quad C_{22} = (+1)(8) = 8, \\quad C_{23} = (-1)(-18
           `@academic[formula_callout:Cofactors and the Sign Pattern
 $$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6) = 6$$]@`,
           `Comparing cofactors to minors, entries at even-sum positions are unchanged while entries at odd-sum positions flip sign.`,
-          <div key={'obj2-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-cofactors-summary-cofactor-construction-chain-matrix'}
+            id="cofactors-summary-cofactor-construction-chain-matrix"
+            title="Summary: The Cofactor Construction Chain"
+            source="/linear-algebra/determinants/cofactors"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ],
       },
       {
@@ -2004,6 +2040,7 @@ $$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6
           sectionsContent.obj3.content,
                   <div key={'unit-laplace'} dangerouslySetInnerHTML={{ __html: demoUnits.laplace }} />,
           `Expanding along a row with zeros in it kills those terms before their minors are ever computed, which is the only real economy available here.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a determinant by cofactor expansion](!/linear-algebra/determinants/methods/cofactor-expansion) →@`,
         ]
     },
     {
@@ -2052,11 +2089,15 @@ $$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-cofactors-computational-cost-matrix'}
+            id="cofactors-computational-cost-matrix"
+            title="Computational Cost"
+            source="/linear-algebra/determinants/cofactors"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2093,6 +2134,14 @@ $$C_{31} = (+1)(-13) = -13, \\quad C_{32} = (-1)(-4) = 4, \\quad C_{33} = (+1)(6
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

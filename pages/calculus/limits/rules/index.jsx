@@ -1,5 +1,6 @@
 
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj12 aggregation, obj15 aggregation, obj16 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,11 +16,35 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Limits of Rational Functions"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function class at x = a","features":[{"id":"c1","name":"lim$_{x → a}$","type":"text"},{"id":"c2","name":"Status","type":"text"}],"items":[{"id":"r1","name":"Polynomial p(x)","values":{"c1":"p(a)","c2":"direct substitution always works (continuous everywhere)"}},{"id":"r2","name":"Rational p(x)/q(x), q(a) ≠ 0","values":{"c1":"p(a) / q(a)","c2":"direct substitution works"}},{"id":"r3","name":"Rational p(x)/q(x), q(a) = 0, p(a) ≠ 0","values":{"c1":"±∞","c2":"one-sided limits are infinite; analyze sign on each side of a to determine + or − (if the signs differ, the two-sided limit does not exist)"}},{"id":"r4","name":"Rational p(x)/q(x), p(a) = q(a) = 0","values":{"c1":"0 / 0 indeterminate","c2":"factor and cancel the common root, then re-evaluate — see [evaluating limits](!/calculus/limits/evaluating)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj15Table ("When Rules Fail"); converted from the table's own cells.
+const fm_obj15Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Indeterminate form","features":[{"id":"c1","name":"Arising from","type":"text"},{"id":"c2","name":"Rule that fails","type":"text"}],"items":[{"id":"r1","name":"0 / 0","values":{"c1":"f → 0 divided by g → 0","c2":"quotient rule (denominator limit is 0)"}},{"id":"r2","name":"∞ / ∞","values":{"c1":"f → ∞ divided by g → ∞","c2":"quotient rule (neither side is finite)"}},{"id":"r3","name":"0 · ∞","values":{"c1":"f → 0 multiplied by g → ∞","c2":"product rule (one factor not finite)"}},{"id":"r4","name":"∞ − ∞","values":{"c1":"f → ∞ minus g → ∞","c2":"difference rule (both quantities not finite)"}},{"id":"r5","name":"0⁰","values":{"c1":"f → 0 raised to g → 0","c2":"power rule (subtle interaction between base and exponent)"}},{"id":"r6","name":"1$^{∞}$","values":{"c1":"f → 1 raised to g → ∞","c2":"power rule (the limit of 1 + 1/x to the x is e, not 1)"}},{"id":"r7","name":"∞⁰","values":{"c1":"f → ∞ raised to g → 0","c2":"power rule (subtle interaction between base and exponent)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use the squeeze theorem", href: "/calculus/limits/methods/squeeze-theorem", desc: "Trap an oscillating function between two bounds that share a limit.", level: "composite", here: "#14" },
+    ] },
+    { title: "More limit methods", items: [
+      { skill: "Find limits at infinity of rational functions", href: "/calculus/limits/methods/limits-at-infinity-rational", desc: "Compare degrees, or divide every term by the highest power of $x$ in the denominator.", level: "composite" },
+      { skill: "Evaluate a limit by factoring", href: "/calculus/limits/methods/factoring-limits", desc: "A $\\frac{0}{0}$ form with polynomials: factor, cancel the vanishing factor, substitute.", level: "composite" },
+      { skill: "Choose the right limit technique", href: "/calculus/limits/methods/which-limit-technique", desc: "A decision tree from what substitution gives you to the right technique.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1291,8 +1316,15 @@ export default function RulesPage({ formulaSummaryData, pitfallData,squeezeCard,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'obj12-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj12Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-rules-limits-rational-functions-matrix'}
+            id="rules-limits-rational-functions-matrix"
+            title="Limits of Rational Functions"
+            source="/calculus/limits/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1322,6 +1354,7 @@ export default function RulesPage({ formulaSummaryData, pitfallData,squeezeCard,
           >
             <TheoremCard data={squeezeCard} variant="card" theme={theoremTheme} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the squeeze theorem](!/calculus/limits/methods/squeeze-theorem) →@`,
         ]
     },
     {
@@ -1330,8 +1363,15 @@ export default function RulesPage({ formulaSummaryData, pitfallData,squeezeCard,
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
-          <div key={'obj15-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj15Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-rules-when-rules-fail-matrix'}
+            id="rules-when-rules-fail-matrix"
+            title="When Rules Fail"
+            source="/calculus/limits/rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj15Table} />
+          </DiagramFrame>,
           `@academic[punchline:A limit rule applies only when its conditions hold; an indeterminate form means rewrite the expression first, then apply the rules.]@`,
         ]
     },
@@ -1368,6 +1408,14 @@ export default function RulesPage({ formulaSummaryData, pitfallData,squeezeCard,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -36,7 +36,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Binomial Probability | Learn Math Class',
         description: 'Find binomial probabilities step by step: check the conditions, name n and p, turn "at least" or "at most" into values of k, add PMF terms. Examples, mistakes.',
@@ -178,7 +178,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Geometric Probability | Learn Math Class',
         description: 'Find geometric probabilities: the trial of the first success, k - 1 failures then a success, the tail formula and the memoryless shortcut. Examples, mistakes.',
@@ -306,7 +306,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Negative Binomial Probability | Learn Math Class',
         description: 'Find negative binomial probabilities: the trial of the r-th success, the coefficient C(k-1, r-1), ranges by sums or a binomial count. Examples, mistakes.',
@@ -558,7 +558,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Poisson Probability | Learn Math Class',
         description: 'Find Poisson probabilities step by step: scale the rate to the interval, evaluate the PMF, add terms or use the complement for "at least". Examples, mistakes.',
@@ -687,7 +687,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Discrete Uniform Probability | Learn Math Class',
         description: 'Find discrete uniform probabilities: count the whole numbers in the event, divide by b - a + 1, handle strict inequalities. Dice and random integer examples.',
@@ -796,7 +796,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Continuous Uniform Probability | Learn Math Class',
         description: 'Find continuous uniform probabilities: clip the interval to [a, b], divide its length by b - a, handle conditional questions. Waiting-time examples, mistakes.',
@@ -904,7 +904,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find an Exponential Probability | Learn Math Class',
         description: 'Find exponential probabilities for waiting times: get the rate from the mean, use the CDF or the tail, handle intervals and memorylessness. Examples, mistakes.',
@@ -1033,7 +1033,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Normal Probability (Z-Scores) | Learn Math Class',
         description: 'Find normal probabilities with z-scores: standardize, read the left-tail area from the standard normal CDF, then take tails and intervals. Examples, mistakes.',
@@ -1164,7 +1164,7 @@ const distributionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Normal Percentile (Inverse Normal) | Learn Math Class',
         description: 'Find normal percentiles and cutoffs: turn the area into a left tail, find z with the inverse normal, then x = mu + z sigma. Top 10%, middle 95%, solving for mu.',
@@ -1536,7 +1536,7 @@ const distributionsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Probability Distribution to Use? Decision Tree | Learn Math Class',
         description: 'Choose the right distribution: uniform, binomial, hypergeometric, geometric, negative binomial, Poisson, exponential or normal, from what the problem describes.',

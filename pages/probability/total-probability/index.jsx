@@ -930,6 +930,7 @@
 
 
 // tables-optimized: v4 | 2026-05-22 | 5 tables (when aggregation, examples aggregation, bayes comparison, mistakes aggregation, summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -951,9 +952,43 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_totalProbabilityRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Total probability","sub":"$P(A) = \\sum P(A \\mid B_i)\\,P(B_i)$"},"groups":[{"name":"What it is built from","items":[{"name":"Conditional probability","href":"/probability/conditional-probability","why":"it is built entirely from conditional pieces"},{"name":"Chain rule","href":"/probability/rules#multy","why":"each term $P(A \\mid B_i)\\,P(B_i)$ equals $P(A \\cap B_i)$"},{"name":"Partitions","href":"/probability/events#relations","why":"the cases must be disjoint and exhaustive"},{"name":"Joint probability","href":"/probability/joint-probability","why":"$P(A) = \\sum P(A \\cap B_i)$, summed over the cases"}]},{"name":"Where it is used","items":[{"name":"Bayes' theorem","href":"/probability/bayes-theorem#total","why":"uses total probability as its denominator"}]},{"name":"The same structure","items":[{"name":"Mixture distributions","href":"/probability/distributions","why":"components weighted by mixing probabilities"},{"name":"Weighted averages","href":"/probability/expected-value","why":"conditional probabilities weighted by $P(B_i)$"},{"name":"Law of total expectation","href":"/probability/expected-value","why":"$E[X] = \\sum E[X \\mid B_i]\\,P(B_i)$"}]},{"name":"When it adds nothing","items":[{"name":"Independence","href":"/probability/independence","why":"if $A$ is independent of every $B_i$, the sum is just $P(A)$"}]}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
+
+// FeatureMatrix 2026-11-14: replaces the table whenTable ("When You Need Total Probability"); converted from the table's own cells.
+const fm_whenTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pattern","features":[{"id":"c1","name":"Characteristic cases","type":"text"},{"id":"c2","name":"Example domain","type":"text"}],"items":[{"id":"r1","name":"Outcome depends on a hidden state","values":{"c1":"disease present vs absent; machine in good vs degraded condition","c2":"diagnostic testing, machine reliability"}},{"id":"r2","name":"Data from mixed sources","values":{"c1":"subgroups with different behavior — age groups, regions, demographics","c2":"survey aggregation, population studies"}},{"id":"r3","name":"Unknown underlying condition","values":{"c1":"several possible operating states, each with its own failure rate","c2":"equipment monitoring, quality control"}},{"id":"r4","name":"Multiple pathways to an outcome","values":{"c1":"an event can occur through several independent routes, each with its own probability","c2":"delivery delays, system failures, route-based risk"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table mistakesTable ("Common Mistakes"); converted from the table's own cells.
+const fm_mistakesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"What goes wrong","type":"text"},{"id":"c2","name":"Fix","type":"text"}],"items":[{"id":"r1","name":"Non-disjoint cases","values":{"c1":"overlapping cases cause probability to be counted twice","c2":"check that every Bᵢ ∩ Bⱼ = ∅ for i ≠ j"}},{"id":"r2","name":"Incomplete partition","values":{"c1":"missing outcomes lead to an underestimate of P(A)","c2":"verify that the union of all Bᵢ covers the whole sample space"}},{"id":"r3","name":"Mixing conditional and unconditional","values":{"c1":"using P(A) where P(A | Bᵢ) is required breaks the formula","c2":"every term inside the sum must be a true conditional probability"}},{"id":"r4","name":"Missing a case","values":{"c1":"the sum runs over fewer cases than actually exist","c2":"enumerate every Bᵢ explicitly before computing"}},{"id":"r5","name":"Misapplied independence","values":{"c1":"assuming P(A | Bᵢ) = P(A) makes the law trivial","c2":"apply the law only when A's probability genuinely varies across cases"}},{"id":"r6","name":"Wrong weight","values":{"c1":"using P(Bᵢ | A) (a posterior) instead of P(Bᵢ) (a prior)","c2":"weights are unconditional prior probabilities of the cases"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table bayesTable ("Relationship to Bayes' Theorem"); converted from the table's own cells.
+const fm_bayesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Tool","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Operation","type":"text"},{"id":"c3","name":"Direction","type":"text"}],"items":[{"id":"r1","name":"Chain rule","values":{"c1":"P(A ∩ B) = P(A | B) · P(B)","c2":"multiplies along a single path","c3":"combines case + outcome into a joint probability"}},{"id":"r2","name":"Total probability","values":{"c1":"P(A) = &Sigma;ᵢ P(A | Bᵢ) · P(Bᵢ)","c2":"adds contributions across all paths","c3":"aggregates forward (cases → outcome)"}},{"id":"r3","name":"Bayes' theorem","values":{"c1":"P(Bᵢ | A) = P(A | Bᵢ) · P(Bᵢ) / P(A)","c2":"divides one path's contribution by the total","c3":"inverts backward (outcome → cases)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table examplesTable ("Examples"); converted from the table's own cells.
+const fm_examplesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Example","features":[{"id":"c1","name":"Cases (Bᵢ)","type":"text"},{"id":"c2","name":"Weights P(Bᵢ)","type":"text"},{"id":"c3","name":"Conditionals P(A | Bᵢ)","type":"text"},{"id":"c4","name":"P(A)","type":"text"}],"items":[{"id":"r1","name":"Medical test (positive)","values":{"c1":"has disease / healthy","c2":"0.01 / 0.99","c3":"0.95 / 0.10","c4":"0.1085"}},{"id":"r2","name":"Manufacturing (defective)","values":{"c1":"machine A / B / C","c2":"0.50 / 0.30 / 0.20","c3":"0.02 / 0.03 / 0.05","c4":"0.029"}},{"id":"r3","name":"Weather → running","values":{"c1":"sunny / cloudy / rainy","c2":"0.6 / 0.3 / 0.1","c3":"0.8 / 0.5 / 0.1","c4":"0.64"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use the law of total probability", href: "/probability/methods/total-probability", desc: "Split into cases, find the chance of the event in each case, weight by the case and add.", level: "composite", here: "#law" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Use Bayes' theorem", href: "/probability/methods/bayes-theorem", desc: "Reverse a conditional probability: from P(evidence given cause) to P(cause given evidence).", level: "composite" },
+      { skill: "Solve a probability problem with a tree diagram", href: "/probability/methods/tree-diagrams", desc: "One level per stage: label the branches, multiply along each path, add the paths you want.", level: "composite" },
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2210,8 +2245,15 @@ export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, 
         link:'',
         content:[
           sectionsContent.when.content,
-          <div key={'when-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: whenTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-total-probability-when-you-need-matrix'}
+            id="total-probability-when-you-need-matrix"
+            title="When You Need Total Probability"
+            source="/probability/total-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_whenTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2252,6 +2294,7 @@ export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, 
         link:'',
         content:[
           sectionsContent.law.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use the law of total probability](!/probability/methods/total-probability) →@`,
         ]
     },
     {
@@ -2270,8 +2313,15 @@ export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, 
         link:'',
         content:[
           sectionsContent.examples.content,
-          <div key={'examples-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: examplesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-total-probability-examples-matrix'}
+            id="total-probability-examples-matrix"
+            title="Examples"
+            source="/probability/total-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_examplesTable} />
+          </DiagramFrame>,
                   <div key={'unit-totalRun'} dangerouslySetInnerHTML={{ __html: demoUnits.totalRun }} />,
             `Averaging the three navy bars without weights, (0.8 + 0.5 + 0.1)/3 ≈ 0.47, gives the wrong answer.`,
           `@academic[punchline:Each case counts in proportion to its probability, so a rare case barely moves the total, however extreme its rate.]@`,
@@ -2333,8 +2383,15 @@ export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, 
             <ProofSteps data={proofStepsData2} variant="stepper" />
           </DiagramFrame>,
           sectionsContent.bayes.afterProof,
-          <div key={'bayes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: bayesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-total-probability-relationship-bayes-theorem-matrix'}
+            id="total-probability-relationship-bayes-theorem-matrix"
+            title="Relationship to Bayes' Theorem"
+            source="/probability/total-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_bayesTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2343,8 +2400,15 @@ export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, 
         link:'',
         content:[
           sectionsContent.mistakes.content,
-          <div key={'mistakes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-total-probability-common-mistakes-matrix'}
+            id="total-probability-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/probability/total-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_mistakesTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'mistakes-mistakes'}
             id="total-probability-pitfalls"
@@ -2370,6 +2434,15 @@ export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, 
         link:'',
         content:[
           sectionsContent.other.content,
+          <DiagramFrame
+            key={'concept-map-total-probability-connections'}
+            id="total-probability-connections"
+            title="Connections to Other Ideas"
+            source="/probability/total-probability"
+            related={false}
+          >
+            <ConceptMap data={cm_totalProbabilityRelated} variant="hub" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2388,6 +2461,14 @@ export default function TotalProbabilityPage({ proofStepsData2, proofStepsData, 
           >
             <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

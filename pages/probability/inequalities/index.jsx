@@ -671,6 +671,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 2 tables (obj4 aggregation, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -689,7 +690,27 @@ import chebyshevDiagrams from '@/app/components/probability/inequalities/chebysh
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Featured Inequalities at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Inequality","features":[{"id":"c1","name":"Applies to","type":"text"},{"id":"c2","name":"Information used","type":"text"},{"id":"c3","name":"Statement","type":"text"},{"id":"c4","name":"What it bounds","type":"text"},{"id":"c5","name":"Tightness","type":"text"}],"items":[{"id":"r1","name":"Markov","values":{"c1":"non-negative random variables","c2":"[E[X]](!/probability/expected-value) only","c3":"P(X ≥ a) ≤ E[X] / a, for any a > 0","c4":"upper tail of a non-negative variable","c5":"very broad; usually loose"}},{"id":"r2","name":"Chebyshev","values":{"c1":"any X with finite [variance](!/probability/variance)","c2":"E[X] and Var(X)","c3":"P(|X − μ| ≥ kσ) ≤ 1 / k², for any k > 0","c4":"two-sided deviation from the mean","c5":"sharper than Markov under the stronger assumption"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Types of Probability Inequalities"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Category","features":[{"id":"c1","name":"Information used","type":"text"},{"id":"c2","name":"Typical use","type":"text"}],"items":[{"id":"r1","name":"Expectation-based","values":{"c1":"E[X] only (sometimes plus non-negativity)","c2":"broadest applicability; coarsest bounds (e.g., Markov)"}},{"id":"r2","name":"Variance / higher moments","values":{"c1":"E[X] together with [Var(X)](!/probability/variance) or higher moments","c2":"sharper deviation bounds around the mean (e.g., Chebyshev)"}},{"id":"r3","name":"Tail bounds","values":{"c1":"moment information or partial distribution shape","c2":"controlling probability of extreme deviations"}},{"id":"r4","name":"Concentration-type","values":{"c1":"independence plus boundedness or sub-Gaussianity","c2":"very tight bounds for sums and averages of many variables"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Random variable methods", items: [
+      { skill: "Bound a probability with Chebyshev's inequality", href: "/probability/random-variables/methods/chebyshev-inequality", desc: "Measure the distance from the mean in standard deviations, then bound: $P(|X - \\mu| \\geq k\\sigma) \\leq 1/k^2$.", level: "composite" },
+      { skill: "Bound a probability with Markov's inequality", href: "/probability/random-variables/methods/markov-inequality", desc: "For a nonnegative variable, bound the upper tail by the mean: $P(X \\geq a) \\leq E[X]/a$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1414,8 +1435,15 @@ export default function ProbabilityInequalitiesPage({ pitfallData,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-types-probability-inequalities-matrix'}
+            id="inequalities-types-probability-inequalities-matrix"
+            title="Types of Probability Inequalities"
+            source="/probability/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1461,8 +1489,15 @@ export default function ProbabilityInequalitiesPage({ pitfallData,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-inequalities-featured-inequalities-at-glance-matrix'}
+            id="inequalities-featured-inequalities-at-glance-matrix"
+            title="Featured Inequalities at a Glance"
+            source="/probability/inequalities"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1480,6 +1515,14 @@ export default function ProbabilityInequalitiesPage({ pitfallData,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

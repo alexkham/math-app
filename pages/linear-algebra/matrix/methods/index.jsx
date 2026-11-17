@@ -16,7 +16,7 @@ import matrixMethods from '@/app/components/calculation-methods/data/linear-alge
 const SITE = 'https://www.learnmathclass.com'
 
 // Hub is released separately from its leaves; flip to true once it meets the release criteria.
-const HUB_INDEXED = false
+const HUB_INDEXED = true
 
 export async function getStaticProps() {
   const url = matrixMethods.hubPath

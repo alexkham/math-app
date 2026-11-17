@@ -708,6 +708,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 4 tables (obj5 comparison, obj6 aggregation, obj7 aggregation, obj12 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -725,12 +726,60 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import distributionExplorerDiagrams from '@/app/components/probability/explorers/distributions/distributionExplorerDiagrams'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_llnObjects = {
+  center: { name: 'Law of Large Numbers', sub: 'the objects involved' },
+  quadrants: [
+    { label: '$\\mu$', title: 'Population mean', items: [
+      'The true [expected value](!/probability/expected-value) of the underlying distribution.',
+      'The fixed value that the sample mean approaches.' ] },
+    { label: '$X_1, X_2, \\dots, X_n$', title: 'Random variables', items: [
+      'Independent copies of the same underlying [random variable](!/probability/random-variables).',
+      'Each is drawn from the identical distribution with mean $\\mu$.' ] },
+    { label: '$\\bar X_n$', title: 'Sample mean', items: [
+      { text: 'The average of the first $n$ observations.', note: '$\\bar X_n = \\frac{1}{n}\\sum_{i=1}^n X_i$' },
+      'Itself a random variable; as $n$ increases it concentrates near $\\mu$.' ] },
+    { label: '$n$', title: 'Sample size', items: [
+      'The number of observations used to compute the average.',
+      'Larger $n$ produces stronger convergence.' ] }
+  ],
+  note: { label: 'What the theorem describes', text: 'Not how individual observations behave, but how the **sample mean** behaves as the sample size grows.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Law of Large Numbers at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example / note","type":"text"}],"items":[{"id":"r1","name":"Core claim","values":{"c1":"the sample mean X̄ₙ converges to the population mean μ as n grows","c2":"fair coin: proportion of heads → 0.5"}},{"id":"r2","name":"Weak form (WLLN)","values":{"c1":"lim$_{n→∞}$ P(|X̄ₙ − μ| > ε) = 0 — convergence in probability","c2":"large deviations become arbitrarily unlikely"}},{"id":"r3","name":"Strong form (SLLN)","values":{"c1":"P(X̄ₙ → μ) = 1 — almost sure convergence","c2":"the observed sequence itself converges, not just its probabilities"}},{"id":"r4","name":"Required structure","values":{"c1":"[independence](!/probability/independence), identical distribution, finite mean","c2":"finite [variance](!/probability/variance) is not required by the WLLN"}},{"id":"r5","name":"Relation to [CLT](!/probability/central-limit-theorem)","values":{"c1":"LLN names the target μ; CLT describes the shape of fluctuations around it","c2":"LLN: where we go. CLT: how we get there."}},{"id":"r6","name":"Why it matters","values":{"c1":"justifies estimation, polling, Monte Carlo simulation, insurance pooling","c2":"sample averages are trustworthy precisely because of the LLN"}},{"id":"r7","name":"When it fails","values":{"c1":"strong dependence, mixed distributions, or undefined mean","c2":"Cauchy: no finite mean, no convergence at all"}},{"id":"r8","name":"Most common pitfall","values":{"c1":"confusing \"long-run frequency\" with \"memory\" of past outcomes","c2":"the gambler's fallacy"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Common Misconceptions"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Misconception","features":[{"id":"c1","name":"Why it's wrong","type":"text"},{"id":"c2","name":"Correct view","type":"text"}],"items":[{"id":"r1","name":"Small samples are biased","values":{"c1":"small samples are more variable, not systematically off","c2":"the sample mean is an unbiased estimator of μ at any n"}},{"id":"r2","name":"Convergence is guaranteed at finite n","values":{"c1":"the LLN is an asymptotic statement about n → ∞","c2":"no fixed n delivers certainty; practical convergence depends on the distribution"}},{"id":"r3","name":"Past outcomes affect future ones (gambler's fallacy)","values":{"c1":"independence means no memory across trials","c2":"proportions approach μ via more data, not by \"correcting\" past runs"}},{"id":"r4","name":"LLN and CLT are the same theorem","values":{"c1":"they answer different questions about averages","c2":"LLN gives the limit value μ; [CLT](!/probability/central-limit-theorem) gives the limiting shape (normal)"}},{"id":"r5","name":"Convergence means equality","values":{"c1":"convergence in probability is not pointwise equality","c2":"at any finite n, X̄ₙ ≠ μ with positive probability"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("When the Law of Large Numbers Applies"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Condition","features":[{"id":"c1","name":"What it requires","type":"text"},{"id":"c2","name":"What happens if it fails","type":"text"}],"items":[{"id":"r1","name":"[Independence](!/probability/independence)","values":{"c1":"observations do not influence each other","c2":"correlated data can prevent the sample mean from stabilizing"}},{"id":"r2","name":"Identical distribution","values":{"c1":"every Xᵢ is drawn from the same distribution with the same μ","c2":"mixing distributions removes a single μ to converge to"}},{"id":"r3","name":"Finite mean","values":{"c1":"μ = E[Xᵢ] exists and is finite","c2":"no target value to converge to (e.g., Cauchy distribution)"}},{"id":"r4","name":"Finite [variance](!/probability/variance) (context-dependent)","values":{"c1":"not required by WLLN; sometimes assumed in classical SLLN proofs","c2":"heavy-tailed but finite-mean distributions still converge, only more slowly"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Weak vs Strong Law of Large Numbers"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Weak Law (WLLN)","type":"text"},{"id":"c2","name":"Strong Law (SLLN)","type":"text"}],"items":[{"id":"r1","name":"Formal statement","values":{"c1":"lim$_{n→∞}$ P(|X̄ₙ − μ| > ε) = 0","c2":"P(X̄ₙ → μ as n → ∞) = 1"}},{"id":"r2","name":"Convergence type","values":{"c1":"in probability","c2":"almost sure"}},{"id":"r3","name":"What it asserts","values":{"c1":"large deviations become arbitrarily unlikely","c2":"the observed sequence itself actually converges"}},{"id":"r4","name":"Logical strength","values":{"c1":"weaker","c2":"stronger — SLLN ⟹ WLLN, not vice versa"}},{"id":"r5","name":"Typical conditions","values":{"c1":"finite mean (variance not required)","c2":"finite mean; classical proofs assume more"}},{"id":"r6","name":"Practical takeaway","values":{"c1":"a single sample mean is unlikely to stray far from μ","c2":"whatever sequence you observe, its running average converges"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Random variable methods", items: [
+      { skill: "Approximate a probability with the central limit theorem", href: "/probability/random-variables/methods/clt-approximation", desc: "Scale the mean and SD to the sum or the average of $n$ terms, standardize, and read $\\Phi(z)$.", level: "composite" },
+      { skill: "Bound a probability with Chebyshev's inequality", href: "/probability/random-variables/methods/chebyshev-inequality", desc: "Measure the distance from the mean in standard deviations, then bound: $P(|X - \\mu| \\geq k\\sigma) \\leq 1/k^2$.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1726,6 +1775,15 @@ Unlike the [Central Limit Theorem](!/probability/central-limit-theorem), finite 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrameV2
+            key={'four-sides-large-numbers-law-objects'}
+            id="large-numbers-law-objects"
+            title="Objects Involved in the Theorem"
+            source="/probability/large-numbers-law"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_llnObjects} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1751,8 +1809,15 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-large-numbers-law-weak-vs-matrix'}
+            id="large-numbers-law-weak-vs-matrix"
+            title="Weak vs Strong Law of Large Numbers"
+            source="/probability/large-numbers-law"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:The weak law makes a large miss unlikely at each n; the strong law makes the path you observe actually arrive.]@`,
         ]
     },
@@ -1786,8 +1851,15 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-large-numbers-law-when-law-matrix'}
+            id="large-numbers-law-when-law-matrix"
+            title="When the Law of Large Numbers Applies"
+            source="/probability/large-numbers-law"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1796,8 +1868,15 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-large-numbers-law-common-misconceptions-matrix'}
+            id="large-numbers-law-common-misconceptions-matrix"
+            title="Common Misconceptions"
+            source="/probability/large-numbers-law"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrameV2>,
                   <div key={'unit-llnDilution'} dangerouslySetInnerHTML={{ __html: demoUnits.llnDilution }} />,
             `The surplus of 5 heads is still expected at n = 1000; it is just 0.5% of the flips.`,
             sectionsContent.misconceptionsMore.content,
@@ -1862,8 +1941,23 @@ The law of large numbers is a statement about the share. Dividing by $n$ is the 
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-large-numbers-law-law-large-matrix'}
+            id="large-numbers-law-law-large-matrix"
+            title="Law of Large Numbers at a Glance"
+            source="/probability/large-numbers-law"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

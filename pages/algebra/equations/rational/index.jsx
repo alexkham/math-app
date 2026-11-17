@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -12,10 +14,53 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Equations Reducible to Rational Form"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Original form","features":[{"id":"c1","name":"Rewrite as","type":"text"},{"id":"c2","name":"Notes","type":"text"}],"items":[{"id":"r1","name":"Negative exponents","values":{"c1":"x⁻¹ + x⁻² = 6 → 1/x + 1/x² = 6","c2":"direct conversion to fraction notation"}},{"id":"r2","name":"Symmetric: x + 1/x = k","values":{"c1":"clear x: x² − kx + 1 = 0","c2":"or substitute u = x + 1/x"}},{"id":"r3","name":"Reciprocals of linear expressions","values":{"c1":"standard rational form","c2":"find LCD across all denominators"}}]};
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Rational Equation Subtypes"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Subtype","features":[{"id":"c1","name":"Denominator structure","type":"text"},{"id":"c2","name":"LCD","type":"text"},{"id":"c3","name":"Watch for","type":"text"}],"items":[{"id":"r1","name":"Monomial","values":{"c1":"single term (x, x², 3x)","c2":"highest power of the variable","c3":"x = 0 excluded"}},{"id":"r2","name":"Polynomial","values":{"c1":"factorable polynomial","c2":"product of distinct factors at highest power","c3":"factor first to expose all restrictions"}},{"id":"r3","name":"Proportion (A/B = C/D)","values":{"c1":"exactly one fraction on each side","c2":"BD (cross-multiplication)","c3":"both B and D must be nonzero"}},{"id":"r4","name":"Reducible","values":{"c1":"not initially rational (neg exponents, x + 1/x, …)","c2":"determined after rewrite","c3":"identify the hidden form first"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a rational equation", href: "/algebra/equations/methods/rational-equations", desc: "Note the excluded values, multiply by the LCD, solve, then reject excluded answers.", level: "composite", here: "#3" },
+    ] },
+    { title: "More equation methods", items: [
+      { skill: "Solve work-rate problems", href: "/algebra/equations/methods/work-rate-problems", desc: "Pipes, painters, printers: rates add, and a rate is one job per time.", level: "applied" },
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+      { skill: "Solve a linear equation with fractions", href: "/algebra/equations/methods/linear-equations-with-fractions", desc: "Multiply every term by the least common denominator, then solve the whole-number equation.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/equations/methods", label: "All equation methods" },
+};
+
+// ProcedureV2 (stages) 2026-11-15: replaces the table obj3Table ("Solving by Clearing Denominators": step, action, watch for); steps, actions, notes and links taken from the table.
+const rationalSolvingStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  groups: [
+    { label: 'The denominators', sub: 'steps 1 to 3', kind: 'must', stages: [
+      { n: 1, name: 'Factor every denominator completely', cond: 'Watch for: hidden restrictions inside polynomials' },
+      { n: 2, name: 'Identify [domain restrictions](!/algebra/definitions#domain_restriction)', cond: 'Watch for: every denominator contributes' },
+      { n: 3, name: 'Determine the LCD', cond: 'Watch for: each distinct factor at highest power' },
+    ] },
+    { label: 'The equation', sub: 'steps 4 and 5', kind: 'must', stages: [
+      { n: 4, name: 'Multiply every term on both sides by the LCD', cond: 'Watch for: clears all fractions in one step' },
+      { n: 5, name: 'Solve the resulting [polynomial equation](!/algebra/equations/polynomial)', cond: 'Watch for: use standard techniques for that degree' },
+    ] },
+    { label: 'The check', sub: 'step 6', kind: 'out', stages: [
+      { n: 6, name: 'Verify each candidate against the original domain', cond: 'Watch for: reject any [extraneous solutions](!/algebra/definitions#extraneous_solution)' },
+    ] },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -686,8 +731,25 @@ $$\\frac{1}{x} + \\frac{1}{x^2} = 6$$`, `$$\\implies x + 1 = 6x^2$$`, `$$\\impli
   };
 
 
+  // Procedure rollout 2026-11-14: Clearing denominators, step by step (obj3).
+  const clearingDenominatorsSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$',
+      rows: [
+        { step: 'Find the least common denominator', example: '$(x - 1)(x + 4)$' },
+        { step: 'Multiply every term on both sides by it', stepSub: 'The plain number $1$ is multiplied as well', example: '$3(x + 4) + 2(x - 1) = (x - 1)(x + 4)$' },
+        { step: 'Expand both sides', example: '$5x + 10 = x^2 + 3x - 4$' },
+        { step: 'Rearrange into standard form', example: '$x^2 - 2x - 14 = 0$' },
+        { step: 'Solve the polynomial equation', example: '$x = 1 \\pm \\sqrt{15}$' },
+        { check: true, step: 'Check the solutions against the excluded values', example: 'neither equals $1$ or $-4$: both are solutions' },
+      ],
+    },
+  };
+
    return {
   props: {
+    clearingDenominatorsSteps,
       rationalDomainScope,
     pitfallData,
     rationalSubtypeTree,
@@ -713,7 +775,7 @@ $$\\frac{1}{x} + \\frac{1}{x^2} = 6$$`, `$$\\implies x + 1 = 6x^2$$`, `$$\\impli
 
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function RationalEquationsPage({rationalDomainScope,  pitfallData,rationalSubtypeTree, 
+export default function RationalEquationsPage({ clearingDenominatorsSteps,rationalDomainScope,  pitfallData,rationalSubtypeTree, 
   seoData,
   sectionsContent,
   introContent,
@@ -832,12 +894,27 @@ $$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'obj3-procedure'}
+            id="clearing-denominators-steps"
+            title="Clearing denominators, step by step"
+            source="/algebra/equations/rational"
+            before={"The equation of this section, from the LCD to the domain check. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={clearingDenominatorsSteps} variant="worked" />
+          </DiagramFrame>,
+          `The walkthrough above follows one equation from start to finish. The same method, stated for any rational equation, has six stages. Two of them come before the LCD is found: factoring the denominators and writing down the excluded values. Each stage has one thing to watch for; press Next to move through them in order.`,
+          <DiagramFrame
+            key={'procedure-rational-solving-stages'}
+            id="rational-equation-solving-stages"
+            title="Solving a Rational Equation, Stage by Stage"
+            source="/algebra/equations/rational"
+            related={false}
+          >
+            <ProcedureV2 data={rationalSolvingStages} variant="stages" />
+          </DiagramFrame>,
           `@academic[punchline:Multiplying every term by the LCD turns a rational equation into a polynomial one in a single step.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a rational equation](!/algebra/equations/methods/rational-equations) →@`,
         ]
     },
     {
@@ -882,11 +959,15 @@ $$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-equations-reducible-rational-form-matrix'}
+            id="rational-equations-reducible-rational-form-matrix"
+            title="Equations Reducible to Rational Form"
+            source="/algebra/equations/rational"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:Negative exponents and reciprocals hide rational equations; once rewritten, they are solved and checked like any other.]@`,
         ]
     },
@@ -896,11 +977,15 @@ $$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-summary-rational-equation-subtypes-matrix'}
+            id="rational-summary-rational-equation-subtypes-matrix"
+            title="Summary of Rational Equation Subtypes"
+            source="/algebra/equations/rational"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj9-diagram'}
             id="rational-equation-subtypes-tree"
@@ -926,6 +1011,14 @@ $$\\frac{3}{x - 1} + \\frac{2}{x + 4} = 1$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

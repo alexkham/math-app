@@ -228,7 +228,7 @@ const derivativesMethods = {
       meta: '4 steps · 3 examples',
       category: 'composite',
       fnType: ['polynomial', 'trig', 'explog'],
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Differentiate Composite Functions (Chain Rule Steps) | Learn Math Class',
         description:
@@ -358,7 +358,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Differentiate Products and Quotients of Composite Functions | Learn Math Class',
         description:
@@ -495,7 +495,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Implicit Differentiation (Step by Step) | Learn Math Class',
         description:
@@ -636,7 +636,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Logarithmic Differentiation (x^x and Long Products) | Learn Math Class',
         description:
@@ -769,7 +769,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Differentiate an Inverse Function (Without Finding It) | Learn Math Class',
         description:
@@ -896,7 +896,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Differentiate Parametric Curves (dy/dx and the Second Derivative) | Learn Math Class',
         description:
@@ -1037,7 +1037,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Higher-Order Derivatives (Second, Third and nth) | Learn Math Class',
         description:
@@ -1160,7 +1160,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Tangent and Normal Lines to a Curve | Learn Math Class',
         description:
@@ -1277,7 +1277,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Linear Approximation and Differentials | Learn Math Class',
         description:
@@ -1412,7 +1412,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Critical Points and Extrema (Step by Step) | Learn Math Class',
         description:
@@ -1546,7 +1546,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Where a Function Is Increasing or Decreasing | Learn Math Class',
         description:
@@ -1658,7 +1658,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Concavity and Inflection Points | Learn Math Class',
         description:
@@ -1775,7 +1775,7 @@ const derivativesMethods = {
       tag: 'Composite',
       meta: '6 steps · 2 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Sketch a Curve Using Derivatives (Step by Step) | Learn Math Class',
         description:
@@ -1893,7 +1893,7 @@ const derivativesMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Differentiation Technique to Use? Decision Tree | Learn Math Class',
         description:
@@ -1981,7 +1981,7 @@ const derivativesMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Related Rates Problems (Step by Step) | Learn Math Class',
         description:
@@ -2095,7 +2095,7 @@ const derivativesMethods = {
       tag: 'Applied',
       meta: '6 steps · 1 example',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Optimization Problems in Calculus (Step by Step) | Learn Math Class',
         description:

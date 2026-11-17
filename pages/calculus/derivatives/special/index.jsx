@@ -1,5 +1,6 @@
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj4 aggregation, obj7 aggregation, obj8 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,11 +16,31 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Patterns in Inverse Trigonometric Derivatives"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Algebraic form (magnitude)","features":[{"id":"c1","name":"Cofunction pair","type":"text"},{"id":"c2","name":"Why they share the same magnitude","type":"text"}],"items":[{"id":"r1","name":"1 ⁄ √(1 − x²)","values":{"c1":"arcsin x ↔ arccos x","c2":"arcsin x + arccos x = π ⁄ 2, so the two derivatives sum to zero"}},{"id":"r2","name":"1 ⁄ (1 + x²)","values":{"c1":"arctan x ↔ arccot x","c2":"arctan x + arccot x = π ⁄ 2, so the two derivatives sum to zero"}},{"id":"r3","name":"1 ⁄ (|x| √(x² − 1))","values":{"c1":"arcsec x ↔ arccsc x","c2":"arcsec x + arccsc x = π ⁄ 2, so the two derivatives sum to zero"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Piecewise Functions"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Condition at boundary x = c","features":[{"id":"c1","name":"What it requires","type":"text"},{"id":"c2","name":"Failure mode if violated","type":"text"}],"items":[{"id":"r1","name":"Continuity at c","values":{"c1":"the two pieces meet: the left and right values both equal f(c)","c2":"jump discontinuity — no tangent line possible"}},{"id":"r2","name":"One-sided derivatives exist","values":{"c1":"both the left-hand and right-hand derivatives at c are finite","c2":"vertical tangent or cusp — slope is infinite or undefined on one side"}},{"id":"r3","name":"One-sided derivatives agree","values":{"c1":"left derivative at c equals right derivative at c","c2":"corner — e.g., |x| at 0, where the slopes are −1 and +1"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Derivative techniques", items: [
+      { skill: "Differentiate inverse trig functions", href: "/calculus/derivatives/techniques#inverse-trig-derivatives", desc: "A plain $\\arcsin x$, $\\arccos x$, $\\arctan x$ (or their reciprocals).", level: "atomic" },
+      { skill: "Differentiate an inverse function", href: "/calculus/derivatives/techniques/inverse-functions", desc: "Get $(f^{-1})'$ from $f'$ without finding $f^{-1}$ explicitly.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1203,7 +1224,15 @@ Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leave
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj4Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-special-patterns-inverse-trigonometric-derivatives-matrix'}
+            id="special-patterns-inverse-trigonometric-derivatives-matrix"
+            title="Patterns in Inverse Trigonometric Derivatives"
+            source="/calculus/derivatives/special"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[punchline:Two functions that add up to a constant have opposite derivatives, so the six formulas are really three.]@`,
         ]
     },
@@ -1231,7 +1260,15 @@ Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leave
           sectionsContent.obj7.content,
           <div key={'unit-smoothJoin'} dangerouslySetInnerHTML={{ __html: demoUnits.smoothJoin }} />,
           `Replacing 2x − 1 by 3x − 2 keeps the value 1 at x = 1 but gives slope 3: a corner.`,
-          <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-special-piecewise-functions-matrix'}
+            id="special-piecewise-functions-matrix"
+            title="Piecewise Functions"
+            source="/calculus/derivatives/special"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1275,6 +1312,14 @@ Writing $\\frac{1}{\\sqrt{1 - 4x^2}}$ for the derivative of $\\arcsin(2x)$ leave
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

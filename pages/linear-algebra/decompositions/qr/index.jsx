@@ -1712,6 +1712,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 2 tables (obj4 comparison, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import FactorizationAnatomy from '@/app/components/infographics/linear-algebra/FactorizationAnatomy'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1738,6 +1740,27 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-decompositions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the QR decomposition", href: "/linear-algebra/decompositions/methods/qr-decomposition", desc: "Run Gram-Schmidt on the columns: the orthonormal vectors form Q, the coefficients form R.", level: "composite", here: "#2" },
+    ] },
+    { title: "More decomposition methods", items: [
+      { skill: "Find the LU decomposition", href: "/linear-algebra/decompositions/methods/lu-decomposition", desc: "Run Gaussian elimination, keep the multipliers in L and the result in U; pivot when a zero appears.", level: "composite" },
+      { skill: "Find the singular value decomposition", href: "/linear-algebra/decompositions/methods/svd", desc: "Eigenvalues of $A^TA$ give the singular values and $V$; then $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ gives $U$.", level: "composite" },
+      { skill: "Choose the right matrix decomposition", href: "/linear-algebra/decompositions/methods/which-decomposition", desc: "A decision tree: the task and the shape of the matrix pick LU, Cholesky, QR, spectral or SVD.", level: "strategy" },
+    ] },
+    { title: "Orthogonality methods", items: [
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite" },
+      { skill: "Solve a least-squares problem", href: "/linear-algebra/orthogonality/methods/least-squares", desc: "When $A\\mathbf{x} = \\mathbf{b}$ has no solution, solve the normal equations for the closest fit.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/decompositions/methods", label: "All decomposition methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2510,8 +2533,27 @@ $$= (\\tfrac{4}{3}, \\tfrac{2}{3}, \\tfrac{2}{3})^T$$`, `Solving $R\\hat{\\mathb
     ],
   };
 
+  // FactorizationAnatomy 2026-11-14: What each factor of QR holds (obj8).
+  const qrFactorAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Original matrix', dim: 'm × n', fill: 'dense', width: 100, height: 140,
+        requires: 'Full column rank' },
+      { symbol: 'Q', name: 'Orthonormal columns', dim: 'm × n', fill: 'ortho', width: 100, height: 140,
+        property: '$Q^TQ = I_n$',
+        contains: 'An orthonormal basis of $\\text{Col}(A)$; $QQ^T$ projects onto it' },
+      { symbol: 'R', name: 'Upper triangular', dim: 'n × n', fill: 'upper', width: 100, height: 100,
+        property: 'Invertible, with a positive diagonal',
+        contains: 'All the size information: $\\|A\\mathbf{x}\\| = \\|R\\mathbf{x}\\|$' },
+    ],
+    existsWhen: '$m \\geq n$ and the columns of $A$ are linearly independent.',
+    uniqueWhen: 'The diagonal entries of $R$ are required to be positive.',
+    cost: 'n² per triangular solve once factored',
+    preferredWhen: 'Least squares, and the iterative algorithm for eigenvalues.',
+  };
+
   return {
   props:{
+    qrFactorAnatomy,
     pitfallData,
     qrStabilityLevels,
     demoUnits,
@@ -2536,7 +2578,7 @@ $$= (\\tfrac{4}{3}, \\tfrac{2}{3}, \\tfrac{2}{3})^T$$`, `Solving $R\\hat{\\mathb
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function QRDecompositionPage({ pitfallData,qrStabilityLevels, 
+export default function QRDecompositionPage({ qrFactorAnatomy, pitfallData,qrStabilityLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2651,6 +2693,7 @@ export default function QRDecompositionPage({ pitfallData,qrStabilityLevels,
           sectionsContent.obj2.content,
                   <div key={'unit-viagram'} dangerouslySetInnerHTML={{ __html: demoUnits.viagram }} />,
           `Classical Gram-Schmidt is the clearest route to QR and the least stable one, which is why Householder reflections follow in the next section.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the QR decomposition](!/linear-algebra/decompositions/methods/qr-decomposition) →@`,
         ]
     },
     {
@@ -2708,6 +2751,17 @@ export default function QRDecompositionPage({ pitfallData,qrStabilityLevels,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-factor-anatomy'}
+            id="qr-factor-anatomy"
+            title="What each factor of QR holds"
+            source="/linear-algebra/decompositions/qr"
+            before={"The thin factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={qrFactorAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -2771,6 +2825,14 @@ export default function QRDecompositionPage({ pitfallData,qrStabilityLevels,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

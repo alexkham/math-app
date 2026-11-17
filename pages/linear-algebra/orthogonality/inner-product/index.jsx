@@ -903,6 +903,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj8 aggregation, obj10 comparison, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -916,6 +917,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
@@ -927,8 +929,28 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("The Pythagorean Theorem"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Relation","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"When equality holds","type":"text"},{"id":"c3","name":"What it provides","type":"text"}],"items":[{"id":"r1","name":"Cauchy–Schwarz inequality","values":{"c1":"|⟨u, v⟩| ≤ ‖u‖ · ‖v‖","c2":"u and v are parallel (one is a scalar multiple of the other)","c3":"legitimacy of the angle formula: −1 ≤ cos θ ≤ 1; bounds on inner products in any inner product space"}},{"id":"r2","name":"Triangle inequality","values":{"c1":"‖u + v‖ ≤ ‖u‖ + ‖v‖","c2":"u and v point in the same direction (one is a non-negative multiple of the other)","c3":"the induced distance d(u, v) = ‖u − v‖ satisfies the metric axioms"}},{"id":"r3","name":"Pythagorean theorem","values":{"c1":"u ⊥ v ⟹ ‖u + v‖² = ‖u‖² + ‖v‖²","c2":"always (the statement is an equality, not an inequality, valid whenever u ⊥ v)","c3":"cross terms vanish; lengths add additively across orthogonal directions, making orthogonal decompositions clean"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Compute an inner product", href: "/linear-algebra/orthogonality/methods/inner-product", desc: "Dot product, weighted and function inner products, and the lengths and angles they give.", level: "composite", here: "#9" },
+    ] },
+    { title: "More orthogonality methods", items: [
+      { skill: "Check if a set is orthogonal or orthonormal", href: "/linear-algebra/orthogonality/methods/orthogonal-set-check", desc: "Dot every pair: all zero means orthogonal; unit lengths as well means orthonormal.", level: "composite" },
+      { skill: "Find an orthogonal projection", href: "/linear-algebra/orthogonality/methods/orthogonal-projection", desc: "Project a vector onto a line, a plane or a subspace; split it into a part inside and a part perpendicular.", level: "composite" },
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/orthogonality/methods", label: "All orthogonality methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1296,7 +1318,7 @@ const sectionsContent = {
 @academic[formula_callout:The Dot Product
 $$\\mathbf{u} \\cdot \\mathbf{v} = u_1 v_1 + u_2 v_2 + \\cdots + u_n v_n = \\mathbf{u}^T\\mathbf{v}$$]@
 
-The result is a scalar, not a [vector](!/linear-algebra/vectors). The matrix form $\\mathbf{u}^T\\mathbf{v}$ treats $\\mathbf{u}$ as a $1 \\times n$ row and $\\mathbf{v}$ as an $n \\times 1$ column, making the dot product a $1 \\times 1$ [matrix multiplication](!/linear-algebra/matrix/operations).
+The result is a scalar, not a [vector](!/linear-algebra/vectors). The matrix form $\\mathbf{u}^T\\mathbf{v}$ treats $\\mathbf{u}$ as a $1 \\times n$ row and $\\mathbf{v}$ as an $n \\times 1$ column, making the dot product a $1 \\times 1$ [matrix multiplication](!/linear-algebra/matrix/operations#which-sizes-fit).
 
 @academic[example:Example
 For $\\mathbf{u} = (2, -1, 3, 0)$ and $\\mathbf{v} = (1, 4, -2, 5)$: $\\mathbf{u} \\cdot \\mathbf{v} = 2(1) + (-1)(4) + 3(-2) + 0(5) = 2 - 4 - 6 + 0 = -8$.]@
@@ -2091,6 +2113,7 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compute an inner product](!/linear-algebra/orthogonality/methods/inner-product) →@`,
         ]
     },
     {
@@ -2099,11 +2122,15 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,          <DiagramFrame
+          <DiagramFrame
+            key={'feature-matrix-inner-product-pythagorean-theorem-matrix'}
+            id="inner-product-pythagorean-theorem-matrix"
+            title="The Pythagorean Theorem"
+            source="/linear-algebra/orthogonality/inner-product"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,          <DiagramFrame
             key={'obj10-theorem'}
             id="pythagorean-theorem-card"
             title="The Pythagorean Theorem for vectors"
@@ -2149,6 +2176,14 @@ Jordan and von Neumann proved in 1935 that a length comes from an inner product 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

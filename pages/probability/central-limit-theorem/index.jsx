@@ -719,6 +719,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 4 tables (obj3 aggregation, obj6 aggregation, obj7 aggregation, obj8 comparison)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -739,7 +740,38 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("CLT vs Law of Large Numbers"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Law of Large Numbers","type":"text"},{"id":"c2","name":"Central Limit Theorem","type":"text"}],"items":[{"id":"r1","name":"What it describes","values":{"c1":"convergence of the sample mean to a single value","c2":"the shape of the distribution the sample mean follows"}},{"id":"r2","name":"Type of statement","values":{"c1":"convergence of the mean to the single number μ","c2":"distributional limit"}},{"id":"r3","name":"Target","values":{"c1":"the population mean μ","c2":"the standard [normal distribution](!/probability/distributions/continuous#normal) N(0, 1) after standardizing"}},{"id":"r4","name":"Scaling","values":{"c1":"none — the raw sample mean converges","c2":"divide by σ ⁄ √n to keep variability visible"}},{"id":"r5","name":"Question answered","values":{"c1":"where does the sample mean go?","c2":"how does it get there?"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("When the Central Limit Theorem Applies"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Condition","features":[{"id":"c1","name":"What it ensures","type":"text"},{"id":"c2","name":"What breaks without it","type":"text"}],"items":[{"id":"r1","name":"[Independence](!/probability/independence)","values":{"c1":"observations don't influence one another, so averaging behaves predictably","c2":"dependence distorts the distribution of the average and prevents normal convergence"}},{"id":"r2","name":"Identical distribution","values":{"c1":"a single source of randomness is being aggregated","c2":"mixing different distributions breaks the aggregation effect"}},{"id":"r3","name":"Finite [mean](!/probability/expected-value)","values":{"c1":"averages have a well-defined center to stabilize around","c2":"no stable center exists; averaging loses its stabilizing effect"}},{"id":"r4","name":"Finite [variance](!/probability/variance)","values":{"c1":"spread is bounded enough for a normal limit to emerge","c2":"heavy-tailed distributions can produce non-normal limits even for large n"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Objects Involved in the Theorem"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Object","features":[{"id":"c1","name":"Symbol","type":"text"},{"id":"c2","name":"Role in the theorem","type":"text"}],"items":[{"id":"r1","name":"Original [random variable](!/probability/random-variables)","values":{"c1":"X","c2":"a single experiment or measurement with mean μ and variance σ²"}},{"id":"r2","name":"Sample","values":{"c1":"X₁, X₂, …, Xₙ","c2":"n independent copies of X drawn under identical conditions"}},{"id":"r3","name":"Sample mean","values":{"c1":"X̄ₙ","c2":"the average (X₁ + … + Xₙ) ⁄ n; itself a random variable"}},{"id":"r4","name":"Limiting [normal distribution](!/probability/distributions/continuous#normal)","values":{"c1":"N(0, 1)","c2":"the distribution that the standardized sample mean approaches as n → ∞"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Approximate a probability with the central limit theorem", href: "/probability/random-variables/methods/clt-approximation", desc: "Scale the mean and SD to the sum or the average of $n$ terms, standardize, and read $\\Phi(z)$.", level: "composite", here: "#6" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the standard deviation of a random variable", href: "/probability/random-variables/methods/standard-deviation", desc: "Find the variance first, then take its square root; the result is in the units of $X$.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+      { skill: "Bound a probability with Chebyshev's inequality", href: "/probability/random-variables/methods/chebyshev-inequality", desc: "Measure the distance from the mean in standard deviations, then bound: $P(|X - \\mu| \\geq k\\sigma) \\leq 1/k^2$.", level: "composite" },
+      { skill: "Find the expected value of a sum", href: "/probability/random-variables/methods#linearity-of-expectation", desc: "The variable is a sum or a linear combination of variables whose means you know: $X + Y$, $3X - 2Y + 5$, the total of $n$ dice. It holds whether or not the variables are independent.", level: "atomic" },
+    ] },
+    { title: "Distribution methods", items: [
+      { skill: "Find a normal probability", href: "/probability/distributions/methods/normal-probability", desc: "Standardize with $z = (x - \\mu)/\\sigma$, then read the area from $\\Phi$: left tails, right tails and intervals.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1625,7 +1657,15 @@ Let $\\bar X_n$ denote their sample mean.`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj3Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-central-limit-theorem-objects-involved-matrix'}
+            id="central-limit-theorem-objects-involved-matrix"
+            title="Objects Involved in the Theorem"
+            source="/probability/central-limit-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1692,7 +1732,16 @@ Every probability question built on the theorem refers to one of these curves. A
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj6Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-central-limit-theorem-when-central-matrix'}
+            id="central-limit-theorem-when-central-matrix"
+            title="When the Central Limit Theorem Applies"
+            source="/probability/central-limit-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to approximate a probability with the central limit theorem](!/probability/random-variables/methods/clt-approximation) →@`,
         ]
     },
     {
@@ -1720,7 +1769,15 @@ Every probability question built on the theorem refers to one of these curves. A
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj8Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-central-limit-theorem-clt-vs-matrix'}
+            id="central-limit-theorem-clt-vs-matrix"
+            title="CLT vs Law of Large Numbers"
+            source="/probability/central-limit-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1745,6 +1802,14 @@ Every probability question built on the theorem refers to one of these curves. A
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

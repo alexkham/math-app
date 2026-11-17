@@ -11,6 +11,7 @@
 // import { tableHeaders } from '@/app/styles/theme'
 // import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 // import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import renderSetElementsV3 from '@/app/utils/illustrations/set-theory/relationships/setElements.v3'
 import powerSetExplorerDiagrams from '@/app/components/diagrams/set-theory/powerSetExplorerDiagrams'
 
@@ -1056,9 +1057,37 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Number of Subsets"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n = |A|","features":[{"id":"c1","name":"Total subsets (2ⁿ)","type":"text"},{"id":"c2","name":"Proper subsets (2ⁿ − 1)","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"1","c2":"0"}},{"id":"r2","name":"1","values":{"c1":"2","c2":"1"}},{"id":"r3","name":"2","values":{"c1":"4","c2":"3"}},{"id":"r4","name":"3","values":{"c1":"8","c2":"7"}},{"id":"r5","name":"4","values":{"c1":"16","c2":"15"}},{"id":"r6","name":"5","values":{"c1":"32","c2":"31"}},{"id":"r7","name":"10","values":{"c1":"1,024","c2":"1,023"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Subset and Superset Notation"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Symbol","features":[{"id":"c1","name":"Read as","type":"text"},{"id":"c2","name":"Meaning","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"A ⊆ B","values":{"c1":"\"A is a subset of B\"","c2":"every element of A is in B (A may equal B)","c3":"{1, 2} ⊆ {1, 2}; ∅ ⊆ A for any A"}},{"id":"r2","name":"A ⊂ B","values":{"c1":"\"A is a proper subset of B\"","c2":"A ⊆ B and A ≠ B","c3":"{1, 2} ⊂ {1, 2, 3}"}},{"id":"r3","name":"B ⊇ A","values":{"c1":"\"B is a superset of A\"","c2":"inverse of ⊆; B contains every element of A","c3":"ℝ ⊇ ℚ"}},{"id":"r4","name":"B ⊃ A","values":{"c1":"\"B is a proper superset of A\"","c2":"inverse of ⊂; B properly contains A","c3":"ℝ ⊃ ℚ; ℂ ⊃ ℝ ⊃ ℚ ⊃ ℤ ⊃ ℕ"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Check whether one set is a subset of another", href: "/set-theory/methods/subset-check", desc: "Test $A \\subseteq B$ element by element: every element of $A$ must be in $B$; for a proper subset, $B$ also needs an element outside $A$.", level: "composite", here: "#1" },
+      { skill: "Count subsets", href: "/set-theory/methods/count-subsets", desc: "Count the subsets of a finite set: $2^n$ in all, $2^n - 1$ proper, $\\binom{n}{k}$ of size $k$, and fewer choices when elements are forced in or out.", level: "composite", here: "#4" },
+      { skill: "List the power set of a set", href: "/set-theory/methods/power-set", desc: "List every subset of a finite set, from the empty set to the set itself, and check the count against $2^n$.", level: "composite", here: "#5" },
+    ] },
+    { title: "More set theory methods", items: [
+      { skill: "Prove a set identity", href: "/set-theory/methods/prove-set-identities", desc: "Prove that two set expressions are equal: show each side is a subset of the other, or rewrite one side with the laws of set algebra.", level: "composite" },
+      { skill: "Find the size of a union of sets", href: "/set-theory/methods/union-cardinality", desc: "Find $|A \\cup B|$ or $|A \\cup B \\cup C|$ from the set sizes and their overlaps with inclusion-exclusion; add directly when the sets are disjoint.", level: "composite" },
+    ] },
+    { title: "Combinatorics methods", items: [
+      { skill: "Use complementary counting", href: "/combinatorics/methods/complementary-counting", desc: "Count the outcomes you do not want and subtract them from the total; the standard route for \"at least one\" questions.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/set-theory/methods", label: "All set theory methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2009,6 +2038,7 @@ The claim is checked the way the candidates above were: take the set on the left
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to check whether one set is a subset of another](!/set-theory/methods/subset-check) →@`,
         ]
     },
     {
@@ -2053,17 +2083,22 @@ The claim is checked the way the candidates above were: take the set on the left
 Write the second copy in reverse, and each subset differs from the one before it by a single element: $\\emptyset$, $\\{a\\}$, $\\{a, b\\}$, $\\{b\\}$, $\\{b, c\\}$, $\\{a, b, c\\}$, $\\{a, c\\}$, $\\{c\\}$. Repeating the step lists the subsets of any finite set this way; Frank Gray patented the order in 1953, and rotary encoders still use it.]@
 
 The doubling can also be followed in a written list. Take the four subsets of $\\{a, b\\}$ in the order $\\emptyset$, $\\{a\\}$, $\\{a, b\\}$, $\\{b\\}$, and write the list out twice: once as it stands, and once with $c$ added to every subset. The first copy holds the four subsets of $\\{a, b, c\\}$ that leave out $c$, the second copy holds the four that contain $c$, and together the two copies hold all eight. A fourth element doubles the list to sixteen subsets in the same way, and every further element doubles it again.`,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-subsets-number-subsets-matrix'}
+            id="subsets-number-subsets-matrix"
+            title="Number of Subsets"
+            source="/set-theory/subsets"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[pitfall,aside:true,width:35%:Removing the empty set from the proper count
 Removing $\\emptyset$ as well as the set itself gives $2^3 - 2 = 6$ proper subsets of $\\{a, b, c\\}$. Since $\\emptyset \\subseteq \\{a, b, c\\}$ and $\\emptyset \\neq \\{a, b, c\\}$, the empty set is proper, and the count is $2^3 - 1 = 7$.
 [Read more](!#pitfall-removing-the-empty-set-from-the-proper-count)]@
 
 The two columns of the table differ by exactly $1$ in every row, because a set has only one subset that is equal to it: the set itself. The first row follows the same pattern. The empty set has a single subset, $\\emptyset$, and that subset is the set itself, so the empty set has $2^0 - 1 = 0$ proper subsets. Further down, the gap stays at $1$ while the counts double, from $32$ and $31$ at $n = 5$ to $1024$ and $1023$ at $n = 10$.`,
           `@academic[punchline:Each element is a separate in-or-out choice, so every new element doubles the number of subsets.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to count subsets](!/set-theory/methods/count-subsets) →@`,
         ]
     },
     {
@@ -2079,6 +2114,7 @@ Writing $\\mathcal{P}(\\{1, 2\\}) = \\{\\emptyset, 1, 2, \\{1, 2\\}\\}$ lists th
 [Read more](!#pitfall-leaving-the-braces-off-the-singletons)]@
 
 The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\}$, $\\{a, b\\}$, $\\{a, c\\}$, $\\{b, c\\}$ and $\\{a, b, c\\}$. Written between one outer pair of braces, these eight sets make up $\\mathcal{P}(\\{a, b, c\\})$, so the power set has $8$ elements even though $\\{a, b, c\\}$ itself has only $3$. Each of the letters $a$, $b$ and $c$ appears in four of the eight subsets, one for every choice made about the other two letters.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to list the power set of a set](!/set-theory/methods/power-set) →@`,
         ]
     },
     {
@@ -2140,11 +2176,15 @@ The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\
             sheet={setTheoryNotationSheet}
             current={'/set-theory/subsets'}
           />,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-subsets-subset-superset-notation-matrix'}
+            id="subsets-subset-superset-notation-matrix"
+            title="Subset and Superset Notation"
+            source="/set-theory/subsets"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -2244,6 +2284,14 @@ The eight subsets in the diagram are $\\emptyset$, $\\{a\\}$, $\\{b\\}$, $\\{c\\
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

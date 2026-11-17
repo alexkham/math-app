@@ -1622,6 +1622,7 @@
 //   )
 // }
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1638,12 +1639,48 @@ import functionTypesDiagrams from '@/app/components/functions/types/functionType
 import functionPiecewiseDiagrams from '@/app/components/functions/piecewise/functionPiecewiseDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Identifying Function Families"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Source","features":[{"id":"c1","name":"What to look for","type":"text"},{"id":"c2","name":"Family-specific clues","type":"text"}],"items":[{"id":"r1","name":"Equation","values":{"c1":"the defining algebraic operation or structure","c2":"x in the exponent → exponential; x under a radical → radical; ratio of polynomials → rational; highest power of x = n → polynomial of degree n"}},{"id":"r2","name":"Graph","values":{"c1":"overall shape and key features","c2":"straight line → linear; parabola → quadratic; S-curve → cubic; periodic wave → trigonometric; asymptotes → rational or exponential"}},{"id":"r3","name":"Table of values","values":{"c1":"how outputs change as inputs step uniformly","c2":"constant differences between outputs → linear; constant ratios → exponential; symmetric pattern around a center → quadratic"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Families at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Family","features":[{"id":"c1","name":"Parent form","type":"text"},{"id":"c2","name":"Domain","type":"text"},{"id":"c3","name":"Range","type":"text"},{"id":"c4","name":"Defining feature","type":"text"}],"items":[{"id":"r1","name":"Constant","values":{"c1":"f(x) = c","c2":"ℝ","c3":"{c}","c4":"horizontal line"}},{"id":"r2","name":"Linear","values":{"c1":"mx + b","c2":"ℝ","c3":"ℝ","c4":"constant slope, straight line"}},{"id":"r3","name":"Quadratic","values":{"c1":"ax² + bx + c","c2":"ℝ","c3":"[k, ∞) or (−∞, k]","c4":"parabola with vertex (h, k)"}},{"id":"r4","name":"Cubic","values":{"c1":"ax³ + …","c2":"ℝ","c3":"ℝ","c4":"S-curve; up to 2 turning points"}},{"id":"r5","name":"Higher polynomial (deg n)","values":{"c1":"aₙxⁿ + … + a₀","c2":"ℝ","c3":"ℝ (odd n) or bounded one side (even n)","c4":"up to n zeros, n − 1 turning points; smooth everywhere"}},{"id":"r6","name":"Rational","values":{"c1":"P(x) ⁄ Q(x)","c2":"ℝ excluding zeros of Q","c3":"varies","c4":"vertical and horizontal asymptotes; holes possible"}},{"id":"r7","name":"Square root","values":{"c1":"√x","c2":"[0, ∞)","c3":"[0, ∞)","c4":"starts at origin, concave down, gradually rising"}},{"id":"r8","name":"Cube root","values":{"c1":"∛x","c2":"ℝ","c3":"ℝ","c4":"S-curve through origin; odd symmetry"}},{"id":"r9","name":"nth root, even n","values":{"c1":"x^(1⁄n)","c2":"[0, ∞)","c3":"[0, ∞)","c4":"generalization of √x: steeper near 0, flatter beyond x = 1"}},{"id":"r10","name":"nth root, odd n","values":{"c1":"x^(1⁄n)","c2":"ℝ","c3":"ℝ","c4":"generalization of ∛x: steeper near 0, flatter beyond |x| = 1"}},{"id":"r11","name":"Absolute value","values":{"c1":"|x|","c2":"ℝ","c3":"[0, ∞)","c4":"V-shape with vertex at origin"}},{"id":"r12","name":"Step (floor / ceiling)","values":{"c1":"⌊x⌋, ⌈x⌉","c2":"ℝ","c3":"ℤ","c4":"staircase — horizontal segments with jumps"}},{"id":"r13","name":"Exponential","values":{"c1":"a · bˣ (b > 0, b ≠ 1)","c2":"ℝ","c3":"(0, ∞) or (−∞, 0)","c4":"rapid growth or decay; horizontal asymptote y = 0"}},{"id":"r14","name":"Logarithmic","values":{"c1":"logₐ(x)","c2":"(0, ∞)","c3":"ℝ","c4":"inverse of exp; vertical asymptote x = 0"}},{"id":"r15","name":"Sine / cosine","values":{"c1":"sin(x), cos(x)","c2":"ℝ","c3":"[−1, 1]","c4":"periodic wave, period 2π"}},{"id":"r16","name":"Tangent","values":{"c1":"tan(x)","c2":"ℝ excl. π⁄2 + nπ","c3":"ℝ","c4":"period π; vertical asymptotes at excluded points"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj17Table ("Comparing Function Families"); converted from the table's own cells.
+const fm_obj17Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Family","features":[{"id":"c1","name":"Examples","type":"text"},{"id":"c2","name":"Growth speed for large x","type":"text"}],"items":[{"id":"r1","name":"Logarithmic","values":{"c1":"ln(x), log₁₀(x)","c2":"slowest — unbounded but very gradual"}},{"id":"r2","name":"Root functions","values":{"c1":"√x, ∛x","c2":"slow — increases but below linear"}},{"id":"r3","name":"Linear","values":{"c1":"x, 2x − 3","c2":"constant rate of change"}},{"id":"r4","name":"Polynomial (degree ≥ 2)","values":{"c1":"x², x³, x⁴","c2":"accelerating — faster than linear"}},{"id":"r5","name":"Exponential","values":{"c1":"2ˣ, eˣ","c2":"fastest — eventually overtakes any polynomial"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Other Radical Functions"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n parity","features":[{"id":"c1","name":"Domain","type":"text"},{"id":"c2","name":"Range","type":"text"},{"id":"c3","name":"Symmetry","type":"text"},{"id":"c4","name":"Shape","type":"text"}],"items":[{"id":"r1","name":"Even n (4th, 6th, ...)","values":{"c1":"[0, ∞)","c2":"[0, ∞)","c3":"none — only the right half exists","c4":"resembles √x: starts at origin, increasing, concave down; higher even roots steeper near 0, flatter beyond x = 1"}},{"id":"r2","name":"Odd n (5th, 7th, ...)","values":{"c1":"(−∞, ∞)","c2":"(−∞, ∞)","c3":"odd — point symmetry about the origin","c4":"resembles ∛x: S-curve through origin; higher odd roots steeper near 0, flatter beyond |x| = 1"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Identify the family of a function", href: "/functions/methods/identify-function-family", desc: "A decision tree from what you see in the formula to the family and the method that handles it.", level: "strategy", here: "#2" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Graph a transformed function", href: "/functions/methods/graph-transformations", desc: "Start from the parent graph, read $a$, $b$, $h$, $k$ from $a f(b(x - h)) + k$, and move key points.", level: "composite" },
+      { skill: "Analyze a function", href: "/functions/methods/analyze-function", desc: "Work through domain, intercepts, symmetry, rise and fall, turning points, end behavior and range in a fixed order.", level: "composite" },
+      { skill: "Evaluate and graph a piecewise function", href: "/functions/methods/piecewise-functions", desc: "Let the input pick the piece, find both values at each boundary, and draw each piece only on its interval.", level: "composite" },
+      { skill: "Find the intercepts of a function", href: "/functions/methods/find-intercepts", desc: "Evaluate $f(0)$ for the $y$-intercept; solve $f(x) = 0$ for the $x$-intercepts and keep the solutions in the domain.", level: "composite" },
+      { skill: "Find the range of a function", href: "/functions/methods/find-range", desc: "Find the lowest and highest outputs from the vertex, the endpoints and the end behavior, or solve $y = f(x)$ for $x$.", level: "composite" },
+    ] },
+    { title: "Trigonometry methods", items: [
+      { skill: "Graph a sine or cosine function", href: "/trigonometry/methods/graph-sine-cosine", desc: "Read amplitude, period, phase shift and midline from $y = A\\sin(B(x - C)) + D$, then plot five key points.", level: "composite" },
+      { skill: "Graph a tangent function", href: "/trigonometry/methods/graph-tangent", desc: "Find the period and the asymptotes, mark the zero and the two quarter points, draw each branch.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3408,12 +3445,17 @@ export default function FamiliesPage({ formulaSummaryData, pitfallData,familyOut
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-families-identifying-function-families-matrix'}
+            id="families-identifying-function-families-matrix"
+            title="Identifying Function Families"
+            source="/functions/families"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           `@academic[punchline:An equation, a graph and a table each carry the family's signature: the defining operation, the shape, the pattern of change.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to identify the family of a function](!/functions/methods/identify-function-family) →@`,
         ]
     },
     {
@@ -3505,11 +3547,15 @@ export default function FamiliesPage({ formulaSummaryData, pitfallData,familyOut
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'obj11-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj11Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-families-other-radical-functions-matrix'}
+            id="families-other-radical-functions-matrix"
+            title="Other Radical Functions"
+            source="/functions/families"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3568,11 +3614,15 @@ export default function FamiliesPage({ formulaSummaryData, pitfallData,familyOut
         link:sectionsContent.obj17.link,
         content:[
           sectionsContent.obj17.content,
-          <div
-            key={'obj17-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj17Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-families-comparing-function-families-matrix'}
+            id="families-comparing-function-families-matrix"
+            title="Comparing Function Families"
+            source="/functions/families"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj17Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj17-diagram'}
             id="function-family-growth-pyramid"
@@ -3624,11 +3674,15 @@ export default function FamiliesPage({ formulaSummaryData, pitfallData,familyOut
         link:sectionsContent.obj18.link,
         content:[
           sectionsContent.obj18.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-families-families-at-glance-matrix'}
+            id="families-families-at-glance-matrix"
+            title="Families at a Glance"
+            source="/functions/families"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj18-diagram'}
             id="function-families-outline"
@@ -3640,6 +3694,14 @@ export default function FamiliesPage({ formulaSummaryData, pitfallData,familyOut
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

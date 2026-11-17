@@ -698,6 +698,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -717,8 +718,82 @@ import diceSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/di
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (operations + probability) 2026-11-15: the section's two-dice example, A = first die shows 6, B = second die shows 6.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const unionRuleDiagram = {
+  labels: { elementsThat: 'Outcomes where' },
+  sets: [{ id: 'A' }, { id: 'B' }],
+  regionNames: { A: 'only $A$', AB: 'both $A$ and $B$', B: 'only $B$', '': 'neither' },
+  given: 'Two dice, 36 outcomes: $A$ = first die shows 6, $B$ = second die shows 6. Each region shows its probability.',
+  initial: 'union',
+  operations: [
+    { id: 'a', name: 'First die 6', notation: '$A$', regions: ['A', 'AB'], rule: 'the first die shows 6',
+      prob: { calc: '$\\frac{6}{36}$' } },
+    { id: 'b', name: 'Second die 6', notation: '$B$', regions: ['AB', 'B'], rule: 'the second die shows 6',
+      prob: { calc: '$\\frac{6}{36}$' } },
+    { id: 'both', name: 'Both', notation: '$A \\cap B$', regions: ['AB'], rule: 'both dice show 6: the single outcome $(6, 6)$',
+      prob: { calc: '$\\frac{1}{36}$' } },
+    { id: 'union', name: 'At least one', notation: '$A \\cup B$', regions: ['A', 'AB', 'B'], rule: 'at least one die shows 6',
+      prob: { ruleLabel: 'Union rule', rule: '$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$', calc: '$\\frac{6}{36} + \\frac{6}{36} - \\frac{1}{36} = \\frac{11}{36}$',
+        note: 'Adding $\\frac{6}{36} + \\frac{6}{36} = \\frac{12}{36}$ counts the outcome $(6, 6)$ twice.' } },
+  ],
+  probability: {
+    regions: { A: 5 / 36, AB: 1 / 36, B: 5 / 36, '': 25 / 36 },
+  },
+};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_axiomsPath = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  path: {
+    beforeLabel: 'Stated on',
+    before: [
+      { name: 'Events', href: '/probability/events', why: 'the objects to which probabilities are assigned' },
+      { name: 'Sample spaces', href: '/probability/sample-space', why: 'the universe in which those events live' }
+    ],
+    target: { kicker: 'This page', name: 'Probability axioms', text: 'The base layer of the entire probability framework.' },
+    afterLabel: 'Leads to',
+    after: [
+      { name: 'Conditional probability', href: '/probability/conditional-probability', why: 'the axioms applied under restricted information' },
+      { name: 'Total probability', href: '/probability/total-probability#cases', why: 'follows from additivity across cases' },
+      { name: 'Independence', href: '/probability/independence', why: 'when conditioning has no effect' },
+      { name: 'Random variables', href: '/probability/random-variables', why: 'the axioms extended to numerical outcomes' },
+      { name: 'Probability distributions', href: '/probability/distributions', why: 'the axioms extended to numerical outcomes' }
+    ]
+  }
+};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table overviewTable ("How the Axioms Generate Probability Theory"); converted from the table's own cells.
+const fm_overviewTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Concept","features":[{"id":"c1","name":"What it builds on","type":"text"},{"id":"c2","name":"What the axioms provide","type":"text"}],"items":[{"id":"r1","name":"[Conditional probability](!/probability/conditional-probability)","values":{"c1":"restriction of attention to a sub-sample-space","c2":"normalization applied inside the restricted space; the formula P(A|B) = P(A ∩ B) ⁄ P(B) follows directly"}},{"id":"r2","name":"[Total probability](!/probability/total-probability)","values":{"c1":"a partition of Ω into mutually exclusive hypotheses","c2":"additivity across the partition yields the decomposition of P(B)"}},{"id":"r3","name":"[Independence](!/probability/independence)","values":{"c1":"how conditioning interacts with axiomatic probability","c2":"a structural simplification: P(A ∩ B) = P(A) P(B) when events do not inform each other"}},{"id":"r4","name":"Bayes' theorem","values":{"c1":"conditional probability combined with total probability","c2":"a coherent rule for inverting the direction of conditioning"}},{"id":"r5","name":"[Random variables](!/probability/random-variables) and [distributions](!/probability/distributions)","values":{"c1":"events extended to numerical outcomes","c2":"the same three axioms applied uniformly across discrete, continuous, and mixed types"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table assumeTable ("What the Axioms Do  Not  Assume"); converted from the table's own cells.
+const fm_assumeTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Not assumed by the axioms","features":[{"id":"c1","name":"What this means","type":"text"},{"id":"c2","name":"Where the assumption would have to come from","type":"text"}],"items":[{"id":"r1","name":"[Independence](!/probability/independence)","values":{"c1":"the axioms do not state that any two events are independent","c2":"independence is a separate property that must be justified for each pair"}},{"id":"r2","name":"Equal likelihood","values":{"c1":"outcomes are not required to have the same probability","c2":"uniform models are a modeling choice on top of the axioms, not a default"}},{"id":"r3","name":"Symmetry or fairness","values":{"c1":"coins, dice, and processes are not assumed to be balanced","c2":"\"the coin is fair\" is an extra assumption added to the model"}},{"id":"r4","name":"Finite sample space","values":{"c1":"the axioms apply equally to finite, countable, and continuous spaces","c2":"continuous models add technical structure but no new axiom"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table consequencesTable ("Immediate Consequences of the Axioms"); converted from the table's own cells.
+const fm_consequencesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Consequence","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Why it follows","type":"text"}],"items":[{"id":"r1","name":"Empty event","values":{"c1":"P(∅) = 0","c2":"from normalization plus additivity applied to Ω and ∅"}},{"id":"r2","name":"Complement","values":{"c1":"P(A$^{c}$) = 1 − P(A)","c2":"additivity applied to the disjoint union A ∪ A$^{c}$ = Ω"}},{"id":"r3","name":"Monotonicity","values":{"c1":"A ⊆ B ⇒ P(A) ≤ P(B)","c2":"B splits as the disjoint union of A and B ∖ A, both non-negative"}},{"id":"r4","name":"Union with overlap","values":{"c1":"P(A ∪ B) = P(A) + P(B) − P(A ∩ B)","c2":"additivity on disjoint pieces plus a correction for double-counting the overlap"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table axiomsTable ("Connections to Other Probability Concepts"); converted from the table's own cells.
+const fm_axiomsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Axiom","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Meaning","type":"text"}],"items":[{"id":"r1","name":"Non-negativity","values":{"c1":"P(A) ≥ 0 for every event A","c2":"probabilities measure possibility from zero upward; negative values are not allowed"}},{"id":"r2","name":"Normalization","values":{"c1":"P(Ω) = 1","c2":"the entire sample space carries the full unit of probability — this fixes the scale"}},{"id":"r3","name":"Additivity (disjoint)","values":{"c1":"P(A ∪ B) = P(A) + P(B) whenever A ∩ B = ∅","c2":"mutually exclusive cases combine by simple summation"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Probability methods", items: [
+      { skill: "Find a probability with the complement rule", href: "/probability/methods#complement-rule", desc: "The event is easier to describe by what does not happen: \"at least one\", \"not all\", \"no six\".", level: "atomic" },
+      { skill: "Find the probability of A or B", href: "/probability/methods#addition-rule", desc: "The question says \"or\": a heart or a king, an even number or a number above $4$, rain or wind.", level: "atomic" },
+      { skill: "List a sample space", href: "/probability/methods/sample-space", desc: "Write down every possible outcome of an experiment with a list, a grid or a tree, then count it.", level: "composite" },
+      { skill: "Find a probability by counting outcomes", href: "/probability/methods/classical-probability", desc: "Equally likely outcomes: count the favorable ones, count all of them, divide.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1580,7 +1655,15 @@ When two events cannot occur together, the probability that one or the other occ
           height={600}
           />
           </div>,
-          <div key={'axioms-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: axiomsTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-axioms-connections-other-probability-concepts-matrix'}
+            id="axioms-connections-other-probability-concepts-matrix"
+            title="Connections to Other Probability Concepts"
+            source="/probability/axioms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_axiomsTable} />
+          </DiagramFrame>,
           <div key={'unit-u_axioms_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_axioms_0 }} />,
         ],
       },
@@ -1671,7 +1754,25 @@ When two events cannot occur together, the probability that one or the other occ
         link:'',
         content:[
           sectionsContent.consequences.content,
-          <div key={'consequences-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: consequencesTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-axioms-immediate-consequences-axioms-matrix-2'}
+            id="axioms-immediate-consequences-axioms-matrix-2"
+            title="Immediate Consequences of the Axioms"
+            source="/probability/axioms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_consequencesTable} />
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'set-diagram-union-rule'}
+            id="union-rule-two-dice"
+            title="The union rule on two dice"
+            source="/probability/axioms"
+            related={false}
+            before={'The two-dice example as a picture: the overlap of the two events is the single outcome $(6, 6)$, and the union rule takes it off once.'}
+          >
+            <SetDiagram data={unionRuleDiagram} variant="operations" theme={setDiagramTheme} />
+          </DiagramFrame>,
           `@academic[punchline:The complement rule, monotonicity and the union rule are not extra assumptions: the three axioms already force them.]@`,
         ]
     },
@@ -1681,7 +1782,15 @@ When two events cannot occur together, the probability that one or the other occ
         link:'',
         content:[
           sectionsContent.assume.content,
-          <div key={'assume-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: assumeTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-axioms-what-axioms-do-not-matrix'}
+            id="axioms-what-axioms-do-not-matrix"
+            title="What the Axioms Do  Not  Assume"
+            source="/probability/axioms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_assumeTable} />
+          </DiagramFrame>,
           `@academic[punchline:The axioms decide which assignments are allowed, not which one is right; fairness and independence are modeling choices.]@`,
         ]
     },
@@ -1699,6 +1808,15 @@ When two events cannot occur together, the probability that one or the other occ
         link:'',
         content:[
           sectionsContent.connections.content,
+          <DiagramFrame
+            key={'concept-map-axioms-connections'}
+            id="axioms-connections"
+            title="Connections to Other Probability Concepts"
+            source="/probability/axioms"
+            related={false}
+          >
+            <ConceptMap data={cm_axiomsPath} variant="path" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1707,7 +1825,15 @@ When two events cannot occur together, the probability that one or the other occ
         link:'',
         content:[
           sectionsContent.overview.content,
-          <div key={'overview-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: overviewTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-axioms-how-axioms-generate-probability-matrix'}
+            id="axioms-how-axioms-generate-probability-matrix"
+            title="How the Axioms Generate Probability Theory"
+            source="/probability/axioms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_overviewTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1743,6 +1869,14 @@ When two events cannot occur together, the probability that one or the other occ
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

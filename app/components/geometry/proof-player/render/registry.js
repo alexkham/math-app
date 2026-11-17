@@ -26,6 +26,7 @@ export const REGISTRY = {
   angleCopy: Point,
   rotateBy: Point,
   rotateDeg: Point,
+  secondIntersection: Point,
 
   polygon: Polygon,
   circle: Circle,

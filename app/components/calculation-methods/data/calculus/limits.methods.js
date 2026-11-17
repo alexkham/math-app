@@ -134,7 +134,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate a Limit by Factoring (0/0 Form) | Learn Math Class',
         description:
@@ -258,7 +258,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate a Limit by Rationalizing (Conjugates) | Learn Math Class',
         description:
@@ -387,7 +387,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate One-Sided Limits (Left and Right) | Learn Math Class',
         description:
@@ -511,7 +511,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Limit of a Piecewise Function | Learn Math Class',
         description:
@@ -639,7 +639,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Limits at Infinity of Rational Functions (Step by Step) | Learn Math Class',
         description:
@@ -764,7 +764,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Limits at Infinity with Square Roots (x → ±∞) | Learn Math Class',
         description:
@@ -889,7 +889,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Squeeze Theorem (Step by Step) | Learn Math Class',
         description:
@@ -1014,7 +1014,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: "How to Use L'Hôpital's Rule (0/0 and ∞/∞) | Learn Math Class",
         description:
@@ -1140,7 +1140,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate Indeterminate Powers: 1^∞, 0^0 and ∞^0 | Learn Math Class',
         description:
@@ -1265,7 +1265,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '5 steps · 4 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Vertical Asymptotes (Step by Step) | Learn Math Class',
         description:
@@ -1403,7 +1403,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 4 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Horizontal Asymptotes (Step by Step) | Learn Math Class',
         description:
@@ -1536,7 +1536,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 4 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Check Whether a Function Is Continuous at a Point | Learn Math Class',
         description:
@@ -1673,7 +1673,7 @@ const limitsMethods = {
       tag: 'Composite',
       meta: '4 steps · 4 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find and Remove a Removable Discontinuity | Learn Math Class',
         description:
@@ -1934,7 +1934,7 @@ const limitsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Limit Technique to Use? Decision Tree | Learn Math Class',
         description:

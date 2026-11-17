@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb';
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar';
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar';
@@ -12,7 +13,54 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import twoSetsLawsVennDiagrams from '@/app/components/venn-diagrams/twoSetsLawsVennDiagrams'
 import threeSetsLawsVennDiagrams from '@/app/components/venn-diagrams/3-sets/threeSetsLawsVennDiagrams'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Set theory methods", items: [
+      { skill: "Prove a set identity", href: "/set-theory/methods/prove-set-identities", desc: "Prove that two set expressions are equal: show each side is a subset of the other, or rewrite one side with the laws of set algebra.", level: "composite" },
+      { skill: "Find the union of two sets", href: "/set-theory/methods#union", desc: "The question asks for the elements in one set **or** the other, or both: $A \\cup B$, \"in at least one of the sets\", \"everyone on either team\".", level: "atomic" },
+      { skill: "Find the intersection of two sets", href: "/set-theory/methods#intersection", desc: "The question asks for the elements in **both** sets: $A \\cap B$, \"common to\", \"in $A$ and in $B$\". If nothing is shared, the answer is $\\emptyset$.", level: "atomic" },
+      { skill: "Find the complement of a set", href: "/set-theory/methods#complement", desc: "The question asks for everything **not** in a set, relative to a universal set $U$: $A^c$, \"not in $A$\", \"outside the circle\". Without a stated $U$ the complement is not defined.", level: "atomic" },
+      { skill: "Find the difference of two sets", href: "/set-theory/methods#difference", desc: "The question asks for the elements of one set that are **not** in another: $A \\setminus B$ (also written $A - B$), \"in $A$ but not in $B$\". Order matters.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/set-theory/methods", label: "All set theory methods" },
+};
+
+// SetDiagram (identity) 2026-11-15: both sides of each law built step by step. Laws, formulas and explanations are the page's own.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+
+const deMorganBothSides = {
+  sets: [{ id: 'A' }, { id: 'B' }],
+  universe: 'U',
+  laws: [
+    { name: 'De Morgan’s Law for Union', formula: '$(A \\cup B)^c = A^c \\cap B^c$', explanation: 'The complement of a union is the intersection of the complements.',
+      left: { label: '$(A \\cup B)^c$', steps: [{ label: '$A \\cup B$', regions: ['A', 'AB', 'B'] }, { label: '$(A \\cup B)^c$', regions: [''] }] },
+      right: { label: '$A^c \\cap B^c$', steps: [{ label: '$A^c$', regions: ['B', ''] }, { label: '$B^c$', regions: ['A', ''] }, { label: '$A^c \\cap B^c$', regions: [''] }] } },
+    { name: 'De Morgan’s Law for Intersection', formula: '$(A \\cap B)^c = A^c \\cup B^c$', explanation: 'The complement of an intersection is the union of the complements.',
+      left: { label: '$(A \\cap B)^c$', steps: [{ label: '$A \\cap B$', regions: ['AB'] }, { label: '$(A \\cap B)^c$', regions: ['A', 'B', ''] }] },
+      right: { label: '$A^c \\cup B^c$', steps: [{ label: '$A^c$', regions: ['B', ''] }, { label: '$B^c$', regions: ['A', ''] }, { label: '$A^c \\cup B^c$', regions: ['A', 'B', ''] }] } },
+  ],
+};
+
+const distributiveBothSides = {
+  sets: [{ id: 'A' }, { id: 'B' }, { id: 'C' }],
+  universe: 'U',
+  laws: [
+    { name: 'Distributive Law of Union over Intersection', formula: '$A \\cup (B \\cap C) = (A \\cup B) \\cap (A \\cup C)$', explanation: 'Union distributes over intersection.',
+      left: { label: '$A \\cup (B \\cap C)$', steps: [{ label: '$B \\cap C$', regions: ['BC', 'ABC'] }, { label: '$A \\cup (B \\cap C)$', regions: ['A', 'AB', 'AC', 'BC', 'ABC'] }] },
+      right: { label: '$(A \\cup B) \\cap (A \\cup C)$', steps: [{ label: '$A \\cup B$', regions: ['A', 'B', 'AB', 'AC', 'BC', 'ABC'] }, { label: '$A \\cup C$', regions: ['A', 'C', 'AB', 'AC', 'BC', 'ABC'] }, { label: '$(A \\cup B) \\cap (A \\cup C)$', regions: ['A', 'AB', 'AC', 'BC', 'ABC'] }] } },
+    { name: 'Distributive Law of Intersection over Union', formula: '$A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$', explanation: 'Intersection distributes over union.',
+      left: { label: '$A \\cap (B \\cup C)$', steps: [{ label: '$B \\cup C$', regions: ['B', 'C', 'AB', 'AC', 'BC', 'ABC'] }, { label: '$A \\cap (B \\cup C)$', regions: ['AB', 'AC', 'ABC'] }] },
+      right: { label: '$(A \\cap B) \\cup (A \\cap C)$', steps: [{ label: '$A \\cap B$', regions: ['AB', 'ABC'] }, { label: '$A \\cap C$', regions: ['AC', 'ABC'] }, { label: '$(A \\cap B) \\cup (A \\cap C)$', regions: ['AB', 'AC', 'ABC'] }] } },
+  ],
+};
 
 export async function getStaticProps(){
 
@@ -312,6 +360,15 @@ export default function SetTheoryRulesPage({demoUnits,sectionsContent,setAlgebra
              </div> ,
             <div key={'unit-distributive'} dangerouslySetInnerHTML={{ __html: demoUnits.distributive }} />,
             `Union spreads across intersection as well, which has no counterpart in ordinary arithmetic.`,
+            <DiagramFrame
+              key={'set-diagram-distributive'}
+              id="distributive-laws-both-sides"
+              title="Distributive laws, side by side"
+              source="/set-theory/rules"
+              before="Build each side of a distributive law one step at a time. Both sides end on the same regions."
+            >
+              <SetDiagram data={distributiveBothSides} variant="identity" theme={setDiagramTheme} />
+            </DiagramFrame>,
         ]
     },
     {
@@ -356,8 +413,25 @@ export default function SetTheoryRulesPage({demoUnits,sectionsContent,setAlgebra
              </div> ,
             <div key={'unit-deMorgan'} dangerouslySetInnerHTML={{ __html: demoUnits.deMorgan }} />,
             `The same exchange runs the other way: the complement of an intersection is the union of the complements.`,
+            <DiagramFrame
+              key={'set-diagram-de-morgan'}
+              id="de-morgan-laws-both-sides"
+              title="De Morgan’s laws, side by side"
+              source="/set-theory/rules"
+              before="Build each side of a De Morgan law one step at a time. Both sides end on the same regions."
+            >
+              <SetDiagram data={deMorganBothSides} variant="identity" theme={setDiagramTheme} />
+            </DiagramFrame>,
         ]
-    }
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
 ]
 
 

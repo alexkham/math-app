@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-24 | 4 tables (obj5 aggregation, obj10 comparison, obj12 aggregation, obj13 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,6 +17,22 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_exponentialEnds = {
+  center: { name: '$e^x$ and $e^{-x}$', sub: 'the behavior reverses' },
+  axes: { cols: ['$x \\to -\\infty$', '$x \\to \\infty$'], rows: ['$e^x$', '$e^{-x}$'] },
+  options: { bullets: false },
+  quadrants: [
+    { label: 'Decays toward zero', title: '$0$', items: [ '$\\lim_{x \\to -\\infty} e^x = 0$' ] },
+    { label: 'Grows without bound', title: '$\\infty$', items: [ '$\\lim_{x \\to \\infty} e^x = \\infty$' ] },
+    { label: 'Grows without bound', title: '$\\infty$', items: [ '$\\lim_{x \\to -\\infty} e^{-x} = \\infty$' ] },
+    { label: 'Decays toward zero', title: '$0$', items: [ '$\\lim_{x \\to \\infty} e^{-x} = 0$' ] }
+  ],
+  note: { label: 'Horizontal asymptote', text: 'The asymptote $y = 0$ appears in the direction where the exponent goes to $-\\infty$.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
@@ -23,7 +40,19 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Dominant Term Analysis"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Degree relation","features":[{"id":"c1","name":"lim$_{x → ∞}$ p(x)/q(x)","type":"text"},{"id":"c2","name":"Why","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"deg p < deg q","values":{"c1":"0","c2":"denominator grows faster than numerator","c3":"(x + 1) / (x³ − 2) → 0"}},{"id":"r2","name":"deg p = deg q","values":{"c1":"ratio of leading coefficients","c2":"scales tie; only leading terms survive","c3":"(4x² + x) / (2x² + 5) → 4 / 2 = 2"}},{"id":"r3","name":"deg p > deg q","values":{"c1":"±∞","c2":"numerator grows faster than denominator; sign from leading-coefficient ratio","c3":"x³ / (x + 1) → ∞"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Master Diagnostic for Limits and Asymptotes"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Observed pattern","features":[{"id":"c1","name":"What it signals","type":"text"},{"id":"c2","name":"Resulting graph feature","type":"text"},{"id":"c3","name":"Section","type":"text"}],"items":[{"id":"r1","name":"lim$_{x → ±∞}$ f(x) = L (finite)","values":{"c1":"end behavior settles to a single value","c2":"horizontal asymptote y = L in that direction","c3":"3"}},{"id":"r2","name":"lim$_{x → ±∞}$ f(x) = ±∞","values":{"c1":"function grows without bound in that direction","c2":"no horizontal asymptote there","c3":"5"}},{"id":"r3","name":"lim$_{x → a}$ f(x) = ±∞ (one or both sides)","values":{"c1":"output blows up near a finite point a","c2":"vertical asymptote x = a","c3":"8, 9"}},{"id":"r4","name":"Rational p/q, deg p < deg q","values":{"c1":"denominator dominates","c2":"horizontal asymptote y = 0","c3":"4, 5"}},{"id":"r5","name":"Rational p/q, deg p = deg q","values":{"c1":"leading-degree terms balance","c2":"horizontal asymptote y = (leading p) / (leading q)","c3":"4, 5"}},{"id":"r6","name":"Rational p/q, deg p > deg q","values":{"c1":"numerator dominates","c2":"no horizontal asymptote (function escapes to ±∞)","c3":"5"}},{"id":"r7","name":"Mixed exponential / logarithmic","values":{"c1":"apply the [growth-rate hierarchy](!/calculus/limits/special) (log ≪ poly ≪ exp)","c2":"depends on which family dominates — see sections 11 and 12 above","c3":"6, 11, 12"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Limits of Logarithms Toward Zero and Infinity"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Direction","type":"text"},{"id":"c2","name":"Limit","type":"text"},{"id":"c3","name":"Asymptote signal","type":"text"}],"items":[{"id":"r1","name":"eˣ","values":{"c1":"x → ∞","c2":"∞","c3":"no horizontal asymptote on the right"}},{"id":"r2","name":"eˣ","values":{"c1":"x → −∞","c2":"0","c3":"horizontal asymptote y = 0 on the left"}},{"id":"r3","name":"e⁻ˣ","values":{"c1":"x → ∞","c2":"0","c3":"horizontal asymptote y = 0 on the right"}},{"id":"r4","name":"e⁻ˣ","values":{"c1":"x → −∞","c2":"∞","c3":"no horizontal asymptote on the left"}},{"id":"r5","name":"ln x","values":{"c1":"x → ∞","c2":"∞","c3":"no horizontal asymptote; grows slowly (slower than any positive power)"}},{"id":"r6","name":"ln x","values":{"c1":"x → 0⁺","c2":"−∞","c3":"vertical asymptote x = 0 (right-hand limit only — ln undefined for x ≤ 0)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("One-Sided Infinite Limits"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function near x = a","features":[{"id":"c1","name":"LHL at a","type":"text"},{"id":"c2","name":"RHL at a","type":"text"},{"id":"c3","name":"Two-sided","type":"text"},{"id":"c4","name":"Asymptote pattern","type":"text"}],"items":[{"id":"r1","name":"1 / (x − a) (odd power)","values":{"c1":"−∞","c2":"+∞","c3":"does not exist (signs disagree)","c4":"vertical asymptote; graph plunges on one side, soars on the other"}},{"id":"r2","name":"1 / (x − a)² (even power)","values":{"c1":"+∞","c2":"+∞","c3":"+∞ (sides agree)","c4":"vertical asymptote; graph soars on both sides"}}]};
 
 // CaseGraph 2026-11-09: "Which side, which infinity" (graph), from the page's own text. Holds functions, so it lives here, not in getStaticProps.
 const caseGraphData = {
@@ -47,6 +76,28 @@ const caseGraphData = {
     ],
   };
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find horizontal asymptotes", href: "/calculus/limits/methods/horizontal-asymptotes", desc: "Take the limits as $x \\to \\infty$ and $x \\to -\\infty$ separately; each finite value gives $y = L$.", level: "composite", here: "#3" },
+      { skill: "Find limits at infinity of rational functions", href: "/calculus/limits/methods/limits-at-infinity-rational", desc: "Compare degrees, or divide every term by the highest power of $x$ in the denominator.", level: "composite", here: "#4" },
+      { skill: "Find limits at infinity with square roots", href: "/calculus/limits/methods/limits-at-infinity-radicals", desc: "Factor the highest power out of the root; $\\sqrt{x^2} = |x|$, which is $-x$ as $x \\to -\\infty$.", level: "composite", here: "#5" },
+      { skill: "Find vertical asymptotes", href: "/calculus/limits/methods/vertical-asymptotes", desc: "Cancel common factors, find the zeros of the denominator, then the sign of each one-sided limit.", level: "composite", here: "#8" },
+    ] },
+    { title: "More limit methods", items: [
+      { skill: "Use L'Hôpital's rule", href: "/calculus/limits/methods/lhopitals-rule", desc: "For $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$: differentiate top and bottom separately and take the limit again.", level: "composite" },
+      { skill: "Evaluate a limit by rationalizing", href: "/calculus/limits/methods/rationalizing-limits", desc: "A root in a $\\frac{0}{0}$ (or $\\infty - \\infty$) form: multiply by the conjugate, cancel, substitute.", level: "composite" },
+      { skill: "Find and remove a removable discontinuity", href: "/calculus/limits/methods/removable-discontinuities", desc: "A hole: the limit exists but $f(a)$ is missing or wrong. Cancel, find the limit, redefine.", level: "composite" },
+      { skill: "Evaluate one-sided limits", href: "/calculus/limits/methods/one-sided-limits", desc: "Left and right limits separately; the two-sided limit exists only when they agree.", level: "composite" },
+      { skill: "Choose the right limit technique", href: "/calculus/limits/methods/which-limit-technique", desc: "A decision tree from what substitution gives you to the right technique.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1149,6 +1200,7 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
             <FunctionAnalysis data={horizontalAsymptoteProfile} theme={{ title: '#06357A', curve: '#06357A', accent: '#2563EB', warm: '#0284C7', warmInk: '#0369A1' }} />
           </DiagramFrame>,
           `The strip makes the sign of the gap visible: left of $x = 3$ the graph approaches $y = 2$ from below, right of it from above, and on neither side does it touch the line. A different function could cross its asymptote many times; this one, with a gap that is never zero, cannot.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find horizontal asymptotes](!/calculus/limits/methods/horizontal-asymptotes) →@`,
         ]
     },
     {
@@ -1157,6 +1209,7 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find limits at infinity of rational functions](!/calculus/limits/methods/limits-at-infinity-rational) →@`,
         ]
     },
     {
@@ -1165,9 +1218,17 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-infinity-dominant-term-analysis-matrix'}
+            id="infinity-dominant-term-analysis-matrix"
+            title="Dominant Term Analysis"
+            source="/calculus/limits/infinity"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:Far out, a rational function is ruled by its two leading terms; the others change only the speed, never the destination.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find limits at infinity with square roots](!/calculus/limits/methods/limits-at-infinity-radicals) →@`,
         ]
     },
     {
@@ -1204,6 +1265,7 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
           sectionsContent.obj8.content,
                   <div key={'unit-vertical'} dangerouslySetInnerHTML={{ __html: demoUnits.vertical }} />,
           `A vertical asymptote is thus an infinite limit drawn as a line.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find vertical asymptotes](!/calculus/limits/methods/vertical-asymptotes) →@`,
         ]
     },
     {
@@ -1232,8 +1294,15 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'obj10-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-infinity-one-sided-infinite-limits-matrix'}
+            id="infinity-one-sided-infinite-limits-matrix"
+            title="One-Sided Infinite Limits"
+            source="/calculus/limits/infinity"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
                   <div key={'unit-opposite'} dangerouslySetInnerHTML={{ __html: demoUnits.opposite }} />,
           `Sign analysis decides which direction each side takes; the asymptote itself is the same line either way.`,
         ]
@@ -1268,6 +1337,15 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'four-sides-exponentials-at-infinity-grid'}
+            id="exponentials-at-infinity-grid"
+            title="Limits of Exponentials at Infinity"
+            source="/calculus/limits/infinity"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_exponentialEnds} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1276,8 +1354,15 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'obj12-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj12Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-infinity-limits-logarithms-toward-zero-matrix'}
+            id="infinity-limits-logarithms-toward-zero-matrix"
+            title="Limits of Logarithms Toward Zero and Infinity"
+            source="/calculus/limits/infinity"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1286,8 +1371,15 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-infinity-summary-master-diagnostic-limits-matrix'}
+            id="infinity-summary-master-diagnostic-limits-matrix"
+            title="Summary: Master Diagnostic for Limits and Asymptotes"
+            source="/calculus/limits/infinity"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1323,6 +1415,14 @@ $$\\lim_{x \\to a} f(x) = \\infty \\qquad \\lim_{x \\to a} f(x) = -\\infty$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

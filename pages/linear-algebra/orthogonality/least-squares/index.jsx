@@ -923,6 +923,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj5 aggregation, obj9 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import MatrixOperation from '@/app/components/infographics/linear-algebra/MatrixOperation'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -936,6 +938,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import leastSquaresDiagrams from '@/app/components/linear-algebra copy/matrix/leastSquaresDiagrams'
@@ -946,7 +949,36 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laOrthoNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-orthogonality'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Regression as Least Squares"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Linear-algebra object","features":[{"id":"c1","name":"Statistics / regression name","type":"text"},{"id":"c2","name":"Symbol and role","type":"text"}],"items":[{"id":"r1","name":"Coefficient matrix","values":{"c1":"design matrix / predictor matrix","c2":"X — rows = observations, columns = features (with an intercept column of 1s)"}},{"id":"r2","name":"Vector of unknowns","values":{"c1":"coefficient (parameter) vector","c2":"β — parameters to be estimated"}},{"id":"r3","name":"Right-hand side","values":{"c1":"response vector","c2":"y — observed outcomes"}},{"id":"r4","name":"Least-squares solution","values":{"c1":"estimated coefficients","c2":"β̂ = (XᵀX)⁻¹ Xᵀ y"}},{"id":"r5","name":"[Projection](!/linear-algebra/orthogonality/projections) matrix P","values":{"c1":"hat matrix","c2":"P = X(XᵀX)⁻¹Xᵀ — puts the \"hat\" on y"}},{"id":"r6","name":"Projection of b onto Col(A)","values":{"c1":"fitted values","c2":"ŷ = P y = X β̂"}},{"id":"r7","name":"Residual vector","values":{"c1":"residual (errors)","c2":"e = y − ŷ = (I − P) y"}},{"id":"r8","name":"Squared residual length","values":{"c1":"residual sum of squares (RSS)","c2":"‖e‖² = Σᵢ (yᵢ − ŷᵢ)²"}},{"id":"r9","name":"Fraction of length captured by projection (centered)","values":{"c1":"coefficient of determination","c2":"R² — fraction of variation in y explained by the model"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Worked Example: Fitting a Parabola"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Model","features":[{"id":"c1","name":"Number of parameters","type":"text"},{"id":"c2","name":"Row of the design matrix A","type":"text"},{"id":"c3","name":"Typical use","type":"text"}],"items":[{"id":"r1","name":"Line: y = c₀ + c₁ x","values":{"c1":"2","c2":"[ 1, xᵢ ]","c3":"linear trends in one variable"}},{"id":"r2","name":"Parabola: y = c₀ + c₁ x + c₂ x²","values":{"c1":"3","c2":"[ 1, xᵢ, xᵢ² ]","c3":"smooth one-variable curves with curvature"}},{"id":"r3","name":"Polynomial of degree k","values":{"c1":"k + 1","c2":"[ 1, xᵢ, xᵢ², …, xᵢᵏ ]","c3":"higher-order curve fitting; flexible but prone to overfit"}},{"id":"r4","name":"Generic linear model: y = Σⱼ cⱼ fⱼ(x)","values":{"c1":"k + 1","c2":"[ f₀(xᵢ), f₁(xᵢ), …, fₖ(xᵢ) ]","c3":"arbitrary basis functions (sinusoids, exponentials, splines)"}},{"id":"r5","name":"Multiple linear regression: y = β₀ + Σⱼ βⱼ xⱼ","values":{"c1":"k + 1","c2":"[ 1, x$_{1,i}$, x$_{2,i}$, …, x$_{k,i}$ ]","c3":"several predictors per observation"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a least-squares problem", href: "/linear-algebra/orthogonality/methods/least-squares", desc: "When $A\\mathbf{x} = \\mathbf{b}$ has no solution, solve the normal equations for the closest fit.", level: "composite", here: "#3" },
+      { skill: "Fit a line or curve to data", href: "/linear-algebra/orthogonality/methods/least-squares-fitting", desc: "Turn data points into an overdetermined system, solve the normal equations, read off the best-fit model.", level: "applied", here: "#9" },
+    ] },
+    { title: "More orthogonality methods", items: [
+      { skill: "Find an orthogonal projection", href: "/linear-algebra/orthogonality/methods/orthogonal-projection", desc: "Project a vector onto a line, a plane or a subspace; split it into a part inside and a part perpendicular.", level: "composite" },
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite" },
+    ] },
+    { title: "Decomposition methods", items: [
+      { skill: "Find the QR decomposition", href: "/linear-algebra/decompositions/methods/qr-decomposition", desc: "Run Gram-Schmidt on the columns: the orthonormal vectors form Q, the coefficients form R.", level: "composite" },
+    ] },
+    { title: "Matrix methods", items: [
+      { skill: "Find the inverse of a 2×2 matrix", href: "/linear-algebra/matrix/methods/inverse-2x2", desc: "Swap the diagonal, negate the other two entries, divide by the determinant $ad - bc$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/orthogonality/methods", label: "All orthogonality methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1807,8 +1839,20 @@ $$A^T\\mathbf{y} = \\begin{pmatrix} 9 \\\\ 13 \\end{pmatrix}$$`, `Solving gives 
     ],
   };
 
+  // MatrixOperation 2026-11-14: The product of A transpose and A (obj4).
+  const leastSquaresGramStrip = {
+    operation: 'multiply',
+    A: [[1, 1, 1, 1], [1, 2, 3, 4]],
+    B: [[1, 1], [1, 2], [1, 3], [1, 4]],
+    nameA: 'Aᵀ',
+    nameB: 'A',
+    nameC: 'AᵀA',
+    intro: 'A $2 \\times 4$ matrix times a $4 \\times 2$ matrix gives the $2 \\times 2$ matrix $A^TA$ of the normal equations.',
+  };
+
   return {
   props:{
+    leastSquaresGramStrip,
     pitfallData,
     normalEqCases,
     demoUnits,
@@ -1834,7 +1878,7 @@ $$A^T\\mathbf{y} = \\begin{pmatrix} 9 \\\\ 13 \\end{pmatrix}$$`, `Solving gives 
 // export default function LeastSquaresPage({seoData,sectionsContent , introContent}) {
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function LeastSquaresPage({ pitfallData,normalEqCases, 
+export default function LeastSquaresPage({ leastSquaresGramStrip, pitfallData,normalEqCases, 
   seoData,
   sectionsContent,
   introContent,
@@ -1970,6 +2014,7 @@ Ceres, discovered on 1 January 1801, was followed for about six weeks before it 
           </DiagramFrameV2>,
                   <div key={'unit-normal'} dangerouslySetInnerHTML={{ __html: demoUnits.normal }} />,
           `These equations are the classical route and the least numerically stable one, which is why QR is preferred in practice.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a least-squares problem](!/linear-algebra/orthogonality/methods/least-squares) →@`,
         ]
     },
     {
@@ -1978,6 +2023,17 @@ Ceres, discovered on 1 January 1801, was followed for about six weeks before it 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-matrix-operation'}
+            id="least-squares-ata-strip"
+            title="The product of A transpose and A"
+            source="/linear-algebra/orthogonality/least-squares"
+            before={"The matrix of the normal equations for the worked example, written out."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <MatrixOperation data={leastSquaresGramStrip} theme="navy" variant="strip" />
+            </div>
+          </DiagramFrame>,
                   <div key={'unit-line'} dangerouslySetInnerHTML={{ __html: demoUnits.line }} />,
           `Fitting a parabola in the next section changes only the columns, never the method.`,
         ]
@@ -1988,11 +2044,15 @@ Ceres, discovered on 1 January 1801, was followed for about six weeks before it 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-least-squares-worked-example-fitting-matrix'}
+            id="least-squares-worked-example-fitting-matrix"
+            title="Worked Example: Fitting a Parabola"
+            source="/linear-algebra/orthogonality/least-squares"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2027,12 +2087,17 @@ Ceres, discovered on 1 January 1801, was followed for about six weeks before it 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-least-squares-regression-as-least-matrix'}
+            id="least-squares-regression-as-least-matrix"
+            title="Regression as Least Squares"
+            source="/linear-algebra/orthogonality/least-squares"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:Linear regression is least squares under another name: the fitted values are the projection of the data onto the column space.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to fit a line or curve to data](!/linear-algebra/orthogonality/methods/least-squares-fitting) →@`,
         ]
     },
     {
@@ -2077,6 +2142,14 @@ Ceres, discovered on 1 January 1801, was followed for about six weeks before it 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

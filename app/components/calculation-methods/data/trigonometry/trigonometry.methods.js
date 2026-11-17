@@ -105,7 +105,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'circle',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Sin, Cos and Tan with the Unit Circle | Learn Math Class',
         description: 'Find exact sin, cos and tan of any standard angle: reduce it to one turn, find the quadrant and reference angle, take the values, attach the signs.',
@@ -211,7 +211,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'circle',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find All Trig Values from One Given Value | Learn Math Class',
         description: 'Given one trig value and the quadrant, find the other five: draw the reference triangle, get the third side by Pythagoras, take ratios, apply the signs.',
@@ -331,7 +331,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'triangles',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a Right Triangle (SOH-CAH-TOA, Step by Step) | Learn Math Class',
         description: 'Solve a right triangle: label the sides from the known angle, pick the ratio linking known and unknown, solve, finish with the angle sum and Pythagoras.',
@@ -434,7 +434,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'triangles',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Law of Sines (AAS and ASA Triangles) | Learn Math Class',
         description: 'Solve AAS and ASA triangles with the law of sines: find the third angle, set up a/sin A = b/sin B, cross-multiply for each missing side, check. Worked examples.',
@@ -538,7 +538,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'triangles',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Law of Cosines (SAS and SSS Triangles) | Learn Math Class',
         description: 'Solve SAS and SSS triangles with the law of cosines: find the third side from c² = a² + b² − 2ab cos C, or an angle from cos C = (a² + b² − c²)/2ab. Examples.',
@@ -657,7 +657,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'triangles',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'The Ambiguous Case (SSA): Zero, One or Two Triangles | Learn Math Class',
         description: 'Handle SSA triangles: compare the side opposite the angle with the height h = b sin A, decide whether there are zero, one or two triangles, then solve each one.',
@@ -764,7 +764,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'triangles',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Area of a Triangle with Trigonometry | Learn Math Class',
         description: 'Find the area of a triangle without its height: ½ab sin C with two sides and the included angle, Heron with three sides, or the law of sines first.',
@@ -883,7 +883,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'graphs',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Graph Sine and Cosine Functions (Amplitude, Period, Shift) | Learn Math Class',
         description: 'Graph y = A sin(B(x − C)) + D: factor B, read amplitude, period, phase shift and midline, plot five key points a quarter-period apart. Examples.',
@@ -992,7 +992,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'graphs',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Graph a Tangent Function (Period and Asymptotes) | Learn Math Class',
         description: 'Graph y = A tan(B(x − C)) + D: find the period π/|B|, place the asymptotes half a period from the centre, plot the zero and quarter points, repeat each branch.',
@@ -1097,7 +1097,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'graphs',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate Inverse Trig Functions (arcsin, arccos, arctan) | Learn Math Class',
         description: 'Evaluate arcsin, arccos and arctan: find the angle with that value inside the restricted range, and simplify compositions like sin(arccos x).',
@@ -1217,7 +1217,7 @@ const trigonometryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'graphs',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Trigonometric Inequalities (Step by Step) | Learn Math Class',
         description: 'Solve trig inequalities: isolate the function, solve the matching equation on one period, read the intervals off the graph, then add the period.',
@@ -1322,7 +1322,7 @@ const trigonometryMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Law of Sines or Law of Cosines? Triangle Decision Tree | Learn Math Class',
         description: 'Choose how to solve a triangle: ratios for a right angle, law of sines for AAS or ASA, law of cosines for SAS or SSS, the ambiguous case for SSA.',
@@ -1415,7 +1415,7 @@ const trigonometryMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Height and Distance Problems (Elevation and Depression) | Learn Math Class',
         description: 'Solve elevation and depression problems: sketch the right triangle, place the angle, label known and unknown sides, pick the ratio, solve. Examples.',
@@ -1504,7 +1504,7 @@ const trigonometryMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Bearing Problems in Trigonometry | Learn Math Class',
         description: 'Solve bearing problems: draw north lines at every point, turn bearings into triangle angles, then use the law of cosines or sines, or east-north parts.',

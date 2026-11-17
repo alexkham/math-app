@@ -32,7 +32,7 @@ const trigEquationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Basic Trig Equations (sin x = a, cos x = a) | Learn Math Class',
         description: 'Solve sin x = a, cos x = a and tan x = a on [0, 2π): find the reference angle, pick the two quadrants with the right sign, write both solutions. Examples.',
@@ -135,7 +135,7 @@ const trigEquationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Write the General Solution of a Trig Equation | Learn Math Class',
         description: 'Write every solution of sin x = a, cos x = a or tan x = a: find the solutions in one period, then add 2kπ (sine, cosine) or kπ (tangent), k any integer.',
@@ -253,7 +253,7 @@ const trigEquationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Trig Equation Solutions in a Given Interval | Learn Math Class',
         description: 'List the solutions of a trig equation in an interval such as [0°, 720°) or [−π, π]: write the general solution, try integer values of k, keep the ones inside.',
@@ -355,7 +355,7 @@ const trigEquationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Quadratic Trig Equations (2sin²x − sin x − 1 = 0) | Learn Math Class',
         description: 'Solve quadratic-type trig equations: let u = sin x, factor or use the formula, discard values outside [−1, 1], then solve each basic equation. Examples.',
@@ -457,7 +457,7 @@ const trigEquationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Trig Equations by Factoring | Learn Math Class',
         description: 'Solve trig equations by factoring: move every term to one side, factor out the common trig factor (never divide by it), solve each factor, reject undefined x.',
@@ -560,7 +560,7 @@ const trigEquationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Trig Equations Using Identities | Learn Math Class',
         description: 'Solve trig equations with mixed functions or angles: use the Pythagorean or double-angle identity to get one function of one angle, solve, check.',
@@ -664,7 +664,7 @@ const trigEquationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Trig Equations with Multiple Angles (sin 2x, cos 3x) | Learn Math Class',
         description: 'Solve sin 2x = a or cos 3x = a: stretch the interval by the multiplier, solve for the inner angle over it, then divide every solution by the multiplier.',
@@ -868,7 +868,7 @@ const trigEquationsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Method to Solve a Trig Equation? Decision Tree | Learn Math Class',
         description: 'Choose a method for a trig equation from its shape: a sin x + b cos x, mixed functions or angles, a square, a product, a multiple angle, or a plain sin x = a.',

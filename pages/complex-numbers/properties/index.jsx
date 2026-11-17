@@ -1333,6 +1333,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1349,10 +1350,33 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Algebraic Closure"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Question","features":[{"id":"c1","name":"ℝ (real numbers)","type":"text"},{"id":"c2","name":"ℂ (complex numbers)","type":"text"}],"items":[{"id":"r1","name":"Algebraically closed?","values":{"c1":"✗ No","c2":"✓ Yes"}},{"id":"r2","name":"Every non-constant polynomial has a root in the field?","values":{"c1":"Not always — e.g., x² + 1 = 0 has no real root","c2":"Always — guaranteed by the Fundamental Theorem of Algebra"}},{"id":"r3","name":"Degree-n polynomial factors completely into n linear factors?","values":{"c1":"Not always (some factors remain irreducible quadratics)","c2":"Always: p(z) = aₙ(z − r₁)(z − r₂)⋯(z − rₙ)"}},{"id":"r4","name":"Number of roots of a degree-n polynomial","values":{"c1":"0 to n","c2":"exactly n (counting multiplicity)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Operation Effects on Conjugate, Modulus, and Argument"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Conjugate behaves as…","type":"text"},{"id":"c2","name":"Modulus behaves as…","type":"text"},{"id":"c3","name":"Argument behaves as…","type":"text"}],"items":[{"id":"r1","name":"Sum z₁ + z₂","values":{"c1":"z̄₁ + z̄₂","c2":"|z₁ + z₂| ≤ |z₁| + |z₂| (triangle inequality)","c3":"no simple rule"}},{"id":"r2","name":"Difference z₁ − z₂","values":{"c1":"z̄₁ − z̄₂","c2":"|z₁ − z₂| ≥ |&thinsp;|z₁| − |z₂|&thinsp;| (reverse triangle inequality)","c3":"no simple rule"}},{"id":"r3","name":"Product z₁ · z₂","values":{"c1":"z̄₁ · z̄₂","c2":"|z₁| · |z₂|","c3":"arg(z₁) + arg(z₂)"}},{"id":"r4","name":"Quotient z₁ / z₂","values":{"c1":"z̄₁ / z̄₂","c2":"|z₁| / |z₂|","c3":"arg(z₁) − arg(z₂)"}},{"id":"r5","name":"Power zⁿ","values":{"c1":"(z̄)ⁿ","c2":"|z|ⁿ","c3":"n · arg(z) (De Moivre)"}},{"id":"r6","name":"Conjugation z̄","values":{"c1":"z (double conjugate)","c2":"|z| (unchanged)","c3":"−arg(z)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Complex number methods", items: [
+      { skill: "Add or subtract complex numbers", href: "/complex-numbers/methods#add-subtract-complex", desc: "Two complex numbers in the form $a + bi$ are joined by a plus or minus sign: $(2 + 3i) + (5 - i)$, $(4 - 3i) - (1 - 5i)$.", level: "atomic" },
+      { skill: "Multiply complex numbers", href: "/complex-numbers/methods/multiply-complex", desc: "Expand the brackets term by term, replace $i^2$ with $-1$, and collect the real and imaginary parts.", level: "composite" },
+      { skill: "Divide complex numbers", href: "/complex-numbers/methods/divide-complex", desc: "Multiply the top and bottom by the conjugate of the denominator, so the denominator becomes the real number $c^2 + d^2$.", level: "composite" },
+      { skill: "Find the complex conjugate", href: "/complex-numbers/methods#complex-conjugate", desc: "You need $\\overline{z}$ to divide, to make a product real, or to pair a root: $\\overline{3 - 4i}$, $\\overline{-2 + i}$, $\\overline{5i}$.", level: "atomic" },
+      { skill: "Find the modulus of a complex number", href: "/complex-numbers/methods#modulus", desc: "You need the distance of $z = a + bi$ from the origin, for example as the $r$ of the polar form: $|3 + 4i|$, $|-5 + 12i|$, $|-4i|$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2855,11 +2879,15 @@ export default function PropertiesPage({ pitfallData,complexOperationProperties,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-algebraic-closure-matrix'}
+            id="properties-algebraic-closure-matrix"
+            title="Algebraic Closure"
+            source="/complex-numbers/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2876,11 +2904,15 @@ export default function PropertiesPage({ pitfallData,complexOperationProperties,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-summary-operation-effects-conjugate-matrix'}
+            id="properties-summary-operation-effects-conjugate-matrix"
+            title="Summary: Operation Effects on Conjugate, Modulus, and Argument"
+            source="/complex-numbers/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           `The same table as a grid of verdicts. Each cell shows whether the operation passes through as an exact law, gives only a bound, holds only up to a multiple of $2\\pi$, or has no simple rule. Click an operation or a column to focus on it.`,
           <DiagramFrame
             key={'obj9-propsheet'}
@@ -2908,6 +2940,14 @@ export default function PropertiesPage({ pitfallData,complexOperationProperties,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

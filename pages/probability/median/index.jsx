@@ -1554,6 +1554,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 6 tables (obj4 comparison, obj6 aggregation, obj10 aggregation, obj11 aggregation, obj13 aggregation, obj15 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1571,12 +1572,100 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
 
+const cm_medianRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  hub: {
+    center: { name: 'Median', sub: 'the 50th percentile' },
+    groups: [
+      { name: 'Other measures of central tendency', items: [
+        { name: 'Mean (Expected Value)', href: '/probability/expected-value', why: 'the probability-weighted average of all values' },
+        { name: 'Mode', href: '/probability/mode', why: 'the value with maximum probability or density' }
+      ], say: 'These three measures together show where a distribution centers and how it is shaped.' },
+      { name: 'Measures of dispersion', items: [
+        { name: 'Variance', href: '/probability/variance', why: 'spread around the mean' },
+        { name: 'Interquartile Range (IQR)', why: '$Q_3 - Q_1$, robust to outliers like the median' }
+      ], say: 'The median gives the center, dispersion gives the spread.' },
+      { name: 'Percentiles and quantiles', items: [
+        { name: 'Quartiles', why: '$Q_1$ (25th), $Q_2$ (median), $Q_3$ (75th)' },
+        { name: 'Deciles', why: 'the 10th, 20th, ..., 90th percentiles' },
+        { name: 'Any quantile $q$', why: 'solves $F(x) = q$' }
+      ], say: 'The median is the special case at $0.5$.' },
+      { name: 'Cumulative distribution function', items: [
+        { name: 'CDF', href: '/probability/cdf', why: 'the median solves $F(m) = 0.5$' },
+        { name: 'Inverse CDF', why: '$m = F^{-1}(0.5)$' }
+      ] },
+      { name: 'Probability functions', items: [
+        { name: 'PMF', href: '/probability/probability-function/pmf', why: 'accumulating it gives the CDF needed for the median' },
+        { name: 'PDF', href: '/probability/probability-function/pdf', why: 'integrating it to $0.5$ locates the median' }
+      ] },
+      { name: 'Skewness', items: [
+        { name: 'Right skew', why: 'mode $<$ median $<$ mean' },
+        { name: 'Left skew', why: 'mean $<$ median $<$ mode' },
+        { name: 'Symmetric unimodal', why: 'mode $=$ median $=$ mean' }
+      ] },
+      { name: 'Distribution families', items: [
+        { name: 'Discrete Distributions', href: '/probability/distributions/discrete', why: 'binomial, geometric, Poisson and others' },
+        { name: 'Continuous Distributions', href: '/probability/distributions/continuous', why: 'normal, exponential, beta and others' }
+      ] },
+      { name: 'Robustness', items: [
+        { name: 'Robust statistic', why: 'resistant to outliers and extreme values' },
+        { name: 'Median Absolute Deviation (MAD)', why: 'a robust measure of spread built on the median' }
+      ] },
+      { name: 'Order statistics', items: [
+        { name: 'Odd $n$', why: 'the $\\frac{n+1}{2}$-th smallest value' },
+        { name: 'Even $n$', why: 'the average of the two middle values' }
+      ] },
+      { name: 'Optimization', items: [
+        { name: 'Median', why: 'minimizes absolute deviation $E[|X - m|]$' },
+        { name: 'Mean', href: '/probability/expected-value', why: 'minimizes squared deviation $E[(X - \\mu)^2]$' }
+      ] }
+    ]
+  }
+};
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Median at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example / note","type":"text"}],"items":[{"id":"r1","name":"What it is","values":{"c1":"the value that splits total probability into two equal halves","c2":"the 50th percentile of the distribution"}},{"id":"r2","name":"[Discrete](!/probability/distributions/discrete) case","values":{"c1":"smallest m with P(X ≤ m) ≥ 0.5 and P(X ≥ m) ≥ 0.5","c2":"may be non-unique when the CDF lands on 0.5"}},{"id":"r3","name":"[Continuous](!/probability/distributions/continuous) case","values":{"c1":"solve F(m) = 0.5, or use m = F⁻¹(0.5)","c2":"exponential: m = ln(2)/λ"}},{"id":"r4","name":"Vs other measures","values":{"c1":"a rank-based center, not a weighted balance point or peak","c2":"right-skewed: [mode](!/probability/mode) < median < [mean](!/probability/expected-value)"}},{"id":"r5","name":"Symmetric vs skewed","values":{"c1":"equals mean and mode under symmetry; sits between them under skew","c2":"normal: median = μ; exponential: median < mean"}},{"id":"r6","name":"Defining property","values":{"c1":"minimizes E[|X − m|]; invariant under monotonic transformations","c2":"median(g(X)) = g(median(X)) for strictly monotonic g"}},{"id":"r7","name":"When it shines","values":{"c1":"skewed data, outlier resistance, ordinal data","c2":"income, housing prices, satisfaction ratings"}},{"id":"r8","name":"When it's weak","values":{"c1":"no additivity; reveals nothing about spread; algebra is awkward","c2":"median(X + Y) ≠ median(X) + median(Y)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj13Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj13Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Why it's wrong","type":"text"},{"id":"c2","name":"Correct view","type":"text"}],"items":[{"id":"r1","name":"Treating median as the average","values":{"c1":"median is a percentile rank, not a weighted sum","c2":"use [mean](!/probability/expected-value) for averages, median for the 50% split"}},{"id":"r2","name":"Assuming median = mean always","values":{"c1":"only true for symmetric distributions","c2":"check symmetry; skew separates them substantially"}},{"id":"r3","name":"Checking only one inequality (discrete)","values":{"c1":"CDF can jump past 0.5 without landing on it","c2":"verify both P(X ≤ m) ≥ 0.5 and P(X ≥ m) ≥ 0.5"}},{"id":"r4","name":"Assuming uniqueness","values":{"c1":"discrete distributions can have multiple medians","c2":"inspect the CDF behavior near 0.5"}},{"id":"r5","name":"Reading median off the [PMF](!/probability/probability-function/pmf) peak","values":{"c1":"median depends on cumulative probability, not individual values","c2":"use the [CDF](!/probability/cdf); the peak is the [mode](!/probability/mode)"}},{"id":"r6","name":"Expecting median to be in the dataset","values":{"c1":"median is a calculated position, not necessarily an observed value","c2":"for even n, sample median averages the two middle values"}},{"id":"r7","name":"Confusing median with [mode](!/probability/mode)","values":{"c1":"median = probability split; mode = peak","c2":"exponential has mode 0 but median ln(2)/λ"}},{"id":"r8","name":"Treating sample median as population median","values":{"c1":"small samples vary substantially","c2":"use confidence intervals; larger samples are more reliable"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Special Cases and Edge Cases"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Edge case","features":[{"id":"c1","name":"When it occurs","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Median = [mean](!/probability/expected-value)","values":{"c1":"distribution is symmetric around a point","c2":"normal: median = mean = μ"}},{"id":"r2","name":"Median ≪ mean","values":{"c1":"strong right skew or heavy right tail","c2":"lognormal: median e$^{μ}$ ≪ mean e$^{μ + σ²/2}$"}},{"id":"r3","name":"Non-unique discrete median","values":{"c1":"CDF lands exactly on 0.5 at a support value","c2":"discrete uniform on {1, 2, 3, 4}: medians at 2 and 3"}},{"id":"r4","name":"Median exists, mean doesn't","values":{"c1":"heavy-tailed distribution with undefined first moment","c2":"Cauchy: median = x₀; mean undefined"}},{"id":"r5","name":"Median shifts under truncation","values":{"c1":"support is restricted, removing probability mass from one side","c2":"normal truncated to [0, ∞): median > μ"}},{"id":"r6","name":"Median far from peaks","values":{"c1":"mixture of well-separated components","c2":"0.5 · N(0, 1) + 0.5 · N(10, 1): median ≈ 5, between the two modes"}},{"id":"r7","name":"Infinitely many medians","values":{"c1":"CDF is flat over an interval at level 0.5","c2":"pathological constructed densities only"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Median for Common Distributions"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Distribution","features":[{"id":"c1","name":"Type","type":"text"},{"id":"c2","name":"Median","type":"text"},{"id":"c3","name":"Notes","type":"text"}],"items":[{"id":"r1","name":"[Discrete Uniform](!/probability/distributions/discrete/uniform) on {a, ..., b}","values":{"c1":"discrete","c2":"(a + b)/2 when a + b is even","c3":"two valid medians when a + b is odd"}},{"id":"r2","name":"[Binomial](!/probability/distributions/discrete/binomial)(n, p)","values":{"c1":"discrete","c2":"≈ np (no closed form)","c3":"numerical CDF lookup for exact value"}},{"id":"r3","name":"[Geometric](!/probability/distributions/discrete/geometric)(p)","values":{"c1":"discrete","c2":"⌈−ln(2) / ln(1 − p)⌉","c3":"rare closed form among discrete distributions"}},{"id":"r4","name":"[Negative Binomial](!/probability/distributions/discrete/negative-binomial)(r, p)","values":{"c1":"discrete","c2":"no closed form","c3":"numerical CDF required"}},{"id":"r5","name":"[Hypergeometric](!/probability/distributions/discrete/hypergeometric)(N, K, n)","values":{"c1":"discrete","c2":"no closed form","c3":"numerical evaluation required"}},{"id":"r6","name":"[Poisson](!/probability/distributions/discrete/poisson)(λ)","values":{"c1":"discrete","c2":"≈ λ + 1/3 − 0.02/λ (large λ)","c3":"numerical for small λ"}},{"id":"r7","name":"[Continuous Uniform](!/probability/distributions/continuous/uniform) on [a, b]","values":{"c1":"continuous","c2":"(a + b)/2","c3":"midpoint of the interval; = mean"}},{"id":"r8","name":"[Normal](!/probability/distributions/continuous/normal)(μ, σ)","values":{"c1":"continuous","c2":"μ","c3":"= mean = mode by symmetry"}},{"id":"r9","name":"[Exponential](!/probability/distributions/continuous/exponential)(λ)","values":{"c1":"continuous","c2":"ln(2)/λ ≈ 0.693/λ","c3":"strictly below the mean 1/λ"}},{"id":"r10","name":"Beta(α, β)","values":{"c1":"continuous","c2":"0.5 when α = β; else no closed form","c3":"numerical for general α, β"}},{"id":"r11","name":"Gamma(k, θ)","values":{"c1":"continuous","c2":"ln(2)/θ when k = 1; else numerical","c3":"reduces to exponential at k = 1"}},{"id":"r12","name":"Weibull(k, λ)","values":{"c1":"continuous","c2":"λ (ln 2)$^{1/k}$","c3":"closed form for any shape k"}},{"id":"r13","name":"Cauchy(x₀, γ)","values":{"c1":"continuous","c2":"x₀","c3":"mean does not exist; median still well-defined"}},{"id":"r14","name":"Lognormal(μ, σ)","values":{"c1":"continuous","c2":"e$^{μ}$","c3":"strictly below the mean e$^{μ + σ²/2}$"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Properties of the Median"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Notes / example","type":"text"}],"items":[{"id":"r1","name":"Minimizes absolute deviation","values":{"c1":"median(X) = arg minₘ E[|X − m|]","c2":"mean minimizes squared deviation instead"}},{"id":"r2","name":"Linear transformation","values":{"c1":"median(aX + b) = a · median(X) + b, a ≠ 0","c2":"X has median 4 ⟹ 3X − 2 has median 10"}},{"id":"r3","name":"Monotonic invariance","values":{"c1":"median(g(X)) = g(median(X)) for strictly monotonic g","c2":"fails for the [mean](!/probability/expected-value); holds for [mode](!/probability/mode)"}},{"id":"r4","name":"Robustness to outliers","values":{"c1":"values beyond the 50% threshold have zero impact","c2":"ideal for contaminated data, income, housing"}},{"id":"r5","name":"Uniqueness (continuous)","values":{"c1":"unique when CDF is strictly increasing","c2":"may be an interval if CDF has flat regions"}},{"id":"r6","name":"Symmetric distributions","values":{"c1":"median = mean = center of symmetry","c2":"normal: all three equal μ"}},{"id":"r7","name":"Independent of spread","values":{"c1":"two distributions can share a median yet differ in variance","c2":"N(0, 1) and N(0, 100) both have median 0"}},{"id":"r8","name":"No additivity","values":{"c1":"median(X + Y) ≠ median(X) + median(Y) in general","c2":"limits use in sums; [mean](!/probability/expected-value) is additive"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Discrete vs Continuous Median"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Discrete","type":"text"},{"id":"c2","name":"Continuous","type":"text"}],"items":[{"id":"r1","name":"Defining condition","values":{"c1":"smallest m with P(X ≤ m) ≥ 0.5 and P(X ≥ m) ≥ 0.5","c2":"unique m where F(m) = 0.5"}},{"id":"r2","name":"Uniqueness","values":{"c1":"may be non-unique when CDF jumps past 0.5","c2":"unique when CDF is strictly increasing"}},{"id":"r3","name":"CDF shape","values":{"c1":"step function with jumps at support values","c2":"smooth, continuous curve"}},{"id":"r4","name":"Computation","values":{"c1":"summation: ∑$_{k ≤ m}$ P(X = k) ≥ 0.5","c2":"integration: ∫$_{-∞}$ᵐ f(x) dx = 0.5"}},{"id":"r5","name":"Solving method","values":{"c1":"evaluate CDF at each support value","c2":"solve F(m) = 0.5 or use m = F⁻¹(0.5)"}},{"id":"r6","name":"Closed form availability","values":{"c1":"rare (geometric is a notable exception)","c2":"often available (normal, exponential, Weibull, ...)"}},{"id":"r7","name":"Visual identification","values":{"c1":"step function crosses horizontal line at 0.5","c2":"vertical line splitting density area into equal halves"}},{"id":"r8","name":"Result is","values":{"c1":"a value or sometimes an interval","c2":"always a single point (non-pathological)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the median and mode of a distribution", href: "/probability/random-variables/methods/median-mode", desc: "The median is where the CDF reaches one half; the mode is the peak of the pmf or pdf.", level: "composite", here: "#7" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the CDF from a PMF", href: "/probability/random-variables/methods/pmf-to-cdf", desc: "Sort the values, keep a running total of the probabilities, and write the step function.", level: "composite" },
+      { skill: "Find the CDF from a PDF", href: "/probability/random-variables/methods/pdf-to-cdf", desc: "Integrate the density from the left end of the support up to $x$, and add the flat pieces outside.", level: "composite" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3756,8 +3845,15 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-median-discrete-vs-continuous-median-matrix'}
+            id="median-discrete-vs-continuous-median-matrix"
+            title="Discrete vs Continuous Median"
+            source="/probability/median"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:A strictly increasing CDF crosses one half once; a stepped CDF jumps past it, which is why discrete medians need two conditions.]@`,
         ]
     },
@@ -3783,8 +3879,15 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-median-properties-median-matrix'}
+            id="median-properties-median-matrix"
+            title="Properties of the Median"
+            source="/probability/median"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -3805,6 +3908,7 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
           </DiagramFrameV2>,
           `Only the discrete route looks for an inequality instead of an equation. A discrete CDF jumps past $0.5$ rather than meeting it, so $F(m) = 0.5$ usually has no solution there; the [common mistakes](!#13) show what goes wrong when the continuous rule is used on a discrete variable.`,
           `The percentile view generalises this from one half to any level.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the median and mode of a distribution](!/probability/random-variables/methods/median-mode) →@`,
         ]
     },
     {
@@ -3821,8 +3925,15 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'obj10-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-median-median-common-distributions-matrix'}
+            id="median-median-common-distributions-matrix"
+            title="Median for Common Distributions"
+            source="/probability/median"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -3831,8 +3942,15 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'obj11-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-median-special-cases-edge-cases-matrix'}
+            id="median-special-cases-edge-cases-matrix"
+            title="Special Cases and Edge Cases"
+            source="/probability/median"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -3883,8 +4001,15 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'obj13-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj13Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-median-common-mistakes-matrix'}
+            id="median-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/probability/median"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj13Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -3893,6 +4018,15 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
+          <DiagramFrameV2
+            key={'concept-map-median-related'}
+            id="median-related-concepts"
+            title="Related Concepts"
+            source="/probability/median"
+            related={false}
+          >
+            <ConceptMap data={cm_medianRelated} variant="hub" />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -3901,8 +4035,23 @@ export default function MedianPage({ proofStepsData, formulaSummaryData,medianMe
         link:sectionsContent.obj15.link,
         content:[
           sectionsContent.obj15.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-median-median-at-glance-matrix'}
+            id="median-median-at-glance-matrix"
+            title="Median at a Glance"
+            source="/probability/median"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

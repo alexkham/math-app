@@ -1753,6 +1753,9 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 2 tables (obj6 aggregation, obj10 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import FactorizationAnatomy from '@/app/components/infographics/linear-algebra/FactorizationAnatomy'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1780,6 +1783,31 @@ import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the spectral decomposition", href: "/linear-algebra/decompositions/methods/spectral-decomposition", desc: "Symmetric matrix: orthonormal eigenvectors and eigenvalues give $A = QDQ^T$, a sum of projections.", level: "composite", here: "#4" },
+    ] },
+    { title: "More decomposition methods", items: [
+      { skill: "Find the singular value decomposition", href: "/linear-algebra/decompositions/methods/svd", desc: "Eigenvalues of $A^TA$ give the singular values and $V$; then $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ gives $U$.", level: "composite" },
+      { skill: "Find the Cholesky decomposition", href: "/linear-algebra/decompositions/methods/cholesky-decomposition", desc: "Symmetric positive definite matrix: build L column by column with square roots so that $A = LL^T$.", level: "composite" },
+      { skill: "Choose the right matrix decomposition", href: "/linear-algebra/decompositions/methods/which-decomposition", desc: "A decision tree: the task and the shape of the matrix pick LU, Cholesky, QR, spectral or SVD.", level: "strategy" },
+    ] },
+    { title: "Eigenvalue methods", items: [
+      { skill: "Diagonalize a matrix", href: "/linear-algebra/eigen/methods/diagonalization", desc: "Put eigenvectors in the columns of $P$ and eigenvalues on the diagonal of $D$, then check $AP = PD$.", level: "composite" },
+      { skill: "Find eigenvalues", href: "/linear-algebra/eigen/methods/eigenvalues", desc: "Solve the characteristic equation $\\det(A - \\lambda I) = 0$ and check the roots against the trace and determinant.", level: "composite" },
+      { skill: "Find eigenvectors", href: "/linear-algebra/eigen/methods/eigenvectors", desc: "For each eigenvalue, row reduce $A - \\lambda I$ and solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$.", level: "composite" },
+    ] },
+    { title: "Orthogonality methods", items: [
+      { skill: "Apply the Gram-Schmidt process", href: "/linear-algebra/orthogonality/methods/gram-schmidt", desc: "Turn any basis into an orthogonal one: subtract projections one vector at a time, then normalize.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/decompositions/methods", label: "All decomposition methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2601,8 +2629,44 @@ $$= \\begin{pmatrix} 3/8 & -1/8 \\\\ -1/8 & 3/8 \\end{pmatrix}$$`],
     ],
   };
 
+  // Procedure rollout 2026-11-14: Computing the spectral decomposition, step by step (obj4).
+  const spectralSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$A = \\begin{pmatrix} 3 & 1 \\\\ 1 & 3 \\end{pmatrix}$',
+      rows: [
+        { step: 'Find the eigenvalues from $\\det(A - \\lambda I) = 0$', example: '$\\lambda_1 = 4$, $\\lambda_2 = 2$' },
+        { step: 'Find the eigenspace of each eigenvalue', example: 'directions $(1, 1)^T$ and $(1, -1)^T$' },
+        { step: 'Make the eigenvectors orthonormal', stepSub: 'Gram-Schmidt is needed only inside a repeated eigenvalue', example: '$\\mathbf{q}_1 = \\frac{1}{\\sqrt{2}}(1, 1)^T$, $\\mathbf{q}_2 = \\frac{1}{\\sqrt{2}}(1, -1)^T$' },
+        { step: 'Assemble $Q$ and $D$ in matching order', example: 'columns $\\mathbf{q}_1, \\mathbf{q}_2$; diagonal $4, 2$' },
+      ],
+    },
+  };
+
+  // FactorizationAnatomy 2026-11-14: What each factor of the spectral decomposition holds (obj5).
+  const spectralFactorAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Symmetric matrix', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        requires: 'Real and symmetric' },
+      { symbol: 'Q', name: 'Orthogonal', dim: 'n × n', fill: 'ortho', width: 110, height: 110,
+        property: '$Q^{-1} = Q^T$',
+        contains: 'Orthonormal eigenvectors as columns' },
+      { symbol: 'D', name: 'Diagonal', dim: 'n × n', fill: 'diag', width: 110, height: 110,
+        contains: 'The eigenvalues $\\lambda_1, \\dots, \\lambda_n$',
+        note: 'Inverse, powers and the exponential act on these entries one by one' },
+      { symbol: 'Qᵀ', name: 'Transpose of Q', dim: 'n × n', fill: 'ortho', width: 110, height: 110,
+        property: 'Undoes $Q$ with no inversion' },
+    ],
+    existsWhen: '$A$ is real and symmetric.',
+    uniqueWhen: 'The eigenvalues are always the same. $Q$ is fixed up to signs when they are all distinct.',
+    cost: 'inverse and powers are nearly free afterwards',
+    preferredWhen: 'Symmetric eigenproblems, quadratic forms, PCA.',
+  };
+
   return {
   props:{
+    spectralFactorAnatomy,
+    spectralSteps,
     specialCasesData,
     pitfallData,
       spectralChain,
@@ -2631,7 +2695,7 @@ $$= \\begin{pmatrix} 3/8 & -1/8 \\\\ -1/8 & 3/8 \\end{pmatrix}$$`],
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function SpectralDecompositionPage({ specialCasesData, pitfallData,spectralChain, spectralNest, 
+export default function SpectralDecompositionPage({ spectralFactorAnatomy, spectralSteps, specialCasesData, pitfallData,spectralChain, spectralNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -2772,8 +2836,18 @@ Mathematicians were calling the set of eigenvalues a spectrum by the early 1900s
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="spectral-decomposition-steps"
+            title="Computing the spectral decomposition, step by step"
+            source="/linear-algebra/decompositions/spectral"
+            before={"The four steps on the worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={spectralSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-compute'} dangerouslySetInnerHTML={{ __html: demoUnits.compute }} />,
           `Symmetry is doing all the work here; without it the eigenvector matrix need not be orthogonal and the transpose shortcut disappears.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the spectral decomposition](!/linear-algebra/decompositions/methods/spectral-decomposition) →@`,
         ]
     },
     {
@@ -2782,6 +2856,17 @@ Mathematicians were calling the set of eigenvalues a spectrum by the early 1900s
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-factor-anatomy'}
+            id="spectral-factor-anatomy"
+            title="What each factor of the spectral decomposition holds"
+            source="/linear-algebra/decompositions/spectral"
+            before={"The factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={spectralFactorAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
           <div key={'unit-orthoCheck'} dangerouslySetInnerHTML={{ __html: demoUnits.orthoCheck }} />,
           `Because Q⁻¹ is just Qᵀ, the decomposition A = QDQᵀ needs no matrix inversion at all.`,
         ]
@@ -2886,6 +2971,14 @@ The classification is immediate once the decomposition is in hand. Substituting 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

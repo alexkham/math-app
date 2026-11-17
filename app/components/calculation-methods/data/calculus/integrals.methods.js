@@ -148,7 +148,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Integrate by u-Substitution (Step by Step) | Learn Math Class',
         description:
@@ -281,7 +281,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Substitution in Definite Integrals: Converting the Limits | Learn Math Class',
         description:
@@ -404,7 +404,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Integrate by Parts (u dv Method, Step by Step) | Learn Math Class',
         description:
@@ -539,7 +539,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Tabular Integration (Repeated Parts) | Learn Math Class',
         description:
@@ -651,7 +651,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Integrate Powers of Sine and Cosine | Learn Math Class',
         description:
@@ -778,7 +778,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use Trigonometric Substitution (Step by Step) | Learn Math Class',
         description:
@@ -1056,7 +1056,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '4 steps · 4 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate Improper Integrals (Step by Step) | Learn Math Class',
         description:
@@ -1197,7 +1197,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '4 steps · 4 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate Definite Integrals with the Fundamental Theorem | Learn Math Class',
         description:
@@ -1331,7 +1331,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '5 steps · 4 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compute a Riemann Sum (Left, Right, Midpoint) | Learn Math Class',
         description:
@@ -2104,7 +2104,7 @@ const integralsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Average Value of a Function on an Interval | Learn Math Class',
         description:
@@ -2231,7 +2231,7 @@ const integralsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Integration Technique to Use? Decision Tree | Learn Math Class',
         description:
@@ -2324,7 +2324,7 @@ const integralsMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Accumulation Problems with Integrals | Learn Math Class',
         description:

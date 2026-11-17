@@ -2,6 +2,8 @@
 
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj6 comparison, obj10 aggregation, obj12 summary capstone)
 // factor-set integrated: v1 | 7 scenes (obj1, obj2, obj3, obj4, obj7, obj9, obj10); obj5 inline-JSX violation fixed
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -23,8 +25,51 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_properDivisorClasses = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'A number and its proper divisors', sub: 'compare the sum of the proper divisors with the number' },
+    branches: [
+      { leaves: [
+        { name: 'Perfect', condition: 'The sum of its proper divisors equals the number.', example: '$6 = 1 + 2 + 3$' },
+        { name: 'Abundant', condition: 'The sum exceeds the number.', example: '$12$: $1 + 2 + 3 + 4 + 6 = 16 > 12$' },
+        { name: 'Deficient', condition: 'The sum falls short of the number.', example: '$10$: $1 + 2 + 5 = 8 < 10$' }
+      ] }
+    ]
+  },
+  note: { label: 'Perfect numbers are rare', text: 'The first four are $6, 28, 496$ and $8{,}128$. Every known perfect number is even.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Toolkit for Divisor Structure"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Question about n","features":[{"id":"c1","name":"Tool or formula","type":"text"},{"id":"c2","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Find every factor","values":{"c1":"pair-search from 1 to √n: each a with a ∣ n gives the pair (a, n / a)","c2":"n = 36: test 1–6 → pairs (1,36), (2,18), (3,12), (4,9), (6,6) → 9 factors"}},{"id":"r2","name":"Count the factors","values":{"c1":"factor n = p₁$^{a₁}$ · … · pₖ$^{aₖ}$; the number of divisors is (a₁+1)(a₂+1)…(aₖ+1)","c2":"72 = 2³ · 3² → (3+1)(2+1) = 12 factors"}},{"id":"r3","name":"Classify n (perfect / abundant / deficient)","values":{"c1":"sum the proper divisors and compare to n","c2":"6: 1 + 2 + 3 = 6 → perfect; 12: 1+2+3+4+6 = 16 > 12 → abundant"}},{"id":"r4","name":"Find common factors with m","values":{"c1":"intersect the factor sets; the largest is [gcd(m, n)](!/arithmetic/divisibility/gcd)","c2":"12 ∩ 18 in factors → {1, 2, 3, 6}; gcd = 6"}},{"id":"r5","name":"Find common multiples with m","values":{"c1":"the smallest is [lcm(m, n)](!/arithmetic/divisibility/lcm); every common multiple is a multiple of it","c2":"4 and 6: lcm = 12; common multiples are 12, 24, 36, 48, …"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Sum of Factors"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Classification","features":[{"id":"c1","name":"Sum-of-proper-divisors test","type":"text"},{"id":"c2","name":"In σ-notation","type":"text"},{"id":"c3","name":"Examples","type":"text"}],"items":[{"id":"r1","name":"Perfect","values":{"c1":"sum of proper divisors equals n","c2":"σ(n) = 2n","c3":"6, 28, 496, 8128 (extremely rare)"}},{"id":"r2","name":"Abundant","values":{"c1":"sum of proper divisors exceeds n","c2":"σ(n) > 2n","c3":"12 (proper-sum = 16), 18, 20, 24, …"}},{"id":"r3","name":"Deficient","values":{"c1":"sum of proper divisors falls short of n","c2":"σ(n) < 2n","c3":"every prime; 10 (proper-sum = 8); most numbers"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Factors vs Multiples"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Factors of n","type":"text"},{"id":"c2","name":"Multiples of n","type":"text"}],"items":[{"id":"r1","name":"Definition","values":{"c1":"integers a such that a ∣ n","c2":"integers b such that n ∣ b"}},{"id":"r2","name":"Direction","values":{"c1":"downward — each is ≤ n","c2":"upward — each positive multiple is ≥ n"}},{"id":"r3","name":"Cardinality","values":{"c1":"finite","c2":"infinite"}},{"id":"r4","name":"Example for n = 12","values":{"c1":"{1, 2, 3, 4, 6, 12}","c2":"12, 24, 36, 48, 60, …"}}]};
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Arithmetic methods", items: [
+      { skill: "Find the GCD by prime factorization", href: "/arithmetic/methods/gcd-prime-factorization", desc: "Factor both numbers into primes and keep the shared primes with the smaller exponent: $\\gcd(72, 120) = 2^3 \\cdot 3 = 24$.", level: "composite" },
+      { skill: "Find the least common multiple", href: "/arithmetic/methods/lcm", desc: "Find the smallest number that two or more numbers divide: take every prime with its larger exponent, or use $\\operatorname{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$.", level: "composite" },
+      { skill: "Test divisibility by 2", href: "/arithmetic/methods#divisibility-by-2", desc: "You need to know whether a whole number is even, for example before halving it or factoring out a $2$: $1{,}746$, $3{,}821$, $90{,}318$.", level: "atomic" },
+      { skill: "Test divisibility by 3", href: "/arithmetic/methods#divisibility-by-3", desc: "You want to know whether $3$ divides a number without dividing it: $729$, $1{,}234$, $5{,}832$.", level: "atomic" },
+      { skill: "Test divisibility by 5", href: "/arithmetic/methods#divisibility-by-5", desc: "You want to know whether $5$ divides a number, for example while factoring or simplifying a fraction: $4{,}835$, $7{,}832$, $990$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -807,8 +852,69 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: The factor search as a loop (obj2).
+  const factorSearchLoop = {
+    loop: {
+      label: 'Algorithm',
+      repeat: 'until $a > 6$',
+      steps: [
+        { text: 'Start with $a = 1$' },
+        { text: 'Test whether $a$ divides $n$', repeat: true },
+        { text: 'If it does, record the pair $a$ and $\\frac{n}{a}$', repeat: true },
+        { text: 'Increase $a$ by $1$ and repeat until $a > \\sqrt{n}$', repeat: true, test: true },
+        { text: 'The recorded pairs hold every factor of $n$', output: true },
+      ],
+    },
+    run: {
+      label: '$n = 36$, $\\sqrt{n} = 6$',
+      vars: [
+        { key: 'a', label: '$a$' },
+        { key: 'p', label: 'pair' },
+      ],
+      start: { a: '$1$' },
+      startNote: 'Begin the search at $a = 1$. It will stop after $a = 6$.',
+      passes: [
+        { steps: [
+            { note: '$1 \\mid 36$.' },
+            { set: { p: '$(1, 36)$' }, note: 'Record $1$ and its partner $36$.' },
+            { set: { a: '$2$' }, note: '$a = 2$ is not above $6$, so go back to step 2.' },
+          ], row: ['$1$', 'yes', '$(1, 36)$'] },
+        { steps: [
+            { note: '$2 \\mid 36$.' },
+            { set: { p: '$(2, 18)$' }, note: 'Record $2$ and its partner $18$.' },
+            { set: { a: '$3$' }, note: '$a = 3$ is not above $6$, so go back to step 2.' },
+          ], row: ['$2$', 'yes', '$(2, 18)$'] },
+        { steps: [
+            { note: '$3 \\mid 36$.' },
+            { set: { p: '$(3, 12)$' }, note: 'Record $3$ and its partner $12$.' },
+            { set: { a: '$4$' }, note: '$a = 4$ is not above $6$, so go back to step 2.' },
+          ], row: ['$3$', 'yes', '$(3, 12)$'] },
+        { steps: [
+            { note: '$4 \\mid 36$.' },
+            { set: { p: '$(4, 9)$' }, note: 'Record $4$ and its partner $9$.' },
+            { set: { a: '$5$' }, note: '$a = 5$ is not above $6$, so go back to step 2.' },
+          ], row: ['$4$', 'yes', '$(4, 9)$'] },
+        { steps: [
+            { note: '$5 \\nmid 36$.' },
+            { set: { p: 'none' }, note: 'Nothing to record: skip.' },
+            { set: { a: '$6$' }, note: '$a = 6$ is not above $6$, so go back to step 2.' },
+          ], row: ['$5$', 'no', 'skip'] },
+        { steps: [
+            { note: '$6 \\mid 36$.' },
+            { set: { p: '$(6, 6)$' }, note: 'Record $6$; its partner is $6$ again.' },
+            { set: { a: '$7$' }, note: '$a = 7$ is above $6$, so the loop ends here.' },
+          ], row: ['$6$', 'yes', '$(6, 6)$'] },
+      ],
+      tableLabel: 'Tests finished so far',
+      columns: ['$a$', 'divides $36$?', 'pair'],
+      result: '$\\{1, 2, 3, 4, 6, 9, 12, 18, 36\\}$',
+      resultNote: 'Nine factors, all found by testing only six candidates.',
+    },
+  };
+
 return {
   props:{
+    factorSearchLoop,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -840,7 +946,7 @@ return {
    }
 
 
-export default function FactorsPage({ pitfallData,seoData, sectionsContent,
+export default function FactorsPage({ factorSearchLoop, pitfallData,seoData, sectionsContent,
   introContent, obj6Table, obj10Table, summaryTable, faqQuestions,
   schemas, obj5SvgMultiples, obj6SvgSplit,
   fsFactorsObj1, fsFactorsObj2, fsFactorsObj3, fsFactorsObj4,
@@ -932,6 +1038,15 @@ export default function FactorsPage({ pitfallData,seoData, sectionsContent,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="finding-all-factors-loop"
+            title="The factor search as a loop"
+            source="/arithmetic/divisibility/factors"
+            before={"The search of this section on 36. Press Next to carry out one step at a time and watch the pairs collect."}
+          >
+            <ProcedureV2 data={factorSearchLoop} variant="loop" />
+          </DiagramFrame>,
           <div key={'obj2-svg'} style={figureWrapStyle}
                dangerouslySetInnerHTML={{ __html: fsFactorsObj2 }} />,
           sectionsContent.obj2.afterFigure,
@@ -959,6 +1074,15 @@ export default function FactorsPage({ pitfallData,seoData, sectionsContent,
           <div key={'obj4-svg'} style={figureWrapStyle}
                dangerouslySetInnerHTML={{ __html: fsFactorsObj4 }} />,
           sectionsContent.obj4.afterFigure,
+          <DiagramFrame
+            key={'taxonomy-proper-divisors-three-categories'}
+            id="proper-divisors-three-categories"
+            title="Proper Divisors"
+            source="/arithmetic/divisibility/factors"
+            related={false}
+          >
+            <Taxonomy data={tx_properDivisorClasses} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -1023,8 +1147,15 @@ export default function FactorsPage({ pitfallData,seoData, sectionsContent,
       <div key={'obj6-svg'} style={figureWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj6SvgSplit }} />,
       sectionsContent.obj6.afterFigure,
-      <div key={'obj6-table'} style={tableWrapStyle}
-           dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+      <DiagramFrame
+        key={'feature-matrix-factors-factors-vs-multiples-matrix'}
+        id="factors-factors-vs-multiples-matrix"
+        title="Factors vs Multiples"
+        source="/arithmetic/divisibility/factors"
+        related={false}
+      >
+        <FeatureMatrix data={fm_obj6Table} />
+      </DiagramFrame>,
     ]
 },
     {
@@ -1071,8 +1202,15 @@ export default function FactorsPage({ pitfallData,seoData, sectionsContent,
           <div key={'obj10-svg'} style={figureWrapStyle}
                dangerouslySetInnerHTML={{ __html: fsFactorsObj10 }} />,
           sectionsContent.obj10.afterFigure,
-          <div key={'obj10-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-factors-sum-factors-matrix'}
+            id="factors-sum-factors-matrix"
+            title="Sum of Factors"
+            source="/arithmetic/divisibility/factors"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1113,8 +1251,15 @@ export default function FactorsPage({ pitfallData,seoData, sectionsContent,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-factors-summary-toolkit-divisor-structure-matrix'}
+            id="factors-summary-toolkit-divisor-structure-matrix"
+            title="Summary: A Toolkit for Divisor Structure"
+            source="/arithmetic/divisibility/factors"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1132,6 +1277,14 @@ export default function FactorsPage({ pitfallData,seoData, sectionsContent,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

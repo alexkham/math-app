@@ -3,6 +3,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj16 summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -30,9 +31,57 @@ import probDistNotationSheet from '@/app/components/infographics/NotationCheatSh
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_binomialRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+    link: { label: 'same trials', color: '#64748b', dash: '' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 150,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    bands: [{ from: 0, to: 2, label: 'Discrete', color: '#f1f5f9' }, { from: 2, to: 3, label: 'Continuous', color: '#eff6ff' }],
+    nodes: [
+      { id: 'bern', name: 'Bernoulli', x: 0, y: 0.2, href: '/probability/distributions/discrete#bernoulli', text: 'One trial that gives $1$ with probability $p$ and $0$ otherwise.' },
+      { id: 'hyp', name: 'Hypergeometric', x: 0, y: 1, href: '/probability/distributions/discrete/hypergeometric', text: 'The number of successes in $n$ draws made without putting items back.' },
+      { id: 'nb', name: 'Negative binomial', x: 0, y: 1.8, href: '/probability/distributions/discrete/negative-binomial', text: 'The number of trials needed to reach the $r$-th success.' },
+      { id: 'poi', name: 'Poisson', x: 1, y: 0, href: '/probability/distributions/discrete/poisson', text: 'The number of events in a window, at an average rate $\\lambda$.' },
+      { id: 'bin', name: 'Binomial', x: 1, y: 1, text: 'The number of successes in $n$ independent trials. Independent counts with the same $p$ add up to another binomial.' },
+      { id: 'geo', name: 'Geometric', x: 1, y: 2, href: '/probability/distributions/discrete/geometric', text: 'The number of trials needed to reach the first success.' },
+      { id: 'norm', name: 'Normal', x: 2, y: 1, href: '/probability/distributions/continuous/normal', text: 'The bell curve with the same mean $np$ and variance $np(1-p)$.' },
+    ],
+    edges: [
+      { from: 'bern', to: 'bin', kind: 'special', label: '$n = 1$', text: 'the Bernoulli is the binomial with $n = 1$; a binomial count is the sum of $n$ independent Bernoulli variables' },
+      { from: 'hyp', to: 'bin', kind: 'limit', label: '$N$ large', text: 'when the population $N$ is much larger than the sample $n$, the hypergeometric comes close to the binomial with $p = \\frac{K}{N}$' },
+      { from: 'bin', to: 'poi', kind: 'limit', label: '$np = \\lambda$', text: 'as $n$ grows and $p$ shrinks with $np = \\lambda$ fixed, the binomial approaches the Poisson' },
+      { from: 'bin', to: 'norm', kind: 'limit', label: '$n$ large', text: '$\\operatorname{Bin}(n, p)$ is close to $N(np,\\ np(1-p))$ when $np$ and $n(1-p)$ are both at least $10$' },
+      { from: 'nb', to: 'bin', kind: 'link', label: 'same trials', text: 'the $r$-th success arrives by trial $n$ exactly when the first $n$ trials hold at least $r$ successes' },
+      { from: 'geo', to: 'nb', kind: 'special', label: '$r = 1$', text: 'the geometric is the negative binomial with $r = 1$' },
+    ],
+  },
+};
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a binomial probability", href: "/probability/distributions/methods/binomial-probability", desc: "Count successes in $n$ independent trials: name $n$, $p$ and the values of $k$, then add PMF terms or use the complement.", level: "composite", here: "#4" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -572,7 +621,47 @@ Every bar of the PMF is computed with the same three-factor product, whatever th
     },
     obj14:{
       title:`Related Distributions`,
-      content:``,
+      content:`
+The binomial distribution sits at the centre of the discrete family. One relative is its building block, two are what it turns into as the number of trials grows, and the rest ask a different question about the same kind of trials.
+
+### Bernoulli: a single trial
+
+A [Bernoulli](!/probability/distributions/discrete#bernoulli) variable is one trial that gives $1$ with probability $p$ and $0$ otherwise, so it is the binomial with $n = 1$. In the other direction, a binomial count is the sum of $n$ independent Bernoulli variables with the same $p$. It follows that independent counts with the same $p$ add up to another binomial: if $X \\sim \\operatorname{Bin}(n_1, p)$ and $Y \\sim \\operatorname{Bin}(n_2, p)$ are independent, then
+
+@academic[formula_callout:Related Distributions
+$$X + Y \\sim \\operatorname{Bin}(n_1 + n_2, p)$$]@
+
+### Poisson: many trials, rare success
+
+Let $n$ grow and $p$ shrink so that the mean $np$ stays at a fixed value $\\lambda$. The binomial probabilities then approach those of the [Poisson](!/probability/distributions/discrete/poisson) distribution:
+
+@academic[formula_callout:Related Distributions
+$$\\binom{n}{k} p^k (1-p)^{n-k} \\to \\frac{\\lambda^k e^{-\\lambda}}{k!} \\quad \\text{as } n \\to \\infty \\text{ with } np = \\lambda$$]@
+
+With $n = 100$ and $p = 0.04$ the chance of no success is $0.96^{100} \\approx 0.0169$, and the Poisson value with $\\lambda = 4$ is $e^{-4} \\approx 0.0183$. The Poisson needs only the mean, which is why it replaces the binomial when $n$ is large and $p$ is small.
+
+### Normal: many trials, fixed chance
+
+Keep $p$ fixed and let $n$ grow. The count spreads out around $np$ and its bar chart takes the bell shape of the [normal](!/probability/distributions/continuous/normal) distribution with the same mean and variance:
+
+@academic[formula_callout:Related Distributions
+$$\\operatorname{Bin}(n, p) \\approx N(np,\\ np(1-p))$$]@
+
+The fit is good when $np$ and $n(1-p)$ are both at least $10$. This is the [central limit theorem](!/probability/central-limit-theorem) applied to a sum of Bernoulli trials.
+
+### Hypergeometric: the same count without replacement
+
+Draw $n$ items from a population of $N$ that holds $K$ successes. If each item is put back before the next draw, the number of successes is binomial with $p = \\frac{K}{N}$. If items are not put back, it is [hypergeometric](!/probability/distributions/discrete/hypergeometric). When $N$ is much larger than $n$, removing a few items barely changes the mix, and the hypergeometric probabilities come close to the binomial ones.
+
+### Geometric and negative binomial: the same trials, counted differently
+
+The binomial fixes the number of trials and counts the successes. The [geometric](!/probability/distributions/discrete/geometric) distribution fixes one success and counts the trials needed to reach it, and the [negative binomial](!/probability/distributions/discrete/negative-binomial) does the same for $r$ successes. The two views answer one question in two ways, because the $r$-th success arrives by trial $n$ exactly when the first $n$ trials hold at least $r$ successes. For $Y \\sim \\operatorname{NegBin}(r, p)$ and $X \\sim \\operatorname{Bin}(n, p)$:
+
+@academic[formula_callout:Related Distributions
+$$P(Y \\leq n) = P(X \\geq r)$$]@
+
+Of these, the Poisson and normal links are used most: the first handles rare events, the second handles large counts where the exact sum is long to compute.
+`,
       before:``,
       after:``,
       link:'',
@@ -1126,6 +1215,7 @@ export default function BinomialDistributionPage({ proofStepsData2, proofStepsDa
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `Summing these bars from the left gives the CDF.`,
           `@academic[punchline:Every binomial probability is the number of orders times the chance of one order.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a binomial probability](!/probability/distributions/methods/binomial-probability) →@`,
         ]
     },
     {
@@ -1216,6 +1306,23 @@ export default function BinomialDistributionPage({ proofStepsData2, proofStepsDa
         ]
     },
     {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'concept-map-binomial-related-distributions'}
+            id="binomial-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/discrete/binomial"
+            related={false}
+          >
+            <ConceptMap data={cm_binomialRelated} variant="graph" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'16',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
@@ -1248,6 +1355,14 @@ export default function BinomialDistributionPage({ proofStepsData2, proofStepsDa
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

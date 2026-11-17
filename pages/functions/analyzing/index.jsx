@@ -977,6 +977,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -996,8 +997,76 @@ import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/cu
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_extremaKinds = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  facets: [
+    { label: 'Local', criterion: 'Compared with all nearby function values', types: [
+      { id: 'lmax', name: 'Local maximum', example: 'a peak', condition: '$f(c)$ is greater than or equal to all nearby function values: the curve rises to a high point and then descends.' },
+      { id: 'lmin', name: 'Local minimum', example: 'a valley', condition: '$f(c)$ is less than or equal to all nearby function values: the curve descends to a low point and then rises.' }
+    ] },
+    { label: 'Absolute (global)', criterion: 'Compared with the whole domain', types: [
+      { id: 'amax', name: 'Absolute maximum', condition: 'The largest value the function achieves anywhere on its domain.', links: [{ to: 'lmax', label: 'may coincide with' }] },
+      { id: 'amin', name: 'Absolute minimum', condition: 'The smallest value the function achieves anywhere on its domain.', links: [{ to: 'lmin', label: 'may coincide with' }] }
+    ] }
+  ],
+  note: { label: 'Not every function has absolute extrema', text: '$f(x) = x$ on $(-\\infty, \\infty)$ has no maximum or minimum. On the closed interval $[0, 5]$ it has absolute minimum $0$ at $x = 0$ and absolute maximum $5$ at $x = 5$, both at endpoints.' }
+};
+
+const tx_symmetryOfFunction = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  tree: {
+    root: { name: 'Symmetry of a function', sub: 'compare $f(-x)$ with $f(x)$' },
+    branches: [
+      { leaves: [
+        { name: 'Even symmetry', condition: '$f(-x) = f(x)$: the graph is symmetric about the $y$-axis.', example: '$x^2$, $|x|$, $\\cos(x)$',
+          sketch: { x0: -2, x1: 2, y0: -0.6, y1: 2.4, vlines: [0], pieces: [{ f: (x) => 0.55 * x * x, from: -2, to: 2 }] } },
+        { name: 'Odd symmetry', condition: '$f(-x) = -f(x)$: the graph is symmetric about the origin.', example: '$x^3$, $x$, $\\sin(x)$',
+          sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, vlines: [0], pieces: [{ f: (x) => 0.18 * x * x * x, from: -2, to: 2 }] } },
+        { name: 'Neither', condition: '$f(-x)$ equals neither $f(x)$ nor $-f(x)$. Most functions are of this kind.', example: '$x^2 + x$',
+          sketch: { x0: -2, x1: 2, y0: -0.9, y1: 2.1, vlines: [0], pieces: [{ f: (x) => 0.5 * (x * x + x), from: -2, to: 2 }] } }
+      ] }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Complete Analysis at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Feature","features":[{"id":"c1","name":"Question to ask","type":"text"},{"id":"c2","name":"How to find it","type":"text"},{"id":"c3","name":"Example for f(x) = x² − 4","type":"text"}],"items":[{"id":"r1","name":"[Domain](!/functions/domain)","values":{"c1":"what inputs are valid?","c2":"check formula restrictions; read horizontal extent of the graph","c3":"(−∞, ∞)"}},{"id":"r2","name":"[Range](!/functions/range)","values":{"c1":"what outputs are achieved?","c2":"solve for y algebraically; read vertical extent of the graph","c3":"[−4, ∞)"}},{"id":"r3","name":"Intercepts","values":{"c1":"where does the graph cross the axes?","c2":"solve f(x) = 0 for x-intercepts; compute f(0) for the y-intercept","c3":"x-intercepts at ±2; y-intercept at −4"}},{"id":"r4","name":"Increasing / decreasing","values":{"c1":"where does the curve rise and fall?","c2":"trace the graph left-to-right; locate turning points","c3":"decreasing on (−∞, 0); increasing on (0, ∞)"}},{"id":"r5","name":"Sign (positive / negative)","values":{"c1":"where is the function above or below the x-axis?","c2":"find the zeros; test the sign on each subinterval","c3":"positive on (−∞, −2) ∪ (2, ∞); negative on (−2, 2)"}},{"id":"r6","name":"Extrema","values":{"c1":"where are the peaks and valleys?","c2":"locate turning points; also check endpoints on a restricted domain","c3":"absolute minimum −4 at x = 0; no maximum"}},{"id":"r7","name":"Symmetry","values":{"c1":"is the graph even, odd, or neither?","c2":"test f(−x) against f(x) and −f(x); or check graphical symmetry","c3":"even — symmetric about the y-axis"}},{"id":"r8","name":"Periodicity","values":{"c1":"does the pattern repeat at regular intervals?","c2":"look for cyclic repetition; measure the distance between matching points","c3":"not periodic"}},{"id":"r9","name":"End behavior","values":{"c1":"what happens as x → ±∞?","c2":"examine the leading term, or the far ends of the graph","c3":"f(x) → ∞ at both ends"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Comparing Functions Across Representations"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Representation","features":[{"id":"c1","name":"What it reveals best","type":"text"},{"id":"c2","name":"Best for answering","type":"text"},{"id":"c3","name":"Example question","type":"text"}],"items":[{"id":"r1","name":"Equation","values":{"c1":"algebraic structure; exact symbolic relationships","c2":"exact values, exact zeros, symbolic manipulation","c3":"\"What is f(3) exactly?\" \"Solve f(x) = 0.\""}},{"id":"r2","name":"Table","values":{"c1":"specific input-output pairs; patterns within sampled values","c2":"looking up listed values; spotting symmetry across listed inputs","c3":"\"What is f(−1) if it appears in the table?\""}},{"id":"r3","name":"[Graph](!/functions/graphs)","values":{"c1":"overall shape; qualitative behavior","c2":"trends, extrema, intervals, symmetry at a glance","c3":"\"Where is f increasing?\" \"Is f even?\""}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Interpreting Real-World Function Graphs"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Graph feature","features":[{"id":"c1","name":"Typical contextual meaning","type":"text"},{"id":"c2","name":"Example interpretations","type":"text"}],"items":[{"id":"r1","name":"y-intercept","values":{"c1":"initial or starting value at t = 0 (or x = 0)","c2":"initial population, starting balance, launch height"}},{"id":"r2","name":"x-intercept(s)","values":{"c1":"when the quantity reaches zero","c2":"break-even point, ground impact, depletion time"}},{"id":"r3","name":"Increasing / decreasing intervals","values":{"c1":"quantity is growing or shrinking","c2":"revenue rising, temperature cooling, inventory depleting"}},{"id":"r4","name":"Steepness (slope)","values":{"c1":"rate of change — steeper means faster","c2":"velocity, growth rate, cooling rate"}},{"id":"r5","name":"Extrema (peaks / valleys)","values":{"c1":"optimal or critical values","c2":"maximum profit, minimum cost, peak concentration"}},{"id":"r6","name":"End behavior","values":{"c1":"long-term trend","c2":"equilibrium, indefinite growth, exponential decay"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Intervals Where Positive, Negative, or Zero"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Sign condition","features":[{"id":"c1","name":"Where on graph","type":"text"},{"id":"c2","name":"Algebraic test","type":"text"},{"id":"c3","name":"Result for f(x) = x² − 4","type":"text"}],"items":[{"id":"r1","name":"Positive — f(x) > 0","values":{"c1":"curve lies above the x-axis","c2":"solve f(x) > 0","c3":"(−∞, −2) ∪ (2, ∞)"}},{"id":"r2","name":"Negative — f(x) < 0","values":{"c1":"curve lies below the x-axis","c2":"solve f(x) < 0","c3":"(−2, 2)"}},{"id":"r3","name":"Zero — f(x) = 0","values":{"c1":"curve crosses (or touches) the x-axis","c2":"solve f(x) = 0","c3":"x = −2, x = 2"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("End Behavior from Graph"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Behavior","features":[{"id":"c1","name":"Symbolic form","type":"text"},{"id":"c2","name":"Graphical signature","type":"text"},{"id":"c3","name":"Typical function families","type":"text"}],"items":[{"id":"r1","name":"Unbounded above","values":{"c1":"f(x) → ∞","c2":"curve rises indefinitely","c3":"positive-leading polynomials, exponential growth"}},{"id":"r2","name":"Unbounded below","values":{"c1":"f(x) → −∞","c2":"curve falls indefinitely","c3":"negative-leading polynomials, downward parabolas"}},{"id":"r3","name":"Finite limit (asymptote)","values":{"c1":"f(x) → L","c2":"levels off toward horizontal line y = L","c3":"rational functions (deg num ≤ deg denom), exponential decay"}},{"id":"r4","name":"Oscillation","values":{"c1":"f(x) bounces without converging","c2":"curve fluctuates indefinitely","c3":"sin(x), cos(x), most [periodic functions](!/functions/properties)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Analyze a function", href: "/functions/methods/analyze-function", desc: "Work through domain, intercepts, symmetry, rise and fall, turning points, end behavior and range in a fixed order.", level: "composite", here: "#1" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Find the intercepts of a function", href: "/functions/methods/find-intercepts", desc: "Evaluate $f(0)$ for the $y$-intercept; solve $f(x) = 0$ for the $x$-intercepts and keep the solutions in the domain.", level: "composite" },
+      { skill: "Tell if a function is even, odd or neither", href: "/functions/methods/even-odd-test", desc: "Check that the domain is symmetric, simplify $f(-x)$, and compare it with $f(x)$ and $-f(x)$.", level: "composite" },
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+      { skill: "Identify the family of a function", href: "/functions/methods/identify-function-family", desc: "A decision tree from what you see in the formula to the family and the method that handles it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2010,6 +2079,7 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
             <FunctionAnalysis data={cubicProfile} theme={profileTheme} />
           </DiagramFrame>,
           `Each row of the profile is one of the questions the sections below take up in turn. The numbered badges tie every fact to the spot on the graph where it shows, and the two strips under the graph make the sign of $f$ and its direction readable at a glance. That picture, all features together and none missing, is what a complete analysis produces.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to analyze a function](!/functions/methods/analyze-function) →@`,
         ]
     },
     {
@@ -2039,8 +2109,15 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-analyzing-intervals-where-positive-negative-matrix'}
+            id="analyzing-intervals-where-positive-negative-matrix"
+            title="Intervals Where Positive, Negative, or Zero"
+            source="/functions/analyzing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `The worked example as a picture: $f(x) = x^2 - 4$ crosses the axis at $x = -2$ and $x = 2$, and those two zeros cut the line into three intervals, one negative between them and two positive outside.`,
           <DiagramFrame
             key={'obj4-profile'}
@@ -2061,6 +2138,15 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
           sectionsContent.obj5.content,
           <div key={'unit-extremaCubic'} dangerouslySetInnerHTML={{ __html: demoUnits.extremaCubic }} />,
           `Widen the interval and the endpoints climb further, while the local max 2 and min −2 stay where they are.`,
+          <DiagramFrame
+            key={'taxonomy-analyzing-extrema-kinds'}
+            id="analyzing-extrema-kinds"
+            title="Locating Extrema from Graph"
+            source="/functions/analyzing"
+            related={false}
+          >
+            <Taxonomy data={tx_extremaKinds} variant="facets" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2071,6 +2157,15 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
           sectionsContent.obj6.content,
                   <div key={'unit-symmetry'} dangerouslySetInnerHTML={{ __html: demoUnits.symmetry }} />,
           `Symmetry halves the work: one side of the graph determines the other.`,
+          <DiagramFrame
+            key={'taxonomy-analyzing-symmetry-kinds'}
+            id="analyzing-symmetry-kinds"
+            title="Identifying Symmetry"
+            source="/functions/analyzing"
+            related={false}
+          >
+            <Taxonomy data={tx_symmetryOfFunction} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2090,8 +2185,15 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-analyzing-end-behavior-graph-matrix'}
+            id="analyzing-end-behavior-graph-matrix"
+            title="End Behavior from Graph"
+            source="/functions/analyzing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-endBehavior'} dangerouslySetInnerHTML={{ __html: demoUnits.endBehavior }} />,
           `End behaviour and asymptotes are the same fact seen from the function and from the line.`,
         ]
@@ -2102,8 +2204,15 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-analyzing-interpreting-real-world-function-matrix'}
+            id="analyzing-interpreting-real-world-function-matrix"
+            title="Interpreting Real-World Function Graphs"
+            source="/functions/analyzing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:On an applied graph every feature answers a question, and each answer needs its units.]@`,
         ]
     },
@@ -2128,8 +2237,15 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
       <div key={'obj10-mini-table'} style={tableWrapStyle}
            dangerouslySetInnerHTML={{ __html: obj10MiniTable }} />,
       sectionsContent.obj10.contentAfter,
-      <div key={'obj10-table'} style={tableWrapStyle}
-           dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+      <DiagramFrame
+        key={'feature-matrix-analyzing-comparing-functions-across-representations-matrix'}
+        id="analyzing-comparing-functions-across-representations-matrix"
+        title="Comparing Functions Across Representations"
+        source="/functions/analyzing"
+        related={false}
+      >
+        <FeatureMatrix data={fm_obj10Table} />
+      </DiagramFrame>,
     ]
 },
     {
@@ -2138,8 +2254,15 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-analyzing-complete-analysis-at-glance-matrix'}
+            id="analyzing-complete-analysis-at-glance-matrix"
+            title="Complete Analysis at a Glance"
+            source="/functions/analyzing"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2216,6 +2339,14 @@ export default function AnalyzingFunctionsPage({ pitfallData,signProfile,
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

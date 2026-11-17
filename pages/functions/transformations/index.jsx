@@ -1494,6 +1494,8 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1515,8 +1517,49 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_generalTransformation = {
+  center: { name: '$g(x) = a \\cdot f(b(x - h)) + k$', sub: 'combines all four types' },
+  axes: { cols: ['shift', 'stretch, compression, reflection'], rows: ['horizontal', 'vertical'] },
+  quadrants: [
+    { label: '$h$', title: 'Horizontal shift', items: [ 'Right if positive.', 'Left if negative.' ] },
+    { label: '$b$', title: 'Horizontal scaling', items: [ 'Compression: $|b| > 1$', 'Stretch: $0 < |b| < 1$', 'Reflection: $b < 0$' ] },
+    { label: '$k$', title: 'Vertical shift', items: [ 'Up if positive.', 'Down if negative.' ] },
+    { label: '$a$', title: 'Vertical scaling', items: [ 'Stretch: $|a| > 1$', 'Compression: $0 < |a| < 1$', 'Reflection: $a < 0$' ] }
+  ],
+  note: { label: 'Example', text: '$g(x) = -2(x + 3)^2 + 5$ shifts $x^2$ left $3$ units, stretches it vertically by factor $2$, reflects it across the $x$-axis and shifts it up $5$ units. The vertex moves from $(0, 0)$ to $(-3, 5)$.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Parent Functions"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Parent","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Domain","type":"text"},{"id":"c3","name":"Range","type":"text"},{"id":"c4","name":"Identifying feature","type":"text"}],"items":[{"id":"r1","name":"Linear","values":{"c1":"f(x) = x","c2":"ℝ","c3":"ℝ","c4":"straight line through the origin, slope 1"}},{"id":"r2","name":"Quadratic","values":{"c1":"f(x) = x²","c2":"ℝ","c3":"[0, ∞)","c4":"parabola with vertex at the origin, opens upward"}},{"id":"r3","name":"Cubic","values":{"c1":"f(x) = x³","c2":"ℝ","c3":"ℝ","c4":"S-curve through the origin with point symmetry"}},{"id":"r4","name":"Absolute value","values":{"c1":"f(x) = |x|","c2":"ℝ","c3":"[0, ∞)","c4":"V-shape with vertex at the origin"}},{"id":"r5","name":"Square root","values":{"c1":"f(x) = √x","c2":"[0, ∞)","c3":"[0, ∞)","c4":"half-curve rising from the origin, flattening"}},{"id":"r6","name":"Reciprocal","values":{"c1":"f(x) = 1⁄x","c2":"x ≠ 0","c3":"y ≠ 0","c4":"hyperbola with asymptotes at the axes"}},{"id":"r7","name":"Exponential","values":{"c1":"f(x) = eˣ (or 2ˣ)","c2":"ℝ","c3":"(0, ∞)","c4":"rises rapidly to the right, asymptote y = 0"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Effect on Domain and Range"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"Effect on domain","type":"text"},{"id":"c2","name":"Effect on range","type":"text"}],"items":[{"id":"r1","name":"Vertical shift + k","values":{"c1":"unchanged","c2":"[a, b] → [a + k, b + k]"}},{"id":"r2","name":"Horizontal shift − h","values":{"c1":"[a, b] → [a + h, b + h]","c2":"unchanged"}},{"id":"r3","name":"Vertical scale by a","values":{"c1":"unchanged","c2":"[m, M] → [am, aM] (or [aM, am] if a < 0)"}},{"id":"r4","name":"Horizontal scale by b","values":{"c1":"[p, q] → [p⁄b, q⁄b] (or reversed if b < 0)","c2":"unchanged"}},{"id":"r5","name":"Vertical reflection","values":{"c1":"unchanged","c2":"[a, b] → [−b, −a]"}},{"id":"r6","name":"Horizontal reflection","values":{"c1":"[a, b] → [−b, −a]","c2":"unchanged"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table insideOutsideTable ("Horizontal Stretch and Compression"); converted from the table's own cells.
+const fm_insideOutsideTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation on the formula","features":[{"id":"c1","name":"Inside f — horizontal effect","type":"text"},{"id":"c2","name":"Outside f — vertical effect","type":"text"}],"items":[{"id":"r1","name":"Add a constant","values":{"c1":"f(x − h): shifts horizontally by h (sign reversed — counterintuitive)","c2":"f(x) + k: shifts vertically by k (sign preserved)"}},{"id":"r2","name":"Negate","values":{"c1":"f(−x): reflection across the y-axis","c2":"−f(x): reflection across the x-axis"}},{"id":"r3","name":"Multiply by a constant","values":{"c1":"f(bx): scales x-values by 1⁄b — reciprocal effect (|b| > 1 compresses, 0 < |b| < 1 stretches)","c2":"a · f(x): scales y-values by a — direct effect (|a| > 1 stretches, 0 < |a| < 1 compresses)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Graph a transformed function", href: "/functions/methods/graph-transformations", desc: "Start from the parent graph, read $a$, $b$, $h$, $k$ from $a f(b(x - h)) + k$, and move key points.", level: "composite", here: "#10" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Find the range of a function", href: "/functions/methods/find-range", desc: "Find the lowest and highest outputs from the vertex, the endpoints and the end behavior, or solve $y = f(x)$ for $x$.", level: "composite" },
+      { skill: "Tell if a function is even, odd or neither", href: "/functions/methods/even-odd-test", desc: "Check that the domain is symmetric, simplify $f(-x)$, and compare it with $f(x)$ and $-f(x)$.", level: "composite" },
+      { skill: "Identify the family of a function", href: "/functions/methods/identify-function-family", desc: "A decision tree from what you see in the formula to the family and the method that handles it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2925,8 +2968,40 @@ const faqQuestions = {
     note: { label: 'All four together', text: 'The general form combines every row, and [combining transformations](!#9) reads $a$, $b$, $h$ and $k$ off a single equation.' },
   };
 
+  // Procedure rollout 2026-11-14: From a transformed graph to its equation (obj11).
+  const fromTransformedGraphSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'A parabola with vertex $(3, -2)$, opening downward',
+      rows: [
+        { step: 'Identify the parent function from the shape', example: 'parabola: $y = x^2$' },
+        { step: 'Locate a key reference point', example: 'vertex at $(3, -2)$' },
+        { step: 'Compare it to the parent', stepSub: 'The vertex of $y = x^2$ is at $(0, 0)$', example: 'right $3$, down $2$' },
+        { step: 'Determine vertical scaling and reflection', example: 'twice as steep, opening downward: $a = -2$' },
+        { step: 'Write the equation', example: '$y = -2(x - 3)^2 - 2$' },
+        { check: true, step: 'Verify with another visible point', example: '$(4, -4)$: $-2(4 - 3)^2 - 2 = -4$' },
+      ],
+    },
+  };
+
+  const transformOrderSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$g(x) = 3f(2(x - 1)) + 4$',
+      rows: [
+        { step: 'Start with the parent function', example: '$f(x)$' },
+        { step: 'Scale horizontally by $1/b$', stepSub: 'Horizontal, inside', example: 'Compress by factor $2$: $f(2x)$' },
+        { step: 'Shift horizontally by $h$', stepSub: 'Horizontal, inside', example: 'Shift right $1$: $f(2(x - 1))$' },
+        { step: 'Scale vertically by $a$', stepSub: 'Vertical, outside', example: 'Stretch by factor $3$: $3f(2(x - 1))$' },
+        { step: 'Shift vertically by $k$', stepSub: 'Vertical, outside', example: 'Shift up $4$: $3f(2(x - 1)) + 4$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    transformOrderSteps,
+    fromTransformedGraphSteps,
     formulaSummaryData,
     pitfallData,
     demoUnits,
@@ -2950,7 +3025,7 @@ const faqQuestions = {
     }
    }
 
-export default function TransformationsPage({ formulaSummaryData, pitfallData,
+export default function TransformationsPage({ transformOrderSteps, fromTransformedGraphSteps, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -3051,11 +3126,15 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-transformations-parent-functions-matrix'}
+            id="transformations-parent-functions-matrix"
+            title="Parent Functions"
+            source="/functions/transformations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3146,11 +3225,15 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'inside-outside-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: insideOutsideTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-transformations-horizontal-stretch-compression-matrix'}
+            id="transformations-horizontal-stretch-compression-matrix"
+            title="Horizontal Stretch and Compression"
+            source="/functions/transformations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_insideOutsideTable} />
+          </DiagramFrame>,
                   <div key={'unit-horizStretch'} dangerouslySetInnerHTML={{ __html: demoUnits.horizStretch }} />,
           `Horizontal stretches change the domain; the range is untouched.`,
         ]
@@ -3163,6 +3246,15 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
           sectionsContent.obj9.content,
           <div key={'unit-combined'} dangerouslySetInnerHTML={{ __html: demoUnits.combined }} />,
           `Tracking the vertex is the quickest way to check a combined transformation.`,
+          <DiagramFrame
+            key={'four-sides-general-transformation-four-parameters'}
+            id="general-transformation-four-parameters"
+            title="Combining Transformations"
+            source="/functions/transformations"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_generalTransformation} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3172,6 +3264,12 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         content:[
           sectionsContent.obj10.content,
           `@academic[punchline:Order matters: in $a \\cdot f(b(x - h)) + k$, each direction is scaled first and shifted second.]@`,
+          <DiagramFrame key={'obj10-procedure'} id="transformation-order-steps" title="The order on one function"
+            source="/functions/transformations" related={false}
+            before={"The inside-out order on the function from this section. Press Next to apply one transformation at a time."}>
+            <ProcedureV2 data={transformOrderSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to graph a transformed function](!/functions/methods/graph-transformations) →@`,
         ]
     },
     {
@@ -3180,6 +3278,15 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
+          <DiagramFrame
+            key={'obj11-procedure'}
+            id="equation-from-transformed-graph-steps"
+            title="From a transformed graph to its equation"
+            source="/functions/transformations"
+            before={"The six steps on the parabola of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={fromTransformedGraphSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-fromGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.fromGraph }} />,
           `Any visible point other than the vertex can serve as the check.`,
         ]
@@ -3190,11 +3297,15 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-transformations-effect-domain-range-matrix'}
+            id="transformations-effect-domain-range-matrix"
+            title="Effect on Domain and Range"
+            source="/functions/transformations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           `@academic[punchline:Horizontal changes reshape only the domain and vertical changes only the range; neither reaches the other.]@`,
         ]
     },
@@ -3242,6 +3353,14 @@ $$g(x) = a \\cdot f(b(x - h)) + k$$
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

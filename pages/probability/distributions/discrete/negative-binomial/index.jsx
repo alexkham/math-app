@@ -838,6 +838,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj16 summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -864,8 +865,54 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_negativeBinomialRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+    link: { label: 'same trials', color: '#64748b', dash: '' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 150,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    bands: [{ from: 0, to: 2, label: 'Discrete', color: '#f1f5f9' }, { from: 2, to: 3, label: 'Continuous', color: '#eff6ff' }],
+    nodes: [
+      { id: 'geo', name: 'Geometric', x: 0, y: 0.2, href: '/probability/distributions/discrete/geometric', text: 'The number of trials needed to reach the first success.' },
+      { id: 'bin', name: 'Binomial', x: 0, y: 1, href: '/probability/distributions/discrete/binomial', text: 'The number of successes in a fixed number $n$ of trials.' },
+      { id: 'poi', name: 'Poisson', x: 0, y: 1.8, href: '/probability/distributions/discrete/poisson', text: 'A count whose variance equals its mean.' },
+      { id: 'nb', name: 'Negative binomial', x: 1, y: 1, text: 'The number of trials needed to reach the $r$-th success; a sum of $r$ independent geometric waits.' },
+      { id: 'gam', name: 'Gamma', x: 2, y: 1, text: 'The time until the $r$-th event at a constant rate; a sum of $r$ independent exponential waits.' },
+    ],
+    edges: [
+      { from: 'geo', to: 'nb', kind: 'special', label: '$r = 1$', text: 'the geometric is the negative binomial with $r = 1$' },
+      { from: 'bin', to: 'nb', kind: 'link', label: 'same trials', text: 'the $r$-th success arrives by trial $n$ exactly when the first $n$ trials hold at least $r$ successes' },
+      { from: 'nb', to: 'poi', kind: 'limit', label: '$r$ large', text: 'the count of failures, with its mean $\\mu$ held fixed, approaches $\\operatorname{Pois}(\\mu)$ as $r$ grows' },
+      { from: 'nb', to: 'gam', kind: 'limit', label: 'steps shrink', text: 'the negative binomial wait turns into the gamma wait as the time between trials shrinks' },
+    ],
+  },
+};
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a negative binomial probability", href: "/probability/distributions/methods/negative-binomial-probability", desc: "The trial of the $r$th success: $r - 1$ successes somewhere in the first $k - 1$ trials, then a success on trial $k$.", level: "composite", here: "#4" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Find a binomial probability", href: "/probability/distributions/methods/binomial-probability", desc: "Count successes in $n$ independent trials: name $n$, $p$ and the values of $k$, then add PMF terms or use the complement.", level: "composite" },
+      { skill: "Find a geometric probability", href: "/probability/distributions/methods/geometric-probability", desc: "Repeat a trial until the first success: $k - 1$ failures then one success, and a short tail formula for \"more than $k$ trials\".", level: "composite" },
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1377,7 +1424,46 @@ The same stopping rule drives a classic puzzle told about the mathematician Stef
     },
     obj14:{
       title:`Related Distributions`,
-      content:``,
+      content:`
+The negative binomial distribution extends the geometric wait to several successes. Its relatives are the single wait it is built from, the binomial count of the same trials, a second form that counts failures only, and the Poisson and gamma distributions it approaches.
+
+### Geometric: one success at a time
+
+The [geometric](!/probability/distributions/discrete/geometric) distribution is the case $r = 1$. In the other direction, the wait for $r$ successes is a sum of $r$ independent geometric waits, one for each success, which is where the mean $\\frac{r}{p}$ and the variance $\\frac{r(1-p)}{p^2}$ come from.
+
+### Binomial: the same trials read the other way
+
+The [binomial](!/probability/distributions/discrete/binomial) distribution fixes the number of trials and counts successes; the negative binomial fixes the successes and counts trials. The $r$-th success arrives by trial $n$ exactly when the first $n$ trials hold at least $r$ successes, so for $Y \\sim \\operatorname{Bin}(n, p)$:
+
+@academic[formula_callout:Related Distributions
+$$P(X \\leq n) = P(Y \\geq r)$$]@
+
+For the third six on a die, the chance that it arrives within $18$ rolls is the chance of at least three sixes in $18$ rolls, about $0.597$.
+
+### The failure-count form
+
+Many texts and most software count only the failures before the $r$-th success, $Y = X - r$, which starts at $0$ instead of $r$:
+
+@academic[formula_callout:Related Distributions
+$$P(Y = j) = \\binom{j + r - 1}{j} p^r (1-p)^j, \\quad j = 0, 1, 2, \\ldots$$]@
+
+The mean drops by $r$ to $\\frac{r(1-p)}{p}$ and the variance stays $\\frac{r(1-p)}{p^2}$. Before using a formula or a software function, check which of the two forms it means.
+
+### Poisson: counts with extra spread
+
+Write $\\mu = \\frac{r(1-p)}{p}$ for the mean of the failure count. Its variance is then
+
+@academic[formula_callout:Related Distributions
+$$\\mathrm{Var}(Y) = \\mu + \\frac{\\mu^2}{r}$$]@
+
+which is always larger than the mean. Let $r$ grow while $\\mu$ stays fixed: the extra term fades and the distribution approaches the [Poisson](!/probability/distributions/discrete/poisson) with mean $\\mu$. For this reason the negative binomial is fitted to counts that vary more than a Poisson allows.
+
+### Gamma: the same wait in continuous time
+
+The sum of $r$ independent exponential waits is the time until the $r$-th event at a constant rate, and it follows the gamma distribution. The negative binomial is the same sum made of geometric waits. As the trials come faster and each one succeeds less often, the geometric wait turns into the [exponential](!/probability/distributions/continuous/exponential) one, and the negative binomial wait turns into the gamma one.
+
+Of these, the geometric and binomial links are the ones used in calculation: the first gives the mean and variance, the second turns a question about the wait into a question about a count.
+`,
       before:``,
       after:``,
       link:'',
@@ -1909,6 +1995,7 @@ export default function NegativeBinomialDistributionPage({ specialCasesData, for
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `The CDF has no closed form and is summed term by term.`,
           `@academic[punchline:The last trial is always the final success, so only the trials before it are free to arrange.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a negative binomial probability](!/probability/distributions/methods/negative-binomial-probability) →@`,
         ]
     },
     {
@@ -1987,6 +2074,23 @@ export default function NegativeBinomialDistributionPage({ specialCasesData, for
         ]
     },
     {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'concept-map-negative-binomial-related-distributions'}
+            id="negative-binomial-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/discrete/negative-binomial"
+            related={false}
+          >
+            <ConceptMap data={cm_negativeBinomialRelated} variant="graph" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'16',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
@@ -2019,6 +2123,14 @@ export default function NegativeBinomialDistributionPage({ specialCasesData, for
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

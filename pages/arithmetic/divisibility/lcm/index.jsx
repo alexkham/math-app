@@ -1,5 +1,7 @@
 
 // tables-optimized: v4 | 2026-05-25 | 3 tables (obj2 aggregation, obj8 aggregation, obj12 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -20,17 +22,43 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import divisibilityTableDiagrams from '@/app/components/divisibility/divisibilityTableDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Basic Properties"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Reflexivity & identity with 1","values":{"c1":"lcm(a, a) = a and lcm(a, 1) = a","c2":"lcm(7, 7) = 7; lcm(15, 1) = 15"}},{"id":"r2","name":"Commutativity","values":{"c1":"lcm(a, b) = lcm(b, a)","c2":"lcm(4, 6) = lcm(6, 4) = 12"}},{"id":"r3","name":"Lower bound","values":{"c1":"lcm(a, b) ≥ max(a, b)","c2":"lcm(4, 6) = 12 ≥ 6"}},{"id":"r4","name":"Upper bound","values":{"c1":"lcm(a, b) ≤ a · b, with equality when gcd(a, b) = 1","c2":"lcm(4, 6) = 12 ≤ 24; lcm(7, 9) = 63 = 7 · 9"}},{"id":"r5","name":"Minimality","values":{"c1":"every common multiple of a and b is also a multiple of lcm(a, b)","c2":"common multiples of 4 and 6 are 12, 24, 36, … — all multiples of 12"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Three Methods for LCM"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Best for","type":"text"},{"id":"c2","name":"How it works","type":"text"},{"id":"c3","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Listing multiples","values":{"c1":"small inputs; quick intuition; classroom explanation","c2":"write out the multiples of each number; the first number that appears in both lists is the LCM","c3":"lcm(6, 8): 6, 12, 18, 24, … and 8, 16, 24, … → first match is 24"}},{"id":"r2","name":"Prime factorization","values":{"c1":"factorizations are easy to obtain or already known","c2":"factor both numbers; for each prime, take the maximum exponent that appears in either factorization","c3":"lcm(12, 18): 12 = 2² · 3, 18 = 2 · 3² → 2² · 3² = 36"}},{"id":"r3","name":"GCD formula","values":{"c1":"larger numbers; [GCD](!/arithmetic/divisibility/gcd) already known or easily computed via the Euclidean algorithm","c2":"apply lcm(a, b) = (a · b) / gcd(a, b); for safety, divide before multiplying: (a / gcd) · b","c3":"lcm(12, 18): gcd(12, 18) = 6 → (12 · 18) / 6 = 36"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("When One Divides the Other"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Case","features":[{"id":"c1","name":"Condition","type":"text"},{"id":"c2","name":"lcm(a, b) equals…","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Minimal — one divides the other","values":{"c1":"a ∣ b","c2":"the larger: lcm(a, b) = b","c3":"lcm(5, 30) = 30"}},{"id":"r2","name":"Intermediate — share some factors","values":{"c1":"1 < gcd(a, b) < min(a, b)","c2":"(a · b) / gcd(a, b), strictly between max(a, b) and a · b","c3":"lcm(12, 18) = 36 (gcd = 6, product = 216)"}},{"id":"r3","name":"Maximal — coprime","values":{"c1":"gcd(a, b) = 1","c2":"the full product: lcm(a, b) = a · b","c3":"lcm(7, 9) = 63 = 7 · 9"}}]};
 
 
 
 
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the least common multiple", href: "/arithmetic/methods/lcm", desc: "Find the smallest number that two or more numbers divide: take every prime with its larger exponent, or use $\\operatorname{lcm}(a, b) = \\frac{a \\cdot b}{\\gcd(a, b)}$.", level: "composite", here: "#12" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Find the GCD by prime factorization", href: "/arithmetic/methods/gcd-prime-factorization", desc: "Factor both numbers into primes and keep the shared primes with the smaller exponent: $\\gcd(72, 120) = 2^3 \\cdot 3 = 24$.", level: "composite" },
+      { skill: "Add and subtract fractions", href: "/arithmetic/methods/add-subtract-fractions", desc: "Rewrite the fractions over the least common denominator, add or subtract the numerators, keep the denominator, and simplify.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -901,8 +929,22 @@ const schemas = {
     conclusion: { text: '$a \\cdot b = \\gcd(a, b) \\cdot \\text{lcm}(a, b)$', say: 'This holds for every prime simultaneously, so the products are equal.' },
   };
 
+  // Procedure rollout 2026-11-14: The LCM from prime factorizations (obj4).
+  const lcmPrimeSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\text{lcm}(12, 18)$',
+      rows: [
+        { step: 'Write the prime factorization of each number', example: '$12 = 2^2 \\cdot 3^1$ and $18 = 2^1 \\cdot 3^2$' },
+        { step: 'For each prime, take the larger exponent', example: '$\\max(2, 1) = 2$ for $2$; $\\max(1, 2) = 2$ for $3$' },
+        { step: 'Multiply the primes with those exponents', example: '$2^2 \\cdot 3^2 = 4 \\cdot 9 = 36$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    lcmPrimeSteps,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -932,7 +974,7 @@ pfLcmObj4,
    }
 
 
-export default function LCMPage({ proofStepsData, formulaSummaryData, pitfallData,lcmMethodTree, seoData, sectionsContent,
+export default function LCMPage({ lcmPrimeSteps, proofStepsData, formulaSummaryData, pitfallData,lcmMethodTree, seoData, sectionsContent,
    introContent, obj2Table, obj8Table, summaryTable,
    faqQuestions, schemas,
   obj1SvgCommon,
@@ -1076,8 +1118,15 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-lcm-basic-properties-matrix'}
+            id="lcm-basic-properties-matrix"
+            title="Basic Properties"
+            source="/arithmetic/divisibility/lcm"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -1139,6 +1188,15 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
     link:sectionsContent.obj4.link,
     content:[
       sectionsContent.obj4.content,
+      <DiagramFrame
+        key={'obj4-procedure'}
+        id="lcm-prime-factorization-steps"
+        title="The LCM from prime factorizations"
+        source="/arithmetic/divisibility/lcm"
+        before={"The example of this section, one step at a time. Press Next to carry out each step."}
+      >
+        <ProcedureV2 data={lcmPrimeSteps} variant="worked" />
+      </DiagramFrame>,
       <div key={'obj4-svg'} style={{ maxWidth: '800px', margin: '20px auto' }}
            dangerouslySetInnerHTML={{ __html: pfLcmObj4 }} />,
       sectionsContent.obj4.afterFigure,
@@ -1189,8 +1247,15 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-lcm-when-one-divides-other-matrix'}
+            id="lcm-when-one-divides-other-matrix"
+            title="When One Divides the Other"
+            source="/arithmetic/divisibility/lcm"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1258,8 +1323,15 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-lcm-summary-three-methods-lcm-matrix'}
+            id="lcm-summary-three-methods-lcm-matrix"
+            title="Summary: Three Methods for LCM"
+            source="/arithmetic/divisibility/lcm"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj12-diagram'}
             id="lcm-methods-tree"
@@ -1268,6 +1340,7 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
           >
             <TopDownTree data={lcmMethodTree} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the least common multiple](!/arithmetic/methods/lcm) →@`,
         ]
     },
     {
@@ -1303,6 +1376,14 @@ obj10SvgBuses,pfLcmObj4, demoUnits, conceptIntroFigures}) {
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

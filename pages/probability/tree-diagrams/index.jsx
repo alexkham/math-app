@@ -683,6 +683,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj7 comparison, obj8 aggregation, obj11 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -700,7 +701,41 @@ import totalProbabilityDiagrams from '@/app/components/probability/total-probabi
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
 
+const sw_treeComponents = {
+  center: { name: 'Tree diagram', sub: 'its structural elements' },
+  quadrants: [
+    { title: 'Root', items: [ 'The starting point of the process, before any outcomes have occurred.' ] },
+    { title: 'Branches', items: [ 'Lines extending from a node.', 'Each represents a possible outcome at a given stage.' ] },
+    { title: 'Nodes', items: [ 'Points where branches meet or split.', 'They represent intermediate states of the process.' ] },
+    { title: 'Paths', items: [ 'Sequences of connected branches from the root to a terminal node.', 'They represent complete outcome sequences.' ] }
+  ],
+  note: { label: 'Paths can differ in length', text: 'In a best-of-seven series some paths end after four games and others run to the seventh. Each leaf is still a complete outcome sequence.' }
+};
+
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Tree Diagrams vs Other Representations"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Tree diagrams","type":"text"},{"id":"c2","name":"Tables","type":"text"},{"id":"c3","name":"Formulas","type":"text"}],"items":[{"id":"r1","name":"Emphasis","values":{"c1":"order and sequence","c2":"parallel outcomes and joint counts","c3":"algebraic relationships"}},{"id":"r2","name":"Strength","values":{"c1":"makes conditional reasoning explicit","c2":"compact view of joint distributions","c3":"works at any scale, including abstract problems"}},{"id":"r3","name":"Best for","values":{"c1":"sequential processes, few stages, dependencies between stages","c2":"counting outcomes, joint events, two-variable summaries","c3":"large problems, abstract reasoning, general rules"}},{"id":"r4","name":"Limitation","values":{"c1":"clutters with many stages or outcomes","c2":"hides order; obscures conditional structure","c3":"less visual; harder to spot structure at a glance"}}]};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a probability problem with a tree diagram", href: "/probability/methods/tree-diagrams", desc: "One level per stage: label the branches, multiply along each path, add the paths you want.", level: "composite", here: "#5" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Find the probability of A and B for dependent events", href: "/probability/methods/multiplication-rule-dependent", desc: "Multiply the first probability by the second one, worked out after the first has happened.", level: "composite" },
+      { skill: "Use the law of total probability", href: "/probability/methods/total-probability", desc: "Split into cases, find the chance of the event in each case, weight by the case and add.", level: "composite" },
+      { skill: "Use Bayes' theorem", href: "/probability/methods/bayes-theorem", desc: "Reverse a conditional probability: from P(evidence given cause) to P(cause given evidence).", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1454,6 +1489,15 @@ The tree does not define randomness on its own — it **organizes** an already d
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'four-sides-tree-diagram-components'}
+            id="tree-diagram-components"
+            title="Components of a Tree Diagram"
+            source="/probability/tree-diagrams"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_treeComponents} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1493,6 +1537,7 @@ The tree does not define randomness on its own — it **organizes** an already d
                   <div key={'unit-u_5_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_2 }} />,
           `Bayes theorem reads the same tree backwards.`,
           `@academic[punchline:Multiply along a path for one sequence, add across paths for an event: every tree calculation is these two moves.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a probability problem with a tree diagram](!/probability/methods/tree-diagrams) →@`,
         ]
     },
     {
@@ -1509,8 +1554,15 @@ The tree does not define randomness on its own — it **organizes** an already d
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-tree-diagrams-tree-diagrams-vs-matrix'}
+            id="tree-diagrams-tree-diagrams-vs-matrix"
+            title="Tree Diagrams vs Other Representations"
+            source="/probability/tree-diagrams"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1556,6 +1608,14 @@ The tree does not define randomness on its own — it **organizes** an already d
           sectionsContent.obj11.content,
           <div key={'summary-table'} style={tableWrapStyle}
                dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // Sections 12-14 are blank placeholders (empty title and content) and

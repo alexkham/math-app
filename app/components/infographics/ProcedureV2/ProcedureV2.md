@@ -1,5 +1,7 @@
 # Procedure
 
+> This file sits in `ProcedureV2/` beside `ProcedureV2.jsx`, the version lesson pages render (import `@/app/components/infographics/ProcedureV2/ProcedureV2`, see "Rollout 2026-11-14" below). The first part describes the old `Procedure.jsx`, which stays in the infographics root and is used by no lesson page.
+
 An algorithm or method infographic: the steps, how they repeat or branch, and how they run on an example. There are three layouts. Wording, colours and behaviour can all be set from data, with defaults.
 
 ```jsx
@@ -313,3 +315,140 @@ Pilot, 2026-11-05, one page per layout. Each frame is added beside the section's
 | `/algebra/roots/simplifying` | Simplification Strategy (`obj9`) | stages | `simplification-strategy-stages` | The five steps in three groups. The content was split before "This process prepares"; the rest is `obj9.afterProcedure`. |
 
 Spots looked at and skipped: `/algebra/polynomials/factoring` Factoring Strategy (already holds a DecisionBox), `/linear-algebra/linear-systems/gaussian-elimination` Summary (already holds an IdentitySheet), `/linear-algebra/decompositions/cholesky` The Algorithm (a column-by-column loop, not stages).
+
+---
+
+## Rollout 2026-11-14 (ProcedureV2)
+
+The step-through rebuild lives in `ProcedureV2.jsx`, next to this file. It has the same three layouts, and each one is run with Next, Previous, Restart and Play. `Procedure.jsx` is kept in the infographics root and no page uses it. The three pilot pages above now import `ProcedureV2`.
+
+Data for `ProcedureV2`:
+
+- worked: the same `worked` object as above. The example side of a row appears when the row is reached.
+- stages: the same `groups` as above, plus optional `run: { label, start }`, and per stage `example`, `exampleNote`, `result`, `skip`; a forked group takes `take: index` for the branch the example follows.
+  - 2026-11-15: when the data has a `run`, the stages are a row of buttons and one panel shows the open stage (rule on the left, example on the right), so the whole block and its controls fit one screen on desktop and phone. A fork branch the example does not take is not drawn. `run.showBefore: true` shows the example as it stood before the stage in front of the stage's example (before → after); use it only when each stage rewrites the example (on `/algebra/roots/simplifying`), not when the stages collect findings (`/algebra/inequalities/polynomial`). Without a `run` the stages stay a plain stacked list.
+- loop: `loop` as above, plus `run: { label, vars: [{ key, label }], start, startNote, passes: [{ steps: [{ set, note }], row }], tableLabel, columns, eqCol, zeroCol, result, resultNote }`. One `steps` entry per repeated step, in order.
+
+Rules used for the rollout:
+
+- A spot is a lesson-page section that states a method as steps and works one example. The steps and the example are taken from that section.
+- The frame is added right after the section text. Nothing is removed. A section that already holds a frame is skipped.
+- Sections whose method is a single formula or two moves are skipped, and so are sections with no worked example.
+- The data is a constant in `getStaticProps`, passed through props. The component defaults carry the site palette, so no `theme` is passed.
+
+52 frames placed:
+
+| Page | Section | Layout | Frame id |
+|---|---|---|---|
+| `/algebra/equations/absolute-value` | `obj3` | worked | `absolute-value-cases-steps` |
+| `/algebra/equations/linear` | `obj4` | worked | `parentheses-equation-steps` |
+| `/algebra/equations/quadratic` | `obj2` | worked | `solve-by-factoring-steps` |
+| `/algebra/equations/rational` | `obj3` | worked | `clearing-denominators-steps` |
+| `/algebra/inequalities/absolute-value` | `obj2` | worked | `less-than-form-steps` |
+| `/algebra/inequalities/polynomial` | `obj2` | worked | `sign-chart-method-steps` |
+| `/algebra/logarithms/equations` | `obj7` | worked | `exponential-via-logs-steps` |
+| `/algebra/logarithms/graphs` | `obj10` | worked | `log-equation-from-graph-steps` |
+| `/algebra/polynomials/graphing` | `obj11` | worked | `sketching-strategy-steps` |
+| `/algebra/polynomials/operations` | `obj5` | worked | `foil-steps` |
+| `/algebra/polynomials/roots` | `obj7` | worked | `rational-root-search-steps` |
+| `/algebra/polynomials/roots` | `obj8` | worked | `synthetic-division-roots-steps` |
+| `/algebra/powers/exponential-equations` | `obj5` | worked | `matching-bases-steps` |
+| `/algebra/powers/exponential-equations` | `obj8` | worked | `substitution-method-steps` |
+| `/algebra/powers/exponential-inequalities` | `obj2` | worked | `exponential-inequality-steps` |
+| `/algebra/roots/equations` | `obj2` | worked | `radical-equation-basic-steps` |
+| `/algebra/roots/functions` | `obj9` | worked | `radical-inverse-steps` |
+| `/arithmetic/divisibility/factors` | `obj2` | loop | `finding-all-factors-loop` |
+| `/arithmetic/divisibility/lcm` | `obj4` | worked | `lcm-prime-factorization-steps` |
+| `/arithmetic/fractions/adding-subtracting` | `obj4` | worked | `common-denominator-steps` |
+| `/arithmetic/fractions/comparing` | `obj3` | worked | `compare-common-denominator-steps` |
+| `/arithmetic/fractions/complex` | `obj2` | worked | `complex-fraction-division-steps` |
+| `/arithmetic/fractions/mixed-numbers` | `obj3` | worked | `improper-to-mixed-steps` |
+| `/arithmetic/modulo` | `obj51` | worked | `compute-remainder-steps` |
+| `/complex-numbers/equations-polynomials` | `obj7` | worked | `solve-zn-equals-w-steps` |
+| `/complex-numbers/operations` | `obj4` | worked | `complex-division-steps` |
+| `/complex-numbers/trigonometric-form` | `obj8` | worked | `algebraic-to-trigonometric-steps` |
+| `/complex-numbers/trigonometric-form` | `obj9` | worked | `trigonometric-to-algebraic-steps` |
+| `/functions/composition` | `obj7` | worked | `three-function-composition-steps` |
+| `/functions/domain` | `obj4` | worked | `rational-domain-steps` |
+| `/functions/inverse` | `obj4` | worked | `find-inverse-steps` |
+| `/functions/piecewise` | `obj11` | worked | `write-piecewise-steps` |
+| `/functions/piecewise` | `obj4` | worked | `graph-piecewise-steps` |
+| `/functions/range` | `obj4` | worked | `range-algebraic-steps` |
+| `/functions/transformations` | `obj11` | worked | `equation-from-transformed-graph-steps` |
+| `/linear-algebra/decompositions/cholesky` | `obj3` | loop | `cholesky-column-loop` |
+| `/linear-algebra/decompositions/spectral` | `obj4` | worked | `spectral-decomposition-steps` |
+| `/linear-algebra/decompositions/svd` | `obj4` | worked | `computing-svd-steps` |
+| `/linear-algebra/determinants/properties` | `obj4` | worked | `determinant-row-reduction-steps` |
+| `/linear-algebra/eigen/characteristic-equation` | `obj7` | worked | `find-eigenvector-steps` |
+| `/linear-algebra/eigen/diagonalization` | `obj2` | worked | `diagonalization-steps` |
+| `/linear-algebra/linear-systems/homogeneous` | `obj4` | worked | `null-space-steps` |
+| `/linear-algebra/matrix/inverse` | `obj4` | worked | `inverse-row-reduction-steps` |
+| `/linear-algebra/orthogonality/gram-schmidt` | `obj2` | worked | `gram-schmidt-two-vectors-steps` |
+| `/linear-algebra/transformations/image-kernel` | `obj8` | worked | `image-and-kernel-steps` |
+| `/linear-algebra/transformations/matrix-representation` | `obj2` | worked | `standard-matrix-steps` |
+| `/linear-algebra/vector-spaces/basis` | `obj7` | worked | `subspace-bases-steps` |
+| `/linear-algebra/vectors/magnitude` | `obj6` | worked | `normalization-steps` |
+| `/probability/mode` | `obj7` | worked | `find-mode-discrete-steps` |
+| `/probability/probability-function/pdf` | `obj7` | worked | `build-pdf-steps` |
+| `/set-theory/venn-diagrams` | `obj4` | worked | `shading-steps` |
+| `/set-theory/venn-diagrams` | `obj5` | worked | `verify-identity-steps` |
+
+---
+
+## Reading search 2026-11-17
+
+Spots were found by reading every lesson section (not by titles). 19 text-only sections got a frame; same rules as the rollout above. Checked headless on desktop and at 375 px.
+
+| Page | Section | Layout | Frame id |
+|---|---|---|---|
+| `/functions/transformations` | `obj10` | worked | `transformation-order-steps` |
+| `/probability/probability-function/pdf` | `obj8` | worked | `pdf-core-pattern-steps` |
+| `/complex-numbers/demoivre-theorem` | `obj10` | worked | `cube-roots-of-minus-eight-steps` |
+| `/trigonometry/equations` | `obj3` | worked | `cosine-equation-steps` |
+| `/trigonometry/inequalities` | `obj7` | worked | `transformed-trig-inequality-steps` |
+| `/algebra/roots/equations` | `obj6` | worked | `two-radical-equation-steps` |
+| `/algebra/roots/simplifying` | `obj4` | worked | `combined-simplification-steps` |
+| `/linear-algebra/linear-systems/gaussian-elimination` | `obj5` | loop | `back-substitution-steps` |
+| `/algebra/logarithms/rules` | `obj6` | worked | `condense-logarithms-steps` |
+| `/algebra/polynomials/factoring` | `obj3` | worked | `factoring-by-grouping-steps` |
+| `/algebra/polynomials/factoring` | `obj5` | worked | `ac-method-steps` |
+| `/algebra/powers/exponential-equations` | `obj6` | worked | `exponent-laws-equation-steps` |
+| `/algebra/inequalities/rational` | `obj6` | worked | `rational-standard-form-steps` |
+| `/calculus/derivatives/graph-analysis` | `obj9` | stages | `curve-sketching-stages` |
+| `/arithmetic/modulo/negative-numbers` | `obj3` | worked | `truncated-division-steps` |
+| `/arithmetic/modulo/operations` | `obj3` | worked | `modular-addition-steps` |
+| `/arithmetic/modulo/operations` | `obj4` | worked | `modular-subtraction-steps` |
+| `/arithmetic/modulo/operations` | `obj5` | worked | `modular-multiplication-steps` |
+| `/arithmetic/modulo/operations` | `obj6` | loop | `modular-power-steps` |
+
+`curve-sketching-stages` has no worked example, because the section gives none.
+
+Not placed: 21 strong spots whose section already holds another diagram.
+
+### Demo-unit sections, 2026-11-17
+
+13 more frames, on sections that held only a demo unit or an HTML table. The frame goes at the end of the section, after the figure and its caption sentence, before the link pill.
+
+| Page | Section | Layout | Frame id |
+|---|---|---|---|
+| `/functions/domain` | `obj8` | worked | `combined-domain-steps` |
+| `/trigonometry/equations` | `obj2` | worked | `sine-equation-steps` |
+| `/trigonometry/inequalities` | `obj2` | worked | `graphical-method-steps` |
+| `/algebra/sequences/prime-numbers` | `obj3` | loop | `sieve-of-eratosthenes-steps` |
+| `/algebra/sequences/prime-numbers` | `obj4` | loop | `trial-division-steps` |
+| `/algebra/sequences/prime-numbers` | `obj5` | loop | `prime-factorization-steps` |
+| `/algebra/polynomials/operations` | `obj6` | loop | `polynomial-long-division-steps` |
+| `/algebra/polynomials/rules` | `obj9` | worked | `descartes-rule-steps` |
+| `/algebra/equations/linear` | `obj3` | worked | `multi-step-equation-steps` |
+| `/algebra/equations/polynomial` | `obj4` | worked | `rational-root-search-steps` |
+| `/algebra/logarithms/equations` | `obj3` | worked | `combining-logarithms-steps` |
+| `/linear-algebra/vector-spaces/fundamental-spaces` | `obj4` | worked | `null-space-basis-steps` |
+| `/arithmetic/divisibility/gcd` | `obj4` | worked | `gcd-prime-factorization-steps` |
+
+Skipped: `/probability/probability-function/pmf` `obj5`. Its table already lists the same five steps on the same coin example.
+
+Authoring notes from this pass:
+
+- No `$…$` in `loop.repeat`. The text runs vertically beside the arc and a formula breaks there; write `√n` as plain text.
+- Keep `loop.repeat` to about 25 characters when only three steps repeat, or it runs past the arc.
+- In the loop table on a phone, three columns of formulas wrap. Put only the short result in each cell.

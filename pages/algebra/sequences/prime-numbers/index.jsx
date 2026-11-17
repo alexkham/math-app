@@ -14,6 +14,7 @@ import { renderFactorSet } from '@/app/utils/illustrations/arithmetic/divisibili
 import { renderPrimeFactorization } from '@/app/utils/illustrations/arithmetic/divisibility/primeFactorization'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
@@ -669,8 +670,183 @@ $$\\text{lcm}(60, 252) = 2^2 \\cdot 3^2 \\cdot 5 \\cdot 7 = 1260$$`],
     conclusion: { text: 'There are infinitely many prime numbers', say: 'No finite collection of primes can account for all of them.' },
   };
 
+  const sieveSteps = {
+    loop: {
+      label: 'Sieve of Eratosthenes',
+      repeat: 'until the prime exceeds √n',
+      steps: [
+        { text: 'List the integers from $2$ to $n$' },
+        { text: 'Take the smallest unmarked number: it is prime', repeat: true },
+        { text: 'Cross out its multiples', repeat: true },
+        { text: 'Stop once the current prime exceeds $\\sqrt{n}$', repeat: true, test: true },
+        { text: 'The surviving numbers are the primes up to $n$', output: true },
+      ],
+    },
+    run: {
+      label: 'Primes up to $30$',
+      vars: [{ key: 'p', label: 'prime' }],
+      start: {},
+      startNote: 'Start with $2, 3, 4, 5, \\ldots, 30$.',
+      passes: [
+        {
+          steps: [
+            { set: { p: '$2$' }, note: 'The smallest unmarked number is $2$, so it is prime.' },
+            { note: 'All even numbers greater than $2$ are removed.' },
+            { note: '$2$ does not exceed $\\sqrt{30}$, so go on.' },
+          ],
+          row: ['$2$', 'all even numbers greater than $2$'],
+        },
+        {
+          steps: [
+            { set: { p: '$3$' }, note: 'The next unmarked number is $3$, so it is prime.' },
+            { note: '$9, 15, 21, 27$ are removed. The other multiples of $3$ are already gone.' },
+            { note: '$3$ does not exceed $\\sqrt{30}$, so go on.' },
+          ],
+          row: ['$3$', '$9, 15, 21, 27$'],
+        },
+        {
+          steps: [
+            { set: { p: '$5$' }, note: 'The next unmarked number is $5$, so it is prime.' },
+            { note: '$25$ is removed.' },
+            { note: 'Since $\\sqrt{30} < 6$, the next prime would exceed it, so the process ends.' },
+          ],
+          row: ['$5$', '$25$'],
+        },
+      ],
+      tableLabel: 'One row per pass',
+      columns: ['Prime', 'Crossed out'],
+      eqCol: 1,
+      result: '$2, 3, 5, 7, 11, 13, 17, 19, 23, 29$',
+      resultNote: 'The surviving numbers are all the primes up to $30$.',
+    },
+  };
+
+  const trialDivisionSteps = {
+    loop: {
+      label: 'Trial division',
+      repeat: 'until a divisor is found',
+      steps: [
+        { text: 'Find the bound $\\lfloor \\sqrt{n} \\rfloor$' },
+        { text: 'Take the next candidate divisor', repeat: true },
+        { text: 'Test whether it divides $n$', repeat: true },
+        { text: 'Stop at a divisor, or when the candidates run out', repeat: true, test: true },
+        { text: 'A divisor means composite; no divisor means prime', output: true },
+      ],
+    },
+    run: {
+      label: 'Is $91$ prime?',
+      vars: [{ key: 'd', label: 'divisor' }],
+      start: {},
+      startNote: '$\\sqrt{91} < 10$, so the candidates are $2, 3, 5, 7$.',
+      passes: [
+        {
+          steps: [
+            { set: { d: '$2$' }, note: 'The first candidate is $2$.' },
+            { note: '$2$ does not divide $91$.' },
+            { note: 'No divisor yet, and candidates remain.' },
+          ],
+          row: ['$2$', 'no'],
+        },
+        {
+          steps: [
+            { set: { d: '$3$' }, note: 'The next candidate is $3$.' },
+            { note: '$3$ does not divide $91$.' },
+            { note: 'No divisor yet, and candidates remain.' },
+          ],
+          row: ['$3$', 'no'],
+        },
+        {
+          steps: [
+            { set: { d: '$5$' }, note: 'The next candidate is $5$.' },
+            { note: '$5$ does not divide $91$.' },
+            { note: 'No divisor yet, and one candidate remains.' },
+          ],
+          row: ['$5$', 'no'],
+        },
+        {
+          steps: [
+            { set: { d: '$7$' }, note: 'The last candidate is $7$.' },
+            { note: '$91 = 7 \\times 13$, so $7$ divides $91$.' },
+            { note: 'A divisor is found, so stop.' },
+          ],
+          row: ['$7$', '$91 = 7 \\times 13$'],
+        },
+      ],
+      tableLabel: 'One row per divisor',
+      columns: ['Divisor', 'Divides $91$?'],
+      eqCol: 1,
+      result: '$91$ is composite',
+      resultNote: '$91 = 7 \\times 13$, so it is composite.',
+    },
+  };
+
+  const repeatedDivisionSteps = {
+    loop: {
+      label: 'Repeated division',
+      repeat: 'until the quotient is prime',
+      steps: [
+        { text: 'Start with $n$' },
+        { text: 'Take the smallest prime that divides the current number', repeat: true },
+        { text: 'Divide by it', repeat: true },
+        { text: 'Repeat until the quotient is prime', repeat: true, test: true },
+        { text: 'The divisors and the last quotient are the prime factors', output: true },
+      ],
+    },
+    run: {
+      label: 'Factor $252$',
+      vars: [
+        { key: 'n', label: 'number' },
+        { key: 'p', label: 'prime' },
+      ],
+      start: { n: '$252$' },
+      startNote: 'Start with $252$.',
+      passes: [
+        {
+          steps: [
+            { set: { p: '$2$' }, note: '$2$ divides $252$.' },
+            { set: { n: '$126$' }, note: '$252 \\div 2 = 126$.' },
+            { note: '$126$ is not prime, so divide again.' },
+          ],
+          row: ['$252 \\div 2 = 126$', '$2$'],
+        },
+        {
+          steps: [
+            { set: { p: '$2$' }, note: '$2$ divides $126$.' },
+            { set: { n: '$63$' }, note: '$126 \\div 2 = 63$.' },
+            { note: '$63$ is not prime, so divide again.' },
+          ],
+          row: ['$126 \\div 2 = 63$', '$2$'],
+        },
+        {
+          steps: [
+            { set: { p: '$3$' }, note: '$2$ does not divide $63$; the smallest prime that does is $3$.' },
+            { set: { n: '$21$' }, note: '$63 \\div 3 = 21$.' },
+            { note: '$21$ is not prime, so divide again.' },
+          ],
+          row: ['$63 \\div 3 = 21$', '$3$'],
+        },
+        {
+          steps: [
+            { set: { p: '$3$' }, note: '$3$ divides $21$.' },
+            { set: { n: '$7$' }, note: '$21 \\div 3 = 7$.' },
+            { note: '$7$ is prime, so stop.' },
+          ],
+          row: ['$21 \\div 3 = 7$', '$3$'],
+        },
+      ],
+      tableLabel: 'One row per division',
+      columns: ['Division', 'Prime factor'],
+      eqCol: 0,
+      result: '$252 = 2^2 \\cdot 3^2 \\cdot 7$',
+      resultNote: 'The divisors were $2, 2, 3, 3$, and the last quotient $7$ is prime.',
+    },
+  };
+
    return {
   props:{
+    repeatedDivisionSteps,
+    trialDivisionSteps,
+    sieveSteps,
     proofStepsData,
       primeNumberApply,
     pitfallData,
@@ -694,7 +870,7 @@ description: "Learn prime numbers: definition, Euclid's infinitude proof, sieve 
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function PrimeNumbersPage({ proofStepsData,primeNumberApply,  pitfallData,primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function PrimeNumbersPage({ repeatedDivisionSteps, trialDivisionSteps, sieveSteps, proofStepsData,primeNumberApply,  pitfallData,primeTypeTree, seoData, sectionsContent, introContent, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const ciTable = (key) => <div key={key} dangerouslySetInnerHTML={{ __html: conceptIntroFigures[key] }} />
 
@@ -827,6 +1003,11 @@ $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@`,
           sectionsContent.obj3.content,
                   <div key={'unit-sieveLastPass'} dangerouslySetInnerHTML={{ __html: demoUnits.sieveLastPass }} />,
           `Sieving up to n only needs the primes up to √n.`,
+          <DiagramFrame key={'obj3-procedure'} id="sieve-of-eratosthenes-steps" title="The sieve up to 30, pass by pass"
+            source="/algebra/sequences/prime-numbers" related={false}
+            before={"The example of this section, one pass at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={sieveSteps} variant="loop" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -838,6 +1019,11 @@ $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@`,
           <div key={'unit-trialPairs'} dangerouslySetInnerHTML={{ __html: demoUnits.trialPairs }} />,
           `For a perfect square such as 49 the pair 7 · 7 sits exactly at √n.`,
           `@academic[punchline:Factors come in pairs on either side of $\\sqrt{n}$, so a number with no prime factor up to $\\sqrt{n}$ is prime.]@`,
+          <DiagramFrame key={'obj4-procedure'} id="trial-division-steps" title="Trial division on 91"
+            source="/algebra/sequences/prime-numbers" related={false}
+            before={"The second example of this section, one divisor at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={trialDivisionSteps} variant="loop" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -848,6 +1034,11 @@ $$2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, \\ldots$$]@`,
           sectionsContent.obj5.content,
           <div key={'unit-factorTree'} dangerouslySetInnerHTML={{ __html: demoUnits.factorTree }} />,
           `Uniqueness is why 1 is not prime: a leaf 1 could be added any number of times.`,
+          <DiagramFrame key={'obj5-procedure'} id="prime-factorization-steps" title="Factoring 252 by repeated division"
+            source="/algebra/sequences/prime-numbers" related={false}
+            before={"The example of this section, one division at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={repeatedDivisionSteps} variant="loop" />
+          </DiagramFrame>,
         ]
     },
     {

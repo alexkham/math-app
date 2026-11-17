@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,9 +16,126 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
+
+// CaseGraph 2026-11-12: "The example's sign chart as a graph" (graph), from the page's own text. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    graph: {
+      f: (x) => (x - 2) / (x + 1),
+      x0: -4.5, x1: 5.5, y0: -5, y1: 6,
+      cuts: [-1, 2], cutLabels: ['−1', '2'],
+      factorsLabel: '$(x-2)\\ (x+1)$',
+      select: 1,
+      question: '$\\frac{x - 2}{x + 1} > 0$',
+      answer: '$(-\\infty, -1) \\cup (2, \\infty)$',
+    },
+    cases: [
+      { name: '$(-\\infty, -1)$', from: -Infinity, to: -1, signs: [-1, -1] },
+      { name: '$(-1, 2)$', from: -1, to: 2, signs: [-1, 1] },
+      { name: '$(2, \\infty)$', from: 2, to: Infinity, signs: [1, 1] },
+    ],
+  };
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// ProcedureV2 (stages) 2026-11-15: replaces the table obj3Table (the six-step sign chart: step, action, what it produces); steps and products taken from the table, run on the section's own example.
+const rationalSignChartStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { exprNow: 'Found so far' },
+  run: {
+    label: 'Solve $\\frac{x - 2}{x + 1} > 0$',
+    start: '$\\frac{x - 2}{x + 1} > 0$',
+  },
+  groups: [
+    { label: 'The critical points', sub: 'steps 1 and 2', kind: 'must', stages: [
+      { n: 1, name: 'Factor', what: 'Factor the numerator and denominator completely', cond: 'Produces: every factor visible as a separate entity',
+        example: '$(x - 2)$ and $(x + 1)$', exampleNote: 'both are already single factors' },
+      { n: 2, name: 'Critical points', what: 'Identify all critical points (numerator zeros and denominator zeros)', cond: 'Produces: ordered list of boundaries on the number line',
+        example: '$-1,\\ 2$', exampleNote: '$-1$ is a denominator zero, $2$ is a numerator zero' },
+    ] },
+    { label: 'The signs', sub: 'steps 3 and 4', kind: 'must', stages: [
+      { n: 3, name: 'Factor signs', what: 'Build the chart: one row per factor, one column per interval', cond: 'Produces: sign of each factor in each interval',
+        example: '$x - 2$: $-\\ -\\ +$ $\\quad x + 1$: $-\\ +\\ +$', exampleNote: 'intervals in order: $(-\\infty, -1)$, $(-1, 2)$, $(2, \\infty)$' },
+      { n: 4, name: 'Quotient sign', what: 'Combine factor signs into the sign of the quotient', cond: 'Produces: sign of $P(x) / Q(x)$ in each interval',
+        example: '$+\\ \\ -\\ \\ +$', exampleNote: 'two negatives give a positive; one negative gives a negative' },
+    ] },
+    { label: 'The answer', sub: 'steps 5 and 6', kind: 'out', stages: [
+      { n: 5, name: 'Select intervals', what: 'Select intervals matching the inequality direction', cond: 'Produces: candidate solution set',
+        example: '$(-\\infty, -1)$ and $(2, \\infty)$', exampleNote: 'the inequality asks for $> 0$, so the positive intervals' },
+      { n: 6, name: 'Endpoints', what: 'Apply endpoint rules: numerator zeros for ≤ ⁄ ≥; denominator zeros never', cond: 'Produces: final solution in interval notation',
+        example: '$(-\\infty, -1) \\cup (2, \\infty)$', exampleNote: '$-1$ is out as a denominator zero; $2$ is out because the inequality is strict',
+        result: '$(-\\infty, -1) \\cup (2, \\infty)$' },
+    ] },
+  ],
+}
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Rational Inequality Forms"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Starting form","features":[{"id":"c1","name":"Example","type":"text"},{"id":"c2","name":"Preparation step","type":"text"},{"id":"c3","name":"Then","type":"text"}],"items":[{"id":"r1","name":"Already standard: P(x) ⁄ Q(x) compared to 0","values":{"c1":"(x − 2) ⁄ (x + 1) > 0","c2":"none","c3":"factor numerator and denominator; sign chart"}},{"id":"r2","name":"Compared to a constant: P(x) ⁄ Q(x) compared to k (k ≠ 0)","values":{"c1":"1 ⁄ (x − 3) ≤ 1","c2":"subtract k; combine into a single fraction over Q(x)","c3":"factor; sign chart"}},{"id":"r3","name":"Two rational expressions: P₁ ⁄ Q₁ compared to P₂ ⁄ Q₂","values":{"c1":"1 ⁄ (x − 3) ≤ 2 ⁄ (x + 1)","c2":"move everything to one side; combine over a common denominator","c3":"factor; sign chart"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Endpoint Inclusion Rules"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Critical point","features":[{"id":"c1","name":"Strict (<, >)","type":"verdict"},{"id":"c2","name":"Non-strict (≤, ≥)","type":"verdict"}],"items":[{"id":"r1","name":"Numerator zero (P(x) = 0)","values":{"c1":"no","c2":"yes"}},{"id":"r2","name":"Denominator zero (Q(x) = 0)","values":{"c1":"no","c2":"no"}}]};
+
+// CaseGraph 2026-11-12: "Numerator zeros and denominator zeros" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -2.4, y1: 2.4,
+      axes: [
+        { id: 'cp', name: 'Critical point', options: [
+          { id: 'num', label: 'numerator zero', sub: '$P(x) = 0$, $Q(x) \\neq 0$; the expression equals $0$' },
+          { id: 'den', label: 'denominator zero', sub: '$Q(x) = 0$; the expression is undefined' } ] },
+        { id: 'kind', name: 'Inequality', select: true, options: [
+          { id: 'strict', label: 'Strict', sub: '$<$, $>$', sign: 1 },
+          { id: 'non', label: 'Non-strict', sub: '$\\leq$, $\\geq$', sign: 1, closed: true } ] },
+      ],
+      layout: { rows: 'cp', cols: 'kind' },
+      cells: {
+        num: { f: (x) => x, roots: [{ x: 0, label: '' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: { strict: 'excluded', non: 'included' } },
+        den: { f: (x) => 0.5 / x, intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], solution: { strict: 'never included', non: 'never included' } },
+      },
+    },
+  };
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a rational inequality", href: "/algebra/inequalities/methods/rational-inequalities", desc: "Compare with zero, combine into one fraction, sign-chart the zeros of top and bottom.", level: "composite", here: "#3" },
+    ] },
+    { title: "More inequality methods", items: [
+      { skill: "Solve a polynomial inequality", href: "/algebra/inequalities/methods/polynomial-inequalities", desc: "Factor, mark the roots, use a sign chart; even multiplicities do not change the sign.", level: "composite" },
+      { skill: "Solve a quadratic inequality", href: "/algebra/inequalities/methods/quadratic-inequalities", desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: "composite" },
+      { skill: "Choose the right method for an inequality", href: "/algebra/inequalities/methods/which-inequality-method", desc: "A decision tree from the shape of the inequality to the method that solves it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/algebra/inequalities/methods", label: "All inequality methods" },
+};
+
+// IntervalLine: the three worked examples of obj7 as sign charts
+const il_rationalExamples = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  signs: {
+    range: [-5, 9],
+    cases: [
+      { name: '$\\frac{x - 2}{x + 1}$', expression: '\\dfrac{x - 2}{x + 1}', op: '>',
+        factors: [{ label: '$x - 2$', root: 2 }, { label: '$x + 1$', root: -1, denominator: true }],
+        notes: { '*': { label: 'Two kinds of critical point', text: 'The numerator zero $2$ joins the solution only for a non-strict sign. The denominator zero $-1$ is never included.' } } },
+      { name: '$\\frac{-x + 7}{(x - 3)(x + 1)}$', expression: '\\dfrac{-x + 7}{(x - 3)(x + 1)}', op: '<=', range: [-4, 10],
+        factors: [{ label: '$-x + 7$', root: 7, negative: true }, { label: '$x - 3$', root: 3, denominator: true }, { label: '$x + 1$', root: -1, denominator: true }],
+        notes: { '*': { label: 'After combining the fractions', text: 'The numerator $-x + 7$ falls as $x$ grows, so it is positive to the left of $7$ and negative to the right.' } } },
+      { name: '$\\frac{(x - 1)^2}{x + 3}$', expression: '\\dfrac{(x - 1)^2}{x + 3}', op: '>=', range: [-6, 5],
+        factors: [{ label: '$(x - 1)^2$', root: 1, power: 2 }, { label: '$x + 3$', root: -3, denominator: true }],
+        notes: { '*': { label: 'A repeated factor', text: 'The factor $(x - 1)^2$ is never negative, so only the denominator $x + 3$ controls the sign.' } } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -704,8 +822,22 @@ const schemas = {
     ],
   };
 
+  const standardFormSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\dfrac{1}{x - 3} \\leq \\dfrac{2}{x + 1}$',
+      rows: [
+        { step: 'Move everything to one side', example: '$\\dfrac{1}{x - 3} - \\dfrac{2}{x + 1} \\leq 0$' },
+        { step: 'Write each term over the common denominator', stepSub: 'Here $(x - 3)(x + 1)$', example: '$\\dfrac{(x + 1) - 2(x - 3)}{(x - 3)(x + 1)} \\leq 0$' },
+        { step: 'Combine and simplify the numerator', example: '$\\dfrac{-x + 7}{(x - 3)(x + 1)} \\leq 0$' },
+        { step: 'Read off the critical points for the sign chart', example: '$x = 7$, $x = 3$, $x = -1$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    standardFormSteps,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -728,7 +860,7 @@ return {
   }
 }}
 
-export default function RationalInequalitiesPage({ pitfallData,
+export default function RationalInequalitiesPage({ standardFormSteps, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -836,11 +968,17 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-rational-critical-point-grid'}
+            id="rational-critical-point-grid"
+            title="Numerator zeros and denominator zeros"
+            source="/algebra/inequalities/rational"
+            related={false}
+            before={"One row per kind of critical point, one column per kind of inequality; the gold part of the axis is where the expression is $\\geq 0$ or $> 0$. A filled dot is included, a hollow one excluded."}
+            after={"Both kinds split the number line; only the numerator zero can join the solution, and only when the inequality allows equality."}
+          >
+            <CaseGraph data={caseGraphData2} variant="grid" />
+          </DiagramFrame>,
                   <div key={'unit-critical'} dangerouslySetInnerHTML={{ __html: demoUnits.critical }} />,
           `Every rational sign chart is built from these two kinds of marks and nothing else.`,
         ]
@@ -853,12 +991,29 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-rational-sign-chart-example-graph'}
+            id="rational-sign-chart-example-graph"
+            title="The example's sign chart as a graph"
+            source="/algebra/inequalities/rational"
+            related={false}
+            before={"The example above on a graph: hover an interval or a row to see the sign of each factor there."}
+            after={"Both critical points split the line, but only $x = 2$ is a zero; at $x = -1$ the graph has no value at all."}
+          >
+            <CaseGraph data={caseGraphData} variant="graph" />
+          </DiagramFrame>,
+          `The graph shows where the example ends up. The six steps that get there are laid out below, each with what it produces, and carried out on the same inequality. Press Next to move through them in order.`,
+          <DiagramFrame
+            key={'procedure-rational-sign-chart-stages'}
+            id="rational-sign-chart-stages"
+            title="The Six Steps of the Sign Chart Method"
+            source="/algebra/inequalities/rational"
+            related={false}
+          >
+            <ProcedureV2 data={rationalSignChartStages} variant="stages" />
+          </DiagramFrame>,
           `@academic[punchline:Every factor counts alike while the signs are tracked; only at the endpoints does it matter which ones are in the denominator.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a rational inequality](!/algebra/inequalities/methods/rational-inequalities) →@`,
         ]
     },
 
@@ -869,11 +1024,15 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-endpoint-inclusion-rules-matrix'}
+            id="rational-endpoint-inclusion-rules-matrix"
+            title="Endpoint Inclusion Rules"
+            source="/algebra/inequalities/rational"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -906,6 +1065,11 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame key={'obj6-procedure'} id="rational-standard-form-steps" title="Standard form in four steps"
+            source="/algebra/inequalities/rational" related={false}
+            before={"The inequality of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={standardFormSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -916,6 +1080,16 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
           sectionsContent.obj7.content,
           <div key={'unit-signs'} dangerouslySetInnerHTML={{ __html: demoUnits.signs }} />,
           `Numerator zeros follow the inequality symbol; denominator zeros are always excluded.`,
+          <DiagramFrame
+            key={'signs-interval-line'}
+            id="rational-worked-examples-sign-chart"
+            title="The worked examples as sign charts"
+            source="/algebra/inequalities/rational"
+            related={false}
+            before={"The three examples as sign charts. Switch the inequality sign: numerator zeros come and go with it, denominator zeros never enter."}
+          >
+            <IntervalLine data={il_rationalExamples} variant="signs" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -934,11 +1108,15 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-rational-summary-rational-inequality-forms-matrix'}
+            id="rational-summary-rational-inequality-forms-matrix"
+            title="Summary of Rational Inequality Forms"
+            source="/algebra/inequalities/rational"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -956,6 +1134,14 @@ $$\\frac{x - 2}{x + 1} > 0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

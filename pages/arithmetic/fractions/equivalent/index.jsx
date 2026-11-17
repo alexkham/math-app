@@ -662,6 +662,8 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 2 tables (obj3 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import TestSelector from '@/app/components/infographics/linear-algebra/TestSelector'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -680,7 +682,31 @@ import euclideanVisualizerDiagrams from '@/app/components/arithmetic/visualizers
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table capstoneTable ("Equivalent Fractions at a Glance"); converted from the table's own cells.
+const fm_capstoneTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Concept","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Equivalence definition","values":{"c1":"two fractions are equivalent when they represent the same value","c2":"1⁄2 = 2⁄4 = 3⁄6"}},{"id":"r2","name":"Scaling rule","values":{"c1":"multiplying both parts by the same nonzero number produces an equivalent fraction","c2":"3⁄5 × 2⁄2 = 6⁄10"}},{"id":"r3","name":"Why scaling preserves value","values":{"c1":"n⁄n = 1 for any nonzero n, so multiplying by it does not change the quantity","c2":"×(2⁄2) is just ×1"}},{"id":"r4","name":"Rewrite with target denominator","values":{"c1":"find what multiplies the original denominator to reach the target, scale both parts by it","c2":"2⁄3 → twelfths: ×4 → 8⁄12"}},{"id":"r5","name":"Simplest form","values":{"c1":"numerator and denominator share no factor other than 1 (equivalently, GCF = 1); also called lowest terms or reduced form","c2":"2⁄3 is simplest; 4⁄6 is not"}},{"id":"r6","name":"Cross-multiplication test","values":{"c1":"a⁄b = c⁄d if and only if a × d = b × c","c2":"3⁄4 vs 9⁄12: 3·12 = 36 = 4·9 ✓"}},{"id":"r7","name":"Cross-mult for [comparing](!/arithmetic/fractions/comparing)","values":{"c1":"when products differ, the larger product corresponds to the larger fraction","c2":"2⁄5 vs 3⁄7: 14 < 15 → 3⁄7 > 2⁄5"}},{"id":"r8","name":"Same point on number line","values":{"c1":"all members of an equivalence class mark the same location","c2":"1⁄2, 2⁄4, 50⁄100 all coincide"}},{"id":"r9","name":"LCD via [LCM](!/arithmetic/divisibility/lcm)","values":{"c1":"the least common denominator is the LCM of the denominators","c2":"denoms 6 and 8 → LCD = 24"}},{"id":"r10","name":"Any common multiple works","values":{"c1":"non-LCD common denominators are valid but produce larger numbers needing more simplification","c2":"48 works for denoms 6 and 8, but 24 is cleaner"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Simplifying Fractions"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Procedure","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Best when","type":"text"}],"items":[{"id":"r1","name":"Iterative division","values":{"c1":"divide both parts by any shared factor, then repeat until none remain","c2":"12⁄18 ÷ 2⁄2 = 6⁄9 ÷ 3⁄3 = 2⁄3","c3":"small obvious factors are easier to spot than the GCF"}},{"id":"r2","name":"[GCF](!/arithmetic/divisibility/gcd) in one step","values":{"c1":"compute the GCF of numerator and denominator, divide both by it","c2":"12⁄18: GCF = 6 → 2⁄3","c3":"the GCF is known or easy to compute"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Simplify fractions", href: "/arithmetic/methods/simplify-fractions", desc: "Reduce a fraction to lowest terms: divide the numerator and the denominator by their GCD, as in $\\frac{84}{126} = \\frac{2}{3}$.", level: "composite", here: "#3" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Find the GCD by prime factorization", href: "/arithmetic/methods/gcd-prime-factorization", desc: "Factor both numbers into primes and keep the shared primes with the smaller exponent: $\\gcd(72, 120) = 2^3 \\cdot 3 = 24$.", level: "composite" },
+      { skill: "Find the GCD with the Euclidean algorithm", href: "/arithmetic/methods/gcd-euclidean-algorithm", desc: "Replace the pair $(a, b)$ by $(b, a \\bmod b)$ until the remainder is $0$; the last nonzero remainder is the GCD. No factoring needed.", level: "composite" },
+      { skill: "Multiply fractions", href: "/arithmetic/methods/multiply-fractions", desc: "Multiply numerators together and denominators together, $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$, cancelling common factors first.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1285,8 +1311,38 @@ const schemas = {
     ],
   };
 
+  // TestSelector 2026-11-14: Which equivalence test to use (obj5).
+  const equivalenceTestSelector = {
+    question: 'Which test shows that two fractions are equivalent?',
+    intro: 'Look at the two fractions first. If that settles nothing, follow the branch that matches them.',
+    shortcutsLabel: 'Check first',
+    shortcuts: [
+      { when: 'One fraction is the other with numerator and denominator multiplied by the same number', then: 'Equivalent. Stop.' },
+    ],
+    branches: [
+      { condition: 'Both fractions are easy to reduce',
+        test: {
+          name: 'Simplest form',
+          doThis: 'Reduce each fraction until its numerator and denominator share no factor but $1$.',
+          why: 'Every family of equivalent fractions has exactly one member in simplest form.',
+          needs: 'The common factors, or the GCF',
+          verdict: 'Equivalent exactly when both reduce to the same fraction.',
+          limit: 'Stopping early gives a wrong answer: $\\frac{6}{9}$ still has the common factor $3$.',
+        } },
+      { condition: 'Any other pair $\\frac{a}{b}$ and $\\frac{c}{d}$',
+        test: {
+          name: 'Cross-multiplication',
+          doThis: 'Compute the cross products $a \\times d$ and $b \\times c$.',
+          needs: 'Two multiplications',
+          verdict: 'Equivalent exactly when the two products are equal.',
+          limit: 'When the products differ, each one belongs to the fraction whose numerator it uses.',
+        } },
+    ],
+  };
+
 return {
   props: {
+    equivalenceTestSelector,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -1307,7 +1363,7 @@ return {
 }
    }
 
-export default function EquivalentFractionsPage({ pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function EquivalentFractionsPage({ equivalenceTestSelector, pitfallData,seoData, sectionsContent, introContent, obj3Table, capstoneTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1406,10 +1462,18 @@ export default function EquivalentFractionsPage({ pitfallData,seoData, sectionsC
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-equivalent-simplifying-fractions-matrix'}
+            id="equivalent-simplifying-fractions-matrix"
+            title="Simplifying Fractions"
+            source="/arithmetic/fractions/equivalent"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
                   <div key={'unit-simplify'} dangerouslySetInnerHTML={{ __html: demoUnits.simplify }} />,
           `Dividing by the greatest common factor at once is what reaching simplest form in a single step means.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to simplify fractions](!/arithmetic/methods/simplify-fractions) →@`,
         ]
     },
     {
@@ -1426,6 +1490,17 @@ export default function EquivalentFractionsPage({ pitfallData,seoData, sectionsC
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-test-selector'}
+            id="equivalence-test-selector"
+            title="Which equivalence test to use"
+            source="/arithmetic/fractions/equivalent"
+            before={"The tests of this page in one place: a check by inspection first, then the test that fits the two fractions."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <TestSelector data={equivalenceTestSelector} theme="navy" variant="tree" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -1455,8 +1530,15 @@ export default function EquivalentFractionsPage({ pitfallData,seoData, sectionsC
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-equivalent-equivalent-fractions-at-glance-matrix'}
+            id="equivalent-equivalent-fractions-at-glance-matrix"
+            title="Equivalent Fractions at a Glance"
+            source="/arithmetic/fractions/equivalent"
+            related={false}
+          >
+            <FeatureMatrix data={fm_capstoneTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1474,6 +1556,14 @@ export default function EquivalentFractionsPage({ pitfallData,seoData, sectionsC
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

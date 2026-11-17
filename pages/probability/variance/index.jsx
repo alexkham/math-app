@@ -950,6 +950,7 @@
 // tables-optimized: v4 | 2026-05-22 | 4 tables (calculate aggregation, sd comparison, mistakes aggregation, summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -968,7 +969,31 @@ import varianceDiagrams from '@/app/components/probability/variance/varianceDiag
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
-import FeatureMatrix from '@/app/components/infographics/FeatureMatrix'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_whySquare = {
+  center: { name: 'Squared deviations', sub: 'what the squaring does' },
+  quadrants: [
+    { title: 'Prevents cancellation', items: [
+      'Raw deviations $(X - \\mu)$ would cancel each other out, always yielding zero.',
+      'Squaring ensures all deviations contribute positively.' ] },
+    { title: 'Emphasizes larger deviations', items: [
+      'A deviation of $10$ contributes $100$; a deviation of $1$ contributes only $1$.',
+      'Variance is therefore sensitive to outliers and extreme values.' ] },
+    { title: 'Guarantees non-negativity', items: [
+      '$(X - \\mu)^2 \\geq 0$ always, so variance itself is never negative.',
+      'A natural scale for measuring spread.' ] },
+    { title: 'Leads to useful identities', items: [
+      { text: 'In particular, the shortcut formula.', note: '$\\mathbb{E}[X^2] - \\mu^2$' },
+      'Connects variance to the moments of the distribution.' ] }
+  ]
+};
+
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_variancePath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"before":[{"name":"Expectation","href":"/probability/expected-value","why":"variance is defined as an expected value"}],"target":{"kicker":"This page","name":"Variance","text":"A second-order moment of the distribution.","formula":"$\\mathrm{Var}(X) = \\mathbb{E}[(X - \\mu)^2]$"},"after":[{"name":"Covariance","href":"/probability/covariance","why":"extends variance to two variables: $\\mathrm{Var}(X) = \\mathrm{Cov}(X, X)$"},{"name":"Linear combinations","href":"/probability/variance#sum","why":"$\\mathrm{Var}(aX + b) = a^2\\mathrm{Var}(X)$ and the rules for sums"},{"name":"Probability distributions","href":"/probability/distributions","why":"every named distribution has its variance formula"}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 
@@ -992,6 +1017,34 @@ const featureMatrixData = {
   };
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 
+// FeatureMatrix 2026-11-14: replaces the table sdTable ("Variance vs Standard Deviation"); converted from the table's own cells.
+const fm_sdTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Attribute","features":[{"id":"c1","name":"Variance","type":"text"},{"id":"c2","name":"Standard deviation","type":"text"}],"items":[{"id":"r1","name":"Symbol","values":{"c1":"Var(X) or σ²","c2":"σ"}},{"id":"r2","name":"Formula","values":{"c1":"E[(X − μ)²]","c2":"√Var(X)"}},{"id":"r3","name":"Units","values":{"c1":"squared units of X (e.g., m², $²)","c2":"same units as X (e.g., m, $)"}},{"id":"r4","name":"Best for","values":{"c1":"theoretical derivations, algebraic manipulation","c2":"interpretation, real-world communication"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table calculateTable ("How to Calculate Variance"); converted from the table's own cells.
+const fm_calculateTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Definition form: Var(X) = E[(X − μ)²]","type":"text"},{"id":"c2","name":"Shortcut form: Var(X) = E[X²] − μ²","type":"text"}],"items":[{"id":"r1","name":"General","values":{"c1":"E[(X − μ)²]","c2":"E[X²] − μ²"}},{"id":"r2","name":"Discrete (PMF)","values":{"c1":"&Sigma;ᵢ (xᵢ − μ)² p(xᵢ)","c2":"&Sigma;ᵢ xᵢ² p(xᵢ) − μ²"}},{"id":"r3","name":"Continuous (PDF)","values":{"c1":"∫ (x − μ)² f(x) dx","c2":"∫ x² f(x) dx − μ²"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the variance of a random variable", href: "/probability/random-variables/methods/variance", desc: "Find the mean, then the mean of the square, and subtract: $E[X^2] - (E[X])^2$.", level: "composite", here: "#calculate" },
+      { skill: "Find the standard deviation of a random variable", href: "/probability/random-variables/methods/standard-deviation", desc: "Find the variance first, then take its square root; the result is in the units of $X$.", level: "composite", here: "#sd" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+      { skill: "Find the covariance and correlation of two random variables", href: "/probability/random-variables/methods/covariance-correlation", desc: "Compute $E[XY] - E[X]E[Y]$ from the joint table, then divide by $\\sigma_X \\sigma_Y$ for the correlation.", level: "composite" },
+      { skill: "Bound a probability with Chebyshev's inequality", href: "/probability/random-variables/methods/chebyshev-inequality", desc: "Measure the distance from the mean in standard deviations, then bound: $P(|X - \\mu| \\geq k\\sigma) \\leq 1/k^2$.", level: "composite" },
+      { skill: "Approximate a probability with the central limit theorem", href: "/probability/random-variables/methods/clt-approximation", desc: "Scale the mean and SD to the sum or the average of $n$ terms, standardize, and read $\\Phi(z)$.", level: "composite" },
+    ] },
+    { title: "Distribution methods", items: [
+      { skill: "Find a binomial probability", href: "/probability/distributions/methods/binomial-probability", desc: "Count successes in $n$ independent trials: name $n$, $p$ and the values of $k$, then add PMF terms or use the complement.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2425,8 +2478,16 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
     link:'',
     content:[
         sectionsContent.calculate.content,
-        <div key={'calculate-table'} style={tableWrapStyle}
-             dangerouslySetInnerHTML={{ __html: calculateTable }} />,
+        <DiagramFrameV2
+          key={'feature-matrix-variance-how-calculate-variance-matrix'}
+          id="variance-how-calculate-variance-matrix"
+          title="How to Calculate Variance"
+          source="/probability/variance"
+          related={false}
+        >
+          <FeatureMatrix data={fm_calculateTable} />
+        </DiagramFrameV2>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the variance of a random variable](!/probability/random-variables/methods/variance) →@`,
     ]
 },
 {
@@ -2482,6 +2543,15 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
             sectionsContent.square.content,
                   <div key={'unit-varSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.varSquare }} />,
             `The farthest value, x = 1, has the smallest weight but still contributes as much as x = 4.`,
+            <DiagramFrameV2
+              key={'four-sides-variance-why-squaring'}
+              id="variance-why-squaring"
+              title="Why Squaring the Distance?"
+              source="/probability/variance"
+              related={false}
+            >
+              <SWOTAnalysisV2 data={sw_whySquare} />
+            </DiagramFrameV2>,
         ]
     },
     {
@@ -2536,10 +2606,18 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
         link:'',
         content:[
             sectionsContent.sd.content,
-            <div key={'sd-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: sdTable }} />,
+            <DiagramFrameV2
+              key={'feature-matrix-variance-variance-vs-standard-deviation-matrix'}
+              id="variance-variance-vs-standard-deviation-matrix"
+              title="Variance vs Standard Deviation"
+              source="/probability/variance"
+              related={false}
+            >
+              <FeatureMatrix data={fm_sdTable} />
+            </DiagramFrameV2>,
                   <div key={'unit-u_sd_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_sd_2 }} />,
           `Common mistakes about variance are collected next.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the standard deviation of a random variable](!/probability/random-variables/methods/standard-deviation) →@`,
         ]
     },
     {
@@ -2558,6 +2636,15 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
         link:'',
         content:[
             sectionsContent.connections.content,
+            <DiagramFrameV2
+              key={'concept-map-variance-connections'}
+              id="variance-connections"
+              title="Connections to Other Probability Concepts"
+              source="/probability/variance"
+              related={false}
+            >
+              <ConceptMap data={cm_variancePath} variant="path" />
+            </DiagramFrameV2>,
         ]
     },
     {
@@ -2576,6 +2663,14 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
             >
               <FormulaSheet data={formulaSummaryData} variant="card" />
             </DiagramFrameV2>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

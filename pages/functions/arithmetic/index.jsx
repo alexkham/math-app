@@ -1204,6 +1204,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1219,6 +1220,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/functionPlot'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
@@ -1226,8 +1228,31 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Notation and Evaluation at a Point"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Procedure","type":"text"},{"id":"c2","name":"Best when","type":"text"}],"items":[{"id":"r1","name":"Method 1 — evaluate, then combine","values":{"c1":"compute f(a) and g(a) separately, then apply the operation","c2":"one-off evaluations; functions given as tables or [graphs](!/functions/graphs)"}},{"id":"r2","name":"Method 2 — combine, then evaluate","values":{"c1":"build the combined formula (f op g)(x) first, then substitute a","c2":"repeated evaluations or further analysis of the combined function"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Graphical Interpretation"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Sign case","features":[{"id":"c1","name":"Sum f + g","type":"text"},{"id":"c2","name":"Product f · g","type":"text"}],"items":[{"id":"r1","name":"both positive","values":{"c1":"positive — higher than either alone","c2":"positive"}},{"id":"r2","name":"opposite signs","values":{"c1":"partial cancellation","c2":"negative"}},{"id":"r3","name":"both negative","values":{"c1":"negative — more negative than either alone","c2":"positive"}},{"id":"r4","name":"either function = 0","values":{"c1":"takes the value of the other function","c2":"zero — a zero of f or g becomes a zero of fg"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Additional Restrictions for Quotient"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Notation","type":"text"},{"id":"c2","name":"Domain rule","type":"text"}],"items":[{"id":"r1","name":"Sum","values":{"c1":"(f + g)(x)","c2":"dom(f) ∩ dom(g)"}},{"id":"r2","name":"Difference","values":{"c1":"(f − g)(x)","c2":"dom(f) ∩ dom(g)"}},{"id":"r3","name":"Product","values":{"c1":"(f · g)(x) or (fg)(x)","c2":"dom(f) ∩ dom(g)"}},{"id":"r4","name":"Quotient","values":{"c1":"(f ⁄ g)(x)","c2":"dom(f) ∩ dom(g), excluding every x where g(x) = 0"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Functions methods", items: [
+      { skill: "Add, subtract, multiply or divide two functions", href: "/functions/methods#function-arithmetic", desc: "Two functions are combined with an operation sign: $(f + g)(x)$, $(f - g)(4)$, $(fg)(x)$, $\\left(\\frac{f}{g}\\right)(x)$.", level: "atomic" },
+      { skill: "Compose two functions", href: "/functions/methods/compose-functions", desc: "Feed the inner function into the outer one: substitute the whole formula, simplify, then check the domain.", level: "composite" },
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2635,8 +2660,15 @@ export default function ArithmeticPage({ formulaSummaryData, pitfallData,arithme
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-arithmetic-notation-evaluation-at-point-matrix'}
+            id="arithmetic-notation-evaluation-at-point-matrix"
+            title="Notation and Evaluation at a Point"
+            source="/functions/arithmetic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2656,8 +2688,15 @@ export default function ArithmeticPage({ formulaSummaryData, pitfallData,arithme
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-arithmetic-additional-restrictions-quotient-matrix'}
+            id="arithmetic-additional-restrictions-quotient-matrix"
+            title="Additional Restrictions for Quotient"
+            source="/functions/arithmetic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2666,8 +2705,15 @@ export default function ArithmeticPage({ formulaSummaryData, pitfallData,arithme
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-arithmetic-graphical-interpretation-matrix'}
+            id="arithmetic-graphical-interpretation-matrix"
+            title="Graphical Interpretation"
+            source="/functions/arithmetic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:A combined graph is built one vertical line at a time, from two heights at the same x.]@`,
         ]
     },
@@ -2793,6 +2839,14 @@ export default function ArithmeticPage({ formulaSummaryData, pitfallData,arithme
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

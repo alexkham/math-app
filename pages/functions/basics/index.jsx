@@ -878,6 +878,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -895,12 +896,40 @@ import renderSetElementsV2 from '@/app/utils/illustrations/set-theory/relationsh
 import renderLineTest from '@/app/utils/illustrations/functions/graphs/lineTest'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("The Landscape of Function Topics"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Topic","features":[{"id":"c1","name":"What it covers","type":"text"},{"id":"c2","name":"Page","type":"text"}],"items":[{"id":"r1","name":"Domain","values":{"c1":"the set of allowed inputs","c2":"[Domain](!/functions/domain)"}},{"id":"r2","name":"Range","values":{"c1":"the set of outputs the function actually produces","c2":"[Range](!/functions/range)"}},{"id":"r3","name":"Graphs","values":{"c1":"visual representation of functions as curves","c2":"[Graphs](!/functions/graphs)"}},{"id":"r4","name":"Analyzing functions","values":{"c1":"where it increases, decreases, and reaches extreme values","c2":"[Analyzing Functions](!/functions/analyzing)"}},{"id":"r5","name":"Properties","values":{"c1":"symmetry, monotonicity, boundedness, continuity","c2":"[Properties](!/functions/properties)"}},{"id":"r6","name":"Arithmetic","values":{"c1":"combining functions through addition, subtraction, multiplication, division","c2":"[Arithmetic](!/functions/arithmetic)"}},{"id":"r7","name":"Transformations","values":{"c1":"shifts, stretches, compressions, reflections","c2":"[Transformations](!/functions/transformations)"}},{"id":"r8","name":"Composition","values":{"c1":"chaining one function's output into another as input","c2":"[Composition](!/functions/composition)"}},{"id":"r9","name":"Inverse functions","values":{"c1":"reversing the process — recovering input from output","c2":"[Inverse](!/functions/inverse)"}},{"id":"r10","name":"Piecewise functions","values":{"c1":"different rules on different intervals of the domain","c2":"[Piecewise](!/functions/piecewise)"}},{"id":"r11","name":"Function families","values":{"c1":"groups by shared structure — linear, quadratic, exponential, and more","c2":"[Families](!/functions/families)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Determining Whether a Relationship is a Function"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Representation","features":[{"id":"c1","name":"Diagnostic test","type":"text"},{"id":"c2","name":"Example of failure","type":"text"}],"items":[{"id":"r1","name":"Set of ordered pairs","values":{"c1":"scan for an input that appears twice with different outputs","c2":"{(2, 5), (3, 7), (2, 9)} — input 2 maps to both 5 and 9"}},{"id":"r2","name":"Table","values":{"c1":"check the input column for duplicates pointing to different outputs","c2":"x = 4 listed twice with different y-values"}},{"id":"r3","name":"Graph","values":{"c1":"vertical line test — any vertical line crossing the curve more than once","c2":"unit circle x² + y² = 1 — vertical lines through the interior hit twice"}},{"id":"r4","name":"Equation","values":{"c1":"solve for y and check whether each x gives a unique value","c2":"y² = x — for x = 4 both y = 2 and y = −2 satisfy"}},{"id":"r5","name":"Verbal description","values":{"c1":"analyze the rule for ambiguity in the output","c2":"\"assign each person their sibling\" — people may have none or many"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Representing Functions"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Representation","features":[{"id":"c1","name":"What it gives","type":"text"},{"id":"c2","name":"Strength","type":"text"},{"id":"c3","name":"Limitation","type":"text"}],"items":[{"id":"r1","name":"Equation","values":{"c1":"explicit formula relating input to output","c2":"precise; computable at any allowed input","c3":"abstract — overall behavior is hard to see"}},{"id":"r2","name":"Table","values":{"c1":"specific input–output pairs","c2":"concrete values; easy direct lookup","c3":"behavior between listed inputs must be inferred"}},{"id":"r3","name":"Graph","values":{"c1":"visual curve over the domain","c2":"reveals shape, trends, and extreme values at a glance","c3":"exact values must be estimated"}},{"id":"r4","name":"Verbal description","values":{"c1":"the rule stated in words","c2":"connects to context and meaning","c3":"less precise than symbolic forms"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Functions vs Relations"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property or example","features":[{"id":"c1","name":"Relation?","type":"text"},{"id":"c2","name":"Function?","type":"text"}],"items":[{"id":"r1","name":"Definition","values":{"c1":"any set of input–output pairs","c2":"a relation with each input mapped to exactly one output"}},{"id":"r2","name":"Uniqueness requirement","values":{"c1":"none — same input may map to many outputs","c2":"every input has exactly one output"}},{"id":"r3","name":"Example: {(1, 2), (1, 3), (2, 5)}","values":{"c1":"✓","c2":"✗"}},{"id":"r4","name":"Example: {(1, 2), (2, 3), (3, 5)}","values":{"c1":"✓","c2":"✓"}},{"id":"r5","name":"Example: x² + y² = 1 (unit circle)","values":{"c1":"✓","c2":"✗"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Functions methods", items: [
+      { skill: "Evaluate a function", href: "/functions/methods#evaluate-function", desc: "A function is given by a formula and you need its output at a number or an expression: $f(5)$, $f(-x)$, $f(a + 2)$, or $f(g(x))$.", level: "atomic" },
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+      { skill: "Find the range of a function", href: "/functions/methods/find-range", desc: "Find the lowest and highest outputs from the vertex, the endpoints and the end behavior, or solve $y = f(x)$ for $x$.", level: "composite" },
+      { skill: "Identify the family of a function", href: "/functions/methods/identify-function-family", desc: "A decision tree from what you see in the formula to the family and the method that handles it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1846,11 +1875,15 @@ Formulas are finite strings of symbols, so they can be listed one by one; the fu
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-functions-vs-relations-matrix'}
+            id="basics-functions-vs-relations-matrix"
+            title="Functions vs Relations"
+            source="/functions/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           `@academic[punchline:A function is a relation that keeps one promise: every input gets exactly one output.]@`,
         ]
     },
@@ -1870,11 +1903,15 @@ Formulas are finite strings of symbols, so they can be listed one by one; the fu
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-representing-functions-matrix'}
+            id="basics-representing-functions-matrix"
+            title="Representing Functions"
+            source="/functions/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj4-diagram'}
             id="function-representations-tree"
@@ -1931,11 +1968,15 @@ Formulas are finite strings of symbols, so they can be listed one by one; the fu
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-determining-whether-relationship-is-matrix'}
+            id="basics-determining-whether-relationship-is-matrix"
+            title="Determining Whether a Relationship is a Function"
+            source="/functions/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every test, in every representation, asks the same question: does some input have more than one output?]@`,
         ]
     },
@@ -1978,11 +2019,15 @@ Formulas are finite strings of symbols, so they can be listed one by one; the fu
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-basics-landscape-function-topics-matrix'}
+            id="basics-landscape-function-topics-matrix"
+            title="The Landscape of Function Topics"
+            source="/functions/basics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj11-diagram'}
             id="function-topics-outline"
@@ -1994,6 +2039,14 @@ Formulas are finite strings of symbols, so they can be listed one by one; the fu
         ]
     },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

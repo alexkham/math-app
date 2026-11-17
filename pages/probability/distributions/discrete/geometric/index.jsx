@@ -840,6 +840,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj16 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 
@@ -869,9 +870,56 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_geometricRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+    built: { label: 'built from', color: '#2563EB', dash: '6 4' },
+    link: { label: 'same trials', color: '#64748b', dash: '' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 150,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    bands: [{ from: 0, to: 2, label: 'Discrete', color: '#f1f5f9' }, { from: 2, to: 3, label: 'Continuous', color: '#eff6ff' }],
+    nodes: [
+      { id: 'bern', name: 'Bernoulli', x: 0, y: 0.2, href: '/probability/distributions/discrete#bernoulli', text: 'One trial that succeeds with probability $p$.' },
+      { id: 'bin', name: 'Binomial', x: 0, y: 1, href: '/probability/distributions/discrete/binomial', text: 'The number of successes in a fixed number $n$ of trials.' },
+      { id: 'nb', name: 'Negative binomial', x: 0, y: 1.8, href: '/probability/distributions/discrete/negative-binomial', text: 'The number of trials needed to reach the $r$-th success; a sum of $r$ independent geometric waits.' },
+      { id: 'geo', name: 'Geometric', x: 1, y: 1, text: 'The number of trials needed to reach the first success. The first success among several independent runs of trials is again geometric.' },
+      { id: 'exp', name: 'Exponential', x: 2, y: 1, href: '/probability/distributions/continuous/exponential', text: 'The waiting time for an event at a constant rate $\\lambda$; the only continuous distribution with no memory.' },
+    ],
+    edges: [
+      { from: 'bern', to: 'geo', kind: 'built', label: 'repeated', text: 'the geometric counts how many Bernoulli trials it takes to see the first success' },
+      { from: 'bin', to: 'geo', kind: 'link', label: 'same trials', text: 'the first success comes after trial $n$ exactly when the first $n$ trials hold no success' },
+      { from: 'geo', to: 'nb', kind: 'special', label: '$r = 1$', text: 'the geometric is the negative binomial with $r = 1$' },
+      { from: 'geo', to: 'exp', kind: 'limit', label: 'steps shrink', text: 'the geometric wait turns into the exponential wait as the time between trials shrinks' },
+    ],
+  },
+};
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a geometric probability", href: "/probability/distributions/methods/geometric-probability", desc: "Repeat a trial until the first success: $k - 1$ failures then one success, and a short tail formula for \"more than $k$ trials\".", level: "composite", here: "#4" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Find a negative binomial probability", href: "/probability/distributions/methods/negative-binomial-probability", desc: "The trial of the $r$th success: $r - 1$ successes somewhere in the first $k - 1$ trials, then a success on trial $k$.", level: "composite" },
+      { skill: "Find an exponential probability", href: "/probability/distributions/methods/exponential-probability", desc: "Waiting times at a constant rate: get $\\lambda$ from the mean, then use $1 - e^{-\\lambda x}$ or the tail $e^{-\\lambda x}$.", level: "composite" },
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1408,7 +1456,40 @@ The roll that shows the first 6 is itself one of the $k$ rolls being counted. Ev
     },
     obj14:{
       title:`Related Distributions`,
-      content:``,
+      content:`
+The geometric distribution is the simplest waiting-time distribution. Its relatives wait for more than one success, count the same trials another way, or measure the same wait in continuous time.
+
+### Negative binomial: waiting for several successes
+
+The [negative binomial](!/probability/distributions/discrete/negative-binomial) distribution counts the trials needed to reach the $r$-th success, and the geometric is its case $r = 1$. After each success the wait for the next one starts afresh, so the total is a sum of $r$ independent geometric waits $X_1, \\ldots, X_r$:
+
+@academic[formula_callout:Related Distributions
+$$X_1 + X_2 + \\cdots + X_r \\sim \\operatorname{NegBin}(r, p)$$]@
+
+The mean and the variance are therefore $r$ times the geometric ones, $\\frac{r}{p}$ and $\\frac{r(1-p)}{p^2}$.
+
+### Binomial: the same trials, a fixed number of them
+
+The [binomial](!/probability/distributions/discrete/binomial) distribution fixes the number of trials and counts successes; the geometric fixes one success and counts trials. The two meet in the tail formula, because the first success comes after trial $n$ exactly when the first $n$ trials hold no success. For $Y \\sim \\operatorname{Bin}(n, p)$:
+
+@academic[formula_callout:Related Distributions
+$$P(X > n) = (1-p)^n = P(Y = 0)$$]@
+
+### Exponential: the same wait in continuous time
+
+The [exponential](!/probability/distributions/continuous/exponential) distribution is the only continuous distribution with no memory, as the geometric is the only discrete one. Run one trial every $\\Delta t$ units of time and let each succeed with probability $p = \\lambda \\Delta t$. The wait $T$ is the number of trials times $\\Delta t$, and
+
+@academic[formula_callout:Related Distributions
+$$P(T > t) = (1 - \\lambda \\Delta t)^{t / \\Delta t} \\to e^{-\\lambda t} \\quad \\text{as } \\Delta t \\to 0$$]@
+
+so the geometric wait turns into the exponential wait as the steps shrink.
+
+### The first of several waits
+
+Run two independent sequences of trials side by side, with success chances $p_1$ and $p_2$, and stop at the first success in either. A step passes with no success with probability $(1 - p_1)(1 - p_2)$, so the stopping time is again geometric, with success chance $1 - (1 - p_1)(1 - p_2)$. With two dice rolled together and a six wanted on either, that chance is $1 - \\frac{25}{36} = \\frac{11}{36}$, and the mean wait drops from $6$ rolls to $\\frac{36}{11} \\approx 3.3$.
+
+Of these, the negative binomial and exponential links matter most: the first extends the wait to several successes, the second carries the memoryless property over to continuous time.
+`,
       before:``,
       after:``,
       link:'',
@@ -1980,6 +2061,7 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
           </div>,        
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `Accumulating the bars gives a closed-form CDF.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a geometric probability](!/probability/distributions/methods/geometric-probability) →@`,
         ]
     },
     {
@@ -2082,6 +2164,23 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
         ]
     },
     {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'concept-map-geometric-related-distributions'}
+            id="geometric-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/discrete/geometric"
+            related={false}
+          >
+            <ConceptMap data={cm_geometricRelated} variant="graph" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'16',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
@@ -2114,6 +2213,14 @@ For a fair coin after five tails, reading $P(X > 6) = \\frac{1}{64}$ as the chan
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

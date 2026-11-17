@@ -58,7 +58,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Expected Value of a Random Variable | Learn Math Class',
         description: 'Find the expected value of a random variable: list values and probabilities, multiply, add; integrate x f(x) for a density. Examples and common mistakes.',
@@ -193,7 +193,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Variance of a Random Variable | Learn Math Class',
         description: 'Find the variance of a random variable: compute the mean, the mean of the square, subtract, check the sign. Discrete and continuous examples, common mistakes.',
@@ -317,7 +317,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '3 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Standard Deviation of a Random Variable | Learn Math Class',
         description: 'Find the standard deviation of a random variable: compute the variance, take the square root, keep the units. Examples with dice, binomial counts and sums.',
@@ -436,7 +436,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Covariance and Correlation | Learn Math Class',
         description: 'Find the covariance and correlation of two random variables: means, E[XY] from the joint table, subtract, divide by both deviations. Examples and pitfalls.',
@@ -570,7 +570,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the CDF from a PMF (Discrete) | Learn Math Class',
         description: 'Find the CDF of a discrete random variable from its PMF: sort the values, add probabilities cumulatively, write the step function. Examples and mistakes.',
@@ -678,7 +678,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the CDF from a PDF (Continuous) | Learn Math Class',
         description: 'Find the CDF of a continuous random variable from its PDF: integrate from the left end to x, add the pieces outside, check F = 1. Examples and mistakes.',
@@ -802,7 +802,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Median and Mode of a Distribution | Learn Math Class',
         description: 'Find the median and mode of a probability distribution: build the CDF, find where it reaches 1/2, locate the peak of the pmf or pdf. Examples and mistakes.',
@@ -909,7 +909,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find an Expected Count with Indicator Variables | Learn Math Class',
         description: 'Find an expected count with indicator variables: one 0-1 variable per event, its mean is the event probability, add them by linearity. Examples, mistakes.',
@@ -1018,7 +1018,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: "How to Use Markov's Inequality | Learn Math Class",
         description: "Bound a tail probability with Markov's inequality: check X is nonnegative, find the mean, divide by the threshold, judge the bound. Examples and mistakes.",
@@ -1125,7 +1125,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: "How to Use Chebyshev's Inequality | Learn Math Class",
         description: "Bound a probability with Chebyshev's inequality: find the mean and standard deviation, count k deviations, use 1/k squared or its complement. Worked examples.",
@@ -1237,7 +1237,7 @@ const randomVariablesMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Central Limit Theorem (CLT) | Learn Math Class',
         description: 'Approximate a probability for a sum or a sample mean with the central limit theorem: scale the mean and SD, standardize, read the normal CDF. Worked examples.',

@@ -2814,6 +2814,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 aggregation, obj10 comparison, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import FactorizationAnatomy from '@/app/components/infographics/linear-algebra/FactorizationAnatomy'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 
@@ -2830,6 +2832,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -2840,7 +2843,31 @@ import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSh
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Computational Cost"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Cost for one system","type":"text"},{"id":"c2","name":"Cost for k systems (same A)","type":"text"},{"id":"c3","name":"Restrictions","type":"text"}],"items":[{"id":"r1","name":"LU with partial pivoting","values":{"c1":"≈ 2n³/3 + O(n²)","c2":"2n³/3 + 2kn²","c3":"A square and invertible"}},{"id":"r2","name":"[Cholesky](!/linear-algebra/decompositions/cholesky)","values":{"c1":"≈ n³/3 + O(n²)","c2":"n³/3 + 2kn²","c3":"A symmetric positive definite"}},{"id":"r3","name":"Explicit [inverse](!/linear-algebra/matrix/inverse) A⁻¹b","values":{"c1":"≈ 8n³/3 to form A⁻¹, then 2n² per multiply","c2":"8n³/3 + 2kn²","c3":"numerically less stable; rarely the right choice"}},{"id":"r4","name":"[Cramer's rule](!/linear-algebra/determinants/applications)","values":{"c1":"O(n · n!) — impractical beyond n ≈ 4","c2":"k × O(n · n!)","c3":"theoretical only; not used in computation"}}]};
 
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the LU decomposition", href: "/linear-algebra/decompositions/methods/lu-decomposition", desc: "Run Gaussian elimination, keep the multipliers in L and the result in U; pivot when a zero appears.", level: "composite", here: "#2" },
+    ] },
+    { title: "More decomposition methods", items: [
+      { skill: "Find the Cholesky decomposition", href: "/linear-algebra/decompositions/methods/cholesky-decomposition", desc: "Symmetric positive definite matrix: build L column by column with square roots so that $A = LL^T$.", level: "composite" },
+      { skill: "Find the QR decomposition", href: "/linear-algebra/decompositions/methods/qr-decomposition", desc: "Run Gram-Schmidt on the columns: the orthonormal vectors form Q, the coefficients form R.", level: "composite" },
+      { skill: "Choose the right matrix decomposition", href: "/linear-algebra/decompositions/methods/which-decomposition", desc: "A decision tree: the task and the shape of the matrix pick LU, Cholesky, QR, spectral or SVD.", level: "strategy" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+      { skill: "Solve a triangular system by back substitution", href: "/linear-algebra/linear-systems/methods/back-substitution", desc: "Solve the last equation first, then substitute upward one row at a time.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/decompositions/methods", label: "All decomposition methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3692,8 +3719,26 @@ $$U = \\begin{pmatrix} -5 & 3 \\\\ 0 & 11/5 \\end{pmatrix}$$`],
     conclusion: { text: '$A = LU$', say: 'The multipliers sit in the sub-diagonal positions of $L$.' },
   };
 
+  // FactorizationAnatomy 2026-11-14: What each factor of PA = LU holds (obj5).
+  const paLuAnatomy = {
+    factors: [
+      { symbol: 'PA', name: 'Rows swapped', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        contains: '$A$ with its rows reordered by the permutation matrix $P$' },
+      { symbol: 'L', name: 'Lower triangular', dim: 'n × n', fill: 'lower', width: 110, height: 110,
+        property: 'Multipliers at most $1$ in absolute value',
+        contains: 'The multipliers of the elimination' },
+      { symbol: 'U', name: 'Upper triangular', dim: 'n × n', fill: 'upper', width: 110, height: 110,
+        contains: 'The result of the elimination' },
+    ],
+    existsWhen: 'For every invertible matrix.',
+    uniqueWhen: '$L$ carries ones on its diagonal and $P$ is fixed.',
+    cost: '⅔n³',
+    preferredWhen: 'Always in numerical software: it is the default.',
+  };
+
   return {
   props:{
+    paLuAnatomy,
     proofStepsData,
     pitfallData,
       luScope,
@@ -3720,7 +3765,7 @@ $$U = \\begin{pmatrix} -5 & 3 \\\\ 0 & 11/5 \\end{pmatrix}$$`],
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 const scopeTheme = { title: '#06357A', accent: '#2563EB', indigoSoft: '#dbeafe', warm: '#B45309' }
 
-export default function LUDecompositionPage({ proofStepsData, pitfallData,luScope, 
+export default function LUDecompositionPage({ paLuAnatomy, proofStepsData, pitfallData,luScope, 
   seoData,
   sectionsContent,
   introContent,
@@ -3846,6 +3891,7 @@ export default function LUDecompositionPage({ proofStepsData, pitfallData,luScop
           sectionsContent.obj2.afterProof,
                   <div key={'unit-construction'} dangerouslySetInnerHTML={{ __html: demoUnits.construction }} />,
           `The factorisation is therefore a by-product of elimination rather than a separate algorithm with its own cost.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the LU decomposition](!/linear-algebra/decompositions/methods/lu-decomposition) →@`,
         ]
     },
     {
@@ -3890,6 +3936,17 @@ export default function LUDecompositionPage({ proofStepsData, pitfallData,luScop
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-factor-anatomy'}
+            id="pa-lu-factor-anatomy"
+            title="What each factor of PA = LU holds"
+            source="/linear-algebra/decompositions/lower-upper"
+            before={"The pivoted factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={paLuAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
                   <div key={'unit-pivoting'} dangerouslySetInnerHTML={{ __html: demoUnits.pivoting }} />,
           `In practice pivoting is used even when it is not strictly required, because small pivots damage accuracy long before they reach zero.`,
           `@academic[fact,aside:true,width:35%:The doubling bound is reached
@@ -3939,8 +3996,15 @@ Large entries in $U$ matter because rounding errors are made relative to the num
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'obj10-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-lower-upper-computational-cost-matrix'}
+            id="lower-upper-computational-cost-matrix"
+            title="Computational Cost"
+            source="/linear-algebra/decompositions/lower-upper"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
         ]
     },
     // NEW capstone section: obj11
@@ -3978,6 +4042,14 @@ Large entries in $U$ matter because rounding errors are made relative to the num
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

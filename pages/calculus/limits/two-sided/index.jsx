@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-24 | 2 tables (obj4 aggregation, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,12 +17,34 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Where Two-Sided Limits Appear in Calculus"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Setting","features":[{"id":"c1","name":"Two-sided limit involved","type":"text"},{"id":"c2","name":"Why agreement from both sides matters","type":"text"}],"items":[{"id":"r1","name":"The basic limit notation","values":{"c1":"lim$_{x → a}$ f(x) = L","c2":"the no-superscript form is the default, requiring both sides to reach the same L"}},{"id":"r2","name":"[Continuity at a point](!/calculus/limits/continuity)","values":{"c1":"lim$_{x → a}$ f(x) = f(a)","c2":"a function isn't continuous if it only matches f(a) from one direction"}},{"id":"r3","name":"[Derivative at a point](!/calculus/derivatives)","values":{"c1":"lim$_{h → 0}$ [f(a + h) − f(a)] / h","c2":"differentiability requires the same instantaneous slope from both sides; corners and cusps fail here"}},{"id":"r4","name":"Domain boundary (exception)","values":{"c1":"only a [one-sided limit](!/calculus/limits/one-sided) exists, e.g. lim$_{x → 0⁺}$ √x","c2":"when the function isn't defined on one side, two-sided isn't available — the one-sided limit takes over as the appropriate concept"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("When Two-Sided Limits Fail to Exist"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Failure mode","features":[{"id":"c1","name":"Left-hand limit at a","type":"text"},{"id":"c2","name":"Right-hand limit at a","type":"text"},{"id":"c3","name":"Why two-sided fails","type":"text"}],"items":[{"id":"r1","name":"Jump discontinuity","values":{"c1":"exists, equals L₁","c2":"exists, equals L₂ ≠ L₁","c3":"both sides settle, but on different values"}},{"id":"r2","name":"Infinite disagreement","values":{"c1":"→ −∞ (or +∞)","c2":"→ the opposite ∞","c3":"neither side is finite, and they head opposite directions"}},{"id":"r3","name":"Oscillation","values":{"c1":"does not exist","c2":"(or does not exist)","c3":"at least one side never settles on any value"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Limit methods", items: [
+      { skill: "Evaluate one-sided limits", href: "/calculus/limits/methods/one-sided-limits", desc: "Left and right limits separately; the two-sided limit exists only when they agree.", level: "composite" },
+      { skill: "Find the limit of a piecewise function", href: "/calculus/limits/methods/piecewise-limits", desc: "At a break, the lower piece gives the left limit and the upper piece the right; compare.", level: "composite" },
+      { skill: "Evaluate a limit by direct substitution", href: "/calculus/limits/methods#direct-substitution", desc: "The function is continuous at $a$: polynomials, rational functions whose denominator is not $0$ at $a$, roots, exponentials, logarithms and trig functions on their domains.", level: "atomic" },
+      { skill: "Evaluate a limit by factoring", href: "/calculus/limits/methods/factoring-limits", desc: "A $\\frac{0}{0}$ form with polynomials: factor, cancel the vanishing factor, substitute.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -966,8 +989,15 @@ Thomae's function of 1875 is $\\frac{1}{q}$ at each fraction $\\frac{p}{q}$ in l
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-two-sided-when-two-sided-matrix'}
+            id="two-sided-when-two-sided-matrix"
+            title="When Two-Sided Limits Fail to Exist"
+            source="/calculus/limits/two-sided"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-fail'} dangerouslySetInnerHTML={{ __html: demoUnits.fail }} />,
           `In every failure mode the two traces either disagree, run away, or never settle.`,
           <DiagramFrame
@@ -1018,8 +1048,15 @@ Thomae's function of 1875 is $\\frac{1}{q}$ at each fraction $\\frac{p}{q}$ in l
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-two-sided-summary-where-two-matrix'}
+            id="two-sided-summary-where-two-matrix"
+            title="Summary: Where Two-Sided Limits Appear in Calculus"
+            source="/calculus/limits/two-sided"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1037,6 +1074,14 @@ Thomae's function of 1875 is $\\frac{1}{q}$ at each fraction $\\frac{p}{q}$ in l
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

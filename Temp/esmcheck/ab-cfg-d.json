@@ -1,0 +1,1 @@
+{"pts":["A","B","C","D","P","Q","X","Y"],"samples":[{"params":{"tq":0.31}},{"params":{"tq":0.33}},{"params":{"tq":0.29}},{"params":{"tp":0.4,"tq":0.4}},{"params":{"tq":0.43}},{"params":{"tq":0.425}}],"segs":[["A","B"],["C","D"],["P","Q"],["P","X"],["Q","Y"]],"segNeed":3,"every":1,"rank":6}

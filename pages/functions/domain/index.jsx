@@ -886,6 +886,8 @@
 //   )
 // }
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -905,11 +907,81 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_domainFromContext = {
+  center: { name: 'Domain from context', sub: 'restrictions that pure algebra does not impose' },
+  quadrants: [
+    { title: 'Time is non-negative', items: [
+      'A function $h(t)$ giving the height of a ball after $t$ seconds has no meaning for $t < 0$.',
+      'The domain starts at $t = 0$, whether or not the formula accepts negative values.' ] },
+    { title: 'Quantities are non-negative', items: [
+      'Length, area, population, and count must be non-negative.',
+      { text: '$A(r) = \\pi r^2$ requires $r \\geq 0$.', note: 'even though the formula works for negative $r$' } ] },
+    { title: 'Physical upper bounds', items: [
+      'The number of items produced in a day has a maximum determined by capacity.',
+      'Temperature in a specific experiment operates within measured bounds.' ] },
+    { title: 'Discrete quantities', items: [
+      'May restrict the domain to integers.',
+      { text: 'Profit $P(n)$ from $n$ units sold makes sense only for whole numbers.', note: '$n = 0, 1, 2, 3, \\ldots$' } ] }
+  ],
+  note: { label: 'A modeling decision, not a calculation', text: 'A formula may allow $x = -5$, but if $x$ represents the number of employees, that value is nonsense.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Domain Rules at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function type","features":[{"id":"c1","name":"Restriction rule","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Resulting domain","type":"text"}],"items":[{"id":"r1","name":"Polynomial","values":{"c1":"none","c2":"f(x) = 2x + 5","c3":"(−∞, ∞)"}},{"id":"r2","name":"Rational","values":{"c1":"denominator ≠ 0","c2":"f(x) = 1 ⁄ (x − 2)","c3":"(−∞, 2) ∪ (2, ∞)"}},{"id":"r3","name":"Even radical","values":{"c1":"radicand ≥ 0","c2":"f(x) = √(x − 5)","c3":"[5, ∞)"}},{"id":"r4","name":"Odd radical","values":{"c1":"none","c2":"f(x) = ∛(x − 5)","c3":"(−∞, ∞)"}},{"id":"r5","name":"Logarithmic","values":{"c1":"argument > 0","c2":"f(x) = ln(x − 4)","c3":"(4, ∞)"}},{"id":"r6","name":"Trigonometric (tan, cot, sec, csc)","values":{"c1":"underlying sin or cos ≠ 0","c2":"tan(x)","c3":"x ≠ π⁄2 + nπ"}},{"id":"r7","name":"Combined","values":{"c1":"intersect every individual restriction","c2":"f(x) = √x ⁄ (x − 3)","c3":"[0, 3) ∪ (3, ∞)"}},{"id":"r8","name":"Contextual / modeled","values":{"c1":"constrained by physical meaning of the variable","c2":"h(t) = −16t² + 64t (projectile)","c3":"[0, 4]"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Domain from Graph"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Visual cue","features":[{"id":"c1","name":"What it means for the domain","type":"text"},{"id":"c2","name":"Notation impact","type":"text"}],"items":[{"id":"r1","name":"Solid dot at endpoint","values":{"c1":"endpoint is included","c2":"use bracket — [ or ]"}},{"id":"r2","name":"Open dot at endpoint","values":{"c1":"endpoint is excluded","c2":"use parenthesis — ( or )"}},{"id":"r3","name":"Vertical asymptote at x = a","values":{"c1":"value a is excluded; graph approaches but never reaches","c2":"domain splits at a using ∪"}},{"id":"r4","name":"Gap in the graph","values":{"c1":"interval missing — no curve exists there","c2":"two or more disjoint intervals joined by ∪"}},{"id":"r5","name":"Arrow at end of curve","values":{"c1":"graph continues indefinitely in that direction","c2":"extend to −∞ or +∞ with a parenthesis"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Finding Domain: Trigonometric Functions"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Defined as","type":"text"},{"id":"c2","name":"Where undefined","type":"text"},{"id":"c3","name":"Domain","type":"text"}],"items":[{"id":"r1","name":"sin(x)","values":{"c1":null,"c2":"never","c3":"all real numbers"}},{"id":"r2","name":"cos(x)","values":{"c1":null,"c2":"never","c3":"all real numbers"}},{"id":"r3","name":"tan(x)","values":{"c1":"sin(x) ⁄ cos(x)","c2":"where cos(x) = 0","c3":"x ≠ π⁄2 + nπ"}},{"id":"r4","name":"cot(x)","values":{"c1":"cos(x) ⁄ sin(x)","c2":"where sin(x) = 0","c3":"x ≠ nπ"}},{"id":"r5","name":"sec(x)","values":{"c1":"1 ⁄ cos(x)","c2":"where cos(x) = 0","c3":"x ≠ π⁄2 + nπ"}},{"id":"r6","name":"csc(x)","values":{"c1":"1 ⁄ sin(x)","c2":"where sin(x) = 0","c3":"x ≠ nπ"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Domain Notation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Notation","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Example","type":"text"},{"id":"c3","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Interval","values":{"c1":"parentheses and brackets around endpoints","c2":"[2, 5), (−∞, 3]","c3":"bracket includes the endpoint; parenthesis excludes it; ∞ always takes a parenthesis"}},{"id":"r2","name":"Set-builder","values":{"c1":"{x | defining condition}","c2":"{x | x ≥ 0}","c3":"handles complex conditions intervals cannot easily express"}},{"id":"r3","name":"Inequality","values":{"c1":"condition stated directly on x","c2":"x ≥ 0; −3 < x ≤ 7","c3":"natural form when a restriction is being derived"}},{"id":"r4","name":"Union (disconnected)","values":{"c1":"two or more intervals joined with ∪","c2":"(−∞, −1) ∪ (1, ∞)","c3":"used when the domain skips a value or interval"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite", here: "#8" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Find the range of a function", href: "/functions/methods/find-range", desc: "Find the lowest and highest outputs from the vertex, the endpoints and the end behavior, or solve $y = f(x)$ for $x$.", level: "composite" },
+      { skill: "Compose two functions", href: "/functions/methods/compose-functions", desc: "Feed the inner function into the outer one: substitute the whole formula, simplify, then check the domain.", level: "composite" },
+    ] },
+    { title: "Inequality methods", items: [
+      { skill: "Solve a quadratic inequality", href: "/algebra/inequalities/methods/quadratic-inequalities", desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
+
+// IntervalLine: sign analysis of the argument x^2 - 4 in obj6
+const il_logDomainSigns = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  signs: {
+    range: [-5, 5],
+    cases: [
+      { name: '$x^2 - 4$', expression: '(x - 2)(x + 2)', op: '>',
+        factors: [{ label: '$x - 2$', root: 2 }, { label: '$x + 2$', root: -2 }],
+        notes: {
+          '>': { label: 'The domain', text: 'The argument is positive on the two outer intervals, so the domain is $(-\\infty, -2) \\cup (2, \\infty)$. The roots stay out: a logarithm needs a strictly positive argument.' },
+          '*': { label: 'Not the domain', text: 'A logarithm needs its argument strictly greater than $0$. Switch back to $>$ to see the domain.' }
+        } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 
@@ -1724,8 +1796,36 @@ const faqQuestions = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: The domain of a rational function, step by step (obj4).
+  const rationalDomainSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$g(x) = \\dfrac{5}{x^2 - 9}$',
+      rows: [
+        { step: 'Set the denominator equal to zero', example: '$x^2 - 9 = 0$' },
+        { step: 'Solve, factoring if needed', example: '$(x - 3)(x + 3) = 0$: $x = 3$ and $x = -3$' },
+        { step: 'Exclude those values; everything else is in the domain', example: '$(-\\infty, -3) \\cup (-3, 3) \\cup (3, \\infty)$' },
+      ],
+    },
+  };
+
+  const combinedDomainSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$g(x) = \\ln(x - 1) + \\sqrt{5 - x}$',
+      rows: [
+        { step: 'List each operation that imposes a restriction', example: 'The logarithm $\\ln(x - 1)$ and the square root $\\sqrt{5 - x}$' },
+        { step: 'Solve the first restriction', stepSub: 'The logarithm needs a positive argument', example: '$x - 1 > 0$, giving $x > 1$' },
+        { step: 'Solve the second restriction', stepSub: 'The square root needs a non-negative radicand', example: '$5 - x \\geq 0$, giving $x \\leq 5$' },
+        { step: 'Intersect all the resulting conditions', example: '$(1, 5]$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    combinedDomainSteps,
+    rationalDomainSteps,
     pitfallData,
     domainKindsComparison,
     demoUnits,
@@ -1749,7 +1849,7 @@ const faqQuestions = {
     }
    }
 
-export default function DomainPage({ pitfallData,domainKindsComparison, 
+export default function DomainPage({ combinedDomainSteps, rationalDomainSteps, pitfallData,domainKindsComparison, 
   seoData,
   sectionsContent,
   introContent,
@@ -1872,8 +1972,15 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
             sheet={functionsNotationSheet}
             current={'/functions/domain'}
           />,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-domain-domain-notation-matrix'}
+            id="domain-domain-notation-matrix"
+            title="Domain Notation"
+            source="/functions/domain"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1902,6 +2009,15 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="rational-domain-steps"
+            title="The domain of a rational function, step by step"
+            source="/functions/domain"
+            before={"The second function of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={rationalDomainSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-rational'} dangerouslySetInnerHTML={{ __html: demoUnits.rational }} />,
           `The excluded values are the vertical asymptotes or holes of the graph.`,
         ]
@@ -1925,6 +2041,16 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
           sectionsContent.obj6.content,
                   <div key={'unit-log'} dangerouslySetInnerHTML={{ __html: demoUnits.log }} />,
           `Combined functions intersect all such restrictions, which the next section takes up.`,
+          <DiagramFrame
+            key={'log-interval-line'}
+            id="log-domain-sign-chart"
+            title="Where the argument is positive"
+            source="/functions/domain"
+            related={false}
+            before={"The sign analysis for $h(x) = \\ln(x^2 - 4)$, interval by interval."}
+          >
+            <IntervalLine data={il_logDomainSigns} variant="signs" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1933,8 +2059,15 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-domain-finding-domain-trigonometric-functions-matrix'}
+            id="domain-finding-domain-trigonometric-functions-matrix"
+            title="Finding Domain: Trigonometric Functions"
+            source="/functions/domain"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:Sine and cosine take every input; the other four fail exactly where the sine or cosine they divide by is zero.]@`,
         ]
     },
@@ -1946,6 +2079,12 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
           sectionsContent.obj8.content,
           <div key={'unit-combinedDomain'} dangerouslySetInnerHTML={{ __html: demoUnits.combinedDomain }} />,
           `The same line-by-line method handles any number of restrictions: one line per requirement, then the overlap.`,
+          <DiagramFrame key={'obj8-procedure'} id="combined-domain-steps" title="List, solve, intersect"
+            source="/functions/domain" related={false}
+            before={"The systematic approach on the second example of this section. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={combinedDomainSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the domain of a function](!/functions/methods/find-domain) →@`,
         ]
     },
     {
@@ -1954,8 +2093,15 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-domain-domain-graph-matrix'}
+            id="domain-domain-graph-matrix"
+            title="Domain from Graph"
+            source="/functions/domain"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:On a graph, the domain is the shadow the curve casts on the x-axis.]@`,
         ]
     },
@@ -1965,6 +2111,15 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrameV2
+            key={'four-sides-domain-from-context-restrictions'}
+            id="domain-from-context-restrictions"
+            title="Domain from Context"
+            source="/functions/domain"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_domainFromContext} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -1990,8 +2145,15 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrameV2
+            key={'feature-matrix-domain-domain-rules-at-glance-matrix'}
+            id="domain-domain-rules-at-glance-matrix"
+            title="Domain Rules at a Glance"
+            source="/functions/domain"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
         ]
     },
     // {
@@ -2051,6 +2213,14 @@ export default function DomainPage({ pitfallData,domainKindsComparison,
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

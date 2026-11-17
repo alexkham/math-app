@@ -1,5 +1,6 @@
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import React from 'react'
@@ -26,6 +27,27 @@ import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Distribution methods", items: [
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+      { skill: "Find an exponential probability", href: "/probability/distributions/methods/exponential-probability", desc: "Waiting times at a constant rate: get $\\lambda$ from the mean, then use $1 - e^{-\\lambda x}$ or the tail $e^{-\\lambda x}$.", level: "composite" },
+      { skill: "Find a normal probability", href: "/probability/distributions/methods/normal-probability", desc: "Standardize with $z = (x - \\mu)/\\sigma$, then read the area from $\\Phi$: left tails, right tails and intervals.", level: "composite" },
+      { skill: "Find a normal percentile", href: "/probability/distributions/methods/normal-percentiles", desc: "Go backwards from an area to a value: find $z$ with $\\Phi(z) = p$, then $x = \\mu + z\\sigma$; also solve for $\\mu$ or $\\sigma$.", level: "composite" },
+      { skill: "Find a continuous uniform probability", href: "/probability/distributions/methods/continuous-uniform-probability", desc: "Equally likely anywhere on $[a, b]$: the probability of an interval is its length over $b - a$, after clipping to the support.", level: "composite" },
+      { skill: "Find a binomial probability", href: "/probability/distributions/methods/binomial-probability", desc: "Count successes in $n$ independent trials: name $n$, $p$ and the values of $k$, then add PMF terms or use the complement.", level: "composite" },
+      { skill: "Find a geometric probability", href: "/probability/distributions/methods/geometric-probability", desc: "Repeat a trial until the first success: $k - 1$ failures then one success, and a short tail formula for \"more than $k$ trials\".", level: "composite" },
+      { skill: "Find a negative binomial probability", href: "/probability/distributions/methods/negative-binomial-probability", desc: "The trial of the $r$th success: $r - 1$ successes somewhere in the first $k - 1$ trials, then a success on trial $k$.", level: "composite" },
+      { skill: "Find a Poisson probability", href: "/probability/distributions/methods/poisson-probability", desc: "Events at an average rate: scale $\\lambda$ to the interval asked about, then use $e^{-\\lambda}\\lambda^k / k!$ or its complement.", level: "composite" },
+      { skill: "Find a discrete uniform probability", href: "/probability/distributions/methods/discrete-uniform-probability", desc: "Equally likely whole numbers from $a$ to $b$: count the values in the event and divide by $b - a + 1$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -883,6 +905,14 @@ $$\\mathbb{P}_X(A) = \\mathbb{P}(X \\in A)$$ ]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

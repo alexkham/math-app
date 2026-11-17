@@ -665,6 +665,8 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj8 aggregation, obj10 aggregation, obj11 summary capstone)
+import TestSelector from '@/app/components/infographics/linear-algebra/TestSelector'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -679,13 +681,44 @@ import determinantDiagrams from '@/app/components/linear-algebra copy/determinan
 import linearTransformationDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/linear-transformations/linearTransformationDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("How Row Operations Affect the Determinant"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Row operation","features":[{"id":"c1","name":"Effect on det(A)","type":"text"},{"id":"c2","name":"Adjustment when reading off det from triangular form","type":"text"}],"items":[{"id":"r1","name":"Swap two rows","values":{"c1":"multiplies det by −1","c2":"flip the sign once per swap"}},{"id":"r2","name":"Multiply a row by k ≠ 0","values":{"c1":"multiplies det by k","c2":"divide the final product by k"}},{"id":"r3","name":"Add a multiple of one row to another","values":{"c1":"leaves det unchanged","c2":"no adjustment"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: How to Compute a Determinant"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Formula / approach","type":"text"},{"id":"c2","name":"Best for","type":"text"},{"id":"c3","name":"Cost","type":"text"}],"items":[{"id":"r1","name":"2×2 formula","values":{"c1":"ad − bc","c2":"every 2×2 case — direct, no tricks needed","c3":"O(1)"}},{"id":"r2","name":"3×3 (first-row expansion or Sarrus)","values":{"c1":"sum of three 2×2 dets with alternating signs; or downward minus upward diagonal products","c2":"3×3 only; Sarrus does not generalize","c3":"O(1)"}},{"id":"r3","name":"Cofactor expansion","values":{"c1":"Σ (−1)$^{i+j}$ aᵢⱼ Mᵢⱼ along any row or column","c2":"small matrices, especially when a row or column has many zeros","c3":"O(n!)"}},{"id":"r4","name":"Row reduction","values":{"c1":"reduce to triangular form, multiply the diagonal, adjust for tracked swaps and scalings","c2":"any matrix 4×4 or larger; the standard general-purpose method","c3":"O(n³)"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Determinant-Based Formulas"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Formula","features":[{"id":"c1","name":"Expression","type":"text"},{"id":"c2","name":"What it computes","type":"text"}],"items":[{"id":"r1","name":"[Cramer's rule](!/linear-algebra/determinants/applications)","values":{"c1":"xᵢ = det(Aᵢ) / det(A)","c2":"each component of the unique solution to Ax = b"}},{"id":"r2","name":"[Adjugate formula](!/linear-algebra/determinants/cofactors) for A⁻¹","values":{"c1":"A⁻¹ = adj(A) / det(A)","c2":"explicit closed form for the matrix inverse"}},{"id":"r3","name":"[Cross product](!/linear-algebra/vectors/cross-product) in ℝ³","values":{"c1":"a × b = symbolic 3×3 det with î, ĵ, k̂ on top","c2":"vector perpendicular to a and b with prescribed length"}},{"id":"r4","name":"[Characteristic polynomial](!/linear-algebra/eigen)","values":{"c1":"det(A − λI)","c2":"polynomial whose roots are the eigenvalues of A"}},{"id":"r5","name":"Wronskian","values":{"c1":"determinant of functions and their derivatives","c2":"linear independence test for solutions of an ODE"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a 3×3 determinant with the rule of Sarrus", href: "/linear-algebra/determinants/methods/sarrus-rule", desc: "Copy the first two columns, add the three downward diagonal products, subtract the three upward ones.", level: "composite", here: "#3" },
+      { skill: "Choose the right determinant method", href: "/linear-algebra/determinants/methods/which-determinant-method", desc: "A decision tree: what you are given, whether the matrix is triangular, then its size and zeros.", level: "strategy", here: "#11" },
+    ] },
+    { title: "More determinant methods", items: [
+      { skill: "Find a 2×2 determinant", href: "/linear-algebra/determinants/methods#determinant-2x2", desc: "A $2 \\times 2$ matrix inside $\\det$ or between vertical bars: $\\det\\begin{pmatrix} 4 & 3 \\\\ 2 & 5 \\end{pmatrix}$, $\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}$, or each minor inside a larger expansion.", level: "atomic" },
+      { skill: "Find a determinant by row reduction", href: "/linear-algebra/determinants/methods/determinant-row-reduction", desc: "Reduce to triangular form, multiply the diagonal, and correct for row swaps and scalings.", level: "composite" },
+      { skill: "Find a determinant by cofactor expansion", href: "/linear-algebra/determinants/methods/cofactor-expansion", desc: "Expand along the row or column with the most zeros: entry times sign times minor, added up.", level: "composite" },
+      { skill: "Use determinant properties", href: "/linear-algebra/determinants/methods/determinant-properties", desc: "Evaluate $\\det(2AB^TA^{-1})$ or the effect of row changes from known determinants, without entries.", level: "composite" },
+      { skill: "Find area and volume with determinants", href: "/linear-algebra/determinants/methods/area-volume-determinant", desc: "Put edge vectors into a matrix; the absolute value of its determinant is the area or volume.", level: "composite" },
+      { skill: "Find the determinant of a triangular matrix", href: "/linear-algebra/determinants/methods/triangular-determinant", desc: "Multiply the diagonal entries; for block triangular matrices, multiply the block determinants.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/determinants/methods", label: "All determinant methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1379,8 +1412,41 @@ $$\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}, \\quad 1 \\cdot 1 = 1$$`],
     ],
   };
 
+  // TestSelector 2026-11-14: Which way to compute a small determinant (obj6).
+  const determinantMethodSelector = {
+    question: 'How should a small determinant be computed by hand?',
+    intro: 'The size of the matrix decides.',
+    gateLabel: 'Branch on the size',
+    branches: [
+      { condition: '$2 \\times 2$',
+        test: {
+          name: 'The formula',
+          doThis: 'Compute $ad - bc$.',
+          verdict: 'The answer is immediate.',
+          limit: 'A formula for the $2 \\times 2$ case only.',
+        } },
+      { condition: '$3 \\times 3$',
+        test: {
+          name: 'First-row expansion or Sarrus',
+          doThis: 'Expand along the first row, or use the Sarrus shortcut.',
+          verdict: 'Both give the same number.',
+          limit: 'The Sarrus shortcut stops here: no such shortcut exists for $4 \\times 4$.',
+        } },
+      { condition: '$4 \\times 4$',
+        test: {
+          name: 'Cofactor expansion',
+          doThis: 'Scan for zeros, then expand along the row or column that has the most of them.',
+          why: 'In the example, column $2$ cuts the work from four $3 \\times 3$ determinants to one.',
+          needs: 'The sign of each position',
+          verdict: 'The determinant is the signed sum of the entries times their minors.',
+          limit: 'The sign comes from the position, $(-1)^{i+j}$, not from the first-row pattern.',
+        } },
+    ],
+  };
+
   return {
   props: {
+    determinantMethodSelector,
     pitfallData,
     faqQuestions,
     detRowOpTree,
@@ -1405,7 +1471,7 @@ $$\\begin{pmatrix} 1 & 2 \\\\ 0 & 1 \\end{pmatrix}, \\quad 1 \\cdot 1 = 1$$`],
    }
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTree, singularCases,
+export default function DeterminantsPage({ determinantMethodSelector, pitfallData,faqQuestions, detRowOpTree, singularCases,
   seoData,
   sectionsContent,
   introContent,
@@ -1504,6 +1570,7 @@ export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTre
           sectionsContent.obj3.content,
                   <div key={'unit-sarrus'} dangerouslySetInnerHTML={{ __html: demoUnits.sarrus }} />,
           `The general definition in the next section is what these six products are a special case of.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a 3×3 determinant with the rule of Sarrus](!/linear-algebra/determinants/methods/sarrus-rule) →@`,
         ]
     },
     {
@@ -1536,6 +1603,17 @@ export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTre
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-test-selector'}
+            id="determinant-method-selector"
+            title="Which way to compute a small determinant"
+            source="/linear-algebra/determinants"
+            before={"The methods named in this section, by the size of the matrix."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <TestSelector data={determinantMethodSelector} theme="navy" variant="tree" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -1554,8 +1632,15 @@ export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTre
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-determinants-how-row-operations-affect-matrix'}
+            id="determinants-how-row-operations-affect-matrix"
+            title="How Row Operations Affect the Determinant"
+            source="/linear-algebra/determinants"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="determinant-row-operations-tree"
@@ -1582,8 +1667,15 @@ export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTre
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'obj10-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj10Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-determinants-determinant-based-formulas-matrix'}
+            id="determinants-determinant-based-formulas-matrix"
+            title="Determinant-Based Formulas"
+            source="/linear-algebra/determinants"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
         ]
     },
     // NEW capstone section: obj11
@@ -1593,8 +1685,16 @@ export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTre
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-determinants-summary-how-compute-determinant-matrix'}
+            id="determinants-summary-how-compute-determinant-matrix"
+            title="Summary: How to Compute a Determinant"
+            source="/linear-algebra/determinants"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which determinant method should I use?](!/linear-algebra/determinants/methods/which-determinant-method) →@`,
         ]
     },
     {
@@ -1612,6 +1712,14 @@ export default function DeterminantsPage({ pitfallData,faqQuestions, detRowOpTre
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

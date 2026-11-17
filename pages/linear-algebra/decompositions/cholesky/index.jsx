@@ -1770,6 +1770,9 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 2 tables (obj2 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import FactorizationAnatomy from '@/app/components/infographics/linear-algebra/FactorizationAnatomy'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 
@@ -1797,6 +1800,23 @@ import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSh
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the Cholesky decomposition", href: "/linear-algebra/decompositions/methods/cholesky-decomposition", desc: "Symmetric positive definite matrix: build L column by column with square roots so that $A = LL^T$.", level: "composite", here: "#3" },
+    ] },
+    { title: "More decomposition methods", items: [
+      { skill: "Choose the right matrix decomposition", href: "/linear-algebra/decompositions/methods/which-decomposition", desc: "A decision tree: the task and the shape of the matrix pick LU, Cholesky, QR, spectral or SVD.", level: "strategy" },
+      { skill: "Find the LU decomposition", href: "/linear-algebra/decompositions/methods/lu-decomposition", desc: "Run Gaussian elimination, keep the multipliers in L and the result in U; pivot when a zero appears.", level: "composite" },
+      { skill: "Find the spectral decomposition", href: "/linear-algebra/decompositions/methods/spectral-decomposition", desc: "Symmetric matrix: orthonormal eigenvectors and eigenvalues give $A = QDQ^T$, a sum of projections.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/decompositions/methods", label: "All decomposition methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2605,8 +2625,71 @@ $$x_1 = \\frac{0 - 1 + 1}{2} = 0$$`, `And $A(0, 1, 1)^T = (0, 6, 7)^T = \\mathbf
     ],
   };
 
+  // Procedure rollout 2026-11-14: The Cholesky algorithm as a loop (obj3).
+  const choleskyLoop = {
+    loop: {
+      label: 'Algorithm',
+      repeat: 'until the last column',
+      steps: [
+        { text: 'Start at column $j = 1$' },
+        { text: 'Compute the diagonal entry $l_{jj}$', repeat: true },
+        { text: 'Compute the entries below it, $l_{ij}$ for $i > j$', repeat: true },
+        { text: 'Move to the next column and repeat until every column is done', repeat: true, test: true },
+        { text: 'The filled columns form $L$', output: true },
+      ],
+    },
+    run: {
+      label: 'The $3 \\times 3$ matrix $A$ of the worked example',
+      vars: [
+        { key: 'j', label: 'column $j$' },
+        { key: 'd', label: 'diagonal' },
+      ],
+      start: { j: '$1$' },
+      startNote: 'The factor $L$ is filled from left to right, starting with column $1$.',
+      passes: [
+        { steps: [
+            { set: { d: '$2$' }, note: '$l_{11} = \\sqrt{4} = 2$.' },
+            { note: '$l_{21} = 2/2 = 1$ and $l_{31} = -2/2 = -1$.' },
+            { set: { j: '$2$' }, note: 'Column $2$ is still to do, so go back to step 2.' },
+          ], row: ['$1$', '$l_{11} = 2$', '$l_{21} = 1$, $l_{31} = -1$'] },
+        { steps: [
+            { set: { d: '$2$' }, note: '$l_{22} = \\sqrt{5 - 1^2} = \\sqrt{4} = 2$.' },
+            { note: '$l_{32} = (1 - (-1)(1))/2 = 1$.' },
+            { set: { j: '$3$' }, note: 'Column $3$ is still to do, so go back to step 2.' },
+          ], row: ['$2$', '$l_{22} = 2$', '$l_{32} = 1$'] },
+        { steps: [
+            { set: { d: '$2$' }, note: '$l_{33} = \\sqrt{6 - (-1)^2 - 1^2} = \\sqrt{4} = 2$.' },
+            { note: 'No entries lie below the last diagonal entry.' },
+            { note: 'All three columns are done, so the loop ends here.' },
+          ], row: ['$3$', '$l_{33} = 2$', 'none'] },
+      ],
+      tableLabel: 'Columns finished so far',
+      columns: ['column', 'diagonal', 'below the diagonal'],
+      result: '$L = \\begin{pmatrix} 2 & 0 & 0 \\\\ 1 & 2 & 0 \\\\ -1 & 1 & 2 \\end{pmatrix}$',
+      resultNote: 'The three columns give $L$, and $LL^T = A$.',
+    },
+  };
+
+  // FactorizationAnatomy 2026-11-14: What each factor of Cholesky holds (obj5).
+  const choleskyFactorAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Symmetric positive definite', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        requires: 'Only the lower triangle is read, since $a_{ij} = a_{ji}$' },
+      { symbol: 'L', name: 'Lower triangular', dim: 'n × n', fill: 'lower', width: 110, height: 110,
+        contains: 'The only factor computed and stored' },
+      { symbol: 'Lᵀ', name: 'Upper triangular', dim: 'n × n', fill: 'upper', width: 110, height: 110,
+        contains: 'The same numbers as $L$, read the other way' },
+    ],
+    existsWhen: 'If and only if $A$ is symmetric positive definite.',
+    uniqueWhen: 'The diagonal entries of $L$ are positive.',
+    cost: '⅓n³ once, then 2n² per system',
+    preferredWhen: 'Large symmetric positive definite systems: twice as fast as LU, half the storage.',
+  };
+
   return {
   props:{
+    choleskyFactorAnatomy,
+    choleskyLoop,
     pitfallData,
     choleskyLevels,
     demoUnits,
@@ -2629,7 +2712,7 @@ $$x_1 = \\frac{0 - 1 + 1}{2} = 0$$`, `And $A(0, 1, 1)^T = (0, 6, 7)^T = \\mathbf
    }
 const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function PageTemplate({ pitfallData,choleskyLevels, 
+export default function PageTemplate({ choleskyFactorAnatomy, choleskyLoop, pitfallData,choleskyLevels, 
   seoData,
   sectionsContent,
   introContent,
@@ -2760,8 +2843,18 @@ export default function PageTemplate({ pitfallData,choleskyLevels,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-procedure'}
+            id="cholesky-column-loop"
+            title="The Cholesky algorithm as a loop"
+            source="/linear-algebra/decompositions/cholesky"
+            before={"The worked example of this section, one column at a time. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={choleskyLoop} variant="loop" />
+          </DiagramFrame>,
                   <div key={'unit-algorithm'} dangerouslySetInnerHTML={{ __html: demoUnits.algorithm }} />,
           `Working on half the matrix is what makes this roughly twice as fast as the LU factorisation it specialises.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the Cholesky decomposition](!/linear-algebra/decompositions/methods/cholesky-decomposition) →@`,
         ]
     },
     {
@@ -2778,6 +2871,17 @@ export default function PageTemplate({ pitfallData,choleskyLevels,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-factor-anatomy'}
+            id="cholesky-factor-anatomy"
+            title="What each factor of Cholesky holds"
+            source="/linear-algebra/decompositions/cholesky"
+            before={"The factorization taken apart, with its cost: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={choleskyFactorAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -2868,6 +2972,14 @@ export default function PageTemplate({ pitfallData,choleskyLevels,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

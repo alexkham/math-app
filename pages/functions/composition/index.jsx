@@ -1639,6 +1639,8 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1659,9 +1661,43 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import functionsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/functions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Domain of Composite Functions"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Composite (f ∘ g)(x)","features":[{"id":"c1","name":"Condition 1: x in domain of g","type":"text"},{"id":"c2","name":"Condition 2: g(x) in domain of f","type":"text"},{"id":"c3","name":"Domain of f ∘ g","type":"text"}],"items":[{"id":"r1","name":"√(x − 3) (f = √x, g = x − 3)","values":{"c1":"all real x — no restriction","c2":"need x − 3 ≥ 0, so x ≥ 3","c3":"[3, ∞)"}},{"id":"r2","name":"1 ⁄ (x² − 1) (f = 1 ⁄ x, g = x² − 1)","values":{"c1":"all real x — no restriction","c2":"need x² − 1 ≠ 0, so x ≠ ±1","c3":"(−∞, −1) ∪ (−1, 1) ∪ (1, ∞)"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Composition Tasks at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Task","features":[{"id":"c1","name":"Given","type":"text"},{"id":"c2","name":"Procedure","type":"text"},{"id":"c3","name":"Example result","type":"text"}],"items":[{"id":"r1","name":"Evaluate at a point","values":{"c1":"f, g, input a","c2":"compute g(a), then apply f to the result","c3":"(f ∘ g)(4) = 101"}},{"id":"r2","name":"Find composite formula","values":{"c1":"formulas for f and g","c2":"substitute g(x) into f wherever f's input appears; simplify","c3":"4x² + 4x − 3"}},{"id":"r3","name":"[Find domain](!/functions/domain)","values":{"c1":"f, g and their domains","c2":"require x in dom(g) AND g(x) in dom(f); intersect","c3":"[3, ∞)"}},{"id":"r4","name":"Test commutativity","values":{"c1":"f and g","c2":"compute both f ∘ g and g ∘ f; compare formulas","c3":"x² + 5 ≠ x² + 10x + 25"}},{"id":"r5","name":"Chain three or more","values":{"c1":"f, g, h, …","c2":"evaluate innermost first, then work outward","c3":"(f ∘ g ∘ h)(3) = 49"}},{"id":"r6","name":"Compose with itself","values":{"c1":"a single f","c2":"substitute f(x) into f wherever its input appears","c3":"f(x) = 2x ⇒ f(f(x)) = 4x"}},{"id":"r7","name":"Decompose","values":{"c1":"a single h(x)","c2":"identify the outer operation; what it acts on is the inner","c3":"√(x² + 1) = √x ∘ (x² + 1)"}},{"id":"r8","name":"[Verify inverses](!/functions/inverse)","values":{"c1":"f and candidate f⁻¹","c2":"check that both f(f⁻¹(x)) and f⁻¹(f(x)) reduce to x","c3":"both compositions = x ⇒ confirmed"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Decomposing Functions"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Composite h(x)","features":[{"id":"c1","name":"Inner g(x)","type":"text"},{"id":"c2","name":"Outer f(x)","type":"text"},{"id":"c3","name":"Verify f(g(x))","type":"text"}],"items":[{"id":"r1","name":"√(x² + 1)","values":{"c1":"x² + 1","c2":"√x","c3":"√(x² + 1) ✓"}},{"id":"r2","name":"(3x − 7)⁵","values":{"c1":"3x − 7","c2":"x⁵","c3":"(3x − 7)⁵ ✓"}},{"id":"r3","name":"(x + 1)²","values":{"c1":"x + 1","c2":"x²","c3":"(x + 1)² ✓"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Non-Commutativity"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Composition","features":[{"id":"c1","name":"Substitution","type":"text"},{"id":"c2","name":"Simplified formula","type":"text"},{"id":"c3","name":"Value at x = 1","type":"text"}],"items":[{"id":"r1","name":"f ∘ g (g acts first)","values":{"c1":"f(g(x)) = f(x²) = (x²) + 5","c2":"x² + 5","c3":"6"}},{"id":"r2","name":"g ∘ f (f acts first)","values":{"c1":"g(f(x)) = g(x + 5) = (x + 5)²","c2":"x² + 10x + 25","c3":"36"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Compose two functions", href: "/functions/methods/compose-functions", desc: "Feed the inner function into the outer one: substitute the whole formula, simplify, then check the domain.", level: "composite", here: "#4" },
+      { skill: "Decompose a function into two functions", href: "/functions/methods/decompose-functions", desc: "Read the order of operations on $x$: the last operation is the outer function, everything before it the inner one.", level: "composite", here: "#9" },
+    ] },
+    { title: "More functions methods", items: [
+      { skill: "Verify that two functions are inverses", href: "/functions/methods/verify-inverse", desc: "Compose them in both orders; they are inverses exactly when both compositions simplify to $x$.", level: "composite" },
+      { skill: "Find the domain of a function", href: "/functions/methods/find-domain", desc: "List every operation that can fail (denominators, even roots, logs), solve each condition, and intersect the results.", level: "composite" },
+      { skill: "Graph a transformed function", href: "/functions/methods/graph-transformations", desc: "Start from the parent graph, read $a$, $b$, $h$, $k$ from $a f(b(x - h)) + k$, and move key points.", level: "composite" },
+    ] },
+    { title: "Derivative techniques", items: [
+      { skill: "Differentiate composite functions", href: "/calculus/derivatives/techniques/composite-functions", desc: "Nested functions such as $\\sin(x^2)$ or $e^{3x+1}$, peeled layer by layer.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/functions/methods", label: "All functions methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3242,8 +3278,22 @@ const faqQuestions = {
     conclusion: { text: '$f \\circ f^{-1} = f^{-1} \\circ f = I$', say: 'Each composition yields the identity function, the function that returns its input unchanged.' },
   };
 
+  // Procedure rollout 2026-11-14: Three functions, from the inside out (obj7).
+  const threeCompositionSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(f \\circ g \\circ h)(3)$ with $f(x) = x^2$, $g(x) = x + 1$, $h(x) = 2x$',
+      rows: [
+        { step: 'The innermost function acts first', example: '$h(3) = 6$' },
+        { step: 'The next function acts on that result', example: '$g(6) = 7$' },
+        { step: 'The outermost function acts last', example: '$f(7) = 49$' },
+      ],
+    },
+  };
+
    return {
       props:{
+    threeCompositionSteps,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -3268,7 +3318,7 @@ const faqQuestions = {
     }
    }
 
-export default function CompositionPage({ proofStepsData, formulaSummaryData, pitfallData,
+export default function CompositionPage({ threeCompositionSteps, proofStepsData, formulaSummaryData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -3408,6 +3458,7 @@ $$(f \\circ g)(x) = f(g(x))$$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to compose two functions](!/functions/methods/compose-functions) →@`,
         ]
     },
     {
@@ -3416,8 +3467,15 @@ $$(f \\circ g)(x) = f(g(x))$$
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-composition-domain-composite-functions-matrix'}
+            id="composition-domain-composite-functions-matrix"
+            title="Domain of Composite Functions"
+            source="/functions/composition"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:An input survives a composition only if every step accepts it: $g$ must take $x$, and $f$ must take $g(x)$.]@`,
         ]
     },
@@ -3427,8 +3485,15 @@ $$(f \\circ g)(x) = f(g(x))$$
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-composition-non-commutativity-matrix'}
+            id="composition-non-commutativity-matrix"
+            title="Non-Commutativity"
+            source="/functions/composition"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3437,6 +3502,15 @@ $$(f \\circ g)(x) = f(g(x))$$
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="three-function-composition-steps"
+            title="Three functions, from the inside out"
+            source="/functions/composition"
+            before={"The example of this section, one function at a time. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={threeCompositionSteps} variant="worked" />
+          </DiagramFrame>,
           `@academic[punchline:Any chain runs from the innermost function outward: regrouping the brackets is harmless, reordering the functions is not.]@`,
         ]
     },
@@ -3456,8 +3530,16 @@ $$(f \\circ g)(x) = f(g(x))$$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-composition-decomposing-functions-matrix'}
+            id="composition-decomposing-functions-matrix"
+            title="Decomposing Functions"
+            source="/functions/composition"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to decompose a function into two functions](!/functions/methods/decompose-functions) →@`,
         ]
     },
     {
@@ -3541,8 +3623,15 @@ $$(f \\circ g)(x) = f(g(x))$$
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-composition-composition-tasks-at-glance-matrix'}
+            id="composition-composition-tasks-at-glance-matrix"
+            title="Composition Tasks at a Glance"
+            source="/functions/composition"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -3586,6 +3675,14 @@ $$(f \\circ g)(x) = f(g(x))$$
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

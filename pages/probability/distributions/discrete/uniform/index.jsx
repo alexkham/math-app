@@ -848,6 +848,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj16 summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -874,8 +875,52 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_discreteUniformRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 150,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    bands: [{ from: 0, to: 2, label: 'Discrete', color: '#f1f5f9' }, { from: 2, to: 3, label: 'Continuous', color: '#eff6ff' }],
+    nodes: [
+      { id: 'bern', name: 'Bernoulli', x: 0, y: 0.3, href: '/probability/distributions/discrete#bernoulli', text: 'One trial that gives $1$ with probability $p$ and $0$ otherwise.' },
+      { id: 'cat', name: 'Categorical', x: 0, y: 1.7, text: 'Finitely many values, each with its own probability.' },
+      { id: 'du', name: 'Discrete uniform', x: 1, y: 1, text: 'Finitely many equally likely values.' },
+      { id: 'cu', name: 'Continuous uniform', x: 2, y: 0.3, href: '/probability/distributions/continuous/uniform', text: 'All values in an interval equally likely.' },
+      { id: 'norm', name: 'Normal', x: 2, y: 1.7, href: '/probability/distributions/continuous/normal', text: 'The bell curve that sums of many independent draws approach.' },
+    ],
+    edges: [
+      { from: 'bern', to: 'du', kind: 'special', label: '$p = \\frac{1}{2}$', text: 'the discrete uniform on the two values $0$ and $1$ is the Bernoulli with $p = \\frac{1}{2}$, a fair coin' },
+      { from: 'du', to: 'cat', kind: 'special', label: 'equal chances', text: 'the discrete uniform is the categorical distribution with every probability equal to $\\frac{1}{n}$' },
+      { from: 'du', to: 'cu', kind: 'limit', label: 'finer grid', text: 'as the equally likely values get closer together, the discrete uniform turns into the continuous uniform' },
+      { from: 'du', to: 'norm', kind: 'limit', label: 'sum of many', text: 'the total of many independent draws approaches the normal; the total of $n$ dice has mean $3.5n$ and variance $\\frac{35n}{12}$' },
+    ],
+  },
+};
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a discrete uniform probability", href: "/probability/distributions/methods/discrete-uniform-probability", desc: "Equally likely whole numbers from $a$ to $b$: count the values in the event and divide by $b - a + 1$.", level: "composite", here: "#4" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Find a continuous uniform probability", href: "/probability/distributions/methods/continuous-uniform-probability", desc: "Equally likely anywhere on $[a, b]$: the probability of an interval is its length over $b - a$, after clipping to the support.", level: "composite" },
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1403,7 +1448,37 @@ Each face has an equal and independent chance of appearing.
     },
     obj14:{
       title:`Related Distributions`,
-      content:``,
+      content:`
+The discrete uniform distribution has no trials and no rate, only a list of equally likely values, so its relatives are few. They come from making the list finer, cutting it down to two values, dropping the equal chances, or adding several draws together.
+
+### Continuous uniform: a finer and finer grid
+
+Place $n$ equally likely values at $\\frac{1}{n}, \\frac{2}{n}, \\ldots, 1$. The chance of landing at or below a point $x$ between $0$ and $1$ is the number of grid values up to $x$, divided by $n$:
+
+@academic[formula_callout:Related Distributions
+$$P(X_n \\leq x) = \\frac{\\lfloor nx \\rfloor}{n} \\to x \\quad \\text{as } n \\to \\infty$$]@
+
+and $F(x) = x$ is the CDF of the [continuous uniform](!/probability/distributions/continuous/uniform) distribution on $(0, 1)$. The variance follows along: $\\frac{n^2 - 1}{12n^2}$ approaches $\\frac{1}{12}$. The link also runs back, and computers use it to roll dice: if $U$ is a continuous uniform value on $(0, 1)$, then $\\lfloor 6U \\rfloor + 1$ is uniform on $1$ to $6$.
+
+### Bernoulli: two values
+
+On the two values $0$ and $1$ the discrete uniform is the [Bernoulli](!/probability/distributions/discrete#bernoulli) distribution with $p = \\frac{1}{2}$, a fair coin. The formulas agree: the mean $\\frac{0 + 1}{2} = \\frac{1}{2}$ is $p$, and the variance $\\frac{2^2 - 1}{12} = \\frac{1}{4}$ is $p(1 - p)$.
+
+### Categorical: unequal chances
+
+A categorical distribution gives each of $n$ values its own probability $p_1, p_2, \\ldots, p_n$, with the probabilities adding up to $1$. The discrete uniform is the case where every $p_i$ equals $\\frac{1}{n}$. A loaded die is categorical but not uniform: the same six values, with different chances.
+
+### Sums of draws: a triangle, then a bell
+
+A sum of uniform draws is not uniform. The total $S$ of two dice runs from $2$ to $12$ with probabilities that rise to a peak at $7$ and fall back:
+
+@academic[formula_callout:Related Distributions
+$$P(S = s) = \\frac{6 - |s - 7|}{36}, \\quad s = 2, 3, \\ldots, 12$$]@
+
+As more dice are added the triangle rounds into a bell, and the total approaches the [normal](!/probability/distributions/continuous/normal) distribution by the [central limit theorem](!/probability/central-limit-theorem). The total of $n$ dice has mean $3.5n$ and variance $\\frac{35n}{12}$.
+
+Of these, the continuous uniform link is the one met most often: the two distributions share a name and a midpoint mean, and differ in whether values are counted or measured.
+`,
       before:``,
       after:``,
       link:'',
@@ -1954,6 +2029,7 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
                   <div key={'unit-u_4_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_0 }} />,
           `The cumulative form is a regular staircase.`,
           `@academic[punchline:Every discrete uniform probability is one over a count, so the whole calculation rests on counting the values correctly.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a discrete uniform probability](!/probability/distributions/methods/discrete-uniform-probability) →@`,
         ]
     },
     {
@@ -2043,6 +2119,23 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
         ]
     },
     {
+        id:'14',
+        title:sectionsContent.obj14.title,
+        link:sectionsContent.obj14.link,
+        content:[
+          sectionsContent.obj14.content,
+          <DiagramFrame
+            key={'concept-map-discrete-uniform-related-distributions'}
+            id="discrete-uniform-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/discrete/uniform"
+            related={false}
+          >
+            <ConceptMap data={cm_discreteUniformRelated} variant="graph" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'16',
         title:sectionsContent.obj16.title,
         link:sectionsContent.obj16.link,
@@ -2075,6 +2168,14 @@ However two dice are weighted, their total is never uniform on $2$ to $12$. With
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

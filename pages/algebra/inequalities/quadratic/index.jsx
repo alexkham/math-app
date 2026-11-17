@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,9 +16,120 @@ import renderFunctionPlotV2 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import Procedure from '@/app/components/infographics/Procedure'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_negativeDiscriminant = {
+  center: { name: '$\\Delta < 0$', sub: 'no real roots, one sign everywhere' },
+  axes: { cols: ['the inequality asks $> 0$ (or $\\geq 0$)', 'the inequality asks $< 0$ (or $\\leq 0$)'], rows: ['$a > 0$', '$a < 0$'] },
+  options: { bullets: false },
+  quadrants: [
+    { label: 'Positive everywhere', title: 'Every real number', tone: 'b', items: [ '$ax^2 + bx + c > 0$ is satisfied by every real number: $(-\\infty, \\infty)$.' ] },
+    { label: 'Positive everywhere', title: 'No solution', tone: 'd', items: [ '$ax^2 + bx + c < 0$ has no solution.' ] },
+    { label: 'Negative everywhere', title: 'No solution', tone: 'd', items: [ '$ax^2 + bx + c > 0$ has no solution.' ] },
+    { label: 'Negative everywhere', title: 'Every real number', tone: 'b', items: [ '$ax^2 + bx + c < 0$ holds for all $x$.' ] }
+  ],
+  note: { label: 'Example', text: '$x^2 + x + 1$ has $\\Delta = 1 - 4 = -3 < 0$ and $a = 1 > 0$, so $x^2 + x + 1 > 0$ is universally true and $x^2 + x + 1 < 0$ is universally false.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
+
+// CaseGraph 2026-11-12: "Roots, intervals and sign by discriminant" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Discriminant', text: '$\\Delta = b^2 - 4ac$' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -2.4, y1: 2.4,
+      axes: [
+        { id: 'd', name: '$\\Delta$', options: [
+          { id: 'pos', label: '$\\Delta > 0$', sub: '2 distinct roots, 3 intervals' },
+          { id: 'zero', label: '$\\Delta = 0$', sub: '1 repeated root, 2 intervals' },
+          { id: 'neg', label: '$\\Delta < 0$', sub: 'no real roots, whole line' } ] },
+        { id: 'a', name: '$a$', options: [
+          { id: 'up', label: '$a > 0$' },
+          { id: 'down', label: '$a < 0$' } ] },
+        { id: 'ineq', name: 'Inequality', select: true, options: [
+          { id: 'gt', label: '$> 0$', sign: 1 },
+          { id: 'lt', label: '$< 0$', sign: -1 } ] },
+      ],
+      layout: { rows: 'd', cols: 'a' },
+      cells: {
+        'pos|up':   { f: (x) => x * x - 1, roots: [{ x: -1, label: 'r₁' }, { x: 1, label: 'r₂' }], intervals: [{ from: -Infinity, to: -1 }, { from: -1, to: 1 }, { from: 1, to: Infinity }], pattern: '+  −  +', solution: { gt: '$(-\\infty, r_1) \\cup (r_2, \\infty)$', lt: '$(r_1, r_2)$' } },
+        'pos|down': { f: (x) => 1 - x * x, roots: [{ x: -1, label: 'r₁' }, { x: 1, label: 'r₂' }], intervals: [{ from: -Infinity, to: -1 }, { from: -1, to: 1 }, { from: 1, to: Infinity }], pattern: '−  +  −', solution: { gt: '$(r_1, r_2)$', lt: '$(-\\infty, r_1) \\cup (r_2, \\infty)$' } },
+        'zero|up':   { f: (x) => x * x, roots: [{ x: 0, label: 'r' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '+  0  +', solution: { gt: 'all $x \\neq r$', lt: '$\\varnothing$' } },
+        'zero|down': { f: (x) => -x * x, roots: [{ x: 0, label: 'r' }], intervals: [{ from: -Infinity, to: 0 }, { from: 0, to: Infinity }], pattern: '−  0  −', solution: { gt: '$\\varnothing$', lt: 'all $x \\neq r$' } },
+        'neg|up':   { f: (x) => x * x + 1, pattern: '+', solution: { gt: '$(-\\infty, \\infty)$', lt: '$\\varnothing$' } },
+        'neg|down': { f: (x) => -x * x - 1, pattern: '−', solution: { gt: '$\\varnothing$', lt: '$(-\\infty, \\infty)$' } },
+      },
+    },
+  };
+import Procedure from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Quadratic Inequality Cases"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Discriminant","features":[{"id":"c1","name":"Roots","type":"text"},{"id":"c2","name":"Sign pattern across the line (a > 0)","type":"text"},{"id":"c3","name":"Solution to expression > 0","type":"text"},{"id":"c4","name":"Solution to expression < 0","type":"text"}],"items":[{"id":"r1","name":"Δ > 0","values":{"c1":"r₁ < r₂","c2":"+ − + (across r₁, r₂)","c3":"(−∞, r₁) ∪ (r₂, ∞)","c4":"(r₁, r₂)"}},{"id":"r2","name":"Δ = 0","values":{"c1":"r (repeated)","c2":"+ everywhere; equals 0 at r","c3":"all x ≠ r","c4":"∅ (empty)"}},{"id":"r3","name":"Δ < 0","values":{"c1":"none","c2":"+ everywhere","c3":"(−∞, ∞)","c4":"∅ (empty)"}}]};
+
+// CaseGraph 2026-11-12: "Above or below the axis" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData2 = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    grid: {
+      x0: -1.8, x1: 1.8, y0: -2.4, y1: 2.4,
+      axes: [
+        { id: 'a', name: 'Leading coefficient', options: [
+          { id: 'up', label: '$a > 0$', sub: 'opens upward' },
+          { id: 'down', label: '$a < 0$', sub: 'opens downward' } ] },
+        { id: 'ineq', name: 'Inequality', select: true, options: [
+          { id: 'gt', label: '$> 0$', sub: 'above the $x$-axis', sign: 1 },
+          { id: 'lt', label: '$< 0$', sub: 'below the $x$-axis', sign: -1 } ] },
+      ],
+      layout: { rows: 'a', cols: 'ineq' },
+      cells: {
+        up:   { f: (x) => x * x - 1, roots: [{ x: -1, label: 'r₁' }, { x: 1, label: 'r₂' }], intervals: [{ from: -Infinity, to: -1 }, { from: -1, to: 1 }, { from: 1, to: Infinity }], pattern: '+  −  +', solution: { gt: '$(-\\infty, r_1) \\cup (r_2, \\infty)$', lt: '$(r_1, r_2)$' } },
+        down: { f: (x) => 1 - x * x, roots: [{ x: -1, label: 'r₁' }, { x: 1, label: 'r₂' }], intervals: [{ from: -Infinity, to: -1 }, { from: -1, to: 1 }, { from: 1, to: Infinity }], pattern: '−  +  −', solution: { gt: '$(r_1, r_2)$', lt: '$(-\\infty, r_1) \\cup (r_2, \\infty)$' } },
+      },
+    },
+  };
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a quadratic inequality", href: "/algebra/inequalities/methods/quadratic-inequalities", desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: "composite", here: "#6" },
+    ] },
+    { title: "More inequality methods", items: [
+      { skill: "Solve a polynomial inequality", href: "/algebra/inequalities/methods/polynomial-inequalities", desc: "Factor, mark the roots, use a sign chart; even multiplicities do not change the sign.", level: "composite" },
+      { skill: "Solve a rational inequality", href: "/algebra/inequalities/methods/rational-inequalities", desc: "Compare with zero, combine into one fraction, sign-chart the zeros of top and bottom.", level: "composite" },
+      { skill: "Choose the right method for an inequality", href: "/algebra/inequalities/methods/which-inequality-method", desc: "A decision tree from the shape of the inequality to the method that solves it.", level: "strategy" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+      { skill: "Use the quadratic formula", href: "/algebra/equations/methods/quadratic-formula", desc: "Read off a, b, c and substitute; works for every quadratic, factorable or not.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/inequalities/methods", label: "All inequality methods" },
+};
+
+// IntervalLine: back-substitution of the bi-quadratic example in obj8
+const il_biquadratic = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  compound: {
+    range: [-4, 4],
+    cases: [
+      { name: '$x^4 - 5x^2 + 4 > 0$', connective: 'or', source: '$x^4 - 5x^2 + 4 > 0$',
+        rewrite: '$u = x^2$: $(u - 1)(u - 4) > 0$ $\\Rightarrow$ $u < 1$ or $u > 4$',
+        conditions: [
+          { label: '$x^2 < 1$', pieces: [{ from: -1, to: 1, fromIn: false, toIn: false }] },
+          { label: '$x^2 > 4$', pieces: [{ from: -Infinity, to: -2, fromIn: false, toIn: false }, { from: 2, to: Infinity, fromIn: false, toIn: false }] }
+        ],
+        note: { label: 'Back in x', text: 'Each condition on $u$ becomes its own set of $x$ values, and either one is enough: three separate pieces, with the four boundaries $\\pm 1$ and $\\pm 2$ left out.' },
+        wrongNote: { label: 'OR, not AND', text: 'No $x$ has $x^2 < 1$ and $x^2 > 4$ at once, so AND leaves nothing.' } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -788,11 +900,17 @@ $$ax^2 + bx + c > 0$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-quadratic-discriminant-sign-grid'}
+            id="quadratic-discriminant-sign-grid"
+            title="Roots, intervals and sign by discriminant"
+            source="/algebra/inequalities/quadratic"
+            related={false}
+            before={"One row per case of the discriminant, one column per sign of $a$. Switch the inequality to see which intervals are solutions; click a heading to focus a row or column."}
+            after={"The discriminant fixes how many intervals there are; the sign of $a$ fixes the sign the quadratic keeps away from its roots."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
           `@academic[punchline:A quadratic can change sign only at a real root, and the discriminant counts those roots before any testing.]@`,
         ]
     },
@@ -824,6 +942,15 @@ $$ax^2 + bx + c > 0$$]@`,
           sectionsContent.obj5.content,
                   <div key={'unit-negative'} dangerouslySetInnerHTML={{ __html: demoUnits.negative }} />,
           `A negative discriminant makes the inequality trivial one way and impossible the other.`,
+          <DiagramFrame
+            key={'four-sides-quadratic-inequality-negative-discriminant'}
+            id="quadratic-inequality-negative-discriminant"
+            title="Solving When the Discriminant Is Negative"
+            source="/algebra/inequalities/quadratic"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_negativeDiscriminant} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -842,6 +969,7 @@ $$ax^2 + bx + c > 0$$]@`,
             <Procedure data={signChartProcedure} variant="worked" />
           </DiagramFrame>,
           sectionsContent.obj6.afterProcedure,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a quadratic inequality](!/algebra/inequalities/methods/quadratic-inequalities) →@`,
         ]
     },
 
@@ -852,11 +980,17 @@ $$ax^2 + bx + c > 0$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-quadratic-parabola-side-grid'}
+            id="quadratic-parabola-side-grid"
+            title="Above or below the axis"
+            source="/algebra/inequalities/quadratic"
+            related={false}
+            before={"Two roots $r_1 < r_2$: one row per way the parabola opens, one column per inequality. The gold stretch of the axis is the solution."}
+            after={"Opening upward puts the outside of the roots above the axis; opening downward puts the inside there."}
+          >
+            <CaseGraph data={caseGraphData2} variant="grid" />
+          </DiagramFrame>,
           `@academic[punchline:A quadratic inequality is a question about a parabola: its roots and the way it opens decide the answer.]@`,
         ]
     },
@@ -868,6 +1002,16 @@ $$ax^2 + bx + c > 0$$]@`,
           sectionsContent.obj8.content,
           <div key={'unit-biquad'} dangerouslySetInnerHTML={{ __html: demoUnits.biquad }} />,
           `Each positive value of u yields two symmetric boundaries in x.`,
+          <DiagramFrame
+            key={'biquad-interval-line'}
+            id="biquadratic-number-line"
+            title="Back-substitution on the number line"
+            source="/algebra/inequalities/quadratic"
+            related={false}
+            before={"The two conditions that come back from $u$, each as its own set of $x$ values, and what they give together."}
+          >
+            <IntervalLine data={il_biquadratic} variant="compound" />
+          </DiagramFrame>,
         ]
     },
 
@@ -878,11 +1022,15 @@ $$ax^2 + bx + c > 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-quadratic-summary-quadratic-inequality-cases-matrix'}
+            id="quadratic-summary-quadratic-inequality-cases-matrix"
+            title="Summary of Quadratic Inequality Cases"
+            source="/algebra/inequalities/quadratic"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -900,6 +1048,14 @@ $$ax^2 + bx + c > 0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

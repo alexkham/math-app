@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -13,12 +14,91 @@ import polynomialMultiplicationDiagrams from '@/app/components/algebra/visualize
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_polynomialDegrees = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  options: { stepMinWidth: 100 },
+  scale: {
+    axisLabel: 'degree',
+    initial: 2,
+    steps: [
+      { key: '0', name: 'Constant', form: '$c$', short: 'horizontal line', sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, pieces: [{ f: () => 0.8, from: -2, to: 2 }] },
+        text: 'The graph is a horizontal line, and the polynomial has no roots unless it equals zero.', examples: '$5, \\quad -3, \\quad \\frac{1}{2}$' },
+      { key: '1', name: 'Linear', form: '$ax + b$', short: 'straight line', sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, pieces: [{ f: (x) => 0.6 * x + 0.2, from: -2, to: 2 }] },
+        text: 'The general form is $ax + b$ with $a \\neq 0$. The graph is a straight line with slope $a$, crossing the x-axis exactly once.', examples: '$2x + 3, \\quad -x + 1, \\quad 7x$' },
+      { key: '2', name: 'Quadratic', form: '$ax^2 + bx + c$', short: 'parabola', sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, pieces: [{ f: (x) => 0.6 * x * x - 1, from: -2, to: 2 }] },
+        text: 'The general form is $ax^2 + bx + c$ with $a \\neq 0$. The graph is a parabola, opening upward when $a > 0$ and downward when $a < 0$.', examples: '$x^2 - 4, \\quad 3x^2 + 2x - 1, \\quad -x^2 + 5$' },
+      { key: '3', name: 'Cubic', form: '$ax^3 + \\cdots + d$', short: 'S-shaped', sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, pieces: [{ f: (x) => 0.35 * (x * x * x - 2.5 * x), from: -2, to: 2 }] },
+        text: 'The general form is $ax^3 + bx^2 + cx + d$ with $a \\neq 0$. The graph has an S-shaped curve with at most two turning points.', examples: '$x^3 - 1, \\quad 2x^3 - x^2 + 4, \\quad -x^3 + 2x$' },
+      { key: '4', name: 'Quartic', form: 'degree $4$', sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, pieces: [{ f: (x) => 0.3 * (x * x * x * x - 4 * x * x) + 0.5, from: -2, to: 2 }] },
+        text: 'A quartic polynomial has degree $4$.' },
+      { key: '5', name: 'Quintic', form: 'degree $5$', sketch: { x0: -2, x1: 2, y0: -1.5, y1: 1.5, pieces: [{ f: (x) => 0.12 * x * (x * x - 1) * (x * x - 3.2), from: -2, to: 2 }] },
+        text: 'A quintic polynomial has degree $5$.' },
+      { key: '$n$', name: 'Degree $n$', open: true, muted: true, form: 'named by degree',
+        text: 'Beyond degree five, standard names become rare — we simply refer to "a degree $6$ polynomial" or "a degree $10$ polynomial."' }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: The Polynomial Family by Degree"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Degree","features":[{"id":"c1","name":"Name","type":"text"},{"id":"c2","name":"General form (aₙ ≠ 0)","type":"text"},{"id":"c3","name":"Graph shape","type":"text"},{"id":"c4","name":"Max roots / turning points","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"Constant","c2":"a","c3":"horizontal line","c4":"0 / 0"}},{"id":"r2","name":"1","values":{"c1":"Linear","c2":"ax + b","c3":"straight line","c4":"1 / 0"}},{"id":"r3","name":"2","values":{"c1":"Quadratic","c2":"ax² + bx + c","c3":"parabola","c4":"2 / 1"}},{"id":"r4","name":"3","values":{"c1":"Cubic","c2":"ax³ + bx² + cx + d","c3":"S-shaped curve","c4":"3 / 2"}},{"id":"r5","name":"4","values":{"c1":"Quartic","c2":"ax⁴ + ⋯ + e","c3":"W- or M-shape","c4":"4 / 3"}},{"id":"r6","name":"5","values":{"c1":"Quintic","c2":"ax⁵ + ⋯ + f","c3":"opposite ends head in opposite directions","c4":"5 / 4"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj11Table ("Key Theorems"); converted from the table's own cells.
+const fm_obj11Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Theorem","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"What it does for you","type":"text"}],"items":[{"id":"r1","name":"Remainder Theorem","values":{"c1":"dividing P(x) by (x − a) leaves remainder P(a)","c2":"compute remainders with a single evaluation, no long division"}},{"id":"r2","name":"Factor Theorem","values":{"c1":"(x − a) is a factor of P(x) ⟺ P(a) = 0","c2":"turn root-finding into factor-finding (and vice versa)"}},{"id":"r3","name":"Rational Root Theorem","values":{"c1":"any rational root p ⁄ q (in lowest terms) of a polynomial with integer coefficients satisfies p | a₀, q | aₙ","c2":"reduce the search for rational roots to a finite list of candidates"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Vocabulary"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Vocabulary","features":[{"id":"c1","name":"Definition","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Term","values":{"c1":"a coefficient times a power of the variable","c2":"in 4x³ − 2x + 7: the terms are 4x³, −2x, 7"}},{"id":"r2","name":"Coefficient","values":{"c1":"numerical factor of a term","c2":"in 4x³ − 2x + 7: 4, −2 (7 is the constant term)"}},{"id":"r3","name":"Leading term","values":{"c1":"term with the highest exponent","c2":"in 4x³ − 2x + 7: 4x³"}},{"id":"r4","name":"Leading coefficient","values":{"c1":"coefficient of the leading term","c2":"in 4x³ − 2x + 7: 4"}},{"id":"r5","name":"Constant term","values":{"c1":"term with no variable; equals P(0)","c2":"in 4x³ − 2x + 7: 7"}},{"id":"r6","name":"Monomial","values":{"c1":"polynomial with exactly one term","c2":"5x²"}},{"id":"r7","name":"Binomial","values":{"c1":"polynomial with exactly two terms","c2":"x + 3"}},{"id":"r8","name":"Trinomial","values":{"c1":"polynomial with exactly three terms","c2":"x² − 4x + 4"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Polynomial methods", items: [
+      { skill: "Factor out the greatest common factor", href: "/algebra/polynomials/methods/factor-gcf", desc: "Pull the largest common number and the lowest common powers out of every term.", level: "composite" },
+      { skill: "Factor by grouping", href: "/algebra/polynomials/methods/factor-by-grouping", desc: "Four terms: pair them, factor each pair, then factor out the common bracket.", level: "composite" },
+      { skill: "Factor a trinomial", href: "/algebra/polynomials/methods/factor-trinomials", desc: "Find two numbers by product and sum; the ac method when the leading coefficient is not 1.", level: "composite" },
+      { skill: "Factor a difference of squares", href: "/algebra/polynomials/methods/difference-of-squares", desc: "Spot $a^2 - b^2$ and write $(a - b)(a + b)$; repeat while squares remain.", level: "composite" },
+      { skill: "Factor a sum or difference of cubes", href: "/algebra/polynomials/methods/sum-difference-of-cubes", desc: "Spot $a^3 \\pm b^3$ and use the matching formula; the quadratic factor never factors further.", level: "composite" },
+      { skill: "Choose the right factoring method", href: "/algebra/polynomials/methods/which-factoring-method", desc: "A decision tree: GCF first, then count the terms and look for the pattern.", level: "strategy" },
+      { skill: "Graph a polynomial", href: "/algebra/polynomials/methods/graph-polynomials", desc: "End behaviour from the leading term, intercepts, cross or touch at each root, then sketch.", level: "composite" },
+      { skill: "Do polynomial long division", href: "/algebra/polynomials/methods/polynomial-long-division", desc: "Divide leading terms, multiply back, subtract, bring down; repeat until the degree drops.", level: "composite" },
+      { skill: "Use synthetic division", href: "/algebra/polynomials/methods/synthetic-division", desc: "Divide by $x - r$ with coefficients only: bring down, multiply by $r$, add, repeat.", level: "composite" },
+      { skill: "Find all roots of a polynomial", href: "/algebra/polynomials/methods/find-all-roots", desc: "Rational roots first, divide them out, finish with the quadratic formula; count multiplicities.", level: "composite" },
+      { skill: "Use the remainder and factor theorems", href: "/algebra/polynomials/methods/remainder-theorem", desc: "The remainder of $f(x) \\div (x - r)$ is $f(r)$; remainder 0 means $(x - r)$ is a factor.", level: "composite" },
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/polynomials/methods", label: "All polynomial methods" },
+};
+
+// PropertySheet (cards) 2026-11-15: replaces the table obj1Table (non-examples: expression, disqualifying feature, violated requirement); one card per row, wording from the table.
+const notPolynomialCards = {
+  header: {
+    kicker: 'polynomials',
+    title: 'Four expressions that are not polynomials',
+    lede: 'Each one breaks the rule that every exponent on $x$ is a non-negative integer.',
+  },
+  verdicts: {
+    no: { label: 'Not a polynomial', color: '#B45309', bg: '#fef3c7', mark: 'cross' },
+  },
+  groups: [{ properties: [
+    { id: 'neg', name: 'Negative exponent', verdict: 'no', statement: '$x^{-2} + 3$', note: 'Violated requirement: exponents must be $\\geq 0$' },
+    { id: 'frac', name: 'Fractional exponent', verdict: 'no', statement: '$\\sqrt{x} + 1$', note: '$\\sqrt{x} = x^{1/2}$. Violated requirement: exponents must be integers' },
+    { id: 'den', name: 'Variable in denominator', verdict: 'no', statement: '$\\frac{1}{x} + 4$', note: '$\\frac{1}{x} = x^{-1}$. Violated requirement: exponents must be $\\geq 0$' },
+    { id: 'exp', name: 'Variable in the exponent', verdict: 'no', statement: '$2^x$', note: 'Violated requirement: the variable must be the base, not the exponent' },
+  ] }],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -893,11 +973,15 @@ export default function PolynomialsPage({ specialCasesData, pitfallData,faqQuest
         lead: `Every failure has the same flaw: a power of x that is not a whole number 0, 1, 2, … — or x in the exponent instead of the base.`,
         content: [
           `Certain expressions fail to qualify. The expression $x^{-2} + 3$ contains a negative exponent and is not a polynomial. The expression $\\sqrt{x} + 1$ involves a fractional exponent ($x^{1/2}$) and is not a polynomial. The expression $\\frac{1}{x} + 4$ places the variable in a denominator, equivalent to $x^{-1}$, and is not a polynomial. The expression $2^x$ has the variable in the exponent rather than the base and is not a polynomial. Each of these violates the requirement that exponents be non-negative integers.`,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'property-sheet-not-polynomials'}
+            id="expressions-that-are-not-polynomials"
+            title="Expressions That Are Not Polynomials"
+            source="/algebra/polynomials"
+            related={false}
+          >
+            <PropertySheet data={notPolynomialCards} variant="cards" />
+          </DiagramFrame>,
           `The coefficients are free: the $\\frac{1}{2}$ in H is allowed, because only the exponents are restricted.`,
         ],
       },
@@ -963,11 +1047,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-polynomials-vocabulary-matrix'}
+            id="polynomials-vocabulary-matrix"
+            title="Vocabulary"
+            source="/algebra/polynomials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -998,6 +1086,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
           sectionsContent.obj4.content,
           <div key={'unit-degrees'} dangerouslySetInnerHTML={{ __html: demoUnits.degrees }} />,
           `Higher degrees allow more bends, which is why degree is the first thing to read off a polynomial.`,
+          <DiagramFrame
+            key={'taxonomy-polynomials-classification-by-degree'}
+            id="polynomials-classification-by-degree"
+            title="Classification by Degree"
+            source="/algebra/polynomials"
+            related={false}
+          >
+            <Taxonomy data={tx_polynomialDegrees} variant="scale" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1073,11 +1170,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'obj11-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj11Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-polynomials-key-theorems-matrix'}
+            id="polynomials-key-theorems-matrix"
+            title="Key Theorems"
+            source="/algebra/polynomials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj11Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -1088,11 +1189,15 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-polynomials-summary-polynomial-family-degree-matrix'}
+            id="polynomials-summary-polynomial-family-degree-matrix"
+            title="Summary: The Polynomial Family by Degree"
+            source="/algebra/polynomials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1110,6 +1215,14 @@ $$a_nx^n + a_{n-1}x^{n-1} + \\cdots + a_2x^2 + a_1x + a_0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar' 
 import '../../../pages.css'
@@ -32,6 +33,21 @@ const pitfallData = {
 };
 const pitfallClosing = `Both slips stop the truth table early. An equivalence must hold in all $2^n$ rows, and a formula that is not a tautology is a contradiction only if no row at all makes it true. Counting the rows first, then looking for one T and one F, catches both.`;
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Logic methods", items: [
+      { skill: "Build a truth table", href: "/logic/methods/truth-table", desc: "List all $2^n$ rows, add one column per subformula from the inside out, and fill each column with the rule of its connective.", level: "composite" },
+      { skill: "Check whether a formula is a tautology", href: "/logic/methods/tautology-check", desc: "Show a formula is true in every row: build its truth table, or assume one row makes it false and reach a clash.", level: "composite" },
+      { skill: "Check whether a formula is a contradiction", href: "/logic/methods/contradiction-check", desc: "Show a formula is false in every row with a truth table, or reduce it with the laws to a clash of the form $A \\land \\neg A$.", level: "composite" },
+      { skill: "Rewrite an implication without the arrow", href: "/logic/methods#implication-equivalence", desc: "An arrow has to go before you can use De Morgan, distribute, or reach a normal form: $P \\to Q$, $(P \\land Q) \\to R$, $\\neg P \\to Q$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/logic/methods", label: "All logic methods" },
+};
 
 export async function getStaticProps() {
  const { default: logicFormulasList } = await import('@/app/api/db/formulas/logic/logicFormulasList')
@@ -430,6 +446,14 @@ Sorting a formula into its category is a search over assignments. A single row w
         <MistakeFix data={pitfallData} variant="trace" />
       </DiagramFrame>,
     ]
+  },
+  {
+      id:'skills',
+      title:'Skills You Should Learn',
+      link:``,
+      content:[
+        <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+      ]
   },
   // faq: rendered component — must be built here, not in getStaticProps
   {

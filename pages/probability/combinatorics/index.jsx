@@ -635,6 +635,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 2 tables (obj4 aggregation/mapping, obj9 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -653,7 +654,34 @@ import coinSampleSpaceDiagrams from '@/app/components/probability/sampleSpace/co
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Application","features":[{"id":"c1","name":"Role of counting","type":"text"},{"id":"c2","name":"What it produces","type":"text"}],"items":[{"id":"r1","name":"Classical probability","values":{"c1":"count outcomes in the event and in [Ω](!/probability/sample-space)","c2":"P(A) = |A| ⁄ |Ω|"}},{"id":"r2","name":"Experiment setup","values":{"c1":"enumerate the outcomes that define Ω (with order or without, with repetition or without)","c2":"the sample space itself"}},{"id":"r3","name":"Discrete [distributions](!/probability/distributions)","values":{"c1":"count outcomes across structured trials","c2":"PMFs for binomial, hypergeometric, discrete uniform"}},{"id":"r4","name":"[Conditional probability](!/probability/conditional-probability)","values":{"c1":"count outcomes inside the restricted sample space","c2":"P(A|B) by counting on the smaller Ω"}},{"id":"r5","name":"Expectation","values":{"c1":"sum contributions across outcomes, often via indicator [random variables](!/probability/random-variables)","c2":"E[X] in finite models, no full PMF needed"}},{"id":"r6","name":"Scope boundary","values":{"c1":"counting does not apply","c2":"continuous spaces, density-based models, empirical / simulation models"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("From Counting to Distributions"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Counting situation","features":[{"id":"c1","name":"What is counted","type":"text"},{"id":"c2","name":"Resulting distribution","type":"text"}],"items":[{"id":"r1","name":"Repeated [Bernoulli trials](!/probability/distributions/discrete#bernoulli) with fixed n","values":{"c1":"number of successes across the n trials","c2":"[Binomial](!/probability/distributions/discrete#binomial)"}},{"id":"r2","name":"Sampling without replacement","values":{"c1":"number of selected items of a given type","c2":"[Hypergeometric](!/probability/distributions/discrete#hypergeometric)"}},{"id":"r3","name":"Symmetric finite model","values":{"c1":"which outcome occurs among equally likely possibilities","c2":"[Discrete uniform](!/probability/distributions/discrete#uniform)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a probability by counting outcomes", href: "/probability/methods/classical-probability", desc: "Equally likely outcomes: count the favorable ones, count all of them, divide.", level: "composite", here: "#3" },
+      { skill: "Solve playing card probability problems", href: "/probability/methods/card-problems", desc: "One card, several cards in a row, or a whole hand from a standard 52-card deck.", level: "applied", here: "#3" },
+      { skill: "Solve urn and ball-drawing problems", href: "/probability/methods/urn-problems", desc: "Colored balls drawn from a bag, with or without replacement: multiply step by step or count combinations.", level: "applied", here: "#3" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Find the probability of A and B for dependent events", href: "/probability/methods/multiplication-rule-dependent", desc: "Multiply the first probability by the second one, worked out after the first has happened.", level: "composite" },
+      { skill: "List a sample space", href: "/probability/methods/sample-space", desc: "Write down every possible outcome of an experiment with a list, a grid or a tree, then count it.", level: "composite" },
+      { skill: "Solve a probability problem with a tree diagram", href: "/probability/methods/tree-diagrams", desc: "One level per stage: label the branches, multiply along each path, add the paths you want.", level: "composite" },
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1357,6 +1385,9 @@ Under these conditions, probability values are determined entirely by counting �
                   <div key={'unit-u_3_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_3_1 }} />,
           `Repeating such counts across trials produces the distributions of the next section.`,
           `@academic[punchline:The question, not the physical experiment, decides what counts as one outcome, and that decision comes before any counting.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a probability by counting outcomes](!/probability/methods/classical-probability) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve playing card probability problems](!/probability/methods/card-problems) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve urn and ball-drawing problems](!/probability/methods/urn-problems) →@`,
         ]
     },
     {
@@ -1365,7 +1396,15 @@ Under these conditions, probability values are determined entirely by counting �
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj4Table}}/>,
+          <DiagramFrame
+            key={'feature-matrix-combinatorics-counting-distributions-matrix'}
+            id="combinatorics-counting-distributions-matrix"
+            title="From Counting to Distributions"
+            source="/probability/combinatorics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[fact,aside:true,width:35%:Three right of four proves nothing
 A taster guessing at random picks all $4$ milk-first cups with probability $\\frac{1}{70}$, since $\\binom{8}{4} = 70$, but gets at least $3$ right with probability $\\frac{17}{70}$, about one time in four. R. A. Fisher used this count in 1935 to argue that only a perfect score is convincing.]@
 
@@ -1412,7 +1451,15 @@ The hypergeometric count also judges claims of skill. In a tasting test, $8$ cup
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'summary-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: summaryTable}}/>,
+          <DiagramFrame
+            key={'feature-matrix-combinatorics-summary-matrix'}
+            id="combinatorics-summary-matrix"
+            title="Summary"
+            source="/probability/combinatorics"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1430,6 +1477,14 @@ The hypergeometric count also judges claims of skill. In a tasting test, $8$ cup
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

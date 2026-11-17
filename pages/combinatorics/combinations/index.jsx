@@ -1068,6 +1068,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import '../../pages.css'
@@ -1087,8 +1088,69 @@ import { tableHeaders } from '@/app/styles/theme'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-17: replaces the five-line property table under each counting type (order matters, distinct or identical, select or distribute, cells labeled, empty cells allowed); values taken from each table.
+const scenarioProfileBase = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  verdicts: {
+    yes: { label: 'Yes', mark: '✓', color: '#2563EB', bg: '#dbeafe' },
+    no: { label: 'No', mark: '✕', color: '#475569', bg: '#f1f5f9' },
+  },
+  orient: 'columns',
+  options: { orientToggle: false },
+  corner: 'Type',
+}
+const scenarioTags = {
+  distinct: { label: 'Distinct', color: '#2563EB', bg: '#dbeafe' },
+  identical: { label: 'Identical', color: '#B45309', bg: '#fef3c7' },
+  subset: { label: 'Select subset', color: '#2563EB', bg: '#dbeafe' },
+  distribute: { label: 'Distribute', color: '#B45309', bg: '#fef3c7' },
+  labeled: { label: 'Labeled', color: '#2563EB', bg: '#dbeafe' },
+  unlabeled: { label: 'Unlabeled', color: '#B45309', bg: '#fef3c7' },
+  allowed: { label: 'Allowed', color: '#2563EB', bg: '#dbeafe' },
+  notAllowed: { label: 'Not allowed', color: '#B45309', bg: '#fef3c7' },
+  typicallyNo: { label: 'Typically no', color: '#B45309', bg: '#fef3c7' },
+  na: { label: 'N/A', color: '#64748b', bg: '#f1f5f9' },
+}
+const scenarioFeatures = [
+  { id: 'order', name: 'Order matters', type: 'verdict' },
+  { id: 'objects', name: 'Objects distinct or identical?', type: 'tag', tags: scenarioTags },
+  { id: 'action', name: 'Select subset or distribute?', type: 'tag', tags: scenarioTags },
+  { id: 'cells', name: 'Cells labeled or unlabeled?', type: 'tag', tags: scenarioTags },
+  { id: 'empty', name: 'Empty cells allowed?', type: 'tag', tags: scenarioTags },
+]
+const fm_simpleCombinationProfile = { ...scenarioProfileBase, features: scenarioFeatures, items: [
+  { id: 'simple', name: 'Simple Combination', values: { order: 'no', objects: 'distinct', action: 'subset', cells: 'na', empty: 'na' } },
+] }
+const fm_partitionProfile = { ...scenarioProfileBase, features: scenarioFeatures, items: [
+  { id: 'partition', name: 'Partition into Groups', values: { order: 'no', objects: 'distinct', action: 'distribute', cells: 'labeled', empty: 'typicallyNo' } },
+] }
+const fm_weakCompositionProfile = { ...scenarioProfileBase, features: scenarioFeatures, items: [
+  { id: 'weakComposition', name: 'Weak Composition', values: { order: 'no', objects: 'identical', action: 'distribute', cells: 'labeled', empty: 'allowed' } },
+] }
+const fm_strongCompositionProfile = { ...scenarioProfileBase, features: scenarioFeatures, items: [
+  { id: 'strongComposition', name: 'Strong Composition', values: { order: 'no', objects: 'identical', action: 'distribute', cells: 'labeled', empty: 'notAllowed' } },
+] }
+const fm_distributionProfile = { ...scenarioProfileBase, features: scenarioFeatures, items: [
+  { id: 'distribution', name: 'Distribution into Cells', values: { order: 'no', objects: 'distinct', action: 'distribute', cells: 'labeled', empty: 'allowed' } },
+] }
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Combinatorics methods", items: [
+      { skill: "Compute binomial coefficients", href: "/combinatorics/methods/binomial-coefficients", desc: "Evaluate $\\binom{n}{k}$ by hand: switch to the smaller $k$ by symmetry, write $k$ falling factors over $k!$, and cancel before you multiply.", level: "composite" },
+      { skill: "Compute a factorial", href: "/combinatorics/methods#factorial", desc: "A product of all whole numbers from $n$ down to $1$ appears, or a ratio of factorials must be simplified: $6!$, $\\frac{8!}{6!}$, $0!$.", level: "atomic" },
+      { skill: "Solve counting word problems", href: "/combinatorics/methods/counting-word-problems", desc: "Committees, license plates, seating plans and \"at least one\" questions: translate the story, pick the formula, count each stage.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/combinatorics/methods", label: "All combinatorics methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2124,7 +2186,16 @@ $$\\binom{n}{r} = \\frac{n!}{r! \\, (n-r)!}.$$
         content: [
           `Each combination is an unordered group — $\\{1, 2\\}$ and $\\{2, 1\\}$ are the same one — and $\\binom{n}{r}$ is a whole number: how many such groups there are.`,
           `**Simple Combination** works when selecting items from a collection where order doesn't matter and no repetitions are allowed. Classic examples include choosing team members from a group or selecting lottery numbers.`,
-          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html:simpleCombinationTable }} key="table" />,
+          <DiagramFrame
+            key={'feature-matrix-simple-combination-profile'}
+            id="simple-combination-profile"
+            title="Simple Combination at a Glance"
+            source="/combinatorics/combinations"
+            related={false}
+            maxWidth={560}
+          >
+            <FeatureMatrix data={fm_simpleCombinationProfile} />
+          </DiagramFrame>,
           `
       **Simple Combination — Examples**:
 Choosing committee members from a club, selecting lottery numbers, picking a set of books to borrow from a library, forming a group of students for a project, selecting ingredients for a recipe from available options.`,
@@ -2207,7 +2278,16 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
         link:'',
         content:[
           sectionsContent.partition.before,
-          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: partitionTable }} key="table" />,
+          <DiagramFrame
+            key={'feature-matrix-partition-into-groups-profile'}
+            id="partition-into-groups-profile"
+            title="Partition into Groups at a Glance"
+            source="/combinatorics/combinations"
+            related={false}
+            maxWidth={560}
+          >
+            <FeatureMatrix data={fm_partitionProfile} />
+          </DiagramFrame>,
            sectionsContent.partition.between,
            sectionsContent.partition.after,
                <div key={3} style={{width:'100%',margin:'auto'}}>
@@ -2229,7 +2309,16 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
         link:'',
         content:[
           sectionsContent.weak.before,
-          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: weakCompositionTable }} key="table" />,
+          <DiagramFrame
+            key={'feature-matrix-weak-composition-profile'}
+            id="weak-composition-profile"
+            title="Weak Composition at a Glance"
+            source="/combinatorics/combinations"
+            related={false}
+            maxWidth={560}
+          >
+            <FeatureMatrix data={fm_weakCompositionProfile} />
+          </DiagramFrame>,
           sectionsContent.weak.between,
           sectionsContent.weak.after,
                      <div key={4} style={{width:'100%',margin:'auto'}}>
@@ -2251,7 +2340,16 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
         content:[
 
           sectionsContent.strong.before,
-          <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: strongCompositionTable }} key="table" />,
+          <DiagramFrame
+            key={'feature-matrix-strong-composition-profile'}
+            id="strong-composition-profile"
+            title="Strong Composition at a Glance"
+            source="/combinatorics/combinations"
+            related={false}
+            maxWidth={560}
+          >
+            <FeatureMatrix data={fm_strongCompositionProfile} />
+          </DiagramFrame>,
           sectionsContent.strong.between,
           sectionsContent.strong.after,
             <div key={5} style={{width:'100%',margin:'auto'}}>
@@ -2272,7 +2370,16 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
       link:'',
       content:[
         sectionsContent.distribution.before,
-        <div style={{margin:'auto',width:'50%'}} dangerouslySetInnerHTML={{ __html: distributionTable }} key="table" />,
+        <DiagramFrame
+          key={'feature-matrix-distribution-into-cells-profile'}
+          id="distribution-into-cells-profile"
+          title="Distribution into Cells at a Glance"
+          source="/combinatorics/combinations"
+          related={false}
+          maxWidth={560}
+        >
+          <FeatureMatrix data={fm_distributionProfile} />
+        </DiagramFrame>,
         sectionsContent.distribution.between,
         sectionsContent.distribution.after,
        
@@ -2328,6 +2435,14 @@ The $\\binom{n}{r}$ notation is the most widely used in modern mathematics, but 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

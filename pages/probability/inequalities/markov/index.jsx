@@ -655,6 +655,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj10 summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -672,11 +673,32 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import markovDiagrams from '@/app/components/probability/inequalities/markovDiagrams'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Markov's Inequality at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Note / example","type":"text"}],"items":[{"id":"r1","name":"Applies to","values":{"c1":"non-negative random variables with finite expectation","c2":"no symmetry, boundedness, or continuity assumed"}},{"id":"r2","name":"Information used","values":{"c1":"[E[X]](!/probability/expected-value) only","c2":"no variance, no higher moments, no distribution shape"}},{"id":"r3","name":"Statement","values":{"c1":"P(X ≥ a) ≤ E[X] / a, for any a > 0","c2":"the bound depends only on E[X] and the threshold a"}},{"id":"r4","name":"What it bounds","values":{"c1":"upper tail of a non-negative variable","c2":"one-sided: bounds only the upper tail P(X ≥ a) (by complement, P(X < a) ≥ 1 − E[X]/a)"}},{"id":"r5","name":"Plain reading","values":{"c1":"large values cannot occur too frequently if the average is small","c2":"a constraint, not an approximation"}},{"id":"r6","name":"Typical role","values":{"c1":"quick baseline bound, first step in proofs","c2":"rarely the final result; refined by stronger inequalities"}},{"id":"r7","name":"Tightness","values":{"c1":"very broad; usually loose","c2":"ignores how mass is distributed around the mean"}},{"id":"r8","name":"When it breaks down","values":{"c1":"threshold a near E[X] makes the bound ≥ 1 and useless","c2":"also loose for light-tailed or tightly concentrated X"}},{"id":"r9","name":"Natural refinement","values":{"c1":"apply Markov to (X − μ)² and use [Var(X)](!/probability/variance)","c2":"this gives Chebyshev's inequality"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Bound a probability with Markov's inequality", href: "/probability/random-variables/methods/markov-inequality", desc: "For a nonnegative variable, bound the upper tail by the mean: $P(X \\geq a) \\leq E[X]/a$.", level: "composite", here: "#5" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+      { skill: "Bound a probability with Chebyshev's inequality", href: "/probability/random-variables/methods/chebyshev-inequality", desc: "Measure the distance from the mean in standard deviations, then bound: $P(|X - \\mu| \\geq k\\sigma) \\leq 1/k^2$.", level: "composite" },
+      { skill: "Approximate a probability with the central limit theorem", href: "/probability/random-variables/methods/clt-approximation", desc: "Scale the mean and SD to the sum or the average of $n$ terms, standardize, and read $\\Phi(z)$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1465,6 +1487,7 @@ For $X$ equal to $-10$ or $10$ with probability $\\frac{1}{2}$ each, the bound g
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to bound a probability with Markov's inequality](!/probability/random-variables/methods/markov-inequality) →@`,
         ]
     },
     {
@@ -1515,8 +1538,15 @@ For $X$ equal to $-10$ or $10$ with probability $\\frac{1}{2}$ each, the bound g
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-markov-markov-s-inequality-at-matrix'}
+            id="markov-markov-s-inequality-at-matrix"
+            title="Markov's Inequality at a Glance"
+            source="/probability/inequalities/markov"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1534,6 +1564,14 @@ For $X$ equal to $-10$ or $10$ with probability $\\frac{1}{2}$ each, the bound g
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

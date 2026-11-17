@@ -903,6 +903,7 @@
 
 
 // tables-optimized: v4 | 2026-05-24 | 4 tables (obj3 comparison, obj7 aggregation, obj8 aggregation, obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -923,8 +924,35 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("dy Versus Δy"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"dy (tangent line)","type":"text"},{"id":"c2","name":"Δy (actual curve)","type":"text"}],"items":[{"id":"r1","name":"Definition","values":{"c1":"dy = f'(x) · dx","c2":"Δy = f(x + dx) − f(x)"}},{"id":"r2","name":"Geometric meaning","values":{"c1":"vertical change along the tangent line","c2":"vertical change along the curve itself"}},{"id":"r3","name":"Computation","values":{"c1":"one slope evaluation × increment","c2":"requires evaluating f at two points"}},{"id":"r4","name":"Small dx behavior","values":{"c1":"accurate estimate of Δy","c2":"nearly equal to dy; error shrinks faster than dx"}},{"id":"r5","name":"Large dx behavior","values":{"c1":"drifts away from Δy; error scales with f''(x)·(dx)²","c2":"diverges from dy as curvature accumulates"}},{"id":"r6","name":"Typical use","values":{"c1":"quick approximation, error propagation","c2":"exact change when both function values are known"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Higher-Order Differentials"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Notation","features":[{"id":"c1","name":"Meaning","type":"text"},{"id":"c2","name":"How it arises","type":"text"}],"items":[{"id":"r1","name":"d²y","values":{"c1":"second differential of y; equals f''(x)·(dx)²","c2":"applying the differential operator d twice with dx held constant"}},{"id":"r2","name":"dx²","values":{"c1":"(dx)² — the differential dx appearing as a factor twice","c2":"NOT d(x²); just (dx)² = dx·dx"}},{"id":"r3","name":"d²y / dx²","values":{"c1":"[second derivative](!/calculus/derivatives/higher-order) f''(x)","c2":"dividing d²y = f''(x)·(dx)² by (dx)²"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Differentials and Leibniz Notation"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Differential manipulation","type":"text"},{"id":"c2","name":"What it justifies","type":"text"}],"items":[{"id":"r1","name":"[Chain rule](!/calculus/derivatives/rules)","values":{"c1":"dy = (dy/du) du and du = (du/dx) dx → dy = (dy/du)(du/dx) dx","c2":"du cancels algebraically, not merely suggestively"}},{"id":"r2","name":"[Substitution in integration](!/calculus/integrals)","values":{"c1":"u = g(x), du = g'(x) dx — replace dx in the integrand","c2":"∫f(x)dx is a literal change of variable, not symbolic shorthand"}},{"id":"r3","name":"Separation of variables","values":{"c1":"dy/dx = g(x)h(y) → dy/h(y) = g(x) dx, integrate both sides","c2":"rearranging dy and dx as independent objects is rigorous"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use linear approximation", href: "/calculus/derivatives/techniques/linear-approximation", desc: "Estimate $f(x)$ near $a$ with the tangent line, and small changes with differentials.", level: "composite", here: "#4" },
+    ] },
+    { title: "More derivative techniques", items: [
+      { skill: "Find tangent and normal lines", href: "/calculus/derivatives/techniques/tangent-normal-lines", desc: "The line through a point of the curve with slope $f'(a)$, and the perpendicular line.", level: "composite" },
+      { skill: "Find concavity and inflection points", href: "/calculus/derivatives/techniques/concavity-inflection-points", desc: "Sign chart of $f''$: which way the graph bends, and where the bending switches.", level: "composite" },
+      { skill: "Find critical points and extrema", href: "/calculus/derivatives/techniques/critical-points", desc: "Solve $f'(x) = 0$, then classify each point as a maximum, minimum or neither.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1949,8 +1977,15 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
           sectionsContent.obj3.content,
           <div key={'unit-dyDelta'} dangerouslySetInnerHTML={{ __html: demoUnits.dyDelta }} />,
           `For f(x) = x² the error is exactly (dx)²: halve dx and the error drops to a quarter.`,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-differentials-dy-versus-y-matrix'}
+            id="differentials-dy-versus-y-matrix"
+            title="dy Versus Δy"
+            source="/calculus/derivatives/differentials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1985,6 +2020,7 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use linear approximation](!/calculus/derivatives/techniques/linear-approximation) →@`,
         ]
     },
     {
@@ -2009,8 +2045,15 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-differentials-differentials-leibniz-notation-matrix'}
+            id="differentials-differentials-leibniz-notation-matrix"
+            title="Differentials and Leibniz Notation"
+            source="/calculus/derivatives/differentials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:With differentials defined, the fraction-like moves of Leibniz notation are genuine algebra, not lucky shorthand.]@`,
         ]
     },
@@ -2020,8 +2063,15 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-differentials-higher-order-differentials-matrix'}
+            id="differentials-higher-order-differentials-matrix"
+            title="Higher-Order Differentials"
+            source="/calculus/derivatives/differentials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2057,6 +2107,14 @@ Writing $dy = 3x^2$ for $y = x^3$ leaves out $dx$ and gives $dy = 12$ at $x = 2$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -583,6 +583,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 3 tables (examples aggregation, mistakes aggregation, obj4 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -602,7 +603,85 @@ import contingencyTableDiagrams from '@/app/components/probability/conditional-p
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
 
+// SetDiagram (operations + probability + condition) 2026-11-15: the section's one-die example, "even" and "at most 2".
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const oneDieIndependentDiagram = {
+  labels: { elementsThat: 'Outcomes that', elements: 'Outcomes' },
+  sets: [{ id: 'A' }, { id: 'B' }],
+  regionNames: { A: 'only $A$', AB: 'both $A$ and $B$', B: 'only $B$', '': 'neither' },
+  elements: [
+    { label: '4', in: ['A'] }, { label: '6', in: ['A'] }, { label: '2', in: ['A', 'B'] }, { label: '1', in: ['B'] }, { label: '3', in: [] }, { label: '5', in: [] },
+  ],
+  given: 'One fair die: $A$ = even, $B$ = at most $2$',
+  initial: 'both',
+  operations: [
+    { id: 'a', name: 'Even', notation: '$A$', regions: ['A', 'AB'], rule: 'are even', result: '$\\{2, 4, 6\\}$',
+      prob: { calc: '$\\frac{3}{6} = \\frac{1}{2}$' } },
+    { id: 'b', name: 'At most 2', notation: '$B$', regions: ['AB', 'B'], rule: 'are at most $2$', result: '$\\{1, 2\\}$',
+      prob: { calc: '$\\frac{2}{6} = \\frac{1}{3}$' } },
+    { id: 'both', name: 'Both', notation: '$A \\cap B$', regions: ['AB'], rule: 'are even and at most $2$', result: '$\\{2\\}$',
+      prob: { calc: '$\\frac{1}{6} = \\frac{1}{2} \\cdot \\frac{1}{3}$', note: 'The probability that both occur equals the product, so the events are independent.' } },
+  ],
+  probability: {
+    conditions: [
+      { id: 'b', label: 'given $B$', notation: '$B$', regions: ['AB', 'B'], sets: ['B'],
+        note: 'With $A$ selected: one of the two outcomes in $B$ is even, so $P(A \\mid B) = \\frac{1}{2} = P(A)$. Learning $B$ leaves the chance of $A$ unchanged.' },
+    ],
+  },
+};
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_dependencePatterns = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  tree: {
+    root: { name: 'Dependence', sub: 'one event changes how we evaluate another' },
+    branches: [
+      { leaves: [
+        { name: 'Shared causes', condition: 'Both events are influenced by the same underlying factor.', example: 'observing one then provides information about the other' },
+        { name: 'Structural restriction', condition: 'The events draw from a limited set of possibilities.', example: 'the occurrence of one may remove options for the other' },
+        { name: 'Conditioning', condition: 'Events independent in isolation may become dependent once additional information is known.', example: 'dependent events may also appear independent within a restricted context' }
+      ] }
+    ]
+  },
+  note: { label: 'A reason to check, not a verdict', text: 'Whether learning one event changes the chance of the other is settled only by the numbers: the probability that both occur against the product of the two separate probabilities.' }
+};
+
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_independencePath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"before":[{"name":"Conditional probability","href":"/probability/conditional-probability","why":"how probabilities change with information; independence is when they do not"}],"target":{"kicker":"This page","name":"Independence","text":"A structural idea running through probability."},"after":[{"name":"Total probability","href":"/probability/total-probability","why":"often relies on independence to simplify models"},{"name":"Bayes' reasoning","href":"/probability/bayes-theorem#independence","why":"depends on knowing when events are independent"},{"name":"Random variables","href":"/probability/random-variables","why":"independence extended to numerical quantities"},{"name":"Joint distributions","href":"/probability/joint-probability#distributions","why":"independence shows as factorization"}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Independence at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Note / example","type":"text"}],"items":[{"id":"r1","name":"Plain meaning","values":{"c1":"knowing one event occurred does not change the probability of the other","c2":"absence of information update"}},{"id":"r2","name":"Joint formula","values":{"c1":"P(A ∩ B) = P(A) · P(B)","c2":"the compact formal statement of independence"}},{"id":"r3","name":"[Conditional](!/probability/conditional-probability) forms","values":{"c1":"P(A | B) = P(A) and P(B | A) = P(B)","c2":"equivalent reformulations of the joint formula"}},{"id":"r4","name":"Independent vs disjoint","values":{"c1":"disjoint = cannot co-occur; independent = no influence","c2":"disjoint events with positive probability are never independent"}},{"id":"r5","name":"How it fails","values":{"c1":"shared causes, structural restriction, hidden conditioning","c2":"check the mechanism, not the surface appearance"}},{"id":"r6","name":"Conditional independence","values":{"c1":"events can become independent (or dependent) once a third event is known","c2":"central to graphical models and Bayesian reasoning"}},{"id":"r7","name":"Why it matters","values":{"c1":"factorizes joint distributions, collapses tree branches, reduces cases","c2":"justifying independence is the real work; using it is the reward"}},{"id":"r8","name":"Most common pitfall","values":{"c1":"confusing disjoint with independent","c2":"disjoint events with positive probability are never independent"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table mistakesTable ("Common Mistakes"); converted from the table's own cells.
+const fm_mistakesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Why it's wrong","type":"text"},{"id":"c2","name":"Correct view","type":"text"}],"items":[{"id":"r1","name":"Confusing disjoint with independent","values":{"c1":"disjoint events cannot co-occur; independent events can and usually do","c2":"disjoint events with positive probability are always dependent"}},{"id":"r2","name":"Assuming independence because events \"look unrelated\"","values":{"c1":"shared causes and hidden constraints often introduce hidden dependence","c2":"verify P(A ∩ B) = P(A) P(B), or justify causally"}},{"id":"r3","name":"Treating independence as permanent","values":{"c1":"conditioning can both create and destroy independence","c2":"independence is context-dependent; always specify the conditioning set"}},{"id":"r4","name":"Confusing P(A ∩ B) with P(A) + P(B)","values":{"c1":"addition is for disjoint unions, not co-occurrence","c2":"use the product P(A) · P(B), and only under independence"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table examplesTable ("Examples"); converted from the table's own cells.
+const fm_examplesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Scenario","features":[{"id":"c1","name":"Verdict","type":"text"},{"id":"c2","name":"Why","type":"text"}],"items":[{"id":"r1","name":"Two flips of a fair coin (A: 1st is H; B: 2nd is H)","values":{"c1":"independent","c2":"the second flip's mechanism is unaffected by the first"}},{"id":"r2","name":"Two separate sensors firing (A: sensor 1; B: sensor 2)","values":{"c1":"independent","c2":"detections come from unrelated mechanisms"}},{"id":"r3","name":"Rolling two dice (A: first die value; B: second die value)","values":{"c1":"independent","c2":"every (a, b) cell is equally likely; each coordinate is unaffected by the other"}},{"id":"r4","name":"Rain today (A) and wet ground (B)","values":{"c1":"dependent","c2":"B is a downstream effect of A; learning B substantially updates P(A)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Test whether two events are independent", href: "/probability/methods/independence-test", desc: "Compare the probability of both with the product of the single probabilities.", level: "composite", here: "#formula" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Find the probability of A and B for independent events", href: "/probability/methods#multiplication-rule-independent", desc: "The question says \"and\" and one event has no effect on the other: two dice, repeated coin tosses, draws with replacement.", level: "atomic" },
+      { skill: "Find the probability of A and B for dependent events", href: "/probability/methods/multiplication-rule-dependent", desc: "Multiply the first probability by the second one, worked out after the first has happened.", level: "composite" },
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite" },
+      { skill: "Find probabilities from a two-way table", href: "/probability/methods/contingency-tables", desc: "Joint, marginal and conditional probabilities: pick the right cell and the right total.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1384,6 +1463,7 @@ export default function IndependencePage({
                   <div key={'unit-independentSquare'} dangerouslySetInnerHTML={{ __html: demoUnits.independentSquare }} />,
             `Change either column's height and the blue area stops being P(A) · P(B).`,
             `@academic[punchline:Independence is a numerical test: two events are independent exactly when the chance of both equals the product of their chances.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to test whether two events are independent](!/probability/methods/independence-test) →@`,
         ]
     },
     {
@@ -1402,8 +1482,15 @@ export default function IndependencePage({
         link:'',
         content:[
           sectionsContent.examples.content,
-          <div key={'examples-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: examplesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-independence-examples-matrix'}
+            id="independence-examples-matrix"
+            title="Examples"
+            source="/probability/independence"
+            related={false}
+          >
+            <FeatureMatrix data={fm_examplesTable} />
+          </DiagramFrame>,
                   <div key={'unit-rainWet'} dangerouslySetInnerHTML={{ __html: demoUnits.rainWet }} />,
             `Given wet ground, the chance of rain rises from 0.3 to 0.27/0.41 ≈ 0.66.`,
         ]
@@ -1414,6 +1501,25 @@ export default function IndependencePage({
         link:'',
         content:[
           sectionsContent.patterns.content,
+          <DiagramFrame
+            key={'taxonomy-independence-dependence-patterns'}
+            id="independence-dependence-patterns"
+            title="How Independence Fails (Dependence Patterns)"
+            source="/probability/independence"
+            related={false}
+          >
+            <Taxonomy data={tx_dependencePatterns} variant="tree" />
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'set-diagram-one-die-independent'}
+            id="one-die-independent-events"
+            title="One die, two independent events"
+            source="/probability/independence"
+            related={false}
+            before={'The one-die example as a picture. The two events share the outcome $2$ and are still independent: select $A$, switch the condition to "given $B$", and its probability stays at $\\frac{1}{2}$.'}
+          >
+            <SetDiagram data={oneDieIndependentDiagram} variant="operations" theme={setDiagramTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1439,8 +1545,15 @@ export default function IndependencePage({
         link:'',
         content:[
           sectionsContent.mistakes.content,
-          <div key={'mistakes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-independence-common-mistakes-matrix'}
+            id="independence-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/probability/independence"
+            related={false}
+          >
+            <FeatureMatrix data={fm_mistakesTable} />
+          </DiagramFrame>,
                   <div key={'unit-u_mistakes_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_mistakes_1 }} />,
           `The connections below place independence among the other core ideas.`,
         ]
@@ -1451,6 +1564,15 @@ export default function IndependencePage({
         link:'',
         content:[
           sectionsContent.connections.content,
+          <DiagramFrame
+            key={'concept-map-independence-connections'}
+            id="independence-connections"
+            title="Connections to Other Probability Concepts"
+            source="/probability/independence"
+            related={false}
+          >
+            <ConceptMap data={cm_independencePath} variant="path" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1459,8 +1581,23 @@ export default function IndependencePage({
         link:'',
         content:[
           sectionsContent.obj4.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-independence-independence-at-glance-matrix'}
+            id="independence-independence-at-glance-matrix"
+            title="Independence at a Glance"
+            source="/probability/independence"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

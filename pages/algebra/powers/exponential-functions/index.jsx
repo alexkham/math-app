@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,7 +18,39 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Cases for f(x) = a^x"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Case","features":[{"id":"c1","name":"Example value of a","type":"text"},{"id":"c2","name":"Behavior of f(x) = aˣ","type":"text"},{"id":"c3","name":"Special note","type":"text"}],"items":[{"id":"r1","name":"Growth (a > 1)","values":{"c1":"2, 10, e","c2":"strictly increasing; asymptote y = 0 on the left","c3":"typical \"exponential growth\" curve"}},{"id":"r2","name":"Decay (0 < a < 1)","values":{"c1":"1⁄2, 1⁄3, 0.9","c2":"strictly decreasing; asymptote y = 0 on the right","c3":"mirror image of growth across the y-axis"}},{"id":"r3","name":"Natural exponential","values":{"c1":"a = e ≈ 2.718","c2":"growth with rate equal to value at every point","c3":"the privileged base in calculus and modeling"}},{"id":"r4","name":"Excluded: a = 1","values":{"c1":"a = 1","c2":"constant: f(x) = 1 for every x","c3":"not classified as an exponential function"}},{"id":"r5","name":"Excluded: a ≤ 0","values":{"c1":"a = 0, a < 0","c2":"no continuous definition for irrational x","c3":"see [irrational exponents](!/algebra/powers/irrational-exponents) for why a > 0 is required"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Exponential vs Power Functions"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"x","features":[{"id":"c1","name":"x² (polynomial)","type":"text"},{"id":"c2","name":"2ˣ (exponential)","type":"text"},{"id":"c3","name":"Leader","type":"text"}],"items":[{"id":"r1","name":"2","values":{"c1":"4","c2":"4","c3":"tied"}},{"id":"r2","name":"3","values":{"c1":"9","c2":"8","c3":"polynomial"}},{"id":"r3","name":"10","values":{"c1":"100","c2":"1,024","c3":"exponential"}},{"id":"r4","name":"20","values":{"c1":"400","c2":"1,048,576","c3":"exponential (by ≈ 2,600×)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Key Properties"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Value","type":"text"},{"id":"c2","name":"Why","type":"text"}],"items":[{"id":"r1","name":"Domain","values":{"c1":"all real numbers","c2":"aˣ is defined for every real x when a > 0"}},{"id":"r2","name":"Range","values":{"c1":"(0, ∞)","c2":"aˣ > 0 for every real x"}},{"id":"r3","name":"Horizontal asymptote","values":{"c1":"y = 0","c2":"curve approaches but never reaches the x-axis"}},{"id":"r4","name":"y-intercept","values":{"c1":"(0, 1)","c2":"a⁰ = 1 for any positive a"}},{"id":"r5","name":"x-intercept","values":{"c1":"none","c2":"aˣ is never 0"}},{"id":"r6","name":"Monotonicity","values":{"c1":"one-to-one","c2":"strictly increasing if a > 1; strictly decreasing if 0 < a < 1"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Basic Shape"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Growth (a > 1)","type":"text"},{"id":"c2","name":"Decay (0 < a < 1)","type":"text"}],"items":[{"id":"r1","name":"Direction","values":{"c1":"strictly increasing","c2":"strictly decreasing"}},{"id":"r2","name":"As x → +∞","values":{"c1":"grows without bound","c2":"approaches 0"}},{"id":"r3","name":"As x → −∞","values":{"c1":"approaches 0","c2":"grows without bound"}},{"id":"r4","name":"Where y = 0 is approached","values":{"c1":"on the left","c2":"on the right"}},{"id":"r5","name":"Steepness driver","values":{"c1":"larger a → steeper rise","c2":"a closer to 0 → faster decay"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve compound interest problems", href: "/algebra/methods/compound-interest-problems", desc: "A = P(1 + r/n)^(nt) and A = Pe^(rt): find the amount, the principal, the time or the rate.", level: "applied", here: "#6" },
+      { skill: "Solve exponential growth and decay problems", href: "/algebra/methods/exponential-growth-decay-problems", desc: "Populations, half-lives, depreciation: build the model, find the rate, solve for the time.", level: "applied", here: "#6" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Solve an exponential equation by matching bases", href: "/algebra/methods/exponential-equations-same-base", desc: "Write both sides as powers of one base, then set the exponents equal.", level: "composite" },
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite" },
+      { skill: "Sum a finite geometric series", href: "/algebra/methods/geometric-series-sum", desc: "Count the terms, then $S_n = a_1\\frac{1 - r^n}{1 - r}$.", level: "composite" },
+      { skill: "Sum an infinite geometric series", href: "/algebra/methods/infinite-geometric-series", desc: "Check $|r| < 1$, then $S = \\frac{a_1}{1 - r}$; also turns repeating decimals into fractions.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 
@@ -883,11 +916,15 @@ export default function ExponentialFunctionsPage({ pitfallData,seoData, sections
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-functions-basic-shape-matrix'}
+            id="exponential-functions-basic-shape-matrix"
+            title="Basic Shape"
+            source="/algebra/powers/exponential-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every exponential graph passes through $(0, 1)$; the base only decides whether it rises or falls, and how steeply.]@`,
         ]
     },
@@ -899,11 +936,15 @@ export default function ExponentialFunctionsPage({ pitfallData,seoData, sections
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-functions-key-properties-matrix'}
+            id="exponential-functions-key-properties-matrix"
+            title="Key Properties"
+            source="/algebra/powers/exponential-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -914,11 +955,15 @@ export default function ExponentialFunctionsPage({ pitfallData,seoData, sections
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-functions-exponential-vs-power-matrix'}
+            id="exponential-functions-exponential-vs-power-matrix"
+            title="Exponential vs Power Functions"
+            source="/algebra/powers/exponential-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -937,6 +982,8 @@ export default function ExponentialFunctionsPage({ pitfallData,seoData, sections
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve compound interest problems](!/algebra/methods/compound-interest-problems) →@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve exponential growth and decay problems](!/algebra/methods/exponential-growth-decay-problems) →@`,
         ]
     },
 
@@ -947,11 +994,15 @@ export default function ExponentialFunctionsPage({ pitfallData,seoData, sections
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-functions-summary-cases-f-matrix'}
+            id="exponential-functions-summary-cases-f-matrix"
+            title="Summary of Cases for f(x) = a^x"
+            source="/algebra/powers/exponential-functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -969,6 +1020,14 @@ export default function ExponentialFunctionsPage({ pitfallData,seoData, sections
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

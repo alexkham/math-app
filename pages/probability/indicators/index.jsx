@@ -661,6 +661,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (obj11 summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -681,8 +682,69 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_indicatorUses = {
+  center: { name: 'Indicator random variables', sub: 'a structural tool, not a model of their own' },
+  quadrants: [
+    { title: 'Bernoulli trials', items: [ 'Each trial contributes a $0$ or $1$.' ] },
+    { title: 'Binomial models', items: [ 'The total number of successes is a sum of indicators.' ] },
+    { title: 'Occupancy and matching problems', items: [ 'Indicators track whether a condition is satisfied.' ] },
+    { title: 'Random structures', items: [
+      'Indicators isolate local events.',
+      { text: 'Records: each draw carries its own record indicator.', note: 'the number of records is the sum of these indicators' } ] }
+  ]
+};
+
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (operations + probability) 2026-11-15: the section's die example, A = even and B = at least 4, with the indicator of each shaded set.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const indicatorOperationsDiagram = {
+  labels: { elementsThat: 'Indicator is 1 for outcomes that', definition: 'Indicator', elements: 'Outcomes' },
+  sets: [{ id: 'A' }, { id: 'B' }],
+  regionNames: { A: 'only $A$', AB: 'both $A$ and $B$', B: 'only $B$', '': 'neither' },
+  elements: [
+    { label: '2', in: ['A'] }, { label: '4', in: ['A', 'B'] }, { label: '6', in: ['A', 'B'] }, { label: '5', in: ['B'] }, { label: '1', in: [] }, { label: '3', in: [] },
+  ],
+  given: 'One die roll: $A = \\{2, 4, 6\\}$ (even), $B = \\{4, 5, 6\\}$ (at least 4)',
+  initial: 'union',
+  operations: [
+    { id: 'inter', name: 'Intersection', notation: '$A \\cap B$', regions: ['AB'], rule: 'lie in both $A$ and $B$',
+      formula: '$I_{A \\cap B} = I_A \\cdot I_B$', result: '$\\{4, 6\\}$', prob: { calc: '$P(A \\cap B) = \\frac{2}{6} = \\frac{1}{3}$' } },
+    { id: 'comp', name: 'Complement', notation: '$A^c$', regions: ['B', ''], rule: 'lie outside $A$',
+      formula: '$I_{A^c} = 1 - I_A$', result: '$\\{1, 3, 5\\}$', prob: { calc: '$P(A^c) = 1 - \\frac{1}{2} = \\frac{1}{2}$' } },
+    { id: 'union', name: 'Union', notation: '$A \\cup B$', regions: ['A', 'AB', 'B'], rule: 'lie in $A$ or $B$',
+      formula: '$I_{A \\cup B} = I_A + I_B - I_A I_B$', result: '$\\{2, 4, 5, 6\\}$',
+      prob: { calc: '$P(A \\cup B) = \\frac{1}{2} + \\frac{1}{2} - \\frac{1}{3} = \\frac{2}{3}$', note: '$I_A + I_B$ alone gives the value $2$ at the outcomes $4$ and $6$; the overlap comes off once.' } },
+    { id: 'neither', name: 'Outside both', notation: '$(A \\cup B)^c$', regions: [''], rule: 'lie outside both events',
+      formula: '$I_{(A \\cup B)^c} = (1 - I_A)(1 - I_B)$', result: '$\\{1, 3\\}$', prob: { calc: '$P\\bigl((A \\cup B)^c\\bigr) = 1 - \\frac{2}{3} = \\frac{1}{3}$' } },
+  ],
+  probability: {},
+};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Indicators at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Note / example","type":"text"}],"items":[{"id":"r1","name":"What it is","values":{"c1":"a [random variable](!/probability/random-variables) assigning 1 to outcomes in A and 0 to all others","c2":"I$_{A}$ : Ω → {0, 1}; follows a Bernoulli distribution with parameter P(A)"}},{"id":"r2","name":"What it is NOT","values":{"c1":"not a probability value, not a distribution, not exclusive to Bernoulli trials","c2":"its value depends on the outcome, not on P(A)"}},{"id":"r3","name":"Key identity","values":{"c1":"E[I$_{A}$] = P(A)","c2":"the bridge between events and [expectation](!/probability/expected-value)"}},{"id":"r4","name":"Complement","values":{"c1":"I$_{Aᶜ}$ = 1 − I$_{A}$","c2":"indicator algebra mirrors set operations"}},{"id":"r5","name":"Linearity","values":{"c1":"E[∑ I$_{Aᵢ}$] = ∑ P(Aᵢ)","c2":"no [independence](!/probability/independence) assumption required"}},{"id":"r6","name":"Counting technique","values":{"c1":"express the count N = ∑ I$_{Aᵢ}$, then take expectation termwise","c2":"converts counting into a sum of probabilities, avoiding enumeration"}},{"id":"r7","name":"Dependence","values":{"c1":"allowed and harmless for expectation","c2":"becomes essential when computing [variance](!/probability/variance)"}},{"id":"r8","name":"Typical uses","values":{"c1":"Bernoulli / binomial models, matching, occupancy, random structures","c2":"a structural tool across [probability models](!/probability/models), not a model of its own"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find an expected count with indicator variables", href: "/probability/random-variables/methods/indicator-variables", desc: "Write the count as a sum of 0-1 indicators, use $E[I] = P(A)$, and add by linearity.", level: "composite", here: "#6" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the expected value of a sum", href: "/probability/random-variables/methods#linearity-of-expectation", desc: "The variable is a sum or a linear combination of variables whose means you know: $X + Y$, $3X - 2Y + 5$, the total of $n$ dice. It holds whether or not the variables are independent.", level: "atomic" },
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+      { skill: "Find the covariance and correlation of two random variables", href: "/probability/random-variables/methods/covariance-correlation", desc: "Compute $E[XY] - E[X]E[Y]$ from the joint table, then divide by $\\sigma_X \\sigma_Y$ for the correlation.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1506,6 +1568,16 @@ An indicator random variable assigns the value $1$ to outcomes in a given event 
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'set-diagram-indicator-operations'}
+            id="indicators-of-set-operations"
+            title="Indicators of set operations on one die"
+            source="/probability/indicators"
+            related={false}
+            before={'The die example as a picture. Pick an operation: the shaded outcomes are exactly those where its indicator equals $1$.'}
+          >
+            <SetDiagram data={indicatorOperationsDiagram} variant="operations" theme={setDiagramTheme} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1533,6 +1605,7 @@ An indicator random variable assigns the value $1$ to outcomes in a given event 
                   <div key={'unit-countSixes'} dangerouslySetInnerHTML={{ __html: demoUnits.countSixes }} />,
           `With n dice the same sum of n indicators gives n/6 expected sixes.`,
           `@academic[punchline:The expected number of events that occur is the sum of their probabilities, overlaps or not.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find an expected count with indicator variables](!/probability/random-variables/methods/indicator-variables) →@`,
         ]
     },
     {
@@ -1549,6 +1622,15 @@ An indicator random variable assigns the value $1$ to outcomes in a given event 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'four-sides-indicators-in-probability-models'}
+            id="indicators-in-probability-models"
+            title="Indicators in Probability Models"
+            source="/probability/indicators"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_indicatorUses} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1573,8 +1655,15 @@ An indicator random variable assigns the value $1$ to outcomes in a given event 
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-indicators-indicators-at-glance-matrix'}
+            id="indicators-indicators-at-glance-matrix"
+            title="Indicators at a Glance"
+            source="/probability/indicators"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1610,6 +1699,14 @@ An indicator random variable assigns the value $1$ to outcomes in a given event 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

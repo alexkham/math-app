@@ -1138,6 +1138,7 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 3 tables (obj3 aggregation, obj5 aggregation, obj7 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1155,13 +1156,36 @@ import partitionIntoGroupsDiagrams from '@/app/components/combinatorics/new-visu
 import renderBinomialExpansion from '@/app/utils/illustrations/combinatorics/binomial/binomialExpansion'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import combinatoricsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/combinatorics'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Special Cases"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Substitution","features":[{"id":"c1","name":"Identity produced","type":"text"},{"id":"c2","name":"Combinatorial meaning","type":"text"}],"items":[{"id":"r1","name":"a = 1, b = 1","values":{"c1":"Σₖ₌₀ⁿ C(n, k) = 2ⁿ","c2":"row sum = total number of subsets of an n-set"}},{"id":"r2","name":"a = 1, b = −1","values":{"c1":"Σₖ₌₀ⁿ (−1)ᵏ C(n, k) = 0 for n ≥ 1","c2":"even-sized subsets are as numerous as odd-sized ones"}},{"id":"r3","name":"a = 1, b = x","values":{"c1":"(1 + x)ⁿ = Σₖ₌₀ⁿ C(n, k) xᵏ","c2":"generating function for row n of Pascal's triangle"}},{"id":"r4","name":"Differentiate, then x = 1","values":{"c1":"Σₖ₌₁ⁿ k · C(n, k) = n · 2ⁿ⁻¹","c2":"weighted row sum; combinatorial proofs by double counting also work"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Worked Expansions"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Problem type","features":[{"id":"c1","name":"Setup","type":"text"},{"id":"c2","name":"Key step","type":"text"},{"id":"c3","name":"Answer","type":"text"}],"items":[{"id":"r1","name":"Full expansion","values":{"c1":"(x + 2)⁴; row 4 = 1, 4, 6, 4, 1","c2":"substitute b = 2 into each term","c3":"x⁴ + 8x³ + 24x² + 32x + 16"}},{"id":"r2","name":"Expansion with signs","values":{"c1":"(2a − 3b)³; row 3 = 1, 3, 3, 1","c2":"track the sign of (−3b)ᵏ in each term","c3":"8a³ − 36a²b + 54ab² − 27b³"}},{"id":"r3","name":"One specific coefficient","values":{"c1":"coefficient of x⁵ in (1 + x)⁸","c2":"general term gives k = 5; compute C(8, 5)","c3":"56"}},{"id":"r4","name":"Term independent of x","values":{"c1":"(x + 1⁄x)¹⁰","c2":"solve 10 − 2k = 0 → k = 5","c3":"C(10, 5) = 252"}},{"id":"r5","name":"Multinomial expansion","values":{"c1":"(a + b + c)³","c2":"enumerate all (k₁, k₂, k₃) with k₁+k₂+k₃ = 3","c3":"10 distinct monomials including 6abc"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a specific term in a binomial expansion", href: "/combinatorics/methods/specific-binomial-term", desc: "Find one term or coefficient of $(a + b)^n$ without expanding: write the general term $\\binom{n}{k}a^{n-k}b^k$ and solve for $k$.", level: "composite", here: "#2" },
+      { skill: "Expand a binomial power", href: "/combinatorics/methods/binomial-expansion", desc: "Expand $(a + b)^n$ with the binomial theorem: coefficients from row $n$ of Pascal's triangle, powers of $a$ falling and powers of $b$ rising.", level: "composite", here: "#5" },
+    ] },
+    { title: "More combinatorics methods", items: [
+      { skill: "Compute binomial coefficients", href: "/combinatorics/methods/binomial-coefficients", desc: "Evaluate $\\binom{n}{k}$ by hand: switch to the smaller $k$ by symmetry, write $k$ falling factors over $k!$, and cancel before you multiply.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/combinatorics/methods", label: "All combinatorics methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2385,6 +2409,7 @@ Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ an
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a specific term in a binomial expansion](!/combinatorics/methods/specific-binomial-term) →@`,
         ]
     },
     {
@@ -2393,8 +2418,15 @@ Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ an
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-binomial-theorem-special-cases-matrix'}
+            id="binomial-theorem-special-cases-matrix"
+            title="Special Cases"
+            source="/combinatorics/binomial-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
                   <div key={'unit-rowsum'} dangerouslySetInnerHTML={{ __html: demoUnits.rowsum }} />,
           `The other substitutions work the same way: each one turns a free choice of a and b into a statement about the coefficients themselves.`,
         ]
@@ -2449,8 +2481,15 @@ Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ an
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-binomial-theorem-worked-expansions-matrix'}
+            id="binomial-theorem-worked-expansions-matrix"
+            title="Worked Expansions"
+            source="/combinatorics/binomial-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj5-diagram'}
             id="difference-expansion-steps"
@@ -2465,6 +2504,7 @@ Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ an
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to expand a binomial power](!/combinatorics/methods/binomial-expansion) →@`,
         ]
     },
     {
@@ -2599,6 +2639,14 @@ Writing $(a + b)^2$ as $a^2 + b^2$ keeps only the two end terms. With $a = 2$ an
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

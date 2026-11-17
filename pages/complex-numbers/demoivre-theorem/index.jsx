@@ -1035,6 +1035,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1052,6 +1053,8 @@ import deMoivreDiagrams from '@/app/components/calculators/complex-numbers/deMoi
 import renderComplexRoots from '@/app/utils/illustrations/complex-numbers/plane/complexRoots'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
@@ -1059,8 +1062,39 @@ import FormulaAnatomy from '@/app/components/infographics/FormulaAnatomy/Formula
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Applying De Moivre's Theorem to Powers"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"n","type":"text"},{"id":"c2","name":"r, θ","type":"text"},{"id":"c3","name":"rⁿ cis(nθ)","type":"text"},{"id":"c4","name":"Result","type":"text"}],"items":[{"id":"r1","name":"1 + i","values":{"c1":"10","c2":"√2, 45°","c3":"(√2)¹⁰ cis(450°) = 32 cis(90°)","c4":"32i"}},{"id":"r2","name":"√3 − i","values":{"c1":"6","c2":"2, −30°","c3":"2⁶ cis(−180°) = 64 · (−1)","c4":"−64"}},{"id":"r3","name":"2 cis(30°)","values":{"c1":"6","c2":"2, 30°","c3":"2⁶ cis(180°)","c4":"−64"}},{"id":"r4","name":"3 cis(60°)","values":{"c1":"−2","c2":"3, 60°","c3":"3⁻² cis(−120°) = (1⁄9) cis(−120°)","c4":"−1⁄18 − (√3⁄18) i"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Forward and Reverse Directions of De Moivre's Theorem"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Forward direction (powers)","type":"text"},{"id":"c2","name":"Reverse direction (n-th roots)","type":"text"}],"items":[{"id":"r1","name":"Question","values":{"c1":"given z, what is zⁿ ?","c2":"given w, what are the z with zⁿ = w ?"}},{"id":"r2","name":"Formula","values":{"c1":"zⁿ = rⁿ cis(nθ)","c2":"zₖ = R$^{1/n}$ cis((φ + 360°k) ⁄ n), k = 0…n−1"}},{"id":"r3","name":"Modulus operation","values":{"c1":"r → rⁿ (raise to nth power)","c2":"R → R$^{1/n}$ (take positive nth root)"}},{"id":"r4","name":"Argument operation","values":{"c1":"θ → nθ (multiply by n)","c2":"φ → (φ + 360°k) ⁄ n (divide, then shift by k turns)"}},{"id":"r5","name":"Number of results","values":{"c1":"exactly 1 (a single value)","c2":"exactly n (distinct roots)"}},{"id":"r6","name":"Geometric picture","values":{"c1":"a single point at distance rⁿ from the origin","c2":"vertices of a regular n-gon (n ≥ 3) on the circle of radius R$^{1/n}$"}},{"id":"r7","name":"Worked example","values":{"c1":"(1 + i)¹⁰ = 32i (one answer)","c2":"z⁴ = −16: four roots √2(±1 ± i) (a square)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Roots of Unity"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n","features":[{"id":"c1","name":"n-th roots of unity (as cis)","type":"text"},{"id":"c2","name":"In algebraic form a + bi","type":"text"},{"id":"c3","name":"Polygon","type":"text"}],"items":[{"id":"r1","name":"2","values":{"c1":"cis(0°), cis(180°)","c2":"1, −1","c3":"two points on the real axis"}},{"id":"r2","name":"3","values":{"c1":"cis(0°), cis(120°), cis(240°)","c2":"1, −1⁄2 + (√3⁄2)i, −1⁄2 − (√3⁄2)i","c3":"equilateral triangle"}},{"id":"r3","name":"4","values":{"c1":"cis(0°), cis(90°), cis(180°), cis(270°)","c2":"1, i, −1, −i","c3":"square"}},{"id":"r4","name":"6","values":{"c1":"cis(60°k), k = 0…5","c2":"1, 1⁄2 + (√3⁄2)i, −1⁄2 + (√3⁄2)i, −1, −1⁄2 − (√3⁄2)i, 1⁄2 − (√3⁄2)i","c3":"regular hexagon"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Geometric Interpretation of Roots"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"n","features":[{"id":"c1","name":"Angular separation","type":"text"},{"id":"c2","name":"Polygon shape on the circle of radius R$^{1/n}$","type":"text"}],"items":[{"id":"r1","name":"2","values":{"c1":"180°","c2":"two diametrically opposite points (a line segment through the origin)"}},{"id":"r2","name":"3","values":{"c1":"120°","c2":"equilateral triangle"}},{"id":"r3","name":"4","values":{"c1":"90°","c2":"square"}},{"id":"r4","name":"5","values":{"c1":"72°","c2":"regular pentagon"}},{"id":"r5","name":"6","values":{"c1":"60°","c2":"regular hexagon"}},{"id":"r6","name":"general n","values":{"c1":"360°⁄n","c2":"regular n-gon centered at origin (n ≥ 3)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Raise a complex number to a power with De Moivre's theorem", href: "/complex-numbers/methods/de-moivre-powers", desc: "Write the number in polar form, raise the modulus to the power, multiply the angle by it, and convert back.", level: "composite", here: "#4" },
+      { skill: "Find the nth roots of a complex number", href: "/complex-numbers/methods/nth-roots", desc: "Write $w$ in polar form, take the real $n$th root of its modulus, and spread $n$ angles $\\frac{\\varphi + 2\\pi k}{n}$ evenly around the circle.", level: "composite", here: "#6" },
+    ] },
+    { title: "More complex number methods", items: [
+      { skill: "Choose the right form of a complex number", href: "/complex-numbers/methods/which-form", desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: "strategy" },
+      { skill: "Multiply and divide complex numbers in polar form", href: "/complex-numbers/methods/multiply-divide-polar", desc: "Multiply or divide the moduli, add or subtract the arguments, and bring the angle back into $(-\\pi, \\pi]$.", level: "composite" },
+      { skill: "Find the square roots of a complex number", href: "/complex-numbers/methods/complex-square-roots", desc: "Set $(x + yi)^2 = a + bi$, use $x^2 - y^2 = a$ and $x^2 + y^2 = |w|$, and pick the signs from $2xy = b$.", level: "composite" },
+      { skill: "Find all complex roots of a polynomial", href: "/complex-numbers/methods/polynomial-complex-roots", desc: "Expect $n$ roots, peel off a real root or a conjugate pair by division, and solve the last quadratic over the complex numbers.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1435,7 +1469,9 @@ Taking $\\theta = \\arctan\\frac{1}{-1} = -45°$ for $-1 + i$ gives $(-1 + i)^3 
 Another example: find $(\\sqrt{3} - i)^6$. The modulus is $\\sqrt{3 + 1} = 2$. The argument, with $a = \\sqrt{3} > 0$ and $b = -1 < 0$, lies in the fourth quadrant: $\\theta = -30°$. So $\\sqrt{3} - i = 2\\text{cis}(-30°)$, and:
 
 @academic[formula_callout:Applying De Moivre's Theorem to Powers
-$$(\\sqrt{3} - i)^6 = 2^6\\text{cis}(-180°) = 64\\text{cis}(-180°) = 64(-1) = -64$$]@`,
+$$(\\sqrt{3} - i)^6 = 2^6\\text{cis}(-180°) = 64\\text{cis}(-180°) = 64(-1) = -64$$]@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to raise a complex number to a power](!/complex-numbers/methods/de-moivre-powers) →@`,
   after: ``,
   link: '',
 },
@@ -1493,7 +1529,9 @@ For $k = 0$: $z_0 = 2\\text{cis}(0°) = 2$.
 For $k = 1$: $z_1 = 2\\text{cis}(120°) = 2(-\\frac{1}{2} + \\frac{\\sqrt{3}}{2}i) = -1 + \\sqrt{3}i$.
 For $k = 2$: $z_2 = 2\\text{cis}(240°) = 2(-\\frac{1}{2} - \\frac{\\sqrt{3}}{2}i) = -1 - \\sqrt{3}i$.
 
-Three roots: $2$, $-1 + \\sqrt{3}i$, and $-1 - \\sqrt{3}i$. Each cubes to $8$.`,
+Three roots: $2$, $-1 + \\sqrt{3}i$, and $-1 - \\sqrt{3}i$. Each cubes to $8$.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the nth roots of a complex number](!/complex-numbers/methods/nth-roots) →@`,
   after: ``,
   link: '',
 },
@@ -2059,8 +2097,23 @@ const schemas = {
     conclusion: { text: 'Holds for all positive integers $n$', say: 'This completes the induction.' },
   };
 
+  const cubeRootsSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$z^3 = -8$',
+      rows: [
+        { step: 'Write the target in trigonometric form', example: '$-8 = 8\\,\\text{cis}(180°)$' },
+        { step: 'Apply the root formula', stepSub: 'The modulus becomes $8^{1/3} = 2$', example: '$z_k = 2\\,\\text{cis}\\left(\\frac{180° + 360°k}{3}\\right)$, $k = 0, 1, 2$' },
+        { step: 'Take $k = 0$', example: '$z_0 = 2\\,\\text{cis}(60°) = 1 + \\sqrt{3}i$' },
+        { step: 'Take $k = 1$', example: '$z_1 = 2\\,\\text{cis}(180°) = -2$' },
+        { step: 'Take $k = 2$', example: '$z_2 = 2\\,\\text{cis}(300°) = 1 - \\sqrt{3}i$' },
+      ],
+    },
+  };
+
   return {
   props:{
+    cubeRootsSteps,
     proofStepsData,
     formulaSummaryData,
     pitfallData,
@@ -2092,7 +2145,7 @@ const schemas = {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function DeMoivreTheoremPage({ proofStepsData, formulaSummaryData, pitfallData,nthRootsAnatomy, unityParityCases, demoivrePowerSteps,
+export default function DeMoivreTheoremPage({ cubeRootsSteps, proofStepsData, formulaSummaryData, pitfallData,nthRootsAnatomy, unityParityCases, demoivrePowerSteps,
   seoData,
   sectionsContent,
   introContent,
@@ -2221,11 +2274,15 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-demoivre-theorem-applying-de-moivre-matrix'}
+            id="demoivre-theorem-applying-de-moivre-matrix"
+            title="Applying De Moivre's Theorem to Powers"
+            source="/complex-numbers/demoivre-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
           `Converting back to algebraic form is the only step with any arithmetic in it.`,
           <DiagramFrame
@@ -2278,11 +2335,15 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-demoivre-theorem-geometric-interpretation-roots-matrix'}
+            id="demoivre-theorem-geometric-interpretation-roots-matrix"
+            title="Geometric Interpretation of Roots"
+            source="/complex-numbers/demoivre-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Whatever the nonzero number, its $n$-th roots cut one circle into $n$ equal arcs.]@`,
         ]
     },
@@ -2292,11 +2353,15 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-demoivre-theorem-roots-unity-matrix'}
+            id="demoivre-theorem-roots-unity-matrix"
+            title="Roots of Unity"
+            source="/complex-numbers/demoivre-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:One number, $\\omega$, generates every $n$-th root of unity: its powers walk the unit circle in equal steps.]@`,
         ]
     },
@@ -2346,6 +2411,11 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame key={'obj10-procedure'} id="cube-roots-of-minus-eight-steps" title="The pattern on the cube roots of −8"
+            source="/complex-numbers/demoivre-theorem" related={false}
+            before={"The root-finding pattern on the second example of this section. Press Next to carry out one step at a time."}>
+            <ProcedureV2 data={cubeRootsSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2354,11 +2424,15 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-demoivre-theorem-summary-forward-reverse-matrix'}
+            id="demoivre-theorem-summary-forward-reverse-matrix"
+            title="Summary: Forward and Reverse Directions of De Moivre's Theorem"
+            source="/complex-numbers/demoivre-theorem"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2394,6 +2468,14 @@ In 1593 Adriaan van Roomen challenged the world's mathematicians with $x^{45} - 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

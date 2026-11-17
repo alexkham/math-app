@@ -1,4 +1,6 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import FactorizationAnatomy from '@/app/components/infographics/linear-algebra/FactorizationAnatomy'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -13,11 +15,74 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import svdDiagrams from '@/app/components/linear-algebra copy/matrix/svdDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const LA_D = '/linear-algebra/decompositions';
+const cm_decompositionRelations = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    records: { label: 'recorded as a matrix product', color: '#2563EB', dash: '6 4' }
+  },
+  graph: {
+    cols: 3, rows: 3, height: 330, nodeWidth: 180,
+    hint: 'Click a decomposition to see how it connects. Hover to trace its links; click a line type to hide it.',
+    nodes: [
+      { id: 'ge', name: 'Gaussian elimination', x: 0, y: 0, href: '/linear-algebra/linear-systems/gaussian-elimination', text: 'Row reduction of a linear system.' },
+      { id: 'lu', name: 'LU', x: 1, y: 0, href: LA_D + '/lower-upper', text: '$A = LU$: a lower triangular factor times an upper triangular one.' },
+      { id: 'chol', name: 'Cholesky', x: 2, y: 0, href: LA_D + '/cholesky', text: '$A = LL^T$ for a symmetric positive definite matrix.' },
+      { id: 'gs', name: 'Gram-Schmidt', x: 0, y: 1, href: '/linear-algebra/orthogonality/gram-schmidt', text: 'Turns a set of vectors into an orthonormal one.' },
+      { id: 'qr', name: 'QR', x: 1, y: 1, href: LA_D + '/qr', text: '$A = QR$: an orthogonal factor times an upper triangular one.' },
+      { id: 'eig', name: 'Eigendecomposition', x: 0, y: 2, href: '/linear-algebra/eigen/diagonalization', text: '$A = PDP^{-1}$ for a diagonalizable matrix.' },
+      { id: 'spec', name: 'Spectral', x: 1, y: 2, href: LA_D + '/spectral', text: '$A = Q \\Lambda Q^T$ for a symmetric matrix.' },
+      { id: 'svd', name: 'SVD', x: 2, y: 2, href: LA_D + '/svd', text: '$A = U \\Sigma V^T$ for any matrix.' }
+    ],
+    edges: [
+      { from: 'ge', to: 'lu', kind: 'records', text: 'LU is Gaussian elimination recorded as a matrix product' },
+      { from: 'gs', to: 'qr', kind: 'records', text: 'QR is Gram-Schmidt recorded as a matrix product' },
+      { from: 'chol', to: 'lu', kind: 'special', label: '$A = A^T$, positive', text: 'when $A = A^T$ with positive eigenvalues, $A = LDL^T$ compresses into $A = LL^T$' },
+      { from: 'spec', to: 'eig', kind: 'special', label: 'symmetric', text: 'eigendecomposition restricted to symmetric matrices, where the eigenvector matrix is orthogonal' },
+      { from: 'spec', to: 'svd', kind: 'special', label: 'symmetric PSD', text: 'the SVD generalizes the spectral decomposition to non-symmetric and non-square matrices; for a symmetric positive semi-definite matrix the two coincide' }
+    ]
+  }
+};
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: The Five Decompositions Side by Side"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Decomposition","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Matrix requirement","type":"text"},{"id":"c3","name":"Factor structure","type":"text"},{"id":"c4","name":"Key application","type":"text"}],"items":[{"id":"r1","name":"[LU](!/linear-algebra/decompositions/lower-upper)","values":{"c1":"A = LU (or PA = LU)","c2":"square; pivoting handles general invertible","c3":"L lower triangular, U upper triangular","c4":"solving linear systems, especially with multiple right-hand sides"}},{"id":"r2","name":"[QR](!/linear-algebra/decompositions/qr)","values":{"c1":"A = QR","c2":"any m × n; independent columns make R invertible","c3":"Q with orthonormal columns, R upper triangular","c4":"least squares; iterative algorithm for eigenvalues"}},{"id":"r3","name":"[Cholesky](!/linear-algebra/decompositions/cholesky)","values":{"c1":"A = LL$^{T}$","c2":"symmetric positive definite","c3":"L lower triangular with positive diagonal","c4":"SPD systems at half LU cost; positive-definiteness test"}},{"id":"r4","name":"[Spectral](!/linear-algebra/decompositions/spectral)","values":{"c1":"A = QDQ$^{T}$","c2":"real symmetric","c3":"Q orthogonal (eigenvectors), D diagonal of eigenvalues","c4":"symmetric eigenproblems, quadratic forms, PCA"}},{"id":"r5","name":"[SVD](!/linear-algebra/decompositions/svd)","values":{"c1":"A = UΣV$^{T}$","c2":"any m × n — no restriction","c3":"U, V orthogonal; Σ diagonal of non-negative singular values","c4":"rank, pseudoinverse, low-rank approximation, condition number"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Choosing the Right Decomposition"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Problem / Matrix context","features":[{"id":"c1","name":"Best decomposition","type":"text"},{"id":"c2","name":"Why","type":"text"}],"items":[{"id":"r1","name":"General square system, one or many right-hand sides","values":{"c1":"[LU](!/linear-algebra/decompositions/lower-upper) (with pivoting if needed)","c2":"factor once, then cheap forward/back substitution per right-hand side"}},{"id":"r2","name":"Symmetric positive definite system","values":{"c1":"[Cholesky](!/linear-algebra/decompositions/cholesky)","c2":"half the cost of LU, no pivoting required, doubles as a definiteness test"}},{"id":"r3","name":"Least squares / overdetermined system","values":{"c1":"[QR](!/linear-algebra/decompositions/qr)","c2":"avoids the condition-number squaring of the normal equations"}},{"id":"r4","name":"Symmetric eigenvalue problem","values":{"c1":"[Spectral](!/linear-algebra/decompositions/spectral)","c2":"guarantees real eigenvalues and an orthogonal eigenvector basis"}},{"id":"r5","name":"Rectangular, rank-deficient, or unknown structure","values":{"c1":"[SVD](!/linear-algebra/decompositions/svd)","c2":"universal — exists for every matrix; reveals rank, pseudoinverse, low-rank approximation, and condition number"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Choose the right matrix decomposition", href: "/linear-algebra/decompositions/methods/which-decomposition", desc: "A decision tree: the task and the shape of the matrix pick LU, Cholesky, QR, spectral or SVD.", level: "strategy", here: "#8" },
+    ] },
+    { title: "More decomposition methods", items: [
+      { skill: "Find the LU decomposition", href: "/linear-algebra/decompositions/methods/lu-decomposition", desc: "Run Gaussian elimination, keep the multipliers in L and the result in U; pivot when a zero appears.", level: "composite" },
+      { skill: "Find the QR decomposition", href: "/linear-algebra/decompositions/methods/qr-decomposition", desc: "Run Gram-Schmidt on the columns: the orthonormal vectors form Q, the coefficients form R.", level: "composite" },
+      { skill: "Find the singular value decomposition", href: "/linear-algebra/decompositions/methods/svd", desc: "Eigenvalues of $A^TA$ give the singular values and $V$; then $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ gives $U$.", level: "composite" },
+      { skill: "Find the Cholesky decomposition", href: "/linear-algebra/decompositions/methods/cholesky-decomposition", desc: "Symmetric positive definite matrix: build L column by column with square roots so that $A = LL^T$.", level: "composite" },
+      { skill: "Find the spectral decomposition", href: "/linear-algebra/decompositions/methods/spectral-decomposition", desc: "Symmetric matrix: orthonormal eigenvectors and eigenvalues give $A = QDQ^T$, a sum of projections.", level: "composite" },
+    ] },
+    { title: "Orthogonality methods", items: [
+      { skill: "Solve a least-squares problem", href: "/linear-algebra/orthogonality/methods/least-squares", desc: "When $A\\mathbf{x} = \\mathbf{b}$ has no solution, solve the normal equations for the closest fit.", level: "composite" },
+    ] },
+    { title: "Eigenvalue methods", items: [
+      { skill: "Diagonalize a matrix", href: "/linear-algebra/eigen/methods/diagonalization", desc: "Put eigenvectors in the columns of $P$ and eigenvalues on the diagonal of $D$, then check $AP = PD$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/decompositions/methods", label: "All decomposition methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -519,8 +584,99 @@ $$= \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix} = A$$`],
     ],
   };
 
+  // FactorizationAnatomy 2026-11-14: What each factor of LU holds (obj3).
+  const luFactorAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Square matrix', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        requires: 'Row pivoting may be needed, giving $PA = LU$' },
+      { symbol: 'L', name: 'Lower triangular', dim: 'n × n', fill: 'lower', width: 110, height: 110,
+        contains: 'The multipliers used during elimination' },
+      { symbol: 'U', name: 'Upper triangular', dim: 'n × n', fill: 'upper', width: 110, height: 110,
+        contains: 'The echelon form reached by Gaussian elimination' },
+    ],
+    existsWhen: '$A$ is square. Row pivoting handles every invertible matrix, as $PA = LU$.',
+    uniqueWhen: '$L$ carries ones on its diagonal and $P$ is fixed.',
+    cost: '⅔n³ once, then n² per right-hand side',
+    preferredWhen: 'Several systems share the same coefficient matrix.',
+  };
+
+  // FactorizationAnatomy 2026-11-14: What each factor of QR holds (obj4).
+  const qrOverviewAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Any matrix', dim: 'm × n', fill: 'dense', width: 100, height: 140,
+        requires: 'Independent columns make $R$ invertible' },
+      { symbol: 'Q', name: 'Orthonormal columns', dim: 'm × n', fill: 'ortho', width: 100, height: 140,
+        contains: 'The orthonormal vectors that Gram-Schmidt produces' },
+      { symbol: 'R', name: 'Upper triangular', dim: 'n × n', fill: 'upper', width: 100, height: 100,
+        contains: 'The triangular system $R\\hat{\\mathbf{x}} = Q^T\\mathbf{b}$ of least squares' },
+    ],
+    existsWhen: 'For any $m \\times n$ matrix.',
+    uniqueWhen: 'The diagonal entries of $R$ are required to be positive.',
+    cost: 'one triangular solve per least-squares problem',
+    preferredWhen: 'Least squares, and the iterative algorithm for eigenvalues.',
+  };
+
+  // FactorizationAnatomy 2026-11-14: What each factor of Cholesky holds (obj5).
+  const choleskyOverviewAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Symmetric positive definite', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        requires: '$A = A^T$ and all eigenvalues strictly positive' },
+      { symbol: 'L', name: 'Lower triangular', dim: 'n × n', fill: 'lower', width: 110, height: 110,
+        property: 'Positive diagonal entries',
+        contains: 'The only factor that is computed' },
+      { symbol: 'Lᵀ', name: 'Upper triangular', dim: 'n × n', fill: 'upper', width: 110, height: 110,
+        contains: 'Just the transpose of $L$' },
+    ],
+    existsWhen: 'If and only if $A$ is symmetric positive definite.',
+    uniqueWhen: 'The diagonal entries of $L$ are positive.',
+    cost: '⅓n³, half the cost of LU',
+    preferredWhen: 'Symmetric positive definite systems, and as a test for positive definiteness.',
+  };
+
+  // FactorizationAnatomy 2026-11-14: What each factor of the spectral decomposition holds (obj6).
+  const spectralOverviewAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Symmetric matrix', dim: 'n × n', fill: 'dense', width: 110, height: 110,
+        requires: 'Real and symmetric' },
+      { symbol: 'Q', name: 'Orthogonal', dim: 'n × n', fill: 'ortho', width: 110, height: 110,
+        contains: 'The eigenvectors $\\mathbf{q}_1, \\dots, \\mathbf{q}_n$ as columns' },
+      { symbol: 'D', name: 'Diagonal', dim: 'n × n', fill: 'diag', width: 110, height: 110,
+        contains: 'The eigenvalues $\\lambda_1, \\dots, \\lambda_n$' },
+      { symbol: 'Qᵀ', name: 'Transpose of Q', dim: 'n × n', fill: 'ortho', width: 110, height: 110,
+        property: 'Takes the place of an inverse' },
+    ],
+    existsWhen: '$A$ is real and symmetric.',
+    uniqueWhen: 'The eigenvalues are always the same. $Q$ is fixed up to signs when they are all distinct.',
+    cost: 'one symmetric eigenvalue problem',
+    preferredWhen: 'Quadratic forms, principal component analysis, classifying symmetric matrices.',
+  };
+
+  // FactorizationAnatomy 2026-11-14: What each factor of the SVD holds (obj7).
+  const svdOverviewAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Any matrix', dim: 'm × n', fill: 'dense', width: 100, height: 130,
+        requires: 'Nothing: every shape and every rank' },
+      { symbol: 'U', name: 'Orthogonal', dim: 'm × m', fill: 'ortho', width: 130, height: 130,
+        contains: 'Orthonormal bases of the column space and the left null space' },
+      { symbol: 'Σ', name: 'Diagonal', dim: 'm × n', fill: 'diag', width: 100, height: 130,
+        property: 'Non-negative entries',
+        contains: 'The singular values; the nonzero ones count the rank' },
+      { symbol: 'Vᵀ', name: 'Orthogonal', dim: 'n × n', fill: 'ortho', width: 100, height: 100,
+        contains: 'Orthonormal bases of the row space and the null space' },
+    ],
+    existsWhen: 'Always.',
+    uniqueWhen: 'The singular values are always the same. $U$ and $V$ are not fixed.',
+    cost: 'the costliest of the five',
+    preferredWhen: 'Rank, pseudoinverse, low-rank approximation, condition number.',
+  };
+
   return {
   props:{
+    svdOverviewAnatomy,
+    spectralOverviewAnatomy,
+    choleskyOverviewAnatomy,
+    qrOverviewAnatomy,
+    luFactorAnatomy,
     pitfallData,
     faqQuestions,
     decompositionDecision,
@@ -544,7 +700,7 @@ $$= \\begin{pmatrix} 2 & 1 \\\\ 0 & 1 \\end{pmatrix} = A$$`],
    }
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
-export default function DecompositionsPage({ pitfallData,faqQuestions, decompositionDecision, decompositionTree,
+export default function DecompositionsPage({ svdOverviewAnatomy, spectralOverviewAnatomy, choleskyOverviewAnatomy, qrOverviewAnatomy, luFactorAnatomy, pitfallData,faqQuestions, decompositionDecision, decompositionTree,
   seoData,
   sectionsContent,
   introContent,
@@ -640,6 +796,17 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-factor-anatomy'}
+            id="lu-factor-anatomy"
+            title="What each factor of LU holds"
+            source="/linear-algebra/decompositions"
+            before={"The factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={luFactorAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -648,6 +815,17 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-factor-anatomy'}
+            id="qr-overview-factor-anatomy"
+            title="What each factor of QR holds"
+            source="/linear-algebra/decompositions"
+            before={"The factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={qrOverviewAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -656,6 +834,17 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-factor-anatomy'}
+            id="cholesky-overview-factor-anatomy"
+            title="What each factor of Cholesky holds"
+            source="/linear-algebra/decompositions"
+            before={"The factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={choleskyOverviewAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -664,6 +853,17 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame
+            key={'obj6-factor-anatomy'}
+            id="spectral-overview-factor-anatomy"
+            title="What each factor of the spectral decomposition holds"
+            source="/linear-algebra/decompositions"
+            before={"The factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={spectralOverviewAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -672,6 +872,17 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-factor-anatomy'}
+            id="svd-overview-factor-anatomy"
+            title="What each factor of the SVD holds"
+            source="/linear-algebra/decompositions"
+            before={"The factorization taken apart: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={svdOverviewAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
                   <div key={'unit-svd'} dangerouslySetInnerHTML={{ __html: demoUnits.svd }} />,
           `The cheaper factorisations above are worth using precisely when their conditions happen to hold; this one is the fallback when they do not.`,
         ]
@@ -682,8 +893,15 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-decompositions-choosing-right-decomposition-matrix'}
+            id="decompositions-choosing-right-decomposition-matrix"
+            title="Choosing the Right Decomposition"
+            source="/linear-algebra/decompositions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `The paragraphs above, as a map: first the question being asked, then what the matrix looks like.`,
           <DiagramFrame
             key={'obj8-decision'}
@@ -694,6 +912,7 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
             <DecisionBox data={decompositionDecision} variant="tree" />
           </DiagramFrame>,
           `Two routes end at the SVD. It is the one decomposition that asks nothing of the shape or rank of the matrix, which is why it catches every case the others cannot take. The [relationships between the decompositions](!#9) show how the five connect.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which matrix decomposition should I use?](!/linear-algebra/decompositions/methods/which-decomposition) →@`,
         ]
     },
     {
@@ -702,6 +921,15 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'concept-map-decomposition-relations'}
+            id="decompositions-relationships"
+            title="Relationships Between Decompositions"
+            source="/linear-algebra/decompositions"
+            related={false}
+          >
+            <ConceptMap data={cm_decompositionRelations} variant="graph" />
+          </DiagramFrame>,
         ]
     },
     // NEW capstone section: obj10
@@ -711,8 +939,15 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-decompositions-summary-five-decompositions-side-matrix'}
+            id="decompositions-summary-five-decompositions-side-matrix"
+            title="Summary: The Five Decompositions Side by Side"
+            source="/linear-algebra/decompositions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj10-diagram'}
             id="decompositions-tree"
@@ -738,6 +973,14 @@ In 2000 the journal Computing in Science and Engineering named the ten algorithm
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

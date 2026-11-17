@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,11 +15,36 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Domain and Range by Index"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function form","features":[{"id":"c1","name":"Domain","type":"text"},{"id":"c2","name":"Range","type":"text"}],"items":[{"id":"r1","name":"ⁿ√x (n even)","values":{"c1":"[0, ∞)","c2":"[0, ∞)"}},{"id":"r2","name":"ⁿ√x (n odd)","values":{"c1":"(−∞, ∞)","c2":"(−∞, ∞)"}},{"id":"r3","name":"√(x − 3)","values":{"c1":"[3, ∞)","c2":"[0, ∞)"}},{"id":"r4","name":"∛(x − 3)","values":{"c1":"(−∞, ∞)","c2":"(−∞, ∞)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Even vs Odd at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Even index (n = 2, 4, 6, …)","type":"text"},{"id":"c2","name":"Odd index (n = 3, 5, 7, …)","type":"text"}],"items":[{"id":"r1","name":"Allowed radicand (real values)","values":{"c1":"a ≥ 0 only","c2":"any real a"}},{"id":"r2","name":"Sign of result","values":{"c1":"always ≥ 0 (principal root)","c2":"matches sign of a"}},{"id":"r3","name":"Domain of f(x) = ⁿ√x","values":{"c1":"[0, ∞)","c2":"(−∞, ∞)"}},{"id":"r4","name":"Range of f(x) = ⁿ√x","values":{"c1":"[0, ∞)","c2":"(−∞, ∞)"}},{"id":"r5","name":"Identity ⁿ√(xⁿ)","values":{"c1":"|x|","c2":"x"}},{"id":"r6","name":"Negative radicand result","values":{"c1":"not real — use [complex numbers](!/complex-numbers)","c2":"real, negative"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Sign Behavior Summary"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Case","features":[{"id":"c1","name":"Result of ⁿ√a","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"a > 0, any n","values":{"c1":"positive","c2":"√16 = 4, ∛27 = 3"}},{"id":"r2","name":"a = 0, any n","values":{"c1":"zero","c2":"√0 = 0, ∛0 = 0"}},{"id":"r3","name":"a < 0, n odd","values":{"c1":"negative (preserves sign)","c2":"∛(−27) = −3"}},{"id":"r4","name":"a < 0, n even","values":{"c1":"not a real number","c2":"√(−9) requires [complex numbers](!/complex-numbers)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Split or combine a root of a product", href: "/algebra/methods#radical-product-rule", desc: "A root of a product, or two roots with the same index multiplied: $\\sqrt{50}$, $\\sqrt{3}\\cdot\\sqrt{12}$, $\\sqrt[3]{16x^4}$.", level: "atomic" },
+      { skill: "Split or combine a root of a quotient", href: "/algebra/methods#radical-quotient-rule", desc: "A root of a fraction, or two roots with the same index divided: $\\sqrt{\\frac{9}{16}}$, $\\frac{\\sqrt{50}}{\\sqrt{2}}$.", level: "atomic" },
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite" },
+      { skill: "Add, subtract, multiply and divide radicals", href: "/algebra/methods/radical-operations", desc: "Simplify first, then combine like radicals; multiply and divide roots with the same index.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1298,11 +1324,15 @@ Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-domain-range-index-matrix'}
+            id="properties-domain-range-index-matrix"
+            title="Domain and Range by Index"
+            source="/algebra/roots/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1311,11 +1341,15 @@ Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-sign-behavior-summary-matrix'}
+            id="properties-sign-behavior-summary-matrix"
+            title="Sign Behavior Summary"
+            source="/algebra/roots/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1332,11 +1366,15 @@ Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-even-vs-odd-at-matrix'}
+            id="properties-even-vs-odd-at-matrix"
+            title="Even vs Odd at a Glance"
+            source="/algebra/roots/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1354,6 +1392,14 @@ Writing $\\sqrt{16} = \\pm 4$ mixes the radical with the solutions of $x^2 = 16$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

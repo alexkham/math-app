@@ -1,6 +1,7 @@
 
   
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj7 aggregation, obj8 aggregation, obj10 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -18,13 +19,56 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionContinuityDiagrams from '@/app/components/functions/continuity/functionContinuityDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_discontinuitiesBlocking = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  tree: {
+    root: { name: 'Discontinuity at $a$', sub: 'not continuous at $a$, so not differentiable at $a$' },
+    branches: [
+      { leaves: [
+        { name: 'Jump discontinuity', condition: 'The function leaps from one value to another.', example: 'no tangent line can bridge the gap',
+          sketch: { x0: -2, x1: 2, y0: -0.4, y1: 2.6, pieces: [{ f: (x) => 0.6 + 0.2 * x, from: -2, to: 0 }, { f: (x) => 1.9 + 0.15 * x, from: 0, to: 2 }], holes: [[0, 0.6]], dots: [[0, 1.9]] } },
+        { name: 'Infinite discontinuity', condition: 'The function blows up at a vertical asymptote.', example: 'the graph near $a$ does not approach the point $(a, f(a))$',
+          sketch: { x0: -2, x1: 2, y0: -3, y1: 3, vlines: [0], pieces: [{ f: (x) => 0.5 / x, from: -2, to: -0.01, n: 160 }, { f: (x) => 0.5 / x, from: 0.01, to: 2, n: 160 }] } },
+        { name: 'Removable discontinuity', condition: 'The limit exists, but $f(a)$ is undefined or differs from the limit.', example: 'redefining $f(a)$ restores continuity and may restore differentiability',
+          sketch: { x0: -2, x1: 2, y0: -0.4, y1: 2.6, pieces: [{ f: (x) => 0.4 * x * x + 0.6, from: -2, to: 2 }], holes: [[0, 0.6]], dots: [[0, 1.9]] } }
+      ] }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("One-Sided Derivatives"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Derivative","features":[{"id":"c1","name":"Notation","type":"text"},{"id":"c2","name":"Defining limit","type":"text"},{"id":"c3","name":"Where it is the natural object","type":"text"}],"items":[{"id":"r1","name":"Left-hand","values":{"c1":"f'₋(a)","c2":"lim$_{h→0⁻}$ [f(a+h) − f(a)] / h","c3":"right endpoint of an interval; left side of a piecewise boundary"}},{"id":"r2","name":"Right-hand","values":{"c1":"f'₊(a)","c2":"lim$_{h→0⁺}$ [f(a+h) − f(a)] / h","c3":"left endpoint of an interval; right side of a piecewise boundary"}},{"id":"r3","name":"Two-sided","values":{"c1":"f'(a)","c2":"requires f'₋(a) = f'₊(a), both finite","c3":"interior points; the standard derivative"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Typology of Differentiability Failure"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Failure mode","features":[{"id":"c1","name":"Left-hand f'(a)","type":"text"},{"id":"c2","name":"Right-hand f'(a)","type":"text"},{"id":"c3","name":"Continuous at a?","type":"text"},{"id":"c4","name":"Canonical example","type":"text"}],"items":[{"id":"r1","name":"Corner","values":{"c1":"finite","c2":"finite, different from left","c3":"yes","c4":"f(x) = |x| at x = 0 (slopes −1 and +1)"}},{"id":"r2","name":"Cusp","values":{"c1":"±∞","c2":"∓∞ (opposite sign)","c3":"yes","c4":"f(x) = x$^{2/3}$ at x = 0"}},{"id":"r3","name":"Vertical tangent","values":{"c1":"±∞","c2":"±∞ (same sign as left)","c3":"yes","c4":"f(x) = x$^{1/3}$ at x = 0"}},{"id":"r4","name":"Discontinuity","values":{"c1":"undefined or DNE","c2":"undefined or DNE","c3":"no","c4":"step function at the jump; 1/x at 0"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Differentiability on Intervals"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Setting","features":[{"id":"c1","name":"Differentiable means","type":"text"},{"id":"c2","name":"Notes","type":"text"}],"items":[{"id":"r1","name":"Open interval (a, b)","values":{"c1":"f differentiable at every point in (a, b)","c2":"no endpoint conditions — endpoints are excluded"}},{"id":"r2","name":"Closed interval [a, b]","values":{"c1":"differentiable on (a, b); right-hand derivative at a; left-hand derivative at b","c2":"more than MVT and Rolle's Theorem need — they ask only for differentiability on (a, b) and continuity on [a, b]"}},{"id":"r3","name":"Piecewise boundary at a","values":{"c1":"f continuous at a AND f'₋(a) = f'₊(a) (both finite)","c2":"continuity alone is not enough — |x| is continuous at 0 but not differentiable"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Limit methods", items: [
+      { skill: "Check whether a function is continuous at a point", href: "/calculus/limits/methods/continuity-check", desc: "Three conditions: $f(a)$ exists, the limit exists, they are equal; then classify any failure.", level: "composite" },
+      { skill: "Evaluate one-sided limits", href: "/calculus/limits/methods/one-sided-limits", desc: "Left and right limits separately; the two-sided limit exists only when they agree.", level: "composite" },
+      { skill: "Find the limit of a piecewise function", href: "/calculus/limits/methods/piecewise-limits", desc: "At a break, the lower piece gives the left limit and the upper piece the right; compare.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 // Concept introduction (section 1) — template B, definition first. Running
@@ -1108,6 +1152,15 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
           sectionsContent.obj6.content,
                   <div key={'unit-jump'} dangerouslySetInnerHTML={{ __html: demoUnits.jump }} />,
           `Continuity is thus the first gate a function must pass before differentiability can even be asked about.`,
+          <DiagramFrame
+            key={'taxonomy-differentiability-discontinuities'}
+            id="differentiability-discontinuities"
+            title="Discontinuities"
+            source="/calculus/derivatives/differentiability"
+            related={false}
+          >
+            <Taxonomy data={tx_discontinuitiesBlocking} variant="tree" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1116,8 +1169,15 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-differentiability-one-sided-derivatives-matrix'}
+            id="differentiability-one-sided-derivatives-matrix"
+            title="One-Sided Derivatives"
+            source="/calculus/derivatives/differentiability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1126,8 +1186,15 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-differentiability-differentiability-intervals-matrix'}
+            id="differentiability-differentiability-intervals-matrix"
+            title="Differentiability on Intervals"
+            source="/calculus/derivatives/differentiability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           `@academic[punchline:Two pieces join differentiably only when they meet and their slopes agree at the join.]@`,
         ]
     },
@@ -1145,8 +1212,15 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-differentiability-summary-typology-differentiability-failure-matrix'}
+            id="differentiability-summary-typology-differentiability-failure-matrix"
+            title="Summary: A Typology of Differentiability Failure"
+            source="/calculus/derivatives/differentiability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj10-diagram'}
             id="differentiability-failure-tree"
@@ -1190,6 +1264,14 @@ $$f'(a) = \\lim_{h \\to 0} \\frac{f(a + h) - f(a)}{h}$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

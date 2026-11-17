@@ -16,12 +16,22 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import derivativesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-derivatives'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("The Derivative as Rate of Change"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Context","features":[{"id":"c1","name":"Quantity f","type":"text"},{"id":"c2","name":"Derivative f'","type":"text"},{"id":"c3","name":"What f' reveals","type":"text"}],"items":[{"id":"r1","name":"General","values":{"c1":"quantity as a function of x","c2":"instantaneous rate of change at each x","c3":"where the quantity accelerates, plateaus, or reverses"}},{"id":"r2","name":"Kinematics","values":{"c1":"position s(t)","c2":"velocity s'(t)","c3":"stops (zeros), reversals (sign changes), maximum speed (extrema)"}},{"id":"r3","name":"Economics","values":{"c1":"total cost C(x)","c2":"marginal cost C'(x)","c3":"whether production costs are accelerating or stabilizing"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: How f and f' Correspond"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Behavior of f","features":[{"id":"c1","name":"Corresponding behavior of f'","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"f is increasing","values":{"c1":"f'(x) ≥ 0","c2":"graph of f' lies on or above the x-axis"}},{"id":"r2","name":"f is decreasing","values":{"c1":"f'(x) ≤ 0","c2":"graph of f' lies on or below the x-axis"}},{"id":"r3","name":"f has a local extremum at a","values":{"c1":"f'(a) = 0, or f' undefined at a","c2":"horizontal tangent on f when f'(a) = 0 (corner or cusp when f' is undefined)"}},{"id":"r4","name":"f has a local maximum","values":{"c1":"f' changes sign + → − (sufficient, not necessary)","c2":"f' crosses zero from above, or jumps from + to − at a corner or cusp"}},{"id":"r5","name":"f has a local minimum","values":{"c1":"f' changes sign − → + (sufficient, not necessary)","c2":"f' crosses zero from below, or jumps from − to + at a corner or cusp"}},{"id":"r6","name":"f is steep at a","values":{"c1":"|f'(a)| is large","c2":"f' graph far from the x-axis"}},{"id":"r7","name":"f is nearly flat at a","values":{"c1":"f'(a) ≈ 0","c2":"f' graph near the x-axis"}},{"id":"r8","name":"f is linear on an interval","values":{"c1":"f' is constant on that interval","c2":"horizontal segment on the graph of f'"}},{"id":"r9","name":"f is concave up","values":{"c1":"f' is increasing","c2":"slope of f is rising"}},{"id":"r10","name":"f is concave down","values":{"c1":"f' is decreasing","c2":"slope of f is falling"}},{"id":"r11","name":"f has an inflection point at a","values":{"c1":"f' has a local extremum at a","c2":"concavity of f flips"}},{"id":"r12","name":"f shifted vertically by C","values":{"c1":"f' is unchanged","c2":"vertical translation is invisible to the derivative"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Continuity of the Derivative"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Class","features":[{"id":"c1","name":"Definition","type":"text"},{"id":"c2","name":"Behavior of f'","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Continuous (C⁰)","values":{"c1":"f continuous on its domain","c2":"may not exist at every point","c3":"|x| — continuous, not differentiable at 0"}},{"id":"r2","name":"[Differentiable](!/calculus/derivatives/differentiability)","values":{"c1":"f' exists at every point of the domain","c2":"exists, but may itself be discontinuous","c3":"x² sin(1/x) extended by f(0)=0"}},{"id":"r3","name":"Continuously differentiable (C¹)","values":{"c1":"f differentiable and f' continuous","c2":"continuous on the whole domain","c3":"polynomials, sin x, eˣ"}},{"id":"r4","name":"Smooth (C∞)","values":{"c1":"all higher derivatives exist and are continuous","c2":"itself C∞ — infinitely differentiable","c3":"polynomials, eˣ, sin x, cos x"}}]};
 
 
 export async function getStaticProps(){
@@ -1012,8 +1022,15 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-function-derivative-as-rate-change-matrix'}
+            id="function-derivative-as-rate-change-matrix"
+            title="The Derivative as Rate of Change"
+            source="/calculus/derivatives/function"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1022,8 +1039,15 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-function-continuity-derivative-matrix'}
+            id="function-continuity-derivative-matrix"
+            title="Continuity of the Derivative"
+            source="/calculus/derivatives/function"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj7-diagram'}
             id="derivative-continuity-nesting"
@@ -1050,8 +1074,15 @@ $$f'(x) = \\lim_{h \\to 0} \\frac{f(x + h) - f(x)}{h} = \\lim_{t \\to x} \\frac{
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-function-summary-how-f-f-matrix'}
+            id="function-summary-how-f-f-matrix"
+            title="Summary: How f and f' Correspond"
+            source="/calculus/derivatives/function"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {

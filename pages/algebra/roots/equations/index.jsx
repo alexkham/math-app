@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -13,9 +15,56 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Why Extraneous Solutions Appear"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Cause","features":[{"id":"c1","name":"Mechanism","type":"text"},{"id":"c2","name":"Where to watch for it","type":"text"}],"items":[{"id":"r1","name":"Squaring is not reversible","values":{"c1":"both v and −v square to v²; sign information is lost","c2":"any even-power step on an equation involving a radical"}},{"id":"r2","name":"Principal root cannot be negative","values":{"c1":"√(expression) ≥ 0 always for even index — see [properties](!/algebra/roots/properties)","c2":"equations of the form √(…) = (negative quantity); squaring hides the impossibility"}},{"id":"r3","name":"Domain violation after squaring","values":{"c1":"candidate makes the original radicand negative for an even-index radical","c2":"even-index equations with linear or quadratic radicands"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Configurations at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Configuration","features":[{"id":"c1","name":"Example","type":"text"},{"id":"c2","name":"Approach","type":"text"},{"id":"c3","name":"Extraneous risk","type":"text"}],"items":[{"id":"r1","name":"Single isolated even-index radical","values":{"c1":"√(x − 2) = 5","c2":"square once, solve, check","c3":"yes — check required"}},{"id":"r2","name":"Single radical with extra term","values":{"c1":"√x + 3 = 7","c2":"isolate the radical first, then square","c3":"yes — check required"}},{"id":"r3","name":"Two radicals (one side or split)","values":{"c1":"√(x + 5) − √x = 1","c2":"isolate one radical, square, isolate the remaining radical, square again","c3":"yes — check required"}},{"id":"r4","name":"One radical each side, even index","values":{"c1":"√(2x + 3) = √(x + 7)","c2":"square directly, solve, check","c3":"low — check only that both radicands are non-negative"}},{"id":"r5","name":"Odd-index radical","values":{"c1":"∛(x − 2) = 4","c2":"cube both sides, solve","c3":"rare — odd roots preserve sign, but still check"}},{"id":"r6","name":"Radical inequality","values":{"c1":"√(x − 2) ≤ 4","c2":"isolate, square, AND apply the radicand-domain restriction; intersect","c3":"handled by domain intersection"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a radical equation", href: "/algebra/methods/radical-equations", desc: "Isolate the root, raise both sides to the index, solve, then check for extraneous solutions.", level: "composite", here: "#2" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite" },
+      { skill: "Add, subtract, multiply and divide radicals", href: "/algebra/methods/radical-operations", desc: "Simplify first, then combine like radicals; multiply and divide roots with the same index.", level: "composite" },
+      { skill: "Solve an exponential equation by matching bases", href: "/algebra/methods/exponential-equations-same-base", desc: "Write both sides as powers of one base, then set the exponents equal.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// IntervalLine: the two radical inequalities of obj9
+const il_radicalIneq = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  compound: {
+    range: [-2, 20],
+    wrongNote: { label: 'The domain is not optional', text: 'OR would admit values of $x$ where the square root does not exist, or where the inequality fails.' },
+    cases: [
+      { name: '$\\sqrt{x} > 3$', connective: 'and', source: '$\\sqrt{x} > 3$',
+        rewrite: 'square: $x > 9$; domain: $x \\geq 0$',
+        conditions: [{ label: '$x > 9$', op: '>', value: 9 }, { label: '$x \\geq 0$', op: '>=', value: 0 }],
+        note: { label: 'The domain is already satisfied', text: 'Every $x > 9$ is non-negative, so the overlap is $x > 9$.' } },
+      { name: '$\\sqrt{x - 2} \\leq 4$', connective: 'and', source: '$\\sqrt{x - 2} \\leq 4$',
+        rewrite: 'square: $x \\leq 18$; domain: $x \\geq 2$',
+        conditions: [{ label: '$x \\leq 18$', op: '<=', value: 18 }, { label: '$x \\geq 2$', op: '>=', value: 2 }],
+        note: { label: 'The domain closes the interval', text: 'Without $x \\geq 2$ the answer would wrongly admit every $x \\leq 18$.' } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -814,8 +863,38 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: The four steps on one equation (obj2).
+  const radicalBasicSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\sqrt{x - 2} + 4 = 9$',
+      rows: [
+        { step: 'Isolate the radical on one side', example: '$\\sqrt{x - 2} = 5$' },
+        { step: 'Raise both sides to the power that matches the index', example: '$x - 2 = 25$' },
+        { step: 'Solve the resulting equation', example: '$x = 27$' },
+        { check: true, step: 'Check the solution in the original equation', example: '$\\sqrt{27 - 2} + 4 = 5 + 4 = 9$' },
+      ],
+    },
+  };
+
+  const twoRadicalSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$\\sqrt{x + 5} - \\sqrt{x} = 1$',
+      rows: [
+        { step: 'Isolate one radical', example: '$\\sqrt{x + 5} = \\sqrt{x} + 1$' },
+        { step: 'Square both sides', example: '$x + 5 = x + 2\\sqrt{x} + 1$' },
+        { step: 'Isolate the remaining radical', example: '$\\sqrt{x} = 2$' },
+        { step: 'Square again', example: '$x = 4$' },
+        { check: true, step: 'Check the solution in the original equation', example: '$\\sqrt{9} - \\sqrt{4} = 3 - 2 = 1$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    twoRadicalSteps,
+    radicalBasicSteps,
     pitfallData,
     radicalEquationCases,
     sectionsContent,
@@ -842,7 +921,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function RootEquationsPage({ pitfallData,radicalEquationCases, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RootEquationsPage({ twoRadicalSteps, radicalBasicSteps, pitfallData,radicalEquationCases, seoData, sectionsContent, introContent, obj2Table, obj5Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -930,11 +1009,16 @@ $$\\sqrt[3]{2x - 1} = 3$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="radical-equation-basic-steps"
+            title="The four steps on one equation"
+            source="/algebra/roots/equations"
+            before={"The basic strategy on the second equation of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={radicalBasicSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a radical equation](!/algebra/methods/radical-equations) →@`,
         ]
     },
     {
@@ -961,11 +1045,15 @@ $$\\sqrt[3]{2x - 1} = 3$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-equations-why-extraneous-solutions-appear-matrix'}
+            id="equations-why-extraneous-solutions-appear-matrix"
+            title="Why Extraneous Solutions Appear"
+            source="/algebra/roots/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:Squaring forgets signs, so the squared equation can accept answers the original equation rejects.]@`,
         ]
     },
@@ -975,6 +1063,11 @@ $$\\sqrt[3]{2x - 1} = 3$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          <DiagramFrame key={'obj6-procedure'} id="two-radical-equation-steps" title="Squaring twice on one equation"
+            source="/algebra/roots/equations" related={false}
+            before={"The equation of this section, one step at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={twoRadicalSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1009,6 +1102,16 @@ $$\\sqrt[3]{2x - 1} = 3$$]@`,
           sectionsContent.obj9.content,
           <div key={'unit-radicalIneq'} dangerouslySetInnerHTML={{ __html: demoUnits.radicalIneq }} />,
           `Dropping the domain condition would wrongly admit every x ≤ 18.`,
+          <DiagramFrame
+            key={'radicalIneq-interval-line'}
+            id="radical-inequalities-number-line"
+            title="Squared condition and domain on the number line"
+            source="/algebra/roots/equations"
+            related={false}
+            before={"Both examples as two conditions: what squaring gives, what the radicand allows, and the part they share."}
+          >
+            <IntervalLine data={il_radicalIneq} variant="compound" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1025,11 +1128,15 @@ $$\\sqrt[3]{2x - 1} = 3$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-equations-configurations-at-glance-matrix'}
+            id="equations-configurations-at-glance-matrix"
+            title="Configurations at a Glance"
+            source="/algebra/roots/equations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1047,6 +1154,14 @@ $$\\sqrt[3]{2x - 1} = 3$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

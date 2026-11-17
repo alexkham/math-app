@@ -732,6 +732,7 @@
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj4 comparison, summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -752,6 +753,29 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
+// FeatureMatrix 2026-11-14: replaces the table componentsTable ("What all Probability Models Have in Common"); converted from the table's own cells.
+const fm_componentsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Component","features":[{"id":"c1","name":"What it specifies","type":"text"},{"id":"c2","name":"Standard notation","type":"text"}],"items":[{"id":"r1","name":"[Sample space](!/probability/sample-space)","values":{"c1":"the set of all possible outcomes the experiment may produce","c2":"S or &Omega;"}},{"id":"r2","name":"[Events](!/probability/events)","values":{"c1":"collections of outcomes treated as meaningful — subsets of the sample space","c2":"E (also written ℱ)"}},{"id":"r3","name":"Probability measure","values":{"c1":"numerical weights expressing how likely each event is","c2":"P"}}]};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Probability Models at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example or symbol","type":"text"}],"items":[{"id":"r1","name":"What a probability model is","values":{"c1":"a mathematical description specifying outcomes, events, and how probabilities are assigned","c2":"(S, E, P)"}},{"id":"r2","name":"Three universal components","values":{"c1":"sample space, events (subsets), and a probability measure","c2":"coin: S = {H, T}; events = subsets of S; P(H) = 1/2"}},{"id":"r3","name":"Why we use models","values":{"c1":"to isolate the random mechanism by stripping away irrelevant detail","c2":"model a coin flip, not the physics of the toss"}},{"id":"r4","name":"The probability hierarchy","values":{"c1":"model → random variable → distribution","c2":"(S, E, P) → X : S → &reals; → P(X ∈ A)"}},{"id":"r5","name":"Same distribution, many models","values":{"c1":"a distribution describes results, not the process that produced them","c2":"Bernoulli(0.5) can arise from a coin, a button press, a draw, …"}},{"id":"r6","name":"Same model, many distributions","values":{"c1":"different random variables on one model yield different distributions","c2":"on dice rolls: X = face value vs Y = 1$_{{even}}$ — different laws"}},{"id":"r7","name":"Modeling assumptions","values":{"c1":"explicit inputs — symmetry, independence, identical repetition, cardinality of S","c2":"&ldquo;fair coin&rdquo; assumes symmetry; iid trials assume independence"}},{"id":"r8","name":"Models vs reality","values":{"c1":"a model is a constructed object isolating a mechanism, not a description of the world","c2":"a coin model is useful even if real coins are slightly biased"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table hierarchyTable ("Models, Random Variables, and Distributions"); converted from the table's own cells.
+const fm_hierarchyTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Layer","features":[{"id":"c1","name":"Notation","type":"text"},{"id":"c2","name":"What it specifies","type":"text"},{"id":"c3","name":"Role","type":"text"}],"items":[{"id":"r1","name":"Probability model","values":{"c1":"(S, E, P)","c2":"the outcome space, the events, and how probabilities are assigned","c3":"supplies the randomness"}},{"id":"r2","name":"[Random variable](!/probability/random-variables)","values":{"c1":"X : S → &reals;","c2":"a numerical function defined on the model's sample space","c3":"selects what is measured"}},{"id":"r3","name":"[Distribution](!/probability/distributions)","values":{"c1":"P(X ∈ A) for A ⊆ &reals;","c2":"the probability law induced on the real line by X","c3":"records the resulting probabilities"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Probability methods", items: [
+      { skill: "Solve coin toss probability problems", href: "/probability/methods/coin-problems", desc: "Heads and tails over several tosses: count the sequences, or use the binomial formula for a biased coin.", level: "applied" },
+      { skill: "Solve dice probability problems", href: "/probability/methods/dice-problems", desc: "Sums, doubles and \"at least one six\": list the ordered outcomes and count.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1590,8 +1614,15 @@ Questions about averages, counts, or numerical outcomes arise only after additio
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'components-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: componentsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-models-what-all-probability-models-matrix'}
+            id="models-what-all-probability-models-matrix"
+            title="What all Probability Models Have in Common"
+            source="/probability/models"
+            related={false}
+          >
+            <FeatureMatrix data={fm_componentsTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1600,8 +1631,15 @@ Questions about averages, counts, or numerical outcomes arise only after additio
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'hierarchy-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: hierarchyTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-models-models-random-variables-distributions-matrix'}
+            id="models-models-random-variables-distributions-matrix"
+            title="Models, Random Variables, and Distributions"
+            source="/probability/models"
+            related={false}
+          >
+            <FeatureMatrix data={fm_hierarchyTable} />
+          </DiagramFrame>,
                   <div key={'unit-u_4_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_4_1 }} />,
           `The next two sections show that this summary loses information in both directions.`,
         ]
@@ -1681,8 +1719,15 @@ Questions about averages, counts, or numerical outcomes arise only after additio
         link:sectionsContent.summary.link,
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-models-probability-models-at-glance-matrix'}
+            id="models-probability-models-at-glance-matrix"
+            title="Probability Models at a Glance"
+            source="/probability/models"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1700,6 +1745,14 @@ Questions about averages, counts, or numerical outcomes arise only after additio
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

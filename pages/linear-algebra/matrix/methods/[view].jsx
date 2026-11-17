@@ -12,12 +12,13 @@ import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import MethodPage from '@/app/components/methods/MethodPage'
 import { leafSlugs } from '@/app/components/methods/resolveMethodRefs'
 import matrixMethods from '@/app/components/calculation-methods/data/linear-algebra/matrix.methods'
+import MatrixMultiplicationOrderVisualizer from '@/app/components/matrix-multiplication/order-visualiser/MatrixMultiplicationVisualizer'
 
 const SITE = 'https://www.learnmathclass.com'
 
 // Visual components this page may render inside "See it happen".
-// No tool is registered yet; register one here and name it in `visual.component`.
-const VISUAL_COMPONENTS = {  }
+// Register a tool here and name it in `visual.component`.
+const VISUAL_COMPONENTS = { MatrixMultiplicationOrderVisualizer }
 
 export async function getStaticPaths() {
   return {

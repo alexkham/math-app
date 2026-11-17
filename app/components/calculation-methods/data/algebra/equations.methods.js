@@ -70,7 +70,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a Linear Equation (Step by Step) | Learn Math Class',
         description: 'Solve linear equations: expand brackets, combine like terms, collect x on one side, divide by the coefficient, check. Includes no-solution and every-x cases.',
@@ -184,7 +184,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Linear Equations with Fractions and Decimals | Learn Math Class',
         description: 'Solve linear equations with fractions: multiply every term by the least common denominator, keep numerators in brackets, solve, check. Decimal version too.',
@@ -288,7 +288,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a Literal Equation (Rearranging Formulas) | Learn Math Class',
         description: 'Solve a formula for one variable: treat the other letters as numbers, undo operations in reverse order, factor if the target appears twice. Examples.',
@@ -392,7 +392,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Quadratic Equations by Factoring | Learn Math Class',
         description: 'Solve quadratics by factoring: move every term to one side, factor the trinomial (ac method when a ≠ 1), set each factor equal to zero. Examples.',
@@ -498,7 +498,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Quadratic Formula (Step by Step) | Learn Math Class',
         description: 'Use the quadratic formula: write the equation in standard form, read a, b and c, compute the discriminant, then x = (−b ± √Δ)/2a. Examples and mistakes.',
@@ -610,7 +610,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Complete the Square (Solve Quadratics and Find the Vertex) | Learn Math Class',
         description: 'Complete the square: divide by a, move c, add (b/2)² to both sides, write the perfect square, take square roots. Also gives vertex form. Examples and mistakes.',
@@ -727,7 +727,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Discriminant (Number and Type of Roots) | Learn Math Class',
         description: 'Use the discriminant b² − 4ac to tell how many real roots a quadratic has and whether they are rational, without solving, and to find k for a repeated root.',
@@ -833,7 +833,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Polynomial Equations (Cubics and Higher) | Learn Math Class',
         description: 'Solve cubic and higher polynomial equations: factor out common terms, test rational roots, divide by synthetic division, finish with the quadratic. Examples.',
@@ -958,7 +958,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Rational Equations (and Reject Extraneous Roots) | Learn Math Class',
         description: 'Solve rational equations: factor the denominators, list the excluded values, multiply by the LCD, solve, then reject any answer that makes a denominator zero.',
@@ -1083,7 +1083,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Absolute Value Equations (Two Cases) | Learn Math Class',
         description: 'Solve absolute value equations: isolate the bars, check the right side is not negative, split into the positive and negative case, solve each, check. Examples.',
@@ -1189,7 +1189,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Systems of Equations by Substitution | Learn Math Class',
         description: 'Solve a system by substitution: isolate one variable, substitute into the other equation, solve, back-substitute. No-solution and nonlinear cases too.',
@@ -1293,7 +1293,7 @@ const equationsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Systems of Equations by Elimination | Learn Math Class',
         description: 'Solve a system by elimination: line up the variables, scale so one variable has opposite coefficients, add, solve, back-substitute. Examples and mistakes.',
@@ -1399,7 +1399,7 @@ const equationsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Method to Solve a Quadratic Equation? Decision Tree | Learn Math Class',
         description: 'Choose how to solve a quadratic: factor when it factors fast, square roots with no x term, complete the square for vertex form, else the quadratic formula.',
@@ -1480,7 +1480,7 @@ const equationsMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Mixture Problems (Solutions, Blends, Investments) | Learn Math Class',
         description: 'Set up mixture problems with a table of amount, rate and amount × rate: one equation for the totals, one for the content. Solutions, coffee and interest.',
@@ -1571,7 +1571,7 @@ const equationsMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Distance, Rate and Time Word Problems | Learn Math Class',
         description: 'Set up distance-rate-time problems: a d = rt row per traveller, linked by total distance, equal distance or equal time. Meeting and catch-up examples.',
@@ -1659,7 +1659,7 @@ const equationsMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Work-Rate Problems (Working Together) | Learn Math Class',
         description: 'Solve work problems: write each rate as 1 job per its time, add the rates of those working together (subtract a drain), set equal to 1 over the combined time.',
@@ -1747,7 +1747,7 @@ const equationsMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Age Word Problems (Step by Step) | Learn Math Class',
         description: 'Solve age problems: name the ages now, shift every age by the same number of years, translate the comparison, solve. Three examples with checks.',

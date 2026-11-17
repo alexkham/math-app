@@ -1291,6 +1291,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1309,12 +1310,29 @@ import angleExplorerDiagrams from '@/app/components/trigonometry/angle/angleExpl
 import renderCircleArc from '@/app/utils/illustrations/trigonometry/circle/circleArc'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Complementary and Supplementary Angles"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Relationship","features":[{"id":"c1","name":"Condition","type":"text"},{"id":"c2","name":"Example pair","type":"text"},{"id":"c3","name":"Trigonometric consequence","type":"text"}],"items":[{"id":"r1","name":"Coterminal","values":{"c1":"differ by 360° (or 2π) — same terminal side","c2":"50°, 410°, −310°","c3":"identical sin, cos, tan, etc."}},{"id":"r2","name":"Complementary","values":{"c1":"sum to 90° (or π ⁄ 2)","c2":"40° & 50°; π ⁄ 6 & π ⁄ 3","c3":"cofunction swap: sin θ = cos(90° − θ)"}},{"id":"r3","name":"Supplementary","values":{"c1":"sum to 180° (or π)","c2":"40° & 140°; π ⁄ 6 & 5π ⁄ 6","c3":"equal sines, opposite cosines: sin θ = sin(180° − θ)"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Trigonometry methods", items: [
+      { skill: "Convert degrees to radians", href: "/trigonometry/methods#degrees-to-radians", desc: "An angle in degrees that a formula needs in radians: $150^\\circ$, $-45^\\circ$, $270^\\circ$.", level: "atomic" },
+      { skill: "Find a coterminal angle", href: "/trigonometry/methods#coterminal-angles", desc: "An angle larger than one turn or negative, to be brought into $[0^\\circ, 360^\\circ)$ or $[0, 2\\pi)$: $765^\\circ$, $-\\frac{5\\pi}{3}$.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2691,11 +2709,15 @@ $$\\theta = \\frac{s}{r}$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-degrees-radians-complementary-supplementary-angles-matrix'}
+            id="degrees-radians-complementary-supplementary-angles-matrix"
+            title="Complementary and Supplementary Angles"
+            source="/trigonometry/degrees-radians"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
                   <div key={'unit-compSupp'} dangerouslySetInnerHTML={{ __html: demoUnits.compSupp }} />,
           `The cofunction identities below are these two relationships written in the language of the trigonometric functions.`,
           <DiagramFrame
@@ -2818,6 +2840,14 @@ $$\\theta = \\frac{s}{r}$$]@`,
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

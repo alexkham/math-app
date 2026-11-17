@@ -610,6 +610,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 2 tables (obj3 aggregation, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -625,6 +626,7 @@ import renderVectorArrows from '@/app/utils/illustrations/linear-algebra/vectors
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
@@ -633,6 +635,25 @@ import laVectorsNotationSheet from '@/app/components/infographics/NotationCheatS
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Types of Vectors"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"Defining condition","type":"text"},{"id":"c2","name":"Magnitude","type":"text"},{"id":"c3","name":"Key feature","type":"text"}],"items":[{"id":"r1","name":"Zero vector **0**","values":{"c1":"every component equals 0","c2":"0","c3":"additive identity (**v** + **0** = **v**); no defined direction"}},{"id":"r2","name":"Unit vector","values":{"c1":"‖**v**‖ = 1","c2":"1","c3":"encodes pure direction; obtained from any nonzero vector by normalization"}},{"id":"r3","name":"Position vector","values":{"c1":"tail anchored at the origin, head at a specific point","c2":"varies","c3":"one-to-one correspondence between points in ℝⁿ and position vectors"}},{"id":"r4","name":"Free vector","values":{"c1":"identity determined by magnitude and direction alone","c2":"varies","c3":"location-independent — the same vector can be drawn anywhere in space"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Vector methods", items: [
+      { skill: "Compute the cross product", href: "/linear-algebra/vectors/methods/cross-product", desc: "Expand a 3×3 determinant with i, j, k in the top row; mind the minus sign on the middle term.", level: "composite" },
+      { skill: "Compute the dot product", href: "/linear-algebra/vectors/methods/dot-product", desc: "Multiply matching components and add; or use the two lengths and the angle between them.", level: "composite" },
+      { skill: "Find the angle between two vectors", href: "/linear-algebra/vectors/methods/angle-between-vectors", desc: "Divide the dot product by the product of the lengths, then take the inverse cosine.", level: "composite" },
+      { skill: "Project one vector onto another", href: "/linear-algebra/vectors/methods/vector-projection", desc: "Scale the target vector by the dot product over its squared length; the rest is perpendicular.", level: "composite" },
+      { skill: "Write a vector as a linear combination", href: "/linear-algebra/vectors/methods/linear-combinations", desc: "Find the weights c₁, c₂, … by solving one linear equation per component.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vectors/methods", label: "All vector methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1450,11 +1471,15 @@ A 12-megapixel colour photo stores three brightness values per pixel, for red, g
           sectionsContent.obj3.content,
           <div key={'unit-freeVector'} dangerouslySetInnerHTML={{ __html: demoUnits.freeVector }} />,
           `Moving an arrow never changes the vector it represents; changing a component always does.`,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-vectors-types-vectors-matrix'}
+            id="vectors-types-vectors-matrix"
+            title="Types of Vectors"
+            source="/linear-algebra/vectors"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj3-diagram'}
             id="vector-types-tree"
@@ -1560,6 +1585,14 @@ A 12-megapixel colour photo stores three brightness values per pixel, for red, g
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1110,6 +1110,9 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj5 aggregation, obj8 aggregation, obj9 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import TestSelector from '@/app/components/infographics/linear-algebra/TestSelector'
+import RowOperationTrace from '@/app/components/infographics/linear-algebra/RowOperationTrace'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1123,6 +1126,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import spanIndependenceDiagrams from '@/app/components/linear-algebra copy/r2-visualizers/span-independence/spanIndependenceDiagrams'
@@ -1133,6 +1137,32 @@ import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSh
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Tests and Shortcuts for Independence"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Context","features":[{"id":"c1","name":"Method","type":"text"},{"id":"c2","name":"What to check","type":"text"},{"id":"c3","name":"Conclusion","type":"text"}],"items":[{"id":"r1","name":"Set contains **0**","values":{"c1":"inspection (no computation)","c2":"is the zero vector in the set?","c3":"dependent — 1·**0** = **0** is a nontrivial relation"}},{"id":"r2","name":"Single nonzero vector","values":{"c1":"inspection (no computation)","c2":"is **v** ≠ **0**?","c3":"independent — c**v** = **0** forces c = 0"}},{"id":"r3","name":"More than n vectors in ℝⁿ","values":{"c1":"inspection (no computation)","c2":"count exceeds dimension?","c3":"dependent — no independent set in ℝⁿ exceeds n"}},{"id":"r4","name":"k vectors in ℝᵐ (general)","values":{"c1":"row-reduce the m × k [matrix](!/linear-algebra/matrix) A = [**v**₁ ⋯ **v**ₖ]","c2":"does every column contain a pivot?","c3":"independent iff yes (no free variables in A**c** = **0**)"}},{"id":"r5","name":"n vectors in ℝⁿ (square case)","values":{"c1":"[determinant](!/linear-algebra/determinants) of the n × n matrix A","c2":"is det A ≠ 0?","c3":"independent iff yes (equivalent to A invertible)"}},{"id":"r6","name":"n differentiable functions","values":{"c1":"[Wronskian](!/linear-algebra/determinants/applications) determinant W(x)","c2":"is W(x₀) ≠ 0 at some single point x₀?","c3":"if yes, independent; if W ≡ 0, no conclusion in general (only when the functions solve a common linear ODE)"}},{"id":"r7","name":"Vectors in an abstract space","values":{"c1":"apply the definition directly","c2":"does c₁**v**₁ + ⋯ + cₖ**v**ₖ = **0** force every cᵢ = 0?","c3":"independent iff yes; use the algebraic structure of the space (polynomial coefficients, matrix entries, etc.) to reduce to scalar equations"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Independence in Abstract Vector Spaces"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Vector space","features":[{"id":"c1","name":"Independent set","type":"text"},{"id":"c2","name":"Why independent","type":"text"},{"id":"c3","name":"Note","type":"text"}],"items":[{"id":"r1","name":"𝒫ₙ (polynomials of degree ≤ n)","values":{"c1":"{1, x, x², …, xⁿ}","c2":"c₀ + c₁x + ⋯ + cₙxⁿ = 0 must hold for every real x; a nonzero polynomial of degree ≤ n has at most n roots, so every coefficient must vanish","c3":"n + 1 vectors, exactly dim(𝒫ₙ) — standard basis"}},{"id":"r2","name":"ℝ²ˣ² (2×2 real [matrices](!/linear-algebra/matrix))","values":{"c1":"{E₁₁, E₁₂, E₂₁, E₂₂}","c2":"c₁E₁₁ + c₂E₁₂ + c₃E₂₁ + c₄E₂₂ = O reads entry-by-entry as c₁ = c₂ = c₃ = c₄ = 0","c3":"4 vectors, exactly dim(ℝ²ˣ²) — standard basis"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Test vectors for linear independence", href: "/linear-algebra/vector-spaces/methods/linear-independence-test", desc: "Put the vectors in the columns of a matrix and count pivots, or use the determinant.", level: "composite", here: "#3" },
+    ] },
+    { title: "More vector space methods", items: [
+      { skill: "Test whether a vector is in a span", href: "/linear-algebra/vector-spaces/methods/span-test", desc: "Row reduce the augmented matrix: consistent means yes. A pivot in every row means the set spans Rⁿ.", level: "composite" },
+      { skill: "Find a basis", href: "/linear-algebra/vector-spaces/methods/find-basis", desc: "Row reduce once: the pivot columns of the original matrix, or one vector per free variable.", level: "composite" },
+      { skill: "Find the dimension of a subspace", href: "/linear-algebra/vector-spaces/methods/dimension", desc: "Count the vectors in a basis: the rank for a span, n minus the rank for a solution set.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gaussian elimination", href: "/linear-algebra/linear-systems/methods/gaussian-elimination", desc: "Reduce the augmented matrix to echelon form, then back-substitute from the bottom row up.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2114,8 +2144,63 @@ $$= x^2$$`, `So $W(0) = 0$, and the functions are called dependent.`],
     ],
   };
 
+  // RowOperationTrace 2026-11-14: The independence test, row operation by row operation (obj3).
+  const independenceTrace = {
+    goal: 'Put $\\mathbf{v}_1 = (1, 2, -1)$, $\\mathbf{v}_2 = (0, 1, 3)$, $\\mathbf{v}_3 = (2, 0, 1)$ in the columns of $A$ and row reduce.',
+    reading: 'Three pivots in three columns, so there are no free variables and the set is independent.',
+    steps: [
+      { id: 's0', label: 'Start', matrix: [[1, 0, 2], [2, 1, 0], [-1, 3, 1]], pivots: [[0, 0]],
+        why: 'The three vectors as the columns of $A$.', note: 'Vectors as columns' },
+      { id: 's1', label: 'Column 1', matrix: [[1, 0, 2], [0, 1, -4], [0, 3, 3]], pivots: [[0, 0], [1, 1]],
+        changed: [[1, 0], [1, 2], [2, 0], [2, 2]],
+        operation: ['R2 − 2·R1', 'R3 + R1'], why: 'Clears the two entries below the first pivot.', note: 'Column 1 cleared' },
+      { id: 's2', label: 'Column 2', matrix: [[1, 0, 2], [0, 1, -4], [0, 0, 15]], pivots: [[0, 0], [1, 1], [2, 2]],
+        changed: [[2, 1], [2, 2]],
+        operation: 'R3 − 3·R2', why: 'Clears the entry below the second pivot. Every column now holds a pivot.', note: 'Echelon form', final: true },
+    ],
+  };
+
+  // TestSelector 2026-11-14: Which independence test to use (obj4).
+  const independenceTestSelector = {
+    question: 'Which test shows that a set of vectors is independent?',
+    intro: 'Count the vectors first. If that settles nothing, follow the branch that matches the set.',
+    shortcutsLabel: 'Check first',
+    shortcuts: [
+      { when: 'More vectors than the dimension of the space, such as four vectors in $\\mathbb{R}^3$', then: 'Dependent. Stop.' },
+    ],
+    branches: [
+      { condition: 'Exactly $n$ vectors in $\\mathbb{R}^n$',
+        test: {
+          name: 'Determinant',
+          doThis: 'Put the vectors in the columns of a square matrix and compute its determinant.',
+          why: 'The columns of a square matrix are independent exactly when it is invertible, and it is invertible exactly when $\\det(A) \\neq 0$.',
+          needs: 'A square matrix',
+          verdict: 'Independent exactly when the determinant is not $0$.',
+          limit: 'Applies only to the square case.',
+        } },
+      { condition: 'Any other number of vectors in $\\mathbb{R}^m$',
+        test: {
+          name: 'Row reduction',
+          doThis: 'Put the vectors in the columns of a matrix $A$ and row reduce it.',
+          why: 'The independence equation is the homogeneous system $A\\mathbf{c} = \\mathbf{0}$.',
+          needs: 'Vectors given by their entries',
+          verdict: 'Independent exactly when every column holds a pivot.',
+          limit: 'Only the columns are read. A zero row at the bottom does not mean dependence.',
+        } },
+      { condition: 'Vectors in an abstract vector space',
+        test: {
+          name: 'The definition',
+          doThis: 'Set a combination of the vectors equal to the zero vector and solve for the coefficients.',
+          verdict: 'Independent exactly when every coefficient has to be $0$.',
+          limit: 'No matrix shortcut: the equation has to be solved in that space.',
+        } },
+    ],
+  };
+
 return {
   props:{
+    independenceTestSelector,
+    independenceTrace,
     pitfallData,
       wronskianConverse,
     demoUnits,
@@ -2142,7 +2227,7 @@ return {
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function LinearIndependencePage({ pitfallData,wronskianConverse, seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function LinearIndependencePage({ independenceTestSelector, independenceTrace, pitfallData,wronskianConverse, seoData, sectionsContent, introContent, independenceProperties, obj8Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -2268,8 +2353,20 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          <DiagramFrame
+            key={'obj3-row-trace'}
+            id="independence-row-trace"
+            title="The independence test, row operation by row operation"
+            source="/linear-algebra/vector-spaces/linear-independence"
+            before={"The reduction of the independent set, with each row operation beside the matrix it produces. Pivots are filled in, and the entries changed at each step are underlined."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <RowOperationTrace data={independenceTrace} theme="navy" variant="ledger" />
+            </div>
+          </DiagramFrame>,
                   <div key={'unit-homogeneous'} dangerouslySetInnerHTML={{ __html: demoUnits.homogeneous }} />,
           `A non-trivial solution is therefore not just evidence of dependence — it is the dependence relation itself, written out.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to test vectors for linear independence](!/linear-algebra/vector-spaces/methods/linear-independence-test) →@`,
         ]
     },
     {
@@ -2278,6 +2375,17 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-test-selector'}
+            id="independence-test-selector"
+            title="Which independence test to use"
+            source="/linear-algebra/vector-spaces/linear-independence"
+            before={"The tests of this page in one place: a check by counting first, then the test that fits the set."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <TestSelector data={independenceTestSelector} theme="navy" variant="tree" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -2329,11 +2437,15 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-independence-independence-abstract-vector-matrix'}
+            id="linear-independence-independence-abstract-vector-matrix"
+            title="Independence in Abstract Vector Spaces"
+            source="/linear-algebra/vector-spaces/linear-independence"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2342,11 +2454,15 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-independence-summary-tests-shortcuts-matrix'}
+            id="linear-independence-summary-tests-shortcuts-matrix"
+            title="Summary: Tests and Shortcuts for Independence"
+            source="/linear-algebra/vector-spaces/linear-independence"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2364,6 +2480,14 @@ The zero vector, by contrast, is always dependent: $1 \\cdot \\mathbf{0} = \\mat
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

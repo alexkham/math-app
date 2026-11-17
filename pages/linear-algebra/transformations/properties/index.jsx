@@ -802,6 +802,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj4 comparison, obj5 aggregation, obj10 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -815,6 +816,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -824,8 +826,30 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laTransformNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-transformations'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Disproving Linearity"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Strategy","features":[{"id":"c1","name":"When to reach for it","type":"text"},{"id":"c2","name":"What it catches","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Check T(0) = 0","values":{"c1":"first, always — the fastest single test","c2":"constant terms, translations, affine offsets","c3":"T(x) = x + 1: T(0) = 1 ≠ 0"}},{"id":"r2","name":"Scan components for non-linear terms","values":{"c1":"explicit formula T(x₁,…,xₙ) = (f₁,…,fₘ) given","c2":"products, powers > 1, |·|, √, constants","c3":"T(x, y) = (xy, y): product xy disqualifies"}},{"id":"r3","name":"Test additivity with specific u, v","values":{"c1":"formula passes T(0)=0 but has a power or product","c2":"nonlinear interaction between inputs","c3":"T(x,y) = (x², y): T(1,0)+T(1,0) = (2,0) ≠ T(2,0) = (4,0)"}},{"id":"r4","name":"Test homogeneity with specific c","values":{"c1":"formula involves |·| or odd-degree behavior","c2":"nonlinear scaling (often via sign)","c3":"T(x) = |x|: T(−1·2) = 2 ≠ −1·T(2) = −2"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Consequences of Linearity"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Identity","features":[{"id":"c1","name":"What it says","type":"text"},{"id":"c2","name":"Source","type":"text"}],"items":[{"id":"r1","name":"T(0) = 0","values":{"c1":"the zero vector always maps to the zero vector","c2":"homogeneity with c = 0"}},{"id":"r2","name":"T(−v) = −T(v)","values":{"c1":"negation is preserved","c2":"homogeneity with c = −1"}},{"id":"r3","name":"T(u − v) = T(u) − T(v)","values":{"c1":"subtraction is preserved","c2":"additivity combined with negation identity"}},{"id":"r4","name":"T(Σ cᵢ vᵢ) = Σ cᵢ T(vᵢ)","values":{"c1":"linear combinations of any length are preserved","c2":"iterating additivity and homogeneity"}},{"id":"r5","name":"[Linear dependence](!/linear-algebra/vector-spaces/linear-independence) is preserved","values":{"c1":"if {vᵢ} is dependent, then {T(vᵢ)} is dependent (independence may be destroyed but never created)","c2":"applying T to a dependence relation Σ cᵢ vᵢ = 0"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Check if a transformation is linear", href: "/linear-algebra/transformations/methods/linearity-check", desc: "Test $T(c\\mathbf{u} + \\mathbf{v}) = cT(\\mathbf{u}) + T(\\mathbf{v})$ with general vectors; one failing example disproves it.", level: "composite", here: "#2" },
+    ] },
+    { title: "More linear transformation methods", items: [
+      { skill: "Find the matrix of a linear transformation", href: "/linear-algebra/transformations/methods/transformation-matrix", desc: "Apply $T$ to each standard basis vector and use the results as the columns of $A$.", level: "composite" },
+      { skill: "Find the kernel and image of a linear transformation", href: "/linear-algebra/transformations/methods/kernel-and-image", desc: "Row reduce the matrix once: the kernel comes from the free variables, the image from the pivot columns of $A$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/transformations/methods", label: "All linear transformation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1842,6 +1866,7 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
             <SpecialCases data={specialCasesData} variant="substitute" />
           </DiagramFrame>,
           sectionsContent.obj2.afterCases,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to check if a transformation is linear](!/linear-algebra/transformations/methods/linearity-check) →@`,
         ]
     },
     {
@@ -1870,8 +1895,15 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-properties-disproving-linearity-matrix'}
+            id="properties-disproving-linearity-matrix"
+            title="Disproving Linearity"
+            source="/linear-algebra/transformations/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[punchline:One concrete failure disproves linearity: test zero first, then a single sum or a single multiple.]@`,
         ]
     },
@@ -1893,8 +1925,15 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
             <ProofSteps data={proofStepsData2} variant="chain" />
           </DiagramFrame>,
           sectionsContent.obj5.afterProof,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-properties-consequences-linearity-matrix'}
+            id="properties-consequences-linearity-matrix"
+            title="Consequences of Linearity"
+            source="/linear-algebra/transformations/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1979,6 +2018,14 @@ With complex scalars, $T(z) = \\bar{z}$ on $\\mathbb{C}$ is additive and keeps e
           >
             <PropertyLawCard data={combinationProperties} theme="navy" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

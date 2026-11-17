@@ -342,25 +342,43 @@ How the site places it:
 - **The data holds functions, so it cannot go through `getStaticProps`.** It is a module-level `const caseGraphData = …` right after the page's imports, and the frame uses it directly (no prop).
 - Beside the page's own text, never instead of it. If the section goes on after the cases, the rest moves into a new field of the section, `afterGraph`, rendered after the frame.
 - Everything shown comes from the page: its function, its cut points, its answers. A section that stops before the signs or the solution (for example at the critical points) is not completed by the frame.
-- Skip sections that already show the same cases: a table, a demo unit, a FunctionAnalysis or other frame. Tables stay.
+- **Replaces a static HTML table of the same cases** (owner decision, 2026-11-12): the frame takes the table's place in the render entry, and the table const stays defined but unused. Every row of the table must show up in the frame (in a cell, a heading's `sub`, the pattern or the solution). A table that holds something else (for example a list of steps) stays, and the frame goes beside it.
+- Skip sections whose cases a demo unit, a FunctionAnalysis or another frame already shows.
 - Leave out `rule` when the page paragraph right after the frame says the same thing.
 - Site palette: `theme: { title, navy: '#06357A', blue: '#2563EB', gold, goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' }`. `related={false}`.
 
-The sign-chart, discriminant and "direction depends on the base" sections named in the first version of these docs were all taken by tables, demo units or other frames by 2026-11-09, so the grid layout is not used on the site yet.
+Asymptotes: the curve lifts the pen where two neighbouring samples are far off and of opposite sign, or where `f` is not finite, so $\frac{1}{x - a}$ and $\tan x$ draw without a false vertical stroke.
 
 ## Phones
 
 - graph: the graph, then the interval table, stack under 680 px. Keep case names short (`'$x < 2$'`), since long names wrap into several lines.
-- grid: under 680 px the row-heading column narrows to 58 px (`--cg-rowhead`) and the cell text shrinks, so a 2 × 3 grid fits a 375 px screen without sideways scroll.
+- grid: under 680 px the row-heading column narrows to 80 px (`--cg-rowhead`), heading text drops to 12 px and long words may wrap, so a 2 × 3 grid fits a 375 px screen without sideways scroll. Keep row labels short (a few words) and put the detail in `sub`.
 
 ## Pages using it
 
-2 frames, placed 2026-11-09. Both use the graph layout.
+17 frames on 13 pages. 14 grid frames took the place of a table of the same cases (2026-11-12); demo units in those sections stay.
 
-| Page | Frame | Section |
-|---|---|---|
-| `/calculus/limits/infinity` | `infinite-limit-sign-sides` | Sign Analysis for Infinite Limits: $\frac{1}{x - 2}$, switch $2^+$ / $2^-$ |
-| `/algebra/logarithms/inequalities` | `log-base-below-one-sign-graph` | Base Between Zero and One: $\log_{1/2}(x) - 3$, switch $> 3$ / $< 3$ |
+| Page | Frame | Layout | Section |
+|---|---|---|---|
+| `/calculus/limits/infinity` | `infinite-limit-sign-sides` | graph | Sign Analysis for Infinite Limits: $\frac{1}{x - 2}$, switch $2^+$ / $2^-$ |
+| `/algebra/logarithms/inequalities` | `log-base-below-one-sign-graph` | graph | Base Between Zero and One: $\log_{1/2}(x) - 3$ |
+| `/algebra/inequalities/rational` | `rational-sign-chart-example-graph` | graph | The Sign Chart Method: the example $\frac{x-2}{x+1} > 0$ (the steps table stays) |
+| `/algebra/inequalities/quadratic` | `quadratic-discriminant-sign-grid` | grid | The Role of the Discriminant: $\Delta$ × sign of $a$ × inequality (replaced `obj2Table`) |
+| `/algebra/inequalities/quadratic` | `quadratic-parabola-side-grid` | grid | Connection to the Parabola: opening × $> 0$ / $< 0$ (replaced `obj7Table`) |
+| `/algebra/inequalities/polynomial` | `polynomial-end-behavior-grid` | grid | End Behavior: parity × sign of $a_n$ (replaced `obj5Table`) |
+| `/algebra/powers` | `exponential-inequality-base-grid` | grid | Exponential Inequalities: base × inequality (replaced `obj10Table`) |
+| `/trigonometry/functions` | `trig-quadrant-sign-grid` | grid | Evaluating at Any Angle: function × sign by quadrant (replaced `obj9Table`) |
+| `/algebra/equations/quadratic` | `quadratic-equation-discriminant-grid` | grid | The Discriminant: the page's three example equations, one per case (replaced `obj5Table`) |
+| `/algebra/equations/quadratic` | `quadratic-equation-axis-meeting-grid` | grid | Connection to Graphing: $\Delta$ × sign of $a$ (replaced `obj8Table`) |
+| `/algebra/equations` | `equations-quadratic-discriminant-grid` | grid | Quadratic Equations: real roots by $\Delta$ (replaced `obj7DiscriminantTable`) |
+| `/algebra/inequalities` | `inequalities-critical-point-grid` | grid | Sign Analysis: kind of critical point × strict / non-strict (replaced `obj8Table`) |
+| `/algebra/inequalities/polynomial` | `root-multiplicity-sign-grid` | grid | Root Multiplicity: odd / even × example factors (replaced `obj4Table`) |
+| `/algebra/inequalities/rational` | `rational-critical-point-grid` | grid | Critical Points: numerator / denominator zero × strict / non-strict (replaced `obj2Table`) |
+| `/calculus/derivatives/graph-analysis` | `derivative-tests-verdict-grid` | grid | The Second Derivative Test: verdict × first / second test (replaced `obj6Table`) |
+| `/calculus/limits/evaluating` | `infinite-limit-sign-grid` | grid | Sign Analysis Near the Point: numerator sign × side (replaced `obj11Table`) |
+| `/trigonometry/unit-circle` | `unit-circle-quadrant-sign-grid` | grid | The Four Quadrants and Sign Patterns: cos / sin / tan × sign, ASTC (replaced `obj4Table`) |
+
+Looked at and left as tables: `/algebra/powers/natural-exponents` Sign Behavior (the sign of one number, not of a function over intervals) and `/calculus/integrals/improper` p-Test (convergence, not sign).
 
 ---
 

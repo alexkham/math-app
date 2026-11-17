@@ -606,6 +606,7 @@
 // tables-optimized: v4 | 2026-05-22 | 2 tables (types comparison, summary capstone)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -630,6 +631,36 @@ import probRandomVarsNotationSheet from '@/app/components/infographics/NotationC
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 
+// FeatureMatrix 2026-11-14: replaces the table typesTable ("Types of Random Variables"); converted from the table's own cells.
+const fm_typesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Attribute","features":[{"id":"c1","name":"Discrete random variable","type":"text"},{"id":"c2","name":"Continuous random variable","type":"text"}],"items":[{"id":"r1","name":"Range","values":{"c1":"a countable set of isolated values","c2":"an interval (or union of intervals) of real numbers"}},{"id":"r2","name":"Listability","values":{"c1":"values can be listed individually, even if infinitely many","c2":"values form a continuum and cannot be listed point by point"}},{"id":"r3","name":"Typical source","values":{"c1":"counting processes (successes, occurrences, items)","c2":"measurement (time, length, weight, temperature)"}},{"id":"r4","name":"Example ranges","values":{"c1":"{0, 1, 2, …}; {1, 2, 3, 4, 5, 6}","c2":"[0, ∞); [0, 1]; (−∞, ∞)"}},{"id":"r5","name":"Probability function","values":{"c1":"[probability mass function](!/probability/probability-function) p$_{X}$(x) = P(X = x)","c2":"[probability density function](!/probability/probability-function) f$_{X}$(x)"}},{"id":"r6","name":"Example variables","values":{"c1":"number of heads, face value of a die, indicator of an event","c2":"time until arrival, height, weight, temperature"}}]};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Random Variables at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example or symbol","type":"text"}],"items":[{"id":"r1","name":"What a random variable is","values":{"c1":"a function X: &Omega; → &reals; that assigns a real number to each outcome of an experiment","c2":"rolling a die: X(face) = the face number"}},{"id":"r2","name":"Where the randomness lies","values":{"c1":"in the underlying experiment; the variable itself is a fixed rule","c2":"the flip of a coin is random; labeling H = 1, T = 0 is fixed"}},{"id":"r3","name":"Discrete type","values":{"c1":"range is a countable set of isolated values","c2":"X ∈ {1, 2, 3, 4, 5, 6}"}},{"id":"r4","name":"Continuous type","values":{"c1":"range is an interval of real numbers","c2":"X ∈ [0, ∞) for time until an event"}},{"id":"r5","name":"Notation for the rule","values":{"c1":"capital letter, referring to the entire assignment","c2":"X, Y, Z"}},{"id":"r6","name":"Notation for a value","values":{"c1":"lowercase letter, referring to a specific result after the experiment","c2":"x, y, z — e.g. &ldquo;X = 4&rdquo; means the die landed on 4"}},{"id":"r7","name":"Probability statements","values":{"c1":"events rewritten as conditions on the variable's value","c2":"P(X = x), P(X ≤ x), P(a ≤ X ≤ b)"}},{"id":"r8","name":"Indicator variable","values":{"c1":"a special binary random variable marking whether an event occurs","c2":"1$_{A}$ = 1 if A occurs, 0 otherwise"}},{"id":"r9","name":"What random variables enable","values":{"c1":"a numerical framework for analyzing randomness","c2":"[distributions](!/probability/distributions), [expectation](!/probability/expected-value), [variance](!/probability/variance), comparison across experiments"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Random variable methods", items: [
+      { skill: "Find the expected value of a random variable", href: "/probability/random-variables/methods/expected-value", desc: "Weight every value by its probability and add; for a density, integrate $x f(x)$ instead.", level: "composite" },
+      { skill: "Find the variance of a random variable", href: "/probability/random-variables/methods/variance", desc: "Find the mean, then the mean of the square, and subtract: $E[X^2] - (E[X])^2$.", level: "composite" },
+      { skill: "Find the standard deviation of a random variable", href: "/probability/random-variables/methods/standard-deviation", desc: "Find the variance first, then take its square root; the result is in the units of $X$.", level: "composite" },
+      { skill: "Find the covariance and correlation of two random variables", href: "/probability/random-variables/methods/covariance-correlation", desc: "Compute $E[XY] - E[X]E[Y]$ from the joint table, then divide by $\\sigma_X \\sigma_Y$ for the correlation.", level: "composite" },
+      { skill: "Find the CDF from a PMF", href: "/probability/random-variables/methods/pmf-to-cdf", desc: "Sort the values, keep a running total of the probabilities, and write the step function.", level: "composite" },
+      { skill: "Find the CDF from a PDF", href: "/probability/random-variables/methods/pdf-to-cdf", desc: "Integrate the density from the left end of the support up to $x$, and add the flat pieces outside.", level: "composite" },
+      { skill: "Find the median and mode of a distribution", href: "/probability/random-variables/methods/median-mode", desc: "The median is where the CDF reaches one half; the mode is the peak of the pmf or pdf.", level: "composite" },
+      { skill: "Find an expected count with indicator variables", href: "/probability/random-variables/methods/indicator-variables", desc: "Write the count as a sum of 0-1 indicators, use $E[I] = P(A)$, and add by linearity.", level: "composite" },
+      { skill: "Bound a probability with Markov's inequality", href: "/probability/random-variables/methods/markov-inequality", desc: "For a nonnegative variable, bound the upper tail by the mean: $P(X \\geq a) \\leq E[X]/a$.", level: "composite" },
+      { skill: "Bound a probability with Chebyshev's inequality", href: "/probability/random-variables/methods/chebyshev-inequality", desc: "Measure the distance from the mean in standard deviations, then bound: $P(|X - \\mu| \\geq k\\sigma) \\leq 1/k^2$.", level: "composite" },
+      { skill: "Approximate a probability with the central limit theorem", href: "/probability/random-variables/methods/clt-approximation", desc: "Scale the mean and SD to the sum or the average of $n$ terms, standardize, and read $\\Phi(z)$.", level: "composite" },
+      { skill: "Find the expected value of a sum", href: "/probability/random-variables/methods#linearity-of-expectation", desc: "The variable is a sum or a linear combination of variables whose means you know: $X + Y$, $3X - 2Y + 5$, the total of $n$ dice. It holds whether or not the variables are independent.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/probability/random-variables/methods", label: "All random variable methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1426,8 +1457,15 @@ possible.`,
         link:'',
         content:[
             sectionsContent.types.content,
-            <div key={'types-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: typesTable }} />,
+            <DiagramFrame
+              key={'feature-matrix-random-variables-types-random-variables-matrix'}
+              id="random-variables-types-random-variables-matrix"
+              title="Types of Random Variables"
+              source="/probability/random-variables"
+              related={false}
+            >
+              <FeatureMatrix data={fm_typesTable} />
+            </DiagramFrame>,
                   <div key={'unit-u_types_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_types_1 }} />,
           `Probability statements about such variables are written next.`,
         ]
@@ -1497,8 +1535,15 @@ possible.`,
         link:'',
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-random-variables-random-variables-at-matrix'}
+            id="random-variables-random-variables-at-matrix"
+            title="Random Variables at a Glance"
+            source="/probability/random-variables"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1516,6 +1561,14 @@ possible.`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

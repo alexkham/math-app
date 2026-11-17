@@ -1557,6 +1557,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1575,13 +1576,68 @@ import renderCurveFeatureV3 from '@/app/utils/illustrations/trigonometry/curves/
 import renderRelationMap from '@/app/utils/illustrations/trigonometry/relations/relationMap'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Reciprocal and Quotient Relationships"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Identity type","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Pair / use","type":"text"}],"items":[{"id":"r1","name":"Reciprocal","values":{"c1":"csc θ = 1 ⁄ sin θ","c2":"sin θ · csc θ = 1"}},{"id":"r2","name":"Reciprocal","values":{"c1":"sec θ = 1 ⁄ cos θ","c2":"cos θ · sec θ = 1"}},{"id":"r3","name":"Reciprocal","values":{"c1":"cot θ = 1 ⁄ tan θ","c2":"tan θ · cot θ = 1"}},{"id":"r4","name":"Quotient","values":{"c1":"tan θ = sin θ ⁄ cos θ","c2":"base ratio defining tangent"}},{"id":"r5","name":"Quotient","values":{"c1":"cot θ = cos θ ⁄ sin θ","c2":"equivalent to 1 ⁄ tan θ"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: The Six Functions at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Unit-circle definition","type":"text"},{"id":"c2","name":"Period","type":"text"},{"id":"c3","name":"Parity","type":"text"},{"id":"c4","name":"Zeros / Vertical asymptotes","type":"text"}],"items":[{"id":"r1","name":"sin θ","values":{"c1":"y-coordinate on the unit circle","c2":"2π","c3":"odd","c4":"zeros at θ = nπ; no asymptotes"}},{"id":"r2","name":"cos θ","values":{"c1":"x-coordinate on the unit circle","c2":"2π","c3":"even","c4":"zeros at θ = π ⁄ 2 + nπ; no asymptotes"}},{"id":"r3","name":"tan θ","values":{"c1":"sin θ ⁄ cos θ = slope of the terminal side","c2":"π","c3":"odd","c4":"zeros at θ = nπ; asymptotes at θ = π ⁄ 2 + nπ"}},{"id":"r4","name":"cot θ","values":{"c1":"cos θ ⁄ sin θ = 1 ⁄ tan θ","c2":"π","c3":"odd","c4":"zeros at θ = π ⁄ 2 + nπ; asymptotes at θ = nπ"}},{"id":"r5","name":"sec θ","values":{"c1":"1 ⁄ cos θ","c2":"2π","c3":"even","c4":"no zeros; asymptotes at θ = π ⁄ 2 + nπ"}},{"id":"r6","name":"csc θ","values":{"c1":"1 ⁄ sin θ","c2":"2π","c3":"odd","c4":"no zeros; asymptotes at θ = nπ"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Domain and Range Summary"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Domain (where defined)","type":"text"},{"id":"c2","name":"Range (possible outputs)","type":"text"}],"items":[{"id":"r1","name":"sin θ","values":{"c1":"all real θ","c2":"[−1, 1]"}},{"id":"r2","name":"cos θ","values":{"c1":"all real θ","c2":"[−1, 1]"}},{"id":"r3","name":"tan θ","values":{"c1":"θ ≠ π ⁄ 2 + nπ (where cos θ = 0)","c2":"all real numbers"}},{"id":"r4","name":"cot θ","values":{"c1":"θ ≠ nπ (where sin θ = 0)","c2":"all real numbers"}},{"id":"r5","name":"sec θ","values":{"c1":"θ ≠ π ⁄ 2 + nπ (where cos θ = 0)","c2":"(−∞, −1] ∪ [1, ∞)"}},{"id":"r6","name":"csc θ","values":{"c1":"θ ≠ nπ (where sin θ = 0)","c2":"(−∞, −1] ∪ [1, ∞)"}}]};
+
+// CaseGraph 2026-11-12: "The sign in each quadrant" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    general: { label: 'Quadrants', text: 'I $(0, \\frac{\\pi}{2})$, II $(\\frac{\\pi}{2}, \\pi)$, III $(\\pi, \\frac{3\\pi}{2})$, IV $(\\frac{3\\pi}{2}, 2\\pi)$' },
+    grid: {
+      x0: 0, x1: 2 * Math.PI, y0: -1.6, y1: 1.6,
+      axes: [
+        { id: 'fn', name: 'Function', options: [
+          { id: 'sin', label: '$\\sin\\theta$', sub: 'and $\\csc\\theta$' },
+          { id: 'cos', label: '$\\cos\\theta$', sub: 'and $\\sec\\theta$' },
+          { id: 'tan', label: '$\\tan\\theta$', sub: 'and $\\cot\\theta$' } ] },
+        { id: 'sign', name: 'Sign', select: true, options: [
+          { id: 'pos', label: 'positive', sign: 1 },
+          { id: 'neg', label: 'negative', sign: -1 } ] },
+      ],
+      layout: { rows: 'fn', cols: 'sign' },
+      cells: {
+        sin: { f: (x) => Math.sin(x), intervals: [{ from: 0, to: Math.PI / 2 }, { from: Math.PI / 2, to: Math.PI }, { from: Math.PI, to: 3 * Math.PI / 2 }, { from: 3 * Math.PI / 2, to: 2 * Math.PI }], pattern: 'I+  II+  III−  IV−', solution: { pos: 'I, II', neg: 'III, IV' } },
+        cos: { f: (x) => Math.cos(x), intervals: [{ from: 0, to: Math.PI / 2 }, { from: Math.PI / 2, to: Math.PI }, { from: Math.PI, to: 3 * Math.PI / 2 }, { from: 3 * Math.PI / 2, to: 2 * Math.PI }], pattern: 'I+  II−  III−  IV+', solution: { pos: 'I, IV', neg: 'II, III' } },
+        tan: { f: (x) => Math.tan(x), intervals: [{ from: 0, to: Math.PI / 2 }, { from: Math.PI / 2, to: Math.PI }, { from: Math.PI, to: 3 * Math.PI / 2 }, { from: 3 * Math.PI / 2, to: 2 * Math.PI }], pattern: 'I+  II−  III+  IV−', solution: { pos: 'I, III', neg: 'II, IV' } },
+      },
+    },
+  };
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find all trig values from one given value", href: "/trigonometry/methods/exact-values", desc: "Given $\\sin\\theta$ (or any one value) and the quadrant, find the other five.", level: "composite", here: "#10" },
+    ] },
+    { title: "More trigonometry methods", items: [
+      { skill: "Find trig values with the unit circle", href: "/trigonometry/methods/unit-circle-values", desc: "Any standard angle: reduce it, find the quadrant and reference angle, attach the sign.", level: "composite" },
+      { skill: "Evaluate inverse trig functions", href: "/trigonometry/methods/inverse-trig-values", desc: "Find the one angle in the restricted range; compositions with a right triangle.", level: "composite" },
+      { skill: "Solve a right triangle", href: "/trigonometry/methods/solve-right-triangle", desc: "Find every missing side and angle from two pieces of information with SOH-CAH-TOA.", level: "composite" },
+    ] },
+    { title: "Identity methods", items: [
+      { skill: "Simplify a trigonometric expression", href: "/trigonometry/identities/methods/simplify-trig-expressions", desc: "Rewrite in sine and cosine, cancel, and recognise a Pythagorean pattern.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/trigonometry/methods", label: "All trigonometry methods" },
+};
 
 export async function getStaticProps(){
 
@@ -3317,11 +3373,15 @@ Indian astronomers tabulated the half-chord of a circle, the vertical leg in the
           sectionsContent.obj7.content,
           <div key={'unit-reduceToTwo'} dangerouslySetInnerHTML={{ __html: demoUnits.reduceToTwo }} />,
           `This is why a proof can usually be finished by rewriting everything in terms of $\\sin\\theta$ and $\\cos\\theta$.`,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-functions-reciprocal-quotient-relationships-matrix'}
+            id="functions-reciprocal-quotient-relationships-matrix"
+            title="Reciprocal and Quotient Relationships"
+            source="/trigonometry/functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj7-diagram'}
             id="sine-cosine-before-after"
@@ -3347,11 +3407,15 @@ Indian astronomers tabulated the half-chord of a circle, the vertical leg in the
           sectionsContent.obj8.content,
           <div key={'unit-domainRange'} dangerouslySetInnerHTML={{ __html: demoUnits.domainRange }} />,
           `The range restrictions matter just as much: $\\sin x = 2$ has no solution because 2 lies outside $[-1, 1]$.`,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-functions-domain-range-summary-matrix'}
+            id="functions-domain-range-summary-matrix"
+            title="Domain and Range Summary"
+            source="/trigonometry/functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
 
@@ -3362,11 +3426,17 @@ Indian astronomers tabulated the half-chord of a circle, the vertical leg in the
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'case-graph-trig-quadrant-sign-grid'}
+            id="trig-quadrant-sign-grid"
+            title="The sign in each quadrant"
+            source="/trigonometry/functions"
+            related={false}
+            before={"Each function over one turn, $0$ to $2\\pi$, split into the four quadrants. A reciprocal has the same sign, so it shares the row. Pick a column to see where the value is positive or negative."}
+            after={"Sine follows the $y$-coordinate and cosine the $x$-coordinate; tangent is positive where the two agree in sign."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
           `@academic[punchline:Every angle is evaluated at an acute reference angle; the quadrant only decides the sign.]@`,
         ]
     },
@@ -3378,6 +3448,7 @@ Indian astronomers tabulated the half-chord of a circle, the vertical leg in the
           sectionsContent.obj10.content,
           <div key={'unit-fromOneValue'} dangerouslySetInnerHTML={{ __html: demoUnits.fromOneValue }} />,
           `Starting from tangent instead works the same way, with a right triangle supplying the missing magnitude.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find all trig values from one given value](!/trigonometry/methods/exact-values) →@`,
         ]
     },
 
@@ -3424,11 +3495,15 @@ Indian astronomers tabulated the half-chord of a circle, the vertical leg in the
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-functions-summary-six-functions-at-matrix'}
+            id="functions-summary-six-functions-at-matrix"
+            title="Summary: The Six Functions at a Glance"
+            source="/trigonometry/functions"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj11-diagram'}
             id="six-trig-functions-outline"
@@ -3496,6 +3571,14 @@ Indian astronomers tabulated the half-chord of a circle, the vertical leg in the
     //     ]
     // },
 
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

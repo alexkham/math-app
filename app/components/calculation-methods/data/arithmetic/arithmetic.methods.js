@@ -462,7 +462,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the GCD by Prime Factorization | Learn Math Class',
         description: 'Find the greatest common divisor by prime factorization: factor both numbers, keep shared primes with the smaller exponent, multiply. Examples and mistakes.',
@@ -593,7 +593,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the GCD with the Euclidean Algorithm | Learn Math Class',
         description: 'Find the GCD of two numbers with the Euclidean algorithm: divide, keep the remainder, repeat until it is zero, read the last divisor. Examples and mistakes.',
@@ -702,7 +702,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Least Common Multiple (LCM) | Learn Math Class',
         description: 'Find the LCM of two or more numbers: factor them, take every prime with its larger exponent, or divide the product by the GCD. Worked examples and mistakes.',
@@ -832,7 +832,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Simplify Fractions (Lowest Terms) | Learn Math Class',
         description: 'Simplify fractions to lowest terms: spot common factors with divisibility rules, divide top and bottom by the GCD, check nothing is left. Examples and mistakes.',
@@ -960,7 +960,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compare Fractions (Cross-Multiplication) | Learn Math Class',
         description: 'Compare fractions step by step: use same denominators or numerators, cross-multiply, or order several with a common denominator. Examples and common mistakes.',
@@ -1083,7 +1083,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Add and Subtract Fractions | Learn Math Class',
         description: 'Add and subtract fractions with unlike denominators: find the LCD, rewrite each fraction, combine numerators, simplify. Mixed numbers, examples and mistakes.',
@@ -1204,7 +1204,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Multiply Fractions (with Cross-Canceling) | Learn Math Class',
         description: 'Multiply fractions step by step: rewrite whole and mixed numbers, cancel common factors across, multiply straight across, simplify. Examples and mistakes.',
@@ -1326,7 +1326,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Divide Fractions (Keep, Change, Flip) | Learn Math Class',
         description: 'Divide fractions with keep, change, flip: rewrite whole and mixed numbers, multiply by the reciprocal of the divisor, simplify. Worked examples and mistakes.',
@@ -1449,7 +1449,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Work with Mixed Numbers and Improper Fractions | Learn Math Class',
         description: 'Convert mixed numbers to improper fractions and back, then multiply and divide them: whole times denominator plus numerator, divide back. Examples, mistakes.',
@@ -1575,7 +1575,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Simplify Complex Fractions | Learn Math Class',
         description: 'Simplify complex fractions two ways: multiply top and bottom by the LCD of the inner denominators, or divide the top by the bottom. Examples, nested, mistakes.',
@@ -1699,7 +1699,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Do Modular Arithmetic (Remainders and Powers) | Learn Math Class',
         description: 'Do modular arithmetic step by step: reduce each number first, add or multiply the remainders, reduce again, use power cycles. Examples and common mistakes.',
@@ -1827,7 +1827,7 @@ const arithmeticMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Modulo of a Negative Number | Learn Math Class',
         description: 'Find the modulo of a negative number: round the quotient down, multiply back, subtract, or add the modulus to a negative remainder. Examples, code and mistakes.',

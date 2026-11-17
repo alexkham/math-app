@@ -1000,6 +1000,7 @@
 
 
 // tables-optimized: v4 | 2026-06-03 | 2 tables (obj2 comparison, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1016,7 +1017,52 @@ import renderCountTree from '@/app/utils/illustrations/combinatorics/counting/co
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
 
+// SetDiagram (count) 2026-11-15: the Addition Rule's failing example, hearts or kings: 13 + 4 - 1 = 16.
+// Region sizes follow from the page's numbers: 12 hearts that are not kings, 3 kings that are not hearts, 1 king of hearts.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const heartsOrKingsDiagram = {
+  labels: { timesCounted: 'Times each card is counted', regionLine: '{count} cards, counted {times} {unit} so far.' },
+  sets: [{ id: 'H', label: 'Hearts' }, { id: 'K', label: 'Kings' }],
+  regions: { H: 12, K: 3, HK: 1 },
+  regionNames: { H: 'hearts that are not kings', K: 'kings that are not hearts', HK: 'the king of hearts' },
+  terms: [
+    { label: '$|H|$', sign: 1, sets: ['H'], value: 13 },
+    { label: '$|K|$', sign: 1, sets: ['K'], value: 4 },
+    { label: '$|H \\cap K|$', sign: -1, sets: ['H', 'K'], value: 1 },
+  ],
+  notes: {
+    2: { label: 'Adding overlapping cases', warn: true, text: 'Adding gives $13 + 4 = 17$ hearts-or-kings in a deck that has only $16$: the king of hearts is both a heart and a king, so it is counted twice.' },
+    3: { label: 'The overlap subtracted once', text: 'For hearts or kings: $13 + 4 - 1 = 16$.' },
+  },
+};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table capstoneTable ("Counting Principles at a Glance"); converted from the table's own cells.
+const fm_capstoneTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Principle","features":[{"id":"c1","name":"Marker / form","type":"text"},{"id":"c2","name":"What it does","type":"text"},{"id":"c3","name":"Canonical example","type":"text"}],"items":[{"id":"r1","name":"Addition rule","values":{"c1":"\"or\" across mutually exclusive cases","c2":"sum the counts of each case","c3":"2 + 3 + 4 = 9 route choices"}},{"id":"r2","name":"Multiplication rule","values":{"c1":"\"and\" across independent steps","c2":"multiply the step counts","c3":"3 × 2 × 4 = 24 lunch combos"}},{"id":"r3","name":"Complementary counting","values":{"c1":"\"at least one\" → count its negation \"none\"","c2":"|A| = |U| − |U ∖ A|; subtract the complement","c3":"900 − 648 = 252 three-digit integers with a repeated digit"}},{"id":"r4","name":"Double counting","values":{"c1":"count the same set two different ways","c2":"equate the two expressions → identity, not a number","c3":"handshake lemma: Σ deg(v) = 2|E|"}},{"id":"r5","name":"Pigeonhole principle","values":{"c1":"items > containers","c2":"at least one container holds ≥ ⌈n⁄k⌉ items (existence, not location)","c3":"13 people, 12 months → two share a birth month"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("The Multiplication Rule"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Addition rule","type":"text"},{"id":"c2","name":"Multiplication rule","type":"text"}],"items":[{"id":"r1","name":"Linguistic marker","values":{"c1":"\"or\" — method 1 OR method 2 OR …","c2":"\"and\" — step 1 AND step 2 AND …"}},{"id":"r2","name":"Structural condition","values":{"c1":"cases are mutually exclusive (no outcome belongs to two methods)","c2":"steps are independent (count per step does not depend on earlier choices)"}},{"id":"r3","name":"Formula","values":{"c1":"m₁ + m₂ + … + mₖ","c2":"m₁ × m₂ × … × mₖ"}},{"id":"r4","name":"[Set-theory](!/set-theory) identity","values":{"c1":"|A ∪ B| = |A| + |B| for disjoint A, B","c2":"|A × B| = |A| · |B| (Cartesian product)"}},{"id":"r5","name":"Example","values":{"c1":"2 bus + 3 train + 4 taxi routes → 9 total","c2":"3 mains × 2 drinks × 4 desserts → 24 meals"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Use complementary counting", href: "/combinatorics/methods/complementary-counting", desc: "Count the outcomes you do not want and subtract them from the total; the standard route for \"at least one\" questions.", level: "composite", here: "#3" },
+      { skill: "Solve counting word problems", href: "/combinatorics/methods/counting-word-problems", desc: "Committees, license plates, seating plans and \"at least one\" questions: translate the story, pick the formula, count each stage.", level: "applied", here: "#6" },
+    ] },
+    { title: "More combinatorics methods", items: [
+      { skill: "Count choices made in stages", href: "/combinatorics/methods#multiplication-principle", desc: "One outcome is built from several steps, and the number of options at each step does not depend on the earlier choices: an outfit of a shirt and pants and shoes, a code digit by digit, a meal of $3 \\times 2 \\times 4$ dishes.", level: "atomic" },
+      { skill: "Count choices from separate cases", href: "/combinatorics/methods#addition-principle", desc: "One outcome comes from one of several groups that share no outcomes, joined by the word **or**: one book from $5$ novels or $7$ biographies, one trip by bus or by train.", level: "atomic" },
+      { skill: "Use inclusion-exclusion for two sets", href: "/combinatorics/methods/inclusion-exclusion-two-sets", desc: "Count the items in A or B: add the two sizes and subtract the overlap once, $|A \\cup B| = |A| + |B| - |A \\cap B|$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/combinatorics/methods", label: "All combinatorics methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1984,6 +2030,16 @@ $$2 + 3 + 4 = 9.$$]@`,
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          <DiagramFrame
+            key={'set-diagram-hearts-or-kings'}
+            id="hearts-or-kings-count"
+            title="Hearts or kings: the overlap counted twice"
+            source="/combinatorics/counting-principles"
+            related={{ href: '/combinatorics/inclusion-exclusion', label: 'Inclusion–exclusion' }}
+            before={'The hearts-or-kings count as a picture. Add the terms one at a time: after the two single counts the king of hearts has been counted twice, and the last term takes it off once.'}
+          >
+            <SetDiagram data={heartsOrKingsDiagram} variant="count" theme={setDiagramTheme} options={{ startAt: 'start' }} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1994,8 +2050,15 @@ $$2 + 3 + 4 = 9.$$]@`,
           sectionsContent.obj2.content,
           <div key={'unit-outfitTree'} dangerouslySetInnerHTML={{ __html: demoUnits.outfitTree }} />,
           `The rule needs the second step to offer the same number of options whatever the first choice was; the tree shows it as equal-sized fans.`,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-counting-principles-multiplication-rule-matrix'}
+            id="counting-principles-multiplication-rule-matrix"
+            title="The Multiplication Rule"
+            source="/combinatorics/counting-principles"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2004,6 +2067,7 @@ $$2 + 3 + 4 = 9.$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use complementary counting](!/combinatorics/methods/complementary-counting) →@`,
         ]
     },
     {
@@ -2031,6 +2095,7 @@ $$2 + 3 + 4 = 9.$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve counting word problems](!/combinatorics/methods/counting-word-problems) →@`,
         ]
     },
     {
@@ -2064,8 +2129,15 @@ $$2 + 3 + 4 = 9.$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-counting-principles-counting-principles-at-matrix'}
+            id="counting-principles-counting-principles-at-matrix"
+            title="Counting Principles at a Glance"
+            source="/combinatorics/counting-principles"
+            related={false}
+          >
+            <FeatureMatrix data={fm_capstoneTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -2149,6 +2221,14 @@ $$2 + 3 + 4 = 9.$$]@`,
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

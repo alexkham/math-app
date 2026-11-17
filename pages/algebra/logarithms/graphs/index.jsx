@@ -1,3 +1,4 @@
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,8 +15,18 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FunctionAnalysis from '@/app/components/infographics/FunctionAnalysis/FunctionAnalysis'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Transformations"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Transformation","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Effect on the graph","type":"text"},{"id":"c3","name":"(a, 1) becomes","type":"text"}],"items":[{"id":"r1","name":"Horizontal shift","values":{"c1":"y = logₐ(x − h)","c2":"shifts h units right (h > 0); asymptote moves to x = h; domain becomes x > h","c3":"(a + h, 1)"}},{"id":"r2","name":"Vertical shift","values":{"c1":"y = logₐ(x) + k","c2":"shifts k units up (k > 0); asymptote and domain unchanged","c3":"(a, 1 + k)"}},{"id":"r3","name":"Vertical stretch","values":{"c1":"y = c · logₐ(x)","c2":"scales y-values by factor c; (1, 0) stays fixed; |c| > 1 stretches, |c| < 1 compresses","c3":"(a, c)"}},{"id":"r4","name":"Reflection in x-axis","values":{"c1":"y = −logₐ(x)","c2":"flips up ↔ down; an increasing log becomes decreasing; equivalent to log_{1/a}","c3":"(a, −1)"}},{"id":"r5","name":"Reflection in y-axis","values":{"c1":"y = logₐ(−x)","c2":"flips left ↔ right; domain becomes x < 0; asymptote still the y-axis","c3":"(−a, 1)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Effect of Base on Shape"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Direction","type":"text"},{"id":"c2","name":"Anchor (a, 1)","type":"text"},{"id":"c3","name":"Steepness vs the others","type":"text"}],"items":[{"id":"r1","name":"y = log₂(x)","values":{"c1":"increasing","c2":"(2, 1)","c3":"smallest base of the three increasing logs — steepest"}},{"id":"r2","name":"y = ln(x)","values":{"c1":"increasing","c2":"(e, 1) ≈ (2.72, 1)","c3":"between log₂ and log₁₀ — middle of the pack"}},{"id":"r3","name":"y = log₁₀(x)","values":{"c1":"increasing","c2":"(10, 1)","c3":"largest base of the three — flattest"}},{"id":"r4","name":"y = log₍₁⁄₂₎(x)","values":{"c1":"decreasing","c2":"(0.5, 1)","c3":"reflection of log₂ across the x-axis (since log₍₁⁄₂₎(x) = −log₂(x))"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Key Points"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Anchor point","features":[{"id":"c1","name":"Why it lies on every graph","type":"text"},{"id":"c2","name":"Concrete coordinates","type":"text"}],"items":[{"id":"r1","name":"(1, 0)","values":{"c1":"logₐ(1) = 0 because a⁰ = 1 for every valid base","c2":"(1, 0) for log₂, ln, log₁₀ — the same point on all of them"}},{"id":"r2","name":"(a, 1)","values":{"c1":"logₐ(a) = 1 because a¹ = a","c2":"(2, 1) for log₂; (e, 1) ≈ (2.718, 1) for ln; (10, 1) for log₁₀"}},{"id":"r3","name":"(1⁄a, −1)","values":{"c1":"logₐ(1⁄a) = −1 because a⁻¹ = 1⁄a","c2":"(0.5, −1) for log₂; (1⁄e, −1) ≈ (0.368, −1) for ln; (0.1, −1) for log₁₀"}}]};
 
 
 export async function getStaticProps(){
@@ -708,8 +719,23 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: From a graph to its equation (obj10).
+  const logFromGraphSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'Asymptote $x = 2$, points $(3, 0)$ and $(4, 1)$',
+      rows: [
+        { step: 'Read the vertical asymptote', stepSub: 'An asymptote at $x = h$ puts $x - h$ in the argument', example: '$y = \\log_a(x - 2)$' },
+        { step: 'Test a point on the curve', stepSub: 'It confirms the form so far', example: '$(3, 0)$: $\\log_a(1) = 0$' },
+        { step: 'Use another point to find the base', example: '$(4, 1)$: $\\log_a(2) = 1$, so $a = 2$' },
+        { step: 'Write the equation', example: '$y = \\log_2(x - 2)$' },
+      ],
+    },
+  };
+
 return {
   props: {
+    logFromGraphSteps,
     pitfallData,
     shiftedLogProfile,
     sectionsContent,
@@ -735,7 +761,7 @@ return {
 // export default function GraphsPage({seoData,sectionsContent , introContent}) {
 
 
-export default function GraphsPage({ pitfallData,shiftedLogProfile, 
+export default function GraphsPage({ logFromGraphSteps, pitfallData,shiftedLogProfile, 
   seoData,
   sectionsContent,
   introContent,
@@ -862,11 +888,15 @@ Height $100$ on $y = \\log_{10}(x)$ is reached only at $x = 10^{100}$, a googol,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-graphs-key-points-matrix'}
+            id="graphs-key-points-matrix"
+            title="Key Points"
+            source="/algebra/logarithms/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -875,11 +905,15 @@ Height $100$ on $y = \\log_{10}(x)$ is reached only at $x = 10^{100}$, a googol,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-graphs-effect-base-shape-matrix'}
+            id="graphs-effect-base-shape-matrix"
+            title="Effect of Base on Shape"
+            source="/algebra/logarithms/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrameV2>,
           `@academic[punchline:The larger the base, the flatter the climb; a base below $1$ turns the climb into a fall.]@`,
         ]
     },
@@ -939,6 +973,15 @@ Height $100$ on $y = \\log_{10}(x)$ is reached only at $x = 10^{100}$, a googol,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'obj10-procedure'}
+            id="log-equation-from-graph-steps"
+            title="From a graph to its equation"
+            source="/algebra/logarithms/graphs"
+            before={"The example of this section, read in the same order. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={logFromGraphSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -955,11 +998,15 @@ Height $100$ on $y = \\log_{10}(x)$ is reached only at $x = 10^{100}$, a googol,
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-graphs-summary-transformations-matrix'}
+            id="graphs-summary-transformations-matrix"
+            title="Summary of Transformations"
+            source="/algebra/logarithms/graphs"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
         ]
     },
     {

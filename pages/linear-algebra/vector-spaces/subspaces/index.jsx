@@ -808,6 +808,8 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj7 comparison, obj8 aggregation, obj10 summary capstone)
 
+import TestSelector from '@/app/components/infographics/linear-algebra/TestSelector'
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -821,6 +823,27 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_subspacesByDimension = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  scale: {
+    axisLabel: 'dimension',
+    initial: 1,
+    steps: [
+      { key: '0', name: '$\\{\\mathbf{0}\\}$', short: 'the zero vector alone',
+        text: 'The smallest subspace, in $\\mathbb{R}^2$ and in $\\mathbb{R}^3$ alike.' },
+      { key: '1', name: 'Lines through the origin', form: '$\\{t\\mathbf{v} : t \\in \\mathbb{R}\\}$',
+        text: 'Every line through the origin has this form for some nonzero vector $\\mathbf{v}$. A line that does not pass through the origin is not a subspace: it does not contain $\\mathbf{0}$.' },
+      { key: '2', name: 'Planes through the origin', short: 'in $\\mathbb{R}^3$',
+        text: 'A plane that does not contain the origin fails the subspace test. In $\\mathbb{R}^2$ this step is the whole space, $\\mathbb{R}^2$ itself.' },
+      { key: '3', name: '$\\mathbb{R}^3$ itself', short: 'the whole space',
+        text: 'There is nothing else: the subspaces are the flat subsets that pass through the origin.' }
+    ]
+  }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -832,9 +855,32 @@ import NestedContainment from '@/app/components/infographics/NestedContainment/N
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("The Row Space"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Null space Null(A)","type":"text"},{"id":"c2","name":"Column space Col(A)","type":"text"},{"id":"c3","name":"Row space Row(A)","type":"text"}],"items":[{"id":"r1","name":"Definition","values":{"c1":"{ x : Ax = 0 }","c2":"{ Ax : x ∈ ℝⁿ } = Span of columns","c3":"Span of rows = Col(Aᵀ)"}},{"id":"r2","name":"Lives in","values":{"c1":"ℝⁿ","c2":"ℝᵐ","c3":"ℝⁿ"}},{"id":"r3","name":"Dimension","values":{"c1":"nullity = n − r","c2":"rank r","c3":"rank r (same as Col)"}},{"id":"r4","name":"Reader question it answers","values":{"c1":"what inputs does A annihilate? (information lost)","c2":"is Ax = b solvable? (set of reachable outputs)","c3":"what is the total reach of the rows? (also equals Col(A) dim)"}},{"id":"r5","name":"Basis from row reduction","values":{"c1":"parametric form of Ax = 0; one vector per free variable","c2":"original columns of A at pivot positions (not RREF columns)","c3":"nonzero rows of the echelon form"}},{"id":"r6","name":"Orthogonal complement (in its ambient space)","values":{"c1":"row space Row(A), in ℝⁿ","c2":"left null space Null(Aᵀ), in ℝᵐ","c3":"null space Null(A), in ℝⁿ"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Subspaces from Operations"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation on W₁, W₂ ⊆ V","features":[{"id":"c1","name":"Always a subspace?","type":"verdict"},{"id":"c2","name":"Reason / formula","type":"text"}],"items":[{"id":"r1","name":"Intersection W₁ ∩ W₂","values":{"c1":"yes","c2":"closure inherits from both — anything in both stays in both under + and scaling"}},{"id":"r2","name":"Union W₁ ∪ W₂","values":{"c1":"no","c2":"in general not: u ∈ W₁ ∖ W₂ and v ∈ W₂ ∖ W₁ give u + v in neither (exception: one is contained in the other)"}},{"id":"r3","name":"Sum W₁ + W₂ = { w₁ + w₂ }","values":{"c1":"yes","c2":"smallest subspace containing both; dim(W₁ + W₂) = dim(W₁) + dim(W₂) − dim(W₁ ∩ W₂)"}},{"id":"r4","name":"Direct sum W₁ ⊕ W₂ (when W₁ ∩ W₂ = {0})","values":{"c1":"yes","c2":"special case of sum; every v ∈ W₁ ⊕ W₂ has a unique decomposition v = w₁ + w₂"}}]};
 
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Test whether a set is a subspace", href: "/linear-algebra/vector-spaces/methods/subspace-test", desc: "Check the zero vector, closure under addition and closure under scalar multiplication.", level: "composite", here: "#2" },
+    ] },
+    { title: "More vector space methods", items: [
+      { skill: "Test whether a vector is in a span", href: "/linear-algebra/vector-spaces/methods/span-test", desc: "Row reduce the augmented matrix: consistent means yes. A pivot in every row means the set spans Rⁿ.", level: "composite" },
+      { skill: "Find a basis", href: "/linear-algebra/vector-spaces/methods/find-basis", desc: "Row reduce once: the pivot columns of the original matrix, or one vector per free variable.", level: "composite" },
+      { skill: "Find the dimension of a subspace", href: "/linear-algebra/vector-spaces/methods/dimension", desc: "Count the vectors in a basis: the rank for a span, n minus the rank for a solution set.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1666,8 +1712,38 @@ const schemas = {
     conclusion: { text: '$\\text{Null}(A)$ is a subspace of $\\mathbb{R}^n$', say: 'Both closure conditions hold.' },
   };
 
+  // TestSelector 2026-11-14: Which form of the subspace test to use (obj2).
+  const subspaceTestSelector = {
+    question: 'Which check shows that a subset $W$ is a subspace?',
+    intro: 'Look for the zero vector first. If it is there, run the closure test in either of its two forms.',
+    shortcutsLabel: 'Check first',
+    shortcuts: [
+      { when: '$\\mathbf{0}$ is not in $W$', then: 'Not a subspace. Stop.' },
+    ],
+    gateLabel: 'Otherwise, choose a form',
+    branches: [
+      { condition: 'The two operations are easier to check one at a time',
+        test: {
+          name: 'Two closure conditions',
+          doThis: 'Show that $\\mathbf{u} + \\mathbf{v}$ stays in $W$, then that $c\\mathbf{v}$ stays in $W$.',
+          needs: 'Arbitrary $\\mathbf{u}, \\mathbf{v}$ in $W$ and an arbitrary scalar $c$',
+          verdict: 'A subspace exactly when both closures hold and $W$ is not empty.',
+          limit: 'Containing $\\mathbf{0}$ is necessary but not sufficient: $\\{(x, y) : y = x^2\\}$ contains it and still fails.',
+        } },
+      { condition: 'One computation is preferred',
+        test: {
+          name: 'Closure under linear combinations',
+          doThis: 'Show that $c\\mathbf{u} + d\\mathbf{v}$ stays in $W$ for all $\\mathbf{u}, \\mathbf{v}$ in $W$ and all scalars $c, d$.',
+          why: 'This single condition captures both closure properties at once.',
+          verdict: 'A subspace exactly when the combination stays in $W$ and $W$ is not empty.',
+          limit: 'One example that works proves nothing. The vectors and scalars have to be arbitrary.',
+        } },
+    ],
+  };
+
 return {
   props:{
+    subspaceTestSelector,
     proofStepsData,
     pitfallData,
     subspaceOpNest,
@@ -1692,7 +1768,7 @@ return {
 
    }
 
-export default function SubspacesPage({ proofStepsData, pitfallData,subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function SubspacesPage({ subspaceTestSelector, proofStepsData, pitfallData,subspaceOpNest, seoData, sectionsContent, introContent, obj7Table, obj8Table, subspaceRecognition, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1799,6 +1875,18 @@ export default function SubspacesPage({ proofStepsData, pitfallData,subspaceOpNe
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-test-selector'}
+            id="subspace-test-selector"
+            title="Which form of the subspace test to use"
+            source="/linear-algebra/vector-spaces/subspaces"
+            before={"The checks of this section in one place: the quick disqualifier first, then the two forms of the test."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <TestSelector data={subspaceTestSelector} theme="navy" variant="tree" />
+            </div>
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to test whether a set is a subspace](!/linear-algebra/vector-spaces/methods/subspace-test) →@`,
         ]
     },
     {
@@ -1819,6 +1907,15 @@ export default function SubspacesPage({ proofStepsData, pitfallData,subspaceOpNe
           sectionsContent.obj4.content,
                   <div key={'unit-geometry'} dangerouslySetInnerHTML={{ __html: demoUnits.geometry }} />,
           `Anything that misses the origin — a line offset from it, a shifted plane — fails the test before any closure question is asked.`,
+          <DiagramFrame
+            key={'taxonomy-subspaces-of-r2-and-r3'}
+            id="subspaces-of-r2-and-r3"
+            title="Subspaces of R² and R³"
+            source="/linear-algebra/vector-spaces/subspaces"
+            related={false}
+          >
+            <Taxonomy data={tx_subspacesByDimension} variant="scale" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1859,8 +1956,15 @@ export default function SubspacesPage({ proofStepsData, pitfallData,subspaceOpNe
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-subspaces-row-space-matrix'}
+            id="subspaces-row-space-matrix"
+            title="The Row Space"
+            source="/linear-algebra/vector-spaces/subspaces"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1869,8 +1973,15 @@ export default function SubspacesPage({ proofStepsData, pitfallData,subspaceOpNe
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-subspaces-subspaces-operations-matrix'}
+            id="subspaces-subspaces-operations-matrix"
+            title="Subspaces from Operations"
+            source="/linear-algebra/vector-spaces/subspaces"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
           <DiagramFrameV2
             key={'obj8-diagram'}
             id="subspace-operations-nesting"
@@ -1924,6 +2035,14 @@ export default function SubspacesPage({ proofStepsData, pitfallData,subspaceOpNe
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1,5 +1,6 @@
 
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj3 aggregation, obj5 comparison, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,13 +18,60 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import functionLimitDiagrams from '@/app/components/functions/limit/functionLimitDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
+
+const tx_infiniteLimitTypes = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', sketchCurve: '#06357A', sketchDot: '#B45309' },
+  tree: {
+    root: { name: 'Infinite limits of integration', sub: 'replace the infinite limit with a finite variable and take a limit' },
+    branches: [
+      { leaves: [
+        { name: 'Type 1', condition: 'Upper limit infinite.', example: '$\\lim_{b \\to \\infty} \\int_a^b f(x)\\, dx$',
+          sketch: { x0: -1, x1: 5, y0: -0.15, y1: 1.2, vlines: [0], pieces: [{ f: (x) => 1 / (1 + x * x), from: 0, to: 5 }] } },
+        { name: 'Type 2', condition: 'Lower limit infinite.', example: '$\\lim_{a \\to -\\infty} \\int_a^b f(x)\\, dx$',
+          sketch: { x0: -5, x1: 1, y0: -0.15, y1: 1.2, vlines: [0], pieces: [{ f: (x) => 1 / (1 + x * x), from: -5, to: 0 }] } },
+        { name: 'Type 3', condition: 'Both limits infinite. Both integrals must converge independently; any finite $c$ works.', example: '$\\int_{-\\infty}^c f(x)\\, dx + \\int_c^{\\infty} f(x)\\, dx$',
+          sketch: { x0: -5, x1: 5, y0: -0.15, y1: 1.2, vlines: [0], pieces: [{ f: (x) => 1 / (1 + x * x), from: -5, to: 5 }] } }
+      ] }
+    ]
+  },
+  note: { label: 'Type 3 splits into the other two', text: 'One integral with two infinite ends becomes a Type 2 integral on $(-\\infty, c]$ and a Type 1 integral on $[c, \\infty)$.' }
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import ComparisonTable2 from '@/app/components/infographics/comparison-table/ComparisonTable2'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import integralsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-integrals'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Discontinuous Integrands"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Improper feature","features":[{"id":"c1","name":"Setup as a limit","type":"text"},{"id":"c2","name":"Convergence requirement","type":"text"}],"items":[{"id":"r1","name":"Upper limit = ∞","values":{"c1":"∫ₐ$^{∞}$ f(x) dx = lim$_{b → ∞}$ ∫ₐ$^{b}$ f(x) dx","c2":"single limit must exist and be finite"}},{"id":"r2","name":"Lower limit = −∞","values":{"c1":"∫$_{-∞}$$^{b}$ f(x) dx = lim$_{a → -∞}$ ∫ₐ$^{b}$ f(x) dx","c2":"single limit must exist and be finite"}},{"id":"r3","name":"Both limits infinite","values":{"c1":"∫$_{-∞}$$^{∞}$ f(x) dx = ∫$_{-∞}$$^{c}$ f + ∫$_{c}$$^{∞}$ f (any finite c)","c2":"both pieces must converge independently"}},{"id":"r4","name":"Asymptote at left endpoint a","values":{"c1":"∫ₐ$^{b}$ f(x) dx = lim$_{t → a⁺}$ ∫ₜ$^{b}$ f(x) dx","c2":"single one-sided limit must exist and be finite"}},{"id":"r5","name":"Asymptote at right endpoint b","values":{"c1":"∫ₐ$^{b}$ f(x) dx = lim$_{t → b⁻}$ ∫ₐᵗ f(x) dx","c2":"single one-sided limit must exist and be finite"}},{"id":"r6","name":"Asymptote at interior point c","values":{"c1":"split at c: lim$_{t → c⁻}$ ∫ₐᵗ f + lim$_{s → c⁺}$ ∫ₛ$^{b}$ f","c2":"both one-sided limits must converge independently"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Tests for Improper Integral Convergence"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Test","features":[{"id":"c1","name":"When to use","type":"text"},{"id":"c2","name":"Conclusion","type":"text"},{"id":"c3","name":"Example or benchmark","type":"text"}],"items":[{"id":"r1","name":"Direct evaluation","values":{"c1":"an antiderivative is available","c2":"exact value if the limit is finite; otherwise diverges","c3":"∫₁$^{∞}$ 1/x² dx = 1"}},{"id":"r2","name":"p-test at ∞","values":{"c1":"integrand behaves like 1/x$^{p}$ as x → ∞","c2":"converges iff p > 1","c3":"∫₁$^{∞}$ 1/x$^{p}$ dx (benchmark)"}},{"id":"r3","name":"p-test near 0","values":{"c1":"integrand behaves like 1/x$^{p}$ as x → 0⁺","c2":"converges iff p < 1","c3":"∫₀¹ 1/√x dx (p = 1/2)"}},{"id":"r4","name":"Direct comparison","values":{"c1":"f ≥ 0 and bounded above by convergent g, or below by divergent g","c2":"f inherits the convergence behavior of the comparator","c3":"1/(x² + 1) < 1/x² ⇒ ∫ 1/(x² + 1) converges"}},{"id":"r5","name":"Limit comparison","values":{"c1":"f, g > 0 and lim$_{x → ∞}$ f/g = L with 0 < L < ∞","c2":"∫ f and ∫ g both converge or both diverge","c3":"x/(x³ + 5) ~ 1/x² ⇒ ∫ x/(x³ + 5) converges"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("The p-Test"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"p > 1","type":"text"},{"id":"c2","name":"p = 1","type":"text"},{"id":"c3","name":"p < 1","type":"text"}],"items":[{"id":"r1","name":"∫₁$^{∞}$ (1 / x$^{p}$) dx","values":{"c1":"converges","c2":"diverges","c3":"diverges"}},{"id":"r2","name":"∫₀¹ (1 / x$^{p}$) dx","values":{"c1":"diverges","c2":"diverges","c3":"converges"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Evaluate improper integrals", href: "/calculus/integrals/techniques/improper-integrals", desc: "An infinite limit or a blow-up inside the interval: replace it by $t$, integrate, take the limit.", level: "composite", here: "#2" },
+    ] },
+    { title: "More integration techniques", items: [
+      { skill: "Evaluate a definite integral with the Fundamental Theorem", href: "/calculus/integrals/techniques/definite-integrals-ftc", desc: "Find an antiderivative $F$ and compute $F(b) - F(a)$; Part 1 for accumulation functions.", level: "composite" },
+      { skill: "Integrate by u-substitution", href: "/calculus/integrals/techniques/u-substitution", desc: "Undo the chain rule: an inner function whose derivative is also in the integrand.", level: "composite" },
+      { skill: "Choose the right integration technique", href: "/calculus/integrals/techniques/which-integration-technique", desc: "A decision tree from the shape of the integrand to the right technique.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/calculus/integrals/techniques", label: "All integration techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -904,6 +952,16 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'taxonomy-improper-infinite-limits-types'}
+            id="improper-infinite-limits-types"
+            title="Infinite Limits of Integration"
+            source="/calculus/integrals/improper"
+            related={false}
+          >
+            <Taxonomy data={tx_infiniteLimitTypes} variant="tree" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate improper integrals](!/calculus/integrals/techniques/improper-integrals) →@`,
         ]
     },
     {
@@ -936,8 +994,15 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-improper-discontinuous-integrands-matrix'}
+            id="improper-discontinuous-integrands-matrix"
+            title="Discontinuous Integrands"
+            source="/calculus/integrals/improper"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every trouble spot, an infinite end or an asymptote, gets its own limit, and the integral converges only if each one does.]@`,
         ]
     },
@@ -967,8 +1032,15 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-improper-p-test-matrix'}
+            id="improper-p-test-matrix"
+            title="The p-Test"
+            source="/calculus/integrals/improper"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:For powers of $x$ the dividing line is $\\frac{1}{x}$: decay faster at infinity, or blow up slower at zero, and the area is finite.]@`,
         ]
     },
@@ -996,8 +1068,15 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-improper-summary-tests-improper-integral-matrix'}
+            id="improper-summary-tests-improper-integral-matrix"
+            title="Summary: Tests for Improper Integral Convergence"
+            source="/calculus/integrals/improper"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj8-diagram'}
             id="improper-convergence-tests-tree"
@@ -1041,6 +1120,14 @@ $$\\int_0^{\\infty} \\frac{1}{\\sqrt{x}(1 + x)}\\, dx$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

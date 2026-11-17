@@ -145,7 +145,7 @@ const setTheoryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Fill a Two-Set Venn Diagram (Regions and Counts) | Learn Math Class',
         description: 'Fill a two-set Venn diagram step by step: overlap first, then A only, B only and the outside region. Worked examples with elements and counts, plus mistakes.',
@@ -272,7 +272,7 @@ const setTheoryMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Fill a Three-Set Venn Diagram (Center Out) | Learn Math Class',
         description: 'Fill a three-set Venn diagram from the center out: triple overlap, pair-only regions, single regions, outside. Worked examples with counts and a missing center.',
@@ -409,7 +409,7 @@ const setTheoryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Prove a Set Identity (Element Method) | Learn Math Class',
         description: 'Prove set identities step by step: show both inclusions with an arbitrary element, or rewrite with set laws or a membership table. Worked examples and mistakes.',
@@ -547,7 +547,7 @@ const setTheoryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to List the Power Set of a Set | Learn Math Class',
         description: 'List a power set step by step: count the elements, expect 2^n subsets, start with the empty set and list by size or by doubling. Worked examples and mistakes.',
@@ -673,7 +673,7 @@ const setTheoryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Count Subsets (All, Proper, Size k) | Learn Math Class',
         description: 'Count subsets of a finite set: 2^n in all, 2^n - 1 proper, n choose k of a given size, and rules for elements that must be in or out. Examples and mistakes.',
@@ -801,7 +801,7 @@ const setTheoryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Size of a Union of Sets (Inclusion-Exclusion) | Learn Math Class',
         description: 'Find the size of a union of two or three sets: add the sizes, subtract the overlaps, add back the triple overlap. Worked examples with listed sets and mistakes.',
@@ -1057,7 +1057,7 @@ const setTheoryMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Check If a Set Is a Subset of Another | Learn Math Class',
         description: 'Check whether A is a subset of B: test every element of A for membership in B, stop at the first miss, then test for a proper subset. Examples and mistakes.',
@@ -1188,7 +1188,7 @@ const setTheoryMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Venn Diagram Survey Problems | Learn Math Class',
         description: 'Solve survey word problems with a Venn diagram: translate both, only, exactly one and neither into regions, fill from the center out, add. Worked examples.',

@@ -1,4 +1,6 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,7 +16,41 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Linear Equation Forms"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"Example","type":"text"},{"id":"c2","name":"Preparation step","type":"text"},{"id":"c3","name":"Then solve as","type":"text"}],"items":[{"id":"r1","name":"Single-step","values":{"c1":"x − 9 = 4","c2":"none","c3":"apply one property of equality"}},{"id":"r2","name":"Multi-step","values":{"c1":"4x − 7 = 2x + 11","c2":"none (already simplified)","c3":"gather, then isolate"}},{"id":"r3","name":"With parentheses","values":{"c1":"3(2x − 5) = 4x + 1","c2":"distribute","c3":"multi-step"}},{"id":"r4","name":"With fractions","values":{"c1":"x/3 + (x−2)/4 = 5","c2":"multiply every term by the LCD","c3":"multi-step"}},{"id":"r5","name":"With decimals","values":{"c1":"0.3x + 1.25 = 0.8x − 0.5","c2":"multiply by 10ⁿ to clear decimals","c3":"multi-step"}},{"id":"r6","name":"Literal","values":{"c1":"A = P(1 + rt), solve for r","c2":"treat other letters as constants","c3":"multi-step"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Special Cases"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Outcome","features":[{"id":"c1","name":"When it occurs","type":"text"},{"id":"c2","name":"Solution set","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"[Conditional](!/algebra/definitions#conditional_equation)","values":{"c1":"a ≠ 0 after simplification","c2":"one value: x = −b/a","c3":"2x = 18 → x = 9"}},{"id":"r2","name":"[Identity](!/algebra/definitions#identity)","values":{"c1":"variable terms cancel, true constant remains","c2":"all real numbers","c3":"2(x + 3) = 2x + 6 → 6 = 6"}},{"id":"r3","name":"[Contradiction](!/algebra/definitions#contradiction)","values":{"c1":"variable terms cancel, false constant remains","c2":"empty","c3":"3(x + 1) = 3x + 8 → 3 = 8"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Properties of Equality"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Operation","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Addition","values":{"c1":"add or subtract the same quantity on both sides","c2":"preserves the solution set"}},{"id":"r2","name":"Multiplication","values":{"c1":"multiply or divide both sides by a nonzero constant","c2":"multiplier ≠ 0 essential — multiplying by 0 destroys the equation"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a linear equation", href: "/algebra/equations/methods/linear-equations", desc: "Simplify each side, collect the unknown on one side, then isolate it.", level: "composite", here: "#3" },
+      { skill: "Solve a linear equation with fractions", href: "/algebra/equations/methods/linear-equations-with-fractions", desc: "Multiply every term by the least common denominator, then solve the whole-number equation.", level: "composite", here: "#5" },
+      { skill: "Solve a literal equation for a variable", href: "/algebra/equations/methods/literal-equations", desc: "Rearrange a formula for one letter, treating every other letter as a number.", level: "composite", here: "#8" },
+    ] },
+    { title: "More equation methods", items: [
+      { skill: "Solve age problems", href: "/algebra/equations/methods/age-problems", desc: "Ages now, in the past and in the future: everyone gains the same number of years.", level: "applied" },
+      { skill: "Move a term to the other side", href: "/algebra/equations/methods#addition-property", desc: "A number or term is added to or subtracted from the unknown: $x - 7 = 12$, $x + 3 = -5$, $2x + 5 = x + 9$.", level: "atomic" },
+      { skill: "Remove a coefficient", href: "/algebra/equations/methods#multiplication-property", desc: "The unknown is multiplied or divided by a number: $-4x = 20$, $\\frac{x}{3} = 5$, $\\frac{2}{3}x = 8$.", level: "atomic" },
+      { skill: "Solve a system of equations by elimination", href: "/algebra/equations/methods/systems-elimination", desc: "Scale the equations so one variable has opposite coefficients, then add.", level: "composite" },
+      { skill: "Solve mixture problems", href: "/algebra/equations/methods/mixture-problems", desc: "Solutions, blends and investments: one equation for the amount, one for the content.", level: "applied" },
+      { skill: "Solve distance, rate and time problems", href: "/algebra/equations/methods/distance-rate-time-problems", desc: "Trains, cars, boats in a current: one d = rt line per traveller, linked by the story.", level: "applied" },
+      { skill: "Solve a system of equations by substitution", href: "/algebra/equations/methods/systems-substitution", desc: "Solve one equation for one variable and substitute it into the other.", level: "composite" },
+      { skill: "Solve a rational equation", href: "/algebra/equations/methods/rational-equations", desc: "Note the excluded values, multiply by the LCD, solve, then reject excluded answers.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/equations/methods", label: "All equation methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -660,8 +696,37 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: An equation with parentheses, step by step (obj4).
+  const parenthesesSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$3(2x - 5) = 4x + 1$',
+      rows: [
+        { step: 'Distribute to clear the parentheses', example: '$6x - 15 = 4x + 1$' },
+        { step: 'Collect the variable terms on one side', stepSub: 'Subtract $4x$ from both sides', example: '$2x - 15 = 1$' },
+        { step: 'Collect the constants on the other side', stepSub: 'Add $15$ to both sides', example: '$2x = 16$' },
+        { step: 'Divide by the coefficient', example: '$x = 8$' },
+        { check: true, step: 'Check in the original equation', example: '$3(16 - 5) = 33$ and $4 \\cdot 8 + 1 = 33$' },
+      ],
+    },
+  };
+
+  const multiStepSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$4x - 7 = 2x + 11$',
+      rows: [
+        { step: 'Gather the variable terms on one side', stepSub: 'Subtract $2x$ from both sides', example: '$2x - 7 = 11$' },
+        { step: 'Gather the constant terms on the other side', stepSub: 'Add $7$ to both sides', example: '$2x = 18$' },
+        { step: 'Isolate the variable', stepSub: 'Divide both sides by $2$', example: '$x = 9$' },
+      ],
+    },
+  };
+
   return {
   props: {
+    multiStepSteps,
+    parenthesesSteps,
     pitfallData,
     demoUnits,
     conceptIntroFigures,
@@ -685,7 +750,7 @@ const schemas = {
    }
 
 
-export default function LinearEquationsPage({ pitfallData,
+export default function LinearEquationsPage({ multiStepSteps, parenthesesSteps, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -785,11 +850,15 @@ $$ax + b = 0$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-properties-equality-matrix'}
+            id="linear-properties-equality-matrix"
+            title="Properties of Equality"
+            source="/algebra/equations/linear"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           `@academic[punchline:Each legal step does the same thing to both sides, so the solution set never changes; it only comes into view.]@`,
         ]
     },
@@ -804,6 +873,12 @@ $$ax + b = 0$$]@`,
             style={tableWrapStyle}
             dangerouslySetInnerHTML={{ __html: obj3Table }}
           />,
+          <DiagramFrame key={'obj3-procedure'} id="multi-step-equation-steps" title="The stages on one equation"
+            source="/algebra/equations/linear" related={false}
+            before={"The multi-step equation of this section, one stage at a time. Press Next to carry out each stage."}>
+            <ProcedureV2 data={multiStepSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a linear equation](!/algebra/equations/methods/linear-equations) →@`,
         ]
     },
     {
@@ -812,6 +887,15 @@ $$ax + b = 0$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="parentheses-equation-steps"
+            title="An equation with parentheses, step by step"
+            source="/algebra/equations/linear"
+            before={"The first equation of this section, from distribution to the answer. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={parenthesesSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -820,6 +904,7 @@ $$ax + b = 0$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a linear equation with fractions](!/algebra/equations/methods/linear-equations-with-fractions) →@`,
         ]
     },
     {
@@ -836,11 +921,15 @@ $$ax + b = 0$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-special-cases-matrix'}
+            id="linear-special-cases-matrix"
+            title="Special Cases"
+            source="/algebra/equations/linear"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
                   <div key={'unit-special'} dangerouslySetInnerHTML={{ __html: demoUnits.special }} />,
           `Both outcomes are legitimate answers, and the picture shows why neither is a mistake.`,
         ]
@@ -851,6 +940,7 @@ $$ax + b = 0$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a literal equation for a variable](!/algebra/equations/methods/literal-equations) →@`,
         ]
     },
     {
@@ -859,11 +949,15 @@ $$ax + b = 0$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-linear-summary-linear-equation-forms-matrix'}
+            id="linear-summary-linear-equation-forms-matrix"
+            title="Summary of Linear Equation Forms"
+            source="/algebra/equations/linear"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -881,6 +975,14 @@ $$ax + b = 0$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

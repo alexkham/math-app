@@ -901,6 +901,7 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj3 comparison, obj8 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -914,6 +915,7 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -924,6 +926,25 @@ import laEigenNotationSheet from '@/app/components/infographics/NotationCheatShe
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj8Table ("Eigenvalues of Special Matrix Types"); converted from the table's own cells.
+const fm_obj8Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Matrix type","features":[{"id":"c1","name":"Defining property","type":"text"},{"id":"c2","name":"Eigenvalue constraint","type":"text"}],"items":[{"id":"r1","name":"[Diagonal / triangular](!/linear-algebra/matrix/types)","values":{"c1":"zeros above or below (or both) the main diagonal","c2":"eigenvalues are the diagonal entries (visible by inspection)"}},{"id":"r2","name":"Real symmetric","values":{"c1":"A = A$^{T}$","c2":"all eigenvalues are real; eigenvectors for distinct λ are [orthogonal](!/linear-algebra/orthogonality)"}},{"id":"r3","name":"Real skew-symmetric","values":{"c1":"A = −A$^{T}$","c2":"eigenvalues are zero or purely imaginary, in conjugate pairs ± bi"}},{"id":"r4","name":"Orthogonal","values":{"c1":"A$^{T}$A = I","c2":"|λ| = 1; real eigenvalues are ±1; complex eigenvalues in conjugate pairs on the unit circle"}},{"id":"r5","name":"Idempotent","values":{"c1":"A² = A","c2":"λ ∈ {0, 1}"}},{"id":"r6","name":"Nilpotent","values":{"c1":"Aᵏ = 0 for some positive integer k","c2":"all eigenvalues equal zero"}},{"id":"r7","name":"Involutory","values":{"c1":"A² = I","c2":"λ ∈ {+1, −1}"}},{"id":"r8","name":"Positive definite (symmetric)","values":{"c1":"x$^{T}$A x > 0 for every nonzero x, with A symmetric","c2":"all eigenvalues strictly positive"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Summary: Spectral Properties at a Glance"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Attribute","features":[{"id":"c1","name":"Algebraic multiplicity mₐ(λ)","type":"text"},{"id":"c2","name":"Geometric multiplicity m$_{g}$(λ)","type":"text"}],"items":[{"id":"r1","name":"Definition","values":{"c1":"number of times λ appears as a root of the characteristic polynomial","c2":"dimension of the eigenspace E$_{λ}$ = Null(A − λI)"}},{"id":"r2","name":"Range","values":{"c1":"1 ≤ mₐ(λ) ≤ n","c2":"1 ≤ m$_{g}$(λ) ≤ mₐ(λ)"}},{"id":"r3","name":"Computed from","values":{"c1":"factoring p(λ) = det(A − λI)","c2":"row reducing A − λI; counting free variables"}},{"id":"r4","name":"Diagonalizability test","values":{"c1":"total Σ mₐ(λ) is always n","c2":"A is diagonalizable ⟺ m$_{g}$(λ) = mₐ(λ) for every λ"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Eigenvalue methods", items: [
+      { skill: "Find a basis for an eigenspace", href: "/linear-algebra/eigen/methods/eigenspace-basis", desc: "Row reduce $A - \\lambda I$, write the null space in parametric form and take one vector per free variable.", level: "composite" },
+      { skill: "Check if a matrix is diagonalizable", href: "/linear-algebra/eigen/methods/diagonalizability-check", desc: "Compare algebraic and geometric multiplicity for every eigenvalue; $n$ distinct eigenvalues settle it at once.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/eigen/methods", label: "All eigenvalue methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1976,11 +1997,15 @@ export default function EigenvaluePropertiesPage({ proofStepsData6, proofStepsDa
         content: [
           `When $m_g = m_a$ for every eigenvalue, the matrix is [diagonalizable](!/linear-algebra/eigen/diagonalization) — there are enough independent eigenvectors to form a [basis](!/linear-algebra/vector-spaces). When $m_g < m_a$ for any eigenvalue, the matrix is defective and cannot be diagonalized.`,
           `For $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix}$, the eigenvalue $\\lambda = 2$ has $m_a = 2$ but $m_g = 1$ (the eigenspace is one-dimensional, spanned by $(1, 0)$). This matrix is not diagonalizable.`,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-summary-spectral-properties-at-matrix'}
+            id="properties-summary-spectral-properties-at-matrix"
+            title="Summary: Spectral Properties at a Glance"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           <div key={'unit-defective'} dangerouslySetInnerHTML={{ __html: demoUnits.defective }} />,
           `A defective matrix is precisely one that cannot be diagonalised, which is why this gap is worth naming rather than treating as a curiosity.`,
         ],
@@ -2135,11 +2160,15 @@ export default function EigenvaluePropertiesPage({ proofStepsData6, proofStepsDa
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'obj8-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj8Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-properties-eigenvalues-special-matrix-types-matrix'}
+            id="properties-eigenvalues-special-matrix-types-matrix"
+            title="Eigenvalues of Special Matrix Types"
+            source="/linear-algebra/eigen/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj8Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2225,6 +2254,14 @@ export default function EigenvaluePropertiesPage({ proofStepsData6, proofStepsDa
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

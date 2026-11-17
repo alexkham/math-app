@@ -1,4 +1,5 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -13,11 +14,34 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Common Errors"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Error","features":[{"id":"c1","name":"Wrong","type":"text"},{"id":"c2","name":"Correct approach","type":"text"}],"items":[{"id":"r1","name":"Distributing over a sum","values":{"c1":"√(a + b) = √a + √b","c2":"no shortcut exists; evaluate the sum inside the radical first"}},{"id":"r2","name":"Treating different indices as same","values":{"c1":"√2 · ∛2 = ⁵√4 (or similar)","c2":"convert to [rational exponents](!/algebra/roots/rational-exponents), find a common denominator"}},{"id":"r3","name":"Ignoring domain restrictions","values":{"c1":"√(−3) · √(−3) = √9 = 3","c2":"product rule fails for negative radicands under even roots; use complex numbers"}},{"id":"r4","name":"Dropping absolute values","values":{"c1":"√(x²) = x","c2":"√(x²) = |x| whenever x may be negative"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("When Rules Apply"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Rule","features":[{"id":"c1","name":"Even index — required for real values","type":"text"},{"id":"c2","name":"Odd index — required for real values","type":"text"}],"items":[{"id":"r1","name":"Product","values":{"c1":"both factors a, b ≥ 0","c2":"a, b any real numbers"}},{"id":"r2","name":"Quotient","values":{"c1":"numerator a ≥ 0, denominator b > 0","c2":"a any real; denominator b ≠ 0"}},{"id":"r3","name":"Power","values":{"c1":"base a ≥ 0","c2":"a any real number"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Split or combine a root of a product", href: "/algebra/methods#radical-product-rule", desc: "A root of a product, or two roots with the same index multiplied: $\\sqrt{50}$, $\\sqrt{3}\\cdot\\sqrt{12}$, $\\sqrt[3]{16x^4}$.", level: "atomic" },
+      { skill: "Split or combine a root of a quotient", href: "/algebra/methods#radical-quotient-rule", desc: "A root of a fraction, or two roots with the same index divided: $\\sqrt{\\frac{9}{16}}$, $\\frac{\\sqrt{50}}{\\sqrt{2}}$.", level: "atomic" },
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite" },
+      { skill: "Add, subtract, multiply and divide radicals", href: "/algebra/methods/radical-operations", desc: "Simplify first, then combine like radicals; multiply and divide roots with the same index.", level: "composite" },
+      { skill: "Rationalize a denominator", href: "/algebra/methods/rationalize-denominator", desc: "Remove roots from the bottom of a fraction: multiply by a root, a conjugate, or a missing power.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1235,11 +1259,15 @@ Splitting $\\sqrt{36 + 64}$ like a product gives $\\sqrt{36} + \\sqrt{64} = 14$.
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-radical-rules-when-rules-apply-matrix'}
+            id="radical-rules-when-rules-apply-matrix"
+            title="When Rules Apply"
+            source="/algebra/roots/radical-rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:The radical rules hold only for matching indices and, under even roots, non-negative radicands; outside those limits they produce false results.]@`,
           `The restrictions above, rule by rule and index by index. The even column is where every condition lives.`,
           <DiagramFrame
@@ -1261,11 +1289,15 @@ Splitting $\\sqrt{36 + 64}$ like a product gives $\\sqrt{36} + \\sqrt{64} = 14$.
           sectionsContent.obj6.content,
           <div key={'unit-rootOfSum'} dangerouslySetInnerHTML={{ __html: demoUnits.rootOfSum }} />,
           `Squaring 3 + √x gives 9 + x + 6√x: the extra 6√x is exactly what the split adds.`,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-radical-rules-common-errors-matrix'}
+            id="radical-rules-common-errors-matrix"
+            title="Common Errors"
+            source="/algebra/roots/radical-rules"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj6-mistakes'}
             id="radical-rule-pitfalls"
@@ -1309,6 +1341,14 @@ Splitting $\\sqrt{36 + 64}$ like a product gives $\\sqrt{36} + \\sqrt{64} = 14$.
           >
             <TopDownTree data={radicalRuleTree} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -12,9 +13,56 @@ import identityDiagrams from '@/app/components/algebra/identities/identityDiagra
 import binomialCoefficientDiagrams from '@/app/components/algebra/visualizers/binomial/binomialCoefficientDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Algebraic Identities"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Family","features":[{"id":"c1","name":"Identity","type":"text"},{"id":"c2","name":"Where it's used","type":"text"}],"items":[{"id":"r1","name":"Square of a sum","values":{"c1":"(a + b)² = a² + 2ab + b²","c2":"completing the square, perfect square trinomials"}},{"id":"r2","name":"Square of a difference","values":{"c1":"(a − b)² = a² − 2ab + b²","c2":"completing the square, expansions"}},{"id":"r3","name":"Difference of squares","values":{"c1":"a² − b² = (a + b)(a − b)","c2":"factoring, rationalizing denominators"}},{"id":"r4","name":"Cube of a sum","values":{"c1":"(a + b)³ = a³ + 3a²b + 3ab² + b³","c2":"cubic expansions, depressed cubics"}},{"id":"r5","name":"Cube of a difference","values":{"c1":"(a − b)³ = a³ − 3a²b + 3ab² − b³","c2":"cubic expansions, depressed cubics"}},{"id":"r6","name":"Sum of cubes","values":{"c1":"a³ + b³ = (a + b)(a² − ab + b²)","c2":"factoring cubics"}},{"id":"r7","name":"Difference of cubes","values":{"c1":"a³ − b³ = (a − b)(a² + ab + b²)","c2":"factoring cubics"}},{"id":"r8","name":"Binomial theorem","values":{"c1":"(a + b)ⁿ = Σ C(n,k) aⁿ⁻ᵏ bᵏ","c2":"general expansions of any degree"}},{"id":"r9","name":"Square of a trinomial","values":{"c1":"(a + b + c)² = a² + b² + c² + 2ab + 2ac + 2bc","c2":"three-variable expansions"}},{"id":"r10","name":"aⁿ − bⁿ","values":{"c1":"(a − b)(aⁿ⁻¹ + aⁿ⁻²b + ⋯ + bⁿ⁻¹)","c2":"factoring any degree, (a − b) always divides"}},{"id":"r11","name":"aⁿ + bⁿ (odd n)","values":{"c1":"(a + b)(aⁿ⁻¹ − aⁿ⁻²b + ⋯ + bⁿ⁻¹)","c2":"factoring odd-degree sums only"}},{"id":"r12","name":"Sophie Germain","values":{"c1":"a⁴ + 4b⁴ = (a² + 2ab + 2b²)(a² − 2ab + 2b²)","c2":"specialty factoring"}},{"id":"r13","name":"Sum of squares (over ℂ)","values":{"c1":"a² + b² = (a + bi)(a − bi)","c2":"complex number factoring"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Sums and Differences of Powers"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Pattern","features":[{"id":"c1","name":"Factors over ℝ?","type":"verdict"},{"id":"c2","name":"Factorization","type":"text"}],"items":[{"id":"r1","name":"a² − b²","values":{"c1":"yes","c2":"(a + b)(a − b)"}},{"id":"r2","name":"a² + b²","values":{"c1":"no","c2":"irreducible over ℝ; (a + bi)(a − bi) over ℂ"}},{"id":"r3","name":"a³ − b³","values":{"c1":"yes","c2":"(a − b)(a² + ab + b²)"}},{"id":"r4","name":"a³ + b³","values":{"c1":"yes","c2":"(a + b)(a² − ab + b²)"}},{"id":"r5","name":"a⁴ − b⁴","values":{"c1":"yes","c2":"(a − b)(a + b)(a² + b²)"}},{"id":"r6","name":"aⁿ − bⁿ (any n)","values":{"c1":"yes","c2":"(a − b)(aⁿ⁻¹ + aⁿ⁻²b + ⋯ + bⁿ⁻¹)"}},{"id":"r7","name":"aⁿ + bⁿ (odd n)","values":{"c1":"yes","c2":"(a + b)(aⁿ⁻¹ − aⁿ⁻²b + ⋯ + bⁿ⁻¹)"}}]};
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Polynomial methods", items: [
+      { skill: "Expand a special product", href: "/algebra/polynomials/methods#special-products", desc: "A binomial squared, or a sum times the matching difference: $(2x + 3)^2$, $(x - 5)^2$, $(3x + 2)(3x - 2)$.", level: "atomic" },
+      { skill: "Factor a difference of squares", href: "/algebra/polynomials/methods/difference-of-squares", desc: "Spot $a^2 - b^2$ and write $(a - b)(a + b)$; repeat while squares remain.", level: "composite" },
+      { skill: "Factor a sum or difference of cubes", href: "/algebra/polynomials/methods/sum-difference-of-cubes", desc: "Spot $a^3 \\pm b^3$ and use the matching formula; the quadratic factor never factors further.", level: "composite" },
+      { skill: "Multiply polynomials", href: "/algebra/polynomials/methods#multiply-polynomials", desc: "Two polynomials multiplied: $(x + 2)(x^2 - 3x + 1)$, $(2x - 1)(x + 4)$.", level: "atomic" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Complete the square", href: "/algebra/equations/methods/completing-the-square", desc: "Turn $x^2 + bx$ into a perfect square to solve a quadratic or find its vertex.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
+
+// FormulaSheet 2026-11-15: replaces the table obj1Table ("Squares of Binomials": pattern → expanded form); the three identities taken from the table, names from the section text.
+const binomialSquareTiles = {
+  items: [
+    { name: 'Square of a sum', formula: '$(a + b)^2 = a^2 + 2ab + b^2$' },
+    { name: 'Square of a difference', formula: '$(a - b)^2 = a^2 - 2ab + b^2$' },
+    { name: 'Product of conjugates', formula: '$(a + b)(a - b) = a^2 - b^2$' },
+  ],
+}
+
+// FormulaSheet 2026-11-15: replaces the table obj2Table ("Cubes of Binomials": pattern → expanded form); the two identities taken from the table.
+const binomialCubeTiles = {
+  columns: [
+    { key: 'name', label: 'Pattern', kind: 'name' },
+    { key: 'formula', label: 'Expanded form', kind: 'formula' },
+  ],
+  rows: [
+    { name: 'Cube of a sum', formula: '$(a + b)^3 = a^3 + 3a^2b + 3ab^2 + b^3$' },
+    { name: 'Cube of a difference', formula: '$(a - b)^3 = a^3 - 3a^2b + 3ab^2 - b^3$' },
+  ],
+}
 
 export async function getStaticProps() {
 
@@ -778,11 +826,16 @@ export default function AlgebraicIdentitiesPage({identitiesOutline, identityPitf
         content: [
           `The middle term is what gets missed most often. Squaring $(a+b)$ does not give $a^2 + b^2$ — the cross term $2ab$ comes from the two outer-and-inner products that survive distribution. The conjugate product $(a+b)(a-b)$ is the exception: there the cross terms cancel, leaving a clean [difference of squares](!/algebra/polynomials/factoring#6) — the most heavily used factoring pattern in algebra.`,
           `Geometrically, $(a+b)^2$ is the area of a square with side $a+b$, dissected into one $a \\times a$ square, one $b \\times b$ square, and two $a \\times b$ rectangles. The cross term $2ab$ counts those two rectangles. Once that picture is in working memory, the formula becomes unforgettable. The reverse direction — recognizing $a^2 + 2ab + b^2$ as a [perfect square trinomial](!/algebra/polynomials/factoring#7) — is what lets you collapse three terms into one squared binomial on sight.`,
-          <div
-            key={'obj1-table'}
-            style={{ margin: '20px auto', width: '100%' }}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'formula-sheet-binomial-squares'}
+            id="binomial-square-identities"
+            title="Squares of Binomials"
+            source="/algebra/identities"
+            related={false}
+          >
+            <FormulaSheet data={binomialSquareTiles} variant="tiles" />
+          </DiagramFrame>,
+          `The picture below draws the first of the three as areas: the square of side $a + b$ cut into its four pieces.`,
           <div key={'unit-square'} dangerouslySetInnerHTML={{ __html: demoUnits.square }} />,
           `The square of a difference and the conjugate product are the same picture with one side shortened or one piece removed.`,
         ],
@@ -845,11 +898,15 @@ Writing $(2x + 3)^2$ as $2x^2 + 12x + 9$ squares the $x$ but not the $2$; at $x 
       link: sectionsContent.obj2.link,
       content: [
         sectionsContent.obj2.content,
-        <div
-          key={'obj2-table'}
-          style={{ margin: '20px auto', width: '100%' }}
-          dangerouslySetInnerHTML={{ __html: obj2Table }}
-        />,
+        <DiagramFrame
+          key={'formula-sheet-binomial-cubes'}
+          id="binomial-cube-identities"
+          title="Cubes of Binomials"
+          source="/algebra/identities"
+          related={false}
+        >
+          <FormulaSheet data={binomialCubeTiles} variant="card" />
+        </DiagramFrame>,
         `@academic[punchline:Cubing a binomial always gives the coefficients $1, 3, 3, 1$; a difference only makes the signs alternate.]@`,
       ]
     },
@@ -879,11 +936,15 @@ Writing $(2x + 3)^2$ as $2x^2 + 12x + 9$ squares the $x$ but not the $2$; at $x 
       link: sectionsContent.obj5.link,
       content: [
         sectionsContent.obj5.content,
-        <div
-          key={'obj5-table'}
-          style={{ margin: '20px auto', width: '100%' }}
-          dangerouslySetInnerHTML={{ __html: obj5Table }}
-        />,
+        <DiagramFrame
+          key={'feature-matrix-identities-sums-differences-powers-matrix'}
+          id="identities-sums-differences-powers-matrix"
+          title="Sums and Differences of Powers"
+          source="/algebra/identities"
+          related={false}
+        >
+          <FeatureMatrix data={fm_obj5Table} />
+        </DiagramFrame>,
                 <div key={'unit-dos'} dangerouslySetInnerHTML={{ __html: demoUnits.dos }} />,
           `The higher-degree factorisations above have no such picture, which is why they are learned as patterns.`,
           `@academic[punchline:A difference of like powers always has the factor $a - b$; a sum has $a + b$ only for odd powers.]@`,
@@ -903,11 +964,15 @@ Writing $(2x + 3)^2$ as $2x^2 + 12x + 9$ squares the $x$ but not the $2$; at $x 
       link: sectionsContent.obj7.link,
       content: [
         sectionsContent.obj7.content,
-        <div
-          key={'summary-table'}
-          style={{ margin: '20px auto', width: '100%' }}
-          dangerouslySetInnerHTML={{ __html: summaryTable }}
-        />,
+        <DiagramFrame
+          key={'feature-matrix-identities-summary-algebraic-identities-matrix'}
+          id="identities-summary-algebraic-identities-matrix"
+          title="Summary of Algebraic Identities"
+          source="/algebra/identities"
+          related={false}
+        >
+          <FeatureMatrix data={fm_summaryTable} />
+        </DiagramFrame>,
         <DiagramFrame
           key={'obj7-diagram'}
           id="algebraic-identities-outline"
@@ -934,6 +999,14 @@ Writing $(2x + 3)^2$ as $2x^2 + 12x + 9$ squares the $x$ but not the $2$; at $x 
           <MistakeFix data={identityPitfalls} variant="trace" />
         </DiagramFrame>,
       ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
     },
     // faq: rendered component — must be built here, not in getStaticProps
     {

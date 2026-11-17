@@ -59,7 +59,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a System by Gaussian Elimination | Learn Math Class',
         description: 'Solve linear systems by Gaussian elimination: write the augmented matrix, clear below each pivot, reach echelon form, back-substitute. Examples and mistakes.',
@@ -195,7 +195,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a System by Gauss-Jordan Elimination | Learn Math Class',
         description: 'Solve a system by Gauss-Jordan elimination: reduce to echelon form, scale every pivot to 1, clear above the pivots, read the solution. Examples, mistakes.',
@@ -307,7 +307,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Reduce a Matrix to Row Echelon Form (REF) | Learn Math Class',
         description: 'Reduce a matrix to row echelon form: find the pivot column, swap a nonzero entry up, clear below it, repeat on the rows below. Rank, examples, common mistakes.',
@@ -422,7 +422,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Reduced Row Echelon Form (RREF) | Learn Math Class',
         description: 'Find the reduced row echelon form of a matrix: reach echelon form, scale each pivot to 1, clear the entries above every pivot, check the result. Examples.',
@@ -530,7 +530,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a System by Back Substitution | Learn Math Class',
         description: 'Solve an upper triangular or echelon-form system by back substitution: solve the last row, substitute upward, carry free variables as parameters. With examples.',
@@ -636,7 +636,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Tell How Many Solutions a Linear System Has | Learn Math Class',
         description: 'Decide if a linear system has one, none or infinitely many solutions: reduce, look for a 0 = d row, compare the rank with the number of unknowns. Examples.',
@@ -769,7 +769,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a Homogeneous System (Ax = 0) | Learn Math Class',
         description: 'Solve a homogeneous system Ax = 0: reduce A, count free variables, solve the pivot variables, write a basis of the null space, check each vector. With examples.',
@@ -882,7 +882,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Write a General Solution in Parametric Vector Form | Learn Math Class',
         description: 'Write the general solution of a linear system in parametric vector form: reduce to RREF, name the free variables, solve the rest, split into vectors. Examples.',
@@ -995,7 +995,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: "How to Solve a System with Cramer's Rule (2×2 and 3×3) | Learn Math Class",
         description: "Solve a square linear system with Cramer's rule: check det(A) is not 0, replace one column with b, take determinants, divide. 2×2 and 3×3 examples, mistakes.",
@@ -1108,7 +1108,7 @@ const linearSystemsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a System Using the Inverse Matrix | Learn Math Class',
         description: 'Solve a linear system with the inverse matrix: write Ax = b, check det(A) is not 0, find the inverse, multiply x = (inverse of A)b, check. Examples, mistakes.',
@@ -1238,7 +1238,7 @@ const linearSystemsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'Which Method to Solve a Linear System? Decision Tree | Learn Math Class',
         description: "Choose how to solve a linear system: count solutions, homogeneous systems, back substitution, Cramer's rule, the inverse or Gaussian elimination. Decision tree.",

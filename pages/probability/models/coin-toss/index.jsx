@@ -705,6 +705,7 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj5 aggregation, obj8 aggregation, summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -723,7 +724,37 @@ import discretePmfDiagrams from '@/app/components/visualizations/probability/dis
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Coin Toss Model at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"What it represents","values":{"c1":"a random mechanism with exactly two possible outcomes in a single trial","c2":"a single Bernoulli experiment"}},{"id":"r2","name":"Outcome space","values":{"c1":"a finite set with exactly two labels distinguishing the outcomes","c2":"&Omega; = {H, T}"}},{"id":"r3","name":"Events","values":{"c1":"subsets of the outcome space — including the certain and impossible events","c2":"{H}, {T}, &Omega;, ∅"}},{"id":"r4","name":"Probability assignment","values":{"c1":"two non-negative weights summing to 1; symmetry is an assumption, not a requirement","c2":"fair coin: P(H) = P(T) = 1/2; biased: P(H) = p, P(T) = 1 − p"}},{"id":"r5","name":"Modeling assumptions","values":{"c1":"single outcome, mutually exclusive, fixed probabilities, memoryless across trials","c2":"a fair coin tossed repeatedly under identical conditions"}},{"id":"r6","name":"[Random variables](!/probability/random-variables)","values":{"c1":"numerical mappings on the two outcomes; different choices give different measurements","c2":"X = 1$_{{H}}$; binary {0, 1}; signed {−1, +1}"}},{"id":"r7","name":"Distribution from one toss","values":{"c1":"the simplest non-degenerate distribution — probability mass on two values","c2":"Bernoulli(p)"}},{"id":"r8","name":"Distributions from repeated tosses","values":{"c1":"counts, waiting times, patterns, and grouped values produce richer distributions","c2":"binomial (counts), geometric (waiting), continuous-uniform approximations (grouped bits)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table constructionsTable ("Distributions Built from Repeated Coin Tosses"); converted from the table's own cells.
+const fm_constructionsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Construction","features":[{"id":"c1","name":"What it measures","type":"text"},{"id":"c2","name":"Resulting distribution","type":"text"}],"items":[{"id":"r1","name":"Count of a chosen outcome","values":{"c1":"how many times a specific outcome occurs in n tosses","c2":"[binomial](!/probability/distributions/discrete/binomial)(n, p)"}},{"id":"r2","name":"Waiting time","values":{"c1":"number of tosses until a specific outcome first appears","c2":"[geometric](!/probability/distributions/discrete/geometric)(p)"}},{"id":"r3","name":"Patterns or runs","values":{"c1":"consecutive streaks or specific sequences within the toss history","c2":"run-length distributions; pattern-matching laws"}},{"id":"r4","name":"Grouping into a number","values":{"c1":"interpret a binary sequence as bits of a single value","c2":"discrete uniform on a power-of-two grid; approaches continuous uniform as length grows"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table assumptionsTable ("Assumptions"); converted from the table's own cells.
+const fm_assumptionsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Assumption","features":[{"id":"c1","name":"What it states","type":"text"},{"id":"c2","name":"What violating it produces","type":"text"}],"items":[{"id":"r1","name":"Single outcome per trial","values":{"c1":"each toss produces exactly one of the two outcomes","c2":"multi-result or ambiguous-outcome mechanisms (different model)"}},{"id":"r2","name":"Mutual exclusivity","values":{"c1":"the two outcomes cannot occur simultaneously","c2":"overlapping outcomes — no longer a binary mechanism"}},{"id":"r3","name":"Fixed probabilities","values":{"c1":"each outcome has a probability specified in advance, unchanging across trials","c2":"time-varying or adaptive probability models"}},{"id":"r4","name":"No memory across trials","values":{"c1":"past tosses don't influence future tosses (independence)","c2":"Markov-chain-like models, runs models, or path-dependent processes"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve coin toss probability problems", href: "/probability/methods/coin-problems", desc: "Heads and tails over several tosses: count the sequences, or use the binomial formula for a biased coin.", level: "applied", here: "#4" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Find a probability by counting outcomes", href: "/probability/methods/classical-probability", desc: "Equally likely outcomes: count the favorable ones, count all of them, divide.", level: "composite" },
+      { skill: "List a sample space", href: "/probability/methods/sample-space", desc: "Write down every possible outcome of an experiment with a list, a grid or a tree, then count it.", level: "composite" },
+      { skill: "Solve dice probability problems", href: "/probability/methods/dice-problems", desc: "Sums, doubles and \"at least one six\": list the ordered outcomes and count.", level: "applied" },
+    ] },
+    { title: "Distribution methods", items: [
+      { skill: "Find a binomial probability", href: "/probability/distributions/methods/binomial-probability", desc: "Count successes in $n$ independent trials: name $n$, $p$ and the values of $k$, then add PMF terms or use the complement.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1564,6 +1595,7 @@ Events can also be described toss by toss. "Heads on the first toss" holds for t
 Toss the coin twice: call HT heads, call TH tails, and start again after HH or TT. The two mixed results are equally likely, so the outcome is exactly fair for every $0 < p < 1$, even when $p$ is unknown. The trick is von Neumann's, from 1951.]@
 
 A biased coin with $P(H) = p$ still keeps one symmetry. Tossed twice, it gives HH with probability $p^2$ and TT with probability $(1 - p)^2$, and these differ whenever $p \\neq \\frac{1}{2}$. The two mixed sequences behave differently: HT has probability $p(1 - p)$ and TH has probability $(1 - p)p$, the same number for every value of $p$.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve coin toss probability problems](!/probability/methods/coin-problems) →@`,
         ]
     },
     {
@@ -1572,8 +1604,15 @@ A biased coin with $P(H) = p$ still keeps one symmetry. Tossed twice, it gives H
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'assumptions-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: assumptionsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-coin-toss-assumptions-matrix'}
+            id="coin-toss-assumptions-matrix"
+            title="Assumptions"
+            source="/probability/models/coin-toss"
+            related={false}
+          >
+            <FeatureMatrix data={fm_assumptionsTable} />
+          </DiagramFrame>,
           `@academic[pitfall,aside:true,width:35%:Expecting a streak to end
 After five heads in a row, tails seems due, so the next toss is given $P(T) > \\frac{1}{2}$. The coin has no memory: the next toss still has $P(T) = \\frac{1}{2}$, and HHHHHT and HHHHHH each have probability $\\frac{1}{64}$.
 [Read more](!#pitfall-expecting-a-streak-to-end)]@
@@ -1603,8 +1642,15 @@ The last assumption becomes visible when the coin is tossed many times in a row.
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'constructions-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: constructionsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-coin-toss-distributions-built-repeated-matrix'}
+            id="coin-toss-distributions-built-repeated-matrix"
+            title="Distributions Built from Repeated Coin Tosses"
+            source="/probability/models/coin-toss"
+            related={false}
+          >
+            <FeatureMatrix data={fm_constructionsTable} />
+          </DiagramFrame>,
                   <div key={'unit-u_8_2'} dangerouslySetInnerHTML={{ __html: demoUnits.u_8_2 }} />,
           `@academic[pitfall,aside:true,width:35%:Expecting exactly half heads
 Treating 5 heads, the most likely count, as the usual result of ten fair tosses overrates it: $P(5 \\text{ heads}) = \\frac{252}{1024} \\approx 0.246$. About three times in four, the count is not 5.
@@ -1656,8 +1702,15 @@ The binomial bars for ten tosses are tallest at 5, the count equal to half the n
         link:sectionsContent.summary.link,
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-coin-toss-coin-toss-model-matrix'}
+            id="coin-toss-coin-toss-model-matrix"
+            title="Coin Toss Model at a Glance"
+            source="/probability/models/coin-toss"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1675,6 +1728,14 @@ The binomial bars for ten tosses are tallest at 5, the count equal to half the n
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

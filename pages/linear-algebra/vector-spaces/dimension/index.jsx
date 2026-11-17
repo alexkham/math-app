@@ -2283,6 +2283,8 @@
 
 // tables-optimized: v4 | 2026-05-22 | 3 tables (obj3 aggregation, obj8 comparison, obj11 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import DimensionLedger from '@/app/components/infographics/linear-algebra/DimensionLedger'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -2297,6 +2299,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
@@ -2309,8 +2312,31 @@ import ComparisonTable2 from '@/app/components/infographics/comparison-table/Com
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSpacesNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-vector-spaces'
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Count vs. Dimension"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"k vectors in an n-dimensional space","features":[{"id":"c1","name":"Can be independent?","type":"text"},{"id":"c2","name":"Can span?","type":"text"},{"id":"c3","name":"Can be a basis?","type":"text"}],"items":[{"id":"r1","name":"k < n (too few)","values":{"c1":"possible — the set can always be extended to a [basis](!/linear-algebra/vector-spaces/basis) by adding n − k vectors","c2":"impossible — the span is a proper subspace of dimension ≤ k","c3":"impossible — cannot span"}},{"id":"r2","name":"k = n (the boundary)","values":{"c1":"iff the set is independent","c2":"iff the set spans","c3":"independence and spanning collapse — either condition alone implies the other, and the set is a basis"}},{"id":"r3","name":"k > n (too many)","values":{"c1":"impossible — the set is automatically [dependent](!/linear-algebra/vector-spaces/linear-independence)","c2":"possible if the set contains n independent vectors","c3":"impossible — always has redundancy; k − n vectors can be removed"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the dimension of a subspace", href: "/linear-algebra/vector-spaces/methods/dimension", desc: "Count the vectors in a basis: the rank for a span, n minus the rank for a solution set.", level: "composite", here: "#1" },
+    ] },
+    { title: "More vector space methods", items: [
+      { skill: "Find a basis", href: "/linear-algebra/vector-spaces/methods/find-basis", desc: "Row reduce once: the pivot columns of the original matrix, or one vector per free variable.", level: "composite" },
+      { skill: "Find the four fundamental subspaces", href: "/linear-algebra/vector-spaces/methods/fundamental-subspaces", desc: "One row reduction gives bases for the column space, row space, null space and left null space.", level: "composite" },
+      { skill: "Test vectors for linear independence", href: "/linear-algebra/vector-spaces/methods/linear-independence-test", desc: "Put the vectors in the columns of a matrix and count pivots, or use the determinant.", level: "composite" },
+    ] },
+    { title: "Matrix methods", items: [
+      { skill: "Find the rank of a matrix", href: "/linear-algebra/matrix/methods/rank", desc: "Row reduce to echelon form and count the pivots.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/vector-spaces/methods", label: "All vector space methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3418,8 +3444,22 @@ $$A = \\begin{pmatrix} 1 & 0 & 2 & 0 & 1 \\\\ 0 & 1 & 3 & 1 & 0 \\\\ 1 & 1 & 5 &
     ],
   };
 
+  // DimensionLedger 2026-11-14: The domain split for a three by five matrix (obj9).
+  const rankNullityDimensionBar = {
+    intro: 'A $3 \\times 5$ matrix of rank $2$. The null space lies in $\\mathbb{R}^5$, so its dimension is $5 - 2 = 3$.',
+    identity: '$\\dim(\\text{Col}\\,A) + \\dim(\\text{Null}\\,A) = n$',
+    bars: [
+      { label: 'Domain', space: 'R⁵', total: 5,
+        segments: [
+          { label: 'Rank', size: 2, hot: true },
+          { label: 'Nullity', size: 3 },
+        ] },
+    ],
+  };
+
 return {
   props:{
+    rankNullityDimensionBar,
     formulaSummaryData,
     pitfallData,
       basisSizeChain,
@@ -3453,7 +3493,7 @@ const hierarchyTheme = { title: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function DimensionPage({ formulaSummaryData, pitfallData,basisSizeChain, finiteInfiniteDimension, setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function DimensionPage({ rankNullityDimensionBar, formulaSummaryData, pitfallData,basisSizeChain, finiteInfiniteDimension, setSizeLevels, subspaceDimLevels, seoData, sectionsContent, introContent, standardDimensions, subspaceSums, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -3527,6 +3567,7 @@ $$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ o
         link:sectionsContent.obj1.link,
         content:[
           <ConceptIntro key={'obj1-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the dimension of a subspace](!/linear-algebra/vector-spaces/methods/dimension) →@`,
         ]
     },
     {
@@ -3669,6 +3710,17 @@ $$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ o
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
+          <DiagramFrame
+            key={'obj9-dimension-ledger'}
+            id="rank-nullity-dimension-bar"
+            title="The domain split for a three by five matrix"
+            source="/linear-algebra/vector-spaces/dimension"
+            before={"The matrix from the note beside the text: the five dimensions of the domain, split between the image and the kernel."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <DimensionLedger data={rankNullityDimensionBar} theme="navy" variant="bars" />
+            </div>
+          </DiagramFrame>,
                   <div key={'unit-ranknullity'} dangerouslySetInnerHTML={{ __html: demoUnits.ranknullity }} />,
           `Read this way the theorem is bookkeeping rather than a surprise: the columns were always going to be divided between the two spaces.`,
         ]
@@ -3687,11 +3739,15 @@ $$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ o
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-dimension-summary-count-vs-dimension-matrix'}
+            id="dimension-summary-count-vs-dimension-matrix"
+            title="Summary: Count vs. Dimension"
+            source="/linear-algebra/vector-spaces/dimension"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3727,6 +3783,14 @@ $$\\dim(V) = |\\mathcal{B}| \\quad \\text{for any basis } \\mathcal{B} \\text{ o
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

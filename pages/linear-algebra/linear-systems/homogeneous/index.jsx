@@ -844,6 +844,9 @@
 
 
 // tables-optimized: v4 | 2026-05-18 | 3 tables (obj2 aggregation, obj7 comparison, obj10 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import RowOperationTrace from '@/app/components/infographics/linear-algebra/RowOperationTrace'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -858,6 +861,7 @@ import { tableHeaders } from '@/app/styles/theme'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -867,8 +871,34 @@ import subspacesDiagrams from '@/app/components/linear-algebra copy/matrix/subsp
 import renderVectorArrowsV6 from '@/app/utils/illustrations/linear-algebra/vectors/vectorArrows.v6'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import laSystemsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-linear-systems'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("When Do Nontrivial Solutions Exist?"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Setting","features":[{"id":"c1","name":"Condition for nontrivial solutions to A x = 0","type":"text"},{"id":"c2","name":"Equivalent statements","type":"text"}],"items":[{"id":"r1","name":"General m × n matrix","values":{"c1":"rank(A) < n","c2":"nullity(A) > 0; at least one free variable in the echelon form of A"}},{"id":"r2","name":"Square n × n matrix","values":{"c1":"det(A) = 0","c2":"A is singular; A is not [invertible](!/linear-algebra/matrix/inverse); columns are linearly dependent"}},{"id":"r3","name":"Wide matrix (n > m)","values":{"c1":"always — nontrivial solutions guaranteed","c2":"rank(A) ≤ m < n, so n − rank(A) ≥ n − m ≥ 1 free variables remain"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Homogeneous vs. Non-Homogeneous"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Homogeneous: A x = 0","type":"text"},{"id":"c2","name":"Non-homogeneous: A x = b, b ≠ 0","type":"text"}],"items":[{"id":"r1","name":"Always consistent?","values":{"c1":"yes — the trivial solution x = 0 always works","c2":"no — depends on whether b ∈ Col(A)"}},{"id":"r2","name":"Solution set","values":{"c1":"Null(A) — a subspace passing through the origin","c2":"xₚ + Null(A) — an affine flat shifted away from the origin"}},{"id":"r3","name":"Superposition","values":{"c1":"closed: any linear combination of solutions is a solution","c2":"not closed: A(x₁ + x₂) = 2b ≠ b"}},{"id":"r4","name":"When uniquely solvable","values":{"c1":"always uniquely \"solvable\" — only the trivial solution when rank(A) = n","c2":"when rank(A) = rank([A | b]) = n"}},{"id":"r5","name":"Number of solutions","values":{"c1":"just the trivial one, or infinitely many (never zero, never finite > 1)","c2":"zero, one, or infinitely many"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve a homogeneous system", href: "/linear-algebra/linear-systems/methods/homogeneous-systems", desc: "Ax = 0 always has the zero solution; reduce A and write the null space with one vector per free variable.", level: "composite", here: "#4" },
+    ] },
+    { title: "More linear system methods", items: [
+      { skill: "Write the general solution in parametric vector form", href: "/linear-algebra/linear-systems/methods/parametric-solutions", desc: "Infinitely many solutions: a particular solution plus one direction vector per free variable.", level: "composite" },
+      { skill: "Find the reduced row echelon form of a matrix", href: "/linear-algebra/linear-systems/methods/reduced-row-echelon-form", desc: "From echelon form, scale every pivot to 1 and clear above it; the result is unique.", level: "composite" },
+      { skill: "Tell how many solutions a system has", href: "/linear-algebra/linear-systems/methods/solvability-check", desc: "One, none or infinitely many: reduce, look for a contradictory row, count the pivots.", level: "composite" },
+    ] },
+    { title: "Eigenvalue methods", items: [
+      { skill: "Find eigenvectors", href: "/linear-algebra/eigen/methods/eigenvectors", desc: "For each eigenvalue, row reduce $A - \\lambda I$ and solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$ for a nonzero $\\mathbf{v}$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/linear-systems/methods", label: "All linear system methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1671,8 +1701,41 @@ $$= (\\lambda - 1)(\\lambda - 3) = 0$$`, `So $\\lambda = 1$ and $\\lambda = 3$. 
     ],
   };
 
+  // Procedure rollout 2026-11-14: Finding the null space, step by step (obj4).
+  const nullSpaceSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The $3 \\times 5$ matrix $A$ of the worked example',
+      rows: [
+        { step: 'Row reduce $A$ to echelon form', example: 'pivots in columns $1$, $3$, $5$' },
+        { step: 'Identify the free variables', example: '$x_2 = s$, $x_4 = t$' },
+        { step: 'Solve for the pivot variables by back substitution', example: '$x_5 = 0$, $x_3 = -t$, $x_1 = -2s - t$' },
+        { step: 'Set each free variable to $1$ in turn, the others to $0$', stepSub: 'Each setting gives one basis vector', example: '$\\mathbf{v}_1 = (-2, 1, 0, 0, 0)$, $\\mathbf{v}_2 = (-1, 0, -1, 1, 0)$' },
+        { check: true, step: 'Check a basis vector against the rows of $A$', example: '$\\mathbf{v}_2$: $-1 + 1 = 0$, $-2 + 2 = 0$, $1 - 2 + 1 = 0$' },
+      ],
+    },
+  };
+
+  // RowOperationTrace 2026-11-14: The reduction, row operation by row operation (obj4).
+  const nullSpaceTrace = {
+    goal: 'Row reduce $A$ to echelon form to find the pivot and free variables.',
+    reading: 'Pivots in columns $1$, $3$ and $5$. The variables $x_2$ and $x_4$ are free, and each one gives a basis vector of the null space.',
+    steps: [
+      { id: 's0', label: 'Start', matrix: [[1, 2, -1, 0, 3], [2, 4, 0, 2, 8], [-1, -2, 2, 1, 0]], pivots: [[0, 0]],
+        why: 'The matrix $A$. The zero column on the right is left out.' },
+      { id: 's1', label: 'Column 1', matrix: [[1, 2, -1, 0, 3], [0, 0, 2, 2, 2], [0, 0, 1, 1, 3]], pivots: [[0, 0], [1, 2]],
+        changed: [[1, 0], [1, 1], [1, 2], [1, 4], [2, 0], [2, 1], [2, 2], [2, 4]],
+        operation: ['R2 − 2·R1', 'R3 + R1'], why: 'Clears the entries below the first pivot. Column $2$ empties too, so the next pivot is in column $3$.' },
+      { id: 's2', label: 'Column 3', matrix: [[1, 2, -1, 0, 3], [0, 0, 2, 2, 2], [0, 0, 0, 0, 2]], pivots: [[0, 0], [1, 2], [2, 4]],
+        changed: [[2, 2], [2, 3], [2, 4]],
+        operation: 'R3 − ½·R2', why: 'Clears the entry below the second pivot. Column $4$ empties too, so the last pivot is in column $5$.', final: true },
+    ],
+  };
+
 return {
   props:{
+    nullSpaceTrace,
+    nullSpaceSteps,
     specialCasesData,
     proofStepsData,
     pitfallData,
@@ -1698,7 +1761,7 @@ return {
 
 // export default function PageTemplate({seoData,sectionsContent , introContent}) {
 
-export default function HomogeneousSystemsPage({ specialCasesData, proofStepsData, pitfallData,
+export default function HomogeneousSystemsPage({ nullSpaceTrace, nullSpaceSteps, specialCasesData, proofStepsData, pitfallData,
   seoData,
   sectionsContent,
   introContent,
@@ -1809,11 +1872,15 @@ $$A\\mathbf{x} = \\mathbf{0}$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-homogeneous-when-do-nontrivial-solutions-matrix'}
+            id="homogeneous-when-do-nontrivial-solutions-matrix"
+            title="When Do Nontrivial Solutions Exist?"
+            source="/linear-algebra/linear-systems/homogeneous"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
                   <div key={'unit-nontrivial'} dangerouslySetInnerHTML={{ __html: demoUnits.nontrivial }} />,
           `Counting pivots against unknowns therefore answers the question before any solution is written down.`,
         ]
@@ -1834,6 +1901,27 @@ $$A\\mathbf{x} = \\mathbf{0}$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-row-trace'}
+            id="null-space-row-trace"
+            title="The reduction, row operation by row operation"
+            source="/linear-algebra/linear-systems/homogeneous"
+            before={"The worked example with each row operation beside the matrix it produces. Pivots are filled in, and the entries changed at each step are underlined."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <RowOperationTrace data={nullSpaceTrace} theme="navy" variant="ledger" />
+            </div>
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="null-space-steps"
+            title="Finding the null space, step by step"
+            source="/linear-algebra/linear-systems/homogeneous"
+            before={"The algorithm on the worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={nullSpaceSteps} variant="worked" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a homogeneous system](!/linear-algebra/linear-systems/methods/homogeneous-systems) →@`,
         ]
     },
     {
@@ -1884,11 +1972,15 @@ $$A\\mathbf{x} = \\mathbf{0}$$]@`,
           sectionsContent.obj7.content,
           <div key={'unit-solutionSet'} dangerouslySetInnerHTML={{ __html: demoUnits.solutionSet }} />,
           `Solving Ax = b therefore splits into two jobs: find one solution, and find the null space.`,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-homogeneous-homogeneous-vs-non-homogeneous-matrix'}
+            id="homogeneous-homogeneous-vs-non-homogeneous-matrix"
+            title="Homogeneous vs. Non-Homogeneous"
+            source="/linear-algebra/linear-systems/homogeneous"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1941,6 +2033,14 @@ $$A\\mathbf{x} = \\mathbf{0}$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

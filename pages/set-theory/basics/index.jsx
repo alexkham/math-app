@@ -607,6 +607,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -630,6 +631,22 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import setTheoryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/set-theory'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Set theory methods", items: [
+      { skill: "Check whether one set is a subset of another", href: "/set-theory/methods/subset-check", desc: "Test $A \\subseteq B$ element by element: every element of $A$ must be in $B$; for a proper subset, $B$ also needs an element outside $A$.", level: "composite" },
+      { skill: "Find the union of two sets", href: "/set-theory/methods#union", desc: "The question asks for the elements in one set **or** the other, or both: $A \\cup B$, \"in at least one of the sets\", \"everyone on either team\".", level: "atomic" },
+      { skill: "Find the intersection of two sets", href: "/set-theory/methods#intersection", desc: "The question asks for the elements in **both** sets: $A \\cap B$, \"common to\", \"in $A$ and in $B$\". If nothing is shared, the answer is $\\emptyset$.", level: "atomic" },
+      { skill: "Find the complement of a set", href: "/set-theory/methods#complement", desc: "The question asks for everything **not** in a set, relative to a universal set $U$: $A^c$, \"not in $A$\", \"outside the circle\". Without a stated $U$ the complement is not defined.", level: "atomic" },
+      { skill: "List the power set of a set", href: "/set-theory/methods/power-set", desc: "List every subset of a finite set, from the empty set to the set itself, and check the count against $2^n$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/set-theory/methods", label: "All set theory methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1366,6 +1383,14 @@ The collection of all sets that are not members of themselves would contain itse
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

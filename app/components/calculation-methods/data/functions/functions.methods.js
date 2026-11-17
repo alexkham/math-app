@@ -80,7 +80,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Domain of a Function | Learn Math Class',
         description: 'Find the domain of a function: list denominators, even roots and logs, solve each condition, intersect the results. Worked examples and common mistakes.',
@@ -220,7 +220,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Range of a Function | Learn Math Class',
         description: 'Find the range of a function: track the lowest and highest outputs, use the vertex and end behavior, or solve y = f(x) for x. Worked examples and mistakes.',
@@ -361,7 +361,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Compose Two Functions | Learn Math Class',
         description: 'Compose two functions step by step: find the inner function, substitute it into the outer one, simplify and find the domain. Examples and common mistakes.',
@@ -496,7 +496,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Decompose a Function into Two Functions | Learn Math Class',
         description: 'Decompose a function as f(g(x)): read the order of operations on x, take the last one as the outer function, then compose back to check. Worked examples.',
@@ -605,7 +605,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Inverse of a Function | Learn Math Class',
         description: 'Find the inverse of a function: check it is one-to-one, swap x and y, solve for y, restrict the domain when needed. Linear, cubic and quadratic examples.',
@@ -746,7 +746,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Verify That Two Functions Are Inverses | Learn Math Class',
         description: 'Verify that two functions are inverses: compute f(g(x)) and g(f(x)), simplify both to x, and check the domains. Examples that pass and fail, and mistakes.',
@@ -872,7 +872,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Graph a Transformed Function | Learn Math Class',
         description: 'Graph a transformed function: name the parent, read a, b, h, k from a f(b(x - h)) + k, apply inside changes first, then move key points. Examples, mistakes.',
@@ -1007,7 +1007,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate and Graph a Piecewise Function | Learn Math Class',
         description: 'Evaluate and graph a piecewise function: pick the piece from the condition, find both values at each boundary, use open and solid dots. Examples and mistakes.',
@@ -1126,7 +1126,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Tell if a Function Is Even, Odd or Neither | Learn Math Class',
         description: 'Tell if a function is even, odd or neither: check the domain is symmetric, simplify f(-x), compare with f(x) and -f(x). Polynomial and rational examples.',
@@ -1255,7 +1255,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Intercepts of a Function | Learn Math Class',
         description: 'Find the x- and y-intercepts of a function: evaluate f(0), solve f(x) = 0, keep only solutions in the domain. Linear, radical and rational examples, mistakes.',
@@ -1503,7 +1503,7 @@ const functionsMethods = {
       tag: 'Composite',
       meta: '6 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Analyze a Function | Learn Math Class',
         description: 'Analyze a function in order: domain, intercepts, symmetry, where it rises and falls, turning points, end behavior and range. Three full examples and mistakes.',
@@ -1632,7 +1632,7 @@ const functionsMethods = {
       tag: 'Strategy',
       meta: 'decision tree',
       category: 'strategy',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Identify the Family of a Function (Decision Tree) | Learn Math Class',
         description: 'Identify the family of a function from its formula: pieces, x in a denominator, exponent or log, a root, a trig function, or powers only. With a decision tree.',

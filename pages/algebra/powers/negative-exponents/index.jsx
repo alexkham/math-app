@@ -1,4 +1,5 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,8 +17,29 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Verifying the Laws Still Hold"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Law","features":[{"id":"c1","name":"Expression","type":"text"},{"id":"c2","name":"Step-by-step","type":"text"},{"id":"c3","name":"Result (rule gives)","type":"text"}],"items":[{"id":"r1","name":"Product (both negative)","values":{"c1":"a⁻² · a⁻³","c2":"(1 ⁄ a²) · (1 ⁄ a³) = 1 ⁄ a⁵","c3":"a⁻⁵ ✓"}},{"id":"r2","name":"Product (mixed signs)","values":{"c1":"a³ · a⁻⁵","c2":"a³ · (1 ⁄ a⁵) = a³ ⁄ a⁵ = 1 ⁄ a²","c3":"a⁻² ✓"}},{"id":"r3","name":"Power of a power","values":{"c1":"(a⁻²)³","c2":"(1 ⁄ a²)³ = 1 ⁄ a⁶","c3":"a⁻⁶ ✓"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Motivation: Extending the Pattern"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Case","features":[{"id":"c1","name":"Left side simplifies to","type":"text"},{"id":"c2","name":"Quotient rule gives","type":"text"},{"id":"c3","name":"Forces","type":"text"}],"items":[{"id":"r1","name":"m = n (aⁿ/aⁿ)","values":{"c1":"1","c2":"a$^{n - n}$ = a⁰","c3":"a⁰ = 1"}},{"id":"r2","name":"m < n (example a²/a⁵)","values":{"c1":"1 ⁄ a³","c2":"a$^{2 - 5}$ = a⁻³","c3":"a⁻³ = 1 ⁄ a³"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Rewrite a negative exponent", href: "/algebra/methods#negative-exponents", desc: "A negative exponent anywhere: $x^{-3}$, $\\frac{1}{2^{-4}}$, $\\left(\\frac{2}{3}\\right)^{-2}$.", level: "atomic" },
+      { skill: "Divide powers with the same base", href: "/algebra/methods#quotient-of-powers", desc: "A power of a base divided by another power of the same base: $\\frac{x^7}{x^2}$, $\\frac{5^3}{5^5}$.", level: "atomic" },
+      { skill: "Simplify expressions with exponents", href: "/algebra/methods/simplify-exponent-expressions", desc: "Combine several exponent rules into one clean answer with positive exponents.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -795,11 +817,15 @@ No finite sum of negative powers of $2$ equals $\\frac{1}{10}$: such a sum is a 
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div
-            key={'obj1-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj1Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-negative-exponents-motivation-extending-pattern-matrix'}
+            id="negative-exponents-motivation-extending-pattern-matrix"
+            title="Motivation: Extending the Pattern"
+            source="/algebra/powers/negative-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -858,11 +884,15 @@ No finite sum of negative powers of $2$ equals $\\frac{1}{10}$: such a sum is a 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-negative-exponents-verifying-laws-still-matrix'}
+            id="negative-exponents-verifying-laws-still-matrix"
+            title="Verifying the Laws Still Hold"
+            source="/algebra/powers/negative-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -908,6 +938,14 @@ No finite sum of negative powers of $2$ equals $\\frac{1}{10}$: such a sum is a 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -998,6 +998,7 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import GenericNavbar from '@/app/components/nav-bar2/GenericNavbar'
@@ -1019,6 +1020,34 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import pascalTriangleDiagrams from '@/app/components/combinatorics/new-visualizers/general/pascalTriangleDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (count) 2026-11-15: the section's example, integers 1 to 30 divisible by 2, 3 or 5.
+// Term values are the page's (15, 10, 6, 5, 3, 2, 1); region sizes follow from them and add up to 30.
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const threeSetCountDiagram = {
+  sets: [{ id: 'A' }, { id: 'B' }, { id: 'C' }],
+  regions: { A: 8, B: 4, C: 2, AB: 4, AC: 2, BC: 1, ABC: 1, '': 8 },
+  regionNames: { A: 'only $A$', B: 'only $B$', C: 'only $C$', AB: '$A$ and $B$ only', AC: '$A$ and $C$ only', BC: '$B$ and $C$ only', ABC: '$A \\cap B \\cap C$' },
+  terms: [
+    { label: '$|A|$', sign: 1, sets: ['A'], value: 15 },
+    { label: '$|B|$', sign: 1, sets: ['B'], value: 10 },
+    { label: '$|C|$', sign: 1, sets: ['C'], value: 6 },
+    { label: '$|A \\cap B|$', sign: -1, sets: ['A', 'B'], value: 5 },
+    { label: '$|A \\cap C|$', sign: -1, sets: ['A', 'C'], value: 3 },
+    { label: '$|B \\cap C|$', sign: -1, sets: ['B', 'C'], value: 2 },
+    { label: '$|A \\cap B \\cap C|$', sign: 1, sets: ['A', 'B', 'C'], value: 1 },
+  ],
+  notes: {
+    3: { label: 'After the single sets', text: 'The single sets give $15 + 10 + 6 = 31$ for only $30$ numbers: every number in an overlap has been counted more than once.' },
+    6: { label: 'Stopping after the pairs', warn: true, text: '$15 + 10 + 6 - 5 - 3 - 2 = 21$ loses $30$, which is added three times and subtracted three times.' },
+    7: { label: 'Every number counted once', text: 'Adding back the triple term gives $21 + 1 = 22$.' },
+  },
+};
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_combinatoricsPath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"beforeLabel":"Stated in","before":[{"name":"Set Theory","href":"/set-theory","why":"unions, intersections and partitions, the language of the counting principles"}],"target":{"kicker":"This page","name":"Combinatorics basics","text":"Counting rules and standard scenarios."},"after":[{"name":"Probability","href":"/probability","why":"favorable outcomes counted against total outcomes"},{"name":"Algebra","href":"/algebra","why":"binomial and polynomial expansions and their identities"},{"name":"Linear Algebra","href":"/linear-algebra","why":"matrices, and permutations as transformations"}]}};
+
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -1026,6 +1055,22 @@ import { tableHeaders } from '@/app/styles/theme'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Combinatorics methods", items: [
+      { skill: "Count choices made in stages", href: "/combinatorics/methods#multiplication-principle", desc: "One outcome is built from several steps, and the number of options at each step does not depend on the earlier choices: an outfit of a shirt and pants and shoes, a code digit by digit, a meal of $3 \\times 2 \\times 4$ dishes.", level: "atomic" },
+      { skill: "Count choices from separate cases", href: "/combinatorics/methods#addition-principle", desc: "One outcome comes from one of several groups that share no outcomes, joined by the word **or**: one book from $5$ novels or $7$ biographies, one trip by bus or by train.", level: "atomic" },
+      { skill: "Compute a factorial", href: "/combinatorics/methods#factorial", desc: "A product of all whole numbers from $n$ down to $1$ appears, or a ratio of factorials must be simplified: $6!$, $\\frac{8!}{6!}$, $0!$.", level: "atomic" },
+      { skill: "Use complementary counting", href: "/combinatorics/methods/complementary-counting", desc: "Count the outcomes you do not want and subtract them from the total; the standard route for \"at least one\" questions.", level: "composite" },
+      { skill: "Solve counting word problems", href: "/combinatorics/methods/counting-word-problems", desc: "Committees, license plates, seating plans and \"at least one\" questions: translate the story, pick the formula, count each stage.", level: "applied" },
+    ] },
+  ],
+  hub: { href: "/combinatorics/methods", label: "All combinatorics methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2022,6 +2067,16 @@ Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 +
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'set-diagram-three-set-count'}
+            id="overlapping-counts-term-by-term"
+            title="Counting 1 to 30 by inclusion-exclusion, one term at a time"
+            source="/combinatorics/basics"
+            related={{ href: '/combinatorics/inclusion-exclusion', label: 'Inclusion–exclusion' }}
+            before={'The numbers from $1$ to $30$ divisible by $2$, $3$ or $5$ ($A$, $B$, $C$), one term at a time. Each region shows how many numbers it holds and how many times they have been counted so far.'}
+          >
+            <SetDiagram data={threeSetCountDiagram} variant="count" theme={setDiagramTheme} options={{ startAt: 'start' }} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2116,6 +2171,15 @@ Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 +
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'concept-map-combinatorics-basics-related-concepts'}
+            id="combinatorics-basics-related-concepts"
+            title="Related Concepts"
+            source="/combinatorics/basics"
+            related={false}
+          >
+            <ConceptMap data={cm_combinatoricsPath} variant="path" />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -2207,6 +2271,14 @@ Counting outfits of one shirt from $5$ and one pair of trousers from $3$ as $5 +
     //     ]
     // },
     
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
+        ]
+    },
     // faq: rendered component — must be built here, not in getStaticProps
     {
         id:'faq',

@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,8 +17,68 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
-import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
 
+const sw_roundingInSoftware = {
+  center: { name: 'Rounding in software', sub: 'the names do not always say which is which' },
+  quadrants: [
+    { title: 'Floor and ceiling', items: [
+      '$\\texttt{floor}$ and $\\texttt{ceil}$ in most languages.',
+      { text: '$\\texttt{INT}$ in spreadsheets rounds down.', note: '$\\texttt{INT}(-3.7) = -4$' } ] },
+    { title: 'Truncation', items: [
+      { text: 'Converting to an integer type usually truncates.', note: 'Python, C and Java: $-3.7$ gives $-3$' },
+      'JavaScript has $\\texttt{Math.trunc}$.' ] },
+    { title: 'Integer division', items: [
+      { text: "Python's $\\texttt{//}$ floors.", note: '$-7 \\; \\texttt{//} \\; 2 = -4$' },
+      { text: 'In C and Java, integer division truncates.', note: 'the same division gives $-3$' },
+      { text: 'JavaScript has no integer division.', note: '$-7 / 2 = -3.5$' } ] },
+    { title: 'Rounding ties', items: [
+      { text: "Python's $\\texttt{round}$ rounds half to even.", note: '$\\texttt{round}(2.5) = 2$' },
+      { text: "JavaScript's $\\texttt{Math.round}$ rounds half up.", note: '$\\texttt{Math.round}(-2.5) = -2$' } ] }
+  ],
+  note: { label: 'Test with awkward inputs', text: 'Positive test inputs cannot tell these apart. Test with a negative number and with a value exactly halfway between two integers.' }
+};
+
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Arithmetic methods", items: [
+      { skill: "Find the modulo of a negative number", href: "/arithmetic/methods/modulo-negative-numbers", desc: "Round the quotient down, not toward zero, so the remainder lands in $0, \\ldots, n - 1$: $(-38) \\bmod 7 = 4$ because $-38 = 7 \\cdot (-6) + 4$.", level: "composite" },
+      { skill: "Do modular arithmetic", href: "/arithmetic/methods/modular-arithmetic", desc: "Find the remainder of a sum, product or power: reduce each number mod $n$ first, operate on the remainders, reduce again; use cycles for powers.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
+
+// PropertySheet (cards) 2026-11-15: replaces the table propertiesTable (properties of floor, ceiling and fractional part: property, rule, example); one card per row, wording from the table.
+const floorCeilingPropertyCards = {
+  header: {
+    kicker: 'floor, ceiling, fractional part',
+    title: 'Properties of floor, ceiling and fractional part',
+    lede: 'For every real $x$ and $y$ and every integer $n$.',
+  },
+  verdicts: {
+    always: { label: 'Always', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+    split: { label: 'Two cases', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+  },
+  groups: [{ properties: [
+    { id: 'bounds', name: 'Bounds', verdict: 'always', statement: '$\\lfloor x \\rfloor \\leq x < \\lfloor x \\rfloor + 1$', note: 'Equivalently $x - 1 < \\lfloor x \\rfloor \\leq x$. Example: $\\lfloor 2.3 \\rfloor = 2 \\leq 2.3 < 3$' },
+    { id: 'range', name: 'Range of the fractional part', verdict: 'always', statement: '$0 \\leq \\{x\\} < 1$', note: 'Example: $\\{-0.1\\} = 0.9$' },
+    { id: 'fixed', name: 'Integers are fixed', verdict: 'always', statement: '$\\lfloor n \\rfloor = \\lceil n \\rceil = n$ and $\\{n\\} = 0$', note: 'For integer $n$. Example: $\\lfloor -4 \\rfloor = -4$' },
+    { id: 'add', name: 'Adding an integer', verdict: 'always', statement: '$\\lfloor x + n \\rfloor = \\lfloor x \\rfloor + n$', note: 'Also $\\{x + n\\} = \\{x\\}$. Example: $\\lfloor 7.2 \\rfloor = \\lfloor 0.2 \\rfloor + 7 = 7$' },
+    { id: 'link', name: 'Floor and ceiling', verdict: 'always', statement: '$\\lceil x \\rceil = -\\lfloor -x \\rfloor$', note: 'Example: $\\lceil 2.3 \\rceil = -\\lfloor -2.3 \\rfloor = -(-3) = 3$' },
+    { id: 'gap', name: 'Gap between them', verdict: 'split', statement: '$\\lceil x \\rceil - \\lfloor x \\rfloor = 0$ or $1$', note: '$0$ for integers, $1$ otherwise. Example: $\\lceil 2.3 \\rceil - \\lfloor 2.3 \\rfloor = 1$' },
+    { id: 'opp', name: 'Opposites', verdict: 'split', statement: '$\\lfloor x \\rfloor + \\lfloor -x \\rfloor = 0$ or $-1$', note: '$0$ for integers, $-1$ otherwise. Example: $\\lfloor 2.3 \\rfloor + \\lfloor -2.3 \\rfloor = 2 - 3 = -1$' },
+    { id: 'sums', name: 'Sums', verdict: 'always', statement: '$\\lfloor x \\rfloor + \\lfloor y \\rfloor \\leq \\lfloor x + y \\rfloor \\leq \\lfloor x \\rfloor + \\lfloor y \\rfloor + 1$', note: 'Example: $\\lfloor 0.6 + 0.6 \\rfloor = 1$, while $\\lfloor 0.6 \\rfloor + \\lfloor 0.6 \\rfloor = 0$' },
+    { id: 'nested', name: 'Nested division', verdict: 'always', statement: '$\\left\\lfloor \\frac{\\lfloor x \\rfloor}{n} \\right\\rfloor = \\left\\lfloor \\frac{x}{n} \\right\\rfloor$', note: 'For positive integer $n$. Example: $\\lfloor \\lfloor 7.9 \\rfloor / 2 \\rfloor = \\lfloor 3.5 \\rfloor = 3 = \\lfloor 3.95 \\rfloor$' },
+  ] }],
+}
 
 export async function getStaticProps(){
 
@@ -745,8 +806,16 @@ export default function IntegerPartPage({ formulaSummaryData, pitfallData,seoDat
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'properties-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: propertiesTable }} />,
+          <DiagramFrame
+            key={'property-sheet-floor-ceiling'}
+            id="floor-ceiling-properties"
+            title="Properties of Floor, Ceiling and Fractional Part"
+            source="/arithmetic/integer-part"
+            related={false}
+            layout="top"
+          >
+            <PropertySheet data={floorCeilingPropertyCards} variant="cards" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -782,6 +851,15 @@ export default function IntegerPartPage({ formulaSummaryData, pitfallData,seoDat
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'four-sides-integer-part-in-software'}
+            id="integer-part-in-software"
+            title="In Calculators and Programming Languages"
+            source="/arithmetic/integer-part"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_roundingInSoftware} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -817,6 +895,14 @@ export default function IntegerPartPage({ formulaSummaryData, pitfallData,seoDat
           >
             <FormulaSheet data={formulaSummaryData} variant="card" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

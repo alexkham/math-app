@@ -1352,6 +1352,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1374,9 +1375,36 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Roots in Exponential Form"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"k","features":[{"id":"c1","name":"Argument formula (φ + 2πk) ⁄ n","type":"text"},{"id":"c2","name":"Argument","type":"text"},{"id":"c3","name":"z_k exponential","type":"text"},{"id":"c4","name":"z_k algebraic","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"(0 + 0) ⁄ 3","c2":"0","c3":"2 eⁱ⁽⁰⁾","c4":"2"}},{"id":"r2","name":"1","values":{"c1":"(0 + 2π) ⁄ 3","c2":"2π⁄3","c3":"2 eⁱ⁽²π/3⁾","c4":"−1 + √3 i"}},{"id":"r3","name":"2","values":{"c1":"(0 + 4π) ⁄ 3","c2":"4π⁄3","c3":"2 eⁱ⁽⁴π/3⁾","c4":"−1 − √3 i"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Converting Between Forms"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Conversion","features":[{"id":"c1","name":"Formulas","type":"text"},{"id":"c2","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Algebraic → Exponential (a + bi → reⁱᶿ)","values":{"c1":"r = √(a² + b²) θ = arctan(b ⁄ a), adjusted for quadrant z = reⁱᶿ","c2":"z = 1 + i r = √(1² + 1²) = √2 θ = arctan(1) = π⁄4 (first quadrant) → 1 + i = √2 · eⁱ⁽π/4⁾"}},{"id":"r2","name":"Exponential → Algebraic (reⁱᶿ → a + bi)","values":{"c1":"a = r · cos θ b = r · sin θ z = a + bi","c2":"z = 4eⁱ⁽²π/3⁾ a = 4 · cos(2π⁄3) = 4 · (−1⁄2) = −2 b = 4 · sin(2π⁄3) = 4 · (√3⁄2) = 2√3 → 4eⁱ⁽²π/3⁾ = −2 + 2√3 i"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Understanding Euler's Formula"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"θ","features":[{"id":"c1","name":"eⁱᶿ via Euler's formula","type":"text"},{"id":"c2","name":"Cartesian a + bi","type":"text"},{"id":"c3","name":"Location on unit circle","type":"text"}],"items":[{"id":"r1","name":"0","values":{"c1":"cos 0 + i sin 0","c2":"1","c3":"positive real axis"}},{"id":"r2","name":"π⁄6","values":{"c1":"cos(π⁄6) + i sin(π⁄6)","c2":"√3⁄2 + (1⁄2)i","c3":"30° from positive real axis"}},{"id":"r3","name":"π⁄4","values":{"c1":"cos(π⁄4) + i sin(π⁄4)","c2":"√2⁄2 + (√2⁄2)i","c3":"45° (first quadrant diagonal)"}},{"id":"r4","name":"π⁄3","values":{"c1":"cos(π⁄3) + i sin(π⁄3)","c2":"1⁄2 + (√3⁄2)i","c3":"60°"}},{"id":"r5","name":"π⁄2","values":{"c1":"cos(π⁄2) + i sin(π⁄2)","c2":"i","c3":"positive imaginary axis"}},{"id":"r6","name":"π","values":{"c1":"cos π + i sin π","c2":"−1","c3":"negative real axis (Euler's identity)"}},{"id":"r7","name":"3π⁄2","values":{"c1":"cos(3π⁄2) + i sin(3π⁄2)","c2":"−i","c3":"negative imaginary axis"}},{"id":"r8","name":"2π","values":{"c1":"cos 2π + i sin 2π","c2":"1","c3":"back to start; full rotation"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Write a complex number in exponential form", href: "/complex-numbers/methods/exponential-form", desc: "Find $r$ and $\\theta$ in radians and write $re^{i\\theta}$; go back with Euler's formula $e^{i\\theta} = \\cos\\theta + i\\sin\\theta$.", level: "composite", here: "#5" },
+    ] },
+    { title: "More complex number methods", items: [
+      { skill: "Choose the right form of a complex number", href: "/complex-numbers/methods/which-form", desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: "strategy" },
+      { skill: "Multiply and divide complex numbers in polar form", href: "/complex-numbers/methods/multiply-divide-polar", desc: "Multiply or divide the moduli, add or subtract the arguments, and bring the angle back into $(-\\pi, \\pi]$.", level: "composite" },
+      { skill: "Convert a complex number to polar form", href: "/complex-numbers/methods/rectangular-to-polar", desc: "Find the modulus $r$, find the argument from $\\tan\\theta = \\frac{b}{a}$ with a quadrant check, and write $r(\\cos\\theta + i\\sin\\theta)$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2163,7 +2191,9 @@ Then write $z = a + bi$.
 @academic[example:Example
 Convert $z = 4e^{i(2\\pi/3)}$. The real part is $a = 4\\cos(2\\pi/3) = 4(-1/2) = -2$. The imaginary part is $b = 4\\sin(2\\pi/3) = 4(\\sqrt{3}/2) = 2\\sqrt{3}$. Thus $4e^{i(2\\pi/3)} = -2 + 2\\sqrt{3}i$.]@
 
-Both conversions are routine once the formulas are memorized. The exponential form serves computation; the algebraic form displays components explicitly.`,
+Both conversions are routine once the formulas are memorized. The exponential form serves computation; the algebraic form displays components explicitly.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to write a complex number in exponential form](!/complex-numbers/methods/exponential-form) →@`,
   after: ``,
   link: '',
 },
@@ -2839,11 +2869,15 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
             <ProofSteps data={proofStepsData} variant="chain" />
           </DiagramFrame>,
           sectionsContent.obj2.afterProof,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-form-understanding-euler-s-matrix'}
+            id="exponential-form-understanding-euler-s-matrix"
+            title="Understanding Euler's Formula"
+            source="/complex-numbers/exponential-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
           `@academic[punchline:Feed an imaginary number into the series for $e^x$ and it splits exactly into the series for cosine and sine.]@`,
         ]
     },
@@ -2907,11 +2941,15 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-form-converting-between-forms-matrix'}
+            id="exponential-form-converting-between-forms-matrix"
+            title="Converting Between Forms"
+            source="/complex-numbers/exponential-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2962,11 +3000,15 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponential-form-roots-exponential-form-matrix'}
+            id="exponential-form-roots-exponential-form-matrix"
+            title="Roots in Exponential Form"
+            source="/complex-numbers/exponential-form"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:The full turns hidden in a number's angle are where its $n$ different $n$-th roots come from.]@`,
         ]
     },
@@ -3011,6 +3053,14 @@ Writing $3 + 4i = 5e^{i \\cdot 53.13}$ feeds degrees into a formula that reads r
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

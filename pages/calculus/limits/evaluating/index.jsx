@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj1 aggregation, obj11 aggregation, obj13 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -17,11 +18,112 @@ import functionLimitDiagrams from '@/app/components/functions/limit/functionLimi
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import CaseGraph from '@/app/components/infographics/CaseGraph/CaseGraph'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 import ScopeCard from '@/app/components/infographics/ScopeCard/ScopeCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
+// FeatureMatrix 2026-11-17: replaces the table summaryTable (limit evaluation playbook: step, trigger, technique, section); rows, wording and links taken from the table; the Form tag restates the form named in each trigger.
+const fm_limitPlaybook = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  corner: 'Trigger',
+  features: [
+    { id: 'c0', name: 'Form', type: 'tag', tags: {
+      any: { label: 'any limit', color: '#06357A', bg: '#e8eefc' },
+      zz: { label: '0/0', color: '#2563EB', bg: '#dbeafe' },
+      ii: { label: 'infinity/infinity', color: '#2563EB', bg: '#dbeafe' },
+      known: { label: 'known form', color: '#06357A', bg: '#e8eefc' },
+      sides: { label: 'left / right', color: '#06357A', bg: '#e8eefc' },
+      kz: { label: 'nonzero/0', color: '#B45309', bg: '#fef3c7' },
+    } },
+    { id: 'c1', name: 'Technique', type: 'text' },
+    { id: 'c2', name: 'Section', type: 'text' },
+  ],
+  items: [
+    { id: 'r1', name: 'Any limit: always start here', sub: 'step 1', values: { c0: 'any', c1: 'direct substitution; if the result is defined and finite, that is the limit', c2: '[1](!#1)' } },
+    { id: 'r2', name: '$\\frac{0}{0}$ with a polynomial numerator and denominator', sub: 'step 2', values: { c0: 'zz', c1: 'factor both, cancel the shared $(x - a)$ factor, substitute again', c2: '[4](!#4)' } },
+    { id: 'r3', name: '$\\frac{0}{0}$ with radicals (square roots, etc.)', sub: 'step 3', values: { c0: 'zz', c1: 'multiply numerator and denominator by the conjugate, simplify the difference of squares, cancel', c2: '[5](!#5)' } },
+    { id: 'r4', name: '$\\frac{0}{0}$ with shared factor hidden inside parens or powers', sub: 'step 4', values: { c0: 'zz', c1: 'expand or simplify the algebra until the $(x - a)$ factor emerges, then cancel', c2: '[6](!#6)' } },
+    { id: 'r5', name: '$\\frac{0}{0}$ with a difference of fractions', sub: 'step 5', values: { c0: 'zz', c1: 'combine over a common denominator; the simplified numerator usually reveals the shared factor', c2: '[7](!#7)' } },
+    { id: 'r6', name: '$\\frac{\\infty}{\\infty}$ for a rational function as $x \\to \\pm\\infty$', sub: 'step 6', values: { c0: 'ii', c1: 'divide every term by the highest power of $x$ in the denominator; see [limits and infinity](!/calculus/limits/infinity)', c2: '[8](!#8)' } },
+    { id: 'r7', name: 'Expression resembles a known trig / exp form', sub: 'step 7', values: { c0: 'known', c1: 'rewrite to match a [special limit](!/calculus/limits/special) ($\\frac{\\sin u}{u}$, $\\frac{e^u - 1}{u}$, etc.) and apply', c2: '[9](!#9)' } },
+    { id: 'r8', name: 'Absolute values, piecewise functions, or potential left / right asymmetry', sub: 'step 8', values: { c0: 'sides', c1: 'evaluate the [one-sided limits](!/calculus/limits/one-sided) separately; agreement determines whether the two-sided limit exists', c2: '[10](!#10)' } },
+    { id: 'r9', name: 'Nonzero / $0$ (not indeterminate: limit is infinite)', sub: 'step 9', values: { c0: 'kz', c1: 'sign-analyze numerator and denominator near $a$ from each side to identify $+\\infty$ or $-\\infty$', c2: '[11](!#11)' } },
+  ],
+}
+
+// FeatureMatrix 2026-11-16: replaces the table obj1Table (function classes where direct substitution gives the limit, and when); rows and conditions taken from the table.
+const fm_directSubstitution = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  verdicts: {
+    yes: { label: 'Always', mark: '✓', color: '#2563EB', bg: '#dbeafe' },
+    part: { label: 'With a condition', mark: '◐', color: '#B45309', bg: '#fef3c7' },
+  },
+  corner: 'Function class',
+  features: [
+    { id: 'c1', name: 'Always?', type: 'verdict' },
+    { id: 'c2', name: 'Direct substitution gives the limit when…', type: 'text' },
+  ],
+  items: [
+    { id: 'r1', name: 'Polynomial', values: { c1: 'yes', c2: 'always: polynomials are continuous everywhere' } },
+    { id: 'r2', name: 'Rational', sub: '$\\frac{p(x)}{q(x)}$', values: { c1: 'part', c2: '$q(a) \\neq 0$' } },
+    { id: 'r3', name: 'Exponential', sub: '$a^x$ ($a > 0$)', values: { c1: 'yes', c2: 'always: continuous everywhere' } },
+    { id: 'r4', name: 'Logarithm', sub: '$\\ln x$ (and $\\log_b x$)', values: { c1: 'part', c2: '$a > 0$: defined only on the positive reals' } },
+    { id: 'r5', name: 'Trig', sub: '$\\sin x$, $\\cos x$', values: { c1: 'yes', c2: 'always: continuous everywhere' } },
+    { id: 'r6', name: 'Trig', sub: '$\\tan x$, $\\sec x$, $\\csc x$, $\\cot x$', values: { c1: 'part', c2: '$a$ is not a vertical asymptote of the function' } },
+    { id: 'r7', name: 'Sums, products, and compositions of the above', values: { c1: 'part', c2: 'each piece is continuous at the relevant input' } },
+  ],
+}
+
+// CaseGraph 2026-11-12: "Which infinity, from the two signs" (grid), from the page's own text and the table it replaces. Holds functions, so it lives here, not in getStaticProps.
+const caseGraphData = {
+    theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', curve: '#06357A', solutionLine: '#B45309', rootStroke: '#06357A', rootLabel: '#06357A', posDot: '#2563EB', negDot: '#B45309' },
+    grid: {
+      x0: -2, x1: 2, y0: -4, y1: 4,
+      axes: [
+        { id: 'num', name: 'Numerator at $a$', options: [
+          { id: 'pos', label: 'positive $(+)$' },
+          { id: 'neg', label: 'negative $(-)$' } ] },
+        { id: 'den', name: 'Denominator as $x \\to a$', options: [
+          { id: 'zp', label: 'small positive $(0^+)$' },
+          { id: 'zm', label: 'small negative $(0^-)$' } ] },
+      ],
+      layout: { rows: 'num', cols: 'den' },
+      cells: {
+        'pos|zp': { f: (x) => (x > 0 ? 1 / x : NaN), intervals: [{ from: 0.0001, to: Infinity }], solution: '$+\\infty$' },
+        'pos|zm': { f: (x) => (x < 0 ? 1 / x : NaN), intervals: [{ from: -Infinity, to: -0.0001 }], solution: '$-\\infty$' },
+        'neg|zp': { f: (x) => (x > 0 ? -1 / x : NaN), intervals: [{ from: 0.0001, to: Infinity }], solution: '$-\\infty$' },
+        'neg|zm': { f: (x) => (x < 0 ? -1 / x : NaN), intervals: [{ from: -Infinity, to: -0.0001 }], solution: '$+\\infty$' },
+      },
+    },
+  };
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Evaluate indeterminate powers", href: "/calculus/limits/methods/indeterminate-powers", desc: "$1^\\infty$, $0^0$ and $\\infty^0$: take the logarithm, find the limit of $g\\ln f$, exponentiate.", level: "composite", here: "#3" },
+      { skill: "Evaluate a limit by factoring", href: "/calculus/limits/methods/factoring-limits", desc: "A $\\frac{0}{0}$ form with polynomials: factor, cancel the vanishing factor, substitute.", level: "composite", here: "#4" },
+      { skill: "Evaluate a limit by rationalizing", href: "/calculus/limits/methods/rationalizing-limits", desc: "A root in a $\\frac{0}{0}$ (or $\\infty - \\infty$) form: multiply by the conjugate, cancel, substitute.", level: "composite", here: "#5" },
+      { skill: "Choose the right limit technique", href: "/calculus/limits/methods/which-limit-technique", desc: "A decision tree from what substitution gives you to the right technique.", level: "strategy", here: "#13" },
+    ] },
+    { title: "More limit methods", items: [
+      { skill: "Evaluate one-sided limits", href: "/calculus/limits/methods/one-sided-limits", desc: "Left and right limits separately; the two-sided limit exists only when they agree.", level: "composite" },
+      { skill: "Use L'Hôpital's rule", href: "/calculus/limits/methods/lhopitals-rule", desc: "For $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$: differentiate top and bottom separately and take the limit again.", level: "composite" },
+      { skill: "Evaluate a limit by direct substitution", href: "/calculus/limits/methods#direct-substitution", desc: "The function is continuous at $a$: polynomials, rational functions whose denominator is not $0$ at $a$, roots, exponentials, logarithms and trig functions on their domains.", level: "atomic" },
+      { skill: "Find limits at infinity of rational functions", href: "/calculus/limits/methods/limits-at-infinity-rational", desc: "Compare degrees, or divide every term by the highest power of $x$ in the denominator.", level: "composite" },
+      { skill: "Find limits at infinity with square roots", href: "/calculus/limits/methods/limits-at-infinity-radicals", desc: "Factor the highest power out of the root; $\\sqrt{x^2} = |x|$, which is $-x$ as $x \\to -\\infty$.", level: "composite" },
+      { skill: "Find and remove a removable discontinuity", href: "/calculus/limits/methods/removable-discontinuities", desc: "A hole: the limit exists but $f(a)$ is missing or wrong. Cancel, find the limit, redefine.", level: "composite" },
+      { skill: "Find vertical asymptotes", href: "/calculus/limits/methods/vertical-asymptotes", desc: "Cancel common factors, find the zeros of the denominator, then the sign of each one-sided limit.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -605,7 +707,7 @@ $$\\lim_{x \\to 2} \\left( \\frac{1}{x - 2} - \\frac{4}{x^2 - 4} \\right) = \\li
   obj13: {
     title: `Summary: The Limit Evaluation Playbook`,
     content: `
-Every limit evaluation problem on this page follows the same arc: try direct substitution first, then classify the indeterminate form, then pick the technique that resolves it. The table below collects the nine moves in priority order — start at the top and move down only as needed. The right side of each row notes where on this page (or which sibling page) the move is detailed.
+Every limit evaluation problem on this page follows the same arc: try direct substitution first, then classify the indeterminate form, then pick the technique that resolves it. The chart below collects the nine moves in priority order — start at the top and move down only as needed. The right side of each row notes where on this page (or which sibling page) the move is detailed.
 `,
     before: ``,
     after: ``,
@@ -1072,8 +1174,15 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj1.link,
         content:[
           sectionsContent.obj1.content,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-direct-substitution'}
+            id="direct-substitution-by-function-class"
+            title="Where Direct Substitution Works"
+            source="/calculus/limits/evaluating"
+            related={false}
+          >
+            <FeatureMatrix data={fm_directSubstitution} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1103,6 +1212,7 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj3.link,
         content:[
           <ConceptIntro key={'obj3-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate indeterminate powers](!/calculus/limits/methods/indeterminate-powers) →@`,
         ]
     },
     {
@@ -1150,6 +1260,7 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
             />
           </DiagramFrame>,
           `@academic[punchline:Cancelling is allowed because a limit never uses the value at the point, only the values around it.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate a limit by factoring](!/calculus/limits/methods/factoring-limits) →@`,
         ]
     },
     {
@@ -1172,6 +1283,7 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
               theme={{ title: '#06357A', accent: '#2563EB', warm: '#B45309', panelSoft: '#e8eefc', indigoSoft: '#e8eefc' }}
             />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate a limit by rationalizing](!/calculus/limits/methods/rationalizing-limits) →@`,
         ]
     },
     {
@@ -1266,8 +1378,17 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
           sectionsContent.obj11.content,
           <div key={'unit-signAnalysis'} dangerouslySetInnerHTML={{ __html: demoUnits.signAnalysis }} />,
           `Because the two sides disagree, the two-sided limit at 3 does not exist, not even as ∞.`,
-          <div key={'obj11-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj11Table }} />,
+          <DiagramFrame
+            key={'case-graph-infinite-limit-sign-grid'}
+            id="infinite-limit-sign-grid"
+            title="Which infinity, from the two signs"
+            source="/calculus/limits/evaluating"
+            related={false}
+            before={"A nonzero numerator over a denominator that tends to $0$: one row per sign of the numerator, one column per side the denominator approaches from. Each sketch shows that side only."}
+            after={"Like signs give $+\\infty$ and unlike signs give $-\\infty$, exactly as in ordinary division."}
+          >
+            <CaseGraph data={caseGraphData} variant="grid" />
+          </DiagramFrame>,
           `@academic[punchline:A nonzero number over a vanishing denominator always blows up; the signs on each side decide which infinity.]@`,
         ]
     },
@@ -1285,8 +1406,17 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-limit-playbook'}
+            id="limit-evaluation-playbook"
+            title="The Limit Evaluation Playbook"
+            source="/calculus/limits/evaluating"
+            related={false}
+            layout="top"
+          >
+            <FeatureMatrix data={fm_limitPlaybook} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[Which limit technique should I use?](!/calculus/limits/methods/which-limit-technique) →@`,
         ]
     },
     {
@@ -1304,6 +1434,14 @@ The rule for $\\frac{0}{0}$ named after L'Hôpital was found by his teacher Joha
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

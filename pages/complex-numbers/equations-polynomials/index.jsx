@@ -948,6 +948,8 @@
 
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -966,10 +968,23 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import DecisionBox from '@/app/components/infographics/DecisionMaker/DecisionBox'
 import DiagramFrameV2 from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Vieta's Formulas"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Degree","features":[{"id":"c1","name":"Monic polynomial","type":"text"},{"id":"c2","name":"Sum of roots","type":"text"},{"id":"c3","name":"Product of roots","type":"text"},{"id":"c4","name":"Middle symmetric sums","type":"text"}],"items":[{"id":"r1","name":"Quadratic","values":{"c1":"z² + bz + c","c2":"z₁ + z₂ = −b","c3":"z₁ · z₂ = c","c4":null}},{"id":"r2","name":"Cubic","values":{"c1":"z³ + bz² + cz + d","c2":"z₁ + z₂ + z₃ = −b","c3":"z₁z₂z₃ = −d","c4":"z₁z₂ + z₁z₃ + z₂z₃ = c"}},{"id":"r3","name":"Quartic","values":{"c1":"z⁴ + bz³ + cz² + dz + e","c2":"Σz_i = −b","c3":"z₁z₂z₃z₄ = e","c4":"Σ z_i z_j = c (pairs); Σ z_i z_j z_k = −d (triples)"}},{"id":"r4","name":"General n","values":{"c1":"zⁿ + aₙ₋₁zⁿ⁻¹ + … + a₀","c2":"−aₙ₋₁","c3":"(−1)ⁿ · a₀","c4":"k-th symmetric sum = (−1)ᵏ · aₙ₋ₖ"}}]};
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Equation Types and Their Solution Methods"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation type","features":[{"id":"c1","name":"Form","type":"text"},{"id":"c2","name":"Method","type":"text"},{"id":"c3","name":"Number of solutions","type":"text"}],"items":[{"id":"r1","name":"General polynomial","values":{"c1":"aₙzⁿ + … + a₀ = 0","c2":"factor over ℂ; or numeric methods","c3":"exactly n (with multiplicity)"}},{"id":"r2","name":"Quadratic (any coefs)","values":{"c1":"az² + bz + c = 0","c2":"quadratic formula z = (−b ± √Δ)⁄(2a); for complex Δ use trig/exponential form to find √Δ","c3":"2 (1 repeated if Δ = 0)"}},{"id":"r3","name":"Pure n-th power","values":{"c1":"zⁿ = w","c2":"trig/exponential form + De Moivre's root formula","c3":"exactly n for w ≠ 0, evenly spaced on a circle (regular n-gon)"}},{"id":"r4","name":"Power-equals-conjugate","values":{"c1":"zⁿ = z̄","c2":"write z = reⁱᵒ; match moduli and arguments separately","c3":"n + 2 for n ≥ 2 (origin + n+1 on unit circle)"}},{"id":"r5","name":"Conjugate-locus equations","values":{"c1":"z + z̄ = k, z · z̄ = k, etc.","c2":"translate to conditions on Re(z), Im(z), |z|; intersect loci for systems","c3":"infinite (a line, circle, or axis) — or finite if intersected"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Equations Involving Conjugates"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Equation","features":[{"id":"c1","name":"Algebraic meaning (z = a + bi)","type":"text"},{"id":"c2","name":"Geometric locus","type":"text"}],"items":[{"id":"r1","name":"z + z̄ = k (k real)","values":{"c1":"2 Re(z) = k → a = k⁄2","c2":"vertical line at x = k⁄2"}},{"id":"r2","name":"z − z̄ = ki (k real)","values":{"c1":"2bi = ki → b = k⁄2","c2":"horizontal line at y = k⁄2"}},{"id":"r3","name":"z · z̄ = k (k > 0)","values":{"c1":"|z|² = k → |z| = √k","c2":"circle centered at origin, radius √k"}},{"id":"r4","name":"z̄ = z","values":{"c1":"−b = b → b = 0","c2":"the real axis"}},{"id":"r5","name":"z̄ = −z","values":{"c1":"a = −a → a = 0","c2":"the imaginary axis"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Polynomials with Real Coefficients"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Consequence","type":"text"}],"items":[{"id":"r1","name":"Conjugate pairing","values":{"c1":"if z₀ is a non-real root, so is z̄₀","c2":"non-real roots always come in pairs"}},{"id":"r2","name":"Real quadratic factor","values":{"c1":"(z − z₀)(z − z̄₀) = z² − 2 Re(z₀) z + |z₀|²","c2":"real polynomials factor over ℝ into linear and irreducible-quadratic factors only"}},{"id":"r3","name":"Odd degree → real root","values":{"c1":"if n is odd, at least one root is real","c2":"every real cubic, quintic, etc. crosses the real axis"}},{"id":"r4","name":"Non-real root count is even","values":{"c1":"non-real roots, counted with multiplicity, total an even number","c2":"(n − # real roots) is even"}}]};
 
 
 // Surfaced on the /complex-numbers hub via buildSectionData extraction.
@@ -980,6 +995,33 @@ const hubMeta = {
   name: 'Complex Polynomial Equations',
   hubDescription: 'Every non-constant polynomial finds its roots in the complex numbers: the Fundamental Theorem of Algebra, complete factorization into linear terms, Vieta formulas linking roots to coefficients, conjugate-pair symmetry of real polynomials, and equation-solving techniques that combine algebra with the geometry of the complex plane.',
 }
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find all complex roots of a polynomial", href: "/complex-numbers/methods/polynomial-complex-roots", desc: "Expect $n$ roots, peel off a real root or a conjugate pair by division, and solve the last quadratic over the complex numbers.", level: "composite", here: "#3" },
+      { skill: "Solve a quadratic equation with complex roots", href: "/complex-numbers/methods/quadratic-complex-roots", desc: "Use the quadratic formula; a negative discriminant gives $\\sqrt{-k} = i\\sqrt{k}$, a complex one needs a complex square root.", level: "composite", here: "#6" },
+      { skill: "Find the square roots of a complex number", href: "/complex-numbers/methods/complex-square-roots", desc: "Set $(x + yi)^2 = a + bi$, use $x^2 - y^2 = a$ and $x^2 + y^2 = |w|$, and pick the signs from $2xy = b$.", level: "composite", here: "#6" },
+    ] },
+    { title: "More complex number methods", items: [
+      { skill: "Find the nth roots of a complex number", href: "/complex-numbers/methods/nth-roots", desc: "Write $w$ in polar form, take the real $n$th root of its modulus, and spread $n$ angles $\\frac{\\varphi + 2\\pi k}{n}$ evenly around the circle.", level: "composite" },
+      { skill: "Choose the right form of a complex number", href: "/complex-numbers/methods/which-form", desc: "A decision tree from the task (sum, product, power, root, conversion) to the form that makes it easy and the method that does it.", level: "strategy" },
+    ] },
+    { title: "Polynomial methods", items: [
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite" },
+      { skill: "Factor a sum or difference of cubes", href: "/algebra/polynomials/methods/sum-difference-of-cubes", desc: "Spot $a^3 \\pm b^3$ and use the matching formula; the quadratic factor never factors further.", level: "composite" },
+      { skill: "Use synthetic division", href: "/algebra/polynomials/methods/synthetic-division", desc: "Divide by $x - r$ with coefficients only: bring down, multiply by $r$, add, repeat.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Use the quadratic formula", href: "/algebra/equations/methods/quadratic-formula", desc: "Read off a, b, c and substitute; works for every quadratic, factorable or not.", level: "composite" },
+      { skill: "Complete the square", href: "/algebra/equations/methods/completing-the-square", desc: "Turn $x^2 + bx$ into a perfect square to solve a quadratic or find its vertex.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1258,7 +1300,9 @@ $$z^3 - 1 = (z - 1)(z - \\omega)(z - \\omega^2)$$]@
 
 Multiplying the last two factors produces a real quadratic: $(z - \\omega)(z - \\omega^2) = z^2 + z + 1$. Thus $z^3 - 1 = (z - 1)(z^2 + z + 1)$, the familiar factorization over $\\mathbb{R}$. Over $\\mathbb{C}$, we factor further into linear terms.
 
-Every non-constant polynomial admits such complete factorization. Real polynomials may resist factoring over $\\mathbb{R}$ into linear terms, but over $\\mathbb{C}$, every non-constant polynomial factors completely.`,
+Every non-constant polynomial admits such complete factorization. Real polynomials may resist factoring over $\\mathbb{R}$ into linear terms, but over $\\mathbb{C}$, every non-constant polynomial factors completely.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find all complex roots of a polynomial](!/complex-numbers/methods/polynomial-complex-roots) →@`,
   after: ``,
   link: '',
 },
@@ -1376,7 +1420,11 @@ Writing $\\sqrt{-3 + 4i}$ as $\\sqrt{-3} + \\sqrt{4i} = \\sqrt{2} + (\\sqrt{2} +
 
 Finding $\\sqrt{-3 + 4i}$ requires the technique from [De Moivre's theorem](!/complex-numbers/demoivre-theorem). Convert $-3 + 4i$ to [trigonometric form](!/complex-numbers/trigonometric-form): modulus $\\sqrt{9 + 16} = 5$, argument $\\theta = \\arctan(4/(-3))$ adjusted to the second quadrant. The square roots have modulus $\\sqrt{5}$ and arguments $\\theta/2$ and $\\theta/2 + 180°$.
 
-The process is lengthier than real quadratics but entirely systematic. Every quadratic with complex coefficients has two roots in $\\mathbb{C}$ (counting multiplicity), accessible through the same formula that handles real coefficients.`,
+The process is lengthier than real quadratics but entirely systematic. Every quadratic with complex coefficients has two roots in $\\mathbb{C}$ (counting multiplicity), accessible through the same formula that handles real coefficients.
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a quadratic equation with complex roots](!/complex-numbers/methods/quadratic-complex-roots) →@
+
+@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the square roots of a complex number](!/complex-numbers/methods/complex-square-roots) →@`,
   after: ``,
   link: '',
 },
@@ -1872,8 +1920,22 @@ const schemas = {
     conclusion: { text: '$p(\\bar{z_0}) = 0$', say: 'The conjugate is also a root.' },
   };
 
+  // Procedure rollout 2026-11-14: Solving a root equation, step by step (obj7).
+  const solveZnSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$z^4 = -16$',
+      rows: [
+        { step: 'Express $w$ in trigonometric form', stepSub: 'Modulus $16$, argument $180°$', example: '$-16 = 16\\,\\text{cis}(180°)$' },
+        { step: 'Apply the root formula for $k = 0, 1, \\ldots, n - 1$', stepSub: '$16^{1/4} = 2$ and $\\frac{180° + 360°k}{4} = 45° + 90°k$', example: '$z_k = 2\\,\\text{cis}(45° + 90°k)$, $k = 0, 1, 2, 3$' },
+        { step: 'Convert to algebraic form', example: '$\\sqrt{2}(1 + i)$, $\\sqrt{2}(-1 + i)$, $\\sqrt{2}(-1 - i)$, $\\sqrt{2}(1 - i)$' },
+      ],
+    },
+  };
+
   return {
   props:{
+    solveZnSteps,
     proofStepsData2,
     proofStepsData,
     formulaSummaryData,
@@ -1901,7 +1963,7 @@ const schemas = {
    }
 
 
-export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,complexEquationDecision, 
+export default function EquationsPolynomialsPage({ solveZnSteps, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,complexEquationDecision, 
   seoData,
   sectionsContent,
   introContent,
@@ -2034,11 +2096,15 @@ export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsDa
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-polynomials-vieta-s-formulas-matrix'}
+            id="equations-polynomials-vieta-s-formulas-matrix"
+            title="Vieta's Formulas"
+            source="/complex-numbers/equations-polynomials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -2059,11 +2125,15 @@ export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsDa
             <ProofSteps data={proofStepsData2} variant="chain" />
           </DiagramFrameV2>,
           sectionsContent.obj5.afterProof,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-polynomials-polynomials-real-coefficients-matrix'}
+            id="equations-polynomials-polynomials-real-coefficients-matrix"
+            title="Polynomials with Real Coefficients"
+            source="/complex-numbers/equations-polynomials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -2080,6 +2150,15 @@ export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsDa
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="solve-zn-equals-w-steps"
+            title="Solving a root equation, step by step"
+            source="/complex-numbers/equations-polynomials"
+            before={"The procedure on the example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={solveZnSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2098,11 +2177,15 @@ export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsDa
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'obj9-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj9Table }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-polynomials-equations-involving-conjugates-matrix'}
+            id="equations-polynomials-equations-involving-conjugates-matrix"
+            title="Equations Involving Conjugates"
+            source="/complex-numbers/equations-polynomials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrameV2>,
         ]
     },
     {
@@ -2119,11 +2202,15 @@ export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsDa
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrameV2
+            key={'feature-matrix-equations-polynomials-summary-equation-types-matrix'}
+            id="equations-polynomials-summary-equation-types-matrix"
+            title="Summary: Equation Types and Their Solution Methods"
+            source="/complex-numbers/equations-polynomials"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrameV2>,
           `The table as a checklist. The special forms are checked first because each has a shortcut; a polynomial that matches none of them falls through to the general case.`,
           <DiagramFrameV2
             key={'obj11-decision'}
@@ -2169,6 +2256,14 @@ export default function EquationsPolynomialsPage({ proofStepsData2, proofStepsDa
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

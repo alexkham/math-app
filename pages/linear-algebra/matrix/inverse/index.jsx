@@ -3012,6 +3012,9 @@
 
 // tables-optimized: v4 | 2026-05-20 | 4 tables (obj3 aggregation, obj8 aggregation, obj9 comparison, obj11 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import RowOperationTrace from '@/app/components/infographics/linear-algebra/RowOperationTrace'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -3026,6 +3029,7 @@ import EquivalenceRing from '@/app/components/infographics/linear-algebra/Equiva
 import PropertyLawCard from '@/app/components/infographics/linear-algebra/PropertyLawCard'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -3040,6 +3044,40 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import laMatrixNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/linear-algebra-matrix'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Methods of Computing the Inverse"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Applies when","type":"text"},{"id":"c2","name":"Cost (n × n)","type":"text"},{"id":"c3","name":"Best for","type":"text"}],"items":[{"id":"r1","name":"2 × 2 swap-and-negate formula","values":{"c1":"n = 2 and ad − bc ≠ 0","c2":"trivial (constant time)","c3":"by-hand work on 2 × 2 matrices"}},{"id":"r2","name":"Row reduction of [A | I]","values":{"c1":"det(A) ≠ 0 (verified during reduction)","c2":"≈ 2n³ operations","c3":"numerical computation when A⁻¹ itself is needed"}},{"id":"r3","name":"Adjugate formula A⁻¹ = adj(A)/det(A)","values":{"c1":"det(A) ≠ 0; symbolic entries","c2":"n² [cofactors](!/linear-algebra/determinants/cofactors), each an (n−1)-determinant","c3":"theoretical derivations, sensitivity formulas"}},{"id":"r4","name":"Solve Ax = b directly (skip A⁻¹)","values":{"c1":"only A⁻¹b is needed, not A⁻¹ itself","c2":"≈ ⅔ n³ ([Gaussian elimination](!/linear-algebra/linear-systems/gaussian-elimination)) + reusable LU","c3":"virtually every practical linear system"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Common Errors"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Wrong","type":"text"},{"id":"c2","name":"Correct","type":"text"}],"items":[{"id":"r1","name":"Distributing over sum","values":{"c1":"(A + B)⁻¹ = A⁻¹ + B⁻¹","c2":"no simple formula relates them"}},{"id":"r2","name":"Order in a product","values":{"c1":"(AB)⁻¹ = A⁻¹B⁻¹","c2":"(AB)⁻¹ = B⁻¹A⁻¹ (order reverses)"}},{"id":"r3","name":"Assuming invertibility","values":{"c1":"every square A has an inverse","c2":"A⁻¹ exists iff det(A) ≠ 0"}},{"id":"r4","name":"Entry-by-entry reciprocal","values":{"c1":"(A⁻¹)ᵢⱼ = 1/aᵢⱼ","c2":"inverse is a global operation depending on all entries"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the inverse of a 2×2 matrix", href: "/linear-algebra/matrix/methods/inverse-2x2", desc: "Swap the diagonal, negate the other two entries, divide by the determinant $ad - bc$.", level: "composite", here: "#2" },
+      { skill: "Find an inverse by Gauss-Jordan elimination", href: "/linear-algebra/matrix/methods/inverse-gauss-jordan", desc: "Row reduce $[A \\mid I]$ until the left half is $I$; the right half is then $A^{-1}$.", level: "composite", here: "#4" },
+      { skill: "Find an inverse with the adjugate", href: "/linear-algebra/matrix/methods/inverse-adjugate", desc: "Compute every cofactor, transpose them into $\\operatorname{adj}(A)$, divide by $\\det(A)$.", level: "composite", here: "#5" },
+      { skill: "Solve a system with the inverse matrix", href: "/linear-algebra/linear-systems/methods/inverse-matrix-method", desc: "Write the system as Ax = b, find the inverse of A, and multiply: x is the inverse times b.", level: "composite", here: "#7" },
+    ] },
+    { title: "More matrix methods", items: [
+      { skill: "Multiply matrices", href: "/linear-algebra/matrix/methods/matrix-multiplication", desc: "Check the inner sizes, then fill each entry with a row of the first times a column of the second.", level: "composite" },
+      { skill: "Find the rank of a matrix", href: "/linear-algebra/matrix/methods/rank", desc: "Row reduce to echelon form and count the pivots.", level: "composite" },
+    ] },
+    { title: "Linear system methods", items: [
+      { skill: "Solve a system by Gauss-Jordan elimination", href: "/linear-algebra/linear-systems/methods/gauss-jordan-elimination", desc: "Row-reduce all the way to reduced form, so each unknown can be read off its own row.", level: "composite" },
+      { skill: "Solve a system with Cramer's rule", href: "/linear-algebra/linear-systems/methods/cramers-rule", desc: "A square system with nonzero determinant: each unknown is a ratio of two determinants.", level: "composite" },
+      { skill: "Choose the right method to solve a linear system", href: "/linear-algebra/linear-systems/methods/which-system-method", desc: "A decision tree: what the question asks, a zero right-hand side, then the shape of the system.", level: "strategy" },
+    ] },
+    { title: "Determinant methods", items: [
+      { skill: "Find a 2×2 determinant", href: "/linear-algebra/determinants/methods#determinant-2x2", desc: "A $2 \\times 2$ matrix inside $\\det$ or between vertical bars: $\\det\\begin{pmatrix} 4 & 3 \\\\ 2 & 5 \\end{pmatrix}$, $\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}$, or each minor inside a larger expansion.", level: "atomic" },
+      { skill: "Find a determinant by cofactor expansion", href: "/linear-algebra/determinants/methods/cofactor-expansion", desc: "Expand along the row or column with the most zeros: entry times sign times minor, added up.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/matrix/methods", label: "All matrix methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -4148,8 +4186,46 @@ $$A^{-1} = \\frac{1}{1}\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 
     conclusion: { text: '$\\det(A^{-1}) = \\frac{1}{\\det(A)}$' },
   };
 
+  // Procedure rollout 2026-11-14: The inverse by row reduction, step by step (obj4).
+  const inverseRowReductionSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The $3 \\times 3$ matrix $A$ of the worked example',
+      rows: [
+        { step: 'Form the augmented matrix $[A \\mid I]$', example: '$3 \\times 6$' },
+        { step: 'Clear the entries below the pivots', example: '$R_2 - 2R_1$, $R_3 - R_1$, then $R_3 - R_2$' },
+        { step: 'Clear the entries above the pivots', stepSub: 'The left half has to reach $I$', example: '$R_2 - R_3$, $R_1 - R_3$, then $R_1 - 2R_2$' },
+        { step: 'Read $A^{-1}$ from the right half', example: '$\\begin{pmatrix} 6 & -3 & 1 \\\\ -3 & 2 & -1 \\\\ 1 & -1 & 1 \\end{pmatrix}$' },
+      ],
+    },
+  };
+
+  // RowOperationTrace 2026-11-14: The reduction, row operation by row operation (obj4).
+  const inverseRowReductionTrace = {
+    goal: 'Reduce $[A \\mid I]$ until the left half is the identity.',
+    reading: 'The left half is $I$, so the right half is $A^{-1}$: its rows are $(6, -3, 1)$, $(-3, 2, -1)$ and $(1, -1, 1)$.',
+    steps: [
+      { id: 's0', label: 'Start', matrix: [[1, 2, 1, 1, 0, 0], [2, 5, 3, 0, 1, 0], [1, 3, 3, 0, 0, 1]], pivots: [[0, 0]], augmentedAfterCol: 2,
+        why: 'The matrix $A$ with the identity attached.' },
+      { id: 's1', label: 'Below pivot 1', matrix: [[1, 2, 1, 1, 0, 0], [0, 1, 1, -2, 1, 0], [0, 1, 2, -1, 0, 1]], pivots: [[0, 0], [1, 1]], augmentedAfterCol: 2,
+        changed: [[1, 0], [1, 1], [1, 2], [1, 3], [1, 4], [2, 0], [2, 1], [2, 2], [2, 3], [2, 5]],
+        operation: ['R2 − 2·R1', 'R3 − R1'], why: 'Clears the entries below the first pivot.' },
+      { id: 's2', label: 'Below pivot 2', matrix: [[1, 2, 1, 1, 0, 0], [0, 1, 1, -2, 1, 0], [0, 0, 1, 1, -1, 1]], pivots: [[0, 0], [1, 1], [2, 2]], augmentedAfterCol: 2,
+        changed: [[2, 1], [2, 2], [2, 3], [2, 4]],
+        operation: 'R3 − R2', why: 'The left half is now triangular, which is not yet the identity.' },
+      { id: 's3', label: 'Above pivot 3', matrix: [[1, 2, 0, 0, 1, -1], [0, 1, 0, -3, 2, -1], [0, 0, 1, 1, -1, 1]], pivots: [[0, 0], [1, 1], [2, 2]], augmentedAfterCol: 2,
+        changed: [[0, 2], [0, 3], [0, 4], [0, 5], [1, 2], [1, 3], [1, 4], [1, 5]],
+        operation: ['R2 − R3', 'R1 − R3'], why: 'Clears the entries above the third pivot.' },
+      { id: 's4', label: 'Above pivot 2', matrix: [[1, 0, 0, 6, -3, 1], [0, 1, 0, -3, 2, -1], [0, 0, 1, 1, -1, 1]], pivots: [[0, 0], [1, 1], [2, 2]], augmentedAfterCol: 2,
+        changed: [[0, 1], [0, 3], [0, 4], [0, 5]],
+        operation: 'R1 − 2·R2', why: 'Clears the entry above the second pivot. The left half is the identity.', final: true },
+    ],
+  };
+
   return {
   props: {
+    inverseRowReductionTrace,
+    inverseRowReductionSteps,
     proofStepsData2,
     proofStepsData,
     formulaSummaryData,
@@ -4179,7 +4255,7 @@ $$A^{-1} = \\frac{1}{1}\\operatorname{adj}(A) = \\begin{pmatrix} 2 & -1 \\\\ -5 
    }
 
 
-export default function MatrixInversePage({ proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,inverseMethodDecision, inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function MatrixInversePage({ inverseRowReductionTrace, inverseRowReductionSteps, proofStepsData2, proofStepsData, formulaSummaryData, pitfallData,inverseMethodDecision, inverse2x2Strip, seoData, sectionsContent, introContent, invertibilityRing, inverseProperties, specialInverses, obj9Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -4295,6 +4371,7 @@ export default function MatrixInversePage({ proofStepsData2, proofStepsData, for
           >
             <MatrixOperation data={inverse2x2Strip} theme="navy" variant="strip" />
           </DiagramFrameV2>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the inverse of a 2×2 matrix](!/linear-algebra/matrix/methods/inverse-2x2) →@`,
         ]
     },
     {
@@ -4321,8 +4398,29 @@ export default function MatrixInversePage({ proofStepsData2, proofStepsData, for
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-row-trace'}
+            id="inverse-row-reduction-trace"
+            title="The reduction, row operation by row operation"
+            source="/linear-algebra/matrix/inverse"
+            before={"The worked example with each row operation beside the matrix it produces. Pivots are filled in, and the entries changed at each step are underlined."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <RowOperationTrace data={inverseRowReductionTrace} theme="navy" variant="ledger" />
+            </div>
+          </DiagramFrame>,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="inverse-row-reduction-steps"
+            title="The inverse by row reduction, step by step"
+            source="/linear-algebra/matrix/inverse"
+            before={"The algorithm on the worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={inverseRowReductionSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-rowreduce'} dangerouslySetInnerHTML={{ __html: demoUnits.rowreduce }} />,
           `For anything larger than 3×3 this is the method that is actually used; the adjugate route below is for understanding rather than for computing.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find an inverse by Gauss-Jordan elimination](!/linear-algebra/matrix/methods/inverse-gauss-jordan) →@`,
         ]
     },
     {
@@ -4333,6 +4431,7 @@ export default function MatrixInversePage({ proofStepsData2, proofStepsData, for
           sectionsContent.obj5.content,
                   <div key={'unit-adjugate'} dangerouslySetInnerHTML={{ __html: demoUnits.adjugate }} />,
           `The formula is exact and completely impractical beyond small matrices, since the number of cofactors grows faster than any gain in clarity.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find an inverse with the adjugate](!/linear-algebra/matrix/methods/inverse-adjugate) →@`,
         ]
     },
     {
@@ -4381,6 +4480,7 @@ export default function MatrixInversePage({ proofStepsData2, proofStepsData, for
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a system with the inverse matrix](!/linear-algebra/linear-systems/methods/inverse-matrix-method) →@`,
         ]
     },
     {
@@ -4424,8 +4524,15 @@ export default function MatrixInversePage({ proofStepsData2, proofStepsData, for
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-common-errors-matrix'}
+            id="inverse-common-errors-matrix"
+            title="Common Errors"
+            source="/linear-algebra/matrix/inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj9-mistakes'}
             id="matrix-inverse-pitfalls"
@@ -4451,8 +4558,15 @@ export default function MatrixInversePage({ proofStepsData2, proofStepsData, for
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-inverse-methods-computing-inverse-matrix'}
+            id="inverse-methods-computing-inverse-matrix"
+            title="Methods of Computing the Inverse"
+            source="/linear-algebra/matrix/inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           `The table compares the four methods by cost. The map below puts them in the order to ask about them, starting with whether the inverse is needed at all.`,
           <DiagramFrame
             key={'obj11-decision'}
@@ -4463,6 +4577,14 @@ export default function MatrixInversePage({ proofStepsData2, proofStepsData, for
             <DecisionBox data={inverseMethodDecision} />
           </DiagramFrame>,
           `The first exit is the one numerical work takes most often. Computing $A^{-1}$ from scratch costs about three times as much as solving the system once, so the other three routes are for when the matrix $A^{-1}$ itself is the goal. [When not to compute the inverse](!#10) goes through the cost in detail.`,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

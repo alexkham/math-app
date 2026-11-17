@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,11 +17,60 @@ import renderFunctionPlot from '@/app/utils/illustrations/functions/graphs/funct
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: The Four Operations at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Core technique","type":"text"},{"id":"c2","name":"Effect on degree","type":"text"},{"id":"c3","name":"Watch out for","type":"text"}],"items":[{"id":"r1","name":"Addition","values":{"c1":"combine like terms","c2":"at most max(deg P, deg Q); less if leading terms cancel","c3":"aligning terms by matching exponent"}},{"id":"r2","name":"Subtraction","values":{"c1":"distribute the negative across every term, then combine","c2":"same as addition","c3":"negating ONLY the first term — the classic error"}},{"id":"r3","name":"Multiplication","values":{"c1":"every term × every term, then combine like terms (FOIL for binomial × binomial)","c2":"exactly deg P + deg Q","c3":"missing one of m × n products in big multiplications"}},{"id":"r4","name":"Division","values":{"c1":"long division (general) or synthetic division (linear divisors only)","c2":"deg quotient = deg P − deg Q; remainder has degree < deg Q","c3":"missing-power placeholders; remainder may be nonzero"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Synthetic Division"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Divisor allowed","type":"text"},{"id":"c2","name":"Process","type":"text"},{"id":"c3","name":"Side benefit","type":"text"}],"items":[{"id":"r1","name":"Polynomial long division","values":{"c1":"any polynomial divisor","c2":"divide leading term, multiply, subtract; repeat until remainder degree < divisor degree","c3":"universal — works on every division problem"}},{"id":"r2","name":"Synthetic division","values":{"c1":"linear divisors of the form (x − c) only","c2":"bring down, multiply by c, add — using only coefficients","c3":"remainder equals P(c); doubles as evaluation and root testing"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Do polynomial long division", href: "/algebra/polynomials/methods/polynomial-long-division", desc: "Divide leading terms, multiply back, subtract, bring down; repeat until the degree drops.", level: "composite", here: "#6" },
+      { skill: "Use synthetic division", href: "/algebra/polynomials/methods/synthetic-division", desc: "Divide by $x - r$ with coefficients only: bring down, multiply by $r$, add, repeat.", level: "composite", here: "#7" },
+    ] },
+    { title: "More polynomial methods", items: [
+      { skill: "Add or subtract polynomials", href: "/algebra/polynomials/methods#add-subtract-polynomials", desc: "Two polynomials joined by $+$ or $-$: $(3x^2 - 2x + 5) + (x^2 + 4x - 1)$, $(3x^2 - 2x + 5) - (x^2 + 4x - 1)$.", level: "atomic" },
+      { skill: "Multiply polynomials", href: "/algebra/polynomials/methods#multiply-polynomials", desc: "Two polynomials multiplied: $(x + 2)(x^2 - 3x + 1)$, $(2x - 1)(x + 4)$.", level: "atomic" },
+      { skill: "Expand a special product", href: "/algebra/polynomials/methods#special-products", desc: "A binomial squared, or a sum times the matching difference: $(2x + 3)^2$, $(x - 5)^2$, $(3x + 2)(3x - 2)$.", level: "atomic" },
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite" },
+      { skill: "Use the remainder and factor theorems", href: "/algebra/polynomials/methods/remainder-theorem", desc: "The remainder of $f(x) \\div (x - r)$ is $f(r)$; remainder 0 means $(x - r)$ is a factor.", level: "composite" },
+      { skill: "Find all roots of a polynomial", href: "/algebra/polynomials/methods/find-all-roots", desc: "Rational roots first, divide them out, finish with the quadratic formula; count multiplicities.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a polynomial equation", href: "/algebra/equations/methods/polynomial-equations", desc: "Factor out what you can, find a rational root, divide it out, repeat until quadratic.", level: "composite" },
+    ] },
+    { title: "Limit methods", items: [
+      { skill: "Evaluate a limit by factoring", href: "/calculus/limits/methods/factoring-limits", desc: "A $\\frac{0}{0}$ form with polynomials: factor, cancel the vanishing factor, substitute.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/polynomials/methods", label: "All polynomial methods" },
+};
+
+// FormulaSheet (card) 2026-11-15: replaces the table obj4Table (special products: pattern, expansion); the five rows come from the table.
+const specialProductsCard = {
+  columns: [
+    { key: 'name', label: 'Pattern', kind: 'name' },
+    { key: 'formula', label: 'Expansion', kind: 'formula' },
+  ],
+  rows: [
+    { name: 'Square of a sum', formula: '$(a + b)^2 = a^2 + 2ab + b^2$' },
+    { name: 'Square of a difference', formula: '$(a - b)^2 = a^2 - 2ab + b^2$' },
+    { name: 'Conjugate binomials (difference of squares)', formula: '$(a + b)(a - b) = a^2 - b^2$' },
+    { name: 'Sum of cubes', formula: '$(a + b)(a^2 - ab + b^2) = a^3 + b^3$' },
+    { name: 'Difference of cubes', formula: '$(a - b)(a^2 + ab + b^2) = a^3 - b^3$' },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -953,8 +1004,82 @@ $$= x^2 + 6x + 9$$`],
     ],
   };
 
+  // Procedure rollout 2026-11-14: FOIL, one product at a time (obj5).
+  const foilSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$(2x + 3)(x - 4)$',
+      rows: [
+        { step: 'First: multiply the first terms', example: '$2x \\cdot x = 2x^2$' },
+        { step: 'Outer: multiply the outer terms', example: '$2x \\cdot (-4) = -8x$' },
+        { step: 'Inner: multiply the inner terms', example: '$3 \\cdot x = 3x$' },
+        { step: 'Last: multiply the last terms', example: '$3 \\cdot (-4) = -12$' },
+        { step: 'Combine the middle terms', example: '$2x^2 - 5x - 12$' },
+      ],
+    },
+  };
+
+  const longDivisionSteps = {
+    loop: {
+      label: 'Long division',
+      repeat: 'until the degree drops below the divisor',
+      steps: [
+        { text: 'Write the dividend and the divisor' },
+        { text: 'Divide the leading term of what remains by the leading term of the divisor', repeat: true },
+        { text: 'Multiply the result by the entire divisor', repeat: true },
+        { text: 'Subtract', repeat: true },
+        { text: 'Stop when the degree of what remains is less than the degree of the divisor', repeat: true, test: true },
+        { text: 'Read off the quotient and the remainder', output: true },
+      ],
+    },
+    run: {
+      label: '$(x^3 - 2x^2 + 5x - 3) \\div (x - 1)$',
+      vars: [
+        { key: 'q', label: 'quotient' },
+        { key: 'r', label: 'remains' },
+      ],
+      start: { r: '$x^3 - 2x^2 + 5x - 3$' },
+      startNote: 'The dividend is $x^3 - 2x^2 + 5x - 3$ and the divisor is $x - 1$.',
+      passes: [
+        {
+          steps: [
+            { set: { q: '$x^2$' }, note: '$x^3 \\div x = x^2$.' },
+            { note: '$x^2(x - 1) = x^3 - x^2$.' },
+            { set: { r: '$-x^2 + 5x - 3$' }, note: 'Subtracting leaves $-x^2 + 5x - 3$.' },
+            { note: 'Degree $2$ is not less than degree $1$, so repeat.' },
+          ],
+          row: ['$x^2$','$x^3 - x^2$', '$-x^2 + 5x - 3$'],
+        },
+        {
+          steps: [
+            { set: { q: '$x^2 - x$' }, note: '$-x^2 \\div x = -x$.' },
+            { note: '$-x(x - 1) = -x^2 + x$.' },
+            { set: { r: '$4x - 3$' }, note: 'Subtracting leaves $4x - 3$.' },
+            { note: 'Degree $1$ is not less than degree $1$, so repeat.' },
+          ],
+          row: ['$-x$','$-x^2 + x$', '$4x - 3$'],
+        },
+        {
+          steps: [
+            { set: { q: '$x^2 - x + 4$' }, note: '$4x \\div x = 4$.' },
+            { note: '$4(x - 1) = 4x - 4$.' },
+            { set: { r: '$1$' }, note: 'Subtracting leaves $1$.' },
+            { note: 'Degree $0$ is less than degree $1$, so stop.' },
+          ],
+          row: ['$4$','$4x - 4$', '$1$'],
+        },
+      ],
+      tableLabel: 'One row per pass',
+      columns: ['Quotient term', 'Multiply', 'Remains'],
+      result: 'Quotient $x^2 - x + 4$, remainder $1$',
+      resultNote: 'The quotient is $x^2 - x + 4$ with remainder $1$.',
+    },
+  };
+
   return {
   props:{
+    longDivisionSteps,
+    foilSteps,
     formulaSummaryData,
     pitfallData,
     polyOpTree,
@@ -979,7 +1104,7 @@ $$= x^2 + 6x + 9$$`],
    }
 
 
-export default function OperationsPage({ formulaSummaryData, pitfallData,polyOpTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function OperationsPage({ longDivisionSteps, foilSteps, formulaSummaryData, pitfallData,polyOpTree, seoData, sectionsContent, introContent, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1090,11 +1215,16 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'formula-sheet-special-products'}
+            id="special-products-formulas"
+            title="Special Products"
+            source="/algebra/polynomials/operations"
+            related={false}
+          >
+            <FormulaSheet data={specialProductsCard} variant="card" />
+          </DiagramFrame>,
+          `The sum of cubes is the least obvious of the five, because four of the six products never show up in the answer. The grid below shows where they go.`,
                   <div key={'unit-special'} dangerouslySetInnerHTML={{ __html: demoUnits.special }} />,
           `Recognising the pattern saves filling the grid, but the grid is why the pattern holds.`,
         ]
@@ -1105,6 +1235,15 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
+          <DiagramFrame
+            key={'obj5-procedure'}
+            id="foil-steps"
+            title="FOIL, one product at a time"
+            source="/algebra/polynomials/operations"
+            before={"The four products in order, then the middle terms combined. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={foilSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-foil'} dangerouslySetInnerHTML={{ __html: demoUnits.foil }} />,
           `For anything larger than two binomials, return to the grid.`,
         ]
@@ -1117,6 +1256,12 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
           sectionsContent.obj6.content,
           <div key={'unit-remainder'} dangerouslySetInnerHTML={{ __html: demoUnits.remainder }} />,
           `The remainder theorem is this picture: dividing by x − c leaves P(c).`,
+          <DiagramFrame key={'obj6-procedure'} id="polynomial-long-division-steps" title="Long division, pass by pass"
+            source="/algebra/polynomials/operations" related={false}
+            before={"The example of this section, one pass at a time. Press Next to carry out each step."}>
+            <ProcedureV2 data={longDivisionSteps} variant="loop" />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to do polynomial long division](!/algebra/polynomials/methods/polynomial-long-division) →@`,
         ]
     },
 
@@ -1127,12 +1272,17 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-operations-synthetic-division-matrix'}
+            id="operations-synthetic-division-matrix"
+            title="Synthetic Division"
+            source="/algebra/polynomials/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Synthetic division is long division by $x - c$ reduced to its coefficients, and its final number is always $P(c)$.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to use synthetic division](!/algebra/polynomials/methods/synthetic-division) →@`,
         ]
     },
     {
@@ -1153,11 +1303,15 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-operations-summary-four-operations-at-matrix'}
+            id="operations-summary-four-operations-at-matrix"
+            title="Summary: The Four Operations at a Glance"
+            source="/algebra/polynomials/operations"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj9-diagram'}
             id="polynomial-operations-tree"
@@ -1201,6 +1355,14 @@ Given $(2x^2 + 3x - 1) + (x^2 - 5x + 4)$, group the terms by degree: the $x^2$ t
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

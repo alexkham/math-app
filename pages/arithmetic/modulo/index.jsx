@@ -794,6 +794,8 @@
 
 
 // tables-optimized: v4 | 2026-05-25 | 4 tables (obj1 aggregation, obj4 aggregation, obj7 aggregation, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -811,6 +813,11 @@ import { renderMultiplesLine } from '@/app/utils/illustrations/arithmetic/divisi
 import modPieWheelDiagrams from '@/app/components/arithmetic/visualizers/modPieWheelDiagrams'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_moduloRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Modulo","sub":"the remainder of a division"},"groups":[{"name":"What modulo tests","items":[{"name":"Divisibility","href":"/arithmetic/divisibility","why":"$a \\bmod n = 0$ is the computational form of $n \\mid a$"}]},{"name":"Built on modulo","items":[{"name":"Divisibility rules","href":"/arithmetic/divisibility/rules","why":"modular arguments packaged as mental shortcuts"},{"name":"GCD","href":"/arithmetic/divisibility/gcd","why":"the Euclidean algorithm applies modulo repeatedly"},{"name":"Powers","href":"/algebra/powers","why":"the rules use congruence properties of powers of $10$"}]}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -818,6 +825,32 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import arithmeticNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/arithmetic'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: A Map of the Modulo Subtree"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Topic","features":[{"id":"c1","name":"What you'll find there","type":"text"},{"id":"c2","name":"Page","type":"text"}],"items":[{"id":"r1","name":"Modular arithmetic operations","values":{"c1":"addition, subtraction, multiplication, and exponentiation performed entirely within a fixed modulus — including last-digit problems and large-power computations","c2":"[/modulo/operations](!/arithmetic/modulo/operations)"}},{"id":"r2","name":"Negative numbers in modulo","values":{"c1":"the two conventions for handling negative dividends, the rounding choices that distinguish them, and how programming languages differ","c2":"[/modulo/negative-numbers](!/arithmetic/modulo/negative-numbers)"}},{"id":"r3","name":"Divisibility","values":{"c1":"the concept that modulo computes — the statement a mod n = 0 is the operational form of n ∣ a","c2":"[/arithmetic/divisibility](!/arithmetic/divisibility)"}},{"id":"r4","name":"Divisibility rules","values":{"c1":"digit-based shortcuts derived from how 10 behaves under modular arithmetic — each rule is a modular identity in compact form","c2":"[/divisibility/rules](!/arithmetic/divisibility/rules)"}},{"id":"r5","name":"GCD & Euclidean algorithm","values":{"c1":"the algorithm finds gcd(a, b) by repeatedly applying the modulo operation until the remainder reaches zero","c2":"[/divisibility/gcd](!/arithmetic/divisibility/gcd)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("The Clock Analogy"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Cyclic system","features":[{"id":"c1","name":"Cycle period (modulus)","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"12-hour clock","values":{"c1":"12","c2":"15:00 on a 24-hour clock → 15 mod 12 = 3 → 3 o'clock"}},{"id":"r2","name":"24-hour clock","values":{"c1":"24","c2":"hour 27 from midnight → 27 mod 24 = 3 → 3:00 AM"}},{"id":"r3","name":"Days of the week","values":{"c1":"7","c2":"starting Sunday (0), day 10 of a sequence → 10 mod 7 = 3 → Wednesday"}},{"id":"r4","name":"Months of the year","values":{"c1":"12","c2":"14 months from January (0) → 14 mod 12 = 2 → March"}},{"id":"r5","name":"Chromatic musical notes","values":{"c1":"12","c2":"each octave repeats the 12-tone pattern; transposing by 12 semitones returns to the same note"}},{"id":"r6","name":"Compass bearings (degrees)","values":{"c1":"360","c2":"a bearing of 720° → 720 mod 360 = 0° → due north (two full turns)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("The Range of Remainders"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Modulus n","features":[{"id":"c1","name":"Remainder set {0, 1, …, n−1}","type":"text"},{"id":"c2","name":"Natural interpretation","type":"text"}],"items":[{"id":"r1","name":"2","values":{"c1":"{0, 1}","c2":"parity — 0 for even, 1 for odd"}},{"id":"r2","name":"7","values":{"c1":"{0, 1, 2, 3, 4, 5, 6}","c2":"day-of-week index from a starting reference day"}},{"id":"r3","name":"10","values":{"c1":"{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}","c2":"the last digit of the decimal representation of the number"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("What is Modulo?"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"a","features":[{"id":"c1","name":"n","type":"text"},{"id":"c2","name":"q (quotient)","type":"text"},{"id":"c3","name":"r = a mod n","type":"text"},{"id":"c4","name":"Identity check (a = n · q + r)","type":"text"}],"items":[{"id":"r1","name":"17","values":{"c1":"5","c2":"3","c3":"2","c4":"17 = 5 · 3 + 2 ✓"}},{"id":"r2","name":"23","values":{"c1":"7","c2":"3","c3":"2","c4":"23 = 7 · 3 + 2 ✓"}},{"id":"r3","name":"12","values":{"c1":"4","c2":"3","c3":"0","c4":"12 = 4 · 3 + 0 ✓ (exact division)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Arithmetic methods", items: [
+      { skill: "Do modular arithmetic", href: "/arithmetic/methods/modular-arithmetic", desc: "Find the remainder of a sum, product or power: reduce each number mod $n$ first, operate on the remainders, reduce again; use cycles for powers.", level: "composite" },
+      { skill: "Find the GCD with the Euclidean algorithm", href: "/arithmetic/methods/gcd-euclidean-algorithm", desc: "Replace the pair $(a, b)$ by $(b, a \\bmod b)$ until the remainder is $0$; the last nonzero remainder is the GCD. No factoring needed.", level: "composite" },
+      { skill: "Find the modulo of a negative number", href: "/arithmetic/methods/modulo-negative-numbers", desc: "Round the quotient down, not toward zero, so the remainder lands in $0, \\ldots, n - 1$: $(-38) \\bmod 7 = 4$ because $-38 = 7 \\cdot (-6) + 4$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1646,8 +1679,23 @@ const schemas = {
     ],
   };
 
+  // Procedure rollout 2026-11-14: Computing a remainder, step by step (obj51).
+  const remainderSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$47 \\bmod 5$',
+      rows: [
+        { step: 'Divide $a$ by $n$', example: '$47 \\div 5 = 9.4$' },
+        { step: 'Keep the integer part of the quotient', example: '$9$' },
+        { step: 'Multiply back by $n$', stepSub: 'The largest multiple of $n$ that fits', example: '$9 \\times 5 = 45$' },
+        { step: 'Subtract from $a$', stepSub: 'The leftover is the remainder', example: '$47 - 45 = 2$' },
+      ],
+    },
+  };
+
 return {
   props:{
+    remainderSteps,
     specialCasesData,
     formulaSummaryData,
     pitfallData,
@@ -1678,7 +1726,7 @@ return {
 
 const figureTheme = { title: '#06357A', parentBg: '#06357A', accent: '#2563EB', warm: '#B45309' }
 
-export default function ModuloPage({ specialCasesData, formulaSummaryData, pitfallData,moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function ModuloPage({ remainderSteps, specialCasesData, formulaSummaryData, pitfallData,moduloDivisibilityCases, seoData, sectionsContent, introContent, obj1Table, obj4Table, obj7Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1729,8 +1777,15 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
           `The expression $17 \\bmod 5 = 2$ because $17 = 5 \\cdot 3 + 2$. Three complete groups of $5$ account for $15$, leaving $2$.`,
           `The expression $23 \\bmod 7 = 2$ because $23 = 7 \\cdot 3 + 2$. Three complete groups of $7$ account for $21$, leaving $2$.`,
           `The expression $12 \\bmod 4 = 0$ because $12 = 4 \\cdot 3 + 0$. The division is exact — nothing remains.`,
-          <div key={'obj1-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-modulo-what-is-modulo-matrix'}
+            id="modulo-what-is-modulo-matrix"
+            title="What is Modulo?"
+            source="/arithmetic/modulo"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
           <div key={'unit-wrap'} dangerouslySetInnerHTML={{ __html: demoUnits.wrap }} />,
           `Modulo is the arithmetic of the slot, not of the number.`,
         ],
@@ -1810,8 +1865,15 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-modulo-range-remainders-matrix'}
+            id="modulo-range-remainders-matrix"
+            title="The Range of Remainders"
+            source="/arithmetic/modulo"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-range'} dangerouslySetInnerHTML={{ __html: demoUnits.range }} />,
           `Whatever the size of a, its remainder is one of these few values.`,
         ]
@@ -1822,6 +1884,15 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj51.link,
         content:[
           sectionsContent.obj51.content,
+          <DiagramFrame
+            key={'obj51-procedure'}
+            id="compute-remainder-steps"
+            title="Computing a remainder, step by step"
+            source="/arithmetic/modulo"
+            before={"The four moves on the first example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={remainderSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-mod47'} dangerouslySetInnerHTML={{ __html: demoUnits.mod47 }} />,
           `The remainder is always the gap to the last multiple at or below a, so it stays between 0 and 4.`,
         ]
@@ -1878,8 +1949,15 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj7Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-modulo-clock-analogy-matrix'}
+            id="modulo-clock-analogy-matrix"
+            title="The Clock Analogy"
+            source="/arithmetic/modulo"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1939,6 +2017,15 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'concept-map-modulo-related-sections'}
+            id="modulo-related-sections"
+            title="Related Sections"
+            source="/arithmetic/modulo"
+            related={false}
+          >
+            <ConceptMap data={cm_moduloRelated} variant="hub" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1947,8 +2034,23 @@ $$a = n \\cdot q + r, \\qquad 0 \\leq r < n$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-modulo-summary-map-modulo-subtree-matrix'}
+            id="modulo-summary-map-modulo-subtree-matrix"
+            title="Summary: A Map of the Modulo Subtree"
+            source="/arithmetic/modulo"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

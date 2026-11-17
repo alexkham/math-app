@@ -904,6 +904,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (capstone summary)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -926,6 +927,23 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the covariance and correlation of two random variables", href: "/probability/random-variables/methods/covariance-correlation", desc: "Compute $E[XY] - E[X]E[Y]$ from the joint table, then divide by $\\sigma_X \\sigma_Y$ for the correlation.", level: "composite", here: "#2" },
+    ] },
+    { title: "Random variable methods", items: [
+      { skill: "Find the standard deviation of a random variable", href: "/probability/random-variables/methods/standard-deviation", desc: "Find the variance first, then take its square root; the result is in the units of $X$.", level: "composite" },
+      { skill: "Find the variance of a random variable", href: "/probability/random-variables/methods/variance", desc: "Find the mean, then the mean of the square, and subtract: $E[X^2] - (E[X])^2$.", level: "composite" },
+      { skill: "Find the expected value of a sum", href: "/probability/random-variables/methods#linearity-of-expectation", desc: "The variable is a sum or a linear combination of variables whose means you know: $X + Y$, $3X - 2Y + 5$, the total of $n$ dice. It holds whether or not the variables are independent.", level: "atomic" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1748,6 +1766,7 @@ $$\\operatorname{Cov}(X, Y) = E\\!\\left[(X - \\mu_X)(Y - \\mu_Y)\\right]$$
         link:sectionsContent.obj2.link,
         content:[
           <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the covariance and correlation of two random variables](!/probability/random-variables/methods/covariance-correlation) →@`,
         ]
     },
     {
@@ -1885,6 +1904,14 @@ The two terms are built from different information: one keeps track of which val
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

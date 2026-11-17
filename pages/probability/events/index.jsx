@@ -549,6 +549,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 3 tables (types aggregation, relations aggregation, obj5 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -567,9 +568,63 @@ import vennTwoSetDiagrams from '@/app/components/probability/venn-explorer/vennT
 import conditionalTreeDiagrams from '@/app/components/probability/conditional-probability-demo/conditionalTreeDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SetDiagram from '@/app/components/infographics/SetDiagram/SetDiagram'
+
+// SetDiagram (operations + probability) 2026-11-15: the page's die example, A = {2, 4, 6} (even) and B = {4, 5, 6} (at least 4).
+const setDiagramTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309', circle: '#06357A', setLabel: '#06357A', hatch: '#06357A', pickInk: '#B45309' };
+const overlappingEventsDiagram = {
+  labels: { elementsThat: 'Outcomes that', elements: 'Outcomes' },
+  sets: [{ id: 'A' }, { id: 'B' }],
+  regionNames: { A: 'only $A$', AB: 'both $A$ and $B$', B: 'only $B$', '': 'neither' },
+  elements: [
+    { label: '2', in: ['A'] }, { label: '4', in: ['A', 'B'] }, { label: '6', in: ['A', 'B'] }, { label: '5', in: ['B'] }, { label: '1', in: [] }, { label: '3', in: [] },
+  ],
+  given: 'One roll of a die: $A = \\{2, 4, 6\\}$ (even), $B = \\{4, 5, 6\\}$ (at least 4)',
+  initial: 'either',
+  operations: [
+    { id: 'a', name: 'Even', notation: '$A$', regions: ['A', 'AB'], rule: 'are even', result: '$\\{2, 4, 6\\}$',
+      prob: { calc: '$\\frac{3}{6} = \\frac{1}{2}$' } },
+    { id: 'b', name: 'At least 4', notation: '$B$', regions: ['AB', 'B'], rule: 'are at least 4', result: '$\\{4, 5, 6\\}$',
+      prob: { calc: '$\\frac{3}{6} = \\frac{1}{2}$' } },
+    { id: 'both', name: 'Both', notation: '$A \\cap B$', regions: ['AB'], rule: 'are even and at least 4', result: '$\\{4, 6\\}$',
+      prob: { calc: '$\\frac{2}{6} = \\frac{1}{3}$', note: 'These two outcomes lie in both events.' } },
+    { id: 'either', name: 'Either', notation: '$A \\cup B$', regions: ['A', 'AB', 'B'], rule: 'are even or at least 4', result: '$\\{2, 4, 5, 6\\}$',
+      prob: { calc: '$\\frac{4}{6} = \\frac{2}{3}$', note: 'Adding $\\frac{3}{6} + \\frac{3}{6} = 1$ counts the shared outcomes $4$ and $6$ twice.' } },
+  ],
+  probability: {},
+};
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+const cm_eventsPath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"before":[{"name":"Sample spaces","href":"/probability/sample-space","why":"the universe from which events are formed"}],"target":{"kicker":"This page","name":"Events","text":"The foundation of nearly everything in probability."},"after":[{"name":"Random variables","href":"/probability/random-variables","why":"turn outcomes into numbers, with events underneath"},{"name":"Conditional probability","href":"/probability/conditional-probability","why":"events under restricted information"},{"name":"Independence","href":"/probability/independence","why":"when events do not influence each other"},{"name":"Total probability","href":"/probability/total-probability","why":"an event broken into its contributions across cases"},{"name":"Bayes' reasoning","href":"/probability/bayes-theorem","why":"events re-evaluated when new information arrives"}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Events at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Note / example","type":"text"}],"items":[{"id":"r1","name":"What it is","values":{"c1":"a subset of the [sample space](!/probability/sample-space) — a meaningful collection of outcomes","c2":"A ⊆ Ω"}},{"id":"r2","name":"Construction","values":{"c1":"group outcomes that share a meaningful condition","c2":"\"result is even\", \"sensor triggers\", \"value > threshold\""}},{"id":"r3","name":"Set-theoretic view","values":{"c1":"events are sets; every set operation has a probabilistic reading","c2":"Venn diagrams visualize event relationships"}},{"id":"r4","name":"Combining events","values":{"c1":"union = \"or\", intersection = \"and\", complement = \"not\"","c2":"A ∪ B, A ∩ B, A$^{c}$"}},{"id":"r5","name":"Relations between events","values":{"c1":"subset, equality, disjointness, partition","c2":"the structural language for comparisons"}},{"id":"r6","name":"Probability attachment","values":{"c1":"probabilities attach to events, not to outcomes in isolation","c2":"disjoint events add; overlapping ones interact through the overlap"}},{"id":"r7","name":"[Independence](!/probability/independence)","values":{"c1":"events whose occurrence patterns do not interact","c2":"knowing A occurred does not update beliefs about B"}},{"id":"r8","name":"[Conditioning](!/probability/conditional-probability)","values":{"c1":"restricts attention to a smaller universe inside another event","c2":"foundation of conditional probability and Bayes' reasoning"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table relationsTable ("Relations Between Events"); converted from the table's own cells.
+const fm_relationsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Relation","features":[{"id":"c1","name":"What it means","type":"text"},{"id":"c2","name":"Set form","type":"text"}],"items":[{"id":"r1","name":"Subset","values":{"c1":"whenever A happens, B happens too","c2":"A ⊆ B"}},{"id":"r2","name":"Equality","values":{"c1":"A and B describe exactly the same situations","c2":"A = B (i.e., A ⊆ B and B ⊆ A)"}},{"id":"r3","name":"Disjointness","values":{"c1":"A and B share no outcomes; cannot both occur","c2":"A ∩ B = ∅"}},{"id":"r4","name":"Overlap","values":{"c1":"events share some outcomes but not all","c2":"A ∩ B ≠ ∅, neither ⊆ the other"}},{"id":"r5","name":"Partition","values":{"c1":"a collection of disjoint events covering all possibilities","c2":"⋃ᵢ Aᵢ = Ω, Aᵢ ∩ Aⱼ = ∅"}},{"id":"r6","name":"Difference","values":{"c1":"the part of one event that lies outside the other","c2":"A − B = A ∩ B$^{c}$"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table typesTable ("Event Structure and Types"); converted from the table's own cells.
+const fm_typesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Type","features":[{"id":"c1","name":"What it is","type":"text"},{"id":"c2","name":"Notation / example","type":"text"}],"items":[{"id":"r1","name":"Elementary event","values":{"c1":"a situation containing exactly one outcome","c2":"{ω}"}},{"id":"r2","name":"Empty event","values":{"c1":"cannot happen — contains no outcomes","c2":"∅"}},{"id":"r3","name":"Certain event","values":{"c1":"always happens — contains every outcome","c2":"Ω (the whole sample space)"}},{"id":"r4","name":"Complement","values":{"c1":"everything outside the event","c2":"A$^{c}$ or Ω − A"}},{"id":"r5","name":"Union","values":{"c1":"at least one of A or B occurs (\"or\")","c2":"A ∪ B"}},{"id":"r6","name":"Intersection","values":{"c1":"A and B both occur (\"and\")","c2":"A ∩ B"}},{"id":"r7","name":"Disjoint events","values":{"c1":"cannot occur together","c2":"A ∩ B = ∅"}},{"id":"r8","name":"Difference","values":{"c1":"outcomes in A but not in B","c2":"A − B (also A \\ B)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Probability methods", items: [
+      { skill: "List a sample space", href: "/probability/methods/sample-space", desc: "Write down every possible outcome of an experiment with a list, a grid or a tree, then count it.", level: "composite" },
+      { skill: "Find a probability with the complement rule", href: "/probability/methods#complement-rule", desc: "The event is easier to describe by what does not happen: \"at least one\", \"not all\", \"no six\".", level: "atomic" },
+      { skill: "Find the probability of A or B", href: "/probability/methods#addition-rule", desc: "The question says \"or\": a heart or a king, an even number or a number above $4$, rain or wind.", level: "atomic" },
+      { skill: "Test whether two events are independent", href: "/probability/methods/independence-test", desc: "Compare the probability of both with the product of the single probabilities.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1365,8 +1420,15 @@ export default function EventsPage({ pitfallData,eventTypesOutline,
         link:'',
         content:[
             sectionsContent.types.content,
-            <div key={'types-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: typesTable }} />,
+            <DiagramFrame
+              key={'feature-matrix-events-event-structure-types-matrix'}
+              id="events-event-structure-types-matrix"
+              title="Event Structure and Types"
+              source="/probability/events"
+              related={false}
+            >
+              <FeatureMatrix data={fm_typesTable} />
+            </DiagramFrame>,
             <DiagramFrame
               key={'types-diagram'}
               id="event-types-outline"
@@ -1393,8 +1455,15 @@ export default function EventsPage({ pitfallData,eventTypesOutline,
         link:'',
         content:[
             sectionsContent.relations.content,
-            <div key={'relations-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: relationsTable }} />,
+            <DiagramFrame
+              key={'feature-matrix-events-relations-between-events-matrix'}
+              id="events-relations-between-events-matrix"
+              title="Relations Between Events"
+              source="/probability/events"
+              related={false}
+            >
+              <FeatureMatrix data={fm_relationsTable} />
+            </DiagramFrame>,
                   <div key={'unit-relations'} dangerouslySetInnerHTML={{ __html: demoUnits.relations }} />,
             `A subset can only have a smaller or equal probability: P(A) = 4/36 ≤ P(B) = 6/36.`,
         ]
@@ -1405,6 +1474,16 @@ export default function EventsPage({ pitfallData,eventTypesOutline,
         link:'',
         content:[
             sectionsContent.assignement.content,
+            <DiagramFrame
+              key={'set-diagram-overlapping-events'}
+              id="overlapping-events-die"
+              title="Overlapping events on one die"
+              source="/probability/events"
+              related={false}
+              before={'The die example as a picture: each outcome sits in the region of the events it belongs to. Pick an event to see its outcomes and its probability.'}
+            >
+              <SetDiagram data={overlappingEventsDiagram} variant="operations" theme={setDiagramTheme} />
+            </DiagramFrame>,
         ]
     },
     {
@@ -1445,6 +1524,15 @@ The formula also tests a common hunch: a six comes up on one roll in six, so six
         link:'',
         content:[
           sectionsContent.connections.content,
+          <DiagramFrame
+            key={'concept-map-events-connections'}
+            id="events-connections"
+            title="Connections to Other Probability Topics"
+            source="/probability/events"
+            related={false}
+          >
+            <ConceptMap data={cm_eventsPath} variant="path" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1453,8 +1541,15 @@ The formula also tests a common hunch: a six comes up on one roll in six, so six
         link:'',
         content:[
           sectionsContent.obj5.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-events-events-at-glance-matrix'}
+            id="events-events-at-glance-matrix"
+            title="Events at a Glance"
+            source="/probability/events"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1472,6 +1567,14 @@ The formula also tests a common hunch: a six comes up on one roll in six, so six
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

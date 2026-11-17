@@ -680,6 +680,7 @@
 
 
 // tables-optimized: v4 | 2026-05-26 | 1 table (obj9 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -699,6 +700,23 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Divide fractions", href: "/arithmetic/methods/divide-fractions", desc: "Keep the first fraction, change $\\div$ to $\\times$, flip the second fraction, then multiply: $\\frac{a}{b} \\div \\frac{c}{d} = \\frac{a}{b} \\times \\frac{d}{c}$.", level: "composite", here: "#2" },
+    ] },
+    { title: "More arithmetic methods", items: [
+      { skill: "Multiply fractions", href: "/arithmetic/methods/multiply-fractions", desc: "Multiply numerators together and denominators together, $\\frac{a}{b} \\times \\frac{c}{d} = \\frac{ac}{bd}$, cancelling common factors first.", level: "composite" },
+      { skill: "Simplify complex fractions", href: "/arithmetic/methods/complex-fractions", desc: "Simplify a fraction whose top or bottom contains fractions: multiply both by the LCD of the inner denominators, or divide the top by the bottom.", level: "composite" },
+      { skill: "Work with mixed numbers", href: "/arithmetic/methods/mixed-numbers", desc: "Convert between mixed numbers and improper fractions, $w\\tfrac{a}{b} = \\frac{wb + a}{b}$, and use the conversion to multiply and divide them.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/arithmetic/methods", label: "All arithmetic methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1440,6 +1458,7 @@ Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\
         link:sectionsContent.obj2.link,
         content:[
           <ConceptIntro key={'obj2-intro'} data={conceptIntro} />,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to divide fractions](!/arithmetic/methods/divide-fractions) →@`,
         ]
     },
     {
@@ -1527,6 +1546,14 @@ Flipping $\\frac{2}{3}$ instead of $\\frac{4}{5}$ gives $\\frac{3}{2} \\times \\
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

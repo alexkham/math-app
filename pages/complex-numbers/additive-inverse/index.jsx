@@ -1280,6 +1280,7 @@
 //   )
 // }
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1301,9 +1302,53 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_additiveInverseViews = {
+  center: { name: 'From $z$ to $-z$', sub: 'four descriptions of the same transformation' },
+  quadrants: [
+    { title: 'Negating both coordinates', items: [
+      '$z = a + bi$ corresponds to the point $(a, b)$.',
+      '$-z = -a - bi$ corresponds to the point $(-a, -b)$.' ] },
+    { title: 'Reflecting through the origin', items: [
+      'Not across the real axis, not across the imaginary axis, but through the origin itself.',
+      'From the first quadrant to the third, from the second to the fourth.',
+      'The origin sits exactly midway between $z$ and $-z$.' ] },
+    { title: 'Preserving distance', items: [
+      { text: 'The modulus remains unchanged.', note: '$|-z| = |z|$' },
+      'The two points occupy opposite ends of a diameter of the circle of radius $|z|$.' ] },
+    { title: 'Reversing direction', items: [
+      { text: 'The argument shifts by exactly $\\pi$ radians.', note: '$\\arg(-z) = \\arg(z) + \\pi$' },
+      'A rotation of $180°$ about the origin carries $z$ to $-z$.' ] }
+  ]
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Properties of Additive Inverse"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Meaning","type":"text"}],"items":[{"id":"r1","name":"Defining property","values":{"c1":"z + (−z) = 0","c2":"a number plus its inverse sums to zero"}},{"id":"r2","name":"Double negation","values":{"c1":"−(−z) = z","c2":"applying inversion twice returns the original"}},{"id":"r3","name":"Distribution over sum","values":{"c1":"−(z₁ + z₂) = −z₁ − z₂","c2":"inverse of a sum = sum of inverses"}},{"id":"r4","name":"Commutes with conjugation","values":{"c1":"−z̄ = −z","c2":"order of negation and conjugation doesn't matter"}},{"id":"r5","name":"Modulus preservation","values":{"c1":"|−z| = |z|","c2":"same distance from the origin"}},{"id":"r6","name":"Argument shift","values":{"c1":"arg(−z) = arg(z) + π","c2":"direction reverses — a 180° rotation about the origin"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Side-by-Side Examples of −z and z̄"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"−z (both signs flip)","type":"text"},{"id":"c2","name":"z̄ (only imag flips)","type":"text"},{"id":"c3","name":"−z = z̄ ?","type":"verdict"},{"id":"c4","name":"Geometric note","type":"text"}],"items":[{"id":"r1","name":"3 + 2i (Q1)","values":{"c1":"−3 − 2i (Q3)","c2":"3 − 2i (Q4)","c3":"no","c4":"−z opposite quadrant; z̄ mirrored across real axis"}},{"id":"r2","name":"−1 + 4i (Q2)","values":{"c1":"1 − 4i (Q4)","c2":"−1 − 4i (Q3)","c3":"no","c4":"−z and z̄ are mirror images of each other across the imaginary axis"}},{"id":"r3","name":"5 (real)","values":{"c1":"−5","c2":"5","c3":"no","c4":"only −z reflects; z̄ = z since the point lies on the real axis"}},{"id":"r4","name":"4i (pure imag)","values":{"c1":"−4i","c2":"−4i","c3":"yes","c4":"both operations land at (0, −4); the only nonzero case where they agree"}},{"id":"r5","name":"0","values":{"c1":"0","c2":"0","c3":"yes","c4":"zero is the unique fixed point of both reflections"}},{"id":"r6","name":"2 − 3i (Q4)","values":{"c1":"−2 + 3i (Q2)","c2":"2 + 3i (Q1)","c3":"no","c4":"again −z and z̄ are mirror images across the imaginary axis"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj10Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj10Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Wrong result","type":"text"},{"id":"c2","name":"Correct result","type":"text"},{"id":"c3","name":"Why","type":"text"}],"items":[{"id":"r1","name":"Negating only the real part","values":{"c1":"−(3 + 2i) = −3 + 2i ✗","c2":"−3 − 2i","c3":"this gives −z̄ , not −z; the additive inverse flips both signs"}},{"id":"r2","name":"Negating only the imaginary part","values":{"c1":"−(3 + 2i) = 3 − 2i ✗","c2":"−3 − 2i","c3":"this gives z̄ , not −z; same root cause — both parts must change sign"}},{"id":"r3","name":"Dropping a sign in subtraction","values":{"c1":"(5 + 2i) − (3 − 4i) = 2 − 2i ✗","c2":"2 + 6i","c3":"subtracting −4i means adding +4i; the negative must distribute to both parts of the subtrahend"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Complex number methods", items: [
+      { skill: "Add or subtract complex numbers", href: "/complex-numbers/methods#add-subtract-complex", desc: "Two complex numbers in the form $a + bi$ are joined by a plus or minus sign: $(2 + 3i) + (5 - i)$, $(4 - 3i) - (1 - 5i)$.", level: "atomic" },
+      { skill: "Plot complex numbers on the Argand plane", href: "/complex-numbers/methods/plot-on-argand-plane", desc: "Plot $a + bi$ as the point $(a, b)$: real part across, imaginary part up; read off the modulus, the conjugate and sums from the picture.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -2630,6 +2675,15 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
           sectionsContent.obj4.content,
           <div key={'unit-halfTurn'} dangerouslySetInnerHTML={{ __html: demoUnits.halfTurn }} />,
           `Compare the conjugate: it reflects z across the real axis instead, so it keeps the real part and flips only the sign of the imaginary part.`,
+          <DiagramFrame
+            key={'four-sides-additive-inverse-four-descriptions'}
+            id="additive-inverse-four-descriptions"
+            title="Geometric Interpretation"
+            source="/complex-numbers/additive-inverse"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_additiveInverseViews} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2638,11 +2692,15 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-additive-inverse-properties-additive-inverse-matrix'}
+            id="additive-inverse-properties-additive-inverse-matrix"
+            title="Properties of Additive Inverse"
+            source="/complex-numbers/additive-inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2720,11 +2778,15 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-additive-inverse-common-mistakes-matrix'}
+            id="additive-inverse-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/complex-numbers/additive-inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj10Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj10-mistakes'}
             id="additive-inverse-pitfalls"
@@ -2742,11 +2804,23 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-additive-inverse-summary-side-side-matrix'}
+            id="additive-inverse-summary-side-side-matrix"
+            title="Summary: Side-by-Side Examples of −z and z̄"
+            source="/complex-numbers/additive-inverse"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

@@ -1,4 +1,5 @@
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -12,6 +13,7 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -19,8 +21,35 @@ import FAQSection from '@/app/components/page-components/faq-component/FAQSectio
 import NotationSection from '@/app/components/page-components/content-components/NotationSection'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import powersRootsLogsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-powers-roots-logarithms'
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Radical and Exponent Notation"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Radical form","type":"text"},{"id":"c2","name":"Rational exponent form","type":"text"},{"id":"c3","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Square root","values":{"c1":"√a","c2":"a^(1/2)","c3":"√25 = 25^(1/2) = 5"}},{"id":"r2","name":"Cube root","values":{"c1":"∛a","c2":"a^(1/3)","c3":"∛8 = 8^(1/3) = 2"}},{"id":"r3","name":"nth root (index n)","values":{"c1":"ⁿ√a","c2":"a^(1/n)","c3":"⁵√32 = 32^(1/5) = 2"}},{"id":"r4","name":"nth root of a power","values":{"c1":"ⁿ√(aᵐ)","c2":"a^(m/n)","c3":"∛(8²) = 8^(2/3) = 4"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("The Roots Subtree at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Sub-topic","features":[{"id":"c1","name":"What it covers","type":"text"},{"id":"c2","name":"Go there for","type":"text"}],"items":[{"id":"r1","name":"[Properties of Radicals](!/algebra/roots/properties)","values":{"c1":"even vs odd index, sign behavior, domain restrictions on radicands","c2":"the fundamental rules that govern when and how radicals are defined"}},{"id":"r2","name":"[Radical Rules](!/algebra/roots/radical-rules)","values":{"c1":"full product, quotient, power, and nested-radical rules with their restrictions","c2":"a complete algebraic reference for manipulating radical expressions"}},{"id":"r3","name":"[Rational Exponents](!/algebra/roots/rational-exponents)","values":{"c1":"fractional powers, conversion between forms, exponent laws applied to roots","c2":"bridging radicals and exponents in any algebraic manipulation"}},{"id":"r4","name":"[Simplifying Radicals](!/algebra/roots/simplifying)","values":{"c1":"reducing radicals to simplest form, extracting perfect powers, removing fractions under the radical","c2":"step-by-step techniques to write any radical in its cleanest form"}},{"id":"r5","name":"[Operations with Radicals](!/algebra/roots/operations)","values":{"c1":"addition and subtraction of like radicals, multiplication and division, rationalizing denominators","c2":"combining and manipulating radical expressions in calculations"}},{"id":"r6","name":"[Radical Equations](!/algebra/roots/equations)","values":{"c1":"isolating radicals, raising both sides to powers, identifying extraneous solutions","c2":"solving equations where the unknown sits under a radical"}},{"id":"r7","name":"[Radical Functions](!/algebra/roots/functions)","values":{"c1":"domains and graphs of √x and ∛x, transformations, inverse relationship to powers","c2":"studying radicals as functions — their shape, behavior, and properties"}},{"id":"r8","name":"Radicals and Complex Numbers","values":{"c1":"extending to negative radicands via the imaginary unit i","c2":"what happens to even roots beyond the real-number system"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("When Radicands Are Negative"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Even index (n = 2, 4, 6, …)","type":"text"},{"id":"c2","name":"Odd index (n = 3, 5, 7, …)","type":"text"}],"items":[{"id":"r1","name":"Principal root for positive radicand","values":{"c1":"the non-negative real root","c2":"the unique (positive) real root"}},{"id":"r2","name":"Principal root for negative radicand","values":{"c1":"not defined in the real numbers (extends to complex via i)","c2":"the unique (negative) real root"}},{"id":"r3","name":"Domain of f(x) = ⁿ√x","values":{"c1":"x ≥ 0","c2":"all real numbers"}},{"id":"r4","name":"Example: positive radicand","values":{"c1":"√16 = 4","c2":"∛27 = 3"}},{"id":"r5","name":"Example: negative radicand","values":{"c1":"√(−4) is not a real number","c2":"∛(−8) = −2"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Rules for Radicals"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Rule","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Use case","type":"text"}],"items":[{"id":"r1","name":"Product","values":{"c1":"ⁿ√(ab) = ⁿ√a · ⁿ√b","c2":"splitting or combining a radical across a multiplication"}},{"id":"r2","name":"Quotient","values":{"c1":"ⁿ√(a ⁄ b) = ⁿ√a ⁄ ⁿ√b","c2":"splitting or combining a radical across a division"}},{"id":"r3","name":"Nested radicals","values":{"c1":"ᵐ√(ⁿ√a) = ⁽ᵐⁿ⁾√a","c2":"collapsing stacked radicals into a single radical by multiplying their indices"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Algebra methods", items: [
+      { skill: "Solve a radical equation", href: "/algebra/methods/radical-equations", desc: "Isolate the root, raise both sides to the index, solve, then check for extraneous solutions.", level: "composite" },
+      { skill: "Add, subtract, multiply and divide radicals", href: "/algebra/methods/radical-operations", desc: "Simplify first, then combine like radicals; multiply and divide roots with the same index.", level: "composite" },
+      { skill: "Simplify a radical", href: "/algebra/methods/simplify-radicals", desc: "Factor out every perfect power from under the root, with numbers and with variables.", level: "composite" },
+      { skill: "Rationalize a denominator", href: "/algebra/methods/rationalize-denominator", desc: "Remove roots from the bottom of a fraction: multiply by a root, a conjugate, or a missing power.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1034,8 +1063,15 @@ $$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
             current={'/algebra/roots'}
           />,
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-roots-radical-exponent-notation-matrix'}
+            id="roots-radical-exponent-notation-matrix"
+            title="Radical and Exponent Notation"
+            source="/algebra/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every root is a power: the index of the radical becomes the denominator of the exponent.]@`,
         ]
     },
@@ -1045,8 +1081,15 @@ $$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-roots-rules-radicals-matrix'}
+            id="roots-rules-radicals-matrix"
+            title="Rules for Radicals"
+            source="/algebra/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:Roots split over multiplication and division; addition and subtraction have no such rule.]@`,
         ]
     },
@@ -1088,8 +1131,15 @@ $$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-roots-when-radicands-are-negative-matrix'}
+            id="roots-when-radicands-are-negative-matrix"
+            title="When Radicands Are Negative"
+            source="/algebra/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:Odd roots accept every real number; even roots of negative numbers leave the reals and need $i$.]@`,
         ]
     },
@@ -1142,8 +1192,15 @@ $$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-roots-roots-subtree-at-glance-matrix'}
+            id="roots-roots-subtree-at-glance-matrix"
+            title="The Roots Subtree at a Glance"
+            source="/algebra/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj11-diagram'}
             id="roots-subtree-outline"
@@ -1152,6 +1209,14 @@ $$\\sqrt[4]{81} = 3 \\quad \\text{because} \\quad 3^4 = 81$$]@`,
           >
             <TaxonomyOutline data={rootsSubtreeOutline} variant="outline" exportable={false} showToolbar={false} framed={false} />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

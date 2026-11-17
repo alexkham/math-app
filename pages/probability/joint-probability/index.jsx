@@ -654,6 +654,7 @@
 
 // tables-optimized: v4 | 2026-05-23 | 4 tables (calculate aggregation, distributions aggregation, mistakes aggregation, obj5 summary capstone)
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -675,7 +676,40 @@ import probEventsNotationSheet from '@/app/components/infographics/NotationCheat
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
 
+const cm_jointRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Joint probability"},"groups":[{"name":"Obtained from the joint","items":[{"name":"Conditional probability","href":"/probability/conditional-probability#meaning","why":"built directly from the joint distribution"},{"name":"Marginal probability","href":"/probability/joint-probability#marginal","why":"obtained by summing or integrating the joint"},{"name":"Independence","href":"/probability/independence#formula","why":"defined by how the joint breaks into marginals"}]},{"name":"Goes further","items":[{"name":"Covariance and correlation","href":"/probability/covariance","why":"how variables move together, visible first in the joint"},{"name":"Bayes' theorem","href":"/probability/bayes-theorem#chain","why":"from the relationship between joint and conditional"},{"name":"Multivariate distributions","href":"/probability/joint-probability#distributions","why":"joint probability in higher dimensions"}]}]}};
+
+
+// FeatureMatrix 2026-11-14: replaces the table calculateTable ("Ways to Calculate Joint Probability"); converted from the table's own cells.
+const fm_calculateTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"What you do","type":"text"},{"id":"c2","name":"When to use","type":"text"}],"items":[{"id":"r1","name":"Direct reasoning","values":{"c1":"count favourable combined outcomes ÷ total combined outcomes","c2":"small, equally likely discrete sample spaces"}},{"id":"r2","name":"Contingency table","values":{"c1":"read individual cells, sum relevant cells for compound conditions","c2":"discrete variables with finite support"}},{"id":"r3","name":"Joint density integration","values":{"c1":"∫∫$_{R}$ f$_{X,Y}$(x, y) dx dy over the region R","c2":"continuous variables when the joint PDF is known"}},{"id":"r4","name":"Joint CDF","values":{"c1":"evaluate F$_{X,Y}$ at the corners of a rectangle and combine","c2":"probabilities over rectangular / box-shaped regions"}},{"id":"r5","name":"Probability rules","values":{"c1":"apply union, complement, conditional, and product rules to combined events","c2":"compound conditions expressed as combinations of simpler ones"}}]};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Joint Probability at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"What it captures","type":"text"},{"id":"c2","name":"Example / note","type":"text"}],"items":[{"id":"r1","name":"What it is","values":{"c1":"likelihood that multiple outcomes occur together","c2":"P(X = x, Y = y) or P(A ∩ B)"}},{"id":"r2","name":"Discrete representation","values":{"c1":"joint PMF / contingency table with cells summing to 1","c2":"2×2 table, multinomial counts"}},{"id":"r3","name":"Continuous representation","values":{"c1":"joint PDF f$_{X,Y}$(x, y) integrating to 1 over the plane","c2":"bivariate normal, joint uniform"}},{"id":"r4","name":"Marginal from joint","values":{"c1":"sum or integrate out the other variable","c2":"row / column totals in a contingency table"}},{"id":"r5","name":"[Conditional](!/probability/conditional-probability) from joint","values":{"c1":"divide joint by the marginal of the conditioning variable","c2":"foundation of the chain rule and Bayes' theorem"}},{"id":"r6","name":"[Independence](!/probability/independence)","values":{"c1":"joint factorizes into the product of marginals","c2":"every cell equals (row marginal) × (column marginal)"}},{"id":"r7","name":"Why it matters","values":{"c1":"reveals dependence patterns invisible in single-variable marginals","c2":"risk, finance, ML classifiers, medical diagnostics"}},{"id":"r8","name":"Most common pitfall","values":{"c1":"treating P(A, B) as if it were P(A) + P(B)","c2":"addition is for disjoint events; joint co-occurrence calls for the product (and only under independence)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table mistakesTable ("Common Mistakes"); converted from the table's own cells.
+const fm_mistakesTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Why it's wrong","type":"text"},{"id":"c2","name":"Correct view","type":"text"}],"items":[{"id":"r1","name":"Confusing joint with [conditional](!/probability/conditional-probability)","values":{"c1":"P(A, B) is co-occurrence; P(A | B) is A given B already happened","c2":"conditional = joint ÷ marginal of the conditioning variable"}},{"id":"r2","name":"Assuming independence by default","values":{"c1":"real-world variables are usually dependent","c2":"independence ⇔ every cell equals (row marginal) × (column marginal)"}},{"id":"r3","name":"Treating P(A, B) as P(A) + P(B)","values":{"c1":"addition is for disjoint unions, not co-occurrence","c2":"use the product P(A) · P(B) — and only under independence"}},{"id":"r4","name":"Forgetting normalization","values":{"c1":"a joint that doesn't sum / integrate to 1 isn't a distribution","c2":"verify ∑∑ p(x, y) = 1 or ∫∫ f(x, y) dx dy = 1 before reasoning"}},{"id":"r5","name":"Mixing marginals and conditionals in a table","values":{"c1":"row / column totals are marginals, individual cells are joints","c2":"conditional = (cell) ÷ (row or column total)"}},{"id":"r6","name":"Reading \"balanced\" cells as independence","values":{"c1":"visual symmetry is not the same as factorization","c2":"independence is a quantitative product test, not a pattern check"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table distributionsTable ("Joint Distributions"); converted from the table's own cells.
+const fm_distributionsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Distribution","features":[{"id":"c1","name":"Type","type":"text"},{"id":"c2","name":"What it models","type":"text"},{"id":"c3","name":"Joint structure","type":"text"}],"items":[{"id":"r1","name":"Multinomial","values":{"c1":"discrete","c2":"counts across k categories over n trials","c3":"joint PMF over (n₁, ..., nₖ) with ∑nᵢ = n"}},{"id":"r2","name":"Bivariate normal","values":{"c1":"continuous","c2":"two correlated normal variables","c3":"bell-shaped joint density tilted by correlation ρ"}},{"id":"r3","name":"Joint uniform","values":{"c1":"continuous","c2":"probability spread evenly over a region R","c3":"f(x, y) = 1 / area(R) on R, zero elsewhere"}},{"id":"r4","name":"Joint Bernoulli (2×2)","values":{"c1":"discrete","c2":"two binary outcomes considered together","c3":"four cells P(0,0), P(0,1), P(1,0), P(1,1) summing to 1"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find probabilities from a two-way table", href: "/probability/methods/contingency-tables", desc: "Joint, marginal and conditional probabilities: pick the right cell and the right total.", level: "composite", here: "#tables" },
+    ] },
+    { title: "More probability methods", items: [
+      { skill: "Find a conditional probability", href: "/probability/methods/conditional-probability", desc: "The probability of A given B: divide the overlap by the probability of the condition.", level: "composite" },
+      { skill: "Test whether two events are independent", href: "/probability/methods/independence-test", desc: "Compare the probability of both with the product of the single probabilities.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/probability/methods", label: "All probability methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1545,6 +1579,7 @@ export default function JointProbabilityPage({ pitfallData,
         link:'',
         content:[
             sectionsContent.tables.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find probabilities from a two-way table](!/probability/methods/contingency-tables) →@`,
         ]
     },
     {
@@ -1553,8 +1588,15 @@ export default function JointProbabilityPage({ pitfallData,
         link:'',
         content:[
             sectionsContent.calculate.content,
-            <div key={'calculate-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: calculateTable }} />,
+            <DiagramFrame
+              key={'feature-matrix-joint-probability-ways-calculate-joint-matrix'}
+              id="joint-probability-ways-calculate-joint-matrix"
+              title="Ways to Calculate Joint Probability"
+              source="/probability/joint-probability"
+              related={false}
+            >
+              <FeatureMatrix data={fm_calculateTable} />
+            </DiagramFrame>,
                   <div key={'unit-jointCount'} dangerouslySetInnerHTML={{ __html: demoUnits.jointCount }} />,
             `Not P(A) + P(B) = 28/36, and not P(A) · P(B) = 5/36: A and B are not independent here.`,
         ]
@@ -1599,8 +1641,15 @@ export default function JointProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.distributions.content,
-          <div key={'distributions-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: distributionsTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-joint-probability-joint-distributions-matrix'}
+            id="joint-probability-joint-distributions-matrix"
+            title="Joint Distributions"
+            source="/probability/joint-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_distributionsTable} />
+          </DiagramFrame>,
         ]
     },
     // {
@@ -1625,8 +1674,15 @@ export default function JointProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.mistakes.content,
-          <div key={'mistakes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-joint-probability-common-mistakes-matrix'}
+            id="joint-probability-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/probability/joint-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_mistakesTable} />
+          </DiagramFrame>,
           sectionsContent.mistakesEntries.content,
           <DiagramFrame
             key={'mistakesEntries-mistakes'}
@@ -1645,6 +1701,15 @@ export default function JointProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.other.content,
+          <DiagramFrame
+            key={'concept-map-joint-probability-connections'}
+            id="joint-probability-connections"
+            title="Connections to Other Probability Concepts"
+            source="/probability/joint-probability"
+            related={false}
+          >
+            <ConceptMap data={cm_jointRelated} variant="hub" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1653,8 +1718,23 @@ export default function JointProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.obj5.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-joint-probability-joint-probability-at-matrix'}
+            id="joint-probability-joint-probability-at-matrix"
+            title="Joint Probability at a Glance"
+            source="/probability/joint-probability"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

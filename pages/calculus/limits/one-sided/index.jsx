@@ -1933,6 +1933,7 @@
 
 
 // tables-optimized: v4 | 2026-05-24 | 2 tables (obj3 comparison, obj11 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1955,8 +1956,53 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import limitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/calculus-limits'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_oneSidedUses = {
+  center: { name: 'One-sided limits', sub: 'where they are used' },
+  quadrants: [
+    { title: 'Endpoint Behavior', items: [
+      'On a closed interval, behavior at an endpoint can only be examined from one direction.',
+      'The limit from within the interval captures the boundary behavior.' ] },
+    { title: 'Classifying Discontinuities', items: [
+      'Is it a jump, removable, or infinite?',
+      'Compare the one-sided limits to each other and to the function value.' ] },
+    { title: 'Piecewise Models', items: [
+      { text: 'Real-world models often switch formulas at threshold values.', note: 'tax brackets, shipping rates, material phase changes' },
+      'One-sided limits detect whether the transition is smooth or abrupt.' ] },
+    { title: 'One-Sided Derivatives', items: [
+      'At a corner point, the rate of change can differ from the left and from the right.',
+      'One-sided derivatives capture this asymmetry.' ] }
+  ]
+};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("The Connection to Two-Sided Limits"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Left-hand limit at a","features":[{"id":"c1","name":"Right-hand limit at a","type":"text"},{"id":"c2","name":"Match?","type":"verdict"},{"id":"c3","name":"Two-sided limit at a","type":"text"}],"items":[{"id":"r1","name":"exists, = L","values":{"c1":"exists, = L","c2":"yes","c3":"exists, equals L"}},{"id":"r2","name":"exists, = L₁","values":{"c1":"exists, = L₂ ≠ L₁","c2":"no","c3":"does not exist (jump-style failure)"}},{"id":"r3","name":"exists","values":{"c1":"does not exist","c2":null,"c3":"does not exist"}},{"id":"r4","name":"does not exist","values":{"c1":"exists or does not exist","c2":null,"c3":"does not exist"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Where One-Sided Limits Are Essential"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Situation","features":[{"id":"c1","name":"Why one-sided analysis is required","type":"text"},{"id":"c2","name":"Pattern of one-sided limits","type":"text"},{"id":"c3","name":"Section","type":"text"}],"items":[{"id":"r1","name":"Piecewise function at a boundary","values":{"c1":"a different formula applies on each side of the boundary","c2":"use the left-side formula for LHL, the right-side formula for RHL; check whether they agree","c3":"5"}},{"id":"r2","name":"Jump discontinuity","values":{"c1":"function jumps from one value to another at the point","c2":"LHL = L₁, RHL = L₂, with L₁ ≠ L₂; both finite","c3":"6"}},{"id":"r3","name":"Vertical asymptote","values":{"c1":"function is unbounded near the point; signs may differ by direction","c2":"LHL = ±∞ and RHL = ±∞, possibly with opposite signs — see [limits and infinity](!/calculus/limits/infinity)","c3":"7"}},{"id":"r4","name":"Domain boundary (radicals, etc.)","values":{"c1":"function is only defined on one side of the boundary point","c2":"only one one-sided limit is meaningful; the other isn't defined","c3":"8"}},{"id":"r5","name":"Closed-interval endpoint","values":{"c1":"continuity at a or b on [a, b] can only be tested from inside the interval","c2":"continuous-from-right at a, continuous-from-left at b","c3":"10"}},{"id":"r6","name":"Corner point (one-sided derivatives)","values":{"c1":"instantaneous rate of change differs left vs right at a kink","c2":"left-derivative ≠ right-derivative ⇒ function is not differentiable at the point","c3":"11"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the limit of a piecewise function", href: "/calculus/limits/methods/piecewise-limits", desc: "At a break, the lower piece gives the left limit and the upper piece the right; compare.", level: "composite", here: "#5" },
+      { skill: "Evaluate one-sided limits", href: "/calculus/limits/methods/one-sided-limits", desc: "Left and right limits separately; the two-sided limit exists only when they agree.", level: "composite", here: "#9" },
+    ] },
+    { title: "More limit methods", items: [
+      { skill: "Check whether a function is continuous at a point", href: "/calculus/limits/methods/continuity-check", desc: "Three conditions: $f(a)$ exists, the limit exists, they are equal; then classify any failure.", level: "composite" },
+      { skill: "Find and remove a removable discontinuity", href: "/calculus/limits/methods/removable-discontinuities", desc: "A hole: the limit exists but $f(a)$ is missing or wrong. Cancel, find the limit, redefine.", level: "composite" },
+      { skill: "Find vertical asymptotes", href: "/calculus/limits/methods/vertical-asymptotes", desc: "Cancel common factors, find the zeros of the denominator, then the sign of each one-sided limit.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/limits/methods", label: "All limit methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -3025,8 +3071,15 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div key={'obj3-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj3Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-one-sided-connection-two-sided-matrix'}
+            id="one-sided-connection-two-sided-matrix"
+            title="The Connection to Two-Sided Limits"
+            source="/calculus/limits/one-sided"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
                   <div key={'unit-connection'} dangerouslySetInnerHTML={{ __html: demoUnits.connection }} />,
           `The two-sided limit is a conclusion drawn from the one-sided ones, never the other way round.`,
         ]
@@ -3063,6 +3116,7 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
           sectionsContent.obj4.content,
                   <div key={'unit-piecewiseMeet'} dangerouslySetInnerHTML={{ __html: demoUnits.piecewiseMeet }} />,
           `Changing the right piece to 3x would give a right limit of 6: a jump, and no two-sided limit.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the limit of a piecewise function](!/calculus/limits/methods/piecewise-limits) →@`,
         ]
     },
     {
@@ -3101,6 +3155,7 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
           sectionsContent.obj8.content,
                   <div key={'unit-signFn'} dangerouslySetInnerHTML={{ __html: demoUnits.signFn }} />,
           `Redefining the value at 0 cannot help: no single number is close to both −1 and 1.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate one-sided limits](!/calculus/limits/methods/one-sided-limits) →@`,
         ]
     },
     {
@@ -3117,6 +3172,15 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          <DiagramFrame
+            key={'four-sides-one-sided-limits-applications'}
+            id="one-sided-limits-applications"
+            title="Applications of One-Sided Limits"
+            source="/calculus/limits/one-sided"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_oneSidedUses} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3125,8 +3189,15 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'feature-matrix-one-sided-summary-where-one-matrix'}
+            id="one-sided-summary-where-one-matrix"
+            title="Summary: Where One-Sided Limits Are Essential"
+            source="/calculus/limits/one-sided"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -3162,6 +3233,14 @@ $$\\lim_{x \\to a^-} f(x)$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

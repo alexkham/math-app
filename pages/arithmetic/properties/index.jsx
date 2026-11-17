@@ -762,11 +762,66 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+
+const cm_propertiesRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Properties of operations"},"groups":[{"name":"In arithmetic","items":[{"name":"Fractions","href":"/arithmetic/fractions","why":"inherit every property of addition and multiplication"},{"name":"Reciprocal","href":"/arithmetic/fractions/dividing#1","why":"the multiplicative inverse of a fraction"},{"name":"Modular arithmetic","href":"/arithmetic/modulo","why":"the same properties in a finite cyclic system"},{"name":"Coprime","href":"/arithmetic/divisibility/gcd#7","why":"the condition for a multiplicative inverse modulo $n$"}]},{"name":"In algebra","items":[{"name":"Algebraic equations","href":"/algebra/equations","why":"solved by applying these properties step by step"},{"name":"Powers and exponents","href":"/algebra/powers","why":"multiplication extended into repeated multiplication"},{"name":"Exponent rules","href":"/algebra/powers/exponent-rules","why":"consequences of associativity and commutativity"}]}]}};
+
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Why These Properties Matter"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Technique","features":[{"id":"c1","name":"Example","type":"text"},{"id":"c2","name":"Property used","type":"text"}],"items":[{"id":"r1","name":"Combining like terms","values":{"c1":"3x + 5x = (3 + 5)x = 8x","c2":"distributive (reverse)"}},{"id":"r2","name":"Factoring","values":{"c1":"a² − b² = (a − b)(a + b)","c2":"distributive (reverse)"}},{"id":"r3","name":"Solving by inverse","values":{"c1":"2x + 5 = 11 → subtract 5 from both sides → 2x = 6","c2":"additive inverse"}},{"id":"r4","name":"Regrouping for mental math","values":{"c1":"25 · 4 · 7 = (25 · 4) · 7 = 100 · 7 = 700","c2":"associative"}},{"id":"r5","name":"Breaking a product","values":{"c1":"8 · 17 = 8(20 − 3) = 160 − 24 = 136","c2":"distributive (over subtraction)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("Sign Rules"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Rule","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Negative × negative","values":{"c1":"(−a)(−b) = ab — product of two negatives is positive","c2":"(−3)(−4) = 12"}},{"id":"r2","name":"Negative × positive","values":{"c1":"(−a)(b) = −(ab) — opposite signs yield a negative product","c2":"(−3)(4) = −12"}},{"id":"r3","name":"Double negative","values":{"c1":"−(−a) = a — negating a negative returns the original","c2":"−(−5) = 5"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Distributive Property"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Left distribution","values":{"c1":"a(b + c) = ab + ac","c2":"3(4 + 5) = 12 + 15 = 27"}},{"id":"r2","name":"Right distribution","values":{"c1":"(b + c)a = ba + ca","c2":"(4 + 5)·3 = 12 + 15 = 27"}},{"id":"r3","name":"Over subtraction","values":{"c1":"a(b − c) = ab − ac","c2":"3(7 − 2) = 21 − 6 = 15"}},{"id":"r4","name":"Factoring (reverse direction)","values":{"c1":"ab + ac = a(b + c)","c2":"3x + 12 = 3(x + 4)"}}]};
+
+// ConceptCompare (table) 2026-11-15: replaces the table capstoneTable (each property for addition, for multiplication, and whether subtraction / division inherit it); cells taken from the table.
+const pairedPropertiesTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+const pairedProperties = {
+  aspectsLabel: 'Property',
+  concepts: [
+    { id: 'add', name: 'For addition', values: {
+      comm: '${a + b = b + a}$',
+      assoc: '${(a + b) + c = a + (b + c)}$',
+      ident: '${a + 0 = a}$ (identity is $0$)',
+      inv: '${a + (-a) = 0}$ for every $a$',
+      dist: '${a(b + c) = ab + ac}$',
+      zero: 'no analog',
+    } },
+    { id: 'mul', name: 'For multiplication', values: {
+      comm: '$a \\cdot b = b \\cdot a$',
+      assoc: '$(a \\cdot b) \\cdot c = a \\cdot (b \\cdot c)$',
+      ident: '$a \\cdot 1 = a$ (identity is $1$)',
+      inv: '$a \\cdot \\frac{1}{a} = 1$ for every $a \\neq 0$',
+      dist: '${a(b + c) = ab + ac}$',
+      zero: '$a \\cdot 0 = 0$; consequence of distributivity; reason $0$ has no multiplicative inverse',
+    } },
+    { id: 'sub', name: 'Inherits to subtraction / division?', values: {
+      comm: 'no',
+      assoc: 'no',
+      ident: 'via inverse form',
+      inv: 'defines subtraction and division',
+      dist: 'yes: distributes over subtraction too',
+      zero: 'not applicable',
+    } },
+  ],
+  aspects: [
+    { id: 'comm', label: 'Commutative' },
+    { id: 'assoc', label: 'Associative' },
+    { id: 'ident', label: 'Identity element' },
+    { id: 'inv', label: 'Inverse element' },
+    { id: 'dist', label: 'Distributive (bridge)' },
+    { id: 'zero', label: 'Zero property' },
+  ],
+  together: { label: 'The bridge', text: 'The distributive property is the only one linking the two operations, which is why it shows the same formula in both columns.' },
+}
 
 export async function getStaticProps(){
 
@@ -1795,8 +1850,15 @@ export default function ArithmeticProperties({ proofStepsData2, proofStepsData, 
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-properties-distributive-property-matrix'}
+            id="properties-distributive-property-matrix"
+            title="Distributive Property"
+            source="/arithmetic/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
                   <div key={'unit-distribArray'} dangerouslySetInnerHTML={{ __html: demoUnits.distribArray }} />,
             `Read right to left, the same picture is factoring: 12 + 15 = 3 · (4 + 5).`,
         ]
@@ -1854,8 +1916,15 @@ export default function ArithmeticProperties({ proofStepsData2, proofStepsData, 
           >
             <ProofSteps data={proofStepsData2} variant="chain" />
           </DiagramFrame>,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-properties-sign-rules-matrix'}
+            id="properties-sign-rules-matrix"
+            title="Sign Rules"
+            source="/arithmetic/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
           `@academic[punchline:The sign rules are not memorized conventions: distributivity and additive inverses force every one of them.]@`,
         ]
     },
@@ -1881,8 +1950,15 @@ export default function ArithmeticProperties({ proofStepsData2, proofStepsData, 
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div key={'obj12-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj12Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-properties-why-these-properties-matter-matrix'}
+            id="properties-why-these-properties-matter-matrix"
+            title="Why These Properties Matter"
+            source="/arithmetic/properties"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1908,6 +1984,15 @@ export default function ArithmeticProperties({ proofStepsData2, proofStepsData, 
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
+          <DiagramFrame
+            key={'concept-map-properties-related-concepts'}
+            id="properties-related-concepts"
+            title="Related Concepts"
+            source="/arithmetic/properties"
+            related={false}
+          >
+            <ConceptMap data={cm_propertiesRelated} variant="hub" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1916,8 +2001,17 @@ export default function ArithmeticProperties({ proofStepsData2, proofStepsData, 
         link:sectionsContent.obj14.link,
         content:[
           sectionsContent.obj14.content,
-          <div key={'capstone-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: capstoneTable }} />,
+          <DiagramFrame
+            key={'concept-compare-paired-properties'}
+            id="properties-addition-and-multiplication"
+            title="Each Property for Addition and for Multiplication"
+            source="/arithmetic/properties"
+            related={false}
+            layout="top"
+          >
+            <ConceptCompare data={pairedProperties} variant="table" theme={pairedPropertiesTheme} />
+          </DiagramFrame>,
+          `The outline below sorts the same properties the other way: first by operation, then by property.`,
           <DiagramFrame
             key={'obj14-diagram'}
             id="arithmetic-properties-outline"

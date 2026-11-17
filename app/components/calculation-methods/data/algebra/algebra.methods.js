@@ -255,7 +255,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'powers',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Simplify Expressions with Exponents (Step by Step) | Learn Math Class',
         description: 'Simplify exponent expressions: clear brackets, combine same bases with the product and quotient rules, write positive exponents. Examples and mistakes.',
@@ -367,7 +367,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'powers',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Exponential Equations by Matching Bases | Learn Math Class',
         description: 'Solve exponential equations without logs: rewrite both sides as powers of one base, equate the exponents, solve what is left. Examples and mistakes.',
@@ -486,7 +486,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'powers',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Exponential Equations with Logarithms | Learn Math Class',
         description: 'Solve exponential equations like 3^x = 20: isolate the power, take ln of both sides, bring the exponent down, divide. Examples and common mistakes.',
@@ -611,7 +611,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'powers',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Exponential Inequalities (When to Flip the Sign) | Learn Math Class',
         description: 'Solve exponential inequalities: write both sides with one base, compare exponents, keep the sign for a base above 1 and flip it below 1. Examples.',
@@ -732,7 +732,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'roots',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Simplify a Radical (Square Roots and Higher Roots) | Learn Math Class',
         description: 'Simplify radicals: split the radicand into a perfect power times a leftover, take the root of the perfect power. Numbers, variables and cube roots.',
@@ -841,7 +841,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'roots',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Rationalize a Denominator (Roots and Conjugates) | Learn Math Class',
         description: 'Rationalize a denominator: multiply by the root, by the conjugate of a two-term denominator, or by the missing power of a cube root. Examples.',
@@ -967,7 +967,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'roots',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Add, Subtract, Multiply and Divide Radicals | Learn Math Class',
         description: 'Operate on radicals: simplify each root, add only like radicals, multiply or divide roots with the same index, expand like binomials. Examples.',
@@ -1086,7 +1086,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'roots',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Radical Equations (and Catch Extraneous Solutions) | Learn Math Class',
         description: 'Solve radical equations: isolate the root, square or cube both sides, solve, then check every answer in the original. Two-radical case included.',
@@ -1198,7 +1198,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'logarithms',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Evaluate a Logarithm Without a Calculator | Learn Math Class',
         description: 'Evaluate logarithms: turn log_b(x) into the question b^? = x, write x as a power of b (fractions and roots too), or change the base. Examples.',
@@ -1318,7 +1318,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'logarithms',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Expand and Condense Logarithmic Expressions | Learn Math Class',
         description: 'Expand a logarithm with the quotient, product and power rules in that order, and condense a sum of logs back into one. Examples and mistakes.',
@@ -1444,7 +1444,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'logarithms',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Logarithmic Equations (Step by Step) | Learn Math Class',
         description: 'Solve log equations: condense to one logarithm, rewrite as an exponential or equate the arguments, solve, then reject answers outside the domain. Examples.',
@@ -1568,7 +1568,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '5 steps · 3 examples',
       category: 'logarithms',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Logarithmic Inequalities (Base Above or Below 1) | Learn Math Class',
         description: 'Solve log inequalities: write the domain, condense, remove the logs (keep the sign for base > 1, flip it for base < 1), intersect with the domain.',
@@ -1694,7 +1694,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'sequences',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the nth Term of an Arithmetic Sequence | Learn Math Class',
         description: 'Find the nth term of an arithmetic sequence: compute the common difference, apply a_n = a_1 + (n − 1)d, or solve for a_1 and d from two terms.',
@@ -1812,7 +1812,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'sequences',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Sum an Arithmetic Series (Step by Step) | Learn Math Class',
         description: 'Sum an arithmetic series: find the number of terms, the first and the last term, then apply S_n = n(a_1 + a_n)/2, or the form with d. Examples and mistakes.',
@@ -1930,7 +1930,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'sequences',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the nth Term of a Geometric Sequence | Learn Math Class',
         description: 'Find the nth term of a geometric sequence: compute the common ratio, apply a_n = a_1·r^(n−1), or recover r and a_1 from two known terms. Examples and mistakes.',
@@ -2049,7 +2049,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'sequences',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Sum a Finite Geometric Series (Step by Step) | Learn Math Class',
         description: 'Sum a finite geometric series: find a_1, r and the number of terms, then apply S_n = a_1(1 − r^n)/(1 − r). Examples with sigma notation and mistakes.',
@@ -2168,7 +2168,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'sequences',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Sum an Infinite Geometric Series (and Convert Repeating Decimals) | Learn Math Class',
         description: 'Sum an infinite geometric series: check that |r| < 1, then S = a_1/(1 − r). Includes turning a repeating decimal into a fraction and what happens when |r| ≥ 1.',
@@ -2286,7 +2286,7 @@ const algebraMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'sequences',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Convert a Recursive Formula to an Explicit Formula | Learn Math Class',
         description: 'Turn a recursive rule like a_n = a_(n−1) + 4 or a_n = 3a_(n−1) into an explicit formula: identify the type, use a_1, verify on the first terms.',
@@ -2405,7 +2405,7 @@ const algebraMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Exponential Growth and Decay Problems | Learn Math Class',
         description: 'Growth and decay word problems: choose A = A₀·b^t or A₀·e^(kt), find the rate from the data, solve for an amount or a time. Half-life example.',
@@ -2501,7 +2501,7 @@ const algebraMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Compound Interest Problems (Step by Step) | Learn Math Class',
         description: 'Compound interest problems: identify P, r, n and t, use A = P(1 + r/n)^(nt) or Pe^(rt), then solve for the amount, the principal, the time or the rate.',

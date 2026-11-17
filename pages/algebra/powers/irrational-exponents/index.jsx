@@ -14,9 +14,42 @@ import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/fun
 import { tableHeaders } from '@/app/styles/theme'
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import NestedContainment from '@/app/components/infographics/NestedContainment/NestedContainment'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Intuition Through Approximation"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Lower bound for π","features":[{"id":"c1","name":"Upper bound for π","type":"text"},{"id":"c2","name":"2$^{lower}$","type":"text"},{"id":"c3","name":"2$^{upper}$","type":"text"},{"id":"c4","name":"Bracket width on 2$^{π}$","type":"text"}],"items":[{"id":"r1","name":"3","values":{"c1":"4","c2":"8","c3":"16","c4":"8"}},{"id":"r2","name":"3.1","values":{"c1":"3.2","c2":"≈ 8.574","c3":"≈ 9.190","c4":"≈ 0.62"}},{"id":"r3","name":"3.14","values":{"c1":"3.15","c2":"≈ 8.815","c3":"≈ 8.877","c4":"≈ 0.06"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+
+// FeatureMatrix 2026-11-15: replaces the table summaryTable (the four extension stages: mechanism added, example, cumulative domain on a); cells and links taken from the table.
+const fm_extensionStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  corner: 'Stage',
+  features: [
+    { id: 'c1', name: 'Mechanism added', type: 'text' },
+    { id: 'c2', name: 'Example', type: 'text' },
+    { id: 'c3', name: 'Cumulative domain on $a$', type: 'text' },
+  ],
+  items: [
+    { id: 'r1', name: '[Natural](!/algebra/powers/natural-exponents)', sub: '$n = 1, 2, 3, \\ldots$', values: {
+      c1: 'repeated multiplication: $a^n = a \\cdot a \\cdots a$ ($n$ factors)',
+      c2: '$2^4 = 16$',
+      c3: 'any real $a$' } },
+    { id: 'r2', name: '[Zero and negative](!/algebra/powers/negative-exponents)', values: {
+      c1: '$a^0 = 1$; $a^{-n} = \\frac{1}{a^n}$ (reciprocal)',
+      c2: '$2^{-3} = \\frac{1}{8}$',
+      c3: '$a \\neq 0$' } },
+    { id: 'r3', name: '[Rational](!/algebra/powers/rational-exponents)', sub: '$m/n$', values: {
+      c1: '$a^{m/n} = \\sqrt[n]{a^m}$ (root and power)',
+      c2: '$8^{2/3} = 4$',
+      c3: '$a \\geq 0$ if $n$ even; any real $a$ if $n$ odd' } },
+    { id: 'r4', name: 'Irrational', values: {
+      c1: '$a^x = \\lim a^r$ for rationals $r \\to x$ (continuous extension)',
+      c2: '$2^{\\pi} \\approx 8.825$',
+      c3: '$a > 0$' } },
+  ],
+}
 
 export async function getStaticProps(){
 const keyWords = [
@@ -628,11 +661,15 @@ export default function IrrationalExponentsPage({ pitfallData,exponentNest, base
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-irrational-exponents-intuition-through-approximation-matrix'}
+            id="irrational-exponents-intuition-through-approximation-matrix"
+            title="Intuition Through Approximation"
+            source="/algebra/powers/irrational-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -677,11 +714,16 @@ export default function IrrationalExponentsPage({ pitfallData,exponentNest, base
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-exponent-extension-stages'}
+            id="exponent-extension-stages"
+            title="The Four Stages of Extending the Exponent"
+            source="/algebra/powers/irrational-exponents"
+            related={false}
+          >
+            <FeatureMatrix data={fm_extensionStages} />
+          </DiagramFrame>,
+          `Read down the last column: the set of allowed bases shrinks at every stage. The exponents go the other way. Each stage keeps all the exponents of the one before and adds more, which is what the next picture shows.`,
           <DiagramFrame
             key={'obj6-diagram'}
             id="exponent-domain-nesting"

@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,8 +17,59 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import IntervalLine from '@/app/components/infographics/IntervalLine/IntervalLine'
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Solving the Greater-Than Form"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"k value","features":[{"id":"c1","name":"|f(x)| < k","type":"text"},{"id":"c2","name":"|f(x)| ≤ k","type":"text"},{"id":"c3","name":"|f(x)| > k","type":"text"},{"id":"c4","name":"|f(x)| ≥ k","type":"text"}],"items":[{"id":"r1","name":"k > 0","values":{"c1":"bounded open interval (−k < f < k)","c2":"bounded closed interval (−k ≤ f ≤ k)","c3":"two open rays (f < −k or f > k)","c4":"two closed rays (f ≤ −k or f ≥ k)"}},{"id":"r2","name":"k = 0","values":{"c1":"∅ (empty)","c2":"roots of f(x) = 0 only","c3":"all reals except roots of f(x) = 0","c4":"(−∞, ∞) all reals"}},{"id":"r3","name":"k < 0","values":{"c1":"∅","c2":"∅","c3":"(−∞, ∞)","c4":"(−∞, ∞)"}}]};
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Absolute Value Inequality Forms"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Form","features":[{"id":"c1","name":"Conversion","type":"text"},{"id":"c2","name":"Resulting inequality","type":"text"},{"id":"c3","name":"Solve as","type":"text"}],"items":[{"id":"r1","name":"|f(x)| < k (k > 0)","values":{"c1":"conjunction: −k < f(x) < k","c2":"double inequality of the same kind as f(x)","c3":"[linear](!/algebra/inequalities/linear) chain, or sign chart for higher-degree f"}},{"id":"r2","name":"|f(x)| > k (k > 0)","values":{"c1":"disjunction: f(x) < −k or f(x) > k","c2":"two inequalities of the same kind as f(x); union the solutions","c3":"linear, [quadratic](!/algebra/inequalities/quadratic), or higher-degree, depending on f"}},{"id":"r3","name":"|f(x)| compared to 0 or to a negative","values":{"c1":"no algebra — read off the table in Section 3","c2":"∅, (−∞, ∞), or the roots / non-roots of f","c3":"solve f(x) = 0 if needed"}},{"id":"r4","name":"|f(x)| compared to |g(x)|","values":{"c1":"squaring: (g − f)(g + f) compared to 0 (or case-split)","c2":"[polynomial inequality](!/algebra/inequalities/polynomial) in factored form","c3":"sign chart on the factored difference of squares"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Inequalities with Absolute Value on Both Sides"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"Procedure","type":"text"},{"id":"c2","name":"Resulting problem","type":"text"},{"id":"c3","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Squaring","values":{"c1":"replace |A| compared to |B| with A² compared to B²; rearrange and factor as a difference of squares","c2":"polynomial inequality (g − f)(g + f) compared to 0; solve by sign chart","c3":"cleanest when f and g are polynomial; less natural for transcendental expressions"}},{"id":"r2","name":"Case-splitting","values":{"c1":"find intervals where f(x) and g(x) have constant signs; remove |·| using the piecewise definition on each interval; solve on each","c2":"several inequalities, one per sign-region; combine the partial solutions","c3":"more laborious but works for non-polynomial expressions"}}]};
 
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Solve an absolute value inequality", href: "/algebra/inequalities/methods/absolute-value-inequalities", desc: "Less than: one three-part inequality. Greater than: two pieces joined by or.", level: "composite", here: "#2" },
+    ] },
+    { title: "More inequality methods", items: [
+      { skill: "Solve a compound inequality", href: "/algebra/inequalities/methods/compound-inequalities", desc: "\"And\" keeps the overlap, \"or\" keeps both pieces; a three-part inequality is solved all at once.", level: "composite" },
+      { skill: "Solve a linear inequality", href: "/algebra/inequalities/methods/linear-inequalities", desc: "Solve like an equation, but flip the sign when multiplying or dividing by a negative.", level: "composite" },
+      { skill: "Choose the right method for an inequality", href: "/algebra/inequalities/methods/which-inequality-method", desc: "A decision tree from the shape of the inequality to the method that solves it.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/algebra/inequalities/methods", label: "All inequality methods" },
+};
+
+// IntervalLine: the linear worked examples of obj4 on the number line
+const il_linearExamples = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', condition: '#2563EB', gold: '#B45309', goldInk: '#B45309', solution: '#B45309' },
+  compound: {
+    range: [-5, 7],
+    wrongNote: { label: 'AND and OR are not interchangeable', text: 'The less-than form needs AND (both conditions at once), the greater-than form needs OR (either one). Swapping them changes the answer entirely.' },
+    cases: [
+      { name: '$|3x - 7| < 2$', connective: 'and', source: '$|3x - 7| < 2$',
+        rewrite: '$-2 < 3x - 7 < 2$ $\\Rightarrow$ $\\frac{5}{3} < x < 3$',
+        conditions: [{ label: '$x > \\frac{5}{3}$', op: '>', value: 5 / 3, tex: '\\frac{5}{3}' }, { label: '$x < 3$', op: '<', value: 3 }],
+        note: { label: 'Less-than form', text: 'Both conditions must hold, so the solution is the single bounded interval between the two ends.' } },
+      { name: '$|1 - 2x| \\geq 5$', connective: 'or', source: '$|1 - 2x| \\geq 5$',
+        rewrite: '$1 - 2x \\leq -5$ or $1 - 2x \\geq 5$ $\\Rightarrow$ $x \\geq 3$ or $x \\leq -2$',
+        conditions: [{ label: '$x \\leq -2$', op: '<=', value: -2 }, { label: '$x \\geq 3$', op: '>=', value: 3 }],
+        note: { label: 'Greater-than form', text: 'Either condition is enough, so the solution is two rays, each with its endpoint included.' } },
+      { name: '$|x - 4| > 0$', connective: 'or', source: '$|x - 4| > 0$',
+        rewrite: '$x - 4 < 0$ or $x - 4 > 0$ $\\Rightarrow$ $x < 4$ or $x > 4$',
+        conditions: [{ label: '$x < 4$', op: '<', value: 4 }, { label: '$x > 4$', op: '>', value: 4 }],
+        note: { label: 'Everything but one point', text: 'The two rays meet at $x = 4$ without including it: every real number except $4$.' } }
+    ]
+  }
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -838,8 +891,23 @@ $$-2x \\geq 4 \\implies x \\leq -2$$`, `The solution is $(-\\infty, -2] \\cup [3
     ],
   };
 
+  // Procedure rollout 2026-11-14: The less-than form, step by step (obj2).
+  const lessThanFormSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$|2x - 3| < 5$',
+      rows: [
+        { step: 'Convert to the double inequality $-k < f(x) < k$', example: '$-5 < 2x - 3 < 5$' },
+        { step: 'Undo the addition or subtraction in all three parts', stepSub: 'Add $3$ throughout', example: '$-2 < 2x < 8$' },
+        { step: 'Divide all three parts by the coefficient', example: '$-1 < x < 4$' },
+        { step: 'Write the solution as an interval', example: '$(-1, 4)$' },
+      ],
+    },
+  };
+
   return {
   props: {
+    lessThanFormSteps,
     pitfallData,
     faqQuestions,
     demoUnits,
@@ -861,7 +929,7 @@ $$-2x \\geq 4 \\implies x \\leq -2$$`, `The solution is $(-\\infty, -2] \\cup [3
 }
    }
 
-export default function AbsoluteValueInequalitiesPage({ pitfallData,
+export default function AbsoluteValueInequalitiesPage({ lessThanFormSteps, pitfallData,
   faqQuestions,
   seoData,
   sectionsContent,
@@ -983,8 +1051,18 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-procedure'}
+            id="less-than-form-steps"
+            title="The less-than form, step by step"
+            source="/algebra/inequalities/absolute-value"
+            before={"The example of this section, solved as a three-part chain. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={lessThanFormSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-lessThan'} dangerouslySetInnerHTML={{ __html: demoUnits.lessThan }} />,
           `The centre of the interval is wherever the expression inside the bars vanishes; its width is 2k divided by the size of the coefficient of x.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve an absolute value inequality](!/algebra/inequalities/methods/absolute-value-inequalities) →@`,
         ]
     },
 
@@ -995,11 +1073,15 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-solving-greater-than-matrix'}
+            id="absolute-value-solving-greater-than-matrix"
+            title="Solving the Greater-Than Form"
+            source="/algebra/inequalities/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Greater-than splits into two separate conditions joined by OR, and the answer is the union of what each one allows.]@`,
         ]
     },
@@ -1009,6 +1091,16 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-interval-line'}
+            id="linear-examples-number-line"
+            title="The worked examples on the number line"
+            source="/algebra/inequalities/absolute-value"
+            related={false}
+            before={"Three of the examples above, each as two conditions and the set they give together. Switch between AND and OR to see what the other connective would do."}
+          >
+            <IntervalLine data={il_linearExamples} variant="compound" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1029,11 +1121,15 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-inequalities-absolute-value-matrix'}
+            id="absolute-value-inequalities-absolute-value-matrix"
+            title="Inequalities with Absolute Value on Both Sides"
+            source="/algebra/inequalities/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:Bars on both sides can be removed by squaring, which is safe because both sides are sizes and never negative.]@`,
         ]
     },
@@ -1055,11 +1151,15 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-summary-absolute-value-matrix-2'}
+            id="absolute-value-summary-absolute-value-matrix-2"
+            title="Summary of Absolute Value Inequality Forms"
+            source="/algebra/inequalities/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1077,6 +1177,14 @@ $$f(x) < -k \\quad \\text{or} \\quad f(x) > k$$]@`,
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

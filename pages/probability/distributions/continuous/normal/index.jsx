@@ -1069,6 +1069,7 @@
 // tables-optimized: v4 | 2026-05-23 | 1 table (capstone summary)
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1094,10 +1095,93 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probDistNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-distributions'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+
+// Related Distributions 2026-11-15: section text written and its map added.
+const cm_normalRelated = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', link: '#2563EB' },
+  kinds: {
+    special: { label: 'special case', color: '#06357A', dash: '' },
+    limit: { label: 'limit', color: '#B45309', dash: '2 4' },
+    built: { label: 'built from', color: '#2563EB', dash: '6 4' },
+  },
+  graph: {
+    cols: 3, rows: 3, height: 560, minWidth: 560, nodeWidth: 130,
+    hint: 'Click a distribution to see how it connects. Hover to trace its links; click a line type to hide it.',
+    bands: [{ from: 0, to: 1, label: 'Discrete', color: '#f1f5f9' }, { from: 1, to: 3, label: 'Continuous', color: '#eff6ff' }],
+    nodes: [
+      { id: 'bin', name: 'Binomial', x: 0, y: 0.3, href: '/probability/distributions/discrete/binomial', text: 'The number of successes in $n$ independent trials.' },
+      { id: 'poi', name: 'Poisson', x: 0, y: 1.7, href: '/probability/distributions/discrete/poisson', text: 'The number of events in a window, at an average rate $\\lambda$.' },
+      { id: 'std', name: 'Standard normal', x: 1, y: 0, text: '$Z \\sim N(0, 1)$, the normal with mean $0$ and standard deviation $1$.' },
+      { id: 'norm', name: 'Normal', x: 1, y: 1, text: 'The bell curve with mean $\\mu$ and variance $\\sigma^2$.' },
+      { id: 'cau', name: 'Cauchy', x: 1, y: 2, text: 'A bell-like curve with tails so heavy that it has no mean.' },
+      { id: 'chi', name: 'Chi-squared', x: 2, y: 0.2, text: 'Mean $k$ and variance $2k$; the distribution of a sample variance from normal data, up to a constant factor.' },
+      { id: 't', name: "Student's t", x: 2, y: 1, text: 'A bell with heavier tails; it turns into the standard normal as the sample grows.' },
+      { id: 'logn', name: 'Lognormal', x: 2, y: 1.8, text: 'A positive, right-skewed variable whose logarithm is normal.' },
+    ],
+    edges: [
+      { from: 'bin', to: 'norm', kind: 'limit', label: '$n$ large', text: '$\\operatorname{Bin}(n, p)$ is close to $N(np,\\ np(1-p))$ when $np$ and $n(1-p)$ are both at least $10$' },
+      { from: 'poi', to: 'norm', kind: 'limit', label: '$\\lambda$ large', text: '$\\operatorname{Pois}(\\lambda)$ is close to $N(\\lambda,\\ \\lambda)$ when $\\lambda$ is about $20$ or more' },
+      { from: 'std', to: 'norm', kind: 'special', label: '$\\mu = 0,\\ \\sigma = 1$', text: 'the standard normal is the case $\\mu = 0$, $\\sigma = 1$; every normal variable is a shifted and rescaled copy of it' },
+      { from: 'norm', to: 'chi', kind: 'built', label: 'sum of squares', text: 'the sum of the squares of $k$ independent standard normals is chi-squared with $k$ degrees of freedom' },
+      { from: 'norm', to: 't', kind: 'built', label: '$\\sigma$ estimated', text: 'the z-score of a sample mean with $s$ in place of $\\sigma$ follows Student\'s t with $n - 1$ degrees of freedom' },
+      { from: 'norm', to: 'logn', kind: 'built', label: '$e^X$', text: 'if $X$ is normal, then $e^X$ is lognormal' },
+      { from: 'norm', to: 'cau', kind: 'built', label: 'ratio of two', text: 'the ratio of two independent standard normals is Cauchy' },
+    ],
+  },
+};
+
+const sw_normalDensity = {
+  center: { name: 'Normal density', sub: 'what each part of the formula does' },
+  quadrants: [
+    { title: 'Bell-shaped curve', items: [
+      'A symmetric, bell-shaped curve centered at $\\mu$.' ] },
+    { title: 'Parameters', items: [
+      '$\\mu$: the mean determines where the center of the bell sits.',
+      '$\\sigma$: the standard deviation controls the width of the bell.',
+      '$\\sigma^2$: the [variance](!/probability/variance) appears in the exponent.' ] },
+    { title: 'Support', items: [
+      '$X$ can take any real value: $(-\\infty, +\\infty)$.',
+      'Theoretically unbounded, but approximately 99.7% of values fall within $\\mu \\pm 3\\sigma$.' ] },
+    { title: 'Logic behind the formula', items: [
+      '$\\frac{1}{\\sigma\\sqrt{2\\pi}}$: normalization constant ensuring the total area equals $1$.',
+      '$(x-\\mu)^2$: squared distance from the mean, which makes the curve symmetric.',
+      '$e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$: exponential decay as you move away from $\\mu$.' ] }
+  ]
+};
+
+import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
+
+const sw_normalUses = {
+  center: { name: 'Normal distribution', sub: 'many small, independent factors combined' },
+  quadrants: [
+    { title: 'Measurement and Physical Sciences', items: [ 'Human heights, weights, and other biological measurements', 'Measurement errors in scientific instruments', 'IQ scores and standardized test results', 'Blood pressure readings in healthy populations' ] },
+    { title: 'Finance and Economics', items: [ 'Asset returns over short time periods (approximately normal)', 'Pricing models for options and derivatives', 'Portfolio risk analysis', 'Economic indicators like inflation rates' ] },
+    { title: 'Quality Control and Manufacturing', items: [ 'Product dimensions and tolerances', 'Production process variations', 'Six Sigma methodologies', 'Control chart limits' ] },
+    { title: 'Natural Phenomena', items: [ 'Temperature variations around seasonal averages', 'Rainfall amounts in many regions', { text: 'Each velocity component of a gas particle', note: 'the speed itself follows the Maxwell-Boltzmann distribution' } ] }
+  ]
+};
+
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find a normal probability", href: "/probability/distributions/methods/normal-probability", desc: "Standardize with $z = (x - \\mu)/\\sigma$, then read the area from $\\Phi$: left tails, right tails and intervals.", level: "composite", here: "#6" },
+      { skill: "Find a normal percentile", href: "/probability/distributions/methods/normal-percentiles", desc: "Go backwards from an area to a value: find $z$ with $\\Phi(z) = p$, then $x = \\mu + z\\sigma$; also solve for $\\mu$ or $\\sigma$.", level: "composite", here: "#10" },
+    ] },
+    { title: "More distribution methods", items: [
+      { skill: "Choose the right probability distribution", href: "/probability/distributions/methods/which-distribution", desc: "A decision tree: equally likely values, then counted or measured, then what produces the count or the measurement.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/probability/distributions/methods", label: "All distribution methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1985,7 +2069,50 @@ This convergence explains why the normal distribution appears so frequently in n
     obj16:{
   
       title:`Related Distributions`,
-      content:``,
+      content:`
+The normal distribution is where many other distributions end up, and where several more begin. Counts turn into it when they grow large, and the distributions used for testing and estimation are built from normal variables.
+
+### Binomial and Poisson: counts that turn normal
+
+A [binomial](!/probability/distributions/discrete/binomial) count with many trials and a [Poisson](!/probability/distributions/discrete/poisson) count with a large rate both take the bell shape. Each is a sum of many small independent pieces, so the [central limit theorem](!/probability/central-limit-theorem) applies, and the matching normal has the same mean and variance as the count:
+
+@academic[formula_callout:Related Distributions
+$$\\operatorname{Bin}(n, p) \\approx N(np,\\ np(1-p)), \\qquad \\operatorname{Pois}(\\lambda) \\approx N(\\lambda,\\ \\lambda)$$]@
+
+The binomial fit is good when $np$ and $n(1-p)$ are both at least $10$, the Poisson fit when $\\lambda$ is about $20$ or more. For $100$ fair coin flips the count of heads is close to $N(50, 25)$, so about $95\\%$ of the time it lands between $40$ and $60$.
+
+### Chi-squared: squares of standard normals
+
+Square a standard normal variable $Z$ and the result follows the chi-squared distribution with $1$ degree of freedom. Add the squares of $k$ independent standard normals and the degrees of freedom add up:
+
+@academic[formula_callout:Related Distributions
+$$Z_1^2 + Z_2^2 + \\cdots + Z_k^2 \\sim \\chi^2(k)$$]@
+
+Its mean is $k$ and its variance $2k$. This is the distribution of a sample variance taken from normal data, up to a constant factor.
+
+### Student's t: when the standard deviation is estimated
+
+The z-score $\\frac{\\bar{X} - \\mu}{\\sigma / \\sqrt{n}}$ of a sample mean is standard normal when the data are normal and $\\sigma$ is known. Replace $\\sigma$ with the sample standard deviation $s$ and the ratio follows Student's t distribution with $n - 1$ degrees of freedom:
+
+@academic[formula_callout:Related Distributions
+$$\\frac{\\bar{X} - \\mu}{s / \\sqrt{n}} \\sim t(n - 1)$$]@
+
+The t curve is a bell with heavier tails, because $s$ itself varies from sample to sample. As $n$ grows, $s$ settles on $\\sigma$ and the t distribution turns into the standard normal.
+
+### Lognormal: the exponential of a normal
+
+If $X$ is normal, then $e^X$ is lognormal: a positive, right-skewed variable whose logarithm is normal. Sums of many small effects give a normal variable, and products of many small positive factors give a lognormal one, which is why it is used for incomes, stock prices and particle sizes.
+
+### More distributions built from normals
+
+• **Standard normal:** every normal variable is a shifted and rescaled copy of $Z \\sim N(0, 1)$, as [Special Cases](!#14) shows.
+• **Cauchy:** the ratio of two independent standard normals follows the Cauchy distribution, a bell-like curve with tails so heavy that it has no mean.
+• **F:** the ratio of two independent chi-squared variables, each divided by its degrees of freedom, follows the F distribution used to compare variances.
+• **Half-normal:** $|Z|$, the size of a standard normal value without its sign, has the right half of the bell at twice the height.
+• **Bivariate normal:** two normal variables that vary together; each one alone is normal, and so is every sum $aX + bY$.
+
+Of these, the binomial and Poisson links explain where normal data come from, and the chi-squared and t links are the ones every test on normal data runs through.
+`,
       before:``,
       after:``,
       link:'',
@@ -2522,6 +2649,15 @@ export default function NormalDistributionPage({ specialCasesData, proofStepsDat
                     </div>,
                   <div key={'unit-u_5_0'} dangerouslySetInnerHTML={{ __html: demoUnits.u_5_0 }} />,
           `Its cumulative form has no closed formula, as the next section explains.`,
+          <DiagramFrame
+            key={'four-sides-normal-pdf-intuition'}
+            id="normal-pdf-intuition"
+            title="Intuition Behind the Formula"
+            source="/probability/distributions/continuous/normal"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_normalDensity} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2537,6 +2673,7 @@ export default function NormalDistributionPage({ specialCasesData, proofStepsDat
                   <div key={'unit-u_6_1'} dangerouslySetInnerHTML={{ __html: demoUnits.u_6_1 }} />,
           `The mean and variance can nevertheless be computed exactly.`,
           `@academic[punchline:A single table of $\\Phi$ answers every normal question: subtract the mean, divide by the standard deviation, then look up.]@`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a normal probability](!/probability/distributions/methods/normal-probability) →@`,
         ]
     },
     {
@@ -2595,6 +2732,7 @@ export default function NormalDistributionPage({ specialCasesData, proofStepsDat
         link:sectionsContent.obj10.link,
         content:[
           sectionsContent.obj10.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find a normal percentile](!/probability/distributions/methods/normal-percentiles) →@`,
         ]
     },
     {
@@ -2603,6 +2741,15 @@ export default function NormalDistributionPage({ specialCasesData, proofStepsDat
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
+          <DiagramFrame
+            key={'four-sides-normal-common-applications'}
+            id="normal-common-applications"
+            title="Common Applications"
+            source="/probability/distributions/continuous/normal"
+            related={false}
+          >
+            <SWOTAnalysisV2 data={sw_normalUses} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2646,6 +2793,23 @@ export default function NormalDistributionPage({ specialCasesData, proofStepsDat
         ]
     },
     {
+        id:'16',
+        title:sectionsContent.obj16.title,
+        link:sectionsContent.obj16.link,
+        content:[
+          sectionsContent.obj16.content,
+          <DiagramFrame
+            key={'concept-map-normal-related-distributions'}
+            id="normal-related-distributions"
+            title="Related Distributions"
+            source="/probability/distributions/continuous/normal"
+            related={false}
+          >
+            <ConceptMap data={cm_normalRelated} variant="graph" />
+          </DiagramFrame>,
+        ]
+    },
+    {
         id:'capstone',
         title:sectionsContent.capstone.title,
         link:sectionsContent.capstone.link,
@@ -2678,6 +2842,14 @@ export default function NormalDistributionPage({ specialCasesData, proofStepsDat
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

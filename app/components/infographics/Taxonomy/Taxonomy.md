@@ -3,7 +3,7 @@
 A family of objects split into kinds: what types exist, what defines each one, and how they relate. There are three layouts. Every colour, label and setting comes from data, with defaults.
 
 ```jsx
-import Taxonomy from '@/app/components/infographics/Taxonomy';
+import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy';
 
 <Taxonomy data={discontinuities} variant="tree" />
 ```

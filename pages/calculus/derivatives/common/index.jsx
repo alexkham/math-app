@@ -1,6 +1,7 @@
 
 
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj2 aggregation, obj5 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -16,11 +17,36 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import functionDerivativeDiagrams from '@/app/components/functions/derivative/functionDerivativeDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
+
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Trigonometric Functions — Tangent, Cotangent, Secant, Cosecant"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Function","features":[{"id":"c1","name":"Derivative","type":"text"},{"id":"c2","name":"Sign","type":"text"},{"id":"c3","name":"Where derivative is undefined","type":"text"}],"items":[{"id":"r1","name":"sin x","values":{"c1":"cos x","c2":"+","c3":"nowhere (defined on all ℝ)"}},{"id":"r2","name":"cos x","values":{"c1":"−sin x","c2":"−","c3":"nowhere (defined on all ℝ)"}},{"id":"r3","name":"tan x","values":{"c1":"sec² x","c2":"+","c3":"x = π/2 + kπ"}},{"id":"r4","name":"cot x","values":{"c1":"−csc² x","c2":"−","c3":"x = kπ"}},{"id":"r5","name":"sec x","values":{"c1":"sec x · tan x","c2":"+","c3":"x = π/2 + kπ"}},{"id":"r6","name":"csc x","values":{"c1":"−csc x · cot x","c2":"−","c3":"x = kπ"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Power Functions"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Exponent type","features":[{"id":"c1","name":"Function","type":"text"},{"id":"c2","name":"Derivative","type":"text"}],"items":[{"id":"r1","name":"Positive integer","values":{"c1":"x⁵","c2":"5x⁴"}},{"id":"r2","name":"Negative integer","values":{"c1":"x⁻³ = 1/x³","c2":"−3x⁻⁴"}},{"id":"r3","name":"Positive fraction","values":{"c1":"x$^{1/2}$ = √x","c2":"(1/2)x$^{-1/2}$ = 1/(2√x)"}},{"id":"r4","name":"Negative fraction","values":{"c1":"x$^{-1/2}$ = 1/√x","c2":"−(1/2)x$^{-3/2}$"}},{"id":"r5","name":"Irrational","values":{"c1":"x$^{π}$","c2":"π · x$^{π-1}$"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Derivative techniques", items: [
+      { skill: "Differentiate exponentials and logarithms", href: "/calculus/derivatives/techniques#exp-log-derivatives", desc: "A plain $e^x$, $a^x$, $\\ln x$ or $\\log_a x$.", level: "atomic" },
+      { skill: "Differentiate trig functions", href: "/calculus/derivatives/techniques#trig-derivatives", desc: "A plain $\\sin x$, $\\cos x$, $\\tan x$, $\\cot x$, $\\sec x$ or $\\csc x$.", level: "atomic" },
+      { skill: "Differentiate composite functions", href: "/calculus/derivatives/techniques/composite-functions", desc: "Nested functions such as $\\sin(x^2)$ or $e^{3x+1}$, peeled layer by layer.", level: "composite" },
+      { skill: "Differentiate parametric curves", href: "/calculus/derivatives/techniques/parametric-differentiation", desc: "$dy/dx$ for $x = x(t)$, $y = y(t)$.", level: "composite" },
+      { skill: "Differentiate a power of x", href: "/calculus/derivatives/techniques#power-rule", desc: "A single term $x^n$ with a constant exponent, including roots and reciprocals once rewritten, like $\\sqrt{x} = x^{1/2}$.", level: "atomic" },
+      { skill: "Differentiate products and quotients of composites", href: "/calculus/derivatives/techniques/products-quotients-of-composites", desc: "When the product or quotient rule has nested pieces inside it.", level: "composite" },
+      { skill: "Find higher-order derivatives", href: "/calculus/derivatives/techniques/higher-order-derivatives", desc: "Second, third and $n$th derivatives, and the patterns that give $f^{(n)}$ directly.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/calculus/derivatives/techniques", label: "All derivative techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1107,8 +1133,15 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
           >
             <ProofSteps data={proofStepsData} variant="chain" />
           </DiagramFrame>,
-          <div key={'obj2-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj2Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-common-power-functions-matrix'}
+            id="common-power-functions-matrix"
+            title="Power Functions"
+            source="/calculus/derivatives/common"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
                   <div key={'unit-power'} dangerouslySetInnerHTML={{ __html: demoUnits.power }} />,
           `Every polynomial derivative is this picture repeated term by term.`,
         ]
@@ -1161,8 +1194,15 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
             <ProofSteps data={proofStepsData3} variant="chain" />
           </DiagramFrame>,
           sectionsContent.obj5.afterProof,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-common-trigonometric-functions-tangent-cotangent-matrix'}
+            id="common-trigonometric-functions-tangent-cotangent-matrix"
+            title="Trigonometric Functions — Tangent, Cotangent, Secant, Cosecant"
+            source="/calculus/derivatives/common"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
           `@academic[punchline:Every trigonometric derivative comes from those of sine and cosine, through the quotient rule.]@`,
         ]
     },
@@ -1239,6 +1279,14 @@ Reading $e^3$ as a power and writing $\\frac{d}{dx}[e^3] = 3e^2$ treats a number
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

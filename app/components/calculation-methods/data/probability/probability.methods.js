@@ -95,7 +95,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to List a Sample Space (Lists, Grids and Trees) | Learn Math Class',
         description: 'List a sample space step by step: decide what one outcome records, pick a list, grid or tree, write every outcome, then count and check. Examples and mistakes.',
@@ -221,7 +221,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Probability by Counting Outcomes | Learn Math Class',
         description: 'Find a probability by counting: check the outcomes are equally likely, count all of them, count the favorable ones, divide. Worked examples and common mistakes.',
@@ -347,7 +347,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find a Conditional Probability (Formula and Examples) | Learn Math Class',
         description: 'Find P(A given B): identify the condition, find its probability and the overlap, then divide. Includes the restricted sample space, examples and mistakes.',
@@ -467,7 +467,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Test Whether Two Events Are Independent | Learn Math Class',
         description: 'Test two events for independence: find each probability, find the probability of both from the outcomes, compare it with the product. Examples and mistakes.',
@@ -587,7 +587,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find the Probability of A and B for Dependent Events | Learn Math Class',
         description: 'Find the probability of A and B when the first event changes the second: order the events, find each conditional probability, multiply. Examples and mistakes.',
@@ -707,7 +707,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Use the Law of Total Probability | Learn Math Class',
         description: 'Use the law of total probability: split into cases that cover everything, find the event chance in each case, weight by the case and add. Worked examples.',
@@ -813,7 +813,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: "How to Use Bayes' Theorem (Step by Step) | Learn Math Class",
         description: "Use Bayes' theorem step by step: name the cause and the evidence, write the prior and the rates, find the evidence by total probability, divide. Examples.",
@@ -940,7 +940,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve a Probability Problem with a Tree Diagram | Learn Math Class',
         description: 'Solve a probability problem with a tree diagram: one level per stage, label the branches, multiply along each path, add the paths in the event. Worked examples.',
@@ -1045,7 +1045,7 @@ const probabilityMethods = {
       tag: 'Composite',
       meta: '4 steps · 3 examples',
       category: 'composite',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Find Probabilities from a Two-Way Table | Learn Math Class',
         description: 'Find joint, marginal and conditional probabilities from a two-way contingency table: add the totals, then divide the right cell by the right total. Examples.',
@@ -1251,7 +1251,7 @@ const probabilityMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Playing Card Probability Problems (52-Card Deck) | Learn Math Class',
         description: 'Solve playing card probability problems: deck facts, order and replacement, counting the sample space and the event, then dividing. Three worked card examples.',
@@ -1341,7 +1341,7 @@ const probabilityMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Dice Probability Problems (Sums, Doubles) | Learn Math Class',
         description: 'Solve dice probability problems: list ordered outcomes in a grid, count sums and doubles, use the complement for at least one six. Three worked dice examples.',
@@ -1432,7 +1432,7 @@ const probabilityMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Coin Toss Probability Problems | Learn Math Class',
         description: 'Solve coin toss probability problems: count head-tail sequences, use the complement for at least one head, and the binomial formula for a biased coin. Examples.',
@@ -1523,7 +1523,7 @@ const probabilityMethods = {
       tag: 'Applied',
       meta: '5 setup steps · 3 examples',
       category: 'applied',
-      indexed: false,
+      indexed: true,
       seo: {
         title: 'How to Solve Urn and Ball-Drawing Problems | Learn Math Class',
         description: 'Solve urn problems: note the colors and replacement, multiply step-by-step probabilities or count combinations, add the orders that fit. Three worked examples.',

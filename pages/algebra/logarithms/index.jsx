@@ -684,6 +684,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -698,10 +699,49 @@ import powersTableDiagrams from '@/app/components/visualizations/algebra/powers/
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
+
+// FeatureMatrix 2026-11-14: replaces the table obj2Table ("Restrictions on Base and Argument"); converted from the table's own cells.
+const fm_obj2Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Forbidden case","features":[{"id":"c1","name":"Why it fails","type":"text"},{"id":"c2","name":"Example of breakdown","type":"text"}],"items":[{"id":"r1","name":"Base a < 0","values":{"c1":"most non-integer exponents produce complex or undefined values","c2":"(−2)^(1⁄2) is not a real number"}},{"id":"r2","name":"Base a = 0","values":{"c1":"0ᶜ = 0 for every c > 0; no exponent yields any other output","c2":"log₀(5) has no solution"}},{"id":"r3","name":"Base a = 1","values":{"c1":"1ᶜ = 1 for every c; one logarithm would have to represent every number","c2":"log₁(7) is incoherent"}},{"id":"r4","name":"Argument b ≤ 0","values":{"c1":"aᶜ is positive when a > 0; cannot equal zero or a negative number","c2":"log₂(−4), log₃(0) undefined"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary of Logarithms"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Topic","features":[{"id":"c1","name":"Central idea","type":"text"},{"id":"c2","name":"Reference","type":"text"}],"items":[{"id":"r1","name":"Definition","values":{"c1":"logₐ(b) = c is equivalent to aᶜ = b","c2":"this page"}},{"id":"r2","name":"Base & argument","values":{"c1":"require a > 0, a ≠ 1, and b > 0","c2":"this page"}},{"id":"r3","name":"Key values","values":{"c1":"logₐ(1) = 0 and logₐ(a) = 1 for every valid base","c2":"this page"}},{"id":"r4","name":"Inverse identities","values":{"c1":"logₐ(aˣ) = x and a^(logₐ(x)) = x — log and exp undo each other","c2":"this page"}},{"id":"r5","name":"Common & natural logs","values":{"c1":"log(x) is base 10; ln(x) is base e ≈ 2.71828","c2":"[Common and Natural Logs](!/algebra/logarithms/common-natural)"}},{"id":"r6","name":"Properties","values":{"c1":"domain (0, ∞), range ℝ, monotonicity set by base, one-to-one","c2":"[Properties of Logarithms](!/algebra/logarithms/properties)"}},{"id":"r7","name":"Rules","values":{"c1":"product, quotient, power, change of base — each inverts an exponent law","c2":"[Logarithm Rules](!/algebra/logarithms/rules)"}},{"id":"r8","name":"Equations","values":{"c1":"convert to exponential form or apply the one-to-one property; check domain","c2":"[Logarithmic Equations](!/algebra/logarithms/equations)"}},{"id":"r9","name":"Inequalities","values":{"c1":"direction is preserved when a > 1, reversed when 0 < a < 1","c2":"[Logarithmic Inequalities](!/algebra/logarithms/inequalities)"}},{"id":"r10","name":"Graphs","values":{"c1":"passes through (1, 0) and (a, 1); vertical asymptote at x = 0","c2":"[Graphing Logarithmic Functions](!/algebra/logarithms/graphs)"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("Logarithm Rules"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Rule","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Worked example","type":"text"}],"items":[{"id":"r1","name":"Product","values":{"c1":"logₐ(x·y) = logₐ(x) + logₐ(y)","c2":"log₂(8·4) = log₂(8) + log₂(4) = 3 + 2 = 5"}},{"id":"r2","name":"Quotient","values":{"c1":"logₐ(x⁄y) = logₐ(x) − logₐ(y)","c2":"log₃(81⁄9) = log₃(81) − log₃(9) = 4 − 2 = 2"}},{"id":"r3","name":"Power","values":{"c1":"logₐ(xⁿ) = n · logₐ(x)","c2":"log₂(8³) = 3 · log₂(8) = 3 · 3 = 9"}},{"id":"r4","name":"Change of base","values":{"c1":"logₐ(x) = log_b(x) ⁄ log_b(a), any valid base b","c2":"log₂(7) = log(7) ⁄ log(2) ≈ 0.845 ⁄ 0.301 ≈ 2.807"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Properties of Logarithms"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Behavior","features":[{"id":"c1","name":"Base a > 1","type":"text"},{"id":"c2","name":"Base 0 < a < 1","type":"text"}],"items":[{"id":"r1","name":"Monotonicity","values":{"c1":"strictly increasing","c2":"strictly decreasing"}},{"id":"r2","name":"As x → 0⁺","values":{"c1":"logₐ(x) → −∞","c2":"logₐ(x) → +∞"}},{"id":"r3","name":"As x → ∞","values":{"c1":"logₐ(x) → +∞","c2":"logₐ(x) → −∞"}},{"id":"r4","name":"Inequality direction (when applying logₐ)","values":{"c1":"preserved","c2":"reversed"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Evaluate a logarithm", href: "/algebra/methods/evaluate-logarithms", desc: "Ask \"which exponent?\", use the key values, or change the base for a calculator.", level: "composite", here: "#3" },
+      { skill: "Solve a logarithmic equation", href: "/algebra/methods/logarithmic-equations", desc: "Condense to one log, convert to exponential form or equate arguments, then check the domain.", level: "composite", here: "#8" },
+      { skill: "Solve a logarithmic inequality", href: "/algebra/methods/logarithmic-inequalities", desc: "Remove the logs keeping or flipping the direction by the base, then intersect with the domain.", level: "composite", here: "#9" },
+    ] },
+    { title: "More algebra methods", items: [
+      { skill: "Expand and condense logarithms", href: "/algebra/methods/expand-condense-logarithms", desc: "Break one log into a sum of simple logs, or fold a sum back into one log.", level: "composite" },
+      { skill: "Solve an exponential equation with logarithms", href: "/algebra/methods/exponential-equations-logarithms", desc: "Isolate the power, take a log of both sides, bring the exponent down, solve.", level: "composite" },
+      { skill: "Solve an exponential inequality", href: "/algebra/methods/exponential-inequalities", desc: "Match bases and compare exponents; flip the sign when the base is between 0 and 1.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Solve a quadratic equation by factoring", href: "/algebra/equations/methods/quadratic-factoring", desc: "Set it to zero, factor, set each factor to zero.", level: "composite" },
+    ] },
+    { title: "Inequality methods", items: [
+      { skill: "Solve a linear inequality", href: "/algebra/inequalities/methods/linear-inequalities", desc: "Solve like an equation, but flip the sign when multiplying or dividing by a negative.", level: "composite" },
+      { skill: "Solve a quadratic inequality", href: "/algebra/inequalities/methods/quadratic-inequalities", desc: "Find the roots, then read the sign from the parabola or a sign chart.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/methods", label: "All algebra methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1537,11 +1577,15 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
-          <div
-            key={'obj2-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj2Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-logarithms-restrictions-base-argument-matrix'}
+            id="logarithms-restrictions-base-argument-matrix"
+            title="Restrictions on Base and Argument"
+            source="/algebra/logarithms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj2Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1552,6 +1596,7 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
           sectionsContent.obj3.content,
           <div key={'unit-anchors'} dangerouslySetInnerHTML={{ __html: demoUnits.anchors }} />,
           `Sketching any logarithm can start from these two guaranteed points.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to evaluate a logarithm](!/algebra/methods/evaluate-logarithms) →@`,
         ]
     },
     {
@@ -1578,11 +1623,15 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-logarithms-properties-logarithms-matrix'}
+            id="logarithms-properties-logarithms-matrix"
+            title="Properties of Logarithms"
+            source="/algebra/logarithms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1591,11 +1640,15 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-logarithms-logarithm-rules-matrix'}
+            id="logarithms-logarithm-rules-matrix"
+            title="Logarithm Rules"
+            source="/algebra/logarithms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
           `@academic[punchline:Logarithms move every operation one level down: products become sums, quotients differences, and powers multiples.]@`,
         ]
     },
@@ -1605,6 +1658,7 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a logarithmic equation](!/algebra/methods/logarithmic-equations) →@`,
         ]
     },
     {
@@ -1621,6 +1675,7 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
           >
             <CaseSplit data={logInequalityCases} variant="poster" proseStyle="cards" theme={figureTheme} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to solve a logarithmic inequality](!/algebra/methods/logarithmic-inequalities) →@`,
         ]
     },
     {
@@ -1637,11 +1692,15 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-logarithms-summary-logarithms-matrix'}
+            id="logarithms-summary-logarithms-matrix"
+            title="Summary of Logarithms"
+            source="/algebra/logarithms"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1659,6 +1718,14 @@ Rewriting $\\log_2(8) = 3$ as $3^2 = 8$ puts the answer in the base, and $3^2 = 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

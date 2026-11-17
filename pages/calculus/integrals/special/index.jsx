@@ -1,4 +1,5 @@
 // tables-optimized: v4 | 2026-05-24 | 3 tables (obj4 aggregation, obj5 aggregation, obj8 summary capstone)
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -14,12 +15,37 @@ import KeyTermsCard from '@/app/components/page-components/KeyTermsCard'
 import { tableHeaders } from '@/app/styles/theme'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Inverse Trigonometric Forms"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Integrand","features":[{"id":"c1","name":"Antiderivative","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"1 / (1 + x²)","values":{"c1":"arctan x + C","c2":"base form (a = 1)"}},{"id":"r2","name":"1 / √(1 − x²)","values":{"c1":"arcsin x + C","c2":"base form (a = 1); valid on |x| < 1"}},{"id":"r3","name":"1 / (x · √(x² − 1))","values":{"c1":"arcsec |x| + C","c2":"absolute value handles both x > 1 and x < −1"}},{"id":"r4","name":"1 / (a² + x²)","values":{"c1":"(1/a) arctan(x/a) + C","c2":"generalization with a > 0"}},{"id":"r5","name":"1 / √(a² − x²)","values":{"c1":"arcsin(x/a) + C","c2":"generalization with a > 0; valid on |x| < a"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Trigonometric Functions"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Integrand","features":[{"id":"c1","name":"Antiderivative","type":"text"},{"id":"c2","name":"Reverses derivative of","type":"text"}],"items":[{"id":"r1","name":"sin x","values":{"c1":"−cos x + C","c2":"cos x (which gives −sin x)"}},{"id":"r2","name":"cos x","values":{"c1":"sin x + C","c2":"sin x"}},{"id":"r3","name":"sec² x","values":{"c1":"tan x + C","c2":"tan x"}},{"id":"r4","name":"csc² x","values":{"c1":"−cot x + C","c2":"cot x (which gives −csc² x)"}},{"id":"r5","name":"sec x · tan x","values":{"c1":"sec x + C","c2":"sec x"}},{"id":"r6","name":"csc x · cot x","values":{"c1":"−csc x + C","c2":"csc x (which gives −csc x cot x)"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Integrate powers of sine and cosine", href: "/calculus/integrals/techniques/trig-powers-integrals", desc: "Odd power: save one factor and substitute. Even powers: reduce the power with half angles.", level: "composite", here: "#4" },
+    ] },
+    { title: "More integration techniques", items: [
+      { skill: "Integrate the basic trig functions", href: "/calculus/integrals/techniques#trig-integrals", desc: "A plain $\\sin x$, $\\cos x$, $\\sec^2 x$, $\\sec x\\tan x$, $\\csc^2 x$ or $\\csc x\\cot x$, or $\\tan x$ and $\\sec x$ via their logarithmic antiderivatives.", level: "atomic" },
+      { skill: "Use trigonometric substitution", href: "/calculus/integrals/techniques/trig-substitution", desc: "Remove $\\sqrt{a^2 - x^2}$, $\\sqrt{a^2 + x^2}$ or $\\sqrt{x^2 - a^2}$ with $x = a\\sin\\theta$, $a\\tan\\theta$ or $a\\sec\\theta$.", level: "composite" },
+      { skill: "Integrate by u-substitution", href: "/calculus/integrals/techniques/u-substitution", desc: "Undo the chain rule: an inner function whose derivative is also in the integrand.", level: "composite" },
+      { skill: "Choose the right integration technique", href: "/calculus/integrals/techniques/which-integration-technique", desc: "A decision tree from the shape of the integrand to the right technique.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/calculus/integrals/techniques", label: "All integration techniques" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -1162,8 +1188,16 @@ export default function PageTemplate({ proofStepsData, formulaSummaryData, pitfa
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div key={'obj4-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj4Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-special-trigonometric-functions-matrix'}
+            id="special-trigonometric-functions-matrix"
+            title="Trigonometric Functions"
+            source="/calculus/integrals/special"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to integrate powers of sine and cosine](!/calculus/integrals/techniques/trig-powers-integrals) →@`,
         ]
     },
     {
@@ -1172,8 +1206,15 @@ export default function PageTemplate({ proofStepsData, formulaSummaryData, pitfa
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'obj5-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj5Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-special-inverse-trigonometric-forms-matrix'}
+            id="special-inverse-trigonometric-forms-matrix"
+            title="Inverse Trigonometric Forms"
+            source="/calculus/integrals/special"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1259,6 +1300,14 @@ export default function PageTemplate({ proofStepsData, formulaSummaryData, pitfa
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

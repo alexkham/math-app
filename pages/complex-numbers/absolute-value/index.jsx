@@ -1,3 +1,4 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -19,9 +20,30 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 
+// FeatureMatrix 2026-11-14: replaces the table obj7Table ("The Reverse Triangle Inequality"); converted from the table's own cells.
+const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Inequality","features":[{"id":"c1","name":"Statement","type":"text"},{"id":"c2","name":"Geometric reading","type":"text"},{"id":"c3","name":"Equality holds when…","type":"text"}],"items":[{"id":"r1","name":"Triangle","values":{"c1":"|z₁ + z₂| ≤ |z₁| + |z₂|","c2":"a triangle's side never exceeds the sum of the other two","c3":"z₁, z₂ point in the same direction from the origin (one is a non-negative real multiple of the other)"}},{"id":"r2","name":"Triangle (n terms)","values":{"c1":"|z₁ + z₂ + … + zₙ| ≤ |z₁| + |z₂| + … + |zₙ|","c2":"iterated detour through every intermediate point","c3":"all zₖ point in the same direction from the origin"}},{"id":"r3","name":"Reverse triangle","values":{"c1":"||z₁| − |z₂|| ≤ |z₁ − z₂|","c2":"difference of radii never exceeds the distance between points","c3":"z₁, z₂ point in the same direction from the origin"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Properties of Modulus"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Note","type":"text"}],"items":[{"id":"r1","name":"Non-negativity","values":{"c1":"|z| ≥ 0","c2":"equality holds iff z = 0"}},{"id":"r2","name":"Conjugate-preservation","values":{"c1":"|z̄| = |z|","c2":"reflection across the real axis doesn't change distance from origin"}},{"id":"r3","name":"Conjugate identity","values":{"c1":"z · z̄ = |z|²","c2":"the cornerstone identity; powers division and many proofs"}},{"id":"r4","name":"Product rule","values":{"c1":"|z₁ · z₂| = |z₁| · |z₂|","c2":"moduli of a product multiply"}},{"id":"r5","name":"Quotient rule","values":{"c1":"|z₁ / z₂| = |z₁| / |z₂| (z₂ ≠ 0)","c2":"moduli of a quotient divide"}},{"id":"r6","name":"Power rule","values":{"c1":"|zⁿ| = |z|ⁿ (integer n)","c2":"modulus raised to the same power; pairs naturally with De Moivre's theorem"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Complex number methods", items: [
+      { skill: "Find the modulus of a complex number", href: "/complex-numbers/methods#modulus", desc: "You need the distance of $z = a + bi$ from the origin, for example as the $r$ of the polar form: $|3 + 4i|$, $|-5 + 12i|$, $|-4i|$.", level: "atomic" },
+      { skill: "Convert a complex number to polar form", href: "/complex-numbers/methods/rectangular-to-polar", desc: "Find the modulus $r$, find the argument from $\\tan\\theta = \\frac{b}{a}$ with a quadrant check, and write $r(\\cos\\theta + i\\sin\\theta)$.", level: "composite" },
+      { skill: "Plot complex numbers on the Argand plane", href: "/complex-numbers/methods/plot-on-argand-plane", desc: "Plot $a + bi$ as the point $(a, b)$: real part across, imaginary part up; read off the modulus, the conjugate and sums from the picture.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 
@@ -1408,11 +1430,15 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-properties-modulus-matrix'}
+            id="absolute-value-properties-modulus-matrix"
+            title="Properties of Modulus"
+            source="/complex-numbers/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
           `@academic[punchline:The modulus respects multiplication exactly: when complex numbers multiply, divide or take powers, their lengths do the same.]@`,
         ]
     },
@@ -1464,11 +1490,15 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
             <ProofSteps data={proofStepsData3} variant="chain" />
           </DiagramFrame>,
           sectionsContent.obj7.afterProof,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-absolute-value-reverse-triangle-inequality-matrix'}
+            id="absolute-value-reverse-triangle-inequality-matrix"
+            title="The Reverse Triangle Inequality"
+            source="/complex-numbers/absolute-value"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj7Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1514,6 +1544,14 @@ Squaring $4i$ instead of $4$ in $|3 + 4i|$ gives $\\sqrt{9 + (4i)^2} = \\sqrt{9 
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

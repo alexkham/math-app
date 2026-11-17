@@ -1,3 +1,5 @@
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -15,13 +17,46 @@ import equationVisualizerDiagrams from '@/app/components/algebra/equations/visua
 import renderFunctionPlotV4 from '@/app/utils/illustrations/functions/graphs/functionPlot.v4'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import polyEqIneqNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/algebra-polynomials-equations-inequalities'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Root-Finding Methods at a Glance"); converted from the table's own cells.
+const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Method","features":[{"id":"c1","name":"When it applies","type":"text"},{"id":"c2","name":"What it produces","type":"text"},{"id":"c3","name":"Limitation","type":"text"}],"items":[{"id":"r1","name":"Factoring","values":{"c1":"polynomial factors cleanly over the integers","c2":"all roots directly readable from the factors","c3":"not every polynomial factors over the integers"}},{"id":"r2","name":"Quadratic formula","values":{"c1":"degree 2 polynomial (or a quadratic factor)","c2":"both roots exactly (real or complex)","c3":"degree 2 only"}},{"id":"r3","name":"Rational Root Theorem","values":{"c1":"polynomial with integer coefficients, any degree","c2":"finite candidate list ± p ⁄ q to test for rational roots","c3":"misses irrational and complex roots"}},{"id":"r4","name":"Synthetic division","values":{"c1":"testing a candidate root and reducing degree","c2":"remainder (= P(r)) and reduced quotient in one pass","c3":"requires a candidate; chains best with RRT"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj12Table ("Common Mistakes"); converted from the table's own cells.
+const fm_obj12Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Mistake","features":[{"id":"c1","name":"Wrong","type":"text"},{"id":"c2","name":"Right","type":"text"}],"items":[{"id":"r1","name":"Root-to-factor sign","values":{"c1":"root r = 3 → factor (x + 3)","c2":"root r = 3 → factor (x − 3)"}},{"id":"r2","name":"Forgetting multiplicity","values":{"c1":"(x − 1)³ has \"three different roots\"","c2":"one distinct root x = 1 with multiplicity 3"}},{"id":"r3","name":"Missing conjugate","values":{"c1":"2 + 3i is a root but 2 − 3i is not listed","c2":"real-coefficient polynomial ⇒ conjugate is also a root"}},{"id":"r4","name":"Quadratic formula sign","values":{"c1":"x² + 6x + 5 → x = (6 ± √…) ⁄ 2","c2":"x = (−6 ± √…) ⁄ 2 (the leading − applies to all of b)"}},{"id":"r5","name":"Abandoning RRT early","values":{"c1":"stopping after a few candidates fail","c2":"every candidate must be tested before concluding none work"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("Finding Roots — Quadratic Formula"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Discriminant Δ = b² − 4ac","features":[{"id":"c1","name":"Nature of roots","type":"text"},{"id":"c2","name":"Graph at x-axis","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Δ > 0","values":{"c1":"two distinct real roots","c2":"two x-intercepts","c3":"x² − 5x + 6 (Δ = 1) → x = 2, 3"}},{"id":"r2","name":"Δ = 0","values":{"c1":"one repeated real root","c2":"touches at one point","c3":"x² − 4x + 4 (Δ = 0) → x = 2 (mult. 2)"}},{"id":"r3","name":"Δ < 0","values":{"c1":"two complex conjugate roots","c2":"no x-intercept","c3":"x² + 2x + 5 (Δ = −16) → x = −1 ± 2i"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj4Table ("Multiplicity"); converted from the table's own cells.
+const fm_obj4Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Multiplicity","features":[{"id":"c1","name":"Graph behavior at the root","type":"text"},{"id":"c2","name":"Example factor","type":"text"}],"items":[{"id":"r1","name":"1 (simple root)","values":{"c1":"crosses the x-axis cleanly","c2":"(x − r)"}},{"id":"r2","name":"Even (2, 4, …)","values":{"c1":"touches the x-axis and turns back (no crossing)","c2":"(x − r)², (x − r)⁴"}},{"id":"r3","name":"Odd ≥ 3","values":{"c1":"crosses with visible flattening near the intercept","c2":"(x − r)³, (x − r)⁵"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find all roots of a polynomial", href: "/algebra/polynomials/methods/find-all-roots", desc: "Rational roots first, divide them out, finish with the quadratic formula; count multiplicities.", level: "composite", here: "#13" },
+    ] },
+    { title: "More polynomial methods", items: [
+      { skill: "Use the rational root test", href: "/algebra/polynomials/methods/rational-root-test", desc: "List ±(factors of the constant)/(factors of the leading coefficient), then test them.", level: "composite" },
+      { skill: "Use synthetic division", href: "/algebra/polynomials/methods/synthetic-division", desc: "Divide by $x - r$ with coefficients only: bring down, multiply by $r$, add, repeat.", level: "composite" },
+      { skill: "Graph a polynomial", href: "/algebra/polynomials/methods/graph-polynomials", desc: "End behaviour from the leading term, intercepts, cross or touch at each root, then sketch.", level: "composite" },
+    ] },
+    { title: "Equation methods", items: [
+      { skill: "Use the quadratic formula", href: "/algebra/equations/methods/quadratic-formula", desc: "Read off a, b, c and substitute; works for every quadratic, factorable or not.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/algebra/polynomials/methods", label: "All polynomial methods" },
+};
 
 export async function getStaticProps(){
 
@@ -888,8 +923,39 @@ $$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\fra
     ],
   };
 
+  // Procedure rollout 2026-11-14: The rational root search, step by step (obj7).
+  const rationalRootSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$2x^3 - 3x^2 - 8x + 12$',
+      rows: [
+        { step: 'List the divisors of the constant term', example: '$12$: $\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12$' },
+        { step: 'List the divisors of the leading coefficient', example: '$2$: $\\pm 1, \\pm 2$' },
+        { step: 'Form every fraction $\\frac{p}{q}$ from the two lists', example: '$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\frac{3}{2}$' },
+        { step: 'Test the candidates by substitution', example: '$P(2) = 16 - 12 - 16 + 12 = 0$: $x = 2$ is a root' },
+      ],
+    },
+  };
+
+  // Procedure rollout 2026-11-14: Finding all roots with synthetic division (obj8).
+  const syntheticRootsSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: '$P(x) = x^3 - 6x^2 + 11x - 6$',
+      rows: [
+        { step: 'Pick a root candidate and write the row of coefficients', example: 'test $2$ with $1, -6, 11, -6$' },
+        { step: 'Run synthetic division and read the remainder', example: 'remainder $0$: $x = 2$ is a root' },
+        { step: 'Read the quotient, one degree lower', example: '$x^2 - 4x + 3$' },
+        { step: 'Repeat until the quotient is a quadratic, then solve it', example: '$(x - 1)(x - 3)$: $x = 1$, $x = 3$' },
+        { step: 'Collect all the roots', example: '$x = 1$, $x = 2$, $x = 3$' },
+      ],
+    },
+  };
+
   return {
   props:{
+    syntheticRootsSteps,
+    rationalRootSteps,
     pitfallData,
     rootMethodTree,
     cubicFactoringSteps,
@@ -915,7 +981,7 @@ $$\\pm 1, \\pm 2, \\pm 3, \\pm 4, \\pm 6, \\pm 12, \\pm \\frac{1}{2}, \\pm \\fra
 }
    }
 
-export default function RootsPage({ pitfallData,rootMethodTree, cubicFactoringSteps, realComplexBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
+export default function RootsPage({ syntheticRootsSteps, rationalRootSteps, pitfallData,rootMethodTree, cubicFactoringSteps, realComplexBeforeAfter, seoData, sectionsContent, introContent, obj4Table, obj6Table, obj12Table, summaryTable, faqQuestions, schemas, demoUnits, conceptIntroFigures}) {
 
   const tableWrapStyle = { margin: '20px auto', width: '100%' }
 
@@ -1048,11 +1114,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-roots-multiplicity-matrix'}
+            id="roots-multiplicity-matrix"
+            title="Multiplicity"
+            source="/algebra/polynomials/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj4Table} />
+          </DiagramFrame>,
                   <div key={'unit-multiplicity'} dangerouslySetInnerHTML={{ __html: demoUnits.multiplicity }} />,
           `Counting roots with multiplicity is what makes the degree bound exact.`,
         ]
@@ -1087,11 +1157,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-roots-finding-roots-quadratic-formula-matrix'}
+            id="roots-finding-roots-quadratic-formula-matrix"
+            title="Finding Roots — Quadratic Formula"
+            source="/algebra/polynomials/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
           `@academic[punchline:The sign of the discriminant tells what kind of roots a quadratic has before either one is computed.]@`,
         ]
     },
@@ -1101,6 +1175,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
+          <DiagramFrame
+            key={'obj7-procedure'}
+            id="rational-root-search-steps"
+            title="The rational root search, step by step"
+            source="/algebra/polynomials/roots"
+            before={"The polynomial of this section, from the two divisor lists to a root. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={rationalRootSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {
@@ -1109,6 +1192,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
+          <DiagramFrame
+            key={'obj8-procedure'}
+            id="synthetic-division-roots-steps"
+            title="Finding all roots with synthetic division"
+            source="/algebra/polynomials/roots"
+            before={"The example of this section, from one root to all three. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={syntheticRootsSteps} variant="worked" />
+          </DiagramFrame>,
           <div key={'unit-quotient'} dangerouslySetInnerHTML={{ __html: demoUnits.quotient }} />,
           `Each successful division lowers the degree by one, until a quadratic finishes the job.`,
         ]
@@ -1160,11 +1252,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
         link:sectionsContent.obj12.link,
         content:[
           sectionsContent.obj12.content,
-          <div
-            key={'obj12-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj12Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-roots-common-mistakes-matrix'}
+            id="roots-common-mistakes-matrix"
+            title="Common Mistakes"
+            source="/algebra/polynomials/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj12Table} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj12-mistakes'}
             id="polynomial-root-pitfalls"
@@ -1184,11 +1280,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
         link:sectionsContent.obj13.link,
         content:[
           sectionsContent.obj13.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-roots-summary-root-finding-methods-matrix'}
+            id="roots-summary-root-finding-methods-matrix"
+            title="Summary: Root-Finding Methods at a Glance"
+            source="/algebra/polynomials/roots"
+            related={false}
+          >
+            <FeatureMatrix data={fm_summaryTable} />
+          </DiagramFrame>,
           <DiagramFrame
             key={'obj13-diagram'}
             id="root-finding-methods-tree"
@@ -1197,6 +1297,15 @@ Consider $P(x) = x^2 - 5x + 6$. Testing $x = 2$ gives $P(2) = 4 - 10 + 6 = 0$. T
           >
             <TopDownTree data={rootMethodTree} />
           </DiagramFrame>,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find all roots of a polynomial](!/algebra/polynomials/methods/find-all-roots) →@`,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

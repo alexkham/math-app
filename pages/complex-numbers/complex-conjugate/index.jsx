@@ -1260,6 +1260,7 @@
 // }
 
 
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -1280,14 +1281,37 @@ import complexDivisionDiagrams from '@/app/components/calculators/complex-number
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
 import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+
+// FeatureMatrix 2026-11-14: replaces the table obj1Table ("Summary: What z̄ Tells You About z"); converted from the table's own cells.
+const fm_obj1Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"Category","type":"text"},{"id":"c2","name":"z̄","type":"text"},{"id":"c3","name":"Note","type":"text"}],"items":[{"id":"r1","name":"3 + 2i","values":{"c1":"general complex (Q1)","c2":"3 − 2i","c3":"imaginary part flips sign"}},{"id":"r2","name":"−1 − 4i","values":{"c1":"general complex (Q3)","c2":"−1 + 4i","c3":"negative imaginary becomes positive"}},{"id":"r3","name":"5","values":{"c1":"real","c2":"5","c3":"unchanged — z̄ = z for every real z"}},{"id":"r4","name":"7i","values":{"c1":"pure imaginary","c2":"−7i","c3":"z̄ = −z for every pure imaginary z"}},{"id":"r5","name":"0","values":{"c1":"zero (both real and pure imag.)","c2":"0","c3":"the unique fixed point of every reflection"}},{"id":"r6","name":"(1⁄2) + (√3⁄2)i","values":{"c1":"on the unit circle (|z| = 1)","c2":"(1⁄2) − (√3⁄2)i","c3":"here z̄ also equals z⁻¹"}}]};
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj5Table ("Classification Theorems"); converted from the table's own cells.
+const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Category of z","features":[{"id":"c1","name":"Algebraic test","type":"text"},{"id":"c2","name":"Geometric meaning","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Real (b = 0)","values":{"c1":"z̄ = z","c2":"lies on the real axis — the mirror itself, fixed by reflection","c3":"z = 5: z̄ = 5 = z ✓"}},{"id":"r2","name":"Pure imaginary (a = 0)","values":{"c1":"z̄ = −z","c2":"lies on the imaginary axis — reflection sends to opposite point through origin","c3":"z = 4i: z̄ = −4i = −z ✓"}}]};
+
+// FeatureMatrix 2026-11-14: replaces the table obj3Table ("Fundamental Properties"); converted from the table's own cells.
+const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"In words","type":"text"}],"items":[{"id":"r1","name":"Involution","values":{"c1":"z̄ = z","c2":"conjugating twice returns the original"}},{"id":"r2","name":"Additivity","values":{"c1":"z₁ + z₂ = z̄₁ + z̄₂","c2":"conjugate of a sum = sum of conjugates"}},{"id":"r3","name":"Subtraction","values":{"c1":"z₁ − z₂ = z̄₁ − z̄₂","c2":"conjugate of a difference = difference of conjugates"}},{"id":"r4","name":"Multiplicativity","values":{"c1":"z₁ · z₂ = z̄₁ · z̄₂","c2":"conjugate of a product = product of conjugates"}},{"id":"r5","name":"Quotient","values":{"c1":"z₁ ⁄ z₂ = z̄₁ ⁄ z̄₂ (z₂ ≠ 0)","c2":"conjugate of a quotient = quotient of conjugates"}},{"id":"r6","name":"Powers","values":{"c1":"zⁿ = (z̄)ⁿ (integer n)","c2":"conjugate of a power = power of the conjugate"}}]};
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page.",
+  groups: [
+    { title: "Complex number methods", items: [
+      { skill: "Find the complex conjugate", href: "/complex-numbers/methods#complex-conjugate", desc: "You need $\\overline{z}$ to divide, to make a product real, or to pair a root: $\\overline{3 - 4i}$, $\\overline{-2 + i}$, $\\overline{5i}$.", level: "atomic" },
+      { skill: "Divide complex numbers", href: "/complex-numbers/methods/divide-complex", desc: "Multiply the top and bottom by the conjugate of the denominator, so the denominator becomes the real number $c^2 + d^2$.", level: "composite" },
+    ] },
+  ],
+  hub: { href: "/complex-numbers/methods", label: "All complex number methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -2679,7 +2703,15 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         content: [
           `The operation preserves the real part $a$ exactly while reversing the sign of the imaginary part. Where the original number has $+bi$, the conjugate has $-bi$. Where the original has $-bi$, the conjugate has $+bi$. Only the vertical component changes; the horizontal component remains untouched.`,
           `Concrete examples illustrate the pattern. The conjugate of $3 + 2i$ is $3 - 2i$. The conjugate of $-1 - 4i$ is $-1 + 4i$ — the negative imaginary part becomes positive. The conjugate of $5$ (a real number, written as $5 + 0i$) is simply $5$ — with no imaginary part to flip, nothing changes. The conjugate of $7i$ (pure imaginary, written as $0 + 7i$) is $-7i$ — the entire number negates because the real part contributes nothing.`,
-          <div key={'obj1-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{ __html: obj1Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-complex-conjugate-summary-what-z-matrix'}
+            id="complex-conjugate-summary-what-z-matrix"
+            title="Summary: What z̄ Tells You About z"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj1Table} />
+          </DiagramFrame>,
         ],
       },
       {
@@ -2789,11 +2821,15 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
             <ProofSteps data={proofStepsData} variant="chain" />
           </DiagramFrame>,
           sectionsContent.obj3.afterProof,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-complex-conjugate-fundamental-properties-matrix'}
+            id="complex-conjugate-fundamental-properties-matrix"
+            title="Fundamental Properties"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj3Table} />
+          </DiagramFrame>,
           `@academic[punchline:Conjugation passes through every arithmetic operation, so conjugating an expression means conjugating each of its pieces.]@`,
         ]
     },
@@ -2848,11 +2884,15 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
           >
             <ProofSteps data={proofStepsData4} variant="chain" />
           </DiagramFrame>,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-complex-conjugate-classification-theorems-matrix'}
+            id="complex-conjugate-classification-theorems-matrix"
+            title="Classification Theorems"
+            source="/complex-numbers/complex-conjugate"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj5Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -2943,6 +2983,14 @@ $$\\overline{z} = a - bi \\quad \\text{for} \\;\\; z = a + bi$$
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps

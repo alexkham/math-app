@@ -201,9 +201,10 @@ const CSS = `
   .cg-gr, .cg-two { grid-template-columns: 1fr; }
   .cg-general { grid-template-columns: 1fr; gap: 4px; }
   /* grid: the whole grid fits a phone column instead of scrolling sideways */
-  .cg-g { min-width: 0; --cg-rowhead: 58px; }
+  .cg-g { min-width: 0; --cg-rowhead: 80px; }
+  .cg-g-h b, .cg-g-r b { overflow-wrap: anywhere; }
   .cg-g-h { padding: 6px 3px; }
-  .cg-g-h b, .cg-g-r b { font-size: 13px; }
+  .cg-g-h b, .cg-g-r b { font-size: 12px; }
   .cg-g-h small, .cg-g-r small { font-size: 9.5px; line-height: 1.25; display: block; }
   .cg-g-r { padding: 6px 3px; }
   .cg-g-c { padding: 4px 3px 6px; }
@@ -250,7 +251,15 @@ function Plot({ f, x0, x1, y0, y1, w, h, pad = 18, cuts = [], on = null, setOn, 
   const Y = (y) => h - pad - (Math.max(y0 - span, Math.min(y1 + span, y)) - y0) / span * (h - 2 * pad);
   const xs = [];
   for (let i = 0; i <= samples; i++) xs.push(x0 + (x1 - x0) * i / samples);
-  const curve = xs.map((x, i) => (i ? 'L' : 'M') + X(x).toFixed(1) + ' ' + Y(f(x)).toFixed(1)).join(' ');
+  // lift the pen across an asymptote (a jump between two far-off values of opposite sign) and where f is not finite
+  let curve = '', prev = null;
+  for (const x of xs) {
+    const y = f(x);
+    if (!Number.isFinite(y)) { prev = null; continue; }
+    const jump = prev !== null && Math.sign(y) !== Math.sign(prev) && Math.abs(y) > span && Math.abs(prev) > span;
+    curve += (prev === null || jump ? 'M' : 'L') + X(x).toFixed(1) + ' ' + Y(y).toFixed(1) + ' ';
+    prev = y;
+  }
   const area = (a, b) => {
     const all = [a, ...xs.filter((x) => x > a && x < b), b];
     return 'M' + X(a).toFixed(1) + ' ' + Y(0).toFixed(1) + ' ' + all.map((x) => 'L' + X(x).toFixed(1) + ' ' + Y(f(x)).toFixed(1)).join(' ') + ' L' + X(b).toFixed(1) + ' ' + Y(0).toFixed(1) + ' Z';

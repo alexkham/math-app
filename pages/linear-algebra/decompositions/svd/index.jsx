@@ -8319,6 +8319,9 @@
 
 // tables-optimized: v4 | 2026-05-18 | 4 tables (obj5 comparison, obj6 aggregation, obj9 aggregation, obj12 summary capstone)
 // intro-rewritten: v8 | worked arithmetic in blocks | diagrams at 80% | obj1 = one ConceptIntro call, ordered block array
+import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
+import FactorizationAnatomy from '@/app/components/infographics/linear-algebra/FactorizationAnatomy'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
 import Breadcrumb from '@/app/components/breadcrumb/Breadcrumb'
 import OperaSidebar from '@/app/components/nav-bar/OperaSidebar'
 import IntroSection from '@/app/components/page-components/section/IntroContentSection'
@@ -8333,6 +8336,7 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import ObjectTypeProfile from '@/app/components/infographics/linear-algebra/ObjectTypeProfile'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ConceptIntro from '@/app/components/page-components/content-components/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -8345,7 +8349,30 @@ import laDecompNotationSheet from '@/app/components/infographics/NotationCheatSh
 import TheoremCard from '@/app/components/infographics/TheoremCard/TheoremCard'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// FeatureMatrix 2026-11-14: replaces the table obj9Table ("SVD and Norms"); converted from the table's own cells.
+const fm_obj9Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Quantity","features":[{"id":"c1","name":"Formula via singular values","type":"text"},{"id":"c2","name":"Interpretation","type":"text"}],"items":[{"id":"r1","name":"Operator (spectral) norm ‖A‖₂","values":{"c1":"σ₁","c2":"maximum stretching factor on the unit ball"}},{"id":"r2","name":"[Frobenius norm](!/linear-algebra/matrix/trace) ‖A‖$_{F}$","values":{"c1":"√(σ₁² + σ₂² + ··· + σᵣ²)","c2":"total \"energy\" — root-sum-of-squares of singular values"}},{"id":"r3","name":"Condition number κ(A)","values":{"c1":"σ₁ / σᵣ","c2":"sensitivity to perturbation: κ = 10ᵏ loses ~k digits"}}]};
 
+// FeatureMatrix 2026-11-14: replaces the table obj6Table ("SVD and the Four Fundamental Subspaces"); converted from the table's own cells.
+const fm_obj6Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Fundamental subspace","features":[{"id":"c1","name":"Basis from","type":"text"},{"id":"c2","name":"Column indices","type":"text"},{"id":"c3","name":"Dimension","type":"text"}],"items":[{"id":"r1","name":"Row space of A","values":{"c1":"V","c2":"1, ..., r","c3":"r"}},{"id":"r2","name":"Null space of A","values":{"c1":"V","c2":"r+1, ..., n","c3":"n − r"}},{"id":"r3","name":"Column space of A","values":{"c1":"U","c2":"1, ..., r","c3":"r"}},{"id":"r4","name":"Left null space of A","values":{"c1":"U","c2":"r+1, ..., m","c3":"m − r"}}]};
+
+
+
+// Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
+const skillsToLearn = {
+  title: false,
+  lede: "Each skill opens its step-by-step method page. Skills marked \"On this page\" are taught above.",
+  groups: [
+    { title: "Taught on this page", items: [
+      { skill: "Find the singular value decomposition", href: "/linear-algebra/decompositions/methods/svd", desc: "Eigenvalues of $A^TA$ give the singular values and $V$; then $\\mathbf{u}_i = A\\mathbf{v}_i / \\sigma_i$ gives $U$.", level: "composite", here: "#4" },
+    ] },
+    { title: "More decomposition methods", items: [
+      { skill: "Find the spectral decomposition", href: "/linear-algebra/decompositions/methods/spectral-decomposition", desc: "Symmetric matrix: orthonormal eigenvectors and eigenvalues give $A = QDQ^T$, a sum of projections.", level: "composite" },
+      { skill: "Find the QR decomposition", href: "/linear-algebra/decompositions/methods/qr-decomposition", desc: "Run Gram-Schmidt on the columns: the orthonormal vectors form Q, the coefficients form R.", level: "composite" },
+      { skill: "Choose the right matrix decomposition", href: "/linear-algebra/decompositions/methods/which-decomposition", desc: "A decision tree: the task and the shape of the matrix pick LU, Cholesky, QR, spectral or SVD.", level: "strategy" },
+    ] },
+  ],
+  hub: { href: "/linear-algebra/decompositions/methods", label: "All decomposition methods" },
+};
 
 export async function getStaticProps(){
 const keyWords = [
@@ -9272,8 +9299,44 @@ $$\\approx 5.83$$`],
     ],
   };
 
+  // Procedure rollout 2026-11-14: Computing the SVD by hand, step by step (obj4).
+  const svdSteps = {
+    worked: {
+      stepLabel: 'Step',
+      exampleLabel: 'The $3 \\times 2$ matrix $A$ of the worked example',
+      rows: [
+        { step: 'Form $A^TA$', example: '$\\begin{pmatrix} 2 & 1 \\\\ 1 & 2 \\end{pmatrix}$' },
+        { step: 'Find its eigenvalues and orthonormal eigenvectors', stepSub: 'The eigenvectors are the columns of $V$', example: '$3$ and $1$; $\\frac{1}{\\sqrt{2}}(1, 1)^T$ and $\\frac{1}{\\sqrt{2}}(1, -1)^T$' },
+        { step: 'Take square roots for the singular values', example: '$\\sigma_1 = \\sqrt{3}$, $\\sigma_2 = 1$' },
+        { step: 'Compute $\\mathbf{u}_i = \\frac{1}{\\sigma_i}A\\mathbf{v}_i$', example: '$\\mathbf{u}_1 = \\frac{1}{\\sqrt{6}}(1, 1, 2)^T$, $\\mathbf{u}_2 = \\frac{1}{\\sqrt{2}}(1, -1, 0)^T$' },
+        { step: 'Extend to an orthonormal basis if needed', example: '$\\mathbf{u}_3 = \\frac{1}{\\sqrt{3}}(-1, -1, 1)^T$' },
+      ],
+    },
+  };
+
+  // FactorizationAnatomy 2026-11-14: The three geometric steps as three factors (obj2).
+  const svdGeometricAnatomy = {
+    factors: [
+      { symbol: 'A', name: 'Any linear map', dim: 'm × n', fill: 'dense', width: 100, height: 130,
+        contains: '$\\mathbf{x} \\mapsto A\\mathbf{x}$' },
+      { symbol: 'U', name: 'Third step', dim: 'm × m', fill: 'ortho', width: 130, height: 130,
+        contains: 'Rotates or reflects the scaled result into the output space' },
+      { symbol: 'Σ', name: 'Second step', dim: 'm × n', fill: 'diag', width: 100, height: 130,
+        contains: 'Scales each axis by its singular value',
+        note: 'An axis with $\\sigma_i = 0$ is collapsed to zero' },
+      { symbol: 'Vᵀ', name: 'First step', dim: 'n × n', fill: 'ortho', width: 100, height: 100,
+        contains: 'Rotates or reflects the input onto the natural axes of $A$' },
+    ],
+    existsWhen: 'For every matrix.',
+    uniqueWhen: 'The singular values are always the same. $U$ and $V$ are not fixed.',
+    cost: 'by hand, through the eigenvalues of AᵀA',
+    preferredWhen: 'Reading how a map stretches: $\\sigma_1$ is the largest stretch and $\\sigma_1/\\sigma_r$ the condition number.',
+  };
+
   return {
   props:{
+    svdGeometricAnatomy,
+    svdSteps,
     specialCasesData,
     pitfallData,
       eckartYoungApply,
@@ -9301,7 +9364,7 @@ $$\\approx 5.83$$`],
 
 const theoremTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
 
-export default function SVDPage({ specialCasesData, pitfallData,eckartYoungApply, svdNest, 
+export default function SVDPage({ svdGeometricAnatomy, svdSteps, specialCasesData, pitfallData,eckartYoungApply, svdNest, 
   seoData,
   sectionsContent,
   introContent,
@@ -9419,6 +9482,17 @@ export default function SVDPage({ specialCasesData, pitfallData,eckartYoungApply
         link:sectionsContent.obj2.link,
         content:[
           sectionsContent.obj2.content,
+          <DiagramFrame
+            key={'obj2-factor-anatomy'}
+            id="svd-geometric-factor-anatomy"
+            title="The three geometric steps as three factors"
+            source="/linear-algebra/decompositions/svd"
+            before={"The same three steps as blocks, read from right to left: the shading shows where the nonzero entries of each factor sit."}
+          >
+            <div style={{ overflowX: 'auto' }}>
+              <FactorizationAnatomy data={svdGeometricAnatomy} theme="navy" variant="anatomy" />
+            </div>
+          </DiagramFrame>,
         ]
     },
     {
@@ -9461,8 +9535,18 @@ export default function SVDPage({ specialCasesData, pitfallData,eckartYoungApply
         link:sectionsContent.obj4.link,
         content:[
           sectionsContent.obj4.content,
+          <DiagramFrame
+            key={'obj4-procedure'}
+            id="computing-svd-steps"
+            title="Computing the SVD by hand, step by step"
+            source="/linear-algebra/decompositions/svd"
+            before={"The hand method on the worked example of this section. Press Next to carry out one step at a time."}
+          >
+            <ProcedureV2 data={svdSteps} variant="worked" />
+          </DiagramFrame>,
                   <div key={'unit-factor'} dangerouslySetInnerHTML={{ __html: demoUnits.factor }} />,
           `That universality is why the SVD, rather than the eigendecomposition, is the factorisation numerical work reaches for by default.`,
+          `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find the singular value decomposition](!/linear-algebra/decompositions/methods/svd) →@`,
         ]
     },
     {
@@ -9488,8 +9572,15 @@ export default function SVDPage({ specialCasesData, pitfallData,eckartYoungApply
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'obj6-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj6Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-svd-svd-four-fundamental-subspaces-matrix'}
+            id="svd-svd-four-fundamental-subspaces-matrix"
+            title="SVD and the Four Fundamental Subspaces"
+            source="/linear-algebra/decompositions/svd"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj6Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -9526,8 +9617,15 @@ export default function SVDPage({ specialCasesData, pitfallData,eckartYoungApply
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div key={'obj9-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj9Table }} />,
+          <DiagramFrame
+            key={'feature-matrix-svd-svd-norms-matrix'}
+            id="svd-svd-norms-matrix"
+            title="SVD and Norms"
+            source="/linear-algebra/decompositions/svd"
+            related={false}
+          >
+            <FeatureMatrix data={fm_obj9Table} />
+          </DiagramFrame>,
         ]
     },
     {
@@ -9610,6 +9708,14 @@ export default function SVDPage({ specialCasesData, pitfallData,eckartYoungApply
           >
             <MistakeFix data={pitfallData} variant="trace" />
           </DiagramFrame>,
+        ]
+    },
+    {
+        id:'skills',
+        title:'Skills You Should Learn',
+        link:``,
+        content:[
+          <SkillsToLearn key={'skills-to-learn'} data={skillsToLearn} />,
         ]
     },
     // faq: rendered component — must be built here, not in getStaticProps
