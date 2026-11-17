@@ -448,6 +448,7 @@ function Operations({ data, L, O, th }) {
             content={(k) => {
               const es = elems(k);
               if (!elements.length && P && P[k] != null) {
+                // eslint-disable-next-line react/display-name -- a render callback, not a component
                 return (x, y) => <text x={x} y={y + 6} textAnchor={k === '' ? 'end' : 'middle'} fontFamily="STIX Two Text, serif" fontSize="16" fontWeight={sel.has(k) ? 700 : 400} fill={sel.has(k) ? th.pickInk : th.elementInk}>{num(P[k])}</text>;
               }
               if (!es.length) return null;
@@ -533,6 +534,7 @@ function Count({ data, L, O, th }) {
             content={(r) => {
               if (r === '') return regions[''] != null ? (x, y) => <text x={x} y={y} textAnchor="end" fontFamily="STIX Two Text, serif" fontSize="13" fill={th.universeLabel}>{regions[''] + ' ' + L.outside}</text> : null;
               const m = mult(r);
+              // eslint-disable-next-line react/display-name -- a render callback, not a component
               return (x, y) => (
                 <>
                   <text x={x} y={y + 2} textAnchor="middle" fontFamily="STIX Two Text, serif" fontSize="17" fontWeight="700" fill={tone(m)[1]}>{regions[r]}</text>
