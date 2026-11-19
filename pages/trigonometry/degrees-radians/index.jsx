@@ -1312,6 +1312,29 @@ import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FormulaSheet (tiles) 2026-11-19: replaces the table obj3Table (common angles: degrees, radians); the seventeen pairs come from the table.
+const commonAngleTiles = {
+  items: [
+    { name: '$0^\\circ$', formula: '$0$' },
+    { name: '$30^\\circ$', formula: '$\\dfrac{\\pi}{6}$' },
+    { name: '$45^\\circ$', formula: '$\\dfrac{\\pi}{4}$' },
+    { name: '$60^\\circ$', formula: '$\\dfrac{\\pi}{3}$' },
+    { name: '$90^\\circ$', formula: '$\\dfrac{\\pi}{2}$' },
+    { name: '$120^\\circ$', formula: '$\\dfrac{2\\pi}{3}$' },
+    { name: '$135^\\circ$', formula: '$\\dfrac{3\\pi}{4}$' },
+    { name: '$150^\\circ$', formula: '$\\dfrac{5\\pi}{6}$' },
+    { name: '$180^\\circ$', formula: '$\\pi$' },
+    { name: '$210^\\circ$', formula: '$\\dfrac{7\\pi}{6}$' },
+    { name: '$225^\\circ$', formula: '$\\dfrac{5\\pi}{4}$' },
+    { name: '$240^\\circ$', formula: '$\\dfrac{4\\pi}{3}$' },
+    { name: '$270^\\circ$', formula: '$\\dfrac{3\\pi}{2}$' },
+    { name: '$300^\\circ$', formula: '$\\dfrac{5\\pi}{3}$' },
+    { name: '$315^\\circ$', formula: '$\\dfrac{7\\pi}{4}$' },
+    { name: '$330^\\circ$', formula: '$\\dfrac{11\\pi}{6}$' },
+    { name: '$360^\\circ$', formula: '$2\\pi$' },
+  ],
+}
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import trigonometryNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/trigonometry'
@@ -2653,11 +2676,16 @@ $$\\theta = \\frac{s}{r}$$]@`,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'formula-sheet-common-angles'}
+            id="common-angles-degrees-radians"
+            title="Common Angles in Degrees and Radians"
+            source="/trigonometry/degrees-radians"
+            related={false}
+            layout="top"
+          >
+            <FormulaSheet data={commonAngleTiles} variant="tiles" />
+          </DiagramFrame>,
           `@academic[punchline:Every conversion is one multiplication by a fraction worth exactly $1$, built from $180° = \\pi$.]@`,
         ]
     },

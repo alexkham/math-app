@@ -893,6 +893,19 @@ const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563E
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import SkillsToLearn from '@/app/components/infographics/SkillsToLearn/SkillsToLearn'
 
+// ProcedureV2 (worked) 2026-11-18: replaces the table obj3Table (multiplying complex numbers: step, action, worked example); steps and the example taken from the table, same form as the division frame on this page.
+const complexProductSteps = {
+  worked: {
+    stepLabel: 'Step',
+    exampleLabel: '$(2 + 3i)(4 - i)$',
+    rows: [
+      { step: 'Expand using distributivity (FOIL)', example: '$8 - 2i + 12i - 3i^2$' },
+      { step: 'Substitute $i^2 = -1$', example: '$8 - 2i + 12i + 3$' },
+      { step: 'Combine real and imaginary terms', example: '$11 + 10i$' },
+    ],
+  },
+}
+
 // Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
 const skillsToLearn = {
   title: false,
@@ -1813,11 +1826,17 @@ Substitute $i^2 = -1$: $= 8 - 2i + 12i - 3(-1) = 8 - 2i + 12i + 3$
 
 Combine: $= (8 + 3) + (-2 + 12)i = 11 + 10i$]@`,
           `Multiplying by a pure real number scales both components proportionally. The product $3(2 + 5i) = 6 + 15i$ stretches the number by factor $3$ without rotating it. Multiplying by $i$ rotates $90°$ counterclockwise: $i(2 + 5i) = 2i + 5i^2 = -5 + 2i$. The [trigonometric form](!/complex-numbers/trigonometric-form) reveals multiplication's full geometric meaning — moduli multiply, arguments add.`,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'obj3-procedure'}
+            id="complex-multiplication-steps"
+            title="Multiplying complex numbers, step by step"
+            source="/complex-numbers/operations"
+            related={false}
+            before={"The step-by-step example above, one step at a time. Press Next to carry out each step."}
+          >
+            <ProcedureV2 data={complexProductSteps} variant="worked" />
+          </DiagramFrame>,
+          `The steps give the product as a number. The picture below shows what the same operation does in the plane.`,
           <div key={'unit-mul'} dangerouslySetInnerHTML={{ __html: demoUnits.mul }} />,
           `The four-term expansion hides a rotation; the trigonometric form reveals it.`,
           `@academic[fact,aside:true,width:35%:Squaring builds Pythagorean triples
@@ -1898,11 +1917,7 @@ Leaving $-3i^2$ as $-3$ in the expansion of $(2 + 3i)(4 - i)$ gives $8 - 2i + 12
           >
             <ProcedureV2 data={complexQuotientSteps} variant="worked" />
           </DiagramFrame>,
-          <div
-            key={'obj4-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj4Table }}
-          />,
+          `The steps give the quotient as a number. The picture below shows what dividing does in the plane.`,
                   <div key={'unit-div'} dangerouslySetInnerHTML={{ __html: demoUnits.div }} />,
           `The conjugate trick is the algebra that performs this counter-rotation.`,
         ]

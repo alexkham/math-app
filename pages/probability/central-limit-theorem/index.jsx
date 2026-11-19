@@ -740,6 +740,18 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probLimitsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-inequalities-limits'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix (ledger) 2026-11-18: replaces the table obj7Table (Common misconception / What is actually true); rows and wording taken from the table.
+const conceptMistakesLedger = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { notTrue: "Common misconception", instead: "What is actually true" },
+  mistakes: [
+    { id: "clt-common-misconceptions-1", wrong: "“The data become normal.”", truth: "Only the distribution of the sample mean approaches normal; the original data are unchanged." },
+    { id: "clt-common-misconceptions-2", wrong: "“The theorem works for any small sample.”", truth: "The required sample size depends on the shape of the original distribution." },
+    { id: "clt-common-misconceptions-3", wrong: "“The theorem is only about sums.”", truth: "Sums appear in the math, but the meaningful object is the average: the scaling by $\\sqrt{n}$ is what reveals the limit." },
+    { id: "clt-common-misconceptions-4", wrong: "“Normal data are required.”", truth: "Skewed, discrete, or irregular distributions all satisfy the theorem when the four conditions hold." },
+  ],
+}
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 
 // FeatureMatrix 2026-11-14: replaces the table obj8Table ("CLT vs Law of Large Numbers"); converted from the table's own cells.
@@ -1750,7 +1762,15 @@ Every probability question built on the theorem refers to one of these curves. A
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div key={'obj7-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: obj7Table}}/>,
+          <DiagramFrame
+            key={'mistake-fix-clt-common-misconceptions'}
+            id="clt-common-misconceptions"
+            title="Common Misconceptions about the Central Limit Theorem"
+            source="/probability/central-limit-theorem"
+            related={false}
+          >
+            <MistakeFix data={conceptMistakesLedger} variant="ledger" />
+          </DiagramFrame>,
           sectionsContent.misconceptionsMore.content,
           <DiagramFrame
             key={'misconceptionsMore-mistakes'}

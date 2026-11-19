@@ -592,6 +592,31 @@ import eigenVectorsDiagrams from '@/app/components/linear-algebra copy/r2-visual
 import CaseSplit from '@/app/components/infographics/CaseSplit/CaseSplit'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// ProcedureV2 (stages) 2026-11-18: replaces the table summaryTable (eigenvalue workflow: step, action, output, tool); actions, outputs, tools and the link taken from the table, run on the page's own matrix.
+const eigenWorkflowStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { exprNow: 'Found so far' },
+  run: {
+    label: 'Eigenvalues and eigenvectors of $A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$',
+    start: '$A = \\begin{pmatrix} 4 & 2 \\\\ 1 & 3 \\end{pmatrix}$',
+  },
+  groups: [
+    { label: 'The eigenvalues', sub: 'steps 1 to 3', kind: 'must', stages: [
+      { n: 1, name: 'Form', what: 'Form the matrix $A - \\lambda I$', cond: 'Output: an $n \\times n$ matrix with $\\lambda$ subtracted along the diagonal. Tool: scalar–matrix subtraction',
+        example: '$A - \\lambda I = \\begin{pmatrix} 4 - \\lambda & 2 \\\\ 1 & 3 - \\lambda \\end{pmatrix}$', exampleNote: '$\\lambda$ comes off the diagonal entries only' },
+      { n: 2, name: 'Determinant', what: 'Set $\\det(A - \\lambda I) = 0$', cond: 'Output: a degree-$n$ polynomial in $\\lambda$, the [characteristic equation](!/linear-algebra/eigen/characteristic-equation). Tool: determinant (cofactor expansion or row reduction)',
+        example: '$(4 - \\lambda)(3 - \\lambda) - 2 = \\lambda^2 - 7\\lambda + 10 = 0$', exampleNote: 'a quadratic, because $A$ is $2 \\times 2$' },
+      { n: 3, name: 'Solve', what: 'Solve the characteristic polynomial', cond: 'Output: the $n$ eigenvalues $\\lambda_1, \\ldots, \\lambda_n$ (counted with algebraic multiplicity). Tool: polynomial root-finding (factoring, quadratic formula, …)',
+        example: '$(\\lambda - 2)(\\lambda - 5) = 0$', exampleNote: 'so $\\lambda_1 = 2$ and $\\lambda_2 = 5$' },
+    ] },
+    { label: 'The eigenvectors', sub: 'step 4', kind: 'out', stages: [
+      { n: 4, name: 'Eigenvectors', what: 'For each $\\lambda$, solve $(A - \\lambda I)\\mathbf{v} = \\mathbf{0}$', cond: 'Output: a basis of the eigenspace $E_\\lambda$; its dimension is the geometric multiplicity. Tool: row reduction and parametric null-space extraction',
+        example: '$\\lambda_1 = 2$: $\\mathbf{v}_1 = (-1, 1)^T$ $\\quad \\lambda_2 = 5$: $\\mathbf{v}_2 = (2, 1)^T$', exampleNote: 'from $\\begin{pmatrix} 2 & 2 \\\\ 1 & 1 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$ and $\\begin{pmatrix} -1 & 2 \\\\ 1 & -2 \\end{pmatrix}\\mathbf{v} = \\mathbf{0}$' },
+    ] },
+  ],
+}
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
@@ -942,7 +967,7 @@ The eigenvalue decomposition is arguably the single most important factorization
   },
   obj9: {
     title: `Summary: The Eigenvalue Workflow`,
-    content: `Finding eigenvalues and eigenvectors is [a four-step procedure](https://calculatematrix.com/matrix-calculators/eigenvectors#walkthrough): a single algebraic equation produces the eigenvalues, and a separate null-space computation produces the eigenvectors for each one. The table below collects the four steps alongside what each one produces and the tool it relies on, summarizing the entire computational pipeline assembled across the sections above.`,
+    content: `Finding eigenvalues and eigenvectors is [a four-step procedure](https://calculatematrix.com/matrix-calculators/eigenvectors#walkthrough): a single algebraic equation produces the eigenvalues, and a separate null-space computation produces the eigenvectors for each one. The steps below are carried out on one matrix, alongside what each one produces and the tool it relies on, summarizing the entire computational pipeline assembled across the sections above.`,
     before: ``,
     after: ``,
     link: ``,
@@ -1390,11 +1415,15 @@ The prefix is German for own: an eigenvector is a direction that belongs to the 
         link:sectionsContent.obj9.link,
         content:[
           sectionsContent.obj9.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'procedure-eigen-workflow'}
+            id="eigenvalue-workflow-steps"
+            title="The Eigenvalue Workflow"
+            source="/linear-algebra/eigen"
+            related={false}
+          >
+            <ProcedureV2 data={eigenWorkflowStages} variant="stages" />
+          </DiagramFrame>,
           `@span[backgroundColor:#e3f2fd,padding:4px 8px,borderRadius:4px,fontSize:12px]:[How to find eigenvalues](!/linear-algebra/eigen/methods/eigenvalues) →@`,
         ]
     },

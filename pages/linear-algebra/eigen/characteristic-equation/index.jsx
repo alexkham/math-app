@@ -848,6 +848,30 @@ import NotationSection from '@/app/components/page-components/content-components
 import IdentitySheet from '@/app/components/infographics/linear-algebra/IdentitySheet'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+
+// FeatureMatrix 2026-11-18: replaces the table obj5Table (matrix structure and how to find its eigenvalues); rows, wording and the link taken from the table; the Method tag restates the kind of work each row names.
+const fm_eigenvalueByStructure = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', bar: '#2563EB', tagInk: '#06357A', sparkLine: '#06357A' },
+  corner: 'Matrix structure',
+  features: [
+    { id: 'c0', name: 'Method', type: 'tag', tags: {
+      read: { label: 'read off', color: '#2563EB', bg: '#dbeafe' },
+      blocks: { label: 'block by block', color: '#2563EB', bg: '#dbeafe' },
+      formula: { label: 'formula', color: '#06357A', bg: '#e8eefc' },
+      factor: { label: 'expand and factor', color: '#06357A', bg: '#e8eefc' },
+      numeric: { label: 'numerical', color: '#B45309', bg: '#fef3c7' },
+    } },
+    { id: 'c1', name: 'How to find the eigenvalues', type: 'text' },
+  ],
+  items: [
+    { id: 'r1', name: 'Diagonal', values: { c0: 'read', c1: 'eigenvalues are the diagonal entries: read off by inspection' } },
+    { id: 'r2', name: 'Triangular', sub: 'upper or lower', values: { c0: 'read', c1: 'eigenvalues are the diagonal entries (det of a triangular matrix is the product of its diagonal)' } },
+    { id: 'r3', name: 'Block triangular', values: { c0: 'blocks', c1: 'multiply the characteristic polynomials of each diagonal block; eigenvalues are the union of block eigenvalues' } },
+    { id: 'r4', name: 'General $2 \\times 2$', values: { c0: 'formula', c1: 'quadratic formula on $\\lambda^2 - \\operatorname{tr}(A)\\,\\lambda + \\det(A) = 0$' } },
+    { id: 'r5', name: 'General $3 \\times 3$ or $4 \\times 4$', values: { c0: 'factor', c1: 'expand $\\det(A - \\lambda I)$ and factor (rational-root testing, cubic/quartic formulas, or inspection)' } },
+    { id: 'r6', name: 'General $n \\geq 5$', sub: 'numerical', values: { c0: 'numeric', c1: 'iterative algorithms such as [QR iteration](!/linear-algebra/decompositions/qr); the polynomial is never formed explicitly' } },
+  ],
+}
 import FAQSection from '@/app/components/page-components/faq-component/FAQSection'
 import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import eigenDiagrams from '@/app/components/linear-algebra copy/matrix/eigenDiagrams'
@@ -1893,11 +1917,15 @@ export default function CharacteristicEquationPage({ findEigenvectorSteps, pitfa
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div
-            key={'obj5-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj5Table }}
-          />,
+          <DiagramFrame
+            key={'feature-matrix-eigenvalues-by-structure'}
+            id="eigenvalues-by-matrix-structure"
+            title="Finding Eigenvalues by Matrix Structure"
+            source="/linear-algebra/eigen/characteristic-equation"
+            related={false}
+          >
+            <FeatureMatrix data={fm_eigenvalueByStructure} />
+          </DiagramFrame>,
           `@academic[punchline:The characteristic polynomial defines the eigenvalues, but beyond small or structured matrices it is not how they are computed.]@`,
         ]
     },

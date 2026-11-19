@@ -1350,6 +1350,36 @@ import conjugateModulusDiagrams from '@/app/components/calculators/complex-numbe
 import polarRectangularDiagrams from '@/app/components/calculators/complex-numbers/polarRectangularDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+
+// ConceptCompare (versus) 2026-11-18: replaces the table obj3Table (field axioms of the complex numbers: additive form and multiplicative form of each axiom group); cells taken from the table.
+const fieldAxiomsTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+const fieldAxiomsCompare = {
+  concepts: [
+    { id: 'add', name: 'Additive form', symbol: '$+$', values: {
+      closure: '$z_1 + z_2 \\in \\mathbb{C}$',
+      comm: '$z_1 + z_2 = z_2 + z_1$',
+      assoc: '$(z_1 + z_2) + z_3 = z_1 + (z_2 + z_3)$',
+      ident: '$z + 0 = z$ (additive identity $0$)',
+      inv: '$-z$ exists; $z + (-z) = 0$',
+    } },
+    { id: 'mul', name: 'Multiplicative form', symbol: '$\\cdot$', values: {
+      closure: '$z_1 \\cdot z_2 \\in \\mathbb{C}$',
+      comm: '$z_1 \\cdot z_2 = z_2 \\cdot z_1$',
+      assoc: '$(z_1 \\cdot z_2) \\cdot z_3 = z_1 \\cdot (z_2 \\cdot z_3)$',
+      ident: '$z \\cdot 1 = z$ (multiplicative identity $1$)',
+      inv: '$z^{-1}$ exists for $z \\neq 0$; $z \\cdot z^{-1} = 1$ (formula: $z^{-1} = \\bar{z} / |z|^2$)',
+    } },
+  ],
+  aspects: [
+    { id: 'closure', label: 'Closure' },
+    { id: 'comm', label: 'Commutativity' },
+    { id: 'assoc', label: 'Associativity' },
+    { id: 'ident', label: 'Identity' },
+    { id: 'inv', label: 'Inverse' },
+  ],
+  together: { label: 'Distributivity', text: '$z_1 \\cdot (z_2 + z_3) = z_1 \\cdot z_2 + z_1 \\cdot z_3$ (multiplication distributes over addition).' },
+}
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -2838,11 +2868,15 @@ export default function PropertiesPage({ pitfallData,complexOperationProperties,
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'obj3-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj3Table }}
-          />,
+          <DiagramFrame
+            key={'concept-compare-field-axioms'}
+            id="complex-field-axioms"
+            title="The Field Axioms in Additive and Multiplicative Form"
+            source="/complex-numbers/properties"
+            related={false}
+          >
+            <ConceptCompare data={fieldAxiomsCompare} variant="versus" theme={fieldAxiomsTheme} />
+          </DiagramFrame>,
         ]
     },
     {

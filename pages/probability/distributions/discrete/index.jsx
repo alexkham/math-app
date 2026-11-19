@@ -17,6 +17,139 @@ import discretePmfDiagrams from '@/app/components/visualizations/probability/dis
 import discreteCdfDiagrams from '@/app/components/visualizations/probability/discrete-distribution/CDFs/discreteCdfDiagrams'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table uniformTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const uniformDiscreteProfileSheet = {
+  header: { kicker: 'Discrete distribution', title: 'Uniform Discrete Distribution', lede: 'Models experiments where each outcome is equally likely (e.g., rolling a fair die, random selection from a finite set).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', sub: 'Parameters: $a$ (minimum value), $b$ (maximum value).', pairs: [
+      [{ formula: '$X \\in \\{a, a+1, a+2, \\ldots, b\\}$', text: 'Support (domain)' },
+       { formula: '$[a, b]$', text: 'Bounds / range: where $a$, $b$ are integers and $a \\leq b$' }],
+      [{ formula: 'Finite', text: 'Finite or infinite?' },
+       { formula: 'Not applicable', text: 'Number of trials known / fixed beforehand? Single selection' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'All selections are equal: no outcome has special meaning.', pairs: [
+      [{ formula: '$P(X = k) = \\dfrac{1}{b - a + 1}$', text: 'PMF (probability mass function): for $k \\in \\{a, a+1, \\ldots, b\\}$' },
+       { formula: '$P(X \\leq k) = \\dfrac{k - a + 1}{b - a + 1}$', text: 'CDF (cumulative distribution function): for $k \\in \\{a, a+1, \\ldots, b\\}$' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = \\dfrac{a + b}{2}$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = \\dfrac{(b - a + 1)^2 - 1}{12}$', text: 'Variance' }],
+      [{ formula: '$\\sigma = \\sqrt{\\dfrac{(b - a + 1)^2 - 1}{12}}$', text: 'Standard deviation' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table binomialTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const binomialProfileSheet = {
+  header: { kicker: 'Discrete distribution', title: 'Binomial Distribution', lede: 'Models the number of successes in a fixed number of independent trials, each with the same probability of success (e.g., number of heads in 10 coin flips).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', sub: 'Parameters: $n$ (number of trials), $p$ (probability of success on each trial), where $0 \\leq p \\leq 1$.', pairs: [
+      [{ formula: '$X \\in \\{0, 1, 2, \\ldots, n\\}$', text: 'Support (domain)' },
+       { formula: '$[0, n]$', text: 'Bounds / range: where $n$ is a positive integer' }],
+      [{ formula: 'Finite', text: 'Finite or infinite?' },
+       { formula: 'Yes', text: 'Number of trials known / fixed beforehand? $n$ is fixed before the experiment' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Fixed number of independent trials; counting total number of successes; each trial has binary outcome (success/failure).', pairs: [
+      [{ formula: '$P(X = k) =$ $\\dbinom{n}{k} p^k (1-p)^{n-k}$', text: 'PMF (probability mass function): for $k \\in \\{0, 1, \\ldots, n\\}$' },
+       { formula: '$P(X \\leq k) =$ $\\sum_{i=0}^{k} \\binom{n}{i} p^i (1-p)^{n-i}$', text: 'CDF (cumulative distribution function)' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = np$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = np(1-p)$', text: 'Variance' }],
+      [{ formula: '$\\sigma = \\sqrt{np(1-p)}$', text: 'Standard deviation' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table geometricTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const geometricProfileSheet = {
+  header: { kicker: 'Discrete distribution', title: 'Geometric Distribution', lede: 'Models the number of trials until the first success in a sequence of independent trials, each with the same probability of success (e.g., number of coin flips until first heads).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', sub: 'Parameters: $p$ (probability of success on each trial), where $0 < p \\leq 1$.', pairs: [
+      [{ formula: '$X \\in \\{1, 2, 3, \\ldots\\}$', text: 'Support (domain)' },
+       { formula: '$[1, \\infty)$', text: 'Bounds / range' }],
+      [{ formula: 'Infinite', text: 'Finite or infinite?' },
+       { formula: 'No', text: 'Number of trials known / fixed beforehand? Trials continue until the first success occurs' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Variable number of independent trials; counting trials until first success; each trial has binary outcome (success/failure); memoryless property.', pairs: [
+      [{ formula: '$P(X = k) = (1-p)^{k-1} p$', text: 'PMF (probability mass function): for $k \\in \\{1, 2, 3, \\ldots\\}$' },
+       { formula: '$P(X \\leq k) = 1 - (1-p)^k$', text: 'CDF (cumulative distribution function): for $k \\in \\{1, 2, 3, \\ldots\\}$' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = \\dfrac{1}{p}$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = \\dfrac{1-p}{p^2}$', text: 'Variance' }],
+      [{ formula: '$\\sigma = \\sqrt{\\dfrac{1-p}{p^2}} = \\dfrac{\\sqrt{1-p}}{p}$', text: 'Standard deviation' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table negativeBinomialTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const negativeBinomialProfileSheet = {
+  header: { kicker: 'Discrete distribution', title: 'Negative Binomial Distribution', lede: 'Models the number of trials until r successes occur in a sequence of independent trials, each with the same probability of success (e.g., number of coin flips until 5th heads).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', sub: 'Parameters: $r$ (number of successes desired), $p$ (probability of success on each trial), where $0 < p \\leq 1$ and $r$ is a positive integer.', pairs: [
+      [{ formula: '$X \\in \\{r, r+1, r+2, \\ldots\\}$', text: 'Support (domain)' },
+       { formula: '$[r, \\infty)$', text: 'Bounds / range: where $r$ is a positive integer' }],
+      [{ formula: 'Infinite', text: 'Finite or infinite?' },
+       { formula: 'No', text: 'Number of trials known / fixed beforehand? Trials continue until $r$ successes occur' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Variable number of independent trials; counting trials until $r^{\\text{th}}$ success; each trial has binary outcome (success/failure); generalization of geometric distribution.', pairs: [
+      [{ formula: '$P(X = k) =$ $\\dbinom{k-1}{r-1} p^r (1-p)^{k-r}$', text: 'PMF (probability mass function): for $k \\in \\{r, r+1, r+2, \\ldots\\}$' },
+       { formula: '$P(X \\leq k) =$ $\\sum_{i=r}^{k} \\binom{i-1}{r-1} p^r (1-p)^{i-r}$', text: 'CDF (cumulative distribution function)' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = \\dfrac{r}{p}$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = \\dfrac{r(1-p)}{p^2}$', text: 'Variance' }],
+      [{ formula: '$\\sigma = \\dfrac{\\sqrt{r(1-p)}}{p}$', text: 'Standard deviation' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table hypergeometricTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const hypergeometricProfileSheet = {
+  header: { kicker: 'Discrete distribution', title: 'Hypergeometric Distribution', lede: 'Models the number of successes in a sample drawn without replacement from a finite population containing both successes and failures (e.g., drawing red balls from an urn without replacing them).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', sub: 'Parameters: $N$ (population size), $K$ (number of success states in population), $n$ (number of draws), where $N$, $K$, $n$ are positive integers with $K \\leq N$ and $n \\leq N$.', pairs: [
+      [{ formula: '$X \\in \\{\\max(0, n-N+K),$ $\\ldots, \\min(n, K)\\}$', text: 'Support (domain)' },
+       { formula: '$[\\max(0, n-N+K),$ $\\min(n, K)]$', text: 'Bounds / range' }],
+      [{ formula: 'Finite', text: 'Finite or infinite?' },
+       { formula: 'Yes', text: 'Number of trials known / fixed beforehand? $n$ is fixed before the experiment' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Sampling without replacement from finite population; fixed number of draws; counting successes in sample; each item can only be selected once.', pairs: [
+      [{ formula: '$P(X = k) =$ $\\dfrac{\\binom{K}{k} \\binom{N-K}{n-k}}{\\binom{N}{n}}$', text: 'PMF (probability mass function)' },
+       { formula: '$P(X \\leq k) =$ $\\sum_{i=0}^{k} \\dfrac{\\binom{K}{i} \\binom{N-K}{n-i}}{\\binom{N}{n}}$', text: 'CDF (cumulative distribution function)' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = n \\cdot \\dfrac{K}{N}$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) =$ $n \\cdot \\frac{K}{N} \\left(1 - \\frac{K}{N}\\right) \\frac{N-n}{N-1}$', text: 'Variance' }],
+      [{ formula: '$\\sigma =$ $\\sqrt{n \\cdot \\frac{K}{N} \\left(1 - \\frac{K}{N}\\right) \\frac{N-n}{N-1}}$', text: 'Standard deviation' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table poissonTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const poissonProfileSheet = {
+  header: { kicker: 'Discrete distribution', title: 'Poisson Distribution', lede: 'Models the number of events occurring in a fixed interval of time or space when events occur independently at a constant average rate (e.g., number of phone calls received per hour).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', sub: 'Parameters: $\\lambda$ (lambda, the average rate of events), where $\\lambda > 0$.', pairs: [
+      [{ formula: '$X \\in \\{0, 1, 2, 3, \\ldots\\}$', text: 'Support (domain)' },
+       { formula: '$[0, \\infty)$', text: 'Bounds / range' }],
+      [{ formula: 'Infinite', text: 'Finite or infinite?' },
+       { formula: 'No fixed number', text: 'Number of trials known / fixed beforehand? Counts events in a fixed interval' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Events occur independently; constant average rate; events in non-overlapping intervals are independent; useful for rare events.', pairs: [
+      [{ formula: '$P(X = k) = \\dfrac{\\lambda^k e^{-\\lambda}}{k!}$', text: 'PMF (probability mass function): for $k \\in \\{0, 1, 2, \\ldots\\}$' },
+       { formula: '$P(X \\leq k) =$ $\\sum_{i=0}^{k} \\frac{\\lambda^i e^{-\\lambda}}{i!}$ $= e^{-\\lambda} \\sum_{i=0}^{k} \\frac{\\lambda^i}{i!}$', text: 'CDF (cumulative distribution function)' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = \\lambda$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = \\lambda$', text: 'Variance' }],
+      [{ formula: '$\\sigma = \\sqrt{\\lambda}$', text: 'Standard deviation' }],
+    ] },
+  ],
+}
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
@@ -2134,7 +2267,16 @@ List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n
     // sectionsContent.uniform.pmf,
 
             // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["discrete uniform distribution"].svg }} key="table" />,
-            <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: uniformTable }} key="table" />,
+            <DiagramFrame
+              key={'formula-sheet-uniform-discrete-distribution-profile'}
+              id="uniform-discrete-distribution-profile"
+              title="Uniform Discrete Distribution at a Glance"
+              source="/probability/distributions/discrete"
+              related={false}
+              layout="top"
+            >
+              <FormulaSheet data={uniformDiscreteProfileSheet} variant="grouped" />
+            </DiagramFrame>,
             sectionsContent.uniform.after,
         ]
     },
@@ -2160,7 +2302,16 @@ List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n
     // sectionsContent.binomial.pmf,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["binomial distribution"].svg }} key="table" />,
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: binomialTable }} key="table" />,
+              <DiagramFrame
+                key={'formula-sheet-binomial-distribution-profile'}
+                id="binomial-distribution-profile"
+                title="Binomial Distribution at a Glance"
+                source="/probability/distributions/discrete"
+                related={false}
+                layout="top"
+              >
+                <FormulaSheet data={binomialProfileSheet} variant="grouped" />
+              </DiagramFrame>,
                sectionsContent.binomial.pitfall,
                sectionsContent.binomial.after,
         
@@ -2188,7 +2339,16 @@ List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n
     // sectionsContent.geometric.parameters,
     // sectionsContent.geometric.pmf,
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["geometric distribution"].svg }} key="table" />,
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: geometricTable }} key="table" />,
+              <DiagramFrame
+                key={'formula-sheet-geometric-distribution-profile'}
+                id="geometric-distribution-profile"
+                title="Geometric Distribution at a Glance"
+                source="/probability/distributions/discrete"
+                related={false}
+                layout="top"
+              >
+                <FormulaSheet data={geometricProfileSheet} variant="grouped" />
+              </DiagramFrame>,
               sectionsContent.geometric.pitfall,
               sectionsContent.geometric.after,
             ]
@@ -2216,7 +2376,16 @@ List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n
     // sectionsContent.negative.pmf,
    
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html:distributionsDiagramsData["negative binomial distribution"].svg }} key="table" />,
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: negativeBinomialTable }} key="table" />,
+              <DiagramFrame
+                key={'formula-sheet-negative-binomial-distribution-profile'}
+                id="negative-binomial-distribution-profile"
+                title="Negative Binomial Distribution at a Glance"
+                source="/probability/distributions/discrete"
+                related={false}
+                layout="top"
+              >
+                <FormulaSheet data={negativeBinomialProfileSheet} variant="grouped" />
+              </DiagramFrame>,
                sectionsContent.negative.pitfall,
                sectionsContent.negative.after,
             ]
@@ -2242,7 +2411,16 @@ List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n
     // sectionsContent.hypergeometric.notation,
     // sectionsContent.hypergeometric.parameters,
     // sectionsContent.hypergeometric.pmf,
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: hypergeometricTable }} key="table" />,
+              <DiagramFrame
+                key={'formula-sheet-hypergeometric-distribution-profile'}
+                id="hypergeometric-distribution-profile"
+                title="Hypergeometric Distribution at a Glance"
+                source="/probability/distributions/discrete"
+                related={false}
+                layout="top"
+              >
+                <FormulaSheet data={hypergeometricProfileSheet} variant="grouped" />
+              </DiagramFrame>,
               sectionsContent.hypergeometric.pitfall,
               sectionsContent.hypergeometric.after,
             ]
@@ -2270,7 +2448,16 @@ List the fractions between $0$ and $1$ as $q_1, q_2, q_3, \\ldots$ and give $q_n
     // sectionsContent.poisson.pmf,
     
               // <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: distributionsDiagramsData["poisson distribution"].svg }} key="table" />,
-              <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} dangerouslySetInnerHTML={{ __html: poissonTable }} key="table" />,
+              <DiagramFrame
+                key={'formula-sheet-poisson-distribution-profile'}
+                id="poisson-distribution-profile"
+                title="Poisson Distribution at a Glance"
+                source="/probability/distributions/discrete"
+                related={false}
+                layout="top"
+              >
+                <FormulaSheet data={poissonProfileSheet} variant="grouped" />
+              </DiagramFrame>,
                sectionsContent.poisson.pitfall,
                sectionsContent.poisson.after,
             ]

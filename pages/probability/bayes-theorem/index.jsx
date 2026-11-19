@@ -639,6 +639,19 @@ import totalProbabilityDiagrams from '@/app/components/probability/total-probabi
 import Hierarchy from '@/app/components/infographics/Hierarchy/Hierarchy'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+
+// MistakeFix (ledger) 2026-11-18: replaces the table mistakesTable (mistake and its correction); the four rows and their wording come from the table.
+const bayesMistakesLedger = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { notTrue: 'Mistake', instead: 'Correction' },
+  mistakes: [
+    { id: 'bayes-swap', wrong: 'Confusing $P(A|B)$ with $P(B|A)$', truth: 'These answer different questions; swapping them reverses the meaning of the result.' },
+    { id: 'bayes-priors', wrong: 'Ignoring priors and focusing only on fit', truth: 'Priors and likelihoods must both be weighed: base rates cannot be discarded just because the evidence is striking.' },
+    { id: 'bayes-independence', wrong: 'Assuming independence without justification', truth: 'Independence can simplify the formula, but treating dependent terms as independent quietly breaks the update.' },
+    { id: 'bayes-normalize', wrong: 'Skipping the normalization step', truth: 'Without dividing by $P(B)$ (or summing over all hypotheses), the posterior probabilities will not sum to $1$ and cannot be interpreted correctly.' },
+  ],
+}
 
 const cm_bayesRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Bayes' theorem","sub":"a bridge rather than an endpoint"},"groups":[{"name":"What it is built on","items":[{"name":"Conditional probability","href":"/probability/conditional-probability","why":"the basic mechanism Bayes' theorem reorganizes"},{"name":"Total probability","href":"/probability/total-probability","why":"supplies the normalization"},{"name":"Chain rule","href":"/probability/bayes-theorem#chain","why":"Bayes' theorem as a rearrangement of joint probability"},{"name":"Probability axioms","href":"/probability/axioms","why":"guarantee that the update follows consistent rules"}]},{"name":"Special case","items":[{"name":"Independence","href":"/probability/independence","why":"where the update simplifies"}]},{"name":"Where it extends","items":[{"name":"Random variables","href":"/probability/random-variables","why":"beyond events to numerical outcomes"},{"name":"Distributions","href":"/probability/distributions","why":"beyond events to numerical outcomes"}]}]}};
 
@@ -1573,7 +1586,15 @@ The numerator of Bayes' theorem is one of these contributions, and the denominat
           sectionsContent.mistakes.content,
                   <div key={'unit-baseRate'} dangerouslySetInnerHTML={{ __html: demoUnits.baseRate }} />,
           `Halving the sick column to 0.05 would cut P(sick | +) to about 0.32, with the same test.`,
-          <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
+          <DiagramFrame
+            key={'mistake-fix-bayes-mistakes'}
+            id="bayes-common-mistakes"
+            title="Common Mistakes with Bayes' Theorem"
+            source="/probability/bayes-theorem"
+            related={false}
+          >
+            <MistakeFix data={bayesMistakesLedger} variant="ledger" />
+          </DiagramFrame>,
         ]
     },
     {

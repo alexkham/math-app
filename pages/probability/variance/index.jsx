@@ -1016,6 +1016,22 @@ const featureMatrixData = {
     ],
   };
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
+import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
+import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix (ledger) 2026-11-18: replaces the table mistakesTable (Mistake / Why it's wrong); rows and wording taken from the table.
+const conceptMistakesLedger = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { notTrue: "Mistake", instead: "Why it's wrong" },
+  mistakes: [
+    { id: "variance-common-mistakes-1", wrong: "Allowing negative variance", truth: "Impossible: variance is an expected value of squared terms, so $\\operatorname{Var}(X) ≥ 0$ always." },
+    { id: "variance-common-mistakes-2", wrong: "Confusing variance with expectation", truth: "Variance measures spread, expectation measures center: two independent aspects of a distribution." },
+    { id: "variance-common-mistakes-3", wrong: "Forgetting independence in $\\operatorname{Var}(X+Y)$", truth: "$\\operatorname{Var}(X+Y) = \\operatorname{Var}(X) + \\operatorname{Var}(Y)$ requires independence; otherwise add twice the [covariance](!/probability/covariance), $2 · \\operatorname{Cov}(X,Y)$." },
+    { id: "variance-common-mistakes-4", wrong: "Mixing discrete and continuous formulas", truth: "Discrete variables require a sum $Σ$, continuous variables require an integral $∫$." },
+    { id: "variance-common-mistakes-5", wrong: "Confusing $σ$ with $σ^2$", truth: "Standard deviation and variance differ in both value and units; $\\sigma = \\sqrt{\\sigma^2}$." },
+    { id: "variance-common-mistakes-6", wrong: "Treating variance as linear", truth: "Scaling squares the constant ($\\operatorname{Var}(aX) = a^2 \\operatorname{Var}(X)$); additivity requires independence." },
+  ],
+}
 
 // FeatureMatrix 2026-11-14: replaces the table sdTable ("Variance vs Standard Deviation"); converted from the table's own cells.
 const fm_sdTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Attribute","features":[{"id":"c1","name":"Variance","type":"text"},{"id":"c2","name":"Standard deviation","type":"text"}],"items":[{"id":"r1","name":"Symbol","values":{"c1":"Var(X) or σ²","c2":"σ"}},{"id":"r2","name":"Formula","values":{"c1":"E[(X − μ)²]","c2":"√Var(X)"}},{"id":"r3","name":"Units","values":{"c1":"squared units of X (e.g., m², $²)","c2":"same units as X (e.g., m, $)"}},{"id":"r4","name":"Best for","values":{"c1":"theoretical derivations, algebraic manipulation","c2":"interpretation, real-world communication"}}]};
@@ -2626,8 +2642,15 @@ $$\\operatorname{Var}(X) = E\\!\\left[(X - \\mu)^2\\right]$$
         link:'',
         content:[
             sectionsContent.mistakes.content,
-            <div key={'mistakes-table'} style={tableWrapStyle}
-                 dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+            <DiagramFrame
+              key={'mistake-fix-variance-common-mistakes'}
+              id="variance-common-mistakes"
+              title="Common Mistakes with Variance"
+              source="/probability/variance"
+              related={false}
+            >
+              <MistakeFix data={conceptMistakesLedger} variant="ledger" />
+            </DiagramFrame>,
         ]
     },
     {

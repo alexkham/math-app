@@ -745,6 +745,28 @@ import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
 const cm_probabilityFunctionPath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"beforeLabel":"Describes","before":[{"name":"Random Variables","href":"/probability/random-variables","why":"the PF describes how a random variable behaves"}],"target":{"kicker":"This page","name":"Probability function","text":"The link that connects random variables, distributions, cumulative functions and probability models."},"after":[{"name":"Distributions","href":"/probability/distributions","why":"every distribution is built from its probability function"},{"name":"CDF","href":"/probability/cdf","why":"sums the PMF or integrates the PDF"},{"name":"Probability Models","href":"/probability/models","why":"sample space, events and the probability function together"},{"name":"Real-world problems","why":"simulations, decisions and inference start from the PF"}]}};
 
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+
+// PropertySheet (sheet) 2026-11-19: replaces the table summaryTable (probability functions at a glance: aspect, statement); the seven rows and their wording come from the table, sorted into two groups.
+const probabilityFunctionSummarySheet = {
+  verdicts: {
+    holds: { label: 'Same for both', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+    conditional: { label: 'PMF and PDF differ', color: '#B45309', bg: '#fef3c7', mark: 'half' },
+  },
+  groups: [
+    { name: 'What it is', properties: [
+      { id: 'what', name: 'What a probability function is', verdict: 'holds', statement: 'a mathematical rule describing how probability is distributed over the values of a random variable' },
+      { id: 'forms', name: 'Two forms', verdict: 'conditional', statement: 'PMF $p(x)$ for discrete random variables; PDF $f(x)$ for continuous random variables' },
+      { id: 'requirements', name: 'Mathematical requirements', verdict: 'conditional', statement: 'non-negative everywhere; total probability sums (PMF) or integrates (PDF) to $1$' },
+    ] },
+    { name: 'How it is used', properties: [
+      { id: 'getting', name: 'Getting a probability', verdict: 'conditional', statement: 'discrete: sum $p(x)$ over event values; continuous: integrate $f(x)$ over the interval (area under the curve)' },
+      { id: 'determine', name: 'How to determine it', verdict: 'holds', statement: 'symmetry, counting, fitting a standard distribution, or estimating from data' },
+      { id: 'enables', name: 'What it enables', verdict: 'holds', statement: 'expected value, variance, distributions, CDF, predictions and decisions' },
+      { id: 'role', name: 'Role in the framework', verdict: 'holds', statement: 'the engine that converts events into computable probabilities for any random variable' },
+    ] },
+  ],
+}
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
@@ -1376,7 +1398,7 @@ The probability function is the bridge between the physical world of experiments
     },
     summary: {
       title: `Probability Function at a Glance`,
-      content: `The page has shown that a probability function is a single idea adapted to two distinct settings — a PMF for discrete random variables and a PDF for continuous ones — both serving the same role of describing how probability is distributed over the values a variable can take. The table below collects the most-used facts in a single reference card, with each row pairing an aspect of the probability function with a concise statement that captures it.`,
+      content: `The page has shown that a probability function is a single idea adapted to two distinct settings — a PMF for discrete random variables and a PDF for continuous ones — both serving the same role of describing how probability is distributed over the values a variable can take. The sheet below collects the most-used facts in a single reference card, with each line pairing an aspect of the probability function with a concise statement that captures it.`,
       before: ``,
       after: ``,
     },
@@ -1723,8 +1745,15 @@ export default function ProbabilityFunctionPage({ pitfallData,pmfPdfTree,
        link: '',
        content: [
          sectionsContent.summary.content,
-         <div key={'summary-table'} style={tableWrapStyle}
-              dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+         <DiagramFrame
+           key={'property-sheet-probability-function-summary'}
+           id="probability-function-summary"
+           title="Probability Functions at a Glance"
+           source="/probability/probability-function"
+           related={false}
+         >
+           <PropertySheet data={probabilityFunctionSummarySheet} variant="sheet" />
+         </DiagramFrame>,
        ]
     },
     {

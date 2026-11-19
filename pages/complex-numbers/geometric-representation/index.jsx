@@ -851,6 +851,33 @@ import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FormulaSheet (grouped) 2026-11-18: replaces the table summaryTable (algebraic object or operation and its geometric meaning in the complex plane); the twelve rows and their wording come from the table, grouped into four families.
+const algebraToGeometrySheet = {
+  groups: [
+    { id: 'points', name: 'Points and distances', pairs: [
+      [{ formula: '$z = a + bi$', text: 'point at $(a, b)$, or vector from the origin to $(a, b)$' },
+       { formula: '$\\operatorname{Re}(z),\\ \\operatorname{Im}(z)$', text: 'horizontal and vertical coordinates' }],
+      [{ formula: '$|z| = \\sqrt{a^2 + b^2}$', text: 'distance from origin to $z$ (Pythagorean theorem on $(a, b)$)' },
+       { formula: '$|z_1 - z_2|$', text: 'distance between the two points $z_1$ and $z_2$' }],
+    ] },
+    { id: 'sums', name: 'Sums and differences', pairs: [
+      [{ formula: '$z_1 + z_2$', text: 'vector sum via parallelogram / tip-to-tail rule' },
+       { formula: '$z_1 - z_2$', text: 'vector from $z_2$ to $z_1$ (displacement between points)' }],
+    ] },
+    { id: 'reflections', name: 'Reflections', pairs: [
+      [{ formula: '$\\bar{z}$', text: 'conjugate: reflection of $z$ across the real axis' },
+       { formula: '$-z$', text: 'reflection through the origin (rotation by $180^\\circ$)' }],
+    ] },
+    { id: 'scaling', name: 'Scaling and rotation', pairs: [
+      [{ formula: '$k \\cdot z$', text: '$k$ a positive real: scale by factor $k$ along the same ray from the origin' },
+       { formula: '$i \\cdot z$', text: 'rotate $z$ by $90^\\circ$ counterclockwise about the origin' }],
+      [{ formula: '$z_1 \\cdot z_2$', text: 'scale by $|z_2|$, rotate by $\\arg(z_2)$; moduli multiply, arguments add' },
+       { formula: '$\\dfrac{z_1}{z_2}$', text: 'scale by $\\frac{1}{|z_2|}$, rotate by $-\\arg(z_2)$; moduli divide, arguments subtract' }],
+    ] },
+  ],
+}
 
 // FeatureMatrix 2026-11-14: replaces the table obj3Table ("Plotting Complex Numbers"); converted from the table's own cells.
 const fm_obj3Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Region","features":[{"id":"c1","name":"Re(z)","type":"text"},{"id":"c2","name":"Im(z)","type":"text"},{"id":"c3","name":"Example","type":"text"}],"items":[{"id":"r1","name":"Quadrant I (upper right)","values":{"c1":"> 0","c2":"> 0","c3":"3 + 2i at (3, 2)"}},{"id":"r2","name":"Quadrant II (upper left)","values":{"c1":"< 0","c2":"> 0","c3":"−1 + 4i at (−1, 4)"}},{"id":"r3","name":"Quadrant III (lower left)","values":{"c1":"< 0","c2":"< 0","c3":"−2 − 3i at (−2, −3)"}},{"id":"r4","name":"Quadrant IV (lower right)","values":{"c1":"> 0","c2":"< 0","c3":"2 − i at (2, −1)"}},{"id":"r5","name":"Real axis (excluding origin)","values":{"c1":"≠ 0","c2":"= 0","c3":"5 at (5, 0); −π at (−π, 0)"}},{"id":"r6","name":"Imaginary axis (excluding origin)","values":{"c1":"= 0","c2":"≠ 0","c3":"3i at (0, 3); −2i at (0, −2)"}},{"id":"r7","name":"Origin (on both axes)","values":{"c1":"= 0","c2":"= 0","c3":"0 at (0, 0) — the only such point"}}]};
@@ -1312,7 +1339,7 @@ General multiplication combines rotation with scaling. The product $z_1 \\cdot z
 },
     obj8:{
       title:`Summary: Algebra ↔ Geometry Translation`,
-      content:`Every complex-number concept introduced on this page has both an algebraic statement and a geometric counterpart. The table below collects them as a single algebra-to-geometry translation reference — coordinates, distances, vector sums, reflections, rotations, and scalings — so the algebraic side and its geometric meaning sit next to each other for quick lookup.`,
+      content:`Every complex-number concept introduced on this page has both an algebraic statement and a geometric counterpart. The sheet below collects them as a single algebra-to-geometry translation reference — coordinates, distances, vector sums, reflections, rotations, and scalings — so the algebraic side and its geometric meaning sit next to each other for quick lookup.`,
       before:``,
       after:``,
       link:'',
@@ -1836,11 +1863,15 @@ export default function GeometricRepresentationPage({ specialCasesData, pitfallD
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div
-            key={'summary-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: summaryTable }}
-          />,
+          <DiagramFrame
+            key={'formula-sheet-algebra-to-geometry'}
+            id="complex-algebra-to-geometry"
+            title="From Algebra to Geometry in the Complex Plane"
+            source="/complex-numbers/geometric-representation"
+            related={false}
+          >
+            <FormulaSheet data={algebraToGeometrySheet} variant="grouped" />
+          </DiagramFrame>,
         ]
     },
     {

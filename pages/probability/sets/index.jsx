@@ -514,6 +514,18 @@ import probEventsNotationSheet from '@/app/components/infographics/NotationCheat
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix (ledger) 2026-11-18: replaces the table mistakesTable (Mistake / What is actually correct); rows and wording taken from the table.
+const conceptMistakesLedger = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { notTrue: "Mistake", instead: "What is actually correct" },
+  mistakes: [
+    { id: "events-as-sets-common-mistakes-1", wrong: "Treating a single outcome as an event", truth: "An event is a set of outcomes; a single outcome is one element of such a set." },
+    { id: "events-as-sets-common-mistakes-2", wrong: "Mixing up union and intersection", truth: "“A or B” is the union $A ∪ B$; “A and B” is the intersection $A ∩ B$." },
+    { id: "events-as-sets-common-mistakes-3", wrong: "Taking complements against a partial set", truth: "The complement $A^c$ is defined relative to the entire sample space $Ω$, not a subregion." },
+    { id: "events-as-sets-common-mistakes-4", wrong: "Expecting individual points to have nonzero probability (continuous)", truth: "In continuous settings, single points have probability zero; only intervals carry positive probability." },
+  ],
+}
 import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
 
 const tx_probabilitySetTypes = {
@@ -533,6 +545,29 @@ const tx_probabilitySetTypes = {
   }
 };
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table summaryTable (probability concept and its set-theoretic definition); the ten rows, their wording and the two links come from the table, grouped into three families.
+const probabilityAsSetsSheet = {
+  groups: [
+    { id: 'space', name: 'The space and its parts', pairs: [
+      [{ formula: '$\\Omega$', text: '[Sample space](!/probability/sample-space): the set containing every possible outcome of the experiment' },
+       { formula: 'one element of $\\Omega$', text: 'Outcome: a single element of $\\Omega$' }],
+      [{ formula: '$A \\subseteq \\Omega$', text: '[Event](!/probability/events): any subset of $\\Omega$' },
+       { formula: '$P(A)$', text: 'Probability of an event: a number assigned to a subset $A$ of $\\Omega$ by the probability function' }],
+    ] },
+    { id: 'special', name: 'Two special events', pairs: [
+      [{ formula: '$\\varnothing$', text: 'Impossible event: the empty set' },
+       { formula: '$\\Omega$', text: 'Certain event: the full sample space' }],
+    ] },
+    { id: 'combining', name: 'Combining events', pairs: [
+      [{ formula: '$A \\cup B$', text: '“A or B”: the union' },
+       { formula: '$A \\cap B$', text: '“A and B”: the intersection' }],
+      [{ formula: '$A^c = \\Omega \\setminus A$', text: '“not A”: the complement' },
+       { formula: '$A \\cap B = \\varnothing$', text: 'Disjoint events: two events $A$, $B$ with nothing in common' }],
+    ] },
+  ],
+}
 
 // FeatureMatrix 2026-11-14: replaces the table operationsTable ("Core Set Operations in Probability"); converted from the table's own cells.
 const fm_operationsTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Operation","features":[{"id":"c1","name":"Symbol","type":"text"},{"id":"c2","name":"Set meaning","type":"text"},{"id":"c3","name":"Probability meaning","type":"text"}],"items":[{"id":"r1","name":"Union","values":{"c1":"A ∪ B","c2":"elements in A, in B, or in both","c3":"at least one of the events occurs"}},{"id":"r2","name":"Intersection","values":{"c1":"A ∩ B","c2":"elements in both A and B","c3":"both events occur simultaneously"}},{"id":"r3","name":"Complement","values":{"c1":"A$^{c}$ or A&prime;","c2":"elements of &Omega; that are not in A","c3":"event A does not occur"}},{"id":"r4","name":"Difference","values":{"c1":"A \\ B","c2":"elements in A but not in B","c3":"A occurs and B does not"}},{"id":"r5","name":"Disjoint","values":{"c1":"A ∩ B = ∅","c2":"A and B share no elements","c3":"the two events cannot both occur"}}]};
@@ -999,7 +1034,7 @@ Sets link directly to every major idea in probability. [Sample spaces](!/probabi
     summary:{
       title:`Sets and Probability at a Glance`,
       content:`
-The page has shown that sets are not just background scaffolding — they are the language probability speaks. Every concept introduced so far reduces, when read carefully, to a precise statement about subsets of a sample space. The table below collects this correspondence in one place: each major probability concept is paired with its set-theoretic definition, making explicit the mapping that runs through every section of the page.`,
+The page has shown that sets are not just background scaffolding — they are the language probability speaks. Every concept introduced so far reduces, when read carefully, to a precise statement about subsets of a sample space. The sheet below collects this correspondence in one place: each major probability concept is paired with its set-theoretic definition, making explicit the mapping that runs through every section of the page.`,
       before:``,
       after:``,
     },
@@ -1272,8 +1307,16 @@ export default function SetsInProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.mistakes.content,
-          <div key={'mistakes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'mistake-fix-events-as-sets-common-mistakes'}
+            id="events-as-sets-common-mistakes"
+            title="Common Mistakes with Events as Sets"
+            source="/probability/sets"
+            related={false}
+          >
+            <MistakeFix data={conceptMistakesLedger} variant="ledger" />
+          </DiagramFrame>,
+          `The list above names the mistakes in words. The frame below works one of them through with numbers.`,
           <DiagramFrame
             key={'mistakes-mistakes'}
             id="probability-set-pitfalls"
@@ -1299,8 +1342,15 @@ export default function SetsInProbabilityPage({ pitfallData,
         link:'',
         content:[
           sectionsContent.summary.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'formula-sheet-probability-as-sets'}
+            id="probability-concepts-as-sets"
+            title="Probability Concepts in Set Language"
+            source="/probability/sets"
+            related={false}
+          >
+            <FormulaSheet data={probabilityAsSetsSheet} variant="grouped" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -625,6 +625,53 @@ import demoUnitFrame from '@/app/components/demo-unit/demoUnitFrame'
 import twoSetsVennDiagrams from '@/app/components/venn-diagrams/twoSetsVennDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table relationshipsTable from the shared set-theory summaries (relationships between sets: equality, inequality, subsets, supersets, disjoint sets, complement: notation, explanation, examples); wording taken from the table.
+const setRelationshipsSheet = {
+  groups: [
+    { id: 'same', name: 'Same or different', pairs: [
+      [{ formula: '$A = B$', text: 'Equality of sets: two sets are equal if they contain exactly the same elements. $A = \\{1, 2, 3\\}$, $B = \\{3, 1, 2\\}$; $A = B$.' },
+       { formula: '$A \\neq C$', text: 'Inequality of sets: two sets are unequal if at least one element is different between the sets. $A = \\{1, 2, 3\\}$, $C = \\{4, 5, 6\\}$; $A \\neq C$.' }],
+    ] },
+    { id: 'inside', name: 'One inside the other', pairs: [
+      [{ formula: '$A \\subseteq B$', text: 'Basic subsets: a subset is a set where every element of the subset is also an element of another set. $A = \\{1, 2\\}$, $B = \\{1, 2, 3, 4\\}$; $A \\subseteq B$.' },
+       { formula: '$A \\subset B$', text: 'Proper subsets: a proper subset of a set is not equal to the original set, containing fewer elements. $A = \\{1, 2\\}$, $B = \\{1, 2, 3, 4\\}$; $A \\subset B$.' }],
+      [{ formula: '$A \\supseteq B$', text: 'Basic supersets: a superset includes every element of another set. $A = \\{1, 2, 3, 4\\}$, $B = \\{1, 2\\}$; $A \\supseteq B$.' },
+       { formula: '$A \\supset B$', text: 'Proper supersets: a proper superset contains all elements of the subset plus additional elements. $A = \\{1, 2, 3, 4\\}$, $B = \\{1, 2\\}$; $A \\supset B$.' }],
+    ] },
+    { id: 'apart', name: 'Apart and outside', pairs: [
+      [{ formula: 'no symbol', text: 'Disjoint sets: two sets are disjoint if they have no elements in common. $A = \\{1, 2, 3\\}$, $C = \\{4, 5, 6\\}$; $A$ and $C$ are disjoint.' },
+       { formula: '$A^c$', text: 'Complement: the set of all elements not in the given set, relative to a universal set. $U = \\{1, 2, 3, 4, 5\\}$, $A = \\{1, 2, 3\\}$; $A^c = \\{4, 5\\}$.' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table operationsTable from the shared set-theory summaries (operations on sets: intersection, union, difference, symmetric difference: notation, explanation, examples); wording taken from the table.
+const setOperationsSheet = {
+  groups: [
+    { id: 'ops', name: 'Operations on two sets', pairs: [
+      [{ formula: '$A \\cap B$', text: 'Intersection: the set of elements that are common to both sets $A$ and $B$. If $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$, then $A \\cap B = \\{3, 4\\}$.' },
+       { formula: '$A \\cup B$', text: 'Union: the set of all elements that are in either set $A$ or set $B$, or in both. If $A = \\{1, 2, 3\\}$ and $B = \\{4, 5, 3\\}$, then $A \\cup B = \\{1, 2, 3, 4, 5\\}$.' }],
+      [{ formula: '$A - B$', text: 'Difference: the set of elements that are in set $A$ but not in set $B$. If $A = \\{1, 2, 3, 4\\}$ and $B = \\{3, 4, 5, 6\\}$, then $A - B = \\{1, 2\\}$.' },
+       { formula: '$A \\,\\Delta\\, B$', text: 'Symmetric difference: the set of elements that are in either of the sets $A$ or $B$, but not in both. If $A = \\{1, 2, 3\\}$ and $B = \\{3, 4, 5\\}$, then $A \\,\\Delta\\, B = \\{1, 2, 4, 5\\}$.' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table cardinalityTable from the shared set-theory summaries (cardinality, finite sets, infinite sets, empty set, universal set: notation, explanation, examples); wording taken from the table.
+const setSizesSheet = {
+  groups: [
+    { id: 'size', name: 'Size of a set', sub: 'Cardinality, written $|A|$ or $\\operatorname{card}(A)$, is the size or number of elements in a set: $|A| = 3$ for $A = \\{1, 2, 3\\}$, and $|B| = 4$ for $B = \\{1, \\text{apple}, 3.14, \\text{True}\\}$.', pairs: [
+      [{ formula: '$\\{A, \\ldots, Z\\}$', text: 'Finite sets: sets with a finite number of elements: the count is a natural number or $0$. Also the days of the week, from Monday to Sunday. Written in regular set notation (enumerative or descriptive).' },
+       { formula: '$\\{1, 2, 3, \\ldots\\}$', text: 'Infinite sets: sets that are not finite: countable, like $\\{1, 2, 3, \\ldots\\}$, or uncountable, like $\\mathbb{R}$. Also the set of all $x$ such that $x$ is a positive even number. Written in regular set notation (enumerative or descriptive).' }],
+    ] },
+    { id: 'special', name: 'Two special sets', pairs: [
+      [{ formula: '$\\varnothing$ or $\\{\\}$', text: 'Empty set: a set containing no elements.' },
+       { formula: '$U$ or $\\xi$', text: 'Universal set: the set containing all objects within a specific context. $U = \\{\\text{Monday}, \\ldots, \\text{Sunday}\\}$ for days of the week, $U = \\{A, \\ldots, Z\\}$ for the English alphabet.' }],
+    ] },
+  ],
+}
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import { tableHeaders } from '@/app/styles/theme'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
@@ -762,7 +809,7 @@ Members can even be sets themselves. The set $\\{1, \\{2, 3\\}\\}$ has two eleme
   },
   notation: {
     title: `Notation Used in Set Theory`,
-    lead: `The discipline that lends its marks to all the others starts here: the braces that build sets, the bar that filters them, the membership pair, and the symbol for having nothing. Sets take capital letters ($A$, $B$, $C$) by convention; the full chart of [set theory symbols](!/math-symbols/set-theory) lists every mark with its [LaTeX](!/latex) code, and the [mathematical keyboard](!/keyboard) types them directly. The summary table below collects the symbols at a glance.`,
+    lead: `The discipline that lends its marks to all the others starts here: the braces that build sets, the bar that filters them, the membership pair, and the symbol for having nothing. Sets take capital letters ($A$, $B$, $C$) by convention; the full chart of [set theory symbols](!/math-symbols/set-theory) lists every mark with its [LaTeX](!/latex) code, and the [mathematical keyboard](!/keyboard) types them directly. The cheat sheet below collects the symbols at a glance.`,
     inherited: `The containment family $\\subseteq$, $\\subset$, $\\supseteq$, $\\supset$ appears in **Relationships Between Sets** below and is owned by the [subsets page](!/set-theory/subsets); the operation marks $\\cap$, $\\cup$ belong to [operations](!/set-theory/operations).`,
     entries: [
       {
@@ -1291,11 +1338,6 @@ The collection of all sets that are not members of themselves would contain itse
             sheet={setTheoryNotationSheet}
             current={'/set-theory/basics'}
           />,
-          <div
-            key={'notation-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: notationTable }}
-          />,
         ]
     },
     {
@@ -1304,11 +1346,17 @@ The collection of all sets that are not members of themselves would contain itse
         link:sectionsContent.obj3.link,
         content:[
           sectionsContent.obj3.content,
-          <div
-            key={'cardinality-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: cardinalityTable }}
-          />,
+          <DiagramFrame
+            key={'formula-sheet-set-sizes'}
+            id="set-cardinality-and-types"
+            title="Cardinality and Types of Sets"
+            source="/set-theory/basics"
+            related={false}
+            layout="top"
+          >
+            <FormulaSheet data={setSizesSheet} variant="grouped" />
+          </DiagramFrame>,
+          `The outline below arranges the same kinds of sets as a tree, by size.`,
           <DiagramFrame
             key={'obj3-diagram'}
             id="set-types-outline"
@@ -1334,11 +1382,17 @@ The collection of all sets that are not members of themselves would contain itse
           sectionsContent.obj4.content3,
           <div key={'fig-disjoint'} dangerouslySetInnerHTML={{ __html: figs.disjoint }} />,
           sectionsContent.obj4.content4,
-          <div
-            key={'relationships-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: relationshipsTable }}
-          />,
+          <DiagramFrame
+            key={'formula-sheet-set-relationships-summary'}
+            id="set-relationships-summary"
+            title="Relationships Between Sets"
+            source="/set-theory/basics"
+            related={false}
+            layout="top"
+          >
+            <FormulaSheet data={setRelationshipsSheet} variant="grouped" />
+          </DiagramFrame>,
+          `The figure below shows one of these relationships, the subset, on two sets.`,
                   <div key={'unit-subset'} dangerouslySetInnerHTML={{ __html: demoUnits.subset }} />,
           `Equality of sets is the case where the containment runs both ways.`,
         ]
@@ -1359,11 +1413,17 @@ The collection of all sets that are not members of themselves would contain itse
           sectionsContent.obj5.content4,
           <div key={'fig-symmetric-difference'} dangerouslySetInnerHTML={{ __html: figs.symmetricDifference }} />,
           sectionsContent.obj5.content5,
-          <div
-            key={'operations-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: operationsTable }}
-          />,
+          <DiagramFrame
+            key={'formula-sheet-set-operations-summary'}
+            id="set-operations-summary"
+            title="Operations on Sets"
+            source="/set-theory/basics"
+            related={false}
+            layout="top"
+          >
+            <FormulaSheet data={setOperationsSheet} variant="grouped" />
+          </DiagramFrame>,
+          `The figure below shows the first of the four, the intersection, as a shaded overlap.`,
                   <div key={'unit-intersection'} dangerouslySetInnerHTML={{ __html: demoUnits.intersection }} />,
           `The operations page develops each of these with its own laws and diagrams.`,
         ]

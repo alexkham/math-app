@@ -701,6 +701,20 @@ import totalProbabilityDiagrams from '@/app/components/probability/total-probabi
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix (ledger) 2026-11-18: replaces the table obj8Table (Mistake / What is actually correct); rows and wording taken from the table.
+const conceptMistakesLedger = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { notTrue: "Mistake", instead: "What is actually correct" },
+  mistakes: [
+    { id: "tree-diagram-common-mistakes-1", wrong: "Treating branch probabilities as unconditional", truth: "Each branch label is conditional, given the path that reaches it." },
+    { id: "tree-diagram-common-mistakes-2", wrong: "Assigning probabilities to paths directly", truth: "Probabilities live on branches; a path's probability is the product of its branch values." },
+    { id: "tree-diagram-common-mistakes-3", wrong: "Forgetting branches at a node sum to 1", truth: "The outcomes leaving any single node form a partition and must sum to $1$." },
+    { id: "tree-diagram-common-mistakes-4", wrong: "Double-counting overlapping paths", truth: "Distinct paths are mutually exclusive; sum their probabilities without overlap." },
+    { id: "tree-diagram-common-mistakes-5", wrong: "Mixing up stages with events of interest", truth: "A stage is structural (where the tree splits); an event is the question being asked about outcomes." },
+    { id: "tree-diagram-common-mistakes-6", wrong: "Reading the tree forward after observation", truth: "Once a later outcome is observed, restrict to the paths consistent with it and renormalize." },
+  ],
+}
 import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
 
 const sw_treeComponents = {
@@ -718,6 +732,33 @@ const sw_treeComponents = {
 // FeatureMatrix 2026-11-14: replaces the table obj7Table ("Tree Diagrams vs Other Representations"); converted from the table's own cells.
 const fm_obj7Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Aspect","features":[{"id":"c1","name":"Tree diagrams","type":"text"},{"id":"c2","name":"Tables","type":"text"},{"id":"c3","name":"Formulas","type":"text"}],"items":[{"id":"r1","name":"Emphasis","values":{"c1":"order and sequence","c2":"parallel outcomes and joint counts","c3":"algebraic relationships"}},{"id":"r2","name":"Strength","values":{"c1":"makes conditional reasoning explicit","c2":"compact view of joint distributions","c3":"works at any scale, including abstract problems"}},{"id":"r3","name":"Best for","values":{"c1":"sequential processes, few stages, dependencies between stages","c2":"counting outcomes, joint events, two-variable summaries","c3":"large problems, abstract reasoning, general rules"}},{"id":"r4","name":"Limitation","values":{"c1":"clutters with many stages or outcomes","c2":"hides order; obscures conditional structure","c3":"less visual; harder to spot structure at a glance"}}]};
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+
+// PropertySheet (sheet) 2026-11-19: replaces the table summaryTable (tree diagrams at a glance: concept, how the tree represents it); the seven rows and their wording come from the table, sorted into two groups.
+const treeSummarySheet = {
+  verdicts: {
+    multiply: { label: 'Multiply along a path', color: '#2563EB', bg: '#dbeafe', mark: 'none' },
+    add: { label: 'Add across paths', color: '#06357A', bg: '#e8eefc', mark: 'none' },
+    read: { label: 'Read the label', color: '#06357A', bg: '#e8eefc', mark: 'none' },
+    backward: { label: 'Read backward', color: '#B45309', bg: '#fef3c7', mark: 'none' },
+    good: { label: 'Good fit', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+    poor: { label: 'Poor fit', color: '#475569', bg: '#f1f5f9', mark: 'cross' },
+  },
+  options: { legend: false, verdictFilter: false },
+  groups: [
+    { name: 'How the tree represents each concept', properties: [
+      { id: 'joint', name: 'Joint probability of a sequence', verdict: 'multiply', statement: 'multiply the branch probabilities along the path from root to terminal node' },
+      { id: 'marginal', name: 'Marginal probability of a later event', verdict: 'add', statement: 'sum the path probabilities over every path that ends in that event' },
+      { id: 'conditional', name: 'Conditional probability', verdict: 'read', statement: 'each branch label is itself a conditional probability, given everything that came before' },
+      { id: 'total', name: 'Law of total probability', verdict: 'add', statement: 'sum contributions across the disjoint first-level branches that partition the process' },
+      { id: 'bayes', name: "Bayes' theorem", verdict: 'backward', statement: 'read backward: keep only the paths consistent with the observation and renormalize their probabilities' },
+    ] },
+    { name: 'When to use a tree', properties: [
+      { id: 'best', name: 'Best for', verdict: 'good', statement: 'sequential outcomes, few stages, dependencies between stages, central conditional probability' },
+      { id: 'less', name: 'Less suitable when', verdict: 'poor', statement: 'many stages, many outcomes per stage, parallel events without natural order' },
+    ] },
+  ],
+}
 
 
 // Skills list 2026-11-14: every skill links to its how-to page in the Methods tier.
@@ -1571,8 +1612,16 @@ The tree does not define randomness on its own — it **organizes** an already d
         link:sectionsContent.obj8.link,
         content:[
           sectionsContent.obj8.content,
-          <div key={'obj8-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: obj8Table }} />,
+          <DiagramFrame
+            key={'mistake-fix-tree-diagram-common-mistakes'}
+            id="tree-diagram-common-mistakes"
+            title="Common Mistakes with Tree Diagrams"
+            source="/probability/tree-diagrams"
+            related={false}
+          >
+            <MistakeFix data={conceptMistakesLedger} variant="ledger" />
+          </DiagramFrame>,
+          `The list above names the mistakes in words. The frame below works two of them through with numbers.`,
           <DiagramFrame
             key={'obj8-mistakes'}
             id="tree-diagram-pitfalls"
@@ -1606,8 +1655,15 @@ The tree does not define randomness on its own — it **organizes** an already d
         link:sectionsContent.obj11.link,
         content:[
           sectionsContent.obj11.content,
-          <div key={'summary-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: summaryTable }} />,
+          <DiagramFrame
+            key={'property-sheet-tree-summary'}
+            id="tree-diagrams-summary"
+            title="Tree Diagrams at a Glance"
+            source="/probability/tree-diagrams"
+            related={false}
+          >
+            <PropertySheet data={treeSummarySheet} variant="sheet" />
+          </DiagramFrame>,
         ]
     },
     {

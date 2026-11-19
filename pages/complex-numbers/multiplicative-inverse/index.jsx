@@ -1376,6 +1376,42 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+
+// ConceptCompare (versus) 2026-11-18: replaces the table obj7Table (conjugate and multiplicative inverse, aspect by aspect); cells taken from the table.
+const conjugateVsInverseTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+const conjugateVsInverse = {
+  concepts: [
+    { id: 'conj', name: 'Conjugate', symbol: '$\\bar{z}$', values: {
+      formula: '$a - bi$',
+      real: '$a$ (unchanged)',
+      imag: '$-b$',
+      modulus: '$|\\bar{z}| = |z|$',
+      geometry: 'reflection across the real axis (same circle)',
+      defined: 'every $z$ (including $0$)',
+      example: '$3 - 4i$',
+    } },
+    { id: 'inv', name: 'Multiplicative inverse', symbol: '$z^{-1}$', values: {
+      formula: '$\\dfrac{a - bi}{a^2 + b^2}$',
+      real: '$\\dfrac{a}{a^2 + b^2}$',
+      imag: '$\\dfrac{-b}{a^2 + b^2}$',
+      modulus: '$|z^{-1}| = \\dfrac{1}{|z|}$',
+      geometry: 'reflection + rescale to a different circle',
+      defined: 'every $z \\neq 0$',
+      example: '$\\dfrac{3 - 4i}{25} = \\dfrac{3}{25} - \\dfrac{4}{25}i$',
+    } },
+  ],
+  aspects: [
+    { id: 'formula', label: 'Formula (for $z = a + bi$)' },
+    { id: 'real', label: 'Real part' },
+    { id: 'imag', label: 'Imaginary part' },
+    { id: 'modulus', label: 'Modulus' },
+    { id: 'geometry', label: 'Geometry' },
+    { id: 'defined', label: 'Defined for which $z$' },
+    { id: 'example', label: 'Example ($z = 3 + 4i$)' },
+  ],
+  together: { label: 'When they coincide', text: '$z^{-1} = \\bar{z}$ if and only if $|z| = 1$ (on the unit circle).' },
+}
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import complexNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/complex-numbers'
@@ -2952,11 +2988,15 @@ $$z^{-1} = \\frac{3 - 4i}{25} = \\frac{3}{25} - \\frac{4}{25}i$$]@`,
         link:sectionsContent.obj7.link,
         content:[
           sectionsContent.obj7.content,
-          <div
-            key={'obj7-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj7Table }}
-          />,
+          <DiagramFrame
+            key={'concept-compare-conjugate-vs-inverse'}
+            id="conjugate-vs-multiplicative-inverse"
+            title="Conjugate and Multiplicative Inverse Compared"
+            source="/complex-numbers/multiplicative-inverse"
+            related={false}
+          >
+            <ConceptCompare data={conjugateVsInverse} variant="versus" theme={conjugateVsInverseTheme} />
+          </DiagramFrame>,
           `@academic[punchline:The inverse and the conjugate always point the same way; they differ only in length, and agree only on the unit circle.]@`,
         ]
     },

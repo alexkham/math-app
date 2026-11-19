@@ -18,6 +18,83 @@ import distributionExplorerDiagrams from '@/app/components/probability/explorers
 import continuousCdfDiagrams from '@/app/components/visualizations/probability/continuous-distribution/CDF/continuousCdfDiagrams'
 import TaxonomyOutline from '@/app/components/infographics/TaxonomyOutline/TaxonomyOutline'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table continuousUniformTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const continuousUniformProfileSheet = {
+  header: { kicker: 'Continuous distribution', title: 'Continuous Uniform Distribution', lede: 'Models situations where all values in a continuous interval are equally likely (e.g., random arrival time within an hour, random point selection on a line segment).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', pairs: [
+      [{ formula: '$X \\in [a, b]$', text: 'Support (domain)' },
+       { formula: '$[a, b]$', text: 'Bounds / range: where $a < b$ (finite interval)' }],
+      [{ formula: 'Finite (continuous)', text: 'Finite or infinite?' },
+       { formula: '$a$, $b$', text: 'Parameters: $a$ (minimum value), $b$ (maximum value), where $a < b$' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Constant probability density over the interval; all subintervals of equal length are equally probable; simplest continuous distribution.', pairs: [
+      [{ formula: '$f(x) = \\dfrac{1}{b - a}$', text: 'PDF (probability density function): for $a \\leq x \\leq b$; $f(x) = 0$ otherwise' },
+       { formula: '$F(x) = \\dfrac{x - a}{b - a}$', text: 'CDF (cumulative distribution function): for $a \\leq x \\leq b$; $F(x) = 0$ for $x < a$; $F(x) = 1$ for $x > b$' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = \\dfrac{a + b}{2}$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = \\dfrac{(b - a)^2}{12}$', text: 'Variance' }],
+      [{ formula: '$\\sigma = \\dfrac{b - a}{\\sqrt{12}}$', text: 'Standard deviation' },
+       { formula: 'any value in $[a, b]$', text: 'Mode (all values equally probable)' }],
+      [{ formula: '$\\dfrac{a + b}{2}$', text: 'Median' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table exponentialTable (profile of the distribution); every row comes from the table, same form as the Normal distribution sheet.
+const exponentialProfileSheet = {
+  header: { kicker: 'Continuous distribution', title: 'Exponential Distribution', lede: 'Models the time between events in a process where events occur continuously and independently at a constant average rate (e.g., time until next phone call, equipment failure time, radioactive decay).' },
+  groups: [
+    { id: 'where', name: 'Where it lives', pairs: [
+      [{ formula: '$X \\in [0, \\infty)$', text: 'Support (domain)' },
+       { formula: '$[0, \\infty)$', text: 'Bounds / range: non-negative real numbers' }],
+      [{ formula: 'Infinite (continuous)', text: 'Finite or infinite?' },
+       { formula: '$\\lambda$', text: 'Parameters: $\\lambda$ (lambda, the rate parameter), where $\\lambda > 0$' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Memoryless property; continuous analog of geometric distribution; models waiting times for Poisson processes; probabilities decay exponentially.', pairs: [
+      [{ formula: '$f(x) = \\lambda e^{-\\lambda x}$', text: 'PDF (probability density function): for $x \\geq 0$' },
+       { formula: '$F(x) = 1 - e^{-\\lambda x}$', text: 'CDF (cumulative distribution function): for $x \\geq 0$' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = \\dfrac{1}{\\lambda}$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = \\dfrac{1}{\\lambda^2}$', text: 'Variance' }],
+      [{ formula: '$\\sigma = \\dfrac{1}{\\lambda}$', text: 'Standard deviation' },
+       { formula: '$0$', text: 'Mode (always)' }],
+      [{ formula: '$\\dfrac{\\ln 2}{\\lambda} \\approx \\dfrac{0.693}{\\lambda}$', text: 'Median' }],
+    ] },
+  ],
+}
+
+// FormulaSheet (grouped) 2026-11-19: replaces the table normalTable (profile of the normal distribution: 13 property rows); every row's content comes from the table, grouped into three families, with the description as the heading line.
+const normalProfileSheet = {
+  header: {
+    kicker: 'Continuous distribution',
+    title: 'Normal Distribution',
+    lede: 'Models measurements that cluster symmetrically around a central value with characteristic bell-shaped curve (e.g., heights, test scores, measurement errors).',
+  },
+  groups: [
+    { id: 'where', name: 'Where it lives', pairs: [
+      [{ formula: '$X \\in (-\\infty, \\infty)$', text: 'Support (domain)' },
+       { formula: '$(-\\infty, \\infty)$', text: 'Bounds / range: all real numbers' }],
+      [{ formula: 'Infinite (continuous)', text: 'Finite or infinite?' },
+       { formula: '$\\mu$, $\\sigma$', text: 'Parameters: $\\mu$ (mu, the mean or center), $\\sigma$ (sigma, the standard deviation), where $\\sigma > 0$' }],
+    ] },
+    { id: 'functions', name: 'Its functions', sub: 'Symmetric around the mean; values closer to $\\mu$ are more likely; describes aggregated effects of many independent random factors.', pairs: [
+      [{ formula: '$f(x) = \\dfrac{1}{\\sigma\\sqrt{2\\pi}} \\, e^{-\\frac{(x - \\mu)^2}{2\\sigma^2}}$', text: 'PDF (probability density function)' },
+       { formula: '$F(x) = \\Phi\\left(\\dfrac{x - \\mu}{\\sigma}\\right)$', text: 'CDF (cumulative distribution function): $\\Phi$ is the standard normal CDF (no closed form, requires numerical methods or tables)' }],
+    ] },
+    { id: 'numbers', name: 'Its summary numbers', pairs: [
+      [{ formula: '$E[X] = \\mu$', text: 'Mean' },
+       { formula: '$\\operatorname{Var}(X) = \\sigma^2$', text: 'Variance' }],
+      [{ formula: '$\\sigma$', text: 'Standard deviation' },
+       { formula: '$\\mu$', text: 'Mode (the mean)' }],
+      [{ formula: '$\\mu$', text: 'Median (the mean)' }],
+    ] },
+  ],
+}
 import Taxonomy from '@/app/components/infographics/Taxonomy/Taxonomy'
 
 const tx_howContinuousDiffer = {
@@ -1583,9 +1660,16 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
         <div key={'keyProperties-normal'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.normal.keyProperties)}
         </div>,
-        <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} 
-     dangerouslySetInnerHTML={{ __html: normalTable }} 
-     key="normal-table" />,
+        <DiagramFrame
+          key={'formula-sheet-normal-profile'}
+          id="normal-distribution-profile"
+          title="Normal Distribution at a Glance"
+          source="/probability/distributions/continuous"
+          related={false}
+          layout="top"
+        >
+          <FormulaSheet data={normalProfileSheet} variant="grouped" />
+        </DiagramFrame>,
     ]
 },
 
@@ -1628,9 +1712,16 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
         <div key={'keyProperties-uniform'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.uniform.keyProperties)}
         </div>,
-        <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} 
-     dangerouslySetInnerHTML={{ __html: continuousUniformTable }} 
-     key="continuous-uniform-table" />
+        <DiagramFrame
+          key={'formula-sheet-continuous-uniform-distribution-profile'}
+          id="continuous-uniform-distribution-profile"
+          title="Continuous Uniform Distribution at a Glance"
+          source="/probability/distributions/continuous"
+          related={false}
+          layout="top"
+        >
+          <FormulaSheet data={continuousUniformProfileSheet} variant="grouped" />
+        </DiagramFrame>
     ]
 },
     // {
@@ -1687,9 +1778,16 @@ export default function ContinuousDistributionsPage({ pitfallData,discreteContin
         <div key={'keyProperties-exponential'} style={{background: 'linear-gradient(to right, #93c5fd 0%, #60a5fa 100%)', padding: '20px', margin: '16px 0', borderRadius: '8px', border: '2px solid #1d4ed8',transform:'scale(0.9)'}}>
             {processContent(sectionsContent.exponential.keyProperties)}
         </div>,
-        <div style={{margin:'auto',width:'100%',transform:'scale(0.85)'}} 
-     dangerouslySetInnerHTML={{ __html: exponentialTable }} 
-     key="exponential-table" />,
+        <DiagramFrame
+          key={'formula-sheet-exponential-distribution-profile'}
+          id="exponential-distribution-profile"
+          title="Exponential Distribution at a Glance"
+          source="/probability/distributions/continuous"
+          related={false}
+          layout="top"
+        >
+          <FormulaSheet data={exponentialProfileSheet} variant="grouped" />
+        </DiagramFrame>,
     ]
 },
     // {

@@ -597,6 +597,19 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probEventsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-events-rules'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 
+// MistakeFix (ledger) 2026-11-18: replaces the table mistakesTable (Mistake / What is actually correct); rows and wording taken from the table.
+const conceptMistakesLedger = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { notTrue: "Mistake", instead: "What is actually correct" },
+  mistakes: [
+    { id: "sample-space-common-mistakes-1", wrong: "Leaving out outcomes that can occur", truth: "$Ω$ must include every outcome the scenario can produce." },
+    { id: "sample-space-common-mistakes-2", wrong: "Including outcomes that cannot occur", truth: "$Ω$ must exclude any outcome the scenario cannot produce." },
+    { id: "sample-space-common-mistakes-3", wrong: "Ignoring order when order matters", truth: "Distinguishable outcomes need distinct entries in $Ω$." },
+    { id: "sample-space-common-mistakes-4", wrong: "Mixing outcomes of different types in one $Ω$", truth: "A single sample space should use one consistent kind of outcome." },
+    { id: "sample-space-common-mistakes-5", wrong: "Using an incomplete $Ω$", truth: "Events must reference the full $Ω$, not a truncated version." },
+  ],
+}
+
 // FeatureMatrix 2026-11-14: replaces the table summaryTable ("Sample Spaces at a Glance"); converted from the table's own cells.
 const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Scenario","features":[{"id":"c1","name":"Sample space &Omega;","type":"text"},{"id":"c2","name":"Example outcome &omega;","type":"text"},{"id":"c3","name":"Example event (subset of &Omega;)","type":"text"}],"items":[{"id":"r1","name":"Roll a fair die","values":{"c1":"{1, 2, 3, 4, 5, 6}","c2":"4","c3":"{2, 4, 6} — &ldquo;even result&rdquo;"}},{"id":"r2","name":"Toss two coins","values":{"c1":"{HH, HT, TH, TT}","c2":"HT","c3":"{HH, HT, TH} — &ldquo;at least one head&rdquo;"}},{"id":"r3","name":"Draw a card from a deck","values":{"c1":"52 individual cards","c2":"&ldquo;Ace of Spades&rdquo;","c3":"the 13 hearts — &ldquo;draw a heart&rdquo;"}},{"id":"r4","name":"Trials until first success","values":{"c1":"{1, 2, 3, …}","c2":"4","c3":"{1, 2, 3} — &ldquo;succeed within 3 trials&rdquo;"}},{"id":"r5","name":"Measure a person's height","values":{"c1":"[0, 3] meters","c2":"1.75","c3":"[1.6, 1.8] — &ldquo;between 1.6 and 1.8 m&rdquo;"}},{"id":"r6","name":"Time until an event","values":{"c1":"[0, ∞)","c2":"t = 3.7","c3":"[0, 5] — &ldquo;within 5 minutes&rdquo;"}}]};
 
@@ -1507,8 +1520,16 @@ Rolling a die → {1, 2, 3, 4, 5, 6}
         link:'',
         content:[
           sectionsContent.mistakes.content,
-          <div key={'mistakes-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: mistakesTable }} />,
+          <DiagramFrame
+            key={'mistake-fix-sample-space-common-mistakes'}
+            id="sample-space-common-mistakes"
+            title="Common Mistakes with Sample Spaces"
+            source="/probability/sample-space"
+            related={false}
+          >
+            <MistakeFix data={conceptMistakesLedger} variant="ledger" />
+          </DiagramFrame>,
+          `The figure below shows why the third mistake matters, on two dice.`,
                   <div key={'unit-orderMatters'} dangerouslySetInnerHTML={{ __html: demoUnits.orderMatters }} />,
             `Counting with ordered pairs keeps every outcome at 1/36, so probabilities can be found by counting cells.`,
           <DiagramFrame

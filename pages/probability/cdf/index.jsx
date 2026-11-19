@@ -673,6 +673,18 @@ import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import MistakeFix from '@/app/components/infographics/MistakeFix/MistakeFix'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+
+// MistakeFix (ledger) 2026-11-18: replaces the table mistakesTable (Mistake / Correction); rows and wording taken from the table.
+const conceptMistakesLedger = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { notTrue: "Mistake", instead: "Correction" },
+  mistakes: [
+    { id: "cdf-common-mistakes-1", wrong: "Confusing CDF with a density or mass function", truth: "$F_X(x)$ is probability accumulated up to $x$, not the probability at $x$." },
+    { id: "cdf-common-mistakes-2", wrong: "Forgetting the CDF is cumulative", truth: "Reading $F_X(x)$ as a point probability misreads it, especially in continuous cases where $P(X = x) = 0$." },
+    { id: "cdf-common-mistakes-3", wrong: "Misreading jumps in discrete CDFs", truth: "Each jump has a precise meaning: its size equals the probability assigned to that value." },
+    { id: "cdf-common-mistakes-4", wrong: "Ignoring required properties", truth: "A function that is not monotonic or lacks the correct limits cannot represent a probability distribution." },
+  ],
+}
 import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
 
 const cm_cdfPath = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"path":{"before":[{"name":"Events","href":"/probability/events","why":"appear as statements of the form $X \\le x$"},{"name":"Random variables","href":"/probability/random-variables","why":"the numerical structure the CDF describes"},{"name":"Probability axioms","href":"/probability/axioms","why":"guarantee the basic properties of the CDF"}],"target":{"kicker":"This page","name":"CDF","text":"Links foundational probability concepts with practical calculations."},"after":[{"name":"PMF","href":"/probability/probability-function#pmf","why":"derived from the CDF, discrete case"},{"name":"PDF","href":"/probability/probability-function#pdf","why":"derived from the CDF, continuous case"},{"name":"Quantiles and percentiles","href":"/probability/median#8","why":"defined by inverting the CDF"},{"name":"Expectation","href":"/probability/expected-value","why":"can be expressed using the CDF"},{"name":"Variance","href":"/probability/variance","why":"can be expressed using the CDF"}]}};
@@ -1789,7 +1801,15 @@ export default function PageTemplate({ formulaSummaryData, pitfallData,
         link:'',
         content:[
             sectionsContent.mistakes.content,
-            <div key={'mistakes-table'} style={tableWrapStyle} dangerouslySetInnerHTML={{__html: mistakesTable}}/>,
+            <DiagramFrame
+              key={'mistake-fix-cdf-common-mistakes'}
+              id="cdf-common-mistakes"
+              title="Common Mistakes with the CDF"
+              source="/probability/cdf"
+              related={false}
+            >
+              <MistakeFix data={conceptMistakesLedger} variant="ledger" />
+            </DiagramFrame>,
             sectionsContent.mistakes.more,
             <DiagramFrame
               key={'mistakes-mistakes'}

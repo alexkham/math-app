@@ -1320,6 +1320,22 @@ import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import BeforeAfter from '@/app/components/infographics/BeforeAfter/BeforeAfter'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// ProcedureV2 (worked) 2026-11-19: replaces the table constructionTable (constructing a PMF: step, action, example on 3 coin flips); steps, example values and the link taken from the table.
+const pmfConstructionSteps = {
+  worked: {
+    stepLabel: 'Step',
+    exampleLabel: '3 coin flips, $X$ = number of heads',
+    rows: [
+      { step: 'Identify the random variable', example: 'let $X$ = number of heads in $3$ fair flips' },
+      { step: 'Determine the support', example: 'support $= \\{0, 1, 2, 3\\}$' },
+      { step: 'Assign a probability to each value', example: '$P(X=0) = \\frac{1}{8}$; $P(X=1) = \\frac{3}{8}$; $P(X=2) = \\frac{3}{8}$; $P(X=3) = \\frac{1}{8}$' },
+      { step: 'Verify the [axioms](!/probability/axioms)', example: 'all probabilities $\\geq 0$; sum $= \\frac{1}{8} + \\frac{3}{8} + \\frac{3}{8} + \\frac{1}{8} = 1$' },
+      { step: 'Write the PMF (formula or table)', example: '$p_X(k) = \\binom{3}{k} \\left(\\frac{1}{2}\\right)^3$ for $k \\in \\{0, 1, 2, 3\\}$' },
+    ],
+  },
+}
 import NotationCheatSheet from '@/app/components/infographics/NotationCheatSheet/NotationCheatSheet'
 import probRandomVarsNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-random-variables'
 import ConceptIntro from '@/app/components/concept-intro/ConceptIntro'
@@ -3154,8 +3170,15 @@ export default function PMFPage({ formulaSummaryData, pitfallData,pmfViewTree, v
         link:sectionsContent.obj5.link,
         content:[
           sectionsContent.obj5.content,
-          <div key={'construction-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: constructionTable }} />,
+          <DiagramFrame
+            key={'procedure-pmf-construction'}
+            id="pmf-construction-steps"
+            title="Constructing a PMF, step by step"
+            source="/probability/probability-function/pmf"
+            related={false}
+          >
+            <ProcedureV2 data={pmfConstructionSteps} variant="worked" />
+          </DiagramFrame>,
         ]
     },
     {

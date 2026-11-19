@@ -27,6 +27,30 @@ import ConceptMap from '@/app/components/infographics/ConceptMap/ConceptMap'
 const cm_modeRelated = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","link":"#2563EB"},"hub":{"center":{"name":"Mode","sub":"the most probable value"},"groups":[{"name":"Other measures of central tendency","items":[{"name":"Mean (Expected Value)","href":"/probability/expected-value","why":"the probability-weighted average of all values"},{"name":"Median","href":"/probability/median","why":"the 50th percentile, robust to outliers"}],"say":"These three measures together show where a distribution centers and how it is shaped."},{"name":"Measures of dispersion","items":[{"name":"Variance","href":"/probability/variance","why":"spread around the mean"},{"name":"Standard Deviation","href":"/probability/variance","why":"square root of variance, in original units"}],"say":"The mode shows concentration points, variance shows spread."},{"name":"Skewness","items":[{"name":"Right skew","why":"mode $<$ median $<$ mean"},{"name":"Left skew","why":"mean $<$ median $<$ mode"},{"name":"Symmetric unimodal","why":"mode $=$ median $=$ mean"}]},{"name":"Distribution shape","items":[{"name":"Unimodal, bimodal, multimodal","href":"/probability/mode#4","why":"classes by the number of modes"},{"name":"Kurtosis","why":"tail heaviness and peak sharpness"}]},{"name":"Probability functions","items":[{"name":"PMF","href":"/probability/probability-function/pmf","why":"discrete case: the mode is where it is largest"},{"name":"PDF","href":"/probability/probability-function/pdf","why":"continuous case: the mode is where it is largest"},{"name":"CDF","href":"/probability/cdf","why":"does not directly reveal the mode"}]},{"name":"Distribution families","items":[{"name":"Discrete Distributions","href":"/probability/distributions/discrete","why":"binomial, geometric, Poisson and others"},{"name":"Continuous Distributions","href":"/probability/distributions/continuous","why":"normal, exponential, beta and others"}]},{"name":"Percentiles and quantiles","items":[{"name":"Median","why":"the 50th percentile"},{"name":"Mode","why":"the maximum probability point"}],"say":"Percentiles divide probability by cumulative area; the mode identifies peak density."},{"name":"Maximum likelihood estimation","items":[{"name":"Maximum likelihood estimate (MLE)","why":"the mode of the likelihood function"}]},{"name":"Mixture models","items":[{"name":"Mixture distributions","href":"/probability/distributions","why":"each component contributes a potential mode"}]},{"name":"Visual representations","items":[{"name":"Histograms and bar charts","why":"modes are the tallest bars"},{"name":"Density curves","why":"modes are the peaks"},{"name":"Box plots","why":"show median and quartiles, not modes"}]},{"name":"Optimization theory","items":[{"name":"Finding the mode","why":"a maximization problem: $\\arg\\max f(x)$"},{"name":"Calculus","href":"/calculus","why":"derivatives and critical points for continuous cases"},{"name":"Numerical optimization","why":"for cases without closed forms"}]}]}};
 
 import FeatureMatrix from '@/app/components/infographics/FeatureMatrix/FeatureMatrix'
+import PropertySheet from '@/app/components/infographics/PropertySheet/PropertySheet'
+
+// PropertySheet (sheet) 2026-11-19: replaces the table propertiesTable (properties of the mode: property, statement); the seven rows and their wording come from the table, sorted into two groups.
+const modePropertySheet = {
+  verdicts: {
+    holds: { label: 'Holds', color: '#2563EB', bg: '#dbeafe', mark: 'check' },
+    conditional: { label: 'With a condition', color: '#06357A', bg: '#e8eefc', mark: 'half' },
+    caution: { label: 'Caution', color: '#B45309', bg: '#fef3c7', mark: 'dot' },
+    fails: { label: 'Fails', color: '#475569', bg: '#f1f5f9', mark: 'cross' },
+  },
+  groups: [
+    { name: 'What the mode keeps', properties: [
+      { id: 'linear', name: 'Linear transformation', verdict: 'holds', statement: '$\\operatorname{mode}(aX + b) = a \\cdot \\operatorname{mode}(X) + b$', note: 'for $a \\neq 0$' },
+      { id: 'robust', name: 'Robustness to outliers', verdict: 'holds', statement: 'tail values cannot shift the mode unless they create a new higher peak' },
+      { id: 'spread', name: 'Independence from spread', verdict: 'holds', statement: 'reveals only peak location', note: '$N(0, 1)$ and $N(0, 100)$ share mode $0$' },
+      { id: 'monotonic', name: 'Monotonic-transformation invariance', verdict: 'conditional', statement: '$\\operatorname{mode}(g(X)) = g(\\operatorname{mode}(X))$', note: 'for strictly monotonic $g$ when $X$ is discrete; fails in general for continuous $X$' },
+    ] },
+    { name: 'What it does not promise', properties: [
+      { id: 'unique', name: 'Non-uniqueness', verdict: 'caution', statement: 'a distribution may have zero, one, two, or many modes' },
+      { id: 'location', name: 'Location flexibility', verdict: 'caution', statement: 'may sit at distribution boundaries or far from the mean' },
+      { id: 'additive', name: 'No additivity', verdict: 'fails', statement: '$\\operatorname{mode}(X + Y) \\neq \\operatorname{mode}(X) + \\operatorname{mode}(Y)$', note: 'in general, even for independent $X$, $Y$' },
+    ] },
+  ],
+}
 import SpecialCases from '@/app/components/infographics/SpecialCases/SpecialCases'
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
 import probSpreadNotationSheet from '@/app/components/infographics/NotationCheatSheet/sheets/probability-expectation-spread'
@@ -1893,8 +1917,15 @@ The mode complements mean and median by revealing where probability actually con
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div key={'properties-table'} style={tableWrapStyle}
-               dangerouslySetInnerHTML={{ __html: propertiesTable }} />,
+          <DiagramFrame
+            key={'property-sheet-mode-properties'}
+            id="mode-properties"
+            title="Properties of the Mode"
+            source="/probability/mode"
+            related={false}
+          >
+            <PropertySheet data={modePropertySheet} variant="sheet" />
+          </DiagramFrame>,
         ]
     },
     {

@@ -1329,6 +1329,39 @@ import ProofSteps from '@/app/components/infographics/ProofSteps/ProofSteps'
 // FeatureMatrix 2026-11-14: replaces the table obj5Table ("Properties of Additive Inverse"); converted from the table's own cells.
 const fm_obj5Table = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"Property","features":[{"id":"c1","name":"Formula","type":"text"},{"id":"c2","name":"Meaning","type":"text"}],"items":[{"id":"r1","name":"Defining property","values":{"c1":"z + (−z) = 0","c2":"a number plus its inverse sums to zero"}},{"id":"r2","name":"Double negation","values":{"c1":"−(−z) = z","c2":"applying inversion twice returns the original"}},{"id":"r3","name":"Distribution over sum","values":{"c1":"−(z₁ + z₂) = −z₁ − z₂","c2":"inverse of a sum = sum of inverses"}},{"id":"r4","name":"Commutes with conjugation","values":{"c1":"−z̄ = −z","c2":"order of negation and conjugation doesn't matter"}},{"id":"r5","name":"Modulus preservation","values":{"c1":"|−z| = |z|","c2":"same distance from the origin"}},{"id":"r6","name":"Argument shift","values":{"c1":"arg(−z) = arg(z) + π","c2":"direction reverses — a 180° rotation about the origin"}}]};
 import FormulaSheet from '@/app/components/infographics/FormulaSheet/FormulaSheet'
+import ConceptCompare from '@/app/components/infographics/ConceptCompare/ConceptCompare'
+
+// ConceptCompare (versus) 2026-11-18: replaces the table obj6Table (additive inverse and complex conjugate, feature by feature); cells taken from the table.
+const negativeVsConjugateTheme = { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' }
+const negativeVsConjugate = {
+  concepts: [
+    { id: 'neg', name: 'Additive inverse', symbol: '$-z$', values: {
+      algebra: 'negates both parts: $-a - bi$',
+      geometry: 'reflection through the origin ($180^\\circ$ rotation)',
+      modulus: '$|{-z}| = |z|$',
+      argument: '$\\arg(z) + \\pi$',
+      defining: 'the number $w$ with $z + w = 0$',
+      confusion: 'writing $-(a + bi) = -a + bi$ (flipping only one sign)',
+    } },
+    { id: 'conj', name: 'Complex conjugate', symbol: '$\\bar{z}$', values: {
+      algebra: 'negates only the imaginary part: $a - bi$',
+      geometry: 'reflection across the real axis',
+      modulus: '$|\\bar{z}| = |z|$',
+      argument: '$-\\arg(z)$',
+      defining: 'the reflection $a - bi$ of $a + bi$',
+      confusion: 'writing $\\bar{z} = -z$ (true only for pure imaginary $z$, zero included)',
+    } },
+  ],
+  aspects: [
+    { id: 'algebra', label: 'Algebraic action on $a + bi$' },
+    { id: 'geometry', label: 'Geometric action' },
+    { id: 'modulus', label: 'Modulus' },
+    { id: 'argument', label: 'Argument' },
+    { id: 'defining', label: 'Defining property' },
+    { id: 'confusion', label: 'Most common confusion' },
+  ],
+  together: { label: 'When they coincide', text: '$-z$ and $\\bar{z}$ coincide when $z$ is pure imaginary (zero included).' },
+}
 
 // FeatureMatrix 2026-11-14: replaces the table summaryTable ("Summary: Side-by-Side Examples of −z and z̄"); converted from the table's own cells.
 const fm_summaryTable = {"theme":{"title":"#06357A","navy":"#06357A","blue":"#2563EB","bar":"#2563EB","tagInk":"#06357A","sparkLine":"#06357A"},"verdicts":{"yes":{"label":"Yes","mark":"✓","color":"#2563EB","bg":"#dbeafe"},"no":{"label":"No","mark":"✕","color":"#475569","bg":"#f1f5f9"}},"corner":"z","features":[{"id":"c1","name":"−z (both signs flip)","type":"text"},{"id":"c2","name":"z̄ (only imag flips)","type":"text"},{"id":"c3","name":"−z = z̄ ?","type":"verdict"},{"id":"c4","name":"Geometric note","type":"text"}],"items":[{"id":"r1","name":"3 + 2i (Q1)","values":{"c1":"−3 − 2i (Q3)","c2":"3 − 2i (Q4)","c3":"no","c4":"−z opposite quadrant; z̄ mirrored across real axis"}},{"id":"r2","name":"−1 + 4i (Q2)","values":{"c1":"1 − 4i (Q4)","c2":"−1 − 4i (Q3)","c3":"no","c4":"−z and z̄ are mirror images of each other across the imaginary axis"}},{"id":"r3","name":"5 (real)","values":{"c1":"−5","c2":"5","c3":"no","c4":"only −z reflects; z̄ = z since the point lies on the real axis"}},{"id":"r4","name":"4i (pure imag)","values":{"c1":"−4i","c2":"−4i","c3":"yes","c4":"both operations land at (0, −4); the only nonzero case where they agree"}},{"id":"r5","name":"0","values":{"c1":"0","c2":"0","c3":"yes","c4":"zero is the unique fixed point of both reflections"}},{"id":"r6","name":"2 − 3i (Q4)","values":{"c1":"−2 + 3i (Q2)","c2":"2 + 3i (Q1)","c3":"no","c4":"again −z and z̄ are mirror images across the imaginary axis"}}]};
@@ -2709,11 +2742,16 @@ $$-z = -a - bi \\quad \\text{for} \\;\\; z = a + bi$$
         link:sectionsContent.obj6.link,
         content:[
           sectionsContent.obj6.content,
-          <div
-            key={'obj6-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj6Table }}
-          />,
+          <DiagramFrame
+            key={'concept-compare-negative-vs-conjugate'}
+            id="additive-inverse-vs-conjugate"
+            title="Additive Inverse and Conjugate Compared"
+            source="/complex-numbers/additive-inverse"
+            related={false}
+          >
+            <ConceptCompare data={negativeVsConjugate} variant="versus" theme={negativeVsConjugateTheme} />
+          </DiagramFrame>,
+          `The picture below draws the conjugate's reflection on one point of the plane.`,
                   <div key={'unit-vsConj'} dangerouslySetInnerHTML={{ __html: demoUnits.vsConj }} />,
           `Two sign changes versus one: that is the whole difference between the two operations.`,
         ]

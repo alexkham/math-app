@@ -1044,6 +1044,35 @@ import trigFunctionsGraphDiagrams from '@/app/components/trigonometry/trigFuncti
 import renderCurveFeature from '@/app/utils/illustrations/trigonometry/curves/curveFeature'
 import TopDownTree from '@/app/components/infographics/TopDownTree/TopDownTree'
 import DiagramFrame from '@/app/components/infographics/DiagramsFrameV2'
+import ProcedureV2 from '@/app/components/infographics/ProcedureV2/ProcedureV2'
+
+// ProcedureV2 (stages) 2026-11-19: replaces the table obj10Table (equation from a graph: step, find, how); what to find and how come from the table, run on a graph whose readings give the section's own equation y = 3 sin(2x - pi/2) + 1.
+const equationFromGraphStages = {
+  theme: { title: '#06357A', navy: '#06357A', blue: '#2563EB', gold: '#B45309', goldInk: '#B45309' },
+  labels: { exprNow: 'Found so far' },
+  run: {
+    label: 'A graph with maximum $4$, minimum $-2$, one cycle of length $\\pi$, rising through the midline at $x = \\frac{\\pi}{4}$',
+    start: 'max $4$, min $-2$, cycle length $\\pi$',
+  },
+  groups: [
+    { label: 'Vertical readings', sub: 'steps 1 and 2', kind: 'must', stages: [
+      { n: 1, name: 'Midline', what: 'Find the midline $D$', cond: 'How: $D = \\frac{\\text{max} + \\text{min}}{2}$',
+        example: '$D = \\dfrac{4 + (-2)}{2} = 1$', exampleNote: 'the average of the highest and lowest values' },
+      { n: 2, name: 'Amplitude', what: 'Find the amplitude $|A|$ and the sign of $A$', cond: 'How: $|A| = \\frac{\\text{max} - \\text{min}}{2}$; sign from whether the cycle is upright or reflected',
+        example: '$|A| = \\dfrac{4 - (-2)}{2} = 3$, so $A = 3$', exampleNote: 'the cycle is upright, so $A$ is positive' },
+    ] },
+    { label: 'Horizontal readings', sub: 'steps 3 and 4', kind: 'must', stages: [
+      { n: 3, name: 'Period', what: 'Find the period and $B$', cond: 'How: read the horizontal length of one cycle; $B = \\frac{2\\pi}{\\text{period}}$ (or $\\frac{\\pi}{\\text{period}}$ for tan, cot)',
+        example: '$B = \\dfrac{2\\pi}{\\pi} = 2$', exampleNote: 'one full cycle is $\\pi$ long' },
+      { n: 4, name: 'Phase shift', what: 'Find the phase shift and $C$', cond: 'How: locate where the standard cycle begins; $C = B \\times$ phase shift',
+        example: '$C = 2 \\cdot \\dfrac{\\pi}{4} = \\dfrac{\\pi}{2}$', exampleNote: 'the standard cycle begins at $x = \\frac{\\pi}{4}$' },
+    ] },
+    { label: 'The equation', sub: 'step 5', kind: 'out', stages: [
+      { n: 5, name: 'Sine or cosine', what: 'Choose sine or cosine', cond: 'How: sine if the standard cycle starts at a midline crossing (rising); cosine if it starts at a peak',
+        example: '$y = 3\\sin\\left(2x - \\dfrac{\\pi}{2}\\right) + 1$', exampleNote: 'the cycle starts at a rising midline crossing, so sine' },
+    ] },
+  ],
+}
 import SWOTAnalysisV2 from '@/app/components/infographics/SWOTAnalysisV2/SWOTAnalysisV2'
 
 const sw_sinusoidParameters = {
@@ -2625,11 +2654,15 @@ Roll a sheet of paper into a tube, cut through it with one straight slanted cut,
           sectionsContent.obj10.content,
           <div key={'unit-equationFromGraph'} dangerouslySetInnerHTML={{ __html: demoUnits.equationFromGraph }} />,
           `Reading in this order matters: the amplitude cannot be computed until the midline is known.`,
-          <div
-            key={'obj10-table'}
-            style={tableWrapStyle}
-            dangerouslySetInnerHTML={{ __html: obj10Table }}
-          />,
+          <DiagramFrame
+            key={'procedure-equation-from-graph'}
+            id="equation-from-graph-steps"
+            title="Reading an Equation off a Graph in Five Steps"
+            source="/trigonometry/graphs"
+            related={false}
+          >
+            <ProcedureV2 data={equationFromGraphStages} variant="stages" />
+          </DiagramFrame>,
         ]
     },
 
